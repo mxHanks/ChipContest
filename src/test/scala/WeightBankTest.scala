@@ -2,7 +2,7 @@ import chisel3.simulator.scalatest.ChiselSim
 import org.scalatest.funspec.AnyFunSpec
 import memory._
 
-class WeighBankTest extends AnyFunSpec with ChiselSim {
+class WeightBankTest extends AnyFunSpec with ChiselSim {
 
     describe("对单个 WeighBank 进行功能测试") {
         it("应该可以按照规定的时序读出和写入") {
