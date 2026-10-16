@@ -15,14 +15,6 @@ private object ControllerState extends ChiselEnum {
     val IDLE, INIT, RUN, CAPTURE, DONE = Value
 }
 
-/**
- * 状态机
- *  - IDLE: 等待开始
- *  - INIT: 初始化寄存器为 0，转载 bias
- *  - RUN: 进行 64 次运算
- *  - CAPTURE: 将 8 个 ACC 结果保存到缓冲期
- *  - DONE: 发出完成脉冲，返回 IDLE
- */
 class MacControllerIO extends Bundle {
     // 外部启动信号
     val start: Bool = Input(Bool())
@@ -41,6 +33,24 @@ class MacControllerIO extends Bundle {
     val done: Bool = Output(Bool())
 }
 
+/**
+ * 状态机
+ *  - IDLE: 等待开始
+ *  - INIT: 初始化寄存器为 0，转载 bias
+ *  - RUN: 进行 64 次运算
+ *  - CAPTURE: 将 8 个 ACC 结果保存到缓冲期
+ *  - DONE: 发出完成脉冲，返回 IDLE
+ *
+ * Inputs:
+ *  - start         外部启动状态机
+ *
+ * Outputs:
+ *  - init          当前为 INIT 状态
+ *  - accumulate    当前正在计算
+ *  - capture       计算完成，需要保存结果
+ *  - done          完成计算以及保存
+ *  - k             当前参与计算的元素编号 (0-63)
+ */
 class MacController extends Module {
     val io: MacControllerIO = IO(new MacControllerIO)
 
