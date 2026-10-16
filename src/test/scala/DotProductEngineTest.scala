@@ -8,6 +8,7 @@ class DotProductEngineTest extends AnyFunSpec with ChiselSim {
 
     // 测试通过
     describe("点积顶层功能测试") {
+
         it("应该可以输出正确的计算结果") {
             simulate(new DotProductEngine) { dut =>
 
@@ -71,5 +72,34 @@ class DotProductEngineTest extends AnyFunSpec with ChiselSim {
                 }
             }
         }
+
+        it("应该能以合理的时序发送预处理信号") {
+            simulate(new DotProductEngine) { dut =>
+                // 准备数据与发送开始信号
+                dut.io.start.poke(true)
+                dut.io.x.poke(0.S)
+                for (j <- 0 until 8) {
+                    dut.io.w(j).poke(0.S)
+                    dut.io.bias(j).poke((10 + j).S)
+                }
+                dut.clock.step()
+
+                // 进入 INIT 阶段
+                dut.io.weightRen.expect(true.B)
+                dut.io.weightReadK.expect(0.U)
+                dut.clock.step()
+
+                // 进入 RUN 阶段
+                dut.io.k.expect(0.U)
+                dut.io.weightRen.expect(true.B)
+                dut.io.weightReadK.expect(1.U)
+                dut.clock.step(64)
+
+                // 运算完成
+                dut.io.k.expect(63.U)
+                dut.io.weightRen.expect(false.B)
+            }
+        }
+
     }
 }

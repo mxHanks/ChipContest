@@ -11,6 +11,10 @@ class DotProductEngineIO extends Bundle {
     val w: Vec[SInt] = Input(Vec(8, SInt(16.W)))
     val bias: Vec[SInt] = Input(Vec(8, SInt(40.W)))
 
+    // 权重预取请求
+    val weightRen: Bool = Output(Bool())
+    val weightReadK: UInt = Output(UInt(6.W))
+
     val k: UInt = Output(UInt(6.W))
     val done: Bool = Output(Bool())
     val result: Vec[SInt] = Output(Vec(8, SInt(48.W)))
@@ -18,7 +22,19 @@ class DotProductEngineIO extends Bundle {
 
 /**
  * 点积计算引擎。
- * 暂定为顶层模块。顶层需要接收数据和启动命令，也需要暴露计算进度和结果。
+ *
+ * Inputs:
+ *  - start         操控 controller 由 IDLE 进入 INIT 也就是拉高 start 到开始计算之间有一个空拍
+ *  - x             1 个 16-bit 的 X 元素
+ *  - w             8 个 16-bit 的 W 元素
+ *  - bias          8 个 40-bit 的偏置量
+ *
+ * Outputs:
+ *  - k         传出当前计算到了第几个元素，由 controller 提供
+ *  - done      传出是否计算完成，由 controller 提供
+ *  - result    8 个 48-bit 的计算结果
+ *  - weightRen     向 权重存储器 发送 同步读取使能
+ *  - weightReadK   指定要预取的权重序号（0~63）
  */
 class DotProductEngine extends Module {
 
@@ -49,5 +65,9 @@ class DotProductEngine extends Module {
 
     io.k := controller.io.k
     io.done := controller.io.done
+
+    // 预读入部分，由于存储 W 的寄存器是同步读取，所以需要在上一拍写好读取信息
+    io.weightReadK := Mux(controller.io.init, 0.U, io.k + 1.U)
+    io.weightRen := controller.io.init || (controller.io.accumulate && (controller.io.k =/= 63.U))
 
 }
