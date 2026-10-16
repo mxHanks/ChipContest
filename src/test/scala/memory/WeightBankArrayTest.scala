@@ -1,6 +1,7 @@
+package memory
+
 import chisel3.simulator.scalatest.ChiselSim
 import org.scalatest.funspec.AnyFunSpec
-import memory._
 
 class WeightBankArrayTest extends AnyFunSpec with ChiselSim {
 

@@ -1,6 +1,6 @@
+package dotproduct
 
 import chisel3._
-import dotproduct._
 import chisel3.simulator.scalatest.ChiselSim
 import org.scalatest.funspec.AnyFunSpec
 

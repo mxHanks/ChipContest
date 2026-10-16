@@ -1,7 +1,8 @@
+package memory
+
+import chisel3._
 import chisel3.simulator.scalatest.ChiselSim
 import org.scalatest.funspec.AnyFunSpec
-import memory._
-import chisel3._
 
 class XRowBufferTest extends AnyFunSpec with ChiselSim {
 
