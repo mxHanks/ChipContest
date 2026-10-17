@@ -34,24 +34,39 @@ class WeightBank extends Module {
     val io: WeightBankIO = IO(new WeightBankIO)
 
     // 存储规则：每列连续存储，第k组列的第j个元素位置在 64k+j 处 (k, j 都从 0 开始)
-    private val mem = SyncReadMem(2048, SInt(16.W))
+    // private val mem = SyncReadMem(2048, SInt(16.W))
+    // 暂定 SRAM 规格：1024×16，单端口 1RW
+    private val mem0 = SyncReadMem(1024, SInt(16.W))
+    private val mem1 = SyncReadMem(1024, SInt(16.W))
 
-    when(io.wen) {
-        mem.write(io.waddr, io.wdata)
-    }
+    assert(!(io.ren && io.wen), "Read and write cannot happen simultaneously!") // 不能用中文 不然报错
 
-    //    io.rvalid := io.ren
-    //    io.rdata := mem(io.raddr)
+    // 写入时使用写地址，否则使用读地址
+    private val addr: UInt = Mux(io.wen, io.waddr, io.raddr)
+    val enable: Bool = io.wen || io.ren
 
-    private val readData: SInt = mem.read(io.raddr, io.ren)
-    io.rdata := readData
-    // 这里 RegNext 会把 ren 延迟一个时钟周期，并在复位时将有效标志初始化为 false。
-    /*
-    相当于写了
-    val validReg = RegInit(false.B)
-    validReg := io.ren
-    io.rvalid := validReg
-     */
+    private val select: Bool = addr(10) // 高一位决定了读取哪一块 mem
+
+    // 两块 SRAM 具有独立的单端口读写接口
+    private val data0: SInt = mem0.readWrite(
+        addr(9, 0),
+        io.wdata,
+        enable && !select,
+        io.wen
+    )
+
+    private val data1: SInt = mem1.readWrite(
+        addr(9, 0),
+        io.wdata,
+        enable && select,
+        io.wen
+    )
+
+    // 读取结果晚一个周期出现，
+    // 所以 SRAM 选择信号也要延迟一个周期
+    private val delayedSelect: Bool = RegNext(io.raddr(10), false.B)
+
+    io.rdata := Mux(delayedSelect, data1, data0)
     io.rvalid := RegNext(io.ren, false.B)
 
 }
