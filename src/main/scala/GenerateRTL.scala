@@ -17,7 +17,7 @@ object GenerateRTL {
 
     def main(args: Array[String]): Unit = {
 
-        val moduleName = args.headOption.getOrElse("DotProductEngine")
+        val moduleName = args.headOption.getOrElse("LinearComputeCore")
 
         val generator = modules.getOrElse(
             moduleName,

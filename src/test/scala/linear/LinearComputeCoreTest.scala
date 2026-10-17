@@ -127,4 +127,99 @@ class LinearComputeCoreTest extends AnyFunSpec with ChiselSim {
             }
         }
     }
+
+    describe("LinearComputeCore SRAM 集成测试") {
+
+        it("应正确计算跨 SRAM 边界的两个 group") {
+
+            simulate(new LinearComputeCore) { dut =>
+
+                // 初始化
+                dut.io.start.poke(false.B)
+                dut.io.group.poke(0.U)
+
+                dut.io.xLoadWen.poke(false.B)
+                dut.io.xLoadAddr.poke(0.U)
+                dut.io.xLoadData.poke(0.S)
+
+                dut.io.wLoadWen.poke(false.B)
+                dut.io.wLoadBank.poke(0.U)
+                dut.io.wLoadAddr.poke(0.U)
+                dut.io.wLoadData.poke(0.S)
+
+                for (j <- 0 until 8) {
+                    dut.io.bias(j).poke((100 + j).S)
+                }
+
+                // X[k] = k + 1
+                for (k <- 0 until 64) {
+                    dut.io.xLoadWen.poke(true.B)
+                    dut.io.xLoadAddr.poke(k.U)
+                    dut.io.xLoadData.poke((k + 1).S)
+                    dut.clock.step()
+                }
+
+                dut.io.xLoadWen.poke(false.B)
+
+                // group 15: SRAM0 地址 960～1023
+                // group 16: SRAM1 地址 1024～1087
+                for (group <- Seq(15, 16)) {
+                    val sign = if (group == 15) 1 else -1
+
+                    for (bank <- 0 until 8) {
+                        for (k <- 0 until 64) {
+                            dut.io.wLoadWen.poke(true.B)
+                            dut.io.wLoadBank.poke(bank.U)
+                            dut.io.wLoadAddr.poke(
+                                (group * 64 + k).U
+                            )
+                            dut.io.wLoadData.poke(
+                                (sign * (k + 1) * (bank + 1)).S
+                            )
+                            dut.clock.step()
+                        }
+                    }
+                }
+
+                dut.io.wLoadWen.poke(false.B)
+
+                // 依次计算两组
+                for (group <- Seq(15, 16)) {
+                    dut.io.group.poke(group.U)
+
+                    dut.io.start.poke(true.B)
+                    dut.clock.step()
+                    dut.io.start.poke(false.B)
+
+                    var cycles = 0
+                    while (
+                        !dut.io.done.peek().litToBoolean &&
+                                cycles < 80
+                    ) {
+                        dut.clock.step()
+                        cycles += 1
+                    }
+
+                    assert(
+                        dut.io.done.peek().litToBoolean,
+                        s"group=$group timeout"
+                    )
+
+                    val sign = if (group == 15) 1 else -1
+
+                    for (j <- 0 until 8) {
+                        val expected =
+                            sign * 89440L * (j + 1) + 100 + j
+
+                        dut.io.result(j).expect(expected.S)
+                    }
+
+                    println(s"[PASS] group=$group")
+
+                    // DONE -> IDLE
+                    dut.clock.step()
+                }
+            }
+        }
+    }
 }

@@ -36,8 +36,8 @@ class WeightBank extends Module {
     // 存储规则：每列连续存储，第k组列的第j个元素位置在 64k+j 处 (k, j 都从 0 开始)
     // private val mem = SyncReadMem(2048, SInt(16.W))
     // 暂定 SRAM 规格：1024×16，单端口 1RW
-    private val mem0 = SyncReadMem(1024, SInt(16.W))
-    private val mem1 = SyncReadMem(1024, SInt(16.W))
+    private val sram0 = Module(new Sram1024x16)
+    private val sram1 = Module(new Sram1024x16)
 
     assert(!(io.ren && io.wen), "Read and write cannot happen simultaneously!") // 不能用中文 不然报错
 
@@ -47,26 +47,32 @@ class WeightBank extends Module {
 
     private val select: Bool = addr(10) // 高一位决定了读取哪一块 mem
 
-    // 两块 SRAM 具有独立的单端口读写接口
-    private val data0: SInt = mem0.readWrite(
-        addr(9, 0),
-        io.wdata,
-        enable && !select,
-        io.wen
+    // 两块 SRAM 共享的信号
+    for (sram <- Seq(sram0, sram1)) {
+        sram.io.addr := addr(9, 0)
+        sram.io.wdata := io.wdata
+        sram.io.isWrite := io.wen
+    }
+
+    // 每次只使能其中一块 SRAM
+    sram0.io.en := (io.wen || io.ren) && !select
+    sram1.io.en := (io.wen || io.ren) && select
+
+    // 读取结果晚一个周期出现
+    // 选择信号也必须保持相同的时序
+    private val delayedSelect =
+        RegNext(io.raddr(10), false.B)
+
+    io.rdata := Mux(
+        delayedSelect,
+        sram1.io.rdata,
+        sram0.io.rdata
     )
 
-    private val data1: SInt = mem1.readWrite(
-        addr(9, 0),
-        io.wdata,
-        enable && select,
-        io.wen
+    io.rvalid := Mux(
+        delayedSelect,
+        sram1.io.rvalid,
+        sram0.io.rvalid
     )
-
-    // 读取结果晚一个周期出现，
-    // 所以 SRAM 选择信号也要延迟一个周期
-    private val delayedSelect: Bool = RegNext(io.raddr(10), false.B)
-
-    io.rdata := Mux(delayedSelect, data1, data0)
-    io.rvalid := RegNext(io.ren, false.B)
 
 }
