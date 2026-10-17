@@ -1,0 +1,1010 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+
+-- Running command `
+    read_verilog -sv generated/DotProductEngine/*.sv
+    hierarchy -check -top DotProductEngine
+
+    synth -top DotProductEngine -noabc -flatten
+
+    dfflibmap -liberty /home/mxhanks/Projects/ChipContest/assets/libs/nangate45/NangateOpenCellLibrary_typical.lib
+    abc -liberty /home/mxhanks/Projects/ChipContest/assets/libs/nangate45/NangateOpenCellLibrary_typical.lib
+
+    clean
+    stat -liberty /home/mxhanks/Projects/ChipContest/assets/libs/nangate45/NangateOpenCellLibrary_typical.lib
+' --
+
+1. Executing Verilog-2005 frontend: generated/DotProductEngine/DotProductEngine.sv
+Parsing SystemVerilog input from `generated/DotProductEngine/DotProductEngine.sv' to AST representation.
+Generating RTLIL representation for module `\DotProductEngine'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: generated/DotProductEngine/MacController.sv
+Parsing SystemVerilog input from `generated/DotProductEngine/MacController.sv' to AST representation.
+Generating RTLIL representation for module `\MacController'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: generated/DotProductEngine/MacPE.sv
+Parsing SystemVerilog input from `generated/DotProductEngine/MacPE.sv' to AST representation.
+Generating RTLIL representation for module `\MacPE'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: generated/DotProductEngine/MacPEArray.sv
+Parsing SystemVerilog input from `generated/DotProductEngine/MacPEArray.sv' to AST representation.
+Generating RTLIL representation for module `\MacPEArray'.
+Successfully finished Verilog frontend.
+
+5. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1. Analyzing design hierarchy..
+Top module:  \DotProductEngine
+Used module:     \MacPEArray
+Used module:         \MacPE
+Used module:     \MacController
+
+5.2. Analyzing design hierarchy..
+Top module:  \DotProductEngine
+Used module:     \MacPEArray
+Used module:         \MacPE
+Used module:     \MacController
+Removed 0 unused modules.
+
+6. Executing SYNTH pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \DotProductEngine
+Used module:     \MacPEArray
+Used module:         \MacPE
+Used module:     \MacController
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \DotProductEngine
+Used module:     \MacPEArray
+Used module:         \MacPE
+Used module:     \MacController
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$generated/DotProductEngine/MacPE.sv:59$23 in module MacPE.
+Marked 3 switch rules as full_case in process $proc$generated/DotProductEngine/MacController.sv:81$11 in module MacController.
+Marked 1 switch rules as full_case in process $proc$generated/DotProductEngine/MacController.sv:0$8 in module MacController.
+Marked 1 switch rules as full_case in process $proc$generated/DotProductEngine/DotProductEngine.sv:101$1 in module DotProductEngine.
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 1 assignment to connection.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~10 debug messages>
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\MacPE.$proc$generated/DotProductEngine/MacPE.sv:59$23'.
+     1/1: $0\ACC[47:0]
+Creating decoders for process `\MacController.$proc$generated/DotProductEngine/MacController.sv:81$11'.
+     1/2: $0\state[2:0]
+     2/2: $0\kReg[5:0]
+Creating decoders for process `\MacController.$proc$generated/DotProductEngine/MacController.sv:0$8'.
+     1/1: $1\casez_tmp[2:0]
+Creating decoders for process `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+     1/8: $0\resultReg_7[47:0]
+     2/8: $0\resultReg_6[47:0]
+     3/8: $0\resultReg_5[47:0]
+     4/8: $0\resultReg_4[47:0]
+     5/8: $0\resultReg_3[47:0]
+     6/8: $0\resultReg_2[47:0]
+     7/8: $0\resultReg_1[47:0]
+     8/8: $0\resultReg_0[47:0]
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\MacController.\casez_tmp' from process `\MacController.$proc$generated/DotProductEngine/MacController.sv:0$8'.
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\MacPE.\ACC' using process `\MacPE.$proc$generated/DotProductEngine/MacPE.sv:59$23'.
+  created $dff cell `$procdff$96' with positive edge clock.
+Creating register for signal `\MacController.\state' using process `\MacController.$proc$generated/DotProductEngine/MacController.sv:81$11'.
+  created $dff cell `$procdff$97' with positive edge clock.
+Creating register for signal `\MacController.\kReg' using process `\MacController.$proc$generated/DotProductEngine/MacController.sv:81$11'.
+  created $dff cell `$procdff$98' with positive edge clock.
+Creating register for signal `\DotProductEngine.\resultReg_0' using process `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+  created $dff cell `$procdff$99' with positive edge clock.
+Creating register for signal `\DotProductEngine.\resultReg_1' using process `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+  created $dff cell `$procdff$100' with positive edge clock.
+Creating register for signal `\DotProductEngine.\resultReg_2' using process `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+  created $dff cell `$procdff$101' with positive edge clock.
+Creating register for signal `\DotProductEngine.\resultReg_3' using process `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+  created $dff cell `$procdff$102' with positive edge clock.
+Creating register for signal `\DotProductEngine.\resultReg_4' using process `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+  created $dff cell `$procdff$103' with positive edge clock.
+Creating register for signal `\DotProductEngine.\resultReg_5' using process `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+  created $dff cell `$procdff$104' with positive edge clock.
+Creating register for signal `\DotProductEngine.\resultReg_6' using process `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+  created $dff cell `$procdff$105' with positive edge clock.
+Creating register for signal `\DotProductEngine.\resultReg_7' using process `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+  created $dff cell `$procdff$106' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 3 empty switches in `\MacPE.$proc$generated/DotProductEngine/MacPE.sv:59$23'.
+Removing empty process `MacPE.$proc$generated/DotProductEngine/MacPE.sv:59$23'.
+Found and cleaned up 4 empty switches in `\MacController.$proc$generated/DotProductEngine/MacController.sv:81$11'.
+Removing empty process `MacController.$proc$generated/DotProductEngine/MacController.sv:81$11'.
+Found and cleaned up 1 empty switch in `\MacController.$proc$generated/DotProductEngine/MacController.sv:0$8'.
+Removing empty process `MacController.$proc$generated/DotProductEngine/MacController.sv:0$8'.
+Found and cleaned up 2 empty switches in `\DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+Removing empty process `DotProductEngine.$proc$generated/DotProductEngine/DotProductEngine.sv:101$1'.
+Cleaned up 10 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module MacPEArray.
+Optimizing module MacPE.
+Optimizing module MacController.
+<suppressed ~2 debug messages>
+Optimizing module DotProductEngine.
+
+6.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module MacPEArray.
+Deleting now unused module MacPE.
+Deleting now unused module MacController.
+<suppressed ~10 debug messages>
+
+6.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+Removed 0 unused cells and 81 unused wires.
+<suppressed ~1 debug messages>
+
+6.6. Executing CHECK pass (checking for obvious problems).
+Checking module DotProductEngine...
+Found and reported 0 problems.
+
+6.7. Executing OPT pass (performing simple optimizations).
+
+6.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+<suppressed ~21 debug messages>
+Removed a total of 7 cells.
+
+6.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DotProductEngine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~19 debug messages>
+
+6.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DotProductEngine.
+Performed a total of 0 changes.
+
+6.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+Removed a total of 0 cells.
+
+6.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+Removed 0 unused cells and 7 unused wires.
+<suppressed ~1 debug messages>
+
+6.7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DotProductEngine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~19 debug messages>
+
+6.7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DotProductEngine.
+Performed a total of 0 changes.
+
+6.7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+Removed a total of 0 cells.
+
+6.7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+
+6.7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.7.16. Finished OPT passes. (There is nothing left to do.)
+
+6.8. Executing FSM pass (extract and optimize FSM).
+
+6.8.1. Executing FSM_DETECT pass (finding FSMs in design).
+Found FSM state register DotProductEngine.controller.state.
+
+6.8.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\controller.state' from module `\DotProductEngine'.
+  found $dff cell for state register: $flatten\controller.$procdff$97
+  root of input selection tree: $flatten\controller.$0\state[2:0]
+  found reset state: 3'000 (guessed from mux tree)
+  found ctrl input: \reset
+  found ctrl input: \io_done
+  found ctrl input: \_controller_io_capture
+  found ctrl input: \_controller_io_accumulate
+  found ctrl input: \_controller_io_init
+  found ctrl input: $flatten\controller.$eq$generated/DotProductEngine/MacController.sv:88$12_Y
+  found state code: 3'000
+  found state code: 3'100
+  found ctrl input: \controller._GEN
+  found state code: 3'011
+  found state code: 3'010
+  found ctrl input: \io_start
+  found state code: 3'001
+  found ctrl output: \io_done
+  found ctrl output: \_controller_io_capture
+  found ctrl output: \_controller_io_accumulate
+  found ctrl output: \_controller_io_init
+  found ctrl output: $flatten\controller.$ne$generated/DotProductEngine/MacController.sv:92$14_Y
+  found ctrl output: $flatten\controller.$eq$generated/DotProductEngine/MacController.sv:88$12_Y
+  ctrl inputs: { \controller._GEN \io_start \reset }
+  ctrl outputs: { $flatten\controller.$0\state[2:0] $flatten\controller.$eq$generated/DotProductEngine/MacController.sv:88$12_Y $flatten\controller.$ne$generated/DotProductEngine/MacController.sv:92$14_Y \_controller_io_capture \_controller_io_accumulate \_controller_io_init \io_done }
+  transition:      3'000 3'-00 ->      3'000 9'000110000
+  transition:      3'000 3'-10 ->      3'001 9'001110000
+  transition:      3'000 3'--1 ->      3'000 9'000110000
+  transition:      3'100 3'--0 ->      3'000 9'000010001
+  transition:      3'100 3'--1 ->      3'000 9'000010001
+  transition:      3'010 3'0-0 ->      3'010 9'010000100
+  transition:      3'010 3'1-0 ->      3'011 9'011000100
+  transition:      3'010 3'--1 ->      3'000 9'000000100
+  transition:      3'001 3'--0 ->      3'010 9'010010010
+  transition:      3'001 3'--1 ->      3'000 9'000010010
+  transition:      3'011 3'--0 ->      3'100 9'100011000
+  transition:      3'011 3'--1 ->      3'000 9'000011000
+
+6.8.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\controller.state$117' from module `\DotProductEngine'.
+  Merging pattern 3'--0 and 3'--1 from group (1 0 9'000010001).
+  Merging pattern 3'--1 and 3'--0 from group (1 0 9'000010001).
+
+6.8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+Removed 11 unused cells and 11 unused wires.
+<suppressed ~13 debug messages>
+
+6.8.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\controller.state$117' from module `\DotProductEngine'.
+  Removing unused output signal $flatten\controller.$0\state[2:0] [0].
+  Removing unused output signal $flatten\controller.$0\state[2:0] [1].
+  Removing unused output signal $flatten\controller.$0\state[2:0] [2].
+
+6.8.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\controller.state$117' from module `\DotProductEngine' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  000 -> ----1
+  100 -> ---1-
+  010 -> --1--
+  001 -> -1---
+  011 -> 1----
+
+6.8.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\controller.state$117' from module `DotProductEngine':
+-------------------------------------
+
+  Information on FSM $fsm$\controller.state$117 (\controller.state):
+
+  Number of input signals:    3
+  Number of output signals:   6
+  Number of state bits:       5
+
+  Input signals:
+    0: \reset
+    1: \io_start
+    2: \controller._GEN
+
+  Output signals:
+    0: \io_done
+    1: \_controller_io_init
+    2: \_controller_io_accumulate
+    3: \_controller_io_capture
+    4: $flatten\controller.$ne$generated/DotProductEngine/MacController.sv:92$14_Y
+    5: $flatten\controller.$eq$generated/DotProductEngine/MacController.sv:88$12_Y
+
+  State encoding:
+    0:    5'----1  <RESET STATE>
+    1:    5'---1-
+    2:    5'--1--
+    3:    5'-1---
+    4:    5'1----
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 3'-00   ->     0 6'110000
+      1:     0 3'--1   ->     0 6'110000
+      2:     0 3'-10   ->     3 6'110000
+      3:     1 3'---   ->     0 6'010001
+      4:     2 3'--1   ->     0 6'000100
+      5:     2 3'0-0   ->     2 6'000100
+      6:     2 3'1-0   ->     4 6'000100
+      7:     3 3'--1   ->     0 6'010010
+      8:     3 3'--0   ->     2 6'010010
+      9:     4 3'--1   ->     0 6'011000
+     10:     4 3'--0   ->     1 6'011000
+
+-------------------------------------
+
+6.8.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\controller.state$117' from module `\DotProductEngine'.
+
+6.9. Executing OPT pass (performing simple optimizations).
+
+6.9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+<suppressed ~5 debug messages>
+
+6.9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+6.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DotProductEngine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~18 debug messages>
+
+6.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DotProductEngine.
+Performed a total of 0 changes.
+
+6.9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+Removed a total of 0 cells.
+
+6.9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$99 ($dff) from module DotProductEngine (D = $procmux$91_Y, Q = \resultReg_0, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$158 ($sdff) from module DotProductEngine (D = \peArray.pes_0.ACC, Q = \resultReg_0).
+Adding SRST signal on $procdff$106 ($dff) from module DotProductEngine (D = $procmux$56_Y, Q = \resultReg_7, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$160 ($sdff) from module DotProductEngine (D = \peArray.pes_7.ACC, Q = \resultReg_7).
+Adding SRST signal on $procdff$105 ($dff) from module DotProductEngine (D = $procmux$61_Y, Q = \resultReg_6, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$162 ($sdff) from module DotProductEngine (D = \peArray.pes_6.ACC, Q = \resultReg_6).
+Adding SRST signal on $procdff$104 ($dff) from module DotProductEngine (D = $procmux$66_Y, Q = \resultReg_5, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$164 ($sdff) from module DotProductEngine (D = \peArray.pes_5.ACC, Q = \resultReg_5).
+Adding SRST signal on $procdff$103 ($dff) from module DotProductEngine (D = $procmux$71_Y, Q = \resultReg_4, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$166 ($sdff) from module DotProductEngine (D = \peArray.pes_4.ACC, Q = \resultReg_4).
+Adding SRST signal on $procdff$102 ($dff) from module DotProductEngine (D = $procmux$76_Y, Q = \resultReg_3, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$168 ($sdff) from module DotProductEngine (D = \peArray.pes_3.ACC, Q = \resultReg_3).
+Adding SRST signal on $procdff$101 ($dff) from module DotProductEngine (D = $procmux$81_Y, Q = \resultReg_2, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$170 ($sdff) from module DotProductEngine (D = \peArray.pes_2.ACC, Q = \resultReg_2).
+Adding SRST signal on $procdff$100 ($dff) from module DotProductEngine (D = $procmux$86_Y, Q = \resultReg_1, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$172 ($sdff) from module DotProductEngine (D = \peArray.pes_1.ACC, Q = \resultReg_1).
+Adding SRST signal on $flatten\peArray.\pes_7.$procdff$96 ($dff) from module DotProductEngine (D = $flatten\peArray.\pes_7.$procmux$28_Y, Q = \peArray.pes_7.ACC, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$174 ($sdff) from module DotProductEngine (D = $flatten\peArray.\pes_7.$procmux$28_Y, Q = \peArray.pes_7.ACC).
+Adding SRST signal on $flatten\peArray.\pes_6.$procdff$96 ($dff) from module DotProductEngine (D = $flatten\peArray.\pes_6.$procmux$28_Y, Q = \peArray.pes_6.ACC, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$178 ($sdff) from module DotProductEngine (D = $flatten\peArray.\pes_6.$procmux$28_Y, Q = \peArray.pes_6.ACC).
+Adding SRST signal on $flatten\peArray.\pes_5.$procdff$96 ($dff) from module DotProductEngine (D = $flatten\peArray.\pes_5.$procmux$28_Y, Q = \peArray.pes_5.ACC, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$182 ($sdff) from module DotProductEngine (D = $flatten\peArray.\pes_5.$procmux$28_Y, Q = \peArray.pes_5.ACC).
+Adding SRST signal on $flatten\peArray.\pes_4.$procdff$96 ($dff) from module DotProductEngine (D = $flatten\peArray.\pes_4.$procmux$28_Y, Q = \peArray.pes_4.ACC, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$186 ($sdff) from module DotProductEngine (D = $flatten\peArray.\pes_4.$procmux$28_Y, Q = \peArray.pes_4.ACC).
+Adding SRST signal on $flatten\peArray.\pes_3.$procdff$96 ($dff) from module DotProductEngine (D = $flatten\peArray.\pes_3.$procmux$28_Y, Q = \peArray.pes_3.ACC, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$190 ($sdff) from module DotProductEngine (D = $flatten\peArray.\pes_3.$procmux$28_Y, Q = \peArray.pes_3.ACC).
+Adding SRST signal on $flatten\peArray.\pes_2.$procdff$96 ($dff) from module DotProductEngine (D = $flatten\peArray.\pes_2.$procmux$28_Y, Q = \peArray.pes_2.ACC, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$194 ($sdff) from module DotProductEngine (D = $flatten\peArray.\pes_2.$procmux$28_Y, Q = \peArray.pes_2.ACC).
+Adding SRST signal on $flatten\peArray.\pes_1.$procdff$96 ($dff) from module DotProductEngine (D = $flatten\peArray.\pes_1.$procmux$28_Y, Q = \peArray.pes_1.ACC, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$198 ($sdff) from module DotProductEngine (D = $flatten\peArray.\pes_1.$procmux$28_Y, Q = \peArray.pes_1.ACC).
+Adding SRST signal on $flatten\peArray.\pes_0.$procdff$96 ($dff) from module DotProductEngine (D = $flatten\peArray.\pes_0.$procmux$28_Y, Q = \peArray.pes_0.ACC, rval = 48'000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$202 ($sdff) from module DotProductEngine (D = $flatten\peArray.\pes_0.$procmux$28_Y, Q = \peArray.pes_0.ACC).
+Adding SRST signal on $flatten\controller.$procdff$98 ($dff) from module DotProductEngine (D = $flatten\controller.$procmux$42_Y, Q = \controller.kReg, rval = 6'000000).
+Adding EN signal on $auto$ff.cc:266:slice$206 ($sdff) from module DotProductEngine (D = $flatten\controller.$procmux$42_Y, Q = \controller.kReg).
+
+6.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+Removed 25 unused cells and 31 unused wires.
+<suppressed ~26 debug messages>
+
+6.9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+<suppressed ~8 debug messages>
+
+6.9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DotProductEngine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+6.9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DotProductEngine.
+Performed a total of 0 changes.
+
+6.9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+<suppressed ~21 debug messages>
+Removed a total of 7 cells.
+
+6.9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+Removed 0 unused cells and 7 unused wires.
+<suppressed ~1 debug messages>
+
+6.9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.9.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.9.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DotProductEngine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+6.9.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DotProductEngine.
+Performed a total of 0 changes.
+
+6.9.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+Removed a total of 0 cells.
+
+6.9.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.9.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+
+6.9.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.9.23. Finished OPT passes. (There is nothing left to do.)
+
+6.10. Executing WREDUCE pass (reducing word size of cells).
+Removed top 5 bits (of 6) from port B of cell DotProductEngine.$add$generated/DotProductEngine/DotProductEngine.sv:193$5 ($add).
+Removed top 1 bits (of 2) from port B of cell DotProductEngine.$auto$opt_dff.cc:195:make_patterns_logic$211 ($ne).
+Converting cell DotProductEngine.$flatten\peArray.\pes_7.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul) from unsigned to signed.
+Removed top 16 bits (of 32) from port A of cell DotProductEngine.$flatten\peArray.\pes_7.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Removed top 16 bits (of 32) from port B of cell DotProductEngine.$flatten\peArray.\pes_7.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Converting cell DotProductEngine.$flatten\peArray.\pes_6.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul) from unsigned to signed.
+Removed top 16 bits (of 32) from port A of cell DotProductEngine.$flatten\peArray.\pes_6.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Removed top 16 bits (of 32) from port B of cell DotProductEngine.$flatten\peArray.\pes_6.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Converting cell DotProductEngine.$flatten\peArray.\pes_5.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul) from unsigned to signed.
+Removed top 16 bits (of 32) from port A of cell DotProductEngine.$flatten\peArray.\pes_5.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Removed top 16 bits (of 32) from port B of cell DotProductEngine.$flatten\peArray.\pes_5.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Converting cell DotProductEngine.$flatten\peArray.\pes_4.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul) from unsigned to signed.
+Removed top 16 bits (of 32) from port A of cell DotProductEngine.$flatten\peArray.\pes_4.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Removed top 16 bits (of 32) from port B of cell DotProductEngine.$flatten\peArray.\pes_4.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Converting cell DotProductEngine.$flatten\peArray.\pes_3.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul) from unsigned to signed.
+Removed top 16 bits (of 32) from port A of cell DotProductEngine.$flatten\peArray.\pes_3.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Removed top 16 bits (of 32) from port B of cell DotProductEngine.$flatten\peArray.\pes_3.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Converting cell DotProductEngine.$flatten\peArray.\pes_2.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul) from unsigned to signed.
+Removed top 16 bits (of 32) from port A of cell DotProductEngine.$flatten\peArray.\pes_2.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Removed top 16 bits (of 32) from port B of cell DotProductEngine.$flatten\peArray.\pes_2.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Converting cell DotProductEngine.$flatten\peArray.\pes_1.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul) from unsigned to signed.
+Removed top 16 bits (of 32) from port A of cell DotProductEngine.$flatten\peArray.\pes_1.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Removed top 16 bits (of 32) from port B of cell DotProductEngine.$flatten\peArray.\pes_1.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Converting cell DotProductEngine.$flatten\peArray.\pes_0.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul) from unsigned to signed.
+Removed top 16 bits (of 32) from port A of cell DotProductEngine.$flatten\peArray.\pes_0.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+Removed top 16 bits (of 32) from port B of cell DotProductEngine.$flatten\peArray.\pes_0.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+
+6.11. Executing PEEPOPT pass (run peephole optimizers).
+
+6.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+
+6.13. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module DotProductEngine:
+  creating $macc model for $add$generated/DotProductEngine/DotProductEngine.sv:193$5 ($add).
+  creating $macc model for $flatten\peArray.\pes_0.$add$generated/DotProductEngine/MacPE.sv:65$24 ($add).
+  creating $macc model for $flatten\peArray.\pes_0.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+  creating $macc model for $flatten\peArray.\pes_1.$add$generated/DotProductEngine/MacPE.sv:65$24 ($add).
+  creating $macc model for $flatten\peArray.\pes_1.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+  creating $macc model for $flatten\peArray.\pes_2.$add$generated/DotProductEngine/MacPE.sv:65$24 ($add).
+  creating $macc model for $flatten\peArray.\pes_2.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+  creating $macc model for $flatten\peArray.\pes_3.$add$generated/DotProductEngine/MacPE.sv:65$24 ($add).
+  creating $macc model for $flatten\peArray.\pes_3.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+  creating $macc model for $flatten\peArray.\pes_4.$add$generated/DotProductEngine/MacPE.sv:65$24 ($add).
+  creating $macc model for $flatten\peArray.\pes_4.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+  creating $macc model for $flatten\peArray.\pes_5.$add$generated/DotProductEngine/MacPE.sv:65$24 ($add).
+  creating $macc model for $flatten\peArray.\pes_5.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+  creating $macc model for $flatten\peArray.\pes_6.$add$generated/DotProductEngine/MacPE.sv:65$24 ($add).
+  creating $macc model for $flatten\peArray.\pes_6.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+  creating $macc model for $flatten\peArray.\pes_7.$add$generated/DotProductEngine/MacPE.sv:65$24 ($add).
+  creating $macc model for $flatten\peArray.\pes_7.$mul$generated/DotProductEngine/MacPE.sv:58$22 ($mul).
+  creating $alu model for $macc $flatten\peArray.\pes_7.$add$generated/DotProductEngine/MacPE.sv:65$24.
+  creating $alu model for $macc $flatten\peArray.\pes_6.$add$generated/DotProductEngine/MacPE.sv:65$24.
+  creating $alu model for $macc $flatten\peArray.\pes_5.$add$generated/DotProductEngine/MacPE.sv:65$24.
+  creating $alu model for $macc $flatten\peArray.\pes_4.$add$generated/DotProductEngine/MacPE.sv:65$24.
+  creating $alu model for $macc $flatten\peArray.\pes_3.$add$generated/DotProductEngine/MacPE.sv:65$24.
+  creating $alu model for $macc $flatten\peArray.\pes_2.$add$generated/DotProductEngine/MacPE.sv:65$24.
+  creating $alu model for $macc $flatten\peArray.\pes_1.$add$generated/DotProductEngine/MacPE.sv:65$24.
+  creating $alu model for $macc $flatten\peArray.\pes_0.$add$generated/DotProductEngine/MacPE.sv:65$24.
+  creating $alu model for $macc $add$generated/DotProductEngine/DotProductEngine.sv:193$5.
+  creating $macc cell for $flatten\peArray.\pes_5.$mul$generated/DotProductEngine/MacPE.sv:58$22: $auto$alumacc.cc:365:replace_macc$214
+  creating $macc cell for $flatten\peArray.\pes_2.$mul$generated/DotProductEngine/MacPE.sv:58$22: $auto$alumacc.cc:365:replace_macc$215
+  creating $macc cell for $flatten\peArray.\pes_4.$mul$generated/DotProductEngine/MacPE.sv:58$22: $auto$alumacc.cc:365:replace_macc$216
+  creating $macc cell for $flatten\peArray.\pes_1.$mul$generated/DotProductEngine/MacPE.sv:58$22: $auto$alumacc.cc:365:replace_macc$217
+  creating $macc cell for $flatten\peArray.\pes_6.$mul$generated/DotProductEngine/MacPE.sv:58$22: $auto$alumacc.cc:365:replace_macc$218
+  creating $macc cell for $flatten\peArray.\pes_0.$mul$generated/DotProductEngine/MacPE.sv:58$22: $auto$alumacc.cc:365:replace_macc$219
+  creating $macc cell for $flatten\peArray.\pes_3.$mul$generated/DotProductEngine/MacPE.sv:58$22: $auto$alumacc.cc:365:replace_macc$220
+  creating $macc cell for $flatten\peArray.\pes_7.$mul$generated/DotProductEngine/MacPE.sv:58$22: $auto$alumacc.cc:365:replace_macc$221
+  creating $alu cell for $add$generated/DotProductEngine/DotProductEngine.sv:193$5: $auto$alumacc.cc:495:replace_alu$222
+  creating $alu cell for $flatten\peArray.\pes_0.$add$generated/DotProductEngine/MacPE.sv:65$24: $auto$alumacc.cc:495:replace_alu$225
+  creating $alu cell for $flatten\peArray.\pes_1.$add$generated/DotProductEngine/MacPE.sv:65$24: $auto$alumacc.cc:495:replace_alu$228
+  creating $alu cell for $flatten\peArray.\pes_2.$add$generated/DotProductEngine/MacPE.sv:65$24: $auto$alumacc.cc:495:replace_alu$231
+  creating $alu cell for $flatten\peArray.\pes_3.$add$generated/DotProductEngine/MacPE.sv:65$24: $auto$alumacc.cc:495:replace_alu$234
+  creating $alu cell for $flatten\peArray.\pes_4.$add$generated/DotProductEngine/MacPE.sv:65$24: $auto$alumacc.cc:495:replace_alu$237
+  creating $alu cell for $flatten\peArray.\pes_5.$add$generated/DotProductEngine/MacPE.sv:65$24: $auto$alumacc.cc:495:replace_alu$240
+  creating $alu cell for $flatten\peArray.\pes_6.$add$generated/DotProductEngine/MacPE.sv:65$24: $auto$alumacc.cc:495:replace_alu$243
+  creating $alu cell for $flatten\peArray.\pes_7.$add$generated/DotProductEngine/MacPE.sv:65$24: $auto$alumacc.cc:495:replace_alu$246
+  created 9 $alu and 8 $macc cells.
+
+6.14. Executing SHARE pass (SAT-based resource sharing).
+
+6.15. Executing OPT pass (performing simple optimizations).
+
+6.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+Removed a total of 0 cells.
+
+6.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DotProductEngine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+6.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DotProductEngine.
+Performed a total of 0 changes.
+
+6.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+Removed a total of 0 cells.
+
+6.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+
+6.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.15.9. Finished OPT passes. (There is nothing left to do.)
+
+6.16. Executing MEMORY pass.
+
+6.16.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+6.16.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+6.16.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+6.16.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+6.16.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+6.16.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+
+6.16.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+6.16.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+6.16.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+
+6.16.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+
+6.18. Executing OPT pass (performing simple optimizations).
+
+6.18.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+<suppressed ~10 debug messages>
+
+6.18.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+Removed a total of 0 cells.
+
+6.18.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+Removed 0 unused cells and 10 unused wires.
+<suppressed ~1 debug messages>
+
+6.18.5. Finished fast OPT passes.
+
+6.19. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+6.20. Executing OPT pass (performing simple optimizations).
+
+6.20.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.20.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+Removed a total of 0 cells.
+
+6.20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DotProductEngine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+6.20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DotProductEngine.
+Performed a total of 0 changes.
+
+6.20.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+Removed a total of 0 cells.
+
+6.20.6. Executing OPT_SHARE pass.
+
+6.20.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.20.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+
+6.20.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+
+6.20.10. Finished OPT passes. (There is nothing left to do.)
+
+6.21. Executing TECHMAP pass (map to technology primitives).
+
+6.21.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+6.21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$88aad6f8473fb7e4e5fbfb8335ddebad03429eaa\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \io_x * \io_w_5 (16x16 bits, signed)
+Using template $paramod$32efbfac1c4dc57230cf86180788fdfd12e3b511\_90_alu for cells of type $alu.
+  add \io_x * \io_w_0 (16x16 bits, signed)
+  add \io_x * \io_w_2 (16x16 bits, signed)
+  add \io_x * \io_w_1 (16x16 bits, signed)
+  add \io_x * \io_w_7 (16x16 bits, signed)
+  add \io_x * \io_w_4 (16x16 bits, signed)
+  add \io_x * \io_w_6 (16x16 bits, signed)
+  add \io_x * \io_w_3 (16x16 bits, signed)
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~4519 debug messages>
+
+6.22. Executing OPT pass (performing simple optimizations).
+
+6.22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module DotProductEngine.
+<suppressed ~7674 debug messages>
+
+6.22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DotProductEngine'.
+<suppressed ~13257 debug messages>
+Removed a total of 4419 cells.
+
+6.22.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DotProductEngine..
+Removed 801 unused cells and 2022 unused wires.
+<suppressed ~802 debug messages>
+
+6.22.5. Finished fast OPT passes.
+
+6.23. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `DotProductEngine'. Setting top module to DotProductEngine.
+
+6.23.1. Analyzing design hierarchy..
+Top module:  \DotProductEngine
+
+6.23.2. Analyzing design hierarchy..
+Top module:  \DotProductEngine
+Removed 0 unused modules.
+
+6.24. Printing statistics.
+
+=== DotProductEngine ===
+
+   Number of wires:               2889
+   Number of wire bits:          32353
+   Number of public wires:         172
+   Number of public wire bits:    4151
+   Number of ports:                 32
+   Number of port bits:            865
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              17940
+     $_AND_                       8288
+     $_DFF_P_                        5
+     $_MUX_                        396
+     $_NOT_                         31
+     $_OR_                        3006
+     $_SDFFE_PP0P_                 774
+     $_XOR_                       5430
+     $scopeinfo                     10
+
+6.25. Executing CHECK pass (checking for obvious problems).
+Checking module DotProductEngine...
+Found and reported 0 problems.
+
+7. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell DFF_X1 (noninv, pins=4, area=4.52) is a direct match for cell type $_DFF_P_.
+  cell DFFR_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN0_.
+  cell DFFS_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN1_.
+  cell DFFRS_X1 (noninv, pins=6, area=6.38) is a direct match for cell type $_DFFSR_PNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \DFF_X1 _DFF_P_ (.CK( C), .D( D), .Q( Q), .QN(~Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \DFFR_X1 _DFF_PN0_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R));
+    \DFFS_X1 _DFF_PN1_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .SN( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    unmapped dff cell: $_DFFE_PP_
+    unmapped dff cell: $_DFFSR_NNN_
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    \DFFRS_X1 _DFFSR_PNN_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R), .SN( S));
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+7.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+<suppressed ~8 debug messages>
+Mapping DFF cells in module `\DotProductEngine':
+  mapped 779 $_DFF_P_ cells to \DFF_X1 cells.
+
+8. Executing ABC pass (technology mapping using ABC).
+
+8.1. Extracting gate netlist of module `\DotProductEngine' to `<abc-temp-dir>/input.blif'..
+Extracted 18699 gates and 19952 wires to a netlist network with 1252 inputs and 786 outputs.
+
+8.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/mxhanks/Projects/ChipContest/assets/libs/nangate45/NangateOpenCellLibrary_typical.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.05 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "ANTENNA_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X2".
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "TAPCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X2" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X4" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X8" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X16" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X32" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC0_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC1_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X16".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TINV_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "TLAT_X1".
+ABC: Library "NangateOpenCellLibrary" from "/home/mxhanks/Projects/ChipContest/assets/libs/nangate45/NangateOpenCellLibrary_typical.lib" has 90 cells (35 skipped: 21 seq; 6 tri-state; 8 no func; 10 dont_use).  Time =     0.08 sec
+ABC: Memory =   11.38 MB. Time =     0.08 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FA_X1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.1.2. Re-integrating ABC results.
+ABC RESULTS:           AND2_X1 cells:      786
+ABC RESULTS:           AND3_X1 cells:      496
+ABC RESULTS:           AND4_X1 cells:      133
+ABC RESULTS:         AOI211_X1 cells:      524
+ABC RESULTS:          AOI21_X1 cells:     1506
+ABC RESULTS:         AOI221_X1 cells:       98
+ABC RESULTS:         AOI222_X1 cells:       89
+ABC RESULTS:          AOI22_X1 cells:      437
+ABC RESULTS:            INV_X1 cells:     1159
+ABC RESULTS:           MUX2_X1 cells:       10
+ABC RESULTS:          NAND2_X1 cells:     2214
+ABC RESULTS:          NAND3_X1 cells:      436
+ABC RESULTS:          NAND4_X1 cells:       80
+ABC RESULTS:           NOR2_X1 cells:     2518
+ABC RESULTS:           NOR3_X1 cells:      299
+ABC RESULTS:           NOR4_X1 cells:       18
+ABC RESULTS:         OAI211_X1 cells:       86
+ABC RESULTS:          OAI21_X1 cells:     1438
+ABC RESULTS:         OAI221_X1 cells:       45
+ABC RESULTS:          OAI22_X1 cells:       28
+ABC RESULTS:          OAI33_X1 cells:       39
+ABC RESULTS:            OR2_X1 cells:      454
+ABC RESULTS:            OR3_X1 cells:      483
+ABC RESULTS:            OR4_X1 cells:        7
+ABC RESULTS:          XNOR2_X1 cells:     2343
+ABC RESULTS:           XOR2_X1 cells:     1508
+ABC RESULTS:        internal signals:    17914
+ABC RESULTS:           input signals:     1252
+ABC RESULTS:          output signals:      786
+Removing temp directory.
+Removed 0 unused cells and 5540 unused wires.
+
+9. Printing statistics.
+
+=== DotProductEngine ===
+
+   Number of wires:              18169
+   Number of wire bits:          21905
+   Number of public wires:         163
+   Number of public wire bits:    3894
+   Number of ports:                 32
+   Number of port bits:            865
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              18023
+     $scopeinfo                     10
+     AND2_X1                       786
+     AND3_X1                       496
+     AND4_X1                       133
+     AOI211_X1                     524
+     AOI21_X1                     1506
+     AOI221_X1                      98
+     AOI222_X1                      89
+     AOI22_X1                      437
+     DFF_X1                        779
+     INV_X1                       1159
+     MUX2_X1                        10
+     NAND2_X1                     2214
+     NAND3_X1                      436
+     NAND4_X1                       80
+     NOR2_X1                      2518
+     NOR3_X1                       299
+     NOR4_X1                        18
+     OAI211_X1                      86
+     OAI21_X1                     1438
+     OAI221_X1                      45
+     OAI22_X1                       28
+     OAI33_X1                       39
+     OR2_X1                        454
+     OR3_X1                        483
+     OR4_X1                          7
+     XNOR2_X1                     2343
+     XOR2_X1                      1508
+
+   Area for cell type $scopeinfo is unknown!
+
+   Chip area for module '\DotProductEngine': 22889.832000
+     of which used for sequential elements: 3522.638000 (15.39%)
+
+End of script. Logfile hash: 3d19c4c400, CPU: user 2.34s system 0.07s, MEM: 83.39 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 57% 1x abc (2 sec), 7% 21x opt_expr (0 sec), ...
