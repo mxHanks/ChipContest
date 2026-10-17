@@ -1,6 +1,7 @@
 import chisel3._
 import circt.stage.ChiselStage
 import dotproduct._
+import linear._
 
 object GenerateRTL {
 
@@ -9,7 +10,9 @@ object GenerateRTL {
         "MacPE" -> (() => new MacPE),
         "MacPEArray" -> (() => new MacPEArray),
         "MacController" -> (() => new MacController),
-        "DotProductEngine" -> (() => new DotProductEngine)
+        "DotProductEngine" -> (() => new DotProductEngine),
+        "LinearComputeCore" -> (() => new LinearComputeCore),
+        "LinearLayerEngine" -> (() => new LinearLayerEngine)
     )
 
     def main(args: Array[String]): Unit = {
