@@ -1,0 +1,206 @@
+{
+  "schema": "fpt-kwt1-declared-dependencies-v1",
+  "groups": [
+    {
+      "name": "qk_service_behavior",
+      "top": "tb_cats_r4_qk_32lane_fp32_service",
+      "filelist": "filesets/qk_service_behavior.f",
+      "sources": [
+        "reference/fpt/tb/tb_cats_r4_b3_fp32_mocks.sv",
+        "reference/fpt/rtl/core/bc/qk/cats_r4_qk_32lane_fp32_service.sv",
+        "reference/fpt/tb/tb_cats_r4_qk_32lane_fp32_service.sv"
+      ],
+      "required_modules": [
+        "fp32_mul_ip",
+        "fp32_add_ip",
+        "cats_r4_qk_32lane_fp32_service"
+      ],
+      "required_packages": [
+        "cats_r4_mock_fp32"
+      ],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "qk_request_buffer_behavior",
+      "top": "tb_cats_r4_qk_request_buffer",
+      "filelist": "filesets/qk_request_buffer_behavior.f",
+      "sources": [
+        "reference/fpt/tb/tb_cats_r4_b3_fp32_mocks.sv",
+        "reference/fpt/rtl/core/bc/qk/cats_r4_qk_32lane_fp32_service.sv",
+        "reference/fpt/rtl/core/bc/qk/cats_r4_qk_32lane_scheduler.sv",
+        "reference/fpt/rtl/core/bc/qk/cats_r4_qk_32lane_engine.sv",
+        "reference/fpt/tb/tb_cats_r4_qk_request_buffer.sv"
+      ],
+      "required_modules": [
+        "fp32_mul_ip",
+        "fp32_add_ip",
+        "cats_r4_qk_32lane_fp32_service",
+        "cats_r4_qk_32lane_scheduler",
+        "cats_r4_qk_32lane_engine"
+      ],
+      "required_packages": [
+        "cats_r4_mock_fp32"
+      ],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "qk_scheduler_protocol",
+      "top": "tb_cats_r4_qk_32lane_scheduler",
+      "filelist": "filesets/qk_scheduler_protocol.f",
+      "sources": [
+        "reference/fpt/rtl/core/bc/qk/cats_r4_qk_32lane_scheduler.sv",
+        "reference/fpt/tb/tb_cats_r4_qk_32lane_scheduler.sv"
+      ],
+      "required_modules": [
+        "cats_r4_qk_32lane_scheduler"
+      ],
+      "required_packages": [],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "banked_owner",
+      "top": "tb_cats_r4_qkv_banked_mem",
+      "filelist": "filesets/banked_owner.f",
+      "sources": [
+        "reference/fpt/rtl/core/cluster/cats_r4_qkv_banked_mem.sv",
+        "reference/fpt/tb/tb_cats_r4_qkv_banked_mem.sv"
+      ],
+      "required_modules": [
+        "cats_r4_qkv_banked_mem"
+      ],
+      "required_packages": [],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "slot_bank",
+      "top": "tb_cats_r4_slot_bank",
+      "filelist": "filesets/slot_bank.f",
+      "sources": [
+        "reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv",
+        "reference/fpt/tb/tb_cats_r4_slot_bank.sv"
+      ],
+      "required_modules": [
+        "cats_r4_slot_bank"
+      ],
+      "required_packages": [],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "async_fifo",
+      "top": "tb_cats_r4_async_fifo",
+      "filelist": "filesets/async_fifo.f",
+      "sources": [
+        "reference/fpt/rtl/core/cluster/cats_r4_async_fifo.sv",
+        "reference/fpt/tb/tb_cats_r4_async_fifo.sv"
+      ],
+      "required_modules": [
+        "cats_r4_async_fifo"
+      ],
+      "required_packages": [],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "reset_edges",
+      "top": "tb_cats_r4_reset_sync_edges",
+      "filelist": "filesets/reset_edges.f",
+      "sources": [
+        "reference/fpt/rtl/core/cluster/cats_r4_reset_sync.sv",
+        "reference/fpt/tb/tb_cats_r4_reset_sync_edges.sv"
+      ],
+      "required_modules": [
+        "cats_r4_reset_sync"
+      ],
+      "required_packages": [],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "bank_bridge_behavior",
+      "top": "tb_cats_r4_qkv_axi_bank_bridge",
+      "filelist": "filesets/bank_bridge_behavior.f",
+      "sources": [
+        "reference/fpt/tb/xpm_memory_sdpram_model.sv",
+        "reference/fpt/rtl/core/cluster/cats_r4_qkv_axi_bank_bridge.sv",
+        "reference/fpt/tb/tb_cats_r4_qkv_axi_bank_bridge.sv"
+      ],
+      "required_modules": [
+        "xpm_memory_sdpram",
+        "cats_r4_qkv_axi_bank_bridge"
+      ],
+      "required_packages": [],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "service_observer",
+      "top": "tb_cats_r4_core_service_observer",
+      "filelist": "filesets/service_observer.f",
+      "sources": [
+        "reference/fpt/rtl/board/cats_r4_core_service_observer.sv",
+        "reference/fpt/tests/tb_cats_r4_core_service_observer.sv"
+      ],
+      "required_modules": [
+        "cats_r4_core_service_observer"
+      ],
+      "required_packages": [],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "service_counter_adapter",
+      "top": "tb_cats_r4_core_service_from_counters",
+      "filelist": "filesets/service_counter_adapter.f",
+      "sources": [
+        "reference/fpt/rtl/board/cats_r4_core_service_observer.sv",
+        "reference/fpt/rtl/board/cats_r4_core_service_from_counters.sv",
+        "reference/fpt/tests/tb_cats_r4_core_service_from_counters.sv"
+      ],
+      "required_modules": [
+        "cats_r4_core_service_observer",
+        "cats_r4_core_service_from_counters"
+      ],
+      "required_packages": [],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    },
+    {
+      "name": "fp32_reference_vectors",
+      "top": "tb_cats_r4_b3_fp32_reference",
+      "filelist": "filesets/fp32_reference_vectors.f",
+      "sources": [
+        "reference/fpt/tb/tb_cats_r4_b3_fp32_mocks.sv",
+        "reference/fpt/tb/tb_cats_r4_b3_fp32_reference.sv"
+      ],
+      "required_modules": [],
+      "required_packages": [
+        "cats_r4_mock_fp32"
+      ],
+      "new_hdl_simulation": "NOT_RUN",
+      "scope": "FPT behavioral reference only"
+    }
+  ],
+  "notes": [
+    "Filelists use paths relative to bundle root.",
+    "Do not mix vendor fp32_* wrappers with same-name TB model definitions.",
+    "fp32_reference_vectors requires +VECTORS=<generated file>; vectors not precomputed here.",
+    "qk_request_buffer_behavior CLEAR_IN_FLIGHT=0/1 are separate scenarios.",
+    "All file sets statically checked only; no native HDL compiler was run."
+  ],
+  "external_vendor_modules": [
+    "floating_point_0",
+    "floating_point_1",
+    "floating_point_2"
+  ],
+  "contest_platform_dependencies": [
+    "E203 platform and driver environment",
+    "standard-cell library",
+    "specified SRAM macros and simulation/power models",
+    "fixed KWT weights and Speech Commands V2 dataset"
+  ]
+}

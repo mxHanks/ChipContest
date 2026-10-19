@@ -1,0 +1,109 @@
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:83:40: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 2 bits.
+                                                                                                                                               : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+   83 |                 ($unsigned(wr_slot[i]) < SLOT_COUNT) &&
+      |                                        ^
+                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.020
+                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:84:40: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 5 bits.
+                                                                                                                                               : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+   84 |                 ($unsigned(wr_bank[i]) < BANKS) &&
+      |                                        ^
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:85:39: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 4 bits.
+                                                                                                                                               : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+   85 |                 ($unsigned(wr_row[i]) < ROWS) &&
+      |                                       ^
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:89:40: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 2 bits.
+                                                                                                                                               : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+   89 |                 ($unsigned(rd_slot[i]) < SLOT_COUNT) &&
+      |                                        ^
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:90:40: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 5 bits.
+                                                                                                                                               : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+   90 |                 ($unsigned(rd_bank[i]) < BANKS) &&
+      |                                        ^
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:91:39: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 4 bits.
+                                                                                                                                               : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+   91 |                 ($unsigned(rd_row[i]) < ROWS) &&
+      |                                       ^
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:138:37: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 5 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  138 |             ($unsigned(acc_wr_bank) < BANKS) &&
+      |                                     ^
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:139:36: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 4 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  139 |             ($unsigned(acc_wr_row) < ROWS) &&
+      |                                    ^
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:143:37: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 5 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  143 |             ($unsigned(acc_rd_bank) < BANKS) &&
+      |                                     ^
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:144:36: Operator LT expects 32 bits on the LHS, but LHS's UNSIGNED generates 4 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  144 |             ($unsigned(acc_rd_row) < ROWS) &&
+      |                                    ^
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:180:45: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 2 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  180 |                     (($unsigned(wr_slot[i]) >= SLOT_COUNT) ||
+      |                                             ^~
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:181:45: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 5 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  181 |                      ($unsigned(wr_bank[i]) >= BANKS) ||
+      |                                             ^~
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:182:44: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 4 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  182 |                      ($unsigned(wr_row[i]) >= ROWS)))
+      |                                            ^~
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:185:45: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 2 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  185 |                     (($unsigned(rd_slot[i]) >= SLOT_COUNT) ||
+      |                                             ^~
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:186:45: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 5 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  186 |                      ($unsigned(rd_bank[i]) >= BANKS) ||
+      |                                             ^~
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:187:44: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 4 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  187 |                      ($unsigned(rd_row[i]) >= ROWS)))
+      |                                            ^~
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:207:42: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 5 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  207 |                 (($unsigned(acc_wr_bank) >= BANKS) ||
+      |                                          ^~
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:208:41: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 4 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  208 |                  ($unsigned(acc_wr_row) >= ROWS)))
+      |                                         ^~
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:211:42: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 5 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  211 |                 (($unsigned(acc_rd_bank) >= BANKS) ||
+      |                                          ^~
+%Warning-WIDTHEXPAND: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:212:41: Operator GTE expects 32 bits on the LHS, but LHS's UNSIGNED generates 4 bits.
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+  212 |                  ($unsigned(acc_rd_row) >= ROWS)))
+      |                                         ^~
+%Warning-MULTIDRIVEN: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:176:18: Variable also written to in always_comb (IEEE 1800-2017 9.2.2.2): 'i'
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+                      /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:176:18: 
+  176 |             for (i = 0; i < 2; i = i + 1) begin
+      |                  ^
+                      /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:120:28: ... Location of always_comb write
+  120 |         for (i = 0; i < 2; i = i + 1)
+      |                            ^
+%Warning-MULTIDRIVEN: /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:176:32: Variable also written to in always_comb (IEEE 1800-2017 9.2.2.2): 'i'
+                                                                                                                                                : ... note: In instance 'tb_cats_r4_slot_bank.dut'
+                      /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:176:32: 
+  176 |             for (i = 0; i < 2; i = i + 1) begin
+      |                                ^
+                      /media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/fpt-r1/reference/fpt/rtl/core/cluster/cats_r4_slot_bank.sv:176:18: ... Location of always_comb write
+  176 |             for (i = 0; i < 2; i = i + 1) begin
+      |                  ^
+make[1]: Entering directory '/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261014T145158.643282Z-417300cf/rtl/slot_bank/default/obj'
+g++ -Os  -I.  -MMD -I/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include -I/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include -I/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include/verilated_timing.cpp
+g++ -Os  -I.  -MMD -I/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include -I/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include/verilated_threads.cpp
+/usr/bin/python3 /media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb_cats_r4_slot_bank.cpp Vtb_cats_r4_slot_bank___024root__DepSet_h775bf2a6__0.cpp Vtb_cats_r4_slot_bank___024root__DepSet_hd48eaa16__0.cpp Vtb_cats_r4_slot_bank__main.cpp Vtb_cats_r4_slot_bank___024root__Slow.cpp Vtb_cats_r4_slot_bank___024root__DepSet_h775bf2a6__0__Slow.cpp Vtb_cats_r4_slot_bank___024root__DepSet_hd48eaa16__0__Slow.cpp Vtb_cats_r4_slot_bank__Syms.cpp > Vtb_cats_r4_slot_bank__ALL.cpp
+echo "" > Vtb_cats_r4_slot_bank__ALL.verilator_deplist.tmp
+g++ -Os  -I.  -MMD -I/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include -I/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o Vtb_cats_r4_slot_bank__ALL.o Vtb_cats_r4_slot_bank__ALL.cpp
+Archive ar -rcs Vtb_cats_r4_slot_bank__ALL.a Vtb_cats_r4_slot_bank__ALL.o
+g++     verilated.o verilated_timing.o verilated_threads.o Vtb_cats_r4_slot_bank__ALL.a    -pthread -lpthread -latomic   -o simulation
+rm Vtb_cats_r4_slot_bank__ALL.verilator_deplist.tmp
+make[1]: Leaving directory '/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261014T145158.643282Z-417300cf/rtl/slot_bank/default/obj'

@@ -1,0 +1,1175 @@
+{
+  "schema": "kwt-optimization-area-budget-v1",
+  "created_date": "2026-10-15",
+  "timezone": "Asia/Shanghai",
+  "scope": "Analytic capacity and port feasibility; not official SRAM mapping or physical area evidence",
+  "capacity_arithmetic_status": "PASS",
+  "physical_acceptance_status": "BLOCKED",
+  "source_sha256": {
+    "赛题要求.pdf": "b73a5414b4dcdb2cca337778a133be88705e207bec080687731d63b413ea927c",
+    "docs/requirements/UNDERGRAD_REQUIREMENTS.md": "f0876a913409fb75d2ef9fec6b5c6a9e00de69fb808cd57f411c81ebb173d02f",
+    "src/rtl/kwt_linear_engine.sv": "0910eb9559bd54656e2a1e16f7fd61b036818dfd8295c7a3bc778a35a381006d",
+    "src/rtl/kwt_linear_engine_opt.sv": "38bf34e259fbeec9196b808b09fa0d4f11a936d5995c1c29a666c3c87bf009b8",
+    "docs/FINAL_WORK_PROPOSAL.md": "d5079a193602ef980a37c466f5fc826bb931ccfac9ba7b829e13b5efa03cb14e"
+  },
+  "constraints": {
+    "incremental_area_limit_mm2": 2.25,
+    "area_comparison": "strict_less_than",
+    "target_frequency_mhz": 150,
+    "macro_word_bits": 16,
+    "macro_depth_options": [
+      128,
+      1024,
+      4096
+    ],
+    "macro_port_classes": [
+      "SP",
+      "DP"
+    ],
+    "shared_sram_bytes": 524288,
+    "rows": 99,
+    "in_features": 64,
+    "out_features": 256,
+    "numeric_format": "fixed16_acc48_v1"
+  },
+  "capacity_optimization": {
+    "objective_order": [
+      "minimum allocated bit capacity for specified bank/parallel-access layout",
+      "fewest macro instances among minimum-capacity choices"
+    ],
+    "not_claimed": "minimum physical area or minimum energy; all official physical metrics remain null",
+    "minimum_depth_checks": [
+      {
+        "required_depth_words": 6336,
+        "minimum_configured_depth_words": 6400,
+        "fewest_depth_macros_at_minimum_capacity": 5,
+        "composition_16bit_depth_slices": {
+          "128": 2,
+          "1024": 2,
+          "4096": 1
+        },
+        "status": "PASS"
+      },
+      {
+        "required_depth_words": 3200,
+        "minimum_configured_depth_words": 3200,
+        "fewest_depth_macros_at_minimum_capacity": 4,
+        "composition_16bit_depth_slices": {
+          "128": 1,
+          "1024": 3,
+          "4096": 0
+        },
+        "status": "PASS"
+      },
+      {
+        "required_depth_words": 3136,
+        "minimum_configured_depth_words": 3200,
+        "fewest_depth_macros_at_minimum_capacity": 4,
+        "composition_16bit_depth_slices": {
+          "128": 1,
+          "1024": 3,
+          "4096": 0
+        },
+        "status": "PASS"
+      },
+      {
+        "required_depth_words": 2048,
+        "minimum_configured_depth_words": 2048,
+        "fewest_depth_macros_at_minimum_capacity": 2,
+        "composition_16bit_depth_slices": {
+          "128": 0,
+          "1024": 2,
+          "4096": 0
+        },
+        "status": "PASS"
+      },
+      {
+        "required_depth_words": 1024,
+        "minimum_configured_depth_words": 1024,
+        "fewest_depth_macros_at_minimum_capacity": 1,
+        "composition_16bit_depth_slices": {
+          "128": 0,
+          "1024": 1,
+          "4096": 0
+        },
+        "status": "PASS"
+      },
+      {
+        "required_depth_words": 512,
+        "minimum_configured_depth_words": 512,
+        "fewest_depth_macros_at_minimum_capacity": 4,
+        "composition_16bit_depth_slices": {
+          "128": 4,
+          "1024": 0,
+          "4096": 0
+        },
+        "status": "PASS"
+      },
+      {
+        "required_depth_words": 32,
+        "minimum_configured_depth_words": 128,
+        "fewest_depth_macros_at_minimum_capacity": 1,
+        "composition_16bit_depth_slices": {
+          "128": 1,
+          "1024": 0,
+          "4096": 0
+        },
+        "status": "PASS"
+      },
+      {
+        "required_depth_words": 16,
+        "minimum_configured_depth_words": 128,
+        "fewest_depth_macros_at_minimum_capacity": 1,
+        "composition_16bit_depth_slices": {
+          "128": 1,
+          "1024": 0,
+          "4096": 0
+        },
+        "status": "PASS"
+      }
+    ]
+  },
+  "macro_catalog": {
+    "SP_16x128": {
+      "width_bits": 16,
+      "depth_words": 128,
+      "port_class": "SP",
+      "official_cell_name": null,
+      "area_mm2": null,
+      "area_source": null,
+      "read_latency_cycles": null,
+      "read_read_concurrent_supported": null,
+      "read_write_concurrent_supported": null,
+      "read_during_write_semantics": null,
+      "liberty_path": null,
+      "functional_model_path": null,
+      "read_energy_j": null,
+      "write_energy_j": null,
+      "leakage_w": null,
+      "status": "BLOCKED",
+      "reason": "Official macro models, port semantics and area data not supplied"
+    },
+    "SP_16x1024": {
+      "width_bits": 16,
+      "depth_words": 1024,
+      "port_class": "SP",
+      "official_cell_name": null,
+      "area_mm2": null,
+      "area_source": null,
+      "read_latency_cycles": null,
+      "read_read_concurrent_supported": null,
+      "read_write_concurrent_supported": null,
+      "read_during_write_semantics": null,
+      "liberty_path": null,
+      "functional_model_path": null,
+      "read_energy_j": null,
+      "write_energy_j": null,
+      "leakage_w": null,
+      "status": "BLOCKED",
+      "reason": "Official macro models, port semantics and area data not supplied"
+    },
+    "SP_16x4096": {
+      "width_bits": 16,
+      "depth_words": 4096,
+      "port_class": "SP",
+      "official_cell_name": null,
+      "area_mm2": null,
+      "area_source": null,
+      "read_latency_cycles": null,
+      "read_read_concurrent_supported": null,
+      "read_write_concurrent_supported": null,
+      "read_during_write_semantics": null,
+      "liberty_path": null,
+      "functional_model_path": null,
+      "read_energy_j": null,
+      "write_energy_j": null,
+      "leakage_w": null,
+      "status": "BLOCKED",
+      "reason": "Official macro models, port semantics and area data not supplied"
+    },
+    "DP_16x128": {
+      "width_bits": 16,
+      "depth_words": 128,
+      "port_class": "DP",
+      "official_cell_name": null,
+      "area_mm2": null,
+      "area_source": null,
+      "read_latency_cycles": null,
+      "read_read_concurrent_supported": null,
+      "read_write_concurrent_supported": null,
+      "read_during_write_semantics": null,
+      "liberty_path": null,
+      "functional_model_path": null,
+      "read_energy_j": null,
+      "write_energy_j": null,
+      "leakage_w": null,
+      "status": "BLOCKED",
+      "reason": "Official macro models, port semantics and area data not supplied"
+    },
+    "DP_16x1024": {
+      "width_bits": 16,
+      "depth_words": 1024,
+      "port_class": "DP",
+      "official_cell_name": null,
+      "area_mm2": null,
+      "area_source": null,
+      "read_latency_cycles": null,
+      "read_read_concurrent_supported": null,
+      "read_write_concurrent_supported": null,
+      "read_during_write_semantics": null,
+      "liberty_path": null,
+      "functional_model_path": null,
+      "read_energy_j": null,
+      "write_energy_j": null,
+      "leakage_w": null,
+      "status": "BLOCKED",
+      "reason": "Official macro models, port semantics and area data not supplied"
+    },
+    "DP_16x4096": {
+      "width_bits": 16,
+      "depth_words": 4096,
+      "port_class": "DP",
+      "official_cell_name": null,
+      "area_mm2": null,
+      "area_source": null,
+      "read_latency_cycles": null,
+      "read_read_concurrent_supported": null,
+      "read_write_concurrent_supported": null,
+      "read_during_write_semantics": null,
+      "liberty_path": null,
+      "functional_model_path": null,
+      "read_energy_j": null,
+      "write_energy_j": null,
+      "leakage_w": null,
+      "status": "BLOCKED",
+      "reason": "Official macro models, port semantics and area data not supplied"
+    }
+  },
+  "configurations": [
+    {
+      "id": "baseline_1x8",
+      "rtl": "src/rtl/kwt_linear_engine.sv",
+      "parallel_rows": 1,
+      "lanes_per_row": 8,
+      "mac_units": 8,
+      "pipe_mul": 0,
+      "components": [
+        {
+          "name": "X",
+          "payload_words": 6336,
+          "payload_width_bits": 16,
+          "payload_bytes": 12672,
+          "banks": 1,
+          "words_per_bank": [
+            6336
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x128": 2,
+            "SP_16x1024": 2,
+            "SP_16x4096": 1
+          },
+          "macro_count": 5,
+          "configured_bytes": 12800,
+          "payload_utilization": 0.99,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "W",
+          "payload_words": 16384,
+          "payload_width_bits": 16,
+          "payload_bytes": 32768,
+          "banks": 8,
+          "words_per_bank": [
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x1024": 16
+          },
+          "macro_count": 16,
+          "configured_bytes": 32768,
+          "payload_utilization": 1.0,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "bias",
+          "payload_words": 256,
+          "payload_width_bits": 40,
+          "payload_bytes": 1280,
+          "banks": 8,
+          "words_per_bank": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32
+          ],
+          "width_slices_per_bank": 3,
+          "macros": {
+            "SP_16x128": 24
+          },
+          "macro_count": 24,
+          "configured_bytes": 6144,
+          "payload_utilization": 0.20833333333333334,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        }
+      ],
+      "macro_counts": {
+        "SP_16x128": 26,
+        "SP_16x1024": 18,
+        "SP_16x4096": 1
+      },
+      "total_macro_count": 45,
+      "configured_sram_bytes": 51712,
+      "payload_sram_bytes": 46720,
+      "register_payload_inventory": {
+        "accumulator_bits": 384,
+        "extra_snapshot_bits": 0,
+        "product_pipeline_bits": 0,
+        "pipeline_control_bits": null,
+        "other_control_input_and_read_register_bits": null,
+        "notes": "Inventory is partial and not a mapped register count; all standard cells must be included in mapped core area"
+      },
+      "area": {
+        "core_logic_mm2": null,
+        "new_interface_logic_mm2": null,
+        "internal_sram_mm2": null,
+        "incremental_total_mm2": null,
+        "remaining_logic_budget_mm2": null,
+        "remaining_total_margin_mm2": null,
+        "strict_area_pass": null,
+        "status": "BLOCKED"
+      },
+      "timing": {
+        "target_mhz": 150,
+        "worst_slack_ns": null,
+        "status": "BLOCKED"
+      },
+      "power": {
+        "whole_task_average_w": null,
+        "whole_task_energy_j": null,
+        "status": "BLOCKED"
+      },
+      "capacity_arithmetic_status": "PASS",
+      "official_macro_mapping_status": "NOT_RUN"
+    },
+    {
+      "id": "opt_1x8_pipe0",
+      "rtl": "src/rtl/kwt_linear_engine_opt.sv",
+      "parallel_rows": 1,
+      "lanes_per_row": 8,
+      "mac_units": 8,
+      "pipe_mul": 0,
+      "components": [
+        {
+          "name": "X",
+          "payload_words": 6336,
+          "payload_width_bits": 16,
+          "payload_bytes": 12672,
+          "banks": 1,
+          "words_per_bank": [
+            6336
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x128": 2,
+            "SP_16x1024": 2,
+            "SP_16x4096": 1
+          },
+          "macro_count": 5,
+          "configured_bytes": 12800,
+          "payload_utilization": 0.99,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "W",
+          "payload_words": 16384,
+          "payload_width_bits": 16,
+          "payload_bytes": 32768,
+          "banks": 8,
+          "words_per_bank": [
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x1024": 16
+          },
+          "macro_count": 16,
+          "configured_bytes": 32768,
+          "payload_utilization": 1.0,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "bias",
+          "payload_words": 256,
+          "payload_width_bits": 40,
+          "payload_bytes": 1280,
+          "banks": 8,
+          "words_per_bank": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32
+          ],
+          "width_slices_per_bank": 3,
+          "macros": {
+            "SP_16x128": 24
+          },
+          "macro_count": 24,
+          "configured_bytes": 6144,
+          "payload_utilization": 0.20833333333333334,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        }
+      ],
+      "macro_counts": {
+        "SP_16x128": 26,
+        "SP_16x1024": 18,
+        "SP_16x4096": 1
+      },
+      "total_macro_count": 45,
+      "configured_sram_bytes": 51712,
+      "payload_sram_bytes": 46720,
+      "register_payload_inventory": {
+        "accumulator_bits": 384,
+        "extra_snapshot_bits": 0,
+        "product_pipeline_bits": 0,
+        "pipeline_control_bits": null,
+        "other_control_input_and_read_register_bits": null,
+        "notes": "Inventory is partial and not a mapped register count; all standard cells must be included in mapped core area"
+      },
+      "area": {
+        "core_logic_mm2": null,
+        "new_interface_logic_mm2": null,
+        "internal_sram_mm2": null,
+        "incremental_total_mm2": null,
+        "remaining_logic_budget_mm2": null,
+        "remaining_total_margin_mm2": null,
+        "strict_area_pass": null,
+        "status": "BLOCKED"
+      },
+      "timing": {
+        "target_mhz": 150,
+        "worst_slack_ns": null,
+        "status": "BLOCKED"
+      },
+      "power": {
+        "whole_task_average_w": null,
+        "whole_task_energy_j": null,
+        "status": "BLOCKED"
+      },
+      "capacity_arithmetic_status": "PASS",
+      "official_macro_mapping_status": "NOT_RUN"
+    },
+    {
+      "id": "opt_1x8_pipe1",
+      "rtl": "src/rtl/kwt_linear_engine_opt.sv",
+      "parallel_rows": 1,
+      "lanes_per_row": 8,
+      "mac_units": 8,
+      "pipe_mul": 1,
+      "components": [
+        {
+          "name": "X",
+          "payload_words": 6336,
+          "payload_width_bits": 16,
+          "payload_bytes": 12672,
+          "banks": 1,
+          "words_per_bank": [
+            6336
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x128": 2,
+            "SP_16x1024": 2,
+            "SP_16x4096": 1
+          },
+          "macro_count": 5,
+          "configured_bytes": 12800,
+          "payload_utilization": 0.99,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "W",
+          "payload_words": 16384,
+          "payload_width_bits": 16,
+          "payload_bytes": 32768,
+          "banks": 8,
+          "words_per_bank": [
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x1024": 16
+          },
+          "macro_count": 16,
+          "configured_bytes": 32768,
+          "payload_utilization": 1.0,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "bias",
+          "payload_words": 256,
+          "payload_width_bits": 40,
+          "payload_bytes": 1280,
+          "banks": 8,
+          "words_per_bank": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32
+          ],
+          "width_slices_per_bank": 3,
+          "macros": {
+            "SP_16x128": 24
+          },
+          "macro_count": 24,
+          "configured_bytes": 6144,
+          "payload_utilization": 0.20833333333333334,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        }
+      ],
+      "macro_counts": {
+        "SP_16x128": 26,
+        "SP_16x1024": 18,
+        "SP_16x4096": 1
+      },
+      "total_macro_count": 45,
+      "configured_sram_bytes": 51712,
+      "payload_sram_bytes": 46720,
+      "register_payload_inventory": {
+        "accumulator_bits": 384,
+        "extra_snapshot_bits": 0,
+        "product_pipeline_bits": 256,
+        "pipeline_control_bits": null,
+        "other_control_input_and_read_register_bits": null,
+        "notes": "Inventory is partial and not a mapped register count; all standard cells must be included in mapped core area"
+      },
+      "area": {
+        "core_logic_mm2": null,
+        "new_interface_logic_mm2": null,
+        "internal_sram_mm2": null,
+        "incremental_total_mm2": null,
+        "remaining_logic_budget_mm2": null,
+        "remaining_total_margin_mm2": null,
+        "strict_area_pass": null,
+        "status": "BLOCKED"
+      },
+      "timing": {
+        "target_mhz": 150,
+        "worst_slack_ns": null,
+        "status": "BLOCKED"
+      },
+      "power": {
+        "whole_task_average_w": null,
+        "whole_task_energy_j": null,
+        "status": "BLOCKED"
+      },
+      "capacity_arithmetic_status": "PASS",
+      "official_macro_mapping_status": "NOT_RUN"
+    },
+    {
+      "id": "opt_1x16_pipe0",
+      "rtl": "src/rtl/kwt_linear_engine_opt.sv",
+      "parallel_rows": 1,
+      "lanes_per_row": 16,
+      "mac_units": 16,
+      "pipe_mul": 0,
+      "components": [
+        {
+          "name": "X",
+          "payload_words": 6336,
+          "payload_width_bits": 16,
+          "payload_bytes": 12672,
+          "banks": 1,
+          "words_per_bank": [
+            6336
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x128": 2,
+            "SP_16x1024": 2,
+            "SP_16x4096": 1
+          },
+          "macro_count": 5,
+          "configured_bytes": 12800,
+          "payload_utilization": 0.99,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "W",
+          "payload_words": 16384,
+          "payload_width_bits": 16,
+          "payload_bytes": 32768,
+          "banks": 16,
+          "words_per_bank": [
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x1024": 16
+          },
+          "macro_count": 16,
+          "configured_bytes": 32768,
+          "payload_utilization": 1.0,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "bias",
+          "payload_words": 256,
+          "payload_width_bits": 40,
+          "payload_bytes": 1280,
+          "banks": 16,
+          "words_per_bank": [
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+          ],
+          "width_slices_per_bank": 3,
+          "macros": {
+            "SP_16x128": 48
+          },
+          "macro_count": 48,
+          "configured_bytes": 12288,
+          "payload_utilization": 0.10416666666666667,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        }
+      ],
+      "macro_counts": {
+        "SP_16x128": 50,
+        "SP_16x1024": 18,
+        "SP_16x4096": 1
+      },
+      "total_macro_count": 69,
+      "configured_sram_bytes": 57856,
+      "payload_sram_bytes": 46720,
+      "register_payload_inventory": {
+        "accumulator_bits": 768,
+        "extra_snapshot_bits": 0,
+        "product_pipeline_bits": 0,
+        "pipeline_control_bits": null,
+        "other_control_input_and_read_register_bits": null,
+        "notes": "Inventory is partial and not a mapped register count; all standard cells must be included in mapped core area"
+      },
+      "area": {
+        "core_logic_mm2": null,
+        "new_interface_logic_mm2": null,
+        "internal_sram_mm2": null,
+        "incremental_total_mm2": null,
+        "remaining_logic_budget_mm2": null,
+        "remaining_total_margin_mm2": null,
+        "strict_area_pass": null,
+        "status": "BLOCKED"
+      },
+      "timing": {
+        "target_mhz": 150,
+        "worst_slack_ns": null,
+        "status": "BLOCKED"
+      },
+      "power": {
+        "whole_task_average_w": null,
+        "whole_task_energy_j": null,
+        "status": "BLOCKED"
+      },
+      "capacity_arithmetic_status": "PASS",
+      "official_macro_mapping_status": "NOT_RUN"
+    },
+    {
+      "id": "opt_1x16_pipe1",
+      "rtl": "src/rtl/kwt_linear_engine_opt.sv",
+      "parallel_rows": 1,
+      "lanes_per_row": 16,
+      "mac_units": 16,
+      "pipe_mul": 1,
+      "components": [
+        {
+          "name": "X",
+          "payload_words": 6336,
+          "payload_width_bits": 16,
+          "payload_bytes": 12672,
+          "banks": 1,
+          "words_per_bank": [
+            6336
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x128": 2,
+            "SP_16x1024": 2,
+            "SP_16x4096": 1
+          },
+          "macro_count": 5,
+          "configured_bytes": 12800,
+          "payload_utilization": 0.99,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "W",
+          "payload_words": 16384,
+          "payload_width_bits": 16,
+          "payload_bytes": 32768,
+          "banks": 16,
+          "words_per_bank": [
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024,
+            1024
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x1024": 16
+          },
+          "macro_count": 16,
+          "configured_bytes": 32768,
+          "payload_utilization": 1.0,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "bias",
+          "payload_words": 256,
+          "payload_width_bits": 40,
+          "payload_bytes": 1280,
+          "banks": 16,
+          "words_per_bank": [
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+          ],
+          "width_slices_per_bank": 3,
+          "macros": {
+            "SP_16x128": 48
+          },
+          "macro_count": 48,
+          "configured_bytes": 12288,
+          "payload_utilization": 0.10416666666666667,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        }
+      ],
+      "macro_counts": {
+        "SP_16x128": 50,
+        "SP_16x1024": 18,
+        "SP_16x4096": 1
+      },
+      "total_macro_count": 69,
+      "configured_sram_bytes": 57856,
+      "payload_sram_bytes": 46720,
+      "register_payload_inventory": {
+        "accumulator_bits": 768,
+        "extra_snapshot_bits": 0,
+        "product_pipeline_bits": 512,
+        "pipeline_control_bits": null,
+        "other_control_input_and_read_register_bits": null,
+        "notes": "Inventory is partial and not a mapped register count; all standard cells must be included in mapped core area"
+      },
+      "area": {
+        "core_logic_mm2": null,
+        "new_interface_logic_mm2": null,
+        "internal_sram_mm2": null,
+        "incremental_total_mm2": null,
+        "remaining_logic_budget_mm2": null,
+        "remaining_total_margin_mm2": null,
+        "strict_area_pass": null,
+        "status": "BLOCKED"
+      },
+      "timing": {
+        "target_mhz": 150,
+        "worst_slack_ns": null,
+        "status": "BLOCKED"
+      },
+      "power": {
+        "whole_task_average_w": null,
+        "whole_task_energy_j": null,
+        "status": "BLOCKED"
+      },
+      "capacity_arithmetic_status": "PASS",
+      "official_macro_mapping_status": "NOT_RUN"
+    },
+    {
+      "id": "proposed_2x8_pingpong",
+      "rtl": null,
+      "parallel_rows": 2,
+      "lanes_per_row": 8,
+      "mac_units": 16,
+      "pipe_mul": null,
+      "components": [
+        {
+          "name": "X",
+          "payload_words": 6336,
+          "payload_width_bits": 16,
+          "payload_bytes": 12672,
+          "banks": 2,
+          "words_per_bank": [
+            3200,
+            3136
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x128": 2,
+            "SP_16x1024": 6
+          },
+          "macro_count": 8,
+          "configured_bytes": 12800,
+          "payload_utilization": 0.99,
+          "port_requirement": "one read from even-row bank and one from odd-row bank; disable odd-row read for final row pair",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "W",
+          "payload_words": 16384,
+          "payload_width_bits": 16,
+          "payload_bytes": 32768,
+          "banks": 8,
+          "words_per_bank": [
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048,
+            2048
+          ],
+          "width_slices_per_bank": 1,
+          "macros": {
+            "SP_16x1024": 16
+          },
+          "macro_count": 16,
+          "configured_bytes": 32768,
+          "payload_utilization": 1.0,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "bias",
+          "payload_words": 256,
+          "payload_width_bits": 40,
+          "payload_bytes": 1280,
+          "banks": 8,
+          "words_per_bank": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32
+          ],
+          "width_slices_per_bank": 3,
+          "macros": {
+            "SP_16x128": 24
+          },
+          "macro_count": 24,
+          "configured_bytes": 6144,
+          "payload_utilization": 0.20833333333333334,
+          "port_requirement": "one synchronous read per bank per cycle; load and compute excluded",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        },
+        {
+          "name": "two_row_result_pingpong",
+          "payload_words": 1024,
+          "payload_width_bits": 48,
+          "payload_bytes": 6144,
+          "banks": 2,
+          "words_per_bank": [
+            512,
+            512
+          ],
+          "width_slices_per_bank": 3,
+          "macros": {
+            "SP_16x128": 24
+          },
+          "macro_count": 24,
+          "configured_bytes": 6144,
+          "payload_utilization": 1.0,
+          "port_requirement": "one 48-bit result written to filling group while one 48-bit result read from separate draining group; never simultaneous read/write on same SP group",
+          "area_mm2": null,
+          "mapping_status": "NOT_RUN"
+        }
+      ],
+      "macro_counts": {
+        "SP_16x128": 50,
+        "SP_16x1024": 22
+      },
+      "total_macro_count": 72,
+      "configured_sram_bytes": 57856,
+      "payload_sram_bytes": 52864,
+      "register_payload_inventory": {
+        "accumulator_bits": 768,
+        "extra_snapshot_bits": 768,
+        "product_pipeline_bits": null,
+        "pipeline_control_bits": null,
+        "other_control_input_and_read_register_bits": null,
+        "notes": "Inventory is partial and not a mapped register count; all standard cells must be included in mapped core area"
+      },
+      "area": {
+        "core_logic_mm2": null,
+        "new_interface_logic_mm2": null,
+        "internal_sram_mm2": null,
+        "incremental_total_mm2": null,
+        "remaining_logic_budget_mm2": null,
+        "remaining_total_margin_mm2": null,
+        "strict_area_pass": null,
+        "status": "BLOCKED"
+      },
+      "timing": {
+        "target_mhz": 150,
+        "worst_slack_ns": null,
+        "status": "BLOCKED"
+      },
+      "power": {
+        "whole_task_average_w": null,
+        "whole_task_energy_j": null,
+        "status": "BLOCKED"
+      },
+      "capacity_arithmetic_status": "PASS",
+      "official_macro_mapping_status": "NOT_RUN"
+    }
+  ],
+  "bias_alternatives": [
+    {
+      "id": "aligned_3word_serial_prefetch",
+      "layout": "each 40-bit bias stored in three 16-bit words",
+      "macros": {
+        "SP_16x128": 6
+      },
+      "configured_bytes": 1536,
+      "payload_bytes": 1280,
+      "single_read_port_fetch_cycles_8_bias_min": 24,
+      "single_read_port_fetch_cycles_16_bias_min": 48,
+      "tile_cache_bits_8lane": 320,
+      "tile_cache_bits_16lane": 640,
+      "additional_costs": [
+        "synchronous return latency",
+        "decode and assemble logic",
+        "first-tile setup time",
+        "prefetch ownership and ready backpressure"
+      ],
+      "alternative_macros": {
+        "SP_16x1024": 1
+      },
+      "alternative_configured_bytes": 2048,
+      "area_mm2": null,
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "two_bias_5word_packed",
+      "layout": "two 40-bit bias values staged as 80 bits and serialized as five 16-bit words",
+      "macros": {
+        "SP_16x128": 5
+      },
+      "configured_bytes": 1280,
+      "payload_bytes": 1280,
+      "single_read_port_fetch_cycles_8_bias_min": 20,
+      "single_read_port_fetch_cycles_16_bias_min": 40,
+      "pair_staging_bits_min": 80,
+      "additional_costs": [
+        "cross-word extract/assemble",
+        "load ready stalls during serialization",
+        "synchronous return latency",
+        "tile-cache and prefetch ownership"
+      ],
+      "area_mm2": null,
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "true_2read_bias_bank_pairs",
+      "required_macro_property": "two simultaneous read addresses; simple 1R1W is insufficient",
+      "macros_8lane": {
+        "DP_16x128": 12
+      },
+      "configured_bytes_8lane": 3072,
+      "macros_16lane": {
+        "DP_16x128": 24
+      },
+      "configured_bytes_16lane": 6144,
+      "area_mm2": null,
+      "status": "BLOCKED"
+    },
+    {
+      "id": "all_bias_flip_flops",
+      "register_bits": 10240,
+      "area_mm2": null,
+      "selection_logic_area_mm2": null,
+      "status": "BLOCKED",
+      "reason": "Requires official clarification of internal-memory SRAM restriction and mapped FF/mux area; excluded from default plan"
+    }
+  ],
+  "result_buffer_alternatives": [
+    {
+      "id": "two_independent_sp_1024_groups",
+      "macros": {
+        "SP_16x1024": 6
+      },
+      "configured_bytes": 12288,
+      "simultaneous_fill_drain": "separate groups permit concurrent operation",
+      "area_mm2": null,
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "one_dp_1024_address_space",
+      "macros": {
+        "DP_16x1024": 3
+      },
+      "configured_bytes": 6144,
+      "required_macro_property": "one concurrent read and write at different addresses with verified semantics",
+      "area_mm2": null,
+      "status": "BLOCKED"
+    }
+  ],
+  "incremental_area_accounting": {
+    "equation": "A_core_logic + A_new_interface_logic + sum(macro_count * macro_area)",
+    "core_logic_includes": [
+      "multipliers and adders",
+      "accumulator/pipeline/snapshot/read registers",
+      "control",
+      "macro decode/mux/packing/CE",
+      "new clock-gating cells when used"
+    ],
+    "interface_logic_includes": [
+      "new register interface",
+      "packing/unpacking",
+      "new FIFOs",
+      "new mover and writeback confirmation"
+    ],
+    "duplicate_counting_forbidden": true,
+    "unit_conversion": "Convert area/1e6 only after official library area units confirmed as um^2",
+    "all_unavailable_physical_values_must_be_null": true
+  },
+  "reused_area_report_only": {
+    "e203_area_mm2": null,
+    "shared_512kib_sram_area_mm2": null,
+    "fixed_bus_and_peripherals_area_mm2": null,
+    "excluded_from_incremental_area": true,
+    "included_in_whole_task_power": true
+  },
+  "blocking_inputs": [
+    "official macro cell names and SP/DP semantics",
+    "official macro area and functional/timing/power models",
+    "official standard-cell library, units and PVT",
+    "official synthesis/SDC/load/interconnect flow",
+    "official E203 integration and full hierarchy"
+  ],
+  "validation": {
+    "method": "exhaustive integer enumeration of 128/1024/4096 depth mixtures plus exact capacity and macro-count assertions",
+    "status": "PASS",
+    "eda_executed": false
+  }
+}

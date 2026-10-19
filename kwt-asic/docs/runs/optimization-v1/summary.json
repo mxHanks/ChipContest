@@ -1,0 +1,1285 @@
+{
+  "schema": "kwt-optimization-milestone-v1",
+  "status": "PASS",
+  "scope": "RTL benchmark and RAM-preserving structure only",
+  "benchmarks": [
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090248.373683Z-engine-bench-25acad81/result.json",
+        "sha256": "387a57be7ddb2315cbb3eaab5001d8402ba1b0496ec1dcf254c1287e423b3319"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "baseline",
+        "lanes": 8,
+        "pipe_mul": 0,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 231264,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 202752,
+        "w_reads": 1622016,
+        "b_reads": 1622016,
+        "window_cycles": 254247
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090255.240762Z-engine-bench-e8187b15/result.json",
+        "sha256": "71d1c97bc803d8f5eef0616d9cb3546fd368b88428eddaf095d896ec896d4702"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "baseline",
+        "lanes": 16,
+        "pipe_mul": 0,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 128304,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 101376,
+        "w_reads": 1622016,
+        "b_reads": 1622016,
+        "window_cycles": 151287
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/result.json",
+        "sha256": "1c69db7a4eb523ee7ce67f571bc09063e57ba120c0587379a29f01113d077e5f"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "opt",
+        "lanes": 8,
+        "pipe_mul": 0,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 231264,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 202752,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 254247
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090308.042975Z-engine-bench-675aa0a1/result.json",
+        "sha256": "9b4f7fffd0b79d41ebb4f51e1d39d3eca9ecca7f64264fcb81206ef68a9f756f"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "opt",
+        "lanes": 8,
+        "pipe_mul": 1,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 234432,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 202752,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 257415
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090314.602797Z-engine-bench-2fefecb6/result.json",
+        "sha256": "248fffb1c2bd05b0f4891b1adda1663307a9e481376c96dec8971f682b0c0b76"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "opt",
+        "lanes": 16,
+        "pipe_mul": 0,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 128304,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 101376,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 151287
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090320.704951Z-engine-bench-7b019eac/result.json",
+        "sha256": "92b615bb4f72b8bf71e9b2c62bf1decf3da4ddc17afd4b36658dfd12e7fd5ad3"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "opt",
+        "lanes": 16,
+        "pipe_mul": 1,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 129888,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 101376,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 152871
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090326.880914Z-engine-bench-f03eaa12/result.json",
+        "sha256": "f358a6ad5e84e08c3b29deb4cef8015801467cfbf25c5d0d14526823c7e012a0"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 8,
+        "pipe_mul": 0,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 231264,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 202752,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 254247
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090333.401866Z-engine-bench-4cbde893/result.json",
+        "sha256": "8bc065b6101aad15a2cd7f86ad24ee24310f17a6173dfd7ba8ae6e23cbffc562"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 8,
+        "pipe_mul": 1,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 234432,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 202752,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 257415
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090340.048197Z-engine-bench-2aeb4537/result.json",
+        "sha256": "b0c902505f1170b7aff46ae83491dfe8c15af25a529aad5131230260a887580e"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 16,
+        "pipe_mul": 0,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 128304,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 101376,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 151287
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090346.173900Z-engine-bench-97b98586/result.json",
+        "sha256": "7c452018cc46e6eac4ddbb580c16cc35464bf1fecb8af879fd64c4ea4500782b"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 16,
+        "pipe_mul": 1,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 129888,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 101376,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 152871
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090352.362134Z-engine-bench-17016419/result.json",
+        "sha256": "11de2295933e7376d69fbaa8571e45d5ced2ffa4cae9665bdfafc1c579b31a0c"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 8,
+        "pipe_mul": 1,
+        "stalls": "random",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 237997,
+        "load_words": 22976,
+        "load_cycles": 24450,
+        "output_stalls": 3565,
+        "x_reads": 202752,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 262449
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090358.947607Z-engine-bench-5c915498/result.json",
+        "sha256": "691031553889e7317ff30b512543e3144d5e564f0aa39db904e14eae86fdd52a"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 8,
+        "pipe_mul": 1,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "real checkpoint weights with one waveform/synthetic silence smoke; not dataset precision",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 234432,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 202752,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 257415
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090404.887343Z-engine-bench-6e3f34bf/result.json",
+        "sha256": "b97f313ae69a1de49781b11e63d8e5c20459b695e97ebaa041eb4417b0083034"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 8,
+        "pipe_mul": 1,
+        "stalls": "random",
+        "tasks": 2,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "iverilog",
+      "outputs": 50688,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 237997,
+        "load_words": 22976,
+        "load_cycles": 24450,
+        "output_stalls": 3565,
+        "x_reads": 202752,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 262449
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090412.195099Z-engine-bench-e4839d73/result.json",
+        "sha256": "62962f94d1467dc4cd3a64b94e2f19e52cc9b6a2f168a8bf7ceea50e3a55fde8"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 16,
+        "pipe_mul": 1,
+        "stalls": "random",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 133547,
+        "load_words": 22976,
+        "load_cycles": 24450,
+        "output_stalls": 3659,
+        "x_reads": 101376,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 157999
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090418.415289Z-engine-bench-2d808088/result.json",
+        "sha256": "87765e1da77eb58f7fc628081165f5d45754a0bc1105b40e1cdab900846fdf34"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 16,
+        "pipe_mul": 1,
+        "stalls": "none",
+        "tasks": 12,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "real checkpoint weights with one waveform/synthetic silence smoke; not dataset precision",
+      "simulator": "verilator",
+      "outputs": 304128,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 129888,
+        "load_words": 22976,
+        "load_cycles": 22981,
+        "output_stalls": 0,
+        "x_reads": 101376,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 152871
+      }
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090423.906311Z-engine-bench-76f189f4/result.json",
+        "sha256": "4fbe216ed2ee9165e940f0dd70ded168eb50d339275ffd3275ec183adc75035a"
+      },
+      "configuration": {
+        "format": "fixed16_acc48_v1",
+        "shape": {
+          "x": [
+            99,
+            64
+          ],
+          "w": [
+            64,
+            256
+          ],
+          "y": [
+            99,
+            256
+          ]
+        },
+        "engine": "banked",
+        "lanes": 16,
+        "pipe_mul": 1,
+        "stalls": "random",
+        "tasks": 2,
+        "seed": 20261015,
+        "compile_jobs": 2
+      },
+      "scope": "full-shape synthetic arithmetic and engine protocol only",
+      "simulator": "iverilog",
+      "outputs": 50688,
+      "first_task": {
+        "task": 0,
+        "outputs": 25344,
+        "core_cycles": 133547,
+        "load_words": 22976,
+        "load_cycles": 24450,
+        "output_stalls": 3659,
+        "x_reads": 101376,
+        "w_reads": 1622016,
+        "b_reads": 25344,
+        "window_cycles": 157999
+      }
+    }
+  ],
+  "bit_compared_outputs": 4359168,
+  "structural_runs": [
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090430.583033Z-structure-74c1d145/result.json",
+        "sha256": "2f5d2f9945bb13ed6606a2050e5015337710a06b5e61b6616286b0eb728088e4"
+      },
+      "configuration": {
+        "variant": "baseline",
+        "top": "kwt_linear_engine",
+        "lanes": 8,
+        "pipe_mul": 0
+      },
+      "memory_bits": 373760,
+      "memories": 3,
+      "cells": 358,
+      "register_bits_excluding_memory_read_flops": 481,
+      "warnings": [
+        "b_mem collected as 8R/8W memory; logical banks must be separated before single-port SRAM mapping",
+        "w_mem collected as 8R/8W memory; logical banks must be separated before single-port SRAM mapping"
+      ]
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090431.021787Z-structure-70a9e823/result.json",
+        "sha256": "7b6399d6e09db4d082cc47c22e24fb9b37cdf561166950ce5bd16d0416cbfc22"
+      },
+      "configuration": {
+        "variant": "baseline",
+        "top": "kwt_linear_engine",
+        "lanes": 16,
+        "pipe_mul": 0
+      },
+      "memory_bits": 373760,
+      "memories": 3,
+      "cells": 557,
+      "register_bits_excluding_memory_read_flops": 865,
+      "warnings": [
+        "b_mem collected as 16R/16W memory; logical banks must be separated before single-port SRAM mapping",
+        "w_mem collected as 16R/16W memory; logical banks must be separated before single-port SRAM mapping"
+      ]
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090431.867860Z-structure-de73863d/result.json",
+        "sha256": "647e7d024855699967782e61baebdce8ca88afa95e68d004d9bcb2fe6f1ee228"
+      },
+      "configuration": {
+        "variant": "opt",
+        "top": "kwt_linear_engine_opt",
+        "lanes": 8,
+        "pipe_mul": 0
+      },
+      "memory_bits": 373760,
+      "memories": 3,
+      "cells": 360,
+      "register_bits_excluding_memory_read_flops": 481,
+      "warnings": [
+        "b_mem collected as 8R/8W memory; logical banks must be separated before single-port SRAM mapping",
+        "w_mem collected as 8R/8W memory; logical banks must be separated before single-port SRAM mapping"
+      ]
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090432.308888Z-structure-b9555e95/result.json",
+        "sha256": "8202027a833b136146d9268d2930f4f0035d1f2685c4381e71a66badb6750893"
+      },
+      "configuration": {
+        "variant": "opt",
+        "top": "kwt_linear_engine_opt",
+        "lanes": 8,
+        "pipe_mul": 1
+      },
+      "memory_bits": 373760,
+      "memories": 3,
+      "cells": 371,
+      "register_bits_excluding_memory_read_flops": 740,
+      "warnings": [
+        "b_mem collected as 8R/8W memory; logical banks must be separated before single-port SRAM mapping",
+        "w_mem collected as 8R/8W memory; logical banks must be separated before single-port SRAM mapping"
+      ]
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090432.753262Z-structure-64b1e0c3/result.json",
+        "sha256": "d1dab0478e0d1680002c6e965ee80871f11042bf259b35103574895813896adf"
+      },
+      "configuration": {
+        "variant": "opt",
+        "top": "kwt_linear_engine_opt",
+        "lanes": 16,
+        "pipe_mul": 0
+      },
+      "memory_bits": 373760,
+      "memories": 3,
+      "cells": 559,
+      "register_bits_excluding_memory_read_flops": 865,
+      "warnings": [
+        "b_mem collected as 16R/16W memory; logical banks must be separated before single-port SRAM mapping",
+        "w_mem collected as 16R/16W memory; logical banks must be separated before single-port SRAM mapping"
+      ]
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090433.645210Z-structure-f908b952/result.json",
+        "sha256": "3219e312166e935897e331009f2e6d936148cabb88765483fdfc55a3189cd794"
+      },
+      "configuration": {
+        "variant": "opt",
+        "top": "kwt_linear_engine_opt",
+        "lanes": 16,
+        "pipe_mul": 1
+      },
+      "memory_bits": 373760,
+      "memories": 3,
+      "cells": 578,
+      "register_bits_excluding_memory_read_flops": 1380,
+      "warnings": [
+        "b_mem collected as 16R/16W memory; logical banks must be separated before single-port SRAM mapping",
+        "w_mem collected as 16R/16W memory; logical banks must be separated before single-port SRAM mapping"
+      ]
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090434.535800Z-structure-f445ece4/result.json",
+        "sha256": "e3f679db528d62b5de46a4ccae520d4c659c8ce2cce814feb395fb78bf2949d6"
+      },
+      "configuration": {
+        "variant": "banked",
+        "top": "kwt_linear_engine_banked",
+        "lanes": 8,
+        "pipe_mul": 0
+      },
+      "memory_bits": 373760,
+      "memories": 17,
+      "cells": 346,
+      "register_bits_excluding_memory_read_flops": 481,
+      "warnings": []
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090434.973355Z-structure-b4fa1cb2/result.json",
+        "sha256": "f8eb191d875cc1f88d50953c5262d2f82763a44b6fb7f3d02b994db2a7c24f2c"
+      },
+      "configuration": {
+        "variant": "banked",
+        "top": "kwt_linear_engine_banked",
+        "lanes": 8,
+        "pipe_mul": 1
+      },
+      "memory_bits": 373760,
+      "memories": 17,
+      "cells": 357,
+      "register_bits_excluding_memory_read_flops": 740,
+      "warnings": []
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090435.412936Z-structure-881834f6/result.json",
+        "sha256": "8296b6cd5204247c15f45952410b7707c25ef43969c1dc1443b8aac240641693"
+      },
+      "configuration": {
+        "variant": "banked",
+        "top": "kwt_linear_engine_banked",
+        "lanes": 16,
+        "pipe_mul": 0
+      },
+      "memory_bits": 373760,
+      "memories": 33,
+      "cells": 529,
+      "register_bits_excluding_memory_read_flops": 865,
+      "warnings": []
+    },
+    {
+      "source_report": {
+        "path": "artifacts/runs/20261015T090436.106072Z-structure-15a1364b/result.json",
+        "sha256": "7cce3fcb329088707722b8f08fa2805b5aec53f6f3063fd934343de9d59c9a09"
+      },
+      "configuration": {
+        "variant": "banked",
+        "top": "kwt_linear_engine_banked",
+        "lanes": 16,
+        "pipe_mul": 1
+      },
+      "memory_bits": 373760,
+      "memories": 33,
+      "cells": 548,
+      "register_bits_excluding_memory_read_flops": 1380,
+      "warnings": []
+    }
+  ],
+  "evidence": [
+    {
+      "path": "artifacts/runs/20261015T090248.373683Z-engine-bench-25acad81/result.json",
+      "sha256": "387a57be7ddb2315cbb3eaab5001d8402ba1b0496ec1dcf254c1287e423b3319"
+    },
+    {
+      "path": "artifacts/runs/20261015T090248.373683Z-engine-bench-25acad81/compile.log",
+      "sha256": "a3a50784b3714f7ed6cce696180bd6f60bb9a0da4775d973fbe3adb8325c87f3"
+    },
+    {
+      "path": "artifacts/runs/20261015T090248.373683Z-engine-bench-25acad81/run.log",
+      "sha256": "ad6d6a7ebdf56b0d2120f1a6e92269be8ba07b9bd9e056083ac17d56457206f2"
+    },
+    {
+      "path": "artifacts/runs/20261015T090255.240762Z-engine-bench-e8187b15/result.json",
+      "sha256": "71d1c97bc803d8f5eef0616d9cb3546fd368b88428eddaf095d896ec896d4702"
+    },
+    {
+      "path": "artifacts/runs/20261015T090255.240762Z-engine-bench-e8187b15/compile.log",
+      "sha256": "c6a74ace054c8d1cbe4b4875234ad86a388e0446a90e9140d66507f16860ee8e"
+    },
+    {
+      "path": "artifacts/runs/20261015T090255.240762Z-engine-bench-e8187b15/run.log",
+      "sha256": "3a35bdc0fd758ccc5cfffa60e7602472585454de06751afedc79c12bb5ef4a8e"
+    },
+    {
+      "path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/result.json",
+      "sha256": "1c69db7a4eb523ee7ce67f571bc09063e57ba120c0587379a29f01113d077e5f"
+    },
+    {
+      "path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/compile.log",
+      "sha256": "da4ea53879c3d716265f5c154e4535c91883bafabf69638581ee9ab4e412745e"
+    },
+    {
+      "path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/run.log",
+      "sha256": "74ed2b842f93061f204dc80b7cee3f735c04ebd1cc760ea413426da5a963cf0a"
+    },
+    {
+      "path": "artifacts/runs/20261015T090308.042975Z-engine-bench-675aa0a1/result.json",
+      "sha256": "9b4f7fffd0b79d41ebb4f51e1d39d3eca9ecca7f64264fcb81206ef68a9f756f"
+    },
+    {
+      "path": "artifacts/runs/20261015T090308.042975Z-engine-bench-675aa0a1/compile.log",
+      "sha256": "810ea688caea00bb716c1e258391f830997979fd7b17d9f7e1979d434c6f86af"
+    },
+    {
+      "path": "artifacts/runs/20261015T090308.042975Z-engine-bench-675aa0a1/run.log",
+      "sha256": "865ce09e403dfc2c79b4446aeac9ecf361ee9953a95e58bf32acf3bbcc0d4cba"
+    },
+    {
+      "path": "artifacts/runs/20261015T090314.602797Z-engine-bench-2fefecb6/result.json",
+      "sha256": "248fffb1c2bd05b0f4891b1adda1663307a9e481376c96dec8971f682b0c0b76"
+    },
+    {
+      "path": "artifacts/runs/20261015T090314.602797Z-engine-bench-2fefecb6/compile.log",
+      "sha256": "4319e47bff32b385ab63918cf6a46af725399341c7f4c6f2c9db09b570990ce4"
+    },
+    {
+      "path": "artifacts/runs/20261015T090314.602797Z-engine-bench-2fefecb6/run.log",
+      "sha256": "3dcde05b40fdee6aafe88c0c844d51ff5895fd52507e37d3745237d747800f6d"
+    },
+    {
+      "path": "artifacts/runs/20261015T090320.704951Z-engine-bench-7b019eac/result.json",
+      "sha256": "92b615bb4f72b8bf71e9b2c62bf1decf3da4ddc17afd4b36658dfd12e7fd5ad3"
+    },
+    {
+      "path": "artifacts/runs/20261015T090320.704951Z-engine-bench-7b019eac/compile.log",
+      "sha256": "234ec799f19002c48df945bf9b6674f54f088a1e3aebf6703e542f81e94b5e12"
+    },
+    {
+      "path": "artifacts/runs/20261015T090320.704951Z-engine-bench-7b019eac/run.log",
+      "sha256": "a7cbb0bdf686267f35920a3004a28d1cfbbe68c1d1d54bb63ae69b799be4c132"
+    },
+    {
+      "path": "artifacts/runs/20261015T090326.880914Z-engine-bench-f03eaa12/result.json",
+      "sha256": "f358a6ad5e84e08c3b29deb4cef8015801467cfbf25c5d0d14526823c7e012a0"
+    },
+    {
+      "path": "artifacts/runs/20261015T090326.880914Z-engine-bench-f03eaa12/compile.log",
+      "sha256": "11a068dc678ff5ad0672cab8436605d1adbc7fae89b68342fb11209eb9355b74"
+    },
+    {
+      "path": "artifacts/runs/20261015T090326.880914Z-engine-bench-f03eaa12/run.log",
+      "sha256": "74ed2b842f93061f204dc80b7cee3f735c04ebd1cc760ea413426da5a963cf0a"
+    },
+    {
+      "path": "artifacts/runs/20261015T090333.401866Z-engine-bench-4cbde893/result.json",
+      "sha256": "8bc065b6101aad15a2cd7f86ad24ee24310f17a6173dfd7ba8ae6e23cbffc562"
+    },
+    {
+      "path": "artifacts/runs/20261015T090333.401866Z-engine-bench-4cbde893/compile.log",
+      "sha256": "fcc0d90fd794ff093d16d2598077ca24bd2c399721865f6d80a83fea778f358c"
+    },
+    {
+      "path": "artifacts/runs/20261015T090333.401866Z-engine-bench-4cbde893/run.log",
+      "sha256": "865ce09e403dfc2c79b4446aeac9ecf361ee9953a95e58bf32acf3bbcc0d4cba"
+    },
+    {
+      "path": "artifacts/runs/20261015T090340.048197Z-engine-bench-2aeb4537/result.json",
+      "sha256": "b0c902505f1170b7aff46ae83491dfe8c15af25a529aad5131230260a887580e"
+    },
+    {
+      "path": "artifacts/runs/20261015T090340.048197Z-engine-bench-2aeb4537/compile.log",
+      "sha256": "04158c17abc49d5bf5a957cc5e9ab003e9365e8bccb2124f946cf0875502f03a"
+    },
+    {
+      "path": "artifacts/runs/20261015T090340.048197Z-engine-bench-2aeb4537/run.log",
+      "sha256": "3dcde05b40fdee6aafe88c0c844d51ff5895fd52507e37d3745237d747800f6d"
+    },
+    {
+      "path": "artifacts/runs/20261015T090346.173900Z-engine-bench-97b98586/result.json",
+      "sha256": "7c452018cc46e6eac4ddbb580c16cc35464bf1fecb8af879fd64c4ea4500782b"
+    },
+    {
+      "path": "artifacts/runs/20261015T090346.173900Z-engine-bench-97b98586/compile.log",
+      "sha256": "f2aa4bf34be542c318b8b4b5ec38567ebdaf38517b6a0d0314f918793f732a25"
+    },
+    {
+      "path": "artifacts/runs/20261015T090346.173900Z-engine-bench-97b98586/run.log",
+      "sha256": "a7cbb0bdf686267f35920a3004a28d1cfbbe68c1d1d54bb63ae69b799be4c132"
+    },
+    {
+      "path": "artifacts/runs/20261015T090352.362134Z-engine-bench-17016419/result.json",
+      "sha256": "11de2295933e7376d69fbaa8571e45d5ced2ffa4cae9665bdfafc1c579b31a0c"
+    },
+    {
+      "path": "artifacts/runs/20261015T090352.362134Z-engine-bench-17016419/compile.log",
+      "sha256": "4c3c515672bd481aa1ca7171ce53889e2fd152ade9f02dd49e1d10447f5bbe34"
+    },
+    {
+      "path": "artifacts/runs/20261015T090352.362134Z-engine-bench-17016419/run.log",
+      "sha256": "3e7c56bb553335349fa375e744b76d4192046c2eb1f136a413fa1fdc3737fb54"
+    },
+    {
+      "path": "artifacts/runs/20261015T090358.947607Z-engine-bench-5c915498/result.json",
+      "sha256": "691031553889e7317ff30b512543e3144d5e564f0aa39db904e14eae86fdd52a"
+    },
+    {
+      "path": "artifacts/runs/20261015T090358.947607Z-engine-bench-5c915498/compile.log",
+      "sha256": "74f660b518e36b83120a2f34f2948fadbca1386d9a93842e7b0ea9181b0b6206"
+    },
+    {
+      "path": "artifacts/runs/20261015T090358.947607Z-engine-bench-5c915498/run.log",
+      "sha256": "865ce09e403dfc2c79b4446aeac9ecf361ee9953a95e58bf32acf3bbcc0d4cba"
+    },
+    {
+      "path": "artifacts/runs/20261015T090404.887343Z-engine-bench-6e3f34bf/result.json",
+      "sha256": "b97f313ae69a1de49781b11e63d8e5c20459b695e97ebaa041eb4417b0083034"
+    },
+    {
+      "path": "artifacts/runs/20261015T090404.887343Z-engine-bench-6e3f34bf/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/runs/20261015T090404.887343Z-engine-bench-6e3f34bf/run.log",
+      "sha256": "d07d5138f516e16092b4b977e271e7698e295d29a941a2dbe4d3cd2a99944bdd"
+    },
+    {
+      "path": "artifacts/runs/20261015T090412.195099Z-engine-bench-e4839d73/result.json",
+      "sha256": "62962f94d1467dc4cd3a64b94e2f19e52cc9b6a2f168a8bf7ceea50e3a55fde8"
+    },
+    {
+      "path": "artifacts/runs/20261015T090412.195099Z-engine-bench-e4839d73/compile.log",
+      "sha256": "a81cbeb72e6683f91e8580538bd567a3db65d7cd24898724b4559f5e60dddb2d"
+    },
+    {
+      "path": "artifacts/runs/20261015T090412.195099Z-engine-bench-e4839d73/run.log",
+      "sha256": "88ca176f1b202aeee1c4fd75039c025e472063902e95d1a8c45cfb6defa9d8f8"
+    },
+    {
+      "path": "artifacts/runs/20261015T090418.415289Z-engine-bench-2d808088/result.json",
+      "sha256": "87765e1da77eb58f7fc628081165f5d45754a0bc1105b40e1cdab900846fdf34"
+    },
+    {
+      "path": "artifacts/runs/20261015T090418.415289Z-engine-bench-2d808088/compile.log",
+      "sha256": "9bceb9cade5843f17a5292fe9cee187b1577ed2f45317023b67e65fa3a01148b"
+    },
+    {
+      "path": "artifacts/runs/20261015T090418.415289Z-engine-bench-2d808088/run.log",
+      "sha256": "a7cbb0bdf686267f35920a3004a28d1cfbbe68c1d1d54bb63ae69b799be4c132"
+    },
+    {
+      "path": "artifacts/runs/20261015T090423.906311Z-engine-bench-76f189f4/result.json",
+      "sha256": "4fbe216ed2ee9165e940f0dd70ded168eb50d339275ffd3275ec183adc75035a"
+    },
+    {
+      "path": "artifacts/runs/20261015T090423.906311Z-engine-bench-76f189f4/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/runs/20261015T090423.906311Z-engine-bench-76f189f4/run.log",
+      "sha256": "129a47d49c019e77728d98b7864a7e15efb8400472c959e4b586203bb3e82a69"
+    },
+    {
+      "path": "artifacts/runs/20261015T090430.583033Z-structure-74c1d145/result.json",
+      "sha256": "2f5d2f9945bb13ed6606a2050e5015337710a06b5e61b6616286b0eb728088e4"
+    },
+    {
+      "path": "artifacts/runs/20261015T090430.583033Z-structure-74c1d145/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090430.583033Z-structure-74c1d145/synthesis.log",
+      "sha256": "48149d03dbdd049ec809c82ce42030872a72d89c3cdb9d2da01873e6cfb2bfee"
+    },
+    {
+      "path": "artifacts/runs/20261015T090431.021787Z-structure-70a9e823/result.json",
+      "sha256": "7b6399d6e09db4d082cc47c22e24fb9b37cdf561166950ce5bd16d0416cbfc22"
+    },
+    {
+      "path": "artifacts/runs/20261015T090431.021787Z-structure-70a9e823/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090431.021787Z-structure-70a9e823/synthesis.log",
+      "sha256": "389e2411d1cae5fe559df5226befc529edb58416058ed916b13a6058d8a8951d"
+    },
+    {
+      "path": "artifacts/runs/20261015T090431.867860Z-structure-de73863d/result.json",
+      "sha256": "647e7d024855699967782e61baebdce8ca88afa95e68d004d9bcb2fe6f1ee228"
+    },
+    {
+      "path": "artifacts/runs/20261015T090431.867860Z-structure-de73863d/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090431.867860Z-structure-de73863d/synthesis.log",
+      "sha256": "6dd9d34cc50447cf191fc0c6d76a1559633b91ca794e651d1647130b159cca5b"
+    },
+    {
+      "path": "artifacts/runs/20261015T090432.308888Z-structure-b9555e95/result.json",
+      "sha256": "8202027a833b136146d9268d2930f4f0035d1f2685c4381e71a66badb6750893"
+    },
+    {
+      "path": "artifacts/runs/20261015T090432.308888Z-structure-b9555e95/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090432.308888Z-structure-b9555e95/synthesis.log",
+      "sha256": "d52566b1edc2fcd1dcbdebb03612eeecc6924dd2f8d7e378f03074da88bb7c54"
+    },
+    {
+      "path": "artifacts/runs/20261015T090432.753262Z-structure-64b1e0c3/result.json",
+      "sha256": "d1dab0478e0d1680002c6e965ee80871f11042bf259b35103574895813896adf"
+    },
+    {
+      "path": "artifacts/runs/20261015T090432.753262Z-structure-64b1e0c3/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090432.753262Z-structure-64b1e0c3/synthesis.log",
+      "sha256": "7532a815cc9fb4c4415dccd0fcb5b8671e7adf29b4f536aecd8208e0103985f7"
+    },
+    {
+      "path": "artifacts/runs/20261015T090433.645210Z-structure-f908b952/result.json",
+      "sha256": "3219e312166e935897e331009f2e6d936148cabb88765483fdfc55a3189cd794"
+    },
+    {
+      "path": "artifacts/runs/20261015T090433.645210Z-structure-f908b952/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090433.645210Z-structure-f908b952/synthesis.log",
+      "sha256": "00a8adb4bd44021add07608a02659864f149bbc1f9aa7d669b2e170a13a89c4c"
+    },
+    {
+      "path": "artifacts/runs/20261015T090434.535800Z-structure-f445ece4/result.json",
+      "sha256": "e3f679db528d62b5de46a4ccae520d4c659c8ce2cce814feb395fb78bf2949d6"
+    },
+    {
+      "path": "artifacts/runs/20261015T090434.535800Z-structure-f445ece4/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090434.535800Z-structure-f445ece4/synthesis.log",
+      "sha256": "a255943b5e0f63bcb3a715f1aa8677960220bd214d94aa9bc919369df6b2db70"
+    },
+    {
+      "path": "artifacts/runs/20261015T090434.973355Z-structure-b4fa1cb2/result.json",
+      "sha256": "f8eb191d875cc1f88d50953c5262d2f82763a44b6fb7f3d02b994db2a7c24f2c"
+    },
+    {
+      "path": "artifacts/runs/20261015T090434.973355Z-structure-b4fa1cb2/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090434.973355Z-structure-b4fa1cb2/synthesis.log",
+      "sha256": "72f309e1a0548e5da37ed6c591de7e3a5eccd537842527c73a35cee9262a4bdd"
+    },
+    {
+      "path": "artifacts/runs/20261015T090435.412936Z-structure-881834f6/result.json",
+      "sha256": "8296b6cd5204247c15f45952410b7707c25ef43969c1dc1443b8aac240641693"
+    },
+    {
+      "path": "artifacts/runs/20261015T090435.412936Z-structure-881834f6/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090435.412936Z-structure-881834f6/synthesis.log",
+      "sha256": "5159a79095165f26a127e4abbb21af0c70134e071376cdcb83e62ef10944ec3e"
+    },
+    {
+      "path": "artifacts/runs/20261015T090436.106072Z-structure-15a1364b/result.json",
+      "sha256": "7cce3fcb329088707722b8f08fa2805b5aec53f6f3063fd934343de9d59c9a09"
+    },
+    {
+      "path": "artifacts/runs/20261015T090436.106072Z-structure-15a1364b/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa"
+    },
+    {
+      "path": "artifacts/runs/20261015T090436.106072Z-structure-15a1364b/synthesis.log",
+      "sha256": "5576aa74a0235bb4f09a870d3615949479d2574c84c66eaabc0063f1b2977681"
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "scripts/verify/run_engine_benchmark.py",
+      "sha256": "7c4fb6ef54355b8f01fe897bce5833aa2c159fee912cb4ed508d8353fc869f0d"
+    },
+    {
+      "path": "scripts/verify/run_linear.py",
+      "sha256": "307f7f9e2396066ed5da44c8c9fc12d793f6feef2acfd78e3fd1ea271df362c5"
+    },
+    {
+      "path": "scripts/verify/run_exported_linear.py",
+      "sha256": "233fd75a8db0c1c473dc8d511395e5e5b0ef1e3e7f7e84d318b634ada1d39f47"
+    },
+    {
+      "path": "scripts/verify/run_checks.py",
+      "sha256": "718d715f26595059155205347acf75a287008dfab1df10abecd3ad81fafe1c07"
+    },
+    {
+      "path": "model/fixed16_acc48.py",
+      "sha256": "2ea34805d54a45c2537ce2d71e653a41989befef05769785a9b2629fdfeeef30"
+    },
+    {
+      "path": "src/rtl/kwt_linear_engine.sv",
+      "sha256": "0910eb9559bd54656e2a1e16f7fd61b036818dfd8295c7a3bc778a35a381006d"
+    },
+    {
+      "path": "sim/tb_engine_benchmark.sv",
+      "sha256": "b42929d2b7df7830c3bb8869385fdf3f1b085a139a50938b4e7a0c887bdab18e"
+    },
+    {
+      "path": "src/rtl/kwt_linear_engine_opt.sv",
+      "sha256": "38bf34e259fbeec9196b808b09fa0d4f11a936d5995c1c29a666c3c87bf009b8"
+    },
+    {
+      "path": "src/rtl/kwt_linear_engine_banked.sv",
+      "sha256": "6028bb305ac45db85cc355332e9c83094029021110a5f299516345f862c54486"
+    },
+    {
+      "path": "scripts/synth/run_structural.py",
+      "sha256": "13e6e42c88d1b650574b1f60c3645e50100f0b89c314a3ffa55da005a216b51f"
+    },
+    {
+      "path": "scripts/setup/bootstrap_synth.sh",
+      "sha256": "62aa0fc628ce12798ef152cd646a7c95bd8aa94a94e939d82161a3ae8e642731"
+    }
+  ],
+  "official_validation_precision": "NOT_RUN",
+  "sram_macro_mapping": "NOT_RUN",
+  "soc": "BLOCKED",
+  "physical_timing": "BLOCKED",
+  "physical_area": "BLOCKED",
+  "physical_power": "BLOCKED",
+  "end_marker": "KWT_OPTIMIZATION_MILESTONE_COMPLETE"
+}

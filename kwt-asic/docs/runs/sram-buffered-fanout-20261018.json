@@ -1,0 +1,942 @@
+{
+  "scope": "static standard-netlist fanout and Liberty pin capacitance, not wire capacitance or physical timing qualification",
+  "inputs": [
+    {
+      "path": "artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/mapped.json",
+      "sha256": "9943fbbd58615182cea68e5da3e9dafa178c6e029a150400d64fe4bf1006e00e"
+    },
+    {
+      "path": "ChipContest/assets/libs/nangate45/NangateOpenCellLibrary_typical.lib",
+      "sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1"
+    }
+  ],
+  "signals": {
+    "u_engine.rst_n": {
+      "direct_sink_pins": 143,
+      "sum_lib_input_pin_cap_fF": 247.364177,
+      "drivers": [
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129318",
+          "type": "BUF_X1",
+          "pin": "Z"
+        }
+      ],
+      "sinks": [
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129322",
+          "type": "AND3_X1",
+          "pin": "A2",
+          "lib_input_cap_fF": 0.927525
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129345",
+          "type": "AND3_X1",
+          "pin": "A2",
+          "lib_input_cap_fF": 0.927525
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129361",
+          "type": "AND3_X1",
+          "pin": "A2",
+          "lib_input_cap_fF": 0.927525
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129366",
+          "type": "AND3_X1",
+          "pin": "A2",
+          "lib_input_cap_fF": 0.927525
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129371",
+          "type": "AND3_X1",
+          "pin": "A2",
+          "lib_input_cap_fF": 0.927525
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129376",
+          "type": "AND3_X1",
+          "pin": "A2",
+          "lib_input_cap_fF": 0.927525
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129381",
+          "type": "AND3_X1",
+          "pin": "A2",
+          "lib_input_cap_fF": 0.927525
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129386",
+          "type": "AND3_X1",
+          "pin": "A2",
+          "lib_input_cap_fF": 0.927525
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$129434",
+          "type": "NAND3_X1",
+          "pin": "A2",
+          "lib_input_cap_fF": 1.621225
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2259",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2260",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2261",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2262",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2263",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2264",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2265",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2266",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2267",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2268",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2269",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2270",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2271",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2272",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2273",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2274",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2275",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2276",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2277",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2278",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2279",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2280",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2281",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2282",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2283",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2284",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2285",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2286",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2287",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2288",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2289",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2290",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2291",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2292",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2293",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2294",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2295",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2296",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2297",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2298",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2299",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2300",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2301",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2302",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2303",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2304",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2305",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2306",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2307",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2308",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2309",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2310",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2311",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2312",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2313",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2314",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2315",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2316",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2317",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2318",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2319",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2320",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2321",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2322",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2323",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2324",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2325",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2326",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2327",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2328",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2329",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2330",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2331",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2332",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2333",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2334",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2335",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2336",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2337",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2338",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2339",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2340",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2341",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2342",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2343",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2344",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2345",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2346",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2347",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2348",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2349",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2350",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2351",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2352",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2353",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2354",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2355",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2356",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2357",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2358",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2359",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2360",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2361",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2362",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2363",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2364",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2365",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2366",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2367",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2368",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2369",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2370",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2371",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2372",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2373",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2374",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2375",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2376",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2377",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2378",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2379",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2380",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2381",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2382",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$2383",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6438",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6439",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6440",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6441",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6442",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6443",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6444",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6445",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6446",
+          "type": "DFFR_X1",
+          "pin": "RN",
+          "lib_input_cap_fF": 1.778528
+        }
+      ]
+    },
+    "u_engine.read_valid": {
+      "direct_sink_pins": 3,
+      "sum_lib_input_pin_cap_fF": 3.803166,
+      "drivers": [
+        {
+          "cell": "$auto$ff.cc:266:slice$6443",
+          "type": "DFFR_X1",
+          "pin": "Q"
+        }
+      ],
+      "sinks": [
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$91060",
+          "type": "BUF_X1",
+          "pin": "A",
+          "lib_input_cap_fF": 0.974659
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$91104",
+          "type": "INV_X1",
+          "pin": "A",
+          "lib_input_cap_fF": 1.70023
+        },
+        {
+          "cell": "$auto$ff.cc:266:slice$6438",
+          "type": "DFFR_X1",
+          "pin": "D",
+          "lib_input_cap_fF": 1.128277
+        }
+      ]
+    },
+    "u_engine.accumulate_valid": {
+      "direct_sink_pins": 2,
+      "sum_lib_input_pin_cap_fF": 3.377083,
+      "drivers": [
+        {
+          "cell": "$auto$ff.cc:266:slice$6438",
+          "type": "DFFR_X1",
+          "pin": "Q"
+        }
+      ],
+      "sinks": [
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$90869",
+          "type": "AOI21_X1",
+          "pin": "B2",
+          "lib_input_cap_fF": 1.676853
+        },
+        {
+          "cell": "$abc$87792$auto$blifparse.cc:386:parse_blif$93311",
+          "type": "INV_X1",
+          "pin": "A",
+          "lib_input_cap_fF": 1.70023
+        }
+      ]
+    }
+  }
+}

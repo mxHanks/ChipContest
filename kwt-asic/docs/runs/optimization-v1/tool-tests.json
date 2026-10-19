@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "scope": "Python verifier checks and exhaustive binary index cast equivalence; not full gate equivalence",
+  "commands": [
+    {
+      "argv": [
+        "make",
+        "test"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+      "started_utc": "2026-10-15T09:10:24.107+00:00",
+      "timeout_seconds": 180,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T09:10:25.476+00:00",
+      "elapsed_seconds": 1.369,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091024Z-optimization-tool-tests/0.log",
+        "sha256": "daef30df709adf65f427f422be11fe9adcf38ee3933f9b99a09246fdf8c1f59d",
+        "size_bytes": 10262
+      }
+    },
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.venv/bin/python3",
+        "scripts/synth/test_structural_tools.py"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+      "started_utc": "2026-10-15T09:10:25.477+00:00",
+      "timeout_seconds": 180,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T09:10:25.542+00:00",
+      "elapsed_seconds": 0.065,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091024Z-optimization-tool-tests/1.log",
+        "sha256": "9462043b2a265c4435386eb93fa9a969d97a0d076684563b797fc18a87231b24",
+        "size_bytes": 605
+      }
+    },
+    {
+      "argv": [
+        "iverilog",
+        "-g2012",
+        "-s",
+        "check_cast_lowering",
+        "-o",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091024Z-optimization-tool-tests/casts.vvp",
+        "scripts/synth/check_cast_lowering.sv"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+      "started_utc": "2026-10-15T09:10:25.542+00:00",
+      "timeout_seconds": 180,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T09:10:25.559+00:00",
+      "elapsed_seconds": 0.017,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091024Z-optimization-tool-tests/2.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      }
+    },
+    {
+      "argv": [
+        "vvp",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091024Z-optimization-tool-tests/casts.vvp"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+      "started_utc": "2026-10-15T09:10:25.559+00:00",
+      "timeout_seconds": 180,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T09:10:25.576+00:00",
+      "elapsed_seconds": 0.017,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091024Z-optimization-tool-tests/3.log",
+        "sha256": "e46f6c8c3041be352b4c286b7afcf38df4e09f6a3557aa3dee7548539d65bf9d",
+        "size_bytes": 105
+      }
+    }
+  ]
+}

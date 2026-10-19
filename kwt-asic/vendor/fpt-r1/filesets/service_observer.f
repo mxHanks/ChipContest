@@ -1,0 +1,2 @@
+reference/fpt/rtl/board/cats_r4_core_service_observer.sv
+reference/fpt/tests/tb_cats_r4_core_service_observer.sv

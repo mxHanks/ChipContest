@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "scope": "numeric contract and export/runner/harness checks, shell syntax",
+  "created_utc": "2026-10-15T03:34:01.339372+00:00",
+  "elapsed_seconds": 1.37,
+  "checks": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "output": "python3 -B -m unittest discover -s tests -v\ntest_reads_signed_extreme_exactly (test_exported_linear_runner.ExportMemoryTests.test_reads_signed_extreme_exactly) ... ok\ntest_recomputes_goldens_and_rejects_one_changed_word (test_exported_linear_runner.ExportMemoryTests.test_recomputes_goldens_and_rejects_one_changed_word) ... ok\ntest_rejects_absolute_traversal_and_symlink_members (test_exported_linear_runner.ExportMemoryTests.test_rejects_absolute_traversal_and_symlink_members) ... ok\ntest_rejects_short_unknown_and_wrong_width_images (test_exported_linear_runner.ExportMemoryTests.test_rejects_short_unknown_and_wrong_width_images) ... ok\ntest_rejects_stale_hash (test_exported_linear_runner.ExportMemoryTests.test_rejects_stale_hash) ... ok\ntest_rejects_duplicate_or_reordered_layers (test_exported_linear_runner.ExportStructureTests.test_rejects_duplicate_or_reordered_layers) ... ok\ntest_rejects_incomplete_or_wrong_format_export (test_exported_linear_runner.ExportStructureTests.test_rejects_incomplete_or_wrong_format_export) ... ok\ntest_rejects_missing_sample_or_wrong_source_commit (test_exported_linear_runner.ExportStructureTests.test_rejects_missing_sample_or_wrong_source_commit) ... ok\ntest_rejects_transposed_shape_and_misaligned_bias_scale (test_exported_linear_runner.ExportStructureTests.test_rejects_transposed_shape_and_misaligned_bias_scale) ... ok\ntest_valid_structure_preserves_twelve_ordered_layers (test_exported_linear_runner.ExportStructureTests.test_valid_structure_preserves_twelve_ordered_layers) ... ok\ntest_explicit_override_keeps_inventory_and_byte_verification (test_exported_linear_runner.SourceRelocationTests.test_explicit_override_keeps_inventory_and_byte_verification) ... ok\ntest_changed_evidence_invalidates_pass (test_harness.HarnessTest.test_changed_evidence_invalidates_pass) ... ok\ntest_cycle_and_premature_pass_rejected (test_harness.HarnessTest.test_cycle_and_premature_pass_rejected) ... ok\ntest_missing_proof_rejected (test_harness.HarnessTest.test_missing_proof_rejected) ... ok\ntest_package_preserves_source_and_excludes_private_assets (test_harness.HarnessTest.test_package_preserves_source_and_excludes_private_assets) ... ok\ntest_source_change_invalidates_unchanged_success_report (test_harness.HarnessTest.test_source_change_invalidates_unchanged_success_report) ... ok\ntest_clipping_counts_rne_range_not_just_float_range (test_kwt_export.KWTExportTests.test_clipping_counts_rne_range_not_just_float_range) ... ok\ntest_exact_checkpoint_layer_order_and_ignores_optimizer_slots (test_kwt_export.KWTExportTests.test_exact_checkpoint_layer_order_and_ignores_optimizer_slots) ... ok\ntest_layernorm_bound_uses_only_parameters (test_kwt_export.KWTExportTests.test_layernorm_bound_uses_only_parameters) ... ok\ntest_missing_wrong_shape_and_duplicate_checkpoint_layers_rejected (test_kwt_export.KWTExportTests.test_missing_wrong_shape_and_duplicate_checkpoint_layers_rejected) ... ok\ntest_power_of_two_scale_exact_boundary (test_kwt_export.KWTExportTests.test_power_of_two_scale_exact_boundary) ... ok\ntest_scale_handles_tiny_zero_and_invalid_bounds (test_kwt_export.KWTExportTests.test_scale_handles_tiny_zero_and_invalid_bounds) ... ok\ntest_absent_stall_coverage_cannot_pass (test_linear_runner.LinearCompletionTests.test_absent_stall_coverage_cannot_pass) ... ok\ntest_cancellation_has_nonzero_opposite_products (test_linear_runner.LinearCompletionTests.test_cancellation_has_nonzero_opposite_products) ... ok\ntest_duplicate_task_cannot_pass (test_linear_runner.LinearCompletionTests.test_duplicate_task_cannot_pass) ... ok\ntest_full_evidence_is_accepted (test_linear_runner.LinearCompletionTests.test_full_evidence_is_accepted) ... ok\ntest_success_line_followed_by_fatal_cannot_pass (test_linear_runner.LinearCompletionTests.test_success_line_followed_by_fatal_cannot_pass) ... ok\ntest_suite_without_every_task_cannot_pass (test_linear_runner.LinearCompletionTests.test_suite_without_every_task_cannot_pass) ... ok\ntest_timeout_cannot_pass (test_linear_runner.LinearCompletionTests.test_timeout_cannot_pass) ... ok\ntest_vectors_are_deterministic_and_task_specific (test_linear_runner.LinearCompletionTests.test_vectors_are_deterministic_and_task_specific) ... ok\ntest_wrong_output_count_cannot_pass (test_linear_runner.LinearCompletionTests.test_wrong_output_count_cannot_pass) ... ok\ntest_explicit_power_of_two_scaling (test_numeric_model.EncodingTests.test_explicit_power_of_two_scaling) ... ok\ntest_float_neighbors_and_saturation (test_numeric_model.EncodingTests.test_float_neighbors_and_saturation) ... ok\ntest_reject_invalid_and_nonfinite_values (test_numeric_model.EncodingTests.test_reject_invalid_and_nonfinite_values) ... ok\ntest_ties_to_even_both_signs (test_numeric_model.EncodingTests.test_ties_to_even_both_signs) ... ok\ntest_dot_extremes_bias_and_cancellation (test_numeric_model.IntegerLinearTests.test_dot_extremes_bias_and_cancellation) ... ok\ntest_dot_rejects_wrong_lengths_or_ranges (test_numeric_model.IntegerLinearTests.test_dot_rejects_wrong_lengths_or_ranges) ... ok\ntest_full_matrix_deterministic_random_selected_outputs (test_numeric_model.IntegerLinearTests.test_full_matrix_deterministic_random_selected_outputs) ... ok\ntest_full_matrix_orientation_and_last_row_column (test_numeric_model.IntegerLinearTests.test_full_matrix_orientation_and_last_row_column) ... ok\ntest_layer_parameters_are_copied_and_independent (test_numeric_model.IntegerLinearTests.test_layer_parameters_are_copied_and_independent) ... ok\ntest_quantize_decode_bias_product_scale (test_numeric_model.IntegerLinearTests.test_quantize_decode_bias_product_scale) ... ok\ntest_random_dot_matches_independent_sum (test_numeric_model.IntegerLinearTests.test_random_dot_matches_independent_sum) ... ok\ntest_strict_full_shapes_and_values (test_numeric_model.IntegerLinearTests.test_strict_full_shapes_and_values) ... ok\ntest_full_vector_export_layout_and_hash (test_numeric_model.MemoryTests.test_full_vector_export_layout_and_hash) ... ok\ntest_hex_round_trip_extremes_and_bad_words (test_numeric_model.MemoryTests.test_hex_round_trip_extremes_and_bad_words) ... ok\ntest_aggregate_energy_not_mean_sample_nrmse (test_numeric_model.NRMSETests.test_aggregate_energy_not_mean_sample_nrmse) ... ok\ntest_denominator_floor_and_empty_rejection (test_numeric_model.NRMSETests.test_denominator_floor_and_empty_rejection) ... ok\ntest_invalid_sample_does_not_mutate_prior_statistics (test_numeric_model.NRMSETests.test_invalid_sample_does_not_mutate_prior_statistics) ... ok\ntest_missing_layer_or_wrong_shape_not_accepted (test_numeric_model.NRMSETests.test_missing_layer_or_wrong_shape_not_accepted) ... ok\ntest_per_layer_full_shape_all_layers_and_maximum (test_numeric_model.NRMSETests.test_per_layer_full_shape_all_layers_and_maximum) ... ok\ntest_clean_finish_without_completion_marker_is_failure (test_verification_runner.CompletionEvidenceTests.test_clean_finish_without_completion_marker_is_failure) ... ok\ntest_complete_success_is_accepted (test_verification_runner.CompletionEvidenceTests.test_complete_success_is_accepted) ... ok\ntest_group_does_not_pass_if_another_scenario_is_blocked (test_verification_runner.CompletionEvidenceTests.test_group_does_not_pass_if_another_scenario_is_blocked) ... ok\ntest_partial_scenario_marker_is_failure (test_verification_runner.CompletionEvidenceTests.test_partial_scenario_marker_is_failure) ... ok\ntest_pass_marker_cannot_hide_failure_diagnostic (test_verification_runner.CompletionEvidenceTests.test_pass_marker_cannot_hide_failure_diagnostic) ... ok\ntest_pass_marker_cannot_hide_nonzero_exit (test_verification_runner.CompletionEvidenceTests.test_pass_marker_cannot_hide_nonzero_exit) ... ok\ntest_pass_marker_cannot_hide_timeout (test_verification_runner.CompletionEvidenceTests.test_pass_marker_cannot_hide_timeout) ... ok\n\n----------------------------------------------------------------------\nRan 57 tests in 1.319s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "bash",
+        "-n",
+        "scripts/setup/bootstrap.sh",
+        "scripts/setup/bootstrap_kwt.sh",
+        "env/activate.sh"
+      ],
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "env/activate.sh",
+      "sha256": "c07574be51c674e4db1a39a88832dc8b29ffeb5afab3394f2387aa145af4cde8"
+    },
+    {
+      "path": "model/fixed16_acc48.py",
+      "sha256": "2ea34805d54a45c2537ce2d71e653a41989befef05769785a9b2629fdfeeef30"
+    },
+    {
+      "path": "scripts/env/doctor.py",
+      "sha256": "7246c82c4a537c410c5db634b3453e55aaa0aef600594ae0c595355e529c3da4"
+    },
+    {
+      "path": "scripts/harness.py",
+      "sha256": "e079370b1da982fa770acc3c3c88d132e72ed835dbfcf4723aaec453f85629be"
+    },
+    {
+      "path": "scripts/model/export_kwt.py",
+      "sha256": "20972cf5e7a0b7d93065ce7ca0c5bd7541106b1e93b45c4e0e1df6af66077def"
+    },
+    {
+      "path": "scripts/model/fetch_kwt.py",
+      "sha256": "c1afcd92d7868c8d9847def9e15f6b224855937ef93cd9691e4fd6dbf0b72f04"
+    },
+    {
+      "path": "scripts/setup/bootstrap.sh",
+      "sha256": "56f3d49aa557e404db5a0de1a69d50bdc8675808de1f3616e17035736bb741f6"
+    },
+    {
+      "path": "scripts/setup/bootstrap_kwt.sh",
+      "sha256": "d3b05415b0513206f058c16e1c838fe3efb0f303a8cff1cf9f0f4f8f57867083"
+    },
+    {
+      "path": "scripts/verify/run_checks.py",
+      "sha256": "718d715f26595059155205347acf75a287008dfab1df10abecd3ad81fafe1c07"
+    },
+    {
+      "path": "scripts/verify/run_exported_linear.py",
+      "sha256": "233fd75a8db0c1c473dc8d511395e5e5b0ef1e3e7f7e84d318b634ada1d39f47"
+    },
+    {
+      "path": "scripts/verify/run_linear.py",
+      "sha256": "307f7f9e2396066ed5da44c8c9fc12d793f6feef2acfd78e3fd1ea271df362c5"
+    },
+    {
+      "path": "tests/test_exported_linear_runner.py",
+      "sha256": "1d169ce69517baa0a0c55309bbebe272f14c8e23e35e8f9aeabd99a77cd9353c"
+    },
+    {
+      "path": "tests/test_harness.py",
+      "sha256": "f42fb73b3643d300b63bb1ea04cf4b19288c634afe7d1c39a03632d063f79d49"
+    },
+    {
+      "path": "tests/test_kwt_export.py",
+      "sha256": "0370a01415d1e4656a106c90e0fda773eb8748ab06b014f0c53bcaeecb5787b0"
+    },
+    {
+      "path": "tests/test_linear_runner.py",
+      "sha256": "eb222dddba84ec01e7af735937ba486ae7897f57842d50d1c9b707b63a721c70"
+    },
+    {
+      "path": "tests/test_numeric_model.py",
+      "sha256": "acac65a4d51f8990341d8f6f057a1929ee8a4aade88323614a9425142929dc30"
+    },
+    {
+      "path": "tests/test_verification_runner.py",
+      "sha256": "2c86af27874c37f0993459bd1e5e13fff9914985396482743f614cb15b9cd28e"
+    }
+  ]
+}

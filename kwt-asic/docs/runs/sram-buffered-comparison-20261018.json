@@ -1,0 +1,25 @@
+{
+  "scope": "same RTL and reference standard-library mapping comparison; no official PPA",
+  "source_sha_equal": true,
+  "normalized_input_snapshot_hierarchy_equal": {
+    "hierarchical.json": true,
+    "blackbox-structure.json": true
+  },
+  "reports": {
+    "unbuffered": {
+      "path": "artifacts/runs/20261018T020610.045677Z-sram-blackbox-173fe72f/result.json",
+      "sha256": "3751d0135deda06cbc4bf426288cf6dc558403ea48cdccd092600f96f4527117"
+    },
+    "buffered": {
+      "path": "artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/result.json",
+      "sha256": "b6d21e9ad36a3f70bd0e3185c239cd1f7d5be755a825f9643658262ca090b226"
+    },
+    "sta": {
+      "path": "artifacts/runs/20261018T024917.037967Z-sram-partial-sta-de192ce7/result.json",
+      "sha256": "15f69f40c7aea7021865ba6668caad4aef779b40f85e8c71353a083f6de705ad"
+    }
+  },
+  "timing_status": "FAIL",
+  "official_ppa": "BLOCKED",
+  "interpretation": "covered setup improved; data hold and internal soft_reset removal both fail, not an arithmetic bottleneck conclusion"
+}

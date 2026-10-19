@@ -1,0 +1,293 @@
+{
+  "schema": "kwt-linear-checks-v1",
+  "status": "PASS",
+  "run_id": "20261015T031009.194353Z-linear-b474bafc",
+  "scope": "new-KWT fixed16_acc48_v1 full-shape synthetic RTL bit agreement and protocol",
+  "started_utc": "2026-10-15T03:10:09.194+00:00",
+  "output": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc",
+  "configuration": {
+    "format": "fixed16_acc48_v1",
+    "rows": 99,
+    "inner": 64,
+    "cols": 256,
+    "lanes": 8,
+    "tasks": 2,
+    "seed": 20261015,
+    "compile_jobs": 2
+  },
+  "simulator": "iverilog",
+  "logic_semantics": "four-state",
+  "real_kwt_accuracy": "NOT_RUN",
+  "actual_12_layer_parameters": "NOT_RUN",
+  "soc": "NOT_RUN",
+  "synthesis": "NOT_RUN",
+  "timing": "NOT_RUN",
+  "area": "NOT_RUN",
+  "power": "NOT_RUN",
+  "tools": {
+    "iverilog": {
+      "status": "PASS",
+      "executable": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/iverilog",
+        "sha256": "8ae43c1473fd91f131a5935d45108dcb4570704cd9dc28066e0a4af137e529b6",
+        "size_bytes": 194
+      },
+      "version": "Icarus Verilog version 12.0 (stable) ()\n\nCopyright (c) 2000-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Preprocessor version 12.0 (stable) ()\n\nCopyright (c) 1999-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Parser/Elaborator version 12.0 (stable) ()\n\nCopyright (c) 1998-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n FLAGS DLL vvp.tgt\nvvp.tgt: Icarus Verilog VVP Code Generator 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.",
+      "command": {
+        "argv": [
+          "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/iverilog",
+          "-V"
+        ],
+        "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+        "started_utc": "2026-10-15T03:10:09.566+00:00",
+        "timeout_seconds": 15,
+        "timed_out": false,
+        "exit_code": 0,
+        "finished_utc": "2026-10-15T03:10:09.583+00:00",
+        "elapsed_seconds": 0.017,
+        "log": {
+          "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/version-iverilog.log",
+          "sha256": "f9199cc8658f4afcec3edeb93f29f23bb2aebf66d3eeb217cdc728aaa692f946",
+          "size_bytes": 3294
+        }
+      }
+    },
+    "vvp": {
+      "status": "PASS",
+      "executable": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/vvp",
+        "sha256": "b6ad09cac0c01562ffb7a05161c2e2ef5b3558c69499aef465f875a485bb7eea",
+        "size_bytes": 189
+      },
+      "version": "Icarus Verilog runtime version 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.",
+      "command": {
+        "argv": [
+          "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/vvp",
+          "-V"
+        ],
+        "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+        "started_utc": "2026-10-15T03:10:09.583+00:00",
+        "timeout_seconds": 15,
+        "timed_out": false,
+        "exit_code": 0,
+        "finished_utc": "2026-10-15T03:10:09.592+00:00",
+        "elapsed_seconds": 0.009,
+        "log": {
+          "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/version-vvp.log",
+          "sha256": "c9010a85df9399c2adb11b59115cdc285ea6f0a399802944367c3813c6772a42",
+          "size_bytes": 814
+        }
+      }
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/iverilog",
+        "-g2012",
+        "-s",
+        "tb_kwt_linear_engine",
+        "-o",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/simulation.vvp",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/kwt_linear_engine.sv",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/tb_kwt_linear_engine.sv"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc",
+      "started_utc": "2026-10-15T03:10:09.592+00:00",
+      "timeout_seconds": 180,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T03:10:09.609+00:00",
+      "elapsed_seconds": 0.017,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/compile.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      }
+    },
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/vvp",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/simulation.vvp",
+        "+VECTORS=/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors",
+        "+TASKS=2",
+        "+SEED=20261015"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc",
+      "started_utc": "2026-10-15T03:10:09.610+00:00",
+      "timeout_seconds": 180,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T03:10:15.692+00:00",
+      "elapsed_seconds": 6.082,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/run.log",
+        "sha256": "b6ab1fa81b412c7a39c47d96a3d536f5b6a1cc42c827218bea0717abd20cb8e3",
+        "size_bytes": 400
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_linear.py",
+      "sha256": "307f7f9e2396066ed5da44c8c9fc12d793f6feef2acfd78e3fd1ea271df362c5",
+      "size_bytes": 12994,
+      "project_relative_path": "scripts/verify/run_linear.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_checks.py",
+      "sha256": "718d715f26595059155205347acf75a287008dfab1df10abecd3ad81fafe1c07",
+      "size_bytes": 16489,
+      "project_relative_path": "scripts/verify/run_checks.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/model/fixed16_acc48.py",
+      "sha256": "2ea34805d54a45c2537ce2d71e653a41989befef05769785a9b2629fdfeeef30",
+      "size_bytes": 14649,
+      "project_relative_path": "model/fixed16_acc48.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/kwt_linear_engine.sv",
+      "sha256": "0910eb9559bd54656e2a1e16f7fd61b036818dfd8295c7a3bc778a35a381006d",
+      "size_bytes": 9535,
+      "project_relative_path": "src/rtl/kwt_linear_engine.sv"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/tb_kwt_linear_engine.sv",
+      "sha256": "9bcd8ca0486ee3d1e74103b52ef93bae8bd16d2d7fa2e78dd77ab20164765a72",
+      "size_bytes": 10952,
+      "project_relative_path": "sim/tb_kwt_linear_engine.sv"
+    }
+  ],
+  "vectors": {
+    "status": "PASS",
+    "manifest": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/manifest.json",
+      "sha256": "14c6c7a776f095a8d0a78f5d482461ab30c800fd22ce26e4665a35ccfda5581b",
+      "size_bytes": 4254,
+      "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/manifest.json"
+    },
+    "cases": [
+      {
+        "task": 0,
+        "category": "extremes",
+        "files": [
+          {
+            "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_00_x.mem",
+            "sha256": "e8b4770bd557c1b44708d684ffcce88166454328ef1fec208ad81cba929d4746",
+            "size_bytes": 31680,
+            "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_00_x.mem",
+            "bits": 16,
+            "count": 6336,
+            "role": "x"
+          },
+          {
+            "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_00_w.mem",
+            "sha256": "437c97484c5d95a8bf37a819046790772e971264098ade663cb0cfd6d4ca1dde",
+            "size_bytes": 81920,
+            "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_00_w.mem",
+            "bits": 16,
+            "count": 16384,
+            "role": "w"
+          },
+          {
+            "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_00_b.mem",
+            "sha256": "424be3c12c33a70ac34f0be630d59496f1161275462f6aa010064941f98a5b75",
+            "size_bytes": 2816,
+            "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_00_b.mem",
+            "bits": 40,
+            "count": 256,
+            "role": "b"
+          },
+          {
+            "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_00_y.mem",
+            "sha256": "b0a5edd0ffe8a63ec72fc3d19c5c075ecee751b0a199f7b2bc195869a828e387",
+            "size_bytes": 329472,
+            "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_00_y.mem",
+            "bits": 48,
+            "count": 25344,
+            "role": "y"
+          }
+        ]
+      },
+      {
+        "task": 1,
+        "category": "zero_x_bias",
+        "files": [
+          {
+            "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_01_x.mem",
+            "sha256": "87b396a8eab707b9b11e32c81745ef7cc2cfdc9faa919a6e93f6da26d1049063",
+            "size_bytes": 31680,
+            "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_01_x.mem",
+            "bits": 16,
+            "count": 6336,
+            "role": "x"
+          },
+          {
+            "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_01_w.mem",
+            "sha256": "732a7259f828d566cb5ef65390c415b26c82549e1ad5822acc0ad3d4fb7f753b",
+            "size_bytes": 81920,
+            "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_01_w.mem",
+            "bits": 16,
+            "count": 16384,
+            "role": "w"
+          },
+          {
+            "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_01_b.mem",
+            "sha256": "ca399099996943d50f200db52e9d9c5338e1d2b909bdde1abcf270b8cb146dd2",
+            "size_bytes": 2816,
+            "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_01_b.mem",
+            "bits": 40,
+            "count": 256,
+            "role": "b"
+          },
+          {
+            "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_01_y.mem",
+            "sha256": "fe71085b935eb4345974f7927f845508554f03a304957615decb9e8f44e2b1c7",
+            "size_bytes": 329472,
+            "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/vectors/task_01_y.mem",
+            "bits": 48,
+            "count": 25344,
+            "role": "y"
+          }
+        ]
+      }
+    ],
+    "elapsed_seconds": 0.365,
+    "golden_check": "entire model output checked with independent dot-product ordering"
+  },
+  "rtl": {
+    "status": "PASS",
+    "coverage": {
+      "tasks": 2,
+      "outputs": 50688,
+      "reset_interrupts": 1,
+      "illegal_load_cases": 3,
+      "input_bubbles": 4209,
+      "output_stall_cycles": 7260,
+      "stable_output_checks": 7260,
+      "busy_load_rejections": 469786,
+      "testbench_window_cycles": 518599,
+      "per_task_core_cycles": [
+        234973,
+        234815
+      ],
+      "timing_scope": "testbench load/start/output/verification window; excludes E203/bus and is not contest timing"
+    }
+  },
+  "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "config_file": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/config.json",
+    "sha256": "6cab538463b46e26b41b9874c45f2ca3e5b1d33595dc92abd307ae5b8621a3ef",
+    "size_bytes": 148,
+    "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/config.json"
+  },
+  "binary": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T031009.194353Z-linear-b474bafc/simulation.vvp",
+    "sha256": "e3936447189593140ec4be7cc10bd3e20ad1b20448a1e1f7ec1a1e7c024ec1e3",
+    "size_bytes": 91949,
+    "project_relative_path": "artifacts/runs/20261015T031009.194353Z-linear-b474bafc/simulation.vvp"
+  },
+  "finished_utc": "2026-10-15T03:10:15.694+00:00",
+  "elapsed_seconds": 6.5
+}

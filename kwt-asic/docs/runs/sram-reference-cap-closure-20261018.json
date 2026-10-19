@@ -1,0 +1,3151 @@
+{
+  "schema": "kwt-reference-cap-closure-milestone-v1",
+  "status": "PASS",
+  "created_utc": "2026-10-18T04:58:44.617+00:00",
+  "scope": "reference standard logic replay, covered timing and known-load electrical; official macros/platform/PVT not qualified",
+  "collector": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-cap-final/collect.py",
+    "sha256": "47a7586ab703d444f610e0a7b14543545d9fdfbdee52d8ce18bdc5cecf480f11",
+    "size_bytes": 6182
+  },
+  "reports": {
+    "previous_milestone": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/docs/runs/sram-reference-eco-20261018.json",
+      "sha256": "65a1b863608cf516503f1772fc7cb653721b5fe950f1f05be075fb9c10ef6c62",
+      "size_bytes": 117178
+    },
+    "cap_failure": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/result.json",
+      "sha256": "954192785792106a820a24d2a29d491e122da64381133a10f4d6d442e1f0ccbe",
+      "size_bytes": 21885
+    },
+    "mapping": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/result.json",
+      "sha256": "ca411d8c00e1cd85d9f4bcb1f459cc730f35e2c6957a93c235218b27881d441e",
+      "size_bytes": 53508
+    },
+    "sta": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/result.json",
+      "sha256": "be4492bfa45995d976ee9fc02640c832a32bb5f2aa98446412ef9900fcd6d16a",
+      "size_bytes": 86372
+    },
+    "electrical_diagnostic": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/result.json",
+      "sha256": "6ae465a73064a91d5d13737ebdd277850230c02719b43009e22f56736e4dfdf0",
+      "size_bytes": 18506
+    },
+    "electrical_entry": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/result.json",
+      "sha256": "6c32fd2ebbc256db0f3dbf123911c5493bd639bfd693b44df064d273220717b6",
+      "size_bytes": 17858
+    },
+    "one_layer": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/result.json",
+      "sha256": "98e382272814421110fd23cf53fdb8dba83cc5c5aede4befff25ca4aadcc569a",
+      "size_bytes": 111485
+    },
+    "twelve_layers": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/result.json",
+      "sha256": "47d42d924ab3185cb984e90b1a7dbd48c85b3cc71ef7f8861c933e4010b84874",
+      "size_bytes": 184855
+    },
+    "host": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045809.863491Z-sram-cap-final-tooling/result.json",
+      "sha256": "9e3f25f020f230aafdc414d1c4d82b00f34fdd603772755e722cc32c5a25c914",
+      "size_bytes": 5545
+    },
+    "previous_portable": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-source/result.json",
+      "sha256": "d34029b7e7ac89d17099a266d6ea77f6c7e6951b1d8ebb1f659af2b426a9d2da",
+      "size_bytes": 3392
+    }
+  },
+  "measurement": {
+    "tasks": 12,
+    "outputs": 304128,
+    "transactions": 1873549,
+    "trace_checks": 5630408,
+    "soft_aborts": 1,
+    "pending_response_resets": 1,
+    "error_cases": 12,
+    "hold_checks": 9756,
+    "final_hi_holds": 12,
+    "ack_holds": 12,
+    "accepted_commands": 1873550,
+    "accepted_responses": 1873549,
+    "aborted_outputs": 0
+  },
+  "reference_standard_logic": {
+    "standard_cells": 46035,
+    "cell_types": {
+      "AND2_X1": 400,
+      "AND3_X1": 69,
+      "AND4_X1": 47,
+      "AOI211_X1": 51,
+      "AOI21_X1": 3341,
+      "AOI22_X1": 336,
+      "BUF_X1": 1565,
+      "BUF_X16": 1,
+      "CLKBUF_X1": 349,
+      "DFFR_X1": 382,
+      "DFF_X1": 1961,
+      "INV_X1": 5123,
+      "MUX2_X1": 616,
+      "NAND2_X1": 8432,
+      "NAND3_X1": 472,
+      "NAND4_X1": 174,
+      "NOR2_X1": 5928,
+      "NOR3_X1": 745,
+      "NOR3_X2": 2,
+      "NOR4_X1": 123,
+      "NOR4_X2": 3,
+      "OAI211_X1": 99,
+      "OAI21_X1": 4442,
+      "OAI221_X1": 241,
+      "OAI22_X1": 142,
+      "OR2_X1": 158,
+      "OR3_X1": 8,
+      "OR4_X1": 5,
+      "XNOR2_X1": 7960,
+      "XOR2_X1": 2860
+    },
+    "opaque_cells_excluded": {
+      "$paramod$e8a9c00517ab55ca872b6bab8c6b0f9560b81b0b\\kwt_sram_1rw_blackbox": 50,
+      "$paramod$b90d00d7499398d52bf0bc04a2def0d4593d60a3\\kwt_sram_1rw_blackbox": 22
+    },
+    "opaque_cell_count": 72,
+    "logic_area_um2": 57015.238,
+    "logic_area_mm2": 0.057015238,
+    "area_scope": "Nangate45 accelerator plus new ICB adapter standard cells; includes bank decode/mux; excludes all SRAM and reused E203/shared SRAM",
+    "sram_area_mm2": null,
+    "official_incremental_area_mm2": null,
+    "official_area_requirement": "BLOCKED"
+  },
+  "cumulative_area_delta_um2": 17.822,
+  "host_tests": 204,
+  "reference_setup_worst_slack_ns": 4.652084,
+  "reference_data_hold_worst_slack_ns": 0.001379,
+  "reference_reset_removal_worst_slack_ns": 0.055262,
+  "reference_known_electrical": {
+    "coverage": {
+      "standard_output_driver_bits": 48378,
+      "output_limit_classes": 32,
+      "driver_bits_with_unknown_SRAM_input_load": 182,
+      "driver_bits_with_ordinary_output_SDC_load": 35
+    },
+    "known_load_status": "PASS",
+    "known_load_violating_polarities": 0,
+    "known_load_violating_drivers": 0,
+    "known_load_borderline_polarities": 0,
+    "minimum_known_margin_ff": "0.362942570",
+    "comparison_resolution_guard_ff": "0.000001",
+    "failures": [],
+    "borderline": [],
+    "full_macro_input_capacitance": "BLOCKED; 182 standard drivers touch cut SRAM input loads",
+    "unknown_SRAM_output_driver_bits": 1152,
+    "full_design_or_official_capacitance": "BLOCKED"
+  },
+  "reference_transition_violations": 0,
+  "reference_clock_violations": 0,
+  "source_protection": {
+    "pre_refactor_files": 492,
+    "missing": [],
+    "protected_original_changes": []
+  },
+  "verified_record_occurrences": 1705,
+  "unique_verified_files": 596,
+  "verified_records": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/iverilog",
+      "sha256": "8ae43c1473fd91f131a5935d45108dcb4570704cd9dc28066e0a4af137e529b6",
+      "size_bytes": 194
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/verilator",
+      "sha256": "475e01d19abaa8e4012edbcbbce50118228c56517d95e93aa827fbbd3fed583c",
+      "size_bytes": 205
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/vvp",
+      "sha256": "b6ad09cac0c01562ffb7a05161c2e2ef5b3558c69499aef465f875a485bb7eea",
+      "size_bytes": 189
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/yosys",
+      "sha256": "21649f11bb384926f0de319884289d6540d69a6293735c3cce91d06a9b4781bc",
+      "size_bytes": 473
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/bin/iverilog",
+      "sha256": "a6071e4b4a68feafca0c8ee0e6aa275eee9a43a108c62801cfd1eca6eab6d8a3",
+      "size_bytes": 51640
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/bin/verilator",
+      "sha256": "4c6292ab82e57b7f34ab26dbae86ba9c494bacfb088b6ff34be93c553d1301b1",
+      "size_bytes": 23493
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/bin/verilator_bin",
+      "sha256": "25f33046f0055a6982c67cdc55081685a844abb50d044cfda087bd418db9be6c",
+      "size_bytes": 10993608
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/bin/vvp",
+      "sha256": "a10bd7d4a0850308ac8c2c98115b6a3084f9be978307610f2a521190c28f4023",
+      "size_bytes": 1354376
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/doc/verilator/html/exe_verilator.html",
+      "sha256": "0d9c17e3fe8878812f1ea6331fada92ee4b8af6a88a353bc166c118e89e49d19",
+      "size_bytes": 234230
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/doc/verilator/html/extensions.html",
+      "sha256": "9214d83ceafe6a846ba4cb1b6f18e2bc86a4c8f5e9042badedbdbd1b39b82a0d",
+      "size_bytes": 67816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/eda/usr/share/doc/verilator/html/warnings.html",
+      "sha256": "f1e86e02afa1b06a33c61de497c0b79394e24f779b49a727859a26367c954064",
+      "size_bytes": 174141
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/opensta/usr/bin/sta",
+      "sha256": "49f2cc47e6ca3d218e4637d8cd79272315f1c980167723aec837fd059293e48f",
+      "size_bytes": 4173752
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/synth/usr/bin/yosys",
+      "sha256": "88c0a12bb814a1a8716b1ae10b482e35d3005ed558e1f5f626b3dc983ea3abd0",
+      "size_bytes": 8174408
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/synth/usr/bin/yosys-abc",
+      "sha256": "001a99fb8648794076dd238e42f3bd8c5112a4b8bd89660883325a7e0d006043",
+      "size_bytes": 14918408
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/ChipContest/assets/libs/nangate45/NangateOpenCellLibrary_typical.lib",
+      "sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+      "size_bytes": 6692032
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/Makefile",
+      "sha256": "7efc72e30aeb3cd38acf7dfbbec46a82db15b07aaa98092b9b149f4e41122634",
+      "size_bytes": 6846
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/boundary.v",
+      "sha256": "2c3aae33e7c6994e120b98f4e4a8b2cbe18ea93d1434cbdaf16085749dd1fcf2",
+      "size_bytes": 6541773
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/clock_checks.rpt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/collect.py",
+      "sha256": "7af6e52ca5048ed71e4d94e36900b63059b56a38b4f0ad63b07e73bc4f0d7db1",
+      "size_bytes": 2602
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/reference.sdc",
+      "sha256": "c00fe97dfa716517db4cf3d6150aa8d5cf7d3987ad77389ed747dbd2b4276aab",
+      "size_bytes": 824
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/reset_net.rpt",
+      "sha256": "35407bd2e25b3a7a486580f86a0f12d99c22ca1c2ca1ec596b4272778d99afd8",
+      "size_bytes": 7422
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/result.json",
+      "sha256": "3413b6dded531f36a7fde74936df1d87bab76ab5ca947167c55151fae82613af",
+      "size_bytes": 9062
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/run.tcl",
+      "sha256": "7f2aa767cde6bdd63b4a4a1895d6ff4fd76bad672093c1a6aed8dbd207e7d2ee",
+      "size_bytes": 513
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/run_state.json",
+      "sha256": "b62d76b055f1da23293c87547f410b99ec57f574f7e9ec567ae9146fb4195707",
+      "size_bytes": 350
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/source_identity.json",
+      "sha256": "f2399b7ce8dcf03a3dac77c58b395fcd902c4dc8da98a1885dcdfd755dbaeac0",
+      "size_bytes": 2263
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/sta.command.json",
+      "sha256": "6caf7750c7863c93d780d89feb90d295f4017064a0121168fb63bbe903018cf5",
+      "size_bytes": 1123
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/sta.log",
+      "sha256": "ddabaf3cb7f2f7dc26ab37c6d7a2c4ec5f71ac9f8dd582e19e070c0ac41d4496",
+      "size_bytes": 379
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-eco-electrical-slew-fixed/transition.rpt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-source/check.py",
+      "sha256": "e9e376f9b317ab1c640b1458423646ff4fd902fd4ee11b4f0e3e3467bac71d8b",
+      "size_bytes": 2828
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-source/host.command.json",
+      "sha256": "a3aa485a01c0e33bfd45a56e89efd000dbc17cea1f08518080f1b8205b253ace",
+      "size_bytes": 964
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-source/host.log",
+      "sha256": "8bb7b7765c9a147592dc20042857a374ef191db2324dab9a05f8b51ef89683da",
+      "size_bytes": 27961
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-source/result.json",
+      "sha256": "d34029b7e7ac89d17099a266d6ea77f6c7e6951b1d8ebb1f659af2b426a9d2da",
+      "size_bytes": 3392
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/binding.json",
+      "sha256": "578638f14d0b9a890870df8f76d45b92bb5c498323dcf4e7ce13bfd0a2d35354",
+      "size_bytes": 3476
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/collect_followup.py",
+      "sha256": "e95c111a5a3c3dad4977acbbe4b8ad258ecf6ee5cd8102e2667024923217af15",
+      "size_bytes": 4418
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/collect_v2.py",
+      "sha256": "c86765782de3fdf6a32ddc819a736ed15ab873d6b9eaabc8af32b075345abc13",
+      "size_bytes": 21861
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/boundary.v",
+      "sha256": "c53f7542d012b128bb3301c29b9ff1af4924d61082b3d007c943142c5438eebd",
+      "size_bytes": 6541773
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/capacitance.tsv",
+      "sha256": "d2e7e8bf6ac32cb99f7599acfdda3946910117b45a72827d71b26e9016be7bc6",
+      "size_bytes": 5965549
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/clock_checks.rpt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/limits.tsv",
+      "sha256": "4b97f48b36372c90bab7ee70f6f51186f8c31d1b0eab20605ef0840ca9f6e452",
+      "size_bytes": 675
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/reference.sdc",
+      "sha256": "c00fe97dfa716517db4cf3d6150aa8d5cf7d3987ad77389ed747dbd2b4276aab",
+      "size_bytes": 824
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/result.json",
+      "sha256": "6ae465a73064a91d5d13737ebdd277850230c02719b43009e22f56736e4dfdf0",
+      "size_bytes": 18506
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/run.tcl",
+      "sha256": "c83d1bd46e8db1fb65c4218e1299360736a67bb40ead40b09aebfa2818e26719",
+      "size_bytes": 4613
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/run_state.json",
+      "sha256": "572eebb95bd261f7523fdd92825f264c32bc8cf30f8c5a98c82433614ea689a0",
+      "size_bytes": 388
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/source_identity.json",
+      "sha256": "ce13df17886e0d5469402314be01dcd257ba692b20be6c92099b44b0a4e0ef57",
+      "size_bytes": 3242
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/sta.command.json",
+      "sha256": "0145a57d4b1a0d045e51a69db9b1d3e9534dab5d6147b85b965e06f815ebd709",
+      "size_bytes": 1201
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/sta.log",
+      "sha256": "21c22670a799d5415fbcb7b00a09c7095251ab12a3aeff08fcb702322bc11905",
+      "size_bytes": 407
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/followup-20261018T045407.863054Z-3325e2ca/transition.rpt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/four-cell-targets.json",
+      "sha256": "9e461b1ac9a05d11c3202d0cd2d9ce3aff381fe2c0bb1dfd49b195971d11ece9",
+      "size_bytes": 4010
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/boundary.v",
+      "sha256": "2c3aae33e7c6994e120b98f4e4a8b2cbe18ea93d1434cbdaf16085749dd1fcf2",
+      "size_bytes": 6541773
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/capacitance.tsv",
+      "sha256": "7581db94cdc23ecf904e4ef4b437babc914025737fb893abe16324b6edbcd766",
+      "size_bytes": 5965542
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/limits.tsv",
+      "sha256": "592043741b769ea18152bc19f71a8b2d207d99d199973cf0070e1f781b1694e2",
+      "size_bytes": 654
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/reference.sdc",
+      "sha256": "c00fe97dfa716517db4cf3d6150aa8d5cf7d3987ad77389ed747dbd2b4276aab",
+      "size_bytes": 824
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/result.json",
+      "sha256": "954192785792106a820a24d2a29d491e122da64381133a10f4d6d442e1f0ccbe",
+      "size_bytes": 21885
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/run.tcl",
+      "sha256": "6b4f212710edf85bb98e44111b6b1e22d4a337a7791a0c8264ab91fda08c406c",
+      "size_bytes": 4426
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/run_state.json",
+      "sha256": "4f97e3ca4ceff06016b82f09015483b4ab48c6455725c8d00350dae242ec216c",
+      "size_bytes": 383
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/source_identity.json",
+      "sha256": "1ea34c64341265eaac0c4109f1408a2dc3c1bd36e1303569cebc360f71bcad65",
+      "size_bytes": 4115
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/sta.command.json",
+      "sha256": "5f525840a124dc404a232ae6478340d9d46250b66f7e47ad2f68d58a294e3b69",
+      "size_bytes": 1189
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-capacitance/run-20261018T045122.192397Z-4d84993f/sta.log",
+      "sha256": "21c22670a799d5415fbcb7b00a09c7095251ab12a3aeff08fcb702322bc11905",
+      "size_bytes": 407
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-reference-eco-acceptance/collect.py",
+      "sha256": "5598946224c3cebebcfc6fe8ba1d14012b4cb47306993f296182abc530d4b97f",
+      "size_bytes": 6436
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261018T044959Z-e87a8e-sram-development-20261018/SHA256SUMS",
+      "sha256": "67cf56d012b9381c51896c7cd62f9c0a82e51afd6652ce63077099fd0f2776d7",
+      "size_bytes": 99
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261018T044959Z-e87a8e-sram-development-20261018/manifest.json",
+      "sha256": "aba8f44435de53147dfec3b83fbc0fed296e6d56c88064a4f056186ddfa7b380",
+      "size_bytes": 102915
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261018T044959Z-e87a8e-sram-development-20261018/sram-development-20261018.tar.gz",
+      "sha256": "8eb76ee57f6b493d455b4faed69826bb147c0b2c749d020cd5f6c2ed316b26b8",
+      "size_bytes": 21791108
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/checkpoint-inventory.json",
+      "sha256": "8e5a8555b3d0d058750c154fefbe509fa7857c44e97b0ab4757efd9bf567b96d",
+      "size_bytes": 90844
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_00/bias.mem",
+      "sha256": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_00/tensors.npz",
+      "sha256": "86f952e7f321d4bfa519d700dd291edbe6f76a18a1f949848a9574e9a826b866",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_00/w.mem",
+      "sha256": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_00/x.mem",
+      "sha256": "0702a89bbf187bd2e2e743c8ba0e2db26cec2fac5f35ecd9e851b06d3a371f4c",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_00/y.mem",
+      "sha256": "250c07331050786b487438294b06b5e2ce472467ecb93ff9f16b98aead84809d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_01/bias.mem",
+      "sha256": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_01/tensors.npz",
+      "sha256": "3679d0bb677d757c8890ccb546000a5e75fad07c31efe1a3b107cb7439b46799",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_01/w.mem",
+      "sha256": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_01/x.mem",
+      "sha256": "4cce5e659259ea9ab415667892e01c67f3f2ac7dfb91c386c384fd76916fc190",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_01/y.mem",
+      "sha256": "61936a7769fcd524827e3ddffd9726469adb46ae891fcd4e2ce93bb8340c3137",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_02/bias.mem",
+      "sha256": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_02/tensors.npz",
+      "sha256": "6c98c309633427bade03e1e38cf410b014204ca1949b548477a8d74889418b2b",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_02/w.mem",
+      "sha256": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_02/x.mem",
+      "sha256": "c31674af3dea07221299ecdd11a7aefbbdda97d4b3431b256c8faaf874dd3eac",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_02/y.mem",
+      "sha256": "66ccbef7e8eaa13758e8d0c033a8e96d99580ecc195c3c156cea49f0276d367d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_03/bias.mem",
+      "sha256": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_03/tensors.npz",
+      "sha256": "bee370e44635564a0ffabd7daf42a3e636e576f8ce4577d68e1519ddc2e0dec0",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_03/w.mem",
+      "sha256": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_03/x.mem",
+      "sha256": "83a521199a0e13c4f086378e96265e086007cfe1a846b5fb2f3cf35bd45ba5f1",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_03/y.mem",
+      "sha256": "30545cceb114ea90ac36653c78b1c1b93c8eb91d7a80703aa11c073d4c699e19",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_04/bias.mem",
+      "sha256": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_04/tensors.npz",
+      "sha256": "d616f67f32eb4962b70ac56c5715f93be1092a6b45f9e7f8fd468f04bc0a66d0",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_04/w.mem",
+      "sha256": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_04/x.mem",
+      "sha256": "0526f1e20e4cff43384616ff292e43ecc79e1ce756d8ea77b874dcc72a874e94",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_04/y.mem",
+      "sha256": "2d6c5dc55bfc5f2da7aa96f4401c1c0ec829bd8bf15dd31a3051e1c6c246eced",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_05/bias.mem",
+      "sha256": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_05/tensors.npz",
+      "sha256": "da5e1faa00d0a4f9e4c4b1264dde1f07c010f212b6f1838301ad40333d341659",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_05/w.mem",
+      "sha256": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_05/x.mem",
+      "sha256": "825e5fab178ae26dac7c23ae39f58bcfdc8377b28339db90159d7cf36eb058f2",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_05/y.mem",
+      "sha256": "9be58803e8675695da34e7eeaa4af072690c8fde1682ae6f57831aaf0809e23d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_06/bias.mem",
+      "sha256": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_06/tensors.npz",
+      "sha256": "62866585170c9d0b905c23188c64b322d586b250b3e08fee1cf887ac95592197",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_06/w.mem",
+      "sha256": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_06/x.mem",
+      "sha256": "a0536bec8d2ebf090a4a5d76e1cf579a88285f4ce38b47b8128330f300bc5dd9",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_06/y.mem",
+      "sha256": "8c6aa36977cdbbedfe576030ec14c07ba691cd3af6d4a836509754f504026648",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_07/bias.mem",
+      "sha256": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_07/tensors.npz",
+      "sha256": "cb86cccbf44a7e00b84775be8e803630227b76352029023689e7affb7e800579",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_07/w.mem",
+      "sha256": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_07/x.mem",
+      "sha256": "b0fdeb87825b0678754b184876905736f388c10c701257896877605761557b46",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_07/y.mem",
+      "sha256": "f4ddd175175295683b8c0e947f43ee1509774f8f73e131672e1592131c1098ea",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_08/bias.mem",
+      "sha256": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_08/tensors.npz",
+      "sha256": "596879765e6869f09355d9c08fdd4e1277bfe8da2ff4c956c3acf92a6feb6c9d",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_08/w.mem",
+      "sha256": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_08/x.mem",
+      "sha256": "0a41dc6cfc80c9b19e014dabd828cacab928fc9281a171aa7a99e58d29c85e58",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_08/y.mem",
+      "sha256": "5fe3de3044b846312fc89571c603e86891550717097ab1316f2be02339327443",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_09/bias.mem",
+      "sha256": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_09/tensors.npz",
+      "sha256": "a7b95dfd9aa3ee3a57122106e93e6b0cde7d4b54ccce61ae4c87fed694b938da",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_09/w.mem",
+      "sha256": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_09/x.mem",
+      "sha256": "3afea40da3af8f42421c1b749f16fa8b60b07a3e4f36126e422686cf2448235a",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_09/y.mem",
+      "sha256": "8d88bf823cbebcc87493261288089cfd2ddaaf0d6a5894e6c677774a012e0432",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_10/bias.mem",
+      "sha256": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_10/tensors.npz",
+      "sha256": "be65d5ae970a3a52a71a18d2d900703dab4258122be821e1f17110b6935ca4f4",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_10/w.mem",
+      "sha256": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_10/x.mem",
+      "sha256": "99e9de4f694194d8f5d3fc179f6ee79fed806c531069a7bd4a2ed1de916d407f",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_10/y.mem",
+      "sha256": "c64270f0b0d707f6864745f35eb7a5b2c4455415cfc482d95ed06504ca3d3a51",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_11/bias.mem",
+      "sha256": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_11/tensors.npz",
+      "sha256": "5590b4399774d3d2a9291e4e6eead07fcd159692e8e1966e78720fbb619a8fc3",
+      "size_bytes": 649534
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_11/w.mem",
+      "sha256": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_11/x.mem",
+      "sha256": "32877bc85bb493d0d317b3241c30c8377cf23965246b0103a1473f08f9ae8289",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/layer_11/y.mem",
+      "sha256": "ef737c1334067ef42e40ba05bbaad8d955261e3d8fb97147bef7d33815590642",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/logits.npy",
+      "sha256": "16ad805fb0fb24439b57c9dad7aa0fdc2d1c605f798db0b4e3b8837646ce558a",
+      "size_bytes": 176
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/manifest.json",
+      "sha256": "0f6a4a4275bb470439029ae01bf0ddfd2dc8ca2da473245ed6f2ef086620be77",
+      "size_bytes": 115270
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/mfcc.npy",
+      "sha256": "055b47ef375f7459d3c6c0111f86413aa77dc70daceeda75865f375dcacaa7b7",
+      "size_bytes": 15808
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/export/waveform.npy",
+      "sha256": "15c21693fca5dfa28501c564694e48ad01342ad03b6d799bf6d2a14e9af67d02",
+      "size_bytes": 64128
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/selected/waveform.npy",
+      "sha256": "15c21693fca5dfa28501c564694e48ad01342ad03b6d799bf6d2a14e9af67d02",
+      "size_bytes": 64128
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/abc.constr",
+      "sha256": "b813869446911394b9d748e223fd669b1591c5f07f7de6b862a222740a536e1c",
+      "size_bytes": 36
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/blackbox-structure.json",
+      "sha256": "043bf225d858ff7873c06dd0187fcc9e61d2f0bcc7a73e4c95b046f4ef0136a0",
+      "size_bytes": 2334526
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/hierarchical.json",
+      "sha256": "7e82f6f5bf8cfa06a4bd6321181c3f51df13d70a82f13cac98af8f69d293445d",
+      "size_bytes": 1242876
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/input-0.sv",
+      "sha256": "e1bd2dead2963a27593b9d52c73fc1119756644b5b84a3e9c4c121d4b2073945",
+      "size_bytes": 6804
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/input-1.sv",
+      "sha256": "2db000bb2efafd09da8c2d12b31743d0be0a58c601236afdbe6d4b5ca06ba83d",
+      "size_bytes": 3650
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/input-2.sv",
+      "sha256": "97f1e12f4dd5fc5b9be7b469909b37ff4fa6edba21bcf0d7f617f8ae85b672c1",
+      "size_bytes": 17323
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/input-3.sv",
+      "sha256": "689a43c4dfbfc5b306a76939fbf3b40b786f152746b02556298ab33af2106a8d",
+      "size_bytes": 570
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/input-4.sv",
+      "sha256": "b6ff53c5d50a09f393fbb48fce2e11574dfa3984656ed7e61821bd93bdd6cb85",
+      "size_bytes": 16792
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/map.ys",
+      "sha256": "358b3ebf69e76706f54a68907a706accb030c9150593c0ef0ec11b7d22cbcf20",
+      "size_bytes": 883
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/mapped.json",
+      "sha256": "9943fbbd58615182cea68e5da3e9dafa178c6e029a150400d64fe4bf1006e00e",
+      "size_bytes": 28992797
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/mapped.v",
+      "sha256": "580419579cf810be34aef7c147177d5bd25e0aedae61d324b7ba4748caaad802",
+      "size_bytes": 4932557
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/mapping.abc",
+      "sha256": "7af8f8cf90fdfd5a85543b7ef8aee4ab98e16c86bda728c993a370f24e075ac2",
+      "size_bytes": 135
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/mapping.log",
+      "sha256": "ee36ff9cd53692874e7ba69d5ba68ee3f095b64d8777b55707e7df9f9a1016b6",
+      "size_bytes": 113735
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/prepare.log",
+      "sha256": "40a1d5c93f67de08f302ee989dbe976f9be8c1341fb122a9ad9314c613a3bf16",
+      "size_bytes": 193458
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/prepare.ys",
+      "sha256": "8ec2dda922c69856b953a9c470a6d03441c93b7f8fb39733e258c50fecc56836",
+      "size_bytes": 388
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/result.json",
+      "sha256": "b6d21e9ad36a3f70bd0e3185c239cd1f7d5be755a825f9643658262ca090b226",
+      "size_bytes": 37295
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T022812.829729Z-sram-blackbox-501ae448/version.log",
+      "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa",
+      "size_bytes": 34
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/boundary.json",
+      "sha256": "4331191e1f4ffc56c83e49093dd5b5fc07b2f6f2b5239f37a5dde39643c79ff6",
+      "size_bytes": 16422904
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/boundary.v",
+      "sha256": "be74479fc0d73d0aef6ca755cd1ce0d3a32e1c1eb292f9f109d72335235ec428",
+      "size_bytes": 6540603
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/coverage.rpt",
+      "sha256": "cfb46bd6bb44d4efe0661555fb5ba98b7fcc8ef348dedd0b8d2cc1006784e90a",
+      "size_bytes": 156661
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/hold.rpt",
+      "sha256": "fb2c58f0383c585877a6b872cfc851192f1e90fb2ccb168b7d3fd8cbdf5addc5",
+      "size_bytes": 51441
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/minimum_electrical.rpt",
+      "sha256": "92cff6050ab3c39358b085c268f4efc7aa0209ed557bdf68452f48994a6f40b7",
+      "size_bytes": 95935
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/reference.sdc",
+      "sha256": "c00fe97dfa716517db4cf3d6150aa8d5cf7d3987ad77389ed747dbd2b4276aab",
+      "size_bytes": 824
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/register_hold.rpt",
+      "sha256": "fb2c58f0383c585877a6b872cfc851192f1e90fb2ccb168b7d3fd8cbdf5addc5",
+      "size_bytes": 51441
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/register_setup.rpt",
+      "sha256": "fd4d59cd048bcae487d918530b8201fa465cd3fb9a5954b6928dd6a9824fb913",
+      "size_bytes": 80323
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/reset_net.rpt",
+      "sha256": "33c18a087787656f1966b7b69aed1fd255d25a1fc246749a9c01118c492462e2",
+      "size_bytes": 7421
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/result.json",
+      "sha256": "c787626ba5c07019055906a7cd39e9ff86985575d0d18c166cccbe9e87c41f2f",
+      "size_bytes": 86214
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/run.tcl",
+      "sha256": "743440827eba1b3ab1c38e11114b23782d018fe3657f6d7f82216a3ea5efe3e5",
+      "size_bytes": 1118
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/setup.rpt",
+      "sha256": "fd4d59cd048bcae487d918530b8201fa465cd3fb9a5954b6928dd6a9824fb913",
+      "size_bytes": 80323
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/sta.log",
+      "sha256": "8e8aac32412155d5c8839efcf214089cb133665b4f84d89df686e029a00c0207",
+      "size_bytes": 428
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/unconstrained.rpt",
+      "sha256": "fd4d59cd048bcae487d918530b8201fa465cd3fb9a5954b6928dd6a9824fb913",
+      "size_bytes": 80323
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/version.log",
+      "sha256": "8a4d165e93729e579c12f73ceb42127673c62db24e8be7d4c5dcbf6c0f08266e",
+      "size_bytes": 7
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/write.log",
+      "sha256": "b676d1aedb6f3276dde333600986887ae8e134533c922366b0c346b49920fcf2",
+      "size_bytes": 6350
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T031137.428349Z-sram-partial-sta-70ca061a/write.ys",
+      "sha256": "06eb681b4166911d76bfb1bc162c9642babe172a1ef138c911d99f815767e7c6",
+      "size_bytes": 99
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T034355.355361Z-sram-alias-58eeb4a6/obj-baseline/simulation",
+      "sha256": "5fb19021df763bf086a2eb4fb50396076b0b02de60e486dec76244c4824fae0d",
+      "size_bytes": 200992
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T034355.355361Z-sram-alias-58eeb4a6/obj-configuration/simulation",
+      "sha256": "8ce4cb0a906e083c4e21fa24f9cf3fe7880bc008480c77f498948b53bcebe89c",
+      "size_bytes": 241296
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T034355.355361Z-sram-alias-58eeb4a6/obj-metacomment/simulation",
+      "sha256": "8ce4cb0a906e083c4e21fa24f9cf3fe7880bc008480c77f498948b53bcebe89c",
+      "size_bytes": 241296
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T034355.355361Z-sram-alias-58eeb4a6/result.json",
+      "sha256": "712d072f6db9b761908a7da1f19c084d6a4e33f7690d16c0eed588084841dd07",
+      "size_bytes": 25847
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T034355.355361Z-sram-alias-58eeb4a6/source_identity.json",
+      "sha256": "493153389f647793fa14a0c8d914e8eaf41dbb5f5488af9ce6a0b1964a6f1e07",
+      "size_bytes": 2562
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T034355.355361Z-sram-alias-58eeb4a6/split_alias.vlt",
+      "sha256": "6e40e719ad02bf283f2ab4a29d5097bb4c71cf825396406a5c6234a04d624cd2",
+      "size_bytes": 73
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T034635.134706Z-mapped-checker-2c530b35/checker.vvp",
+      "sha256": "ff76e09d60ba3a95fa45e80cd0291575544e27dc1a2410aecc6453d4e4f41108",
+      "size_bytes": 36093
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T034635.134706Z-mapped-checker-2c530b35/result.json",
+      "sha256": "60b341a74a694ba60a8b71827c0d3955e3189e17ded98c6a32ff6a6d615a7e48",
+      "size_bytes": 46221
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T034635.134706Z-mapped-checker-2c530b35/source_identity.json",
+      "sha256": "72c8f5a54b86ae94664bf1c06c3527ca524bf1d644eec2e5a1e7afe19ee60da8",
+      "size_bytes": 1968
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041150.377364Z-minimum-eco-b1931abc/candidate-input.json",
+      "sha256": "ac4329d305d720c5cdc9519624b8b2a880b8b537a5157b6e922db26187e3c7ef",
+      "size_bytes": 16399333
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041150.377364Z-minimum-eco-b1931abc/emit.command.json",
+      "sha256": "163ea7d465ccc0c7f2d5997ce570ae7096b8d8df9dcf64bf7cacfbd8a09eb02f",
+      "size_bytes": 1112
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041150.377364Z-minimum-eco-b1931abc/emit.log",
+      "sha256": "4154d1edfb843cbf9de7a300b9ed076798662230af75a4f2dd3f151859a7a2d1",
+      "size_bytes": 6496
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041150.377364Z-minimum-eco-b1931abc/emit.ys",
+      "sha256": "cc492f2af57da3b90c6e0ca383349ab411d75855fda8d6db8dcec3062e0bcf64",
+      "size_bytes": 136
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041150.377364Z-minimum-eco-b1931abc/mapped.json",
+      "sha256": "ab5d1daf9cc5f78ceb7c385f1a00e77a66623242905b1a73fc65e45b1bf6994f",
+      "size_bytes": 28996313
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041150.377364Z-minimum-eco-b1931abc/mapped.v",
+      "sha256": "ed10911b33c6953fb7aff2e7e2cd2555a1ebbfb602760e090685f05dc820e742",
+      "size_bytes": 6410509
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041150.377364Z-minimum-eco-b1931abc/result.json",
+      "sha256": "d48ca06e674812a4cff86077577f9619b16fd85d4f7712731a472aebf9f946df",
+      "size_bytes": 38420
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041150.377364Z-minimum-eco-b1931abc/run_state.json",
+      "sha256": "d2cd0e54d1bbdfcb54b2a70a0ec0ab34fff2f56d3e2b4a3570cb38b36b5c87b3",
+      "size_bytes": 354
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041150.377364Z-minimum-eco-b1931abc/source_identity.json",
+      "sha256": "13a71984a94509d3c5a28ed4818cab235675428d4c44fc86779aff67e994ef45",
+      "size_bytes": 2545
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/boundary.json",
+      "sha256": "8e8e72e1f9e0542c1a7b8a7f0fa5e09403fa4afc5e20e9bd925608e1a23a2b87",
+      "size_bytes": 16424761
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/boundary.v",
+      "sha256": "c4ce5b3a69b46e7049ee491a642ddd6adaef03e381d2139aedf83fd690ef5d3d",
+      "size_bytes": 6541467
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/coverage.rpt",
+      "sha256": "cfb46bd6bb44d4efe0661555fb5ba98b7fcc8ef348dedd0b8d2cc1006784e90a",
+      "size_bytes": 156661
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/hold.rpt",
+      "sha256": "13f6edefc205020508e5abb4e5b56246fdca4765975757f435022cd88ceaa748",
+      "size_bytes": 57926
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/minimum_electrical.rpt",
+      "sha256": "caa70cf3752867a39440c685d51d7fa4a0fb57045133814032aee89ea8616570",
+      "size_bytes": 126444
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/reference.sdc",
+      "sha256": "c00fe97dfa716517db4cf3d6150aa8d5cf7d3987ad77389ed747dbd2b4276aab",
+      "size_bytes": 824
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/register_hold.rpt",
+      "sha256": "13f6edefc205020508e5abb4e5b56246fdca4765975757f435022cd88ceaa748",
+      "size_bytes": 57926
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/register_setup.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/reset_net.rpt",
+      "sha256": "35407bd2e25b3a7a486580f86a0f12d99c22ca1c2ca1ec596b4272778d99afd8",
+      "size_bytes": 7422
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/result.json",
+      "sha256": "41404c1d5c91cf523d1a9799c41796d6380a03d24f68894e67c7446134bbc8f6",
+      "size_bytes": 86266
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/run.tcl",
+      "sha256": "743440827eba1b3ab1c38e11114b23782d018fe3657f6d7f82216a3ea5efe3e5",
+      "size_bytes": 1118
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/setup.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/sta.log",
+      "sha256": "8e8aac32412155d5c8839efcf214089cb133665b4f84d89df686e029a00c0207",
+      "size_bytes": 428
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/unconstrained.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/version.log",
+      "sha256": "8a4d165e93729e579c12f73ceb42127673c62db24e8be7d4c5dcbf6c0f08266e",
+      "size_bytes": 7
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/write.log",
+      "sha256": "a1c2579b6a81ef100cdab18af89c2ede35032750e163bf2affbe9105808e49ad",
+      "size_bytes": 6350
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041159.423652Z-sram-partial-sta-6ba603da/write.ys",
+      "sha256": "06eb681b4166911d76bfb1bc162c9642babe172a1ef138c911d99f815767e7c6",
+      "size_bytes": 99
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041339.468516Z-counter-hold-eco-b6ac8a8a/candidate-input.json",
+      "sha256": "cd774b277376f3c6b644f9125d2d40e07a257149ae764b65c35f2dd8505ebe3b",
+      "size_bytes": 16399893
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041339.468516Z-counter-hold-eco-b6ac8a8a/emit.command.json",
+      "sha256": "4e6192fe04526b0cbe29bebaa948f2224e3c5a979b42e8646e1d4a7794dee11e",
+      "size_bytes": 1122
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041339.468516Z-counter-hold-eco-b6ac8a8a/emit.log",
+      "sha256": "8e2a4bbae2ed0ecee5e9741c1226c037f7764de0b4be1255621856ca04091309",
+      "size_bytes": 6496
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041339.468516Z-counter-hold-eco-b6ac8a8a/emit.ys",
+      "sha256": "ebd69c3bcc34883513d87eb4fe3f87b869c1deb1dddd502df049f617a2ab76da",
+      "size_bytes": 136
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041339.468516Z-counter-hold-eco-b6ac8a8a/mapped.json",
+      "sha256": "e59903b5e4a743b501400b4e58db6f6e6dae902494f186380067abb998d3013a",
+      "size_bytes": 28997347
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041339.468516Z-counter-hold-eco-b6ac8a8a/mapped.v",
+      "sha256": "c75f0aa7a4288547a1fc66a83655048b1f8921a066c501c967b4590cd27d0f9e",
+      "size_bytes": 6410815
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041339.468516Z-counter-hold-eco-b6ac8a8a/result.json",
+      "sha256": "40fbf13337f2aa38172c059d4957480a011399e2250bfa55590bed15eadc7748",
+      "size_bytes": 41010
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041339.468516Z-counter-hold-eco-b6ac8a8a/run_state.json",
+      "sha256": "7ce4f7726e6e5f15f3001ed8631e2038693b00bb53c502a15a08310c36453162",
+      "size_bytes": 359
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041339.468516Z-counter-hold-eco-b6ac8a8a/source_identity.json",
+      "sha256": "16d041c6f5e03f7e7aefc765206fc095bce55d905f1a4e5f0c2153ca4b6d2363",
+      "size_bytes": 2866
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/boundary.json",
+      "sha256": "aa3efbea560f2d7677ccb42b6a32d63e3475394e2fdeaef9d9dac3a3f13ba466",
+      "size_bytes": 16425321
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/boundary.v",
+      "sha256": "78834a74a6c90ecaf9386b98918def0a2987e3425fb8f2faea0ac5a21a8afb5e",
+      "size_bytes": 6541773
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/coverage.rpt",
+      "sha256": "cfb46bd6bb44d4efe0661555fb5ba98b7fcc8ef348dedd0b8d2cc1006784e90a",
+      "size_bytes": 156661
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/hold.rpt",
+      "sha256": "8ec102fddd21883e575e49445f40d58543e9ab2a73adddf548b81cda2f4df803",
+      "size_bytes": 57902
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/minimum_electrical.rpt",
+      "sha256": "78dca32626374d0e22bf5b032009ed8e3ff8be7c0f6e04e9ad4dcfe3b0d1ac74",
+      "size_bytes": 126436
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/reference.sdc",
+      "sha256": "c00fe97dfa716517db4cf3d6150aa8d5cf7d3987ad77389ed747dbd2b4276aab",
+      "size_bytes": 824
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/register_hold.rpt",
+      "sha256": "8ec102fddd21883e575e49445f40d58543e9ab2a73adddf548b81cda2f4df803",
+      "size_bytes": 57902
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/register_setup.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/reset_net.rpt",
+      "sha256": "35407bd2e25b3a7a486580f86a0f12d99c22ca1c2ca1ec596b4272778d99afd8",
+      "size_bytes": 7422
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/result.json",
+      "sha256": "9b25b49ea216d7651e252c585249924a377ae9f35677883da4b6c2aef2edef97",
+      "size_bytes": 86388
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/run.tcl",
+      "sha256": "743440827eba1b3ab1c38e11114b23782d018fe3657f6d7f82216a3ea5efe3e5",
+      "size_bytes": 1118
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/setup.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/sta.log",
+      "sha256": "8e8aac32412155d5c8839efcf214089cb133665b4f84d89df686e029a00c0207",
+      "size_bytes": 428
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/unconstrained.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/version.log",
+      "sha256": "8a4d165e93729e579c12f73ceb42127673c62db24e8be7d4c5dcbf6c0f08266e",
+      "size_bytes": 7
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/write.log",
+      "sha256": "dd5fbb5dd447d1c7e9859cd04c94ab4552696ac2445d58410f95a0687aae3032",
+      "size_bytes": 6350
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041352.042363Z-sram-partial-sta-5291996c/write.ys",
+      "sha256": "06eb681b4166911d76bfb1bc162c9642babe172a1ef138c911d99f815767e7c6",
+      "size_bytes": 99
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T041630.593942Z-eco-identity-add33a26/result.json",
+      "sha256": "4bcd06bf67fa6bd92b4b59cac89786b6388562e5d3a939a77212ea76227fc72f",
+      "size_bytes": 2195
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042058.542924Z-slew-eco-1836b7fb/candidate-input.json",
+      "sha256": "50de05415079a95fa4b40cf47742772bc5a426d540df2b73bb3b9aebda55ec9c",
+      "size_bytes": 16399893
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042058.542924Z-slew-eco-1836b7fb/emit.command.json",
+      "sha256": "338868a46637546c3a47779d0da7f638f8e616f43c43d169b060a613dad6b5c1",
+      "size_bytes": 1106
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042058.542924Z-slew-eco-1836b7fb/emit.log",
+      "sha256": "f6f09943054e3bd9f962549369862f617e3f552a4ac7c35e2e040387bb5fba7e",
+      "size_bytes": 6493
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042058.542924Z-slew-eco-1836b7fb/emit.ys",
+      "sha256": "e4daffabe49c1ef8af3dccfc491995dbf4a268b75e9f95b781b247a63db5b388",
+      "size_bytes": 133
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042058.542924Z-slew-eco-1836b7fb/mapped.json",
+      "sha256": "488cd5e919dad2288695ba40ec8748ea046cbedfdb6b9e1f4db6e1259df74783",
+      "size_bytes": 28997347
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042058.542924Z-slew-eco-1836b7fb/mapped.v",
+      "sha256": "736939deae247cb124a1f049ed49fe6b474bcda61995c5594e557369d878bc13",
+      "size_bytes": 6410815
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042058.542924Z-slew-eco-1836b7fb/result.json",
+      "sha256": "eaf9fefaa3ac1ab455e5b201cdc9c794a14e5da83179188a6d6fa2d8814a332e",
+      "size_bytes": 46582
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042058.542924Z-slew-eco-1836b7fb/run_state.json",
+      "sha256": "1daaa7c445924945f26c045193e8db42b3f3adffb23ffb23179aca7f15d2da6d",
+      "size_bytes": 351
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042058.542924Z-slew-eco-1836b7fb/source_identity.json",
+      "sha256": "4e70b1c74c5110ffaee6845a30e6cf1d10a5392311e820063b9ea439720befd3",
+      "size_bytes": 3091
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/boundary.json",
+      "sha256": "83a3bcd0ad4862431d324c0e8dbf6a5399c03a5057ab89417357a1408374f176",
+      "size_bytes": 16425321
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/boundary.v",
+      "sha256": "2c3aae33e7c6994e120b98f4e4a8b2cbe18ea93d1434cbdaf16085749dd1fcf2",
+      "size_bytes": 6541773
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/coverage.rpt",
+      "sha256": "cfb46bd6bb44d4efe0661555fb5ba98b7fcc8ef348dedd0b8d2cc1006784e90a",
+      "size_bytes": 156661
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/hold.rpt",
+      "sha256": "8ec102fddd21883e575e49445f40d58543e9ab2a73adddf548b81cda2f4df803",
+      "size_bytes": 57902
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/minimum_electrical.rpt",
+      "sha256": "78dca32626374d0e22bf5b032009ed8e3ff8be7c0f6e04e9ad4dcfe3b0d1ac74",
+      "size_bytes": 126436
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/reference.sdc",
+      "sha256": "c00fe97dfa716517db4cf3d6150aa8d5cf7d3987ad77389ed747dbd2b4276aab",
+      "size_bytes": 824
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/register_hold.rpt",
+      "sha256": "8ec102fddd21883e575e49445f40d58543e9ab2a73adddf548b81cda2f4df803",
+      "size_bytes": 57902
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/register_setup.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/reset_net.rpt",
+      "sha256": "35407bd2e25b3a7a486580f86a0f12d99c22ca1c2ca1ec596b4272778d99afd8",
+      "size_bytes": 7422
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/result.json",
+      "sha256": "a42fac64a585723b4d685904f45dbe315be58f2ea010bfcbdac1d35b62b7ac22",
+      "size_bytes": 86366
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/run.tcl",
+      "sha256": "743440827eba1b3ab1c38e11114b23782d018fe3657f6d7f82216a3ea5efe3e5",
+      "size_bytes": 1118
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/setup.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/sta.log",
+      "sha256": "8e8aac32412155d5c8839efcf214089cb133665b4f84d89df686e029a00c0207",
+      "size_bytes": 428
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/unconstrained.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/version.log",
+      "sha256": "8a4d165e93729e579c12f73ceb42127673c62db24e8be7d4c5dcbf6c0f08266e",
+      "size_bytes": 7
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/write.log",
+      "sha256": "d4062ea793e4f06404351dce548aaf0ae63a02ba84cea1e4a3162dde40d27777",
+      "size_bytes": 6350
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042113.590865Z-sram-partial-sta-291f5407/write.ys",
+      "sha256": "06eb681b4166911d76bfb1bc162c9642babe172a1ef138c911d99f815767e7c6",
+      "size_bytes": 99
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/cells.command.json",
+      "sha256": "4bb74985e433d40aca4620e95baaf389d553a351d746cd7ae3a43cdb7d31bd89",
+      "size_bytes": 1116
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/cells.log",
+      "sha256": "4fcccfbd227bb37159dc7724f9636d330e56b93d6c1f91aa5b866551277d4264",
+      "size_bytes": 16014
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/cells.ys",
+      "sha256": "f237346ab8a14e2f293150478e83355271bf7ea8c8e53f1361467ab855ccd7ec",
+      "size_bytes": 262
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/compile.command.json",
+      "sha256": "c6cd1320ae467dbbe5822c701c88c2fc5a0dd3381e7fe127bad54280f73a8862",
+      "size_bytes": 2475
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/compile.log",
+      "sha256": "e0715f87e428277d227783e746cfa71871901363a0f992b424aa001a3679d4a3",
+      "size_bytes": 91229
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/logical_macros.sv",
+      "sha256": "10ecd59e3901821b959f8b8db9499105ad86c8e3ae1bfef433b15f679f71dbf5",
+      "size_bytes": 858
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/mapped_alias.vlt",
+      "sha256": "a961f9fd1bd23489ef44d2c34436f8519743001043931d0a34eff0b049bdab59",
+      "size_bytes": 82
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/mapped_top.v",
+      "sha256": "e59513f2d6b15628011795c4c6f1118b80513600441bb515fa05110dd2ed1a68",
+      "size_bytes": 6410822
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/obj/simulation",
+      "sha256": "00b4142c4385ca5835dcea455884ca004c8eb04a5bfdda64cd4d2cafa56f3f18",
+      "size_bytes": 3812888
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/result.json",
+      "sha256": "54a6f0326b5f31079ac724ce8ca227c860c3dabb1317af95b2d4e93fcb131cbf",
+      "size_bytes": 104579
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/run.command.json",
+      "sha256": "8c846cab4ffdc4098a5868966098b62a0cdbe39660e07f16bf6f54ebd4c519c0",
+      "size_bytes": 1287
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/run.log",
+      "sha256": "30a9e7ffb3ea8351ba1688af82dfd19e41e9b7bf6182806aadfb7c255245bace",
+      "size_bytes": 363
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/standard_cells.v",
+      "sha256": "6413229ee6caeb08c4128d3f55385bd2656fe6010fa2a209e51c0bd752a22789",
+      "size_bytes": 29300
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/vectors/layer_00/bias.mem",
+      "sha256": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/vectors/layer_00/w.mem",
+      "sha256": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/vectors/layer_00/x.mem",
+      "sha256": "0702a89bbf187bd2e2e743c8ba0e2db26cec2fac5f35ecd9e851b06d3a371f4c",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042218.309500Z-sram-mapped-65ab7247/vectors/layer_00/y.mem",
+      "sha256": "250c07331050786b487438294b06b5e2ce472467ecb93ff9f16b98aead84809d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/cells.ys",
+      "sha256": "f237346ab8a14e2f293150478e83355271bf7ea8c8e53f1361467ab855ccd7ec",
+      "size_bytes": 262
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/logical_macros.sv",
+      "sha256": "10ecd59e3901821b959f8b8db9499105ad86c8e3ae1bfef433b15f679f71dbf5",
+      "size_bytes": 858
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/mapped_alias.vlt",
+      "sha256": "a961f9fd1bd23489ef44d2c34436f8519743001043931d0a34eff0b049bdab59",
+      "size_bytes": 82
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/mapped_top.v",
+      "sha256": "e59513f2d6b15628011795c4c6f1118b80513600441bb515fa05110dd2ed1a68",
+      "size_bytes": 6410822
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/result.json",
+      "sha256": "e9427eb0422a9a74e02cd902e436cb6fc6a19847d009169f3fabe950c230d983",
+      "size_bytes": 181212
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/run.command.json",
+      "sha256": "576c033a52b96ff2feb7c6a24077800655862df6c5e028b15c902ec80d94414f",
+      "size_bytes": 1293
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/run.log",
+      "sha256": "a67f4970685c012391549aea260b48d7685063f95223d7f5a22d3b57730ad455",
+      "size_bytes": 792
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_00/bias.mem",
+      "sha256": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_00/w.mem",
+      "sha256": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_00/x.mem",
+      "sha256": "0702a89bbf187bd2e2e743c8ba0e2db26cec2fac5f35ecd9e851b06d3a371f4c",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_00/y.mem",
+      "sha256": "250c07331050786b487438294b06b5e2ce472467ecb93ff9f16b98aead84809d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_01/bias.mem",
+      "sha256": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_01/w.mem",
+      "sha256": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_01/x.mem",
+      "sha256": "4cce5e659259ea9ab415667892e01c67f3f2ac7dfb91c386c384fd76916fc190",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_01/y.mem",
+      "sha256": "61936a7769fcd524827e3ddffd9726469adb46ae891fcd4e2ce93bb8340c3137",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_02/bias.mem",
+      "sha256": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_02/w.mem",
+      "sha256": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_02/x.mem",
+      "sha256": "c31674af3dea07221299ecdd11a7aefbbdda97d4b3431b256c8faaf874dd3eac",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_02/y.mem",
+      "sha256": "66ccbef7e8eaa13758e8d0c033a8e96d99580ecc195c3c156cea49f0276d367d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_03/bias.mem",
+      "sha256": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_03/w.mem",
+      "sha256": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_03/x.mem",
+      "sha256": "83a521199a0e13c4f086378e96265e086007cfe1a846b5fb2f3cf35bd45ba5f1",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_03/y.mem",
+      "sha256": "30545cceb114ea90ac36653c78b1c1b93c8eb91d7a80703aa11c073d4c699e19",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_04/bias.mem",
+      "sha256": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_04/w.mem",
+      "sha256": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_04/x.mem",
+      "sha256": "0526f1e20e4cff43384616ff292e43ecc79e1ce756d8ea77b874dcc72a874e94",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_04/y.mem",
+      "sha256": "2d6c5dc55bfc5f2da7aa96f4401c1c0ec829bd8bf15dd31a3051e1c6c246eced",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_05/bias.mem",
+      "sha256": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_05/w.mem",
+      "sha256": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_05/x.mem",
+      "sha256": "825e5fab178ae26dac7c23ae39f58bcfdc8377b28339db90159d7cf36eb058f2",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_05/y.mem",
+      "sha256": "9be58803e8675695da34e7eeaa4af072690c8fde1682ae6f57831aaf0809e23d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_06/bias.mem",
+      "sha256": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_06/w.mem",
+      "sha256": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_06/x.mem",
+      "sha256": "a0536bec8d2ebf090a4a5d76e1cf579a88285f4ce38b47b8128330f300bc5dd9",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_06/y.mem",
+      "sha256": "8c6aa36977cdbbedfe576030ec14c07ba691cd3af6d4a836509754f504026648",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_07/bias.mem",
+      "sha256": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_07/w.mem",
+      "sha256": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_07/x.mem",
+      "sha256": "b0fdeb87825b0678754b184876905736f388c10c701257896877605761557b46",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_07/y.mem",
+      "sha256": "f4ddd175175295683b8c0e947f43ee1509774f8f73e131672e1592131c1098ea",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_08/bias.mem",
+      "sha256": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_08/w.mem",
+      "sha256": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_08/x.mem",
+      "sha256": "0a41dc6cfc80c9b19e014dabd828cacab928fc9281a171aa7a99e58d29c85e58",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_08/y.mem",
+      "sha256": "5fe3de3044b846312fc89571c603e86891550717097ab1316f2be02339327443",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_09/bias.mem",
+      "sha256": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_09/w.mem",
+      "sha256": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_09/x.mem",
+      "sha256": "3afea40da3af8f42421c1b749f16fa8b60b07a3e4f36126e422686cf2448235a",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_09/y.mem",
+      "sha256": "8d88bf823cbebcc87493261288089cfd2ddaaf0d6a5894e6c677774a012e0432",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_10/bias.mem",
+      "sha256": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_10/w.mem",
+      "sha256": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_10/x.mem",
+      "sha256": "99e9de4f694194d8f5d3fc179f6ee79fed806c531069a7bd4a2ed1de916d407f",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_10/y.mem",
+      "sha256": "c64270f0b0d707f6864745f35eb7a5b2c4455415cfc482d95ed06504ca3d3a51",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_11/bias.mem",
+      "sha256": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_11/w.mem",
+      "sha256": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_11/x.mem",
+      "sha256": "32877bc85bb493d0d317b3241c30c8377cf23965246b0103a1473f08f9ae8289",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042525.732765Z-mapped-replay-e2fa058a/vectors/layer_11/y.mem",
+      "sha256": "ef737c1334067ef42e40ba05bbaad8d955261e3d8fb97147bef7d33815590642",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042600.270316Z-sram-eco-tooling/host.command.json",
+      "sha256": "b06d990d7c9f832c30881e2d19a7c2b004c26f0af0df7eee749d48b9a5639d88",
+      "size_bytes": 965
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042600.270316Z-sram-eco-tooling/host.log",
+      "sha256": "87de5ff99224746ac1a08b450cc088a6324dfc399b15b5132f17808d79e1fb9c",
+      "size_bytes": 27961
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042600.270316Z-sram-eco-tooling/result.json",
+      "sha256": "34a9ef8dc0526986cf0f18cd2a4849170353586737eae8b13022f64e9f347705",
+      "size_bytes": 2883
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042600.270316Z-sram-eco-tooling/verify.command.json",
+      "sha256": "67c9340cb0c1a0ead2b519c695b3f4b64b64db9b655b5820c2f3fc45426ab19e",
+      "size_bytes": 968
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T042600.270316Z-sram-eco-tooling/verify.log",
+      "sha256": "b895e6804a478bc3196548c0cefc9826aebc81ca11631f5fcb2d2c5ea4cb3ba6",
+      "size_bytes": 329
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/candidate-input.json",
+      "sha256": "17dd2c2c1f4290f1967148bcfb9d797031c3e99ea2a0bd7c2a46be0d24cf43ee",
+      "size_bytes": 16399893
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/emit.command.json",
+      "sha256": "4ef364fb2d59a4a53256eb186bbe44fc781d47e1bc0d6cee5f986d7ea7ca3169",
+      "size_bytes": 1104
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/emit.log",
+      "sha256": "a5b27c0890dfa63480dfea90f0fc9f020aac3fafac4bd522939de28d16e14880",
+      "size_bytes": 6492
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/emit.ys",
+      "sha256": "36447dc25b09991b567d56bc030338d659e3a01a8340b2584088b72ddc468342",
+      "size_bytes": 132
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/mapped.json",
+      "sha256": "069bc38a175420d60085c57874fb74d28497363666ca782b455ec480ba487650",
+      "size_bytes": 28997347
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/mapped.v",
+      "sha256": "a8a922b98186a5592ffe133b0177fe57c69b66717440ec69d5224612c5c6c4fc",
+      "size_bytes": 6410815
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/result.json",
+      "sha256": "ca411d8c00e1cd85d9f4bcb1f459cc730f35e2c6957a93c235218b27881d441e",
+      "size_bytes": 53508
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/run_state.json",
+      "sha256": "4feadf2ce0530334e37e8368bfbc80b1e1fa11ffb603f72bd531544fd867212d",
+      "size_bytes": 350
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045310.742436Z-cap-eco-a2a7cf86/source_identity.json",
+      "sha256": "844f5e1360cff45dfa8bd34c63e0c5bdfee0269efd13203554629f42c0a62bb9",
+      "size_bytes": 3637
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/boundary.json",
+      "sha256": "d649925dc94d3e03e90b72d7c06a3356122f436d1b7d87b77cc6fa9efb1950f7",
+      "size_bytes": 16425321
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/boundary.v",
+      "sha256": "c53f7542d012b128bb3301c29b9ff1af4924d61082b3d007c943142c5438eebd",
+      "size_bytes": 6541773
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/coverage.rpt",
+      "sha256": "cfb46bd6bb44d4efe0661555fb5ba98b7fcc8ef348dedd0b8d2cc1006784e90a",
+      "size_bytes": 156661
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/hold.rpt",
+      "sha256": "8ec102fddd21883e575e49445f40d58543e9ab2a73adddf548b81cda2f4df803",
+      "size_bytes": 57902
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/minimum_electrical.rpt",
+      "sha256": "78dca32626374d0e22bf5b032009ed8e3ff8be7c0f6e04e9ad4dcfe3b0d1ac74",
+      "size_bytes": 126436
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/reference.sdc",
+      "sha256": "c00fe97dfa716517db4cf3d6150aa8d5cf7d3987ad77389ed747dbd2b4276aab",
+      "size_bytes": 824
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/register_hold.rpt",
+      "sha256": "8ec102fddd21883e575e49445f40d58543e9ab2a73adddf548b81cda2f4df803",
+      "size_bytes": 57902
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/register_setup.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/reset_net.rpt",
+      "sha256": "35407bd2e25b3a7a486580f86a0f12d99c22ca1c2ca1ec596b4272778d99afd8",
+      "size_bytes": 7422
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/result.json",
+      "sha256": "be4492bfa45995d976ee9fc02640c832a32bb5f2aa98446412ef9900fcd6d16a",
+      "size_bytes": 86372
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/run.tcl",
+      "sha256": "743440827eba1b3ab1c38e11114b23782d018fe3657f6d7f82216a3ea5efe3e5",
+      "size_bytes": 1118
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/setup.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/sta.log",
+      "sha256": "8e8aac32412155d5c8839efcf214089cb133665b4f84d89df686e029a00c0207",
+      "size_bytes": 428
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/unconstrained.rpt",
+      "sha256": "7041f8c74afe6ab3299e47cad61ac3ff407beee2f2fce3a30b2c29f026c68ebf",
+      "size_bytes": 86823
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/version.log",
+      "sha256": "8a4d165e93729e579c12f73ceb42127673c62db24e8be7d4c5dcbf6c0f08266e",
+      "size_bytes": 7
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/write.log",
+      "sha256": "107d49020c3947cbbfcb3b954de39e732b351b29e00ddb10efa62d885fa25f0c",
+      "size_bytes": 6350
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045325.003407Z-sram-partial-sta-1f542ca4/write.ys",
+      "sha256": "06eb681b4166911d76bfb1bc162c9642babe172a1ef138c911d99f815767e7c6",
+      "size_bytes": 99
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/alias_probe.command.json",
+      "sha256": "56fe9af687bb80c8c14b7ed8323c6a257ae6505ca352ef392fbaf83e394eacd5",
+      "size_bytes": 1192
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/alias_probe.log",
+      "sha256": "0216156c045476f33c7242aa31ef94610e4edf92a1d687d413e13cc802c770f5",
+      "size_bytes": 168
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/cells.command.json",
+      "sha256": "e147a3722e7bf40be390d42a1e251edb0a652ec5c5c4cbb55a2f10d1a88c68ae",
+      "size_bytes": 1117
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/cells.log",
+      "sha256": "fcedf02a7d2ee33dee4c120a48e9da33ab2656fcfaa18e036297cbe93fd8cf55",
+      "size_bytes": 16014
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/cells.ys",
+      "sha256": "f237346ab8a14e2f293150478e83355271bf7ea8c8e53f1361467ab855ccd7ec",
+      "size_bytes": 262
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/checker_probe.command.json",
+      "sha256": "0cd8a75b6ac76a055c017fe8fd121a265f6eafbe803b4e233d2e06bed0ae8c69",
+      "size_bytes": 1199
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/checker_probe.log",
+      "sha256": "e19fc4ffc6910e66b60aeeb3bcae2025753a7ec7e9611da1d1bbc36cee0456f9",
+      "size_bytes": 172
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/compile.command.json",
+      "sha256": "ab64279e3ca3a29099f3dde8207c24aa36da2fd06641c65da19a8974a13f987c",
+      "size_bytes": 2476
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/compile.log",
+      "sha256": "79d927d997be17a0a732be277d4fc70122d726d72661bf7f0ad77ae4a6fc30fb",
+      "size_bytes": 91229
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/logical_macros.sv",
+      "sha256": "10ecd59e3901821b959f8b8db9499105ad86c8e3ae1bfef433b15f679f71dbf5",
+      "size_bytes": 858
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/mapped_alias.vlt",
+      "sha256": "a961f9fd1bd23489ef44d2c34436f8519743001043931d0a34eff0b049bdab59",
+      "size_bytes": 82
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/mapped_top.v",
+      "sha256": "a151dc63106fafc0c838559837b0cc0c248c78053f9ca540ba23eed316d21b0e",
+      "size_bytes": 6410822
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/obj/simulation",
+      "sha256": "00b4142c4385ca5835dcea455884ca004c8eb04a5bfdda64cd4d2cafa56f3f18",
+      "size_bytes": 3812888
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/result.json",
+      "sha256": "98e382272814421110fd23cf53fdb8dba83cc5c5aede4befff25ca4aadcc569a",
+      "size_bytes": 111485
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/run.command.json",
+      "sha256": "25613fbcd0639590e88de850ff7acd076d72dfcc00e0bfd255eb8a7b75cb89b2",
+      "size_bytes": 1287
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/run.log",
+      "sha256": "30a9e7ffb3ea8351ba1688af82dfd19e41e9b7bf6182806aadfb7c255245bace",
+      "size_bytes": 363
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/standard_cells.v",
+      "sha256": "6413229ee6caeb08c4128d3f55385bd2656fe6010fa2a209e51c0bd752a22789",
+      "size_bytes": 29300
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/vectors/layer_00/bias.mem",
+      "sha256": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/vectors/layer_00/w.mem",
+      "sha256": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/vectors/layer_00/x.mem",
+      "sha256": "0702a89bbf187bd2e2e743c8ba0e2db26cec2fac5f35ecd9e851b06d3a371f4c",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045429.710464Z-sram-mapped-900bfc2c/vectors/layer_00/y.mem",
+      "sha256": "250c07331050786b487438294b06b5e2ce472467ecb93ff9f16b98aead84809d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045431.752486Z-sram-alias-40167e5e/obj-baseline/simulation",
+      "sha256": "5fb19021df763bf086a2eb4fb50396076b0b02de60e486dec76244c4824fae0d",
+      "size_bytes": 200992
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045431.752486Z-sram-alias-40167e5e/obj-configuration/simulation",
+      "sha256": "8ce4cb0a906e083c4e21fa24f9cf3fe7880bc008480c77f498948b53bcebe89c",
+      "size_bytes": 241296
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045431.752486Z-sram-alias-40167e5e/obj-metacomment/simulation",
+      "sha256": "8ce4cb0a906e083c4e21fa24f9cf3fe7880bc008480c77f498948b53bcebe89c",
+      "size_bytes": 241296
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045431.752486Z-sram-alias-40167e5e/result.json",
+      "sha256": "f4b8a7dd731cb49eeaf816ca0561cd08f5d5c3d6c35a72e08d1ded0ab5f12bb6",
+      "size_bytes": 25847
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045431.752486Z-sram-alias-40167e5e/source_identity.json",
+      "sha256": "676bcf93f986b4359981bbdd89f65f6e655a70659f6ee9ad4eeb144c1f658272",
+      "size_bytes": 2562
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045431.752486Z-sram-alias-40167e5e/split_alias.vlt",
+      "sha256": "6e40e719ad02bf283f2ab4a29d5097bb4c71cf825396406a5c6234a04d624cd2",
+      "size_bytes": 73
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045439.977052Z-mapped-checker-8d6ef846/checker.vvp",
+      "sha256": "20e7fd79c9c217ace56ac0ddfe36c2a08618644c23a26bd2434f60c32cc6794b",
+      "size_bytes": 36093
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045439.977052Z-mapped-checker-8d6ef846/result.json",
+      "sha256": "3293c63dbbec994ae1a3cb26eff328ed02e2b3346ba202addf63305be4cf3b9c",
+      "size_bytes": 46289
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045439.977052Z-mapped-checker-8d6ef846/source_identity.json",
+      "sha256": "72c8f5a54b86ae94664bf1c06c3527ca524bf1d644eec2e5a1e7afe19ee60da8",
+      "size_bytes": 1968
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/cells.ys",
+      "sha256": "f237346ab8a14e2f293150478e83355271bf7ea8c8e53f1361467ab855ccd7ec",
+      "size_bytes": 262
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/logical_macros.sv",
+      "sha256": "10ecd59e3901821b959f8b8db9499105ad86c8e3ae1bfef433b15f679f71dbf5",
+      "size_bytes": 858
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/mapped_alias.vlt",
+      "sha256": "a961f9fd1bd23489ef44d2c34436f8519743001043931d0a34eff0b049bdab59",
+      "size_bytes": 82
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/mapped_top.v",
+      "sha256": "a151dc63106fafc0c838559837b0cc0c248c78053f9ca540ba23eed316d21b0e",
+      "size_bytes": 6410822
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/result.json",
+      "sha256": "47d42d924ab3185cb984e90b1a7dbd48c85b3cc71ef7f8861c933e4010b84874",
+      "size_bytes": 184855
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/run.command.json",
+      "sha256": "851d26a1fb32a1dcbad2915bceefe97f89ce66960bbd8c284036aeef760f1d67",
+      "size_bytes": 1293
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/run.log",
+      "sha256": "a67f4970685c012391549aea260b48d7685063f95223d7f5a22d3b57730ad455",
+      "size_bytes": 792
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_00/bias.mem",
+      "sha256": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_00/w.mem",
+      "sha256": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_00/x.mem",
+      "sha256": "0702a89bbf187bd2e2e743c8ba0e2db26cec2fac5f35ecd9e851b06d3a371f4c",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_00/y.mem",
+      "sha256": "250c07331050786b487438294b06b5e2ce472467ecb93ff9f16b98aead84809d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_01/bias.mem",
+      "sha256": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_01/w.mem",
+      "sha256": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_01/x.mem",
+      "sha256": "4cce5e659259ea9ab415667892e01c67f3f2ac7dfb91c386c384fd76916fc190",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_01/y.mem",
+      "sha256": "61936a7769fcd524827e3ddffd9726469adb46ae891fcd4e2ce93bb8340c3137",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_02/bias.mem",
+      "sha256": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_02/w.mem",
+      "sha256": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_02/x.mem",
+      "sha256": "c31674af3dea07221299ecdd11a7aefbbdda97d4b3431b256c8faaf874dd3eac",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_02/y.mem",
+      "sha256": "66ccbef7e8eaa13758e8d0c033a8e96d99580ecc195c3c156cea49f0276d367d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_03/bias.mem",
+      "sha256": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_03/w.mem",
+      "sha256": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_03/x.mem",
+      "sha256": "83a521199a0e13c4f086378e96265e086007cfe1a846b5fb2f3cf35bd45ba5f1",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_03/y.mem",
+      "sha256": "30545cceb114ea90ac36653c78b1c1b93c8eb91d7a80703aa11c073d4c699e19",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_04/bias.mem",
+      "sha256": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_04/w.mem",
+      "sha256": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_04/x.mem",
+      "sha256": "0526f1e20e4cff43384616ff292e43ecc79e1ce756d8ea77b874dcc72a874e94",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_04/y.mem",
+      "sha256": "2d6c5dc55bfc5f2da7aa96f4401c1c0ec829bd8bf15dd31a3051e1c6c246eced",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_05/bias.mem",
+      "sha256": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_05/w.mem",
+      "sha256": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_05/x.mem",
+      "sha256": "825e5fab178ae26dac7c23ae39f58bcfdc8377b28339db90159d7cf36eb058f2",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_05/y.mem",
+      "sha256": "9be58803e8675695da34e7eeaa4af072690c8fde1682ae6f57831aaf0809e23d",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_06/bias.mem",
+      "sha256": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_06/w.mem",
+      "sha256": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_06/x.mem",
+      "sha256": "a0536bec8d2ebf090a4a5d76e1cf579a88285f4ce38b47b8128330f300bc5dd9",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_06/y.mem",
+      "sha256": "8c6aa36977cdbbedfe576030ec14c07ba691cd3af6d4a836509754f504026648",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_07/bias.mem",
+      "sha256": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_07/w.mem",
+      "sha256": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_07/x.mem",
+      "sha256": "b0fdeb87825b0678754b184876905736f388c10c701257896877605761557b46",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_07/y.mem",
+      "sha256": "f4ddd175175295683b8c0e947f43ee1509774f8f73e131672e1592131c1098ea",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_08/bias.mem",
+      "sha256": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_08/w.mem",
+      "sha256": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_08/x.mem",
+      "sha256": "0a41dc6cfc80c9b19e014dabd828cacab928fc9281a171aa7a99e58d29c85e58",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_08/y.mem",
+      "sha256": "5fe3de3044b846312fc89571c603e86891550717097ab1316f2be02339327443",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_09/bias.mem",
+      "sha256": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_09/w.mem",
+      "sha256": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_09/x.mem",
+      "sha256": "3afea40da3af8f42421c1b749f16fa8b60b07a3e4f36126e422686cf2448235a",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_09/y.mem",
+      "sha256": "8d88bf823cbebcc87493261288089cfd2ddaaf0d6a5894e6c677774a012e0432",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_10/bias.mem",
+      "sha256": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_10/w.mem",
+      "sha256": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_10/x.mem",
+      "sha256": "99e9de4f694194d8f5d3fc179f6ee79fed806c531069a7bd4a2ed1de916d407f",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_10/y.mem",
+      "sha256": "c64270f0b0d707f6864745f35eb7a5b2c4455415cfc482d95ed06504ca3d3a51",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_11/bias.mem",
+      "sha256": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53",
+      "size_bytes": 2816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_11/w.mem",
+      "sha256": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6",
+      "size_bytes": 81920
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_11/x.mem",
+      "sha256": "32877bc85bb493d0d317b3241c30c8377cf23965246b0103a1473f08f9ae8289",
+      "size_bytes": 31680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045551.554590Z-mapped-replay-a9782263/vectors/layer_11/y.mem",
+      "sha256": "ef737c1334067ef42e40ba05bbaad8d955261e3d8fb97147bef7d33815590642",
+      "size_bytes": 329472
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/boundary.v",
+      "sha256": "c53f7542d012b128bb3301c29b9ff1af4924d61082b3d007c943142c5438eebd",
+      "size_bytes": 6541773
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/capacitance.tsv",
+      "sha256": "d2e7e8bf6ac32cb99f7599acfdda3946910117b45a72827d71b26e9016be7bc6",
+      "size_bytes": 5965549
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/clock_checks.rpt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/limits.tsv",
+      "sha256": "4b97f48b36372c90bab7ee70f6f51186f8c31d1b0eab20605ef0840ca9f6e452",
+      "size_bytes": 675
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/reference.sdc",
+      "sha256": "c00fe97dfa716517db4cf3d6150aa8d5cf7d3987ad77389ed747dbd2b4276aab",
+      "size_bytes": 824
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/result.json",
+      "sha256": "6c32fd2ebbc256db0f3dbf123911c5493bd639bfd693b44df064d273220717b6",
+      "size_bytes": 17858
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/run.tcl",
+      "sha256": "c83d1bd46e8db1fb65c4218e1299360736a67bb40ead40b09aebfa2818e26719",
+      "size_bytes": 4613
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/run_state.json",
+      "sha256": "b37d4b3360d00f73b58478bcf18f0c040e9a537c2310054e0c197eb18c4a619b",
+      "size_bytes": 362
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/source_identity.json",
+      "sha256": "ed54de387d725d4d63a5e5cf5d00308c33d5283e2e6d30561a0b23159e7c4931",
+      "size_bytes": 3100
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/sta.command.json",
+      "sha256": "02982b87ec86d03b664db522dfefb4afd5cbc8389dc1b8a952667bdcfc98a633",
+      "size_bytes": 1149
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/sta.log",
+      "sha256": "21c22670a799d5415fbcb7b00a09c7095251ab12a3aeff08fcb702322bc11905",
+      "size_bytes": 407
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045757.228970Z-reference-electrical-a1c4d8a4/transition.rpt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045809.863491Z-sram-cap-final-tooling/host.command.json",
+      "sha256": "68e07aaa8d0714b0447fa32e3849c231eed3047fa735cf04a468cc68da38161f",
+      "size_bytes": 971
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045809.863491Z-sram-cap-final-tooling/host.log",
+      "sha256": "db1e484160f0ba26c564ff5cdc96479a120c708aef8d35ab8b556597b0efc6fc",
+      "size_bytes": 28255
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045809.863491Z-sram-cap-final-tooling/result.json",
+      "sha256": "9e3f25f020f230aafdc414d1c4d82b00f34fdd603772755e722cc32c5a25c914",
+      "size_bytes": 5545
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045809.863491Z-sram-cap-final-tooling/verify.command.json",
+      "sha256": "9f53fb057ba846912519e8d74b170bff9110fc82b4f12f62835502872060227b",
+      "size_bytes": 974
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261018T045809.863491Z-sram-cap-final-tooling/verify.log",
+      "sha256": "aeb327b3f87070ad24db7a570aabcdbc285e2d1e7b964ca8e032249379ae3dd3",
+      "size_bytes": 329
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/configs/sram-backends.json",
+      "sha256": "28ff605715f11e7f7c38c4e647f6af4af5f89451e2ac699ccf96858be512e2c1",
+      "size_bytes": 1380
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/docs/runs/kwt-source-manifest.json",
+      "sha256": "5a9ce0fd81790d8e3165e6e7f0da5dd6bb806d0a022de3b378848ccefaa61219",
+      "size_bytes": 49539
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/docs/runs/sram-reference-eco-20261018.json",
+      "sha256": "65a1b863608cf516503f1772fc7cb653721b5fe950f1f05be075fb9c10ef6c62",
+      "size_bytes": 117178
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/model/fixed16_acc48.py",
+      "sha256": "2ea34805d54a45c2537ce2d71e653a41989befef05769785a9b2629fdfeeef30",
+      "size_bytes": 14649
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/model/export_kwt.py",
+      "sha256": "20972cf5e7a0b7d93065ce7ca0c5bd7541106b1e93b45c4e0e1df6af66077def",
+      "size_bytes": 22154
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_memory_blackbox.py",
+      "sha256": "2a884d93720d8c889f2ee116418856b31a43de4acfdd7bbf950a9a74832eb618",
+      "size_bytes": 16602
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_memory_partial_sta.py",
+      "sha256": "1a4957d3914b0bb10187982ce73cce27c0c12c1732748e4999193c8e41c42156",
+      "size_bytes": 14541
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_nangate_reference.py",
+      "sha256": "807b09a8ead2b4d927906637e7c3e1473f58387643d751d0b33c7acb18378ad4",
+      "size_bytes": 19262
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_sram_cap_candidate.py",
+      "sha256": "9ab1a86fe06c5942c5eaa12daa7dbd182604b8c726af88ea840be4731757b995",
+      "size_bytes": 7312
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_sram_counter_hold_candidate.py",
+      "sha256": "96c545768df02093641276498bac4a3aff92262e54b172d8185bfd71905a2058",
+      "size_bytes": 6680
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_sram_minimum_candidate.py",
+      "sha256": "94c01d64dd8542b9c959a41cd44ccf03790b7da42ce983b0a6fefd17f5ffc75a",
+      "size_bytes": 10182
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_sram_reset_probe.py",
+      "sha256": "ae0d3dca91d35f4b58cc9afb481ba90bbf24404f05f5f5fc13cd7010fdc373a2",
+      "size_bytes": 7509
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_sram_resize_candidate.py",
+      "sha256": "8aaff9d97a4660f6d3339bacfa09298d9ab9eba8fa70ca5ad7e679c8f2e794fb",
+      "size_bytes": 6119
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_structural.py",
+      "sha256": "13e6e42c88d1b650574b1f60c3645e50100f0b89c314a3ffa55da005a216b51f",
+      "size_bytes": 11090
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/check_sram_eco_identity.py",
+      "sha256": "39063ad0dbb894ea0523f4cb51da26c0721ad442b38f659f5d93318434c7609f",
+      "size_bytes": 6156
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/diagnose_mapped_alias.py",
+      "sha256": "fbf28725a9880a8ef0a10f875ef84ae8990aab1bc40c5357c012732d8e357027",
+      "size_bytes": 6453
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/reference_electrical/qualified_cap_model.py",
+      "sha256": "b5324db5d47a2f3cbed392a3ec2d1a308e8f3919a1334848b73875e1b52ff3b0",
+      "size_bytes": 16688
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/reference_electrical/run.py",
+      "sha256": "c9b26b585816305c79a1c9ae9f137e18e4a101cb56b7e631ad0c72f2806745b6",
+      "size_bytes": 4494
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_checks.py",
+      "sha256": "718d715f26595059155205347acf75a287008dfab1df10abecd3ad81fafe1c07",
+      "size_bytes": 16489
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_exported_linear.py",
+      "sha256": "233fd75a8db0c1c473dc8d511395e5e5b0ef1e3e7f7e84d318b634ada1d39f47",
+      "size_bytes": 21290
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_linear.py",
+      "sha256": "307f7f9e2396066ed5da44c8c9fc12d793f6feef2acfd78e3fd1ea271df362c5",
+      "size_bytes": 12994
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_mapped_checker_tests.py",
+      "sha256": "aa0b0527b9149e2039a0d893123b9f76eff05a5c82a191c03db246d3f678b408",
+      "size_bytes": 6563
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_sram_mapped.py",
+      "sha256": "e4a403bd65a600b83ade422feebe0dbd00a557f409e6385408548c557a5c5e55",
+      "size_bytes": 28174
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_sram_mapped_replay.py",
+      "sha256": "a694e122cfe538584f8ba1b56b24522eb4cc232332a18df9fa1eb696ab1cace1",
+      "size_bytes": 8741
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_sram_soc.py",
+      "sha256": "0210f3490d7747a8082dc677a42abdc8469658b3d8f6dad432870e1ecddff81d",
+      "size_bytes": 10835
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/sram_evidence.py",
+      "sha256": "e021c4742128202a879138906a921bf09093fe938fc268a70bf973ead63f20f9",
+      "size_bytes": 9162
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/sram_sources.py",
+      "sha256": "8084f3caedeabaab3cb01f8796cdccf61d125d9258cd669cc9738cf21ec0aee2",
+      "size_bytes": 3463
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/fixtures/kwt_mapped_alias.sv",
+      "sha256": "6c884ec20f5bab86b786e9defc135783924c88c43e06d6a5250f07c2f1067d26",
+      "size_bytes": 3039
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/fixtures/tb_kwt_icb_pair_checker.sv",
+      "sha256": "08033f1a6d75deafdb1b3fe8c7bc495806de9a8f00bdfed411db2d3e3a0215f6",
+      "size_bytes": 3434
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/kwt_icb_pair_checker.sv",
+      "sha256": "43f2bf5a3f72e5d5900df05e40b35e88f2d72ea201031fad319b40bc8a9f70b9",
+      "size_bytes": 1217
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/tb_kwt_icb_mapped_pair.sv",
+      "sha256": "8950561ee5b994913a3ed4e4b884573e08aa190095fd4ad4fec845ddfd6214dc",
+      "size_bytes": 11173
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/soc/kwt_icb_slave_sram.sv",
+      "sha256": "b6ff53c5d50a09f393fbb48fce2e11574dfa3984656ed7e61821bd93bdd6cb85",
+      "size_bytes": 16792
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/kwt_linear_engine_rowpair_sram.sv",
+      "sha256": "97f1e12f4dd5fc5b9be7b469909b37ff4fa6edba21bcf0d7f617f8ae85b672c1",
+      "size_bytes": 17323
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/memory/kwt_sram_1rw.sv",
+      "sha256": "e1bd2dead2963a27593b9d52c73fc1119756644b5b84a3e9c4c121d4b2073945",
+      "size_bytes": 6804
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/memory/kwt_sram_1rw_blackbox.sv",
+      "sha256": "689a43c4dfbfc5b306a76939fbf3b40b786f152746b02556298ab33af2106a8d",
+      "size_bytes": 570
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/memory/kwt_sram_bank.sv",
+      "sha256": "2db000bb2efafd09da8c2d12b31743d0be0a58c601236afdbe6d4b5ca06ba83d",
+      "size_bytes": 3650
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_sram_cap_eco.py",
+      "sha256": "c98027505fcc66b3f240de28521f76727c302f9015429bb6f05c27cd1c163209",
+      "size_bytes": 1969
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/LICENSE.txt",
+      "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+      "size_bytes": 11356
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/README.md",
+      "sha256": "4264a9e006e0614c6308b66396b33553eca0e6737dd46f94139121c52375ffab",
+      "size_bytes": 5182
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/eval.sh",
+      "sha256": "e1ae5aaba19f7c6752096f56c15187a1ba9dcff23efef6474e9bc2c8ea05a12d",
+      "size_bytes": 923
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/__init__.py",
+      "sha256": "0fb351533132330b339eb877152ac31befd141e3a6d26744dea92fb450173d79",
+      "size_bytes": 624
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/data/__init__.py",
+      "sha256": "3dea8678389c6f9fdb918b26b39932ea12933d40cecab3b4db10da413ca1ae05",
+      "size_bytes": 629
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/data/input_data.py",
+      "sha256": "dc4980ba9165811b92fc0767ee7e7c70ee96a93e34f5d7209c8e194dcbe7c912",
+      "size_bytes": 35247
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/data/input_data_test.py",
+      "sha256": "3ff25e6926657bb64e5731db3c3e0ec1748efee765464033c342576cdd6f9cee",
+      "size_bytes": 8733
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/__init__.py",
+      "sha256": "9b51ecd206b8fa2a00e7f60df1f9d9ceefb2c9c2364a34fccd0d4e116bf16581",
+      "size_bytes": 631
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/average_pooling2d.py",
+      "sha256": "73d4ce9ac31ce17d03b68fd3e7ea9b5325ea48d355858afff51f4ebbf13fb78e",
+      "size_bytes": 3419
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/average_pooling2d_test.py",
+      "sha256": "49ab3914de8eb3f53db590cca241b8b61f509d589a98b1c399c20c1fc71ef391",
+      "size_bytes": 2881
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/compat.py",
+      "sha256": "70ee8c264129109918a58e8f2e24648b015af2c95016dbfc3ff10aa348ecd479",
+      "size_bytes": 781
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/contrib_conv2d.py",
+      "sha256": "052f92476fe8c66b5cad3820ebc13faa88914b310290335963b1a9ede98063cb",
+      "size_bytes": 3216
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/contrib_conv2d_test.py",
+      "sha256": "5de94a691f84f9c7ef3a21c15e1a17675fe4be2532666824a8b6a772f76c3d48",
+      "size_bytes": 662
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/conv1d_transpose.py",
+      "sha256": "b0c31cab25f03f23147777b7fdef0d63ddf5e5925d888d31fb857bc3d6ffdd8f",
+      "size_bytes": 8269
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/conv1d_transpose_test.py",
+      "sha256": "2301a729873262460550df0526f55b1b3ef034ef5d0e6655b41855cc1cc1f92a",
+      "size_bytes": 4257
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/conv2d_test.py",
+      "sha256": "0b801ba5b95d1d931fd3e7a20d03a229eff43f1c7fa7894f743a5bfd2efca6ed",
+      "size_bytes": 7525
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/data_frame.py",
+      "sha256": "bef8c6e9625a2917a44895fcd2540a81d5d423e23683662e95532af54421c48f",
+      "size_bytes": 9208
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/data_frame_test.py",
+      "sha256": "dc422710f2f5cc25ff4987b6f5704d073fda012f92a02497733d647dfe522b98",
+      "size_bytes": 7139
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/dct.py",
+      "sha256": "88beea7c572eba605ecf4daa7b1c7916da057de424ce7ddfac8d9b7ad4368c34",
+      "size_bytes": 2279
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/dct_test.py",
+      "sha256": "fb6705f0064b6e7b11bd44851c7f8510644544380899dcd10f58132018f473ce",
+      "size_bytes": 1750
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/delay.py",
+      "sha256": "fc432a80af854bd63167dede64c1d5fc5fa8f28627495a413e7871a20660cf06",
+      "size_bytes": 5087
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/delay_test.py",
+      "sha256": "a91263464ec0d54d38e05df0ba06ddf3e75a12995298e0cf8bdba98f72a666ad",
+      "size_bytes": 7847
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/dense_test.py",
+      "sha256": "365deec62eb6a7a2cf581af2edaa9ada28b96264ac955b5234f0cbbb3fac83f2",
+      "size_bytes": 2855
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/depthwise_conv1d.py",
+      "sha256": "6ab182dd1c5bd3ecaf5f3edafde8f79cc127091a25b98c8c5bd0c1acd6ca722f",
+      "size_bytes": 9669
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/depthwise_conv1d_test.py",
+      "sha256": "4ffab203aed9a0c55f3840df48f10c1c9ed5d0b521626f3f5222804c2a3273d2",
+      "size_bytes": 5221
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/flatten_test.py",
+      "sha256": "dd55999f39a4f0604edecbb6ea1bf1c040344cdf1632e132b69182bf7e59f8cd",
+      "size_bytes": 4462
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/gru.py",
+      "sha256": "4a6c3944b0e1e47c9dcfab7944a35b21390d903e35ce0d71f5f813c605d733a3",
+      "size_bytes": 7959
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/gru_test.py",
+      "sha256": "4b98d3f63382de7a0b075398adf6bfbaaeb9ebb37ba4b4aaba65bb7c5f4177be",
+      "size_bytes": 3907
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/lstm.py",
+      "sha256": "82c7995253dcb6cc9587f959bfe8de2ddae2ca86552fdf17b12169b862043662",
+      "size_bytes": 10610
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/lstm_test.py",
+      "sha256": "365ae89ee3d300a600c3f29e0df21a1cc7e0a590b83f15f34c4f0ee9897050f4",
+      "size_bytes": 5206
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/magnitude_rdft.py",
+      "sha256": "279ae684dc91835a14959e82470d91314c4dbf8cf26119321cec2a2d464a2f77",
+      "size_bytes": 4473
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/magnitude_rdft_mel.py",
+      "sha256": "b967f6c064296fd1ec889449d2f713cbb50628e0382410ed3ee916697a591302",
+      "size_bytes": 5281
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/magnitude_rdft_mel_test.py",
+      "sha256": "6f293bd80892ec23e2da64182662619054ae87fa3034129be30aadeaa034cecd",
+      "size_bytes": 3884
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/magnitude_rdft_test.py",
+      "sha256": "67e128f9b19bd203d7e624b7fb35358cdced1473f4cf7fdaefd5f6a715e43fe0",
+      "size_bytes": 1709
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/mel_spectrogram.py",
+      "sha256": "2afb63519d15a73c1ccb90a137fe4ca54c65ee99dda76486a0508d2397723eef",
+      "size_bytes": 3207
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/mel_spectrogram_test.py",
+      "sha256": "14122e3e6c0e26348e2de3ea30e0b503247d12f0f09da468f8ecbd92adb7f65b",
+      "size_bytes": 2735
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/mel_table.py",
+      "sha256": "c8c81b0ab88e8d8de25f2e9df507675ea79e923e5c511f9e4dcf42869219cfe3",
+      "size_bytes": 5565
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/mel_table_test.py",
+      "sha256": "9356ee6dec8cb65bd0d82b054f0a68bcc359e942af8affd02748c78bef973cbb",
+      "size_bytes": 1899
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/modes.py",
+      "sha256": "d9c5f0d210b773b10294bc55826bf1db4048e83267fa59d965deef6de9dd2fc8",
+      "size_bytes": 3066
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/non_scaling_dropout.py",
+      "sha256": "ba8876eaa74848cefb557f0768f60078fde303ab88c85d1ebe61363713380b56",
+      "size_bytes": 1882
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/non_scaling_dropout_test.py",
+      "sha256": "0eba74da023a35e329b670412ef09a9fe0aabfca903b4fd09d508a595d4c75c1",
+      "size_bytes": 4778
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/normalizer.py",
+      "sha256": "6ea321a32fafc6e3f5ff7426b922b4de72410c4cc58e1df2371ea40e1827c26c",
+      "size_bytes": 1677
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/preemphasis.py",
+      "sha256": "c0f11404aef79833e99f01e70ca75db6a45a5490522968d0b08c35a4073731c1",
+      "size_bytes": 2319
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/preemphasis_test.py",
+      "sha256": "8d480e80f6eccc2b06e32896709ea6a55fdd39e916715c7617d15a0ba23d283e",
+      "size_bytes": 1816
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/random_shift.py",
+      "sha256": "b4bf55af883f765a2125f373852201fa2bcd26f4b26ba733ad5600482c8a9f1a",
+      "size_bytes": 4236
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/random_shift_test.py",
+      "sha256": "34507a53f6b127e63e83927c221e63f98eb8072c7df6d7d73076282d8512f43e",
+      "size_bytes": 1850
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/random_stretch_squeeze.py",
+      "sha256": "d8629600f9d73f4e4ad8e82b8802039de780dab674ceeb99da35a3fcefd8cf15",
+      "size_bytes": 4470
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/random_stretch_squeeze_test.py",
+      "sha256": "98440fc618a39f04befe03de58c29d3ca56693228698e2d7134d6705d7c91a21",
+      "size_bytes": 1962
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/spectrogram_augment.py",
+      "sha256": "6ba17cf2d328b0acf940f524bfb870a0a12ece07637c3118c1f1d21271051a7c",
+      "size_bytes": 4084
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/spectrogram_augment_test.py",
+      "sha256": "7ec3d6ca406e2384dd19c14da4e54aa66db7b704f1cb0a9b98f2c23ab6f5080a",
+      "size_bytes": 2651
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/spectrogram_cutout.py",
+      "sha256": "4742a44a724d470569295e75824838a7010008f91f60bd776c6c3e708d1f1158",
+      "size_bytes": 5749
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/spectrogram_cutout_test.py",
+      "sha256": "8c3b658233fd5856de8c202293cbd0d489faf76746665be82c2e2421033d6f71",
+      "size_bytes": 2293
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/speech_features.py",
+      "sha256": "1cda96e047a2d82ddf779234d6f4c6abeb1bfba308fa923ed05892330fd40061",
+      "size_bytes": 13229
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/speech_features_test.py",
+      "sha256": "f9a9b175c9424329da56db124ba62a6375144c75ab23a111ce20208611489b40",
+      "size_bytes": 7963
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/stream.py",
+      "sha256": "850192ef1fc34a7514252ac569f9f9e64f8ec13df86918f179c1d96a753a0c38",
+      "size_bytes": 14686
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/stream_test.py",
+      "sha256": "bf07aa073a3038e7c8b9a55c4f47f845a0ea483faebc7114d75202f7edc09a2a",
+      "size_bytes": 16210
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/svdf.py",
+      "sha256": "896f638b7a4c7c7f0172ac4f5630628e390315e1370141310f3da0e3b2c3cc1d",
+      "size_bytes": 5691
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/svdf_test.py",
+      "sha256": "771c22449a87a663d01d80a753770f358a5cb3d250763e65329ddc8c9d1c3d7f",
+      "size_bytes": 5216
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/temporal_padding.py",
+      "sha256": "8eea326391eb6322886d1288585dc58e0537d06649bec2ea212a70875e503130",
+      "size_bytes": 3471
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/temporal_padding_test.py",
+      "sha256": "50755d84108c3b292a9a6ea671cd8b4e18aad124bf0c9d56ca3ed4cb902eb307",
+      "size_bytes": 3099
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/test_utils.py",
+      "sha256": "da2546a14398c661f7ca9196c95797ed7da7ce1791b1baac38edc7c044d1d997",
+      "size_bytes": 5153
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/layers/windowing.py",
+      "sha256": "c6a36b8348d8e56aa43e4261ccd9f24d9fdae586d2b5044a2613bad756442969",
+      "size_bytes": 2961
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/__init__.py",
+      "sha256": "4bc3626a37a3a9f9bf877138df3bf5ef5c691323f0d5d530b5a1b19e12e45eff",
+      "size_bytes": 631
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/att_mh_rnn.py",
+      "sha256": "5ab6ba54f9ead893615c373dba597d505ebb79da09155dc57d3d432c0814ca96",
+      "size_bytes": 6556
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/att_rnn.py",
+      "sha256": "ab0ee66bf3b24ad47d61c9bd96cb684b7da81eb47a152987c0984b39ad52ab9d",
+      "size_bytes": 5474
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/cnn.py",
+      "sha256": "fb70dbd69d3a355426d79976b1d9f4bc567454eeb8793a0b992b92c28b1b8411",
+      "size_bytes": 4168
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/crnn.py",
+      "sha256": "322d573cc40317ad3020516c906181768599b0fda3e1ee4556133e41eb615dde",
+      "size_bytes": 5210
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/dnn.py",
+      "sha256": "ed7fbd9971c02c4236baeebd5a2ffd01e861af3dfd0bdaccb47c81ca24909ae1",
+      "size_bytes": 3801
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/dnn_raw.py",
+      "sha256": "fbd8643c091967c9e6d5bcb4076775db43d4e0d0d5a3cc37ed692845f10d2c9c",
+      "size_bytes": 3756
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/ds_cnn.py",
+      "sha256": "b84296a08a52078b82ed3b6a0f0816d29450bf54338b93bcf110e07afff5579f",
+      "size_bytes": 7319
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/ds_tc_resnet.py",
+      "sha256": "d14ee2e6a9cb25a4ab4f9147adc8c986afa7886b8098cb39dca262816cb616a4",
+      "size_bytes": 9947
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/gru.py",
+      "sha256": "0044cad1437cec5cd5093c6318cdda5c4fe17c9d482343bb9e7d20c20ee10c11",
+      "size_bytes": 3532
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/inception.py",
+      "sha256": "420e2b1dc05372ad0155d48f91002979d7f34769e515fb91aa55bacbfdda9f44",
+      "size_bytes": 5109
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/inception_resnet.py",
+      "sha256": "8781e90723c34b87b1ec55fc4e101679f867d40a1a8b9ad1e19e43c1f39cae1c",
+      "size_bytes": 7226
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/kws_transformer.py",
+      "sha256": "3dc1ef411d7a42bd19a6aa6d6b6e592d5bc42a90a2b98b7199d913a52438c20b",
+      "size_bytes": 6539
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/lstm.py",
+      "sha256": "da3802f666a2d630eaf728f81625b4d3776654669b4048ed896168641ef7f1db",
+      "size_bytes": 3931
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/mobilenet.py",
+      "sha256": "0cf9a1ecd75b3619b1fb86ed9d296262b36b858f8dccc8dad59fea3e604e67cf",
+      "size_bytes": 4730
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/mobilenet_v2.py",
+      "sha256": "9949921b4cfada94ebb89af6440ddfa09d650d8989d8b55ae3b440b02a7b0ee6",
+      "size_bytes": 5462
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/model_flags.py",
+      "sha256": "63ed685610487a82411bd13b677dcc15eea4f06cc06411600f816e9e8c1d4de1",
+      "size_bytes": 2787
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/model_params.py",
+      "sha256": "73d60697a383333d6fcb89ff1c5809cc427c624f3a8f3650714b5d6549855be7",
+      "size_bytes": 11462
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/models.py",
+      "sha256": "1d40905512b83ffefcf0d402604f01e551c611a7a35ad3370ecc70571193fe20",
+      "size_bytes": 2213
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/models_test.py",
+      "sha256": "70b0fbe7ccce6ba5a69e7267f1ac7d463f9e5f87c70503670c594c89dcc849fd",
+      "size_bytes": 5040
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/svdf.py",
+      "sha256": "713c445e56627ced413f7c2b24c3ddfc2524ae2c1460f5fc7a4126bb1dec3e86",
+      "size_bytes": 4265
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/svdf_resnet.py",
+      "sha256": "9d6a6468ec1fc6a7e8344f2c819651bfa1b3a1830e551f79befa8eae6c9a70a3",
+      "size_bytes": 9209
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/tc_resnet.py",
+      "sha256": "21c3059a1717a2d45fa76557d5fef8a3fadedd98b8f6d429ddc636ffb0fd6100",
+      "size_bytes": 6444
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/transformer_utils.py",
+      "sha256": "aee79450556166161adf1f3d70191017ebdc3e54983e86f9c7e45944c476bd02",
+      "size_bytes": 7589
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/utils.py",
+      "sha256": "b39e1dd17f2f00fede8b753cf2bd33cf127e3cdc773f31aa5e2b83f210ec11bf",
+      "size_bytes": 16962
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/utils_test.py",
+      "sha256": "b263cad53c9865304b94573369bedc9852b36c1a3090a1be8d0571062431321a",
+      "size_bytes": 8376
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/models/xception.py",
+      "sha256": "5ced7ee395ec01f8cbec8d62c18ec6f97e80d6660cecae3ad0340bd8ee966094",
+      "size_bytes": 8274
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/train/__init__.py",
+      "sha256": "74d24d47a6d86de5e21ca5e7052a87f58187217b35bc12b880eeb581fb7a7536",
+      "size_bytes": 630
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/train/base_parser.py",
+      "sha256": "fdfe242c1f32844ba6dc2cb7fb8f7dacb184c18bdf0657e9231cbea5b3d6008d",
+      "size_bytes": 13572
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/train/base_parser_test.py",
+      "sha256": "a141d03f68eab52d158cf6e765fb61c332ed554710b043aa5d6fb455c8379867",
+      "size_bytes": 4468
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/train/model_train_eval.py",
+      "sha256": "a35cb9bf584feb819ba53bb8149b4be6a7f760a842a938d373691b3af725a976",
+      "size_bytes": 13378
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/train/test.py",
+      "sha256": "dda24ccd519a53bd3e8318961678636b31e54657d5accd88f1520c3580ade760",
+      "size_bytes": 28044
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/train/train.py",
+      "sha256": "7ec00aa8f05e62ccc74d43fb4cd6cbb2639996812134c18a8fad7152ab5e9445",
+      "size_bytes": 13053
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/kws_streaming/train/train_test.py",
+      "sha256": "fdf695988f8cec551e3539fb52ddec33d1332954fa95a59a80e45311cad545d0",
+      "size_bytes": 5152
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/models_data_v2_12_labels/kwt1/best_weights.data-00000-of-00001",
+      "sha256": "ae993f6ed995938c1ab584b0857b35ca18f31f88001c7e17c7d7c3868bd33ad3",
+      "size_bytes": 7401050
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/models_data_v2_12_labels/kwt1/best_weights.index",
+      "sha256": "5a60a0fa78a1855572084a42669768e2998d37e7d93c833962960fdb0db70fbc",
+      "size_bytes": 34662
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/models_data_v2_12_labels/kwt1/checkpoint",
+      "sha256": "ef7594d4b66dd6923f2aff6b07748c6972843474929cd8ea28cb0911747f9d97",
+      "size_bytes": 81
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/models_data_v2_12_labels/kwt1/flags.json",
+      "sha256": "fcd480d309f96d2029a3ba764634f9e46dd73b667c0ebb84b66af02680494c58",
+      "size_bytes": 2097
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/models_data_v2_12_labels/kwt1/flags.txt",
+      "sha256": "c2e1e7d478aba268d648fff51a4841ec28816d7b330ba6104b51cd331adb56c5",
+      "size_bytes": 1867
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/models_data_v2_12_labels/kwt1/labels.txt",
+      "sha256": "d19753ae642d3a5ab8eb8042f5df4d1d8c40afc6bb8ae4b7b16a808bc8ce6efd",
+      "size_bytes": 60
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/models_data_v2_12_labels/kwt1/model_summary.txt",
+      "sha256": "f19bdcdd8263dba7e71883b28d001e30f5829e668edabc8864fd0d19100e7ad5",
+      "size_bytes": 878
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/vendor/kwt1-237e4097/requirements.txt",
+      "sha256": "35d2f2b48b318945f7ba350240cde8f06efa285975932be70e46b9170e343c83",
+      "size_bytes": 89
+    }
+  ],
+  "formal_all_input_equivalence": "NOT_PROVEN",
+  "four_state_full_netlist": "NOT_RUN",
+  "complete_sram_load_electrical": "BLOCKED",
+  "official_150mhz": "BLOCKED",
+  "official_area": "BLOCKED",
+  "official_power": "BLOCKED",
+  "risks": [
+    "hold margin 1.379ps at typical reference only",
+    "182 drivers lack real macro input loads; 1152 macro output drivers unknown",
+    "raw artifacts, libraries, tools/platform excluded from portable source archive"
+  ],
+  "previous_portable_scope": "614 source files/202 tests applies to the earlier archive only; later source additions are not silently included"
+}

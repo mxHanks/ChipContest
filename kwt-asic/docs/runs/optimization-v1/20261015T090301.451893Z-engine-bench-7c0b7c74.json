@@ -1,0 +1,872 @@
+{
+  "schema": "kwt-engine-benchmark-v1",
+  "status": "PASS",
+  "run_id": "20261015T090301.451893Z-engine-bench-7c0b7c74",
+  "started_utc": "2026-10-15T09:03:01.451+00:00",
+  "output": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74",
+  "configuration": {
+    "format": "fixed16_acc48_v1",
+    "shape": {
+      "x": [
+        99,
+        64
+      ],
+      "w": [
+        64,
+        256
+      ],
+      "y": [
+        99,
+        256
+      ]
+    },
+    "engine": "opt",
+    "lanes": 8,
+    "pipe_mul": 0,
+    "stalls": "none",
+    "tasks": 12,
+    "seed": 20261015,
+    "compile_jobs": 2
+  },
+  "simulator": "verilator",
+  "logic_semantics": "two-state",
+  "scope": "full-shape synthetic arithmetic and engine protocol only",
+  "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "official_precision": "NOT_RUN",
+  "validation_dataset_precision": "NOT_RUN",
+  "soc": "NOT_RUN",
+  "synthesis": "NOT_RUN",
+  "timing": "NOT_RUN",
+  "area": "NOT_RUN",
+  "power": "NOT_RUN",
+  "inputs": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_engine_benchmark.py",
+      "sha256": "7c4fb6ef54355b8f01fe897bce5833aa2c159fee912cb4ed508d8353fc869f0d",
+      "size_bytes": 19062,
+      "project_relative_path": "scripts/verify/run_engine_benchmark.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_linear.py",
+      "sha256": "307f7f9e2396066ed5da44c8c9fc12d793f6feef2acfd78e3fd1ea271df362c5",
+      "size_bytes": 12994,
+      "project_relative_path": "scripts/verify/run_linear.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_exported_linear.py",
+      "sha256": "233fd75a8db0c1c473dc8d511395e5e5b0ef1e3e7f7e84d318b634ada1d39f47",
+      "size_bytes": 21290,
+      "project_relative_path": "scripts/verify/run_exported_linear.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_checks.py",
+      "sha256": "718d715f26595059155205347acf75a287008dfab1df10abecd3ad81fafe1c07",
+      "size_bytes": 16489,
+      "project_relative_path": "scripts/verify/run_checks.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/model/fixed16_acc48.py",
+      "sha256": "2ea34805d54a45c2537ce2d71e653a41989befef05769785a9b2629fdfeeef30",
+      "size_bytes": 14649,
+      "project_relative_path": "model/fixed16_acc48.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/kwt_linear_engine_opt.sv",
+      "sha256": "38bf34e259fbeec9196b808b09fa0d4f11a936d5995c1c29a666c3c87bf009b8",
+      "size_bytes": 11955,
+      "project_relative_path": "src/rtl/kwt_linear_engine_opt.sv"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/tb_engine_benchmark.sv",
+      "sha256": "b42929d2b7df7830c3bb8869385fdf3f1b085a139a50938b4e7a0c887bdab18e",
+      "size_bytes": 14664,
+      "project_relative_path": "sim/tb_engine_benchmark.sv"
+    }
+  ],
+  "provenance": [],
+  "replayed_vectors": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_00_x.mem",
+      "sha256": "e8b4770bd557c1b44708d684ffcce88166454328ef1fec208ad81cba929d4746",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_00_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_00_w.mem",
+      "sha256": "437c97484c5d95a8bf37a819046790772e971264098ade663cb0cfd6d4ca1dde",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_00_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_00_b.mem",
+      "sha256": "424be3c12c33a70ac34f0be630d59496f1161275462f6aa010064941f98a5b75",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_00_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_00_y.mem",
+      "sha256": "b0a5edd0ffe8a63ec72fc3d19c5c075ecee751b0a199f7b2bc195869a828e387",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_00_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_01_x.mem",
+      "sha256": "87b396a8eab707b9b11e32c81745ef7cc2cfdc9faa919a6e93f6da26d1049063",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_01_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_01_w.mem",
+      "sha256": "732a7259f828d566cb5ef65390c415b26c82549e1ad5822acc0ad3d4fb7f753b",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_01_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_01_b.mem",
+      "sha256": "ca399099996943d50f200db52e9d9c5338e1d2b909bdde1abcf270b8cb146dd2",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_01_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_01_y.mem",
+      "sha256": "fe71085b935eb4345974f7927f845508554f03a304957615decb9e8f44e2b1c7",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_01_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_02_x.mem",
+      "sha256": "9d53b5d44c32ee31ced8ff86f708825ecacf97dc2e3337b2ab046b4764654cb7",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_02_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_02_w.mem",
+      "sha256": "060b065a99ef9b96e6620efda94fa7fecd616ff9adbf7cff96f7528e380bde4f",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_02_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_02_b.mem",
+      "sha256": "7b071c1dc697e79639a825d0a6a373e11a73a8bdd841a2e391bd918e9dc66594",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_02_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_02_y.mem",
+      "sha256": "01d079c87bfb9b4f7a61ef8ffb0c6e214f45867c6cf7d114f23856ee7ce1c69e",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_02_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_03_x.mem",
+      "sha256": "30cd6bcc99f085490fdd4a93144180004dd4a3fb0b9c5f30a879463febdb96ad",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_03_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_03_w.mem",
+      "sha256": "2b7c769c52f643cb643877e15e5eb2c185aa10f2b35688b49e92e40913a0695a",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_03_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_03_b.mem",
+      "sha256": "bd0539551a24a708ce43d6af99c3f1a54b248e71dbaa2f3cb532095aecddd7cf",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_03_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_03_y.mem",
+      "sha256": "41911d4e40e70cab24d8c32e6f0fbc9469791c03ed0de2d75e1486a8b31c413b",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_03_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_04_x.mem",
+      "sha256": "8492753116f4824175cf971a9d6530d66b0e44642eda2923fa184de767da8d94",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_04_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_04_w.mem",
+      "sha256": "67dd616cd69f40c329bbe6abc6d2a832af356dd6d8d5365e377796bbc6f5575f",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_04_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_04_b.mem",
+      "sha256": "10c6721221c08abd1efaec64b59fa0dbd91fc88f33506e195da4d428adc7c433",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_04_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_04_y.mem",
+      "sha256": "f7540001055e2722e0d14a57180576998c4255209c0e6914dbe3b507d104ee6a",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_04_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_05_x.mem",
+      "sha256": "eac2f510a2964273b6eaf66eba1018754ec9e83562f5d1921d6ce05c19079f56",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_05_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_05_w.mem",
+      "sha256": "1c48b8ebf392cdc5fc16f1d0b81225a3eb70d4feda6cc99f32d6d9b56583c84f",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_05_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_05_b.mem",
+      "sha256": "4948c45cd6df7826a4670d5da73e055096b1d6fc146c5e73cbb3ca77b715d410",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_05_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_05_y.mem",
+      "sha256": "df1608f61798989c469a02a81aee6997c62bda1b904a0a6afa3ecad3cc37317f",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_05_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_06_x.mem",
+      "sha256": "039e1c2fff4401babd9f92f044a00d07ce7222a5086f11db00b3a9ebfab5ef83",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_06_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_06_w.mem",
+      "sha256": "55af19cb60f523c4310b0ce0460ce79e63f174a64d8c97b88367e47cb7acd91b",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_06_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_06_b.mem",
+      "sha256": "7f642d4d35aaeb0f5c11ff937d3a9b7fd988bdcd4b7e7ee4cd9da9fe6cabcb54",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_06_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_06_y.mem",
+      "sha256": "95fe523eadb4bbf89f6a67fac2a979a05b6c7a4d51251d22bc22d7412742ebb2",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_06_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_07_x.mem",
+      "sha256": "87b396a8eab707b9b11e32c81745ef7cc2cfdc9faa919a6e93f6da26d1049063",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_07_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_07_w.mem",
+      "sha256": "60cca93a8fd409e397b8082156e199052dcc3cd017a40809c970486bf6b33fac",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_07_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_07_b.mem",
+      "sha256": "9cb724929557bf85e96fd1678ce12c5f271e9a78a5e9e4112ab9821ddc425135",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_07_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_07_y.mem",
+      "sha256": "766f7696faed0fc286fb4dbf70d50d9777e993fd974a0ef865d8a9a0031c00ed",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_07_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_08_x.mem",
+      "sha256": "48f901a74baf50dcaf9533be3378c98b8111d7b7813054da754937e659e3c93e",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_08_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_08_w.mem",
+      "sha256": "060b065a99ef9b96e6620efda94fa7fecd616ff9adbf7cff96f7528e380bde4f",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_08_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_08_b.mem",
+      "sha256": "bebf2e9db07543fa282c3532ee4f0a9169cc57db7eaf1365823a06365796ad5f",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_08_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_08_y.mem",
+      "sha256": "8a69ac052c190d943608e3f8af51e2a5de02fa7dd2b2bc1d26e0dbb3caaf456a",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_08_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_09_x.mem",
+      "sha256": "30cd6bcc99f085490fdd4a93144180004dd4a3fb0b9c5f30a879463febdb96ad",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_09_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_09_w.mem",
+      "sha256": "5e4e65f3f55ea97bc3a86a76a6387e177bca580bf2b697eea8e30a9e8e2087f4",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_09_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_09_b.mem",
+      "sha256": "516bcddfd9f7c3017c84a2f83dcf579ce6796300a4494ec8c078dfee9336dcb0",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_09_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_09_y.mem",
+      "sha256": "378187c470e970fba92a87dfce18205a6a50e489c394857e119d092ead8c5bbf",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_09_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_10_x.mem",
+      "sha256": "62aa6a227ba5af1b6fff57b4998cb197f24a61470de1c797e14b514f45d0b1d1",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_10_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_10_w.mem",
+      "sha256": "6aa8a22cc354e2a479f3c71ee7e7f3e78ad452c4a08c29f7b9e2709682af05f2",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_10_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_10_b.mem",
+      "sha256": "5b023ef75477409e5a1ff50f64e31f0ba16438ceb63fcbdac65465e1225a4767",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_10_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_10_y.mem",
+      "sha256": "5d7641564effa3d46601f092e31e174743529f36e1abdb7c3388a7f270908b24",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_10_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_11_x.mem",
+      "sha256": "eac2f510a2964273b6eaf66eba1018754ec9e83562f5d1921d6ce05c19079f56",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_11_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_11_w.mem",
+      "sha256": "c52db9e9e61bfaf6b870f30d7bda2843e55177e1a82d1ca81b0a6704bba2dc5a",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_11_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_11_b.mem",
+      "sha256": "19ed7597d83b7ea2020ec06e0406c32f6745a387a680fce097da237f7d68d46f",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_11_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_11_y.mem",
+      "sha256": "821668a7bd14584199d3523ba0029b0201d4f8c92975e087fb58879744083d48",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/task_11_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    }
+  ],
+  "tools": {
+    "verilator": {
+      "status": "PASS",
+      "executable": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/verilator",
+        "sha256": "475e01d19abaa8e4012edbcbbce50118228c56517d95e93aa827fbbd3fed583c",
+        "size_bytes": 205
+      },
+      "version": "Verilator 5.020 2024-01-01 rev (Debian 5.020-1)",
+      "command": {
+        "argv": [
+          "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/verilator",
+          "--version"
+        ],
+        "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+        "started_utc": "2026-10-15T09:03:03.730+00:00",
+        "timeout_seconds": 15,
+        "timed_out": false,
+        "exit_code": 0,
+        "finished_utc": "2026-10-15T09:03:03.797+00:00",
+        "elapsed_seconds": 0.066,
+        "log": {
+          "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/version-verilator.log",
+          "sha256": "26daf9ad1ba36ee1c20cab9a869d0a1fbb8117230c80c78ec2d8cf597f64c4a5",
+          "size_bytes": 48
+        }
+      }
+    },
+    "make": {
+      "status": "PASS",
+      "executable": {
+        "path": "/usr/bin/make",
+        "sha256": "d78b8f1d099fbcfb6f2f49ab87223b9b68fb3956642f92d6ec6de812e8afa965",
+        "size_bytes": 259808
+      },
+      "version": "GNU Make 4.3\nBuilt for x86_64-pc-linux-gnu\nCopyright (C) 1988-2020 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.",
+      "command": {
+        "argv": [
+          "/usr/bin/make",
+          "--version"
+        ],
+        "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+        "started_utc": "2026-10-15T09:03:03.797+00:00",
+        "timeout_seconds": 15,
+        "timed_out": false,
+        "exit_code": 0,
+        "finished_utc": "2026-10-15T09:03:03.800+00:00",
+        "elapsed_seconds": 0.003,
+        "log": {
+          "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/version-make.log",
+          "sha256": "8ee498ee2fc27e8dcdf99191b454077df95e3840d841ec94321748b6d7f36819",
+          "size_bytes": 297
+        }
+      }
+    },
+    "g++": {
+      "status": "PASS",
+      "executable": {
+        "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+        "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+        "size_bytes": 1027128
+      },
+      "version": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+      "command": {
+        "argv": [
+          "/usr/bin/g++",
+          "--version"
+        ],
+        "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+        "started_utc": "2026-10-15T09:03:03.801+00:00",
+        "timeout_seconds": 15,
+        "timed_out": false,
+        "exit_code": 0,
+        "finished_utc": "2026-10-15T09:03:03.803+00:00",
+        "elapsed_seconds": 0.003,
+        "log": {
+          "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/version-g++.log",
+          "sha256": "59d1cbef41d4ae78d5063d525b7aa13d18dc0493ea00537efc19b2ee398cb5a8",
+          "size_bytes": 246
+        }
+      }
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/verilator",
+        "--binary",
+        "--timing",
+        "--assert",
+        "-Wno-fatal",
+        "--top-module",
+        "tb_engine_benchmark",
+        "--Mdir",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/obj",
+        "-o",
+        "simulation",
+        "-j",
+        "2",
+        "--threads",
+        "1",
+        "-GLANES=8",
+        "-GPIPE_MUL=0",
+        "-DBENCH_OPT",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/kwt_linear_engine_opt.sv",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/tb_engine_benchmark.sv"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74",
+      "started_utc": "2026-10-15T09:03:03.804+00:00",
+      "timeout_seconds": 180,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T09:03:06.476+00:00",
+      "elapsed_seconds": 2.672,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/compile.log",
+        "sha256": "da4ea53879c3d716265f5c154e4535c91883bafabf69638581ee9ab4e412745e",
+        "size_bytes": 3789
+      }
+    },
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/obj/simulation",
+        "+VECTORS=/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors",
+        "+TASKS=12",
+        "+SEED=20261015",
+        "+RANDOM_STALLS=0"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74",
+      "started_utc": "2026-10-15T09:03:06.477+00:00",
+      "timeout_seconds": 240,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T09:03:07.996+00:00",
+      "elapsed_seconds": 1.519,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/run.log",
+        "sha256": "74ed2b842f93061f204dc80b7cee3f735c04ebd1cc760ea413426da5a963cf0a",
+        "size_bytes": 2419
+      }
+    }
+  ],
+  "vectors": {
+    "status": "PASS",
+    "kind": "synthetic integer matrices",
+    "manifest": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/manifest.json",
+      "sha256": "b1f831ba58955bbf5ea19c31bc1387b99c4568807df329f66dc0cdaaa281b180",
+      "size_bytes": 24592,
+      "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/vectors/manifest.json"
+    },
+    "categories": [
+      "extremes",
+      "zero_x_bias",
+      "zero_w_bias",
+      "row_column_index",
+      "random",
+      "cancellation",
+      "extremes",
+      "zero_x_bias",
+      "zero_w_bias",
+      "row_column_index",
+      "random",
+      "cancellation"
+    ]
+  },
+  "rtl": {
+    "status": "PASS",
+    "coverage": {
+      "per_task": [
+        {
+          "task": 0,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 1,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 2,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 3,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 4,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 5,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 6,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 7,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 8,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 9,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 10,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        },
+        {
+          "task": 11,
+          "outputs": 25344,
+          "core_cycles": 231264,
+          "load_words": 22976,
+          "load_cycles": 22981,
+          "output_stalls": 0,
+          "x_reads": 202752,
+          "w_reads": 1622016,
+          "b_reads": 25344,
+          "window_cycles": 254247
+        }
+      ],
+      "suite": {
+        "tasks": 12,
+        "outputs": 304128,
+        "reset_interrupts": 3,
+        "illegal_load_cases": 3,
+        "input_bubbles": 0,
+        "output_stall_cycles": 0,
+        "stable_output_checks": 0,
+        "busy_load_rejections": 2775156,
+        "testbench_window_cycles": 3051048
+      },
+      "expected": {
+        "core_cycles_without_stalls": 231264,
+        "x_reads": 202752,
+        "w_reads": 1622016,
+        "b_reads": 25344
+      },
+      "timing_scope": "RTL load/start/output testbench only; no E203, bus, host, or official writeback timing",
+      "memory_scope": "observed RTL read enables in 16-bit X/W and 40-bit bias words; not SRAM energy"
+    }
+  },
+  "config_file": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/config.json",
+    "sha256": "f5b114166a5c6a88ddb6aa55b0e5124c17ecd08f95571fe9cf37db7fdadfe8dd",
+    "size_bytes": 291,
+    "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/config.json"
+  },
+  "workload_sha256": "b9fb1378cb6638bfcde3ffaa6d42ded5d4d757ca48c6d38710cc74dc5578a02e",
+  "binary": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/obj/simulation",
+    "sha256": "e2d8a6d1fb52e323f114073d07706fea954ae63e2eb15f2a2d0abea62c4d69b8",
+    "size_bytes": 282160,
+    "project_relative_path": "artifacts/runs/20261015T090301.451893Z-engine-bench-7c0b7c74/obj/simulation"
+  },
+  "finished_utc": "2026-10-15T09:03:08.005+00:00",
+  "elapsed_seconds": 6.554
+}
