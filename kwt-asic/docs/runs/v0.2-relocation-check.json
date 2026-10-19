@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "scope": "fresh-directory source package, offline tools bootstrap, offline KWT vendor verification, full synthetic and 12-layer real-weight silence RTL replay, unit tests and harness integrity",
+  "created_utc": "2026-10-15T03:35:54.111894+00:00",
+  "candidate_package": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261015T033508Z-97010a-migration-v0.2-rc1/migration-v0.2-rc1.tar.gz",
+  "candidate_package_sha256": "65700abf455866494dedded8aff1a8b9289a317e8fa6048b0b9db41823c4a0db",
+  "workspace": "/tmp/kwt-v02-relocation-l0wm5vmj/migration-v0.2-rc1",
+  "elapsed_seconds": 13.999,
+  "checks": [
+    {
+      "argv": [
+        "bash",
+        "scripts/setup/bootstrap.sh"
+      ],
+      "exit_code": 0,
+      "original_log": "/tmp/kwt-v02-relocation-l0wm5vmj/0.log",
+      "log": "docs/runs/v0.2-relocation-0.log",
+      "log_sha256": "57e221adb9678066b403bfab32501f833226d34c1ae9852b02aa2f95602eaeea"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/model/fetch_kwt.py"
+      ],
+      "exit_code": 0,
+      "original_log": "/tmp/kwt-v02-relocation-l0wm5vmj/1.log",
+      "log": "docs/runs/v0.2-relocation-1.log",
+      "log_sha256": "a95e4772fc6532821264ddf977e8db6b2b8b6c6e786ae7baf0d92c52618b81ba"
+    },
+    {
+      "argv": [
+        "make",
+        "linear"
+      ],
+      "exit_code": 0,
+      "original_log": "/tmp/kwt-v02-relocation-l0wm5vmj/2.log",
+      "log": "docs/runs/v0.2-relocation-2.log",
+      "log_sha256": "c3609e8736d294f9feeeb98820732fceb3267fda8b7186dc8c3da27c3a7e785b"
+    },
+    {
+      "argv": [
+        "make",
+        "linear-real"
+      ],
+      "exit_code": 0,
+      "original_log": "/tmp/kwt-v02-relocation-l0wm5vmj/3.log",
+      "log": "docs/runs/v0.2-relocation-3.log",
+      "log_sha256": "f39d44bae781ea001ed3312d06ad0dd2bb1bd1ba4716c9e6e84eb3be152d5e95"
+    },
+    {
+      "argv": [
+        "make",
+        "test"
+      ],
+      "exit_code": 0,
+      "original_log": "/tmp/kwt-v02-relocation-l0wm5vmj/4.log",
+      "log": "docs/runs/v0.2-relocation-4.log",
+      "log_sha256": "7d364a6dd3f54f1e763c054c3712b4c9941fe0aea7dca0b48b1de0cefa7db297"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/harness.py",
+        "validate"
+      ],
+      "exit_code": 0,
+      "original_log": "/tmp/kwt-v02-relocation-l0wm5vmj/5.log",
+      "log": "docs/runs/v0.2-relocation-5.log",
+      "log_sha256": "b0b3b671b3205d66d790ea2133efe491aabf5de95124fad9768381083bac4423"
+    }
+  ],
+  "runtime_source_hashes": {
+    "scripts/harness.py": "e079370b1da982fa770acc3c3c88d132e72ed835dbfcf4723aaec453f85629be",
+    "scripts/env/doctor.py": "7246c82c4a537c410c5db634b3453e55aaa0aef600594ae0c595355e529c3da4",
+    "scripts/model/export_kwt.py": "20972cf5e7a0b7d93065ce7ca0c5bd7541106b1e93b45c4e0e1df6af66077def",
+    "scripts/model/fetch_kwt.py": "c1afcd92d7868c8d9847def9e15f6b224855937ef93cd9691e4fd6dbf0b72f04",
+    "scripts/verify/run_checks.py": "718d715f26595059155205347acf75a287008dfab1df10abecd3ad81fafe1c07",
+    "scripts/verify/run_exported_linear.py": "233fd75a8db0c1c473dc8d511395e5e5b0ef1e3e7f7e84d318b634ada1d39f47",
+    "scripts/verify/run_linear.py": "307f7f9e2396066ed5da44c8c9fc12d793f6feef2acfd78e3fd1ea271df362c5"
+  },
+  "note": "Final archive may add relocation evidence and status documentation only; runtime sources are frozen."
+}

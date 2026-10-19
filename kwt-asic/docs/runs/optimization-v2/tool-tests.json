@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "scope": "verification-tool checks only",
+  "commands": [
+    {
+      "argv": [
+        "make",
+        "test"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/optimization-v2-tools-20261015T101155Z/0.log",
+        "sha256": "0c5f17bed831c2640b3fb730016021b11c8171f86884dc7e78af71036d1b11c7"
+      },
+      "end_marker": "OK"
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/synth/test_structural_tools.py"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/optimization-v2-tools-20261015T101155Z/1.log",
+        "sha256": "9462043b2a265c4435386eb93fa9a969d97a0d076684563b797fc18a87231b24"
+      },
+      "end_marker": "OK"
+    }
+  ],
+  "ppa_original_validation": {
+    "path": "/tmp/kwt-ppa-gate-validation-tby_nqe4/validation.json",
+    "sha256": "423a7f4e8ae58fdb8e9d42c9d9824cf3f62811a111cd908b80477017b200e53b"
+  },
+  "ppa_preserved_directory": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/optimization-v2-tools-20261015T101155Z/ppa-gate",
+  "source_bindings": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_engine_benchmark.py",
+      "sha256": "34492f818d82f1336463b7365e2d0ddde8a40432544bade17b652c07fe331ecd"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_exported_linear_runner.py",
+      "sha256": "1d169ce69517baa0a0c55309bbebe272f14c8e23e35e8f9aeabd99a77cd9353c"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_harness.py",
+      "sha256": "f42fb73b3643d300b63bb1ea04cf4b19288c634afe7d1c39a03632d063f79d49"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_kwt_export.py",
+      "sha256": "0370a01415d1e4656a106c90e0fda773eb8748ab06b014f0c53bcaeecb5787b0"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_linear_runner.py",
+      "sha256": "eb222dddba84ec01e7af735937ba486ae7897f57842d50d1c9b707b63a721c70"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_numeric_model.py",
+      "sha256": "acac65a4d51f8990341d8f6f057a1929ee8a4aade88323614a9425142929dc30"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_ppa_budget.py",
+      "sha256": "f0000939be9a6745d4e5fd9e49fed6d75f033f6431ee4f8044930df3e831d26d"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_rowpair_benchmark.py",
+      "sha256": "eeda4791ad2b17b5c6c78c2e8f6236bb80238907d6cd2cdd42c4137e0005c57b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/tests/test_verification_runner.py",
+      "sha256": "2c86af27874c37f0993459bd1e5e13fff9914985396482743f614cb15b9cd28e"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/check_ppa_budget.py",
+      "sha256": "3a27f4f54d470b0f2c58754649f3168705ccace375068bb394a52750d27445de"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_rowpair_benchmark.py",
+      "sha256": "5e1825248b6de15c4454687ad3d91c81dde7e51c120efbd74ccc4b2b2945ac38"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_rowpair_structural.py",
+      "sha256": "af6426f3f9cff7c7a98ee7227c73622bebdfeabff3166a187bfb3c8150498b1b"
+    }
+  ]
+}

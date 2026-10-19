@@ -1,0 +1,1253 @@
+{
+  "schema": "kwt-rowpair-structure-v1",
+  "status": "PASS",
+  "configuration": {
+    "top": "kwt_linear_engine_rowpair",
+    "macs": 16,
+    "rows": 2,
+    "columns": 8,
+    "pipe_mul": 1,
+    "result_buffers": 2
+  },
+  "scope": "RAM-preserving RTLIL structure only, not mapped gate area, delay, power or equivalence",
+  "physical_area": "NOT_RUN",
+  "physical_timing": "NOT_RUN",
+  "physical_power": "NOT_RUN",
+  "sram_macro_mapping": "NOT_RUN",
+  "gate_equivalence": "NOT_RUN",
+  "soc": "NOT_RUN",
+  "inputs": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/kwt_linear_engine_rowpair.sv",
+      "sha256": "bd9306973651068e213e1e4abdbc721bf91e13b02adde3d74361db85b9633d87",
+      "bytes": 15799
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_rowpair_structural.py",
+      "sha256": "af6426f3f9cff7c7a98ee7227c73622bebdfeabff3166a187bfb3c8150498b1b",
+      "bytes": 4866
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_structural.py",
+      "sha256": "13e6e42c88d1b650574b1f60c3645e50100f0b89c314a3ffa55da005a216b51f",
+      "bytes": 11090
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/yosys",
+      "sha256": "21649f11bb384926f0de319884289d6540d69a6293735c3cce91d06a9b4781bc",
+      "bytes": 473
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/synth/usr/bin/yosys",
+      "sha256": "88c0a12bb814a1a8716b1ae10b482e35d3005ed558e1f5f626b3dc983ea3abd0",
+      "bytes": 8174408
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/synth/usr/bin/yosys-abc",
+      "sha256": "001a99fb8648794076dd238e42f3bd8c5112a4b8bd89660883325a7e0d006043",
+      "bytes": 14918408
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/yosys",
+        "-Q",
+        "-s",
+        "run.ys"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T101004.417222Z-rowpair-structure-d65ce7e8",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.465569,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T101004.417222Z-rowpair-structure-d65ce7e8/synthesis.log",
+        "sha256": "ba477280a3bcf228a8e497fdd6843a30082a7ad904579be89472961b9f8b9a61",
+        "bytes": 137513
+      }
+    }
+  ],
+  "script": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T101004.417222Z-rowpair-structure-d65ce7e8/run.ys",
+    "sha256": "71245e8038753713d8ed5f8367d58a21e53baceb07011a8e4a438c2c9c9977d4",
+    "bytes": 313
+  },
+  "structure": {
+    "cell_types": {
+      "$add": 44,
+      "$adff": 7,
+      "$adffe": 24,
+      "$and": 2,
+      "$dffe": 54,
+      "$eq": 49,
+      "$logic_and": 49,
+      "$logic_not": 12,
+      "$logic_or": 2,
+      "$lt": 4,
+      "$mem_v2": 20,
+      "$mul": 16,
+      "$mux": 161,
+      "$ne": 21,
+      "$neg": 2,
+      "$not": 7,
+      "$or": 2,
+      "$pmux": 9,
+      "$reduce_and": 13,
+      "$reduce_bool": 13,
+      "$reduce_or": 3,
+      "$shift": 3,
+      "$shiftx": 2,
+      "$sub": 1
+    },
+    "cells": 520,
+    "memories": [
+      {
+        "name": "g_lane[0].b_mem",
+        "width": 40,
+        "words": 32,
+        "bits": 1280,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[0].w_mem",
+        "width": 16,
+        "words": 2048,
+        "bits": 32768,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[1].b_mem",
+        "width": 40,
+        "words": 32,
+        "bits": 1280,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[1].w_mem",
+        "width": 16,
+        "words": 2048,
+        "bits": 32768,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[2].b_mem",
+        "width": 40,
+        "words": 32,
+        "bits": 1280,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[2].w_mem",
+        "width": 16,
+        "words": 2048,
+        "bits": 32768,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[3].b_mem",
+        "width": 40,
+        "words": 32,
+        "bits": 1280,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[3].w_mem",
+        "width": 16,
+        "words": 2048,
+        "bits": 32768,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[4].b_mem",
+        "width": 40,
+        "words": 32,
+        "bits": 1280,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[4].w_mem",
+        "width": 16,
+        "words": 2048,
+        "bits": 32768,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[5].b_mem",
+        "width": 40,
+        "words": 32,
+        "bits": 1280,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[5].w_mem",
+        "width": 16,
+        "words": 2048,
+        "bits": 32768,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[6].b_mem",
+        "width": 40,
+        "words": 32,
+        "bits": 1280,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[6].w_mem",
+        "width": 16,
+        "words": 2048,
+        "bits": 32768,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[7].b_mem",
+        "width": 40,
+        "words": 32,
+        "bits": 1280,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[7].w_mem",
+        "width": 16,
+        "words": 2048,
+        "bits": 32768,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_result_buffer[0].result_mem",
+        "width": 41,
+        "words": 512,
+        "bits": 20992,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_result_buffer[1].result_mem",
+        "width": 41,
+        "words": 512,
+        "bits": 20992,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_x_row[0].x_mem",
+        "width": 16,
+        "words": 3200,
+        "bits": 51200,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_x_row[1].x_mem",
+        "width": 16,
+        "words": 3136,
+        "bits": 50176,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      }
+    ],
+    "memory_bits": 415744,
+    "multipliers": [
+      {
+        "name": "$mul$input.sv:178$1327",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1328",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1329",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1330",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1331",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1332",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1333",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1334",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1335",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1336",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1337",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1338",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1339",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1340",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1341",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:178$1342",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      }
+    ],
+    "adders": [
+      {
+        "name": "$add$input.sv:0$1318",
+        "a_width": 32,
+        "b_width": 3,
+        "y_width": 32,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:124$766",
+        "a_width": 3,
+        "b_width": 3,
+        "y_width": 3,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:192$1021",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1033",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1071",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1083",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1121",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1133",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1171",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1183",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1221",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1233",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1271",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$1283",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$921",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$933",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$971",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:192$983",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1022",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1034",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1072",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1084",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1122",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1134",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1172",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1184",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1222",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1234",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1272",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$1284",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$922",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$934",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$972",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:195$984",
+        "a_width": 41,
+        "b_width": 41,
+        "y_width": 41,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:256$796",
+        "a_width": 32,
+        "b_width": 1,
+        "y_width": 32,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:259$797",
+        "a_width": 4,
+        "b_width": 1,
+        "y_width": 4,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:272$800",
+        "a_width": 13,
+        "b_width": 1,
+        "y_width": 13,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:273$801",
+        "a_width": 15,
+        "b_width": 1,
+        "y_width": 15,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:274$802",
+        "a_width": 9,
+        "b_width": 1,
+        "y_width": 9,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:281$808",
+        "a_width": 9,
+        "b_width": 1,
+        "y_width": 9,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:286$823",
+        "a_width": 6,
+        "b_width": 1,
+        "y_width": 6,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:308$841",
+        "a_width": 6,
+        "b_width": 1,
+        "y_width": 6,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:317$844",
+        "a_width": 5,
+        "b_width": 1,
+        "y_width": 5,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:324$846",
+        "a_width": 6,
+        "b_width": 1,
+        "y_width": 6,
+        "a_signed": false,
+        "b_signed": false
+      }
+    ],
+    "registers_excluding_memory_read_flops": [
+      {
+        "name": "$auto$ff.cc:266:slice$2576",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2579",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2580",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2587",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2592",
+        "type": "$adffe",
+        "width": 5
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2593",
+        "type": "$adffe",
+        "width": 4
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2600",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2601",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2602",
+        "type": "$dffe",
+        "width": 15
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2611",
+        "type": "$dffe",
+        "width": 15
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2618",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2619",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2620",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2621",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2622",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2623",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2624",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2625",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2626",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2627",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2628",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2630",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2634",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2635",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2636",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2637",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2638",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2639",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2640",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2641",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2642",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2644",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2646",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2647",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2648",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2649",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2654",
+        "type": "$adffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2657",
+        "type": "$adffe",
+        "width": 3
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2670",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2671",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2672",
+        "type": "$adffe",
+        "width": 13
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2681",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2684",
+        "type": "$adffe",
+        "width": 9
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2693",
+        "type": "$adffe",
+        "width": 15
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2702",
+        "type": "$adffe",
+        "width": 5
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2705",
+        "type": "$adffe",
+        "width": 6
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2714",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2723",
+        "type": "$adffe",
+        "width": 6
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2730",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2733",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2734",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2735",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2740",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2741",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2744",
+        "type": "$adffe",
+        "width": 9
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2751",
+        "type": "$adffe",
+        "width": 6
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2754",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2761",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2762",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2763",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2764",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2765",
+        "type": "$dffe",
+        "width": 15
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2766",
+        "type": "$dffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2767",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2776",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2784",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2785",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2786",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2787",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2788",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2789",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2790",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2791",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2792",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2793",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2795",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2797",
+        "type": "$dffe",
+        "width": 41
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$2798",
+        "type": "$dffe",
+        "width": 32
+      },
+      {
+        "name": "$procdff$2497",
+        "type": "$adff",
+        "width": 1
+      },
+      {
+        "name": "$procdff$2508",
+        "type": "$adff",
+        "width": 1
+      },
+      {
+        "name": "$procdff$2509",
+        "type": "$adff",
+        "width": 1
+      },
+      {
+        "name": "$procdff$2521",
+        "type": "$adff",
+        "width": 2
+      },
+      {
+        "name": "$procdff$2522",
+        "type": "$adff",
+        "width": 1
+      },
+      {
+        "name": "$procdff$2534",
+        "type": "$adff",
+        "width": 1
+      },
+      {
+        "name": "$procdff$2535",
+        "type": "$adff",
+        "width": 2
+      }
+    ],
+    "register_bits_excluding_memory_read_flops": 2086,
+    "mapping_warnings": [],
+    "scope": "RTLIL structure before cell/memory technology mapping; counts are not mm2, MHz or mW"
+  },
+  "outputs": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T101004.417222Z-rowpair-structure-d65ce7e8/netlist.json",
+      "sha256": "5c736450f84498da05e60f6f975fbc5bdb7c89f7dddbea062d979b4a2d4544dc",
+      "bytes": 1065678
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T101004.417222Z-rowpair-structure-d65ce7e8/stats.json",
+      "sha256": "a84adac867896b00b6cf7bbb5290eaddcd46dd6c500cd5d6aece61b544220669",
+      "bytes": 2043
+    }
+  ]
+}

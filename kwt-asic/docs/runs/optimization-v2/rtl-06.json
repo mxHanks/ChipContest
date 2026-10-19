@@ -1,0 +1,398 @@
+{
+  "schema": "kwt-rowpair-benchmark-v1",
+  "status": "PASS",
+  "run_id": "20261015T100645.963592Z-rowpair-bench-92ae4ed5",
+  "started_utc": "2026-10-15T10:06:45.963+00:00",
+  "output": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5",
+  "configuration": {
+    "format": "fixed16_acc48_v1",
+    "shape": {
+      "x": [
+        99,
+        64
+      ],
+      "w": [
+        64,
+        256
+      ],
+      "y": [
+        99,
+        256
+      ]
+    },
+    "engine": "rowpair",
+    "lanes": 8,
+    "pipe_mul": 1,
+    "stalls": "random",
+    "tasks": 2,
+    "seed": 20261015,
+    "compile_jobs": 2,
+    "macs": 16,
+    "rows_per_tile": 2,
+    "result_buffers": 1
+  },
+  "simulator": "verilator",
+  "logic_semantics": "two-state",
+  "scope": "full-shape synthetic arithmetic and engine protocol only",
+  "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "official_precision": "NOT_RUN",
+  "validation_dataset_precision": "NOT_RUN",
+  "soc": "NOT_RUN",
+  "synthesis": "NOT_RUN",
+  "timing": "NOT_RUN",
+  "area": "NOT_RUN",
+  "power": "NOT_RUN",
+  "inputs": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_rowpair_benchmark.py",
+      "sha256": "5e1825248b6de15c4454687ad3d91c81dde7e51c120efbd74ccc4b2b2945ac38",
+      "size_bytes": 21672,
+      "project_relative_path": "scripts/verify/run_rowpair_benchmark.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_linear.py",
+      "sha256": "307f7f9e2396066ed5da44c8c9fc12d793f6feef2acfd78e3fd1ea271df362c5",
+      "size_bytes": 12994,
+      "project_relative_path": "scripts/verify/run_linear.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_exported_linear.py",
+      "sha256": "233fd75a8db0c1c473dc8d511395e5e5b0ef1e3e7f7e84d318b634ada1d39f47",
+      "size_bytes": 21290,
+      "project_relative_path": "scripts/verify/run_exported_linear.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_checks.py",
+      "sha256": "718d715f26595059155205347acf75a287008dfab1df10abecd3ad81fafe1c07",
+      "size_bytes": 16489,
+      "project_relative_path": "scripts/verify/run_checks.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_engine_benchmark.py",
+      "sha256": "7c4fb6ef54355b8f01fe897bce5833aa2c159fee912cb4ed508d8353fc869f0d",
+      "size_bytes": 19062,
+      "project_relative_path": "scripts/verify/run_engine_benchmark.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/model/fixed16_acc48.py",
+      "sha256": "2ea34805d54a45c2537ce2d71e653a41989befef05769785a9b2629fdfeeef30",
+      "size_bytes": 14649,
+      "project_relative_path": "model/fixed16_acc48.py"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/kwt_linear_engine_rowpair.sv",
+      "sha256": "bd9306973651068e213e1e4abdbc721bf91e13b02adde3d74361db85b9633d87",
+      "size_bytes": 15799,
+      "project_relative_path": "src/rtl/kwt_linear_engine_rowpair.sv"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/tb_rowpair_benchmark.sv",
+      "sha256": "b61592d89be80453f10420dad48b7ea9f936f63bfc403388c5bf099f9d4d00d1",
+      "size_bytes": 16177,
+      "project_relative_path": "sim/tb_rowpair_benchmark.sv"
+    }
+  ],
+  "provenance": [],
+  "replayed_vectors": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_00_x.mem",
+      "sha256": "e8b4770bd557c1b44708d684ffcce88166454328ef1fec208ad81cba929d4746",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_00_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_00_w.mem",
+      "sha256": "437c97484c5d95a8bf37a819046790772e971264098ade663cb0cfd6d4ca1dde",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_00_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_00_b.mem",
+      "sha256": "424be3c12c33a70ac34f0be630d59496f1161275462f6aa010064941f98a5b75",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_00_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_00_y.mem",
+      "sha256": "b0a5edd0ffe8a63ec72fc3d19c5c075ecee751b0a199f7b2bc195869a828e387",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_00_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_01_x.mem",
+      "sha256": "87b396a8eab707b9b11e32c81745ef7cc2cfdc9faa919a6e93f6da26d1049063",
+      "size_bytes": 31680,
+      "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_01_x.mem",
+      "bits": 16,
+      "count": 6336,
+      "role": "x"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_01_w.mem",
+      "sha256": "732a7259f828d566cb5ef65390c415b26c82549e1ad5822acc0ad3d4fb7f753b",
+      "size_bytes": 81920,
+      "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_01_w.mem",
+      "bits": 16,
+      "count": 16384,
+      "role": "w"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_01_b.mem",
+      "sha256": "ca399099996943d50f200db52e9d9c5338e1d2b909bdde1abcf270b8cb146dd2",
+      "size_bytes": 2816,
+      "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_01_b.mem",
+      "bits": 40,
+      "count": 256,
+      "role": "b"
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_01_y.mem",
+      "sha256": "fe71085b935eb4345974f7927f845508554f03a304957615decb9e8f44e2b1c7",
+      "size_bytes": 329472,
+      "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/task_01_y.mem",
+      "bits": 48,
+      "count": 25344,
+      "role": "y"
+    }
+  ],
+  "tools": {
+    "verilator": {
+      "status": "PASS",
+      "executable": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/verilator",
+        "sha256": "475e01d19abaa8e4012edbcbbce50118228c56517d95e93aa827fbbd3fed583c",
+        "size_bytes": 205
+      },
+      "version": "Verilator 5.020 2024-01-01 rev (Debian 5.020-1)",
+      "command": {
+        "argv": [
+          "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/verilator",
+          "--version"
+        ],
+        "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+        "started_utc": "2026-10-15T10:06:46.336+00:00",
+        "timeout_seconds": 15,
+        "timed_out": false,
+        "exit_code": 0,
+        "finished_utc": "2026-10-15T10:06:46.402+00:00",
+        "elapsed_seconds": 0.066,
+        "log": {
+          "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/version-verilator.log",
+          "sha256": "26daf9ad1ba36ee1c20cab9a869d0a1fbb8117230c80c78ec2d8cf597f64c4a5",
+          "size_bytes": 48
+        }
+      }
+    },
+    "make": {
+      "status": "PASS",
+      "executable": {
+        "path": "/usr/bin/make",
+        "sha256": "d78b8f1d099fbcfb6f2f49ab87223b9b68fb3956642f92d6ec6de812e8afa965",
+        "size_bytes": 259808
+      },
+      "version": "GNU Make 4.3\nBuilt for x86_64-pc-linux-gnu\nCopyright (C) 1988-2020 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.",
+      "command": {
+        "argv": [
+          "/usr/bin/make",
+          "--version"
+        ],
+        "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+        "started_utc": "2026-10-15T10:06:46.402+00:00",
+        "timeout_seconds": 15,
+        "timed_out": false,
+        "exit_code": 0,
+        "finished_utc": "2026-10-15T10:06:46.406+00:00",
+        "elapsed_seconds": 0.004,
+        "log": {
+          "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/version-make.log",
+          "sha256": "8ee498ee2fc27e8dcdf99191b454077df95e3840d841ec94321748b6d7f36819",
+          "size_bytes": 297
+        }
+      }
+    },
+    "g++": {
+      "status": "PASS",
+      "executable": {
+        "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+        "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+        "size_bytes": 1027128
+      },
+      "version": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+      "command": {
+        "argv": [
+          "/usr/bin/g++",
+          "--version"
+        ],
+        "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration",
+        "started_utc": "2026-10-15T10:06:46.406+00:00",
+        "timeout_seconds": 15,
+        "timed_out": false,
+        "exit_code": 0,
+        "finished_utc": "2026-10-15T10:06:46.409+00:00",
+        "elapsed_seconds": 0.003,
+        "log": {
+          "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/version-g++.log",
+          "sha256": "59d1cbef41d4ae78d5063d525b7aa13d18dc0493ea00537efc19b2ee398cb5a8",
+          "size_bytes": 246
+        }
+      }
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/verilator",
+        "--binary",
+        "--timing",
+        "--assert",
+        "-Wno-fatal",
+        "--top-module",
+        "tb_rowpair_benchmark",
+        "--Mdir",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/obj",
+        "-o",
+        "simulation",
+        "-j",
+        "2",
+        "--threads",
+        "1",
+        "-GRESULT_BUFFERS=1",
+        "-GPIPE_MUL=1",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/kwt_linear_engine_rowpair.sv",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/sim/tb_rowpair_benchmark.sv"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5",
+      "started_utc": "2026-10-15T10:06:46.410+00:00",
+      "timeout_seconds": 180,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T10:06:49.183+00:00",
+      "elapsed_seconds": 2.773,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/compile.log",
+        "sha256": "954f1787f6d04ad84a78e8ea10ed9ea5d6957c8f45f191e9617658eaeb2e6872",
+        "size_bytes": 3807
+      }
+    },
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/obj/simulation",
+        "+VECTORS=/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors",
+        "+TASKS=2",
+        "+SEED=20261015",
+        "+RANDOM_STALLS=1"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5",
+      "started_utc": "2026-10-15T10:06:49.184+00:00",
+      "timeout_seconds": 240,
+      "timed_out": false,
+      "exit_code": 0,
+      "finished_utc": "2026-10-15T10:06:49.450+00:00",
+      "elapsed_seconds": 0.266,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/run.log",
+        "sha256": "0bafed228f7178e90b02fe065a3976a388bed8853663c715c6588429cbc8d163",
+        "size_bytes": 794
+      }
+    }
+  ],
+  "vectors": {
+    "status": "PASS",
+    "kind": "synthetic integer matrices",
+    "manifest": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/manifest.json",
+      "sha256": "17d925f011e2546572f8a7fd017ed64729ce99e2613cc707522ea4fd52a68812",
+      "size_bytes": 4366,
+      "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/vectors/manifest.json"
+    },
+    "categories": [
+      "extremes",
+      "zero_x_bias"
+    ]
+  },
+  "rtl": {
+    "status": "PASS",
+    "coverage": {
+      "per_task": [
+        {
+          "task": 0,
+          "outputs": 25344,
+          "core_cycles": 143039,
+          "load_words": 22976,
+          "load_cycles": 24450,
+          "output_stalls": 9554,
+          "x_reads": 202752,
+          "w_reads": 819200,
+          "b_reads": 12800,
+          "window_cycles": 167491,
+          "result_reads": 25344,
+          "result_writes": 25344,
+          "overlap_cycles": 0,
+          "buffer_wait_cycles": 34705
+        },
+        {
+          "task": 1,
+          "outputs": 25344,
+          "core_cycles": 143122,
+          "load_words": 22976,
+          "load_cycles": 24390,
+          "output_stalls": 9637,
+          "x_reads": 202752,
+          "w_reads": 819200,
+          "b_reads": 12800,
+          "window_cycles": 167514,
+          "result_reads": 25344,
+          "result_writes": 25344,
+          "overlap_cycles": 0,
+          "buffer_wait_cycles": 34779
+        }
+      ],
+      "suite": {
+        "tasks": 2,
+        "outputs": 50688,
+        "reset_interrupts": 3,
+        "illegal_load_cases": 3,
+        "input_bubbles": 7167,
+        "output_stall_cycles": 19191,
+        "stable_output_checks": 19191,
+        "busy_load_rejections": 286159,
+        "testbench_window_cycles": 335019
+      },
+      "expected": {
+        "core_cycles_without_stalls": 133485,
+        "x_reads": 202752,
+        "w_reads": 819200,
+        "b_reads": 12800
+      },
+      "timing_scope": "RTL load/start/output testbench only; no E203, bus, host, or official writeback timing",
+      "memory_scope": "observed RTL read enables in 16-bit X/W and 40-bit bias words; not SRAM energy"
+    }
+  },
+  "config_file": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/config.json",
+    "sha256": "43eac789a298958a207d69baa4f5fcb2043549e67564baaa8a2c21a02de232a9",
+    "size_bytes": 355,
+    "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/config.json"
+  },
+  "workload_sha256": "8c5679489afbc4fb43a587f559a85628e3b56f99f914dbfb57cb1fb173d4bb57",
+  "binary": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/obj/simulation",
+    "sha256": "7fb769abf502b06f030cf6fc3b3e9525323d743b32acec21b871399206295acd",
+    "size_bytes": 290528,
+    "project_relative_path": "artifacts/runs/20261015T100645.963592Z-rowpair-bench-92ae4ed5/obj/simulation"
+  },
+  "finished_utc": "2026-10-15T10:06:49.453+00:00",
+  "elapsed_seconds": 3.489
+}

@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "scope": "Fresh-directory extraction, offline tool bootstrap from pinned packages, all 5 default RTL groups, source/evidence validation and 12 unit tests",
+  "created_utc": "2026-10-14T14:58:07.492014+00:00",
+  "candidate_package": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261014T145729Z-15139e-migration-v0.1-rc1/migration-v0.1-rc1.tar.gz",
+  "candidate_package_sha256": "1e2ace829e3263dd5b69855c7283014d97c5786e45586b0341637e7a98b6929a",
+  "workspace": "/tmp/kwt-relocation-bw845ln7/migration-v0.1-rc1",
+  "elapsed_seconds": 13.904,
+  "checks": [
+    {
+      "argv": [
+        "bash",
+        "scripts/setup/bootstrap.sh"
+      ],
+      "exit_code": 0,
+      "log": "/tmp/kwt-relocation-bw845ln7/0.log",
+      "log_sha256": "57e221adb9678066b403bfab32501f833226d34c1ae9852b02aa2f95602eaeea"
+    },
+    {
+      "argv": [
+        "make",
+        "rtl"
+      ],
+      "exit_code": 0,
+      "log": "/tmp/kwt-relocation-bw845ln7/1.log",
+      "log_sha256": "c6b54a171d6a48885f03d3be3354a8017a39493a1696bf14d59ee230d568d638"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/harness.py",
+        "validate"
+      ],
+      "exit_code": 0,
+      "log": "/tmp/kwt-relocation-bw845ln7/2.log",
+      "log_sha256": "4799d3838bf335c069b89a940bf1e02fb561621704d9c461bf6c8fc2d5736430"
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "/tmp/kwt-relocation-bw845ln7/3.log",
+      "log_sha256": "dcf47484dd3232b9615b3f458fb1a199faba8b4abe0afca5a24e8d53d75240d1"
+    }
+  ],
+  "note": "Final release adds this relocation evidence and final status only; runtime source unchanged."
+}

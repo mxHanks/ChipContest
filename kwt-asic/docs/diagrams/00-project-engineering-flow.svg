@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+<title id="title">项目工程总流程：从需求到可复现作品</title>
+<desc id="desc">KWT-1 项目工程图。规划与当前实现状态分开标注；不能将优化候选当作验收通过。</desc>
+<rect x="0" y="0" width="1920" height="1080" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1.5"/>
+<rect x="56" y="47" width="8" height="62" rx="0" fill="#2463A6" stroke="none" stroke-width="1.5"/>
+<text x="88" y="68" fill="#2463A6" font-size="17" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">KWT-1  /  RISC-V E203  /  ENGINEERING ATLAS</text>
+<text x="88" y="111" fill="#142B43" font-size="37" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">项目工程总流程：从需求到可复现作品</text>
+<text x="88" y="146" fill="#526579" font-size="19" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">主流程图  |  三人并行开发 → 汇合验证 → 指定工艺分析 → 公平优化 → 最终冻结</text>
+<text x="1856" y="79" fill="#526579" font-size="21" text-anchor="end" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">01 / 05</text>
+<polyline points="56,1027 1864,1027" fill="none" stroke="#C8D4DE" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="1057" fill="#526579" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">2026-10-15  |  migration-v0.2 基线  |  规划与实现状态分开标注</text>
+<text x="1864" y="1057" fill="#526579" font-size="16" text-anchor="end" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">KWT ENGINEERING  /  01</text>
+<rect x="56" y="178" width="1808" height="93" rx="12" fill="#142B43" stroke="none" stroke-width="1.5"/>
+<text x="80" y="215" fill="#FFFFFF" font-size="26" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">需求确认与基线登记</text>
+<text x="80" y="248" fill="#D9E6F3" font-size="22" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">99×64 × 64×256 + bias；12 层独立任务；官方来源 / 版本 / 接口契约 / 数值候选</text>
+<text x="1838" y="215" fill="#D9E6F3" font-size="20" text-anchor="end" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">当前已验：8 路核心 + 静音回放</text>
+<polyline points="324,272 324,307" fill="none" stroke="#526579" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="324.00,307.00 328.60,297.00 319.40,297.00" fill="#526579"/>
+<polyline points="960,272 960,307" fill="none" stroke="#526579" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="960.00,307.00 964.60,297.00 955.40,297.00" fill="#526579"/>
+<polyline points="1596,272 1596,307" fill="none" stroke="#526579" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1596.00,307.00 1600.60,297.00 1591.40,297.00" fill="#526579"/>
+<rect x="56" y="316" width="536" height="141" rx="12" fill="#ECF7F4" stroke="#117E75" stroke-width="1.7"/>
+<rect x="57" y="330" width="5" height="113" rx="2" fill="#117E75" stroke="none" stroke-width="1.5"/>
+<text x="76" y="351" fill="#142B43" font-size="23" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">C · 模型、数值与真实数据</text>
+<text x="76" y="383" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">固定模型 / Speech Commands V2 划分</text>
+<text x="76" y="412" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">训练标定、验证评估；发布向量与 Golden</text>
+<text x="76" y="440" fill="#117E75" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">交付：数值契约、12 层误差、数据哈希</text>
+<rect x="692" y="316" width="536" height="141" rx="12" fill="#F4F0FA" stroke="#7451A8" stroke-width="1.7"/>
+<rect x="693" y="330" width="5" height="113" rx="2" fill="#7451A8" stroke="none" stroke-width="1.5"/>
+<text x="712" y="351" fill="#142B43" font-size="23" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">B · 线性计算核心与指定 SRAM</text>
+<text x="712" y="383" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">微架构、MAC、流水与地址调度</text>
+<text x="712" y="412" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">指定宏端口 / 延迟适配；RTL 单元验证</text>
+<text x="712" y="440" fill="#7451A8" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">交付：RTL、宏模型、握手与时序契约</text>
+<rect x="1328" y="316" width="536" height="141" rx="12" fill="#EDF4FC" stroke="#2463A6" stroke-width="1.7"/>
+<rect x="1329" y="330" width="5" height="113" rx="2" fill="#2463A6" stroke="none" stroke-width="1.5"/>
+<text x="1348" y="351" fill="#142B43" font-size="23" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">A · E203 平台与系统接口</text>
+<text x="1348" y="383" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">官方 SDK / 地址图 / System Bus 或 NICE</text>
+<text x="1348" y="412" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">C 驱动、数据搬运、启动与写回确认</text>
+<text x="1348" y="440" fill="#2463A6" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">交付：平台、适配层、驱动与任务入口</text>
+<polyline points="324,459 324,490" fill="none" stroke="#526579" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="321" y="487" width="6" height="6" rx="3" fill="#526579" stroke="none" stroke-width="1.5"/>
+<polyline points="960,459 960,490" fill="none" stroke="#526579" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="957" y="487" width="6" height="6" rx="3" fill="#526579" stroke="none" stroke-width="1.5"/>
+<polyline points="1596,459 1596,490" fill="none" stroke="#526579" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1593" y="487" width="6" height="6" rx="3" fill="#526579" stroke="none" stroke-width="1.5"/>
+<polyline points="324,490 1596,490" fill="none" stroke="#526579" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="324,490 324,523" fill="none" stroke="#526579" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="324.00,523.00 328.60,513.00 319.40,513.00" fill="#526579"/>
+<rect x="742" y="465" width="214.00000000000003" height="26" rx="3" fill="#FFFFFF" stroke="none" stroke-width="1.5"/>
+<text x="750" y="483" fill="#526579" font-size="18" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">交接带版本；接收方复现</text>
+<rect x="56" y="532" width="536" height="143" rx="12" fill="#FFFFFF" stroke="#117E75" stroke-width="1.7"/>
+<rect x="57" y="546" width="5" height="115" rx="2" fill="#117E75" stroke="none" stroke-width="1.5"/>
+<text x="76" y="567" fill="#142B43" font-size="23" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">01 · 功能与数值闭环</text>
+<text x="76" y="599" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">整数模型 ↔ RTL：全结果逐位一致</text>
+<text x="76" y="628" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">真实 12 层精度；边界 / 复位 / 连续任务</text>
+<text x="76" y="658" fill="#117E75" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">数值变更重新评估；Golden 只进检查器</text>
+<rect x="692" y="532" width="536" height="143" rx="12" fill="#FFFFFF" stroke="#2463A6" stroke-width="1.7"/>
+<rect x="693" y="546" width="5" height="115" rx="2" fill="#2463A6" stroke="none" stroke-width="1.5"/>
+<text x="712" y="567" fill="#142B43" font-size="23" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">02 · E203 完整任务闭环</text>
+<text x="712" y="599" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">装载 X/W/b → 硬件计算 → 全部 Y 写回</text>
+<text x="712" y="628" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">换参 / 回压 / 异常；采集周期与活动波形</text>
+<text x="712" y="658" fill="#2463A6" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">系统 DONE = 最后写事务已确认</text>
+<rect x="1328" y="532" width="536" height="143" rx="12" fill="#FFF5E4" stroke="#A96A12" stroke-width="1.7"/>
+<rect x="1329" y="546" width="5" height="115" rx="2" fill="#A96A12" stroke="none" stroke-width="1.5"/>
+<text x="1348" y="567" fill="#142B43" font-size="23" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">03 · 指定工艺与 PPA 分析</text>
+<text x="1348" y="599" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">同版 RTL / 宏 / 标准单元库 + SDC</text>
+<text x="1348" y="628" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">综合与前后核对 → STA → 功耗与面积</text>
+<text x="1348" y="658" fill="#A96A12" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">输出：网表、时序、面积、活动覆盖报告</text>
+<polyline points="594,604 683,604" fill="none" stroke="#2463A6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="683.00,604.00 673.00,599.40 673.00,608.60" fill="#2463A6"/>
+<polyline points="1230,604 1319,604" fill="none" stroke="#2463A6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1319.00,604.00 1309.00,599.40 1309.00,608.60" fill="#2463A6"/>
+<polyline points="1596,677 1596,712 324,712 324,744" fill="none" stroke="#A96A12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="324.00,744.00 328.60,734.00 319.40,734.00" fill="#A96A12"/>
+<rect x="687" y="687" width="298.39306640625" height="27" rx="3" fill="#FFFFFF" stroke="none" stroke-width="1.5"/>
+<text x="695" y="706" fill="#A96A12" font-size="19" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">功能 / 精度 / SoC / 工艺证据汇总</text>
+<rect x="56" y="753" width="536" height="140" rx="12" fill="#FFF5E4" stroke="#A96A12" stroke-width="1.7"/>
+<rect x="57" y="767" width="5" height="112" rx="2" fill="#A96A12" stroke="none" stroke-width="1.5"/>
+<text x="76" y="788" fill="#142B43" font-size="23" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">04 · 资格门：全部条件合格</text>
+<text x="76" y="820" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">逐位一致、NRMSE ≤ 3%、完整 SoC</text>
+<text x="76" y="849" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">150 MHz；核心 + 接口 + 内部 SRAM</text>
+<text x="76" y="876" fill="#A96A12" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">增量面积 ≤ 2.25 mm²；建议预留裕量</text>
+<rect x="692" y="753" width="536" height="140" rx="12" fill="#F4F0FA" stroke="#7451A8" stroke-width="1.7"/>
+<rect x="693" y="767" width="5" height="112" rx="2" fill="#7451A8" stroke="none" stroke-width="1.5"/>
+<text x="712" y="788" fill="#142B43" font-size="23" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">05 · 瓶颈分析与同条件对照</text>
+<text x="712" y="820" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">拆分装载 / 计算 / 等待 / 写回开销</text>
+<text x="712" y="849" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">比较流水、并行度、复用与缓冲代价</text>
+<text x="712" y="876" fill="#7451A8" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">改动 → 实现与重验；只选择通过的配置</text>
+<rect x="1328" y="753" width="536" height="140" rx="12" fill="#EDF8F0" stroke="#277B53" stroke-width="1.7"/>
+<rect x="1329" y="767" width="5" height="112" rx="2" fill="#277B53" stroke="none" stroke-width="1.5"/>
+<text x="1348" y="788" fill="#142B43" font-size="23" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">06 · 冻结、独立复现与答辩</text>
+<text x="1348" y="820" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">D16 择优；D17 冻结 RTL / 数值 / 配置</text>
+<text x="1348" y="849" fill="#526579" font-size="20" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">独立复现、贡献说明、实验表与演示</text>
+<text x="1348" y="876" fill="#277B53" font-size="16" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="700">交付：工程 + 模型 + 驱动 + 完整证据</text>
+<polyline points="594,821 683,821" fill="none" stroke="#142B43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="683.00,821.00 673.00,816.40 673.00,825.60" fill="#142B43"/>
+<polyline points="1230,821 1319,821" fill="none" stroke="#142B43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1319.00,821.00 1309.00,816.40 1309.00,825.60" fill="#142B43"/>
+<polyline points="960,895 960,934 32,934 32,605 47,605" fill="none" stroke="#B34545" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 6"/>
+<polygon points="47.00,605.00 37.00,600.40 37.00,609.60" fill="#B34545"/>
+<rect x="143" y="909" width="564.43017578125" height="27" rx="3" fill="#FFFFFF" stroke="none" stroke-width="1.5"/>
+<text x="151" y="928" fill="#B34545" font-size="19" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">不合格 / 优化改动 → 责任模块修复 → 功能、SoC、工艺重新验证</text>
+<rect x="56" y="959" width="1808" height="53" rx="10" fill="#F7F9FC" stroke="none" stroke-width="1.5"/>
+<text x="78" y="992" fill="#142B43" font-size="21" text-anchor="start" font-family="DejaVu Sans,Droid Sans Fallback,Noto Sans CJK SC,sans-serif" font-weight="400">测量从装载到最终写回；功耗覆盖 CPU / 互连 / 加速器 / SRAM。缺材料标 BLOCKED，继续无依赖工作。</text>
+</svg>

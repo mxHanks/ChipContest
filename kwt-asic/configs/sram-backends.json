@@ -1,0 +1,25 @@
+{
+  "schema": "kwt-sram-backends-v1",
+  "top": "kwt_linear_engine_rowpair_sram",
+  "numeric_contract": "fixed16_acc48_v1",
+  "common_sources": [
+    "src/rtl/memory/kwt_sram_1rw.sv",
+    "src/rtl/memory/kwt_sram_bank.sv",
+    "src/rtl/kwt_linear_engine_rowpair_sram.sv"
+  ],
+  "backends": {
+    "BEHAVIORAL": {"SRAM_BACKEND": 0, "purpose": "functional simulation only", "synthesis": "REJECTED"},
+    "BLACKBOX": {"SRAM_BACKEND": 1, "purpose": "logic-only early synthesis", "extra_sources": ["src/rtl/memory/kwt_sram_1rw_blackbox.sv"], "functional_simulation": "REJECTED", "full_ppa": "BLOCKED"},
+    "FF_FALLBACK": {"SRAM_BACKEND": 2, "purpose": "functional reference and explicit FF synthesis", "full_capacity_mapping_requires_opt_in": true},
+    "OFFICIAL_MACRO": {"SRAM_BACKEND": 3, "status": "BLOCKED", "required_module": "kwt_official_sram_adapter", "functional_sources": null, "setup_liberty": null, "hold_liberty": null, "power_liberty": null, "area_table": null}
+  },
+  "logical_bank_count": 20,
+  "logical_payload_bits": 415744,
+  "capacity_templates": [
+    {"width": 16, "depth": 128, "count": 50},
+    {"width": 16, "depth": 1024, "count": 22}
+  ],
+  "configured_bits": 462848,
+  "physical_macro_mapping": "NOT_RUN",
+  "interface": {"ports": "1RW", "read_latency_cycles": 1, "disabled_output": "hold", "simultaneous_read_write": "forbidden", "payload_reset": false}
+}

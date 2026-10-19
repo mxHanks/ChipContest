@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "scope": "one validation waveform 12-layer bit-exact smoke only",
+  "outputs": 304128,
+  "max_layer_nrmse": 0.0001413885397482701,
+  "selection": {
+    "status": "PASS",
+    "scope": "one deterministic validation waveform smoke, not validation-set accuracy",
+    "partition": "validation",
+    "word": "yes",
+    "selection": "lexicographic order within fixed upstream which_set validation partition",
+    "offset": 0,
+    "source_wav": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/data/speech-commands-v0.02/yes/026290a7_nohash_0.wav",
+    "source_wav_sha256": "502212360d558d8682ed108c0b8903837b25f6ce8513ff54d549b55158410439",
+    "original_samples": 16000,
+    "zero_pad_to": 16000,
+    "waveform": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T091234Z-speech-smoke/selected/waveform.npy",
+    "waveform_sha256": "15c21693fca5dfa28501c564694e48ad01342ad03b6d799bf6d2a14e9af67d02",
+    "upstream_split_code_sha256": "dc4980ba9165811b92fc0767ee7e7c70ee96a93e34f5d7209c8e194dcbe7c912",
+    "implementation_sha256": "95bf776a70827b726da76a147b85c6466dcac43c51e30bcfe8dcd6cbf8362832",
+    "scales_tuned_on_sample": false,
+    "archive_sha256": "af14739ee7dc311471de98f5f9d2c9191b18aedfe957f4a6ff791c709868ff58"
+  },
+  "evidence": [
+    {
+      "path": "artifacts/runs/20261015T091307.519749Z-engine-bench-0e6c3eb5/result.json",
+      "sha256": "cfc275167d4ddbcacd2b3b21c450d7890dd97564fc6d5a2aaca361961bbcb3a0"
+    },
+    {
+      "path": "artifacts/runs/20261015T091234Z-speech-smoke/result.json",
+      "sha256": "6d6e51076784d269b0e819c2c47dfea0ad1c0d191b7608f2bf7684f1dab4b83b"
+    },
+    {
+      "path": "artifacts/runs/20261015T091234Z-speech-smoke/selected/selection.json",
+      "sha256": "d2b0d4319981b9162e1437fb72f0e040eb8e2cb949caf94e4f5fac44b30c7772"
+    },
+    {
+      "path": "artifacts/runs/20261015T091234Z-speech-smoke/export/manifest.json",
+      "sha256": "0f6a4a4275bb470439029ae01bf0ddfd2dc8ca2da473245ed6f2ef086620be77"
+    },
+    {
+      "path": "artifacts/runs/20261015T091234Z-speech-smoke/0.log",
+      "sha256": "9163eb9a00775204bfa0cfcd1f93008a06d3e0e744b927bf197ce9e2764d3c96"
+    },
+    {
+      "path": "artifacts/runs/20261015T091234Z-speech-smoke/1.log",
+      "sha256": "caa849ce9d5123f3526679c444bd5860a5e7539cd89fdb73da04178fc5762f33"
+    },
+    {
+      "path": "artifacts/runs/20261015T091307.519749Z-engine-bench-0e6c3eb5/compile.log",
+      "sha256": "7556454c8577faaaa7ffcadc6b36e47c97c202e687cebe7a28cab65e82751556"
+    },
+    {
+      "path": "artifacts/runs/20261015T091307.519749Z-engine-bench-0e6c3eb5/run.log",
+      "sha256": "865ce09e403dfc2c79b4446aeac9ecf361ee9953a95e58bf32acf3bbcc0d4cba"
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "scripts/model/select_validation_waveform.py",
+      "sha256": "95bf776a70827b726da76a147b85c6466dcac43c51e30bcfe8dcd6cbf8362832"
+    },
+    {
+      "path": "scripts/model/export_kwt.py",
+      "sha256": "20972cf5e7a0b7d93065ce7ca0c5bd7541106b1e93b45c4e0e1df6af66077def"
+    },
+    {
+      "path": "model/fixed16_acc48.py",
+      "sha256": "2ea34805d54a45c2537ce2d71e653a41989befef05769785a9b2629fdfeeef30"
+    },
+    {
+      "path": "src/rtl/kwt_linear_engine_banked.sv",
+      "sha256": "6028bb305ac45db85cc355332e9c83094029021110a5f299516345f862c54486"
+    },
+    {
+      "path": "scripts/verify/run_engine_benchmark.py",
+      "sha256": "7c4fb6ef54355b8f01fe897bce5833aa2c159fee912cb4ed508d8353fc869f0d"
+    },
+    {
+      "path": "sim/tb_engine_benchmark.sv",
+      "sha256": "b42929d2b7df7830c3bb8869385fdf3f1b085a139a50938b4e7a0c887bdab18e"
+    }
+  ],
+  "full_validation": "NOT_RUN",
+  "official_600_samples": "NOT_RUN",
+  "soc": "NOT_RUN",
+  "ppa": "NOT_RUN"
+}

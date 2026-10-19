@@ -1,0 +1,1138 @@
+{
+  "schema": "kwt-structural-synthesis-v1",
+  "status": "PASS",
+  "run_directory": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090435.412936Z-structure-881834f6",
+  "started_utc": "2026-10-15T09:04:35.413035+00:00",
+  "scope": "RAM-preserving structural synthesis, not gate-level equivalence or physical PPA",
+  "configuration": {
+    "variant": "banked",
+    "top": "kwt_linear_engine_banked",
+    "lanes": 16,
+    "pipe_mul": 0
+  },
+  "physical_timing": "NOT_RUN",
+  "physical_area": "NOT_RUN",
+  "physical_power": "NOT_RUN",
+  "sram_macro_mapping": "NOT_RUN",
+  "gate_equivalence": "NOT_RUN",
+  "soc": "NOT_RUN",
+  "inputs": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/src/rtl/kwt_linear_engine_banked.sv",
+      "sha256": "6028bb305ac45db85cc355332e9c83094029021110a5f299516345f862c54486",
+      "bytes": 12085
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/synth/run_structural.py",
+      "sha256": "13e6e42c88d1b650574b1f60c3645e50100f0b89c314a3ffa55da005a216b51f",
+      "bytes": 11090
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/setup/bootstrap_synth.sh",
+      "sha256": "62aa0fc628ce12798ef152cd646a7c95bd8aa94a94e939d82161a3ae8e642731",
+      "bytes": 2780
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/yosys",
+      "sha256": "21649f11bb384926f0de319884289d6540d69a6293735c3cce91d06a9b4781bc",
+      "bytes": 473
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/synth/usr/bin/yosys",
+      "sha256": "88c0a12bb814a1a8716b1ae10b482e35d3005ed558e1f5f626b3dc983ea3abd0",
+      "bytes": 8174408
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/synth/usr/bin/yosys-abc",
+      "sha256": "001a99fb8648794076dd238e42f3bd8c5112a4b8bd89660883325a7e0d006043",
+      "bytes": 14918408
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/yosys",
+        "-V"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090435.412936Z-structure-881834f6",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.00795,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090435.412936Z-structure-881834f6/version.log",
+        "sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa",
+        "bytes": 34
+      }
+    },
+    {
+      "argv": [
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/.tools/bin/yosys",
+        "-Q",
+        "-s",
+        "run.ys"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090435.412936Z-structure-881834f6",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.61593,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090435.412936Z-structure-881834f6/synthesis.log",
+        "sha256": "5159a79095165f26a127e4abbb21af0c70134e071376cdcb83e62ef10944ec3e",
+        "bytes": 146142
+      }
+    }
+  ],
+  "source_adaptation": {
+    "rule": "int'(known_index) -> $signed(32'(known_index))",
+    "replacements": 10,
+    "operands": [
+      "block_index",
+      "emit_lane",
+      "k_issue",
+      "load_addr"
+    ],
+    "reason": "Yosys 0.33 rejects int' cast syntax; signed 32-bit binary result preserved",
+    "four_state_equivalence": "NOT_PROVEN; Icarus int' and sized casts differ on X/Z operands; structural synthesis scope is initialized binary indices",
+    "derived": {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090435.412936Z-structure-881834f6/input.sv",
+      "sha256": "3a8a375158f23b9146e954da797ec0b541575aa8650d2a1735ab72e2f89b4210",
+      "bytes": 12165
+    }
+  },
+  "script": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090435.412936Z-structure-881834f6/run.ys",
+    "sha256": "291ace484cd0620b4e1e1b7bd686c4221e697cbfa573ec084492ccb820a67837",
+    "bytes": 295
+  },
+  "completion_marker_count": 1,
+  "structure": {
+    "cell_types": {
+      "$add": 43,
+      "$adff": 6,
+      "$adffe": 8,
+      "$dffe": 16,
+      "$eq": 46,
+      "$logic_and": 51,
+      "$logic_not": 8,
+      "$lt": 3,
+      "$mem_v2": 33,
+      "$mul": 16,
+      "$mux": 269,
+      "$ne": 10,
+      "$pmux": 7,
+      "$reduce_and": 7,
+      "$reduce_bool": 5,
+      "$reduce_or": 1
+    },
+    "cells": 529,
+    "memories": [
+      {
+        "name": "g_lane[0].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[0].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[10].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[10].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[11].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[11].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[12].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[12].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[13].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[13].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[14].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[14].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[15].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[15].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[1].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[1].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[2].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[2].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[3].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[3].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[4].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[4].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[5].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[5].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[6].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[6].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[7].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[7].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[8].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[8].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[9].b_mem",
+        "width": 40,
+        "words": 16,
+        "bits": 640,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "g_lane[9].w_mem",
+        "width": 16,
+        "words": 1024,
+        "bits": 16384,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      },
+      {
+        "name": "x_mem",
+        "width": 16,
+        "words": 6336,
+        "bits": 101376,
+        "read_ports": 1,
+        "write_ports": 1,
+        "read_clock_enable_mask": 1,
+        "write_clock_enable_mask": 1,
+        "requires_bank_partition_or_multiport_mapping": false
+      }
+    ],
+    "memory_bits": 373760,
+    "multipliers": [
+      {
+        "name": "$mul$input.sv:157$1392",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1393",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1394",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1395",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1396",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1397",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1398",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1399",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1400",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1401",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1402",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1403",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1404",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1405",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1406",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$mul$input.sv:157$1407",
+        "a_width": 16,
+        "b_width": 16,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      }
+    ],
+    "adders": [
+      {
+        "name": "$add$input.sv:116$777",
+        "a_width": 32,
+        "b_width": 15,
+        "y_width": 32,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:117$776",
+        "a_width": 32,
+        "b_width": 32,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:176$1384",
+        "a_width": 32,
+        "b_width": 32,
+        "y_width": 32,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1026",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1062",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1098",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1134",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1170",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1206",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1242",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1278",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1314",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1350",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$1386",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$846",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$882",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$918",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$954",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:184$990",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1027",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1063",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1099",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1135",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1171",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1207",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1243",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1279",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1315",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1351",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$1387",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$847",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$883",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$919",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$955",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:187$991",
+        "a_width": 48,
+        "b_width": 48,
+        "y_width": 48,
+        "a_signed": true,
+        "b_signed": true
+      },
+      {
+        "name": "$add$input.sv:215$795",
+        "a_width": 32,
+        "b_width": 1,
+        "y_width": 32,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:222$797",
+        "a_width": 13,
+        "b_width": 1,
+        "y_width": 13,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:223$798",
+        "a_width": 15,
+        "b_width": 1,
+        "y_width": 15,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:224$799",
+        "a_width": 9,
+        "b_width": 1,
+        "y_width": 9,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:246$803",
+        "a_width": 6,
+        "b_width": 1,
+        "y_width": 6,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:267$809",
+        "a_width": 7,
+        "b_width": 1,
+        "y_width": 7,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:271$810",
+        "a_width": 4,
+        "b_width": 1,
+        "y_width": 4,
+        "a_signed": false,
+        "b_signed": false
+      },
+      {
+        "name": "$add$input.sv:275$811",
+        "a_width": 4,
+        "b_width": 1,
+        "y_width": 4,
+        "a_signed": false,
+        "b_signed": false
+      }
+    ],
+    "registers_excluding_memory_read_flops": [
+      {
+        "name": "$auto$ff.cc:266:slice$3223",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3228",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3233",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3238",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3243",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3248",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3253",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3258",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3263",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3268",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3273",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3278",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3283",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3288",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3290",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3295",
+        "type": "$adffe",
+        "width": 2
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3313",
+        "type": "$adffe",
+        "width": 7
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3328",
+        "type": "$adffe",
+        "width": 4
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3339",
+        "type": "$adffe",
+        "width": 6
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3352",
+        "type": "$adffe",
+        "width": 4
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3363",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3364",
+        "type": "$adffe",
+        "width": 1
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3366",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$auto$ff.cc:266:slice$3371",
+        "type": "$dffe",
+        "width": 48
+      },
+      {
+        "name": "$procdff$2814",
+        "type": "$adff",
+        "width": 1
+      },
+      {
+        "name": "$procdff$2816",
+        "type": "$adff",
+        "width": 32
+      },
+      {
+        "name": "$procdff$2818",
+        "type": "$adff",
+        "width": 13
+      },
+      {
+        "name": "$procdff$2819",
+        "type": "$adff",
+        "width": 15
+      },
+      {
+        "name": "$procdff$2820",
+        "type": "$adff",
+        "width": 9
+      },
+      {
+        "name": "$procdff$2825",
+        "type": "$adff",
+        "width": 1
+      }
+    ],
+    "register_bits_excluding_memory_read_flops": 865,
+    "mapping_warnings": [],
+    "scope": "RTLIL structure before cell/memory technology mapping; counts are not mm2, MHz or mW"
+  },
+  "outputs": [
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090435.412936Z-structure-881834f6/netlist.json",
+      "sha256": "2ee77ded392387f38ac092271f98fe13d06056baee88389b69232134d1f8318a",
+      "bytes": 1114552
+    },
+    {
+      "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/runs/20261015T090435.412936Z-structure-881834f6/stats.json",
+      "sha256": "1b1fc4038328e3906fd72540fcc71cd2b56ad2630f5580e7a6944a3d5d5366a8",
+      "bytes": 1650
+    }
+  ]
+}

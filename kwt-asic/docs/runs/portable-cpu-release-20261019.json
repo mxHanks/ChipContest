@@ -1,0 +1,197 @@
+{
+  "schema": "kwt-portable-cpu-release-v1",
+  "status": "PASS",
+  "created_utc": "2026-10-19T01:24:34.188+00:00",
+  "scope": "source package, exact-byte restoration,324 host tests/static/default-blocked gate; CPU runs accepted separately",
+  "source_archive": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261019T012341Z-3268eb-sram-development-cpu-v2-20261019/sram-development-cpu-v2-20261019.tar.gz",
+    "sha256": "0ecf2ea22d0fb1322115404274a756869043c7ed7a97c988402db38cf5a4c68e",
+    "size_bytes": 22306580
+  },
+  "release_manifest": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261019T012341Z-3268eb-sram-development-cpu-v2-20261019/manifest.json",
+    "sha256": "d976766662518d18d4a36ad0e8b69d84368e02a990672ba32facd89319ef4c51",
+    "size_bytes": 111267
+  },
+  "SHA256SUMS": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261019T012341Z-3268eb-sram-development-cpu-v2-20261019/SHA256SUMS",
+    "sha256": "e3df3ab04158f5cd5d095c12f7c5a283cbf9937817076125968a22e3315e476d",
+    "size_bytes": 106
+  },
+  "source_files": 666,
+  "source_bytes": 36400172,
+  "host_tests": 324,
+  "restore_report": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/result.json",
+    "sha256": "7a69c534e52487bd57f9615ed6790dac109340d3fcec23ff5cbef1615cdc9fe2",
+    "size_bytes": 7922
+  },
+  "restore_identity": {
+    "schema": "kwt-sram-source-identity-v1",
+    "configuration": {
+      "release": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261019T012341Z-3268eb-sram-development-cpu-v2-20261019",
+      "restored_path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/workspace"
+    },
+    "inputs": [
+      {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/package_restore.py",
+        "sha256": "53e35977bdbd358eb9a7250cc67af98536681c5d2511ca1fa1827355e7096a09",
+        "size_bytes": 4330
+      },
+      {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/sram_evidence.py",
+        "sha256": "e021c4742128202a879138906a921bf09093fe938fc268a70bf973ead63f20f9",
+        "size_bytes": 9162
+      },
+      {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/scripts/verify/run_official_sram_contract.py",
+        "sha256": "0227dea2a05c0c03ac942414a8aadae108e1e39d2de87960a2baabc2ba04fb71",
+        "size_bytes": 14143
+      },
+      {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261019T012341Z-3268eb-sram-development-cpu-v2-20261019/sram-development-cpu-v2-20261019.tar.gz",
+        "sha256": "0ecf2ea22d0fb1322115404274a756869043c7ed7a97c988402db38cf5a4c68e",
+        "size_bytes": 22306580
+      },
+      {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/releases/20261019T012341Z-3268eb-sram-development-cpu-v2-20261019/manifest.json",
+        "sha256": "d976766662518d18d4a36ad0e8b69d84368e02a990672ba32facd89319ef4c51",
+        "size_bytes": 111267
+      }
+    ],
+    "source_id": "4a5a003f3190c1df97eb2dad2ac6c1163f9b508ab5a3d4c750ca03b8694c5157"
+  },
+  "commands": [
+    {
+      "schema": "kwt-sram-command-v1",
+      "status": "EXITED",
+      "argv": [
+        "/usr/bin/make",
+        "test",
+        "PYTHON=/usr/bin/python3"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/workspace",
+      "host": "leo-pc",
+      "supervisor": {
+        "pid": 2,
+        "process_start_ticks": "21277155",
+        "pid_namespace": "pid:[4026533341]",
+        "boot_id": "05525c0d-dc1f-4693-b0e2-3157c4625bf3"
+      },
+      "started_utc": "2026-10-19T01:23:50.557+00:00",
+      "timeout_seconds": 120,
+      "timed_out": false,
+      "interrupted": false,
+      "exit_code": 0,
+      "pid": 3,
+      "process_start_ticks": "21277199",
+      "pid_namespace": "pid:[4026533341]",
+      "boot_id": "05525c0d-dc1f-4693-b0e2-3157c4625bf3",
+      "finished_utc": "2026-10-19T01:24:03.369+00:00",
+      "elapsed_seconds": 12.811,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/host.log",
+        "sha256": "347cec27c67e49c510381bc35c8e2c709cd56b94afb3ad57252328abefe13e63",
+        "size_bytes": 50190
+      },
+      "native_state": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/host.command.json",
+        "sha256": "456228a265dacbc1fb9d9bf144dd8a861141cf0dd75b769c9550959ecd2cf6c8",
+        "size_bytes": 1080
+      }
+    },
+    {
+      "schema": "kwt-sram-command-v1",
+      "status": "EXITED",
+      "argv": [
+        "/usr/bin/make",
+        "verify",
+        "PYTHON=/usr/bin/python3"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/workspace",
+      "host": "leo-pc",
+      "supervisor": {
+        "pid": 2,
+        "process_start_ticks": "21277155",
+        "pid_namespace": "pid:[4026533341]",
+        "boot_id": "05525c0d-dc1f-4693-b0e2-3157c4625bf3"
+      },
+      "started_utc": "2026-10-19T01:24:03.387+00:00",
+      "timeout_seconds": 120,
+      "timed_out": false,
+      "interrupted": false,
+      "exit_code": 0,
+      "pid": 46,
+      "process_start_ticks": "21278482",
+      "pid_namespace": "pid:[4026533341]",
+      "boot_id": "05525c0d-dc1f-4693-b0e2-3157c4625bf3",
+      "finished_utc": "2026-10-19T01:24:03.506+00:00",
+      "elapsed_seconds": 0.118,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/static.log",
+        "sha256": "1e052faa6cd08ce3aeec4e6452ddd97ada68f12c6256c2754a617ea431b625bb",
+        "size_bytes": 408
+      },
+      "native_state": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/static.command.json",
+        "sha256": "6a26ee855a0652a6d6a8a60fd0bea539860bca27d779c8e4a301617dec5d610d",
+        "size_bytes": 1082
+      }
+    },
+    {
+      "schema": "kwt-sram-command-v1",
+      "status": "EXITED",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/workspace/scripts/verify/run_sram_adapter_soc_v2.py"
+      ],
+      "cwd": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/workspace",
+      "host": "leo-pc",
+      "supervisor": {
+        "pid": 2,
+        "process_start_ticks": "21277155",
+        "pid_namespace": "pid:[4026533341]",
+        "boot_id": "05525c0d-dc1f-4693-b0e2-3157c4625bf3"
+      },
+      "started_utc": "2026-10-19T01:24:03.522+00:00",
+      "timeout_seconds": 120,
+      "timed_out": false,
+      "interrupted": false,
+      "exit_code": 2,
+      "pid": 51,
+      "process_start_ticks": "21278495",
+      "pid_namespace": "pid:[4026533341]",
+      "boot_id": "05525c0d-dc1f-4693-b0e2-3157c4625bf3",
+      "finished_utc": "2026-10-19T01:24:03.589+00:00",
+      "elapsed_seconds": 0.067,
+      "log": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/default-no-official.log",
+        "sha256": "b6cb3d4004f50aa17ad3d2bffe439e88943344160e362d8895a91603c73f2229",
+        "size_bytes": 297
+      },
+      "native_state": {
+        "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/default-no-official.command.json",
+        "sha256": "9b1640f321f45f2e607f183ad74257bc82d938c349fd399ed4116b1c18e974f3",
+        "size_bytes": 1232
+      }
+    }
+  ],
+  "default_missing_official": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/artifacts/diagnostics/20261018-portable-cpu/release-restore/workspace/artifacts/runs/20261019T012403.577345Z-adapter-soc-v2-e4a64d51/result.json",
+    "sha256": "c91698386d7289d0117885faa943acc1a46b9c2a09aa4d12e7602f55243917fe",
+    "size_bytes": 18146
+  },
+  "cpu_milestone": {
+    "path": "/media/leo/Data/Vitis/RISC-V-forward-acceleration/docs/runs/portable-cpu-20261018.json",
+    "sha256": "824fb375bfe53bfef36afab426944addf87a1dbea7446c38d48b5dcad287cbd7",
+    "size_bytes": 582064
+  },
+  "limitations": [
+    "release excludes tools/platform/dataset/raw runs",
+    "restored host tests are not a CPU/EDA rerun",
+    "receiver must create its own current primitive/system/behavioral/adapter reports",
+    "official platform/SRAM/PPA absent"
+  ],
+  "receipt_note": "saved after package creation; package manifest defines its source bytes, this receipt is in later checkpoint"
+}
