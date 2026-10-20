@@ -207,3 +207,62 @@ make run_test \
 | 3 | scratch 寄存器读写检查失败 |
 
 
+
+## E203 加速器计算回归测试
+
+### 测试覆盖范围
+
+| 测试程序 | 验证内容 | 预期结果 |
+|---|---|---|
+| `accel_compute.S` | 单组 8 路点积计算，X 和权重均为 1，偏置为通道编号 | 第 j 路结果为 `64 + j` |
+| `accel_multigroup.S` | 依次运行 group 0 和 group 1，验证权重组选择 | group 0 为 `64 + j`，group 1 为 `128 + j` |
+| `accel_repeat_x.S` | 同一组权重连续执行两次，第二次将输入从 1 改为 2 | 第一次为 `64 + j`，第二次为 `128 + j` |
+
+其中，`accel_repeat_x.S` 还检查输入缓冲区重载和重复启动后的累加状态重置。
+
+### 1. 编译测试程序
+
+在项目根目录执行：
+
+```bash
+set -e
+mkdir -p build/e203
+RISCV_TESTS="$PWD/third-party/e203_hbirdv2/riscv-tools/riscv-tests"
+
+for name in accel_compute accel_multigroup accel_repeat_x; do
+    riscv64-unknown-elf-gcc \
+      -march=rv32imac_zicsr_zifencei \
+      -mabi=ilp32 \
+      -nostdlib -nostartfiles -static -mcmodel=medany \
+      -Wl,--no-relax \
+      -T "$RISCV_TESTS/env/p/link.ld" \
+      "tests/e203/${name}.S" \
+      -o "build/e203/${name}"
+
+    riscv64-unknown-elf-objdump \
+      --disassemble-all "build/e203/${name}" \
+      > "build/e203/${name}.dump"
+
+    riscv64-unknown-elf-objcopy \
+      -O verilog "build/e203/${name}" \
+      "build/e203/${name}.verilog"
+
+    sed -i 's/@800/@000/g' "build/e203/${name}.verilog"
+done
+```
+
+### 2. 运行测试
+
+```bash
+cd third-party/e203_hbirdv2/vsim
+
+for name in accel_compute accel_multigroup accel_repeat_x; do
+    echo "========== Running ${name} =========="
+    make run_test \
+      TESTCASE="$(realpath "../../../build/e203/${name}")" \
+      DUMPWAVE=0
+done
+```
+
+每项测试都应出现 `TEST_PASS`。如果修改了 E203 RTL，应先执行
+`make clean` 和 `make install`，再运行测试，避免使用旧的 RTL 副本。
