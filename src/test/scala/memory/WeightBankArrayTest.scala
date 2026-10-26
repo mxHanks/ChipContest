@@ -8,6 +8,7 @@ class WeightBankArrayTest extends AnyFunSpec with ChiselSim {
     describe("测试 WeightBankArray 相关功能") {
         it("能否正常完成读写操作") {
             simulate(new WeightBankArray) { dut =>
+                dut.io.ren.poke(false)
                 // 循环写入测试用例
                 for (i <- 0 until 8) {
                     dut.io.loadBank.poke(i)
@@ -19,7 +20,7 @@ class WeightBankArrayTest extends AnyFunSpec with ChiselSim {
                     // 一个时钟周期只能写入一个 Bank
                 }
 
-
+                dut.io.loadWen.poke(false)
                 dut.io.ren.poke(true)
                 dut.io.raddr.poke(0)
                 dut.clock.step()
