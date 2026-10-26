@@ -1,0 +1,44 @@
+["make", "run_test", "SIM=iverilog", "DUMPWAVE=0", "TESTCASE=/mnt/e/E203/worktrees/e203-c-integration/build/e203/baseline-final/accel_multigroup"]
+make compile RUN_DIR=/mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run SIM_TOOL=iverilog -C /mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run
+make[1]: Entering directory '/mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run'
+make[1]: Nothing to be done for 'compile'.
+make[1]: Leaving directory '/mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run'
+make run DUMPWAVE=0 TESTCASE=/mnt/e/E203/worktrees/e203-c-integration/build/e203/baseline-final/accel_multigroup SIM_TOOL=iverilog RUN_DIR=/mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run -C /mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run
+make[1]: Entering directory '/mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run'
+rm -rf accel_multigroup
+mkdir accel_multigroup
+cd accel_multigroup; vvp /mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run/vvp.exec -lxt2	 +DUMPWAVE=0 +TESTCASE=/mnt/e/E203/worktrees/e203-c-integration/build/e203/baseline-final/accel_multigroup +SIM_TOOL=iverilog 2>&1 | tee accel_multigroup.log; cd /mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run; 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+TESTCASE=                                                                                                                                                                                                                         /mnt/e/E203/worktrees/e203-c-integration/build/e203/baseline-final/accel_multigroup
+ITCM 0x00: 000000000000106f
+ITCM 0x01: 0000000000000000
+ITCM 0x02: 0000000000000000
+ITCM 0x03: 0000000000000000
+ITCM 0x04: 0000000000000000
+ITCM 0x05: 0000000000000000
+ITCM 0x06: 0000000000000000
+ITCM 0x07: 0000000000000000
+ITCM 0x16: xxxxxxxxxxxxxxxx
+ITCM 0x20: xxxxxxxxxxxxxxxx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~ Test Result Summary ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~TESTCASE:                                                                                                                                                                                                                          /mnt/e/E203/worktrees/e203-c-integration/build/e203/baseline-final/accel_multigroup ~~~~~~~~~~~~~
+~~~~~~~~~~~~~~Total cycle_count value:      21199 ~~~~~~~~~~~~~
+~~~~~~~~~~The valid Instruction Count:       4643 ~~~~~~~~~~~~~
+~~~~~The test ending reached at cycle:      21182 ~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~The final x3 Reg value:          1 ~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~ TEST_PASS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~ #####     ##     ####    #### ~~~~~~~~~~~~~~~~
+~~~~~~~~~ #    #   #  #   #       #     ~~~~~~~~~~~~~~~~
+~~~~~~~~~ #    #  #    #   ####    #### ~~~~~~~~~~~~~~~~
+~~~~~~~~~ #####   ######       #       #~~~~~~~~~~~~~~~~
+~~~~~~~~~ #       #    #  #    #  #    #~~~~~~~~~~~~~~~~
+~~~~~~~~~ #       #    #   ####    #### ~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v:222: $finish called at 84926 (1s)
+make[1]: Leaving directory '/mnt/e/E203/worktrees/e203-c-integration/third-party/e203_hbirdv2/vsim/run'

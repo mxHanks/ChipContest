@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-26",
+  "scope": "C-role development SoC integration; no official platform/SRAM/PPA or full-dataset accuracy claim",
+  "source_verified_against_main_commit": "b7da551e7ee97fe404f0a8ac42a05a43ae85ac10",
+  "e203_published_commit": "e36d34a52e6eef93fd0bdfed1b13009e1056bea3",
+  "source_binding_note": "Some runs started before milestone commits: report commit IDs identify HEAD at invocation, while source/firmware/runner hashes bind the actual executed bytes. Real12 and synthetic12 source hashes were checked against the committed implementation before bundling. Fresh Linux clone independently replays repository-normalized sources.",
+  "host_checks": 7,
+  "original_chisel_tests": 11,
+  "original_icarus_cases": 5,
+  "fresh_clone_real_outputs": 25344,
+  "regressions": {
+    "baseline": {
+      "expected_status": "PASS",
+      "observed_status": "PASS",
+      "report_sha256": "9e14062c76779615cc3185d97ebe9a42114bedcb2ff11cad5ccc5eaf4601d4cd"
+    },
+    "real12": {
+      "expected_status": "PASS",
+      "observed_status": "PASS",
+      "report_sha256": "bc601d03c6551bdab7b275d457cc3ec0661c7ba109b0613de9182b032dfea95d"
+    },
+    "synthetic12": {
+      "expected_status": "PASS",
+      "observed_status": "PASS",
+      "report_sha256": "2e538f3f7a47cb08bc63c9d60c4dd76dacdad99beed6a368ffa4a7c138cbb9ec"
+    },
+    "bad-golden": {
+      "expected_status": "FAIL",
+      "observed_status": "FAIL",
+      "report_sha256": "944cc526ebf3812bd866e5d9831bdd42c7cedf072d91499a0f5386b0abcae2e9"
+    },
+    "timeout": {
+      "expected_status": "FAIL",
+      "observed_status": "FAIL",
+      "report_sha256": "cad2074efc8ea6847f6586af50ec815d85e5e561e05de9e1f3bfc33690f6f02a"
+    }
+  },
+  "review": "Independent read-only review completed; response-retirement, doctor, cache identity and baseline source identity findings fixed and verified.",
+  "sdk_helloworld": "Build/dasm PASS on SHA-verified complete xPack 15.2.0-1 with explicit CSR ISA; not a simulation claim."
+}

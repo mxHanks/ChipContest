@@ -24,29 +24,29 @@ New branches only; preserve Chisel/core ABI; CPU/testbench never substitutes man
 Files: E203 rtl/e203/soc/e203_soc_top.v; main tests/e203/tb_accel_soc.sv, firmware/{start.S,link.ld,accel.h,accel.c,main.c}.
 Consumes: existing accel_icb_slave ABI at 0x10042000.
 Produces: signed full-matrix CPU writes to shared memory; TASK_PASS / SOC_PASS markers.
-- [ ] Add TB/firmware first; demonstrate missing top-level memory interface fails compilation.
-- [ ] Add optional external ICB ports, preserving default behavior.
-- [ ] Compile/run a complete synthetic layer and a negative golden-data test.
-- [ ] Run the existing default ADD and four assembly tests through repository make flow.
-- [ ] Commit/push E203 changes on new feature/e203-c-integration branch before main gitlink.
+- [x] Add TB/firmware first; demonstrate missing top-level memory interface fails compilation.
+- [x] Add optional external ICB ports, preserving default behavior.
+- [x] Compile/run a complete synthetic layer and a negative golden-data test.
+- [x] Run the existing default ADD and four assembly tests through repository make flow.
+- [x] Commit/push E203 changes on new feature/e203-c-integration branch before main gitlink.
 
 ### Task 2: Portable runner and 12-layer coverage
 
 Files: tools/scripts/e203_soc.py; tests/e203/test_runner.py; tests/e203/vectors/ fixture archive/provenance.
 Consumes: Task 1 top/TB/firmware, strict .mem vectors.
 Produces: fail-closed build/simulation runner and JSON/log evidence.
-- [ ] Write/run failing stdlib tests for input validation, negative result detection and command failure.
-- [ ] Implement doctor, baseline, synthetic and external-vector modes; explicit paths/options, version/hash records, optional waves.
-- [ ] Import only existing real-checkpoint silence .mem data/provenance from c2e58fd, without adopting its alternate hardware/ABI.
-- [ ] Run synthetic and real 12-task regressions without per-layer reset; verify signed values and exact output/write counts.
-- [ ] Run host tests and repository Scala regression; commit the integrated software/test milestone on the new main branch.
+- [x] Write/run failing stdlib tests for input validation, negative result detection and command failure.
+- [x] Implement doctor, baseline, synthetic and external-vector modes; explicit paths/options, version/hash records, optional waves.
+- [x] Import only existing real-checkpoint silence .mem data/provenance from c2e58fd, without adopting its alternate hardware/ABI.
+- [x] Run synthetic and real 12-task regressions without per-layer reset; verify signed values and exact output/write counts.
+- [x] Run host tests and repository Scala regression; commit the integrated software/test milestone on the new main branch.
 
 ### Task 3: Documentation, fresh reconstruction and review
 
 Files: README.md, quickstart.md, docs/e203-integration.md.
 Consumes: actual Task 1/2 command outputs and limitations.
 Produces: reproducible handoff and honest validation summary.
-- [ ] Document prerequisites, commands, memory map, vector contract, source identity, waveform/timing scope and official-server handoff.
-- [ ] Repeat a build/run from a separate directory using documented inputs.
-- [ ] Request fresh review; fix important findings with reproducing tests and rerun relevant/full checks.
-- [ ] Commit docs and verified fixes. Publish only new feature branches if credentials permit; otherwise preserve commits and report exact publishing blocker.
+- [x] Document prerequisites, commands, memory map, vector contract, source identity, waveform/timing scope and official-server handoff.
+- [x] Repeat a build/run from a separate directory using documented inputs.
+- [x] Request fresh review; fix important findings with reproducing tests and rerun relevant/full checks.
+- [x] Commit docs and verified fixes. Publish only new feature branches if credentials permit; otherwise preserve commits and report exact publishing blocker.

@@ -76,10 +76,10 @@ git clone https://github.com/mxhanks/ChipContest.git
 cd ChipContest
 ```
 
-当前 E203 集成工作位于 `feature/e203-integration` 分支：
+基础 E203 集成位于 `feature/e203-integration`；C 角色完整矩阵与写回回归接续于 `feature/e203-c-integration`。运行本分支新增流程时使用：
 
 ```bash
-git switch feature/e203-integration
+git switch feature/e203-c-integration
 git submodule update --init --recursive
 ```
 
@@ -149,12 +149,25 @@ generated/LinearComputeCore/
 | 1024×16 SRAM 行为模型封装     | 已验证 |
 | 自动行 / 组调度               | 已验证 |
 | 99×256 完整矩阵功能回归       | 已通过 |
-| 真实 KWT 模型数据逐位回归     | 待完善 |
-| E203 SoC 集成                 | 进行中 |
+| 真实 KWT 模型数据逐位回归     | 单静音样本12层SoC回放通过；全量待完善 |
+| E203 SoC 集成                 | 开发版完整矩阵/12层换参已验证；官方平台待适配 |
 | 真实 SRAM Macro 适配          | 待完成 |
 | 时序收敛、功耗及最终 PPA 报告 | 待完成 |
 
-完整矩阵回归通过不意味着已完成实际 SoC 数据搬运。当前测试仍由 Testbench 提供输入行、Bias 和结果接收握手。
+上表中的 Chisel 完整矩阵测试由 Testbench 提供输入行、Bias 和结果接收握手；CPU 数据搬运与共享存储写回的独立验证见下节。
+
+### C 角色集成分支
+
+`feature/e203-c-integration` 接续上述集成分支，增加裸机 C 驱动、完整矩阵调度、可选外部系统存储 ICB 接口和独立写回检查器。运行入口与验证范围见 [quickstart.md](quickstart.md#c-角色完整矩阵与写回回归) 和 [集成说明](docs/e203-integration.md)。此路径使用开发版 512 KiB 行为共享存储；官方平台、SRAM 宏及正式 PPA 仍需材料到位后验证。
+
+```bash
+python3 -m unittest discover -s tests/e203 -p test_runner.py
+python3 tools/scripts/e203_soc.py --mode baseline
+python3 tools/scripts/e203_soc.py --mode synthetic --tasks 1
+python3 tools/scripts/e203_soc.py --mode real --tasks 12
+```
+
+原有 Chisel/SoC 测试及其运行方式继续保留。真实回放夹具只覆盖一个 KWT 静音样本的 12 层 FFN1 输入，不能代替完整数据集精度评估。
 
 ## Git 协作规范
 

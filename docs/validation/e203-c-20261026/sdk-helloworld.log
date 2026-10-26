@@ -1,0 +1,43 @@
+Clean all build objects
+Assembling :  ../../../SoC/hbirdv2/Common/Source/GCC/intexc_hbirdv2.S
+Assembling :  ../../../SoC/hbirdv2/Common/Source/GCC/startup_hbirdv2.S
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Drivers/hbirdv2_gpio.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Drivers/hbirdv2_i2c.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Drivers/hbirdv2_pwm.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Drivers/hbirdv2_spi.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Drivers/hbirdv2_uart.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Drivers/htif.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/clock_getres.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/clock_gettime.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/clock_settime.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/close.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/execve.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/exit.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/fork.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/fstat.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/getpid.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/gettimeofday.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/isatty.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/kill.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/link.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/lseek.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/open.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/read.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/sbrk.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/stat.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/times.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/unlink.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/wait.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/Stubs/write.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/hbirdv2_common.c
+Compiling  :  ../../../SoC/hbirdv2/Common/Source/system_hbirdv2.c
+Compiling  :  main.c
+Linking    :  helloworld.elf
+/home/fortiutde/.cache/e203-c-toolchain/xpack-riscv-none-elf-gcc-15.2.0-1/bin/../lib/gcc/riscv-none-elf/15.2.0/../../../../riscv-none-elf/bin/ld: warning: helloworld.elf has a LOAD segment with RWX permissions
+   text	   data	    bss	    dec	    hex	filename
+  46026	   1860	   3020	  50906	   c6da	helloworld.elf
+/home/fortiutde/.cache/e203-c-toolchain/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump -S -D helloworld.elf > helloworld.dump
+/home/fortiutde/.cache/e203-c-toolchain/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objdump -d helloworld.elf > helloworld.dasm
+/home/fortiutde/.cache/e203-c-toolchain/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy helloworld.elf -O ihex helloworld.hex
+/home/fortiutde/.cache/e203-c-toolchain/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-objcopy helloworld.elf -O verilog helloworld.verilog
+sed -i 's/@800/@000/g' helloworld.verilog

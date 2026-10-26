@@ -266,3 +266,34 @@ done
 
 每项测试都应出现 `TEST_PASS`。如果修改了 E203 RTL，应先执行
 `make clean` 和 `make install`，再运行测试，避免使用旧的 RTL 副本。
+
+## C 角色完整矩阵与写回回归
+
+在本分支 `feature/e203-c-integration`，先按前文初始化子模块和工具。完整矩阵默认使用 Verilator 的 `--binary --timing`（以及 g++）；原 ADD 和四项汇编回归仍使用 Icarus Verilog 12。Python 入口只依赖标准库。
+
+```bash
+git submodule update --init --recursive
+python3 tools/scripts/e203_soc.py --mode doctor
+python3 -m unittest discover -s tests/e203 -p test_runner.py
+python3 tools/scripts/e203_soc.py --mode baseline
+python3 tools/scripts/e203_soc.py --mode synthetic --tasks 1
+python3 tools/scripts/e203_soc.py --mode real --tasks 12
+```
+
+运行器自动执行 `make clean`、`make install`。每次输出到新的 `build/e203/<时间>/`，保留原始日志和 `result.json`；也可用 `--out` 指定不存在的目录。进程退出码和完成标志都被检查，坏向量、超时和不匹配均失败。`--mode real --tasks 12` 的预期终止标志为：
+
+```text
+SOC_PASS tasks=12 outputs=304128 writes=608256
+```
+
+每层由 CPU 从共享存储读取输入/权重/偏置、经现有 MMIO 启动 3168 次八路计算，并完整写回 25344 个 signed48 结果。结果显式符号扩展为 signed64，检查器核对全部 50688 次字写及最后写响应后才接受层 ACK。层间不复位，下一层必须重新装载参数。
+
+真实夹具来自仓库已归档 KWT 静音导出，来源和 SHA 保留在 `tests/e203/vectors/`。它证明所选输入上的整数功能联调，不证明官方600样本精度或十二层编码器推理。A 提供其他相同格式数据时使用：
+
+```bash
+python3 tools/scripts/e203_soc.py --mode vectors --vectors /实际数据目录 --tasks 12
+```
+
+每个 `layer_XX/` 包含定长十六进制补码 `x.mem`、`w.mem`、`bias.mem`、`y.mem`。详细布局、共享存储映射、时钟/计时范围、`--waves`、四态选项及官方服务器接入顺序见 [C 角色集成说明](docs/e203-integration.md)。开发平台的输入预装载不计入当前测量，不能将其周期直接当比赛正式吞吐量。
+
+Chisel 完整回归仍按 README 执行 `scala-cli test .`；已有系统 JDK 时可增加 `--server=false --jvm system`。项目 Scala/Chisel/ScalaTest 版本保持不变。
