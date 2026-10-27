@@ -1,0 +1,6 @@
+["gcc", "-march=rv32imac_zicsr_zifencei", "-mabi=ilp32", "-Os", "-ffreestanding", "-fno-builtin", "-msmall-data-limit=0", "-nostdlib", "-nostartfiles", "-static", "-mcmodel=medany", "-Wl,--no-relax", "-T", "/mnt/e/E203/worktrees/e203-c-integration/tests/e203/firmware/link.ld", "/mnt/e/E203/worktrees/e203-c-integration/tests/e203/firmware/start.S", "/mnt/e/E203/worktrees/e203-c-integration/tests/e203/firmware/main.c", "/mnt/e/E203/worktrees/e203-c-integration/tests/e203/firmware/accel.c", "-o", "/mnt/e/E203/worktrees/e203-c-integration/build/acceptance/prep-negative/doctor/accel_soc"]
+gcc: error: unrecognized argument in option ‘-mabi=ilp32’
+gcc: note: valid arguments to ‘-mabi=’ are: ms sysv
+gcc: error: unrecognized argument in option ‘-mcmodel=medany’
+gcc: note: valid arguments to ‘-mcmodel=’ are: 32 kernel large medium small
+gcc: error: unrecognized command-line option ‘-msmall-data-limit=0’

@@ -1,0 +1,111 @@
+{
+  "scope": "C-role development server preparation; official platform/SRAM/PPA/600-sample accuracy pending",
+  "status": "PASS",
+  "code_commit": "dfdfffa53e205e378329fd53bf614e8d49d39c0d",
+  "e203_commit": "e36d34a52e6eef93fd0bdfed1b13009e1056bea3",
+  "tests": {
+    "host": 12,
+    "chisel": 11,
+    "baseline": 5,
+    "real_layers": 12,
+    "real_outputs": 304128,
+    "real_write_words": 608256,
+    "icarus_real_layers": 1,
+    "offline_compilers": [
+      "GCC13.2",
+      "xPackGCC15.2"
+    ]
+  },
+  "reports": {
+    "acceptance": {
+      "file": "acceptance.json",
+      "expected_status": "PASS"
+    },
+    "doctor": {
+      "file": "doctor.json",
+      "expected_status": "PASS"
+    },
+    "baseline": {
+      "file": "baseline.json",
+      "expected_status": "PASS"
+    },
+    "synthetic1": {
+      "file": "synthetic1.json",
+      "expected_status": "PASS"
+    },
+    "real12": {
+      "file": "real12.json",
+      "expected_status": "PASS"
+    },
+    "vectors12": {
+      "file": "vectors12.json",
+      "expected_status": "PASS"
+    },
+    "doctor-final": {
+      "file": "doctor-final.json",
+      "expected_status": "PASS"
+    },
+    "icarus1": {
+      "file": "icarus1.json",
+      "expected_status": "PASS"
+    },
+    "offline-doctor": {
+      "file": "offline-doctor.json",
+      "expected_status": "PASS"
+    },
+    "offline-vectors": {
+      "file": "offline-vectors.json",
+      "expected_status": "PASS"
+    },
+    "offline-real1": {
+      "file": "offline-real1.json",
+      "expected_status": "PASS"
+    },
+    "offline-real1-xpack": {
+      "file": "offline-real1-xpack.json",
+      "expected_status": "PASS"
+    },
+    "missing-submodule-negative": {
+      "file": "missing-submodule-negative.json",
+      "expected_status": "FAIL"
+    },
+    "acceptance-negative": {
+      "file": "acceptance-negative.json",
+      "expected_status": "FAIL"
+    }
+  },
+  "provenance_note": "Reports retain invocation-time Git HEAD and actual executed file hashes. Runs launched during implementation precede final commits. The final parser rechecked all retained SoC logs. Offline6d458df recovery used committed code and no remote Git protocols.",
+  "files": {
+    "acceptance-negative.json": "dcfa72a7eeaa4ecba6700681123c9ac623cc2a1adaa032d9d7c7c72c145a15d5",
+    "acceptance.json": "7a7254604729b502fe368241480f3b9945b01b994b6a5191c92cf8803b2aa144",
+    "baseline-accel_compute.log": "055bf16cbd42ccb46ebbcc1715d7b58b4b7d6d1623e542b33afe3e5fb198c219",
+    "baseline-accel_mmio.log": "95532d7c1f98b0789aae8eac9099c8695a59c7709c3382af56bb5c7a41a0078d",
+    "baseline-accel_multigroup.log": "ae0cb144a80501d17d9293f82d8214ca186e88372367e37b9a4c837a1e6baa8b",
+    "baseline-accel_repeat_x.log": "12856ed91c911095b0ec913ace60fdbebef75b09124ae9e605a79a8fd0c8deae",
+    "baseline-rv32ui-p-add.log": "e97bbdbc0c6228b69487429ab284d14d071665b75f2af4a7015ca716670dc794",
+    "baseline.json": "22e3ed5cc21647f4554f28a4daa7fc681e4be493580d1d06179edfa5a0b2e856",
+    "chisel.log": "409053817caa419842e468aad201acf6b83230b4cc81e80b0d433c1260c7e093",
+    "doctor-final.json": "180f21d771cb27b05f404e550d674ec2c31e07e6064601c76656806a0c568ebc",
+    "doctor.json": "a750cca4c6424842c9c70aa27ac727cb9f39e8da3e19af50aee83fef7df6abf9",
+    "github-actions.json": "6c3fd7a8b846a0cee1a1dbc446d4c76e76e306ed2e487d0ec49a53791750b0a8",
+    "host-compiler-negative.log": "64c02121a90f66869d5b45bfe0e58c7b8c96bb32a969d80a7b4d370fe87b4416",
+    "host-tests.log": "070a433803e20edcd880732847d37cfeb988105626bc3ffbb7f7c78a962c0e57",
+    "icarus1.json": "1e376ea230a41ae33d3e7d7344445e09eaf73f1f8b2471028233a2194c148aca",
+    "icarus1.log": "cc645dd2ed7501cf7fbcb63fba929b91e1dadc485f95511e2727587e9db26351",
+    "missing-submodule-negative.json": "e5ead535b11502a060aa34fe3fd091d94e675f0ab83c4a11e21d7d2abebe5e43",
+    "offline-doctor.json": "2060bce5a485fd899d3c1804a710634abad14016ee30d5a989c9444f214f2167",
+    "offline-real1-xpack.json": "dbdbb2f5d2c8eb86ffabf5a6dcb7ca2e9d7d40d96a57dc645d9cd38d28b9e4fd",
+    "offline-real1-xpack.log": "63bc449df8ce2b20b84d479697d1a963b82bf75c2b8f6f1fc698512bd469f396",
+    "offline-real1.json": "f8d94483419e136e983f5da69ed3b1f6d77803a128447d5a7d8e33dabba63a86",
+    "offline-real1.log": "edc3b3d8188c27dfc8a0ab856caaad47a6af9fd47a1f300a65f484d98ff2ec71",
+    "offline-vectors.json": "736c769cbb1e0bb0de9fa4aa74080b185455b9439ce7d4049fdf132a0d7aa6ce",
+    "real12.json": "e4920b7e00b2ef272235bc143c779e20bbea98a96e46dc0d2d6992cb3fd07fa7",
+    "real12.log": "5a8dca705794db18c7b351c843c0aafcf5fafaecdf2ba534fb26dcceede548b8",
+    "review.md": "3769baa92b33a6664a913091ca88cfe0945c5b28efabd33b5f95d9de88f98be3",
+    "rtl-generate.log": "2469a5b1993e3daa82f2b4f4644418f332e5d1e071213b78e0a4edaeb57c542c",
+    "rtl-sync.json": "65030a8f7056cc6ce4d1876edf705f2a1fc8e694e1e89469d001b8f3e7ed0915",
+    "synthetic1.json": "0d5abe6f5cc078668498355f50e9f237d338d6ee4f4670bf84e6bf02d3c3e2f1",
+    "synthetic1.log": "985d7edea8f2a53e080799d0df617824463908d3241debeedb85ee10d7c0bf5a",
+    "vectors12.json": "e145fb850090bf936f31ffac972cc80ab755160fca50999ea25d59dba0b122f9"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "started_utc": "2026-10-27T12:07:59.840612+00:00",
+  "scope": "development acceptance; official SRAM/PPA/600-sample accuracy still required",
+  "steps": [
+    {
+      "name": "host",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "vectors",
+      "command": [
+        "/usr/bin/python3",
+        "/mnt/e/E203/worktrees/e203-c-integration/tools/scripts/e203_soc.py",
+        "--mode",
+        "check-vectors",
+        "--tasks",
+        "12",
+        "--sim",
+        "verilator",
+        "--cross-prefix",
+        "riscv64-unknown-elf-",
+        "--out",
+        "/mnt/e/E203/worktrees/e203-c-integration/build/acceptance/prep-standard/vectors"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "doctor",
+      "command": [
+        "/usr/bin/python3",
+        "/mnt/e/E203/worktrees/e203-c-integration/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--tasks",
+        "1",
+        "--sim",
+        "verilator",
+        "--cross-prefix",
+        "riscv64-unknown-elf-",
+        "--out",
+        "/mnt/e/E203/worktrees/e203-c-integration/build/acceptance/prep-standard/doctor"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "baseline",
+      "command": [
+        "/usr/bin/python3",
+        "/mnt/e/E203/worktrees/e203-c-integration/tools/scripts/e203_soc.py",
+        "--mode",
+        "baseline",
+        "--tasks",
+        "1",
+        "--sim",
+        "iverilog",
+        "--cross-prefix",
+        "riscv64-unknown-elf-",
+        "--out",
+        "/mnt/e/E203/worktrees/e203-c-integration/build/acceptance/prep-standard/baseline"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic1",
+      "command": [
+        "/usr/bin/python3",
+        "/mnt/e/E203/worktrees/e203-c-integration/tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "1",
+        "--sim",
+        "verilator",
+        "--cross-prefix",
+        "riscv64-unknown-elf-",
+        "--out",
+        "/mnt/e/E203/worktrees/e203-c-integration/build/acceptance/prep-standard/synthetic1"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "real12",
+      "command": [
+        "/usr/bin/python3",
+        "/mnt/e/E203/worktrees/e203-c-integration/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "verilator",
+        "--cross-prefix",
+        "riscv64-unknown-elf-",
+        "--out",
+        "/mnt/e/E203/worktrees/e203-c-integration/build/acceptance/prep-standard/real12"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "finished_utc": "2026-10-27T12:25:22.320466+00:00"
+}

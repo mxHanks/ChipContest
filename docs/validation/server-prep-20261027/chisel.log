@@ -1,0 +1,56 @@
+The `--offline` option is experimental
+Please bear in mind that non-ideal user experience should be expected.
+If you encounter any bugs or have feedback to share, make sure to reach out to the maintenance team at https://github.com/VirtusLab/scala-cli
+[[33mwarn[0m] Scala 2.13.18 is no longer supported by the test-runner module.
+[[33mwarn[0m] Defaulting to a legacy test-runner module version: 1.9.1.
+[[33mwarn[0m] To use the latest test-runner, upgrade Scala to at least 3.3.
+[32mDotProductEngineTest:[0m
+[32m点积顶层功能测试[0m
+[32m- 应该可以输出正确的计算结果[0m
+[32m- 应该能以合理的时序发送预处理信号[0m
+[32mMacPEArrayTest:[0m
+[32mMacPEArray test[0m
+[32m- 应该能正确执行 8 路并行乘累加[0m
+[32mLinearComputeCoreTest:[0m
+[32mLinearComputeCore 集成功能测试[0m
+[PASS] group=0, bias=0, latency=66 cycles
+[PASS] group=1, bias=100, latency=66 cycles
+[32m- 应正确从存储器读取数据，完成两组 8 路点积[0m
+[32mLinearComputeCore SRAM 集成测试[0m
+[PASS] group=15
+[PASS] group=16
+[32m- 应正确计算跨 SRAM 边界的两个 group[0m
+[32mLinearLayerEngineTest:[0m
+[32mLinearLayerEngine 自动调度测试[0m
+[PASS] row=0 group=0 latency=68 cycles
+[PASS] row=0 group=1 latency=68 cycles
+[PASS] row=1 group=0 latency=68 cycles
+[PASS] row=1 group=1 latency=68 cycles
+[32m- 应自动遍历两行两组并正确输出结果[0m
+[32mLinearLayerFullTest:[0m
+[32mLinearLayerEngine 完整矩阵测试[0m
+[PASS] Full matrix 99x256: 25344 outputs verified
+[32m- 应自动计算 99x256 个输出并与参考结果一致[0m
+[32mWeightBankArrayTest:[0m
+[32m测试 WeightBankArray 相关功能[0m
+[32m- 能否正常完成读写操作[0m
+[32mWeightBankTest:[0m
+[32m对单个 WeighBank 进行功能测试[0m
+[32m- 应该可以按照规定的时序读出和写入[0m
+[PASS] addr=1023, expected=-123
+[PASS] addr=1024, expected=456
+[PASS] addr=1025, expected=-789
+[PASS] addr=0, expected=11
+[PASS] addr=2047, expected=1234
+[PASS] addr=1, expected=22
+[PASS] addr=1024, expected=456
+[PASS] addr=1023, expected=-123
+[32m- 应该正确完成写入、连续读取和跨 SRAM 边界访问[0m
+[32mXRowBufferTest:[0m
+[32m测试 XRow 存储的功能是否正常[0m
+[32m- 应该正常的读写[0m
+[36mRun completed in 19 minutes, 29 seconds.[0m
+[36mTotal number of tests run: 11[0m
+[36mSuites: completed 8, aborted 0[0m
+[36mTests: succeeded 11, failed 0, canceled 0, ignored 0, pending 0[0m
+[32mAll tests passed.[0m

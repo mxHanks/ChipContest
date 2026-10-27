@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "mode": "doctor",
+  "tasks": 1,
+  "scope": "development toolchain/submodule preflight; actual RV32 firmware build; no simulation",
+  "tools": {
+    "git": "/usr/bin/git",
+    "make": "/usr/bin/make",
+    "iverilog": "/usr/bin/iverilog",
+    "vvp": "/usr/bin/vvp",
+    "riscv64-unknown-elf-gcc": "/usr/bin/riscv64-unknown-elf-gcc",
+    "riscv64-unknown-elf-objcopy": "/usr/bin/riscv64-unknown-elf-objcopy",
+    "riscv64-unknown-elf-objdump": "/usr/bin/riscv64-unknown-elf-objdump",
+    "verilator": "/usr/local/bin/verilator",
+    "g++": "/usr/bin/g++"
+  },
+  "versions": {
+    "iverilog": [
+      "Icarus Verilog version 12.0 (stable) ()",
+      "",
+      "Copyright (c) 2000-2021 Stephen Williams (steve@icarus.com)"
+    ],
+    "riscv64-unknown-elf-gcc": [
+      "riscv64-unknown-elf-gcc (13.2.0-11ubuntu1+12) 13.2.0",
+      "Copyright (C) 2023 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ],
+    "verilator": [
+      "Verilator 5.052 2026-09-05 rev v5.052-61-g983a06a16"
+    ],
+    "g++": [
+      "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "Copyright (C) 2023 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ]
+  },
+  "main_commit": "6d458dfb37246e2c16c94fac0fd73dd9b4bde573",
+  "e203_commit": "e36d34a52e6eef93fd0bdfed1b13009e1056bea3",
+  "firmware_elf_sha256": "c513a25798fb547990383b661c897cba388cadb7c5361f4b68651b4867d7844e",
+  "firmware_image_sha256": "f320d5319774eecd30e84f638cd20c91dc50b9d1252dc2bc0182c8b517d30da7"
+}

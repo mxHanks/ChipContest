@@ -1,0 +1,60 @@
+{
+  "status": "FAIL",
+  "started_utc": "2026-10-27T12:16:58.424016+00:00",
+  "scope": "development acceptance; official SRAM/PPA/600-sample accuracy still required",
+  "steps": [
+    {
+      "name": "host",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "vectors",
+      "command": [
+        "/usr/bin/python3",
+        "/mnt/e/E203/worktrees/e203-c-integration/tools/scripts/e203_soc.py",
+        "--mode",
+        "check-vectors",
+        "--tasks",
+        "12",
+        "--sim",
+        "verilator",
+        "--cross-prefix",
+        "",
+        "--out",
+        "/mnt/e/E203/worktrees/e203-c-integration/build/acceptance/prep-negative/vectors"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "doctor",
+      "command": [
+        "/usr/bin/python3",
+        "/mnt/e/E203/worktrees/e203-c-integration/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--tasks",
+        "1",
+        "--sim",
+        "verilator",
+        "--cross-prefix",
+        "",
+        "--out",
+        "/mnt/e/E203/worktrees/e203-c-integration/build/acceptance/prep-negative/doctor"
+      ],
+      "status": "FAIL"
+    }
+  ],
+  "failed_step": "doctor",
+  "error": "command exit 1: /mnt/e/E203/worktrees/e203-c-integration/build/acceptance/prep-negative/doctor.log",
+  "finished_utc": "2026-10-27T12:17:02.441914+00:00"
+}

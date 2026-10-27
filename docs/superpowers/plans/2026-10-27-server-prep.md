@@ -33,16 +33,16 @@ Produces: check_vectors(directory, tasks) and --mode check-vectors with default 
 Files: e203_soc.py, tools/scripts/server_accept.py; test_runner.py, test_accept.py; .github/workflows/host-checks.yml.
 Consumes: Task 1 checker, existing runner modes and exact submodule pin.
 Produces: doctor with RV32 build/identity validation; fail-closed standard/full acceptance CLI.
-- [ ] Reproduce missing-submodule and failing-step cases in runnable tests.
-- [ ] Validate submodule root/gitlink, actual firmware build and compiler versions in doctor. Run host, vector, doctor, baseline, synthetic1, real12 sequentially; --full additionally runs Chisel and Icarus1.
-- [ ] Run all host tests, doctor and actual complete acceptance; retain logs and commit.
-- [ ] Enable the same lightweight host/vector checks on GitHub and inspect the actual run.
+- [x] Reproduce missing-submodule and failing-step cases in runnable tests.
+- [x] Validate submodule root/gitlink, actual firmware build and compiler versions in doctor. Run host, vector, doctor, baseline, synthetic1, real12 sequentially; --full additionally runs Chisel and Icarus1.
+- [x] Run all host tests, doctor and actual complete acceptance; retain logs and commit.
+- [x] Enable the same lightweight host/vector checks on GitHub and inspect the actual run.
 
 ### Task 3: Offline reconstruction and handoff
 
 Files: docs/server-handoff.md, README.md, quickstart.md, docs/validation/server-prep-20261027/.
 Consumes: committed source, E203 gitlink, successful Task 1/2 evidence.
 Produces: documented native bundle recipe, local bundle pair plus hashes, offline restoration evidence and official-material checklist.
-- [ ] Create/verify both bundles; restore into a new directory without network, verify commits and run host/real1 there.
-- [ ] Document exact commands, acceptance limits and official inputs still needed; copy compact immutable evidence.
-- [ ] Fresh final review, fix important findings with RED→GREEN checks, rerun affected checks, commit/push only the new branch.
+- [x] Create/verify both bundles; restore into a new directory without network, verify commits and run host/real1 there.
+- [x] Document exact commands, acceptance limits and official inputs still needed; copy compact immutable evidence.
+- [x] Fresh final review, fix important findings with RED→GREEN checks, rerun affected checks, commit/push only the new branch.
