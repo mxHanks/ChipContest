@@ -1,0 +1,19 @@
+name: Host and integer vector checks
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  host-checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Check the host tools and their failure paths
+        run: python3 -m unittest discover -s tests/e203 -p 'test_*.py'
+      - name: Independently recompute the 12-layer integer fixture
+        run: python3 tools/scripts/e203_soc.py --mode check-vectors --tasks 12
