@@ -42,6 +42,47 @@ def read_mem(path, bits, count):
     return [n - (1 << bits) if n & (1 << (bits-1)) else n for n in values]
 
 
+def load_fixture(directory, tasks):
+    archive=TESTS/'vectors/kwt-silence-v1.tar.gz'
+    manifest=json.loads((TESTS/'vectors/kwt-silence-v1.json').read_text())
+    if sha(archive)!=manifest['archive_sha256']:
+        raise ValueError('fixture archive hash mismatch')
+    with tarfile.open(archive) as tar:
+        for layer in range(tasks):
+            dest=directory/f'layer_{layer:02d}'
+            dest.mkdir(parents=True)
+            for name in ['x','w','bias','y']:
+                key=f'layer_{layer:02d}/{name}.mem'
+                member=tar.getmember(key)
+                if not member.isfile(): raise ValueError('non-file fixture member')
+                data=tar.extractfile(member).read()
+                if hashlib.sha256(data).hexdigest()!=manifest['files'][key]:
+                    raise ValueError('fixture tensor hash mismatch: '+key)
+                (dest/(name+'.mem')).write_bytes(data)
+    return manifest
+
+
+def check_vectors(directory, tasks):
+    """Independent unbounded-integer reference; never supplies CPU/RTL results."""
+    if not 1 <= tasks <= 12: raise ValueError('invalid task count')
+    layers=[]
+    for layer in range(tasks):
+        source=directory/f'layer_{layer:02d}'
+        x=read_mem(source/'x.mem',16,6336)
+        w=read_mem(source/'w.mem',16,16384)
+        bias=read_mem(source/'bias.mem',40,256)
+        y=read_mem(source/'y.mem',48,25344)
+        for row in range(99):
+            for col in range(256):
+                expected=bias[col]+sum(x[row*64+k]*w[k*256+col] for k in range(64))
+                if expected!=y[row*256+col]:
+                    raise ValueError(f'vector mismatch layer={layer} row={row} col={col}: '
+                                     f'expected {expected}, got {y[row*256+col]}')
+        layers.append({'layer':layer,'outputs':25344,
+                       'sha256':{p.name:sha(p) for p in sorted(source.glob('*.mem'))}})
+    return layers
+
+
 def check_log(log, tasks):
     if re.search(r'FATAL|TEST_FAIL|%Error|Time Out|timeout', log, re.I):
         raise ValueError('simulation reported failure')
@@ -122,7 +163,7 @@ def baseline(out, prefix):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--mode',choices=['doctor','baseline','synthetic','real','vectors'],default='synthetic')
+    parser.add_argument('--mode',choices=['doctor','baseline','synthetic','real','vectors','check-vectors'],default='synthetic')
     parser.add_argument('--tasks',type=int,choices=range(1,13),default=1)
     parser.add_argument('--vectors',type=Path)
     parser.add_argument('--sim',choices=['verilator','iverilog'],default='verilator')
@@ -139,18 +180,27 @@ def main():
             'scope':'development platform; TB shared-memory preload excluded; no official PPA/accuracy claim'}
     try:
         required=['git','make','iverilog','vvp',args.cross_prefix+'gcc',args.cross_prefix+'objcopy',args.cross_prefix+'objdump']
-        if args.sim=='verilator' and args.mode!='baseline':
+        if args.mode=='check-vectors': required=['git']
+        elif args.sim=='verilator' and args.mode!='baseline':
             required+=['verilator','g++']
         report['tools']={name:shutil.which(name) for name in required}
         missing=[n for n,p in report['tools'].items() if p is None]
         if missing: raise RuntimeError('missing tools: '+', '.join(missing))
         report['versions']={}
         for name in ['iverilog',args.cross_prefix+'gcc','verilator','g++']:
-            if shutil.which(name):
-                report['versions'][name]=run([name,'-V' if name=='iverilog' else '--version'],ROOT,out/(name.replace('/','_')+'-version.log')).splitlines()[1:3]
+            if name in report['tools']:
+                report['versions'][name]=run([name,'-V' if name=='iverilog' else '--version'],ROOT,out/(name.replace('/','_')+'-version.log')).splitlines()[:3]
         report['main_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
         report['e203_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=E203,text=True).strip()
-        if args.mode=='doctor':
+        if args.mode=='check-vectors':
+            directory=args.vectors.resolve() if args.vectors else out/'vectors'
+            if args.vectors is None: report['fixture']=load_fixture(directory,args.tasks)
+            report['layers']=check_vectors(directory,args.tasks)
+            report['outputs']=args.tasks*25344
+            report['runner_sha256']=sha(Path(__file__))
+            report['scope']='exact integer XW+b check; no RTL or floating-point accuracy claim'
+            report['status']='PASS'
+        elif args.mode=='doctor':
             report['status']='PASS'
         else:
             # Always refresh the installed RTL, following the repository quickstart.
@@ -166,24 +216,7 @@ def main():
                     synthetic(directory,args.tasks)
                 elif args.mode=='real':
                     directory=out/'vectors'
-                    directory.mkdir()
-                    archive=TESTS/'vectors/kwt-silence-v1.tar.gz'
-                    manifest=json.loads((TESTS/'vectors/kwt-silence-v1.json').read_text())
-                    if sha(archive)!=manifest['archive_sha256']: raise ValueError('fixture archive hash mismatch')
-                    # Only regular expected tensor members; no arbitrary archive paths.
-                    with tarfile.open(archive) as tar:
-                        for layer in range(args.tasks):
-                            dest=directory/f'layer_{layer:02d}'
-                            dest.mkdir()
-                            for name in ['x','w','bias','y']:
-                                member=tar.getmember(f'layer_{layer:02d}/{name}.mem')
-                                if not member.isfile(): raise ValueError('non-file fixture member')
-                                data=tar.extractfile(member).read()
-                                key=f'layer_{layer:02d}/{name}.mem'
-                                if hashlib.sha256(data).hexdigest()!=manifest['files'][key]:
-                                    raise ValueError('fixture tensor hash mismatch: '+key)
-                                (dest/(name+'.mem')).write_bytes(data)
-                    report['fixture']=manifest
+                    report['fixture']=load_fixture(directory,args.tasks)
                 else:
                     if args.vectors is None: raise ValueError('--vectors is required')
                     directory=args.vectors.resolve()
