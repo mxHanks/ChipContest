@@ -297,3 +297,16 @@ python3 tools/scripts/e203_soc.py --mode vectors --vectors /实际数据目录 -
 每个 `layer_XX/` 包含定长十六进制补码 `x.mem`、`w.mem`、`bias.mem`、`y.mem`。详细布局、共享存储映射、时钟/计时范围、`--waves`、四态选项及官方服务器接入顺序见 [C 角色集成说明](docs/e203-integration.md)。开发平台的输入预装载不计入当前测量，不能将其周期直接当比赛正式吞吐量。
 
 Chisel 完整回归仍按 README 执行 `scala-cli test .`；已有系统 JDK 时可增加 `--server=false --jvm system`。项目 Scala/Chisel/ScalaTest 版本保持不变。
+
+## 服务器接手验收
+
+在接续分支 `feature/e203-server-prep` 中，可用一个入口顺序执行上述开发验收并保留统一报告：
+
+```bash
+python3 tools/scripts/server_accept.py
+python3 tools/scripts/server_accept.py --full
+```
+
+向量交付后可先独立检查整数参考：`python3 tools/scripts/e203_soc.py --mode check-vectors --tasks 12 --vectors /数据目录`。省略 `--vectors` 使用内置真实夹具。此检查不依赖仿真器或交叉编译器，不代表浮点精度验收。
+
+doctor 还会实际构建 RV32 固件并检查子模块提交；缺失子模块须按本页开头初始化。离线 Git bundle、工具链、Scala缓存及官方平台检查表见 [服务器交接说明](docs/server-handoff.md)。

@@ -30,12 +30,13 @@ Produces: check_vectors(directory, tasks) and --mode check-vectors with default 
 
 ### Task 2: Real preflight and sequential acceptance
 
-Files: e203_soc.py, tools/scripts/server_accept.py; test_runner.py, test_accept.py.
+Files: e203_soc.py, tools/scripts/server_accept.py; test_runner.py, test_accept.py; .github/workflows/host-checks.yml.
 Consumes: Task 1 checker, existing runner modes and exact submodule pin.
 Produces: doctor with RV32 build/identity validation; fail-closed standard/full acceptance CLI.
 - [ ] Reproduce missing-submodule and failing-step cases in runnable tests.
 - [ ] Validate submodule root/gitlink, actual firmware build and compiler versions in doctor. Run host, vector, doctor, baseline, synthetic1, real12 sequentially; --full additionally runs Chisel and Icarus1.
 - [ ] Run all host tests, doctor and actual complete acceptance; retain logs and commit.
+- [ ] Enable the same lightweight host/vector checks on GitHub and inspect the actual run.
 
 ### Task 3: Offline reconstruction and handoff
 

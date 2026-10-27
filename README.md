@@ -169,6 +169,8 @@ python3 tools/scripts/e203_soc.py --mode real --tasks 12
 
 原有 Chisel/SoC 测试及其运行方式继续保留。真实回放夹具只覆盖一个 KWT 静音样本的 12 层 FFN1 输入，不能代替完整数据集精度评估。
 
+服务器接手准备位于 `feature/e203-server-prep`，在 C 集成基础上增加参考向量独立核算、实际工具链预检和一键验收。执行 `python3 tools/scripts/server_accept.py`，扩展四态/Chisel回归可增加 `--full`。离线交接包恢复及官方材料到位后的检查顺序见 [服务器交接说明](docs/server-handoff.md)。
+
 ## Git 协作规范
 
 ### 分支管理
