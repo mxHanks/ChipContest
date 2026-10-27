@@ -30,7 +30,8 @@ def run(command, cwd, logfile, timeout=1800):
                                 stderr=subprocess.STDOUT, timeout=timeout)
     if result.returncode:
         raise RuntimeError(f'command exit {result.returncode}: {logfile}')
-    return logfile.read_text(errors='replace')
+    # Keep invocation metadata in the saved log, outside parsed process output.
+    return logfile.read_text(errors='replace').split('\n',1)[1]
 
 
 def read_mem(path, bits, count):
@@ -86,11 +87,12 @@ def check_vectors(directory, tasks):
 def check_log(log, tasks):
     if re.search(r'FATAL|TEST_FAIL|%Error|Time Out|timeout', log, re.I):
         raise ValueError('simulation reported failure')
-    found = re.findall(r'TASK_PASS layer=(\d+) outputs=25344 writes=50688 cycles=(\d+) firmware_cycles=(\d+)', log)
-    if [int(x[0]) for x in found] != list(range(tasks)):
+    found = re.findall(r'^TASK_PASS layer=(\d+) outputs=25344 writes=50688 cycles=(\d+) firmware_cycles=(\d+)$', log,re.M)
+    if ([int(x[0]) for x in found] != list(range(tasks)) or
+            len(found)!=len(re.findall(r'^TASK_PASS\b',log,re.M))):
         raise ValueError('missing, duplicate or unordered layer completion')
     end = f'SOC_PASS tasks={tasks} outputs={tasks*25344} writes={tasks*50688}'
-    if log.count(end) != 1:
+    if re.findall(r'^SOC_PASS.*$',log,re.M) != [end]:
         raise ValueError('missing complete SoC result marker')
     return [dict(layer=int(a), cycles=int(b), firmware_cycles=int(c)) for a,b,c in found]
 
@@ -130,6 +132,21 @@ def compile_firmware(out, prefix):
     if not re.search(r'80000086\s+<write_tohost>', dump):
         raise ValueError('firmware completion address is not 0x80000086')
     return target
+
+
+def verify_submodule(root, submodule):
+    # git -C in an empty submodule directory otherwise silently finds the parent.
+    if not (submodule/'.git').exists():
+        raise ValueError('E203 submodule is not initialized; run git submodule update --init --recursive')
+    top=subprocess.check_output(['git','rev-parse','--show-toplevel'],cwd=submodule,text=True).strip()
+    if Path(top).resolve()!=submodule.resolve():
+        raise ValueError('E203 submodule is not initialized as its own repository')
+    commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=submodule,text=True).strip()
+    pin=subprocess.check_output(['git','ls-tree','HEAD',submodule.relative_to(root).as_posix()],
+                                cwd=root,text=True).split()
+    if len(pin)<3 or pin[0]!='160000' or pin[2]!=commit:
+        raise ValueError('E203 commit does not match the main repository gitlink')
+    return commit
 
 
 def baseline(out, prefix):
@@ -191,7 +208,7 @@ def main():
             if name in report['tools']:
                 report['versions'][name]=run([name,'-V' if name=='iverilog' else '--version'],ROOT,out/(name.replace('/','_')+'-version.log')).splitlines()[:3]
         report['main_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
-        report['e203_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=E203,text=True).strip()
+        if args.mode!='check-vectors': report['e203_commit']=verify_submodule(ROOT,E203)
         if args.mode=='check-vectors':
             directory=args.vectors.resolve() if args.vectors else out/'vectors'
             if args.vectors is None: report['fixture']=load_fixture(directory,args.tasks)
@@ -201,6 +218,10 @@ def main():
             report['scope']='exact integer XW+b check; no RTL or floating-point accuracy claim'
             report['status']='PASS'
         elif args.mode=='doctor':
+            firmware=compile_firmware(out,args.cross_prefix)
+            report['firmware_elf_sha256']=sha(firmware)
+            report['firmware_image_sha256']=sha(Path(str(firmware)+'.verilog'))
+            report['scope']='development toolchain/submodule preflight; actual RV32 firmware build; no simulation'
             report['status']='PASS'
         else:
             # Always refresh the installed RTL, following the repository quickstart.

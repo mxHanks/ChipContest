@@ -10,6 +10,31 @@ spec.loader.exec_module(soc)
 
 
 class RunnerTests(unittest.TestCase):
+    def test_submodule_must_have_own_repository_and_match_gitlink(self):
+        import subprocess
+        verify=getattr(soc,'verify_submodule',None)
+        self.assertIsNotNone(verify, 'submodule preflight is missing')
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            sub=root/'third-party/e203_hbirdv2'
+            sub.mkdir(parents=True)
+            def git(cwd,*args):
+                return subprocess.check_output(['git','-c','user.name=Test',
+                    '-c','user.email=test@example.invalid',*args],cwd=cwd,text=True,stderr=subprocess.DEVNULL).strip()
+            git(root,'init')
+            git(root,'commit','--allow-empty','-m','root')
+            with self.assertRaisesRegex(ValueError,'not initialized'):
+                verify(root,sub)
+            git(sub,'init')
+            git(sub,'commit','--allow-empty','-m','submodule')
+            first=git(sub,'rev-parse','HEAD')
+            git(root,'update-index','--add','--cacheinfo',f'160000,{first},third-party/e203_hbirdv2')
+            git(root,'commit','-m','pin')
+            self.assertEqual(verify(root,sub), first)
+            git(sub,'commit','--allow-empty','-m','unpinned')
+            with self.assertRaisesRegex(ValueError,'gitlink'):
+                verify(root,sub)
+
     def test_signed_mem_and_exact_shape(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / 'x.mem'
@@ -27,7 +52,10 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(soc.check_log(good, 1)[0]['cycles'], 99)
         for bad in [good.replace('25344', '1'), good.replace('TASK_PASS', 'SKIPPED'),
                     good.replace('layer=0', 'layer=1'), good + 'FATAL: mismatch\n', '',
-                    good.replace('SOC_PASS', 'NO_COMPLETION')]:
+                    good.replace('SOC_PASS', 'NO_COMPLETION'),
+                    good.replace('SOC_PASS tasks=1 outputs=25344 writes=50688',
+                                 'SOC_PASS tasks=1 outputs=25344 writes=506880'),
+                    good+'SOC_PASS tasks=2 outputs=50688 writes=101376\n']:
             with self.assertRaises(ValueError):
                 soc.check_log(bad, 1)
 
@@ -43,6 +71,16 @@ class RunnerTests(unittest.TestCase):
             soc.run([sys.executable, '-c',
                      'import os; assert os.path.samefile(os.getcwd(), os.environ["PWD"])'],
                     Path(tmp), Path(tmp)/'pwd.log')
+
+    def test_command_metadata_cannot_be_mistaken_for_simulator_failure(self):
+        import sys
+        good=('TASK_PASS layer=0 outputs=25344 writes=50688 cycles=99 firmware_cycles=100\n'
+              'SOC_PASS tasks=1 outputs=25344 writes=50688\n')
+        with tempfile.TemporaryDirectory() as tmp:
+            log=Path(tmp)/'run.log'
+            output=soc.run([sys.executable,'-c',f'print({good!r})','/tmp/timeout/FATAL'],ROOT,log)
+            self.assertEqual(soc.check_log(output,1)[0]['cycles'],99)
+            self.assertIn('/tmp/timeout/FATAL',log.read_text())
 
     def test_synthetic_distinguishes_layers_and_signs(self):
         with tempfile.TemporaryDirectory() as tmp:
