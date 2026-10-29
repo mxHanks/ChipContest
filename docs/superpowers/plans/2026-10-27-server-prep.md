@@ -2,7 +2,7 @@
 
 > For agentic workers: execute inline using superpowers:executing-plans; request one final independent code review.
 
-**Goal:** Deliver reproducible, offline-capable C-role server acceptance.
+**Goal:** Deliver reproducible, offline-capable xu server acceptance.
 **Architecture:** Reuse e203_soc.py and Git bundles, add only a stdlib integer checker and sequential acceptance entry point.
 **Tech Stack:** Existing Python3, Git, RV32 GCC, Icarus/Verilator and Scala CLI.
 **Spec:** docs/superpowers/specs/2026-10-27-server-prep-design.md

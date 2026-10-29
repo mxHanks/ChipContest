@@ -1,6 +1,6 @@
-# E203 C integration
+# E203 xu integration
 
-Scope approved by the user's C-role assignment and explicit execution request. Follow README and both main/feature quickstarts; work only on new feature branches. Keep the Chisel core, existing MMIO ABI and upstream CPU unchanged. Main base: 9d5f800; E203 base: 999913e.
+Scope approved by the user's xu assignment and explicit execution request. Follow README and both main/feature quickstarts; work only on new feature branches. Keep the Chisel core, existing MMIO ABI and upstream CPU unchanged. Main base: 9d5f800; E203 base: 999913e.
 
 ## Approach
 

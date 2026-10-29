@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproducible C-role development SoC checks; Python standard library only."""
+"""Reproducible xu development SoC checks; Python standard library only."""
 import argparse
 import hashlib
 import json

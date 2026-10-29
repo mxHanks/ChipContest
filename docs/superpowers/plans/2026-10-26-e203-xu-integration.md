@@ -1,11 +1,11 @@
-# E203 C Integration Implementation Plan
+# E203 xu Integration Implementation Plan
 
 > For agentic workers: execute inline using superpowers:executing-plans, then request one fresh whole-branch review.
 
-**Goal:** Complete the C-role development SoC chain and portable regression entry point.
+**Goal:** Complete the xu development SoC chain and portable regression entry point.
 **Architecture:** Preserve eight-PE core and ABI; add optional external memory pins, C firmware, an independent memory/writeback scoreboard and a stdlib Python runner.
 **Tech Stack:** Existing Verilog/SystemVerilog, bare-metal RV32 GCC, Icarus 12, Verilator, Python3; existing Scala CLI project for core regression.
-**Spec:** docs/superpowers/specs/2026-10-26-e203-c-integration-design.md
+**Spec:** docs/superpowers/specs/2026-10-26-e203-xu-integration-design.md
 
 ## Global Constraints
 
@@ -28,7 +28,7 @@ Produces: signed full-matrix CPU writes to shared memory; TASK_PASS / SOC_PASS m
 - [x] Add optional external ICB ports, preserving default behavior.
 - [x] Compile/run a complete synthetic layer and a negative golden-data test.
 - [x] Run the existing default ADD and four assembly tests through repository make flow.
-- [x] Commit/push E203 changes on new feature/e203-c-integration branch before main gitlink.
+- [x] Commit/push E203 changes on new feature/e203-xu-integration branch before main gitlink.
 
 ### Task 2: Portable runner and 12-layer coverage
 

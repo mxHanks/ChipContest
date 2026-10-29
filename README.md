@@ -76,10 +76,10 @@ git clone https://github.com/mxhanks/ChipContest.git
 cd ChipContest
 ```
 
-基础 E203 集成位于 `feature/e203-integration`；C 角色完整矩阵与写回回归接续于 `feature/e203-c-integration`。运行本分支新增流程时使用：
+基础 E203 集成位于 `feature/e203-integration`；xu 完整矩阵与写回回归接续于 `feature/e203-xu-integration`。运行本分支新增流程时使用：
 
 ```bash
-git switch feature/e203-c-integration
+git switch feature/e203-xu-integration
 git submodule update --init --recursive
 ```
 
@@ -156,9 +156,9 @@ generated/LinearComputeCore/
 
 上表中的 Chisel 完整矩阵测试由 Testbench 提供输入行、Bias 和结果接收握手；CPU 数据搬运与共享存储写回的独立验证见下节。
 
-### C 角色集成分支
+### xu 集成分支
 
-`feature/e203-c-integration` 接续上述集成分支，增加裸机 C 驱动、完整矩阵调度、可选外部系统存储 ICB 接口和独立写回检查器。运行入口与验证范围见 [quickstart.md](quickstart.md#c-角色完整矩阵与写回回归) 和 [集成说明](docs/e203-integration.md)。此路径使用开发版 512 KiB 行为共享存储；官方平台、SRAM 宏及正式 PPA 仍需材料到位后验证。
+`feature/e203-xu-integration` 接续上述集成分支，增加裸机 C 驱动、完整矩阵调度、可选外部系统存储 ICB 接口和独立写回检查器。运行入口与验证范围见 [quickstart.md](quickstart.md#xu-完整矩阵与写回回归) 和 [集成说明](docs/e203-integration.md)。此路径使用开发版 512 KiB 行为共享存储；官方平台、SRAM 宏及正式 PPA 仍需材料到位后验证。
 
 ```bash
 python3 -m unittest discover -s tests/e203 -p test_runner.py
@@ -169,7 +169,7 @@ python3 tools/scripts/e203_soc.py --mode real --tasks 12
 
 原有 Chisel/SoC 测试及其运行方式继续保留。真实回放夹具只覆盖一个 KWT 静音样本的 12 层 FFN1 输入，不能代替完整数据集精度评估。
 
-服务器接手准备位于 `feature/e203-server-prep`，在 C 集成基础上增加参考向量独立核算、实际工具链预检和一键验收。执行 `python3 tools/scripts/server_accept.py`，扩展四态/Chisel回归可增加 `--full`。离线交接包恢复及官方材料到位后的检查顺序见 [服务器交接说明](docs/server-handoff.md)。
+服务器接手准备位于 `feature/e203-xu-server-prep`，在 xu 的集成基础上增加参考向量独立核算、实际工具链预检和一键验收。执行 `python3 tools/scripts/server_accept.py`，扩展四态/Chisel回归可增加 `--full`。离线交接包恢复及官方材料到位后的检查顺序见 [服务器交接说明](docs/server-handoff.md)。
 
 ## Git 协作规范
 
