@@ -267,9 +267,9 @@ done
 每项测试都应出现 `TEST_PASS`。如果修改了 E203 RTL，应先执行
 `make clean` 和 `make install`，再运行测试，避免使用旧的 RTL 副本。
 
-## C 角色完整矩阵与写回回归
+## xu 完整矩阵与写回回归
 
-在本分支 `feature/e203-c-integration`，先按前文初始化子模块和工具。完整矩阵默认使用 Verilator 的 `--binary --timing`（以及 g++）；原 ADD 和四项汇编回归仍使用 Icarus Verilog 12。Python 入口只依赖标准库。
+在本分支 `feature/e203-xu-integration`，先按前文初始化子模块和工具。完整矩阵默认使用 Verilator 的 `--binary --timing`（以及 g++）；原 ADD 和四项汇编回归仍使用 Icarus Verilog 12。Python 入口只依赖标准库。
 
 ```bash
 git submodule update --init --recursive
@@ -294,6 +294,6 @@ SOC_PASS tasks=12 outputs=304128 writes=608256
 python3 tools/scripts/e203_soc.py --mode vectors --vectors /实际数据目录 --tasks 12
 ```
 
-每个 `layer_XX/` 包含定长十六进制补码 `x.mem`、`w.mem`、`bias.mem`、`y.mem`。详细布局、共享存储映射、时钟/计时范围、`--waves`、四态选项及官方服务器接入顺序见 [C 角色集成说明](docs/e203-integration.md)。开发平台的输入预装载不计入当前测量，不能将其周期直接当比赛正式吞吐量。
+每个 `layer_XX/` 包含定长十六进制补码 `x.mem`、`w.mem`、`bias.mem`、`y.mem`。详细布局、共享存储映射、时钟/计时范围、`--waves`、四态选项及官方服务器接入顺序见 [xu 集成说明](docs/e203-integration.md)。开发平台的输入预装载不计入当前测量，不能将其周期直接当比赛正式吞吐量。
 
 Chisel 完整回归仍按 README 执行 `scala-cli test .`；已有系统 JDK 时可增加 `--server=false --jvm system`。项目 Scala/Chisel/ScalaTest 版本保持不变。

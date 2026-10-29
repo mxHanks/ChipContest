@@ -1,6 +1,6 @@
-# C 角色：E203 开发平台集成
+# xu：E203 开发平台集成
 
-本工作沿用 README 的 Chisel 8 路 INT16/48 位累加器及 `feature/e203-integration`，保留原 ICB ABI 和计算核心。新代码分支统一为 `feature/e203-c-integration`（主仓库、E203 Fork 各自独立）。没有合入另一条 kwt-asic 硬件路线。
+本工作沿用 README 的 Chisel 8 路 INT16/48 位累加器及 `feature/e203-integration`，保留原 ICB ABI 和计算核心。新代码分支统一为 `feature/e203-xu-integration`（主仓库、E203 Fork 各自独立）。没有合入另一条 kwt-asic 硬件路线。
 
 ## 已接通的链路
 
@@ -13,7 +13,7 @@ E203 子模块 `e203_soc_top` 新增 `EXTERNAL_SYSMEM` 参数和外部系统存�
 与 quickstart 一致，需 Git、Make、Icarus Verilog 12、RISC-V GCC/binutils、Python3。完整矩阵默认使用 Verilator（需支持 `--binary --timing`）和 C++ 编译器；主机检查无需第三方 Python 包。Chisel 源回归使用 project.scala 指定的 Scala 2.13.18、Chisel 7.16.0 和 ScalaTest 3.2.20；不为适配机器而升级项目语言。
 
 ```bash
-git clone --recurse-submodules --branch feature/e203-c-integration https://github.com/mxHanks/ChipContest.git
+git clone --recurse-submodules --branch feature/e203-xu-integration https://github.com/mxHanks/ChipContest.git
 cd ChipContest
 python3 tools/scripts/e203_soc.py --mode doctor
 python3 -m unittest discover -s tests/e203 -p test_runner.py
@@ -29,7 +29,7 @@ scala-cli test . --server=false --jvm system
 
 `--sim iverilog` 可对完整矩阵使用四态仿真；默认 Verilator 是两态开发验证，不能替代四态检查。`--waves` 生成输出目录内的 VCD，适合单任务调试。`--max-cycles` 可限制仿真周期，外层另有墙钟超时。工具链名称不同时使用 `--cross-prefix /实际路径/riscv-none-elf-`。
 
-旧 main quickstart 的 SDK Hello World 属于 Legacy 参考。当前 Ubuntu GCC 的 ISA 命名要求显式 `RISCV_ARCH=rv32imac_zicsr_zifencei`；SDK 还依赖含 Newlib/`nosys.specs` 的完整裸机工具链。新 C 角色固件为 freestanding，不依赖 libc 或修改 SDK 源码，使用同样的显式 ISA 与 ilp32 ABI。官方 SDK 到位后在驱动外层适配启动/链接；不能把 SDK 示例构建失败隐藏为通过。
+旧 main quickstart 的 SDK Hello World 属于 Legacy 参考。当前 Ubuntu GCC 的 ISA 命名要求显式 `RISCV_ARCH=rv32imac_zicsr_zifencei`；SDK 还依赖含 Newlib/`nosys.specs` 的完整裸机工具链。新 xu 固件为 freestanding，不依赖 libc 或修改 SDK 源码，使用同样的显式 ISA 与 ilp32 ABI。官方 SDK 到位后在驱动外层适配启动/链接；不能把 SDK 示例构建失败隐藏为通过。
 
 本次亦按 Legacy 路径克隆 Hbird SDK，固定提交 `0e0e9083569721578c42f07a95b05a26c0760db6`。Ubuntu GCC 原命令因旧 ISA 名称、缺少 Newlib 失败；改用经发布方 SHA256 核验的 xPack RISC-V GCC 15.2.0-1 完整工具链，且仅在命令行显式补充 ISA 后，Hello World 的 `dasm` 目标实际构建成功，生成 ELF、dump、dasm、hex、map 和 verilog。没有修改 SDK 源码，也未将“编译成功”称为 Hello World 仿真通过。
 
@@ -40,7 +40,7 @@ make CORE=e203 DOWNLOAD=ilm COMPILE_PREFIX=/实际工具链/bin/riscv-none-elf- 
   NEWLIB=normal RISCV_ARCH=rv32imac_zicsr_zifencei dasm
 ```
 
-工具链来源为 [xPack 官方 v15.2.0-1 发布](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v15.2.0-1)。工具和 SDK 不打包进本仓库；C 角色默认回归继续使用 Ubuntu 的 freestanding 工具链。
+工具链来源为 [xPack 官方 v15.2.0-1 发布](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v15.2.0-1)。工具和 SDK 不打包进本仓库；xu 默认回归继续使用 Ubuntu 的 freestanding 工具链。
 
 ## 数据约定和来源
 
@@ -94,7 +94,7 @@ python3 tools/scripts/e203_soc.py --mode vectors --vectors /数据目录 --tasks
 
 ## 本次实际验证
 
-2026-10-26 验证记录见 [结果索引](validation/e203-c-20261026/summary.json)。保留原始 JSON、结束日志和失败负例，未将历史 PASS 改名作为本机结果。
+2026-10-26 验证记录见 [结果索引](validation/e203-xu-20261026/summary.json)。保留原始 JSON、结束日志和失败负例，未将历史 PASS 改名作为本机结果。
 
 - 原 ADD 与四项汇编用例：5/5 通过。
 - 原 Chisel 测试：8 个 suite、11/11 通过，含完整99×256和SRAM跨片边界。
