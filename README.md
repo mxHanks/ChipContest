@@ -8,6 +8,8 @@
 >
 > 对于已经通过测试的稳定功能，及时提交 Git Commit，避免多个功能混杂在同一次提交中。
 
+当前服务器适配分支为 `codex/xu-platform-eval`，基于 `ddcf6cc`，保持计算 RTL 和 MMIO ABI。旧系统上的 VCS 回归使用 `python3 tools/scripts/server_accept.py --sim vcs --cross-prefix /工具链/bin/riscv64-unknown-elf-`；Icarus/Chisel 的 `--full` 单独验收。环境与运行步骤见 [服务器交接](docs/server-handoff.md)，数据格式和软件参考分别见 [平台接口](docs/platform-interface.md) 与 [数值契约](docs/numeric-contract.md)。
+
 ## 项目目标
 
 当前重点实现 INT16 线性层矩阵乘法加速器：

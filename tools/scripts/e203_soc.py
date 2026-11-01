@@ -98,8 +98,62 @@ def check_log(log, tasks):
 
 
 def build_key(report, sim, waves):
-    identity=[report['source_sha256'],report['versions'],report['runner_sha256'],sim,waves]
+    identity=[report['source_sha256'],report['versions'],report['runner_sha256'],
+              report.get('tools',{}),sim,waves]
     return hashlib.sha256(json.dumps(identity,sort_keys=True).encode()).hexdigest()[:16]
+
+
+def required_tools(mode, sim, prefix):
+    if mode=='check-vectors': return ['git']
+    tools=['git',prefix+'gcc',prefix+'objcopy']
+    if mode!='baseline': tools.append(prefix+'objdump')
+    if mode=='doctor': return tools
+    tools.append('make')
+    if sim=='vcs': tools.append('vcs')
+    elif sim=='iverilog' or mode=='baseline': tools+=['iverilog','vvp']
+    else: tools+=['verilator','g++']
+    return tools
+
+
+def matrix_sources(installed):
+    # Legacy install/tb contains tb_top and must not join this independent TB.
+    return sorted(p for p in installed.rglob('*') if p.suffix in ['.v','.sv'])+[TESTS/'tb_accel_soc.sv']
+
+
+def vcs_build_command(cache, filelist, includes, waves):
+    return ['vcs','-full64','-sverilog','-timescale=1ns/10ps',
+            '-top','tb_accel_soc','+define+DISABLE_SV_ASSERTION=1',
+            *(['-debug_access+all'] if waves else []),
+            *['+incdir+'+str(p) for p in includes],'-f',str(filelist),
+            '-Mdir='+str(cache/'csrc'),'-o',str(cache/'accel_soc')]
+
+
+def build_simulator(sim, cache, filelist, includes, waves, out):
+    binary=cache/('accel_soc.vvp' if sim=='iverilog' else 'accel_soc')
+    if sim=='vcs':
+        # A failed VCS link can leave a binary behind. Only reuse a completed build.
+        receipt=cache/'vcs-build.json'
+        valid=False
+        if binary.is_file() and receipt.is_file():
+            try:
+                valid=json.loads(receipt.read_text())['binary_sha256']==sha(binary)
+            except (ValueError,KeyError,TypeError):
+                pass
+        if not valid:
+            if receipt.exists(): receipt.unlink()
+            run(vcs_build_command(cache,filelist,includes,waves),cache,out/'simulator-build.log')
+            receipt.write_text(json.dumps({'binary_sha256':sha(binary)})+'\n')
+        return binary,[str(binary)]
+    if sim=='verilator':
+        if not binary.exists():
+            run(['verilator','--binary','--timing',*(['--trace'] if waves else []),'-j','2','-Wno-fatal',
+                 '--top-module','tb_accel_soc','-Mdir',str(cache),'-o','accel_soc',
+                 '-DDISABLE_SV_ASSERTION=1',*['-I'+str(p) for p in includes],'-f',str(filelist)],
+                ROOT,out/'simulator-build.log')
+        return binary,[str(binary)]
+    run(['iverilog','-g2012','-s','tb_accel_soc','-DDISABLE_SV_ASSERTION=1',
+         *['-I'+str(p) for p in includes],'-o',str(binary),'-f',str(filelist)],ROOT,out/'simulator-build.log')
+    return binary,['vvp',str(binary)]
 
 
 def synthetic(directory, tasks):
@@ -120,7 +174,7 @@ def synthetic(directory, tasks):
 def compile_firmware(out, prefix):
     target = out/'accel_soc'
     sources = [TESTS/'firmware'/name for name in ['start.S','main.c','accel.c']]
-    run([prefix+'gcc','-march=rv32imac_zicsr_zifencei','-mabi=ilp32',
+    run([prefix+'gcc','-march=rv32imac_zicsr2p0_zifencei2p0','-mabi=ilp32',
          '-Os','-ffreestanding','-fno-builtin','-msmall-data-limit=0',
          '-nostdlib','-nostartfiles','-static','-mcmodel=medany','-Wl,--no-relax',
          '-T',str(TESTS/'firmware/link.ld'),*[str(p) for p in sources],'-o',str(target)],
@@ -138,18 +192,18 @@ def verify_submodule(root, submodule):
     # git -C in an empty submodule directory otherwise silently finds the parent.
     if not (submodule/'.git').exists():
         raise ValueError('E203 submodule is not initialized; run git submodule update --init --recursive')
-    top=subprocess.check_output(['git','rev-parse','--show-toplevel'],cwd=submodule,text=True).strip()
+    top=subprocess.check_output(['git','rev-parse','--show-toplevel'],cwd=submodule,universal_newlines=True).strip()
     if Path(top).resolve()!=submodule.resolve():
         raise ValueError('E203 submodule is not initialized as its own repository')
-    commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=submodule,text=True).strip()
+    commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=submodule,universal_newlines=True).strip()
     pin=subprocess.check_output(['git','ls-tree','HEAD',submodule.relative_to(root).as_posix()],
-                                cwd=root,text=True).split()
+                                cwd=root,universal_newlines=True).split()
     if len(pin)<3 or pin[0]!='160000' or pin[2]!=commit:
         raise ValueError('E203 commit does not match the main repository gitlink')
     return commit
 
 
-def baseline(out, prefix):
+def baseline(out, prefix, sim='iverilog'):
     vsim=E203/'vsim'
     results=[]
     inputs={}
@@ -158,14 +212,14 @@ def baseline(out, prefix):
             target=E203/'riscv-tools/riscv-tests/isa/generated'/name
         else:
             target=out/name
-            run([prefix+'gcc','-march=rv32imac_zicsr_zifencei','-mabi=ilp32',
+            run([prefix+'gcc','-march=rv32imac_zicsr2p0_zifencei2p0','-mabi=ilp32',
                  '-nostdlib','-nostartfiles','-static','-mcmodel=medany','-Wl,--no-relax',
                  '-T',str(E203/'riscv-tools/riscv-tests/env/p/link.ld'),
                  str(TESTS/(name+'.S')),'-o',str(target)],ROOT,out/(name+'-build.log'))
             run([prefix+'objcopy','-O','verilog',str(target),str(target)+'.verilog'],ROOT,out/(name+'-objcopy.log'))
             image=Path(str(target)+'.verilog')
             image.write_text(image.read_text().replace('@800','@000'))
-        log=run(['make','run_test','SIM=iverilog','DUMPWAVE=0','TESTCASE='+str(target)],
+        log=run(['make','run_test','SIM='+sim,'DUMPWAVE=0','TESTCASE='+str(target)],
                 vsim,out/(name+'.log'))
         if 'TEST_PASS' not in log or re.search(r'TEST_FAIL|Time Out|FATAL|ERROR:',log):
             raise ValueError(f'baseline did not pass: {name}')
@@ -183,7 +237,7 @@ def main():
     parser.add_argument('--mode',choices=['doctor','baseline','synthetic','real','vectors','check-vectors'],default='synthetic')
     parser.add_argument('--tasks',type=int,choices=range(1,13),default=1)
     parser.add_argument('--vectors',type=Path)
-    parser.add_argument('--sim',choices=['verilator','iverilog'],default='verilator')
+    parser.add_argument('--sim',choices=['verilator','iverilog','vcs'],default='verilator')
     parser.add_argument('--cross-prefix',default='riscv64-unknown-elf-')
     parser.add_argument('--out',type=Path)
     parser.add_argument('--waves',action='store_true')
@@ -193,21 +247,25 @@ def main():
         parser.error('--max-cycles must be positive')
     out=(args.out or ROOT/'build/e203'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')).resolve()
     out.mkdir(parents=True,exist_ok=False)
-    report={'status':'RUNNING','mode':args.mode,'tasks':args.tasks,
+    selected_sim='iverilog' if args.mode=='baseline' and args.sim=='verilator' else args.sim
+    report={'status':'RUNNING','mode':args.mode,'tasks':args.tasks,'simulator':selected_sim,
             'scope':'development platform; TB shared-memory preload excluded; no official PPA/accuracy claim'}
     try:
-        required=['git','make','iverilog','vvp',args.cross_prefix+'gcc',args.cross_prefix+'objcopy',args.cross_prefix+'objdump']
-        if args.mode=='check-vectors': required=['git']
-        elif args.sim=='verilator' and args.mode!='baseline':
-            required+=['verilator','g++']
+        required=required_tools(args.mode,selected_sim,args.cross_prefix)
         report['tools']={name:shutil.which(name) for name in required}
         missing=[n for n,p in report['tools'].items() if p is None]
         if missing: raise RuntimeError('missing tools: '+', '.join(missing))
         report['versions']={}
-        for name in ['iverilog',args.cross_prefix+'gcc','verilator','g++']:
+        for name in ['iverilog',args.cross_prefix+'gcc','verilator','g++','vcs']:
             if name in report['tools']:
-                report['versions'][name]=run([name,'-V' if name=='iverilog' else '--version'],ROOT,out/(name.replace('/','_')+'-version.log')).splitlines()[:3]
-        report['main_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+                flag='-ID' if name=='vcs' else '-V' if name=='iverilog' else '--version'
+                version=run([name,flag],ROOT,out/(name.replace('/','_')+'-version.log')).splitlines()
+                report['versions'][name]=version if name=='vcs' else version[:3]
+        if selected_sim=='vcs' and args.mode not in ['doctor','check-vectors']:
+            for name in ['gcc','g++']:
+                if shutil.which(name):
+                    report['versions'][name]=run([name,'--version'],ROOT,out/(name+'-version.log')).splitlines()[:3]
+        report['main_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,universal_newlines=True).strip()
         if args.mode!='check-vectors': report['e203_commit']=verify_submodule(ROOT,E203)
         if args.mode=='check-vectors':
             directory=args.vectors.resolve() if args.vectors else out/'vectors'
@@ -230,7 +288,7 @@ def main():
             installed=E203/'vsim/install/rtl'
             report['source_sha256']={str(p.relative_to(ROOT)):sha(p) for p in sorted(installed.rglob('*')) if p.suffix in ['.v','.sv']}
             if args.mode=='baseline':
-                report.update(baseline(out,args.cross_prefix))
+                report.update(baseline(out,args.cross_prefix,selected_sim))
             else:
                 if args.mode=='synthetic':
                     directory=out/'vectors'
@@ -253,28 +311,15 @@ def main():
                 report['firmware_image_sha256']=sha(Path(str(firmware)+'.verilog'))
                 report['runner_sha256']=sha(Path(__file__))
                 installed=E203/'vsim/install/rtl'
-                sources=sorted([p for p in installed.rglob('*') if p.suffix in ['.v','.sv']])
-                sources+=[TESTS/'tb_accel_soc.sv']
+                sources=matrix_sources(installed)
                 report['source_sha256']={str(p.relative_to(ROOT)):sha(p) for p in sources}
-                key=build_key(report,args.sim,args.waves)
+                key=build_key(report,selected_sim,args.waves)
                 cache=ROOT/'build/e203'/('sim-'+key)
                 cache.mkdir(parents=True,exist_ok=True)
                 filelist=cache/'rtl.f'
                 filelist.write_text('\n'.join(str(p) for p in sources)+'\n')
                 includes=[str(installed/p) for p in ['core','perips','perips/apb_i2c']]
-                if args.sim=='verilator':
-                    binary=cache/'accel_soc'
-                    if not binary.exists():
-                        run(['verilator','--binary','--timing',*(['--trace'] if args.waves else []),'-j','2','-Wno-fatal',
-                             '--top-module','tb_accel_soc','-Mdir',str(cache),'-o','accel_soc',
-                             '-DDISABLE_SV_ASSERTION=1',*['-I'+p for p in includes],'-f',str(filelist)],
-                            ROOT,out/'simulator-build.log')
-                    command=[str(binary)]
-                else:
-                    binary=cache/'accel_soc.vvp'
-                    run(['iverilog','-g2012','-s','tb_accel_soc','-DDISABLE_SV_ASSERTION=1',
-                         *['-I'+p for p in includes],'-o',str(binary),'-f',str(filelist)],ROOT,out/'simulator-build.log')
-                    command=['vvp',str(binary)]
+                binary,command=build_simulator(selected_sim,cache,filelist,includes,args.waves,out)
                 report['simulator_sha256']=sha(binary)
                 print(f'Running {args.mode}: {args.tasks} tasks; logs: {out}',flush=True)
                 log=run(command+[f'+TESTCASE={firmware}',f'+VECTORS={directory}',

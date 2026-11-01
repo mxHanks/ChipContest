@@ -1,0 +1,127 @@
+{
+  "schema": "xu_observed_server_validation_v1",
+  "date_local": "2026-11-01",
+  "timezone": "Asia/Shanghai",
+  "status": "PASS",
+  "profile": "vcs-platform",
+  "baseline": "ddcf6cc5ea9119b3dd162249be8c4521eef45da2",
+  "e203_commit": "e36d34a52e6eef93fd0bdfed1b13009e1056bea3",
+  "scope": "development behavior-memory SoC regression on the EDA server, with original compute RTL and MMIO",
+  "environment": {
+    "python": "3.6.8",
+    "git": "1.8.3.1",
+    "glibc": "2.17",
+    "host_gcc": "4.8.5",
+    "make": "3.82",
+    "java": "1.8.0_25",
+    "vcs": "Q-2020.03-SP2-6_Full64",
+    "cross_gcc": "SiFive GCC-Metal 10.2.0-2020.12.8"
+  },
+  "checks": {
+    "host": 19,
+    "numeric": 34,
+    "baseline": 5,
+    "synthetic_layers": 1,
+    "exact_integer_layers": 12,
+    "exact_integer_outputs": 304128,
+    "real_soc_layers": 12,
+    "real_soc_outputs": 304128,
+    "real_soc_write_words": 608256,
+    "altered_golden_rejected": true,
+    "timeout_rejected": true,
+    "source_checkpoint_files_sha_verified": 104
+  },
+  "cycles": [
+    {
+      "layer": 0,
+      "cycles": 2368078,
+      "firmware_cycles": 2368150
+    },
+    {
+      "layer": 1,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 2,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 3,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 4,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 5,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 6,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 7,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 8,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 9,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 10,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    },
+    {
+      "layer": 11,
+      "cycles": 2368074,
+      "firmware_cycles": 2368146
+    }
+  ],
+  "not_run": [
+    "original --full",
+    "Icarus on this server",
+    "Chisel on this server",
+    "new floating-point validation",
+    "official600 evaluation",
+    "official SRAM/150MHz/area/power"
+  ],
+  "optional_inference": "BLOCKED: Python3.8.20/tensorflow-cpu2.4.0/numpy1.19.5 environment not installed; actual system-Python export exits2",
+  "remote_directory": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex",
+  "remote_reports": [
+    "vcs-acceptance-01/acceptance.json",
+    "vcs-acceptance-01/real12/result.json",
+    "vcs-acceptance-01/real12/simulation.log",
+    "vcs-negatives-01/result.json",
+    "server-summary.json",
+    "kwt-source-verified.json",
+    "export-system-python/manifest.json"
+  ],
+  "evidence_note": "Observed over authenticated VNC. FTP RETR is denied; the raw server reports remain at the recorded remote location. This local observation record is not a copied raw server JSON. Screenshots preserve actual output. Test-time HEAD is the fixed baseline; executed file identities are recorded separately.",
+  "toolchain": {
+    "source_url": "https://static.dev.sifive.com/dev-tools/freedom-tools/v2020.12/riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-linux-centos6.tar.gz",
+    "original_archive_sha256": "de2bb188300dc38d74103516ce5cfd1060dfd105e8a408e9e3991512cf27285e",
+    "freestanding_subset_sha256": "c6300d11b47ac17ffbdecc3891353c0122f4c59fa7361395f7d391d336e829b3"
+  },
+  "evidence_sha256": {
+    "vcs-acceptance-and-negatives.png": "2bc1499f68b3f60ea1b0546094008cc436e1d572b523cf0c8a1bd5dc4a5edf83",
+    "kwt-source-and-inference-boundary.png": "f034a13a5f0eb0e778bef4163b3764a25393927cafac46df4850498222d9815a",
+    "runtime-source-manifest.json": "1b02ea9404eb567fe12ccaa086e32a4278c56bb61b8dd1c2f68cb09d428d9b5e",
+    "vcs-real12-pass.png": "abb5b426f0fa87d2015905df0b8ea99260453faa6a3f34bede12396bf35e3ab0"
+  }
+}

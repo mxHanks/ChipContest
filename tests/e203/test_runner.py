@@ -20,7 +20,8 @@ class RunnerTests(unittest.TestCase):
             sub.mkdir(parents=True)
             def git(cwd,*args):
                 return subprocess.check_output(['git','-c','user.name=Test',
-                    '-c','user.email=test@example.invalid',*args],cwd=cwd,text=True,stderr=subprocess.DEVNULL).strip()
+                    '-c','user.email=test@example.invalid',*args],cwd=cwd,
+                    universal_newlines=True,stderr=subprocess.DEVNULL).strip()
             git(root,'init')
             git(root,'commit','--allow-empty','-m','root')
             with self.assertRaisesRegex(ValueError,'not initialized'):
@@ -28,7 +29,8 @@ class RunnerTests(unittest.TestCase):
             git(sub,'init')
             git(sub,'commit','--allow-empty','-m','submodule')
             first=git(sub,'rev-parse','HEAD')
-            git(root,'update-index','--add','--cacheinfo',f'160000,{first},third-party/e203_hbirdv2')
+            git(root,'update-index','--add','--cacheinfo','160000',first,
+                'third-party/e203_hbirdv2')
             git(root,'commit','-m','pin')
             self.assertEqual(verify(root,sub), first)
             git(sub,'commit','--allow-empty','-m','unpinned')
@@ -96,10 +98,11 @@ class RunnerTests(unittest.TestCase):
             self.assertGreater(y[-1], 1 << 32)
             self.assertNotEqual((a/'y.mem').read_bytes(), (b/'y.mem').read_bytes())
 
-    def test_doctor_requires_the_selected_simulator(self):
+    def test_doctor_requires_toolchain_without_unused_simulators(self):
         from unittest.mock import patch
+        prefix='riscv64-unknown-elf-'
         def which(name):
-            return None if name in ('verilator', 'g++') else '/bin/tool'
+            return None if name in ('verilator','g++','iverilog','vvp','vcs',prefix+'gcc') else '/bin/tool'
         with tempfile.TemporaryDirectory() as tmp:
             out=Path(tmp)/'doctor'
             with patch('sys.argv',['e203_soc.py','--mode','doctor','--out',str(out)]), \
@@ -107,7 +110,23 @@ class RunnerTests(unittest.TestCase):
                 self.assertEqual(soc.main(),1)
             import json
             result=json.loads((out/'result.json').read_text())
-            self.assertEqual(result['error'],'missing tools: verilator, g++')
+            self.assertEqual(result['error'],'missing tools: '+prefix+'gcc')
+            self.assertTrue({prefix+'gcc',prefix+'objcopy',prefix+'objdump'}.issubset(result['tools']))
+
+    def test_baseline_requires_the_selected_simulator(self):
+        from unittest.mock import patch
+        import json
+        for sim,missing in [('vcs',['vcs']),('iverilog',['iverilog','vvp'])]:
+            with self.subTest(sim=sim), tempfile.TemporaryDirectory() as tmp:
+                out=Path(tmp)/'baseline'
+                def which(name):
+                    return None if name in missing else '/bin/tool'
+                with patch('sys.argv',['e203_soc.py','--mode','baseline','--sim',sim,
+                                       '--out',str(out)]), \
+                     patch.object(soc.shutil,'which',side_effect=which):
+                    self.assertEqual(soc.main(),1)
+                result=json.loads((out/'result.json').read_text())
+                self.assertEqual(result['error'],'missing tools: '+', '.join(missing))
 
     def test_cache_changes_with_build_recipe_or_compiler(self):
         report={'source_sha256':{'core.sv':'source'},

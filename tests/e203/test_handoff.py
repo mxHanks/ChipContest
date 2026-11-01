@@ -20,9 +20,12 @@ class HandoffTests(unittest.TestCase):
             (bundle/'ChipContest.bundle').write_text('damaged archive')
             (bundle/'SHA256SUMS').write_text('0'*64+'  ChipContest.bundle\n')
             recipe=recipe.replace('bundle=/交接包的绝对路径','bundle='+shlex.quote(str(bundle)))
-            result=subprocess.run(['bash','-c',recipe],cwd=work,capture_output=True,text=True)
+            result=subprocess.run(['bash','-c',recipe],cwd=work,
+                                  stdout=subprocess.PIPE,stderr=subprocess.PIPE,
+                                  universal_newlines=True)
             self.assertNotEqual(result.returncode,0)
             self.assertIn('FAILED',result.stdout+result.stderr)
+            self.assertFalse((work/'ChipContest').exists())
             self.assertNotIn('Cloning',result.stderr)
             self.assertNotIn('python3',result.stderr)
 

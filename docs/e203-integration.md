@@ -42,6 +42,19 @@ make CORE=e203 DOWNLOAD=ilm COMPILE_PREFIX=/实际工具链/bin/riscv-none-elf- 
 
 工具链来源为 [xPack 官方 v15.2.0-1 发布](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/tag/v15.2.0-1)。工具和 SDK 不打包进本仓库；xu 默认回归继续使用 Ubuntu 的 freestanding 工具链。
 
+## 服务器 VCS 适配
+
+`codex/xu-platform-eval` 固定从主仓 `ddcf6cc5ea9119b3dd162249be8c4521eef45da2`、E203 `e36d34a52e6eef93fd0bdfed1b13009e1056bea3` 起步，保持现有 INT16/acc48 计算 RTL、MMIO ABI 和子模块 gitlink。实测服务器为 Python 3.6.8、glibc 2.17、主机 GCC 4.8、Git 1.8.3、JRE 8；本轮沿用服务器 VCS，独立 RISC-V GCC/binutils 仍须实际构建固件验证。
+
+```bash
+python3 tools/scripts/e203_soc.py --mode doctor --sim vcs --cross-prefix /实际RV工具链/bin/riscv-none-elf-
+python3 tools/scripts/server_accept.py --sim vcs --cross-prefix /实际RV工具链/bin/riscv-none-elf-
+```
+
+VCS 一键流程覆盖主机检查、标准库数值模型回归、12层整数向量核算、doctor、原SoC五项测试、合成单层及真实12层。doctor 仅检查 Git、RV GCC/objcopy/objdump、子模块和实际固件构建；仿真阶段另外要求所选 VCS 可用并实际完成编译/运行。Icarus/Verilator 路径继续保留，`--sim vcs` 与 `--full` 互斥；VCS 报告明确未运行 Icarus 单层和 Chisel 回归，不能用其替换 `--full` 的证据。JRE 8 不影响该 VCS 流程，Scala/Chisel/firtool 链须另外准备并验证。
+
+Python 主机测试兼容 3.6 的 subprocess API；Git fixture 使用 1.8 支持的分离式 `update-index --cacheinfo`。固定基线包的旧 Git 恢复流程、完整验收及每条路线的范围见 [服务器交接说明](server-handoff.md)。
+
 ## 数据约定和来源
 
 每层一个 `layer_00` 至 `layer_11` 子目录：
@@ -59,7 +72,9 @@ make CORE=e203 DOWNLOAD=ilm COMPILE_PREFIX=/实际工具链/bin/riscv-none-elf- 
 
 `--mode real` 使用 `tests/e203/vectors/kwt-silence-v1.tar.gz` 的 48 个原始 mem 文件。它们逐字节取自 ChipContest 提交 `c2e58fd9de4c653c4d7822ee5e79e4f06761edb1` 的 `kwt-asic/sim/vectors/kwt-silence-v1/`，保留原导出 manifest、日志、KWT Apache 2.0 许可证和逐文件 SHA。固定上游 KWT 提交为 `237e4097afd4f6851e0b82f0a8d65c2dfe8eae30`。这是一个真实 checkpoint 的静音样本、12 层独立 FFN1 输入的整数回放，不是全验证集或官方600样本精度验收，也不是十二层编码器推理。
 
-A 交付新向量后直接运行：
+官方600样本清单在评测结束后公布，不作为当前开发的前置材料。现阶段用可获得的开发样本和真实 checkpoint 评估量化/浮点误差，并保持软件整数模型与 RTL 逐位一致；内置静音夹具的通过范围不变。
+
+A 交付同格式的新开发向量后直接运行：
 
 ```bash
 python3 tools/scripts/e203_soc.py --mode vectors --vectors /数据目录 --tasks 12
@@ -85,7 +100,7 @@ python3 tools/scripts/e203_soc.py --mode vectors --vectors /数据目录 --tasks
 
 ## 官方服务器接手顺序
 
-1. 从上述固定分支及子模块提交重建；先 doctor、主机检查、baseline。
+1. 从固定主仓/子模块 SHA 重建；服务器使用 `codex/xu-platform-eval`，先 doctor、主机检查和所选仿真器的 baseline。
 2. 跑一层 synthetic，再跑真实12层；保留新机器自己的日志和哈希，不沿用本机 PASS。
 3. 将官方平台系统存储接口接到同一驱动地址配置，核对官方装载及写回窗口，重新运行上述检查。
 4. B 交付宏/综合网表后，运行对应功能回归和活动导出；指定库下150 MHz、增量面积及完整功耗另行验收。

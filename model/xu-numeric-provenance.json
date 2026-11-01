@@ -1,0 +1,56 @@
+{
+  "schema": "xu_numeric_reuse_v1",
+  "owner": "xu",
+  "source_repository": "https://github.com/mxHanks/ChipContest",
+  "source_commit": "c2e58fd9de4c653c4d7822ee5e79e4f06761edb1",
+  "files": [
+    {
+      "path": "model/fixed16_acc48.py",
+      "original_path": "kwt-asic/model/fixed16_acc48.py",
+      "original_sha256": "2ea34805d54a45c2537ce2d71e653a41989befef05769785a9b2629fdfeeef30"
+    },
+    {
+      "path": "tests/numeric/test_numeric_model.py",
+      "original_path": "kwt-asic/tests/test_numeric_model.py",
+      "original_sha256": "acac65a4d51f8990341d8f6f057a1929ee8a4aade88323614a9425142929dc30"
+    },
+    {
+      "path": "tests/numeric/test_kwt_export.py",
+      "original_path": "kwt-asic/tests/test_kwt_export.py",
+      "original_sha256": "0370a01415d1e4656a106c90e0fda773eb8748ab06b014f0c53bcaeecb5787b0"
+    },
+    {
+      "path": "tools/model/export_kwt.py",
+      "original_path": "kwt-asic/scripts/model/export_kwt.py",
+      "original_sha256": "20972cf5e7a0b7d93065ce7ca0c5bd7541106b1e93b45c4e0e1df6af66077def"
+    },
+    {
+      "path": "tools/model/evaluate_kwt_dataset.py",
+      "original_path": "kwt-asic/scripts/model/evaluate_kwt_dataset.py",
+      "original_sha256": "6c4a372dde2b89443a26ccf10e8f215cb3dde4bc3a54dc7191b0eb194873f664"
+    },
+    {
+      "path": "tools/model/requirements-kwt-py38.lock",
+      "original_path": "kwt-asic/env/requirements-kwt.lock",
+      "original_sha256": "396e7259249cc4b2194421bdc3d8ff99b7999f4d7a856d6b6c470daca7e07f53"
+    },
+    {
+      "path": "tools/model/prepare_speech_commands.py",
+      "original_path": "kwt-asic/scripts/model/prepare_speech_commands.py",
+      "original_sha256": "fbe88306bb9bbcd08bbbd59c1d59b1785e4031548ec82116b565d8d3dc06635c"
+    },
+    {
+      "path": "docs/numeric-contract.md",
+      "original_path": "kwt-asic/docs/design/NUMERIC_CONTRACT.md",
+      "original_sha256": "147c544d5da083ef51fecc63f7ec77a86eaa2755902e70b4ae874b756029663a",
+      "adaptation": "Rewritten for the approved frozen static scales, current MMIO, external inference inputs and Python 3.6 compatibility."
+    }
+  ],
+  "adaptation": [
+    "Python 3.6-compatible immutable value types replace dataclasses; arithmetic unchanged.",
+    "Source/checkpoint bytes are external and verified against model/kwt-source-files.json.",
+    "Legacy inference is optional and requires an isolated Python 3.8.20 environment; no TF/NumPy dependency for the canonical model.",
+    "Runtime inference recomputes parameter-only scales and checks the frozen per-layer metadata."
+  ],
+  "license": "Original project model/scripts have no standalone license header; preserve provenance. KWT third-party license remains tests/e203/vectors/LICENSE.kwt.txt; no FPT hardware or proprietary technology imported."
+}

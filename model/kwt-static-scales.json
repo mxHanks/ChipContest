@@ -1,0 +1,303 @@
+{
+  "schema": "xu_kwt_static_scales_v1",
+  "format": "fixed16_acc48_v1",
+  "status": "frozen_development_contract",
+  "operator": "Y=XW+b",
+  "shape": {
+    "x": [
+      99,
+      64
+    ],
+    "w": [
+      64,
+      256
+    ],
+    "bias": [
+      256
+    ],
+    "y": [
+      99,
+      256
+    ]
+  },
+  "bits": {
+    "x": 16,
+    "w": 16,
+    "bias": 40,
+    "y": 48
+  },
+  "selection": "static per layer; checkpoint parameters only; no task/sample calibration",
+  "source_commit": "237e4097afd4f6851e0b82f0a8d65c2dfe8eae30",
+  "checkpoint": [
+    {
+      "path": "models_data_v2_12_labels/kwt1/best_weights.data-00000-of-00001",
+      "sha256": "ae993f6ed995938c1ab584b0857b35ca18f31f88001c7e17c7d7c3868bd33ad3",
+      "bytes": 7401050
+    },
+    {
+      "path": "models_data_v2_12_labels/kwt1/best_weights.index",
+      "sha256": "5a60a0fa78a1855572084a42669768e2998d37e7d93c833962960fdb0db70fbc",
+      "bytes": 34662
+    }
+  ],
+  "source_fixture": {
+    "commit": "ddcf6cc5ea9119b3dd162249be8c4521eef45da2",
+    "path": "tests/e203/vectors/kwt-silence-manifest.json",
+    "sha256": "aa3e75ded4ae5be6877e3c764555b3bcea894d0223c002f2bdb9d772487dabcd"
+  },
+  "layers": [
+    {
+      "layer_id": 0,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/0/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/0/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/0/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/0/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 10.641423255205154,
+        "w_maxabs": 0.4201895594596863,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 1,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/1/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/1/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/1/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/1/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 9.381879299879074,
+        "w_maxabs": 0.3442831337451935,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 2,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/2/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/2/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/2/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/2/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 9.288965754210949,
+        "w_maxabs": 0.3745529353618622,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 3,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/3/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/3/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/3/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/3/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 9.251055017113686,
+        "w_maxabs": 0.41112613677978516,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 4,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/4/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/4/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/4/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/4/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 9.091369219124317,
+        "w_maxabs": 0.32905369997024536,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 5,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/5/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/5/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/5/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/5/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 9.6306496784091,
+        "w_maxabs": 0.3204328715801239,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 6,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/6/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/6/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/6/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/6/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 8.925446406006813,
+        "w_maxabs": 0.32933828234672546,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 7,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/7/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/7/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/7/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/7/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 9.049521334469318,
+        "w_maxabs": 0.3689568042755127,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 8,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/8/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/8/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/8/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/8/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 8.934490218758583,
+        "w_maxabs": 0.2897762060165405,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 9,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/9/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/9/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/9/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/9/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 9.341553263366222,
+        "w_maxabs": 0.3408030867576599,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 10,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/10/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/10/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/10/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/10/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 9.435502260923386,
+        "w_maxabs": 0.36291491985321045,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    },
+    {
+      "layer_id": 11,
+      "checkpoint_keys": {
+        "kernel": "layer_with_weights-0/enc_layers/11/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+        "bias": "layer_with_weights-0/enc_layers/11/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+        "gamma": "layer_with_weights-0/enc_layers/11/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+        "beta": "layer_with_weights-0/enc_layers/11/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE"
+      },
+      "scales": {
+        "x_exp": -11,
+        "w_exp": -16,
+        "bias_exp": -27,
+        "y_exp": -27
+      },
+      "scale_selection": {
+        "x_bound": 9.908406786620617,
+        "w_maxabs": 0.3552662432193756,
+        "method": "x: sqrt(64)*maxabs(LN1.gamma)+maxabs(LN1.beta); w: maxabs(W); smallest signed16-safe power-of-two scale",
+        "sample_independent": true
+      }
+    }
+  ],
+  "scope": "frozen software conversion metadata; not official 600-sample or PPA acceptance"
+}
