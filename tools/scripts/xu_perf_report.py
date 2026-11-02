@@ -18,17 +18,18 @@ def summarize(result, frequency_mhz):
     if result.get('status') != 'PASS' or result.get('mode') != 'real':
         raise ValueError('a passing real-task simulation is required')
     config = contract.configuration_from_result(result)
+    explicit = 'firmware_schedule' in result
     layers = result['layers']
     if (type(result['tasks']) is not int or not 1 <= result['tasks'] <= 12 or
             not layers or [x['layer'] for x in layers] != list(range(result['tasks']))):
         raise ValueError('incomplete or unordered layers')
     for field, expected in [('outputs', result['tasks'] * contract.OUTPUTS_PER_TASK),
                             ('write_words', result['tasks'] * contract.task_contract(config['schedule'])['shared_writes'])]:
-        if field in result and result[field] != expected:
+        if (explicit or field in result) and result.get(field) != expected:
             raise ValueError('incomplete result ' + field)
     if any('performance' in x for x in layers) and not all('performance' in x for x in layers):
         raise ValueError('incomplete performance profiles')
-    if config['schedule'] != 'baseline' and not all('performance' in x for x in layers):
+    if (explicit or config['schedule'] != 'baseline') and not all('performance' in x for x in layers):
         raise ValueError('explicit firmware schedule requires complete performance profiles')
     hz = frequency_mhz * 1e6
     rows = []

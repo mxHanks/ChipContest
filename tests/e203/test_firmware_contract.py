@@ -24,6 +24,7 @@ class FirmwareContractTests(unittest.TestCase):
                         shared_reads=contract.task_contract(schedule)['shared_reads'],
                         shared_writes=50688, starts=3168, dones=3168)
         return dict(status='PASS', mode='real', tasks=1, firmware_schedule=schedule,
+                    outputs=25344, write_words=50688,
                     layers=[dict(layer=0, cycles=2368078, firmware_cycles=2368150,
                                  performance=counters)])
 
@@ -56,6 +57,8 @@ class FirmwareContractTests(unittest.TestCase):
                      lambda x: x['layers'][0].pop('performance'),
                      lambda x: x.update(outputs=25343),
                      lambda x: x.update(write_words=50687),
+                     lambda x: x.pop('outputs'),
+                     lambda x: x.pop('write_words'),
                      lambda x: x.update(firmware_opt='-Ofast'),
                      lambda x: x.update(firmware_experiment='unknown'),
                      lambda x: x.update(firmware_build={'configuration':contract.configuration()}),
@@ -72,6 +75,8 @@ class FirmwareContractTests(unittest.TestCase):
         source = self.source()
         del source['firmware_schedule']
         source['tasks'] = 12
+        source['outputs'] = 304128
+        source['write_words'] = 608256
         source['layers'] = [dict(layer=i, cycles=2368078 if i == 0 else 2368074,
                                  firmware_cycles=2368150 if i == 0 else 2368146)
                             for i in range(12)]
@@ -79,6 +84,23 @@ class FirmwareContractTests(unittest.TestCase):
         self.assertEqual(report['aggregate']['cycles'], 28416892)
         self.assertEqual(report['firmware_schedule'], 'baseline')
         self.assertEqual(report['firmware_opt'], '-Os')
+
+    def test_explicit_baseline_requires_observer_records(self):
+        source = self.source()
+        source['layers'][0].pop('performance')
+        with self.assertRaises(ValueError):
+            perf.summarize(source, 150)
+
+    def test_historical_observed_receipt_still_recomputes(self):
+        path = soc.ROOT/'docs/validation/xu-performance-20261102/observed-receipt.json'
+        receipt = json.loads(path.read_text())
+        source = dict(status='PASS', mode='real', tasks=receipt['tasks'],
+                      outputs=receipt['outputs'], write_words=receipt['write_words'], layers=[])
+        for group in receipt['groups']:
+            for layer in group['layers']:
+                source['layers'].append(dict(layer=layer, cycles=group['cycles'],
+                    firmware_cycles=group['firmware_cycles'], performance=group['performance']))
+        self.assertEqual(perf.summarize(source, 150)['aggregate']['cycles'], 28416892)
 
     def test_cli_and_acceptance_propagate_configuration_to_every_soc_step(self):
         parser = argparse.ArgumentParser()
