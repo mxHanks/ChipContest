@@ -18,6 +18,15 @@ static uint32_t bias_cache[2 * COLS];
 } while (0)
 #endif
 
+#if XU_FIRMWARE_RESULT_UNROLL
+#define XU_READ_RESULT(bank) do { \
+    unsigned index = 2 * (row * COLS + group * 8 + (bank)); \
+    reg[RESULT_INDEX] = (bank); \
+    y[index] = reg[RESULT_LO]; \
+    y[index + 1] = (uint32_t)(int32_t)(int16_t)reg[RESULT_HI]; \
+} while (0)
+#endif
+
 int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                  const volatile uint32_t *bias, volatile uint32_t *y,
                  uint32_t poll_limit) {
@@ -69,12 +78,23 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             unsigned polls = 0;
             while (!(reg[STATUS] & 2u))
                 if (++polls >= poll_limit) return -3;
+#if XU_FIRMWARE_RESULT_UNROLL
+            XU_READ_RESULT(0);
+            XU_READ_RESULT(1);
+            XU_READ_RESULT(2);
+            XU_READ_RESULT(3);
+            XU_READ_RESULT(4);
+            XU_READ_RESULT(5);
+            XU_READ_RESULT(6);
+            XU_READ_RESULT(7);
+#else
             for (unsigned bank = 0; bank < 8; ++bank) {
                 unsigned index = 2 * (row * COLS + group * 8 + bank);
                 reg[RESULT_INDEX] = bank;
                 y[index] = reg[RESULT_LO];
                 y[index + 1] = (uint32_t)(int32_t)(int16_t)reg[RESULT_HI];
             }
+#endif
         }
     }
     __asm__ volatile ("fence iorw, iorw" ::: "memory");
