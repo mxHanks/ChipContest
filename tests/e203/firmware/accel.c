@@ -9,6 +9,15 @@ enum { ID, SCRATCH, CTRL, STATUS, GROUP, X_ADDR, X_DATA, W_BANK,
 static uint32_t bias_cache[2 * COLS];
 #endif
 
+#if XU_FIRMWARE_BIAS_UNROLL
+#define XU_LOAD_BIAS(bank) do { \
+    unsigned col = group * 8 + (bank); \
+    reg[BIAS_INDEX] = (bank); \
+    reg[BIAS_LO] = task_bias[2 * col]; \
+    reg[BIAS_HI] = task_bias[2 * col + 1] & 0xffu; \
+} while (0)
+#endif
+
 int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                  const volatile uint32_t *bias, volatile uint32_t *y,
                  uint32_t poll_limit) {
@@ -37,12 +46,23 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             reg[X_DATA] = x[row * INNER + k] & 0xffffu;
         }
         for (unsigned group = 0; group < 32; ++group) {
+#if XU_FIRMWARE_BIAS_UNROLL
+            XU_LOAD_BIAS(0);
+            XU_LOAD_BIAS(1);
+            XU_LOAD_BIAS(2);
+            XU_LOAD_BIAS(3);
+            XU_LOAD_BIAS(4);
+            XU_LOAD_BIAS(5);
+            XU_LOAD_BIAS(6);
+            XU_LOAD_BIAS(7);
+#else
             for (unsigned bank = 0; bank < 8; ++bank) {
                 unsigned col = group * 8 + bank;
                 reg[BIAS_INDEX] = bank;
                 reg[BIAS_LO] = task_bias[2 * col];
                 reg[BIAS_HI] = task_bias[2 * col + 1] & 0xffu;
             }
+#endif
             reg[GROUP] = group;
             reg[STATUS] = 2; /* W1C, including a previous task's completion. */
             reg[CTRL] = 1;
