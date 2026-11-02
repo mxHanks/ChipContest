@@ -1,0 +1,129 @@
+{
+  "status": "PASS",
+  "mode": "doctor",
+  "tasks": 1,
+  "simulator": "verilator",
+  "bias_storage": "sram",
+  "firmware_schedule": "bias-hw-window",
+  "firmware_opt": "-O2",
+  "firmware_experiment": "both-unroll-no-masks",
+  "transaction_contract": {
+    "w_shared_reads": 16384,
+    "x_shared_reads": 6336,
+    "bias_shared_reads": 512,
+    "shared_reads": 23232,
+    "shared_writes": 50688,
+    "bias_mmio_writes": 768,
+    "mmio_writes": 55720,
+    "starts": 3168,
+    "dones": 3168,
+    "mac_fire": 202752,
+    "macs": 1622016,
+    "outputs": 25344
+  },
+  "contract_sha256": "a0602663237aec93e52f1ea38ff7982ceb21f603f334899cbc48fd6a51c30b96",
+  "wave_scope": "none",
+  "scope": "development toolchain/submodule preflight; actual RV32 firmware build; no simulation",
+  "tools": {
+    "git": "/usr/bin/git",
+    "riscv64-unknown-elf-gcc": "/usr/bin/riscv64-unknown-elf-gcc",
+    "riscv64-unknown-elf-objcopy": "/usr/bin/riscv64-unknown-elf-objcopy",
+    "riscv64-unknown-elf-objdump": "/usr/bin/riscv64-unknown-elf-objdump"
+  },
+  "versions": {
+    "riscv64-unknown-elf-gcc": [
+      "riscv64-unknown-elf-gcc (14.2.0+19) 14.2.0",
+      "Copyright (C) 2024 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ]
+  },
+  "main_commit": "223c416bf05285c935c7164512345643c802187b",
+  "e203_commit": "eee41507965d562066af3335192e3ef93ef36d31",
+  "firmware_build": {
+    "configuration": {
+      "schedule": "bias-hw-window",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks"
+    },
+    "command": [
+      "riscv64-unknown-elf-gcc",
+      "-march=rv32imac_zicsr2p0_zifencei2p0",
+      "-mabi=ilp32",
+      "-O2",
+      "-DXU_FIRMWARE_BIAS_DTCM=0",
+      "-DXU_HARDWARE_BIAS_CACHE=1",
+      "-DXU_HARDWARE_RESULT_WINDOW=1",
+      "-DXU_FIRMWARE_BIAS_UNROLL=1",
+      "-DXU_FIRMWARE_RESULT_UNROLL=1",
+      "-DXU_FIRMWARE_NO_MASKS=1",
+      "-fstack-usage",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-msmall-data-limit=0",
+      "-nostdlib",
+      "-nostartfiles",
+      "-static",
+      "-mcmodel=medany",
+      "-Wl,--no-relax",
+      "-T",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/e203/firmware/link.ld",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/e203/firmware/start.S",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/e203/firmware/main.c",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/e203/firmware/accel.c",
+      "-o",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-s1-sram-bias/doctor/accel_soc"
+    ],
+    "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-s1-sram-bias/doctor",
+    "source_sha256": {
+      "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e",
+      "accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+      "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+      "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+      "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e"
+    },
+    "elf_sha256": "68ca7bc967e6b73a51e6bed750692ec25d37b29b7265e9a662c31359906fd062",
+    "image_sha256": "8d2ff853f5444d0188d5bca63020aa8048ce8a1b29675ef65cdf8b3b40203185",
+    "memory": {
+      "itcm_bytes": 932,
+      "itcm_capacity_bytes": 65536,
+      "itcm_remaining_bytes": 64604,
+      "data_bytes": 0,
+      "bss_bytes": 0,
+      "dtcm_capacity_bytes": 65536,
+      "stack_top": 2415984624,
+      "stack_capacity_after_bss_bytes": 65520,
+      "stack_top_guard_bytes": 16,
+      "stack_frames": [
+        {
+          "source": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/e203/firmware/accel.c:51:5:accel_linear",
+          "bytes": 64,
+          "kind": "static"
+        },
+        {
+          "source": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/e203/firmware/main.c:3:5:main",
+          "bytes": 32,
+          "kind": "static"
+        }
+      ],
+      "max_static_stack_frame_bytes": 64,
+      "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+    }
+  },
+  "firmware_sha256": {
+    "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e",
+    "accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+    "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+    "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+    "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e"
+  },
+  "firmware_elf_sha256": "68ca7bc967e6b73a51e6bed750692ec25d37b29b7265e9a662c31359906fd062",
+  "firmware_image_sha256": "8d2ff853f5444d0188d5bca63020aa8048ce8a1b29675ef65cdf8b3b40203185",
+  "runner_sha256": "ca213f7b6bcd9741bee89f0dd29335c63a0b4cb09cdbf7b5143967731a322c58",
+  "log_sha256": {
+    "firmware-build.log": "af71be86867e39f29d3458df3e178e214581639cc28d9e27d16eb8e8dfdeb81f",
+    "firmware-sections.log": "5c6aa588dc8f9679cab3918965aafc78734ea9e2696597f643c895efc477f8b4",
+    "firmware-symbols.log": "a3fcf67ebb97efe9ec5b9a34a962e773d055aa031b87ac6a04d062f4e05ac83a",
+    "objcopy.log": "dd0c546294245b77670272ffead1f701ab52f66c00f925d03b0e76891e64ca8b",
+    "riscv64-unknown-elf-gcc-version.log": "44d55abeabdb089d1459886560b7d95dfbed6ac57eae56d53c758bc041362558"
+  }
+}

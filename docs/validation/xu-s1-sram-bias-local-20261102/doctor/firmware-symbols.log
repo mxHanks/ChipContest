@@ -1,0 +1,21 @@
+["riscv64-unknown-elf-objdump", "-t", "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-s1-sram-bias/doctor/accel_soc"]
+
+/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-s1-sram-bias/doctor/accel_soc:     file format elf32-littleriscv
+
+SYMBOL TABLE:
+80000000 l    d  .text	00000000 .text
+90000000 l    d  .bss	00000000 .bss
+00000000 l    d  .riscv.attributes	00000000 .riscv.attributes
+00000000 l    d  .comment	00000000 .comment
+00000000 l    df *ABS*	00000000 ccGBNTzW.o
+00000000 l    df *ABS*	00000000 main.c
+00000000 l    df *ABS*	00000000 accel.c
+90000000 g       .bss	00000000 __bss_end
+9000fff0 g       .bss	00000000 __stack_top
+80000000 g       .text	00000000 _start
+80000086 g       .text	00000000 write_tohost
+80000114 g     F .text	00000290 accel_linear
+90000000 g       .bss	00000000 __bss_start
+80000088 g     F .text	0000008c main
+
+

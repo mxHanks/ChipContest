@@ -1,0 +1,65 @@
+test_rejects_duplicate_pass_unretired_or_fatal_result (test_xu_gate_verify.GateEvidenceTests.test_rejects_duplicate_pass_unretired_or_fatal_result) ... ok
+test_rejects_trace_missing_accepted_request (test_xu_gate_verify.GateEvidenceTests.test_rejects_trace_missing_accepted_request) ... ok
+test_rejects_unknown_gate_response_even_with_pass_marker (test_xu_gate_verify.GateEvidenceTests.test_rejects_unknown_gate_response_even_with_pass_marker) ... ok
+test_resolves_nested_vendor_model_includes_and_rejects_absent_dependency (test_xu_gate_verify.GateEvidenceTests.test_resolves_nested_vendor_model_includes_and_rejects_absent_dependency) ... ok
+test_vcs_functional_replay_explicitly_disables_model_timing (test_xu_gate_verify.GateEvidenceTests.test_vcs_functional_replay_explicitly_disables_model_timing) ... ok
+test_missing_task_mixed_design_wrong_duration_and_wrong_frequency_fail (test_xu_soc_activity.EnergyEvidenceTests.test_missing_task_mixed_design_wrong_duration_and_wrong_frequency_fail) ... ok
+test_twelve_task_energy_uses_each_window_duration (test_xu_soc_activity.EnergyEvidenceTests.test_twelve_task_energy_uses_each_window_duration) ... ok
+test_wrapper_only_activity_and_unmodeled_sram_are_rejected (test_xu_soc_activity.EnergyEvidenceTests.test_wrapper_only_activity_and_unmodeled_sram_are_rejected) ... ok
+test_bus_bits_aliases_unknown_dwell_and_boundary_events (test_xu_soc_activity.StreamingActivityTests.test_bus_bits_aliases_unknown_dwell_and_boundary_events) ... ok
+test_dumpon_snapshot_is_not_an_event_and_off_gap_is_rejected (test_xu_soc_activity.StreamingActivityTests.test_dumpon_snapshot_is_not_an_event_and_off_gap_is_rejected) ... ok
+test_real_sv_probe_waveform_matches_hand_counted_saif_expectation (test_xu_soc_activity.StreamingActivityTests.test_real_sv_probe_waveform_matches_hand_counted_saif_expectation) ... ok
+test_saif_rejects_dwell_duration_mismatch (test_xu_soc_activity.StreamingActivityTests.test_saif_rejects_dwell_duration_mismatch) ... ok
+test_actual_source_manifest_prepares_and_retains_unreviewed_gaps (test_xu_soc_implementation.XuSocImplementationTest.test_actual_source_manifest_prepares_and_retains_unreviewed_gaps) ... ERROR
+test_stale_clock_review_source_is_rejected_before_output (test_xu_soc_implementation.XuSocImplementationTest.test_stale_clock_review_source_is_rejected_before_output) ... FAIL
+test_supplied_library_digest_cannot_be_replaced_by_computed_digest (test_xu_soc_implementation.XuSocImplementationTest.test_supplied_library_digest_cannot_be_replaced_by_computed_digest) ... ok
+test_hold_failures_and_missing_clocks_never_become_pass (test_xu_soc_ppa_flow.XuSocPpaFlowTest.test_hold_failures_and_missing_clocks_never_become_pass) ... ok
+test_library_roles_geometry_and_retained_topology_are_mandatory (test_xu_soc_ppa_flow.XuSocPpaFlowTest.test_library_roles_geometry_and_retained_topology_are_mandatory) ... ok
+test_power_runs_twelve_independent_start_end_pairs (test_xu_soc_ppa_flow.XuSocPpaFlowTest.test_power_runs_twelve_independent_start_end_pairs) ... ok
+test_prepared_scripts_preserve_scope_and_separate_sram_from_target_library (test_xu_soc_ppa_flow.XuSocPpaFlowTest.test_prepared_scripts_preserve_scope_and_separate_sram_from_target_library) ... ok
+test_tcl_guard_stops_before_success_marker_on_failure (test_xu_soc_ppa_flow.XuSocPpaFlowTest.test_tcl_guard_stops_before_success_marker_on_failure) ... ok
+test_unreviewed_template_cannot_be_used_as_qualified_proof (test_xu_soc_ppa_flow.XuSocPpaFlowTest.test_unreviewed_template_cannot_be_used_as_qualified_proof) ... ok
+test_zero_exit_without_marker_and_indented_errors_are_rejected (test_xu_soc_ppa_flow.XuSocPpaFlowTest.test_zero_exit_without_marker_and_indented_errors_are_rejected) ... ok
+test_all_real_pad_ports_preserved_and_forwarded (test_xu_soc_ppa_harness.XuSocPpaHarnessTest.test_all_real_pad_ports_preserved_and_forwarded) ... ok
+test_external_tools_have_closed_stdin (test_xu_soc_ppa_harness.XuSocPpaHarnessTest.test_external_tools_have_closed_stdin) ... ok
+test_nominal_clocks_reset_and_public_boundaries (test_xu_soc_ppa_harness.XuSocPpaHarnessTest.test_nominal_clocks_reset_and_public_boundaries) ... ok
+test_nominal_window_validates_inclusive_cycles_and_elapsed_time (test_xu_soc_ppa_harness.XuSocPpaHarnessTest.test_nominal_window_validates_inclusive_cycles_and_elapsed_time) ... ok
+test_only_itcm_and_shared_backdoor_preloaded (test_xu_soc_ppa_harness.XuSocPpaHarnessTest.test_only_itcm_and_shared_backdoor_preloaded) ... ok
+test_original_scoreboard_and_performance_boundaries_preserved (test_xu_soc_ppa_harness.XuSocPpaHarnessTest.test_original_scoreboard_and_performance_boundaries_preserved) ... ok
+test_tb_drift_is_rejected (test_xu_soc_ppa_harness.XuSocPpaHarnessTest.test_tb_drift_is_rejected) ... ok
+
+======================================================================
+ERROR: test_actual_source_manifest_prepares_and_retains_unreviewed_gaps (test_xu_soc_implementation.XuSocImplementationTest.test_actual_source_manifest_prepares_and_retains_unreviewed_gaps)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/host/test_xu_soc_implementation.py", line 41, in test_actual_source_manifest_prepares_and_retains_unreviewed_gaps
+    receipt = self.generate(out)
+  File "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/host/test_xu_soc_implementation.py", line 36, in generate
+    return IMPL.generate(ROOT, out, self.standard, standard_sha or PPA.sha(self.standard),
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                         self.sram, PPA.sha(self.sram), review or self.review_dir/'clock-review.json')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tools/ppa/xu_soc_implementation.py", line 92, in generate
+    ppa.require(inv['e203_commit'] == FROZEN_E203, 'E203 child commit differs from frozen f49a5fc')
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tools/scripts/xu_soc_ppa.py", line 41, in require
+    raise ValueError(message)
+ValueError: E203 child commit differs from frozen f49a5fc
+
+======================================================================
+FAIL: test_stale_clock_review_source_is_rejected_before_output (test_xu_soc_implementation.XuSocImplementationTest.test_stale_clock_review_source_is_rejected_before_output)
+----------------------------------------------------------------------
+ValueError: E203 child commit differs from frozen f49a5fc
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/host/test_xu_soc_implementation.py", line 71, in test_stale_clock_review_source_is_rejected_before_output
+    with self.assertRaisesRegex(ValueError, 'clock-reviewed source changed'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "clock-reviewed source changed" does not match "E203 child commit differs from frozen f49a5fc"
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.615s
+
+FAILED (failures=1, errors=1)

@@ -1,0 +1,245 @@
+{
+  "schema": "xu-s1-local-commands-v1",
+  "main_commit": "223c416bf05285c935c7164512345643c802187b",
+  "e203_commit": "eee41507965d562066af3335192e3ef93ef36d31",
+  "commands": [
+    {
+      "argv": [
+        "scala-cli",
+        "run",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system",
+        "--main-class",
+        "GenerateRTL"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "default-generation-actual.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "scala-cli",
+        "run",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system",
+        "--main-class",
+        "GenerateRTL",
+        "--",
+        "LinearSramCachedCore"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "sram-generation.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "scala-cli",
+        "test",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system",
+        "--test-only",
+        "linear.BiasSramCacheTest"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "chisel-component-extended.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "scala-cli",
+        "test",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "chisel-final.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-v"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "e203-final.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/numeric",
+        "-v"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "numeric-tests.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/host",
+        "-v"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "host-tests.log",
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_cached_wrapper.py",
+        "-v"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "wrapper-final-tests.log",
+      "exit_code": 0,
+      "environment_overrides": {
+        "XU_WRAPPER_LOG_DIR": "build/xu-s1-sram-bias/wrapper-final"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "docs/validation/xu-s1-sram-bias-local-20261102/verify_source_identity.py",
+        "--out",
+        "build/xu-s1-sram-bias/source-identity-evidence.json"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "source-identity-command.log",
+      "exit_code": 0,
+      "result_artifact": "source-identity-final.json"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "1",
+        "--sim",
+        "verilator",
+        "--bias-storage",
+        "sram",
+        "--firmware-schedule",
+        "bias-hw-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "build/xu-s1-sram-bias/real1"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "real1-command.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "2",
+        "--sim",
+        "verilator",
+        "--bias-storage",
+        "sram",
+        "--firmware-schedule",
+        "bias-hw-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "build/xu-s1-sram-bias/synthetic2"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "synthetic2-command.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "baseline",
+        "--sim",
+        "iverilog",
+        "--bias-storage",
+        "sram",
+        "--out",
+        "build/xu-s1-sram-bias/legacy5"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "legacy5-command.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--bias-storage",
+        "sram",
+        "--firmware-schedule",
+        "bias-hw-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "build/xu-s1-sram-bias/doctor"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "doctor-command.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "check-vectors",
+        "--tasks",
+        "12",
+        "--out",
+        "build/xu-s1-sram-bias/vectors12"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias",
+      "stdout_and_stderr": "vectors12-command.log",
+      "exit_code": 0
+    }
+  ],
+  "notes": [
+    "Wrapper direct exact compiler/simulator argv and all input hashes are in wrapper-direct/result.json.",
+    "SoC log headers preserve all actual nested argv; result.json preserves log hashes.",
+    "Raw host suite exit1 is retained; the unchanged S0 generator intentionally refuses the S1 child freeze."
+  ]
+}

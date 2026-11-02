@@ -1,0 +1,8 @@
+["/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/e203/sim-9012082bf2893ac6/accel_soc", "+TESTCASE=/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-s1-sram-bias/real1/accel_soc", "+VECTORS=/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-s1-sram-bias/real1/vectors", "+TASKS=1", "+DUMPWAVE=0", "+MAX_CYCLES=200000000"]
+TASK_PASS layer=0 outputs=25344 writes=50688 cycles=1415556 firmware_cycles=1415659
+PERF_TASK layer=0 cycles=1415556 w_load=299301 x_load=114939 bias_load=7773 compute_wait=224928 writeback=662954 other=105661 busy=221760 mac_fire=202752 mmio_reads=79200 mmio_writes=55720 shared_reads=23232 shared_writes=50688 shared_stall=8698 mmio_stall=0 starts=3168 dones=3168
+SOC_PASS tasks=1 outputs=25344 writes=50688
+- /home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tests/e203/tb_accel_soc.sv:321: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.032 2025-01-01
+- Verilator: $finish at 6us; walltime 59.925 s; speed 95.021 ns/s
+- Verilator: cpu 59.782 s on 1 threads; alloced 107 MB
