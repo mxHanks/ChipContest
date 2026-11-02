@@ -1,0 +1,249 @@
+{
+  "scope": "Local GCC loadable-byte equality, not ELF metadata equality or server timing/PPA",
+  "base_parent": "74e011813dbf215327e59016d34136a36e87ba05",
+  "gcc": "riscv64-unknown-elf-gcc (14.2.0+19) 14.2.0",
+  "base_accel_sha256": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+  "candidate_accel_sha256": "aa4a42adfcebded6e2bae201b084b066200831bd7ca4e60ed6fc6357e598f6af",
+  "records": [
+    {
+      "schedule": "baseline",
+      "optimization": "-Os",
+      "experiment": "none",
+      "hashes": {
+        "base": {
+          "elf_sha256": "d519ee01150294ee3d7626c8573d7a02e9ec1eb3d3befa71f6ce72d4a63fc7bc",
+          "load_image_sha256": "73580aa9e1162c331f41fce2beb43cdec2359abe1617bc917d4d18ef29e61607"
+        },
+        "candidate": {
+          "elf_sha256": "cc311c898c2cddb2ef376c3f95b2e3526e42541d466f895de661ae7a3c505605",
+          "load_image_sha256": "73580aa9e1162c331f41fce2beb43cdec2359abe1617bc917d4d18ef29e61607"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=0",
+        "-DXU_HARDWARE_BIAS_CACHE=0",
+        "-DXU_HARDWARE_RESULT_WINDOW=0",
+        "-DXU_FIRMWARE_BIAS_UNROLL=0",
+        "-DXU_FIRMWARE_RESULT_UNROLL=0",
+        "-DXU_FIRMWARE_NO_MASKS=0"
+      ]
+    },
+    {
+      "schedule": "baseline",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "hashes": {
+        "base": {
+          "elf_sha256": "a2869ccb0544db1826dd7e4591b61afc840ee40e0ba17770b73dbb95b3e5698f",
+          "load_image_sha256": "6d07bb00a113f52414986f0478682ccf9b494729fc4dee5d8cee3beecaed9ddc"
+        },
+        "candidate": {
+          "elf_sha256": "4c09e14ad982810ac5a569c675976b9b7599a825a044fb2353041404b51473d9",
+          "load_image_sha256": "6d07bb00a113f52414986f0478682ccf9b494729fc4dee5d8cee3beecaed9ddc"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=0",
+        "-DXU_HARDWARE_BIAS_CACHE=0",
+        "-DXU_HARDWARE_RESULT_WINDOW=0",
+        "-DXU_FIRMWARE_BIAS_UNROLL=1",
+        "-DXU_FIRMWARE_RESULT_UNROLL=1",
+        "-DXU_FIRMWARE_NO_MASKS=1"
+      ]
+    },
+    {
+      "schedule": "bias-dtcm",
+      "optimization": "-Os",
+      "experiment": "none",
+      "hashes": {
+        "base": {
+          "elf_sha256": "1870815f355f19958aee0b104eede17c4eab65af2cb3d2b4d340f8f4ccc5094f",
+          "load_image_sha256": "5a9190471e19ccd68244f5bbed31cc5ba5f2f5361cdd54906c36652139b03ef1"
+        },
+        "candidate": {
+          "elf_sha256": "b821e8a8f2ecfe8eb8d568186ca479b0ebf00ea9fe8cfba2911a25518b4e5e0b",
+          "load_image_sha256": "5a9190471e19ccd68244f5bbed31cc5ba5f2f5361cdd54906c36652139b03ef1"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=1",
+        "-DXU_HARDWARE_BIAS_CACHE=0",
+        "-DXU_HARDWARE_RESULT_WINDOW=0",
+        "-DXU_FIRMWARE_BIAS_UNROLL=0",
+        "-DXU_FIRMWARE_RESULT_UNROLL=0",
+        "-DXU_FIRMWARE_NO_MASKS=0"
+      ]
+    },
+    {
+      "schedule": "bias-dtcm",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "hashes": {
+        "base": {
+          "elf_sha256": "8688bec6d072d475c15eafd2c4eb8b351d74ebf44a9d042e095980d4e0f4eb6f",
+          "load_image_sha256": "5bad5afd000d263b17ead3f4fb0932477221cf136c383dfba197d395d1a84d90"
+        },
+        "candidate": {
+          "elf_sha256": "9383957a50313fd2a6cb3f65aa1c2b597cc7848ec6cf5be80a0fe5fd037b22d2",
+          "load_image_sha256": "5bad5afd000d263b17ead3f4fb0932477221cf136c383dfba197d395d1a84d90"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=1",
+        "-DXU_HARDWARE_BIAS_CACHE=0",
+        "-DXU_HARDWARE_RESULT_WINDOW=0",
+        "-DXU_FIRMWARE_BIAS_UNROLL=1",
+        "-DXU_FIRMWARE_RESULT_UNROLL=1",
+        "-DXU_FIRMWARE_NO_MASKS=1"
+      ]
+    },
+    {
+      "schedule": "bias-hw",
+      "optimization": "-Os",
+      "experiment": "none",
+      "hashes": {
+        "base": {
+          "elf_sha256": "16fcc33c76da627f3f612e11f77f39ff2e84270c366fefaa33c8ad87bf7ac365",
+          "load_image_sha256": "47e2645496bac651231b0bdec771980dfc88be8d8005becef8b58417bb63486b"
+        },
+        "candidate": {
+          "elf_sha256": "ce8c9268358cc26f21c1707c82efe170113711309471b18a6710c3ad99f35375",
+          "load_image_sha256": "47e2645496bac651231b0bdec771980dfc88be8d8005becef8b58417bb63486b"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=0",
+        "-DXU_HARDWARE_BIAS_CACHE=1",
+        "-DXU_HARDWARE_RESULT_WINDOW=0",
+        "-DXU_FIRMWARE_BIAS_UNROLL=0",
+        "-DXU_FIRMWARE_RESULT_UNROLL=0",
+        "-DXU_FIRMWARE_NO_MASKS=0"
+      ]
+    },
+    {
+      "schedule": "bias-hw",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "hashes": {
+        "base": {
+          "elf_sha256": "dd6f2f6515b287c84fe43d354a7117879d74df15a63abca892575cf18ebdedaf",
+          "load_image_sha256": "abee91483fcc2ad49a1cb5a9a8607461724596e52dd58b326b28648d31da0834"
+        },
+        "candidate": {
+          "elf_sha256": "194c0ab8120e99e035ab1285cf4490bff07ffac6caf9a3ddaf4b242852f10f6c",
+          "load_image_sha256": "abee91483fcc2ad49a1cb5a9a8607461724596e52dd58b326b28648d31da0834"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=0",
+        "-DXU_HARDWARE_BIAS_CACHE=1",
+        "-DXU_HARDWARE_RESULT_WINDOW=0",
+        "-DXU_FIRMWARE_BIAS_UNROLL=1",
+        "-DXU_FIRMWARE_RESULT_UNROLL=1",
+        "-DXU_FIRMWARE_NO_MASKS=1"
+      ]
+    },
+    {
+      "schedule": "bias-dtcm-window",
+      "optimization": "-Os",
+      "experiment": "none",
+      "hashes": {
+        "base": {
+          "elf_sha256": "a5c1a8b3dbbb197f3015c44e306d9aab1cf6ccaecfb9beb0aadf5204da206ad6",
+          "load_image_sha256": "f64c968530e4ec6da887b443e870d6f0a0a9a211a097824aea0d7a06ccc20385"
+        },
+        "candidate": {
+          "elf_sha256": "1542ed429dcbd14d62457124cfd99cf20c0cd05981a2bb91e4016ac08249d778",
+          "load_image_sha256": "f64c968530e4ec6da887b443e870d6f0a0a9a211a097824aea0d7a06ccc20385"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=1",
+        "-DXU_HARDWARE_BIAS_CACHE=0",
+        "-DXU_HARDWARE_RESULT_WINDOW=1",
+        "-DXU_FIRMWARE_BIAS_UNROLL=0",
+        "-DXU_FIRMWARE_RESULT_UNROLL=0",
+        "-DXU_FIRMWARE_NO_MASKS=0"
+      ]
+    },
+    {
+      "schedule": "bias-dtcm-window",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "hashes": {
+        "base": {
+          "elf_sha256": "025e7e7e6bcb895c4ee4e9376bbaf3072d8830e0ff9fd8e2d316a3dd8853d052",
+          "load_image_sha256": "373105e84f02aa82fbe235303a3149f15c84409d1819ba178f17803d57713a32"
+        },
+        "candidate": {
+          "elf_sha256": "503333c133a84dc7227dc7f6bbf6910743e0517884e0cbae4d3510565dc59daa",
+          "load_image_sha256": "373105e84f02aa82fbe235303a3149f15c84409d1819ba178f17803d57713a32"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=1",
+        "-DXU_HARDWARE_BIAS_CACHE=0",
+        "-DXU_HARDWARE_RESULT_WINDOW=1",
+        "-DXU_FIRMWARE_BIAS_UNROLL=1",
+        "-DXU_FIRMWARE_RESULT_UNROLL=1",
+        "-DXU_FIRMWARE_NO_MASKS=1"
+      ]
+    },
+    {
+      "schedule": "bias-hw-window",
+      "optimization": "-Os",
+      "experiment": "none",
+      "hashes": {
+        "base": {
+          "elf_sha256": "38ee1a047405c26f3777cd608c313cf2e2403750b147ee695c4200cfe2913d3c",
+          "load_image_sha256": "6d185a667ecc01c9f60508e0b44080c8a774eea7cbbfe04a3724e6a0925add08"
+        },
+        "candidate": {
+          "elf_sha256": "0262d865a69b9a1fb4237a7679d0b8ea499e1493ce8874815ef1536a93aed929",
+          "load_image_sha256": "6d185a667ecc01c9f60508e0b44080c8a774eea7cbbfe04a3724e6a0925add08"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=0",
+        "-DXU_HARDWARE_BIAS_CACHE=1",
+        "-DXU_HARDWARE_RESULT_WINDOW=1",
+        "-DXU_FIRMWARE_BIAS_UNROLL=0",
+        "-DXU_FIRMWARE_RESULT_UNROLL=0",
+        "-DXU_FIRMWARE_NO_MASKS=0"
+      ]
+    },
+    {
+      "schedule": "bias-hw-window",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "hashes": {
+        "base": {
+          "elf_sha256": "6ba9385d94f7c3e2eb94888a80a4d24af3dc08e3e32faee21ee6af5ba13497be",
+          "load_image_sha256": "c3512d474237786091e9b9f8d4a6add617670b7096c1d577676013fdf33d9806"
+        },
+        "candidate": {
+          "elf_sha256": "8a3122c2c77e07fb96d6d799380c6462441f50c840c526fa54d1e4db92c1b3ed",
+          "load_image_sha256": "c3512d474237786091e9b9f8d4a6add617670b7096c1d577676013fdf33d9806"
+        }
+      },
+      "load_image_equal": true,
+      "defines": [
+        "-DXU_FIRMWARE_BIAS_DTCM=0",
+        "-DXU_HARDWARE_BIAS_CACHE=1",
+        "-DXU_HARDWARE_RESULT_WINDOW=1",
+        "-DXU_FIRMWARE_BIAS_UNROLL=1",
+        "-DXU_FIRMWARE_RESULT_UNROLL=1",
+        "-DXU_FIRMWARE_NO_MASKS=1"
+      ]
+    }
+  ]
+}

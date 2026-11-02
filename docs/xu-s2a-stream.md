@@ -19,13 +19,13 @@ W 游标 `s=k*256+c` 解码为 `bank=s[2:0]`、`addr={s[7:3],s[13:8]}`，对应�
 
 新 CURSOR/DATA 写必须 `cmd_wmask=1111` 且 busy=0；cursor 全 32 位值必须在表中区间内，DATA 必须还有至少一个元素。非法 mask、忙时写、越界或终点继续写：响应 `rsp_err=1`、置 sticky error，不修改游标或存储。旧地址保留各自原有 mask/启动/W1C 语义，旧响应错误仍为 0。未实现的 packed 地址不增加任何 capability。
 
-接受 DATA 命令时捕获其数据、物理 bank/addr，置 pending 并撤销命令 ready；下一时钟边沿由真实 core 写口提交一次，然后推进游标并产生响应。响应有效之前内部写已经生效，`rsp_valid/rsp_rdata/rsp_err` 在背压时一起保持，不重复装载。最后一个写响应退休同拍可接受 START，pending 期间不能接受 START；忙时旧 START 仍忽略。没有修改 Chisel 或 SRAM 端口/容量。
+接受 DATA 命令时捕获其数据、物理 bank/addr，置 pending 并撤销命令 ready；下一时钟边沿由真实 core 写口提交一次，然后推进游标并产生响应。响应有效之前内部写已经生效，`rsp_valid/rsp_rdata/rsp_err` 在背压时一起保持，不重复装载。最后一个写响应退休同拍可接受 START，pending 期间不能接受 START；忙时旧 START 仍忽略。因为 pending 时不接受下一命令，普通串行状态读只能在提交后被接受，不能靠该读观察 bit0=1。没有修改 Chisel 或 SRAM 端口/容量。
 
 ## 固件及事务契约
 
 新 schedule 为 `bias-hw-stream16-window`，沿用 H1 bias 上传及 H2 固定结果窗口，可结合现有优化/展开实验。新固件同时严格检查旧 CAP 和新 STREAM_CAP，缺流接口返回 -5。旧默认 schedule、数值格式、夹具和命令参数保持原定义。
 
-W 首元素共享读先发生，再写 W_CURSOR=0，随后流上传全部 16,384 个 W；每行 X_CURSOR=0 并上传 64 元素。全部初始化、共享读取、内部提交、轮询及写回都留在原首共享读至末 Y 写响应退休窗口。每任务重新完整装载 W/X/bias，不跨任务复用。
+W 首元素共享读先发生，再写 W_CURSOR=0，随后流上传全部 16,384 个 W；每行 X_CURSOR=0 并上传 64 元素。全部装载/游标初始化、共享读取、内部提交、轮询及写回都留在原首共享读至末 Y 写响应退休窗口。旧 CAP 及新增 STREAM_CAP 的兼容性探测均在首共享读之前，不计入该既有窗口。每任务重新完整装载 W/X/bias，不跨任务复用。
 
 | 窗口内每任务工作 | 旧 H1+H2 | S2a |
 | --- | ---: | ---: |
@@ -53,3 +53,5 @@ python3 tools/scripts/e203_soc.py --mode real --tasks 1 --sim verilator \
 ```
 
 输出目录必须尚不存在；本机 GCC 版本及本地行为存储背压下的周期单列，不能与服务器 GCC 10.2/VCS 周期混比。最终验证记录保存在本候选的 `docs/validation/xu-s2a-stream-20261102/`，包括实际运行源/ELF/向量/日志哈希、事务和明确测量边界。
+
+2026-11-02 本地层 0 筛查已完成：旧 ABI 控制组和 S2a 都使用本候选 RTL、GCC 14.2.0、Verilator 5.032、`-O2`、`both-unroll-no-masks` 以及同一份固定向量/模拟器。窗口周期从 1,387,720 降为 1,286,374，减少 101,346（7.3031%）；MMIO 写从 55,720 降为 33,094，其余规定工作量及精确输出全部通过。host 51 项、numeric 42 项、直接旧/新接口 TB、5 项旧 Icarus 用例和 10 组旧固件装载字节一致性检查通过。逐阶段数据、原始日志、SHA-256 以及限制见 [验证记录](validation/xu-s2a-stream-20261102/README.md)。该单层本地结果不构成 S0 资格、12 层服务器周期、formal、PPA、保留或得分结论。
