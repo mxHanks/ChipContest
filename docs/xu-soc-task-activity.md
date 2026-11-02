@@ -91,3 +91,12 @@ XU_TASK_ACTIVITY_VENDOR_MODEL=/absolute/private/RAMSP1024X16.v \
 ```
 
 新增检查包括真实公共MMIO全量清空及四个破坏负例，使用collector实际observer逐项检查W/X/bias物理内容与8-lane signed小算例；实际RISC-V wrapper链接/内存审计；首次request阻塞3周期后完成全部payload、禁止撤回/改址/窗口前数据写及缺失目的设置；真实layer7的prepare-only映射/明确PARTIAL状态；完整生成336宏TB的Icarus elaboration；静态DTCM的声明、已知idle控制与缺失/未知负例。13项测试的原始日志、实际构建命令、生成TB及源码/证据SHA保存在`docs/validation/xu-score-s0-soc-20261102/task-clear-activity-host-01/`。厂商模型只保留路径/SHA，不复制内容；二进制留在本地build目录。无本地VCS运行或全SoC SAIF/PT测量结论；实际服务器首任务及12任务结果须另存后再审查。
+
+
+## 显式SRAM宏引脚观测
+
+`--sram-pin-alias`使用[宏引脚观测工具](xu-sram-activity-alias.md)在DUT内绑定只读仿真observer，保留原DUT-only活动范围；只在该选项下添加VCS `-debug_region+cell`及生成的observer源。功能RTL、SRAM模型、时钟和内容均不改写。默认构建不添加observer。
+
+每个任务原始`task.saif`保留字节及SHA，新生成`task-normalized.saif`和`task-normalization.json`。归一化要求336宏全部22512位的实测统计一一对应，保留全部X/Z/B停留时间、TC与其他原始活动；缺失、重名、源身份变化及native pin不一致均拒绝。VCS的精确`macro_0000.PIN`拼写只作有限命名兼容，不能用于任意推测层级。严格范围/时长/静态DTCM检查作用于新文件，原始文件不覆盖。
+
+配置与每任务结果分别绑定observer、mapping、normalizer、原始及归一化SAIF身份。完整SoC实际VCS采集、PT映射覆盖、SRAM内部功耗、能量及资格仍须实测审查；合成host handoff测试不替代这些证据。先用`--task-ids 0 --clear-task-before-window --sram-pin-alias --max-cycles 4000000`在新目录验证首任务，通过后另开目录执行12任务。

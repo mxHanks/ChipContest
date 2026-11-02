@@ -22,6 +22,7 @@ import xu_soc_ppa_verify as base
 from xu_soc_ppa_verify import soc, contract
 import xu_soc_activity as activity
 import xu_task_clear_protocol as clear
+import xu_sram_activity_alias as sram_alias
 
 TENSORS = ('x', 'w', 'bias', 'y')
 SCOPE = 'tb_xu_soc_ppa.dut'
@@ -391,6 +392,66 @@ def collect_sources(generated, vendor, weight_adapter):
                       HERE / 'xu_shared_icb_sram.sv', HERE / 'xu_soc_ppa_top.sv', generated]
 
 
+def prepare_sram_pin_alias(build, weight_adapter):
+    """Bind simulation-only observers inside the existing DUT activity scope."""
+    require(Path(weight_adapter).resolve() == (HERE / 'xu_weight_sram_adapter.sv').resolve(),
+            'SRAM pin alias source guard supports only the default weight adapter')
+    directory = Path(build) / 'sram-pin-alias'
+    mapping = sram_alias.generate(ROOT, directory, dut_scope=SCOPE, placement='bind')
+    mapping_file = directory / 'xu_sram_activity_alias.mapping.json'
+    checked, pairs = sram_alias.validate_mapping(mapping_file)
+    require(checked == mapping and mapping['mode'] == 'source_guarded_full_soc_336' and
+            mapping['macro_count'] == 336 and len(pairs) == 22512 and
+            mapping['observer_scope'] == SCOPE + '.xu_sram_activity_alias',
+            'full-SoC bound SRAM pin alias mapping differs')
+    return dict(recipe='simulation-bound-sram-pin-alias-v1', mapping=mapping,
+                mapping_file=identity(mapping_file), observer_source=mapping['observer_source'],
+                helper=identity(sram_alias.__file__),
+                status='GENERATED_NOT_CAPTURE_OR_POWER_QUALIFIED',
+                scope_policy='observer bound immediately inside the unchanged DUT-only SAIF scope',
+                normalization_policy='raw task.saif immutable; measured per-bit statistics copied bijectively to a new normalized SAIF; no inferred activity')
+
+
+def check_sram_pin_alias(configuration):
+    """Check the frozen generated source, mapping, helper and guarded design."""
+    unchanged({configuration[key]['path']: configuration[key]['sha256']
+               for key in ('mapping_file', 'observer_source', 'helper')})
+    mapping, pairs = sram_alias.validate_mapping(configuration['mapping_file']['path'])
+    require(mapping == configuration['mapping'] and mapping['mode'] == 'source_guarded_full_soc_336' and
+            mapping['placement'] == 'bind' and mapping['dut_scope'] == SCOPE and
+            mapping['observer_scope'] == SCOPE + '.xu_sram_activity_alias' and
+            mapping['macro_count'] == 336 and len(pairs) == 22512,
+            'frozen full-SoC SRAM pin alias configuration differs')
+
+
+def inspect_task_activity(destination, window, declared_static_scopes, alias_configuration=None):
+    """Inspect native SAIF or a strictly normalized copy; never edit raw SAIF."""
+    raw = Path(destination) / 'task.saif'
+    if alias_configuration is None:
+        return dict(saif=inspect_activity(raw, window, declared_static_scopes))
+    check_sram_pin_alias(alias_configuration)
+    raw_before = identity(raw)
+    normalized = Path(destination) / 'task-normalized.saif'
+    receipt_path = Path(destination) / 'task-normalization.json'
+    receipt = sram_alias.normalize(raw, alias_configuration['mapping_file']['path'],
+                                   normalized, receipt_path)
+    require(identity(raw) == raw_before and receipt['raw_saif']['sha256'] == raw_before['sha256'],
+            'raw task SAIF changed during alias normalization')
+    require(receipt['macro_count'] == 336 and receipt['alias_bit_count'] == 22512 and
+            receipt['normalized_saif']['sha256'] == base.sha(normalized),
+            'normalized full-SoC SRAM pin alias receipt differs')
+    inspected = inspect_activity(normalized, window, declared_static_scopes)
+    require(inspected['sha256'] == receipt['normalized_saif']['sha256'] and
+            identity(raw) == raw_before, 'task SAIF identity changed during inspection')
+    check_sram_pin_alias(alias_configuration)
+    return dict(saif=inspected, sram_pin_alias_capture=dict(
+        status='NORMALIZED_REVIEW_PENDING', raw_saif=receipt['raw_saif'],
+        normalized_saif=receipt['normalized_saif'], normalization_receipt=identity(receipt_path),
+        normalization=receipt, mapping_file=alias_configuration['mapping_file'],
+        observer_source=alias_configuration['observer_source'], normalizer=alias_configuration['helper'],
+        limitation='Simulation pin capture and exact normalization only; mapped annotation, SRAM power, energy and contest qualification remain REVIEW_PENDING'))
+
+
 def checked_log(log, task_id, schedule, clear_task_before_window=False):
     layers = soc.check_log(log, 1)
     layers[0]['performance'] = soc.check_performance(log, layers, schedule)[0]
@@ -554,6 +615,8 @@ def main(argv=None):
                         help='add vendor-supported INITIALIZE_MEMORY define; records a distinct frozen recipe')
     parser.add_argument('--clear-task-before-window', action='store_true',
                         help='explicit CPU-MMIO zero-clear recipe, with formal SAIF starting at first source request')
+    parser.add_argument('--sram-pin-alias', action='store_true',
+                        help='bind simulation-only observers for all 336 SRAM macro pins and inspect a normalized SAIF copy')
     parser.add_argument('--task-ids', type=parse_task_ids, default=list(range(12)),
                         help='development subset of real global IDs, e.g. 0 or 0,7,11; subset results are always PARTIAL')
     parser.add_argument('--prepare-only', action='store_true', help='build firmware and materialize all inputs, skip VCS')
@@ -574,6 +637,7 @@ def main(argv=None):
     report['requested_task_ids'] = args.task_ids
     report['taskset_complete'] = args.task_ids == list(range(12))
     report['clear_task_before_window'] = args.clear_task_before_window
+    report['sram_pin_alias'] = args.sram_pin_alias
     try:
         require(args.firmware_schedule in ('bias-hw', 'bias-hw-window'),
                 'complete 256-entry pre-START bias proof requires bias-hw or bias-hw-window')
@@ -592,7 +656,8 @@ def main(argv=None):
             note='Original vendor model is unchanged. INITIALIZE_MEMORY is optional and changes the frozen recipe; it does not clear X/bias Reg. CPU-MMIO clearing is a separate explicit recipe.')
         report['e203_commit'] = verify_frozen_child(args.out)
         report['main_commit'] = soc.run(['git', 'rev-parse', 'HEAD'], ROOT, args.out / 'main-commit.log').strip()
-        helpers = (base, soc, contract, activity) + ((clear,) if args.clear_task_before_window else ())
+        helpers = ((base, soc, contract, activity) + ((clear,) if args.clear_task_before_window else ()) +
+                   ((sram_alias,) if args.sram_pin_alias else ()))
         report['helpers'] = [identity(m.__file__) for m in helpers]
         report['runner'] = identity(__file__)
         early = {item['path']: item['sha256'] for item in report['helpers'] +
@@ -624,6 +689,10 @@ def main(argv=None):
         generated = build / 'tb_xu_soc_task_activity.sv'
         generated.write_text(generate_tb(args.clear_task_before_window))
         sources = collect_sources(generated, args.vendor_model, args.weight_adapter)
+        alias_configuration = None
+        if args.sram_pin_alias:
+            alias_configuration = prepare_sram_pin_alias(build, args.weight_adapter)
+            sources.append(Path(alias_configuration['observer_source']['path']))
         frozen = {str(p): base.sha(p) for p in sources}
         config = dict(rtl_sources_sha256=frozen, original_tb=identity(base.TB),
                       firmware_image=identity(str(firmware) + '.verilog'),
@@ -638,6 +707,8 @@ def main(argv=None):
         config['analysis_sdc_sha256'] = config['constraints']['sha256']
         config['constraints_role'] = 'exact supplied analysis SDC; not inferred DC mapped-SDC identity'
         config['declared_static_scopes'] = STATIC_SCOPE_DECLARATIONS
+        if alias_configuration is not None:
+            config['sram_pin_alias'] = alias_configuration
         if args.clear_task_before_window:
             config['task_clear_recipe'] = dict(
                 name='cpu-mmio-clear-before-source-request-v1', clear_counts=clear.CLEAR_COUNTS,
@@ -658,9 +729,16 @@ def main(argv=None):
         if args.clear_task_before_window:
             receipt = config['task_clear_recipe']['firmware_build']
             identities[receipt['path']] = receipt['sha256']
+        if alias_configuration is not None:
+            for key in ('mapping_file', 'observer_source', 'helper'):
+                record = alias_configuration[key]
+                identities[record['path']] = record['sha256']
         filelist = build / 'rtl.f'
         filelist.write_text('\n'.join(str(p) for p in sources) + '\n')
         command = base.build_command('vcs', 'macro', build, filelist, True, 'nominal150')
+        if alias_configuration is not None:
+            # Match the explicit VCS bind-probe recipe. No functional changes.
+            command.insert(1, '-debug_region+cell')
         command[0] = args.vcs
         if args.initialize_vendor_memory:
             command.insert(1, '+define+INITIALIZE_MEMORY')
@@ -686,7 +764,9 @@ def main(argv=None):
                                for task_id, d, _ in tasks]
         else:
             soc.run([args.vcs, '-ID'], build, build / 'vcs-version.log', args.build_timeout)
+            unchanged(identities)
             log = soc.run(command, build, build / 'build.log', args.build_timeout)
+            unchanged(identities)
             require(not re.search(r'Error-\[|undefined system task|unknown system task', log, re.I),
                     'VCS diagnostic failure; see simulator/build.log')
             binary = build / 'soc'
@@ -702,14 +782,16 @@ def main(argv=None):
                        '+TASKS=1', '+XU_GLOBAL_TASK=' + str(task_id),
                        '+MAX_CYCLES=' + str(args.max_cycles), '+DUMPWAVE=0']
                 log = soc.run(run, destination, destination / 'simulation.log', args.run_timeout)
+                unchanged(identities)
                 layer, window = checked_log(log, task_id, args.firmware_schedule, args.clear_task_before_window)
-                saif = inspect_activity(destination / 'task.saif', window, config['declared_static_scopes'])
+                inspected = inspect_task_activity(destination, window, config['declared_static_scopes'],
+                                                  alias_configuration)
                 unchanged(identities)
                 result = dict(task_id=task_id, configuration_sha256=report['configuration_sha256'],
                               status='COLLECTED_REVIEW_PENDING', local_scoreboard_layer=0, layer=layer,
                               input_manifest=identity(destination / 'vectors/input-manifest.json'),
                               run_command=run, boundary_log=identity(destination / 'simulation.log'),
-                              activity_window=window, saif=saif,
+                              activity_window=window, saif=inspected['saif'],
                               cache_policy=dict(status='REVIEW_PENDING', fresh_process=True,
                                                 reset_cache_enable_zero_observed=True,
                                                 complete_fixture_matched_uploads_inside_window_observed=True,
@@ -718,6 +800,8 @@ def main(argv=None):
                                                 physical_initial_clearing_evidence=(
                                                     '33697 actual clear MMIO writes (content stores zero), separate original destination setup, drained idle/cache-zero before first source request'
                                                     if args.clear_task_before_window else 'not observed')))
+                if alias_configuration is not None:
+                    result['sram_pin_alias_capture'] = inspected['sram_pin_alias_capture']
                 write_json(destination / 'result.json', result)
                 report['tasks'].append(result)
                 write_json(args.out / 'result.json', report)
