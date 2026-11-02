@@ -18,8 +18,10 @@ ROOT = Path(__file__).resolve().parents[2]
 FROZEN_E203 = 'f49a5fc914971426bd4530db39e270a84b41139f'
 
 
-def ppa_module(root):
-    spec = importlib.util.spec_from_file_location('xu_soc_ppa', root/'tools/scripts/xu_soc_ppa.py')
+def ppa_module(tool_root=ROOT):
+    # Source --root is deliberately independent of the producer/tool assets.
+    # Importing a candidate's old PPA module silently loses current guardrails.
+    spec = importlib.util.spec_from_file_location('xu_soc_ppa', tool_root/'tools/scripts/xu_soc_ppa.py')
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -35,7 +37,7 @@ def identity(ppa, path, expected=None):
     return dict(path=str(path), sha256=actual)
 
 
-def review_identity(ppa, root, path):
+def review_identity(ppa, root, path, tool_root=ROOT):
     record = identity(ppa, path)
     review = json.loads(Path(record['path']).read_text())
     ppa.require(review.get('schema') == 'xu-full-soc-clock-review-v1' and review.get('status') == 'REVIEWED',
@@ -47,14 +49,17 @@ def review_identity(ppa, root, path):
     for relative, item in sources.items():
         ppa.require(not Path(relative).is_absolute() and '..' not in Path(relative).parts,
                     'clock review source key must be repository-relative')
-        ppa.require(identity(ppa, root/relative)['sha256'] == item.get('sha256'),
+        source=(tool_root if relative.startswith('tools/') else root)/relative
+        ppa.require(identity(ppa, source)['sha256'] == item.get('sha256'),
                     'clock-reviewed source changed: '+relative)
-    ppa.require(review.get('constraints_sha256') == ppa.sha(root/'tools/ppa/xu_full_soc.sdc'),
+        ppa.require(Path(item.get('path','')).resolve()==source.resolve(),
+                    'clock-reviewed source origin differs: '+relative)
+    ppa.require(review.get('constraints_sha256') == ppa.sha(tool_root/'tools/ppa/xu_full_soc.sdc'),
                 'clock review SDC changed')
     return record
 
 
-def topology_identity(ppa, root):
+def topology_identity(ppa, root, tool_root=ROOT):
     # Source guards locate the hierarchy later checked against actual linked
     # cells/ref_names by DC/PT. They are not an elaboration/equivalence result.
     checks = [
@@ -73,48 +78,68 @@ def topology_identity(ppa, root):
     ]
     sources = {}
     for relative, pattern, label in checks:
-        path = root/relative
+        path = (tool_root if relative.startswith('tools/') else root)/relative
         ppa.require(re.search(pattern, ppa.comments(path.read_text()), re.S) is not None,
                     'current source hierarchy differs: '+label)
         sources[relative] = identity(ppa, path)
     return sources
 
 
-def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_review=None):
+def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_review=None,
+             profile='baseline', bias_sram_db=None, bias_sram_sha=None):
     root = Path(root).resolve()
     out = Path(out).absolute()
-    ppa = ppa_module(root)
+    ppa = ppa_module()
     ppa.require(not out.exists(), 'output directory exists')
     libraries = [dict(identity(ppa, standard_db, standard_sha), role='standard_cell'),
                  dict(identity(ppa, sram_db, sram_sha), role='sram')]
     ppa.require(libraries[0]['path'] != libraries[1]['path'], 'standard-cell and SRAM library paths must differ')
+    if profile=='sram-bias':
+        ppa.require(bias_sram_db is not None and bias_sram_sha is not None,
+                    'sram-bias profile requires --bias-sram-db and --bias-sram-sha256')
+        libraries.append(dict(identity(ppa,bias_sram_db,bias_sram_sha),role='bias_sram'))
+    else:
+        ppa.require(bias_sram_db is None and bias_sram_sha is None,
+                    'bias SRAM library is allowed only for sram-bias profile')
+    ppa.require(len({record['path'] for record in libraries})==len(libraries),'library paths must differ')
+    profile_identity=ppa.source_profile_identity(root,profile)
     inv = ppa.inventory(root)
-    ppa.require(inv['e203_commit'] == FROZEN_E203, 'E203 child commit differs from frozen f49a5fc')
     topology = topology_identity(ppa, root)
     if clock_review is not None:
         review = review_identity(ppa, root, clock_review)
     out.mkdir(parents=True)
     if clock_review is None:
-        command = [sys.executable, str(root/'tools/ppa/xu_review_full_soc_clocks.py'),
-                   '--out', str(out/'clock-review')]
+        command = [sys.executable, str(ROOT/'tools/ppa/xu_review_full_soc_clocks.py'),
+                   '--root',str(root),'--tool-root',str(ROOT),'--out', str(out/'clock-review')]
         result = subprocess.run(command, cwd=str(root), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                 universal_newlines=True, timeout=120)
         (out/'clock-review-generation.log').write_text(json.dumps(command)+'\n'+result.stdout)
         ppa.require(result.returncode == 0, 'clock review failed; inspect '+str(out/'clock-review-generation.log'))
         review = review_identity(ppa, root, out/'clock-review/clock-review.json')
-    impl = ppa.template(inv)
+    impl = ppa.template(inv,profile)
+    impl['tool_assets_root']=str(ROOT)
     impl['replacements'] = {
-        ppa.RTL+'/general/sirv_sim_ram.v': identity(ppa, root/'tools/ppa/xu_sirv_sram_adapter.sv'),
-        ppa.RTL+'/perips/mem_1024x16.sv': identity(ppa, root/'tools/ppa/xu_weight_sram_adapter.sv')}
-    impl['added_sources'] = [identity(ppa, root/'tools/ppa'/name)
+        ppa.RTL+'/general/sirv_sim_ram.v': identity(ppa, ROOT/'tools/ppa/xu_sirv_sram_adapter.sv'),
+        ppa.RTL+'/perips/mem_1024x16.sv': identity(ppa, ROOT/'tools/ppa/xu_weight_sram_adapter.sv')}
+    if profile=='sram-bias':
+        impl['replacements'][ppa.BIAS_MEMORY]=identity(ppa,ROOT/'tools/ppa/xu_bias_sram_adapter.sv',ppa.BIAS_ADAPTER_SHA256)
+    impl['added_sources'] = [identity(ppa, ROOT/'tools/ppa'/name)
                              for name in ['xu_soc_ppa_top.sv', 'xu_shared_icb_sram.sv']]
     impl['libraries'] = libraries
-    impl['constraints'] = identity(ppa, root/'tools/ppa/xu_full_soc.sdc')
+    impl['constraints'] = identity(ppa, ROOT/'tools/ppa/xu_full_soc.sdc')
     impl['clock_review'] = review
     impl['source_freeze'] = dict(main_commit=inv['main_commit'], e203_commit=inv['e203_commit'],
+                                 profile=profile_identity,
                                  topology_sources=topology,
+                                 memory_groups_sha256=ppa.digest(impl['memory_groups']),
+                                 libraries_sha256=ppa.digest(libraries),
                                  source_manifest_sha256=inv['platform_source_manifest_sha256'])
-    impl['note'] = ('Actual full-digital-SoC development configuration, exact 336 RAMSP1024X16 macros. '
+    impl['tool_producer'] = dict(implementation_generator=identity(ppa,__file__),
+                                ppa=identity(ppa,ppa.__file__),
+                                clock_reviewer=identity(ppa,ROOT/'tools/ppa/xu_review_full_soc_clocks.py'))
+    impl['note'] = ('Actual '+profile+' full-digital-SoC development configuration, exact 336 RAMSP1024X16 macros. '
+                    +('Bias SRAM adds 24 RAMSP128X16: 10240 logical bits, 49152 physical bits including 38912 padding bits. '
+                      if profile=='sram-bias' else '')+
                     'Mapping/PVT/netlist equivalence are unreviewed; no timing, power, or contest pass claimed. '
                     'No vendor simulation models are in the synthesis source list.')
     proof_path = out/'mapping-proof.json'
@@ -126,6 +151,7 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
     receipt = dict(schema='xu-full-soc-implementation-generation-v1', status='GENERATED_NOT_QUALIFIED',
                    implementation=identity(ppa, out/'implementation.json'), qualification_gaps=gaps,
                    macro_total=sum(group['count'] for group in impl['memory_groups']),
+                   source_profile=profile_identity, tool_producer=impl['tool_producer'],
                    generator_sha256=ppa.sha(__file__))
     ppa.write(out/'generation.json', receipt)
     return receipt
@@ -139,10 +165,15 @@ def main():
     parser.add_argument('--standard-cell-sha256', required=True)
     parser.add_argument('--sram-db', required=True, type=Path)
     parser.add_argument('--sram-sha256', required=True)
+    parser.add_argument('--profile',choices=['baseline','h2-only','sram-bias'],default='baseline',
+                        help='explicit approved child/source geometry; baseline remains strict f49a5fc')
+    parser.add_argument('--bias-sram-db',type=Path,help='RAMSP128X16 library; required only for sram-bias')
+    parser.add_argument('--bias-sram-sha256',help='supplied RAMSP128X16 library SHA256; required only for sram-bias')
     parser.add_argument('--clock-review', type=Path, help='existing source-derived review; otherwise generate one now')
     args = parser.parse_args()
     receipt = generate(args.root, args.out, args.standard_cell_db, args.standard_cell_sha256,
-                       args.sram_db, args.sram_sha256, args.clock_review)
+                       args.sram_db, args.sram_sha256, args.clock_review,
+                       args.profile,args.bias_sram_db,args.bias_sram_sha256)
     print(json.dumps(receipt, sort_keys=True))
 
 

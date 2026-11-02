@@ -14,6 +14,7 @@ import subprocess
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[2]
+TOOL_ROOT = ROOT
 RTL = 'third-party/e203_hbirdv2/rtl/e203/'
 SOURCES = [
     RTL+'soc/e203_soc_top.v', RTL+'subsys/e203_subsys_top.v',
@@ -36,6 +37,10 @@ SOURCES = [
 ]
 
 
+def source_path(relative):
+    return (TOOL_ROOT if relative.startswith('tools/') else ROOT)/relative
+
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -55,7 +60,7 @@ def run(command, out, label):
 def tcl_mock(out):
     # Names are parsed from the actual PPA top. The mock deliberately does not
     # pretend that its list operations validate mapped Synopsys collections.
-    top = re.sub(r'/\*.*?\*/|//[^\n]*', '', (ROOT/'tools/ppa/xu_soc_ppa_top.sv').read_text(), flags=re.S)
+    top = re.sub(r'/\*.*?\*/|//[^\n]*', '', source_path('tools/ppa/xu_soc_ppa_top.sv').read_text(), flags=re.S)
     header = top.split(');', 1)[0]
     ports = re.findall(r'\b(input|output)\s*(?:\[[^\]]+\]\s*)?(\w+)', header)
     inputs = [name for direction, name in ports if direction == 'input']
@@ -108,7 +113,7 @@ foreach command {set_clock_uncertainty set_clock_transition set_clock_gating_che
     script += 'set ports [concat $inputs $outputs]\n'
     script += 'set pins [list '+ ' '.join(literal(x) for x in pins)+']\n'
     script += 'set missing {}\n'
-    script += 'set sdc '+literal(str(ROOT/'tools/ppa/xu_full_soc.sdc'))+'\n'
+    script += 'set sdc '+literal(str(source_path('tools/ppa/xu_full_soc.sdc')))+'\n'
     script += '''
 foreach mode {envelope reset_bypass divider} {
   for {set divisor 0} {$divisor < 64} {incr divisor} {
@@ -130,7 +135,7 @@ set missing [lindex $pins 1]
 if {![catch {source $sdc} message] || ![string match {*expected one pin*} $message]} {
   error "missing clock pin did not fail closed"
 }
-set f [open '''+literal(str(ROOT/'tools/ppa/xu_full_soc_clock_review.tcl'))+''']
+set f [open '''+literal(str(source_path('tools/ppa/xu_full_soc_clock_review.tcl')))+''']
 set review [read $f]; close $f
 if {![info complete $review]} { error "review Tcl is incomplete" }
 puts "XU_SDC_MOCK_PASS 192_mode_divisor_combinations; missing_pin_rejected; review_Tcl_complete"
@@ -149,8 +154,8 @@ def rtl_test(out):
                RTL+'subsys/e203_subsys_hclkgen_rstsync.v', RTL+'subsys/e203_subsys_hclkgen.v',
                RTL+'perips/sirv_hclkgen_regs.v']
     exe = out/'clock.vvp'
-    compile_result = run(['iverilog', '-g2012', '-DDISABLE_SV_ASSERTION', '-I', RTL+'core',
-                          '-s', 'tb_xu_full_soc_clocks', '-o', str(exe)]+sources,
+    compile_result = run(['iverilog', '-g2012', '-DDISABLE_SV_ASSERTION', '-I', str(ROOT/(RTL+'core')),
+                          '-s', 'tb_xu_full_soc_clocks', '-o', str(exe)]+[str(source_path(name)) for name in sources],
                          out, 'rtl-compile')
     result = run(['vvp', str(exe)], out, 'rtl-clock')
     if 'XU_CLOCK_RTL_PASS' not in (out/'rtl-clock.log').read_text():
@@ -161,13 +166,17 @@ def rtl_test(out):
 
 
 def main():
+    global ROOT, TOOL_ROOT
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--root',type=Path,default=ROOT,help='platform/test source root')
+    parser.add_argument('--tool-root',type=Path,default=TOOL_ROOT,help='PPA top/SDC/reviewer assets root')
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--run-rtl', action='store_true')
     args = parser.parse_args()
+    ROOT=args.root.resolve();TOOL_ROOT=args.tool_root.resolve()
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=True)
-    sdc = ROOT/'tools/ppa/xu_full_soc.sdc'
+    sdc = source_path('tools/ppa/xu_full_soc.sdc')
     body = '\n'.join(line for line in sdc.read_text().splitlines() if not line.lstrip().startswith('#'))
     for command in ['set_false_path', 'set_multicycle_path', 'set_clock_groups', 'set_ideal_network', 'set_disable_timing']:
         if re.search(r'\b'+command+r'\b', body):
@@ -180,7 +189,8 @@ def main():
         sta_status='NOT_RUN_NO_DC_PT_RESULT',
         created_utc=datetime.now(timezone.utc).isoformat(),
         constraints_sha256=sha(sdc),
-        source_files={name:dict(path=str(ROOT/name), sha256=sha(ROOT/name)) for name in SOURCES},
+        source_roots=dict(platform=str(ROOT),tools=str(TOOL_ROOT)),
+        source_files={name:dict(path=str(source_path(name)), sha256=sha(source_path(name))) for name in SOURCES},
         primary_clocks=[dict(name='xu_hfextclk', period_ns=6.666666667, purpose='150MHz digital target'),
                         dict(name='xu_lfextclk', period_ns=30517.578125, purpose='32.768kHz platform LF reference'),
                         dict(name='xu_jtag_tck', period_ns=100, purpose='10MHz engineering assumption')],

@@ -21,6 +21,17 @@ from datetime import datetime, timezone
 ROOT = Path(__file__).resolve().parents[2]
 SUB = 'third-party/e203_hbirdv2'
 RTL = SUB + '/rtl/e203'
+FROZEN_E203 = 'f49a5fc914971426bd4530db39e270a84b41139f'
+SOURCE_PROFILES = {
+    'baseline': dict(commit=FROZEN_E203, changed_files=[]),
+    'h2-only': dict(commit='434628c1525931c15dfaf06b5586118eb530ccba', changed_files=[
+        'rtl/e203/perips/LinearCachedCore.sv', 'rtl/e203/perips/accel_icb_slave.v']),
+    'sram-bias': dict(commit='eee41507965d562066af3335192e3ef93ef36d31', changed_files=[
+        'rtl/e203/perips/BiasSramCache.sv', 'rtl/e203/perips/LinearSramCachedCore.sv',
+        'rtl/e203/perips/accel_icb_slave.v', 'rtl/e203/perips/mem_32x40.sv']),
+}
+BIAS_MEMORY = RTL+'/perips/mem_32x40.sv'
+BIAS_ADAPTER_SHA256 = '019f86f6acc3bdf0e3d2678de1b90540deac1ec50850c010d0263e3d2231c2fd'
 REQUIRED_BITS = {'itcm': 65536*8, 'dtcm': 65536*8,
                  'shared': 524288*8, 'accelerator_weights': 32768*8}
 REPLACEABLE = {RTL+'/general/sirv_sim_ram.v', RTL+'/perips/mem_1024x16.sv'}
@@ -32,6 +43,11 @@ MEMORY_SCOPES = {'itcm': MAIN+'/u_e203_cpu_top/u_e203_srams/u_e203_itcm_ram/*',
                  'dtcm': MAIN+'/u_e203_cpu_top/u_e203_srams/u_e203_dtcm_ram/*',
                  'shared': 'u_shared/storage/*',
                  'accelerator_weights': MAIN+'/u_e203_subsys_perips/u_accel_icb_slave/*'}
+BIAS_GROUP = dict(name='accelerator_bias', logical_bits=8*32*40,
+                  instance_pattern=MAIN+'/u_e203_subsys_perips/u_accel_icb_slave/u_linear_compute_core/cache/*',
+                  macro_ref='RAMSP128X16', depth=128, width=16, count=24,
+                  logical_banks=8, logical_depth=32, logical_width=40, width_lanes=3,
+                  physical_bits=24*128*16, padding_bits=24*128*16-8*32*40)
 RETAINED = {'cpu': (MAIN+'/u_e203_cpu_top', 'e203_cpu_top*'),
             'accelerator': (MAIN+'/u_e203_subsys_perips/u_accel_icb_slave', 'accel_icb_slave*'),
             'interconnect': (MAIN+'/u_e203_subsys_perips/u_sirv_ppi_fab', 'sirv_icb1to16_bus*')}
@@ -66,7 +82,56 @@ def comments(text):
 
 
 def git(root, *args):
-    return subprocess.check_output(['git']+list(args), cwd=str(root)).decode().strip()
+    return subprocess.check_output(['git','--no-replace-objects']+list(args), cwd=str(root)).decode().strip()
+
+
+def source_profile_identity(root, profile='baseline'):
+    """Check approved commit, its complete delta, and actual child worktree bytes.
+
+    Checking Git object trees also covers fixed files outside the source-level
+    hierarchy regexes. Hash every tracked worktree file independently of index
+    flags; ignored/untracked RTL files cannot enter inventory unnoticed.
+    """
+    require(profile in SOURCE_PROFILES, 'unknown source profile: '+str(profile))
+    child=Path(root)/SUB
+    approved=SOURCE_PROFILES[profile]
+    actual=git(child,'rev-parse','HEAD')
+    require(actual==approved['commit'], 'E203 child commit differs from approved '+profile+' pin')
+    def tree(commit):
+        output=subprocess.check_output(['git','--no-replace-objects','ls-tree','-rz',commit],cwd=str(child))
+        records={}
+        for entry in output.split(b'\0'):
+            if not entry:continue
+            metadata,name=entry.split(b'\t',1)
+            mode,kind,oid=metadata.decode('ascii').split()
+            records[os.fsdecode(name)]=(mode,kind,oid)
+        return records
+    baseline=tree(FROZEN_E203);selected=tree(actual)
+    changed=sorted(name for name in set(baseline)|set(selected) if baseline.get(name)!=selected.get(name))
+    require(changed==sorted(approved['changed_files']), 'approved profile changes files outside its exact fixed-platform delta')
+    worktree={}
+    for name,(mode,kind,oid) in selected.items():
+        path=child/name
+        require(kind=='blob', 'unsupported child tree entry: '+name)
+        if mode=='120000':
+            require(path.is_symlink(), 'child tree symlink changed: '+name)
+            content=os.fsencode(os.readlink(str(path)))
+        else:
+            require(path.is_file() and not path.is_symlink(), 'child tree file missing/changed: '+name)
+            require(mode in ['100644','100755'] and bool(path.stat().st_mode & 0o111)==(mode=='100755'),
+                    'child tree file mode changed: '+name)
+            content=path.read_bytes()
+        blob=hashlib.sha1(b'blob '+str(len(content)).encode('ascii')+b'\0'+content).hexdigest()
+        require(blob==oid, 'child tree worktree bytes differ from approved pin: '+name)
+        worktree[name]=dict(mode=mode,sha256=hashlib.sha256(content).hexdigest())
+    rtl_names={name for name in selected if name.startswith('rtl/e203/')}
+    actual_rtl={p.relative_to(child).as_posix() for p in (child/'rtl/e203').rglob('*') if p.is_file() or p.is_symlink()}
+    require(actual_rtl==rtl_names, 'untracked/missing fixed-platform RTL files')
+    return dict(name=profile, baseline_e203_commit=FROZEN_E203, e203_commit=actual,
+                baseline_tree=git(child,'rev-parse',FROZEN_E203+'^{tree}'),
+                approved_tree=git(child,'rev-parse',actual+'^{tree}'),
+                changed_files=changed, fixed_tree_file_count=len(selected)-len(changed),
+                actual_child_tree_manifest_sha256=digest(worktree))
 
 
 def inventory(root):
@@ -130,20 +195,25 @@ def inventory(root):
                 scope='inventory only; no synthesized area, timing closure, power, or contest qualification assertion')
 
 
-def template(inv):
+def template(inv, profile='baseline'):
+    require(profile in SOURCE_PROFILES, 'unknown source profile: '+str(profile))
+    replacements=REPLACEABLE|({BIAS_MEMORY} if profile=='sram-bias' else set())
     return dict(schema='xu-full-soc-implementation-v1', top='xu_soc_ppa_top',
+                source_profile=profile,
                 platform_source_manifest_sha256=inv['platform_source_manifest_sha256'],
                 replacements={name:dict(path='/absolute/qualified/replacement/'+Path(name).name, sha256='REQUIRED')
-                              for name in sorted(REPLACEABLE)},
+                              for name in sorted(replacements)},
                 added_sources=[dict(path='/absolute/qualified/xu_soc_ppa_top.sv', sha256='REQUIRED'),
                                dict(path='/absolute/qualified/xu_shared_icb_sram.sv', sha256='REQUIRED')],
                 libraries=[dict(path='/absolute/same-corner/standard_cells.db', sha256='REQUIRED', role='standard_cell'),
-                           dict(path='/absolute/same-corner/SRAM.db', sha256='REQUIRED', role='sram')],
+                           dict(path='/absolute/same-corner/SRAM.db', sha256='REQUIRED', role='sram')]+
+                          ([dict(path='/absolute/same-corner/RAMSP128X16.db', sha256='REQUIRED', role='bias_sram')]
+                           if profile=='sram-bias' else []),
                 search_paths=[], defines=['SYNTHESIS', 'DISABLE_SV_ASSERTION=1'],
                 constraints=dict(path='/absolute/reviewed/full-soc.sdc', sha256='REQUIRED'),
                 memory_groups=[dict(name=name, logical_bits=bits, instance_pattern=MEMORY_SCOPES[name],
                                     macro_ref='RAMSP1024X16', depth=1024, width=16, count=bits//16384)
-                               for name,bits in REQUIRED_BITS.items()],
+                               for name,bits in REQUIRED_BITS.items()]+([dict(BIAS_GROUP)] if profile=='sram-bias' else []),
                 retained_instances=[dict(name=name,pattern=record[0],reference_pattern=record[1])
                                     for name,record in sorted(RETAINED.items())],
                 mapping_proof=dict(path='/absolute/verified/mapping-proof.json', sha256='REQUIRED'),
@@ -170,8 +240,11 @@ def tcl(value):
 def library_paths(impl):
     libraries=impl.get('libraries',[])
     require(isinstance(libraries,list) and len(libraries)>=2, 'standard cell and SRAM libraries are required')
-    require(all(record.get('role') in ['standard_cell','sram'] for record in libraries),
-            'each library needs an explicit standard_cell or sram role')
+    require(all(record.get('role') in ['standard_cell','sram','bias_sram'] for record in libraries),
+            'each library needs an explicit standard_cell, sram or bias_sram role')
+    bias_count=sum(record.get('role')=='bias_sram' for record in libraries)
+    require(bias_count==(1 if impl.get('source_profile','baseline')=='sram-bias' else 0),
+            'exactly one bias_sram library is required only for sram-bias profile')
     files=[str(absolute_file(record, 'library '+str(n))) for n,record in enumerate(libraries)]
     require(len(set(files))==len(files), 'duplicate library paths/roles')
     target=[path for path,record in zip(files,libraries) if record['role']=='standard_cell']
@@ -195,9 +268,23 @@ def checked_implementation(impl, inv, allow_unqualified=False):
     require(impl.get('schema')=='xu-full-soc-implementation-v1', 'implementation schema differs')
     require(impl.get('platform_source_manifest_sha256')==inv['platform_source_manifest_sha256'], 'platform source freeze differs')
     require(impl.get('top')=='xu_soc_ppa_top', 'fixed full-SoC PPA top must be xu_soc_ppa_top')
-    require(set(impl.get('replacements',{}))==REPLACEABLE, 'only both known behavioral RAM definitions may be replaced')
+    profile=impl.get('source_profile','baseline')
+    profile_identity=source_profile_identity(inv['root'],profile)
+    freeze=impl.get('source_freeze',{})
+    if freeze:
+        require(freeze.get('profile')==profile_identity, 'source freeze profile differs from actual approved child tree')
+        require(freeze.get('e203_commit')==inv['e203_commit'] and freeze.get('main_commit')==inv['main_commit'],
+                'source freeze main/child commit differs')
+        require(freeze.get('memory_groups_sha256')==digest(impl.get('memory_groups')) and
+                freeze.get('libraries_sha256')==digest(impl.get('libraries')),
+                'source freeze memory/library configuration differs')
+    replaceable=REPLACEABLE|({BIAS_MEMORY} if profile=='sram-bias' else set())
+    require(set(impl.get('replacements',{}))==replaceable, 'only exact profile behavioral RAM definitions may be replaced')
     for name,record in impl['replacements'].items():
         absolute_file(record, 'replacement '+name)
+    if profile=='sram-bias':
+        require(impl['replacements'][BIAS_MEMORY]['sha256']==BIAS_ADAPTER_SHA256,
+                'sram-bias requires the exact approved bias SRAM adapter')
     require(impl.get('added_sources'), 'full-scope top / shared RAM implementation is missing')
     for n,record in enumerate(impl['added_sources']):
         absolute_file(record, 'added source '+str(n))
@@ -207,8 +294,13 @@ def checked_implementation(impl, inv, allow_unqualified=False):
     require('SYNTHESIS' in defines and not any('FPGA_SOURCE' in x for x in defines), 'ASIC SYNTHESIS with actual clock gating is required')
     require(all(re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*(?:=[A-Za-z0-9_]+)?', x) for x in defines), 'invalid defines')
     groups=impl.get('memory_groups',[])
-    require({g.get('name') for g in groups}==set(REQUIRED_BITS) and len(groups)==4, 'all four SRAM capacity groups are required')
+    expected_names=set(REQUIRED_BITS)|({'accelerator_bias'} if profile=='sram-bias' else set())
+    require({g.get('name') for g in groups}==expected_names and len(groups)==len(expected_names),
+            'exact profile SRAM capacity groups are required')
     for g in groups:
+        if g['name']=='accelerator_bias':
+            require(g==BIAS_GROUP, 'frozen bias SRAM geometry/count/scope/padding differs')
+            continue
         require(g.get('logical_bits')==REQUIRED_BITS[g['name']], 'logical memory capacity differs: '+g['name'])
         for k in ['count','width','depth']:
             require(type(g.get(k)) is int and g[k]>0, 'bad SRAM geometry '+g['name'])
@@ -247,8 +339,11 @@ def checked_implementation(impl, inv, allow_unqualified=False):
     for relative,record in review.get('source_files',{}).items():
         require(not Path(relative).is_absolute() and '..' not in Path(relative).parts,
                 'clock review source key must be repository-relative')
-        path=Path(inv['root'])/relative
+        tools_root=Path(impl.get('tool_assets_root',inv['root']))
+        path=(tools_root if relative.startswith('tools/') else Path(inv['root']))/relative
         require(path.is_file() and sha(path)==record.get('sha256'), 'clock-reviewed source changed: '+relative)
+        if 'path' in record:
+            require(Path(record['path']).resolve()==path.resolve(), 'clock-reviewed source origin differs: '+relative)
     require(all(review.get(k) for k in ['primary_clocks','generated_clock_policy','reset_exceptions','clock_domain_crossings','untested_check_policy']), 'clock/reset/untested policy incomplete')
     return proof,review,gaps
 
@@ -258,7 +353,7 @@ def memory_checks(impl):
     for g in impl['memory_groups']:
         # -hierarchical patterns containing '/' differ between DC/PT releases.
         # Filter full_name explicitly and count actual macro leaves only.
-        filt='full_name =~ '+g['instance_pattern']+' && ref_name == '+g['macro_ref']
+        filt='full_name =~ '+g['instance_pattern']+' && ref_name == '+g['macro_ref']+' && is_hierarchical == false'
         lines += ['set xu_cells [get_cells -quiet -hierarchical -filter '+tcl(filt)+']',
                   'if {[sizeof_collection $xu_cells] != '+str(g['count'])+'} {error '+tcl('wrong macro count: '+g['name'])+'}',
                   'foreach_in_collection xu_c $xu_cells {',
@@ -267,10 +362,19 @@ def memory_checks(impl):
                   '  dict set xu_seen $xu_n 1',
                   '  if {[get_attribute $xu_c ref_name] != '+tcl(g['macro_ref'])+'} {error "wrong SRAM reference: $xu_n"}',
                   '}',
-                  'puts "XU_SRAM_GROUP '+g['name']+' count='+str(g['count'])+' logical_bits='+str(g['logical_bits'])+'"']
-    lines += ['set xu_all_macros [get_cells -quiet -hierarchical -filter {ref_name == RAMSP1024X16}]',
-              'if {[sizeof_collection $xu_all_macros] != 336 || [dict size $xu_seen] != 336} {error {full-SoC RAMSP1024X16 total must be exactly 336}}',
-              'foreach_in_collection xu_c $xu_all_macros {if {![dict exists $xu_seen [get_object_name $xu_c]]} {error {ungrouped/unaccounted SRAM macro}}}']
+                  'puts "XU_SRAM_GROUP '+g['name']+' count='+str(g['count'])+' macro_ref='+g['macro_ref']+
+                  ' logical_bits='+str(g['logical_bits'])+' physical_bits='+str(g['count']*g['depth']*g['width'])+
+                  ' padding_bits='+str(g['count']*g['depth']*g['width']-g['logical_bits'])+'"']
+    total=sum(g['count'] for g in impl['memory_groups'])
+    refs=sorted({g['macro_ref'] for g in impl['memory_groups']})
+    lines += ['# RAMSP is the explicit technology SRAM namespace; reject every extra leaf/reference.',
+              'set xu_allowed_refs [list '+' '.join(tcl(ref) for ref in refs)+']',
+              'set xu_all_macros [get_cells -quiet -hierarchical -filter {ref_name =~ RAMSP* && is_hierarchical == false}]',
+              'if {[sizeof_collection $xu_all_macros] != '+str(total)+' || [dict size $xu_seen] != '+str(total)+'} {error '+tcl('full-SoC SRAM total must be exactly '+str(total))+'}',
+              'foreach_in_collection xu_c $xu_all_macros {',
+              '  if {[lsearch -exact $xu_allowed_refs [get_attribute $xu_c ref_name]] < 0} {error {unexpected SRAM reference}}',
+              '  if {![dict exists $xu_seen [get_object_name $xu_c]]} {error {ungrouped/unaccounted SRAM macro}}',
+              '}']
     for x in impl['retained_instances']:
         filt='full_name == '+x['pattern']+' && ref_name =~ '+x['reference_pattern']
         lines.append('if {[sizeof_collection [get_cells -quiet -hierarchical -filter '+tcl(filt)+']] != 1} {error '+tcl('missing/wrong '+x['name'])+'}')
@@ -308,7 +412,7 @@ def prepare(root, out, impl, allow_unqualified=False):
         src=absolute_file(record,'added source');dst=source_dir/'xu-added'/('%03d-'%index+src.name);dst.parent.mkdir(exist_ok=True)
         shutil.copyfile(str(src),str(dst));inputs.append(dst);origin[str(dst.relative_to(out))]=dict(path=str(src),sha256=sha(src),replacement=False)
     shutil.copyfile(str(absolute_file(impl['constraints'],'SDC')),str(out/'constraints.sdc'))
-    reporter=Path(root)/'tools/ppa/xu_full_soc_clock_review.tcl'
+    reporter=Path(impl.get('tool_assets_root',root))/'tools/ppa/xu_full_soc_clock_review.tcl'
     require(reporter.is_file(),'clock-report collector is missing')
     shutil.copyfile(str(reporter),str(out/'clock-review.tcl'))
     target_libs,libs=library_paths(impl)
@@ -333,7 +437,7 @@ def prepare(root, out, impl, allow_unqualified=False):
     # normal shell commands/options used by this contract.
     synth+=memory_checks(impl)+'check_design > precheck.rpt\nset XU_CLOCK_MODE envelope\nset XU_PLL_DIV 0\nsource constraints.sdc\n'+clock_contract_checks()
     synth+='set_boundary_optimization [get_cells -hierarchical -filter {is_hierarchical == true}] false\n'
-    synth+='set_dont_touch [get_cells -hierarchical -filter {ref_name == RAMSP1024X16}] true\n'
+    synth+='set_dont_touch [get_cells -hierarchical -filter {ref_name =~ RAMSP* && is_hierarchical == false}] true\n'
     synth+='set_fix_hold [all_clocks]\ncompile_ultra -no_autoungroup\n'
     synth+=memory_checks(impl)+'check_design > postcheck.rpt\nreport_units > dc-units.rpt\nreport_area -hierarchy > area.rpt\nreport_reference -hierarchy > references.rpt\nreport_qor > qor.rpt\nreport_clock > clocks.rpt\nwrite -format verilog -hierarchy -output mapped.v\nwrite_sdc mapped.sdc\n'
     (out/'synth.tcl').write_text(guarded_tcl(synth,'XU_SOC_SYNTHESIS_COMPLETE_NOT_QUALIFIED'))
