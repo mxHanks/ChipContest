@@ -1,0 +1,255 @@
+{
+  "cell_model_scope": "Yosys generic logic gates emitted as Verilog primitives; only 16 SRAM behavior instances remain unsynthesized",
+  "flow": "local-yosys-generic-gates",
+  "generic_cell_counts": {
+    "$_ANDNOT_": 31768,
+    "$_AND_": 7882,
+    "$_DFFE_PN0N_": 1,
+    "$_DFFE_PN0P_": 456,
+    "$_DFFE_PP_": 11264,
+    "$_DFF_PN0_": 5,
+    "$_DFF_P_": 5,
+    "$_MUX_": 3314,
+    "$_NAND_": 236,
+    "$_NOR_": 2241,
+    "$_NOT_": 699,
+    "$_ORNOT_": 3695,
+    "$_OR_": 29226,
+    "$_SDFFE_PN0P_": 774,
+    "$_SDFF_PN0_": 1,
+    "$_XNOR_": 1127,
+    "$_XOR_": 4354,
+    "mem_1024x16": 16
+  },
+  "inputs": {
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/host/tb_xu_gate_wrapper.sv": {
+      "bytes": 10542,
+      "sha256": "11d9451fc91007b606b980e88f2d2030781ddf7033abbc2474283e4a3ce96911"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv": {
+      "bytes": 89275,
+      "sha256": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv": {
+      "bytes": 6563,
+      "sha256": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv": {
+      "bytes": 3319,
+      "sha256": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv": {
+      "bytes": 3415,
+      "sha256": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": {
+      "bytes": 3368,
+      "sha256": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv": {
+      "bytes": 2657,
+      "sha256": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv": {
+      "bytes": 2655,
+      "sha256": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": {
+      "bytes": 408,
+      "sha256": "876b0530970ffe7a1be08f2a7e447e52ccdb8f4af85da74a17451f97fb61f452"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv": {
+      "bytes": 3081,
+      "sha256": "dab19731a961020ce07edb17a0d5afae5ffe43a96fcd62a89a4df47f1d3e0a7a"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv": {
+      "bytes": 2578,
+      "sha256": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv": {
+      "bytes": 13293,
+      "sha256": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": {
+      "bytes": 15294,
+      "sha256": "7ad5eb72b46629ca70c97e0efcab03d8772de41c911ee16612ee46c74c6c2d21"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": {
+      "bytes": 3092,
+      "sha256": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4"
+    },
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/scripts/xu_gate_verify.py": {
+      "bytes": 12322,
+      "sha256": "c95388202d0de1000b5bdf97d724a1fe25f88b110d2cfa9b0c2819c114e7a7e2"
+    }
+  },
+  "limits": [
+    "Finite directed/randomized functional replay is not formal equivalence.",
+    "This wrapper test does not establish full-SoC post-synthesis functionality.",
+    "No physical timing, power, area or 600-sample accuracy claim."
+  ],
+  "log_sha256": {
+    "gate/compile.log": "8b9a00c01d3d2506b686aa17d12408acf793a68016f1fe375456133cfaba6a48",
+    "gate/simulation.log": "dce63ee4db87dc745852a64c53eb7d439c21fa8dbb25388a5a8da0ce63f61fb4",
+    "iverilog-version.log": "35e964baa555ed80f33d53f65d6147a602c06b9256af36367fd88fc1525b51cb",
+    "rtl/compile.log": "5ea6879bb7fece37a8e6cfe0e9f7b79d538edb51cf20b240ed3ede21fb62dad7",
+    "rtl/simulation.log": "a2e0a8086fb79f21e96b1c0c26663b497d2866802e3ec593945dfb5ca56bed8b",
+    "synthesis.log": "578cef2439f69a2f3a30217c9dccacc820ebe3928aad24c9e480080e511993a4",
+    "vvp-version.log": "639a5be2902a1045b25d849baccdd86d43cba1823fb75bc456f1a422a1b4897b",
+    "yosys-version.log": "c045a9a4d96786f0cb69b122cafac3deb7ff96d16ef5ba1ab851ee05588c1461"
+  },
+  "netlist": {
+    "bytes": 8364326,
+    "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/mapped-generic.v",
+    "sha256": "43efa08fbeb0d0d44447dd5fc96ebdc9c92fb3f4d882fc53a7b2292382b81098"
+  },
+  "schema": "xu-wrapper-gate-replay-v1",
+  "scope": "public ICB-port wrapper functional replay; zero delay, no SDF; SRAM model boundary explicit",
+  "simulations": {
+    "gate": {
+      "accepted": 17151,
+      "retired": 17151,
+      "simulation_log_sha256": "dce63ee4db87dc745852a64c53eb7d439c21fa8dbb25388a5a8da0ce63f61fb4",
+      "status": "PASS",
+      "traced_transfers": 17149,
+      "transaction_trace_sha256": "16a76077e775b8d6dfc920f35e61d480a27d3f02393f39ce098411a80aa73d34"
+    },
+    "rtl": {
+      "accepted": 17151,
+      "retired": 17151,
+      "simulation_log_sha256": "a2e0a8086fb79f21e96b1c0c26663b497d2866802e3ec593945dfb5ca56bed8b",
+      "status": "PASS",
+      "traced_transfers": 17149,
+      "transaction_trace_sha256": "16a76077e775b8d6dfc920f35e61d480a27d3f02393f39ce098411a80aa73d34"
+    }
+  },
+  "simulator": "iverilog",
+  "status": "PASS",
+  "steps": [
+    {
+      "command": [
+        "/usr/bin/iverilog",
+        "-V"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02",
+      "elapsed_seconds": 0.016244006998022087,
+      "log_sha256": "35e964baa555ed80f33d53f65d6147a602c06b9256af36367fd88fc1525b51cb",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/bin/vvp",
+        "-V"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02",
+      "elapsed_seconds": 0.008532460997230373,
+      "log_sha256": "639a5be2902a1045b25d849baccdd86d43cba1823fb75bc456f1a422a1b4897b",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/bin/yosys",
+        "-V"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02",
+      "elapsed_seconds": 0.01643600100214826,
+      "log_sha256": "c045a9a4d96786f0cb69b122cafac3deb7ff96d16ef5ba1ab851ee05588c1461",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/bin/iverilog",
+        "-g2012",
+        "-s",
+        "tb_xu_gate_wrapper",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/rtl/wrapper.vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/host/tb_xu_gate_wrapper.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/rtl",
+      "elapsed_seconds": 0.0648768859973643,
+      "log_sha256": "5ea6879bb7fece37a8e6cfe0e9f7b79d538edb51cf20b240ed3ede21fb62dad7",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/bin/vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/rtl/wrapper.vvp",
+        "+TRACE=/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/rtl/transactions.trace"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/rtl",
+      "elapsed_seconds": 3.2804285830061417,
+      "log_sha256": "a2e0a8086fb79f21e96b1c0c26663b497d2866802e3ec593945dfb5ca56bed8b",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/bin/yosys",
+        "-Q",
+        "-T",
+        "-s",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/synth.ys"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02",
+      "elapsed_seconds": 14.714314172997547,
+      "log_sha256": "578cef2439f69a2f3a30217c9dccacc820ebe3928aad24c9e480080e511993a4",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/bin/iverilog",
+        "-g2012",
+        "-s",
+        "tb_xu_gate_wrapper",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/gate/wrapper.vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/host/tb_xu_gate_wrapper.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/mapped-generic.v",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/gate",
+      "elapsed_seconds": 69.97845450000023,
+      "log_sha256": "8b9a00c01d3d2506b686aa17d12408acf793a68016f1fe375456133cfaba6a48",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/bin/vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/gate/wrapper.vvp",
+        "+TRACE=/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/gate/transactions.trace"
+      ],
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-gate-generic-02/gate",
+      "elapsed_seconds": 144.23056051399908,
+      "log_sha256": "dce63ee4db87dc745852a64c53eb7d439c21fa8dbb25388a5a8da0ce63f61fb4",
+      "returncode": 0
+    }
+  ],
+  "tool_identities": {
+    "iverilog": {
+      "path": "/usr/bin/iverilog",
+      "sha256": "a6681e0b577dcfc4ea83d1591a5714710b0b3535ebb36491ee8177553bab9631"
+    },
+    "vvp": {
+      "path": "/usr/bin/vvp",
+      "sha256": "e0a087a4906d5a9cd1b0b85c9b4c2081704c2c9bcd94f224437fc56b15fc440d"
+    },
+    "yosys": {
+      "path": "/usr/bin/yosys",
+      "sha256": "30aa795bec7533dac08bad56309edb6ac70dd33f017c28082d3c1dae1012112f"
+    }
+  },
+  "transaction_trace_byte_identical": true
+}
