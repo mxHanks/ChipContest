@@ -115,6 +115,23 @@ def check_performance(log, layers, schedule='baseline'):
     return [{k: v for k, v in row.items() if k not in ['layer', 'cycles']} for row in records]
 
 
+def check_sram_bias_latency(counters, schedule):
+    """S1 retains 68 wrapper busy cycles, plus two per cached START.
+
+    This checks a fixed hardware latency; polling/MMIO totals stay measured and
+    the existing transaction/numeric contract must be checked independently.
+    """
+    contract.configuration(schedule)
+    cached = schedule.startswith('bias-hw')
+    starts = 99 * 32
+    expected_busy = starts * (70 if cached else 68)
+    if counters['busy'] != expected_busy:
+        raise ValueError('SRAM candidate busy cycles differ from fixed latency')
+    return dict(prefetches=starts if cached else 0,
+                extra_busy_cycles=starts * 2 if cached else 0,
+                expected_busy=expected_busy)
+
+
 def build_key(report, sim, waves):
     identity=[report['source_sha256'],report['versions'],report['runner_sha256'],
               report.get('tools',{}),sim,waves]
@@ -303,6 +320,8 @@ def main():
     parser.add_argument('--waves',action='store_true')
     parser.add_argument('--accel-waves',action='store_true',
                         help='dump accelerator-only VCD during measured task windows for activity analysis')
+    parser.add_argument('--bias-storage', choices=['reg', 'sram'], default='reg',
+                        help='identify the installed xu candidate; sram adds a fixed busy-cycle check')
     parser.add_argument('--max-cycles',type=int,default=200000000)
     contract.add_arguments(parser)
     args=parser.parse_args()
@@ -315,6 +334,7 @@ def main():
     out.mkdir(parents=True,exist_ok=False)
     selected_sim='iverilog' if args.mode=='baseline' and args.sim=='verilator' else args.sim
     report={'status':'RUNNING','mode':args.mode,'tasks':args.tasks,'simulator':selected_sim,
+            'bias_storage':args.bias_storage,
             'firmware_schedule':args.firmware_schedule,'firmware_opt':args.firmware_opt,
             'firmware_experiment':args.firmware_experiment,
             'transaction_contract':contract.task_contract(args.firmware_schedule),
@@ -397,6 +417,9 @@ def main():
                 report['layers']=check_log(log,args.tasks)
                 for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
                     layer['performance'] = counters
+                    if args.bias_storage == 'sram':
+                        layer['sram_bias_contract'] = check_sram_bias_latency(
+                            counters, args.firmware_schedule)
                 report['outputs']=args.tasks*25344
                 report['write_words']=args.tasks*50688
             report['status']='PASS'

@@ -11,6 +11,20 @@ import xu_perf_report as perf
 
 
 class PerformanceTests(unittest.TestCase):
+    def test_sram_bias_latency_is_fixed_for_every_schedule(self):
+        for schedule in ('baseline', 'bias-dtcm', 'bias-dtcm-window', 'bias-hw', 'bias-hw-window'):
+            cached = schedule.startswith('bias-hw')
+            busy = 3168 * (70 if cached else 68)
+            self.assertEqual(soc.check_sram_bias_latency({'busy': busy}, schedule),
+                             dict(prefetches=3168 if cached else 0,
+                                  extra_busy_cycles=6336 if cached else 0,
+                                  expected_busy=busy))
+            for wrong in (busy - 1, busy + 1, 3168 * (68 if cached else 70)):
+                with self.subTest(schedule=schedule, busy=wrong), self.assertRaises(ValueError):
+                    soc.check_sram_bias_latency({'busy': wrong}, schedule)
+        with self.assertRaises(ValueError):
+            soc.check_sram_bias_latency({'busy': 221760}, 'unknown')
+
     def record(self):
         return ('PERF_TASK layer=0 cycles=2368078 w_load=300000 x_load=100000 '
                 'bias_load=600000 compute_wait=250000 writeback=1118078 other=0 '

@@ -1,0 +1,43 @@
+{
+  "binary_sha256": "9e23c8683c805024d420748aad54d4895806d448a49c4018392e66774d1410f4",
+  "commands": [
+    [
+      "iverilog",
+      "-g2012",
+      "-DARM_UD_MODEL",
+      "-DXU_VENDOR_SRAM_MODEL",
+      "-s",
+      "tb_xu_bias_sram_adapter",
+      "-o",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-bias-sram-contract-03/simulation.vvp",
+      "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/vendor-models-private-01/sram-models-private-01/RAMSP128X16/RAMSP128X16.v",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tools/ppa/xu_bias_sram_adapter.sv",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-bias-sram-contract-03/xu_reference_mem_32x40.sv",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tools/ppa/tb_xu_bias_sram_adapter.sv"
+    ],
+    [
+      "vvp",
+      "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-bias-sram-contract-03/simulation.vvp"
+    ]
+  ],
+  "completion": "XU_BIAS_SRAM_CONTRACT_PASS addresses=32 masks_per_address=32 exhaustive_mask_writes=1024 x_byte_writes=160 cycles=5377 read_checks=2612 invalid_checks=2765 model=vendor-functional",
+  "inputs": {
+    "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/build/xu-bias-sram-contract-03/xu_reference_mem_32x40.sv": "21edb0ce86db8c066c5092daf3329ae23444ce162e3cea14ba8fbeab4c3e7b16",
+    "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/third-party/e203_hbirdv2/rtl/e203/perips/mem_32x40.sv": "e3df7fba6056a85473c88f85271d2e0a6d6634d343d4d71aeae857df0bf9c247",
+    "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tools/ppa/tb_xu_bias_sram_adapter.sv": "a2d6062f1309dbb421dd2e35b4827fa5241018d0406387c8148127657caa60e5",
+    "/home/mxhanks/Projects/ChipContest-xu-s1-sram-bias/tools/ppa/xu_bias_sram_adapter.sv": "019f86f6acc3bdf0e3d2678de1b90540deac1ec50850c010d0263e3d2231c2fd",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/vendor-models-private-01/sram-models-private-01/RAMSP128X16/RAMSP128X16.v": "f9d6d881746681dacd4f3851467561e441ee7190776ab566b1f0a729aa3ddb4d"
+  },
+  "limitations": [
+    "ARM_UD_MODEL four-state functional simulation; no SDF/timing checks",
+    "known address/control/mask inputs; unknown data and unwritten cells checked",
+    "module contract only; not full-SoC equivalence, area, timing or power evidence"
+  ],
+  "log_sha256": {
+    "compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "simulation.log": "ae36ee424c5f4ac6a84fe92ff148ac85418c19149a3a9f78146bd1e94a2b8c41"
+  },
+  "runner_sha256": "118cbd0c0415deb60fc0fe8438a374c349cf7b77470eab0ea25b5366a32176d6",
+  "schema": "xu-bias-sram-functional-contract-v1",
+  "status": "PASS"
+}

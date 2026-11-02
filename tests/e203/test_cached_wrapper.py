@@ -29,6 +29,9 @@ class XuCachedWrapperTests(unittest.TestCase):
                    'MacPE.sv', 'XRowBuffer.sv', 'WeightBankArray.sv',
                    'WeightBank.sv', 'Sram1024x16.sv', 'mem_1024x16.sv',
                    'accel_icb_slave.v']
+        sram_candidate = (perips/'LinearSramCachedCore.sv').exists()
+        if sram_candidate:
+            sources += ['LinearSramCachedCore.sv', 'BiasSramCache.sv', 'mem_32x40.sv']
         with tempfile.TemporaryDirectory(prefix='xu-cache-wrapper-') as temporary:
             binary = Path(temporary) / ('wrapper.vvp' if simulator == 'iverilog' else 'simv')
             inputs = [str(root/'tests/e203/tb_xu_cached_wrapper.sv'),
@@ -38,11 +41,11 @@ class XuCachedWrapperTests(unittest.TestCase):
                                    '-top', 'tb_xu_cached_wrapper',
                                    '+define+DISABLE_SV_ASSERTION=1',
                                    '-Mdir=' + str(Path(temporary)/'csrc'), '-o', str(binary),
-                                   *inputs]
+                                   *(['+define+XU_SRAM_BIAS_CACHE'] if sram_candidate else []), *inputs]
                 simulate_command = [str(binary)]
             else:
                 compile_command = ['iverilog', '-g2012', '-s', 'tb_xu_cached_wrapper',
-                                   '-o', str(binary), *inputs]
+                                   '-o', str(binary), *(['-DXU_SRAM_BIAS_CACHE'] if sram_candidate else []), *inputs]
                 simulate_command = ['vvp', str(binary)]
             built = subprocess.run(compile_command, cwd=temporary,
                                    universal_newlines=True, stdout=subprocess.PIPE,

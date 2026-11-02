@@ -13,6 +13,8 @@ object GenerateRTL {
         "DotProductEngine" -> (() => new DotProductEngine),
         "LinearComputeCore" -> (() => new LinearComputeCore),
         "LinearCachedCore" -> (() => new LinearCachedCore),
+        "LinearSramCachedCore" -> (() => new LinearSramCachedCore),
+        "BiasSramCache" -> (() => new BiasSramCache),
         "BiasBankCache" -> (() => new BiasBankCache),
         "LinearLayerEngine" -> (() => new LinearLayerEngine)
     )
