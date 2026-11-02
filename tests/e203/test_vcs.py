@@ -100,7 +100,7 @@ class VcsPlatformTests(unittest.TestCase):
     def test_acceptance_separates_vcs_from_original_full(self):
         out=Path('/unused-xu-output')
         vcs=accept.acceptance_steps(out,'rv-','vcs')
-        self.assertEqual([s[0] for s in vcs],['host','numeric','vectors','doctor','baseline','synthetic1','real12'])
+        self.assertEqual([s[0] for s in vcs],['host','numeric','vectors','doctor','baseline','synthetic1','synthetic2','real12'])
         self.assertIn('tests/numeric',vcs[1][1])
         for _,command,_ in vcs[2:]:
             self.assertEqual(command[command.index('--sim')+1],'vcs')

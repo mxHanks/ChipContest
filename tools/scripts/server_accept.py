@@ -13,11 +13,14 @@ VCS_SCOPE=('VCS four-state development platform acceptance; Icarus and Chisel no
            'official platform/SRAM/PPA/600-sample accuracy still required')
 
 
-def execute_steps(steps, out, scope=DEFAULT_SCOPE, profile='development-standard', not_run=None):
+def execute_steps(steps, out, scope=DEFAULT_SCOPE, profile='development-standard', not_run=None,
+                  firmware_config=None):
     if not steps: raise ValueError('acceptance must contain at least one step')
     result={'status':'RUNNING','started_utc':datetime.now(timezone.utc).isoformat(),
             'scope':scope,'profile':profile,'not_run':not_run or [],
             'steps':[]}
+    if firmware_config is not None:
+        result['firmware_configuration']=firmware_config
     try:
         for name, command, timeout in steps:
             step={'name':name,'command':[str(c) for c in command],'status':'RUNNING'}
@@ -34,21 +37,26 @@ def execute_steps(steps, out, scope=DEFAULT_SCOPE, profile='development-standard
     return result
 
 
-def acceptance_steps(out, cross_prefix, sim='verilator', full=False, offline=False):
+def acceptance_steps(out, cross_prefix, sim='verilator', full=False, offline=False,
+                     firmware_schedule='baseline', firmware_opt='-Os', firmware_experiment='none'):
+    config=soc.contract.configuration(firmware_schedule,firmware_opt,firmware_experiment)
+    firmware_args=['--firmware-schedule',config['schedule'],
+                   '--firmware-opt='+config['optimization'],
+                   '--firmware-experiment',config['experiment']]
     if sim=='vcs' and full:
         raise ValueError('VCS platform acceptance is separate from --full Icarus/Chisel acceptance')
     steps=[('host',[sys.executable,'-m','unittest','discover','-s','tests/e203','-p','test_*.py'],180),
            ('numeric',[sys.executable,'-m','unittest','discover','-s','tests/numeric','-v'],240)]
     for name,mode,tasks,backend in [('vectors','check-vectors',12,sim),
             ('doctor','doctor',1,sim),('baseline','baseline',1,'vcs' if sim=='vcs' else 'iverilog'),
-            ('synthetic1','synthetic',1,sim),('real12','real',12,sim)]:
+            ('synthetic1','synthetic',1,sim),('synthetic2','synthetic',2,sim),('real12','real',12,sim)]:
         steps.append((name,[sys.executable,str(soc.ROOT/'tools/scripts/e203_soc.py'),
             '--mode',mode,'--tasks',str(tasks),'--sim',backend,'--cross-prefix',cross_prefix,
-            '--out',str(out/name)],10800))
+            '--out',str(out/name),*firmware_args],10800))
     if full:
         steps.append(('icarus1',[sys.executable,str(soc.ROOT/'tools/scripts/e203_soc.py'),
             '--mode','real','--sim','iverilog','--tasks','1','--cross-prefix',cross_prefix,
-            '--out',str(out/'icarus1')],10800))
+            '--out',str(out/'icarus1'),*firmware_args],10800))
         steps.append(('chisel',['scala-cli',*(['--power'] if offline else []),
             'test','.',*(['--offline'] if offline else []),'--server=false','--jvm','system'],7200))
     return steps
@@ -62,6 +70,7 @@ def main():
                         help='vcs selects a separate platform flow without Icarus or Chisel')
     parser.add_argument('--full',action='store_true',help='also run Icarus real1 and all Chisel tests')
     parser.add_argument('--offline',action='store_true',help='use pre-populated Scala dependency cache with --full')
+    soc.contract.add_arguments(parser)
     args=parser.parse_args()
     if args.sim=='vcs' and args.full:
         parser.error('--sim vcs cannot be combined with --full; Icarus/Chisel remain a separate acceptance')
@@ -69,10 +78,12 @@ def main():
         parser.error('--offline controls Scala dependencies and does not apply to --sim vcs')
     out=(args.out or soc.ROOT/'build/acceptance'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')).resolve()
     out.mkdir(parents=True,exist_ok=False)
-    steps=acceptance_steps(out,args.cross_prefix,args.sim,args.full,args.offline)
+    steps=acceptance_steps(out,args.cross_prefix,args.sim,args.full,args.offline,
+                           args.firmware_schedule,args.firmware_opt,args.firmware_experiment)
     result=execute_steps(steps,out,VCS_SCOPE if args.sim=='vcs' else DEFAULT_SCOPE,
                          'vcs-platform' if args.sim=='vcs' else 'development-full' if args.full else 'development-standard',
-                         ['icarus1','chisel'] if args.sim=='vcs' else [])
+                         ['icarus1','chisel'] if args.sim=='vcs' else [],
+                         soc.contract.configuration(args.firmware_schedule,args.firmware_opt,args.firmware_experiment))
     print(f'{result["status"]}: {out / "acceptance.json"}',flush=True)
     return 0 if result['status']=='PASS' else 1
 

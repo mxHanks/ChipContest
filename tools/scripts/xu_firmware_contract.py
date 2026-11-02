@@ -1,0 +1,81 @@
+"""Shared xu firmware identities and fixed development-task work contracts."""
+
+PHASES = ['w_load', 'x_load', 'bias_load', 'compute_wait', 'writeback', 'other']
+PERFORMANCE_FIELDS = ['layer', 'cycles', *PHASES, 'busy', 'mac_fire',
+                      'mmio_reads', 'mmio_writes', 'shared_reads', 'shared_writes',
+                      'shared_stall', 'mmio_stall', 'starts', 'dones']
+PES = 8
+MACS_PER_TASK = 99 * 64 * 256
+OUTPUTS_PER_TASK = 99 * 256
+SCHEDULES = ('baseline', 'bias-dtcm')
+OPTIMIZATIONS = ('-Os', '-O2', '-O3')
+EXPERIMENTS = ('none', 'bias-unroll', 'result-unroll', 'both-unroll', 'no-masks',
+               'bias-unroll-no-masks', 'result-unroll-no-masks', 'both-unroll-no-masks')
+
+
+def configuration(schedule='baseline', optimization='-Os', experiment='none'):
+    if schedule not in SCHEDULES:
+        raise ValueError('unknown firmware schedule: ' + str(schedule))
+    if optimization not in OPTIMIZATIONS:
+        raise ValueError('unknown firmware optimization: ' + str(optimization))
+    if experiment not in EXPERIMENTS:
+        raise ValueError('unknown firmware experiment: ' + str(experiment))
+    return dict(schedule=schedule, optimization=optimization, experiment=experiment)
+
+
+def configuration_from_result(result):
+    # Reports predating explicit configuration describe the historical -Os path.
+    config = configuration(result.get('firmware_schedule', 'baseline'),
+                           result.get('firmware_opt', '-Os'),
+                           result.get('firmware_experiment', 'none'))
+    built = (result.get('firmware_build') or {}).get('configuration')
+    if built is not None and built != config:
+        raise ValueError('firmware build and run configuration differ')
+    if ('transaction_contract' in result and
+            result['transaction_contract'] != task_contract(config['schedule'])):
+        raise ValueError('firmware transaction contract differs from the schedule')
+    return config
+
+
+def add_arguments(parser):
+    parser.add_argument('--firmware-schedule', choices=SCHEDULES, default='baseline')
+    parser.add_argument('--firmware-opt', choices=OPTIMIZATIONS, default='-Os',
+                        help='compiler optimization; use --firmware-opt=-O2 (default: -Os)')
+    parser.add_argument('--firmware-experiment', choices=EXPERIMENTS, default='none')
+
+
+def compiler_defines(config):
+    config = configuration(**config)
+    experiment = config['experiment']
+    values = {'XU_FIRMWARE_BIAS_DTCM': config['schedule'] == 'bias-dtcm',
+              'XU_FIRMWARE_BIAS_UNROLL': experiment.startswith(('bias-unroll', 'both-unroll')),
+              'XU_FIRMWARE_RESULT_UNROLL': experiment.startswith(('result-unroll', 'both-unroll')),
+              'XU_FIRMWARE_NO_MASKS': experiment.endswith('no-masks')}
+    return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
+
+
+def task_contract(schedule='baseline'):
+    configuration(schedule)
+    w_reads, x_reads = 16384, 6336
+    bias_reads = 99 * 512 if schedule == 'baseline' else 512
+    return dict(w_shared_reads=w_reads, x_shared_reads=x_reads, bias_shared_reads=bias_reads,
+                shared_reads=w_reads + x_reads + bias_reads, shared_writes=50688,
+                bias_mmio_writes=99 * 32 * 8 * 3, mmio_writes=156326,
+                starts=99 * 32, dones=99 * 32,
+                mac_fire=MACS_PER_TASK // PES, macs=MACS_PER_TASK, outputs=OUTPUTS_PER_TASK)
+
+
+def validate_performance(perf, cycles, schedule='baseline'):
+    expected = set(PERFORMANCE_FIELDS) - {'layer', 'cycles'}
+    if set(perf) != expected or any(type(v) is not int or v < 0 for v in perf.values()):
+        raise ValueError('missing or invalid performance counters')
+    if type(cycles) is not int or cycles <= 0 or sum(perf[p] for p in PHASES) != cycles:
+        raise ValueError('performance phases do not cover the task window')
+    if not perf['mac_fire'] <= perf['busy'] <= cycles:
+        raise ValueError('invalid MAC/busy activity')
+    contract = task_contract(schedule)
+    if any(perf[k] != contract[k] for k in ['mac_fire', 'starts', 'dones', 'mmio_writes',
+                                            'shared_reads', 'shared_writes']):
+        raise ValueError('performance work counters differ from the firmware schedule')
+    if any(value > cycles for value in perf.values()):
+        raise ValueError('performance counter exceeds measured window')

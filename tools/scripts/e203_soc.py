@@ -11,6 +11,7 @@ import sys
 import tarfile
 from datetime import datetime, timezone
 from pathlib import Path
+import xu_firmware_contract as contract
 
 ROOT = Path(__file__).resolve().parents[2]
 E203 = ROOT / 'third-party/e203_hbirdv2'
@@ -97,11 +98,10 @@ def check_log(log, tasks):
     return [dict(layer=int(a), cycles=int(b), firmware_cycles=int(c)) for a,b,c in found]
 
 
-def check_performance(log, layers):
+def check_performance(log, layers, schedule='baseline'):
     """Require complete observer records in addition to numerical completion."""
-    fields = ['layer', 'cycles', 'w_load', 'x_load', 'bias_load', 'compute_wait',
-              'writeback', 'other', 'busy', 'mac_fire', 'mmio_reads', 'mmio_writes',
-              'shared_reads', 'shared_writes', 'shared_stall', 'mmio_stall', 'starts', 'dones']
+    contract.configuration(schedule)
+    fields = contract.PERFORMANCE_FIELDS
     pattern = r'^PERF_TASK ' + ' '.join(name + r'=(\d+)' for name in fields) + r'$'
     found = re.findall(pattern, log, re.M)
     if len(found) != len(layers) or len(found) != len(re.findall(r'^PERF_TASK\b', log, re.M)):
@@ -110,17 +110,8 @@ def check_performance(log, layers):
     for row, layer in zip(records, layers):
         if row['layer'] != layer['layer'] or row['cycles'] != layer['cycles']:
             raise ValueError('performance window or layer differs from task completion')
-        phases = ['w_load', 'x_load', 'bias_load', 'compute_wait', 'writeback', 'other']
-        if row['cycles'] <= 0 or sum(row[name] for name in phases) != row['cycles']:
-            raise ValueError('performance phases do not cover the task window')
-        if not row['mac_fire'] <= row['busy'] <= row['cycles']:
-            raise ValueError('invalid MAC/busy activity')
-        if (row['mac_fire'] != 99 * 32 * 64 or row['starts'] != 99 * 32 or
-                row['dones'] != 99 * 32 or row['shared_reads'] != 16384 + 6336 + 99 * 512 or
-                row['shared_writes'] != 50688):
-            raise ValueError('performance work counters differ from the firmware task')
-        if any(row[name] > row['cycles'] for name in fields[2:]):
-            raise ValueError('performance counter exceeds measured window')
+        contract.validate_performance({k: v for k, v in row.items()
+                                       if k not in ['layer', 'cycles']}, row['cycles'], schedule)
     return [{k: v for k, v in row.items() if k not in ['layer', 'cycles']} for row in records]
 
 
@@ -198,20 +189,62 @@ def synthetic(directory, tasks):
             (dest/f'{name}.mem').write_text(''.join(f'{v&((1<<bits)-1):0{bits//4}x}\n' for v in values))
 
 
-def compile_firmware(out, prefix):
+def firmware_memory(sections, symbols, stack_files):
+    sizes = {name: int(size, 16) for name, size in
+             re.findall(r'^\s*\d+\s+(\.[\w.]+)\s+([0-9a-fA-F]+)\s', sections, re.M)}
+    addresses = {}
+    for line in symbols.splitlines():
+        fields = line.split()
+        if fields and fields[-1] in ['__bss_start', '__bss_end', '__stack_top']:
+            addresses[fields[-1]] = int(fields[0], 16)
+    if set(addresses) != {'__bss_start', '__bss_end', '__stack_top'}:
+        raise ValueError('firmware memory symbols are missing')
+    if sizes.get('.data', 0) != 0:
+        raise ValueError('startup does not copy initialized DTCM data')
+    frames = []
+    for path in stack_files:
+        for line in path.read_text().splitlines():
+            source, size, kind = line.rsplit('\t', 2)
+            frames.append(dict(source=source, bytes=int(size), kind=kind))
+    available = addresses['__stack_top'] - addresses['__bss_end']
+    if not frames or available <= 0 or any(f['kind'] != 'static' for f in frames):
+        raise ValueError('firmware stack usage is unavailable or DTCM is exhausted')
+    return dict(itcm_bytes=sizes.get('.text', 0), itcm_capacity_bytes=65536,
+                itcm_remaining_bytes=65536 - sizes.get('.text', 0),
+                data_bytes=sizes.get('.data', 0), bss_bytes=sizes.get('.bss', 0),
+                dtcm_capacity_bytes=65536, stack_top=addresses['__stack_top'],
+                stack_capacity_after_bss_bytes=available, stack_top_guard_bytes=16,
+                stack_frames=frames, max_static_stack_frame_bytes=max(f['bytes'] for f in frames),
+                stack_usage_scope='GCC static per-function frames; runtime high-water mark not measured')
+
+
+def compile_firmware(out, prefix, schedule='baseline', optimization='-Os', experiment='none', report=None):
     target = out/'accel_soc'
+    config = contract.configuration(schedule, optimization, experiment)
     sources = [TESTS/'firmware'/name for name in ['start.S','main.c','accel.c']]
-    run([prefix+'gcc','-march=rv32imac_zicsr2p0_zifencei2p0','-mabi=ilp32',
-         '-Os','-ffreestanding','-fno-builtin','-msmall-data-limit=0',
+    command = [prefix+'gcc','-march=rv32imac_zicsr2p0_zifencei2p0','-mabi=ilp32',
+         optimization,*contract.compiler_defines(config),'-fstack-usage',
+         '-ffreestanding','-fno-builtin','-msmall-data-limit=0',
          '-nostdlib','-nostartfiles','-static','-mcmodel=medany','-Wl,--no-relax',
-         '-T',str(TESTS/'firmware/link.ld'),*[str(p) for p in sources],'-o',str(target)],
-        ROOT,out/'firmware-build.log')
+         '-T',str(TESTS/'firmware/link.ld'),*[str(p) for p in sources],'-o',str(target)]
+    run(command,out,out/'firmware-build.log')
     run([prefix+'objcopy','-O','verilog',str(target),str(target)+'.verilog'],ROOT,out/'objcopy.log')
     image = Path(str(target)+'.verilog')
     image.write_text(image.read_text().replace('@800','@000'))
     dump = run([prefix+'objdump','--disassemble-all',str(target)],ROOT,out/'firmware.dump')
     if not re.search(r'80000086\s+<write_tohost>', dump):
         raise ValueError('firmware completion address is not 0x80000086')
+    sections = run([prefix+'objdump','-h',str(target)],ROOT,out/'firmware-sections.log')
+    symbols = run([prefix+'objdump','-t',str(target)],ROOT,out/'firmware-symbols.log')
+    identity = dict(configuration=config, command=[str(c) for c in command], cwd=str(out),
+                    source_sha256={p.name:sha(p) for p in (TESTS/'firmware').iterdir() if p.is_file()},
+                    elf_sha256=sha(target), image_sha256=sha(image),
+                    memory=firmware_memory(sections, symbols, sorted(out.glob('*.su'))))
+    (out/'firmware-build.json').write_text(json.dumps(identity,indent=2)+'\n')
+    if report is not None:
+        report.update(firmware_build=identity, firmware_sha256=identity['source_sha256'],
+                      firmware_elf_sha256=identity['elf_sha256'],
+                      firmware_image_sha256=identity['image_sha256'])
     return target
 
 
@@ -269,6 +302,7 @@ def main():
     parser.add_argument('--out',type=Path)
     parser.add_argument('--waves',action='store_true')
     parser.add_argument('--max-cycles',type=int,default=200000000)
+    contract.add_arguments(parser)
     args=parser.parse_args()
     if args.max_cycles < 1:
         parser.error('--max-cycles must be positive')
@@ -276,6 +310,10 @@ def main():
     out.mkdir(parents=True,exist_ok=False)
     selected_sim='iverilog' if args.mode=='baseline' and args.sim=='verilator' else args.sim
     report={'status':'RUNNING','mode':args.mode,'tasks':args.tasks,'simulator':selected_sim,
+            'firmware_schedule':args.firmware_schedule,'firmware_opt':args.firmware_opt,
+            'firmware_experiment':args.firmware_experiment,
+            'transaction_contract':contract.task_contract(args.firmware_schedule),
+            'contract_sha256':sha(Path(contract.__file__)),
             'scope':'development platform; TB shared-memory preload excluded; no official PPA/accuracy claim'}
     try:
         required=required_tools(args.mode,selected_sim,args.cross_prefix)
@@ -303,9 +341,9 @@ def main():
             report['scope']='exact integer XW+b check; no RTL or floating-point accuracy claim'
             report['status']='PASS'
         elif args.mode=='doctor':
-            firmware=compile_firmware(out,args.cross_prefix)
-            report['firmware_elf_sha256']=sha(firmware)
-            report['firmware_image_sha256']=sha(Path(str(firmware)+'.verilog'))
+            firmware=compile_firmware(out,args.cross_prefix,args.firmware_schedule,
+                                      args.firmware_opt,args.firmware_experiment,report)
+            report['runner_sha256']=sha(Path(__file__))
             report['scope']='development toolchain/submodule preflight; actual RV32 firmware build; no simulation'
             report['status']='PASS'
         else:
@@ -332,10 +370,8 @@ def main():
                         path=directory/f'layer_{layer:02d}'/(name+'.mem')
                         read_mem(path,bits,count)
                         report['vectors'][str(path.relative_to(directory))]=sha(path)
-                firmware=compile_firmware(out,args.cross_prefix)
-                report['firmware_sha256']={p.name:sha(p) for p in (TESTS/'firmware').iterdir() if p.is_file()}
-                report['firmware_elf_sha256']=sha(firmware)
-                report['firmware_image_sha256']=sha(Path(str(firmware)+'.verilog'))
+                firmware=compile_firmware(out,args.cross_prefix,args.firmware_schedule,
+                                          args.firmware_opt,args.firmware_experiment,report)
                 report['runner_sha256']=sha(Path(__file__))
                 installed=E203/'vsim/install/rtl'
                 sources=matrix_sources(installed)
@@ -353,7 +389,7 @@ def main():
                         f'+TASKS={args.tasks}',f'+DUMPWAVE={int(args.waves)}',
                         f'+MAX_CYCLES={args.max_cycles}'],out,out/'simulation.log',7200)
                 report['layers']=check_log(log,args.tasks)
-                for layer, counters in zip(report['layers'], check_performance(log, report['layers'])):
+                for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
                     layer['performance'] = counters
                 report['outputs']=args.tasks*25344
                 report['write_words']=args.tasks*50688
@@ -362,6 +398,7 @@ def main():
         report['status']='FAIL'
         report['error']=str(exc)
         print(str(exc),file=sys.stderr)
+    report['log_sha256']={p.name:sha(p) for p in sorted(out.glob('*.log'))}
     (out/'result.json').write_text(json.dumps(report,indent=2)+'\n')
     print(f'{report["status"]}: {out / "result.json"}',flush=True)
     return 0 if report['status']=='PASS' else 1

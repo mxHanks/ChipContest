@@ -14,7 +14,7 @@ class PerformanceTests(unittest.TestCase):
     def record(self):
         return ('PERF_TASK layer=0 cycles=2368078 w_load=300000 x_load=100000 '
                 'bias_load=600000 compute_wait=250000 writeback=1118078 other=0 '
-                'busy=215424 mac_fire=202752 mmio_reads=60000 mmio_writes=150000 '
+                'busy=215424 mac_fire=202752 mmio_reads=60000 mmio_writes=156326 '
                 'shared_reads=73408 shared_writes=50688 shared_stall=10000 '
                 'mmio_stall=0 starts=3168 dones=3168\n')
 

@@ -5,10 +5,11 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import xu_firmware_contract as contract
 
-PHASES = ['w_load', 'x_load', 'bias_load', 'compute_wait', 'writeback', 'other']
-MACS_PER_TASK = 99 * 64 * 256
-PES = 8
+PHASES = contract.PHASES
+MACS_PER_TASK = contract.MACS_PER_TASK
+PES = contract.PES
 
 
 def summarize(result, frequency_mhz):
@@ -16,11 +17,19 @@ def summarize(result, frequency_mhz):
         raise ValueError('frequency must be finite and positive')
     if result.get('status') != 'PASS' or result.get('mode') != 'real':
         raise ValueError('a passing real-task simulation is required')
+    config = contract.configuration_from_result(result)
     layers = result['layers']
-    if not layers or [x['layer'] for x in layers] != list(range(result['tasks'])):
+    if (type(result['tasks']) is not int or not 1 <= result['tasks'] <= 12 or
+            not layers or [x['layer'] for x in layers] != list(range(result['tasks']))):
         raise ValueError('incomplete or unordered layers')
+    for field, expected in [('outputs', result['tasks'] * contract.OUTPUTS_PER_TASK),
+                            ('write_words', result['tasks'] * contract.task_contract(config['schedule'])['shared_writes'])]:
+        if field in result and result[field] != expected:
+            raise ValueError('incomplete result ' + field)
     if any('performance' in x for x in layers) and not all('performance' in x for x in layers):
         raise ValueError('incomplete performance profiles')
+    if config['schedule'] != 'baseline' and not all('performance' in x for x in layers):
+        raise ValueError('explicit firmware schedule requires complete performance profiles')
     hz = frequency_mhz * 1e6
     rows = []
     for layer in layers:
@@ -35,17 +44,7 @@ def summarize(result, frequency_mhz):
                    end_to_end_peak_fraction=MACS_PER_TASK / (cycles * PES))
         perf = layer.get('performance')
         if perf is not None:
-            if any(type(v) is not int or v < 0 for v in perf.values()):
-                raise ValueError('invalid performance counters')
-            if sum(perf[p] for p in PHASES) != cycles:
-                raise ValueError('phase cycles do not cover the measured interval')
-            if perf['mac_fire'] * PES != MACS_PER_TASK:
-                raise ValueError('MAC activity does not match the task work')
-            if (not perf['mac_fire'] <= perf['busy'] <= cycles or
-                    perf['starts'] != 3168 or perf['dones'] != 3168 or
-                    perf['shared_reads'] != 73408 or perf['shared_writes'] != 50688 or
-                    any(v > cycles for v in perf.values())):
-                raise ValueError('performance work or activity counters are inconsistent')
+            contract.validate_performance(perf, cycles, config['schedule'])
             row['counters'] = perf
             row['phase_fraction'] = {p: perf[p] / cycles for p in PHASES}
             row['mac_active_fraction'] = perf['mac_fire'] / cycles
@@ -65,6 +64,15 @@ def summarize(result, frequency_mhz):
         aggregate['counters'] = {k: sum(x['counters'][k] for x in rows) for k in keys}
         aggregate['phase_fraction'] = {p: aggregate['counters'][p] / total for p in PHASES}
     return dict(schema='xu-development-perf-v1', frequency_mhz=frequency_mhz,
+                firmware_schedule=config['schedule'], firmware_opt=config['optimization'],
+                firmware_experiment=config['experiment'],
+                firmware_build=result.get('firmware_build'),
+                transaction_contract=contract.task_contract(config['schedule']),
+                source_identity={key:result[key] for key in [
+                    'main_commit','e203_commit','runner_sha256','contract_sha256',
+                    'firmware_sha256','firmware_elf_sha256','firmware_image_sha256',
+                    'source_sha256','vectors','tools','versions','simulator_sha256','log_sha256']
+                    if key in result},
                 frequency_status='conditional conversion; physical timing closure not established',
                 scope='12 independent FFN1 layers at most; development shared SRAM with modulo-7 backpressure; '
                       'first shared input/parameter read acceptance through final Y write-response retirement; '

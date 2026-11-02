@@ -2,8 +2,10 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+import sys
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / 'tools/scripts'))
 spec = importlib.util.spec_from_file_location('e203_soc', ROOT / 'tools/scripts/e203_soc.py')
 soc = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(soc)
