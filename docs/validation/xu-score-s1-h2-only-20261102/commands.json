@@ -1,0 +1,208 @@
+{
+  "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-h2-only",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "worktree",
+        "add",
+        "/home/mxhanks/Projects/ChipContest-xu-s1-h2-only",
+        "-b",
+        "codex/xu-s1-h2-only",
+        "e998479"
+      ],
+      "receipt": "setup worktree",
+      "exit_code": 0,
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt"
+    },
+    {
+      "argv": [
+        "git",
+        "clone",
+        "--no-hardlinks",
+        "--branch",
+        "codex/xu-optimize-hw",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2",
+        "/home/mxhanks/Projects/ChipContest-xu-s1-h2-only/third-party/e203_hbirdv2"
+      ],
+      "receipt": "independent child clone",
+      "exit_code": 0,
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt"
+    },
+    {
+      "argv": [
+        "git",
+        "checkout",
+        "-b",
+        "codex/xu-s1-h2-only",
+        "f49a5fc914971426bd4530db39e270a84b41139f"
+      ],
+      "receipt": "child checkout",
+      "exit_code": 0,
+      "cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-h2-only/third-party/e203_hbirdv2"
+    },
+    {
+      "argv": [
+        "scala-cli",
+        "run",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system",
+        "-M",
+        "GenerateRTL",
+        "--",
+        "LinearH2OnlyCore"
+      ],
+      "receipt": "xu-s1-h2-only/generate-h2-only.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "scala-cli",
+        "test",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system"
+      ],
+      "receipt": "xu-s1-h2-only/chisel-tests.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/numeric"
+      ],
+      "receipt": "xu-s1-h2-only/numeric-tests.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_cached_wrapper.py"
+      ],
+      "receipt": "xu-s1-h2-only/wrapper-test.log; XU_WRAPPER_LOG_DIR=build/xu-s1-h2-only/wrapper",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "scala-cli",
+        "run",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system",
+        "-M",
+        "GenerateRTL",
+        "--",
+        "LinearCachedCore"
+      ],
+      "receipt": "xu-s1-h2-only/generate-default.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "1",
+        "--sim",
+        "verilator",
+        "--firmware-schedule",
+        "bias-dtcm-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "build/xu-s1-h2-only/real1"
+      ],
+      "receipt": "xu-s1-h2-only/real1/result.json",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "1",
+        "--sim",
+        "verilator",
+        "--firmware-schedule",
+        "bias-hw",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "build/xu-s1-h2-only/reject-bias-hw"
+      ],
+      "receipt": "xu-s1-h2-only/reject-bias-hw/result.json; expected rejection",
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "check-vectors",
+        "--tasks",
+        "12",
+        "--out",
+        "build/xu-s1-h2-only/frozen-vectors12"
+      ],
+      "receipt": "xu-s1-h2-only/frozen-vectors12/result.json",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "yosys",
+        "-Q",
+        "-T",
+        "-s",
+        "/home/mxhanks/Projects/ChipContest-xu-s1-h2-only/build/xu-s1-h2-only/hierarchy.ys"
+      ],
+      "receipt": "xu-s1-h2-only/hierarchy.log; initial missing-proc failure also retained",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/host",
+        "-p",
+        "test_xu_gate_verify.py"
+      ],
+      "receipt": "xu-s1-h2-only/gate-evidence-tests.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "cherry-pick",
+        "ac85d6ae00db4fab8ba397753df1a3565c60f31f"
+      ],
+      "receipt": "compatibility fix inherited as 1caf5dc",
+      "exit_code": 0
+    }
+  ],
+  "direct_wrapper_commands": "exact compile/simulation argv and cwd are in per-replay result.json; compiler commands also begin saved SoC *.log files",
+  "child_checkout_cwd": "/home/mxhanks/Projects/ChipContest-xu-s1-h2-only/third-party/e203_hbirdv2",
+  "chisel_raw_log_count": 42
+}

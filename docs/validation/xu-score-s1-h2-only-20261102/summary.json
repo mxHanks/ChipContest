@@ -1,0 +1,84 @@
+{
+  "schema": "xu-s1-h2-only-local-screen-v1",
+  "status": "PASS",
+  "scope": "local screening only; no VCS12, area, timing, power, energy, competition qualification or retained-candidate claim",
+  "source_parent_runtime_commit": "0f52ea32d32eb5ce46d19258dee5ab41005870cb",
+  "source_parent_gatebench_commit": "2805a42adc9a0cfe90328044ab06ef239d618202",
+  "source_parent_after_compatibility_commit": "1caf5dcd4e50d5fe0e3a5c95e8f4ebd6f2237f11",
+  "child_base": "f49a5fc914971426bd4530db39e270a84b41139f",
+  "child_candidate": "434628c1525931c15dfaf06b5586118eb530ccba",
+  "capability": "0x58550002",
+  "bias_cache_hardware": false,
+  "chisel_tests": {
+    "passed": 14,
+    "suites": 10,
+    "reported_run_seconds": 54.26
+  },
+  "numeric_tests_passed": 42,
+  "frozen_integer_vectors_tasks": 12,
+  "frozen_integer_outputs": 304128,
+  "real1": {
+    "layer": 0,
+    "cycles": 1927329,
+    "firmware_cycles": 1927435,
+    "performance": {
+      "w_load": 298949,
+      "x_load": 114873,
+      "bias_load": 552279,
+      "compute_wait": 218592,
+      "writeback": 649473,
+      "other": 93163,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 76032,
+      "mmio_writes": 130982,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 7734,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    }
+  },
+  "real1_scope": "development platform; TB shared-memory preload excluded; no official PPA/accuracy claim",
+  "bias_hw_negative_control": {
+    "runner_status": "FAIL",
+    "runner_exit_code": 1,
+    "simulator_exit_code": -6,
+    "expected_marker": "firmware failure gp=14 completed=0",
+    "outcome": "PASS: unsupported cache rejected"
+  },
+  "h2_e203_wrapper": {
+    "accepted": 4007,
+    "retired": 4007
+  },
+  "h2_gate_rtl_wrapper": {
+    "accepted": 13708,
+    "retired": 13708,
+    "trace_rows": 13706
+  },
+  "fixed_combined_controls": {
+    "e203_wrapper_accepted_retired": 4909,
+    "gate_wrapper_accepted_retired": 17151,
+    "gate_trace_rows": 17149
+  },
+  "evidence_archive": {
+    "file": "xu-h2-only-local-evidence.tar.xz",
+    "sha256": "2815732c53f9caf1e062bf9f2aa1c9f0585ab590c9f69df7eb5f50ac78c0d4e7",
+    "files": 109,
+    "chisel_raw_logs": 42
+  },
+  "child_bundle": {
+    "file": "xu-e203-h2-only.bundle",
+    "sha256": "ee0ba8033f73926228f8408da691fba74403ef0f9aefdf421763bc967b295a29"
+  },
+  "known_unfinished": [
+    "Root owns actual VCS12 and same-library PPA",
+    "Root must explicitly audit allowed accelerator child differences for full-SoC config guard; current guard fixed f49",
+    "No SRAM bias-storage candidate attempted"
+  ],
+  "preserved_attempts": [
+    "hierarchy-initial-failed: write_json required proc; corrected flow passed",
+    "gate-rtl-combined-reference: HEAD export was H2 duplicate; only explicit -f49a5fc directory is combined baseline"
+  ]
+}
