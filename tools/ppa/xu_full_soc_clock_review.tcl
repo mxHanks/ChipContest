@@ -37,7 +37,8 @@ set xu_no_clock 0
 set xu_clock_pin_count 0
 foreach_in_collection xu_pin [all_registers -clock_pins] {
     incr xu_clock_pin_count
-    set xu_pinclks [get_clocks -quiet -of_objects $xu_pin]
+    # PT T-2022.03 get_clocks selects names only; clocks is a pin attribute.
+    set xu_pinclks [get_attribute $xu_pin clocks]
     if {[sizeof_collection $xu_pinclks] == 0} { incr xu_no_clock }
     puts $xu_f "register\t[get_object_name $xu_pin]\t[get_object_name $xu_pinclks]"
 }
@@ -47,7 +48,7 @@ foreach_in_collection xu_cell [get_cells -quiet -hierarchical -filter {ref_name 
         puts $xu_f "SRAM_MISSING_CLK\t[get_object_name $xu_cell]\t"
         incr xu_no_clock
     } else {
-        set xu_pinclks [get_clocks -quiet -of_objects $xu_pin]
+        set xu_pinclks [get_attribute $xu_pin clocks]
         if {[sizeof_collection $xu_pinclks] == 0} { incr xu_no_clock }
         puts $xu_f "SRAM\t[get_object_name $xu_pin]\t[get_object_name $xu_pinclks]"
     }

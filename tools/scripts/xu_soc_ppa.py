@@ -337,7 +337,7 @@ def prepare(root, out, impl, allow_unqualified=False):
     synth+='set_fix_hold [all_clocks]\ncompile_ultra -no_autoungroup\n'
     synth+=memory_checks(impl)+'check_design > postcheck.rpt\nreport_units > dc-units.rpt\nreport_area -hierarchy > area.rpt\nreport_reference -hierarchy > references.rpt\nreport_qor > qor.rpt\nreport_clock > clocks.rpt\nwrite -format verilog -hierarchy -output mapped.v\nwrite_sdc mapped.sdc\n'
     (out/'synth.tcl').write_text(guarded_tcl(synth,'XU_SOC_SYNTHESIS_COMPLETE_NOT_QUALIFIED'))
-    pt='set_app_var link_path '+libexpr+'\nread_verilog mapped.v\nif {![link_design '+tcl(impl['top'])+']} {error {PT link failed}}\nread_sdc mapped.sdc\n'+clock_contract_checks()+'set_propagated_clock [all_clocks]\nupdate_timing\n'
+    pt='set_app_var link_path '+libexpr+'\nread_verilog mapped.v\nif {![link_design '+tcl(impl['top'])+']} {error {PT link failed}}\nsource constraints.sdc\n'+clock_contract_checks()+'set_propagated_clock [all_clocks]\nupdate_timing\n'
     pt+=memory_checks(impl)
     pt+='check_timing -verbose > check-timing.rpt\nreport_units > units.rpt\nreport_clock > pt-clocks.rpt\nreport_analysis_coverage -status_details untested > analysis-coverage.rpt\nreport_timing -delay_type max -max_paths 50 -significant_digits 8 > setup.rpt\nreport_timing -delay_type min -max_paths 50 -significant_digits 8 > hold.rpt\nreport_constraint -all_violators > violations.rpt\n'
     pt+='set XU_CLOCK_MODE envelope\nset XU_PLL_DIV 0\nset XU_CLOCK_REVIEW_DIR clock-reports\nsource clock-review.tcl\n'
@@ -432,8 +432,15 @@ def activity_power(out, record, env):
             'activity must accompany complete twelve-task numerical verification')
     require(record.get('mapping_sha256')==digest(dict(replacements=impl['replacements'],added_sources=impl['added_sources'])), 'activity mapping source differs')
     require(record.get('source_manifest_sha256')==prepared['input_manifest_sha256'],'activity full source manifest differs')
+    # Preserve DC's mapped SDC identity separately from the exact contract sourced by PT.
     require(record.get('netlist_sha256')==sha(out/'mapped.v')==execution.get('netlist_sha256') and
             record.get('sdc_sha256')==sha(out/'mapped.sdc')==execution.get('sdc_sha256'),'activity netlist/SDC identity differs')
+    analysis_sdc=out/'constraints.sdc'
+    require(analysis_sdc.is_file() and not analysis_sdc.is_symlink(),'analysis SDC must be a regular prepared file')
+    analysis_sdc_sha256=sha(analysis_sdc)
+    require(record.get('analysis_sdc_sha256')==analysis_sdc_sha256==execution.get('analysis_sdc_sha256')==
+            prepared.get('generated_sha256',{}).get('constraints.sdc')==impl.get('constraints',{}).get('sha256'),
+            'activity analysis SDC identity differs')
     require(not re.search(r'FATAL|TEST_FAIL|%Error|Time Out|timeout',log,re.I),'activity simulation log reports failure')
     layers=result.get('layers',[])
     require([r.get('layer') for r in layers]==list(range(12)),'all twelve distinct layers required')
@@ -457,7 +464,7 @@ def activity_power(out, record, env):
     require(isinstance(strip,str) and strip and 'u_accel' not in strip,'wrapper-only strip_path cannot qualify full-scope power')
     require(not (out/'power-run.json').exists() and not (out/'activity-input.json').exists(),'refuse existing power run')
     _,libs=library_paths(impl)
-    common='set_app_var link_path [list * '+' '.join(tcl(x) for x in libs)+']\nset_app_var power_enable_analysis true\nset_app_var power_analysis_mode averaged\nread_verilog mapped.v\nif {![link_design '+tcl(impl['top'])+']} {error {PT power link failed}}\nread_sdc mapped.sdc\n'+clock_contract_checks()+'set_propagated_clock [all_clocks]\nupdate_timing\n'
+    common='set_app_var link_path [list * '+' '.join(tcl(x) for x in libs)+']\nset_app_var power_enable_analysis true\nset_app_var power_analysis_mode averaged\nread_verilog mapped.v\nif {![link_design '+tcl(impl['top'])+']} {error {PT power link failed}}\nsource constraints.sdc\n'+clock_contract_checks()+'set_propagated_clock [all_clocks]\nupdate_timing\n'
     common+=memory_checks(impl)
     # Each process reads exactly one start/end pair, so all activity state and
     # probability propagation are independent across the twelve task windows.
@@ -470,12 +477,18 @@ def activity_power(out, record, env):
         script.write_text(guarded_tcl(body,'XU_SOC_POWER_COMPLETE_NOT_QUALIFIED'));scripts.append(script)
     write(out/'activity-input.json',record)
     receipt=dict(schema='xu-full-soc-power-execution-v1',status='RUNNING_NOT_QUALIFIED',tasks=[],
+                 netlist_sha256=record['netlist_sha256'],sdc_sha256=record['sdc_sha256'],
+                 analysis_sdc_sha256=analysis_sdc_sha256,
                  activity_sha256=digest(record),method='twelve independent averaged PT windows; no mean-power or energy claim',
                  pending='Every task needs annotation propagation/default review and all SRAM power coverage, then sum(P_task*duration_task) via xu_soc_activity.py energy')
     write(out/'power-run.json',receipt)
     try:
         for index,script in enumerate(scripts):
+            require(analysis_sdc.is_file() and not analysis_sdc.is_symlink() and sha(analysis_sdc)==analysis_sdc_sha256,
+                    'analysis SDC changed before power execution')
             result=run_tool(out,['pt_shell','-f',script.name],'pt-power-%02d'%index,env)
+            require(analysis_sdc.is_file() and not analysis_sdc.is_symlink() and sha(analysis_sdc)==analysis_sdc_sha256,
+                    'analysis SDC changed during power execution')
             reports=sorted(out.glob('task-%02d-*.rpt'%index))
             require(len(reports)==6 and all(x.stat().st_size>0 for x in reports),'missing/empty per-task power report')
             receipt['tasks'].append(dict(task=index,window_ns=windows[index],execution=result,
@@ -521,6 +534,7 @@ def main():
             run['pt']=run_tool(out,['pt_shell','-f','sta.tcl'],'pt-sta',env)
             verify_prepared(root,out,manifest)
             run.update(status='EXECUTED_NOT_QUALIFIED',netlist_sha256=sha(out/'mapped.v'),sdc_sha256=sha(out/'mapped.sdc'),
+                       analysis_sdc_sha256=sha(out/'constraints.sdc'),
                        timing_review=timing_execution_review(out),qualification_gaps=manifest.get('qualification_gaps',[]))
         except Exception as exc:
             run.update(status='FAIL',error=str(exc));write(out/'execution.json',run);raise

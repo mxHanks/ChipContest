@@ -48,7 +48,7 @@ if {$XU_CLOCK_MODE eq "envelope"} {
     # at the fastest 150 MHz, with the real 50% source high pulse. No register
     # value is assumed, and the clock-control logic remains timed. This can
     # overconstrain slower programmed states; it never grants a longer cycle.
-    create_generated_clock -name xu_plldiv_envelope -master_clock xu_hfextclk \
+    create_generated_clock -add -name xu_plldiv_envelope -master_clock xu_hfextclk \
         -source $xu_div_source -divide_by 1 $xu_div_target
 } else {
     # These are sirv_hclkgen_regs register OUTPUT pins. Case values express a
@@ -67,10 +67,10 @@ if {$XU_CLOCK_MODE eq "envelope"} {
         # RTL is pulse swallowing, not a 50% toggle divider. N=2*(div+1),
         # output high time=Tsource/2, period=N*Tsource. Source edge indices
         # 1,2,2*N+1 preserve the short high pulse needed for pulse-width checks.
-        create_generated_clock -name xu_plldiv_static -master_clock xu_hfextclk \
+        create_generated_clock -add -name xu_plldiv_static -master_clock xu_hfextclk \
             -source $xu_div_source -edges [list 1 2 [expr {4*($XU_PLL_DIV+1)+1}]] $xu_div_target
     } else {
-        create_generated_clock -name xu_plldiv_by1 -master_clock xu_hfextclk \
+        create_generated_clock -add -name xu_plldiv_by1 -master_clock xu_hfextclk \
             -source $xu_div_source -divide_by 1 $xu_div_target
     }
 }

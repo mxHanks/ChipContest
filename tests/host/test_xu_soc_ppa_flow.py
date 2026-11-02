@@ -47,6 +47,33 @@ class XuSocPpaFlowTest(unittest.TestCase):
         impl['mapping_proof']=self.identity(path)
         return impl,proof
 
+    def power_fixture(self, directory):
+        impl,_=self.fixture(directory)
+        out=directory/'prepared'
+        prepared=PPA.prepare(ROOT,out,impl,allow_unqualified=True)
+        (out/'mapped.v').write_text('HOST NETLIST FIXTURE ONLY')
+        (out/'mapped.sdc').write_text('HOST MAPPED SDC FIXTURE ONLY')
+        execution=dict(status='EXECUTED_NOT_QUALIFIED',netlist_sha256=PPA.sha(out/'mapped.v'),
+                       sdc_sha256=PPA.sha(out/'mapped.sdc'),analysis_sdc_sha256=PPA.sha(out/'constraints.sdc'))
+        (out/'execution.json').write_text(json.dumps(execution))
+        layers=[dict(layer=i,cycles=i+2,firmware_cycles=i+10) for i in range(12)]
+        log=directory/'simulation.log'
+        log.write_text(''.join('TASK_PASS layer={layer} outputs=25344 writes=50688 cycles={cycles} firmware_cycles={firmware_cycles}\n'.format(**x) for x in layers)+
+                       'SOC_PASS tasks=12 outputs=304128 writes=608256\n')
+        result=dict(status='PASS',tasks=12,outputs=304128,write_words=608256,layers=layers,
+                    log_sha256={'simulation.log':PPA.sha(log)})
+        resultpath=directory/'result.json';resultpath.write_text(json.dumps(result))
+        vcd=directory/'activity.vcd';vcd.write_text('HOST VCD FIXTURE ONLY')
+        windows=[[i*1000+10,i*1000+10+(x['cycles']-1)*20/3] for i,x in enumerate(layers)]
+        record=dict(vcd=self.identity(vcd),result=self.identity(resultpath),simulation_log=self.identity(log),
+                    mapping_sha256=PPA.digest(dict(replacements=impl['replacements'],added_sources=impl['added_sources'])),
+                    source_manifest_sha256=prepared['input_manifest_sha256'],netlist_sha256=execution['netlist_sha256'],
+                    sdc_sha256=execution['sdc_sha256'],analysis_sdc_sha256=execution['analysis_sdc_sha256'],
+                    windows_ns=windows,clock_period_ns=20/3,
+                    scope='full-digital-soc-including-all-srams',strip_path='tb/dut',
+                    scope_paths={x:'tb/dut/'+x for x in ['cpu','accelerator','interconnect','shared','itcm','dtcm']})
+        return out,record,windows
+
     def test_unreviewed_template_cannot_be_used_as_qualified_proof(self):
         with tempfile.TemporaryDirectory() as temporary:
             impl,proof=self.fixture(Path(temporary))
@@ -94,6 +121,8 @@ class XuSocPpaFlowTest(unittest.TestCase):
             self.assertIn('XU_FATAL:',script)
             self.assertIn('clock-review.tcl',result['generated_sha256'])
             pt=(out/'sta.tcl').read_text()
+            self.assertIn('source constraints.sdc\n',pt)
+            self.assertNotIn('read_sdc mapped.sdc',pt)
             self.assertIn('set_propagated_clock [all_clocks]',pt)
             self.assertIn('report_analysis_coverage -status_details untested',pt)
             self.assertIn('foreach xu_type {max min}',pt)
@@ -139,29 +168,8 @@ class XuSocPpaFlowTest(unittest.TestCase):
 
     def test_power_runs_twelve_independent_start_end_pairs(self):
         with tempfile.TemporaryDirectory() as temporary:
-            directory=Path(temporary)
-            impl,_=self.fixture(directory)
-            out=directory/'prepared'
-            prepared=PPA.prepare(ROOT,out,impl,allow_unqualified=True)
-            (out/'mapped.v').write_text('HOST NETLIST FIXTURE ONLY')
-            (out/'mapped.sdc').write_text('HOST MAPPED SDC FIXTURE ONLY')
-            execution=dict(status='EXECUTED_NOT_QUALIFIED',netlist_sha256=PPA.sha(out/'mapped.v'),sdc_sha256=PPA.sha(out/'mapped.sdc'))
-            (out/'execution.json').write_text(json.dumps(execution))
-            layers=[dict(layer=i,cycles=i+2,firmware_cycles=i+10) for i in range(12)]
-            log=directory/'simulation.log'
-            log.write_text(''.join('TASK_PASS layer={layer} outputs=25344 writes=50688 cycles={cycles} firmware_cycles={firmware_cycles}\n'.format(**x) for x in layers)+
-                           'SOC_PASS tasks=12 outputs=304128 writes=608256\n')
-            result=dict(status='PASS',tasks=12,outputs=304128,write_words=608256,layers=layers,
-                        log_sha256={'simulation.log':PPA.sha(log)})
-            resultpath=directory/'result.json';resultpath.write_text(json.dumps(result))
-            vcd=directory/'activity.vcd';vcd.write_text('HOST VCD FIXTURE ONLY')
-            windows=[[i*1000+10,i*1000+10+(x['cycles']-1)*20/3] for i,x in enumerate(layers)]
-            record=dict(vcd=self.identity(vcd),result=self.identity(resultpath),simulation_log=self.identity(log),
-                        mapping_sha256=PPA.digest(dict(replacements=impl['replacements'],added_sources=impl['added_sources'])),
-                        source_manifest_sha256=prepared['input_manifest_sha256'],netlist_sha256=execution['netlist_sha256'],
-                        sdc_sha256=execution['sdc_sha256'],windows_ns=windows,clock_period_ns=20/3,
-                        scope='full-digital-soc-including-all-srams',strip_path='tb/dut',
-                        scope_paths={x:'tb/dut/'+x for x in ['cpu','accelerator','interconnect','shared','itcm','dtcm']})
+            out,record,windows=self.power_fixture(Path(temporary))
+            self.assertNotEqual(record['sdc_sha256'],record['analysis_sdc_sha256'])
             called=[]
             def fake_tool(directory,command,label,env):
                 index=int(label.rsplit('-',1)[1]);called.append(index)
@@ -169,6 +177,8 @@ class XuSocPpaFlowTest(unittest.TestCase):
                 pairs=re.findall(r'-time \[list ([^\]]+)\]',text)
                 self.assertEqual(len(pairs),1)
                 self.assertEqual([float(x) for x in pairs[0].split()],windows[index])
+                self.assertIn('source constraints.sdc\n',text)
+                self.assertNotIn('read_sdc mapped.sdc',text)
                 for name in ['switching-before','switching-after','unannotated','power','power-hierarchy','units']:
                     (directory/('task-%02d-%s.rpt'%(index,name))).write_text('HOST REPORT FIXTURE ONLY')
                 return dict(scope='HOST EXECUTION FIXTURE ONLY')
@@ -177,7 +187,75 @@ class XuSocPpaFlowTest(unittest.TestCase):
             self.assertEqual(called,list(range(12)))
             self.assertEqual(receipt['status'],'EXECUTED_NOT_QUALIFIED')
             self.assertEqual(len(receipt['tasks']),12)
+            self.assertEqual(receipt['sdc_sha256'],PPA.sha(out/'mapped.sdc'))
+            self.assertEqual(receipt['analysis_sdc_sha256'],PPA.sha(out/'constraints.sdc'))
             self.assertNotIn('energy_joules',receipt)
+
+    def test_power_rejects_missing_or_mismatched_analysis_sdc_identity(self):
+        for label in ['missing_activity','missing_execution','mapped_as_analysis','execution_mismatch',
+                      'actual_file_changed','prepared_mismatch','mapped_file_changed','symlink']:
+            with self.subTest(label=label),tempfile.TemporaryDirectory() as temporary:
+                out,record,_=self.power_fixture(Path(temporary))
+                execution=json.loads((out/'execution.json').read_text())
+                if label=='missing_activity':
+                    record.pop('analysis_sdc_sha256')
+                elif label=='missing_execution':
+                    execution.pop('analysis_sdc_sha256')
+                elif label=='mapped_as_analysis':
+                    record['analysis_sdc_sha256']=record['sdc_sha256']
+                elif label=='execution_mismatch':
+                    execution['analysis_sdc_sha256']='0'*64
+                elif label=='actual_file_changed':
+                    (out/'constraints.sdc').write_text('HOST CHANGED ANALYSIS CONSTRAINTS')
+                elif label=='prepared_mismatch':
+                    (out/'constraints.sdc').write_text('HOST UNPREPARED ANALYSIS CONSTRAINTS')
+                    record['analysis_sdc_sha256']=execution['analysis_sdc_sha256']=PPA.sha(out/'constraints.sdc')
+                elif label=='mapped_file_changed':
+                    (out/'mapped.sdc').write_text('HOST CHANGED MAPPED CONSTRAINTS')
+                elif label=='symlink':
+                    (out/'constraints.sdc').rename(out/'other.sdc')
+                    (out/'constraints.sdc').symlink_to(out/'other.sdc')
+                (out/'execution.json').write_text(json.dumps(execution))
+                with mock.patch.object(PPA,'run_tool') as run_tool,self.assertRaisesRegex(ValueError,'SDC'):
+                    PPA.activity_power(out,record,{})
+                run_tool.assert_not_called()
+                self.assertFalse((out/'power-run.json').exists())
+                self.assertFalse((out/'activity-input.json').exists())
+
+    def test_power_cannot_report_success_if_analysis_sdc_changes_during_execution(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            out,record,_=self.power_fixture(Path(temporary))
+            def change_constraints(directory,command,label,env):
+                (directory/'constraints.sdc').write_text('HOST CHANGED DURING POWER EXECUTION')
+                return dict(scope='HOST EXECUTION FIXTURE ONLY')
+            with mock.patch.object(PPA,'run_tool',side_effect=change_constraints) as run_tool,\
+                    self.assertRaisesRegex(ValueError,'analysis SDC changed during'):
+                PPA.activity_power(out,record,{})
+            run_tool.assert_called_once()
+            receipt=json.loads((out/'power-run.json').read_text())
+            self.assertEqual(receipt['status'],'FAIL')
+            self.assertEqual(receipt['tasks'],[])
+
+    def test_run_receipt_separates_mapped_and_analysis_sdc_identity(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory=Path(temporary)
+            impl,_=self.fixture(directory)
+            out=directory/'prepared'
+            PPA.prepare(ROOT,out,impl,allow_unqualified=True)
+            def fake_tool(directory,command,label,env):
+                if label=='dc':
+                    (directory/'mapped.v').write_text('HOST NETLIST FIXTURE ONLY')
+                    (directory/'mapped.sdc').write_text('HOST MAPPED SDC FIXTURE ONLY')
+                return dict(scope='HOST EXECUTION FIXTURE ONLY')
+            with mock.patch.object(sys,'argv',['xu_soc_ppa.py','run','--root',str(ROOT),'--out',str(out)]),\
+                    mock.patch.object(PPA,'run_tool',side_effect=fake_tool),\
+                    mock.patch.object(PPA,'timing_execution_review',return_value=dict(qualification='NOT_QUALIFIED')):
+                self.assertEqual(PPA.main(),0)
+            execution=json.loads((out/'execution.json').read_text())
+            self.assertEqual(execution['status'],'EXECUTED_NOT_QUALIFIED')
+            self.assertEqual(execution['sdc_sha256'],PPA.sha(out/'mapped.sdc'))
+            self.assertEqual(execution['analysis_sdc_sha256'],PPA.sha(out/'constraints.sdc'))
+            self.assertNotEqual(execution['sdc_sha256'],execution['analysis_sdc_sha256'])
 
 
 if __name__=='__main__':
