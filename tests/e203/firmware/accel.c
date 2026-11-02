@@ -4,6 +4,15 @@ enum { ID, SCRATCH, CTRL, STATUS, GROUP, X_ADDR, X_DATA, W_BANK,
        W_ADDR, W_DATA, BIAS_INDEX, BIAS_LO, BIAS_HI,
        RESULT_INDEX, RESULT_LO, RESULT_HI };
 
+#if XU_FIRMWARE_NO_MASKS
+/* Fixed ABI: X/W truncate to 16 bits and BIAS_HI truncates to 8 bits. */
+#define XU_LOW16(value) (value)
+#define XU_LOW8(value) (value)
+#else
+#define XU_LOW16(value) ((value) & 0xffffu)
+#define XU_LOW8(value) ((value) & 0xffu)
+#endif
+
 #if XU_FIRMWARE_BIAS_DTCM
 /* Raw low/high words preserve the signed40 MMIO representation in DTCM BSS. */
 static uint32_t bias_cache[2 * COLS];
@@ -14,7 +23,7 @@ static uint32_t bias_cache[2 * COLS];
     unsigned col = group * 8 + (bank); \
     reg[BIAS_INDEX] = (bank); \
     reg[BIAS_LO] = task_bias[2 * col]; \
-    reg[BIAS_HI] = task_bias[2 * col + 1] & 0xffu; \
+    reg[BIAS_HI] = XU_LOW8(task_bias[2 * col + 1]); \
 } while (0)
 #endif
 
@@ -38,7 +47,7 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
         for (unsigned group = 0; group < 32; ++group)
             for (unsigned k = 0; k < INNER; ++k) {
                 reg[W_ADDR] = group * INNER + k;
-                reg[W_DATA] = w[k * COLS + group * 8 + bank] & 0xffffu;
+                reg[W_DATA] = XU_LOW16(w[k * COLS + group * 8 + bank]);
             }
     }
 #if XU_FIRMWARE_BIAS_DTCM
@@ -52,7 +61,7 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
     for (unsigned row = 0; row < ROWS; ++row) {
         for (unsigned k = 0; k < INNER; ++k) {
             reg[X_ADDR] = k;
-            reg[X_DATA] = x[row * INNER + k] & 0xffffu;
+            reg[X_DATA] = XU_LOW16(x[row * INNER + k]);
         }
         for (unsigned group = 0; group < 32; ++group) {
 #if XU_FIRMWARE_BIAS_UNROLL
@@ -69,7 +78,7 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                 unsigned col = group * 8 + bank;
                 reg[BIAS_INDEX] = bank;
                 reg[BIAS_LO] = task_bias[2 * col];
-                reg[BIAS_HI] = task_bias[2 * col + 1] & 0xffu;
+                reg[BIAS_HI] = XU_LOW8(task_bias[2 * col + 1]);
             }
 #endif
             reg[GROUP] = group;
