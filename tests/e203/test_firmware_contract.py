@@ -108,7 +108,10 @@ class FirmwareContractTests(unittest.TestCase):
         args = parser.parse_args(['--firmware-schedule', 'bias-dtcm', '--firmware-opt=-O3',
                                   '--firmware-experiment', 'both-unroll-no-masks'])
         config = contract.configuration(args.firmware_schedule, args.firmware_opt, args.firmware_experiment)
-        self.assertTrue(all(flag.endswith('=1') for flag in contract.compiler_defines(config)))
+        defines = contract.compiler_defines(config)
+        self.assertTrue(all(flag.endswith('=1') for flag in defines if flag.startswith('-DXU_FIRMWARE_')))
+        self.assertIn('-DXU_HARDWARE_BIAS_CACHE=0', defines)
+        self.assertIn('-DXU_HARDWARE_RESULT_WINDOW=0', defines)
         for sim, full in [('vcs', False), ('verilator', True)]:
             steps = accept.acceptance_steps(Path('/unused-xu'), 'rv-', sim, full=full,
                                             firmware_schedule=config['schedule'],

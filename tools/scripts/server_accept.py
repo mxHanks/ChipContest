@@ -45,7 +45,12 @@ def acceptance_steps(out, cross_prefix, sim='verilator', full=False, offline=Fal
                    '--firmware-experiment',config['experiment']]
     if sim=='vcs' and full:
         raise ValueError('VCS platform acceptance is separate from --full Icarus/Chisel acceptance')
-    steps=[('host',[sys.executable,'-m','unittest','discover','-s','tests/e203','-p','test_*.py'],180),
+    host_command=[sys.executable,'-m','unittest','discover','-s','tests/e203','-p','test_*.py']
+    if sim=='vcs':
+        # The additive cache/window interface test also uses the chosen backend.
+        host_command=['env','XU_WRAPPER_SIM=vcs',
+                      'XU_WRAPPER_LOG_DIR='+str(out/'host-wrapper-vcs'),*host_command]
+    steps=[('host',host_command,300),
            ('numeric',[sys.executable,'-m','unittest','discover','-s','tests/numeric','-v'],240)]
     for name,mode,tasks,backend in [('vectors','check-vectors',12,sim),
             ('doctor','doctor',1,sim),('baseline','baseline',1,'vcs' if sim=='vcs' else 'iverilog'),

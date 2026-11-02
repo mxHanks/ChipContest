@@ -71,6 +71,10 @@ module tb_accel_soc;
       // Match the existing inclusive first-input/final-Y-response interval.
       in_window=perf_active || (first_cycle<0 && shared_accept && cmd_read &&
                                cmd_addr>=BASE && cmd_addr<BASE+'h18800);
+      if (dumpwave==2 && !perf_active && in_window) begin
+        $dumpon;
+        $display("ACTIVITY_BEGIN layer=%0d time=%0t",layer,$time);
+      end
       if (in_window) begin
         perf_active=1;
         phase_now=perf_phase;
@@ -87,7 +91,8 @@ module tb_accel_soc;
             12'h014, 12'h018: begin
               phase_now=PERF_X; phase_next=PERF_X;
             end
-            12'h028, 12'h02c, 12'h030: begin
+            12'h028, 12'h02c, 12'h030,
+            12'h040, 12'h044, 12'h048, 12'h04c: begin
               phase_now=PERF_BIAS; phase_next=PERF_BIAS;
             end
             12'h034: begin
@@ -95,6 +100,11 @@ module tb_accel_soc;
             end
             default: begin end
           endcase
+        end
+        // The read-only window has no RESULT_INDEX write to start writeback.
+        if (mmio_accept && `ACCEL.cmd_read &&
+            `ACCEL.cmd_addr[11:0]>=12'h080 && `ACCEL.cmd_addr[11:0]<=12'h0bc) begin
+          phase_now=PERF_WRITEBACK; phase_next=PERF_WRITEBACK;
         end
         if (start_accept) begin
           phase_now=PERF_COMPUTE; phase_next=PERF_COMPUTE;
@@ -121,7 +131,7 @@ module tb_accel_soc;
         endcase
         if (`ACCEL.busy) perf_busy=perf_busy+1;
         // All eight PEs share this enable: one fire means eight signed16 MACs.
-        if (`ACCEL.u_linear_compute_core.engine.peArray.io_enable)
+        if (`ACCEL.u_linear_compute_core.core.engine.peArray.io_enable)
           perf_mac_fire=perf_mac_fire+1;
         if (start_accept) perf_starts=perf_starts+1;
         if (`ACCEL.core_done) perf_dones=perf_dones+1;
@@ -139,7 +149,13 @@ module tb_accel_soc;
           perf_mmio_stall=perf_mmio_stall+1;
         if ((cmd_valid && !cmd_ready) || (rsp_valid && !rsp_ready))
           perf_shared_stall=perf_shared_stall+1;
-        if (shared_retire && final_write_pending) perf_active=0;
+        if (shared_retire && final_write_pending) begin
+          perf_active=0;
+          if (dumpwave==2) begin
+            $display("ACTIVITY_END layer=%0d time=%0t",layer,$time);
+            $dumpoff;
+          end
+        end
       end
 
       // Retiring metadata belongs to the old response even when the next
@@ -150,7 +166,8 @@ module tb_accel_soc;
           ((`ACCEL.cmd_addr[11:0]==12'h024 &&
             `ACCEL.w_bank_reg==7 && `ACCEL.w_addr_reg==2047) ||
            (`ACCEL.cmd_addr[11:0]==12'h018 && `ACCEL.x_addr_reg==63) ||
-           (`ACCEL.cmd_addr[11:0]==12'h030 && `ACCEL.bias_index_reg==7));
+           (`ACCEL.cmd_addr[11:0]==12'h030 && `ACCEL.bias_index_reg==7) ||
+           (`ACCEL.cmd_addr[11:0]==12'h040 && `ACCEL.cmd_wdata[0]));
       if (shared_retire) perf_shared_end_writeback=0;
       if (shared_accept)
         perf_shared_end_writeback=!cmd_read && cmd_addr>=BASE+YOFF &&
@@ -234,7 +251,11 @@ module tb_accel_soc;
     ram[HOST/4]=tasks;
     load_layer(0);
     if ($value$plusargs("DUMPWAVE=%d",dumpwave) && dumpwave) begin
-      $dumpfile("tb_accel_soc.vcd"); $dumpvars(0,tb_accel_soc);
+      $dumpfile("tb_accel_soc.vcd");
+      if (dumpwave==2) begin
+        $dumpvars(0,`ACCEL);
+        $dumpoff;
+      end else $dumpvars(0,tb_accel_soc);
     end
     #120 rst_n=1;
   end

@@ -7,7 +7,7 @@ PERFORMANCE_FIELDS = ['layer', 'cycles', *PHASES, 'busy', 'mac_fire',
 PES = 8
 MACS_PER_TASK = 99 * 64 * 256
 OUTPUTS_PER_TASK = 99 * 256
-SCHEDULES = ('baseline', 'bias-dtcm')
+SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-window')
 OPTIMIZATIONS = ('-Os', '-O2', '-O3')
 EXPERIMENTS = ('none', 'bias-unroll', 'result-unroll', 'both-unroll', 'no-masks',
                'bias-unroll-no-masks', 'result-unroll-no-masks', 'both-unroll-no-masks')
@@ -47,7 +47,9 @@ def add_arguments(parser):
 def compiler_defines(config):
     config = configuration(**config)
     experiment = config['experiment']
-    values = {'XU_FIRMWARE_BIAS_DTCM': config['schedule'] == 'bias-dtcm',
+    values = {'XU_FIRMWARE_BIAS_DTCM': config['schedule'].startswith('bias-dtcm'),
+              'XU_HARDWARE_BIAS_CACHE': config['schedule'].startswith('bias-hw'),
+              'XU_HARDWARE_RESULT_WINDOW': config['schedule'].endswith('-window'),
               'XU_FIRMWARE_BIAS_UNROLL': experiment.startswith(('bias-unroll', 'both-unroll')),
               'XU_FIRMWARE_RESULT_UNROLL': experiment.startswith(('result-unroll', 'both-unroll')),
               'XU_FIRMWARE_NO_MASKS': experiment.endswith('no-masks')}
@@ -58,9 +60,13 @@ def task_contract(schedule='baseline'):
     configuration(schedule)
     w_reads, x_reads = 16384, 6336
     bias_reads = 99 * 512 if schedule == 'baseline' else 512
+    bias_writes = 768 if schedule.startswith('bias-hw') else 76032
+    control_writes = 2 if schedule.startswith('bias-hw') else 0
+    result_index_writes = 0 if schedule.endswith('-window') else OUTPUTS_PER_TASK
+    mmio_writes = 156326 - 76032 + bias_writes + control_writes - OUTPUTS_PER_TASK + result_index_writes
     return dict(w_shared_reads=w_reads, x_shared_reads=x_reads, bias_shared_reads=bias_reads,
                 shared_reads=w_reads + x_reads + bias_reads, shared_writes=50688,
-                bias_mmio_writes=99 * 32 * 8 * 3, mmio_writes=156326,
+                bias_mmio_writes=bias_writes, mmio_writes=mmio_writes,
                 starts=99 * 32, dones=99 * 32,
                 mac_fire=MACS_PER_TASK // PES, macs=MACS_PER_TASK, outputs=OUTPUTS_PER_TASK)
 

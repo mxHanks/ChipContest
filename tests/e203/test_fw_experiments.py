@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools/scripts'))
 import xu_fw_experiments as experiments
@@ -20,7 +21,12 @@ class FakeProcesses:
         self.failed, self.corrupt = failed, corrupt
         self.shifted_baseline = shifted_baseline
         self.config_totals = {}
-        self.source = experiments.source_identity()
+        # These are process/selection tests for the historical software-only
+        # campaign. Its actual source guard deliberately rejects hardware edits.
+        self.source = dict(commit='unit-test-software-revision', parent_commits=[],
+                           source_sha256={str(p.relative_to(experiments.ROOT)): experiments.sha(p)
+                                          for p in (experiments.ROOT/'tests/e203/firmware').iterdir()
+                                          if p.is_file()})
 
     @staticmethod
     def value(command, name):
@@ -110,8 +116,10 @@ class FirmwareExperimentTests(unittest.TestCase):
     def run_campaign(self, processes, sim='vcs', accept=False):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
-        campaign = experiments.Campaign(Path(temporary.name), sim, 'test-', accept, runner=processes)
-        return campaign.run(), processes
+        identity = getattr(processes, 'source', None) or FakeProcesses().source
+        with patch.object(experiments, 'source_identity', return_value=identity):
+            campaign = experiments.Campaign(Path(temporary.name), sim, 'test-', accept, runner=processes)
+            return campaign.run(), processes
 
     def test_independent_order_strict_selection_and_full_acceptance(self):
         report, processes = self.run_campaign(FakeProcesses(), accept=True)

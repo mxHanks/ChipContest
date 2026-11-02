@@ -301,11 +301,16 @@ def main():
     parser.add_argument('--cross-prefix',default='riscv64-unknown-elf-')
     parser.add_argument('--out',type=Path)
     parser.add_argument('--waves',action='store_true')
+    parser.add_argument('--accel-waves',action='store_true',
+                        help='dump accelerator-only VCD during measured task windows for activity analysis')
     parser.add_argument('--max-cycles',type=int,default=200000000)
     contract.add_arguments(parser)
     args=parser.parse_args()
     if args.max_cycles < 1:
         parser.error('--max-cycles must be positive')
+    if args.waves and args.accel_waves:
+        parser.error('choose --waves or --accel-waves')
+    trace_enabled = args.waves or args.accel_waves
     out=(args.out or ROOT/'build/e203'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')).resolve()
     out.mkdir(parents=True,exist_ok=False)
     selected_sim='iverilog' if args.mode=='baseline' and args.sim=='verilator' else args.sim
@@ -314,6 +319,7 @@ def main():
             'firmware_experiment':args.firmware_experiment,
             'transaction_contract':contract.task_contract(args.firmware_schedule),
             'contract_sha256':sha(Path(contract.__file__)),
+            'wave_scope':'accelerator measured windows' if args.accel_waves else 'full TB' if args.waves else 'none',
             'scope':'development platform; TB shared-memory preload excluded; no official PPA/accuracy claim'}
     try:
         required=required_tools(args.mode,selected_sim,args.cross_prefix)
@@ -376,17 +382,17 @@ def main():
                 installed=E203/'vsim/install/rtl'
                 sources=matrix_sources(installed)
                 report['source_sha256']={str(p.relative_to(ROOT)):sha(p) for p in sources}
-                key=build_key(report,selected_sim,args.waves)
+                key=build_key(report,selected_sim,trace_enabled)
                 cache=ROOT/'build/e203'/('sim-'+key)
                 cache.mkdir(parents=True,exist_ok=True)
                 filelist=cache/'rtl.f'
                 filelist.write_text('\n'.join(str(p) for p in sources)+'\n')
                 includes=[str(installed/p) for p in ['core','perips','perips/apb_i2c']]
-                binary,command=build_simulator(selected_sim,cache,filelist,includes,args.waves,out)
+                binary,command=build_simulator(selected_sim,cache,filelist,includes,trace_enabled,out)
                 report['simulator_sha256']=sha(binary)
                 print(f'Running {args.mode}: {args.tasks} tasks; logs: {out}',flush=True)
                 log=run(command+[f'+TESTCASE={firmware}',f'+VECTORS={directory}',
-                        f'+TASKS={args.tasks}',f'+DUMPWAVE={int(args.waves)}',
+                        f'+TASKS={args.tasks}',f'+DUMPWAVE={2 if args.accel_waves else int(args.waves)}',
                         f'+MAX_CYCLES={args.max_cycles}'],out,out/'simulation.log',7200)
                 report['layers']=check_log(log,args.tasks)
                 for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
