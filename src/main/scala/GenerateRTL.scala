@@ -12,6 +12,8 @@ object GenerateRTL {
         "MacController" -> (() => new MacController),
         "DotProductEngine" -> (() => new DotProductEngine),
         "LinearComputeCore" -> (() => new LinearComputeCore),
+        "LinearCachedCore" -> (() => new LinearCachedCore),
+        "BiasBankCache" -> (() => new BiasBankCache),
         "LinearLayerEngine" -> (() => new LinearLayerEngine)
     )
 
