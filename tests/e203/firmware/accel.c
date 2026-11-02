@@ -4,6 +4,11 @@ enum { ID, SCRATCH, CTRL, STATUS, GROUP, X_ADDR, X_DATA, W_BANK,
        W_ADDR, W_DATA, BIAS_INDEX, BIAS_LO, BIAS_HI,
        RESULT_INDEX, RESULT_LO, RESULT_HI };
 
+#if XU_FIRMWARE_BIAS_DTCM
+/* Raw low/high words preserve the signed40 MMIO representation in DTCM BSS. */
+static uint32_t bias_cache[2 * COLS];
+#endif
+
 int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                  const volatile uint32_t *bias, volatile uint32_t *y,
                  uint32_t poll_limit) {
@@ -18,6 +23,14 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                 reg[W_DATA] = w[k * COLS + group * 8 + bank] & 0xffffu;
             }
     }
+#if XU_FIRMWARE_BIAS_DTCM
+    /* Refresh every task, inside the window after W and before the first X. */
+    for (unsigned word = 0; word < 2 * COLS; ++word)
+        bias_cache[word] = bias[word];
+    const uint32_t *task_bias = bias_cache;
+#else
+    const volatile uint32_t *task_bias = bias;
+#endif
     for (unsigned row = 0; row < ROWS; ++row) {
         for (unsigned k = 0; k < INNER; ++k) {
             reg[X_ADDR] = k;
@@ -27,8 +40,8 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             for (unsigned bank = 0; bank < 8; ++bank) {
                 unsigned col = group * 8 + bank;
                 reg[BIAS_INDEX] = bank;
-                reg[BIAS_LO] = bias[2 * col];
-                reg[BIAS_HI] = bias[2 * col + 1] & 0xffu;
+                reg[BIAS_LO] = task_bias[2 * col];
+                reg[BIAS_HI] = task_bias[2 * col + 1] & 0xffu;
             }
             reg[GROUP] = group;
             reg[STATUS] = 2; /* W1C, including a previous task's completion. */
