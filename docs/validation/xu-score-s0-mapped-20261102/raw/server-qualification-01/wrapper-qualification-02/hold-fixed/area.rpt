@@ -1,0 +1,186 @@
+ 
+****************************************
+Report : area
+Design : accel_icb_slave
+Version: T-2022.03-SP5-5
+Date   : Mon Nov  2 20:05:03 2026
+****************************************
+
+Information: Updating design information... (UID-85)
+Warning: Design 'accel_icb_slave' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Library(s) Used:
+
+    scc40nll_vhsc40_rvt_ss_v0p99_125c_basic (File: /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db)
+    RAMSP1024X16_ss_0p99v_0p99v_125c (File: /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db)
+
+Number of ports:                         9210
+Number of nets:                         82401
+Number of cells:                        72842
+Number of combinational cells:          60202
+Number of sequential cells:             12511
+Number of macros/black boxes:              16
+Number of buf/inv:                      17286
+Number of references:                      48
+
+Combinational area:              87549.855915
+Buf/Inv area:                    14266.963353
+Noncombinational area:           60492.550788
+Macro/Black Box area:           146376.390625
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                294418.797328
+Total area:                 undefined
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area                Local cell area
+                                  --------------------  ----------------------------------- 
+Hierarchical cell                 Absolute     Percent  Combi-      Noncombi-   Black-
+                                  Total        Total    national    national    boxes        Design
+--------------------------------  -----------  -------  ----------  ----------  -----------  ---------------------
+accel_icb_slave                   294418.7973    100.0   2859.7128   2801.9375       0.0000  accel_icb_slave
+u_linear_compute_core             288757.1470     98.1    792.5736      0.0000       0.0000  LinearCachedCore
+u_linear_compute_core/biasCache   111404.3111     37.8  62375.1900  49029.1211       0.0000  BiasBankCache
+u_linear_compute_core/core        176560.2623     60.0      0.0000      0.0000       0.0000  LinearComputeCore
+u_linear_compute_core/core/engine  20191.6347      6.9    973.5600   1838.5920       0.0000  DotProductEngine
+u_linear_compute_core/core/engine/controller
+                                     106.2936      0.0     63.2016     43.0920       0.0000  MacController
+u_linear_compute_core/core/engine/peArray
+                                   17273.1890      5.9      5.7456      0.0000       0.0000  MacPEArray
+u_linear_compute_core/core/engine/peArray/pes_0
+                                    2152.0464      0.7    182.9016    229.8240       0.0000  MacPE_0
+u_linear_compute_core/core/engine/peArray/pes_0/add_65
+                                     364.5264      0.1    364.5264      0.0000       0.0000  MacPE_0_DW01_add_1
+u_linear_compute_core/core/engine/peArray/pes_0/mult_58
+                                    1374.7944      0.5   1374.7944      0.0000       0.0000  MacPE_0_DW_mult_uns_2
+u_linear_compute_core/core/engine/peArray/pes_1
+                                    2158.1112      0.7    182.9016    229.8240       0.0000  MacPE_7
+u_linear_compute_core/core/engine/peArray/pes_1/add_65
+                                     363.2496      0.1    363.2496      0.0000       0.0000  MacPE_7_DW01_add_1
+u_linear_compute_core/core/engine/peArray/pes_1/mult_58
+                                    1382.1360      0.5   1382.1360      0.0000       0.0000  MacPE_7_DW_mult_uns_2
+u_linear_compute_core/core/engine/peArray/pes_2
+                                    2153.3232      0.7    182.9016    229.8240       0.0000  MacPE_6
+u_linear_compute_core/core/engine/peArray/pes_2/add_65
+                                     366.4416      0.1    366.4416      0.0000       0.0000  MacPE_6_DW01_add_1
+u_linear_compute_core/core/engine/peArray/pes_2/mult_58
+                                    1374.1560      0.5   1374.1560      0.0000       0.0000  MacPE_6_DW_mult_uns_2
+u_linear_compute_core/core/engine/peArray/pes_3
+                                    2157.4728      0.7    182.9016    229.8240       0.0000  MacPE_5
+u_linear_compute_core/core/engine/peArray/pes_3/add_65
+                                     365.1648      0.1    365.1648      0.0000       0.0000  MacPE_5_DW01_add_1
+u_linear_compute_core/core/engine/peArray/pes_3/mult_58
+                                    1379.5824      0.5   1379.5824      0.0000       0.0000  MacPE_5_DW_mult_uns_2
+u_linear_compute_core/core/engine/peArray/pes_4
+                                    2157.4728      0.7    182.9016    229.8240       0.0000  MacPE_4
+u_linear_compute_core/core/engine/peArray/pes_4/add_65
+                                     366.1224      0.1    366.1224      0.0000       0.0000  MacPE_4_DW01_add_2
+u_linear_compute_core/core/engine/peArray/pes_4/mult_58
+                                    1378.6248      0.5   1378.6248      0.0000       0.0000  MacPE_4_DW_mult_uns_1
+u_linear_compute_core/core/engine/peArray/pes_5
+                                    2158.7496      0.7    182.9016    229.8240       0.0000  MacPE_3
+u_linear_compute_core/core/engine/peArray/pes_5/add_65
+                                     365.1648      0.1    365.1648      0.0000       0.0000  MacPE_3_DW01_add_2
+u_linear_compute_core/core/engine/peArray/pes_5/mult_58
+                                    1380.8592      0.5   1380.8592      0.0000       0.0000  MacPE_3_DW_mult_uns_1
+u_linear_compute_core/core/engine/peArray/pes_6
+                                    2159.0688      0.7    182.9016    229.8240       0.0000  MacPE_2
+u_linear_compute_core/core/engine/peArray/pes_6/add_65
+                                     368.3568      0.1    368.3568      0.0000       0.0000  MacPE_2_DW01_add_1
+u_linear_compute_core/core/engine/peArray/pes_6/mult_58
+                                    1377.9864      0.5   1377.9864      0.0000       0.0000  MacPE_2_DW_mult_uns_2
+u_linear_compute_core/core/engine/peArray/pes_7
+                                    2171.1984      0.7    182.9016    229.8240       0.0000  MacPE_1
+u_linear_compute_core/core/engine/peArray/pes_7/add_65
+                                     364.5264      0.1    364.5264      0.0000       0.0000  MacPE_1_DW01_add_1
+u_linear_compute_core/core/engine/peArray/pes_7/mult_58
+                                    1393.9464      0.5   1393.9464      0.0000       0.0000  MacPE_1_DW_mult_uns_2
+u_linear_compute_core/core/weightBanks
+                                  147103.8474     50.0     14.6832      0.0000       0.0000  WeightBankArray
+u_linear_compute_core/core/weightBanks/banks_0
+                                   18382.5944      6.2     78.2040      4.7880       0.0000  WeightBank_0
+u_linear_compute_core/core/weightBanks/banks_0/sram0
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_0
+u_linear_compute_core/core/weightBanks/banks_0/sram0/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_0
+u_linear_compute_core/core/weightBanks/banks_0/sram1
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_15
+u_linear_compute_core/core/weightBanks/banks_0/sram1/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_15
+u_linear_compute_core/core/weightBanks/banks_1
+                                   18387.3824      6.2     82.9920      4.7880       0.0000  WeightBank_7
+u_linear_compute_core/core/weightBanks/banks_1/sram0
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_14
+u_linear_compute_core/core/weightBanks/banks_1/sram0/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_14
+u_linear_compute_core/core/weightBanks/banks_1/sram1
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_13
+u_linear_compute_core/core/weightBanks/banks_1/sram1/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_13
+u_linear_compute_core/core/weightBanks/banks_2
+                                   18386.4248      6.2     82.0344      4.7880       0.0000  WeightBank_6
+u_linear_compute_core/core/weightBanks/banks_2/sram0
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_12
+u_linear_compute_core/core/weightBanks/banks_2/sram0/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_12
+u_linear_compute_core/core/weightBanks/banks_2/sram1
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_11
+u_linear_compute_core/core/weightBanks/banks_2/sram1/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_11
+u_linear_compute_core/core/weightBanks/banks_3
+                                   18386.4248      6.2     82.0344      4.7880       0.0000  WeightBank_5
+u_linear_compute_core/core/weightBanks/banks_3/sram0
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_10
+u_linear_compute_core/core/weightBanks/banks_3/sram0/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_10
+u_linear_compute_core/core/weightBanks/banks_3/sram1
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_9
+u_linear_compute_core/core/weightBanks/banks_3/sram1/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_9
+u_linear_compute_core/core/weightBanks/banks_4
+                                   18386.4248      6.2     82.0344      4.7880       0.0000  WeightBank_4
+u_linear_compute_core/core/weightBanks/banks_4/sram0
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_8
+u_linear_compute_core/core/weightBanks/banks_4/sram0/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_8
+u_linear_compute_core/core/weightBanks/banks_4/sram1
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_7
+u_linear_compute_core/core/weightBanks/banks_4/sram1/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_7
+u_linear_compute_core/core/weightBanks/banks_5
+                                   18386.4248      6.2     82.0344      4.7880       0.0000  WeightBank_3
+u_linear_compute_core/core/weightBanks/banks_5/sram0
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_6
+u_linear_compute_core/core/weightBanks/banks_5/sram0/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_6
+u_linear_compute_core/core/weightBanks/banks_5/sram1
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_5
+u_linear_compute_core/core/weightBanks/banks_5/sram1/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_5
+u_linear_compute_core/core/weightBanks/banks_6
+                                   18390.8936      6.2     86.5032      4.7880       0.0000  WeightBank_2
+u_linear_compute_core/core/weightBanks/banks_6/sram0
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_4
+u_linear_compute_core/core/weightBanks/banks_6/sram0/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_4
+u_linear_compute_core/core/weightBanks/banks_6/sram1
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_3
+u_linear_compute_core/core/weightBanks/banks_6/sram1/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_3
+u_linear_compute_core/core/weightBanks/banks_7
+                                   18382.5944      6.2     78.2040      4.7880       0.0000  WeightBank_1
+u_linear_compute_core/core/weightBanks/banks_7/sram0
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_2
+u_linear_compute_core/core/weightBanks/banks_7/sram0/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_2
+u_linear_compute_core/core/weightBanks/banks_7/sram1
+                                    9149.8012      3.1      0.0000      0.0000       0.0000  Sram1024x16_1
+u_linear_compute_core/core/weightBanks/banks_7/sram1/mem_ext
+                                    9149.8012      3.1      1.2768      0.0000    9148.5244  mem_1024x16_1
+u_linear_compute_core/core/xBuffer
+                                    9264.7801      3.1   4361.8680   4902.9121       0.0000  XRowBuffer
+--------------------------------  -----------  -------  ----------  ----------  -----------  ---------------------
+Total                                                   87549.8559  60492.5508  146376.3906
+
+1

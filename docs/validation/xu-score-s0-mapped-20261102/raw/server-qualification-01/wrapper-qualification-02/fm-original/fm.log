@@ -1,0 +1,206 @@
+
+                                 Formality (R)
+
+               Version R-2020.09-SP5 for linux64 - Apr 14, 2021 
+
+                    Copyright (c) 1988 - 2021 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+  Inclusivity & Diversity - Visit SolvNetPlus to read the “Synopsys Statement
+         on Inclusivity and Diversity” (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Build: 6994249
+Hostname: RDserver04
+Current time: Mon Nov  2 19:54:30 2026
+
+Loading db file '/eda/synopsys/fm/fm_2020.09-SP5/libraries/syn/gtech.db'
+
+Script: verify.tcl
+
+if {[catch {
+set synopsys_auto_setup true
+set hdlin_unresolved_modules black_box
+read_db -technology_library {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db}
+read_db -technology_library {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db}
+read_sverilog -r {/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/BiasBankCache.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/DotProductEngine.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/LinearCachedCore.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/LinearComputeCore.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/MacController.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/MacPE.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/MacPEArray.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/Sram1024x16.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/WeightBank.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/WeightBankArray.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/XRowBuffer.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/accel_icb_slave.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/xu-sram-adapter.sv}
+set_top r:/WORK/accel_icb_slave
+read_verilog -i {/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v}
+set_top i:/WORK/accel_icb_slave
+match
+report_unmatched_points > unmatched.rpt
+if {[verify]} {
+ puts "XU_FORMALITY_PASS"
+ report_verification > verification.rpt
+ exit 0
+} else {
+ report_failing_points > failing.rpt
+ puts "XU_FORMALITY_FAIL"
+ exit 1
+}
+} xu_error]} {puts stderr "XU_FORMALITY_SCRIPT_ERROR $xu_error"; exit 1}
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db'
+No target library specified, default is WORK
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/BiasBankCache.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/DotProductEngine.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/LinearCachedCore.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/LinearComputeCore.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/MacController.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/MacPE.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/MacPEArray.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/Sram1024x16.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/WeightBank.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/WeightBankArray.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/XRowBuffer.sv'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/accel_icb_slave.v'
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-hw-rtl-02/xu-sram-adapter.sv'
+Current container set to 'r'
+Setting top design to 'r:/WORK/accel_icb_slave'
+Status:   Elaborating design accel_icb_slave   ...  
+Status:   Elaborating design LinearCachedCore   ...  
+Status:   Elaborating design LinearComputeCore   ...  
+Status:   Elaborating design XRowBuffer   ...  
+Status:   Elaborating design WeightBankArray   ...  
+Status:   Elaborating design WeightBank   ...  
+Status:   Elaborating design Sram1024x16   ...  
+Status:   Elaborating design mem_1024x16   ...  
+Status:   Elaborating design DotProductEngine   ...  
+Status:   Elaborating design MacController   ...  
+Status:   Elaborating design MacPEArray   ...  
+Status:   Elaborating design MacPE   ...  
+Status:   Elaborating design BiasBankCache   ...  
+Status:  Implementing inferred operators...
+
+************ Library Checking Summary ************
+Warning:  1267 unlinked power cell(s) with unread pg pins.
+Warning:  2 unlinked power cell(s) with no power down functions on outputs.
+Warning:  318 unlinked power cell(s) with no power down function on an ff or latch.
+Warning:  1 unlinked black box(es) marked as 'retention cell'.
+        Use 'report_libraries -defects all' for more details.
+**************************************************
+
+Top design successfully set to 'r:/WORK/accel_icb_slave'
+Reference design set to 'r:/WORK/accel_icb_slave'
+No target library specified, default is WORK
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v'
+Current container set to 'i'
+Setting top design to 'i:/WORK/accel_icb_slave'
+Status:  Implementing inferred operators...
+
+************ Library Checking Summary ************
+Warning:  1267 unlinked power cell(s) with unread pg pins.
+Warning:  2 unlinked power cell(s) with no power down functions on outputs.
+Warning:  318 unlinked power cell(s) with no power down function on an ff or latch.
+Warning:  1 unlinked black box(es) marked as 'retention cell'.
+        Use 'report_libraries -defects all' for more details.
+**************************************************
+
+Top design successfully set to 'i:/WORK/accel_icb_slave'
+Implementation design set to 'i:/WORK/accel_icb_slave'
+Reference design is 'r:/WORK/accel_icb_slave'
+Implementation design is 'i:/WORK/accel_icb_slave'
+Status:  Checking designs...
+    Warning: Design r:/RAMSP1024X16_SS_0P99V_0P99V_125C/RAMSP1024X16 is a black box and there are cells referencing it (FM-160)
+    Warning: Design i:/RAMSP1024X16_SS_0P99V_0P99V_125C/RAMSP1024X16 is a black box and there are cells referencing it (FM-160)
+    Warning: 0 (264) undriven nets found in reference (implementation) design; see formality.log for list (FM-399)
+    Warning: 1 (16) black-box references found in reference (implementation) design; see formality.log for list (FM-182)
+Status:  Building verification models...
+Status:  Matching...
+    
+*********************************** Matching Results ***********************************    
+ 13362 Compare points matched by name    
+ 0 Compare points matched by signature analysis    
+ 0 Compare points matched by topology    
+ 309 Matched primary inputs, black-box outputs    
+ 16(0) Unmatched reference(implementation) compare points    
+ 0(0) Unmatched reference(implementation) primary inputs, black-box outputs    
+----------------------------------------------------------------------------------------    
+Unmatched Objects                                                        REF        IMPL    
+----------------------------------------------------------------------------------------    
+ Registers                                                                16           0    
+   DFF                                                                    16           0    
+****************************************************************************************
+
+Reference design is 'r:/WORK/accel_icb_slave'
+Implementation design is 'i:/WORK/accel_icb_slave'
+    
+*********************************** Matching Results ***********************************    
+ 13362 Compare points matched by name    
+ 0 Compare points matched by signature analysis    
+ 0 Compare points matched by topology    
+ 309 Matched primary inputs, black-box outputs    
+ 16(0) Unmatched reference(implementation) compare points    
+ 0(0) Unmatched reference(implementation) primary inputs, black-box outputs    
+----------------------------------------------------------------------------------------    
+Unmatched Objects                                                        REF        IMPL    
+----------------------------------------------------------------------------------------    
+ Registers                                                                16           0    
+   DFF                                                                    16           0    
+****************************************************************************************
+
+Status:  Verifying...
+......
+    
+Status:  Matching hierarchy...
+...
+    
+    
+Status:  Verifying...
+
+***************************** Synopsys Auto Setup Summary ******************************
+
+!!! Synopsys Auto Setup Mode was enabled. !!!
+!!! Verification results are valid assuming the following setup constraints: !!!
+
+### RTL Interpretation Setup
+   set hdlin_ignore_parallel_case false
+   set hdlin_ignore_full_case false
+   set hdlin_error_on_mismatch_message false
+   set hdlin_ignore_embedded_configuration true
+
+### Undriven Signal Handling Setup
+   set verification_set_undriven_signals synthesis
+
+### Test Logic Setup
+   set verification_verify_directly_undriven_output false
+   For details see report_dont_verify_points and report_constants
+
+For further details on Synopsys Auto Setup Mode: Type man synopsys_auto_setup
+****************************************************************************************
+
+
+********************************* Verification Results *********************************
+Verification SUCCEEDED
+   ATTENTION: synopsys_auto_setup mode was enabled.
+              See Synopsys Auto Setup Summary for details.
+----------------------------------------------------------
+ Reference design: r:/WORK/accel_icb_slave
+ Implementation design: i:/WORK/accel_icb_slave
+ 13362 Passing compare points
+----------------------------------------------------------------------------------------
+Matched Compare Points     BBPin    Loop   BBNet     Cut    Port     DFF     LAT   TOTAL
+----------------------------------------------------------------------------------------
+Passing (equivalent)         816       0       0       0      35   12511       0   13362
+Failing (not equivalent)       0       0       0       0       0       0       0       0
+****************************************************************************************
+Info:  Formality Guide Files (SVF) might improve the performance of this verification.
+XU_FORMALITY_PASS
+Error: unknown command 'report_verification' (CMD-005)
+XU_FORMALITY_SCRIPT_ERROR 
+
+Maximum memory usage for this session: 1276 MB
+CPU usage for this session: 594.14 seconds ( 0.17 hours )
+Current time: Mon Nov  2 20:04:31 2026
+Elapsed time: 601 seconds ( 0.17 hours )
+
+Thank you for using Formality (R)!

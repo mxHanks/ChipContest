@@ -1,0 +1,73 @@
+
+                                 PrimeTime (R)
+
+              Version T-2022.03-SP5-1 for linux64 - Mar 28, 2023 
+
+                    Copyright (c) 1988 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+set_app_var link_path [list * {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db} {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db}]
+* /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db
+read_verilog {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/wrapper-qualification-02/hold-fixed/mapped.v}
+1
+if {![link_design accel_icb_slave]} {exit 1}
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/wrapper-qualification-02/hold-fixed/mapped.v'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db'
+Linking design accel_icb_slave...
+Information: Removing 72 unneeded designs..... (LNK-034)
+Information: 1137 (89.11%) library cells are unused in library scc40nll_vhsc40_rvt_ss_v0p99_125c_basic..... (LNK-045)
+Information: total 1137 library cells are unused (LNK-046)
+Design 'accel_icb_slave' was successfully linked.
+Information: There are 72910 leaf cells, ports, hiers and 83580 nets in the design (LNK-047)
+read_sdc {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/wrapper-qualification-02/hold-fixed/mapped.sdc}
+
+Reading SDC version 2.1...
+1
+1
+update_timing
+Warning: Some timing arcs have been disabled for breaking timing loops or because of constant propagation. Use the 'report_disable_timing' command to get the list of these disabled timing arcs. (PTE-003)
+Information: Building multi voltage information for entire design. (MV-022)
+1
+report_units > units.rpt
+check_timing -verbose > check-timing.rpt
+report_analysis_coverage > analysis-coverage.rpt
+report_timing -delay_type max -slack_lesser_than 1000 -max_paths 5 -significant_digits 8 > setup-exact.rpt
+report_timing -delay_type min -slack_lesser_than 1000 -max_paths 5 -significant_digits 8 > hold-exact.rpt
+set xu_max [get_timing_paths -delay_type max -slack_lesser_than 1000 -max_paths 1]
+_sel294
+set xu_min [get_timing_paths -delay_type min -slack_lesser_than 1000 -max_paths 1]
+_sel295
+puts "XU_SETUP_SLACK_NS [get_attribute $xu_max slack]"
+XU_SETUP_SLACK_NS 0.002921
+puts "XU_HOLD_SLACK_NS [get_attribute $xu_min slack]"
+XU_HOLD_SLACK_NS 0.062291
+puts "XU_SRAM_MACRO_COUNT [sizeof_collection [get_cells -hierarchical -filter {ref_name == RAMSP1024X16}]]"
+XU_SRAM_MACRO_COUNT 16
+puts "XU_EXACT_AUDIT_PASS"
+XU_EXACT_AUDIT_PASS
+exit 0
+Information: Defining new variable 'xu_max'. (CMD-041)
+Information: Defining new variable 'xu_min'. (CMD-041)
+
+Timing updates: 1 (0 implicit, 1 explicit) (0 incremental, 1 full, 0 logical)
+Noise updates: 0 (0 implicit, 0 explicit) (0 incremental, 0 full)
+Maximum memory usage for this session: 3074.17 MB
+CPU usage for this session: 19 seconds 
+Elapsed time for this session: 9 seconds
+Elapsed time spent in memory sampling: 0 seconds
+Diagnostics summary: 3 warnings, 7 informationals
+
+Thank you for using pt_shell!

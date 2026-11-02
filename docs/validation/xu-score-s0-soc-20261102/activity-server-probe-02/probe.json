@@ -1,0 +1,358 @@
+{
+  "created_utc": "2026-11-02T12:33:43.095594+00:00",
+  "recipes": {
+    "debug": {
+      "binary_sha256": "0be140822051d0815ee5b1784e6fff4ba728cb844722d43b47764454b22d13a7",
+      "compile_command": [
+        "/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs",
+        "-full64",
+        "-sverilog",
+        "-debug_access+all",
+        "-top",
+        "xu_activity_probe",
+        "-Mdir=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/csrc",
+        "-o",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/simv",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu_activity_probe_s02.sv"
+      ],
+      "policies": {
+        "default": {
+          "activity_inventory": [
+            {
+              "duration_seconds": "4.000000000E-8",
+              "mode": "all",
+              "signals": [
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 8,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/clk"
+                }
+              ]
+            },
+            {
+              "duration_seconds": "8.000000000E-8",
+              "mode": "combined",
+              "signals": [
+                {
+                  "IG": 0,
+                  "T0": 40000000,
+                  "T1": 40000000,
+                  "TC": 16,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/clk"
+                }
+              ]
+            },
+            {
+              "duration_seconds": "4.000000000E-8",
+              "mode": "second",
+              "signals": [
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 8,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/clk"
+                }
+              ]
+            }
+          ],
+          "error": "first isolated window differs from known circuit",
+          "status": "FAILED"
+        },
+        "on_sv": {
+          "error": "command failed; see /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/on_sv/all/simulation.log",
+          "status": "FAILED"
+        },
+        "rtl_on": {
+          "activity_inventory": [
+            {
+              "duration_seconds": "4.000000000E-8",
+              "mode": "all",
+              "signals": [
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 8,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/clk"
+                },
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 4,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/q"
+                },
+                {
+                  "IG": 0,
+                  "T0": 40000000,
+                  "T1": 0,
+                  "TC": 0,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[3]"
+                },
+                {
+                  "IG": 0,
+                  "T0": 13000000,
+                  "T1": 27000000,
+                  "TC": 1,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[2]"
+                },
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 2,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[1]"
+                },
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 4,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[0]"
+                }
+              ]
+            },
+            {
+              "duration_seconds": "8.000000000E-8",
+              "mode": "combined",
+              "signals": [
+                {
+                  "IG": 0,
+                  "T0": 40000000,
+                  "T1": 40000000,
+                  "TC": 16,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/clk"
+                },
+                {
+                  "IG": 0,
+                  "T0": 40000000,
+                  "T1": 40000000,
+                  "TC": 8,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/q"
+                },
+                {
+                  "IG": 0,
+                  "T0": 40000000,
+                  "T1": 40000000,
+                  "TC": 0,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[3]"
+                },
+                {
+                  "IG": 0,
+                  "T0": 46000000,
+                  "T1": 34000000,
+                  "TC": 2,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[2]"
+                },
+                {
+                  "IG": 0,
+                  "T0": 40000000,
+                  "T1": 40000000,
+                  "TC": 4,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[1]"
+                },
+                {
+                  "IG": 0,
+                  "T0": 40000000,
+                  "T1": 40000000,
+                  "TC": 8,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[0]"
+                }
+              ]
+            },
+            {
+              "duration_seconds": "4.000000000E-8",
+              "mode": "second",
+              "signals": [
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 8,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/clk"
+                },
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 4,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/q"
+                },
+                {
+                  "IG": 0,
+                  "T0": 0,
+                  "T1": 40000000,
+                  "TC": 0,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[3]"
+                },
+                {
+                  "IG": 0,
+                  "T0": 33000000,
+                  "T1": 7000000,
+                  "TC": 1,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[2]"
+                },
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 2,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[1]"
+                },
+                {
+                  "IG": 0,
+                  "T0": 20000000,
+                  "T1": 20000000,
+                  "TC": 4,
+                  "TX": 0,
+                  "kind": "NET",
+                  "path": "xu_activity_probe/u_probe/count[0]"
+                }
+              ]
+            }
+          ],
+          "files": [
+            {
+              "duration_seconds": "4.000000000E-8",
+              "duration_ticks": 40000000,
+              "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_on/all/first.saif",
+              "sha256": "043c70beb99be07557a77b67fffb3683f676e3021c12a37903bf2f2d135208ec",
+              "timescale_seconds": "1E-15"
+            },
+            {
+              "duration_seconds": "4.000000000E-8",
+              "duration_ticks": 40000000,
+              "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_on/second/final.saif",
+              "sha256": "f5ec2f86fd3201d7db7490392252a6433ac51f01ff5533788ff3ea265c95ac92",
+              "timescale_seconds": "1E-15"
+            },
+            {
+              "duration_seconds": "4.000000000E-8",
+              "duration_ticks": 40000000,
+              "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_on/all/first_repeat.saif",
+              "sha256": "043c70beb99be07557a77b67fffb3683f676e3021c12a37903bf2f2d135208ec",
+              "timescale_seconds": "1E-15"
+            },
+            {
+              "duration_seconds": "8.000000000E-8",
+              "duration_ticks": 80000000,
+              "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_on/all/final.saif",
+              "sha256": "c5beedd5326b822fcf4a553030b5ead5f6cab853b11fab790becf4b1abb03cee",
+              "timescale_seconds": "1E-15"
+            },
+            {
+              "duration_seconds": "8.000000000E-8",
+              "duration_ticks": 80000000,
+              "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_on/all/after_idle.saif",
+              "sha256": "c5beedd5326b822fcf4a553030b5ead5f6cab853b11fab790becf4b1abb03cee",
+              "timescale_seconds": "1E-15"
+            },
+            {
+              "duration_seconds": "8.000000000E-8",
+              "duration_ticks": 80000000,
+              "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_on/combined/final.saif",
+              "sha256": "c5beedd5326b822fcf4a553030b5ead5f6cab853b11fab790becf4b1abb03cee",
+              "timescale_seconds": "1E-15"
+            },
+            {
+              "duration_seconds": "8.000000000E-8",
+              "duration_ticks": 80000000,
+              "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_on/combined/after_idle.saif",
+              "sha256": "c5beedd5326b822fcf4a553030b5ead5f6cab853b11fab790becf4b1abb03cee",
+              "timescale_seconds": "1E-15"
+            },
+            {
+              "duration_seconds": "4.000000000E-8",
+              "duration_ticks": 40000000,
+              "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_on/second/final.saif",
+              "sha256": "f5ec2f86fd3201d7db7490392252a6433ac51f01ff5533788ff3ea265c95ac92",
+              "timescale_seconds": "1E-15"
+            },
+            {
+              "duration_seconds": "4.000000000E-8",
+              "duration_ticks": 40000000,
+              "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_on/second/after_idle.saif",
+              "sha256": "e6c81b99031596fd46e04bfa1cc876ec5d46c32e08d39e5f2d4444c50f752584",
+              "timescale_seconds": "1E-15"
+            }
+          ],
+          "final_report_semantics": {
+            "all": "cumulative",
+            "combined": "cumulative",
+            "second": "second"
+          },
+          "first_report_effect": "preserved",
+          "multi_window_accumulates_without_idle": true,
+          "observations": {},
+          "recommendation": "one fresh simulation process and one SAIF window per formal task; never subtract SAIF files",
+          "report_preserves_counters": true,
+          "status": "VERIFIED_SINGLE_WINDOW",
+          "stopped_report_effect": {
+            "all": "preserved",
+            "combined": "preserved",
+            "second": "preserved"
+          }
+        },
+        "rtl_sv": {
+          "error": "command failed; see /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/rtl_sv/all/simulation.log",
+          "status": "FAILED"
+        },
+        "union": {
+          "error": "command failed; see /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-02/debug/union/all/simulation.log",
+          "status": "FAILED"
+        }
+      },
+      "status": "VERIFIED_SINGLE_WINDOW"
+    }
+  },
+  "schema": "xu-saif-capability-probe-v2",
+  "source": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu_activity_probe_s02.sv",
+    "sha256": "ee27911decedbbe7877b4142e395ca445978134193a668e3ca44925cebdbc8b3"
+  },
+  "status": "VERIFIED_SINGLE_WINDOW",
+  "vcs": "/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs"
+}

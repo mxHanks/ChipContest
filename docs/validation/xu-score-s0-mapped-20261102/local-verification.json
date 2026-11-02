@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "check": "altered_raw_bytes",
+      "expected": "reject",
+      "status": "PASS"
+    },
+    {
+      "check": "unexpected_file",
+      "expected": "reject",
+      "status": "PASS"
+    },
+    {
+      "check": "missing_file",
+      "expected": "reject",
+      "status": "PASS"
+    },
+    {
+      "check": "symlink_file",
+      "expected": "reject",
+      "status": "PASS"
+    },
+    {
+      "check": "altered_summary_with_rehashed_manifest",
+      "expected": "reject",
+      "status": "PASS"
+    },
+    {
+      "check": "replay_command_rendering_and_bash_syntax",
+      "scope": "Input SHA checks stubbed only to exercise new-output Tcl/command generation locally; no EDA execution.",
+      "status": "PASS"
+    },
+    {
+      "check": "python_syntax",
+      "status": "PASS"
+    }
+  ],
+  "eda_executed_locally": false,
+  "limitations": [
+    "Actual VCS/DC/PT/Formality execution evidence is imported server raw data; local verification checks bytes, claims and replay preparation only."
+  ],
+  "owner": "xu",
+  "schema": "xu-s0-mapped-local-verification-v1",
+  "status": "PASS"
+}

@@ -1,0 +1,88 @@
+{
+  "formality02": {
+    "auto_setup": true,
+    "error": "unknown command 'report_verification' (CMD-005)",
+    "failing_compare_points": 0,
+    "passing_compare_points": 13362,
+    "returncode": 1,
+    "sram_boundary": "16 technology SRAM black boxes; 816 black-box pin compare points",
+    "status": "PROOF_SUCCEEDED_SCRIPT_FAILED",
+    "target": "original mapped candidate 6f90b1ce\u2026"
+  },
+  "formality03": {
+    "auto_setup": true,
+    "failing_compare_points_each": 0,
+    "hold_fixed_netlist_sha256": "75d732b4c052e2c9d6d1e70dca10264d855fa3a771e170315f96e328a746f026",
+    "hold_fixed_returncode": 0,
+    "original_netlist_sha256": "6f90b1ce3ea180eeb59c2438ddad74aea7ac0d87690608814b2fba7384dd5971",
+    "original_returncode": 0,
+    "passing_compare_points_each": 13362,
+    "qualification": "Conditional on documented auto-setup and black-box SRAM boundaries.",
+    "sram_boundary": "Technology SRAM black boxes; 816 black-box pin compare points each.",
+    "status": "PASS"
+  },
+  "gate01": {
+    "accepted_each": 17151,
+    "delay_model": "zero delay, no SDF; specify/timing checks disabled",
+    "netlist_sha256": "6f90b1ce3ea180eeb59c2438ddad74aea7ac0d87690608814b2fba7384dd5971",
+    "retired_each": 17151,
+    "status": "PASS",
+    "trace_byte_identical": true,
+    "trace_sha256": "16a76077e775b8d6dfc920f35e61d480a27d3f02393f39ce098411a80aa73d34",
+    "traced_transfers_each": 17149
+  },
+  "gate_execution_main_commit": "bd484edb3a1b21844bef5366091781357fc7d472",
+  "gate_fixed03": {
+    "accepted_each": 17151,
+    "delay_model": "zero delay, no SDF; specify/timing checks disabled",
+    "netlist_sha256": "75d732b4c052e2c9d6d1e70dca10264d855fa3a771e170315f96e328a746f026",
+    "result_sha256": "8e68fe4fdafe6fc314e8780b505e67a1d6c048b904a270bea06ab3c960ab4757",
+    "retired_each": 17151,
+    "returncode": 0,
+    "status": "PASS",
+    "trace_byte_identical_reported": true,
+    "trace_evidence": "03 result records identical trace SHA; repeated trace payloads were not re-downloaded. Packaged gate01 trace bytes have this same SHA.",
+    "trace_sha256": "16a76077e775b8d6dfc920f35e61d480a27d3f02393f39ce098411a80aa73d34",
+    "traced_transfers_each": 17149
+  },
+  "hold_fixed02": {
+    "area_unit_basis": "Same SMIC40 RVT/SRAM libraries as raw/prior-area-unit-proof/area-compliance.json; four standard-cell LEF SIZE products and SRAM LEF/Liberty identity establish um2.",
+    "checks_total": 53772,
+    "current_synthesis_area_limit_mm2": 2.25,
+    "dc_returncode": 0,
+    "ddc_sha256": "081ea1c8e48c3bb08edabea73be9526a6d0c369eb0895e533f5a3c2117b5dd6a",
+    "hold_slack_attribute_ns": 0.062291,
+    "hold_slack_report_ns": 0.06229059,
+    "macro_count": 16,
+    "netlist_sha256": "75d732b4c052e2c9d6d1e70dca10264d855fa3a771e170315f96e328a746f026",
+    "physical_rc": false,
+    "pt_returncode": 0,
+    "sdc_sha256": "e09a90973e15bf742e6424925bfe5e0712e48c1f513f7bfb26269c502b5e4b25",
+    "setup_slack_attribute_ns": 0.002921,
+    "setup_slack_report_ns": 0.00292103,
+    "total_cell_area_mm2": 0.294418797328,
+    "total_cell_area_um2": 294418.797328,
+    "untested_checks": 2716,
+    "violated_reported_checks": 0,
+    "wire_load_specified": false,
+    "within_synthesis_area_limit": true
+  },
+  "original_mapped_candidate": {
+    "hold_slack_exact_report_ns": -0.11813561,
+    "hold_slack_ns": -0.118136,
+    "total_cell_area_um2": 293988.515714
+  },
+  "owner": "xu",
+  "qualification_limits": [
+    "Accelerator wrapper/core only: excludes CPU, system interconnect and shared RAM.",
+    "Mapped gate replay is finite functional verification, not a full-SoC or timing simulation.",
+    "02 Formality proof succeeded but the script returned1; clean03 reruns returned0 for both original and hold-fixed netlists, under the same auto-setup/SRAM black-box boundaries.",
+    "PT pre-layout values do not close physical timing; 2716 untested checks remain.",
+    "No PDK, standard-cell/SRAM model, mapped netlist/DDC/SVF or simulator binary payload is included.",
+    "This package makes no new Chisel regeneration, energy, 600-sample accuracy, official score or contest qualification claim."
+  ],
+  "schema": "xu-s0-mapped-wrapper-result-v1",
+  "source_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+  "source_main_commit": "97b35421dfbbfa8f4d495b6927a7c66610ff8206",
+  "status": "WRAPPER_EVIDENCE_ONLY_NOT_CONTEST_QUALIFIED"
+}

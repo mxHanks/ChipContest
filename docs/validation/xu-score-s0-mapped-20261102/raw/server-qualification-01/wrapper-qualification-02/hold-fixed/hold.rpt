@@ -1,0 +1,202 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay min
+        -max_paths 5
+Design : accel_icb_slave
+Version: T-2022.03-SP5-5
+Date   : Mon Nov  2 20:05:06 2026
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: ss_v0p99_125c   Library: scc40nll_vhsc40_rvt_ss_v0p99_125c_basic
+Wire Load Model Mode: top
+
+  Startpoint: w_addr_reg_reg[4]
+              (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_0/sram0/mem_ext/macro
+            (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                                                         Incr       Path
+  ----------------------------------------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                                                                      0.00       0.00
+  clock network delay (ideal)                                                                   0.00       0.00
+  w_addr_reg_reg[4]/CK (DRNQNV2_12TR40)                                                         0.00 #     0.00 r
+  w_addr_reg_reg[4]/QN (DRNQNV2_12TR40)                                                         0.22       0.22 r
+  U2795/ZN (INV2_12TR40)                                                                        0.06       0.28 f
+  u_linear_compute_core/io_wLoadAddr[4] (LinearCachedCore)                                      0.00       0.28 f
+  u_linear_compute_core/core/io_wLoadAddr[4] (LinearComputeCore)                                0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/io_loadAddr[4] (WeightBankArray)                       0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_0/io_waddr[4] (WeightBank_0)                     0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_0/U17/Z (AO22V2_12TR40)                          0.11       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_0/sram0/io_addr[4] (Sram1024x16_0)               0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_0/sram0/mem_ext/RW0_addr[4] (mem_1024x16_0)      0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_0/sram0/mem_ext/macro/A[4] (RAMSP1024X16)        0.00       0.39 f
+  data arrival time                                                                                        0.39
+
+  clock xu_clk (rise edge)                                                                      0.00       0.00
+  clock network delay (ideal)                                                                   0.00       0.00
+  clock uncertainty                                                                             0.10       0.10
+  u_linear_compute_core/core/weightBanks/banks_0/sram0/mem_ext/macro/CLK (RAMSP1024X16)         0.00       0.10 r
+  library hold time                                                                             0.23       0.33
+  data required time                                                                                       0.33
+  ----------------------------------------------------------------------------------------------------------------
+  data required time                                                                                       0.33
+  data arrival time                                                                                       -0.39
+  ----------------------------------------------------------------------------------------------------------------
+  slack (MET)                                                                                              0.06
+
+
+  Startpoint: w_addr_reg_reg[4]
+              (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_0/sram1/mem_ext/macro
+            (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                                                          Incr       Path
+  -----------------------------------------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                                                                       0.00       0.00
+  clock network delay (ideal)                                                                    0.00       0.00
+  w_addr_reg_reg[4]/CK (DRNQNV2_12TR40)                                                          0.00 #     0.00 r
+  w_addr_reg_reg[4]/QN (DRNQNV2_12TR40)                                                          0.22       0.22 r
+  U2795/ZN (INV2_12TR40)                                                                         0.06       0.28 f
+  u_linear_compute_core/io_wLoadAddr[4] (LinearCachedCore)                                       0.00       0.28 f
+  u_linear_compute_core/core/io_wLoadAddr[4] (LinearComputeCore)                                 0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/io_loadAddr[4] (WeightBankArray)                        0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_0/io_waddr[4] (WeightBank_0)                      0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_0/U17/Z (AO22V2_12TR40)                           0.11       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_0/sram1/io_addr[4] (Sram1024x16_15)               0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_0/sram1/mem_ext/RW0_addr[4] (mem_1024x16_15)      0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_0/sram1/mem_ext/macro/A[4] (RAMSP1024X16)         0.00       0.39 f
+  data arrival time                                                                                         0.39
+
+  clock xu_clk (rise edge)                                                                       0.00       0.00
+  clock network delay (ideal)                                                                    0.00       0.00
+  clock uncertainty                                                                              0.10       0.10
+  u_linear_compute_core/core/weightBanks/banks_0/sram1/mem_ext/macro/CLK (RAMSP1024X16)          0.00       0.10 r
+  library hold time                                                                              0.23       0.33
+  data required time                                                                                        0.33
+  -----------------------------------------------------------------------------------------------------------------
+  data required time                                                                                        0.33
+  data arrival time                                                                                        -0.39
+  -----------------------------------------------------------------------------------------------------------------
+  slack (MET)                                                                                               0.06
+
+
+  Startpoint: w_addr_reg_reg[4]
+              (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_1/sram0/mem_ext/macro
+            (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                                                          Incr       Path
+  -----------------------------------------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                                                                       0.00       0.00
+  clock network delay (ideal)                                                                    0.00       0.00
+  w_addr_reg_reg[4]/CK (DRNQNV2_12TR40)                                                          0.00 #     0.00 r
+  w_addr_reg_reg[4]/QN (DRNQNV2_12TR40)                                                          0.22       0.22 r
+  U2795/ZN (INV2_12TR40)                                                                         0.06       0.28 f
+  u_linear_compute_core/io_wLoadAddr[4] (LinearCachedCore)                                       0.00       0.28 f
+  u_linear_compute_core/core/io_wLoadAddr[4] (LinearComputeCore)                                 0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/io_loadAddr[4] (WeightBankArray)                        0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_1/io_waddr[4] (WeightBank_7)                      0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_1/U22/Z (AO22V2_12TR40)                           0.11       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_1/sram0/io_addr[4] (Sram1024x16_14)               0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_1/sram0/mem_ext/RW0_addr[4] (mem_1024x16_14)      0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_1/sram0/mem_ext/macro/A[4] (RAMSP1024X16)         0.00       0.39 f
+  data arrival time                                                                                         0.39
+
+  clock xu_clk (rise edge)                                                                       0.00       0.00
+  clock network delay (ideal)                                                                    0.00       0.00
+  clock uncertainty                                                                              0.10       0.10
+  u_linear_compute_core/core/weightBanks/banks_1/sram0/mem_ext/macro/CLK (RAMSP1024X16)          0.00       0.10 r
+  library hold time                                                                              0.23       0.33
+  data required time                                                                                        0.33
+  -----------------------------------------------------------------------------------------------------------------
+  data required time                                                                                        0.33
+  data arrival time                                                                                        -0.39
+  -----------------------------------------------------------------------------------------------------------------
+  slack (MET)                                                                                               0.06
+
+
+  Startpoint: w_addr_reg_reg[4]
+              (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_1/sram1/mem_ext/macro
+            (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                                                          Incr       Path
+  -----------------------------------------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                                                                       0.00       0.00
+  clock network delay (ideal)                                                                    0.00       0.00
+  w_addr_reg_reg[4]/CK (DRNQNV2_12TR40)                                                          0.00 #     0.00 r
+  w_addr_reg_reg[4]/QN (DRNQNV2_12TR40)                                                          0.22       0.22 r
+  U2795/ZN (INV2_12TR40)                                                                         0.06       0.28 f
+  u_linear_compute_core/io_wLoadAddr[4] (LinearCachedCore)                                       0.00       0.28 f
+  u_linear_compute_core/core/io_wLoadAddr[4] (LinearComputeCore)                                 0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/io_loadAddr[4] (WeightBankArray)                        0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_1/io_waddr[4] (WeightBank_7)                      0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_1/U22/Z (AO22V2_12TR40)                           0.11       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_1/sram1/io_addr[4] (Sram1024x16_13)               0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_1/sram1/mem_ext/RW0_addr[4] (mem_1024x16_13)      0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_1/sram1/mem_ext/macro/A[4] (RAMSP1024X16)         0.00       0.39 f
+  data arrival time                                                                                         0.39
+
+  clock xu_clk (rise edge)                                                                       0.00       0.00
+  clock network delay (ideal)                                                                    0.00       0.00
+  clock uncertainty                                                                              0.10       0.10
+  u_linear_compute_core/core/weightBanks/banks_1/sram1/mem_ext/macro/CLK (RAMSP1024X16)          0.00       0.10 r
+  library hold time                                                                              0.23       0.33
+  data required time                                                                                        0.33
+  -----------------------------------------------------------------------------------------------------------------
+  data required time                                                                                        0.33
+  data arrival time                                                                                        -0.39
+  -----------------------------------------------------------------------------------------------------------------
+  slack (MET)                                                                                               0.06
+
+
+  Startpoint: w_addr_reg_reg[4]
+              (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_2/sram0/mem_ext/macro
+            (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                                                          Incr       Path
+  -----------------------------------------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                                                                       0.00       0.00
+  clock network delay (ideal)                                                                    0.00       0.00
+  w_addr_reg_reg[4]/CK (DRNQNV2_12TR40)                                                          0.00 #     0.00 r
+  w_addr_reg_reg[4]/QN (DRNQNV2_12TR40)                                                          0.22       0.22 r
+  U2795/ZN (INV2_12TR40)                                                                         0.06       0.28 f
+  u_linear_compute_core/io_wLoadAddr[4] (LinearCachedCore)                                       0.00       0.28 f
+  u_linear_compute_core/core/io_wLoadAddr[4] (LinearComputeCore)                                 0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/io_loadAddr[4] (WeightBankArray)                        0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_2/io_waddr[4] (WeightBank_6)                      0.00       0.28 f
+  u_linear_compute_core/core/weightBanks/banks_2/U17/Z (AO22V2_12TR40)                           0.11       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_2/sram0/io_addr[4] (Sram1024x16_12)               0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_2/sram0/mem_ext/RW0_addr[4] (mem_1024x16_12)      0.00       0.39 f
+  u_linear_compute_core/core/weightBanks/banks_2/sram0/mem_ext/macro/A[4] (RAMSP1024X16)         0.00       0.39 f
+  data arrival time                                                                                         0.39
+
+  clock xu_clk (rise edge)                                                                       0.00       0.00
+  clock network delay (ideal)                                                                    0.00       0.00
+  clock uncertainty                                                                              0.10       0.10
+  u_linear_compute_core/core/weightBanks/banks_2/sram0/mem_ext/macro/CLK (RAMSP1024X16)          0.00       0.10 r
+  library hold time                                                                              0.23       0.33
+  data required time                                                                                        0.33
+  -----------------------------------------------------------------------------------------------------------------
+  data required time                                                                                        0.33
+  data arrival time                                                                                        -0.39
+  -----------------------------------------------------------------------------------------------------------------
+  slack (MET)                                                                                               0.06
+
+
+1

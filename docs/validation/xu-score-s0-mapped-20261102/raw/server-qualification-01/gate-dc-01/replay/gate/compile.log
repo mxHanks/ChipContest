@@ -1,0 +1,186 @@
+["/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs", "-full64", "-sverilog", "-timescale=1ns/1ps", "+nospecify", "+notimingcheck", "-top", "tb_xu_gate_wrapper", "+define+DISABLE_SV_ASSERTION=1", "-Mdir=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/gate-dc-01/replay/gate/csrc", "-o", "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/gate-dc-01/replay/gate/simv", "+define+ARM_UD_MODEL", "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest/tests/host/tb_xu_gate_wrapper.sv", "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v", "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/stdcell-models-01/scc40nll_vhsc40_rvt.v", "/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP1024X16/verilog/RAMSP1024X16.v"]
+                         Chronologic VCS (TM)
+      Version Q-2020.03-SP2-6_Full64 -- Mon Nov  2 20:02:37 2026
+               Copyright (c) 1991-2020 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+Parsing design file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest/tests/host/tb_xu_gate_wrapper.sv'
+Parsing design file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v'
+Parsing design file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/stdcell-models-01/scc40nll_vhsc40_rvt.v'
+
+Warning-[OPD] Override previous declaration
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/stdcell-models-01/scc40nll_vhsc40_rvt.v, 101923
+  Previously declared 
+  at:"/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/stdcell-models-01/scc40nll_vhsc40_rvt.v",
+  101797
+  This udp will be overridden by the last declaration.
+  
+
+
+Warning-[OPD] Override previous declaration
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/stdcell-models-01/scc40nll_vhsc40_rvt.v, 101946
+  Previously declared 
+  at:"/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/stdcell-models-01/scc40nll_vhsc40_rvt.v",
+  101830
+  This udp will be overridden by the last declaration.
+  
+
+Parsing design file '/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP1024X16/verilog/RAMSP1024X16.v'
+Top Level Modules:
+       tb_xu_gate_wrapper
+TimeScale is 10 ps / 1 ps
+
+Warning-[TFIPC] Too few instance port connections
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v, 7988
+MacPE_0, "MacPE_0_DW01_add_1 add_65( .A (io_result),  .B ({_ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T}),  .CI (1'b0),  .SUM ({N52, N51, N50, N49, N48, N47, N46, N45, N44, N43, N42, N41, N40, N39, N38, N37, N36, N35, N34, N33, N32, N31, N30, N29, N28, N27, N26, N25, N24, N23, N22, N21, N20, N19, N18, N17, N16, N15, N14, N13, N12, N11, N10, N9, N8, N7, N6, N5}));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v, 9351
+MacPE_7, "MacPE_7_DW01_add_1 add_65( .A (io_result),  .B ({_ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T}),  .CI (1'b0),  .SUM ({N52, N51, N50, N49, N48, N47, N46, N45, N44, N43, N42, N41, N40, N39, N38, N37, N36, N35, N34, N33, N32, N31, N30, N29, N28, N27, N26, N25, N24, N23, N22, N21, N20, N19, N18, N17, N16, N15, N14, N13, N12, N11, N10, N9, N8, N7, N6, N5}));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v, 10713
+MacPE_6, "MacPE_6_DW01_add_1 add_65( .A (io_result),  .B ({_ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T}),  .CI (1'b0),  .SUM ({N52, N51, N50, N49, N48, N47, N46, N45, N44, N43, N42, N41, N40, N39, N38, N37, N36, N35, N34, N33, N32, N31, N30, N29, N28, N27, N26, N25, N24, N23, N22, N21, N20, N19, N18, N17, N16, N15, N14, N13, N12, N11, N10, N9, N8, N7, N6, N5}));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v, 12079
+MacPE_5, "MacPE_5_DW01_add_1 add_65( .A (io_result),  .B ({_ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T}),  .CI (1'b0),  .SUM ({N52, N51, N50, N49, N48, N47, N46, N45, N44, N43, N42, N41, N40, N39, N38, N37, N36, N35, N34, N33, N32, N31, N30, N29, N28, N27, N26, N25, N24, N23, N22, N21, N20, N19, N18, N17, N16, N15, N14, N13, N12, N11, N10, N9, N8, N7, N6, N5}));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v, 13455
+MacPE_4, "MacPE_4_DW01_add_2 add_65( .A (io_result),  .B ({_ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T}),  .CI (1'b0),  .SUM ({N52, N51, N50, N49, N48, N47, N46, N45, N44, N43, N42, N41, N40, N39, N38, N37, N36, N35, N34, N33, N32, N31, N30, N29, N28, N27, N26, N25, N24, N23, N22, N21, N20, N19, N18, N17, N16, N15, N14, N13, N12, N11, N10, N9, N8, N7, N6, N5}));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v, 14832
+MacPE_3, "MacPE_3_DW01_add_2 add_65( .A (io_result),  .B ({_ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T}),  .CI (1'b0),  .SUM ({N52, N51, N50, N49, N48, N47, N46, N45, N44, N43, N42, N41, N40, N39, N38, N37, N36, N35, N34, N33, N32, N31, N30, N29, N28, N27, N26, N25, N24, N23, N22, N21, N20, N19, N18, N17, N16, N15, N14, N13, N12, N11, N10, N9, N8, N7, N6, N5}));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v, 16205
+MacPE_2, "MacPE_2_DW01_add_1 add_65( .A (io_result),  .B ({_ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T}),  .CI (1'b0),  .SUM ({N52, N51, N50, N49, N48, N47, N46, N45, N44, N43, N42, N41, N40, N39, N38, N37, N36, N35, N34, N33, N32, N31, N30, N29, N28, N27, N26, N25, N24, N23, N22, N21, N20, N19, N18, N17, N16, N15, N14, N13, N12, N11, N10, N9, N8, N7, N6, N5}));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v, 17561
+MacPE_1, "MacPE_1_DW01_add_1 add_65( .A (io_result),  .B ({_ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T[31], _ACC_T}),  .CI (1'b0),  .SUM ({N52, N51, N50, N49, N48, N47, N46, N45, N44, N43, N42, N41, N40, N39, N38, N37, N36, N35, N34, N33, N32, N31, N30, N29, N28, N27, N26, N25, N24, N23, N22, N21, N20, N19, N18, N17, N16, N15, N14, N13, N12, N11, N10, N9, N8, N7, N6, N5}));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+Starting vcs inline pass...
+
+69 modules and 2 UDPs read.
+recompiling module tb_xu_gate_wrapper
+recompiling module XRowBuffer
+recompiling module WeightBankArray
+recompiling module MacController
+recompiling module MacPE_7
+recompiling module MacPE_6
+recompiling module MacPE_5
+recompiling module MacPE_4
+recompiling module MacPE_3
+recompiling module MacPE_2
+recompiling module MacPE_1
+recompiling module BiasBankCache
+recompiling module LinearCachedCore
+recompiling module AD1V4_12TR40
+recompiling module ADH1V2C_12TR40
+recompiling module AND3V2_12TR40
+recompiling module AO1B2V2_12TR40
+recompiling module AO21V2_12TR40
+recompiling module AO221V2_12TR40
+recompiling module AO22V2_12TR40
+recompiling module AO31V2_12TR40
+recompiling module AOA211V2_12TR40
+recompiling module AOAI211V2_12TR40
+recompiling module AOI211V2_12TR40
+recompiling module AOI21BV2_12TR40
+recompiling module AOI21V8_12TR40
+recompiling module AOI221V2_12TR40
+recompiling module AOI222V2_12TR40
+recompiling module AOI22BBV2_12TR40
+recompiling module AOI22V2_12TR40
+recompiling module BUFV8RQ_12TR40
+recompiling module CLKAND2V2_12TR40
+recompiling module CLKINV4_12TR40
+recompiling module CLKNAND2V4_12TR40
+recompiling module DQNV2_12TR40
+recompiling module DQV2_12TR40
+recompiling module DRNQNV2_12TR40
+recompiling module DRNQV2_12TR40
+recompiling module INV2_12TR40
+recompiling module MUX2NV2_12TR40
+recompiling module NAND2BV2_12TR40
+recompiling module NAND2V2_12TR40
+recompiling module NAND3BV2_12TR40
+recompiling module NAND3V2_12TR40
+recompiling module NAND4BV2_12TR40
+recompiling module NAND4CV2_12TR40
+recompiling module NOR2BV2_12TR40
+recompiling module NOR2V4_12TR40
+recompiling module NOR3BBV2_12TR40
+recompiling module NOR3V2_12TR40
+50 of 69 modules done
+recompiling module NOR4BBV2_12TR40
+recompiling module NOR4BV2_12TR40
+recompiling module NOR4V2_12TR40
+recompiling module OA21V2_12TR40
+recompiling module OA221V2_12TR40
+recompiling module OAI211V2_12TR40
+recompiling module OAI21V4_12TR40
+recompiling module OAI221V2_12TR40
+recompiling module OAI222V2_12TR40
+recompiling module OAI22BBV2_12TR40
+recompiling module OAI22V6_12TR40
+recompiling module OAI31V2_12TR40
+recompiling module OAO211V2_12TR40
+recompiling module OAOI211V2_12TR40
+recompiling module OR2V3_12TR40
+recompiling module OR4V2_12TR40
+recompiling module XNOR2V8_12TR40
+recompiling module XOR2V1_12TR40
+recompiling module RAMSP1024X16
+All of 69 modules done
+make: Warning: File `filelist.hsopt.llvm2_0.objs' has modification time 0.45 s in the future
+make: warning:  Clock skew detected.  Your build may be incomplete.
+make: Warning: File `filelist.hsopt.llvm2_0.objs' has modification time 0.073 s in the future
+make[1]: Warning: File `filelist.hsopt.llvm2_0.objs' has modification time 0.063 s in the future
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Warning: File `filelist.hsopt.llvm2_0.objs' has modification time 0.046 s in the future
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+if [ -x /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/gate-dc-01/replay/gate/simv ]; then chmod a-x /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/gate-dc-01/replay/gate/simv; fi
+g++  -o /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/gate-dc-01/replay/gate/simv      -rdynamic  -Wl,-rpath='$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir -Wl,-rpath=/eda/synopsys/vcs/vcs_2020.03-SP2-6/linux64/lib -L/eda/synopsys/vcs/vcs_2020.03-SP2-6/linux64/lib  -Wl,-rpath-link=./  /usr/lib64/libnuma.so.1   objs/amcQw_d.o   _22653_archive_1.so objs/udps/exIG1.o objs/udps/U7Vwg.o  SIM_l.o      rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          -lvirsim -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -luclinative /eda/synopsys/vcs/vcs_2020.03-SP2-6/linux64/lib/vcs_tls.o   -Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive          /eda/synopsys/vcs/vcs_2020.03-SP2-6/linux64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/gate-dc-01/replay/gate/simv up to date
+make: warning:  Clock skew detected.  Your build may be incomplete.
+CPU time: 7.747 seconds to compile + 1.947 seconds to elab + .271 seconds to link
