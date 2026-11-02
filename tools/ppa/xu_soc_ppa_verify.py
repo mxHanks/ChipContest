@@ -86,7 +86,9 @@ def instrument_nominal_clock(text, wrapped):
     end
   end
 '''.replace('CLOCK_PATH', clock_path)
-    text = once(text, 'module tb_xu_soc_ppa;', 'module tb_xu_soc_ppa;' + declarations)
+    # VCS requires clk/rst_n to be declared before the assertion process.
+    text = once(text, '  reg clk = 0, lfclk = 0, rst_n = 0;',
+                '  reg clk = 0, lfclk = 0, rst_n = 0;' + declarations)
     text = once(text, '  always #2 clk = ~clk;', '''  initial forever begin
     xu_half_index=xu_half_index+1;
     xu_target_ns=xu_half_index*(10.0/3.0);
