@@ -1,0 +1,33 @@
+{
+  "evidence_sha256": {
+    "host-tests.log": "0e0b3f0f246894e959ebd68fafbcbc3a153af9a5e71d29fd07da7309d9cf6dcc",
+    "probe-first.json": "340cd6ae24e0999981b4db59c49ded1dcc0a6c85610e601457c5ce497b0ee448",
+    "probe-first.saif": "641ce46b361a1ba21f9c96328d1c49a8b8b29dda6155c3adb9a8669da131d4f1",
+    "probe-iverilog.log": "479afb0b294c6bfcb538e0fc382b4109d1d56625a18ca9df7f4ef3f76c87073d",
+    "probe-iverilog.vcd": "0036d95cdbfd138c4258893de713e9f44eb640a0ce8e9d0fb33b6db11ef13188",
+    "probe-second.json": "237ffc5e46fc5459e57a941d1f907f7424c3bf286342625d1293af17394c556e",
+    "probe-second.saif": "9ed9d6dfce54d02c3d0998bbddcfe8d9e3fd95d8d7882b5c98d701abeb9f2793",
+    "test_xu_soc_activity.py": "8048e79cee3b8112b2a828b3c30105228fce978ba44196264d34042fa7acf677",
+    "xu_activity_probe.sv": "ee27911decedbbe7877b4142e395ca445978134193a668e3ca44925cebdbc8b3",
+    "xu_soc_activity.py": "0aa0cd4f896da17689ca2acdef169f6c6c1701569c09bfaa8eed63de6fb0207b"
+  },
+  "local_tests": "python3 -m unittest discover -s tests/host -p test_xu_soc_activity.py -v",
+  "probe_compile_command": [
+    "iverilog",
+    "-g2012",
+    "-DXU_PROBE_VCD",
+    "-s",
+    "xu_activity_probe",
+    "-o",
+    "/tmp/tmp3lz0jaqw/sim.vvp",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_activity_probe.sv"
+  ],
+  "schema": "xu-soc-activity-host-evidence-v2",
+  "scope": "Icarus-generated deterministic tiny circuit only; not E203/full-SoC activity, not a power measurement",
+  "source_sha256": {
+    "tests/host/test_xu_soc_activity.py": "8048e79cee3b8112b2a828b3c30105228fce978ba44196264d34042fa7acf677",
+    "tools/ppa/xu_activity_probe.sv": "ee27911decedbbe7877b4142e395ca445978134193a668e3ca44925cebdbc8b3",
+    "tools/scripts/xu_soc_activity.py": "0aa0cd4f896da17689ca2acdef169f6c6c1701569c09bfaa8eed63de6fb0207b"
+  },
+  "status": "HOST_PREPARATION_VERIFIED_NO_FULL_SOC_POWER"
+}

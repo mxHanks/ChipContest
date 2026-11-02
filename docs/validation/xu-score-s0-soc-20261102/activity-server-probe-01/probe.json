@@ -1,0 +1,48 @@
+{
+  "created_utc": "2026-11-02T12:10:55.095649+00:00",
+  "recipes": {
+    "coverage": {
+      "binary_sha256": "b8353a0aa58551f445dbc87abe18b5be60987943dc8fc4924348ffdae70424c1",
+      "compile_command": [
+        "/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs",
+        "-full64",
+        "-sverilog",
+        "-debug_access+all",
+        "-top",
+        "xu_activity_probe",
+        "-Mdir=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-01/coverage/csrc",
+        "-o",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-01/coverage/simv",
+        "-cm",
+        "tgl",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu_activity_probe_s0.sv"
+      ],
+      "error": "first isolated window differs from known circuit",
+      "status": "FAILED"
+    },
+    "debug": {
+      "binary_sha256": "a49f2e04cf3dbbc705ae74d8e64597445c74183dc168e7598c2c4c255b2aee95",
+      "compile_command": [
+        "/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs",
+        "-full64",
+        "-sverilog",
+        "-debug_access+all",
+        "-top",
+        "xu_activity_probe",
+        "-Mdir=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-01/debug/csrc",
+        "-o",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/activity-probe-01/debug/simv",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu_activity_probe_s0.sv"
+      ],
+      "error": "first isolated window differs from known circuit",
+      "status": "FAILED"
+    }
+  },
+  "schema": "xu-saif-capability-probe-v1",
+  "source": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu_activity_probe_s0.sv",
+    "sha256": "0185c85e251196c4e528372d91f1a431715482d8a37c840b0637d1143dabcac2"
+  },
+  "status": "FAILED",
+  "vcs": "/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs"
+}

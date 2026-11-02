@@ -27,7 +27,7 @@ def run(command, cwd, logfile, timeout=1800):
         log.write(json.dumps([str(c) for c in command]) + '\n')
         log.flush()
         env = dict(os.environ, PWD=str(Path(cwd).resolve()))
-        result = subprocess.run(command, cwd=cwd, env=env, stdout=log,
+        result = subprocess.run(command, cwd=cwd, env=env, stdin=subprocess.DEVNULL, stdout=log,
                                 stderr=subprocess.STDOUT, timeout=timeout)
     if result.returncode:
         raise RuntimeError(f'command exit {result.returncode}: {logfile}')

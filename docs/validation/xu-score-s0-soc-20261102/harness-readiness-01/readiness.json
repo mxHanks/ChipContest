@@ -1,0 +1,54 @@
+{
+  "schema": "xu-full-soc-harness-readiness-v1",
+  "status": "READY_FOR_FOUR_STATE_SERVER_SIMULATION_NOT_QUALIFIED",
+  "created_utc": "2026-11-02T12:36:37.056015+00:00",
+  "host_guards": {
+    "status": "PASS",
+    "tests": 7
+  },
+  "unit_probes": {
+    "vendor_preload": {
+      "status": "PASS",
+      "scope": "vendor physical backdoor packing only, all1024 logical words plus four X-containing words; not fullSoC",
+      "all_recorded_hashes_match": true
+    },
+    "nominal_clock": {
+      "status": "PASS",
+      "scope": "absolute-target HF clock phase and reset edge count only",
+      "all_recorded_hashes_match": true
+    }
+  },
+  "nominal_full_soc": {
+    "status": "COMPILE_PASS_NOT_SIMULATED",
+    "simulator": "Icarus Verilog 12.0",
+    "actual_vendor_model_sha256": "81b55d87d5e6821d44037d6f0290ec89c9edb9582eb1932957f181aefc300d51"
+  },
+  "source_sha256": {
+    "tools/ppa/xu_soc_ppa_verify.py": "3e08ac04f7b48bc8fa01dc80c235ce55fce2e1b4bd27e467a7edfa623f373bdc",
+    "tools/ppa/xu_soc_ppa_top.sv": "8d0e5fd38f2425e7ea8041dd5b8c3a8fd4ce7fa171afb1bf0ebeb6f53446f28a",
+    "tools/ppa/xu_shared_icb_sram.sv": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d",
+    "tools/ppa/xu_soc_ppa_harness.md": "5382c0e1fa44535be2e59f97fcf602b41503de743a1bc4474a9e694d0ba33437",
+    "tools/ppa/tb_xu_nominal_clock_probe.sv": "b2520df794ab08aafd5b13e19e3d9146a67584d137d743beb9391eaa30e41fc4",
+    "tools/ppa/tb_xu_vendor_preload.sv": "96c7d3a538adafd02b043b8edd21f2bbc65fc964a8e89345126d6d55b5dc15e7",
+    "tools/scripts/e203_soc.py": "573d0d1830069cf99ea73bcf2553b175bc77f6f5ecbe7595036453a193970e2b",
+    "tests/host/test_xu_soc_ppa_harness.py": "e0150bce2a43c27b2e44e56484a3d20a97cf85eb8aab6e18a607c9f365facd90"
+  },
+  "limitations": [
+    "No local actual-macro fullSoC simulation PASS",
+    "Previous Verilator vendor probes failed and fullSoC attempts remain stopped/incomplete; historical logs unmodified",
+    "Icarus compile warns on mixed/default timescales and broadens constant selects in always_* sensitivity; compile evidence only",
+    "Public fixture reload marker does not prove accelerator cache clearing",
+    "No mapped equivalence,150MHz STA,SAIF mapping coverage,power or energy qualification"
+  ],
+  "evidence_sha256": {
+    "nominal-full-soc-result.json": "d14750bd0f3b1361cf75472f45c1f59c172c9bcaea0d6b096388d86ed9238c74",
+    "nominal-full-soc-compile.log": "64a94f723de700e559d07a87a1228030aea79301602e65d5866c4c39a9b2e1e5",
+    "vendor_preload-result.json": "4358be23922d6be06c0610a83d1edd16ce5c61ede4985daa5c3dc8c9c1d7deac",
+    "vendor_preload-simulation.log": "cf0359e9a432612428419ad16185f486ba9c4a11071771d18c18225adc462c8c",
+    "host-tests.log": "db795c7bdf2c44dd1456a3d49a47891d4586d8d7c8a4c812c31aafb01840d829",
+    "nominal-full-soc-rtl.f": "faa89f1f989758782e15244e6d634d60e48f15a57dcf368124e9710abc5fa21d",
+    "nominal_clock-simulation.log": "7c1334d421df8023d13ca246e0296ddcebd8a70667a23ade0789da2ddc79c88e",
+    "nominal-full-soc-tb_xu_soc_ppa.sv": "410a502b28496c39960fe3bc7754e94ea8e8467f32bdde374a5c6501c3dacff7",
+    "nominal_clock-result.json": "6d4b71fc3e5934259c07ae4fa4dd9ba3e34b0400ad6f5cd748ea22d6d9902c0c"
+  }
+}

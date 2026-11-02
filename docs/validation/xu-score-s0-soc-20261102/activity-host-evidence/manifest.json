@@ -1,0 +1,30 @@
+{
+  "evidence_sha256": {
+    "host-tests.log": "009fc52f108bbe46a8d17e0a1763a2e3d1314b2e64fc3847aefb2eb7606d6bee",
+    "probe-first.json": "35cef125cc1c5c0ac3585aa9052abce7f6eb51dfca83f149a276de0e8751d2cd",
+    "probe-first.saif": "863224ea748e9c9b45ffe992905f2936b2fd6cb5b342562045f64070609f8ed0",
+    "probe-iverilog.log": "4a07231fda694074b72c364829b3a3a38be24e0aa32d92f8c7dec3d86a22c49f",
+    "probe-iverilog.vcd": "b2b54b6a09464a718b790178adc1456b2a161258cce19b37f6bd337745f6fc54",
+    "probe-second.json": "73871e3cf65040de0838cf5e2f517bd62f5acc655ff2448b4a39667416437dfe",
+    "probe-second.saif": "698e2066a0ef03f8bed0fd157e18956cc45333a846a47950e77e993b47517fce"
+  },
+  "local_tests": "python3 -m unittest discover -s tests/host -p test_xu_soc_activity.py -v",
+  "probe_compile_command": [
+    "iverilog",
+    "-g2012",
+    "-DXU_PROBE_VCD",
+    "-s",
+    "xu_activity_probe",
+    "-o",
+    "/tmp/tmptns8kn3r/sim.vvp",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_activity_probe.sv"
+  ],
+  "schema": "xu-soc-activity-host-evidence-v1",
+  "scope": "Icarus-generated deterministic tiny circuit only; not E203/full-SoC activity, not a power measurement",
+  "source_sha256": {
+    "tests/host/test_xu_soc_activity.py": "cc308ecb80d34aca348cba1ad4005588ec77670ed9204040e842cdc5f3153ee5",
+    "tools/ppa/xu_activity_probe.sv": "1bd37c1e25276685eed3ec0142946b6ed0b3d1529c3276d2844222299d4b675a",
+    "tools/scripts/xu_soc_activity.py": "4e45444cbfecc4b2bbaf1e9d5f2209a5823effcc3f8b6aa62079b9c5799ca888"
+  },
+  "status": "HOST_PREPARATION_VERIFIED_NO_VCS_PT_POWER"
+}

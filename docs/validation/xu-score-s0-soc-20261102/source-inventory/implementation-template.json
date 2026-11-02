@@ -1,0 +1,102 @@
+{
+  "activity": null,
+  "added_sources": [
+    {
+      "path": "/absolute/qualified/xu_soc_ppa_top.sv",
+      "sha256": "REQUIRED"
+    }
+  ],
+  "clock_review": {
+    "path": "/absolute/reviewed/clock-review.json",
+    "sha256": "REQUIRED"
+  },
+  "constraints": {
+    "path": "/absolute/reviewed/full-soc.sdc",
+    "sha256": "REQUIRED"
+  },
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1"
+  ],
+  "libraries": [
+    {
+      "path": "/absolute/same-corner/standard_cells.db",
+      "sha256": "REQUIRED"
+    },
+    {
+      "path": "/absolute/same-corner/SRAM.db",
+      "sha256": "REQUIRED"
+    }
+  ],
+  "mapping_proof": {
+    "path": "/absolute/verified/mapping-proof.json",
+    "sha256": "REQUIRED"
+  },
+  "memory_groups": [
+    {
+      "count": 32,
+      "depth": 1024,
+      "instance_pattern": "FILL_EXACT_HIERARCHY/itcm/*",
+      "logical_bits": 524288,
+      "macro_ref": "RAMSP1024X16",
+      "name": "itcm",
+      "width": 16
+    },
+    {
+      "count": 32,
+      "depth": 1024,
+      "instance_pattern": "FILL_EXACT_HIERARCHY/dtcm/*",
+      "logical_bits": 524288,
+      "macro_ref": "RAMSP1024X16",
+      "name": "dtcm",
+      "width": 16
+    },
+    {
+      "count": 256,
+      "depth": 1024,
+      "instance_pattern": "FILL_EXACT_HIERARCHY/shared/*",
+      "logical_bits": 4194304,
+      "macro_ref": "RAMSP1024X16",
+      "name": "shared",
+      "width": 16
+    },
+    {
+      "count": 16,
+      "depth": 1024,
+      "instance_pattern": "FILL_EXACT_HIERARCHY/accelerator_weights/*",
+      "logical_bits": 262144,
+      "macro_ref": "RAMSP1024X16",
+      "name": "accelerator_weights",
+      "width": 16
+    }
+  ],
+  "note": "Fill actual paths/hashes after SRAM-model, byte-mask, timing, bus and whole-SoC functional checks. No defaults qualify.",
+  "platform_source_manifest_sha256": "59b07516f64b64eea4a5082d03d5963f3c78e52f331a77f10fdf4fb6b64bda27",
+  "replacements": {
+    "third-party/e203_hbirdv2/rtl/e203/general/sirv_sim_ram.v": {
+      "path": "/absolute/qualified/replacement/sirv_sim_ram.v",
+      "sha256": "REQUIRED"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": {
+      "path": "/absolute/qualified/replacement/mem_1024x16.sv",
+      "sha256": "REQUIRED"
+    }
+  },
+  "retained_instances": [
+    {
+      "name": "cpu",
+      "pattern": "FILL_EXACT_CPU_HIERARCHY"
+    },
+    {
+      "name": "accelerator",
+      "pattern": "FILL_EXACT_ACCEL_HIERARCHY"
+    },
+    {
+      "name": "interconnect",
+      "pattern": "FILL_EXACT_BUS_HIERARCHY"
+    }
+  ],
+  "schema": "xu-full-soc-implementation-v1",
+  "search_paths": [],
+  "top": "xu_soc_ppa_top"
+}
