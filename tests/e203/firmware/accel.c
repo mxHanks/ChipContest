@@ -8,6 +8,15 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
        CACHE_LO = 0x48 / 4, CACHE_HI = 0x4c / 4,
        CAPABILITY = 0x50 / 4, RESULT_WINDOW = 0x80 / 4 };
 
+#ifndef XU_HARDWARE_STREAM16
+#define XU_HARDWARE_STREAM16 0
+#endif
+#if XU_HARDWARE_STREAM16
+enum { W_CURSOR = 0x54 / 4, W_STREAM16 = 0x58 / 4,
+       X_CURSOR = 0x60 / 4, X_STREAM16 = 0x64 / 4,
+       STREAM_CAPABILITY = 0x70 / 4 };
+#endif
+
 #if XU_FIRMWARE_NO_MASKS
 /* Fixed ABI: X/W truncate to 16 bits and BIAS_HI truncates to 8 bits. */
 #define XU_LOW16(value) (value)
@@ -58,6 +67,16 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
     /* Reject old RTL instead of silently accepting writes to absent registers. */
     if (reg[CAPABILITY] != 0x58550003u) return -4;
 #endif
+#if XU_HARDWARE_STREAM16
+    if (reg[STREAM_CAPABILITY] != 0x58530003u) return -5;
+    /* Keep initialization inside the first shared-read/final-Y-response window.
+     * The source remains one signed16 code per existing 32-bit shared slot. */
+    uint32_t first_w = w[0];
+    reg[W_CURSOR] = 0;
+    reg[W_STREAM16] = first_w;
+    for (unsigned element = 1; element < INNER * COLS; ++element)
+        reg[W_STREAM16] = w[element];
+#else
     for (unsigned bank = 0; bank < 8; ++bank) {
         reg[W_BANK] = bank;
         for (unsigned group = 0; group < 32; ++group)
@@ -66,6 +85,7 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                 reg[W_DATA] = XU_LOW16(w[k * COLS + group * 8 + bank]);
             }
     }
+#endif
 #if XU_HARDWARE_BIAS_CACHE
     /* Per-task refresh and both mode writes remain inside the timed window. */
     reg[CACHE_CTRL] = 0;
@@ -84,10 +104,16 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
     const volatile uint32_t *task_bias = bias;
 #endif
     for (unsigned row = 0; row < ROWS; ++row) {
+#if XU_HARDWARE_STREAM16
+        reg[X_CURSOR] = 0;
+        for (unsigned k = 0; k < INNER; ++k)
+            reg[X_STREAM16] = x[row * INNER + k];
+#else
         for (unsigned k = 0; k < INNER; ++k) {
             reg[X_ADDR] = k;
             reg[X_DATA] = XU_LOW16(x[row * INNER + k]);
         }
+#endif
         for (unsigned group = 0; group < 32; ++group) {
 #if XU_HARDWARE_BIAS_CACHE
             /* Chisel selects all eight cached bias values using GROUP. */
