@@ -7,17 +7,20 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools/scripts'))
 import xu_firmware_contract as contract
 import xu_perf_report as perf
+import e203_soc as soc
 
 
 class HardwareContractTests(unittest.TestCase):
     def test_exact_work_and_mode_mismatch_rejection(self):
         for schedule, writes in [('bias-dtcm', 156326), ('bias-hw', 81064),
                                  ('bias-dtcm-window', 130982), ('bias-hw-window', 55720),
-                                 ('bias-hw-stream16-window', 33094)]:
+                                 ('bias-hw-stream16-window', 33094),
+                                 ('bias-hw-pack32-window', 21734)]:
             with self.subTest(schedule=schedule):
                 work = contract.task_contract(schedule)
                 self.assertEqual(work['mmio_writes'], writes)
                 self.assertEqual(work['shared_reads'], 23232)
+                self.assertEqual(work['shared_writes'], 50688)
                 self.assertEqual(work['bias_mmio_writes'], 768 if schedule.startswith('bias-hw') else 76032)
                 counters = dict.fromkeys(set(contract.PERFORMANCE_FIELDS) - {'layer', 'cycles'}, 0)
                 counters.update(w_load=300000, x_load=100000, bias_load=200000,
@@ -31,6 +34,11 @@ class HardwareContractTests(unittest.TestCase):
                               layers=[dict(layer=0, cycles=2000000, firmware_cycles=2000080,
                                            performance=counters)])
                 self.assertEqual(perf.summarize(source, 150)['aggregate']['cycles'], 2000000)
+                row = source['layers'][0]
+                log = 'PERF_TASK ' + ' '.join(
+                    f'{key}={row[key] if key in row else counters[key]}'
+                    for key in contract.PERFORMANCE_FIELDS) + '\n'
+                self.assertEqual(soc.check_performance(log, [row], schedule)[0]['mmio_writes'], writes)
                 for other in contract.SCHEDULES:
                     if other == schedule:
                         continue
@@ -40,6 +48,7 @@ class HardwareContractTests(unittest.TestCase):
                     with self.assertRaises(ValueError): perf.summarize(bad, 150)
                     bad.pop('transaction_contract')
                     with self.assertRaises(ValueError): perf.summarize(bad, 150)
+                    with self.assertRaises(ValueError): soc.check_performance(log, [row], other)
 
     def test_scalar_stream_is_opt_in_and_keeps_source_and_output_work(self):
         stream = contract.task_contract('bias-hw-stream16-window')
@@ -54,6 +63,33 @@ class HardwareContractTests(unittest.TestCase):
             self.assertEqual('-DXU_HARDWARE_STREAM16=1' in defines,
                              schedule == 'bias-hw-stream16-window')
             self.assertNotIn('-DXU_HARDWARE_STREAM16=0', defines)
+
+    def test_packed_stream_is_opt_in_and_preserves_source_and_output_work(self):
+        packed = contract.task_contract('bias-hw-pack32-window')
+        scalar = contract.task_contract('bias-hw-stream16-window')
+        self.assertEqual(scalar['mmio_writes'] - packed['mmio_writes'], 11360)
+        for field in scalar.keys() - {'mmio_writes'}:
+            self.assertEqual(packed[field], scalar[field])
+        for schedule in contract.SCHEDULES:
+            defines = contract.compiler_defines(contract.configuration(schedule))
+            self.assertEqual('-DXU_HARDWARE_PACK32=1' in defines,
+                             schedule == 'bias-hw-pack32-window')
+            self.assertNotIn('-DXU_HARDWARE_PACK32=0', defines)
+
+    def test_legacy_and_scalar_stream_compiler_commands_remain_unchanged(self):
+        names = ['XU_FIRMWARE_BIAS_DTCM', 'XU_HARDWARE_BIAS_CACHE',
+                 'XU_HARDWARE_RESULT_WINDOW', 'XU_FIRMWARE_BIAS_UNROLL',
+                 'XU_FIRMWARE_RESULT_UNROLL', 'XU_FIRMWARE_NO_MASKS']
+        for schedule, switches in [('baseline', '000'), ('bias-dtcm', '100'),
+                                   ('bias-hw', '010'), ('bias-dtcm-window', '101'),
+                                   ('bias-hw-window', '011'),
+                                   ('bias-hw-stream16-window', '011')]:
+            expected = ['-D' + name + '=' + value
+                        for name, value in zip(names, switches + '000')]
+            if schedule == 'bias-hw-stream16-window':
+                expected.append('-DXU_HARDWARE_STREAM16=1')
+            with self.subTest(schedule=schedule):
+                self.assertEqual(contract.compiler_defines(contract.configuration(schedule)), expected)
 
     def test_new_compiler_modes_are_independent(self):
         for schedule in contract.SCHEDULES:

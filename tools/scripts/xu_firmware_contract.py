@@ -8,7 +8,7 @@ PES = 8
 MACS_PER_TASK = 99 * 64 * 256
 OUTPUTS_PER_TASK = 99 * 256
 SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-window',
-             'bias-hw-stream16-window')
+             'bias-hw-stream16-window', 'bias-hw-pack32-window')
 OPTIMIZATIONS = ('-Os', '-O2', '-O3')
 EXPERIMENTS = ('none', 'bias-unroll', 'result-unroll', 'both-unroll', 'no-masks',
                'bias-unroll-no-masks', 'result-unroll-no-masks', 'both-unroll-no-masks')
@@ -54,9 +54,11 @@ def compiler_defines(config):
               'XU_FIRMWARE_BIAS_UNROLL': experiment.startswith(('bias-unroll', 'both-unroll')),
               'XU_FIRMWARE_RESULT_UNROLL': experiment.startswith(('result-unroll', 'both-unroll')),
               'XU_FIRMWARE_NO_MASKS': experiment.endswith('no-masks')}
-    # Keep every legacy command line unchanged; stream is explicitly opt-in.
+    # Keep every legacy command line unchanged; streaming modes are opt-in.
     if config['schedule'] == 'bias-hw-stream16-window':
         values['XU_HARDWARE_STREAM16'] = True
+    if config['schedule'] == 'bias-hw-pack32-window':
+        values['XU_HARDWARE_PACK32'] = True
     return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
 
 
@@ -72,6 +74,9 @@ def task_contract(schedule='baseline'):
         # W: cursor + 16384 data; X: 99*(cursor + 64 data).
         # Unlike legacy BANK=0/ADDR=0, the stream W cursor is inside the window.
         mmio_writes = (1 + w_reads) + 99 * (1 + 64) + 768 + 2 + 3 * 99 * 32
+    if schedule == 'bias-hw-pack32-window':
+        # Pack two signed 16-bit source values into each W/X data write.
+        mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 3 * 99 * 32
     return dict(w_shared_reads=w_reads, x_shared_reads=x_reads, bias_shared_reads=bias_reads,
                 shared_reads=w_reads + x_reads + bias_reads, shared_writes=50688,
                 bias_mmio_writes=bias_writes, mmio_writes=mmio_writes,

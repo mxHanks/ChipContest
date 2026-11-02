@@ -85,10 +85,10 @@ module tb_accel_soc;
 
         if (mmio_accept && !`ACCEL.cmd_read) begin
           case (`ACCEL.cmd_addr[11:0])
-            12'h01c, 12'h020, 12'h024, 12'h054, 12'h058: begin
+            12'h01c, 12'h020, 12'h024, 12'h054, 12'h058, 12'h05c: begin
               phase_now=PERF_W; phase_next=PERF_W;
             end
-            12'h014, 12'h018, 12'h060, 12'h064: begin
+            12'h014, 12'h018, 12'h060, 12'h064, 12'h068: begin
               phase_now=PERF_X; phase_next=PERF_X;
             end
             12'h028, 12'h02c, 12'h030,
@@ -168,6 +168,8 @@ module tb_accel_soc;
            (`ACCEL.cmd_addr[11:0]==12'h018 && `ACCEL.x_addr_reg==63) ||
            (`ACCEL.cmd_addr[11:0]==12'h058 && `ACCEL.w_cursor==16383) ||
            (`ACCEL.cmd_addr[11:0]==12'h064 && `ACCEL.x_cursor==63) ||
+           (`ACCEL.cmd_addr[11:0]==12'h05c && `ACCEL.w_cursor==16382) ||
+           (`ACCEL.cmd_addr[11:0]==12'h068 && `ACCEL.x_cursor==62) ||
            (`ACCEL.cmd_addr[11:0]==12'h030 && `ACCEL.bias_index_reg==7) ||
            (`ACCEL.cmd_addr[11:0]==12'h040 && `ACCEL.cmd_wdata[0]));
       if (shared_retire) perf_shared_end_writeback=0;

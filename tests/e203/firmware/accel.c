@@ -11,10 +11,14 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
 #ifndef XU_HARDWARE_STREAM16
 #define XU_HARDWARE_STREAM16 0
 #endif
-#if XU_HARDWARE_STREAM16
+#ifndef XU_HARDWARE_PACK32
+#define XU_HARDWARE_PACK32 0
+#endif
+#if XU_HARDWARE_STREAM16 || XU_HARDWARE_PACK32
 enum { W_CURSOR = 0x54 / 4, W_STREAM16 = 0x58 / 4,
        X_CURSOR = 0x60 / 4, X_STREAM16 = 0x64 / 4,
-       STREAM_CAPABILITY = 0x70 / 4 };
+       W_PACK32 = 0x5c / 4, X_PACK32 = 0x68 / 4,
+       STREAM_CAPABILITY = 0x70 / 4, PACKED_CAPABILITY = 0x74 / 4 };
 #endif
 
 #if XU_FIRMWARE_NO_MASKS
@@ -67,7 +71,23 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
     /* Reject old RTL instead of silently accepting writes to absent registers. */
     if (reg[CAPABILITY] != 0x58550003u) return -4;
 #endif
-#if XU_HARDWARE_STREAM16
+#if XU_HARDWARE_PACK32
+    if (reg[STREAM_CAPABILITY] != 0x58530003u) return -5;
+    uint32_t packed_cap = reg[PACKED_CAPABILITY];
+    if ((packed_cap & 0xffff0000u) != 0x58500000u || (packed_cap & 3u) != 3u)
+        return -6;
+    /* Preserve the original 32-bit shared slots: both high halves are explicitly
+     * truncated even when the legacy no-masks experiment is selected. */
+    uint32_t first_w0 = w[0];
+    uint32_t first_w1 = w[1];
+    reg[W_CURSOR] = 0;
+    reg[W_PACK32] = (uint32_t)(uint16_t)first_w0 | ((uint32_t)(uint16_t)first_w1 << 16);
+    for (unsigned element = 2; element < INNER * COLS; element += 2) {
+        uint32_t low = w[element];
+        uint32_t high = w[element + 1];
+        reg[W_PACK32] = (uint32_t)(uint16_t)low | ((uint32_t)(uint16_t)high << 16);
+    }
+#elif XU_HARDWARE_STREAM16
     if (reg[STREAM_CAPABILITY] != 0x58530003u) return -5;
     /* Keep initialization inside the first shared-read/final-Y-response window.
      * The source remains one signed16 code per existing 32-bit shared slot. */
@@ -104,7 +124,14 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
     const volatile uint32_t *task_bias = bias;
 #endif
     for (unsigned row = 0; row < ROWS; ++row) {
-#if XU_HARDWARE_STREAM16
+#if XU_HARDWARE_PACK32
+        reg[X_CURSOR] = 0;
+        for (unsigned k = 0; k < INNER; k += 2) {
+            uint32_t low = x[row * INNER + k];
+            uint32_t high = x[row * INNER + k + 1];
+            reg[X_PACK32] = (uint32_t)(uint16_t)low | ((uint32_t)(uint16_t)high << 16);
+        }
+#elif XU_HARDWARE_STREAM16
         reg[X_CURSOR] = 0;
         for (unsigned k = 0; k < INNER; ++k)
             reg[X_STREAM16] = x[row * INNER + k];
