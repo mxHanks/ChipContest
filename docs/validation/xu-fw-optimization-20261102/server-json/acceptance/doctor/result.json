@@ -1,0 +1,125 @@
+{
+  "status": "PASS",
+  "mode": "doctor",
+  "tasks": 1,
+  "simulator": "vcs",
+  "firmware_schedule": "bias-dtcm",
+  "firmware_opt": "-O2",
+  "firmware_experiment": "both-unroll-no-masks",
+  "transaction_contract": {
+    "w_shared_reads": 16384,
+    "x_shared_reads": 6336,
+    "bias_shared_reads": 512,
+    "shared_reads": 23232,
+    "shared_writes": 50688,
+    "bias_mmio_writes": 76032,
+    "mmio_writes": 156326,
+    "starts": 3168,
+    "dones": 3168,
+    "mac_fire": 202752,
+    "macs": 1622016,
+    "outputs": 25344
+  },
+  "contract_sha256": "97e6c23f8b3c65edb44c2ed7a81c71e9c5be93dc5f2a1eb59425e4fd01252426",
+  "scope": "development toolchain/submodule preflight; actual RV32 firmware build; no simulation",
+  "tools": {
+    "git": "/bin/git",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objcopy": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objcopy",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objdump": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objdump"
+  },
+  "versions": {
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc": [
+      "riscv64-unknown-elf-gcc (SiFive GCC-Metal 10.2.0-2020.12.8) 10.2.0",
+      "Copyright (C) 2020 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ]
+  },
+  "main_commit": "8a7640787423a73a0751454de47893406f85e604",
+  "e203_commit": "e36d34a52e6eef93fd0bdfed1b13009e1056bea3",
+  "firmware_build": {
+    "configuration": {
+      "schedule": "bias-dtcm",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks"
+    },
+    "command": [
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+      "-march=rv32imac_zicsr2p0_zifencei2p0",
+      "-mabi=ilp32",
+      "-O2",
+      "-DXU_FIRMWARE_BIAS_DTCM=1",
+      "-DXU_FIRMWARE_BIAS_UNROLL=1",
+      "-DXU_FIRMWARE_RESULT_UNROLL=1",
+      "-DXU_FIRMWARE_NO_MASKS=1",
+      "-fstack-usage",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-msmall-data-limit=0",
+      "-nostdlib",
+      "-nostartfiles",
+      "-static",
+      "-mcmodel=medany",
+      "-Wl,--no-relax",
+      "-T",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tests/e203/firmware/link.ld",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tests/e203/firmware/start.S",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tests/e203/firmware/main.c",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c",
+      "-o",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/xu-vcs-campaign-01/acceptance/doctor/accel_soc"
+    ],
+    "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/xu-vcs-campaign-01/acceptance/doctor",
+    "source_sha256": {
+      "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+      "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+      "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+      "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+      "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+    },
+    "elf_sha256": "c66d554422a394c6c1dc3fd08808f102e0101d8e9d6f496a64e03f59fa8932ad",
+    "image_sha256": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+    "memory": {
+      "itcm_bytes": 962,
+      "itcm_capacity_bytes": 65536,
+      "itcm_remaining_bytes": 64574,
+      "data_bytes": 0,
+      "bss_bytes": 2048,
+      "dtcm_capacity_bytes": 65536,
+      "stack_top": 2415984624,
+      "stack_capacity_after_bss_bytes": 63472,
+      "stack_top_guard_bytes": 16,
+      "stack_frames": [
+        {
+          "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c:39:5:accel_linear",
+          "bytes": 48,
+          "kind": "static"
+        },
+        {
+          "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tests/e203/firmware/main.c:3:5:main",
+          "bytes": 32,
+          "kind": "static"
+        }
+      ],
+      "max_static_stack_frame_bytes": 48,
+      "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+    }
+  },
+  "firmware_sha256": {
+    "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+    "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+    "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+    "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+    "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+  },
+  "firmware_elf_sha256": "c66d554422a394c6c1dc3fd08808f102e0101d8e9d6f496a64e03f59fa8932ad",
+  "firmware_image_sha256": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+  "runner_sha256": "92ea23d75912771f54817c79651a49a42adf1ae1a6eae421da4d83d7e65fbdce",
+  "log_sha256": {
+    "_storage2_2026contest_server4_s4_23usr_Desktop_xu-platform-eval-20261101-codex_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "5fad73530f26d1c54a671b384a3f5c96ba2425c6fcb3aed95cfce1a5b9f356fb",
+    "firmware-build.log": "184e407eb9effdd6047a5ad14a0d5082c377c77d1d20f8c3d762af504bddddbc",
+    "firmware-sections.log": "11cdacba4dfab0d707592a568a0c6f4d48a4f239af72c7e77b263faa6dcddbbc",
+    "firmware-symbols.log": "9977da5601ab84cc85ded6de00d704c20c3c460b3100f87b982a5f43ad400185",
+    "objcopy.log": "b842fd7a992e366cab51dd1a50152c0848ee2f8ef48c84c2ce5daaa5635f9c94"
+  }
+}

@@ -1,0 +1,2801 @@
+{
+  "assembly_audit": "All 48 accel_linear bodies preserve at least one signed16-to-signed32 RESULT_HI shift pair and final fence. MMIO sequence also reviewed against sequenced volatile C statements; no instruction execution or simulation performed.",
+  "baseline_image_matches_history": true,
+  "compiler": "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+  "compiler_sha256": "1094274e53a2732173d4c765c9c0739a9d21fce999eca291ec4a340d47969369",
+  "compiler_version": [
+    "riscv64-unknown-elf-gcc (SiFive GCC-Metal 10.2.0-2020.12.8) 10.2.0"
+  ],
+  "configurations": [
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "none",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-none"
+      ],
+      "configuration": {
+        "experiment": "none",
+        "optimization": "-Os",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65472,
+      "dump_sha256": "d406c052f4bf63ecf6d02954a12f963c859e28f53fecd3a5dcf0190043c4d23a",
+      "elf_bytes": 5504,
+      "elf_sha256": "02cdd79ef8884f04f7e8efe1eaaa4faf7c0311064a7d06bccc3187cbd58387b3",
+      "final_fence_present": true,
+      "image_bytes": 1804,
+      "image_sha256": "4932e8d8f62cdd2732d894abc4c7008809283fe3de29445de90ec764cd12f32e",
+      "itcm_bytes": 598,
+      "itcm_remaining_bytes": 64938,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "4a57e8082222ff2949ce733ef4b91ae26d38d29e7a25cd8022f4c3d72070bbaa",
+        "firmware-sections.log": "e4c20c971521b15b95cac01629530ff87b4da86a597de4983778d2a4b08c8635",
+        "firmware-symbols.log": "6390607a58f6114b081e0d961332fb27422487d239ed91fe74ef2f33a36cd58a",
+        "objcopy.log": "416793f8fb42447a73fe0b1bd80f9a3c96141f625ce69bd691c53ff34373bcb0"
+      },
+      "main_plus_accel_static_frames_bytes": 48,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-none",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "b6d4a0dd69a2eda1173bce0cb3605346609fb30deb0ada16e93423ebb1662ece",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 16,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "bias-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-bias-unroll"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll",
+        "optimization": "-Os",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "53d9bca1223a6bb290816a7f70407e68c48c80175204498af1790a9172c6813c",
+      "elf_bytes": 5712,
+      "elf_sha256": "84130b69d554f345a08f3b7dc6cd1cc630d94f8a587c632bce8215170d8177d5",
+      "final_fence_present": true,
+      "image_bytes": 2428,
+      "image_sha256": "9601d1b5d74a069cc3904b44c930332599490d5c16012145ed4baea90df23a19",
+      "itcm_bytes": 806,
+      "itcm_remaining_bytes": 64730,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "73b6daccbcf69b7f0e93c2e7740aedfe72c71561420c96de66649a5fd3e2b6b3",
+        "firmware-sections.log": "c7f59d0d7f78866fa4c97f0ccf7e11d9cc45685f55e54719091153b7db4a9ab0",
+        "firmware-symbols.log": "a9454d09132ed6e9e39a1f4754812fb752d974ddc64464ae527e99b695da2f27",
+        "objcopy.log": "fe55202963668b61864e1633370b62ada8ba070d053728ca0b194bf1275b172c"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-bias-unroll",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "b7718bf30eb7f63632cd3259444841451018b17ba6026fc2b2b5c17b2f1282cd",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "result-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-result-unroll"
+      ],
+      "configuration": {
+        "experiment": "result-unroll",
+        "optimization": "-Os",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65456,
+      "dump_sha256": "5d39ccd64e2b2fbb53a2cf42e46d960c1e15db5cb722c074d6042e20df854a9e",
+      "elf_bytes": 5716,
+      "elf_sha256": "469c59a37f654777573a0a728c9091668a9867c2e2814aceaa3df1c7334e6cc6",
+      "final_fence_present": true,
+      "image_bytes": 2440,
+      "image_sha256": "bcc43decc29078239058c317ac37a5387a7bc1d082fea1ff2b29b4257b99848d",
+      "itcm_bytes": 810,
+      "itcm_remaining_bytes": 64726,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "e0e207b189a003c769e07a4e04457bf585dfe64fdc8e835eb8ba1807a1d6e239",
+        "firmware-sections.log": "bdc400138ce0ed9299aaa7d92762475017629f872f2860aaf766bd096c6e6086",
+        "firmware-symbols.log": "44308247cd721d9dda1df3ca3495e6cd5cb4e54892e2d48ab68a2baf2bc661dd",
+        "objcopy.log": "8a318a95ccda0c2df634eb92b173dcd5175488d3dddbf93774d21b53d8506a57"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-result-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "00819286f5cd1c54e7485cbf6e69aa0548540e6ed8214fceaf86448b0d71675d",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "both-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-both-unroll"
+      ],
+      "configuration": {
+        "experiment": "both-unroll",
+        "optimization": "-Os",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "a0dd0c26e83c6ce69c568d29e30ef4c00ec672369f15e1d67d90f010d43708bb",
+      "elf_bytes": 5880,
+      "elf_sha256": "39a994d8e86d8b909bae84060398e643f5b6ec279beae94c50c0333602d4b916",
+      "final_fence_present": true,
+      "image_bytes": 2932,
+      "image_sha256": "326128a74cb2c2bfa4940074c0a96fbb77befc58485e5dc25653082f06726334",
+      "itcm_bytes": 974,
+      "itcm_remaining_bytes": 64562,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "2b5b0cdd79780aa8aca13650cbe375b5f7b2aee06225275dc825e42a2d420062",
+        "firmware-sections.log": "94695cb41ebc6724eeac233f9fd62d56ea8d1e62a7e0f4853f22f65d91c2e46b",
+        "firmware-symbols.log": "fe31aa016bd64889cd2b6192b9d87bc34feab602c84775fa3929683bf7ae6760",
+        "objcopy.log": "6ec9966b8128f24841920ea7725440ec3fdea03cc89034ae909c55eb33b8f9e6"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-both-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "6c1721b0f6fd773a37a8fc0d27c42e483f832868f7427c545100f330681771b0",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-no-masks"
+      ],
+      "configuration": {
+        "experiment": "no-masks",
+        "optimization": "-Os",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65472,
+      "dump_sha256": "707cda17a5a791bcb4a08a1bd23b0b3206aa97c28918fdeebc05c5e37332d3c5",
+      "elf_bytes": 5476,
+      "elf_sha256": "95b6e6a74b9e8bfc4790bae4259472bb96c6d35036914102b8ea03eb8420f2aa",
+      "final_fence_present": true,
+      "image_bytes": 1726,
+      "image_sha256": "62848b85d2df28f49df1c6fc7d823b3bc8c18f1916c28ece4584125b6de9d7f2",
+      "itcm_bytes": 572,
+      "itcm_remaining_bytes": 64964,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "0ae03ac2c98acdcec9ede99438d871e165f0457b82b9aa93b6ce2bc76b8d84bd",
+        "firmware-sections.log": "9d4bf0d03ba111229e76f9ae79e9b65fbed89a2c2969985fcab609a30eb684a7",
+        "firmware-symbols.log": "9d2ae7f5d002bbe1acc3bdd5071195d7c35084f3a9146c62fe24b1d9c2968f75",
+        "objcopy.log": "485366b02b72198d69a797d68cfa20f89860517e29b86aef2c2509d6daa9b200"
+      },
+      "main_plus_accel_static_frames_bytes": 48,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-no-masks",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "aa96fe935d35d91e5ce9dbdafbb2496a9d749644e47292b1524ad27bc85df648",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 16,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "bias-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-bias-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll-no-masks",
+        "optimization": "-Os",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "71fbe2821eb07c938df617e4b0c596a277dbc2df02a41b1e1fdc82c38710e646",
+      "elf_bytes": 5656,
+      "elf_sha256": "c42f16f36e2c597c01a6252af549bc66a9e3bdca3ec86cecb55704daab5c48c3",
+      "final_fence_present": true,
+      "image_bytes": 2260,
+      "image_sha256": "1f9858315226901071479d29d8cd51a4dda76bf74409d44eb4e41d870df79b8d",
+      "itcm_bytes": 750,
+      "itcm_remaining_bytes": 64786,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "f9d08935f5179243fb9d127825f8df0c29b27a1f8639e2f6860b1b273cbd6c0a",
+        "firmware-sections.log": "e88320c7456eb8474277d5a4f84ada86c5896e5fdd6e6e0bfea7bdaee28ca6e4",
+        "firmware-symbols.log": "7752ad5da230c70a691cf6c63ba48aeb7db408b8eb44025e9f3cd48f4d732707",
+        "objcopy.log": "b8f1ae1cdf6698f1f0e852367a238c212c24e2460b47090e93d014bb1f4aa613"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-bias-unroll-no-masks",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "78d9abd926f9b6730c25da9228101a211039b9493fa8baa0411a5186f94e74c2",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "result-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-result-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "result-unroll-no-masks",
+        "optimization": "-Os",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65456,
+      "dump_sha256": "4fd5f8b40447ed9af875a10a38f5cc7be4ab13bf020a3d1d14c615a7de38936a",
+      "elf_bytes": 5684,
+      "elf_sha256": "91ef5dcfa3699522df9838e360cf2472937f79d8ae0a9dd9c543fdf0a10ea59e",
+      "final_fence_present": true,
+      "image_bytes": 2350,
+      "image_sha256": "f3f702a3f1303767db126aef81bed524c0f001b95f0492bb19c9a5feea02a6ea",
+      "itcm_bytes": 780,
+      "itcm_remaining_bytes": 64756,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "2f089c8043a950ccde560d87712a14ce57b7cc194a541c3fb5ddaa1aa33f305e",
+        "firmware-sections.log": "f2bd5f1eb5d4c9c11fa6597ae2e6834beadc5f365c133ebb1cb07beef27c618f",
+        "firmware-symbols.log": "2e8cd36f4d1df0c813e46a942e947e25160ecb94cf3ad5c25149a49d16b857d5",
+        "objcopy.log": "7ab2d117755ca74b0b4611c586f4d7dde4892dd581a74a50d9b69aef32ca7cb4"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-result-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "c1a4198c594c698b1789916c074d70362553fed898a860e0e2d37a3b3c3a6437",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-both-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-Os",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65456,
+      "dump_sha256": "c12dd2cdc64a1d5f08eece130537bc8e614a6c80e6b43c8e203332a3221ac197",
+      "elf_bytes": 5820,
+      "elf_sha256": "9bcc400f016b760c1894091f5f873a2618e2de0d88c5b56b26b8001aed3f046b",
+      "final_fence_present": true,
+      "image_bytes": 2752,
+      "image_sha256": "f8ddb1721175316f46da0d2a63a50422926846e1945ccacbb4a5aa955e56ba11",
+      "itcm_bytes": 914,
+      "itcm_remaining_bytes": 64622,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "3e0ba9d16b5bc17018ef558539609c12af5e9de01331e257ea2436cc090aa1be",
+        "firmware-sections.log": "84f60584b9daf373bf9f33892498da842fcd835b286943433781845999088ff4",
+        "firmware-symbols.log": "79299f89d1464e687a3cb6cf4dd2d0901e52f6bd171b014ca412c043f325486b",
+        "objcopy.log": "8bec2dfc360dc3f3c41c5e6609bd77044d22345263c6fab9310a20403a02b66b"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-Os-both-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "3e7cea01e832a67b3d98986e7962eade7f9f8e71603b9031b6361c4b7191c2bd",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "none",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-none"
+      ],
+      "configuration": {
+        "experiment": "none",
+        "optimization": "-O2",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65456,
+      "dump_sha256": "dba8321bb343ed423a59f8a799a9fef5b5c86f480e624d8bda576d1b11cd3fd0",
+      "elf_bytes": 5512,
+      "elf_sha256": "99a7d79960b82651f2112b2306f3d02cd1a7aaeace63cb6619833cac0963b218",
+      "final_fence_present": true,
+      "image_bytes": 1834,
+      "image_sha256": "367be59f69b91820f4bd702c6a9a624cf622bda2751d8b84dc915a79eb582340",
+      "itcm_bytes": 608,
+      "itcm_remaining_bytes": 64928,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "1c548543287531e14ab5e667e7b10d0683adf7ee8b9326c4c9726b7de0d51e83",
+        "firmware-sections.log": "54fc23808db2dacc7f1110dc770d08b15221c1705de2540f2de3e0245d388fd8",
+        "firmware-symbols.log": "73f710e0c6ea4f73642d08f2559ec1b8d2abb0ab3441ed96577c61e81a117d11",
+        "objcopy.log": "52845a3635cfebba6932b94cf29ac352f25c3b26ccc7b0615528e3ea20806599"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-none",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "d6f96047740590e7f227d4cfb8059e0adebaafed70a2f2053295a6b78a8754ea",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "bias-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-bias-unroll"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll",
+        "optimization": "-O2",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "815d61e10f5efc8c5c70043330eeab2a73c31edc019fb3d086a084d0a05d8f96",
+      "elf_bytes": 5720,
+      "elf_sha256": "b2c7e4fc9412a179e647195ea825ef7777b2f242f431dbccb45b84c20c412833",
+      "final_fence_present": true,
+      "image_bytes": 2452,
+      "image_sha256": "ccc67187aa8ae478270820227e20671b7b1da1094a53822e0d811a490708935f",
+      "itcm_bytes": 814,
+      "itcm_remaining_bytes": 64722,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "4d646c36cb6112fa6c612f92f133b6facf2e5416a15e4f0e85246753e7820e24",
+        "firmware-sections.log": "608c623ac2aff71266c797184527cdfb3fcc0fe56b1f13a824c0ab877d5d7b4c",
+        "firmware-symbols.log": "4eb1a111cff9292f053e80afbae25b5be573e658b3354ef83cf49f68db937aa4",
+        "objcopy.log": "5f85f35276dc87be94a77b4bca3d470d7a7e8d1281e31a88a9c875c54c4765e8"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-bias-unroll",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "d71e740328ac55a3b9bc3dce5b2d8510cf6dfc23f9ab72842c582d393350dfe6",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "result-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-result-unroll"
+      ],
+      "configuration": {
+        "experiment": "result-unroll",
+        "optimization": "-O2",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "b63f4d5496a0d1b439a62529775579a4cecae61e6b04dd74d3821503a5f70be4",
+      "elf_bytes": 5668,
+      "elf_sha256": "06f86efbf3f20a9aeb358ae85a44a97041fde05cdf5a30d18c8700aee80197e4",
+      "final_fence_present": true,
+      "image_bytes": 2302,
+      "image_sha256": "3feec335eeb8feb76e984295b3e26e75ef38f10fa7d426b0d78c1d9dd5a2d5a4",
+      "itcm_bytes": 764,
+      "itcm_remaining_bytes": 64772,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "66adcb4c63266f5ac5fea83090b38b9b2265cb4693ee186ab348f6efa0f56246",
+        "firmware-sections.log": "bacd5166c72bc51dda62412b6ab226f94b23392725ae69196dae6aa42b2badc2",
+        "firmware-symbols.log": "c55d393f9986fd8cf5da8c0e8dcc887f7263ea0b71e445b49fece4e5284ee5d5",
+        "objcopy.log": "ced4cf5260f22eba8047b9b49b623a442b23a310e60e110cb35aa9d162d8fced"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-result-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "a657383a2ffe3fd94b8471b0ee6886fdc3c7bc804b8688957adec47030f0b378",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-both-unroll"
+      ],
+      "configuration": {
+        "experiment": "both-unroll",
+        "optimization": "-O2",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "feef427b51a8555759d2b58c8b6ade2277fa256c91f98401d0b829d4f93e2138",
+      "elf_bytes": 5876,
+      "elf_sha256": "0ff8fc06d7fc5482bc78091dbcc83ec89779d9c8d36e364df61c35550638120e",
+      "final_fence_present": true,
+      "image_bytes": 2920,
+      "image_sha256": "2f1d7a88e91cbecd51b8312101e4a42dfa9f659867014b235727bcd841528d6d",
+      "itcm_bytes": 970,
+      "itcm_remaining_bytes": 64566,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "77137cab83867feec1c8eccc762190b2222cc35f56e08127217e8807ab3bb51d",
+        "firmware-sections.log": "4d57945344cc5b29f9418f414997f4ebf763584c37bb29be5a7fc2add1b97cab",
+        "firmware-symbols.log": "b262c904c792581bb301eabfdc3f16c10821b65016b8c7879e0c421336e7aa19",
+        "objcopy.log": "4e61366ae51188899c9168da195c0196f9f32eba84d25ad2e6fb114bd155fe7d"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-both-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "a28f544c6fb9bbb0ef047a28ca55e0900f2cc8f3a4dd5973f55b414b725b06cf",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-no-masks"
+      ],
+      "configuration": {
+        "experiment": "no-masks",
+        "optimization": "-O2",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65472,
+      "dump_sha256": "d48c4469877d5883ae4bb136959ab4ec3388be26e43f1b4fbe41da96202a9f91",
+      "elf_bytes": 5492,
+      "elf_sha256": "106aab094ab45b363c3d82feb850c320299fc799df67d97c533f21cfe1764075",
+      "final_fence_present": true,
+      "image_bytes": 1774,
+      "image_sha256": "3751ac59b4b6850c95ffb1e123ea261437c59ef328e66a7b6ae36a43fadfd3ff",
+      "itcm_bytes": 588,
+      "itcm_remaining_bytes": 64948,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "b0543f23e37d5d85ea79686e97d2bccfe025416cbd05ce9c1aa1519de4957423",
+        "firmware-sections.log": "59fd287b1f9ff6e62fc40e34abb96522abad0fed1601bce2d92005ac97b03ce7",
+        "firmware-symbols.log": "c1b37b3555067b48e14f3cf2503c3a20536a8958d3bd8b0c870675eea9772357",
+        "objcopy.log": "3c965dab9b96addb9027b10662b8f137f0986d0922786350503b98b3d086b705"
+      },
+      "main_plus_accel_static_frames_bytes": 48,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-no-masks",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "56197a2bffbe0218621c3e64d35a1f92c3a872edab36c7bd5939b30033d8580a",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 16,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "bias-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-bias-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "d145ea72d603de24e91eba8c9ea658b4ca451f2b891bca74469d25b1c337d00e",
+      "elf_bytes": 5664,
+      "elf_sha256": "fa381d41d0a3909dad0f76944f557cfbb6c4a9d17984f6dbbafa0cfd7651120b",
+      "final_fence_present": true,
+      "image_bytes": 2284,
+      "image_sha256": "20b0a3419924e36b4b9721dbe78468cd576a8ac821189433d8d712026e4cb2cd",
+      "itcm_bytes": 758,
+      "itcm_remaining_bytes": 64778,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "20f9658fba5c00b01af33da5d9bda8f215c534353a0ee8f9f69837e90ed7a136",
+        "firmware-sections.log": "9165f920e0604f810b7511124c822c49ee4615637ebe87c786ca91f36df0cdc5",
+        "firmware-symbols.log": "a39349439d508d66ca6585a13899e70105afc594b1548d7329f335f0b7436ab6",
+        "objcopy.log": "0210d83feb299ce042ebe4cae044e0c293d1a780d7806979a9a8afde79ab28dd"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-bias-unroll-no-masks",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "fdfc3e07699bdbb24c42fe05f6d25afcc0120aecb052d5d542e7d1cb1a96b60c",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "result-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-result-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "result-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "e6137e00f95dfc4e2d2499671bccc6c7a47da992c9341cdc033ac426daa461ec",
+      "elf_bytes": 5652,
+      "elf_sha256": "5585018fde139695f0c252ab27d79d56b9ad41e49309ab31972ba0ae1343f950",
+      "final_fence_present": true,
+      "image_bytes": 2254,
+      "image_sha256": "0d6d4fc212934a633608da1211ad4dccfd592e7119564c76a4ac1da03ea47210",
+      "itcm_bytes": 748,
+      "itcm_remaining_bytes": 64788,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "3ad6cc93a7e876608db9c78fe9cf3c423075d510e5fb03b7c99f5cc8b143d1c9",
+        "firmware-sections.log": "2bb76ff1f8b274f20ab2a5f3b92213ac5dc3af8dc2b4f81a975858f9a997a5d5",
+        "firmware-symbols.log": "16bdb4d25e2dccbfca88838af1dd14021fc968092727f6bb41c207017c6f9999",
+        "objcopy.log": "47bd4797acbdefd512315075da3c1dfa44da842a09cd9e8c8a3704cb0566fabd"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-result-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "7a6d092f5ea1677608da6df818f5777a95264e0b32b72c478313268be90c5fab",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-both-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "6ccefe18ee7618db43b006bfc675970d335864d0f4812d53e03dd3bd2f5d74ae",
+      "elf_bytes": 5828,
+      "elf_sha256": "6addea2b92aab62207081db2bab623badecf7c3bf8bc9c80ef30a7090afb71ce",
+      "final_fence_present": true,
+      "image_bytes": 2776,
+      "image_sha256": "88c14bb03fafbf8b8939fca5a8cff1a952408ae3b551d30f2b3e1dc1ac74dcfc",
+      "itcm_bytes": 922,
+      "itcm_remaining_bytes": 64614,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "00c302954ade9a5462e9344b0c73e25dba3988f57b5ad4a5d21e00c5d7a53a64",
+        "firmware-sections.log": "8e4d2fc8ee0d629d3b6f6e3560c04780be11b06d954a6c518a12f7e09b08139b",
+        "firmware-symbols.log": "5dadc494463287d859ac10c6566c1c3cdc12af807747cf49786a9e494c9c6775",
+        "objcopy.log": "9bbb07bdc8489302adcb89e2baec75a50585ebe7e880f4a3b37e19bcc5007cc0"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O2-both-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "a7a6d9d0154b7bc3202dacf2df8e8101f9a6fa1d31b00e44a9916760a714752f",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "none",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-none"
+      ],
+      "configuration": {
+        "experiment": "none",
+        "optimization": "-O3",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "7fddd4d272995c8abd114992ca812b7e385a7f9318f59df04f67b90a44a8eb8b",
+      "elf_bytes": 5876,
+      "elf_sha256": "0ff8fc06d7fc5482bc78091dbcc83ec89779d9c8d36e364df61c35550638120e",
+      "final_fence_present": true,
+      "image_bytes": 2920,
+      "image_sha256": "2f1d7a88e91cbecd51b8312101e4a42dfa9f659867014b235727bcd841528d6d",
+      "itcm_bytes": 970,
+      "itcm_remaining_bytes": 64566,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "ee342f732911e55b0b6073d83d517b7a9434d8b6df99f865ecf61eab8d879a9f",
+        "firmware-sections.log": "77370f0fe1e36f8465bc276c332649e52b351059f9b0a707bd8b12ed13559a20",
+        "firmware-symbols.log": "9640cc8040d11b048905ef24f3c06f4f653f2443e7ec61795217ab23daecb22e",
+        "objcopy.log": "d3a9879616b662b998f60b8fec6804915db6660a219cfd42cb90a839a66eb04b"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-none",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "fc7478e50347c747475e876af8e77fd4d4040baa9286a0935f31656089ddc8ca",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "bias-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-bias-unroll"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll",
+        "optimization": "-O3",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "059df62af6e7455d0adae30622f5355cf01196fe80635b567123932c9b8a30ef",
+      "elf_bytes": 5876,
+      "elf_sha256": "0ff8fc06d7fc5482bc78091dbcc83ec89779d9c8d36e364df61c35550638120e",
+      "final_fence_present": true,
+      "image_bytes": 2920,
+      "image_sha256": "2f1d7a88e91cbecd51b8312101e4a42dfa9f659867014b235727bcd841528d6d",
+      "itcm_bytes": 970,
+      "itcm_remaining_bytes": 64566,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "1c6c6552c72b152468f2e4bf18e46728c0c19505897f16d82270741eebf9affb",
+        "firmware-sections.log": "9ef9d09dabf223819298c263389cea8e7dac94dc6f11a14034c4a6065f2d7b8f",
+        "firmware-symbols.log": "2831526dfc6b53021738768213879d332b469c1aa563cfc0b0acf2e890b91625",
+        "objcopy.log": "6939a950b039984351a1379e008d74bf1abf4dd8c9b82c4be2a16fa0aa012c42"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-bias-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "798aa6af7567a88a00ab5beeb58f44844e2350a793860ed329a8024c95c4438a",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "result-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-result-unroll"
+      ],
+      "configuration": {
+        "experiment": "result-unroll",
+        "optimization": "-O3",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "f999677b5e36011f5ad1daaf24d4f1bdbea227a00a312a06ae2c84d24e2ed2e3",
+      "elf_bytes": 5876,
+      "elf_sha256": "0ff8fc06d7fc5482bc78091dbcc83ec89779d9c8d36e364df61c35550638120e",
+      "final_fence_present": true,
+      "image_bytes": 2920,
+      "image_sha256": "2f1d7a88e91cbecd51b8312101e4a42dfa9f659867014b235727bcd841528d6d",
+      "itcm_bytes": 970,
+      "itcm_remaining_bytes": 64566,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "c0a73fbcbb555415d5a968d3f46422c3211e70f7ee9c6b624ee265d8be39df6b",
+        "firmware-sections.log": "18dd54ac122fab65f5dbab2d13c75c62a4134c1b41fa21eec08dca3dd83b8754",
+        "firmware-symbols.log": "ddc5da3f7104724d32d546b5fba9056ba77a5f116012a5ab96a804c9a40c76d2",
+        "objcopy.log": "75c3b3d010d45690d5d5faa546e57d87b77239fd000071cda1c8b46824ba6316"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-result-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "cf6c63a15cbd107fa2a1f163aab4057d065d0d1d6f0a987ae40672ed6b2fd6ec",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "both-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-both-unroll"
+      ],
+      "configuration": {
+        "experiment": "both-unroll",
+        "optimization": "-O3",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "bd898187e0f46fd3e947c18808cdc3ba6e728168e9deb559e29a1f4dbd72ef75",
+      "elf_bytes": 5876,
+      "elf_sha256": "0ff8fc06d7fc5482bc78091dbcc83ec89779d9c8d36e364df61c35550638120e",
+      "final_fence_present": true,
+      "image_bytes": 2920,
+      "image_sha256": "2f1d7a88e91cbecd51b8312101e4a42dfa9f659867014b235727bcd841528d6d",
+      "itcm_bytes": 970,
+      "itcm_remaining_bytes": 64566,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "f6c1673bab871ede6ec8ff9e47b7177d1845df54545eb47afe9117b2865f6804",
+        "firmware-sections.log": "5033af925edca68253d56efd12cc59e1ffaf973ba5798c820ed968f0e9a1b71a",
+        "firmware-symbols.log": "2486a9ae141177394ea379a62ee48370cc3010072f4b7282ea2509593f200e4d",
+        "objcopy.log": "37297215cd40b00afcddcfb68fbebd54cab53945b23001aa6fbdf5c8014a23bc"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-both-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "8d2bfb3ce75766220c93f2ecb255a72a37931ebdb5ef74e8306900f61e8b7304",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-no-masks"
+      ],
+      "configuration": {
+        "experiment": "no-masks",
+        "optimization": "-O3",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "04ea5a23f3952d6ad3d11a408932939e4d350b215d53297a6b1c311b25355ef6",
+      "elf_bytes": 5828,
+      "elf_sha256": "6addea2b92aab62207081db2bab623badecf7c3bf8bc9c80ef30a7090afb71ce",
+      "final_fence_present": true,
+      "image_bytes": 2776,
+      "image_sha256": "88c14bb03fafbf8b8939fca5a8cff1a952408ae3b551d30f2b3e1dc1ac74dcfc",
+      "itcm_bytes": 922,
+      "itcm_remaining_bytes": 64614,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "b84a2acf8ad712daded9c7c49a7d704ec4919433e68b77a6ba7fd2655af33d01",
+        "firmware-sections.log": "2c3bb93924b76f7b0318f155a2f18d25a68747ff3ae49947689b79344012641f",
+        "firmware-symbols.log": "5bb2a039d63a39e999b5c22b81b0909a8ffbf1757dbd14ef209c8bb54fadcdc8",
+        "objcopy.log": "512d632f1db7d8977505e3ffb1cc11d685aaee2d2ab49b12d1b14aff1a15d59d"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "49613e0b80e4486b429114bc0aff9e1f31689d39bba75a67b34093fe1e100e2f",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "bias-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-bias-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll-no-masks",
+        "optimization": "-O3",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "a40982c6a1c9be3335052611d3e04da2a4805b22f5e53defb4d64f0cdba49cb0",
+      "elf_bytes": 5828,
+      "elf_sha256": "6addea2b92aab62207081db2bab623badecf7c3bf8bc9c80ef30a7090afb71ce",
+      "final_fence_present": true,
+      "image_bytes": 2776,
+      "image_sha256": "88c14bb03fafbf8b8939fca5a8cff1a952408ae3b551d30f2b3e1dc1ac74dcfc",
+      "itcm_bytes": 922,
+      "itcm_remaining_bytes": 64614,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "3ea8ed78813b12a7d542971797f32afd85a3cfd80f6e0614b57f44188aa564eb",
+        "firmware-sections.log": "be64717a9dc9fecd9ab91149682624ae8807e5218e3afdea763a14dcffb0b1aa",
+        "firmware-symbols.log": "1bc71c1a0f2693e702e33f7d63af27895a730037425533873e96d5eda4843260",
+        "objcopy.log": "7c01ce1574fbe67c2a49bd046724ea514d2bd5efabb73413e824f1c4af5e7f73"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-bias-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "1493cc18d380d1a47f6a2dc0ca0ae40e4865935cb111d9daba03bd7b9b85f1c6",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "result-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-result-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "result-unroll-no-masks",
+        "optimization": "-O3",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "9dd236b61b1ab75158b420cde1f85092b26c59a77bda005745b176d26c8c6068",
+      "elf_bytes": 5828,
+      "elf_sha256": "6addea2b92aab62207081db2bab623badecf7c3bf8bc9c80ef30a7090afb71ce",
+      "final_fence_present": true,
+      "image_bytes": 2776,
+      "image_sha256": "88c14bb03fafbf8b8939fca5a8cff1a952408ae3b551d30f2b3e1dc1ac74dcfc",
+      "itcm_bytes": 922,
+      "itcm_remaining_bytes": 64614,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "9b3383608bfca3a20fe62612a04c186742cf4e315740a91a84c0bcad4b1c9670",
+        "firmware-sections.log": "1a69b2f6975a4d2074a2208e92ebc0b980fd1d706f14896999a831421ed1d87c",
+        "firmware-symbols.log": "deb4d9e52054cfb35b6aa9d2eb7bdb9036fb6f342a50dfe4c0f9f107053cfd3e",
+        "objcopy.log": "21cb17088d57c3039aa82c2db3661f8227fa35693574981ef5052e5546e016c0"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-result-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "035b6d49eaeafad95c16c388c67f45709b7e2dd9fbc5651abfefde054550431e",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "baseline",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-both-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-O3",
+        "schedule": "baseline"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 65440,
+      "dump_sha256": "9d40346c29a251b6d42b2cbf9f7c94322b168499f151b9b3c2670e7bb9c1ec33",
+      "elf_bytes": 5828,
+      "elf_sha256": "6addea2b92aab62207081db2bab623badecf7c3bf8bc9c80ef30a7090afb71ce",
+      "final_fence_present": true,
+      "image_bytes": 2776,
+      "image_sha256": "88c14bb03fafbf8b8939fca5a8cff1a952408ae3b551d30f2b3e1dc1ac74dcfc",
+      "itcm_bytes": 922,
+      "itcm_remaining_bytes": 64614,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "e881b0059ca0cfd07be8fbfebb5ae7135881d63b55fbcbf228492e4ba8f8f2d2",
+        "firmware-sections.log": "2d02172747d6f678116441d31e90bedc7e520c7f78812290fbd38e902b01204f",
+        "firmware-symbols.log": "71687b4169ad852059f5b165224ad3c2133e004282ce6b760aaacf1347718d29",
+        "objcopy.log": "8a9acbc44d8914131bfa324bb39f6ee01c5d48908aa25a29c062e9a2cff002fb"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-baseline-O3-both-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "2efa2c107eb74c55ca8ac1680453f9a57f1b60f23ffeaea0590f937bc64fb0dd",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "none",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-none"
+      ],
+      "configuration": {
+        "experiment": "none",
+        "optimization": "-Os",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63424,
+      "dump_sha256": "a073493f99fd2267bd9ddffe95270703a5a1e20f211b5ea72f2f69ff2531c918",
+      "elf_bytes": 5564,
+      "elf_sha256": "f05fb13aa59105c5901ca85d1ea67721ff1e3e6cfd28864b1f4f2d8e6020df40",
+      "final_fence_present": true,
+      "image_bytes": 1900,
+      "image_sha256": "4b684203b7f323deb62975d9d4378c6ab011b9c4ae9b13fae1cbf55a1aa07bac",
+      "itcm_bytes": 630,
+      "itcm_remaining_bytes": 64906,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "9387074cc2f2144205380bbfce2ed7e4955ff8fa338cac5641bb301a172c15e1",
+        "firmware-sections.log": "9514a74304e8ecc030875a988e8ab602753afa2371918c76a3594d14b175ffd8",
+        "firmware-symbols.log": "732a799e15ebd7e15269702b89e3d219777e13018766fd0619ba3bfdec45c9f8",
+        "objcopy.log": "012086cc89b4382121e93917b9d63a2019340d7c2738366b04eb0e004f01f694"
+      },
+      "main_plus_accel_static_frames_bytes": 48,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-none",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "e5b35888122e888b20ef11ab2b72ea0c53f2e878baf5e8317577e793a5340d4e",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 16,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "bias-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-bias-unroll"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll",
+        "optimization": "-Os",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "0ffa7c64da00d4eefe249133959130e865389199b4f4ee05ed2a905c00fae65d",
+      "elf_bytes": 5736,
+      "elf_sha256": "630c03f2f1d66855a4f871e3e1331a99a25c1ee2ab909c817def926286d10195",
+      "final_fence_present": true,
+      "image_bytes": 2422,
+      "image_sha256": "45537a9cf25eb579b143a83e2a25af459a271a3c5b709b5313ff1ad2a0310c0f",
+      "itcm_bytes": 804,
+      "itcm_remaining_bytes": 64732,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "c0e259f8bdc7e40c5de290d0eca8f72c30e439192675141b4821eda7cd5ca0a4",
+        "firmware-sections.log": "31e845a81f9288d2ca029ab61d99b911ec044f674dff6c09496e87a0c5343c81",
+        "firmware-symbols.log": "55cdb53fb89577b9ba049f8d8ddb708a454e01d6a0f000d8de697332bac74a28",
+        "objcopy.log": "8c465a863b1c8b425b0aa1ce1b4b1af0d6dbc8ba855a469fa53780347a910c49"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-bias-unroll",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "be7c37123247c9c36e4896825179ebe4bf509fa1914659712bbbd4c7b687d20d",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "result-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-result-unroll"
+      ],
+      "configuration": {
+        "experiment": "result-unroll",
+        "optimization": "-Os",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63408,
+      "dump_sha256": "0e13840f288510d51dc09a8eab0a154ebde1eb644c23f65f0c0c50a265b10885",
+      "elf_bytes": 5776,
+      "elf_sha256": "1cfc09ec2a169fb24b7d0ac295df12a3ce5b69d6d675a82e7567ea7b0a61ded6",
+      "final_fence_present": true,
+      "image_bytes": 2536,
+      "image_sha256": "81538dc6712e781f430f6778ca2e94b7a2dcce8439a27fa512a0d6e0f1c328e2",
+      "itcm_bytes": 842,
+      "itcm_remaining_bytes": 64694,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "52629fcf90bc6db3b9fe38551ccc04394218537e91c6d0854d00a1f622bb729d",
+        "firmware-sections.log": "22113b851a09410668995dee1cb35d3b6031ff8dcc2547f473cc79b4c2c8e998",
+        "firmware-symbols.log": "ec05b0cf5dd6103045dc940e5772cb286b00af3331115431ee6b88128a75c686",
+        "objcopy.log": "9689970aa77097c6cb66c2cc368b94270bd602b901e643325a97cceb9dad8e22"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-result-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "73dce78774b24e115e17f3dce55d426005dc9cefba7ddf9a29f3b713fa1ad978",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "both-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-both-unroll"
+      ],
+      "configuration": {
+        "experiment": "both-unroll",
+        "optimization": "-Os",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63408,
+      "dump_sha256": "e834f184badfd43df82142d16b8c17fae45809d17dca8488bd6b179918b64b76",
+      "elf_bytes": 5904,
+      "elf_sha256": "61ce4045d80933bff32d312714e8f9b96af51ea06632dab7d4725edd3e59789e",
+      "final_fence_present": true,
+      "image_bytes": 2926,
+      "image_sha256": "984cc31facf4427bb26797d5f9f11b1da7a8ec96542f0491eb3c59bae17a6506",
+      "itcm_bytes": 972,
+      "itcm_remaining_bytes": 64564,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "b1cc126c40e375cf1620bedcce312b8aff8c45caf8f66c63416ab7c8e8561d67",
+        "firmware-sections.log": "15df27fd285bc5ab420d365334c80adb691efe2e9e9e55bc9a0c261d92753839",
+        "firmware-symbols.log": "0a5fb4ae6a4604c625c51dd0bb50986cf8a36b26d2affe55af6a1f05ab85b465",
+        "objcopy.log": "da78feeec061d2dcf698009785a17c6ab7e47d4c7ad0a6d861f23636344fa986"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-both-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "bb041f4f2eec726164f2f7ab9a1e62d015c608dce4c3bc24c9257f2244cd696f",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-no-masks"
+      ],
+      "configuration": {
+        "experiment": "no-masks",
+        "optimization": "-Os",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63424,
+      "dump_sha256": "497fd40b23bcdbfbecd99c6a489b3d5758e67fc8c386fcdd99f613bbbcb25d63",
+      "elf_bytes": 5540,
+      "elf_sha256": "a4082dae23352371692ffb40fc98d15ef2d0800af813ffc39fb003d7496af2a1",
+      "final_fence_present": true,
+      "image_bytes": 1834,
+      "image_sha256": "386352591663f7d30d6f33c2713db45d6a3099b353cdd1d874c41534d8b0f528",
+      "itcm_bytes": 608,
+      "itcm_remaining_bytes": 64928,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "b3190b6c8b4ba8de9da40b308180b1fee56aa0411a322b7804c793c89422e027",
+        "firmware-sections.log": "219292122215e6a1c9e5189532dc63a9321cb39bdcf4f900b318b698caa10e5b",
+        "firmware-symbols.log": "9a7b859a888ed528a171f5337c400ef0e8d676d61f8c32d67f98aeb9e37086a9",
+        "objcopy.log": "6a86ab27d84027005ae07af7b300f69bd21a5e4e1f26106245358c88788601cf"
+      },
+      "main_plus_accel_static_frames_bytes": 48,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-no-masks",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "535cd9246a8a90ee8cb8e9bdff4e419b11b68ffca81d1de3c15703b80d4af425",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 16,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "bias-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-bias-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll-no-masks",
+        "optimization": "-Os",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63408,
+      "dump_sha256": "776cb439a221affd0f15c99c869299114b337b593a605aed1915eae057811c5c",
+      "elf_bytes": 5716,
+      "elf_sha256": "44f2958d629e10e0ab1534522846399ae24508d7980ba5f366433600ac1907e6",
+      "final_fence_present": true,
+      "image_bytes": 2356,
+      "image_sha256": "293f543e0eb96450b39f88f336865375fd24eed3a15642bf74b53532b6884d38",
+      "itcm_bytes": 782,
+      "itcm_remaining_bytes": 64754,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "9b49d0fd413858f780612d8c6a0d8418180e07466aa679b5c45d3ba26b8b2a5e",
+        "firmware-sections.log": "72dcd80972a3f49ff43eb20bd7ef12ced60d9f42f46fdf0d7b4595227ff2dbe0",
+        "firmware-symbols.log": "f174a835ec75a8511c5225d80cb93f2e66ee90e18b9fd0a48dc994e71a8ee208",
+        "objcopy.log": "357fab55bbe55c6deefc3b4c941ca350f3bcf53544f057a845ee6a61203d09ca"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-bias-unroll-no-masks",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "dfc1c57001d40599181fed883c1cb9aaafdef42b253ff597435e559800012e95",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "result-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-result-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "result-unroll-no-masks",
+        "optimization": "-Os",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63408,
+      "dump_sha256": "67f6b3610863886dca391afa348c3539be99101367556f91e744f73ef510b902",
+      "elf_bytes": 5748,
+      "elf_sha256": "37b9d76eec636d7b02c99c35af89de76ace20aa8817d09df153982af6d3c0cdd",
+      "final_fence_present": true,
+      "image_bytes": 2458,
+      "image_sha256": "c355dea5d0fe0c7e892050e1c65ed7bb261da29d51193e8d526f16ae63697965",
+      "itcm_bytes": 816,
+      "itcm_remaining_bytes": 64720,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "ab1e5b5d49432fff56c62c693c69bba4d639cebe1aa022573fb8b6ae14a8c1d5",
+        "firmware-sections.log": "d8cd8c6a9cef03745d571528382e015fffbe561de78a2a92fad9ca807723d8b8",
+        "firmware-symbols.log": "5fe93f63278dcc735cc906a73bc0bcd43af977f55dd7d616996a3c4699b007f4",
+        "objcopy.log": "8ba3414cece73b528f83993bcf4e6a78ca8a91cb7ebb859482aad520d1f9f85e"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-result-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "c5baa34649c0ed98ae3d04cc0a16129934a0a2406988a5ad6bc3f88a0080b3dd",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-Os",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-both-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-Os",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63408,
+      "dump_sha256": "50ea41d5b3133021d0a1e6479cc901a753c02baf7eb12f50bad0ebf4de2cf11e",
+      "elf_bytes": 5876,
+      "elf_sha256": "773d49bf6a8f8f3d90ae697077a898642f7f89a5c72b36039f8a5293def21f8c",
+      "final_fence_present": true,
+      "image_bytes": 2842,
+      "image_sha256": "01ff317cd2844a49be0f454332bec15193afafb860eef55483dba9f55971928b",
+      "itcm_bytes": 944,
+      "itcm_remaining_bytes": 64592,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "386aaaa4caa6bdc98430d6a220f82e831bdf96b29f21b0204566d46d1681cbff",
+        "firmware-sections.log": "6f8fc2273608f65e8c7fb140dec039b297b2fc24f151db9ac3b01917ceffb49e",
+        "firmware-symbols.log": "2ff22e9c21794eddd9294b1ce34cc0209e50854caeedbc2a39976527518baab1",
+        "objcopy.log": "0a1873c397b9624fa04d33d1e1a667907076d5bb19110229d6a75c98ba008ab6"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-Os-both-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "914d7236c4b6fc4e0523557977679a9187358e239b3663872a57ae071fc3cd4b",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "none",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-none"
+      ],
+      "configuration": {
+        "experiment": "none",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63408,
+      "dump_sha256": "7807f193520033474324f342e4f49f74f75cade9284f669ef5118dd84242fa69",
+      "elf_bytes": 5572,
+      "elf_sha256": "9cc7e2ccc020465a8b28094a45fc5d715272a1b7889f046801e123155887f07d",
+      "final_fence_present": true,
+      "image_bytes": 1924,
+      "image_sha256": "89ecf6473887e4f99aece841999001ea962a24cdfde86d5ef2624fd42fdf9495",
+      "itcm_bytes": 638,
+      "itcm_remaining_bytes": 64898,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "b5719950b0d260149873f7dae4311c2ca70dcf888523b795444db5b1d76a620c",
+        "firmware-sections.log": "e1a5a02ef33186eb2c8970d3948111e151178e4cea9c573e3ca56991a1168e82",
+        "firmware-symbols.log": "a5f63a1cf89583f4285a0714b97f0de8a5679b9cc30b4a54c20cd67911b835fd",
+        "objcopy.log": "61e309ba2d1352c6180391fcc9d9e628ecf8407289b37862f4526f5278b7cbdb"
+      },
+      "main_plus_accel_static_frames_bytes": 64,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-none",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "6c4e85544327ab096157e8e4b600197cae6a4275bf372868d97ac3337e76cc86",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 32,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "bias-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-bias-unroll"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "92bb3fa39162a23b2c03c0104c781bc550477f77ebf23fb072ee6ad54599aaf9",
+      "elf_bytes": 5748,
+      "elf_sha256": "a6ea8e96bd94023facc604fba1033bb4d51ebadade81fae40bbc09adfe46c6db",
+      "final_fence_present": true,
+      "image_bytes": 2458,
+      "image_sha256": "59253967c802959421485f56a25150648d5d9f220973a6a5cc45dca845bdf1a1",
+      "itcm_bytes": 816,
+      "itcm_remaining_bytes": 64720,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "8cb11f581bef89baae2ca3e33600acb84d04cc10222709e2825d7c49bf765f42",
+        "firmware-sections.log": "2b5e9eae7f8fe3cd0d3f8d0ca1e6a793bca370f8ee0eaeaed51ff95fca203304",
+        "firmware-symbols.log": "139e5fb0410ab29803240f40704b619203b81e6ca9a118af0d02c00aa061b373",
+        "objcopy.log": "449a3daeca5f74b73666ee7bdfb9f3f5cb881e69bf1c8e63b82ec7eb740e5157"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-bias-unroll",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "d0d9103cd4eba677d370e346167bf1a501f64af5bd320649b114cbd922f07685",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "result-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-result-unroll"
+      ],
+      "configuration": {
+        "experiment": "result-unroll",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "7439e819b1fb3e8b660b050c8bd2ffbc9beafe0406b2793991aad7a35bd96b6f",
+      "elf_bytes": 5732,
+      "elf_sha256": "1b60b69d9a2529aafcf8467856b82169e3dfa90180a8d700180921e0d19ad4ca",
+      "final_fence_present": true,
+      "image_bytes": 2404,
+      "image_sha256": "03412673afebf16e8473e997289b417bfe2cccc3b6d0ffad2b269016aecc79f6",
+      "itcm_bytes": 798,
+      "itcm_remaining_bytes": 64738,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "781ca70511a2b24a5fda9264b6c76c108aa2c4b2b10f07c53edb0ee2d7791230",
+        "firmware-sections.log": "4862348ae38d4556015c913fee5ee61d3991a8ff1d04903cf3969b30e7b5c07a",
+        "firmware-symbols.log": "c8dc68e88f354b923351be4cf98eabd73b234f76529f5491a8391f67cc2235f1",
+        "objcopy.log": "98f9a97ada24dad259ed542abae99847cf854a956a5d6de1bbae231b73a850cb"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-result-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "b1e277c0af0f08bc94de5fa1753ecd5dcbeb4a8786d046f768cae3e96975f797",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-both-unroll"
+      ],
+      "configuration": {
+        "experiment": "both-unroll",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "b4d38cfefd38b4f5fd31b094395be1a6ba67b8b6687cc2e4016b2201d129137d",
+      "elf_bytes": 5912,
+      "elf_sha256": "b470006506da4e3d8aa03326d998ea4c5d5a726b99fb6dd595af5e7941d4c0d9",
+      "final_fence_present": true,
+      "image_bytes": 2944,
+      "image_sha256": "d9839518b92d1e47ae0780d1fa7cdacd0a32e41bff9eb84dbdc86ab91d060a87",
+      "itcm_bytes": 978,
+      "itcm_remaining_bytes": 64558,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "563b29aad8107d7133048c60d6645d2ecbe3a5d191010de47a5d662541ad4519",
+        "firmware-sections.log": "f8a7e58e453cc8d177ae21bd79b310aedd58ccd1e2f2b3fcf9aa10bace9875f5",
+        "firmware-symbols.log": "df3e4ecf92a5980e930bba5c80c140223540d79dadade3b3449a4172f8eb7904",
+        "objcopy.log": "5971972d61f2bc4f3eab2df5c33a465238b443147bd20d667723ccb8fd9fb84b"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-both-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "99253f9695082424b77482ac8067cf7f0457eeae32725b48e9f7770910921005",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-no-masks"
+      ],
+      "configuration": {
+        "experiment": "no-masks",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63424,
+      "dump_sha256": "92439530ae0ac97e8ec07459957a4e39433d948ab3c702b7c8da78c83d0f09e8",
+      "elf_bytes": 5556,
+      "elf_sha256": "215a2c681384172ead6fb9f2dfb5a53b86847546ae66de6648eca9a4a1adb434",
+      "final_fence_present": true,
+      "image_bytes": 1876,
+      "image_sha256": "c2ac3314f25f3b242775f27389ed722bf70ee2fe451fd6781e9875450c5820eb",
+      "itcm_bytes": 622,
+      "itcm_remaining_bytes": 64914,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "acc49c41e7787150d7423527db24811201226df704a39986feb6c3c921fde311",
+        "firmware-sections.log": "9eb416c612e1bcf8eef7131ee03dc681ef565506b80f57697603617405759d20",
+        "firmware-symbols.log": "410366b0a667af6fe36f608be9e72ec9e04b9a88501c3f5140a48d78adb6e774",
+        "objcopy.log": "05fc41f7f873373a65656fac7d16eb1e541db06f4d9921f692c0eebf9b3c0eff"
+      },
+      "main_plus_accel_static_frames_bytes": 48,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-no-masks",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "5f43670e34a64f2a9f03a52e43b7f0314f23858087896a0052353402c039ca52",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 16,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "bias-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-bias-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "2226c61abc7941a7c020bf92518730c380a815acf76fe1cef56f728831281fe5",
+      "elf_bytes": 5732,
+      "elf_sha256": "d061404697880fd08f34c8efedfdcc2bc4d6a8499bb69d548f008d64fa608d88",
+      "final_fence_present": true,
+      "image_bytes": 2404,
+      "image_sha256": "32ad71ff65e6235e142c750276afce4ab191609b29281d5ccc365e9621c9de3e",
+      "itcm_bytes": 798,
+      "itcm_remaining_bytes": 64738,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "6be5f05f08a1c69400aa310117db0e8a85e7436be530009eb7f402fbf3e5feee",
+        "firmware-sections.log": "10c983f256a84a9f4bacb310a1b68f4969846f21912e86a95794a0cf6b6cbe64",
+        "firmware-symbols.log": "52891c986a73c96cc4d8635931ce34ce8704fde6a2724c072d832bbbe9785fe1",
+        "objcopy.log": "fd3935b653b50f4a897c8cbae2c732695c361df81b864194c86a90799c7b28be"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-bias-unroll-no-masks",
+      "result_hi_sign_extension_sites": 1,
+      "result_sha256": "74c2e6b1b802d81d0e5cbbbd08673e2cc2c2a9c0303c84ddfcaca681bee78a2c",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "result-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-result-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "result-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "c4c8daf3527ba6e220247bcd71f84cbc823b9fad55503ba21f8aaa16397fbc4d",
+      "elf_bytes": 5716,
+      "elf_sha256": "fc2aeb46ebb55e4457c7863d83b4599894b58cc6fdaf4c6d1b2620b3abbd275a",
+      "final_fence_present": true,
+      "image_bytes": 2356,
+      "image_sha256": "7bb5965ee9afdf79629d7090af9123488fdc4414da052f4ead7ad4df9092e1f0",
+      "itcm_bytes": 782,
+      "itcm_remaining_bytes": 64754,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "c9892bed304bb2845e26b3ca5c02f3d2dacdba01cb6e2af737008dba2c525977",
+        "firmware-sections.log": "37f3819f5cdbfe48a6b1cb8e5aca63139ac39af92352f1c81160ce500ceba3a7",
+        "firmware-symbols.log": "af0d108bab4bb5c7ddd0dca68f9ce8e1f455acedab0e58dffd30b1341d56d986",
+        "objcopy.log": "610c0db4b6984df0b37881fc17b2dbfdab27db6a1fe8d903b549031b33ec573c"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-result-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "68642043983164485ceadbbe372407ffc12b6e419fbb1e170b4be24633953ece",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-both-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "f365a725783a58535a3e4677142baaeaf52fcd233626eb09ebfbd56574b86cd6",
+      "elf_bytes": 5896,
+      "elf_sha256": "c66d554422a394c6c1dc3fd08808f102e0101d8e9d6f496a64e03f59fa8932ad",
+      "final_fence_present": true,
+      "image_bytes": 2896,
+      "image_sha256": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+      "itcm_bytes": 962,
+      "itcm_remaining_bytes": 64574,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "06006e319e8e371c9f777a72867aff0dc5b0301626686af2a197f1f068fc1296",
+        "firmware-sections.log": "eed46c421c077033476e239b5640a1f6b1af2e0bce35afcf38abbcd6b5dd88f9",
+        "firmware-symbols.log": "2b15db42a933067740be7f61e64b97827522f21b0f25f591d0e53645eca63d0a",
+        "objcopy.log": "289191686021a0d6cb61fb2da395addae344618c5af0597398e0c3c76defd664"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O2-both-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "7b4cbf7921bbd5272d1d1b7bc7ba16ba6e54fd1fcf9bed74341d0da06c3b9f56",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "none",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-none"
+      ],
+      "configuration": {
+        "experiment": "none",
+        "optimization": "-O3",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "e2641cdd0d2815e3f15887a0469f57dc357821bf1cb79a643089802ba99fd341",
+      "elf_bytes": 5912,
+      "elf_sha256": "b470006506da4e3d8aa03326d998ea4c5d5a726b99fb6dd595af5e7941d4c0d9",
+      "final_fence_present": true,
+      "image_bytes": 2944,
+      "image_sha256": "d9839518b92d1e47ae0780d1fa7cdacd0a32e41bff9eb84dbdc86ab91d060a87",
+      "itcm_bytes": 978,
+      "itcm_remaining_bytes": 64558,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "fd08d42dcdc0e48604b68e38bcf475c36e202d0cfe4d08f6f1048dcb53c9537b",
+        "firmware-sections.log": "31251fbdf12496ca4579546eac8590a508bc0edc476f748756c16a42388c9d46",
+        "firmware-symbols.log": "0d46aa2b7bd10e806ea29d9cb5b6e8b7716f815a49d6edab45eeefab40ea2964",
+        "objcopy.log": "3b7a5a64aabe77fc68de32d8e6bca49a69f72e5f8a991f3ea752c75f16f2dddd"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-none",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "2f56d81783f493e0195b2d631b09c4acb49343a996cc6c8d83784e467db4042b",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "bias-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-bias-unroll"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll",
+        "optimization": "-O3",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "f66428a8c4a438589d091464a8429be93723a23468573c20b7e8fc666682d50b",
+      "elf_bytes": 5912,
+      "elf_sha256": "b470006506da4e3d8aa03326d998ea4c5d5a726b99fb6dd595af5e7941d4c0d9",
+      "final_fence_present": true,
+      "image_bytes": 2944,
+      "image_sha256": "d9839518b92d1e47ae0780d1fa7cdacd0a32e41bff9eb84dbdc86ab91d060a87",
+      "itcm_bytes": 978,
+      "itcm_remaining_bytes": 64558,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "3d26af06990f461aa03d00854cea16ba1f151b28c35a71fe1f0667117d586c12",
+        "firmware-sections.log": "7d94ffbcbcf83fd56cfa2aa28799dcfbd1d268d93dc70620cc6f409c7a731736",
+        "firmware-symbols.log": "da6d532a44a853e05a6975762be021cff19a8a8e26329640811ee31b038b06ca",
+        "objcopy.log": "deb13d1a809f62dab392f934cb1a99adf3469863e7eeb6934d67f99fed84956d"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-bias-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "0b89c18ce273fe451f5d3056852b7147b75f63311f9472db27eaa20a7dfc90d3",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "result-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-result-unroll"
+      ],
+      "configuration": {
+        "experiment": "result-unroll",
+        "optimization": "-O3",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "b8dc382f240ef0ace2984bec438e84bc80a0972ee9398c2677986f2ee0237861",
+      "elf_bytes": 5912,
+      "elf_sha256": "b470006506da4e3d8aa03326d998ea4c5d5a726b99fb6dd595af5e7941d4c0d9",
+      "final_fence_present": true,
+      "image_bytes": 2944,
+      "image_sha256": "d9839518b92d1e47ae0780d1fa7cdacd0a32e41bff9eb84dbdc86ab91d060a87",
+      "itcm_bytes": 978,
+      "itcm_remaining_bytes": 64558,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "c9ec22f338a330bf9e37356064b4b7ebecd28bcf913fcd209430e5c2553974ac",
+        "firmware-sections.log": "647c32b261a22b500da0ae848c978e3e00ee84982a5baf7ef83e9b45d0b6c9a6",
+        "firmware-symbols.log": "9663c53ce8e7b9bb92b20379cb82ec59a350d933e8dc2b6e0c12a9405b6c978a",
+        "objcopy.log": "87f5f3629d3b06677021d3a4980eb44c4a4825c2327c0d0151dce92165841761"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-result-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "83462bf597a83f433409824f648a8b595ccea947e86b53763092a2ec27f4b9e2",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "both-unroll",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-both-unroll"
+      ],
+      "configuration": {
+        "experiment": "both-unroll",
+        "optimization": "-O3",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "b18f9e1c08cf14339d8d8d24606ee03ea663cc83bed6458955c463e3d5437108",
+      "elf_bytes": 5912,
+      "elf_sha256": "b470006506da4e3d8aa03326d998ea4c5d5a726b99fb6dd595af5e7941d4c0d9",
+      "final_fence_present": true,
+      "image_bytes": 2944,
+      "image_sha256": "d9839518b92d1e47ae0780d1fa7cdacd0a32e41bff9eb84dbdc86ab91d060a87",
+      "itcm_bytes": 978,
+      "itcm_remaining_bytes": 64558,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "fde4a2a6f8808fb99a0ab58c934e762db07c8c8bd65dc7075a687b2886a2bfbf",
+        "firmware-sections.log": "aedf9a46570933417fcab8bbf4f8a3ea7e3600c2a10dde3b8f656b0a9fb6e744",
+        "firmware-symbols.log": "f63d724c2edec2ec1b763fcc2915dc45168b503015c3b3edccfa23d9ecb3477c",
+        "objcopy.log": "1bc6c70318e2f2061b07ce625c0f5446c3346151cf00bbd8d9f2c88b392853e5"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-both-unroll",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "b57ba2ef45a3e688955170d77a82f1cfbd26a8d387eba09ab77221a5143715cd",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-no-masks"
+      ],
+      "configuration": {
+        "experiment": "no-masks",
+        "optimization": "-O3",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "805ff2278de81b1ae1d9307d6f10a4ed15fddf961baad8833c729e90489ff675",
+      "elf_bytes": 5896,
+      "elf_sha256": "c66d554422a394c6c1dc3fd08808f102e0101d8e9d6f496a64e03f59fa8932ad",
+      "final_fence_present": true,
+      "image_bytes": 2896,
+      "image_sha256": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+      "itcm_bytes": 962,
+      "itcm_remaining_bytes": 64574,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "2d7d08a20fe7f6c4e8da7d5a8b8a47b24719dc1c136321d449b694a8f6f05c15",
+        "firmware-sections.log": "7d202fc9d1fb6b983a7043cb6fc826a2e05be8659f38b5a9ba4aa5f3251d418b",
+        "firmware-symbols.log": "8500c786bd0b607edf9cb28a0d59c282289ec0e040e796f46b81231371f9981b",
+        "objcopy.log": "f008eb08f778243bf949c2d42f80aa1e1f5a36ed488a84ff9fb40d5a67fc7caa"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "c07e6d86107424e060050b855c16a0a27f9378dbb7584ac44fbf4e5a3627cd4c",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "bias-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-bias-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "bias-unroll-no-masks",
+        "optimization": "-O3",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "3bde770cd983dc80825c51ddc7fdbb4a625a6cb043669f57fdb0f6f85409f53a",
+      "elf_bytes": 5896,
+      "elf_sha256": "c66d554422a394c6c1dc3fd08808f102e0101d8e9d6f496a64e03f59fa8932ad",
+      "final_fence_present": true,
+      "image_bytes": 2896,
+      "image_sha256": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+      "itcm_bytes": 962,
+      "itcm_remaining_bytes": 64574,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "3eb0d7e97263489b0a5f71944052c52313e330300f2617461b18f0df868fbf9f",
+        "firmware-sections.log": "1614c6ff6b59639422fb513c496c142393dea41bfdd4096268caf5d5b4f2f904",
+        "firmware-symbols.log": "7ea4aca41414956ffe7b5d08df9e1d6521dd0a746fe785460afc633c8c9f06d8",
+        "objcopy.log": "51ffe284a94f91cb104d1237d370c5ecfaee17f212d553b434925870ea1439d1"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-bias-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "52b5847295388ba04e82b610078bd73ca0eabbce51e0ca731a1ac0e2f085aea8",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "result-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-result-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "result-unroll-no-masks",
+        "optimization": "-O3",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "10aeb201efe68e33432811276750c1fb6dda34ab6ebcc80028e329ead9e73a93",
+      "elf_bytes": 5896,
+      "elf_sha256": "c66d554422a394c6c1dc3fd08808f102e0101d8e9d6f496a64e03f59fa8932ad",
+      "final_fence_present": true,
+      "image_bytes": 2896,
+      "image_sha256": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+      "itcm_bytes": 962,
+      "itcm_remaining_bytes": 64574,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "a1cdd8d7a526e25775df6c8373a200c4f9a5f89120c4b3bd4e722a185d5290fc",
+        "firmware-sections.log": "bc6874aaad45ccd58a8ff1aaf784c90796a854c97376e4b5c0be6e92b5830843",
+        "firmware-symbols.log": "b8ba4e550b44e6f9b71df210fb12fad3ad0d6e4fbd9452f1f723b7e8d67f7cef",
+        "objcopy.log": "cb3511d1e17704a608a6eedca6480ce04344035278f2de2822dac82488fffbbb"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-result-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "ee6bc7625df794f43adc1ee597237c386d9e2a810dfe5fa31461bf02e21caffb",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "bss_bytes": 2048,
+      "command": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/tmp/chipcontest-riscv-tools/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O3",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-both-unroll-no-masks"
+      ],
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-O3",
+        "schedule": "bias-dtcm"
+      },
+      "data_bytes": 0,
+      "dtcm_remaining_after_bss_guard_and_static_call_chain_bytes": 63392,
+      "dump_sha256": "bbf3430e9efccf77e0a4bb04a305e57668906f498c8a96a84b7d8fba9d4c19b4",
+      "elf_bytes": 5896,
+      "elf_sha256": "c66d554422a394c6c1dc3fd08808f102e0101d8e9d6f496a64e03f59fa8932ad",
+      "final_fence_present": true,
+      "image_bytes": 2896,
+      "image_sha256": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+      "itcm_bytes": 962,
+      "itcm_remaining_bytes": 64574,
+      "log_sha256": {
+        "_tmp_chipcontest-riscv-tools_sifive-rv32-c_bin_riscv64-unknown-elf-gcc-version.log": "f91b84d54aa90adeb4f92ef9ec63fb9a3b60b7a893c0bdbf11f62a91ef67dc9a",
+        "firmware-build.log": "371f6b6d3067ce5bb49cc32c2ae2f0880ba305674a8d6dea69b0eee143f2a4b4",
+        "firmware-sections.log": "5fe0cf50cbf2a4158dee99d25daeebedb1065c4bd7bdcf4c75c50cd0b5a722a5",
+        "firmware-symbols.log": "1770068d2a46056d0b0bc803ef4b216f0579060fb45b25cd129afe0152117736",
+        "objcopy.log": "fb0d9c8d632d5327d159843189451a628697b7275cdc7360a082a228b2cae88d"
+      },
+      "main_plus_accel_static_frames_bytes": 80,
+      "output": "/home/mxhanks/Projects/ChipContest-xu-optimize-fw/build/xu-opt-local/review-doctor-bias-dtcm-O3-both-unroll-no-masks",
+      "result_hi_sign_extension_sites": 8,
+      "result_sha256": "6bbb58b072989a9b87929756b894f81f9d1f94e32fc5763a90402daaabe17d90",
+      "source_sha256": {
+        "accel.c": "e2c0af0f9c321b72715b0b393b7a194941fb5f70bf6979007f3f1153c0cd5ad9",
+        "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+        "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+        "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+        "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+      },
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "status": "PASS"
+    }
+  ],
+  "created_utc": "2026-11-02T03:08:05.161202+00:00",
+  "historical_baseline_image_sha256": "4932e8d8f62cdd2732d894abc4c7008809283fe3de29445de90ec764cd12f32e",
+  "schema": "xu-firmware-compile-matrix-v1",
+  "scope": "compiler and static memory audit only; no simulation or make install; static main-to-accel_linear call chain, runtime high-water mark not measured",
+  "source_commit": "8a7640787423a73a0751454de47893406f85e604",
+  "status": "PASS"
+}

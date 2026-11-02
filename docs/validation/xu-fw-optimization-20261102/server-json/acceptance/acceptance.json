@@ -1,0 +1,183 @@
+{
+  "status": "PASS",
+  "started_utc": "2026-11-02T04:27:41.140906+00:00",
+  "scope": "VCS four-state development platform acceptance; Icarus and Chisel not run; official platform/SRAM/PPA/600-sample accuracy still required",
+  "profile": "vcs-platform",
+  "not_run": [
+    "icarus1",
+    "chisel"
+  ],
+  "steps": [
+    {
+      "name": "host",
+      "command": [
+        "/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "numeric",
+      "command": [
+        "/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/numeric",
+        "-v"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "vectors",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tools/scripts/e203_soc.py",
+        "--mode",
+        "check-vectors",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/xu-vcs-campaign-01/acceptance/vectors",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "doctor",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/xu-vcs-campaign-01/acceptance/doctor",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "baseline",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tools/scripts/e203_soc.py",
+        "--mode",
+        "baseline",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/xu-vcs-campaign-01/acceptance/baseline",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic1",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/xu-vcs-campaign-01/acceptance/synthetic1",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic2",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "2",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/xu-vcs-campaign-01/acceptance/synthetic2",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "real12",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/ChipContest/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-fw-optimization-20261102/xu-vcs-campaign-01/acceptance/real12",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "firmware_configuration": {
+    "schedule": "bias-dtcm",
+    "optimization": "-O2",
+    "experiment": "both-unroll-no-masks"
+  },
+  "finished_utc": "2026-11-02T04:37:35.060597+00:00"
+}
