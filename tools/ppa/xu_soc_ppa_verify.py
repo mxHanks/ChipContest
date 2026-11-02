@@ -314,11 +314,11 @@ def main():
             report['vendor_model'] = dict(path=str(args.vendor_model), sha256=sha(args.vendor_model),
                                          selection='ARM_UD_MODEL fast functional; no timing checks')
         report['e203_commit'] = soc.verify_submodule(ROOT, ROOT / 'third-party/e203_hbirdv2')
-        report['main_commit'] = subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip()
+        report['main_commit'] = subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, universal_newlines=True).strip()
         report['tool_versions'] = {}
         for tool in [args.sim, args.cross_prefix+'gcc']:
             flag = '-ID' if tool == 'vcs' else '-V' if tool == 'iverilog' else '--version'
-            report['tool_versions'][tool] = soc.run([tool,flag], args.out, args.out/(tool+'-version.log')).splitlines()[:5]
+            report['tool_versions'][tool] = soc.run([tool,flag], args.out, args.out/(Path(tool).name+'-version.log')).splitlines()[:5]
         vectors = args.vectors.resolve() if args.vectors else args.out / 'vectors'
         if args.vectors is None:
             report['fixture'] = soc.load_fixture(vectors, args.tasks)
