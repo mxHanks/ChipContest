@@ -97,6 +97,33 @@ def check_log(log, tasks):
     return [dict(layer=int(a), cycles=int(b), firmware_cycles=int(c)) for a,b,c in found]
 
 
+def check_performance(log, layers):
+    """Require complete observer records in addition to numerical completion."""
+    fields = ['layer', 'cycles', 'w_load', 'x_load', 'bias_load', 'compute_wait',
+              'writeback', 'other', 'busy', 'mac_fire', 'mmio_reads', 'mmio_writes',
+              'shared_reads', 'shared_writes', 'shared_stall', 'mmio_stall', 'starts', 'dones']
+    pattern = r'^PERF_TASK ' + ' '.join(name + r'=(\d+)' for name in fields) + r'$'
+    found = re.findall(pattern, log, re.M)
+    if len(found) != len(layers) or len(found) != len(re.findall(r'^PERF_TASK\b', log, re.M)):
+        raise ValueError('missing or malformed performance records')
+    records = [dict(zip(fields, map(int, row))) for row in found]
+    for row, layer in zip(records, layers):
+        if row['layer'] != layer['layer'] or row['cycles'] != layer['cycles']:
+            raise ValueError('performance window or layer differs from task completion')
+        phases = ['w_load', 'x_load', 'bias_load', 'compute_wait', 'writeback', 'other']
+        if row['cycles'] <= 0 or sum(row[name] for name in phases) != row['cycles']:
+            raise ValueError('performance phases do not cover the task window')
+        if not row['mac_fire'] <= row['busy'] <= row['cycles']:
+            raise ValueError('invalid MAC/busy activity')
+        if (row['mac_fire'] != 99 * 32 * 64 or row['starts'] != 99 * 32 or
+                row['dones'] != 99 * 32 or row['shared_reads'] != 16384 + 6336 + 99 * 512 or
+                row['shared_writes'] != 50688):
+            raise ValueError('performance work counters differ from the firmware task')
+        if any(row[name] > row['cycles'] for name in fields[2:]):
+            raise ValueError('performance counter exceeds measured window')
+    return [{k: v for k, v in row.items() if k not in ['layer', 'cycles']} for row in records]
+
+
 def build_key(report, sim, waves):
     identity=[report['source_sha256'],report['versions'],report['runner_sha256'],
               report.get('tools',{}),sim,waves]
@@ -326,6 +353,8 @@ def main():
                         f'+TASKS={args.tasks}',f'+DUMPWAVE={int(args.waves)}',
                         f'+MAX_CYCLES={args.max_cycles}'],out,out/'simulation.log',7200)
                 report['layers']=check_log(log,args.tasks)
+                for layer, counters in zip(report['layers'], check_performance(log, report['layers'])):
+                    layer['performance'] = counters
                 report['outputs']=args.tasks*25344
                 report['write_words']=args.tasks*50688
             report['status']='PASS'

@@ -8,6 +8,8 @@
 
 2026-11-01 已在该服务器完成 VCS 一键验收：host 19/19、numeric 34/34、独立12层整数核算、原 SoC 5/5、synthetic1 和 real12 均通过。real12 检查 304128 个结果、608256 次写字；篡改参考值与超时两个实际 VCS 负例也通过。完整范围与复现位置见 [本轮验证记录](validation/platform-vcs-20261101/README.md)。原版 `--full`、Chisel、浮点 validation 和正式 SRAM/PPA 不包含在此 PASS 内。
 
+性能旁路计数、阶段口径和目标频率换算见 [xu 性能测量方法](xu-performance-method.md)。新增观察不改变 RTL、固件或共享存储激励；运行器在数值完成之外校验阶段求和、MAC 活动和事务计数。首次性能数据见 [2026-11-02 性能记录](validation/xu-performance-20261102/README.md)。
+
 在已恢复的工程中运行：
 
 ```bash
