@@ -1,0 +1,28 @@
+{
+  "schema": "xu-full-soc-rtl-compare-v1",
+  "status": "FAIL",
+  "tasks": 1,
+  "simulator": "vcs",
+  "runner_sha256": "3e08ac04f7b48bc8fa01dc80c235ce55fce2e1b4bd27e467a7edfa623f373bdc",
+  "clock_mode": "reference4ns",
+  "hf_nominal_period_ns": 4,
+  "timeprecision_seconds": 1e-11,
+  "helper_sha256": {
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest/tools/scripts/e203_soc.py": "573d0d1830069cf99ea73bcf2553b175bc77f6f5ecbe7595036453a193970e2b",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest/tools/scripts/xu_firmware_contract.py": "a0602663237aec93e52f1ea38ff7982ceb21f603f334899cbc48fd6a51c30b96"
+  },
+  "original_tb_sha256": "bba0248513ca2dfe67be907306417bf6eb2c34d45603a7c55a33b5a062d2fc44",
+  "limitations": [
+    "RTL functional comparison; not gate-level equivalence, STA or power qualification",
+    "Verilator is two-state; use VCS/Icarus for four-state evidence",
+    "reference4ns preserves old 4ns/120ns TB; nominal150 is a separate clock configuration",
+    "shared_fixture preload marker does not prove physical accelerator cache clearing"
+  ],
+  "vendor_model": {
+    "path": "/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP1024X16/verilog/RAMSP1024X16.v",
+    "sha256": "81b55d87d5e6821d44037d6f0290ec89c9edb9582eb1932957f181aefc300d51",
+    "selection": "ARM_UD_MODEL fast functional; no timing checks"
+  },
+  "e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+  "error": "__init__() got an unexpected keyword argument 'text'"
+}

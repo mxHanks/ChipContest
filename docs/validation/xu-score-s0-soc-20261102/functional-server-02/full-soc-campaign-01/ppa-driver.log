@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/s0e.py", line 45, in <module>
+    run([sys.executable,str(R/'tools/scripts/xu_soc_ppa.py'),'run','--out',str(out)],O/'ppa-run.log')
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/s0e.py", line 7, in run
+    with log.open('x')as f:subprocess.run(cmd,cwd=str(R),stdin=subprocess.DEVNULL,stdout=f,stderr=subprocess.STDOUT,check=True,timeout=21600)
+  File "/usr/lib64/python3.6/subprocess.py", line 438, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/bin/python3', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest/tools/scripts/xu_soc_ppa.py', 'run', '--out', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-01/ppa-ss-01']' returned non-zero exit status 1.
