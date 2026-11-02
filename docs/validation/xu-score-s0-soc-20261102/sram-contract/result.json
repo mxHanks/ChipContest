@@ -1,0 +1,75 @@
+{
+  "inputs": {
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/adapter-qualified-functional-01/reference.sv": "d9f1a5af0ef0df513dbd03cda61203e874f76c1d762143a6f4d0d26a246c09cb",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/vendor-models-private-01/sram-models-private-01/RAMSP1024X16/RAMSP1024X16.v": "81b55d87d5e6821d44037d6f0290ec89c9edb9582eb1932957f181aefc300d51",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/third-party/e203_hbirdv2/rtl/e203/general/sirv_sim_ram.v": "f25074ac97a3511c393c1b17a8081ef650d1f53ab12b4f4334c222342e31e63b",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/tb_xu_sram_adapter.sv": "89145d9be14d58adb455ee0ff2857a5a672ce79d44185faa8b8cfd3bc6e3a3f4",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/tb_xu_sram_geometry.sv": "dc5a641180611ea16572e125bd549b92dbca2e74d9ef94b1e896c65cb83a6826",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_sirv_sram_adapter.sv": "b2b2baaa1e105ed794382886439cd2c16fd280a0f29b54c4d925351e6f90a0c5"
+  },
+  "limitations": [
+    "four-state functional model with ARM_UD_MODEL; no SDF/timing checks",
+    "module interface comparison; not full-SoC equivalence or power qualification"
+  ],
+  "runner_sha256": "4efbecd1350eb3a55166a0084fc6d67cdcda19cea988b45465bb3f95c70a540d",
+  "schema": "xu-sram-functional-contract-v1",
+  "status": "PASS",
+  "suites": {
+    "exhaustive-2048": {
+      "binary_sha256": "81fb247338b5d303684031556a607c8fce3313372b693144d9f7025995eb00c3",
+      "commands": [
+        [
+          "iverilog",
+          "-g2012",
+          "-DARM_UD_MODEL",
+          "-DXU_VENDOR_SRAM_MODEL",
+          "-s",
+          "tb_xu_sram_adapter",
+          "-o",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/adapter-qualified-functional-01/exhaustive-2048/simulation.vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/vendor-models-private-01/sram-models-private-01/RAMSP1024X16/RAMSP1024X16.v",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_sirv_sram_adapter.sv",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/adapter-qualified-functional-01/reference.sv",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/tb_xu_sram_adapter.sv"
+        ],
+        [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/adapter-qualified-functional-01/exhaustive-2048/simulation.vvp"
+        ]
+      ],
+      "log_sha256": {
+        "compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "simulation.log": "09889f8d71e25b61064869f6312866cbec55ddf3e9d2709e6ce1923226132da1"
+      },
+      "status": "PASS"
+    },
+    "platform-geometries": {
+      "binary_sha256": "144a8944c07f2436fbc67a25a1ff179650d6e6145014b50fd310ae3932b7a956",
+      "commands": [
+        [
+          "iverilog",
+          "-g2012",
+          "-DARM_UD_MODEL",
+          "-DXU_VENDOR_SRAM_MODEL",
+          "-s",
+          "tb_xu_sram_geometry",
+          "-o",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/adapter-qualified-functional-01/platform-geometries/simulation.vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/vendor-models-private-01/sram-models-private-01/RAMSP1024X16/RAMSP1024X16.v",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_sirv_sram_adapter.sv",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/adapter-qualified-functional-01/reference.sv",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/tb_xu_sram_geometry.sv"
+        ],
+        [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/adapter-qualified-functional-01/platform-geometries/simulation.vvp"
+        ]
+      ],
+      "log_sha256": {
+        "compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "simulation.log": "90b05cefdd9becf1a3099482940c8e1f4e90d8331e9ebafc3dc2c8fe388088d6"
+      },
+      "status": "PASS"
+    }
+  }
+}
