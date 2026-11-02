@@ -21,6 +21,7 @@ module tb_xu_gate_wrapper;
   integer addr, lane, group_id, k, trial;
   reg [31:0] value, low_word, high_word;
   reg [39:0] data40;
+  reg has_bias_cache;
 
   always @(posedge clk) if (rst_n) begin
     if (cmd_valid && cmd_ready) accepted=accepted+1;
@@ -99,6 +100,8 @@ module tb_xu_gate_wrapper;
     reg [47:0] expected_result;
     reg [31:0] status;
     begin
+      if (cached && !has_bias_cache)
+        $fatal(1,"cache computation requested without capability");
       put('h040,cached,1); put('h010,selected_group,15);
       put('h00c,2,15); put('h008,1,15);
       poll_count=0; status=0;
@@ -127,32 +130,46 @@ module tb_xu_gate_wrapper;
     end
   endtask
 
-  // Accept one command while retiring a prior stalled response. Cache bytes
-  // must not update before cmd_ready; both responses must retire exactly once.
+  // Accept one command while retiring a prior stalled response. Neither command
+  // may be accepted twice; both responses must retire exactly once.
   // Observe only public ICB ports: no synthesized hierarchy or preserved nets.
   task automatic blocked_write;
     reg [39:0] original;
+    integer accepted_before, retired_before;
     begin
-      put('h044,42,15); original=expected[42];
+      if (has_bias_cache) begin
+        put('h044,42,15); original=expected[42];
+      end else begin
+        expect_read('h004,32'h12345678);
+      end
+      accepted_before=accepted; retired_before=retired;
       @(negedge clk);
       cmd_valid=1; cmd_read=1; cmd_addr=32'h10042000; rsp_ready=0;
       @(posedge clk); #1;
       @(negedge clk);
-      cmd_read=0; cmd_addr=32'h10042048; cmd_wdata=32'hcafef00d; cmd_wmask=15;
+      cmd_read=0; cmd_addr=has_bias_cache?32'h10042048:32'h10042004;
+      cmd_wdata=32'hcafef00d; cmd_wmask=15;
       repeat(4) begin
         @(posedge clk); #1;
-        if (cmd_ready || !rsp_valid || rsp_err || rsp_rdata!==32'hacce2030)
+        if (cmd_ready || !rsp_valid || rsp_err || rsp_rdata!==32'hacce2030 ||
+            accepted!=accepted_before+1 || retired!=retired_before)
           $fatal(1,"blocked response changed before pipelined write");
       end
       @(negedge clk); rsp_ready=1;
       @(posedge clk); #1;
       if (!rsp_valid || rsp_err) $fatal(1,"pipelined write response missing");
-      expected[42]={original[39:32],32'hcafef00d};
+      if (has_bias_cache) expected[42]={original[39:32],32'hcafef00d};
       @(negedge clk); cmd_valid=0;
       @(posedge clk); #1;
       @(negedge clk); rsp_ready=0;
-      expect_read('h048,expected[42][31:0]);
-      expect_read('h04c,{24'b0,expected[42][39:32]});
+      if (accepted!=accepted_before+2 || retired!=retired_before+2)
+        $fatal(1,"pipelined request/response count mismatch");
+      if (has_bias_cache) begin
+        expect_read('h048,expected[42][31:0]);
+        expect_read('h04c,{24'b0,expected[42][39:32]});
+      end else begin
+        expect_read('h004,32'hcafef00d);
+      end
     end
   endtask
 
@@ -163,28 +180,42 @@ module tb_xu_gate_wrapper;
     for(gi=0;gi<32;gi=gi+1)
       for(lane=0;lane<8;lane=lane+1) sums[gi][lane]=0;
     repeat(3) @(negedge clk); rst_n=1;
-    expect_read('h000,32'hacce2030); expect_read('h050,32'h58550003);
+    expect_read('h000,32'hacce2030);
+    transfer(1,'h050,0,0,value);
+    if (value!==32'h58550003 && value!==32'h58550002)
+      $fatal(1,"unsupported capability=%h",value);
+    has_bias_cache=value[0];
     expect_read('h040,0); expect_read('h044,0);
     put('h040,1,2); expect_read('h040,0);
     put('h044,255,2); expect_read('h044,0);
     put('h004,32'h12345678,15); expect_read('h004,32'h12345678);
-    for (addr=0;addr<256;addr=addr+1) begin
-      data40=(addr[0]?40'h8000000000:40'h7fffffffff)^addr;
-      load_cache(addr,data40);
-      expect_read('h048,expected[addr][31:0]);
-      expect_read('h04c,{24'b0,expected[addr][39:32]});
-    end
-    // All byte lanes, zero mask, irrelevant high mask, and address truncation.
-    for (trial=0;trial<24;trial=trial+1) begin
-      seed=random_next(seed); addr=seed[7:0];
-      put('h044,32'hffff0000|addr,1); expect_read('h044,addr);
-      put('h048,32'ha1b2c3d4,5);
-      expected[addr]=(expected[addr]&40'hffff00ff00)|40'h00b200d4;
-      put('h048,0,0); put('h04c,0,2);
-      expect_read('h048,expected[addr][31:0]);
-      expect_read('h04c,{24'b0,expected[addr][39:32]});
-      put('h04c,32'hffffff89,1); expected[addr][39:32]=8'h89;
-      expect_read('h04c,32'h89);
+    if (has_bias_cache) begin
+      for (addr=0;addr<256;addr=addr+1) begin
+        data40=(addr[0]?40'h8000000000:40'h7fffffffff)^addr;
+        load_cache(addr,data40);
+        expect_read('h048,expected[addr][31:0]);
+        expect_read('h04c,{24'b0,expected[addr][39:32]});
+      end
+      // All byte lanes, zero mask, irrelevant high mask, and address truncation.
+      for (trial=0;trial<24;trial=trial+1) begin
+        seed=random_next(seed); addr=seed[7:0];
+        put('h044,32'hffff0000|addr,1); expect_read('h044,addr);
+        put('h048,32'ha1b2c3d4,5);
+        expected[addr]=(expected[addr]&40'hffff00ff00)|40'h00b200d4;
+        put('h048,0,0); put('h04c,0,2);
+        expect_read('h048,expected[addr][31:0]);
+        expect_read('h04c,{24'b0,expected[addr][39:32]});
+        put('h04c,32'hffffff89,1); expected[addr][39:32]=8'h89;
+        expect_read('h04c,32'h89);
+      end
+    end else begin
+      // H2 acknowledges reserved cache writes without exposing storage or mode.
+      put('h040,1,15); expect_read('h040,0);
+      for (addr=0;addr<256;addr=addr+1) begin
+        load_cache(addr,40'h7fffffffff^addr);
+        expect_read('h044,0); expect_read('h048,0); expect_read('h04c,0);
+      end
+      $display("XU_BIAS_CACHE_UNSUPPORTED capability=58550002 cache_checks=not_run");
     end
     blocked_write();
     // X=0 ensures full signed40 bias is observed without arithmetic ambiguity.
@@ -201,13 +232,18 @@ module tb_xu_gate_wrapper;
       put('h028,lane,15); put('h02c,legacy[lane][31:0],15);
       put('h030,{24'b0,legacy[lane][39:32]},1);
     end
-    check_group(0,0); check_group(31,0); check_group(0,1); check_group(31,1);
-    for(addr=0;addr<256;addr=addr+1) load_cache(addr,-40'd1-addr);
-    check_group(0,1); check_group(31,1); check_group(0,0);
+    check_group(0,0); check_group(31,0);
+    if (has_bias_cache) begin
+      check_group(0,1); check_group(31,1);
+      for(addr=0;addr<256;addr=addr+1) load_cache(addr,-40'd1-addr);
+      check_group(0,1); check_group(31,1);
+    end
+    check_group(0,0);
     // Non-zero MACs, signed16 extrema, SRAM boundary groups and consecutive tasks.
     for(task_id=0;task_id<2;task_id=task_id+1) begin
-      for(addr=0;addr<256;addr=addr+1)
-        load_cache(addr,(addr[0]?40'h8000000000:40'h7fffffffff)^((task_id+1)*257+addr));
+      if (has_bias_cache)
+        for(addr=0;addr<256;addr=addr+1)
+          load_cache(addr,(addr[0]?40'h8000000000:40'h7fffffffff)^((task_id+1)*257+addr));
       for(lane=0;lane<8;lane=lane+1) begin
         legacy[lane]=(lane[0]?40'h8000000000:40'h7fffffffff)^(task_id*73+lane);
         put('h028,lane,15); put('h02c,legacy[lane][31:0],15);
@@ -239,7 +275,8 @@ module tb_xu_gate_wrapper;
               sums[selected_group][lane]=sums[selected_group][lane]+$signed(x_values[k])*$signed(w_value);
             end
           end
-          check_group(selected_group,0); check_group(selected_group,1);
+          check_group(selected_group,0);
+          if (has_bias_cache) check_group(selected_group,1);
         end
       end
     end
