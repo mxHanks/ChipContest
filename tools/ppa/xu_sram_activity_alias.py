@@ -283,6 +283,30 @@ def equivalent(left, right):
     return all(a.get(key, 0) == b.get(key, 0) for key in set(a) | set(b))
 
 
+def alias_name_encodings(mapping, pairs):
+    """Enumerate exact source spellings; dots elsewhere remain literal names.
+
+    VCS 2020 writes the named generate block and its register as one NET atom
+    (macro_0000.CLK), while the canonical encoding uses an INSTANCE node. Do
+    not split arbitrary dotted atoms or infer any other flattened hierarchy.
+    """
+    prefix = slash(mapping['observer_scope']) + '/'
+    names = {}
+    for index in range(mapping['macro_count']):
+        block = 'macro_%04d' % index
+        for pin, width in PIN_WIDTHS.items():
+            for bit in range(width):
+                name = pin if width == 1 else pin + '[%d]' % bit
+                canonical = prefix + block + '/' + name
+                require(canonical in pairs, 'alias encoding differs from pin mapping')
+                for path, encoding in [(canonical, 'hierarchical'),
+                                       (prefix + block + '.' + name, 'vcs_generate_net_atom')]:
+                    require(path not in names, 'ambiguous observer alias spelling: ' + path)
+                    names[path] = (canonical, encoding)
+    require(len(names) == 2 * len(pairs), 'alias name encodings are not bijective per encoding')
+    return names
+
+
 def normalize(raw, mapping_path, out, receipt_path=None):
     raw, out = Path(raw).absolute(), Path(out).absolute()
     mapping_path = Path(mapping_path).absolute()
@@ -296,11 +320,24 @@ def normalize(raw, mapping_path, out, receipt_path=None):
     measured = reader.read_saif(raw)
     source = {(s['kind'], s['path']): s for s in measured['signals']}
     observer_prefix = slash(mapping['observer_scope']) + '/'
-    aliases = {s['path']: s for s in measured['signals'] if s['path'].startswith(observer_prefix)}
-    require(set(aliases) == set(pairs), 'missing or unexpected alias bits: missing=%d unexpected=%d' %
-            (len(set(pairs) - set(aliases)), len(set(aliases) - set(pairs))))
-    require(all(s['kind'] == 'NET' for s in measured['signals'] if s['path'].startswith(observer_prefix)), 'observer aliases must be ordinary RTL NET activity')
-    require(sum(s['path'].startswith(observer_prefix) for s in measured['signals']) == len(pairs), 'duplicate alias representation')
+    encodings = alias_name_encodings(mapping, pairs)
+    aliases, alias_names, unexpected = {}, {}, []
+    encoding_counts = {'hierarchical': 0, 'vcs_generate_net_atom': 0}
+    for signal in measured['signals']:
+        if not signal['path'].startswith(observer_prefix):
+            continue
+        require(signal['kind'] == 'NET', 'observer aliases must be ordinary RTL NET activity')
+        if signal['path'] not in encodings:
+            unexpected.append(signal['path'])
+            continue
+        canonical, encoding = encodings[signal['path']]
+        require(canonical not in aliases, 'duplicate alias representation: ' + canonical)
+        aliases[canonical] = signal
+        alias_names[canonical] = signal['path']
+        encoding_counts[encoding] += 1
+    require(set(aliases) == set(pairs) and not unexpected,
+            'missing or unexpected alias bits: missing=%d unexpected=%d' %
+            (len(set(pairs) - set(aliases)), len(unexpected)))
     inject, native_reused, native_both = {}, 0, 0
     comparison = []
     for alias, target in sorted(pairs.items()):
@@ -370,6 +407,8 @@ def normalize(raw, mapping_path, out, receipt_path=None):
                    'raw_saif': raw_identity, 'normalized_saif': identity(out), 'mapping': identity(mapping_path),
                    'observer_source': mapping['observer_source'], 'generator': identity(__file__),
                    'macro_count': mapping['macro_count'], 'alias_bit_count': len(pairs),
+                   'alias_name_encoding_counts': encoding_counts,
+                   'alias_name_comparison_sha256': canonical_hash(sorted(alias_names.items())),
                    'mapped_pin_bits_added_as_port': len(inject), 'native_pin_bits_verified_reused': native_reused,
                    'preexisting_native_net_and_port_bits_preserved': native_both,
                    'nonalias_raw_signal_count_preserved': len(preserved), 'per_bit_comparison_sha256': canonical_hash(comparison),

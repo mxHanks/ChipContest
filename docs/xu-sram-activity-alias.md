@@ -71,6 +71,17 @@ The alias-to-pin mapping is bijective. All state dwell buckets, transition
 counts, and additional signal statistics are copied; optional absent buckets
 are equivalent only to zero when comparing existing native records.
 
+Two exact observer name encodings are accepted. The canonical form has an
+`INSTANCE macro_0000` containing a `NET CLK`, giving
+`.../xu_sram_activity_alias/macro_0000/CLK`. In the measured VCS 2020 bound
+observer probe, the generate block and pin are one literal NET atom,
+`macro_0000.CLK`, giving `.../xu_sram_activity_alias/macro_0000.CLK`.
+The same finite spelling rule applies to each mapped block and pin bit,
+including `macro_0000.WEN[15]`. Exactly one NET record must supply each bit;
+supplying both encodings for one bit is rejected even if the statistics agree.
+Other dotted names are never split or rewritten. Unsupported names inside
+the observer, duplicate representations, and spelling collisions are errors.
+
 When a native NET or PORT already exists at the target macro pin, its statistics
 must equal the alias. The native kind is reused without adding another kind.
 Preexisting NET and PORT records are both checked and preserved, and their
@@ -85,6 +96,8 @@ pass checks every preserved raw record, every added pin record, and the time
 base. The receipt records raw and transformed SHA256 values, source and
 mapping identities, complete bit counts, native reuse counts, retained signal
 counts, unknown bit-ticks, and a deterministic hash of the per-bit comparisons.
+It also records the count of each accepted name encoding and a hash of the
+exact canonical-to-measured-source-name pairs.
 The raw file identity is checked again after normalization.
 
 ## Local verification on 2026-11-02
@@ -102,8 +115,8 @@ XU_SRAM_VENDOR_SHA256=81b55d87d5e6821d44037d6f0290ec89c9edb9582eb1932957f181aefc
 python -m unittest discover -s tests/host -p test_xu_sram_activity_alias.py -v
 ```
 
-Eight tests passed locally with that exact vendor model, Icarus, and
-`ARM_UD_MODEL`; no vendor model bytes are included in the added sources.
+The original eight-test suite passed locally with that exact vendor model,
+Icarus, and `ARM_UD_MODEL`; no vendor model bytes are included in the added sources.
 `tests/ppa/tb_xu_sram_activity_alias.sv` uses the existing SRAM adapter and
 compares all 201 observer bits against the actual ports of three macros in
 an independently collected VCD over `[2 ns,100 ns)`. The stimulus checks a
@@ -120,6 +133,12 @@ native NET/PORT reuse, immutable raw/output files, source tampering rejection,
 complete mapping, missing/extra/duplicate alias rejection, and native mismatch
 rejection. Synthetic normalization exercises the no-native case and checks
 every copied pin statistic plus unrelated raw signals, including TB dwell.
+The current eleven-test suite passes ten tests locally with the open model
+and skips the private-model test unless explicitly configured. Added cases
+cover all 67 observed VCS name spellings, mixed exact encodings, duplicate
+encodings, unsupported dotted names, literal-dot nonalias preservation, and
+all 45,024 canonical/VCS name candidates for the full topology. These
+synthetic name fixtures do not by themselves qualify VCS activity capture.
 
 These are local functional and digital-activity checks. They do not establish
 full-SoC VCS activity completeness, mapped annotation, Liberty internal power,

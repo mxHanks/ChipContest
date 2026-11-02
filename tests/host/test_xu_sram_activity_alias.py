@@ -100,6 +100,76 @@ class AliasNormalizationTests(unittest.TestCase):
             self.assertFalse(any('/xu_sram_activity_alias/' in s['path'] for s in output.values()))
             self.assertEqual(result['raw_saif']['sha256'], before)
             self.assertEqual(result['normalized_saif']['sha256'], alias.sha(d / 'normalized.saif'))
+            self.assertEqual(result['alias_name_encoding_counts'],
+                             dict(hierarchical=67, vcs_generate_net_atom=0))
+
+    def test_observed_vcs_generate_net_atoms_preserve_all_statistics_and_literal_dots(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d = Path(tmp)
+            _, mapping_path, pairs, raw, signals = self.fixture(d)
+            # Actual VCS 2020 spelling: the generate block and pin are one
+            # literal NET atom below the observer INSTANCE, not two scopes.
+            vcs = {path: path.rsplit('/', 1)[0] + '.' + path.rsplit('/', 1)[1] for path in pairs}
+            self.assertIn('tb/xu_sram_activity_alias/macro_0000.CLK', vcs.values())
+            signals = [(path, kind, dict(T0=1, T1=2, TX=3, TZ=1, TB=3, TC=7, IG=2)
+                        if path.endswith('/CLK') else values) for path, kind, values in signals]
+            signals = [(vcs.get(path, path), kind, values) for path, kind, values in signals]
+            unrelated = [('tb/dut/macro_0000.CLK', 'NET', dict(T0=1, T1=2, TX=3, TZ=1, TB=3, TC=7, IG=2)),
+                         ('tb/unrelated/xu_sram_activity_alias.macro_0000.CLK', 'PORT',
+                          dict(T0=3, T1=1, TX=2, TZ=4, TC=5))]
+            signals += unrelated
+            self.write_raw(raw, signals)
+            before = alias.sha(raw)
+            result = alias.normalize(raw, mapping_path, d / 'normalized.saif')
+            original = native_signals(activity.read_saif(raw))
+            output = native_signals(activity.read_saif(d / 'normalized.saif'))
+            self.assertEqual(alias.sha(raw), before)
+            self.assertEqual(result['alias_name_encoding_counts'],
+                             dict(hierarchical=0, vcs_generate_net_atom=67))
+            self.assertEqual(result['alias_name_comparison_sha256'], alias.canonical_hash(sorted(vcs.items())))
+            self.assertEqual(result['mapped_pin_bits_added_as_port'], 67)
+            self.assertEqual(result['alias_unknown_bit_ticks'], 12)
+            for source, target in pairs.items():
+                self.assertEqual(alias.stats(output[('PORT', target)]), alias.stats(original[('NET', vcs[source])]))
+            for path, kind, _ in unrelated + [('tb/dut/regular[2]', 'NET', {})]:
+                self.assertEqual(output[(kind, path)], original[(kind, path)])
+            self.assertFalse(any('/xu_sram_activity_alias/' in path for _, path in output))
+            self.assertEqual(len(output), 67 + len(unrelated) + 1)
+            self.assertIn('(DATE "literal \\"quoted\\" text")', (d / 'normalized.saif').read_text())
+
+    def test_mixed_exact_encodings_require_one_source_per_bit(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d = Path(tmp)
+            _, mapping_path, pairs, raw, signals = self.fixture(d)
+            selected = sorted(pairs)[::2]
+            vcs = {path: path.rsplit('/', 1)[0] + '.' + path.rsplit('/', 1)[1] for path in selected}
+            self.write_raw(raw, [(vcs.get(path, path), kind, values) for path, kind, values in signals])
+            result = alias.normalize(raw, mapping_path, d / 'normalized.saif')
+            self.assertEqual(result['alias_name_encoding_counts'],
+                             dict(hierarchical=67 - len(selected), vcs_generate_net_atom=len(selected)))
+            self.assertEqual(result['mapped_pin_bits_added_as_port'], 67)
+
+    def test_duplicate_encodings_and_unsupported_flattening_fail_without_output(self):
+        for mode in ('duplicate_NET', 'duplicate_PORT', 'extra_dot', 'nested_dot', 'scalar_index', 'block_index'):
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as tmp:
+                d = Path(tmp)
+                _, mapping_path, pairs, raw, signals = self.fixture(d)
+                canonical = 'tb/xu_sram_activity_alias/macro_0000/CLK'
+                values = next(values for path, _, values in signals if path == canonical)
+                if mode.startswith('duplicate_'):
+                    signals.append(('tb/xu_sram_activity_alias/macro_0000.CLK', mode.split('_')[1], dict(values)))
+                else:
+                    unsupported = {'extra_dot': 'macro_0000.extra.CLK', 'nested_dot': 'macro_0000/extra.CLK',
+                                   'scalar_index': 'macro_0000.CLK[0]', 'block_index': 'macro_00000.CLK'}[mode]
+                    signals = [(('tb/xu_sram_activity_alias/' + unsupported) if path == canonical else path,
+                                kind, stats) for path, kind, stats in signals]
+                self.write_raw(raw, signals)
+                before = alias.sha(raw)
+                with self.assertRaises(ValueError):
+                    alias.normalize(raw, mapping_path, d / 'bad.saif')
+                self.assertFalse((d / 'bad.saif').exists())
+                self.assertFalse((d / 'bad.saif.receipt.json').exists())
+                self.assertEqual(alias.sha(raw), before)
 
     def test_native_net_port_or_both_reused_without_introduced_cross_kind_duplicate(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -183,6 +253,10 @@ class AliasNormalizationTests(unittest.TestCase):
             _, pairs = alias.validate_mapping(mapping_path)
             self.assertEqual(mapping['macro_count'], 336)
             self.assertEqual(len(pairs), 22512)
+            encodings = alias.alias_name_encodings(mapping, pairs)
+            self.assertEqual(len(encodings), 45024)
+            self.assertEqual(encodings['tb_xu_soc_ppa/dut/xu_sram_activity_alias/macro_0335.Q[15]'],
+                             ('tb_xu_soc_ppa/dut/xu_sram_activity_alias/macro_0335/Q[15]', 'vcs_generate_net_atom'))
             self.assertEqual({group: sum(m['group'] == group for m in mapping['macros'])
                               for group in ('shared', 'itcm', 'dtcm', 'accelerator_weights')},
                              dict(shared=256, itcm=32, dtcm=32, accelerator_weights=16))
