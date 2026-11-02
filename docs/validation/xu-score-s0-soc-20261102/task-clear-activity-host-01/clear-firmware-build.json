@@ -1,0 +1,186 @@
+{
+  "recipe": "cpu-mmio-clear-before-source-request-v1",
+  "configuration": {
+    "schedule": "bias-hw-window",
+    "optimization": "-O2",
+    "experiment": "both-unroll-no-masks"
+  },
+  "compiler": {
+    "path": "/usr/bin/riscv64-unknown-elf-gcc",
+    "sha256": "4310e64944572c23d75e4d49e828eeb073894a9ad8746bac30636085c32cd126"
+  },
+  "compiler_version_log": {
+    "path": "/tmp/xu-clear-fw-zz_e5can/gcc-version.log",
+    "sha256": "44d55abeabdb089d1459886560b7d95dfbed6ac57eae56d53c758bc041362558"
+  },
+  "toolchain": [
+    {
+      "path": "/usr/bin/riscv64-unknown-elf-gcc",
+      "sha256": "4310e64944572c23d75e4d49e828eeb073894a9ad8746bac30636085c32cd126"
+    },
+    {
+      "path": "/usr/bin/riscv64-unknown-elf-objcopy",
+      "sha256": "15a3fbf9c6ffdb08747440ef2935188046c47d3e3878de28812154e748ae50d3"
+    },
+    {
+      "path": "/usr/bin/riscv64-unknown-elf-objdump",
+      "sha256": "53fed9a49aedc552a620bdb170edd991e77bc33fe8f7508f3107825ab7201e20"
+    }
+  ],
+  "command": [
+    "riscv64-unknown-elf-gcc",
+    "-march=rv32imac_zicsr2p0_zifencei2p0",
+    "-mabi=ilp32",
+    "-O2",
+    "-DXU_FIRMWARE_BIAS_DTCM=0",
+    "-DXU_HARDWARE_BIAS_CACHE=1",
+    "-DXU_HARDWARE_RESULT_WINDOW=1",
+    "-DXU_FIRMWARE_BIAS_UNROLL=1",
+    "-DXU_FIRMWARE_RESULT_UNROLL=1",
+    "-DXU_FIRMWARE_NO_MASKS=1",
+    "-fstack-usage",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-msmall-data-limit=0",
+    "-nostdlib",
+    "-nostartfiles",
+    "-static",
+    "-mcmodel=medany",
+    "-Wl,--no-relax",
+    "-T",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/link.ld",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/start.S",
+    "/tmp/xu-clear-fw-zz_e5can/xu_clear_main.c",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c",
+    "-o",
+    "/tmp/xu-clear-fw-zz_e5can/accel_soc"
+  ],
+  "cwd": "/tmp/xu-clear-fw-zz_e5can",
+  "compile_sources": [
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/start.S",
+      "sha256": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+    },
+    {
+      "path": "/tmp/xu-clear-fw-zz_e5can/xu_clear_main.c",
+      "sha256": "392e075fd1348eb64d52111907d1d85ce329477704762ba4d576b27db388c3a8"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c",
+      "sha256": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/start.S",
+      "sha256": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c",
+      "sha256": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c",
+      "sha256": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/link.ld",
+      "sha256": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.h",
+      "sha256": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e"
+    },
+    {
+      "path": "/tmp/xu-clear-fw-zz_e5can/xu_clear_main.c",
+      "sha256": "392e075fd1348eb64d52111907d1d85ce329477704762ba4d576b27db388c3a8"
+    },
+    {
+      "path": "/tmp/xu-clear-fw-zz_e5can/xu_clear_observer.svh",
+      "sha256": "4beca28973af16c9d537bb86090d41cd25bc58fb9719638b502d2011d83decdd"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_task_clear_protocol.py",
+      "sha256": "467e51abbaefa1ef40e3c2d5cfbc18376be351886b212f7667f0a44934488ee8"
+    },
+    {
+      "path": "/usr/bin/riscv64-unknown-elf-gcc",
+      "sha256": "4310e64944572c23d75e4d49e828eeb073894a9ad8746bac30636085c32cd126"
+    },
+    {
+      "path": "/usr/bin/riscv64-unknown-elf-objcopy",
+      "sha256": "15a3fbf9c6ffdb08747440ef2935188046c47d3e3878de28812154e748ae50d3"
+    },
+    {
+      "path": "/usr/bin/riscv64-unknown-elf-objdump",
+      "sha256": "53fed9a49aedc552a620bdb170edd991e77bc33fe8f7508f3107825ab7201e20"
+    }
+  ],
+  "input_sha256": {
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+    "/tmp/xu-clear-fw-zz_e5can/xu_clear_main.c": "392e075fd1348eb64d52111907d1d85ce329477704762ba4d576b27db388c3a8",
+    "/tmp/xu-clear-fw-zz_e5can/xu_clear_observer.svh": "4beca28973af16c9d537bb86090d41cd25bc58fb9719638b502d2011d83decdd",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_task_clear_protocol.py": "467e51abbaefa1ef40e3c2d5cfbc18376be351886b212f7667f0a44934488ee8",
+    "/usr/bin/riscv64-unknown-elf-gcc": "4310e64944572c23d75e4d49e828eeb073894a9ad8746bac30636085c32cd126",
+    "/usr/bin/riscv64-unknown-elf-objcopy": "15a3fbf9c6ffdb08747440ef2935188046c47d3e3878de28812154e748ae50d3",
+    "/usr/bin/riscv64-unknown-elf-objdump": "53fed9a49aedc552a620bdb170edd991e77bc33fe8f7508f3107825ab7201e20"
+  },
+  "source_sha256": {
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+    "/tmp/xu-clear-fw-zz_e5can/xu_clear_main.c": "392e075fd1348eb64d52111907d1d85ce329477704762ba4d576b27db388c3a8",
+    "/tmp/xu-clear-fw-zz_e5can/xu_clear_observer.svh": "4beca28973af16c9d537bb86090d41cd25bc58fb9719638b502d2011d83decdd",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_task_clear_protocol.py": "467e51abbaefa1ef40e3c2d5cfbc18376be351886b212f7667f0a44934488ee8"
+  },
+  "frozen_main": {
+    "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c",
+    "sha256": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc"
+  },
+  "wrapper": {
+    "path": "/tmp/xu-clear-fw-zz_e5can/xu_clear_main.c",
+    "sha256": "392e075fd1348eb64d52111907d1d85ce329477704762ba4d576b27db388c3a8"
+  },
+  "observer": {
+    "path": "/tmp/xu-clear-fw-zz_e5can/xu_clear_observer.svh",
+    "sha256": "4beca28973af16c9d537bb86090d41cd25bc58fb9719638b502d2011d83decdd"
+  },
+  "elf_sha256": "e23540a3141a995974559b6accdf28c0b5e3bb477fb59ad3b3bcbe83018be7f1",
+  "image_sha256": "ceca8cbf8636255362182c0190f6c9f378a76a1487af3516cfe4a6317b70d124",
+  "memory": {
+    "itcm_bytes": 1156,
+    "itcm_capacity_bytes": 65536,
+    "itcm_remaining_bytes": 64380,
+    "data_bytes": 0,
+    "bss_bytes": 0,
+    "dtcm_capacity_bytes": 65536,
+    "stack_top": 2415984624,
+    "stack_capacity_after_bss_bytes": 65520,
+    "stack_top_guard_bytes": 16,
+    "stack_frames": [
+      {
+        "source": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c:51:5:accel_linear",
+        "bytes": 64,
+        "kind": "static"
+      },
+      {
+        "source": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c:3:5:xu_frozen_task_main",
+        "bytes": 32,
+        "kind": "static"
+      },
+      {
+        "source": "/tmp/xu-clear-fw-zz_e5can/xu_clear_main.c:37:5:main",
+        "bytes": 0,
+        "kind": "static"
+      }
+    ],
+    "max_static_stack_frame_bytes": 64,
+    "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+  }
+}

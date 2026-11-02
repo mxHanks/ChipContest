@@ -1,0 +1,9 @@
+{"command": ["vvp", "/tmp/xu-clear-request-szvte0ok/probe.vvp", "+MODE=1"], "cwd": "/tmp/xu-clear-request-szvte0ok", "returncode": 1}
+XU_TASK_CLEAR_BEGIN task=7 cycle=1 tick=6666667
+XU_TASK_CLEAR_LAST_WRITE task=7 cycle=33697 tick=224646677899 writes=33697
+XU_TASK_CLEAR_OBSERVED writes=33697 w=16384 bias=256 legacy_bias=8 x=64 drained=1 cache_enable=0 idle=1 source_request=1 task_setup_writes=2
+XU_SOURCE_REQUEST task=7 cycle=33700 tick=224666677900
+XU_ACTIVITY_BEGIN task=7 tick=224666677900
+XU_CACHE_INITIAL task=7 fresh_process=1 cache_enable=0 busy=0 prior_uploads=0 prior_starts=0
+FATAL: /tmp/xu-clear-request-szvte0ok/probe.sv:272: first source request changed before acceptance
+       Time: 224673344567  Scope: tb_xu_clear_request_probe.xu_observe_clear_window

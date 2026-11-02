@@ -18,6 +18,12 @@ SPEC.loader.exec_module(collector)
 
 
 class TaskMappingTests(unittest.TestCase):
+    def test_development_task_ids_preserve_real_ids_and_reject_ambiguous_sets(self):
+        self.assertEqual(collector.parse_task_ids('0,7,11'), [0, 7, 11])
+        for value in ('', '12', '-1', '7,0', '0,0', '0 1'):
+            with self.subTest(value=value), self.assertRaises(Exception):
+                collector.parse_task_ids(value)
+
     def test_all_twelve_real_fixtures_map_to_local_zero_with_original_identities(self):
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
@@ -61,6 +67,21 @@ class TaskMappingTests(unittest.TestCase):
         self.assertNotIn('"rtl_on", "sv"', text)
         self.assertNotIn('force ', text)
 
+    def test_opt_in_keeps_legacy_window_and_starts_formal_saif_at_request(self):
+        text = collector.generate_tb(True)
+        self.assertEqual(text.count('xu_observe_clear_window();'), 1)
+        self.assertEqual(text.count('if (xu_payload_phase) xu_observe_upload();'), 1)
+        self.assertNotIn('if (!in_window) xu_observe_upload();', text)
+        for call in ('$toggle_start();', '$toggle_stop();', '$toggle_report('):
+            self.assertEqual(text.count(call), 1)
+        self.assertIn('source_request=cmd_valid && cmd_read', text)
+        self.assertIn('xu_observe_task_clear(source_request,xu_payload_phase);', text)
+        self.assertIn('`ACCEL.rsp_valid!==1\'b0', text)
+        self.assertIn('in_window=perf_active || (first_cycle<0 && shared_accept', text)
+        self.assertIn('layer,last_cycle-first_cycle+1,firmware_cycles', text)
+        self.assertIn('xu_formal_cycles!=perf_cycles+xu_initial_wait', text)
+        self.assertNotIn('force ', text)
+
     def test_global_task_log_boundary_does_not_accept_local_zero(self):
         cycles = 2000000
         perf = dict((key, 0) for key in collector.contract.PERFORMANCE_FIELDS)
@@ -86,6 +107,34 @@ class TaskMappingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'global task boundary identity'):
             collector.checked_log(log.replace('task=7', 'task=0'), 7, 'bias-hw-window')
 
+        # A real blocked request must extend formal SAIF, retaining raw legacy logs.
+        request = begin - 20000000
+        formal = log.replace('XU_ACTIVITY_BEGIN task=7 tick=%d' % begin,
+                             'XU_ACTIVITY_BEGIN task=7 tick=%d' % request)
+        formal += '\n' + '\n'.join([
+            'XU_TASK_CLEAR_BEGIN task=7 cycle=50 tick=1',
+            'XU_TASK_CLEAR_LAST_WRITE task=7 cycle=90 tick=2 writes=33697',
+            'XU_TASK_CLEAR_OBSERVED writes=33697 w=16384 bias=256 legacy_bias=8 x=64 drained=1 cache_enable=0 idle=1 source_request=1 task_setup_writes=2',
+            'XU_SOURCE_REQUEST task=7 cycle=97 tick=%d' % request,
+            'XU_SOURCE_ACCEPT task=7 cycle=100 tick=%d' % begin,
+            ('XU_TASK_WINDOW task=7 request_cycle=97 accept_cycle=100 end_cycle=%d '
+             'initial_wait_cycles=3 legacy_inclusive_cycles=%d formal_inclusive_cycles=%d formal_elapsed_cycles=%d')
+            % (99 + cycles, cycles, cycles+3, cycles+2)])
+        # Shift this synthetic clock origin forward so all physical ticks are positive.
+        formal = formal.replace('tick=%d' % request, 'tick=%d' % (request + 30000000))
+        formal = formal.replace('tick=%d' % begin, 'tick=%d' % (begin + 30000000))
+        formal = formal.replace('tick_fs=%d' % begin, 'tick_fs=%d' % (begin + 30000000))
+        formal = formal.replace('tick=%d' % end, 'tick=%d' % (end + 30000000))
+        formal = formal.replace('tick_fs=%d' % end, 'tick_fs=%d' % (end + 30000000))
+        layer, window = collector.checked_log(formal, 7, 'bias-hw-window', True)
+        self.assertEqual(layer['cycles'], cycles)
+        self.assertEqual(window['formal_inclusive_cycles'], cycles+3)
+        self.assertEqual(window['initial_source_wait_cycles'], 3)
+        self.assertEqual(window['legacy_accept_window']['begin']['cycle'], 100)
+        with self.assertRaisesRegex(ValueError, 'cycle accounting differs'):
+            collector.checked_log(formal.replace('initial_wait_cycles=3', 'initial_wait_cycles=2'),
+                                  7, 'bias-hw-window', True)
+
     def test_scope_inventory_requires_all_336_macro_instances_and_exact_duration(self):
         # Synthetic digital SAIF, expressly not a measured SoC fixture.
         paths = {'hfextclk': 12, 'u_soc/u_e203_cpu_top/q': 1,
@@ -96,10 +145,10 @@ class TaskMappingTests(unittest.TestCase):
                              ('u_soc/u_e203_dtcm_ram', 32),
                              ('u_soc/u_accel_icb_slave/u_linear_compute_core/core', 16)]:
             for index in range(count):
-                for pin in ['CLK', 'CEN']:
+                for pin in (['CLK', 'CEN', 'RET1N'] if 'dtcm' in group else ['CLK', 'CEN']):
                     paths['%s/bank_%d/macro/%s' % (group, index, pin)] = 1
 
-        def saif(records):
+        def saif(records, static_dtcm=False, unknown_cen=False):
             tree = {}
             for path, toggles in records.items():
                 node = tree
@@ -108,10 +157,21 @@ class TaskMappingTests(unittest.TestCase):
                     node = node.setdefault(name, {})
                 node[parts[-1]] = toggles
 
-            def render(name, node):
-                nets = ' '.join('(%s (T0 20000000) (T1 20000000) (TX 0) (TC %d))' % (key, value)
-                                for key, value in node.items() if isinstance(value, int))
-                children = ' '.join(render(key, value) for key, value in node.items() if isinstance(value, dict))
+            def render(name, node, parent=''):
+                current = parent+'/'+name
+                nets = []
+                for key, value in node.items():
+                    if not isinstance(value, int):
+                        continue
+                    if static_dtcm and '/u_e203_dtcm_ram/' in current:
+                        high = key != 'CLK'
+                        tx = 1 if unknown_cen and key == 'CEN' else 0
+                        t0, t1 = (0, 40000000-tx) if high else (40000000-tx, 0)
+                        nets.append('(%s (T0 %d) (T1 %d) (TX %d) (TC 0))' % (key, t0, t1, tx))
+                    else:
+                        nets.append('(%s (T0 20000000) (T1 20000000) (TX 0) (TC %d))' % (key, value))
+                nets = ' '.join(nets)
+                children = ' '.join(render(key, value, current) for key, value in node.items() if isinstance(value, dict))
                 return '(INSTANCE %s (NET %s) %s)' % (name, nets, children)
             return '(SAIFILE (TIMESCALE 1 fs) (DURATION 40000000) (INSTANCE tb_xu_soc_ppa %s))' % render('dut', tree)
 
@@ -122,6 +182,24 @@ class TaskMappingTests(unittest.TestCase):
             self.assertEqual(sum(g['observed_count'] for g in result['macro_inventory'].values()), 336)
             with self.assertRaisesRegex(ValueError, 'DURATION differs'):
                 collector.inspect_activity(path, dict(duration_ticks=40000001))
+            path.write_text(saif(paths, static_dtcm=True))
+            with self.assertRaisesRegex(ValueError, 'no static declaration: dtcm'):
+                collector.inspect_activity(path, dict(duration_ticks=40000000))
+            result = collector.inspect_activity(path, dict(duration_ticks=40000000), ('dtcm',))
+            self.assertEqual(result['scope_presence']['dtcm']['state'], 'OBSERVED_KNOWN_STATIC_DISABLED')
+            self.assertEqual(result['scope_presence']['dtcm']['macro_count'], 32)
+            path.write_text(saif(paths, static_dtcm=True, unknown_cen=True))
+            with self.assertRaisesRegex(ValueError, 'control missing/unknown/not held idle'):
+                collector.inspect_activity(path, dict(duration_ticks=40000000), ('dtcm',))
+            del paths['u_soc/u_e203_dtcm_ram/bank_31/macro/RET1N']
+            path.write_text(saif(paths, static_dtcm=True))
+            with self.assertRaisesRegex(ValueError, 'control missing/unknown/not held idle'):
+                collector.inspect_activity(path, dict(duration_ticks=40000000), ('dtcm',))
+            del paths['u_soc/u_e203_dtcm_ram/bank_31/macro/CLK']
+            del paths['u_soc/u_e203_dtcm_ram/bank_31/macro/CEN']
+            path.write_text(saif(paths, static_dtcm=True))
+            with self.assertRaisesRegex(ValueError, 'SRAM macro count differs: dtcm'):
+                collector.inspect_activity(path, dict(duration_ticks=40000000), ('dtcm',))
             del paths['u_shared/bank_255/macro/CLK']
             del paths['u_shared/bank_255/macro/CEN']
             path.write_text(saif(paths))

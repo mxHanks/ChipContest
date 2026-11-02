@@ -1,0 +1,22 @@
+["riscv64-unknown-elf-objdump", "-t", "/tmp/xu-clear-fw-zz_e5can/accel_soc"]
+
+/tmp/xu-clear-fw-zz_e5can/accel_soc:     file format elf32-littleriscv
+
+SYMBOL TABLE:
+80000000 l    d  .text	00000000 .text
+90000000 l    d  .bss	00000000 .bss
+00000000 l    d  .riscv.attributes	00000000 .riscv.attributes
+00000000 l    d  .comment	00000000 .comment
+00000000 l    df *ABS*	00000000 ccm1ks2W.o
+00000000 l    df *ABS*	00000000 xu_clear_main.c
+00000000 l    df *ABS*	00000000 accel.c
+90000000 g       .bss	00000000 __bss_end
+9000fff0 g       .bss	00000000 __stack_top
+80000000 g       .text	00000000 _start
+80000086 g       .text	00000000 write_tohost
+800001f4 g     F .text	00000290 accel_linear
+90000000 g       .bss	00000000 __bss_start
+8000011a g     F .text	000000da main
+80000088 g     F .text	00000092 xu_frozen_task_main
+
+
