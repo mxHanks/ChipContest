@@ -1,0 +1,38 @@
+{
+  "baseline_modified": false,
+  "cache_policy_review_status": "REVIEW_PENDING",
+  "clear_counts": {
+    "accepted_writes": 33697,
+    "bias": 256,
+    "cache_disable_writes": 1,
+    "legacy_bias": 8,
+    "w": 16384,
+    "x": 64
+  },
+  "frozen_main": {
+    "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c",
+    "sha256": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc"
+  },
+  "helper": {
+    "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_task_clear_protocol.py",
+    "sha256": "467e51abbaefa1ef40e3c2d5cfbc18376be351886b212f7667f0a44934488ee8"
+  },
+  "limitations": [
+    "No full-SoC execution, official cache-policy acceptance or PPA PASS",
+    "No vendor initialization or model modification",
+    "Clearing activity and elapsed cycles require separate reporting"
+  ],
+  "outputs": [
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/clear-protocol-host-01/recipe/xu_clear_main.c",
+      "sha256": "392e075fd1348eb64d52111907d1d85ce329477704762ba4d576b27db388c3a8"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/clear-protocol-host-01/recipe/xu_clear_observer.svh",
+      "sha256": "992ec459f4fc451ae645345ba9a4fc8409af01326e226225e5dbe80ebaa9b480"
+    }
+  ],
+  "requires": "one fresh reset process; TASKS=1; original payload observer retained",
+  "schema": "xu-task-clear-protocol-v1",
+  "status": "GENERATED_NOT_FULL_SOC_SIMULATED"
+}
