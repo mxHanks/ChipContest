@@ -1,0 +1,81 @@
+diff --git a/tests/e203/tb_accel_soc.sv b/tests/e203/tb_accel_soc.sv
+index 73d6a4b..58b2f04 100644
+--- a/tests/e203/tb_accel_soc.sv
++++ b/tests/e203/tb_accel_soc.sv
+@@ -71,6 +71,10 @@ module tb_accel_soc;
+       // Match the existing inclusive first-input/final-Y-response interval.
+       in_window=perf_active || (first_cycle<0 && shared_accept && cmd_read &&
+                                cmd_addr>=BASE && cmd_addr<BASE+'h18800);
++      if (dumpwave==2 && !perf_active && in_window) begin
++        $dumpon;
++        $display("ACTIVITY_BEGIN layer=%0d time=%0t",layer,$time);
++      end
+       if (in_window) begin
+         perf_active=1;
+         phase_now=perf_phase;
+@@ -139,7 +143,13 @@ module tb_accel_soc;
+           perf_mmio_stall=perf_mmio_stall+1;
+         if ((cmd_valid && !cmd_ready) || (rsp_valid && !rsp_ready))
+           perf_shared_stall=perf_shared_stall+1;
+-        if (shared_retire && final_write_pending) perf_active=0;
++        if (shared_retire && final_write_pending) begin
++          perf_active=0;
++          if (dumpwave==2) begin
++            $display("ACTIVITY_END layer=%0d time=%0t",layer,$time);
++            $dumpoff;
++          end
++        end
+       end
+ 
+       // Retiring metadata belongs to the old response even when the next
+@@ -234,7 +244,10 @@ module tb_accel_soc;
+     ram[HOST/4]=tasks;
+     load_layer(0);
+     if ($value$plusargs("DUMPWAVE=%d",dumpwave) && dumpwave) begin
+-      $dumpfile("tb_accel_soc.vcd"); $dumpvars(0,tb_accel_soc);
++      $dumpfile("tb_accel_soc.vcd"); if (dumpwave==2) begin
++        $dumpvars(0,`ACCEL);
++        $dumpoff;
++      end else $dumpvars(0,tb_accel_soc);
+     end
+     #120 rst_n=1;
+   end
+diff --git a/tools/scripts/e203_soc.py b/tools/scripts/e203_soc.py
+index 3bb7359..0b40f90 100644
+--- a/tools/scripts/e203_soc.py
++++ b/tools/scripts/e203_soc.py
+@@ -301,11 +301,13 @@ def main():
+     parser.add_argument('--cross-prefix',default='riscv64-unknown-elf-')
+     parser.add_argument('--out',type=Path)
+     parser.add_argument('--waves',action='store_true')
++    parser.add_argument('--accel-waves',action='store_true')
+     parser.add_argument('--max-cycles',type=int,default=200000000)
+     contract.add_arguments(parser)
+     args=parser.parse_args()
+     if args.max_cycles < 1:
+         parser.error('--max-cycles must be positive')
++    trace_enabled = args.waves or args.accel_waves
+     out=(args.out or ROOT/'build/e203'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')).resolve()
+     out.mkdir(parents=True,exist_ok=False)
+     selected_sim='iverilog' if args.mode=='baseline' and args.sim=='verilator' else args.sim
+@@ -376,17 +378,17 @@ def main():
+                 installed=E203/'vsim/install/rtl'
+                 sources=matrix_sources(installed)
+                 report['source_sha256']={str(p.relative_to(ROOT)):sha(p) for p in sources}
+-                key=build_key(report,selected_sim,args.waves)
++                key=build_key(report,selected_sim,trace_enabled)
+                 cache=ROOT/'build/e203'/('sim-'+key)
+                 cache.mkdir(parents=True,exist_ok=True)
+                 filelist=cache/'rtl.f'
+                 filelist.write_text('\n'.join(str(p) for p in sources)+'\n')
+                 includes=[str(installed/p) for p in ['core','perips','perips/apb_i2c']]
+-                binary,command=build_simulator(selected_sim,cache,filelist,includes,args.waves,out)
++                binary,command=build_simulator(selected_sim,cache,filelist,includes,trace_enabled,out)
+                 report['simulator_sha256']=sha(binary)
+                 print(f'Running {args.mode}: {args.tasks} tasks; logs: {out}',flush=True)
+                 log=run(command+[f'+TESTCASE={firmware}',f'+VECTORS={directory}',
+-                        f'+TASKS={args.tasks}',f'+DUMPWAVE={int(args.waves)}',
++                        f'+TASKS={args.tasks}',f'+DUMPWAVE={2 if args.accel_waves else int(args.waves)}',
+                         f'+MAX_CYCLES={args.max_cycles}'],out,out/'simulation.log',7200)
+                 report['layers']=check_log(log,args.tasks)
+                 for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):

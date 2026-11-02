@@ -1,0 +1,40 @@
+["/bin/python3", "-m", "unittest", "discover", "-s", "tests/numeric", "-v"]
+test_clipping_counts_rne_range_not_just_float_range (test_kwt_export.KWTExportTests) ... ok
+test_exact_checkpoint_layer_order_and_ignores_optimizer_slots (test_kwt_export.KWTExportTests) ... ok
+test_layernorm_bound_uses_only_parameters (test_kwt_export.KWTExportTests) ... ok
+test_missing_wrong_shape_and_duplicate_checkpoint_layers_rejected (test_kwt_export.KWTExportTests) ... ok
+test_power_of_two_scale_exact_boundary (test_kwt_export.KWTExportTests) ... ok
+test_scale_handles_tiny_zero_and_invalid_bounds (test_kwt_export.KWTExportTests) ... ok
+test_all_twelve_existing_layers_match_canonical_integer_model (test_numeric_handoff.ExistingFixtureTests) ... ok
+test_frozen_scale_source_and_checkpoint_identity (test_numeric_handoff.ExistingFixtureTests) ... ok
+test_canonical_loader_records_actual_repository_module_identity (test_numeric_handoff.InferenceInputTests) ... ok
+test_completed_failed_precision_gate_exits_nonzero (test_numeric_handoff.InferenceInputTests) ... ok
+test_external_model_name_cannot_replace_canonical_reference (test_numeric_handoff.InferenceInputTests) ... ok
+test_external_source_hash_length_and_path_guards (test_numeric_handoff.InferenceInputTests) ... ok
+test_inference_aggregation_matches_canonical_energy_rule (test_numeric_handoff.InferenceInputTests) ... ok
+test_missing_sources_write_blocked_reports_and_nonzero_exit (test_numeric_handoff.InferenceInputTests) ... ok
+test_server_python_requires_separate_legacy_inference_environment (test_numeric_handoff.InferenceInputTests) ... ok
+test_explicit_power_of_two_scaling (test_numeric_model.EncodingTests) ... ok
+test_float_neighbors_and_saturation (test_numeric_model.EncodingTests) ... ok
+test_reject_invalid_and_nonfinite_values (test_numeric_model.EncodingTests) ... ok
+test_ties_to_even_both_signs (test_numeric_model.EncodingTests) ... ok
+test_dot_extremes_bias_and_cancellation (test_numeric_model.IntegerLinearTests) ... ok
+test_dot_rejects_wrong_lengths_or_ranges (test_numeric_model.IntegerLinearTests) ... ok
+test_full_matrix_deterministic_random_selected_outputs (test_numeric_model.IntegerLinearTests) ... ok
+test_full_matrix_orientation_and_last_row_column (test_numeric_model.IntegerLinearTests) ... ok
+test_layer_parameters_are_copied_and_independent (test_numeric_model.IntegerLinearTests) ... ok
+test_quantize_decode_bias_product_scale (test_numeric_model.IntegerLinearTests) ... ok
+test_random_dot_matches_independent_sum (test_numeric_model.IntegerLinearTests) ... ok
+test_strict_full_shapes_and_values (test_numeric_model.IntegerLinearTests) ... ok
+test_full_vector_export_layout_and_hash (test_numeric_model.MemoryTests) ... ok
+test_hex_round_trip_extremes_and_bad_words (test_numeric_model.MemoryTests) ... ok
+test_aggregate_energy_not_mean_sample_nrmse (test_numeric_model.NRMSETests) ... ok
+test_denominator_floor_and_empty_rejection (test_numeric_model.NRMSETests) ... ok
+test_invalid_sample_does_not_mutate_prior_statistics (test_numeric_model.NRMSETests) ... ok
+test_missing_layer_or_wrong_shape_not_accepted (test_numeric_model.NRMSETests) ... ok
+test_per_layer_full_shape_all_layers_and_maximum (test_numeric_model.NRMSETests) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 10.156s
+
+OK

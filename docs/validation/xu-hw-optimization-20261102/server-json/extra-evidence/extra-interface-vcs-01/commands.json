@@ -1,0 +1,41 @@
+{
+  "simulator": "vcs",
+  "compile_command": [
+    "vcs",
+    "-full64",
+    "-sverilog",
+    "-timescale=1ns/10ps",
+    "-top",
+    "tb_xu_cached_wrapper_extra",
+    "+define+DISABLE_SV_ASSERTION=1",
+    "-Mdir=/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/extra-interface-vcs-01/csrc",
+    "-o",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/extra-interface-vcs-01/simv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/extra-interface-source/xu-hw-extra-interface/tb_xu_cached_wrapper_extra.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v"
+  ],
+  "simulation_command": [
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/extra-interface-vcs-01/simv"
+  ],
+  "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/extra-interface-vcs-01",
+  "base_tb_sha256": "a6a26ebbdca3cfa52c0b0ff36f16bcfddfbaf287db195da2456a114f09ea4812",
+  "supplement_tb_sha256": "15363228e2fabd2a69ec681febd7a64aa6af1d024109b0f5c955881b73739381",
+  "status": "PASS",
+  "compile_returncode": 0,
+  "compile_log_sha256": "e4931115bd390a71b31d28065a8b6b922587601c547259aa6c99bbcb1c2452e5",
+  "simulation_returncode": 0,
+  "simulation_log_sha256": "7a5b767e96885a0ffc9e74cb1864de808796ed1e81383020d41314db6e733ce6",
+  "elapsed_seconds": 2.618866399046965
+}

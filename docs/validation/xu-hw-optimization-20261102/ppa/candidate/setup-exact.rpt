@@ -1,0 +1,721 @@
+****************************************
+Report : timing
+	-path_type full
+	-delay_type max
+	-slack_lesser_than 1000.00000000
+	-max_paths 5
+	-sort_by slack
+Design : accel_icb_slave
+Version: T-2022.03-SP5-1
+Date   : Mon Nov  2 17:03:05 2026
+****************************************
+
+
+  Startpoint: u_linear_compute_core/core/weightBanks/banks_6/sram1/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/engine/peArray/pes_6/ACC_reg[47]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  u_linear_compute_core/core/weightBanks/banks_6/sram1/mem_ext/macro/CLK (RAMSP1024X16)
+                                                      0.00000000 0.00000000 r
+  u_linear_compute_core/core/weightBanks/banks_6/sram1/mem_ext/macro/Q[2] (RAMSP1024X16)
+                                                      1.70031309 1.70031309 r
+  u_linear_compute_core/core/weightBanks/banks_6/U5/Z (MUX2V2_12TR40)
+                                                      0.09194231 1.79225540 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U649/Z (BUFV4_12TR40)
+                                                      0.09338951 1.88564491 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U658/ZN (CLKINV0_12TR40)
+                                                      0.06537724 1.95102215 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U656/ZN (NAND2CV2_12TR40)
+                                                      0.03682518 1.98784733 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U657/ZN (NAND2CV2_12TR40)
+                                                      0.05596399 2.04381132 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U629/ZN (OAI22V6_12TR40)
+                                                      0.05399275 2.09780407 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U628/S (AD1V3_12TR40)
+                                                      0.17402220 2.27182627 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U967/S (AD1V2C_12TR40)
+                                                      0.17755795 2.44938421 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U632/Z (OR2V2_12TR40)
+                                                      0.09153318 2.54091740 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U859/ZN (AOI21V2_12TR40)
+                                                      0.08234167 2.62325907 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U858/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.69226336 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U861/ZN (AOI21V2_12TR40)
+                                                      0.08094025 2.77320361 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U857/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.84220791 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U848/ZN (AOI21V2_12TR40)
+                                                      0.08775377 2.92996168 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U845/ZN (OAI21V2_12TR40)
+                                                      0.07365084 3.00361252 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U850/ZN (AOI21V2_12TR40)
+                                                      0.08775377 3.09136629 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U846/ZN (OAI21V2_12TR40)
+                                                      0.07365084 3.16501713 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U662/ZN (AOI21V2_12TR40)
+                                                      0.08775377 3.25277090 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U847/ZN (OAI21V2_12TR40)
+                                                      0.08026481 3.33303571 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U643/ZN (AOI21V4_12TR40)
+                                                      0.07369661 3.40673232 r
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U840/ZN (OAI21V2_12TR40)
+                                                      0.04882312 3.45555544 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U663/Z (AO1B2V2_12TR40)
+                                                      0.08437800 3.53993344 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U63/CO (AD1V2C_12TR40)
+                                                      0.15563464 3.69556808 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U664/CO (AD1V2C_12TR40)
+                                                      0.16153693 3.85710502 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U61/CO (AD1V2C_12TR40)
+                                                      0.16152501 4.01863003 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U665/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.18015480 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U59/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.34167957 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U666/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.50320435 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U57/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.66472912 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U668/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.82625389 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U669/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.98777866 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U670/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.14930344 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U53/CO (AD1V2C_12TR40)
+                                                      0.15795803 5.30726147 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U645/CO (AD1V2T_12TR40)
+                                                      0.13635063 5.44361210 f
+  u_linear_compute_core/core/engine/peArray/pes_6/mult_58/U631/ZN (CLKINV10_12TR40)
+                                                      0.07258368 5.51619577 r
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U537/ZN (NAND2CV2_12TR40)
+                                                      0.05762529 5.57382107 f
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U440/ZN (OAI21V2_12TR40)
+                                                      0.07245827 5.64627934 r
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U439/ZN (AOI21V2_12TR40)
+                                                      0.04633713 5.69261646 f
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U424/ZN (OAI21V2_12TR40)
+                                                      0.07402706 5.76664352 r
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U428/ZN (AOI21V2_12TR40)
+                                                      0.06365013 5.83029366 f
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U354/Z (OR2V3_12TR40)
+                                                      0.09028387 5.92057753 f
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U355/ZN (CLKNAND2V4_12TR40)
+                                                      0.02866411 5.94924164 r
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U337/ZN (AOI21V2_12TR40)
+                                                      0.04932404 5.99856567 f
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U336/ZN (CLKINV2_12TR40)
+                                                      0.03969812 6.03826380 r
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U358/ZN (NAND2CV4_12TR40)
+                                                      0.02814484 6.06640863 f
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U359/ZN (CLKNAND2V4_12TR40)
+                                                      0.02560472 6.09201336 r
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U338/ZN (AOI21V2_12TR40)
+                                                      0.04968596 6.14169931 f
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U363/ZN (OAI21V2_12TR40)
+                                                      0.08564949 6.22734880 r
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U431/ZN (AOI21V2_12TR40)
+                                                      0.07061100 6.29795980 f
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U362/ZN (OAI21V2_12TR40)
+                                                      0.07943630 6.37739611 r
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U365/ZN (INV1SR_12TR40)
+                                                      0.03683186 6.41422796 f
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U371/ZN (CLKNAND2V2_12TR40)
+                                                      0.03118420 6.44541216 r
+  u_linear_compute_core/core/engine/peArray/pes_6/add_65/U339/ZN (NAND2CV2_12TR40)
+                                                      0.03080797 6.47622013 f
+  u_linear_compute_core/core/engine/peArray/pes_6/U4/ZN (CLKNAND2V2_12TR40)
+                                                      0.02705431 6.50327444 r
+  u_linear_compute_core/core/engine/peArray/pes_6/U6/ZN (NAND3V2_12TR40)
+                                                      0.05484676 6.55812120 f
+  u_linear_compute_core/core/engine/peArray/pes_6/ACC_reg[47]/D (DQV2_12TR40)
+                                                      0.00000000 6.55812120 f
+  data arrival time                                              6.55812120
+
+  clock xu_clk (rise edge)                            6.66666985 6.66666985
+  clock network delay (ideal)                         0.00000000 6.66666985
+  clock reconvergence pessimism                       0.00000000 6.66666985
+  clock uncertainty                                   -0.10000000
+                                                                 6.56666994
+  u_linear_compute_core/core/engine/peArray/pes_6/ACC_reg[47]/CK (DQV2_12TR40)
+                                                                 6.56666994 r
+  library setup time                                  -0.00562761
+                                                                 6.56104231
+  data required time                                             6.56104231
+  ------------------------------------------------------------------------------
+  data required time                                             6.56104231
+  data arrival time                                              -6.55812120
+  ------------------------------------------------------------------------------
+  slack (MET)                                                    0.00292103
+
+
+  Startpoint: u_linear_compute_core/core/weightBanks/banks_3/sram1/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/engine/peArray/pes_3/ACC_reg[47]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  u_linear_compute_core/core/weightBanks/banks_3/sram1/mem_ext/macro/CLK (RAMSP1024X16)
+                                                      0.00000000 0.00000000 r
+  u_linear_compute_core/core/weightBanks/banks_3/sram1/mem_ext/macro/Q[2] (RAMSP1024X16)
+                                                      1.70031309 1.70031309 r
+  u_linear_compute_core/core/weightBanks/banks_3/U4/Z (MUX2V2_12TR40)
+                                                      0.09277105 1.79308414 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U651/Z (BUFV5_12TR40)
+                                                      0.08238363 1.87546778 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U661/ZN (CLKINV0_12TR40)
+                                                      0.05636740 1.93183517 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U653/ZN (CLKNAND2V2_12TR40)
+                                                      0.03387260 1.96570778 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U648/ZN (NAND2CV2_12TR40)
+                                                      0.04886293 2.01457071 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U633/ZN (OAI22V4_12TR40)
+                                                      0.05743408 2.07200480 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U632/S (AD1V3_12TR40)
+                                                      0.17837286 2.25037766 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U965/S (AD1V2C_12TR40)
+                                                      0.17755795 2.42793560 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U637/Z (OR2V2_12TR40)
+                                                      0.09153223 2.51946783 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U857/ZN (AOI21V2_12TR40)
+                                                      0.08234143 2.60180926 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U856/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.67081356 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U859/ZN (AOI21V2_12TR40)
+                                                      0.08094025 2.75175381 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U855/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.82075810 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U846/ZN (AOI21V2_12TR40)
+                                                      0.08775377 2.90851188 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U844/ZN (OAI21V2_12TR40)
+                                                      0.07365084 2.98216271 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U848/ZN (AOI21V2_12TR40)
+                                                      0.08775377 3.06991649 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U845/ZN (OAI21V2_12TR40)
+                                                      0.07365084 3.14356732 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U664/ZN (AOI21V2_12TR40)
+                                                      0.10005879 3.24362612 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U627/ZN (OAI21V4_12TR40)
+                                                      0.07951880 3.32314491 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U626/ZN (AOI21V8_12TR40)
+                                                      0.05679488 3.37993979 r
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U839/ZN (OAI21V2_12TR40)
+                                                      0.04184246 3.42178226 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U665/Z (AO1B2V2_12TR40)
+                                                      0.08437800 3.50616026 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U63/CO (AD1V2C_12TR40)
+                                                      0.15563464 3.66179490 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U666/CO (AD1V2C_12TR40)
+                                                      0.16153693 3.82333183 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U61/CO (AD1V2C_12TR40)
+                                                      0.16152477 3.98485661 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U667/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.14638138 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U59/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.30790615 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U668/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.46943092 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U57/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.63095570 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U670/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.79248047 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U671/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.95400524 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U672/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.11553001 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U53/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.27705479 f
+  u_linear_compute_core/core/engine/peArray/pes_3/mult_58/U636/S (AD1V2C_12TR40)
+                                                      0.16726780 5.44432259 f
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U540/ZN (NOR2V2_12TR40)
+                                                      0.06530428 5.50962687 r
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U434/ZN (OAI21V2_12TR40)
+                                                      0.05800152 5.56762838 f
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U431/ZN (AOI21V2_12TR40)
+                                                      0.07151890 5.63914728 r
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U416/ZN (OAI21V2_12TR40)
+                                                      0.05942011 5.69856739 f
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U420/ZN (AOI21V2_12TR40)
+                                                      0.08456230 5.78312969 r
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U415/ZN (OAI21V2_12TR40)
+                                                      0.07375097 5.85688066 f
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U337/ZN (AOI21V2_12TR40)
+                                                      0.09541130 5.95229197 r
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U336/ZN (CLKINV4_12TR40)
+                                                      0.04873466 6.00102663 f
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U353/ZN (NAND2CV4_12TR40)
+                                                      0.02855492 6.02958155 r
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U354/ZN (CLKNAND2V4_12TR40)
+                                                      0.02913809 6.05871964 f
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U338/ZN (AOI21V2_12TR40)
+                                                      0.08084440 6.13956404 r
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U414/ZN (OAI21V2_12TR40)
+                                                      0.07362986 6.21319389 f
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U423/ZN (AOI21V2_12TR40)
+                                                      0.08764362 6.30083752 r
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U357/ZN (OAI21V2_12TR40)
+                                                      0.06619787 6.36703539 f
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U360/ZN (INV1SR_12TR40)
+                                                      0.03760338 6.40463877 r
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U361/ZN (CLKNAND2V2_12TR40)
+                                                      0.03501701 6.43965578 f
+  u_linear_compute_core/core/engine/peArray/pes_3/add_65/U358/ZN (NAND2V2_12TR40)
+                                                      0.03494740 6.47460318 r
+  u_linear_compute_core/core/engine/peArray/pes_3/U3/ZN (CLKNAND2V2_12TR40)
+                                                      0.03033113 6.50493431 f
+  u_linear_compute_core/core/engine/peArray/pes_3/U4/ZN (NAND3V2_12TR40)
+                                                      0.04455042 6.54948473 r
+  u_linear_compute_core/core/engine/peArray/pes_3/ACC_reg[47]/D (DQV2_12TR40)
+                                                      0.00000000 6.54948473 r
+  data arrival time                                              6.54948473
+
+  clock xu_clk (rise edge)                            6.66666985 6.66666985
+  clock network delay (ideal)                         0.00000000 6.66666985
+  clock reconvergence pessimism                       0.00000000 6.66666985
+  clock uncertainty                                   -0.10000000
+                                                                 6.56666994
+  u_linear_compute_core/core/engine/peArray/pes_3/ACC_reg[47]/CK (DQV2_12TR40)
+                                                                 6.56666994 r
+  library setup time                                  -0.01216431
+                                                                 6.55450535
+  data required time                                             6.55450535
+  ------------------------------------------------------------------------------
+  data required time                                             6.55450535
+  data arrival time                                              -6.54948473
+  ------------------------------------------------------------------------------
+  slack (MET)                                                    0.00502080
+
+
+  Startpoint: u_linear_compute_core/core/weightBanks/banks_4/sram1/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/engine/peArray/pes_4/ACC_reg[47]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  u_linear_compute_core/core/weightBanks/banks_4/sram1/mem_ext/macro/CLK (RAMSP1024X16)
+                                                      0.00000000 0.00000000 r
+  u_linear_compute_core/core/weightBanks/banks_4/sram1/mem_ext/macro/Q[2] (RAMSP1024X16)
+                                                      1.70031309 1.70031309 r
+  u_linear_compute_core/core/weightBanks/banks_4/U4/Z (MUX2V2_12TR40)
+                                                      0.09194231 1.79225540 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U656/Z (BUFV4_12TR40)
+                                                      0.09280443 1.88505983 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U671/ZN (CLKINV0_12TR40)
+                                                      0.06431389 1.94937372 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U664/ZN (CLKNAND2V2_12TR40)
+                                                      0.03486967 1.98424339 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U653/ZN (NAND2V2_12TR40)
+                                                      0.04777241 2.03201580 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U630/ZN (OAI22V4_12TR40)
+                                                      0.05686903 2.08888483 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U629/S (AD1V3_12TR40)
+                                                      0.17837286 2.26725769 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U972/S (AD1V2C_12TR40)
+                                                      0.17755795 2.44481564 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U637/Z (OR2V2_12TR40)
+                                                      0.09153223 2.53634787 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U865/ZN (AOI21V2_12TR40)
+                                                      0.08234143 2.61868930 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U864/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.68769360 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U867/ZN (AOI21V2_12TR40)
+                                                      0.08094025 2.76863384 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U863/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.83763814 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U854/ZN (AOI21V2_12TR40)
+                                                      0.08775377 2.92539191 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U851/ZN (OAI21V2_12TR40)
+                                                      0.07365084 2.99904275 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U856/ZN (AOI21V2_12TR40)
+                                                      0.08775377 3.08679652 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U852/ZN (OAI21V2_12TR40)
+                                                      0.07365084 3.16044736 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U673/ZN (AOI21V2_12TR40)
+                                                      0.08775377 3.24820113 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U853/ZN (OAI21V2_12TR40)
+                                                      0.07362771 3.32182884 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U635/ZN (AOI21V2_12TR40)
+                                                      0.09812975 3.41995859 r
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U846/ZN (OAI21V2_12TR40)
+                                                      0.06534648 3.48530507 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U674/Z (AO1B2V2_12TR40)
+                                                      0.08437800 3.56968307 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U63/CO (AD1V2C_12TR40)
+                                                      0.15563464 3.72531772 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U675/CO (AD1V2C_12TR40)
+                                                      0.16153693 3.88685465 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U61/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.04837942 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U676/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.20990419 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U59/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.37142897 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U677/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.53295374 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U57/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.69447851 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U679/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.85600328 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U680/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.01752806 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U681/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.17905283 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U53/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.34057760 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U636/CO (AD1V2C_12TR40)
+                                                      0.18081999 5.52139759 f
+  u_linear_compute_core/core/engine/peArray/pes_4/mult_58/U631/ZN (CLKINV16_12TR40)
+                                                      0.06093979 5.58233738 r
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U529/ZN (NAND2CV2_12TR40)
+                                                      0.05021715 5.63255453 f
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U432/ZN (OAI21V2_12TR40)
+                                                      0.07063723 5.70319176 r
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U431/ZN (AOI21V2_12TR40)
+                                                      0.04626322 5.74945498 f
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U415/ZN (OAI21V2_12TR40)
+                                                      0.07402658 5.82348156 r
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U419/ZN (AOI21V2_12TR40)
+                                                      0.06387472 5.88735628 f
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U414/ZN (OAI21V2_12TR40)
+                                                      0.08941126 5.97676754 r
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U427/ZN (AOI21V2_12TR40)
+                                                      0.07805347 6.05482101 f
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U351/ZN (OAI21V4_12TR40)
+                                                      0.07464075 6.12946177 r
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U335/ZN (AOI21V4_12TR40)
+                                                      0.05217075 6.18163252 f
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U357/ZN (OAI21V4_12TR40)
+                                                      0.06057453 6.24220705 r
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U422/ZN (AOI21V2_12TR40)
+                                                      0.05695009 6.29915714 f
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U358/ZN (OAI21V2_12TR40)
+                                                      0.07552338 6.37468052 r
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U360/ZN (CLKNAND2V0_12TR40)
+                                                      0.06253910 6.43721962 f
+  u_linear_compute_core/core/engine/peArray/pes_4/add_65/U359/ZN (NAND2V2_12TR40)
+                                                      0.03677750 6.47399712 r
+  u_linear_compute_core/core/engine/peArray/pes_4/U4/ZN (CLKNAND2V2_12TR40)
+                                                      0.03051949 6.50451660 f
+  u_linear_compute_core/core/engine/peArray/pes_4/U6/ZN (NAND3V2_12TR40)
+                                                      0.04455042 6.54906702 r
+  u_linear_compute_core/core/engine/peArray/pes_4/ACC_reg[47]/D (DQV2_12TR40)
+                                                      0.00000000 6.54906702 r
+  data arrival time                                              6.54906702
+
+  clock xu_clk (rise edge)                            6.66666985 6.66666985
+  clock network delay (ideal)                         0.00000000 6.66666985
+  clock reconvergence pessimism                       0.00000000 6.66666985
+  clock uncertainty                                   -0.10000000
+                                                                 6.56666994
+  u_linear_compute_core/core/engine/peArray/pes_4/ACC_reg[47]/CK (DQV2_12TR40)
+                                                                 6.56666994 r
+  library setup time                                  -0.01216431
+                                                                 6.55450535
+  data required time                                             6.55450535
+  ------------------------------------------------------------------------------
+  data required time                                             6.55450535
+  data arrival time                                              -6.54906702
+  ------------------------------------------------------------------------------
+  slack (MET)                                                    0.00543851
+
+
+  Startpoint: u_linear_compute_core/core/weightBanks/banks_5/sram1/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/engine/peArray/pes_5/ACC_reg[47]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  u_linear_compute_core/core/weightBanks/banks_5/sram1/mem_ext/macro/CLK (RAMSP1024X16)
+                                                      0.00000000 0.00000000 r
+  u_linear_compute_core/core/weightBanks/banks_5/sram1/mem_ext/macro/Q[2] (RAMSP1024X16)
+                                                      1.70031309 1.70031309 r
+  u_linear_compute_core/core/weightBanks/banks_5/U4/Z (MUX2V2_12TR40)
+                                                      0.09194231 1.79225540 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U659/Z (BUFV4_12TR40)
+                                                      0.09280443 1.88505983 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U674/ZN (CLKINV0_12TR40)
+                                                      0.06431389 1.94937372 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U667/ZN (CLKNAND2V2_12TR40)
+                                                      0.03486967 1.98424339 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U656/ZN (NAND2V2_12TR40)
+                                                      0.04777241 2.03201580 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U631/ZN (OAI22V4_12TR40)
+                                                      0.05686903 2.08888483 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U630/S (AD1V3_12TR40)
+                                                      0.17837238 2.26725721 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U973/S (AD1V2C_12TR40)
+                                                      0.17755795 2.44481516 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U639/Z (OR2V2_12TR40)
+                                                      0.09153223 2.53634739 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U866/ZN (AOI21V2_12TR40)
+                                                      0.08234167 2.61868906 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U865/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.68769336 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U868/ZN (AOI21V2_12TR40)
+                                                      0.08094025 2.76863360 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U864/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.83763790 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U855/ZN (AOI21V2_12TR40)
+                                                      0.08775377 2.92539167 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U853/ZN (OAI21V2_12TR40)
+                                                      0.07365084 2.99904251 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U857/ZN (AOI21V2_12TR40)
+                                                      0.08775377 3.08679628 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U854/ZN (OAI21V2_12TR40)
+                                                      0.08028865 3.16708493 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U626/ZN (AOI21V4_12TR40)
+                                                      0.06858277 3.23566771 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U634/ZN (OAI21V2_12TR40)
+                                                      0.06471610 3.30038381 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U637/ZN (AOI21V2_12TR40)
+                                                      0.06979179 3.37017560 r
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U848/ZN (OAI21V2_12TR40)
+                                                      0.04642749 3.41660309 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U676/Z (AO1B2V2_12TR40)
+                                                      0.08437800 3.50098109 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U63/CO (AD1V2C_12TR40)
+                                                      0.15563464 3.65661573 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U677/CO (AD1V2C_12TR40)
+                                                      0.16153693 3.81815267 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U61/CO (AD1V2C_12TR40)
+                                                      0.16152477 3.97967744 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U678/CO (AD1V2C_12TR40)
+                                                      0.16152453 4.14120197 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U59/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.30272675 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U679/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.46425152 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U57/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.62577629 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U681/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.78730106 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U682/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.94882584 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U683/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.11035061 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U53/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.27187538 f
+  u_linear_compute_core/core/engine/peArray/pes_5/mult_58/U638/S (AD1V2C_12TR40)
+                                                      0.16726780 5.43914318 f
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U540/ZN (NOR2V2_12TR40)
+                                                      0.06530476 5.50444794 r
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U434/ZN (OAI21V2_12TR40)
+                                                      0.05800152 5.56244946 f
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U431/ZN (AOI21V2_12TR40)
+                                                      0.07151890 5.63396835 r
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U416/ZN (OAI21V2_12TR40)
+                                                      0.05942011 5.69338846 f
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U420/ZN (AOI21V2_12TR40)
+                                                      0.08456182 5.77795029 r
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U415/ZN (OAI21V2_12TR40)
+                                                      0.07375145 5.85170174 f
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U427/ZN (AOI21V2_12TR40)
+                                                      0.08761930 5.93932104 r
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U414/ZN (OAI21V2_12TR40)
+                                                      0.07362986 6.01295090 f
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U337/ZN (AOI21V2_12TR40)
+                                                      0.09541178 6.10836267 r
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U336/ZN (CLKINV4_12TR40)
+                                                      0.04873419 6.15709686 f
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U353/ZN (NAND2CV4_12TR40)
+                                                      0.02855539 6.18565226 r
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U354/ZN (CLKNAND2V4_12TR40)
+                                                      0.02917576 6.21482801 f
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U338/ZN (AOI21V2_12TR40)
+                                                      0.08107376 6.29590178 r
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U357/ZN (OAI21V2_12TR40)
+                                                      0.06603003 6.36193180 f
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U360/ZN (INV1SR_12TR40)
+                                                      0.03752470 6.39945650 r
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U361/ZN (CLKNAND2V2_12TR40)
+                                                      0.03499556 6.43445206 f
+  u_linear_compute_core/core/engine/peArray/pes_5/add_65/U358/ZN (NAND2V2_12TR40)
+                                                      0.03494740 6.46939945 r
+  u_linear_compute_core/core/engine/peArray/pes_5/U3/ZN (CLKNAND2V2_12TR40)
+                                                      0.03051758 6.49991703 f
+  u_linear_compute_core/core/engine/peArray/pes_5/U4/ZN (NAND3V2_12TR40)
+                                                      0.04455042 6.54446745 r
+  u_linear_compute_core/core/engine/peArray/pes_5/ACC_reg[47]/D (DQV2_12TR40)
+                                                      0.00000000 6.54446745 r
+  data arrival time                                              6.54446745
+
+  clock xu_clk (rise edge)                            6.66666985 6.66666985
+  clock network delay (ideal)                         0.00000000 6.66666985
+  clock reconvergence pessimism                       0.00000000 6.66666985
+  clock uncertainty                                   -0.10000000
+                                                                 6.56666994
+  u_linear_compute_core/core/engine/peArray/pes_5/ACC_reg[47]/CK (DQV2_12TR40)
+                                                                 6.56666994 r
+  library setup time                                  -0.01213050
+                                                                 6.55453920
+  data required time                                             6.55453920
+  ------------------------------------------------------------------------------
+  data required time                                             6.55453920
+  data arrival time                                              -6.54446745
+  ------------------------------------------------------------------------------
+  slack (MET)                                                    0.01007190
+
+
+  Startpoint: u_linear_compute_core/core/weightBanks/banks_7/sram1/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/engine/peArray/pes_7/ACC_reg[47]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  u_linear_compute_core/core/weightBanks/banks_7/sram1/mem_ext/macro/CLK (RAMSP1024X16)
+                                                      0.00000000 0.00000000 r
+  u_linear_compute_core/core/weightBanks/banks_7/sram1/mem_ext/macro/Q[0] (RAMSP1024X16)
+                                                      1.70059156 1.70059156 r
+  u_linear_compute_core/core/weightBanks/banks_7/U13/Z (MUX2V4_12TR40)
+                                                      0.08520317 1.78579473 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U664/Z (BUFV16_12TR40)
+                                                      0.06383228 1.84962702 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U789/ZN (XNOR2V0_12TR40)
+                                                      0.07108021 1.92070723 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U640/ZN (OAI22V2_12TR40)
+                                                      0.08140898 2.00211620 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U972/S (ADH1V2C_12TR40)
+                                                      0.16044903 2.16256523 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U969/S (AD1V2C_12TR40)
+                                                      0.18018484 2.34275007 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U729/ZN (NOR2CV2_12TR40)
+                                                      0.06664419 2.40939426 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U900/ZN (OAI21V2_12TR40)
+                                                      0.06138229 2.47077656 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U851/ZN (AOI21V2_12TR40)
+                                                      0.07896829 2.54974484 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U850/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.61874914 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U853/ZN (AOI21V2_12TR40)
+                                                      0.08094025 2.69968939 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U849/ZN (OAI21V2_12TR40)
+                                                      0.06900430 2.76869369 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U840/ZN (AOI21V2_12TR40)
+                                                      0.08775377 2.85644746 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U837/ZN (OAI21V2_12TR40)
+                                                      0.07365084 2.93009830 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U842/ZN (AOI21V2_12TR40)
+                                                      0.08775377 3.01785207 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U838/ZN (OAI21V2_12TR40)
+                                                      0.07365084 3.09150290 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U668/ZN (AOI21V2_12TR40)
+                                                      0.08775377 3.17925668 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U839/ZN (OAI21V2_12TR40)
+                                                      0.07362771 3.25288439 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U649/ZN (AOI21V2_12TR40)
+                                                      0.08759069 3.34047508 r
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U650/ZN (OAI21V2_12TR40)
+                                                      0.07451248 3.41498756 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U667/Z (AO1B2V2_12TR40)
+                                                      0.09107065 3.50605822 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U63/CO (AD1V2C_12TR40)
+                                                      0.15563464 3.66169286 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U669/CO (AD1V2C_12TR40)
+                                                      0.16153693 3.82322979 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U61/CO (AD1V2C_12TR40)
+                                                      0.16152477 3.98475456 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U670/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.14627934 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U59/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.30780411 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U671/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.46932888 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U57/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.63085365 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U673/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.79237843 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U674/CO (AD1V2C_12TR40)
+                                                      0.16152477 4.95390320 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U675/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.11542797 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U53/CO (AD1V2C_12TR40)
+                                                      0.16152477 5.27695274 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U651/CO (AD1V2C_12TR40)
+                                                      0.17017841 5.44713116 f
+  u_linear_compute_core/core/engine/peArray/pes_7/mult_58/U644/ZN (CLKINV10_12TR40)
+                                                      0.06280708 5.50993824 r
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U383/ZN (CLKNAND2V0_12TR40)
+                                                      0.08086538 5.59080362 f
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U436/ZN (OAI21V2_12TR40)
+                                                      0.08619070 5.67699432 r
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U434/ZN (AOI21V2_12TR40)
+                                                      0.04792500 5.72491932 f
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U419/ZN (OAI21V2_12TR40)
+                                                      0.07402658 5.79894590 r
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U421/ZN (AOI21V2_12TR40)
+                                                      0.06387424 5.86282015 f
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U418/ZN (OAI21V2_12TR40)
+                                                      0.08941126 5.95223141 r
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U429/ZN (AOI21V2_12TR40)
+                                                      0.07177067 6.02400208 f
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U417/ZN (OAI21V2_12TR40)
+                                                      0.09053278 6.11453485 r
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U426/ZN (AOI21V2_12TR40)
+                                                      0.07810211 6.19263697 f
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U353/ZN (OAI21V4_12TR40)
+                                                      0.07464552 6.26728249 r
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U335/ZN (AOI21V4_12TR40)
+                                                      0.05217171 6.31945419 f
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U358/ZN (OAI21V4_12TR40)
+                                                      0.05569458 6.37514877 r
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U357/ZN (INV1SR_12TR40)
+                                                      0.02926159 6.40441036 f
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U354/ZN (CLKNAND2V2_12TR40)
+                                                      0.02809286 6.43250322 r
+  u_linear_compute_core/core/engine/peArray/pes_7/add_65/U338/ZN (NAND2CV2_12TR40)
+                                                      0.03202820 6.46453142 f
+  u_linear_compute_core/core/engine/peArray/pes_7/U3/ZN (NAND2CV2_12TR40)
+                                                      0.02888203 6.49341345 r
+  u_linear_compute_core/core/engine/peArray/pes_7/U4/ZN (NAND3V2_12TR40)
+                                                      0.05526543 6.54867887 f
+  u_linear_compute_core/core/engine/peArray/pes_7/ACC_reg[47]/D (DQV2_12TR40)
+                                                      0.00000000 6.54867887 f
+  data arrival time                                              6.54867887
+
+  clock xu_clk (rise edge)                            6.66666985 6.66666985
+  clock network delay (ideal)                         0.00000000 6.66666985
+  clock reconvergence pessimism                       0.00000000 6.66666985
+  clock uncertainty                                   -0.10000000
+                                                                 6.56666994
+  u_linear_compute_core/core/engine/peArray/pes_7/ACC_reg[47]/CK (DQV2_12TR40)
+                                                                 6.56666994 r
+  library setup time                                  -0.00562761
+                                                                 6.56104231
+  data required time                                             6.56104231
+  ------------------------------------------------------------------------------
+  data required time                                             6.56104231
+  data arrival time                                              -6.54867887
+  ------------------------------------------------------------------------------
+  slack (MET)                                                    0.01236336
+
+Warning: report_timing has satisfied the max_paths criteria. There are 12988 further endpoints which have paths of interest with slack less than 1000.00000000 that were not considered when generating this report. (UITE-502)
+
+1

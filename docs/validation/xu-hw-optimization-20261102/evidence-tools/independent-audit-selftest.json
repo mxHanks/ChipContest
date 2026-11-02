@@ -1,0 +1,112 @@
+{
+  "checks": [
+    {
+      "name": "unchanged_complete_local_record",
+      "rejected": false,
+      "status": "PASS"
+    },
+    {
+      "error": "incomplete numerical output/writeback: H1H2-real1",
+      "name": "output_missing",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "incomplete numerical output/writeback: H1H2-real1",
+      "name": "writeback_missing",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "unordered/duplicate/missing layers: H1H2-real1",
+      "name": "duplicate_layer",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "six phases do not cover window: H1H2-real1",
+      "name": "phase_partition_wrong",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "incorrect fixed work/transaction mmio_writes: H1H2-real1",
+      "name": "mmio_transaction_wrong",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "incorrect fixed work/transaction mac_fire: H1H2-real1",
+      "name": "mac_fire_wrong",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "invalid firmware mcycle window: H1H2-real1",
+      "name": "mcycle_smaller_than_window",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "declared transaction contract differs: H1H2-real1",
+      "name": "declared_work_wrong",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "compiler optimization or independent hardware mode differs: H1H2-real1",
+      "name": "compiler_mode_mismatch",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "real fixture identity changed: layer_00/y.mem",
+      "name": "vector_identity_mismatch",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "measurement runner/contract source mismatch",
+      "name": "runner_identity_mismatch",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "firmware artifact hash metadata differs: H1H2-real1",
+      "name": "firmware_artifact_mismatch",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "failure marker in complete log: H1H2-real1",
+      "name": "complete_log_failure_marker",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "malformed TASK_PASS lines: H1H2-real1",
+      "name": "complete_log_duplicate_task_pass",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "malformed PERF_TASK lines: H1H2-real1",
+      "name": "complete_log_missing_perf_record",
+      "rejected": true,
+      "status": "PASS"
+    },
+    {
+      "error": "incomplete SOC_PASS: H1H2-real1",
+      "name": "complete_log_wrong_completion",
+      "rejected": true,
+      "status": "PASS"
+    }
+  ],
+  "intentional_corruptions_rejected": 16,
+  "positive_controls": 1,
+  "runtime_modules_imported": false,
+  "scope": "isolated semantic/log verifier tests against one complete local real1 record; not end-to-end server acceptance",
+  "source_result_sha256": "6bcfeb7bd3ef09f1902f65a07baacddb80bcaf06bc62d9057aaf7aa5a3e60e54",
+  "status": "PASS",
+  "verifier_sha256": "f865004467ab97d8571e811a064fbb0aa6c4e8f74ebd70faca6f381558325507"
+}

@@ -1,0 +1,32 @@
+****************************************
+Report : Averaged Power
+Design : accel_icb_slave
+Version: T-2022.03-SP5-1
+Date   : Mon Nov  2 18:33:23 2026
+****************************************
+
+
+
+  Attributes
+  ----------
+      i  -  Including register clock pin internal power
+      u  -  User defined power group
+
+                        Internal  Switching  Leakage    Total
+Power Group             Power     Power      Power      Power   (     %)  Attrs
+--------------------------------------------------------------------------------
+clock_network           1.879e-03    0.0000    0.0000 1.879e-03 (58.82%)  i
+register                5.955e-06 3.689e-06 1.058e-05 2.022e-05 ( 0.63%)  
+combinational           3.050e-04 2.014e-04 3.363e-05 5.401e-04 (16.91%)  
+sequential                 0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+memory                  4.657e-04 4.830e-07 2.892e-04 7.553e-04 (23.64%)  
+io_pad                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+black_box                  0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+
+  Net Switching Power  = 2.056e-04   ( 6.44%)
+  Cell Internal Power  = 2.656e-03   (83.13%)
+  Cell Leakage Power   = 3.334e-04   (10.44%)
+                         ---------
+Total Power            = 3.195e-03  (100.00%)
+
+1

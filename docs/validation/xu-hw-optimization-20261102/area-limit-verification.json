@@ -1,0 +1,32 @@
+{
+  "area_proof_sha256": "8df6f900caf17e522ee4342295480bd605a62a0c1049b4a4ed5ba2414330cf3c",
+  "cases": {
+    "baseline": {
+      "area_mm2": 0.181530844586,
+      "headroom_mm2": 2.0684691554140002,
+      "limit_fraction": 0.08068037537155555,
+      "limit_mm2": 2.25,
+      "synthesis_cell_plus_macro_budget_pass": true
+    },
+    "candidate": {
+      "area_mm2": 0.293988515714,
+      "headroom_mm2": 1.956011484286,
+      "limit_fraction": 0.13066156253955555,
+      "limit_mm2": 2.25,
+      "synthesis_cell_plus_macro_budget_pass": true
+    }
+  },
+  "current_requirement_sha256": "3b6a1e463a517ad7d2bc1530e57aa09d326bebfc762c4c98995bb5ae2a947d41",
+  "evidence_kind": "independent derived numerical and original reference-byte audit",
+  "lef_syntax_reference": "Cadence LEF/DEF 5.7 Language Reference p183: https://www.ispd.cc/contests/18/lefdefref.pdf",
+  "limitations": [
+    "Cell plus macro footprint sum from synthesis, not placed-and-routed core/die bounding-box area",
+    "No placement utilization, routing space, CTS/hold-fix/tap/filler insertion or final physical overhead included",
+    "Physical signoff remains incomplete due to hold violations, untested timing checks and unqualified experimental SRAM adapter"
+  ],
+  "paired_summary_sha256": "3c20a1b677bc88ffa772f9a18734aacd35847dde60f6bfdccf31fd9764b53ed9",
+  "requirement_note": "Latest user correction sets 2.25 mm2; original 2.5 mm2 server receipt preserved byte-for-byte.",
+  "source_receipt_historical_limit_mm2": 2.5,
+  "status": "PASS",
+  "unit_basis": "Four mapped standard-cell areas equal LEF SIZE products in um2; exact SRAM Liberty area equals its LEF footprint"
+}

@@ -1,0 +1,1489 @@
+{
+  "baseline_cycles": 25251416,
+  "conditional_frequency_mhz": 150,
+  "conditional_mean_latency_ms": 9.172413333333333,
+  "conditional_tasks_per_second": 109.0225618557675,
+  "counters": [
+    {
+      "baseline": 2585088,
+      "counter": "busy",
+      "delta": 0,
+      "final": 2585088
+    },
+    {
+      "baseline": 2433024,
+      "counter": "mac_fire",
+      "delta": 0,
+      "final": 2433024
+    },
+    {
+      "baseline": 912384,
+      "counter": "mmio_reads",
+      "delta": 0,
+      "final": 912384
+    },
+    {
+      "baseline": 1875912,
+      "counter": "mmio_writes",
+      "delta": -1207272,
+      "final": 668640
+    },
+    {
+      "baseline": 278784,
+      "counter": "shared_reads",
+      "delta": 0,
+      "final": 278784
+    },
+    {
+      "baseline": 608256,
+      "counter": "shared_writes",
+      "delta": 0,
+      "final": 608256
+    },
+    {
+      "baseline": 92024,
+      "counter": "shared_stall",
+      "delta": 38296,
+      "final": 130320
+    },
+    {
+      "baseline": 0,
+      "counter": "mmio_stall",
+      "delta": 0,
+      "final": 0
+    },
+    {
+      "baseline": 38016,
+      "counter": "starts",
+      "delta": 0,
+      "final": 38016
+    },
+    {
+      "baseline": 38016,
+      "counter": "dones",
+      "delta": 0,
+      "final": 38016
+    }
+  ],
+  "cycle_reduction_fraction": 0.34616165683540284,
+  "delta_cycles": -8741072,
+  "evidence_kind": "locally derived from exact server JSON; not simulation log originals",
+  "experiments": [
+    {
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm"
+      },
+      "cycles": 25251416,
+      "delta_vs_baseline": 0,
+      "delta_vs_reference": 0,
+      "firmware_build": {
+        "command": [
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+          "-march=rv32imac_zicsr2p0_zifencei2p0",
+          "-mabi=ilp32",
+          "-O2",
+          "-DXU_FIRMWARE_BIAS_DTCM=1",
+          "-DXU_HARDWARE_BIAS_CACHE=0",
+          "-DXU_HARDWARE_RESULT_WINDOW=0",
+          "-DXU_FIRMWARE_BIAS_UNROLL=1",
+          "-DXU_FIRMWARE_RESULT_UNROLL=1",
+          "-DXU_FIRMWARE_NO_MASKS=1",
+          "-fstack-usage",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-msmall-data-limit=0",
+          "-nostdlib",
+          "-nostartfiles",
+          "-static",
+          "-mcmodel=medany",
+          "-Wl,--no-relax",
+          "-T",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/link.ld",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/start.S",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/main.c",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c",
+          "-o",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/xu-vcs-hw-campaign-01/B0-new-RTL-real12/accel_soc"
+        ],
+        "configuration": {
+          "experiment": "both-unroll-no-masks",
+          "optimization": "-O2",
+          "schedule": "bias-dtcm"
+        },
+        "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/xu-vcs-hw-campaign-01/B0-new-RTL-real12",
+        "elf_sha256": "c66d554422a394c6c1dc3fd08808f102e0101d8e9d6f496a64e03f59fa8932ad",
+        "image_sha256": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+        "memory": {
+          "bss_bytes": 2048,
+          "data_bytes": 0,
+          "dtcm_capacity_bytes": 65536,
+          "itcm_bytes": 962,
+          "itcm_capacity_bytes": 65536,
+          "itcm_remaining_bytes": 64574,
+          "max_static_stack_frame_bytes": 48,
+          "stack_capacity_after_bss_bytes": 63472,
+          "stack_frames": [
+            {
+              "bytes": 48,
+              "kind": "static",
+              "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c:51:5:accel_linear"
+            },
+            {
+              "bytes": 32,
+              "kind": "static",
+              "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/main.c:3:5:main"
+            }
+          ],
+          "stack_top": 2415984624,
+          "stack_top_guard_bytes": 16,
+          "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+        },
+        "source_sha256": {
+          "accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+          "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+          "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+          "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+          "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+        }
+      },
+      "layers_vs_baseline": [
+        {
+          "cycles": 2104281,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104360,
+          "layer": 0,
+          "reference_cycles": 2104281,
+          "reference_firmware_cycles": 2104360
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 1,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 2,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 3,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 4,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 5,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 6,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 7,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 8,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 9,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 10,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 11,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        }
+      ],
+      "layers_vs_reference": [
+        {
+          "cycles": 2104281,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104360,
+          "layer": 0,
+          "reference_cycles": 2104281,
+          "reference_firmware_cycles": 2104360
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 1,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 2,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 3,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 4,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 5,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 6,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 7,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 8,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 9,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 10,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 2104285,
+          "delta_cycles": 0,
+          "delta_firmware_cycles": 0,
+          "firmware_cycles": 2104364,
+          "layer": 11,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        }
+      ],
+      "name": "B0-new-RTL",
+      "reference": null,
+      "speedup_vs_baseline": 1.0,
+      "status": "PASS"
+    },
+    {
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "bias-hw"
+      },
+      "cycles": 18271573,
+      "delta_vs_baseline": -6979843,
+      "delta_vs_reference": -6979843,
+      "firmware_build": {
+        "command": [
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+          "-march=rv32imac_zicsr2p0_zifencei2p0",
+          "-mabi=ilp32",
+          "-O2",
+          "-DXU_FIRMWARE_BIAS_DTCM=0",
+          "-DXU_HARDWARE_BIAS_CACHE=1",
+          "-DXU_HARDWARE_RESULT_WINDOW=0",
+          "-DXU_FIRMWARE_BIAS_UNROLL=1",
+          "-DXU_FIRMWARE_RESULT_UNROLL=1",
+          "-DXU_FIRMWARE_NO_MASKS=1",
+          "-fstack-usage",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-msmall-data-limit=0",
+          "-nostdlib",
+          "-nostartfiles",
+          "-static",
+          "-mcmodel=medany",
+          "-Wl,--no-relax",
+          "-T",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/link.ld",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/start.S",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/main.c",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c",
+          "-o",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/xu-vcs-hw-campaign-01/H1-bias-cache-real12/accel_soc"
+        ],
+        "configuration": {
+          "experiment": "both-unroll-no-masks",
+          "optimization": "-O2",
+          "schedule": "bias-hw"
+        },
+        "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/xu-vcs-hw-campaign-01/H1-bias-cache-real12",
+        "elf_sha256": "4889ac8286b5b3bdc406494bec6270989b595ac7819c1b878947596603377e00",
+        "image_sha256": "00a2b23d2f568f41e26be8ee1b3a741c0d74fbef81ecd3b5893c9118b24d59de",
+        "memory": {
+          "bss_bytes": 0,
+          "data_bytes": 0,
+          "dtcm_capacity_bytes": 65536,
+          "itcm_bytes": 758,
+          "itcm_capacity_bytes": 65536,
+          "itcm_remaining_bytes": 64778,
+          "max_static_stack_frame_bytes": 32,
+          "stack_capacity_after_bss_bytes": 65520,
+          "stack_frames": [
+            {
+              "bytes": 32,
+              "kind": "static",
+              "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c:51:5:accel_linear"
+            },
+            {
+              "bytes": 32,
+              "kind": "static",
+              "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/main.c:3:5:main"
+            }
+          ],
+          "stack_top": 2415984624,
+          "stack_top_guard_bytes": 16,
+          "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+        },
+        "source_sha256": {
+          "accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+          "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+          "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+          "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+          "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+        }
+      },
+      "layers_vs_baseline": [
+        {
+          "cycles": 1522632,
+          "delta_cycles": -581649,
+          "delta_firmware_cycles": -581645,
+          "firmware_cycles": 1522715,
+          "layer": 0,
+          "reference_cycles": 2104281,
+          "reference_firmware_cycles": 2104360
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 1,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 2,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 3,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 4,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 5,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 6,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 7,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 8,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 9,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 10,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 11,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        }
+      ],
+      "layers_vs_reference": [
+        {
+          "cycles": 1522632,
+          "delta_cycles": -581649,
+          "delta_firmware_cycles": -581645,
+          "firmware_cycles": 1522715,
+          "layer": 0,
+          "reference_cycles": 2104281,
+          "reference_firmware_cycles": 2104360
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 1,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 2,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 3,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 4,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 5,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 6,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 7,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 8,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 9,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 10,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1522631,
+          "delta_cycles": -581654,
+          "delta_firmware_cycles": -581650,
+          "firmware_cycles": 1522714,
+          "layer": 11,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        }
+      ],
+      "name": "H1-bias-cache",
+      "reference": "B0-new-RTL",
+      "speedup_vs_baseline": 1.3820055886813905,
+      "status": "PASS"
+    },
+    {
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "bias-dtcm-window"
+      },
+      "cycles": 23457855,
+      "delta_vs_baseline": -1793561,
+      "delta_vs_reference": -1793561,
+      "firmware_build": {
+        "command": [
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+          "-march=rv32imac_zicsr2p0_zifencei2p0",
+          "-mabi=ilp32",
+          "-O2",
+          "-DXU_FIRMWARE_BIAS_DTCM=1",
+          "-DXU_HARDWARE_BIAS_CACHE=0",
+          "-DXU_HARDWARE_RESULT_WINDOW=1",
+          "-DXU_FIRMWARE_BIAS_UNROLL=1",
+          "-DXU_FIRMWARE_RESULT_UNROLL=1",
+          "-DXU_FIRMWARE_NO_MASKS=1",
+          "-fstack-usage",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-msmall-data-limit=0",
+          "-nostdlib",
+          "-nostartfiles",
+          "-static",
+          "-mcmodel=medany",
+          "-Wl,--no-relax",
+          "-T",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/link.ld",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/start.S",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/main.c",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c",
+          "-o",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/xu-vcs-hw-campaign-01/H2-result-window-real12/accel_soc"
+        ],
+        "configuration": {
+          "experiment": "both-unroll-no-masks",
+          "optimization": "-O2",
+          "schedule": "bias-dtcm-window"
+        },
+        "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/xu-vcs-hw-campaign-01/H2-result-window-real12",
+        "elf_sha256": "f80f27ea36ae413e779589d17a9402a4fa2e142264ee8f75f1b2a5eb893334b0",
+        "image_sha256": "485a719f574e706ef4a94cc5603f1e6dd5c48c4ce52c8a90d697f954b78b539d",
+        "memory": {
+          "bss_bytes": 2048,
+          "data_bytes": 0,
+          "dtcm_capacity_bytes": 65536,
+          "itcm_bytes": 942,
+          "itcm_capacity_bytes": 65536,
+          "itcm_remaining_bytes": 64594,
+          "max_static_stack_frame_bytes": 32,
+          "stack_capacity_after_bss_bytes": 63472,
+          "stack_frames": [
+            {
+              "bytes": 32,
+              "kind": "static",
+              "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c:51:5:accel_linear"
+            },
+            {
+              "bytes": 32,
+              "kind": "static",
+              "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/main.c:3:5:main"
+            }
+          ],
+          "stack_top": 2415984624,
+          "stack_top_guard_bytes": 16,
+          "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+        },
+        "source_sha256": {
+          "accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+          "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+          "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+          "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+          "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+        }
+      },
+      "layers_vs_baseline": [
+        {
+          "cycles": 1954822,
+          "delta_cycles": -149459,
+          "delta_firmware_cycles": -149450,
+          "firmware_cycles": 1954910,
+          "layer": 0,
+          "reference_cycles": 2104281,
+          "reference_firmware_cycles": 2104360
+        },
+        {
+          "cycles": 1954823,
+          "delta_cycles": -149462,
+          "delta_firmware_cycles": -149454,
+          "firmware_cycles": 1954910,
+          "layer": 1,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 2,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 3,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 4,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 5,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 6,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 7,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 8,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 9,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 10,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 11,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        }
+      ],
+      "layers_vs_reference": [
+        {
+          "cycles": 1954822,
+          "delta_cycles": -149459,
+          "delta_firmware_cycles": -149450,
+          "firmware_cycles": 1954910,
+          "layer": 0,
+          "reference_cycles": 2104281,
+          "reference_firmware_cycles": 2104360
+        },
+        {
+          "cycles": 1954823,
+          "delta_cycles": -149462,
+          "delta_firmware_cycles": -149454,
+          "firmware_cycles": 1954910,
+          "layer": 1,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 2,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 3,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 4,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 5,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 6,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 7,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 8,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 9,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 10,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1954821,
+          "delta_cycles": -149464,
+          "delta_firmware_cycles": -149456,
+          "firmware_cycles": 1954908,
+          "layer": 11,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        }
+      ],
+      "name": "H2-result-window",
+      "reference": "B0-new-RTL",
+      "speedup_vs_baseline": 1.0764588663370969,
+      "status": "PASS"
+    },
+    {
+      "configuration": {
+        "experiment": "both-unroll-no-masks",
+        "optimization": "-O2",
+        "schedule": "bias-hw-window"
+      },
+      "cycles": 16510344,
+      "delta_vs_baseline": -8741072,
+      "delta_vs_reference": -1761229,
+      "firmware_build": {
+        "command": [
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+          "-march=rv32imac_zicsr2p0_zifencei2p0",
+          "-mabi=ilp32",
+          "-O2",
+          "-DXU_FIRMWARE_BIAS_DTCM=0",
+          "-DXU_HARDWARE_BIAS_CACHE=1",
+          "-DXU_HARDWARE_RESULT_WINDOW=1",
+          "-DXU_FIRMWARE_BIAS_UNROLL=1",
+          "-DXU_FIRMWARE_RESULT_UNROLL=1",
+          "-DXU_FIRMWARE_NO_MASKS=1",
+          "-fstack-usage",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-msmall-data-limit=0",
+          "-nostdlib",
+          "-nostartfiles",
+          "-static",
+          "-mcmodel=medany",
+          "-Wl,--no-relax",
+          "-T",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/link.ld",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/start.S",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/main.c",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c",
+          "-o",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/xu-vcs-hw-campaign-01/H1H2-combined-real12/accel_soc"
+        ],
+        "configuration": {
+          "experiment": "both-unroll-no-masks",
+          "optimization": "-O2",
+          "schedule": "bias-hw-window"
+        },
+        "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/xu-vcs-hw-campaign-01/H1H2-combined-real12",
+        "elf_sha256": "3ebce7dfe768ae98556500d408e3a564ebb590a31ddf48f49bd164741d0b0395",
+        "image_sha256": "6e22a1bffbd74c5cfc9b6d8603ce71a9f413ec5d2aea5df8bf792b922461e4e1",
+        "memory": {
+          "bss_bytes": 0,
+          "data_bytes": 0,
+          "dtcm_capacity_bytes": 65536,
+          "itcm_bytes": 722,
+          "itcm_capacity_bytes": 65536,
+          "itcm_remaining_bytes": 64814,
+          "max_static_stack_frame_bytes": 32,
+          "stack_capacity_after_bss_bytes": 65520,
+          "stack_frames": [
+            {
+              "bytes": 16,
+              "kind": "static",
+              "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/accel.c:51:5:accel_linear"
+            },
+            {
+              "bytes": 32,
+              "kind": "static",
+              "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ChipContest/tests/e203/firmware/main.c:3:5:main"
+            }
+          ],
+          "stack_top": 2415984624,
+          "stack_top_guard_bytes": 16,
+          "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+        },
+        "source_sha256": {
+          "accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+          "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+          "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+          "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+          "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+        }
+      },
+      "layers_vs_baseline": [
+        {
+          "cycles": 1375864,
+          "delta_cycles": -728417,
+          "delta_firmware_cycles": -728425,
+          "firmware_cycles": 1375935,
+          "layer": 0,
+          "reference_cycles": 2104281,
+          "reference_firmware_cycles": 2104360
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -728425,
+          "delta_firmware_cycles": -728432,
+          "firmware_cycles": 1375932,
+          "layer": 1,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -728421,
+          "delta_firmware_cycles": -728429,
+          "firmware_cycles": 1375935,
+          "layer": 2,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -728425,
+          "delta_firmware_cycles": -728432,
+          "firmware_cycles": 1375932,
+          "layer": 3,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -728421,
+          "delta_firmware_cycles": -728429,
+          "firmware_cycles": 1375935,
+          "layer": 4,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -728425,
+          "delta_firmware_cycles": -728432,
+          "firmware_cycles": 1375932,
+          "layer": 5,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -728421,
+          "delta_firmware_cycles": -728429,
+          "firmware_cycles": 1375935,
+          "layer": 6,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -728425,
+          "delta_firmware_cycles": -728432,
+          "firmware_cycles": 1375932,
+          "layer": 7,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -728421,
+          "delta_firmware_cycles": -728429,
+          "firmware_cycles": 1375935,
+          "layer": 8,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -728425,
+          "delta_firmware_cycles": -728432,
+          "firmware_cycles": 1375932,
+          "layer": 9,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -728421,
+          "delta_firmware_cycles": -728429,
+          "firmware_cycles": 1375935,
+          "layer": 10,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -728425,
+          "delta_firmware_cycles": -728432,
+          "firmware_cycles": 1375932,
+          "layer": 11,
+          "reference_cycles": 2104285,
+          "reference_firmware_cycles": 2104364
+        }
+      ],
+      "layers_vs_reference": [
+        {
+          "cycles": 1375864,
+          "delta_cycles": -146768,
+          "delta_firmware_cycles": -146780,
+          "firmware_cycles": 1375935,
+          "layer": 0,
+          "reference_cycles": 1522632,
+          "reference_firmware_cycles": 1522715
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -146771,
+          "delta_firmware_cycles": -146782,
+          "firmware_cycles": 1375932,
+          "layer": 1,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -146767,
+          "delta_firmware_cycles": -146779,
+          "firmware_cycles": 1375935,
+          "layer": 2,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -146771,
+          "delta_firmware_cycles": -146782,
+          "firmware_cycles": 1375932,
+          "layer": 3,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -146767,
+          "delta_firmware_cycles": -146779,
+          "firmware_cycles": 1375935,
+          "layer": 4,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -146771,
+          "delta_firmware_cycles": -146782,
+          "firmware_cycles": 1375932,
+          "layer": 5,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -146767,
+          "delta_firmware_cycles": -146779,
+          "firmware_cycles": 1375935,
+          "layer": 6,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -146771,
+          "delta_firmware_cycles": -146782,
+          "firmware_cycles": 1375932,
+          "layer": 7,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -146767,
+          "delta_firmware_cycles": -146779,
+          "firmware_cycles": 1375935,
+          "layer": 8,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -146771,
+          "delta_firmware_cycles": -146782,
+          "firmware_cycles": 1375932,
+          "layer": 9,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375864,
+          "delta_cycles": -146767,
+          "delta_firmware_cycles": -146779,
+          "firmware_cycles": 1375935,
+          "layer": 10,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        },
+        {
+          "cycles": 1375860,
+          "delta_cycles": -146771,
+          "delta_firmware_cycles": -146782,
+          "firmware_cycles": 1375932,
+          "layer": 11,
+          "reference_cycles": 1522631,
+          "reference_firmware_cycles": 1522714
+        }
+      ],
+      "name": "H1H2-combined",
+      "reference": "H1-bias-cache",
+      "speedup_vs_baseline": 1.5294300348920653,
+      "status": "PASS"
+    }
+  ],
+  "final_configuration": {
+    "experiment": "both-unroll-no-masks",
+    "optimization": "-O2",
+    "schedule": "bias-hw-window"
+  },
+  "final_cycles": 16510344,
+  "frequency_scope": "conditional conversion only; physical timing closure not established",
+  "layers": [
+    {
+      "cycles": 1375864,
+      "delta_cycles": -728417,
+      "delta_firmware_cycles": -728425,
+      "firmware_cycles": 1375935,
+      "layer": 0,
+      "reference_cycles": 2104281,
+      "reference_firmware_cycles": 2104360
+    },
+    {
+      "cycles": 1375860,
+      "delta_cycles": -728425,
+      "delta_firmware_cycles": -728432,
+      "firmware_cycles": 1375932,
+      "layer": 1,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375864,
+      "delta_cycles": -728421,
+      "delta_firmware_cycles": -728429,
+      "firmware_cycles": 1375935,
+      "layer": 2,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375860,
+      "delta_cycles": -728425,
+      "delta_firmware_cycles": -728432,
+      "firmware_cycles": 1375932,
+      "layer": 3,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375864,
+      "delta_cycles": -728421,
+      "delta_firmware_cycles": -728429,
+      "firmware_cycles": 1375935,
+      "layer": 4,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375860,
+      "delta_cycles": -728425,
+      "delta_firmware_cycles": -728432,
+      "firmware_cycles": 1375932,
+      "layer": 5,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375864,
+      "delta_cycles": -728421,
+      "delta_firmware_cycles": -728429,
+      "firmware_cycles": 1375935,
+      "layer": 6,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375860,
+      "delta_cycles": -728425,
+      "delta_firmware_cycles": -728432,
+      "firmware_cycles": 1375932,
+      "layer": 7,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375864,
+      "delta_cycles": -728421,
+      "delta_firmware_cycles": -728429,
+      "firmware_cycles": 1375935,
+      "layer": 8,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375860,
+      "delta_cycles": -728425,
+      "delta_firmware_cycles": -728432,
+      "firmware_cycles": 1375932,
+      "layer": 9,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375864,
+      "delta_cycles": -728421,
+      "delta_firmware_cycles": -728429,
+      "firmware_cycles": 1375935,
+      "layer": 10,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    },
+    {
+      "cycles": 1375860,
+      "delta_cycles": -728425,
+      "delta_firmware_cycles": -728432,
+      "firmware_cycles": 1375932,
+      "layer": 11,
+      "reference_cycles": 2104285,
+      "reference_firmware_cycles": 2104364
+    }
+  ],
+  "mac_active_fraction": 0.14736361640920384,
+  "memory": {
+    "baseline": {
+      "bss_bytes": 2048,
+      "data_bytes": 0,
+      "elf_sha256": "c66d554422a394c6c1dc3fd08808f102e0101d8e9d6f496a64e03f59fa8932ad",
+      "image_sha256": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+      "itcm_bytes": 962,
+      "remaining_dtcm_bytes": 63392,
+      "stack_frames_bytes": {
+        "accel_linear": 48,
+        "main": 32
+      },
+      "static_call_chain_bytes": 80
+    },
+    "final": {
+      "bss_bytes": 0,
+      "data_bytes": 0,
+      "elf_sha256": "3ebce7dfe768ae98556500d408e3a564ebb590a31ddf48f49bd164741d0b0395",
+      "image_sha256": "6e22a1bffbd74c5cfc9b6d8603ce71a9f413ec5d2aea5df8bf792b922461e4e1",
+      "itcm_bytes": 722,
+      "remaining_dtcm_bytes": 65472,
+      "stack_frames_bytes": {
+        "accel_linear": 16,
+        "main": 32
+      },
+      "static_call_chain_bytes": 48
+    }
+  },
+  "phases": [
+    {
+      "baseline": 3587532,
+      "delta": -144,
+      "final": 3587388,
+      "final_fraction": 0.21728123896146562,
+      "phase": "w_load"
+    },
+    {
+      "baseline": 1378091,
+      "delta": 877,
+      "final": 1378968,
+      "final_fraction": 0.08352145782062445,
+      "phase": "x_load"
+    },
+    {
+      "baseline": 6627180,
+      "delta": -6533868,
+      "final": 93312,
+      "final_fraction": 0.005651729606602988,
+      "phase": "bias_load"
+    },
+    {
+      "baseline": 2623104,
+      "delta": 0,
+      "final": 2623104,
+      "final_fraction": 0.1588763989411729,
+      "phase": "compute_wait"
+    },
+    {
+      "baseline": 9618070,
+      "delta": -1787362,
+      "final": 7830708,
+      "final_fraction": 0.47429102628025194,
+      "phase": "writeback"
+    },
+    {
+      "baseline": 1417439,
+      "delta": -420575,
+      "final": 996864,
+      "final_fraction": 0.060378148389882126,
+      "phase": "other"
+    }
+  ],
+  "schema": "xu-hardware-independent-comparison-v1",
+  "selected_experiment": "H1H2-combined",
+  "source_sha256": {
+    "B0-new-RTL-real12/result.json": "30e2879af7446a54539dc5feb79201260bc37e4c15c4d795d911f65f1cb81cf8",
+    "acceptance/acceptance.json": "037f66ab147db8028823da71cbd882cc11e0b5ad5cdbd03d16e737766bdfc416",
+    "acceptance/real12/result.json": "a5acfdeb0e1d11baf6245a481302fa26a589a90c98e673b19a3440dee886131c",
+    "acceptance/xu-performance.json": "0742690df78ef43343975b8450d5a16b5ff86599e4123c2fbdf0dde7d5f64e82",
+    "experiments.json": "efd768271e1916de73fecac7469fca77eca0855b55648f5ac5c65eada3541aac"
+  },
+  "speedup": 1.5294300348920653
+}

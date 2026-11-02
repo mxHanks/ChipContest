@@ -1,0 +1,114 @@
+{
+  "actual_eda_commands_executed": false,
+  "derived_subset_bytes": 151644,
+  "derived_subset_sha256": "784ca438ee2c381e67755191a76b3d487ff51c81b6b43312bc0c72bae614743b",
+  "exact_original_clickable_copies": {
+    "ppa/baseline-ss-01/constraints.sdc": {
+      "bytes": 433,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/baseline-ss-01/constraints.sdc",
+      "sha256": "398615ebf9924af73a556832dcf7274314892789b8b8e32fec18cabd2588327e"
+    },
+    "ppa/baseline-ss-01/manifest.json": {
+      "bytes": 2836,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/baseline-ss-01/manifest.json",
+      "sha256": "c063a39433ab4a4e0bea342c4510613622d65d2613512eed8a2a82c9cf37368f"
+    },
+    "ppa/baseline-ss-01/synth.tcl": {
+      "bytes": 3471,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/baseline-ss-01/synth.tcl",
+      "sha256": "241887ebce6e0c3207ffbb409505d1961a4a6bebdeb7474d360a760d54566837"
+    },
+    "ppa/candidate-ss-02/constraints.sdc": {
+      "bytes": 433,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/constraints.sdc",
+      "sha256": "398615ebf9924af73a556832dcf7274314892789b8b8e32fec18cabd2588327e"
+    },
+    "ppa/candidate-ss-02/manifest.json": {
+      "bytes": 3226,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/manifest.json",
+      "sha256": "3eba478d3ce3fb3d7ec528c40631a5984402ff95e0d8d7d1ca651bafc58a6ce4"
+    },
+    "ppa/candidate-ss-02/synth.tcl": {
+      "bytes": 3894,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/synth.tcl",
+      "sha256": "4dcdb1199febd625d07a3cffc82bf9c5822cbc850903ac12a55bdca49b9f641f"
+    },
+    "ppa/frozen-fw-rtl/xu-sram-adapter.sv": {
+      "bytes": 722,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/frozen-fw-rtl/xu-sram-adapter.sv",
+      "sha256": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707"
+    },
+    "ppa/paired-exact-audit-01/baseline/audit.tcl": {
+      "bytes": 1361,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/paired-exact-audit-01/baseline/audit.tcl",
+      "sha256": "8eda2ca411603b24f2a3b9af99117d965f56edf17198db2f4cdfccf6d694a0dd"
+    },
+    "ppa/paired-exact-audit-01/candidate/audit.tcl": {
+      "bytes": 1363,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/paired-exact-audit-01/candidate/audit.tcl",
+      "sha256": "22689e6499949b3aeb46e9f07a0f549d3f89788dbebda00d463994679e04ca82"
+    },
+    "ppa/pt-baseline-fixed-01/pt.tcl": {
+      "bytes": 1289,
+      "server_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/pt-baseline-fixed-01/pt.tcl",
+      "sha256": "393e73feed774b931dde0f1b12c5ee4e40d35b4313e6115de49c5f0ef030e8e3"
+    }
+  },
+  "helper_sha256": {
+    "xu_package_ppa_subset.py": "8e0f74152d5236ee64853d75f825cde381887af9858351a2af88630bf1c98a5c",
+    "xu_prepare_ppa_replay.py": "48c6efcf86205ff7abfbea8f63641eb343e760fb89c8729907d3ee9d21a27671"
+  },
+  "included_originals": 104,
+  "local_installed_library_tool_dependencies_ready": false,
+  "negative_controls": [
+    {
+      "name": "existing output refused",
+      "status": "PASS rejected"
+    },
+    {
+      "name": "run without licensed dependencies refused",
+      "status": "PASS rejected"
+    }
+  ],
+  "omitted_originals": 9,
+  "original_files_verified": 113,
+  "original_manifest_sha256": "bc4b0f40d8ed81791db8c648fccd51a8bbec71c242495a3cb09ed7c655d36383",
+  "preparation_status": "PREPARED_NOT_RUN",
+  "prepared_source_files": 24,
+  "schema": "xu-ppa-reproducibility-preflight-v1",
+  "scope": "local source-byte, Tcl syntax and isolated path preparation checks; EDA commands stubbed, no DC/PT/power run added",
+  "source_original_archive_sha256": "8fc6a127069934bb21227b865918c45aeb74f4f7739b7c24b34b32ee5a4c31f3",
+  "status": "PASS",
+  "strict_subset_manifest": "PASS (107 ordinary members)",
+  "tcl_syntax_and_isolated_path_checks": {
+    "EDA_commands_stubbed": true,
+    "checks": [
+      {
+        "case": "baseline",
+        "new_input_output_paths_checked": true,
+        "returncode": 0,
+        "tcl": "synth.tcl"
+      },
+      {
+        "case": "baseline",
+        "new_input_output_paths_checked": true,
+        "returncode": 0,
+        "tcl": "audit.tcl"
+      },
+      {
+        "case": "candidate",
+        "new_input_output_paths_checked": true,
+        "returncode": 0,
+        "tcl": "synth.tcl"
+      },
+      {
+        "case": "candidate",
+        "new_input_output_paths_checked": true,
+        "returncode": 0,
+        "tcl": "audit.tcl"
+      }
+    ],
+    "harness_sha256": "03b233b688c6a922bd0bd0b207cbb00244bf4355e660af57a373f329d72e3b01",
+    "interpreter": "local /usr/bin/tclsh"
+  }
+}

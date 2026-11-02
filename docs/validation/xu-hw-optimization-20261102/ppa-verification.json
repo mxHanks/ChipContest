@@ -1,0 +1,134 @@
+{
+  "cases": {
+    "baseline": {
+      "hold_slack_ns": -0.115133,
+      "macro_area_library_units": 146376.390625,
+      "macro_count": 16,
+      "netlist_sha256": "40ba8784cbcb3fcc262e69cb29d42c6ca4dffbdd1e1eae475400624025c3e101",
+      "sdc_sha256": "0694b40c7034c8651ee008b2bfe1f0ccea107b25e2cdb5467811b2ca7357486a",
+      "setup_slack_ns": 0.002345,
+      "standard_cell_area_library_units": 35154.45396099999,
+      "timing_coverage_report_sha256": "f9281637d36c472a5ced019fe0b904f399e2263a78742e17cb9fb63417933a84",
+      "total_cell_area_library_units": 181530.844586
+    },
+    "candidate": {
+      "hold_slack_ns": -0.118136,
+      "macro_area_library_units": 146376.390625,
+      "macro_count": 16,
+      "netlist_sha256": "6f90b1ce3ea180eeb59c2438ddad74aea7ac0d87690608814b2fba7384dd5971",
+      "sdc_sha256": "19b474f3774e432e99ec5034a136dfea110e8124e1e5a6e8ed354ad8fa3fc595",
+      "setup_slack_ns": 0.002921,
+      "standard_cell_area_library_units": 147612.12508899998,
+      "timing_coverage_report_sha256": "7497a81f974b70d458337b0923689fb03fe1653aa69702cc43f3e63292b3811c",
+      "total_cell_area_library_units": 293988.515714
+    }
+  },
+  "checked_reports": [
+    {
+      "bytes": 1149,
+      "case": "baseline",
+      "name": "analysis-coverage.rpt",
+      "sha256": "f9281637d36c472a5ced019fe0b904f399e2263a78742e17cb9fb63417933a84"
+    },
+    {
+      "bytes": 997,
+      "case": "baseline",
+      "name": "check-timing.rpt",
+      "sha256": "7267a999d832f1653b71dd213c0bff91ca848d37d2f11d293eba1c47c8adb024"
+    },
+    {
+      "bytes": 10470,
+      "case": "baseline",
+      "name": "hold-exact.rpt",
+      "sha256": "79e19d5d58dc5e298b5ce01fefba605945f0e97d998f57760e6a117c49eda90f"
+    },
+    {
+      "bytes": 52249,
+      "case": "baseline",
+      "name": "setup-exact.rpt",
+      "sha256": "15ac2ad1245c9b823ad140ee818bd4ce30150cf11c5eb512c13cde40e6ab9fc2"
+    },
+    {
+      "bytes": 437,
+      "case": "baseline",
+      "name": "units.rpt",
+      "sha256": "5f6e8e66eb767cf3e21339720645556398e2e8f399e0cfc374646d9f2a61a502"
+    },
+    {
+      "bytes": 12931,
+      "case": "baseline",
+      "name": "area.rpt",
+      "sha256": "b5ca5fc29755996a3a5cdaeeb59091e89f524b94bc3e9926eca449f02b9259aa"
+    },
+    {
+      "bytes": 1149,
+      "case": "candidate",
+      "name": "analysis-coverage.rpt",
+      "sha256": "7497a81f974b70d458337b0923689fb03fe1653aa69702cc43f3e63292b3811c"
+    },
+    {
+      "bytes": 997,
+      "case": "candidate",
+      "name": "check-timing.rpt",
+      "sha256": "7267a999d832f1653b71dd213c0bff91ca848d37d2f11d293eba1c47c8adb024"
+    },
+    {
+      "bytes": 10931,
+      "case": "candidate",
+      "name": "hold-exact.rpt",
+      "sha256": "614ef13bbe4c0619c23efdafd20a6c494b530d927399fdc96d96ec78b819030d"
+    },
+    {
+      "bytes": 54206,
+      "case": "candidate",
+      "name": "setup-exact.rpt",
+      "sha256": "adb8d977b9fcb8682d19569e7904e7791cb210f3e9b9f5da7cbdc0754140371f"
+    },
+    {
+      "bytes": 437,
+      "case": "candidate",
+      "name": "units.rpt",
+      "sha256": "0a86e1cce66d3f643d5904e0b8e51138f7427570bcafdbde123a3092e53e9211"
+    },
+    {
+      "bytes": 13552,
+      "case": "candidate",
+      "name": "area.rpt",
+      "sha256": "08c5a18ac513513a2984bfe6099b27848efbdeb36dc1a5c9a62440f283452bb8"
+    }
+  ],
+  "comparison": {
+    "cell_area_delta_library_units": 112457.67112799999,
+    "cell_area_ratio": 1.6194962150067191,
+    "hold_slack_delta_ns": -0.0030030000000000057,
+    "setup_slack_delta_ns": 0.0005760000000000001,
+    "standard_cell_area_ratio": 4.198959405051759
+  },
+  "constraints_sha256": "398615ebf9924af73a556832dcf7274314892789b8b8e32fec18cabd2588327e",
+  "coverage": "See original analysis-coverage reports; untested paths and hold violations are retained, not waived by this audit.",
+  "library_identity": {
+    "/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP1024X16/lib/RAMSP1024X16_ss_0p99v_0p99v_125c.lib": {
+      "bytes": 230114,
+      "sha256": "7375bbc68c8a5e396c8f69c722f5b487c6b41dc2e1f3789a1d9c92fe516422a6"
+    },
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db": {
+      "bytes": 52224,
+      "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+    },
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db": {
+      "bytes": 48432887,
+      "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+    }
+  },
+  "limitations": [
+    "No extracted RC/SPEF",
+    "DC area report: Net Interconnect area undefined (No wire load specified)",
+    "Library area units not established by report_units; no conversion to mm^2",
+    "SRAM EMA=010 and EMAW=00 inherited experimental adapter, PVT qualification not established",
+    "Hold violations remain; no claim of physical 150 MHz timing closure",
+    "Existing power reports are vectorless API probes only; no workload-power claim"
+  ],
+  "scope": "original report-byte integrity and paired numerical/source/constraint audit; no EDA rerun or physical signoff",
+  "source_summary_sha256": "3c20a1b677bc88ffa772f9a18734aacd35847dde60f6bfdccf31fd9764b53ed9",
+  "status": "PASS"
+}

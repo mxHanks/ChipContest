@@ -1,0 +1,84 @@
+{
+  "area": {
+    "area_mm2": 0.293988515714,
+    "headroom_mm2": 1.956011484286,
+    "limit_fraction": 0.13066156253955555,
+    "limit_mm2": 2.25,
+    "synthesis_cell_plus_macro_budget_pass": true
+  },
+  "area_corrected_budget_reproduction": "PASS: identical current audit reproduced and isolated stale 2.5 mm2 requirement rejected",
+  "area_original_server_receipt_preserved": true,
+  "checks": {
+    "area-limit-verification.json": {
+      "sha256": "65fa1d2716a2cfb5af2636ff6a533ca18a8407bcfb2fe7be2451871be1be27f6",
+      "status": "PASS"
+    },
+    "local-verification.json": {
+      "sha256": "09246da7d8cb0be7061e316f4d996722eb3e631d41d13b886d01eac8da84ba7c",
+      "status": "PASS"
+    },
+    "power-verification.json": {
+      "sha256": "c4296d43cc9d1c79dbca7d3166c51c1102f566c28fc16e9a4fbd0d35e8191051",
+      "status": "PASS"
+    },
+    "ppa-verification.json": {
+      "sha256": "ecd24e0eb66eac8659455889ad594596ed11a4bfdb80668bf0bcf8c08f15bfef",
+      "status": "PASS"
+    },
+    "server-verification.json": {
+      "sha256": "bd0a574ca8db0d0cef04d7338426d8c7af909e61edb6be76bdfd2eedb2f51dc6",
+      "status": "PASS"
+    },
+    "transfer-verification.json": {
+      "sha256": "cdd0b2f6fef445bc7bf9d9b45098404f9bbac1b63f1a3da13b963085bb96ba36",
+      "status": "PASS"
+    }
+  },
+  "limitations": [
+    "Synthesized cell-plus-macro area, not final placed core/die bounding box",
+    "Remaining hold violations and untested timing checks",
+    "Averaged pre-layout RTL-activity power for one real layer0 only; no full local waveform byte audit",
+    "No extracted RC or wire-load model, ideal clock, experimental SRAM adapter"
+  ],
+  "physical_signoff_complete": false,
+  "power": {
+    "activity_coverage_rows": {
+      "Memory": "256(100.00%)      0(0.00%)     0(0.00%)     0(0.00%)         0(0.00%)        0(0.00%)        0(0.00%)        0(0.00%)        0(0.00%)        0(0.00%)      256",
+      "Nets": "10281(13.86%)     0(0.00%)     0(0.00%)     0(0.00%)         0(0.00%)        0(0.00%)        272(0.37%)      55537(74.89%)   8064(10.87%)    0(0.00%)      74154",
+      "Primary Input": "73(100.00%)       0(0.00%)     0(0.00%)     0(0.00%)         0(0.00%)        0(0.00%)        0(0.00%)        0(0.00%)        0(0.00%)        0(0.00%)      73",
+      "Sequential": "8644(69.09%)      0(0.00%)     0(0.00%)     0(0.00%)         0(0.00%)        0(0.00%)        0(0.00%)        3850(30.77%)    17(0.14%)       0(0.00%)      12511"
+    },
+    "clock_group_fraction": 0.8378001550132425,
+    "clock_pin_internal_power_w": 0.0102927117,
+    "derived_vcd_sha256": "8818785d6fa02b9ce410d0e442c0ef58c6f3c76dd6e8d83a96829c2ec373d893",
+    "estimated_window_energy_j": 0.00011268686701284002,
+    "estimated_window_energy_uj": 112.68686701284001,
+    "internal_power_w": 0.0114546018,
+    "leakage_power_w": 0.000468791957,
+    "power_mw": 12.285402000000001,
+    "power_report_sha256": "048ad016adf4369d813216d453b710019fea0875dd4c6c75ad3110bf621d7470",
+    "power_w": 0.012285402,
+    "raw_vcd_sha256": "528a441a3e47d5a3bfa61b54c2d06602bd880eb6963178e84f2de0a348e8b714",
+    "switching_power_w": 0.000362008897,
+    "window_cycles_inclusive": 1375864,
+    "window_duration_ns": 9172420.0
+  },
+  "power_comparison": {
+    "average_power_ratio": 3.845786328585873,
+    "average_power_reduction": false,
+    "energy_ratio": 2.514529965909675,
+    "estimated_window_energy_reduction": false
+  },
+  "runtime_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+  "runtime_identity": "PASS: all 214 frozen runtime files and tracked source/RTL sets unchanged; E203 worktree clean",
+  "runtime_main_commit": "97b35421dfbbfa8f4d495b6927a7c66610ff8206",
+  "schema": "xu-hardware-evidence-delivery-verification-v1",
+  "scope": "Final document/evidence assembly audit; server performance/EDA results remain tied to immutable execution commits, not this report-only commit.",
+  "semantic_reproduction": "PASS: independent server audit/comparison, PPA, area and power generated outputs reproduced; current corrected area audit rechecked afterward",
+  "status": "PASS",
+  "transfer": {
+    "byte_crc_sha256": "PASS",
+    "complete_files": 7,
+    "visible_frames": 84
+  }
+}

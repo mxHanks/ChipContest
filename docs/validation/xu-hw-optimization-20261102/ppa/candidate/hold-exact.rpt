@@ -1,0 +1,180 @@
+****************************************
+Report : timing
+	-path_type full
+	-delay_type min
+	-slack_lesser_than 1000.00000000
+	-max_paths 5
+	-sort_by slack
+Design : accel_icb_slave
+Version: T-2022.03-SP5-1
+Date   : Mon Nov  2 17:03:05 2026
+****************************************
+
+
+  Startpoint: w_data_reg_reg[5]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_0/sram0/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  w_data_reg_reg[5]/CK (DRNQNV2_12TR40)               0.00000000 0.00000000 r
+  w_data_reg_reg[5]/QN (DRNQNV2_12TR40)               0.22008801 0.22008801 r
+  U2895/ZN (INV2_12TR40)                              0.13728875 0.35737675 f
+  u_linear_compute_core/core/weightBanks/banks_0/sram0/mem_ext/macro/D[5] (RAMSP1024X16)
+                                                      0.00000000 0.35737675 f
+  data arrival time                                              0.35737675
+
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_linear_compute_core/core/weightBanks/banks_0/sram0/mem_ext/macro/CLK (RAMSP1024X16)
+                                                                 0.10000000 r
+  library hold time                                   0.37551236 0.47551236
+  data required time                                             0.47551236
+  ------------------------------------------------------------------------------
+  data required time                                             0.47551236
+  data arrival time                                              -0.35737675
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.11813561
+
+
+  Startpoint: w_data_reg_reg[5]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_0/sram1/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  w_data_reg_reg[5]/CK (DRNQNV2_12TR40)               0.00000000 0.00000000 r
+  w_data_reg_reg[5]/QN (DRNQNV2_12TR40)               0.22008801 0.22008801 r
+  U2895/ZN (INV2_12TR40)                              0.13728875 0.35737675 f
+  u_linear_compute_core/core/weightBanks/banks_0/sram1/mem_ext/macro/D[5] (RAMSP1024X16)
+                                                      0.00000000 0.35737675 f
+  data arrival time                                              0.35737675
+
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_linear_compute_core/core/weightBanks/banks_0/sram1/mem_ext/macro/CLK (RAMSP1024X16)
+                                                                 0.10000000 r
+  library hold time                                   0.37551236 0.47551236
+  data required time                                             0.47551236
+  ------------------------------------------------------------------------------
+  data required time                                             0.47551236
+  data arrival time                                              -0.35737675
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.11813561
+
+
+  Startpoint: w_data_reg_reg[5]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_1/sram0/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  w_data_reg_reg[5]/CK (DRNQNV2_12TR40)               0.00000000 0.00000000 r
+  w_data_reg_reg[5]/QN (DRNQNV2_12TR40)               0.22008801 0.22008801 r
+  U2895/ZN (INV2_12TR40)                              0.13728875 0.35737675 f
+  u_linear_compute_core/core/weightBanks/banks_1/sram0/mem_ext/macro/D[5] (RAMSP1024X16)
+                                                      0.00000000 0.35737675 f
+  data arrival time                                              0.35737675
+
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_linear_compute_core/core/weightBanks/banks_1/sram0/mem_ext/macro/CLK (RAMSP1024X16)
+                                                                 0.10000000 r
+  library hold time                                   0.37551236 0.47551236
+  data required time                                             0.47551236
+  ------------------------------------------------------------------------------
+  data required time                                             0.47551236
+  data arrival time                                              -0.35737675
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.11813561
+
+
+  Startpoint: w_data_reg_reg[5]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_1/sram1/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  w_data_reg_reg[5]/CK (DRNQNV2_12TR40)               0.00000000 0.00000000 r
+  w_data_reg_reg[5]/QN (DRNQNV2_12TR40)               0.22008801 0.22008801 r
+  U2895/ZN (INV2_12TR40)                              0.13728875 0.35737675 f
+  u_linear_compute_core/core/weightBanks/banks_1/sram1/mem_ext/macro/D[5] (RAMSP1024X16)
+                                                      0.00000000 0.35737675 f
+  data arrival time                                              0.35737675
+
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_linear_compute_core/core/weightBanks/banks_1/sram1/mem_ext/macro/CLK (RAMSP1024X16)
+                                                                 0.10000000 r
+  library hold time                                   0.37551236 0.47551236
+  data required time                                             0.47551236
+  ------------------------------------------------------------------------------
+  data required time                                             0.47551236
+  data arrival time                                              -0.35737675
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.11813561
+
+
+  Startpoint: w_data_reg_reg[5]
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Endpoint: u_linear_compute_core/core/weightBanks/banks_2/sram0/mem_ext/macro
+               (rising edge-triggered flip-flop clocked by xu_clk)
+  Path Group: xu_clk
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  w_data_reg_reg[5]/CK (DRNQNV2_12TR40)               0.00000000 0.00000000 r
+  w_data_reg_reg[5]/QN (DRNQNV2_12TR40)               0.22008801 0.22008801 r
+  U2895/ZN (INV2_12TR40)                              0.13728875 0.35737675 f
+  u_linear_compute_core/core/weightBanks/banks_2/sram0/mem_ext/macro/D[5] (RAMSP1024X16)
+                                                      0.00000000 0.35737675 f
+  data arrival time                                              0.35737675
+
+  clock xu_clk (rise edge)                            0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_linear_compute_core/core/weightBanks/banks_2/sram0/mem_ext/macro/CLK (RAMSP1024X16)
+                                                                 0.10000000 r
+  library hold time                                   0.37551236 0.47551236
+  data required time                                             0.47551236
+  ------------------------------------------------------------------------------
+  data required time                                             0.47551236
+  data arrival time                                              -0.35737675
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.11813561
+
+Warning: report_timing has satisfied the max_paths criteria. There are 251 further endpoints which have paths of interest with slack less than 1000.00000000 that were not considered when generating this report. (UITE-502)
+
+1

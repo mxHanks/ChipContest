@@ -1,0 +1,366 @@
+{
+  "evidence_kind": "observation receipt: aggregate summary transcribed from ScalaTest tool stdout; archived per-test logs are raw files",
+  "command": [
+    "scala-cli",
+    "test",
+    ".",
+    "--server=false"
+  ],
+  "observed_summary": {
+    "tests": 13,
+    "succeeded": 13,
+    "failed": 0,
+    "suites": 10,
+    "duration_seconds": 75
+  },
+  "generation_command": [
+    "scala-cli",
+    "run",
+    ".",
+    "--server=false",
+    "-M",
+    "GenerateRTL",
+    "--",
+    "LinearCachedCore"
+  ],
+  "baseline_submodule": "e36d34a52e6eef93fd0bdfed1b13009e1056bea3",
+  "new_submodule": "f49a5fc914971426bd4530db39e270a84b41139f",
+  "versions": {
+    "scala_cli": {
+      "command": [
+        "scala-cli",
+        "version"
+      ],
+      "returncode": 0,
+      "output": "Scala CLI version: 1.17.1\nScala version (default): 3.9.0"
+    },
+    "java": {
+      "command": [
+        "java",
+        "-version"
+      ],
+      "returncode": 0,
+      "output": "openjdk version \"25.0.4.1\" 2026-08-18\nOpenJDK Runtime Environment (build 25.0.4.1+1-1-26.04.4-Ubuntu)\nOpenJDK 64-Bit Server VM (build 25.0.4.1+1-1-26.04.4-Ubuntu, mixed mode, sharing)"
+    },
+    "verilator": {
+      "command": [
+        "verilator",
+        "--version"
+      ],
+      "returncode": 0,
+      "output": "Verilator 5.032 2025-01-01 rev (Debian 5.032-1)"
+    },
+    "iverilog": {
+      "command": [
+        "iverilog",
+        "-V"
+      ],
+      "returncode": 0,
+      "output": "Icarus Verilog version 12.0 (stable) ()\n\nCopyright (c) 2000-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Preprocessor version 12.0 (stable) ()\n\nCopyright (c) 1999-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Parser/Elaborator version 12.0 (stable) ()\n\nCopyright (c) 1998-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n FLAGS DLL vvp.tgt\nvvp.tgt: Icarus Verilog VVP Code Generator 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
+    }
+  },
+  "scala_chisel_versions_from_project": "//> using repository https://central.sonatype.com/repository/maven-snapshots\n//> using scala 2.13.18\n//> using exclude \"third-party/**\"\n//> using exclude \"migration-v0.2/**\"\n//> using exclude \"assets/**\"\n//> using exclude \"runs/**\"\n//> using exclude \"build/**\"\n//> using exclude \"generated/**\"\n//> using exclude \"reports/**\"\n//> using dep org.chipsalliance::chisel:7.16.0\n//> using plugin org.chipsalliance:::chisel-plugin:7.16.0\n//> using test.dep org.scalatest::scalatest:3.2.20",
+  "files": [
+    {
+      "path": "chiselsim/BiasBankCacheTest/xu-full-bias-cache/keeps-every-bank-and-group-distinct-through-masked-writes-and-task-refresh/workdir-verilator/compilation-log.txt",
+      "bytes": 17771,
+      "sha256": "a88fa38a02c3c6c8e4032a14c911fc6bccfbc9c2da9a90ad7a5b34897f8e1a7b"
+    },
+    {
+      "path": "chiselsim/BiasBankCacheTest/xu-full-bias-cache/keeps-every-bank-and-group-distinct-through-masked-writes-and-task-refresh/workdir-verilator/execution-script.txt",
+      "bytes": 242486,
+      "sha256": "fe47752541e17a169dea9dbe0a59e621333cd231fdef8f1499f8beec4080c4b0"
+    },
+    {
+      "path": "chiselsim/BiasBankCacheTest/xu-full-bias-cache/keeps-every-bank-and-group-distinct-through-masked-writes-and-task-refresh/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/DotProductEngineTest/--------/-------------/workdir-verilator/compilation-log.txt",
+      "bytes": 7637,
+      "sha256": "3f8e9b3ee8bd1ac067977e0d17615241995ad856f275f11e86271dac4d472c15"
+    },
+    {
+      "path": "chiselsim/DotProductEngineTest/--------/-------------/workdir-verilator/execution-script.txt",
+      "bytes": 21672,
+      "sha256": "1a6a4adf0db2270ea75eb4a488801d0a58ea4add7c54910cdc80c347beb84d0d"
+    },
+    {
+      "path": "chiselsim/DotProductEngineTest/--------/-------------/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/DotProductEngineTest/--------/----------------/workdir-verilator/compilation-log.txt",
+      "bytes": 7694,
+      "sha256": "4f86934b408d2d8ab4f46538467f095d6eaa2d8e25513854699d46f45a991af3"
+    },
+    {
+      "path": "chiselsim/DotProductEngineTest/--------/----------------/workdir-verilator/execution-script.txt",
+      "bytes": 880,
+      "sha256": "cead032ec52cdfdd938137e15d5b7e3a4fe2f2513dcd1a43ceca4097bfc94450"
+    },
+    {
+      "path": "chiselsim/DotProductEngineTest/--------/----------------/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/LinearCachedCoreTest/xu-cached-compute-core/selects-legacy-or-per-group-signed40-biases-without-changing-MAC-results/workdir-verilator/compilation-log.txt",
+      "bytes": 19507,
+      "sha256": "e2bd2c1a813698e226301c9bbe3e4253d2b2c43e1ce28717b14a53471011d657"
+    },
+    {
+      "path": "chiselsim/LinearCachedCoreTest/xu-cached-compute-core/selects-legacy-or-per-group-signed40-biases-without-changing-MAC-results/workdir-verilator/execution-script.txt",
+      "bytes": 501620,
+      "sha256": "143c7ddb09c30c5e684384c627621095c4b59f27b2b6843cfc0cf09e5b95d3d8"
+    },
+    {
+      "path": "chiselsim/LinearCachedCoreTest/xu-cached-compute-core/selects-legacy-or-per-group-signed40-biases-without-changing-MAC-results/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/LinearComputeCoreTest/LinearComputeCore-------/-----------------8----/workdir-verilator/compilation-log.txt",
+      "bytes": 8226,
+      "sha256": "130a4f4a8b8a691f1bd24f986f6e4cc5e2c96fef77e1224f0fdd6cb4e49ba58c"
+    },
+    {
+      "path": "chiselsim/LinearComputeCoreTest/LinearComputeCore-------/-----------------8----/workdir-verilator/execution-script.txt",
+      "bytes": 177648,
+      "sha256": "fca31f04340df4211e02158e07ffba4be2ebab0f80d0acd0debacc09d08c1bf0"
+    },
+    {
+      "path": "chiselsim/LinearComputeCoreTest/LinearComputeCore-------/-----------------8----/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/LinearComputeCoreTest/LinearComputeCore-SRAM-----/-------SRAM-------group/workdir-verilator/compilation-log.txt",
+      "bytes": 8302,
+      "sha256": "47494daf866c0589de324c61a4db4f5b4784162705e587476d0abbb3daa3868f"
+    },
+    {
+      "path": "chiselsim/LinearComputeCoreTest/LinearComputeCore-SRAM-----/-------SRAM-------group/workdir-verilator/execution-script.txt",
+      "bytes": 178347,
+      "sha256": "379c018d6801fe9636d50bcc0da931d1e99ef565ff67c1f211af9751b07f6b67"
+    },
+    {
+      "path": "chiselsim/LinearComputeCoreTest/LinearComputeCore-SRAM-----/-------SRAM-------group/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/LinearLayerEngineTest/LinearLayerEngine-------/----------------/workdir-verilator/compilation-log.txt",
+      "bytes": 8112,
+      "sha256": "b0169db6db58974fb4da1bf62887de0e3a942376e487353fbaee58a41f6f5a1f"
+    },
+    {
+      "path": "chiselsim/LinearLayerEngineTest/LinearLayerEngine-------/----------------/workdir-verilator/execution-script.txt",
+      "bytes": 574054,
+      "sha256": "3f8703069e79a218a94ff90ddc1dac5f0fc599c15622e46cd87a22775ee58f37"
+    },
+    {
+      "path": "chiselsim/LinearLayerEngineTest/LinearLayerEngine-------/----------------/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/LinearLayerFullTest/LinearLayerEngine-------/------99x256------------/workdir-verilator/compilation-log.txt",
+      "bytes": 8226,
+      "sha256": "3966cb1426da52a67ae13bcd52d2a658caaa7d2e5410d3201c94a03615803dac"
+    },
+    {
+      "path": "chiselsim/LinearLayerFullTest/LinearLayerEngine-------/------99x256------------/workdir-verilator/execution-script.txt",
+      "bytes": 26228519,
+      "sha256": "021199eed0daee1df988a165fd3351e552bb9ac6b2c94658ba2511ba07f1d6ea"
+    },
+    {
+      "path": "chiselsim/LinearLayerFullTest/LinearLayerEngine-------/------99x256------------/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/MacPEArrayTest/MacPEArray-test/--------8-------/workdir-verilator/compilation-log.txt",
+      "bytes": 7713,
+      "sha256": "aef253ac6c24e858446f3a0961d19d78f5b40beaa6dfef4caaabde8b7f9c5ebb"
+    },
+    {
+      "path": "chiselsim/MacPEArrayTest/MacPEArray-test/--------8-------/workdir-verilator/execution-script.txt",
+      "bytes": 1576,
+      "sha256": "f64f3e9b5ee16ff084c12d4015cc376d355cf3a8be4d1a5e50afd93d683e108f"
+    },
+    {
+      "path": "chiselsim/MacPEArrayTest/MacPEArray-test/--------8-------/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/WeightBankArrayTest/---WeightBankArray-----/----------/workdir-verilator/compilation-log.txt",
+      "bytes": 7940,
+      "sha256": "e95c877286c0956cb9eb3131dd6ed3c0656208a1195431f775278776b81fed85"
+    },
+    {
+      "path": "chiselsim/WeightBankArrayTest/---WeightBankArray-----/----------/workdir-verilator/execution-script.txt",
+      "bytes": 1597,
+      "sha256": "be68341dfeb1bbcabf30892bb3b1c367678e4c55d729e4ca196c53897ac1daf9"
+    },
+    {
+      "path": "chiselsim/WeightBankArrayTest/---WeightBankArray-----/----------/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/WeightBankTest/----WeighBank-------/----------------/workdir-verilator/compilation-log.txt",
+      "bytes": 7902,
+      "sha256": "b0c7c74387418936ee997b1aeee7ff955522742bb837a0f378aea91b900b99be"
+    },
+    {
+      "path": "chiselsim/WeightBankTest/----WeighBank-------/----------------/workdir-verilator/execution-script.txt",
+      "bytes": 598,
+      "sha256": "dde87dcdc9673e3be4e96d57bfcc88b7dda8f2ad615f2e624e3e973d2e93c1b7"
+    },
+    {
+      "path": "chiselsim/WeightBankTest/----WeighBank-------/----------------/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/WeightBankTest/----WeighBank-------/----------------SRAM-----/workdir-verilator/compilation-log.txt",
+      "bytes": 8073,
+      "sha256": "3ec70a038505f82cbeef5375de642de90c82abe53698ea1c2faf2eedfb9cc9a7"
+    },
+    {
+      "path": "chiselsim/WeightBankTest/----WeighBank-------/----------------SRAM-----/workdir-verilator/execution-script.txt",
+      "bytes": 2442,
+      "sha256": "22e8c10b6486525977977a788cf9b42bffbf81fcb1a031bcb4ebeb3ca9d589a0"
+    },
+    {
+      "path": "chiselsim/WeightBankTest/----WeighBank-------/----------------SRAM-----/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chiselsim/XRowBufferTest/---XRow----------/-------/workdir-verilator/compilation-log.txt",
+      "bytes": 7580,
+      "sha256": "eec0cb5e33c27bcc7a268d95cf4fc521b3eea6b384e79475fff14e1c12d5f210"
+    },
+    {
+      "path": "chiselsim/XRowBufferTest/---XRow----------/-------/workdir-verilator/execution-script.txt",
+      "bytes": 12353,
+      "sha256": "5ce05f2e720c55af36fe080e54d195a6ebb648c452b59a22d25d213cfe59997e"
+    },
+    {
+      "path": "chiselsim/XRowBufferTest/---XRow----------/-------/workdir-verilator/simulation-log.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "rtl": [
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv",
+      "sha256": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+      "bytes": 6563,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv",
+      "sha256": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+      "bytes": 3415,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv",
+      "sha256": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+      "bytes": 3368,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv",
+      "sha256": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+      "bytes": 2657,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv",
+      "sha256": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+      "bytes": 2655,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv",
+      "sha256": "876b0530970ffe7a1be08f2a7e447e52ccdb8f4af85da74a17451f97fb61f452",
+      "bytes": 408,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "876b0530970ffe7a1be08f2a7e447e52ccdb8f4af85da74a17451f97fb61f452",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv",
+      "sha256": "dab19731a961020ce07edb17a0d5afae5ffe43a96fcd62a89a4df47f1d3e0a7a",
+      "bytes": 3081,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "dab19731a961020ce07edb17a0d5afae5ffe43a96fcd62a89a4df47f1d3e0a7a",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+      "sha256": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+      "bytes": 2578,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+      "sha256": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+      "bytes": 13293,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv",
+      "sha256": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+      "bytes": 3092,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0",
+      "baseline_sha256": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+      "identical_to_baseline": true
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv",
+      "sha256": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28",
+      "bytes": 89275,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0"
+    },
+    {
+      "path": "third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv",
+      "sha256": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7",
+      "bytes": 3319,
+      "generation_matches": true,
+      "generated_header": "// Generated by CIRCT firtool-1.160.0"
+    }
+  ]
+}

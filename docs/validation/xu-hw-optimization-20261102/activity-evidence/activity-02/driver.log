@@ -1,0 +1,38 @@
+Cloning into '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/old-RTL-clone'...
+done.
+Note: checking out '8a7640787423a73a0751454de47893406f85e604'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 8a76407... 实验：xu E4 独立选择删除硬件截断前的冗余掩码
+Cloning into '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/old-RTL-clone/third-party/e203_hbirdv2'...
+done.
+Note: checking out 'e36d34a52e6eef93fd0bdfed1b13009e1056bea3'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at e36d34a... 新增：接出可选系统存储 ICB 接口
+Submodule 'third-party/e203_hbirdv2' (https://github.com/mxhanks/e203_hbirdv2.git) registered for path 'third-party/e203_hbirdv2'
+DERIVED_VCD raw_sha256=e2a5180bffe4be938c2d951e31be976a96409dd297a186d1cf50ab2f428d47dd derived_sha256=a69f85b687d6d9a3e823def4c644cea3f58dde0333f082cc133a17f04a72c588 ticks=4905636 max_error=0.3333333333333333 window_ns=[43596.67, 14072130.0]
+Traceback (most recent call last):
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-activity-job-v2-20261102.py", line 50, in <module>
+    run([sys.executable,str(D/'xu-hw-scale-vcd-20261102.py'),str(A/name/'tb_accel_soc.vcd'),'--simulation-log',str(A/name/'simulation.log'),'--out',str(A/name/'activity-150MHz.vcd.gz'),'--metadata',str(A/name/'activity-scale.json')])
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-activity-job-v2-20261102.py", line 6, in run
+    def run(cmd,cwd=None):subprocess.check_call(cmd,cwd=str(cwd) if cwd else None)
+  File "/usr/lib64/python3.6/subprocess.py", line 311, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['/bin/python3', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-scale-vcd-20261102.py', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/tb_accel_soc.vcd', '--simulation-log', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/simulation.log', '--out', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/activity-150MHz.vcd.gz', '--metadata', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/activity-scale.json']' died with <Signals.SIGTERM: 15>.

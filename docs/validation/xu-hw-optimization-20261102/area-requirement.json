@@ -1,0 +1,9 @@
+{
+  "accelerator_area_limit_mm2": 2.25,
+  "measurement": "server SMIC40 standard-cell plus RAMSP1024X16 SS libraries; total cell area including 16 macros",
+  "note": "Latest user correction is authoritative. Original server area-compliance.json was generated with the earlier 2.5 mm2 instruction and is preserved byte-for-byte; current area-limit-verification.json reapplies 2.25 to the identical physical area.",
+  "scope": "complete accelerator: MMIO wrapper, compute, bias cache and internal weight SRAM; excludes E203 CPU/interconnect/shared system RAM",
+  "source": "explicit user correction in this chat on 2026-11-02: accelerator area limit is 2.25 mm2",
+  "superseded_limit_mm2": 2.5,
+  "unit_confirmation": "PASS: four standard-cell LEF SIZE products match mapped library areas; SRAM LEF 82.46 x 110.945 um matches linked Liberty area9148.5247um2"
+}

@@ -1,0 +1,86 @@
+
+                                 PrimeTime (R)
+
+              Version T-2022.03-SP5-1 for linux64 - Mar 28, 2023 
+
+                    Copyright (c) 1988 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+set_app_var link_path [list * {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db} {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db}]
+* /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db
+set_app_var power_enable_analysis true
+Information: Checked out license 'PrimePower' (PT-019)
+true
+set_app_var power_analysis_mode averaged
+averaged
+read_verilog {/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v}
+1
+if {![link_design accel_icb_slave]} {exit 1}
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.v'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db'
+Linking design accel_icb_slave...
+Information: Removing 72 unneeded designs..... (LNK-034)
+Information: 1140 (89.34%) library cells are unused in library scc40nll_vhsc40_rvt_ss_v0p99_125c_basic..... (LNK-045)
+Information: total 1140 library cells are unused (LNK-046)
+Design 'accel_icb_slave' was successfully linked.
+Information: There are 72826 leaf cells, ports, hiers and 83496 nets in the design (LNK-047)
+read_sdc {/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/ppa/candidate-ss-02/mapped.sdc}
+
+Reading SDC version 2.1...
+1
+1
+update_timing
+Warning: Some timing arcs have been disabled for breaking timing loops or because of constant propagation. Use the 'report_disable_timing' command to get the list of these disabled timing arcs. (PTE-003)
+Information: Building multi voltage information for entire design. (MV-022)
+1
+report_units > units.rpt
+man report_switching_activity > man-report-switching-activity.txt
+if {![read_vcd -rtl -strip_path {tb_accel_soc/dut/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_accel_icb_slave} -time {29936.670000000002 9202356.67} {/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/activity-buffered-150MHz.vcd.gz}]} {error {read_vcd failed}}
+Information: Reading file activity-buffered-150MHz.vcd.gz to annotate toggle rates on the design...
+Information: Reading vcd file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/activity-buffered-150MHz.vcd.gz'
+
+======================================================================
+Summary:
+Total number of nets = 74154
+Number of annotated nets = 10281 (13.86%)
+Total number of leaf cells = 72645
+Number of fully annotated leaf cells = 19 (0.03%)
+======================================================================
+
+Information: Total number of synthesis invariant points = 12953 , annotated synthesis invariant points = 9054, annotation_ratio = 69.90%
+report_switching_activity > activity-before-propagation.rpt
+update_power
+Information: Running switching activity propagation with 4 threads!
+Information: Running averaged power analysis... (PWR-601)
+Information: Running power calculation with 4 threads. (PWR-602)
+1
+report_switching_activity > activity-after-propagation.rpt
+report_power -hierarchy > power-hierarchy.rpt
+report_power > power.rpt
+report_analysis_coverage > timing-analysis-coverage.rpt
+puts "XU_ACTIVITY_POWER_PASS"
+XU_ACTIVITY_POWER_PASS
+exit 0
+
+Timing updates: 1 (0 implicit, 1 explicit) (0 incremental, 1 full, 0 logical)
+Noise updates: 0 (0 implicit, 0 explicit) (0 incremental, 0 full)
+Maximum memory usage for this session: 3104.29 MB
+CPU usage for this session: 55 seconds 
+Elapsed time for this session: 28 seconds
+Elapsed time spent in memory sampling: 0 seconds
+Diagnostics summary: 1 warning, 8 informationals
+
+Thank you for using pt_shell!

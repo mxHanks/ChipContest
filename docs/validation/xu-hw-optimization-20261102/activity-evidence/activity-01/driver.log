@@ -1,0 +1,35 @@
+Cloning into '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-01/old-RTL-clone'...
+done.
+Note: checking out '8a7640787423a73a0751454de47893406f85e604'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 8a76407... 实验：xu E4 独立选择删除硬件截断前的冗余掩码
+Cloning into '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-01/old-RTL-clone/third-party/e203_hbirdv2'...
+done.
+Note: checking out 'e36d34a52e6eef93fd0bdfed1b13009e1056bea3'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at e36d34a... 新增：接出可选系统存储 ICB 接口
+Submodule 'third-party/e203_hbirdv2' (https://github.com/mxhanks/e203_hbirdv2.git) registered for path 'third-party/e203_hbirdv2'
+Traceback (most recent call last):
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-activity-job-20261102.py", line 30, in <module>
+    patch(tb,'      $dumpvars(0,tb_accel_soc);','      if (dumpwave==2) begin\n        $dumpvars(0,`ACCEL);\n        $dumpoff;\n      end else $dumpvars(0,tb_accel_soc);')
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-activity-job-20261102.py", line 10, in patch
+    if t.count(a)!=1:raise ValueError('patch count: '+str(p)+' '+a)
+ValueError: patch count: /storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-01/old-RTL-clone/tests/e203/tb_accel_soc.sv       $dumpvars(0,tb_accel_soc);

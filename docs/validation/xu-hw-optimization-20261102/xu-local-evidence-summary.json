@@ -1,0 +1,133 @@
+{
+  "evidence_kind": "Observation receipt with original per-test raw logs; no test rerun was performed to package this archive",
+  "command": [
+    "scala-cli",
+    "test",
+    ".",
+    "--server=false"
+  ],
+  "test_count": 13,
+  "suite_count": 10,
+  "observed_status": "13 succeeded, 0 failed, 0 aborted suites",
+  "observed_scala_test_runtime_seconds": 75,
+  "individual_wall_times": "not recorded by the original run; not inferred from filesystem timestamps",
+  "tests": [
+    {
+      "suite": "dotproduct.DotProductEngineTest",
+      "name": "应该可以输出正确的计算结果",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "64轮、8路点积；bias初始化、结果保持、done回空闲"
+    },
+    {
+      "suite": "dotproduct.DotProductEngineTest",
+      "name": "应该能以合理的时序发送预处理信号",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "INIT预取k=0；RUN预取k+1；末轮关闭权重读使能"
+    },
+    {
+      "suite": "dotproduct.MacPEArrayTest",
+      "name": "应该能正确执行 8 路并行乘累加",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "8 PE一次并行MAC及关闭enable后的结果保持"
+    },
+    {
+      "suite": "linear.LinearLayerEngineTest",
+      "name": "应自动遍历两行两组并正确输出结果",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "2行×2组×8路=32结果；rowLoaded/resultReady握手与done"
+    },
+    {
+      "suite": "linear.BiasBankCacheTest",
+      "name": "keeps every bank and group distinct through masked writes and task refresh",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "256项全写；256次固定种子随机字节掩码写；256项第二任务刷新；全32组×8路校验及signed40边界"
+    },
+    {
+      "suite": "linear.LinearComputeCoreTest",
+      "name": "应正确从存储器读取数据，完成两组 8 路点积",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "group0/1、正负权重、16个结果；每组启动至done观察66周期"
+    },
+    {
+      "suite": "linear.LinearComputeCoreTest",
+      "name": "应正确计算跨 SRAM 边界的两个 group",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "group15/16跨SRAM0/1边界、16个结果"
+    },
+    {
+      "suite": "linear.LinearCachedCoreTest",
+      "name": "selects legacy or per-group signed40 biases without changing MAC results",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "2任务×2bias模式×4组（0/15/16/31）=16组、128结果；非零MAC及signed40极值"
+    },
+    {
+      "suite": "memory.WeightBankArrayTest",
+      "name": "能否正常完成读写操作",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "8 bank独立写入后同地址并行读与rvalid"
+    },
+    {
+      "suite": "memory.XRowBufferTest",
+      "name": "应该正常的读写",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "64个signed16值全写及组合读取"
+    },
+    {
+      "suite": "memory.WeightBankTest",
+      "name": "应该可以按照规定的时序读出和写入",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "单地址负数同步读写、rvalid失效"
+    },
+    {
+      "suite": "memory.WeightBankTest",
+      "name": "应该正确完成写入、连续读取和跨 SRAM 边界访问",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "0/1/1023/1024/1025/2047地址；连续读取与两块SRAM切换"
+    },
+    {
+      "suite": "lineear.LinearLayerFullTest",
+      "name": "应自动计算 99x256 个输出并与参考结果一致",
+      "count": 1,
+      "status": "PASS observed in suite stdout",
+      "individual_wall_seconds": null,
+      "scope": "99行×32组×8路=25,344个结果；完整W/X装载及独立BigInt参考结果"
+    }
+  ],
+  "wrapper": {
+    "simulator": "Icarus Verilog",
+    "separate_from_chisel_13": true,
+    "accepted": 4909,
+    "retired": 4909,
+    "raw_log": "direct-wrapper-iverilog/simulation.log"
+  },
+  "limitations": [
+    "The ScalaTest aggregate stdout was not originally redirected to a file; its summary is labeled as an observation receipt.",
+    "Per-test simulation-log.txt files are empty when the simulator emitted no console text; their exact empty bytes and SHA256 are preserved.",
+    "Absolute paths inside raw compiler/protocol logs are retained as evidence; tar entry names are relative and contain no parent traversal.",
+    "This local Chisel/Icarus evidence does not establish server VCS performance or physical PPA."
+  ]
+}

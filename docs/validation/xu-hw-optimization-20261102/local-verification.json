@@ -1,0 +1,642 @@
+{
+  "status": "PASS",
+  "evidence_kind": "independent audit of archived raw local evidence",
+  "scope": "local GCC14 / Verilator / Icarus; no server real12 performance or physical PPA claim",
+  "source": {
+    "status": "PASS",
+    "source_files": 214,
+    "frozen_runtime_commit": "97b35421dfbbfa8f4d495b6927a7c66610ff8206",
+    "current_main_commit": "97b35421dfbbfa8f4d495b6927a7c66610ff8206",
+    "e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+    "criterion": "runtime file hashes and source sets; current HEAD may include report-only changes"
+  },
+  "archives": {
+    "xu-hw-local-evidence.tar.xz": {
+      "sha256": "baa54cb77e0b038d824a51c97f3f7227b56281a77445a9d8ad08209807e458ab",
+      "bytes": 1204980,
+      "ordinary_files_including_manifest": 48,
+      "strict_inner_sha256": "PASS"
+    },
+    "xu-hw-extra-interface.tar.xz": {
+      "sha256": "a14d84c035d33b6e9d07afbae2e9ce3917544994583d9785c1d2814291490522",
+      "bytes": 8048,
+      "ordinary_files_including_manifest": 10,
+      "strict_inner_sha256": "PASS"
+    },
+    "xu-hw-local-screening.tar.xz": {
+      "sha256": "a4ff5236891bc3a8b51aa4223e23a34d90b9fe08c2df21b777373b211fabf4bb",
+      "bytes": 44780,
+      "ordinary_files_including_manifest": 134,
+      "strict_inner_sha256": "PASS"
+    }
+  },
+  "runs": [
+    {
+      "name": "B0-real1",
+      "result_sha256": "319442ffc30600689281c338f237731ee866370f387b7f2504323a37fd4bfd16",
+      "simulation_log_sha256": "35e67048861ee6ceaccd4b65a3481b8337dc18cc4cd3a3b8888baff2089a0471",
+      "mode": "real",
+      "firmware_schedule": "bias-dtcm",
+      "firmware": {
+        "elf_sha256": "98092a2829f07542db0490f0d36e1f0eb5149b35c602f2046a5e06055c56a91f",
+        "image_sha256": "1e038157321ac5891329762064d7da77125fbf0134dfe29600e94105b5acefd8",
+        "image_bytes_verified_against_elf": 1064,
+        "bss_bytes": 2048,
+        "itcm_bytes": 1064,
+        "static_function_stack_frames": [
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/accel.c:51:5:accel_linear",
+            "bytes": 64,
+            "kind": "static"
+          },
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/main.c:3:5:main",
+            "bytes": 32,
+            "kind": "static"
+          }
+        ]
+      },
+      "status": "PASS",
+      "tasks": 1,
+      "outputs": 25344,
+      "write_words": 50688,
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 2083525,
+          "firmware_cycles": 2083622,
+          "performance": {
+            "w_load": 299315,
+            "x_load": 114873,
+            "bias_load": 552877,
+            "compute_wait": 218592,
+            "writeback": 801536,
+            "other": 96332,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 156326,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 7673,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        }
+      ],
+      "independent_transaction_contract": {
+        "w_shared_reads": 16384,
+        "x_shared_reads": 6336,
+        "bias_shared_reads": 512,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "bias_mmio_writes": 76032,
+        "mmio_writes": 156326,
+        "starts": 3168,
+        "dones": 3168,
+        "mac_fire": 202752,
+        "macs": 1622016,
+        "outputs": 25344
+      }
+    },
+    {
+      "name": "H1-synthetic2",
+      "result_sha256": "975768248e0cf529ab75e1332e2d55154a9b55a3640d7332344b8f4394382e42",
+      "simulation_log_sha256": "e6d19cc3af982ccfecaa1984a401bd0d28006d2379548dc50e67bfc4f8f71467",
+      "mode": "synthetic",
+      "firmware_schedule": "bias-hw",
+      "firmware": {
+        "elf_sha256": "543d39f5c0684ed1bbd01021623161ec330d25e1afd49a168794838fcddd29cc",
+        "image_sha256": "f1d1648d3d52a3d69e7380e161fa02c842270897c4dcbc4002ab2f886c0ed4ba",
+        "image_bytes_verified_against_elf": 848,
+        "bss_bytes": 0,
+        "itcm_bytes": 848,
+        "static_function_stack_frames": [
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/accel.c:51:5:accel_linear",
+            "bytes": 48,
+            "kind": "static"
+          },
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/main.c:3:5:main",
+            "bytes": 32,
+            "kind": "static"
+          }
+        ]
+      },
+      "status": "PASS",
+      "tasks": 2,
+      "outputs": 50688,
+      "write_words": 101376,
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 1549641,
+          "firmware_cycles": 1549740,
+          "performance": {
+            "w_load": 299297,
+            "x_load": 114840,
+            "bias_load": 7776,
+            "compute_wait": 218592,
+            "writeback": 803385,
+            "other": 105751,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 81064,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 9642,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        },
+        {
+          "layer": 1,
+          "cycles": 1549642,
+          "firmware_cycles": 1549741,
+          "performance": {
+            "w_load": 299298,
+            "x_load": 114840,
+            "bias_load": 7776,
+            "compute_wait": 218592,
+            "writeback": 803385,
+            "other": 105751,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 81064,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 9643,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        }
+      ],
+      "independent_transaction_contract": {
+        "w_shared_reads": 16384,
+        "x_shared_reads": 6336,
+        "bias_shared_reads": 512,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "bias_mmio_writes": 768,
+        "mmio_writes": 81064,
+        "starts": 3168,
+        "dones": 3168,
+        "mac_fire": 202752,
+        "macs": 1622016,
+        "outputs": 25344
+      }
+    },
+    {
+      "name": "H1-real1",
+      "result_sha256": "6a380ea152a1d9898fd28771969600ffcb19231cfdc31308d9e84f0ed6b9015d",
+      "simulation_log_sha256": "2d1c99a220bb22088646f55cc55fa0c395b88c049cd4d0b2fd0693a30cca587b",
+      "mode": "real",
+      "firmware_schedule": "bias-hw",
+      "firmware": {
+        "elf_sha256": "f74461588be95f0ba9c2c5989c261316249a2c780da7990fdbf5b496fad0ed4c",
+        "image_sha256": "f1d1648d3d52a3d69e7380e161fa02c842270897c4dcbc4002ab2f886c0ed4ba",
+        "image_bytes_verified_against_elf": 848,
+        "bss_bytes": 0,
+        "itcm_bytes": 848,
+        "static_function_stack_frames": [
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/accel.c:51:5:accel_linear",
+            "bytes": 48,
+            "kind": "static"
+          },
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/main.c:3:5:main",
+            "bytes": 32,
+            "kind": "static"
+          }
+        ]
+      },
+      "status": "PASS",
+      "tasks": 1,
+      "outputs": 25344,
+      "write_words": 50688,
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 1549641,
+          "firmware_cycles": 1549740,
+          "performance": {
+            "w_load": 299297,
+            "x_load": 114840,
+            "bias_load": 7776,
+            "compute_wait": 218592,
+            "writeback": 803385,
+            "other": 105751,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 81064,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 9642,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        }
+      ],
+      "independent_transaction_contract": {
+        "w_shared_reads": 16384,
+        "x_shared_reads": 6336,
+        "bias_shared_reads": 512,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "bias_mmio_writes": 768,
+        "mmio_writes": 81064,
+        "starts": 3168,
+        "dones": 3168,
+        "mac_fire": 202752,
+        "macs": 1622016,
+        "outputs": 25344
+      }
+    },
+    {
+      "name": "H2-synthetic2",
+      "result_sha256": "81ebbb5d6e033c14d316e9b39c5c23c201dcb252113dac9a4008e55c4fcd7122",
+      "simulation_log_sha256": "0123c0f72d609a5ba2571d9d649fc39dad91752983e3e92e86816a04bbb2905b",
+      "mode": "synthetic",
+      "firmware_schedule": "bias-dtcm-window",
+      "firmware": {
+        "elf_sha256": "0d0de316c8c0891f1792d284e4e5d6303360a2557a8f5db5a47f29934de89210",
+        "image_sha256": "47dbdc70da139059d4df2dae55b5abcab9424c1dfd78b0abe79e3f5fb1940d05",
+        "image_bytes_verified_against_elf": 1074,
+        "bss_bytes": 2048,
+        "itcm_bytes": 1074,
+        "static_function_stack_frames": [
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/accel.c:51:5:accel_linear",
+            "bytes": 48,
+            "kind": "static"
+          },
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/main.c:3:5:main",
+            "bytes": 32,
+            "kind": "static"
+          }
+        ]
+      },
+      "status": "PASS",
+      "tasks": 2,
+      "outputs": 50688,
+      "write_words": 101376,
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 1928522,
+          "firmware_cycles": 1928626,
+          "performance": {
+            "w_load": 299315,
+            "x_load": 114938,
+            "bias_load": 552876,
+            "compute_wait": 218592,
+            "writeback": 649538,
+            "other": 93263,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 130982,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 7804,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        },
+        {
+          "layer": 1,
+          "cycles": 1928524,
+          "firmware_cycles": 1928628,
+          "performance": {
+            "w_load": 299315,
+            "x_load": 114840,
+            "bias_load": 552876,
+            "compute_wait": 218592,
+            "writeback": 649638,
+            "other": 93263,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 130982,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 7806,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        }
+      ],
+      "independent_transaction_contract": {
+        "w_shared_reads": 16384,
+        "x_shared_reads": 6336,
+        "bias_shared_reads": 512,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "bias_mmio_writes": 76032,
+        "mmio_writes": 130982,
+        "starts": 3168,
+        "dones": 3168,
+        "mac_fire": 202752,
+        "macs": 1622016,
+        "outputs": 25344
+      }
+    },
+    {
+      "name": "H2-real1",
+      "result_sha256": "9dcc9ee01ad2d119db823ff65b31a53495ba74c9d8916f206c8ccac10bcd3af0",
+      "simulation_log_sha256": "18b73ab765dbd6fcf5b91f752de0074b449ac238a6c801d8a2dcf1a8a64c60fd",
+      "mode": "real",
+      "firmware_schedule": "bias-dtcm-window",
+      "firmware": {
+        "elf_sha256": "70242071ba7640571e3a04e9afb67d683d6779a5352b9b7a50a1814ff41548cc",
+        "image_sha256": "47dbdc70da139059d4df2dae55b5abcab9424c1dfd78b0abe79e3f5fb1940d05",
+        "image_bytes_verified_against_elf": 1074,
+        "bss_bytes": 2048,
+        "itcm_bytes": 1074,
+        "static_function_stack_frames": [
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/accel.c:51:5:accel_linear",
+            "bytes": 48,
+            "kind": "static"
+          },
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/main.c:3:5:main",
+            "bytes": 32,
+            "kind": "static"
+          }
+        ]
+      },
+      "status": "PASS",
+      "tasks": 1,
+      "outputs": 25344,
+      "write_words": 50688,
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 1928522,
+          "firmware_cycles": 1928626,
+          "performance": {
+            "w_load": 299315,
+            "x_load": 114938,
+            "bias_load": 552876,
+            "compute_wait": 218592,
+            "writeback": 649538,
+            "other": 93263,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 130982,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 7804,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        }
+      ],
+      "independent_transaction_contract": {
+        "w_shared_reads": 16384,
+        "x_shared_reads": 6336,
+        "bias_shared_reads": 512,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "bias_mmio_writes": 76032,
+        "mmio_writes": 130982,
+        "starts": 3168,
+        "dones": 3168,
+        "mac_fire": 202752,
+        "macs": 1622016,
+        "outputs": 25344
+      }
+    },
+    {
+      "name": "H1H2-synthetic2",
+      "result_sha256": "40f1e003c0d3aac9e2e3c25b69f007bc85ce397f12a8ff306ba4fc81243e388d",
+      "simulation_log_sha256": "cde6a0960c97e31c4619a7a517f44ac7fc4542f99676606f3a34dfdbbf394e64",
+      "mode": "synthetic",
+      "firmware_schedule": "bias-hw-window",
+      "firmware": {
+        "elf_sha256": "bafb00bb610e64c7292211011f358376aa734582cd46aa6cf07051e64b9b5aaa",
+        "image_sha256": "8d2ff853f5444d0188d5bca63020aa8048ce8a1b29675ef65cdf8b3b40203185",
+        "image_bytes_verified_against_elf": 932,
+        "bss_bytes": 0,
+        "itcm_bytes": 932,
+        "static_function_stack_frames": [
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/accel.c:51:5:accel_linear",
+            "bytes": 64,
+            "kind": "static"
+          },
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/main.c:3:5:main",
+            "bytes": 32,
+            "kind": "static"
+          }
+        ]
+      },
+      "status": "PASS",
+      "tasks": 2,
+      "outputs": 50688,
+      "write_words": 101376,
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 1387720,
+          "firmware_cycles": 1387823,
+          "performance": {
+            "w_load": 299301,
+            "x_load": 114906,
+            "bias_load": 7773,
+            "compute_wait": 218592,
+            "writeback": 663663,
+            "other": 83485,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 55720,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 9374,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        },
+        {
+          "layer": 1,
+          "cycles": 1387720,
+          "firmware_cycles": 1387824,
+          "performance": {
+            "w_load": 299301,
+            "x_load": 114906,
+            "bias_load": 7773,
+            "compute_wait": 218592,
+            "writeback": 663663,
+            "other": 83485,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 55720,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 9374,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        }
+      ],
+      "independent_transaction_contract": {
+        "w_shared_reads": 16384,
+        "x_shared_reads": 6336,
+        "bias_shared_reads": 512,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "bias_mmio_writes": 768,
+        "mmio_writes": 55720,
+        "starts": 3168,
+        "dones": 3168,
+        "mac_fire": 202752,
+        "macs": 1622016,
+        "outputs": 25344
+      }
+    },
+    {
+      "name": "H1H2-real1",
+      "result_sha256": "6bcfeb7bd3ef09f1902f65a07baacddb80bcaf06bc62d9057aaf7aa5a3e60e54",
+      "simulation_log_sha256": "52d185aff93b415dd868435f140690fe6f045e67bb47cc3afc329ed826b6ef2c",
+      "mode": "real",
+      "firmware_schedule": "bias-hw-window",
+      "firmware": {
+        "elf_sha256": "ac10dad03981158a6c23e605ba4a6bbddfc90697cef772ba3c850a3d2bd8e60e",
+        "image_sha256": "8d2ff853f5444d0188d5bca63020aa8048ce8a1b29675ef65cdf8b3b40203185",
+        "image_bytes_verified_against_elf": 932,
+        "bss_bytes": 0,
+        "itcm_bytes": 932,
+        "static_function_stack_frames": [
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/accel.c:51:5:accel_linear",
+            "bytes": 64,
+            "kind": "static"
+          },
+          {
+            "source": "/home/mxhanks/Projects/ChipContest-xu-optimize-hw/tests/e203/firmware/main.c:3:5:main",
+            "bytes": 32,
+            "kind": "static"
+          }
+        ]
+      },
+      "status": "PASS",
+      "tasks": 1,
+      "outputs": 25344,
+      "write_words": 50688,
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 1387720,
+          "firmware_cycles": 1387823,
+          "performance": {
+            "w_load": 299301,
+            "x_load": 114906,
+            "bias_load": 7773,
+            "compute_wait": 218592,
+            "writeback": 663663,
+            "other": 83485,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 76032,
+            "mmio_writes": 55720,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 9374,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        }
+      ],
+      "independent_transaction_contract": {
+        "w_shared_reads": 16384,
+        "x_shared_reads": 6336,
+        "bias_shared_reads": 512,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "bias_mmio_writes": 768,
+        "mmio_writes": 55720,
+        "starts": 3168,
+        "dones": 3168,
+        "mac_fire": 202752,
+        "macs": 1622016,
+        "outputs": 25344
+      }
+    }
+  ],
+  "tool_versions": {
+    "riscv64-unknown-elf-gcc": [
+      "riscv64-unknown-elf-gcc (14.2.0+19) 14.2.0",
+      "Copyright (C) 2024 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ],
+    "verilator": [
+      "Verilator 5.032 2025-01-01 rev (Debian 5.032-1)"
+    ],
+    "g++": [
+      "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+      "Copyright (C) 2025 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ]
+  },
+  "host_tests": {
+    "tests": 49,
+    "status": "PASS",
+    "log_sha256": "7cd517214152a910fdc3591e33794bd7a007f769938d5468409d1ae2a647c605"
+  },
+  "numeric_tests": {
+    "tests": 34,
+    "status": "PASS",
+    "log_sha256": "8008c99681484bfbbe32afa3189b6230c2fbd7cb4f9ac72406fcdb165d160df3"
+  },
+  "chisel": {
+    "tests_observed_passed": 13,
+    "suites_observed": 10,
+    "aggregate_stdout": "not originally saved; observation receipt only",
+    "preserved_raw_per_test_files": 39,
+    "raw_per_test_file_semantics": "compile / protocol execution script / simulator console output; empty console files preserved"
+  },
+  "direct_wrapper_iverilog": {
+    "status": "PASS",
+    "accepted": 4909,
+    "retired": 4909,
+    "simulation_log_sha256": "a13e924cf5ef796a227c7aeaa1b62bbf5ae82bccb7c1fcf495892565445bbaf5"
+  },
+  "supplemental_interface_iverilog": {
+    "status": "PASS",
+    "scope": [
+      "RO result-window writes ignored across all 16 words and legacy RESULT_INDEX unchanged",
+      "CACHE_CTRL and CACHE_ADDR writes accepted/read back while busy; intentionally invalid firmware operation, numerical results excluded; immediate reset afterwards"
+    ],
+    "simulation_log_sha256": "b8cfc8a270464b1e2db04e279993605b52dc73f54a7398ee693fb83d03121f1f"
+  },
+  "runs_verified": 7,
+  "tasks_verified": 10,
+  "independence": "does not import runtime runner, contract, campaign, or retention decision functions",
+  "limits": [
+    "Local one-real-layer screening cannot substitute for same-server real12 VCS retention.",
+    "Hash / event auditing verifies preserved artifacts and recorded counters, not a second independent RTL simulation.",
+    "No VCS result, physical area, power, timing closure or accuracy evaluation is inferred here.",
+    "Chisel aggregate stdout is an observation receipt, never claimed as an archived original stdout."
+  ]
+}

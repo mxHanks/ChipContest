@@ -1,0 +1,63 @@
+{
+  "cases": {
+    "baseline": {
+      "command": [
+        "/bin/python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-dtcm",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--accel-waves",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/baseline"
+      ],
+      "cycles": 2104281,
+      "image": "73f5aa7dd9d67e05288e33971617c90565be49eb3a7528841659753f1ae35c46",
+      "raw_vcd_bytes": 601795038,
+      "raw_vcd_sha256": "e2a5180bffe4be938c2d951e31be976a96409dd297a186d1cf50ab2f428d47dd",
+      "status": "PASS"
+    },
+    "candidate": {
+      "command": [
+        "/bin/python3",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--firmware-schedule",
+        "bias-hw-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--accel-waves",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate"
+      ],
+      "cycles": 1375864,
+      "image": "6e22a1bffbd74c5cfc9b6d8603ce71a9f413ec5d2aea5df8bf792b922461e4e1",
+      "raw_vcd_bytes": 710473547,
+      "raw_vcd_sha256": "528a441a3e47d5a3bfa61b54c2d06602bd880eb6963178e84f2de0a348e8b714",
+      "status": "PASS"
+    }
+  },
+  "error": "Command '['/bin/python3', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-scale-vcd-20261102.py', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/tb_accel_soc.vcd', '--simulation-log', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/simulation.log', '--out', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/activity-150MHz.vcd.gz', '--metadata', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/activity-scale.json']' died with <Signals.SIGTERM: 15>.",
+  "finished_epoch": 1793615582.6047072,
+  "stage": "candidate-vcs",
+  "started_epoch": 1793614783.4814212,
+  "status": "FAIL"
+}

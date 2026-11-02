@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "scope": "in-memory / temporary-file negative controls; no runtime source or original artifact changed",
+  "verifier_sha256": "006b6b5e6862465c3bc932399f4dc73187b3b67a46373c36ad1333d753455a33",
+  "checks": [
+    {
+      "name": "changed mmio write count in raw PERF",
+      "status": "PASS rejected corruption",
+      "error": "work counter differs: mmio_writes"
+    },
+    {
+      "name": "duplicated TASK event",
+      "status": "PASS rejected corruption",
+      "error": "missing, duplicated, or unordered TASK/PERF/SOC events"
+    },
+    {
+      "name": "appended bytes to original screening archive",
+      "status": "PASS rejected corruption",
+      "error": "outer archive hash differs: xu-hw-local-screening.tar.xz"
+    }
+  ]
+}

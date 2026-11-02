@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-scale-vcd-20261102.py", line 16, in <module>
+    if args.out.exists() or args.metadata.exists():raise ValueError('derived outputs must not exist')
+ValueError: derived outputs must not exist
+Traceback (most recent call last):
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-activity-finish-20261102.py", line 38, in <module>
+    if not scale.exists():run([sys.executable,str(D/'xu-hw-scale-vcd-20261102.py'),str(wave/'tb_accel_soc.vcd'),'--simulation-log',str(wave/'simulation.log'),'--out',str(vcd),'--metadata',str(scale)])
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-activity-finish-20261102.py", line 8, in run
+    def run(c,cwd=None):subprocess.check_call(c,cwd=str(cwd) if cwd else None)
+  File "/usr/lib64/python3.6/subprocess.py", line 311, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['/bin/python3', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-scale-vcd-20261102.py', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/tb_accel_soc.vcd', '--simulation-log', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/simulation.log', '--out', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/activity-150MHz.vcd.gz', '--metadata', '/storage2/2026contest/server4/s4_23usr/Desktop/xu-hw-optimization-20261102/activity-02/candidate/activity-scale.json']' returned non-zero exit status 1.
