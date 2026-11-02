@@ -1,0 +1,70 @@
+{
+  "configuration": {
+    "schedule": "bias-hw-window",
+    "optimization": "-O2",
+    "experiment": "both-unroll-no-masks"
+  },
+  "command": [
+    "riscv64-unknown-elf-gcc",
+    "-march=rv32imac_zicsr2p0_zifencei2p0",
+    "-mabi=ilp32",
+    "-O2",
+    "-DXU_FIRMWARE_BIAS_DTCM=0",
+    "-DXU_HARDWARE_BIAS_CACHE=1",
+    "-DXU_HARDWARE_RESULT_WINDOW=1",
+    "-DXU_FIRMWARE_BIAS_UNROLL=1",
+    "-DXU_FIRMWARE_RESULT_UNROLL=1",
+    "-DXU_FIRMWARE_NO_MASKS=1",
+    "-fstack-usage",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-msmall-data-limit=0",
+    "-nostdlib",
+    "-nostartfiles",
+    "-static",
+    "-mcmodel=medany",
+    "-Wl,--no-relax",
+    "-T",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/link.ld",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/start.S",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c",
+    "-o",
+    "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/firmware/accel_soc"
+  ],
+  "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/firmware",
+  "source_sha256": {
+    "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e",
+    "accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+    "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+    "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+    "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e"
+  },
+  "elf_sha256": "ebc036d457370c86682c0064fe5a4bbbe7598da80f4722238ea6cc5a9041c897",
+  "image_sha256": "8d2ff853f5444d0188d5bca63020aa8048ce8a1b29675ef65cdf8b3b40203185",
+  "memory": {
+    "itcm_bytes": 932,
+    "itcm_capacity_bytes": 65536,
+    "itcm_remaining_bytes": 64604,
+    "data_bytes": 0,
+    "bss_bytes": 0,
+    "dtcm_capacity_bytes": 65536,
+    "stack_top": 2415984624,
+    "stack_capacity_after_bss_bytes": 65520,
+    "stack_top_guard_bytes": 16,
+    "stack_frames": [
+      {
+        "source": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c:51:5:accel_linear",
+        "bytes": 64,
+        "kind": "static"
+      },
+      {
+        "source": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c:3:5:main",
+        "bytes": 32,
+        "kind": "static"
+      }
+    ],
+    "max_static_stack_frame_bytes": 64,
+    "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+  }
+}

@@ -1,0 +1,927 @@
+{
+  "e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+  "firmware_build": {
+    "command": [
+      "riscv64-unknown-elf-gcc",
+      "-march=rv32imac_zicsr2p0_zifencei2p0",
+      "-mabi=ilp32",
+      "-O2",
+      "-DXU_FIRMWARE_BIAS_DTCM=0",
+      "-DXU_HARDWARE_BIAS_CACHE=1",
+      "-DXU_HARDWARE_RESULT_WINDOW=1",
+      "-DXU_FIRMWARE_BIAS_UNROLL=1",
+      "-DXU_FIRMWARE_RESULT_UNROLL=1",
+      "-DXU_FIRMWARE_NO_MASKS=1",
+      "-fstack-usage",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-msmall-data-limit=0",
+      "-nostdlib",
+      "-nostartfiles",
+      "-static",
+      "-mcmodel=medany",
+      "-Wl,--no-relax",
+      "-T",
+      "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/link.ld",
+      "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/start.S",
+      "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c",
+      "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c",
+      "-o",
+      "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/firmware/accel_soc"
+    ],
+    "configuration": {
+      "experiment": "both-unroll-no-masks",
+      "optimization": "-O2",
+      "schedule": "bias-hw-window"
+    },
+    "cwd": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/firmware",
+    "elf_sha256": "ebc036d457370c86682c0064fe5a4bbbe7598da80f4722238ea6cc5a9041c897",
+    "image_sha256": "8d2ff853f5444d0188d5bca63020aa8048ce8a1b29675ef65cdf8b3b40203185",
+    "memory": {
+      "bss_bytes": 0,
+      "data_bytes": 0,
+      "dtcm_capacity_bytes": 65536,
+      "itcm_bytes": 932,
+      "itcm_capacity_bytes": 65536,
+      "itcm_remaining_bytes": 64604,
+      "max_static_stack_frame_bytes": 64,
+      "stack_capacity_after_bss_bytes": 65520,
+      "stack_frames": [
+        {
+          "bytes": 64,
+          "kind": "static",
+          "source": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/accel.c:51:5:accel_linear"
+        },
+        {
+          "bytes": 32,
+          "kind": "static",
+          "source": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tests/e203/firmware/main.c:3:5:main"
+        }
+      ],
+      "stack_top": 2415984624,
+      "stack_top_guard_bytes": 16,
+      "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+    },
+    "source_sha256": {
+      "accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+      "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+      "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+      "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+      "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+    }
+  },
+  "firmware_elf_sha256": "ebc036d457370c86682c0064fe5a4bbbe7598da80f4722238ea6cc5a9041c897",
+  "firmware_image_sha256": "8d2ff853f5444d0188d5bca63020aa8048ce8a1b29675ef65cdf8b3b40203185",
+  "firmware_sha256": {
+    "accel.c": "080262f875884ca31bcc179895604252aaef527b76f491199d562d3c879bee2e",
+    "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+    "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+    "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+    "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+  },
+  "fixture": {
+    "archive_sha256": "ab9fe42d42324cabdd5912d7b2a2bee1c0fa8b9a55d5ca217da21a57f07c57f4",
+    "files": {
+      "layer_00/bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+      "layer_00/w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+      "layer_00/x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+      "layer_00/y.mem": "ccc8b950f2bc79a688ea1d9d6cf577441d1eefc4eb04b558cb011080e0427719",
+      "layer_01/bias.mem": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428",
+      "layer_01/w.mem": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9",
+      "layer_01/x.mem": "c71a441702b99a6e5d4d9a6dcf4da7b304437a5c55bd83cd89f17f7447b13dca",
+      "layer_01/y.mem": "f5a20a636c8a2d48ae69a2edb6df2439c6defdda3949cf45a4dc7c65f6841f00",
+      "layer_02/bias.mem": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d",
+      "layer_02/w.mem": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5",
+      "layer_02/x.mem": "51e47b183ca7528ae1f9c34d713bf7877eafeb70d429ac39cd9688dc9091e2f3",
+      "layer_02/y.mem": "b8ccc1fe8a3feb6fa8ed2593ba277ceb5fa89ebf5a27b88d4a2525c8ddc3399c",
+      "layer_03/bias.mem": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4",
+      "layer_03/w.mem": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6",
+      "layer_03/x.mem": "5f1dd9d57106afbff85c96c9d85e1bfa59ff43457b77cf8914e2f5fca2da45d4",
+      "layer_03/y.mem": "e3699dbc0539e8adff3be9ef51c2312f2b84e2d67bf98a8b867965025744dfba",
+      "layer_04/bias.mem": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673",
+      "layer_04/w.mem": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1",
+      "layer_04/x.mem": "f981389f3abef58c6df432b49b942d2e5b11d2b15ff1af4955df1a6ac3ba8ebb",
+      "layer_04/y.mem": "59cb14fd981b64b6e3219a370ffd87ad563f66d81eb2cfcf5c67039392102b2c",
+      "layer_05/bias.mem": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1",
+      "layer_05/w.mem": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b",
+      "layer_05/x.mem": "09a340b6a55187fdcc5b15cbe601e1b4fbb65545534a3ef5aaf75aae7ecf0456",
+      "layer_05/y.mem": "7bb3611a15e8ff5ef7a43e614ccf67e36dea2d743d31ee2563d62f1ff5d822fd",
+      "layer_06/bias.mem": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5",
+      "layer_06/w.mem": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd",
+      "layer_06/x.mem": "dea4fc9f26ac90123758c605dfab7c74b7df953e709350245b6d5344f17e4a3a",
+      "layer_06/y.mem": "df599ef5e07056a604c70ff921e51ab50bff2417515cf42ae413a2e1fb394912",
+      "layer_07/bias.mem": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc",
+      "layer_07/w.mem": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96",
+      "layer_07/x.mem": "64c2a590083e456ac3d838dbc3fec287bf6899440a8a4c377f7ffa200e1a92bf",
+      "layer_07/y.mem": "f402ef742b9d8e42f6534873021c8fe51de4b40595e33a05cbba6d3851d4b410",
+      "layer_08/bias.mem": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266",
+      "layer_08/w.mem": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa",
+      "layer_08/x.mem": "8f41479e9c89c62cf12fd69fd5cb966469043516de034bcf6546b06bafc5bcf8",
+      "layer_08/y.mem": "50704e9c707d63ffc771201dfa481c1b32c8b9412b317b910df49fe15d2d66fc",
+      "layer_09/bias.mem": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e",
+      "layer_09/w.mem": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a",
+      "layer_09/x.mem": "75d3f134c03e0f1a7155458fbb6a65c79e42273b7594ee6e1897772959969550",
+      "layer_09/y.mem": "34408dc613d676843af510f74236398e85e3809a6aab458ef7c59e7f395b7150",
+      "layer_10/bias.mem": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8",
+      "layer_10/w.mem": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625",
+      "layer_10/x.mem": "f0cab491f7f6bdfa7df0ebcb6f5a9187233a5b7e3b6ee3bedfe5a727de0ee90e",
+      "layer_10/y.mem": "f14293789475a1910aaab87ca50e7e2118635e4c5ea23dae155dce9ee6e9cadb",
+      "layer_11/bias.mem": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53",
+      "layer_11/w.mem": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6",
+      "layer_11/x.mem": "c5eb2770ec2c0c49a39cc0636e84ac69b9532779d2adce6bbef925745aa75e20",
+      "layer_11/y.mem": "bb47de450edd1baaf037f3ec10c55d0ad1711194edab7c2597e984dd622248fb"
+    },
+    "format": "fixed16_acc48_v1",
+    "kwt_commit": "237e4097afd4f6851e0b82f0a8d65c2dfe8eae30",
+    "scope": "one real-checkpoint silence sample, 12 independent FFN1 layers; not official accuracy evaluation",
+    "source_commit": "c2e58fd9de4c653c4d7822ee5e79e4f06761edb1",
+    "source_directory": "kwt-asic/sim/vectors/kwt-silence-v1/",
+    "source_repository": "https://github.com/mxHanks/ChipContest"
+  },
+  "limitations": "No VCS, full SoC execution, PT or power result. No synthesized-target correspondence is claimed.",
+  "mapped_tasks": [
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_00/layer_00/x.mem",
+            "sha256": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_00/x.mem",
+            "sha256": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_00/layer_00/w.mem",
+            "sha256": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_00/w.mem",
+            "sha256": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_00/layer_00/bias.mem",
+            "sha256": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_00/bias.mem",
+            "sha256": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_00/layer_00/y.mem",
+            "sha256": "ccc8b950f2bc79a688ea1d9d6cf577441d1eefc4eb04b558cb011080e0427719"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_00/y.mem",
+            "sha256": "ccc8b950f2bc79a688ea1d9d6cf577441d1eefc4eb04b558cb011080e0427719"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 0,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_00",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_01/layer_00/x.mem",
+            "sha256": "c71a441702b99a6e5d4d9a6dcf4da7b304437a5c55bd83cd89f17f7447b13dca"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_01/x.mem",
+            "sha256": "c71a441702b99a6e5d4d9a6dcf4da7b304437a5c55bd83cd89f17f7447b13dca"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_01/layer_00/w.mem",
+            "sha256": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_01/w.mem",
+            "sha256": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_01/layer_00/bias.mem",
+            "sha256": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_01/bias.mem",
+            "sha256": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_01/layer_00/y.mem",
+            "sha256": "f5a20a636c8a2d48ae69a2edb6df2439c6defdda3949cf45a4dc7c65f6841f00"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_01/y.mem",
+            "sha256": "f5a20a636c8a2d48ae69a2edb6df2439c6defdda3949cf45a4dc7c65f6841f00"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 1,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_01",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_02/layer_00/x.mem",
+            "sha256": "51e47b183ca7528ae1f9c34d713bf7877eafeb70d429ac39cd9688dc9091e2f3"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_02/x.mem",
+            "sha256": "51e47b183ca7528ae1f9c34d713bf7877eafeb70d429ac39cd9688dc9091e2f3"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_02/layer_00/w.mem",
+            "sha256": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_02/w.mem",
+            "sha256": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_02/layer_00/bias.mem",
+            "sha256": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_02/bias.mem",
+            "sha256": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_02/layer_00/y.mem",
+            "sha256": "b8ccc1fe8a3feb6fa8ed2593ba277ceb5fa89ebf5a27b88d4a2525c8ddc3399c"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_02/y.mem",
+            "sha256": "b8ccc1fe8a3feb6fa8ed2593ba277ceb5fa89ebf5a27b88d4a2525c8ddc3399c"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 2,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_02",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_03/layer_00/x.mem",
+            "sha256": "5f1dd9d57106afbff85c96c9d85e1bfa59ff43457b77cf8914e2f5fca2da45d4"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_03/x.mem",
+            "sha256": "5f1dd9d57106afbff85c96c9d85e1bfa59ff43457b77cf8914e2f5fca2da45d4"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_03/layer_00/w.mem",
+            "sha256": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_03/w.mem",
+            "sha256": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_03/layer_00/bias.mem",
+            "sha256": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_03/bias.mem",
+            "sha256": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_03/layer_00/y.mem",
+            "sha256": "e3699dbc0539e8adff3be9ef51c2312f2b84e2d67bf98a8b867965025744dfba"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_03/y.mem",
+            "sha256": "e3699dbc0539e8adff3be9ef51c2312f2b84e2d67bf98a8b867965025744dfba"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 3,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_03",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_04/layer_00/x.mem",
+            "sha256": "f981389f3abef58c6df432b49b942d2e5b11d2b15ff1af4955df1a6ac3ba8ebb"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_04/x.mem",
+            "sha256": "f981389f3abef58c6df432b49b942d2e5b11d2b15ff1af4955df1a6ac3ba8ebb"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_04/layer_00/w.mem",
+            "sha256": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_04/w.mem",
+            "sha256": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_04/layer_00/bias.mem",
+            "sha256": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_04/bias.mem",
+            "sha256": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_04/layer_00/y.mem",
+            "sha256": "59cb14fd981b64b6e3219a370ffd87ad563f66d81eb2cfcf5c67039392102b2c"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_04/y.mem",
+            "sha256": "59cb14fd981b64b6e3219a370ffd87ad563f66d81eb2cfcf5c67039392102b2c"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 4,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_04",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_05/layer_00/x.mem",
+            "sha256": "09a340b6a55187fdcc5b15cbe601e1b4fbb65545534a3ef5aaf75aae7ecf0456"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_05/x.mem",
+            "sha256": "09a340b6a55187fdcc5b15cbe601e1b4fbb65545534a3ef5aaf75aae7ecf0456"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_05/layer_00/w.mem",
+            "sha256": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_05/w.mem",
+            "sha256": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_05/layer_00/bias.mem",
+            "sha256": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_05/bias.mem",
+            "sha256": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_05/layer_00/y.mem",
+            "sha256": "7bb3611a15e8ff5ef7a43e614ccf67e36dea2d743d31ee2563d62f1ff5d822fd"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_05/y.mem",
+            "sha256": "7bb3611a15e8ff5ef7a43e614ccf67e36dea2d743d31ee2563d62f1ff5d822fd"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 5,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_05",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_06/layer_00/x.mem",
+            "sha256": "dea4fc9f26ac90123758c605dfab7c74b7df953e709350245b6d5344f17e4a3a"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_06/x.mem",
+            "sha256": "dea4fc9f26ac90123758c605dfab7c74b7df953e709350245b6d5344f17e4a3a"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_06/layer_00/w.mem",
+            "sha256": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_06/w.mem",
+            "sha256": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_06/layer_00/bias.mem",
+            "sha256": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_06/bias.mem",
+            "sha256": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_06/layer_00/y.mem",
+            "sha256": "df599ef5e07056a604c70ff921e51ab50bff2417515cf42ae413a2e1fb394912"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_06/y.mem",
+            "sha256": "df599ef5e07056a604c70ff921e51ab50bff2417515cf42ae413a2e1fb394912"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 6,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_06",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_07/layer_00/x.mem",
+            "sha256": "64c2a590083e456ac3d838dbc3fec287bf6899440a8a4c377f7ffa200e1a92bf"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_07/x.mem",
+            "sha256": "64c2a590083e456ac3d838dbc3fec287bf6899440a8a4c377f7ffa200e1a92bf"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_07/layer_00/w.mem",
+            "sha256": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_07/w.mem",
+            "sha256": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_07/layer_00/bias.mem",
+            "sha256": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_07/bias.mem",
+            "sha256": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_07/layer_00/y.mem",
+            "sha256": "f402ef742b9d8e42f6534873021c8fe51de4b40595e33a05cbba6d3851d4b410"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_07/y.mem",
+            "sha256": "f402ef742b9d8e42f6534873021c8fe51de4b40595e33a05cbba6d3851d4b410"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 7,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_07",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_08/layer_00/x.mem",
+            "sha256": "8f41479e9c89c62cf12fd69fd5cb966469043516de034bcf6546b06bafc5bcf8"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_08/x.mem",
+            "sha256": "8f41479e9c89c62cf12fd69fd5cb966469043516de034bcf6546b06bafc5bcf8"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_08/layer_00/w.mem",
+            "sha256": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_08/w.mem",
+            "sha256": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_08/layer_00/bias.mem",
+            "sha256": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_08/bias.mem",
+            "sha256": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_08/layer_00/y.mem",
+            "sha256": "50704e9c707d63ffc771201dfa481c1b32c8b9412b317b910df49fe15d2d66fc"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_08/y.mem",
+            "sha256": "50704e9c707d63ffc771201dfa481c1b32c8b9412b317b910df49fe15d2d66fc"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 8,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_08",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_09/layer_00/x.mem",
+            "sha256": "75d3f134c03e0f1a7155458fbb6a65c79e42273b7594ee6e1897772959969550"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_09/x.mem",
+            "sha256": "75d3f134c03e0f1a7155458fbb6a65c79e42273b7594ee6e1897772959969550"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_09/layer_00/w.mem",
+            "sha256": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_09/w.mem",
+            "sha256": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_09/layer_00/bias.mem",
+            "sha256": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_09/bias.mem",
+            "sha256": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_09/layer_00/y.mem",
+            "sha256": "34408dc613d676843af510f74236398e85e3809a6aab458ef7c59e7f395b7150"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_09/y.mem",
+            "sha256": "34408dc613d676843af510f74236398e85e3809a6aab458ef7c59e7f395b7150"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 9,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_09",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_10/layer_00/x.mem",
+            "sha256": "f0cab491f7f6bdfa7df0ebcb6f5a9187233a5b7e3b6ee3bedfe5a727de0ee90e"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_10/x.mem",
+            "sha256": "f0cab491f7f6bdfa7df0ebcb6f5a9187233a5b7e3b6ee3bedfe5a727de0ee90e"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_10/layer_00/w.mem",
+            "sha256": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_10/w.mem",
+            "sha256": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_10/layer_00/bias.mem",
+            "sha256": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_10/bias.mem",
+            "sha256": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_10/layer_00/y.mem",
+            "sha256": "f14293789475a1910aaab87ca50e7e2118635e4c5ea23dae155dce9ee6e9cadb"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_10/y.mem",
+            "sha256": "f14293789475a1910aaab87ca50e7e2118635e4c5ea23dae155dce9ee6e9cadb"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 10,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_10",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    },
+    {
+      "files": [
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_11/layer_00/x.mem",
+            "sha256": "c5eb2770ec2c0c49a39cc0636e84ac69b9532779d2adce6bbef925745aa75e20"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_11/x.mem",
+            "sha256": "c5eb2770ec2c0c49a39cc0636e84ac69b9532779d2adce6bbef925745aa75e20"
+          },
+          "tensor": "x"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_11/layer_00/w.mem",
+            "sha256": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_11/w.mem",
+            "sha256": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6"
+          },
+          "tensor": "w"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_11/layer_00/bias.mem",
+            "sha256": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_11/bias.mem",
+            "sha256": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53"
+          },
+          "tensor": "bias"
+        },
+        {
+          "materialized": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/mapped_11/layer_00/y.mem",
+            "sha256": "bb47de450edd1baaf037f3ec10c55d0ad1711194edab7c2597e984dd622248fb"
+          },
+          "original": {
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0-task-activity-host-01/original-vectors/layer_11/y.mem",
+            "sha256": "bb47de450edd1baaf037f3ec10c55d0ad1711194edab7c2597e984dd622248fb"
+          },
+          "tensor": "y"
+        }
+      ],
+      "global_task_id": 11,
+      "mapping": "four original tensor files copied byte-for-byte; +TASKS=1",
+      "original_layer": "layer_11",
+      "schema": "xu-soc-single-task-input-v1",
+      "simulator_layer": "layer_00"
+    }
+  ],
+  "python36_syntax": "PASS; actual runtime is current host Python, not a Python3.6 interpreter",
+  "schema": "xu-soc-task-activity-host-preparation-v1",
+  "source": [
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_soc_task_activity.py",
+      "sha256": "ea49772c8a812792f5f3b65879b51061b6e809075d9c91b1eb5102836fd405bc"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/ppa/xu_soc_ppa_verify.py",
+      "sha256": "e7b1ae0724d572e055c88114b7b3214169e7acb5e3d847da402f65b58bd4ba83"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/scripts/e203_soc.py",
+      "sha256": "573d0d1830069cf99ea73bcf2553b175bc77f6f5ecbe7595036453a193970e2b"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/scripts/xu_firmware_contract.py",
+      "sha256": "a0602663237aec93e52f1ea38ff7982ceb21f603f334899cbc48fd6a51c30b96"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/tools/scripts/xu_soc_activity.py",
+      "sha256": "8a10bde83fb1a622b01f6b9a014e9b65b286f1f76a3a214c62f6c6d6a784c942"
+    }
+  ],
+  "status": "HOST_PREPARATION_ONLY",
+  "vectors": [
+    {
+      "layer": 0,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+        "w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+        "x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+        "y.mem": "ccc8b950f2bc79a688ea1d9d6cf577441d1eefc4eb04b558cb011080e0427719"
+      }
+    },
+    {
+      "layer": 1,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428",
+        "w.mem": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9",
+        "x.mem": "c71a441702b99a6e5d4d9a6dcf4da7b304437a5c55bd83cd89f17f7447b13dca",
+        "y.mem": "f5a20a636c8a2d48ae69a2edb6df2439c6defdda3949cf45a4dc7c65f6841f00"
+      }
+    },
+    {
+      "layer": 2,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d",
+        "w.mem": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5",
+        "x.mem": "51e47b183ca7528ae1f9c34d713bf7877eafeb70d429ac39cd9688dc9091e2f3",
+        "y.mem": "b8ccc1fe8a3feb6fa8ed2593ba277ceb5fa89ebf5a27b88d4a2525c8ddc3399c"
+      }
+    },
+    {
+      "layer": 3,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4",
+        "w.mem": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6",
+        "x.mem": "5f1dd9d57106afbff85c96c9d85e1bfa59ff43457b77cf8914e2f5fca2da45d4",
+        "y.mem": "e3699dbc0539e8adff3be9ef51c2312f2b84e2d67bf98a8b867965025744dfba"
+      }
+    },
+    {
+      "layer": 4,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673",
+        "w.mem": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1",
+        "x.mem": "f981389f3abef58c6df432b49b942d2e5b11d2b15ff1af4955df1a6ac3ba8ebb",
+        "y.mem": "59cb14fd981b64b6e3219a370ffd87ad563f66d81eb2cfcf5c67039392102b2c"
+      }
+    },
+    {
+      "layer": 5,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1",
+        "w.mem": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b",
+        "x.mem": "09a340b6a55187fdcc5b15cbe601e1b4fbb65545534a3ef5aaf75aae7ecf0456",
+        "y.mem": "7bb3611a15e8ff5ef7a43e614ccf67e36dea2d743d31ee2563d62f1ff5d822fd"
+      }
+    },
+    {
+      "layer": 6,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5",
+        "w.mem": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd",
+        "x.mem": "dea4fc9f26ac90123758c605dfab7c74b7df953e709350245b6d5344f17e4a3a",
+        "y.mem": "df599ef5e07056a604c70ff921e51ab50bff2417515cf42ae413a2e1fb394912"
+      }
+    },
+    {
+      "layer": 7,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc",
+        "w.mem": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96",
+        "x.mem": "64c2a590083e456ac3d838dbc3fec287bf6899440a8a4c377f7ffa200e1a92bf",
+        "y.mem": "f402ef742b9d8e42f6534873021c8fe51de4b40595e33a05cbba6d3851d4b410"
+      }
+    },
+    {
+      "layer": 8,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266",
+        "w.mem": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa",
+        "x.mem": "8f41479e9c89c62cf12fd69fd5cb966469043516de034bcf6546b06bafc5bcf8",
+        "y.mem": "50704e9c707d63ffc771201dfa481c1b32c8b9412b317b910df49fe15d2d66fc"
+      }
+    },
+    {
+      "layer": 9,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e",
+        "w.mem": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a",
+        "x.mem": "75d3f134c03e0f1a7155458fbb6a65c79e42273b7594ee6e1897772959969550",
+        "y.mem": "34408dc613d676843af510f74236398e85e3809a6aab458ef7c59e7f395b7150"
+      }
+    },
+    {
+      "layer": 10,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8",
+        "w.mem": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625",
+        "x.mem": "f0cab491f7f6bdfa7df0ebcb6f5a9187233a5b7e3b6ee3bedfe5a727de0ee90e",
+        "y.mem": "f14293789475a1910aaab87ca50e7e2118635e4c5ea23dae155dce9ee6e9cadb"
+      }
+    },
+    {
+      "layer": 11,
+      "outputs": 25344,
+      "sha256": {
+        "bias.mem": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53",
+        "w.mem": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6",
+        "x.mem": "c5eb2770ec2c0c49a39cc0636e84ac69b9532779d2adce6bbef925745aa75e20",
+        "y.mem": "bb47de450edd1baaf037f3ec10c55d0ad1711194edab7c2597e984dd622248fb"
+      }
+    }
+  ]
+}
