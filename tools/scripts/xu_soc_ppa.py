@@ -328,7 +328,10 @@ def prepare(root, out, impl, allow_unqualified=False):
     synth+='elaborate '+tcl(impl['top'])+'\ncurrent_design '+tcl(impl['top'])+'\nif {![link]} {error {DC link failed}}\n'
     synth+='if {[sizeof_collection [current_design]] != 1} {error {no elaborated current design}}\n'
     synth+='foreach_in_collection xu_d [get_designs *] {\nset xu_blackbox [get_attribute $xu_d is_black_box]\nif {[string is true -strict $xu_blackbox]} {error "unresolved design [get_object_name $xu_d]"}\nif {$xu_blackbox ne "" && ![string is false -strict $xu_blackbox]} {error "unexpected black-box attribute [get_object_name $xu_d]: $xu_blackbox"}\n}\n'
-    synth+=memory_checks(impl)+'check_design > precheck.rpt\nset XU_CLOCK_MODE envelope\nset XU_PLL_DIV 0\nread_sdc constraints.sdc\n'+clock_contract_checks()
+    # This reviewed contract contains Tcl collection operations/procedures.
+    # DC read_sdc uses its restricted SDC interpreter; source preserves the
+    # normal shell commands/options used by this contract.
+    synth+=memory_checks(impl)+'check_design > precheck.rpt\nset XU_CLOCK_MODE envelope\nset XU_PLL_DIV 0\nsource constraints.sdc\n'+clock_contract_checks()
     synth+='set_boundary_optimization [get_cells -hierarchical -filter {is_hierarchical == true}] false\n'
     synth+='set_dont_touch [get_cells -hierarchical -filter {ref_name == RAMSP1024X16}] true\n'
     synth+='set_fix_hold [all_clocks]\ncompile_ultra -no_autoungroup\n'
