@@ -6,8 +6,9 @@ import org.scalatest.funspec.AnyFunSpec
 
 class LinearCachedCoreTest extends AnyFunSpec with ChiselSim {
     describe("xu cached compute core") {
-        it("selects legacy or per-group signed40 biases without changing MAC results") {
-            simulate(new LinearCachedCore) { dut =>
+        for (enableBiasCache <- Seq(true, false)) {
+        it(s"preserves signed40 MAC results with bias cache hardware=$enableBiasCache") {
+            simulate(new LinearCachedCore(enableBiasCache)) { dut =>
                 dut.io.start.poke(false.B)
                 dut.io.group.poke(0.U)
                 dut.io.cacheEnable.poke(false.B)
@@ -69,7 +70,7 @@ class LinearCachedCoreTest extends AnyFunSpec with ChiselSim {
                         assert(dut.io.done.peek().litToBoolean, s"group $group timed out")
                         for (lane <- 0 until 8) {
                             val dot = (0 until 64).map(k => (k - 32) * (group - lane - k)).sum
-                            val initial = if (enabled) bias(task, group * 8 + lane) else BigInt(lane - 7)
+                            val initial = if (enabled && enableBiasCache) bias(task, group * 8 + lane) else BigInt(lane - 7)
                             dut.io.result(lane).expect((initial + dot).S)
                         }
                         dut.clock.step()
@@ -77,6 +78,7 @@ class LinearCachedCoreTest extends AnyFunSpec with ChiselSim {
                     }
                 }
             }
+        }
         }
     }
 }

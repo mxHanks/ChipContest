@@ -9,7 +9,7 @@ import unittest
 
 
 class XuCachedWrapperTests(unittest.TestCase):
-    def test_cache_masks_legacy_modes_result_window_and_backpressure(self):
+    def test_supported_features_legacy_modes_result_window_and_backpressure(self):
         simulator = os.environ.get('XU_WRAPPER_SIM', 'iverilog')
         self.assertIn(simulator, ('iverilog', 'vcs'), 'unknown XU_WRAPPER_SIM')
         if simulator == 'iverilog' and (not shutil.which('iverilog') or not shutil.which('vvp')):
@@ -53,7 +53,12 @@ class XuCachedWrapperTests(unittest.TestCase):
                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60)
             save_log('simulation.log', result.stdout + result.stderr)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-            self.assertIn('XU_CACHED_WRAPPER_PASS', result.stdout)
+            if 'XU_H2_ONLY_WRAPPER_PASS' in result.stdout:
+                self.assertIn('XU_BIAS_CACHE_UNSUPPORTED capability=58550002 cache_checks=not_run',
+                              result.stdout)
+                self.assertNotIn('XU_CACHED_WRAPPER_PASS', result.stdout)
+            else:
+                self.assertIn('XU_CACHED_WRAPPER_PASS', result.stdout)
             self.assertNotRegex(result.stdout + result.stderr,
                                 re.compile(r'\b(?:FATAL|FAIL(?:ED|URE)?)\b', re.IGNORECASE))
 

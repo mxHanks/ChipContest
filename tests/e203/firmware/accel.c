@@ -55,8 +55,12 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
     if (reg[ID] != 0xacce2030u) return -1;
     if (reg[STATUS] & 1u) return -2;
 #if XU_HARDWARE_BIAS_CACHE || XU_HARDWARE_RESULT_WINDOW
-    /* Reject old RTL instead of silently accepting writes to absent registers. */
-    if (reg[CAPABILITY] != 0x58550003u) return -4;
+    /* The low capability bits independently advertise bias cache and window. */
+    const uint32_t required = (XU_HARDWARE_BIAS_CACHE ? 1u : 0u) |
+                              (XU_HARDWARE_RESULT_WINDOW ? 2u : 0u);
+    const uint32_t capability = reg[CAPABILITY];
+    if ((capability & 0xffff0000u) != 0x58550000u ||
+        (capability & required) != required) return -4;
 #endif
     for (unsigned bank = 0; bank < 8; ++bank) {
         reg[W_BANK] = bank;

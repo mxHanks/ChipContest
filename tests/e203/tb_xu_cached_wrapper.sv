@@ -15,6 +15,7 @@ module tb_xu_cached_wrapper;
   integer addr, lane, group_id, k, trial;
   reg [31:0] value, low_word, high_word;
   reg [39:0] data40;
+  reg has_bias_cache;
 
   always @(posedge clk) if (rst_n) begin
     if (cmd_valid && cmd_ready) accepted=accepted+1;
@@ -101,14 +102,14 @@ module tb_xu_cached_wrapper;
       if (status[0]) $fatal(1,"busy remains asserted after completion");
       put('h034,3,15);
       for (selected_lane=7;selected_lane>=0;selected_lane=selected_lane-1) begin
-        selected_bias=cached?expected[selected_group*8+selected_lane]:legacy[selected_lane];
+        selected_bias=(cached && has_bias_cache)?expected[selected_group*8+selected_lane]:legacy[selected_lane];
         expected_result={{8{selected_bias[39]}},selected_bias};
         expect_read('h080+selected_lane*8,expected_result[31:0]);
         expect_read('h084+selected_lane*8,{16'b0,expected_result[47:32]});
       end
       expect_read('h034,3); // Window reads have no index side effects.
       for (selected_lane=0;selected_lane<8;selected_lane=selected_lane+1) begin
-        selected_bias=cached?expected[selected_group*8+selected_lane]:legacy[selected_lane];
+        selected_bias=(cached && has_bias_cache)?expected[selected_group*8+selected_lane]:legacy[selected_lane];
         expected_result={{8{selected_bias[39]}},selected_bias};
         put('h034,selected_lane,15);
         expect_read('h038,expected_result[31:0]);
@@ -129,30 +130,37 @@ module tb_xu_cached_wrapper;
       cmd_valid=1; cmd_read=1; cmd_addr=32'h10042000; rsp_ready=0;
       @(posedge clk); #1;
       @(negedge clk);
-      cmd_read=0; cmd_addr=32'h10042048; cmd_wdata=32'hcafef00d; cmd_wmask=15;
+      cmd_read=0; cmd_addr=has_bias_cache?32'h10042048:32'h10042004;
+      cmd_wdata=32'hcafef00d; cmd_wmask=15;
       repeat(4) begin
         @(posedge clk); #1;
-        if (cmd_ready || dut.cache_read_data!==original || rsp_rdata!==32'hacce2030)
+        if (cmd_ready || (has_bias_cache && dut.cache_read_data!==original) || rsp_rdata!==32'hacce2030)
           $fatal(1,"blocked command had a side effect");
       end
       @(negedge clk); rsp_ready=1;
       @(posedge clk); #1;
-      if (dut.cache_read_data!=={original[39:32],32'hcafef00d})
+      if (has_bias_cache && dut.cache_read_data!=={original[39:32],32'hcafef00d})
         $fatal(1,"accepted pipelined cache write missing");
       expected[42]={original[39:32],32'hcafef00d};
       @(negedge clk); cmd_valid=0;
       @(posedge clk); #1;
       @(negedge clk); rsp_ready=0;
+      if (!has_bias_cache) expect_read('h004,32'hcafef00d);
     end
   endtask
 
   initial begin
     repeat(3) @(negedge clk); rst_n=1;
-    expect_read('h000,32'hacce2030); expect_read('h050,32'h58550003);
+    expect_read('h000,32'hacce2030);
+    transfer(1,'h050,0,0,value);
+    if (value!==32'h58550003 && value!==32'h58550002)
+      $fatal(1,"unsupported capability=%h",value);
+    has_bias_cache=value[0];
     expect_read('h040,0); expect_read('h044,0);
     put('h040,1,2); expect_read('h040,0);
     put('h044,255,2); expect_read('h044,0);
     put('h004,32'h12345678,15); expect_read('h004,32'h12345678);
+    if (has_bias_cache) begin
     for (addr=0;addr<256;addr=addr+1) begin
       data40=(addr[0]?40'h8000000000:40'h7fffffffff)^addr;
       load_cache(addr,data40);
@@ -171,6 +179,15 @@ module tb_xu_cached_wrapper;
       put('h04c,32'hffffff89,1); expected[addr][39:32]=8'h89;
       expect_read('h04c,32'h89);
     end
+    end else begin
+      // Reserved cache offsets acknowledge writes but expose no storage or mode.
+      put('h040,1,15); expect_read('h040,0);
+      for (addr=0;addr<256;addr=addr+1) begin
+        load_cache(addr,40'h7fffffffff^addr);
+        expect_read('h044,0); expect_read('h048,0); expect_read('h04c,0);
+      end
+      $display("XU_BIAS_CACHE_UNSUPPORTED capability=58550002 cache_checks=not_run");
+    end
     blocked_write();
     // X=0 ensures full signed40 bias is observed without arithmetic ambiguity.
     for(k=0;k<64;k=k+1) begin put('h014,k,15); put('h018,0,15); end
@@ -187,13 +204,18 @@ module tb_xu_cached_wrapper;
       put('h030,{24'b0,legacy[lane][39:32]},1);
     end
     check_group(0,0); check_group(31,0); check_group(0,1); check_group(31,1);
-    for(addr=0;addr<256;addr=addr+1) load_cache(addr,-40'd1-addr);
-    check_group(0,1); check_group(31,1); check_group(0,0);
+    if (has_bias_cache) begin
+      for(addr=0;addr<256;addr=addr+1) load_cache(addr,-40'd1-addr);
+      check_group(0,1); check_group(31,1); check_group(0,0);
+    end
     @(negedge clk); rst_n=0;
     repeat(2) @(negedge clk); rst_n=1;
     expect_read('h040,0); expect_read('h044,0); expect_read('h00c,0);
     if(accepted!=retired) $fatal(1,"request/response count mismatch %0d/%0d",accepted,retired);
-    $display("XU_CACHED_WRAPPER_PASS accepted=%0d retired=%0d",accepted,retired);
+    if (has_bias_cache)
+      $display("XU_CACHED_WRAPPER_PASS accepted=%0d retired=%0d",accepted,retired);
+    else
+      $display("XU_H2_ONLY_WRAPPER_PASS accepted=%0d retired=%0d",accepted,retired);
     $finish;
   end
   initial begin #2000000; $fatal(1,"test timed out"); end

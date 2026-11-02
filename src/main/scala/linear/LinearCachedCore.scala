@@ -13,10 +13,9 @@ class LinearCachedCoreIO extends LinearComputeCoreIO {
 }
 
 /** xu optional full-bias cache around the unchanged eight-PE compute core. */
-class LinearCachedCore extends Module {
+class LinearCachedCore(enableBiasCache: Boolean = true) extends Module {
     val io = IO(new LinearCachedCoreIO)
     private val core = Module(new LinearComputeCore)
-    private val biasCache = Module(new BiasBankCache)
 
     core.io.start := io.start
     core.io.group := io.group
@@ -28,15 +27,22 @@ class LinearCachedCore extends Module {
     core.io.wLoadAddr := io.wLoadAddr
     core.io.wLoadData := io.wLoadData
 
-    biasCache.io.writeEnable := io.cacheWriteEnable
-    biasCache.io.writeAddr := io.cacheWriteAddr
-    biasCache.io.writeData := io.cacheWriteData
-    biasCache.io.writeMask := io.cacheWriteMask
-    biasCache.io.readAddr := io.cacheReadAddr
-    biasCache.io.group := io.group
-    core.io.bias := Mux(io.cacheEnable, biasCache.io.bias, io.bias)
-
-    io.cacheReadData := biasCache.io.readData
+    // Elaboration-time selection removes the cache banks and bias muxes from
+    // the H2-only hardware, while preserving the original default generator.
+    if (enableBiasCache) {
+        val biasCache = Module(new BiasBankCache)
+        biasCache.io.writeEnable := io.cacheWriteEnable
+        biasCache.io.writeAddr := io.cacheWriteAddr
+        biasCache.io.writeData := io.cacheWriteData
+        biasCache.io.writeMask := io.cacheWriteMask
+        biasCache.io.readAddr := io.cacheReadAddr
+        biasCache.io.group := io.group
+        core.io.bias := Mux(io.cacheEnable, biasCache.io.bias, io.bias)
+        io.cacheReadData := biasCache.io.readData
+    } else {
+        core.io.bias := io.bias
+        io.cacheReadData := 0.U
+    }
     io.done := core.io.done
     io.result := core.io.result
 }
