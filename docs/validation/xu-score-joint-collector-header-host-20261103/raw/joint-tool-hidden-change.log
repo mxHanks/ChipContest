@@ -1,0 +1,11 @@
+{"command": ["/usr/bin/python3", "-c", "import sys;sys.path.insert(0,\"tools/ppa\");import xu_candidate_joint_context as c;c.full_tool_identity();print(\"XU_JOINT_TOOL_ALL_BLOBS_PASS\")"], "cwd": "/tmp/xu-joint-tool-clone-r6t01bmq/tool", "returncode": 1}
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import sys;sys.path.insert(0,"tools/ppa");import xu_candidate_joint_context as c;c.full_tool_identity();print("XU_JOINT_TOOL_ALL_BLOBS_PASS")
+                                                                                     ~~~~~~~~~~~~~~~~~~~~^^
+  File "/tmp/xu-joint-tool-clone-r6t01bmq/tool/tools/ppa/xu_candidate_joint_context.py", line 50, in full_tool_identity
+    require(hashlib.sha1(b'blob '+str(len(data)).encode('ascii')+b'\0'+data).hexdigest()==oid,'tool tracked bytes differ from committed Git: '+name)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/xu-joint-tool-clone-r6t01bmq/tool/tools/ppa/xu_candidate_activity_context.py", line 38, in require
+    raise ValueError(message)
+ValueError: tool tracked bytes differ from committed Git: tests/ppa/tb_xu_sram_joint_micro.sv
