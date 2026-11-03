@@ -225,7 +225,7 @@ redirect -file check-timing.rpt {check_timing -verbose}
     if {[sizeof_collection $xu_pins] != 67} {error {SRAM signal pin count differs; review library interface}}
     foreach_in_collection xu_p $xu_pins {
       puts "XU_SRAM_PIN name=[string map {. /} [get_object_name $xu_p]]"
-      report_attribute -all $xu_p
+      report_attribute -application $xu_p
     }
   }
 }
@@ -244,7 +244,9 @@ redirect -file sram-library.rpt {
   if {[sizeof_collection $xu_libcells] < 1} {error {SRAM link has no actual library cells}}
   foreach_in_collection xu_lc $xu_libcells {
     puts "XU_SRAM_LIBRARY_CELL [get_object_name $xu_lc]"
-    report_attribute -all $xu_lc
+    report_attribute -application $xu_lc
+    set xu_libname [lindex [split [get_object_name $xu_lc] /] 0]
+    report_lib -power_arcs [get_libs $xu_libname] $xu_lc
   }
   foreach_in_collection xu_lib [get_libs *] {report_lib [get_object_name $xu_lib]}
 }

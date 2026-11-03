@@ -70,3 +70,10 @@ installation). Supply `--lc-root /eda/synopsys/lib_compiler/lib_compiler_2022.03
 to `run` to set `SYNOPSYS_LC_ROOT` and prepend its `bin` in the child environment;
 the selected root is recorded. Omission preserves the existing environment.
 This startup fix is not a successful power run or annotation qualification.
+
+A subsequent real PT run reached SAIF annotation and the before-power coverage
+reports, then rejected `report_attribute -all`. The target's own command manual
+requires `-application` to include application attributes. The pin and library
+reports now use that option. Linked SRAM cells additionally get the documented
+`report_lib -power_arcs` report for review of the actual power arcs; this still
+does not automatically establish complete SRAM power-mode coverage.
