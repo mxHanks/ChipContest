@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "mutated_copies_only": true,
+  "unchanged_raw": true,
+  "integrity_corruptions_rejected": 6,
+  "cases": [
+    {
+      "case": "changed_raw_bytes",
+      "returncode": 1,
+      "expected_rejection": "original raw bytes differ:",
+      "actual_rejection": "ValueError: original raw bytes differ: s2c-accept-01/child-checkout.log"
+    },
+    {
+      "case": "extra_raw_file",
+      "returncode": 1,
+      "expected_rejection": "extra or missing raw file",
+      "actual_rejection": "ValueError: extra or missing raw file"
+    },
+    {
+      "case": "changed_selected_digest",
+      "returncode": 1,
+      "expected_rejection": "selected manifest differs",
+      "actual_rejection": "ValueError: selected manifest differs"
+    },
+    {
+      "case": "changed_frozen_source_digest",
+      "returncode": 1,
+      "expected_rejection": "frozen source digest differs",
+      "actual_rejection": "ValueError: frozen source digest differs"
+    },
+    {
+      "case": "duplicate_export_path",
+      "returncode": 1,
+      "expected_rejection": "original manifest is not unique",
+      "actual_rejection": "ValueError: original manifest is not unique"
+    },
+    {
+      "case": "wrong_candidate_commit",
+      "returncode": 1,
+      "expected_rejection": "frozen commit differs",
+      "actual_rejection": "ValueError: frozen commit differs"
+    }
+  ]
+}

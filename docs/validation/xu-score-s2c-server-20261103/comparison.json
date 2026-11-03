@@ -1,0 +1,928 @@
+{
+  "status": "VERIFIED_VCS_DEVELOPMENT_RESULTS_WITH_BINARY_RETRIEVAL_GAPS",
+  "main_commit": "d276b55ffecbe8d620f9a361bf5d0859299ba7b5",
+  "e203_commit": "49a9436e01ea8ceeead94242e4a99c16e31a0865",
+  "selected_unique_payloads": 123,
+  "source_paths_verified": 152,
+  "full_deployment_manifest_paths": 2384,
+  "actual_server_steps": [
+    "host",
+    "numeric",
+    "vectors",
+    "doctor",
+    "baseline",
+    "synthetic1",
+    "synthetic2",
+    "real12",
+    "packed-control-real12"
+  ],
+  "host_tests": 57,
+  "host_skips": 3,
+  "numeric_tests": 42,
+  "direct_vcs": {
+    "autogroup": {
+      "status": "VERIFIED_ACTUAL_VCS_LOGS",
+      "counts": [
+        2,
+        64,
+        512,
+        958,
+        99,
+        99,
+        11719,
+        11719
+      ],
+      "binary_identity": "recorded SHA only; binary not retrieved"
+    },
+    "packed": {
+      "status": "VERIFIED_ACTUAL_VCS_LOGS",
+      "counts": [
+        9653,
+        9653,
+        16457,
+        16390,
+        67,
+        33
+      ],
+      "binary_identity": "recorded SHA only; binary not retrieved"
+    },
+    "stream": {
+      "status": "VERIFIED_ACTUAL_VCS_LOGS",
+      "counts": [
+        17828,
+        17828,
+        16454,
+        16387,
+        67,
+        33
+      ],
+      "binary_identity": "recorded SHA only; binary not retrieved"
+    }
+  },
+  "independently_recomputed_fixed_outputs": 304128,
+  "total_cycles": {
+    "autogroup": 11842200,
+    "packed": 14532449
+  },
+  "per_layer": [
+    {
+      "layer": 0,
+      "packed_cycles": 1211034,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224184
+    },
+    {
+      "layer": 1,
+      "packed_cycles": 1211035,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224185
+    },
+    {
+      "layer": 2,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    },
+    {
+      "layer": 3,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    },
+    {
+      "layer": 4,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    },
+    {
+      "layer": 5,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    },
+    {
+      "layer": 6,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    },
+    {
+      "layer": 7,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    },
+    {
+      "layer": 8,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    },
+    {
+      "layer": 9,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    },
+    {
+      "layer": 10,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    },
+    {
+      "layer": 11,
+      "packed_cycles": 1211038,
+      "autogroup_cycles": 986850,
+      "autogroup_minus_packed": -224188
+    }
+  ],
+  "reduction_cycles": 2690249,
+  "reduction_percent": 18.512014045258304,
+  "same_identity_fields": [
+    "main_commit",
+    "e203_commit",
+    "source_sha256",
+    "runner_sha256",
+    "contract_sha256",
+    "versions",
+    "tools",
+    "vectors",
+    "fixture",
+    "firmware_sha256",
+    "simulator_sha256",
+    "firmware_opt",
+    "firmware_experiment"
+  ],
+  "autogroup_activity": [
+    {
+      "layer": 0,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 1,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 2,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 3,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 4,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 5,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 6,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 7,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 8,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 9,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 10,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    },
+    {
+      "layer": 11,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 157014,
+      "fifo_full_wait": 484210
+    }
+  ],
+  "rejected_corruptions": [
+    "synthetic1/missing_TASK_PASS",
+    "synthetic1/duplicate_TASK_PASS",
+    "synthetic1/missing_PERF_TASK",
+    "synthetic1/duplicate_PERF_TASK",
+    "synthetic1/missing_SOC_PASS",
+    "synthetic1/duplicate_SOC_PASS",
+    "synthetic1/missing_AUTO_TASK",
+    "synthetic1/duplicate_AUTO_TASK",
+    "synthetic1/wrong_mmio_writes",
+    "synthetic1/wrong_shared_reads",
+    "synthetic1/wrong_shared_writes",
+    "synthetic1/wrong_mac_fire",
+    "synthetic1/wrong_starts",
+    "synthetic1/wrong_dones",
+    "synthetic1/wrong_POP",
+    "synthetic1/zero_overlap",
+    "synthetic1/FATAL",
+    "synthetic2/missing_TASK_PASS",
+    "synthetic2/duplicate_TASK_PASS",
+    "synthetic2/missing_PERF_TASK",
+    "synthetic2/duplicate_PERF_TASK",
+    "synthetic2/missing_SOC_PASS",
+    "synthetic2/duplicate_SOC_PASS",
+    "synthetic2/missing_AUTO_TASK",
+    "synthetic2/duplicate_AUTO_TASK",
+    "synthetic2/wrong_mmio_writes",
+    "synthetic2/wrong_shared_reads",
+    "synthetic2/wrong_shared_writes",
+    "synthetic2/wrong_mac_fire",
+    "synthetic2/wrong_starts",
+    "synthetic2/wrong_dones",
+    "synthetic2/wrong_POP",
+    "synthetic2/zero_overlap",
+    "synthetic2/FATAL",
+    "real12/missing_TASK_PASS",
+    "real12/duplicate_TASK_PASS",
+    "real12/missing_PERF_TASK",
+    "real12/duplicate_PERF_TASK",
+    "real12/missing_SOC_PASS",
+    "real12/duplicate_SOC_PASS",
+    "real12/missing_AUTO_TASK",
+    "real12/duplicate_AUTO_TASK",
+    "real12/wrong_mmio_writes",
+    "real12/wrong_shared_reads",
+    "real12/wrong_shared_writes",
+    "real12/wrong_mac_fire",
+    "real12/wrong_starts",
+    "real12/wrong_dones",
+    "real12/wrong_POP",
+    "real12/zero_overlap",
+    "real12/FATAL",
+    "packed-control-real12/missing_TASK_PASS",
+    "packed-control-real12/duplicate_TASK_PASS",
+    "packed-control-real12/missing_PERF_TASK",
+    "packed-control-real12/duplicate_PERF_TASK",
+    "packed-control-real12/missing_SOC_PASS",
+    "packed-control-real12/duplicate_SOC_PASS",
+    "packed-control-real12/wrong_mmio_writes",
+    "packed-control-real12/wrong_shared_reads",
+    "packed-control-real12/wrong_shared_writes",
+    "packed-control-real12/wrong_mac_fire",
+    "packed-control-real12/wrong_starts",
+    "packed-control-real12/wrong_dones",
+    "packed-control-real12/FATAL"
+  ],
+  "initial_failed_main": "0d1f6e9f1b0b6efb2207f99fcef78597855eb5c0",
+  "initial_failed_child": "dd149bb34aa1c3feca066ffbf9bdd3311f4b954c",
+  "limitations": [
+    "actual server ELF/loadable images/simulator binaries/vectors not retrieved; SHA identities are recorded, not rehashed binaries",
+    "all declared run logs retrieved and rehashed; shared original fixture independently recomputed",
+    "4ns development TB and preloaded shared memory; candidate formal clear/request-window,150MHz mapped equivalence/STA and full-SoC energy still required",
+    "official600 accuracy and scoring/retention not established"
+  ],
+  "layer_counters": {
+    "autogroup": [
+      {
+        "layer": 0,
+        "cycles": 986850,
+        "firmware_cycles": 986921,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 1,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 2,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 3,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 4,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 5,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 6,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 7,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 8,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 9,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 10,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 11,
+        "cycles": 986850,
+        "firmware_cycles": 986920,
+        "performance": {
+          "w_load": 183503,
+          "x_load": 71084,
+          "bias_load": 7774,
+          "compute_wait": 44946,
+          "writeback": 666370,
+          "other": 13173,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 54648,
+          "mmio_writes": 15497,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 11978,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      }
+    ],
+    "packed": [
+      {
+        "layer": 0,
+        "cycles": 1211034,
+        "firmware_cycles": 1211098,
+        "performance": {
+          "w_load": 183504,
+          "x_load": 71180,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650281,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8656,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 1,
+        "cycles": 1211035,
+        "firmware_cycles": 1211100,
+        "performance": {
+          "w_load": 183505,
+          "x_load": 71180,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650281,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8657,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 2,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 3,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 4,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 5,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 6,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 7,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 8,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 9,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 10,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      },
+      {
+        "layer": 11,
+        "cycles": 1211038,
+        "firmware_cycles": 1211102,
+        "performance": {
+          "w_load": 183506,
+          "x_load": 71181,
+          "bias_load": 7773,
+          "compute_wait": 218592,
+          "writeback": 650282,
+          "other": 79704,
+          "busy": 215424,
+          "mac_fire": 202752,
+          "mmio_reads": 76032,
+          "mmio_writes": 21734,
+          "shared_reads": 23232,
+          "shared_writes": 50688,
+          "shared_stall": 8660,
+          "mmio_stall": 0,
+          "starts": 3168,
+          "dones": 3168
+        }
+      }
+    ]
+  },
+  "aggregate_counters": {
+    "autogroup": {
+      "w_load": 2202036,
+      "x_load": 853008,
+      "bias_load": 93288,
+      "compute_wait": 539352,
+      "writeback": 7996440,
+      "other": 158076,
+      "busy": 2585088,
+      "mac_fire": 2433024,
+      "mmio_reads": 655776,
+      "mmio_writes": 185964,
+      "shared_reads": 278784,
+      "shared_writes": 608256,
+      "shared_stall": 143736,
+      "mmio_stall": 0,
+      "starts": 38016,
+      "dones": 38016
+    },
+    "packed": {
+      "w_load": 2202069,
+      "x_load": 854170,
+      "bias_load": 93276,
+      "compute_wait": 2623104,
+      "writeback": 7803382,
+      "other": 956448,
+      "busy": 2585088,
+      "mac_fire": 2433024,
+      "mmio_reads": 912384,
+      "mmio_writes": 260808,
+      "shared_reads": 278784,
+      "shared_writes": 608256,
+      "shared_stall": 103913,
+      "mmio_stall": 0,
+      "starts": 38016,
+      "dones": 38016
+    }
+  },
+  "source_changes": {
+    "production_chisel": [
+      "src/main/scala/GenerateRTL.scala",
+      "src/main/scala/linear/LinearAutoGroupCore.scala"
+    ],
+    "test_chisel": [
+      "src/test/scala/linear/LinearAutoGroupCoreTest.scala"
+    ],
+    "initial_vcs_repair": "identical row_start_accept initializer moved below its five input declarations; no logic/Chisel change"
+  },
+  "full12_result_sha256": {
+    "autogroup": "be9ee988f77dac469aa23181032f6c75b21109831f9fdbccf69084feb4f2c019",
+    "packed": "76897139432ff6abf12a4b6b44666efa026fbc49c5e0b9f11433d73073a7cb9c"
+  }
+}

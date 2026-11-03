@@ -1,0 +1,53 @@
+["make", "run_test", "SIM=vcs", "DUMPWAVE=0", "TESTCASE=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-accept-02/acceptance/baseline/accel_compute"]
+make compile RUN_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run SIM_TOOL=vcs -C /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run
+make[1]: Entering directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run'
+make[1]: Nothing to be done for `compile'.
+make[1]: Leaving directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run'
+make run DUMPWAVE=0 TESTCASE=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-accept-02/acceptance/baseline/accel_compute SIM_TOOL=vcs RUN_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run -C /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run
+make[1]: Entering directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run'
+rm -rf accel_compute
+mkdir accel_compute
+cd accel_compute; /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run/simv +ntb_random_seed_automatic +DUMPWAVE=0 +TESTCASE=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-accept-02/acceptance/baseline/accel_compute +SIM_TOOL=vcs 2>&1 | tee accel_compute.log; cd /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run; 
+Chronologic VCS simulator copyright 1991-2020
+Contains Synopsys proprietary information.
+Compiler version Q-2020.03-SP2-6_Full64; Runtime version Q-2020.03-SP2-6_Full64;  Nov  3 10:50 2026
+NOTE: automatic random seed used: 2112970343
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+TESTCASE=                                                                                                                                                                               /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-accept-02/acceptance/baseline/accel_compute
+ITCM 0x00: 000000000000106f
+ITCM 0x01: 0000000000000000
+ITCM 0x02: 0000000000000000
+ITCM 0x03: 0000000000000000
+ITCM 0x04: 0000000000000000
+ITCM 0x05: 0000000000000000
+ITCM 0x06: 0000000000000000
+ITCM 0x07: 0000000000000000
+ITCM 0x16: xxxxxxxxxxxxxxxx
+ITCM 0x20: xxxxxxxxxxxxxxxx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~ Test Result Summary ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~TESTCASE:                                                                                                                                                                                /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-accept-02/acceptance/baseline/accel_compute ~~~~~~~~~~~~~
+~~~~~~~~~~~~~~Total cycle_count value:      14771 ~~~~~~~~~~~~~
+~~~~~~~~~~The valid Instruction Count:       2998 ~~~~~~~~~~~~~
+~~~~~The test ending reached at cycle:      14754 ~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~The final x3 Reg value:          1 ~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~ TEST_PASS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~ #####     ##     ####    #### ~~~~~~~~~~~~~~~~
+~~~~~~~~~ #    #   #  #   #       #     ~~~~~~~~~~~~~~~~
+~~~~~~~~~ #    #  #    #   ####    #### ~~~~~~~~~~~~~~~~
+~~~~~~~~~ #####   ######       #       #~~~~~~~~~~~~~~~~
+~~~~~~~~~ #       #    #  #    #  #    #~~~~~~~~~~~~~~~~
+~~~~~~~~~ #       #    #   ####    #### ~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$finish called from file "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v", line 222.
+$finish at simulation time              5921400
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 59214000 ps
+CPU Time:      1.060 seconds;       Data structure size:   2.0Mb
+Tue Nov  3 10:50:18 2026
+make[1]: Leaving directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/third-party/e203_hbirdv2/vsim/run'
