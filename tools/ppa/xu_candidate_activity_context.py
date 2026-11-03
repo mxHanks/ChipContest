@@ -18,6 +18,10 @@ PROFILE = 's2c-autogroup'
 MAIN_COMMIT = 'd276b55ffecbe8d620f9a361bf5d0859299ba7b5'
 SCHEDULE = 'bias-hw-autogroup-window'
 FROZEN_TOOLS = {
+    'tools/ppa/xu_sirv_sram_adapter.sv': 'b2b2baaa1e105ed794382886439cd2c16fd280a0f29b54c4d925351e6f90a0c5',
+    'tools/ppa/xu_weight_sram_adapter.sv': '86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707',
+    'tools/ppa/xu_shared_icb_sram.sv': '2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d',
+    'tools/ppa/xu_soc_ppa_top.sv': '8d0e5fd38f2425e7ea8041dd5b8c3a8fd4ce7fa171afb1bf0ebeb6f53446f28a',
     'tools/ppa/xu_soc_task_activity.py': '84bd2ac43621fcee46b3e8c336d0ccb0142ec0d1180fc7926ee2af5cef676511',
     'tools/ppa/xu_soc_ppa_verify.py': 'feeb24d171bc251e7020b77ed1b29d6e2a30da4d9037269f4e7c06b150252967',
     'tools/ppa/xu_task_clear_protocol.py': '467e51abbaefa1ef40e3c2d5cfbc18376be351886b212f7667f0a44934488ee8',
