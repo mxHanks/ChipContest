@@ -45,7 +45,7 @@ def clear_observer(ctx):
                          "`ACCEL.x_load_wen!==1'b0 || `ACCEL.stream_pending!==1'b0 || `ACCEL.rsp_valid!==1'b0)")
     text = ctx.base.once(text, "`ACCEL.cmd_addr[11:0]!=12'h050)",
                          "`ACCEL.cmd_addr[11:0]!=12'h050 && `ACCEL.cmd_addr[11:0]!=12'h070 &&\n"
-                         "                `ACCEL.cmd_addr[11:0]!=12'h074 && `ACCEL.cmd_addr[11:0]!=12'h0cc)")
+                         "                `ACCEL.cmd_addr[11:0]!=12'h074 && `ACCEL.cmd_addr[11:0]!=12'h078)")
     text = ctx.base.once(text, '          end else begin\n            if (`ACCEL.cmd_wmask',
                          '          end else begin\n            if (xu_clear_writes==33697)\n'
                          '              $fatal(1,"XU_CLEAR_REJECT candidate setup/data write before first source request");\n'

@@ -1,6 +1,6 @@
 # xu S2c 独立正式活动采集器
 
-本工具只面向冻结 S2c 候选：主仓 `d276b55ffecbe8d620f9a361bf5d0859299ba7b5`，E203 子仓 `49a9436e01ea8ceeead94242e4a99c16e31a0865`，profile `s2c-autogroup`。它与 baseline 活动采集器独立，不能读取 baseline SAIF 充当 S2c 活动。工具仓可以在另一个干净工作树；`--source-root` 和 `--tool-root` 分别指定两者，后者必须是所执行脚本所在仓库。原 `xu_soc_task_activity.py`、`xu_soc_ppa_verify.py`、`xu_task_clear_protocol.py`、`xu_sram_activity_alias.py` 及共同固件/模型工具逐字节 SHA 固定，不修改它们的源码或模块对象，也不放宽其 f49 guard。
+本工具只面向冻结 S2c 候选：主仓 `d276b55ffecbe8d620f9a361bf5d0859299ba7b5`，E203 子仓 `49a9436e01ea8ceeead94242e4a99c16e31a0865`，profile `s2c-autogroup`。它与 baseline 活动采集器独立，不能读取 baseline SAIF 充当 S2c 活动。工具仓可以在另一个干净工作树；`--source-root` 和 `--tool-root` 分别指定两者，后者必须是所执行脚本所在仓库。原 `xu_soc_task_activity.py`、`xu_soc_ppa_verify.py`、`xu_task_clear_protocol.py`、`xu_sram_activity_alias.py` 及共同固件/模型工具逐字节 SHA 固定，不修改它们的源码或共享模块对象，也不放宽其 f49 guard。
 
 `xu_candidate_activity_context.py` 对主仓的完整 tracked blob/mode/gitlink、子仓批准 profile 的完整 tree/blob/mode 和活跃 RTL 目录做检查，拒绝 dirty、非忽略 untracked、隐藏的 assume-unchanged 字节修改、错误主/子提交及额外活跃 RTL。工具仓要求已提交且干净，并绑定 HEAD/tree。工具与源代码、输入向量、生成的 TB、observer/mapping、固件/编译器、外部模型、目标网表、SDC 在编译及每任务运行前后重验。网表/SDC 在此只是身份输入；此工具不证明该网表与候选的等价或时序。
 

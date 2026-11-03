@@ -39,6 +39,10 @@ module tb_xu_s2c_task_observer;
       wait(dut.x_load_wen);
       @(negedge clk); force dut.u_linear_compute_core.io_xLoadData=16'h0001;
     end
+    if(mode==9) begin
+      wait(bus_valid && bus_read && bus_addr[11:0]=='h100);
+      @(negedge clk); force dut.rsp_rdata=32'hbad0cafe;
+    end
   end
   task automatic transfer(input bit reading,input [11:0] offset,input [31:0] data,
                           input [3:0] mask,output [31:0] result);
@@ -91,6 +95,14 @@ module tb_xu_s2c_task_observer;
     for(a=0;a<256;a=a+1) begin put('h044,a); put('h048,0); put('h04c,0); end
     for(a=0;a<8;a=a+1) begin put('h028,a); put('h02c,0); put('h030,0); end
     for(a=0;a<64;a=a+1) begin put('h014,a); put('h018,0); end
+    // Match the real clear wrapper + frozen S2c firmware's capability probes.
+    transfer(1,'h000,0,0,response); if(response!==32'hacce2030) $fatal(1,"ID");
+    transfer(1,'h00c,0,0,response); if(response!==0) $fatal(1,"STATUS");
+    transfer(1,'h050,0,0,response); if(response!==32'h58550003) $fatal(1,"CAP");
+    transfer(1,'h078,0,0,response); if(response!==32'h58410001) $fatal(1,"AUTO_CAP");
+    transfer(1,'h070,0,0,response); if(response!==32'h58530003) $fatal(1,"STREAM_CAP");
+    transfer(1,'h074,0,0,response); if(response!==32'h58500003) $fatal(1,"PACKED_CAP");
+    if(mode==7) transfer(1,'h0cc,0,0,response);
     if(mode==1) put('h054,0);
     @(negedge clk); cmd_valid=1;
     repeat(3) @(negedge clk);
@@ -100,6 +112,7 @@ module tb_xu_s2c_task_observer;
     @(negedge clk); cmd_valid=0;
     if(xu_initial_wait!=4) $fatal(1,"driver initial source wait differs");
     put('h054,0);
+    if(mode==8) put('h054,0);
     for(a=0;a<16384;a=a+2) put('h05c,{w[a+1],w[a]});
     put('h040,0);
     for(c=0;c<256;c=c+1) begin
@@ -129,6 +142,8 @@ module tb_xu_s2c_task_observer;
        xu_clear_bias_commits!=256 || xu_w_count!=16384 || xu_bias_count!=256 || xu_x_count!=6336 ||
        xu_rows!=99 || xu_starts!=3168 || xu_dones!=3168 || xu_pops!=3168 ||
        xu_w_pairs!=8192 || xu_x_pairs!=3168 || xu_result_words!=0 ||
+       xu_w_cursor_setups!=1 || xu_x_cursor_setups!=99 || xu_cache_mode_writes!=2 ||
+       xu_result_response_pending ||
        dut.row_active || dut.row_count || dut.row_running || dut.row_produced!=32 || dut.row_retired!=32)
       $fatal(1,"driver final coverage differs");
     $display("XU_S2C_OBSERVER_RTL_PASS clear=33697 w_actual=16384 x_actual=6336 bias_actual=256 rows=99 groups=3168 retired_pops=3168 words=50688 wait=4 signed16_40_48=1");
