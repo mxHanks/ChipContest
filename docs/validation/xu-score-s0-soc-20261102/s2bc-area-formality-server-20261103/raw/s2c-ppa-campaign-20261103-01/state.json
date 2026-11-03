@@ -1,0 +1,55 @@
+{
+  "finished_epoch": 1793676082.776149,
+  "runs": [
+    {
+      "acceptance_sha256": "4014647bbab2e2a42f60d13a77c666bca8d22e7690793e2b579e8dff281f098b",
+      "candidate": "s2c",
+      "commands": [
+        [
+          "/bin/python3",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_soc_implementation.py",
+          "--root",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02",
+          "--profile",
+          "s2c-autogroup",
+          "--out",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-ppa-campaign-20261103-01/s2c/implementation",
+          "--standard-cell-db",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+          "--standard-cell-sha256",
+          "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723",
+          "--sram-db",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+          "--sram-sha256",
+          "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+        ],
+        [
+          "/bin/python3",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/scripts/xu_soc_ppa.py",
+          "prepare",
+          "--root",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02",
+          "--implementation",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-ppa-campaign-20261103-01/s2c/implementation/implementation.json",
+          "--out",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-ppa-campaign-20261103-01/s2c/ppa",
+          "--allow-unqualified-mapping"
+        ],
+        [
+          "/bin/python3",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/scripts/xu_soc_ppa.py",
+          "run",
+          "--root",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02",
+          "--out",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-ppa-campaign-20261103-01/s2c/ppa"
+        ]
+      ],
+      "profile": "s2c-autogroup",
+      "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02",
+      "status": "EXECUTED_NOT_QUALIFIED"
+    }
+  ],
+  "started_epoch": 1793674875.5840957,
+  "status": "EXECUTED_NOT_QUALIFIED"
+}

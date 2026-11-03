@@ -1,0 +1,180 @@
+{
+  "activity": null,
+  "added_sources": [
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_soc_ppa_top.sv",
+      "sha256": "8d0e5fd38f2425e7ea8041dd5b8c3a8fd4ce7fa171afb1bf0ebeb6f53446f28a"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_shared_icb_sram.sv",
+      "sha256": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d"
+    }
+  ],
+  "clock_review": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2b-ppa-campaign-20261103-01/s2b/implementation/clock-review/clock-review.json",
+    "sha256": "81280803b26d5ec06ad1ad2c7783f3e68b64a0cb21482bb96ffd8a57471de6e7"
+  },
+  "constraints": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_full_soc.sdc",
+    "sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98"
+  },
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1"
+  ],
+  "libraries": [
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+      "role": "standard_cell",
+      "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+      "role": "sram",
+      "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+    }
+  ],
+  "mapping_proof": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2b-ppa-campaign-20261103-01/s2b/implementation/mapping-proof.json",
+    "sha256": "4bc971ce8377b09b2cd41bc61612f82a4d14f0d50ada55dcf07c1d992acaa8cf"
+  },
+  "memory_groups": [
+    {
+      "count": 32,
+      "depth": 1024,
+      "instance_pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_srams/u_e203_itcm_ram/*",
+      "logical_bits": 524288,
+      "macro_ref": "RAMSP1024X16",
+      "name": "itcm",
+      "width": 16
+    },
+    {
+      "count": 32,
+      "depth": 1024,
+      "instance_pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_srams/u_e203_dtcm_ram/*",
+      "logical_bits": 524288,
+      "macro_ref": "RAMSP1024X16",
+      "name": "dtcm",
+      "width": 16
+    },
+    {
+      "count": 256,
+      "depth": 1024,
+      "instance_pattern": "u_shared/storage/*",
+      "logical_bits": 4194304,
+      "macro_ref": "RAMSP1024X16",
+      "name": "shared",
+      "width": 16
+    },
+    {
+      "count": 16,
+      "depth": 1024,
+      "instance_pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_accel_icb_slave/*",
+      "logical_bits": 262144,
+      "macro_ref": "RAMSP1024X16",
+      "name": "accelerator_weights",
+      "width": 16
+    }
+  ],
+  "note": "Actual s2b-packed full-digital-SoC development configuration, exact 336 RAMSP1024X16 macros. Mapping/PVT/netlist equivalence are unreviewed; no timing, power, or contest pass claimed. No vendor simulation models are in the synthesis source list.",
+  "platform_source_manifest_sha256": "d59a546513efc5c6a82132d3bb9f9bb3a2569f8dbd3fecbbb495e5b608a7ee4d",
+  "replacements": {
+    "third-party/e203_hbirdv2/rtl/e203/general/sirv_sim_ram.v": {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_sirv_sram_adapter.sv",
+      "sha256": "b2b2baaa1e105ed794382886439cd2c16fd280a0f29b54c4d925351e6f90a0c5"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_weight_sram_adapter.sv",
+      "sha256": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707"
+    }
+  },
+  "retained_instances": [
+    {
+      "name": "accelerator",
+      "pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_accel_icb_slave",
+      "reference_pattern": "accel_icb_slave*"
+    },
+    {
+      "name": "cpu",
+      "pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top",
+      "reference_pattern": "e203_cpu_top*"
+    },
+    {
+      "name": "interconnect",
+      "pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_sirv_ppi_fab",
+      "reference_pattern": "sirv_icb1to16_bus*"
+    }
+  ],
+  "schema": "xu-full-soc-implementation-v1",
+  "search_paths": [],
+  "source_freeze": {
+    "e203_commit": "d5faa5e8c857fa35df62a68de667bdb8a6e954f7",
+    "libraries_sha256": "a68e3f8e95e24696764957056b92f643739f4a350c52e11f6f08d35b2f05cefe",
+    "main_commit": "a2a1f076060c43fcefb1148edaa83c89bb1d4320",
+    "memory_groups_sha256": "885f5d9cd404525cecd2b85639c8648e2993935b86eb252df5eb2977dc682be9",
+    "profile": {
+      "actual_child_tree_manifest_sha256": "6a396616fa4432b2eb2917308362875f5b787000c551239976fcd73b6c4eaf8d",
+      "approved_tree": "cd1aad297d42f20ffa1c52cc4c677a60139e446b",
+      "baseline_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+      "baseline_tree": "c4218b8275403189e0063f147d160f272416d11a",
+      "changed_files": [
+        "rtl/e203/perips/accel_icb_slave.v"
+      ],
+      "e203_commit": "d5faa5e8c857fa35df62a68de667bdb8a6e954f7",
+      "fixed_tree_file_count": 1064,
+      "name": "s2b-packed"
+    },
+    "source_manifest_sha256": "d59a546513efc5c6a82132d3bb9f9bb3a2569f8dbd3fecbbb495e5b608a7ee4d",
+    "topology_sources": {
+      "third-party/e203_hbirdv2/rtl/e203/core/e203_cpu_top.v": {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/third-party/e203_hbirdv2/rtl/e203/core/e203_cpu_top.v",
+        "sha256": "0970379eabe2253a5d1af51a6c3cab5d44183108ad974b56ed2841bccbbabb5a"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/core/e203_srams.v": {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/third-party/e203_hbirdv2/rtl/e203/core/e203_srams.v",
+        "sha256": "b7dcaf04823b7968862ab8a9e989a176e864f6715aa5e120c4f618a1c7aba550"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/soc/e203_soc_top.v": {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/third-party/e203_hbirdv2/rtl/e203/soc/e203_soc_top.v",
+        "sha256": "1502c8f1fc39f01f9dff32302a11d34d49d3ff8701305a1ba3f3bdba13018aff"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v": {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v",
+        "sha256": "4258161cac87bc56ef19f22ee8c82dbcae9d3effb2f0159282d3f8acd85c015c"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_perips.v": {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_perips.v",
+        "sha256": "7cfe072f79e41fa8b41eb917f89db2702b0c26a0747678f044e051b739d0537c"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_top.v": {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_top.v",
+        "sha256": "dcf1a6d8161f724926ef5fb58c52b67c9911444abbd08901b5fb9bd158b0339f"
+      },
+      "tools/ppa/xu_shared_icb_sram.sv": {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_shared_icb_sram.sv",
+        "sha256": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d"
+      },
+      "tools/ppa/xu_soc_ppa_top.sv": {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_soc_ppa_top.sv",
+        "sha256": "8d0e5fd38f2425e7ea8041dd5b8c3a8fd4ce7fa171afb1bf0ebeb6f53446f28a"
+      }
+    }
+  },
+  "source_profile": "s2b-packed",
+  "tool_assets_root": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103",
+  "tool_producer": {
+    "clock_reviewer": {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_review_full_soc_clocks.py",
+      "sha256": "8d5d78be3bee507d9b037916a6a2b1c8604477cef91ae6fab2afdba583f1d098"
+    },
+    "implementation_generator": {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_soc_implementation.py",
+      "sha256": "8933ff162d1a6656d46ad1447b99eef9eb3a2f707841cb90ef35734b13e5fd2e"
+    },
+    "ppa": {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/scripts/xu_soc_ppa.py",
+      "sha256": "bc4070bdbd7ac6ae48f7ead1599a3a1a143b9872a7c4a9ef76aad3b677b25040"
+    }
+  },
+  "top": "xu_soc_ppa_top"
+}
