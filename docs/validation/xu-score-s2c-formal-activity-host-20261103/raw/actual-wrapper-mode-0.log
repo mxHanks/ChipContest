@@ -1,0 +1,10 @@
+{"command": ["vvp", "/tmp/xu-s2c-actual-observer-acqtl_bs/probe.vvp", "+MODE=0", "+GOLDEN=/tmp/xu-s2c-actual-observer-acqtl_bs/golden.hex"], "cwd": "/tmp/xu-s2c-actual-observer-acqtl_bs", "returncode": 0}
+XU_TASK_CLEAR_BEGIN task=7 cycle=2 tick=55000000
+XU_TASK_CLEAR_LAST_WRITE task=7 cycle=168482 tick=1684855000000 writes=33697
+XU_TASK_CLEAR_OBSERVED writes=33697 w=16384 bias=256 legacy_bias=8 x=64 drained=1 cache_enable=0 idle=1 source_request=1 task_setup_writes=0 actual_commits=1 fifo_reset_empty=1
+XU_SOURCE_REQUEST task=7 cycle=168517 tick=1685205000000
+XU_ACTIVITY_BEGIN task=7 tick=1685205000000
+XU_CACHE_INITIAL task=7 fresh_process=1 cache_enable=0 busy=0 prior_uploads=0 prior_starts=0
+XU_SOURCE_ACCEPT task=7 cycle=168521 tick=1685245000000
+XU_S2C_OBSERVER_RTL_PASS clear=33697 w_actual=16384 x_actual=6336 bias_actual=256 rows=99 groups=3168 retired_pops=3168 words=50688 wait=4 signed16_40_48=1
+/tmp/xu-s2c-actual-observer-acqtl_bs/probe.sv:528: $finish called at 5444450000000 (1fs)
