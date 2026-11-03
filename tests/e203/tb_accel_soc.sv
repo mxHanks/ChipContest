@@ -44,6 +44,7 @@ module tb_accel_soc;
   integer perf_mmio_reads, perf_mmio_writes, perf_mmio_stall;
   integer perf_shared_reads, perf_shared_writes, perf_shared_stall;
   integer perf_auto_rows, perf_auto_pops, perf_auto_overlap, perf_auto_full;
+  integer perf_db_rows, perf_db_pops, perf_db_overlap, perf_db_x_overlap, perf_db_full;
 
   task reset_performance;
     begin
@@ -55,6 +56,7 @@ module tb_accel_soc;
       perf_mmio_reads=0; perf_mmio_writes=0; perf_mmio_stall=0;
       perf_shared_reads=0; perf_shared_writes=0; perf_shared_stall=0;
       perf_auto_rows=0; perf_auto_pops=0; perf_auto_overlap=0; perf_auto_full=0;
+      perf_db_rows=0; perf_db_pops=0; perf_db_overlap=0; perf_db_x_overlap=0; perf_db_full=0;
     end
   endtask
 
@@ -84,7 +86,7 @@ module tb_accel_soc;
         phase_next=perf_phase;
         if ((mmio_retire && perf_mmio_end_phase) ||
             (shared_retire && perf_shared_end_writeback) ||
-            (`ACCEL.core_done && (!`ACCEL.row_active || perf_phase==PERF_COMPUTE)))
+            (`ACCEL.core_done && ((!`ACCEL.row_active && !`ACCEL.db_mode) || perf_phase==PERF_COMPUTE)))
           phase_next=PERF_OTHER;
 
         if (mmio_accept && !`ACCEL.cmd_read) begin
@@ -92,7 +94,7 @@ module tb_accel_soc;
             12'h01c, 12'h020, 12'h024, 12'h054, 12'h058, 12'h05c: begin
               phase_now=PERF_W; phase_next=PERF_W;
             end
-            12'h014, 12'h018, 12'h060, 12'h064, 12'h068: begin
+            12'h014, 12'h018, 12'h060, 12'h064, 12'h068, 12'h0d8, 12'h0dc: begin
               phase_now=PERF_X; phase_next=PERF_X;
             end
             12'h028, 12'h02c, 12'h030,
@@ -108,13 +110,14 @@ module tb_accel_soc;
         // The read-only window has no RESULT_INDEX write to start writeback.
         if (mmio_accept && `ACCEL.cmd_read &&
             ((`ACCEL.cmd_addr[11:0]>=12'h080 && `ACCEL.cmd_addr[11:0]<=12'h0bc) ||
-             (`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h13c))) begin
+             (`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h13c) ||
+             (`ACCEL.cmd_addr[11:0]>=12'h200 && `ACCEL.cmd_addr[11:0]<=12'h23c))) begin
           phase_now=PERF_WRITEBACK; phase_next=PERF_WRITEBACK;
         end
-        if (start_accept || row_start_accept) begin
+        if (start_accept || row_start_accept || `ACCEL.db_submit_accept) begin
           phase_now=PERF_COMPUTE; phase_next=PERF_COMPUTE;
         end
-        if (mmio_accept && `ACCEL.cmd_read && `ACCEL.cmd_addr[11:0]==12'h0c4) begin
+        if (mmio_accept && `ACCEL.cmd_read && (`ACCEL.cmd_addr[11:0]==12'h0c4 || `ACCEL.cmd_addr[11:0]==12'h0d4)) begin
           phase_now=PERF_COMPUTE; phase_next=PERF_COMPUTE;
         end
         // Source reads can precede their matching MMIO load operation.
@@ -137,10 +140,16 @@ module tb_accel_soc;
           PERF_WRITEBACK: perf_writeback=perf_writeback+1;
           default: perf_other=perf_other+1;
         endcase
-        if (`ACCEL.manual_busy || `ACCEL.row_running ||
-            (`ACCEL.row_active && `ACCEL.compute_start)) perf_busy=perf_busy+1;
+        if (`ACCEL.manual_busy || `ACCEL.row_running || `ACCEL.db_running ||
+            ((`ACCEL.row_active || `ACCEL.db_mode) && `ACCEL.compute_start)) perf_busy=perf_busy+1;
         if (row_start_accept) perf_auto_rows=perf_auto_rows+1;
         if (`ACCEL.row_pop) perf_auto_pops=perf_auto_pops+1;
+        if (`ACCEL.db_submit_accept) perf_db_rows=perf_db_rows+1;
+        if (`ACCEL.db_pop) perf_db_pops=perf_db_pops+1;
+        if (`ACCEL.db_running && phase_now==PERF_WRITEBACK) perf_db_overlap=perf_db_overlap+1;
+        if (`ACCEL.db_running && phase_now==PERF_X) perf_db_x_overlap=perf_db_x_overlap+1;
+        if (`ACCEL.db_outstanding!=0 && `ACCEL.db_count==2 && !`ACCEL.db_running)
+          perf_db_full=perf_db_full+1;
         if (`ACCEL.row_running && phase_now==PERF_WRITEBACK)
           perf_auto_overlap=perf_auto_overlap+1;
         if (`ACCEL.row_active && `ACCEL.row_count==2 && !`ACCEL.row_running)
@@ -148,7 +157,7 @@ module tb_accel_soc;
         // All eight PEs share this enable: one fire means eight signed16 MACs.
         if (`ACCEL.u_linear_compute_core.core.engine.peArray.io_enable)
           perf_mac_fire=perf_mac_fire+1;
-        if (start_accept || (`ACCEL.row_active && `ACCEL.compute_start))
+        if (start_accept || ((`ACCEL.row_active || `ACCEL.db_mode) && `ACCEL.compute_start))
           perf_starts=perf_starts+1;
         if (`ACCEL.core_done) perf_dones=perf_dones+1;
         if (mmio_accept) begin
@@ -186,6 +195,7 @@ module tb_accel_soc;
            (`ACCEL.cmd_addr[11:0]==12'h064 && `ACCEL.x_cursor==63) ||
            (`ACCEL.cmd_addr[11:0]==12'h05c && `ACCEL.w_cursor==16382) ||
            (`ACCEL.cmd_addr[11:0]==12'h068 && `ACCEL.x_cursor==62) ||
+           (`ACCEL.cmd_addr[11:0]==12'h0dc && `ACCEL.db_x_cursor==62) ||
            (`ACCEL.cmd_addr[11:0]==12'h030 && `ACCEL.bias_index_reg==7) ||
            (`ACCEL.cmd_addr[11:0]==12'h040 && `ACCEL.cmd_wdata[0]));
       if (shared_retire) perf_shared_end_writeback=0;
@@ -208,6 +218,15 @@ module tb_accel_soc;
           $fatal(1,"autonomous row/POP retirement or overlap contract mismatch");
         $display("AUTO_TASK layer=%0d rows=%0d pops_retired=%0d compute_writeback_overlap=%0d fifo_full_wait=%0d",
           layer,perf_auto_rows,perf_auto_pops,perf_auto_overlap,perf_auto_full);
+      end
+      if (perf_db_rows!=0) begin
+        if (perf_db_rows!=99 || perf_db_pops!=3168 || `ACCEL.db_mode ||
+            `ACCEL.db_outstanding!=0 || `ACCEL.db_queued!=0 || `ACCEL.db_count!=0 ||
+            `ACCEL.db_running || `ACCEL.db_bank_free!=3 ||
+            perf_db_overlap==0 || perf_db_x_overlap==0)
+          $fatal(1,"double-buffer descriptor/POP retirement or overlap contract mismatch");
+        $display("DB_TASK layer=%0d rows=%0d pops_retired=%0d compute_writeback_overlap=%0d compute_xload_overlap=%0d fifo_full_wait=%0d",
+          layer,perf_db_rows,perf_db_pops,perf_db_overlap,perf_db_x_overlap,perf_db_full);
       end
       $display("PERF_TASK layer=%0d cycles=%0d w_load=%0d x_load=%0d bias_load=%0d compute_wait=%0d writeback=%0d other=%0d busy=%0d mac_fire=%0d mmio_reads=%0d mmio_writes=%0d shared_reads=%0d shared_writes=%0d shared_stall=%0d mmio_stall=%0d starts=%0d dones=%0d",
         layer,perf_cycles,perf_w_load,perf_x_load,perf_bias_load,

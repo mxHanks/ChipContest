@@ -16,7 +16,8 @@ class HardwareContractTests(unittest.TestCase):
                                  ('bias-dtcm-window', 130982), ('bias-hw-window', 55720),
                                  ('bias-hw-stream16-window', 33094),
                                  ('bias-hw-pack32-window', 21734),
-                                 ('bias-hw-autogroup-window', 15497)]:
+                                 ('bias-hw-autogroup-window', 15497),
+                                 ('bias-hw-doublebuf-window', 15499)]:
             with self.subTest(schedule=schedule):
                 work = contract.task_contract(schedule)
                 self.assertEqual(work['mmio_writes'], writes)
@@ -42,6 +43,9 @@ class HardwareContractTests(unittest.TestCase):
                 if schedule == 'bias-hw-autogroup-window':
                     log += ('AUTO_TASK layer=0 rows=99 pops_retired=3168 '
                             'compute_writeback_overlap=100 fifo_full_wait=200\n')
+                if schedule == 'bias-hw-doublebuf-window':
+                    log += ('DB_TASK layer=0 rows=99 pops_retired=3168 '
+                            'compute_writeback_overlap=100 compute_xload_overlap=10 fifo_full_wait=200\n')
                 self.assertEqual(soc.check_performance(log, [row], schedule)[0]['mmio_writes'], writes)
                 for other in contract.SCHEDULES:
                     if other == schedule:
@@ -77,7 +81,8 @@ class HardwareContractTests(unittest.TestCase):
         for schedule in contract.SCHEDULES:
             defines = contract.compiler_defines(contract.configuration(schedule))
             self.assertEqual('-DXU_HARDWARE_PACK32=1' in defines,
-                             schedule in ('bias-hw-pack32-window', 'bias-hw-autogroup-window'))
+                             schedule in ('bias-hw-pack32-window', 'bias-hw-autogroup-window',
+                                          'bias-hw-doublebuf-window'))
             self.assertNotIn('-DXU_HARDWARE_PACK32=0', defines)
 
     def test_autogroup_replaces_only_group_control_with_row_and_retired_pops(self):
@@ -106,6 +111,31 @@ class HardwareContractTests(unittest.TestCase):
                 soc.check_autogroup_activity(invalid, layer, 'bias-hw-autogroup-window')
         with self.assertRaises(ValueError):
             soc.check_autogroup_activity(valid, layer, 'bias-hw-pack32-window')
+
+    def test_doublebuf_requires_both_overlaps_and_keeps_every_source_word(self):
+        auto = contract.task_contract('bias-hw-autogroup-window')
+        buffered = contract.task_contract('bias-hw-doublebuf-window')
+        self.assertEqual(buffered['mmio_writes'] - auto['mmio_writes'], 2)
+        for field in auto.keys() - {'mmio_writes'}:
+            self.assertEqual(buffered[field], auto[field])
+        for schedule in contract.SCHEDULES:
+            self.assertEqual('-DXU_HARDWARE_DOUBLEBUF=1' in
+                             contract.compiler_defines(contract.configuration(schedule)),
+                             schedule == 'bias-hw-doublebuf-window')
+        layer = [dict(layer=0, cycles=1000000)]
+        valid = ('DB_TASK layer=0 rows=99 pops_retired=3168 '
+                 'compute_writeback_overlap=100 compute_xload_overlap=10 fifo_full_wait=200\n')
+        self.assertEqual(soc.check_doublebuf_activity(valid, layer,
+                         'bias-hw-doublebuf-window')[0]['pops_retired'], 3168)
+        for invalid in ['', valid + valid, valid.replace('3168', '3167'),
+                        valid.replace('rows=99', 'rows=98'), valid.replace('layer=0', 'layer=1'),
+                        valid.replace('writeback_overlap=100', 'writeback_overlap=0'),
+                        valid.replace('xload_overlap=10', 'xload_overlap=0'),
+                        valid.replace('xload_overlap=10', 'xload_overlap=1000001')]:
+            with self.assertRaises(ValueError):
+                soc.check_doublebuf_activity(invalid, layer, 'bias-hw-doublebuf-window')
+        with self.assertRaises(ValueError):
+            soc.check_doublebuf_activity(valid, layer, 'bias-hw-autogroup-window')
 
     def test_legacy_and_scalar_stream_compiler_commands_remain_unchanged(self):
         names = ['XU_FIRMWARE_BIAS_DTCM', 'XU_HARDWARE_BIAS_CACHE',

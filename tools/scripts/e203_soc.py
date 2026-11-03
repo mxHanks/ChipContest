@@ -102,6 +102,7 @@ def check_performance(log, layers, schedule='baseline'):
     """Require complete observer records in addition to numerical completion."""
     contract.configuration(schedule)
     check_autogroup_activity(log, layers, schedule)
+    check_doublebuf_activity(log, layers, schedule)
     fields = contract.PERFORMANCE_FIELDS
     pattern = r'^PERF_TASK ' + ' '.join(name + r'=(\d+)' for name in fields) + r'$'
     found = re.findall(pattern, log, re.M)
@@ -129,6 +130,24 @@ def check_autogroup_activity(log, layers, schedule):
                 not 0 < record['compute_writeback_overlap'] <= layer['cycles'] or
                 not 0 <= record['fifo_full_wait'] <= layer['cycles']):
             raise ValueError('autonomous row retirement or overlap differs from the contract')
+    return records
+
+
+def check_doublebuf_activity(log, layers, schedule):
+    names = ['layer', 'rows', 'pops_retired', 'compute_writeback_overlap',
+             'compute_xload_overlap', 'fifo_full_wait']
+    pattern = r'^DB_TASK ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
+    records = [dict(zip(names, map(int, row))) for row in re.findall(pattern, log, re.M)]
+    expected = len(layers) if schedule == 'bias-hw-doublebuf-window' else 0
+    if len(records) != expected or len(records) != len(re.findall(r'^DB_TASK\b', log, re.M)):
+        raise ValueError('missing, duplicate or unexpected double-buffer row activity')
+    for record, layer in zip(records, layers):
+        if (record['layer'] != layer['layer'] or record['rows'] != 99 or
+                record['pops_retired'] != 3168 or
+                any(not 0 < record[key] <= layer['cycles'] for key in
+                    ['compute_writeback_overlap', 'compute_xload_overlap']) or
+                not 0 <= record['fifo_full_wait'] <= layer['cycles']):
+            raise ValueError('double-buffer retirement or overlap differs from the contract')
     return records
 
 
@@ -414,6 +433,9 @@ def main():
                 report['layers']=check_log(log,args.tasks)
                 if args.firmware_schedule == 'bias-hw-autogroup-window':
                     report['autogroup_activity']=check_autogroup_activity(
+                        log,report['layers'],args.firmware_schedule)
+                if args.firmware_schedule == 'bias-hw-doublebuf-window':
+                    report['doublebuf_activity']=check_doublebuf_activity(
                         log,report['layers'],args.firmware_schedule)
                 for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
                     layer['performance'] = counters
