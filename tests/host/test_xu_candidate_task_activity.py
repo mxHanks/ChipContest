@@ -259,7 +259,8 @@ class CandidateActivityTests(unittest.TestCase):
             cases=[(0,None),(1,'candidate setup/data write before first source request'),
                 (2,'fixture-mismatched actual W commit'),(3,'nonzero actual X clear commit'),
                 (4,'first source request changed before acceptance'),(5,'first source request changed before acceptance'),
-                (6,'POP before all owned words read')]
+                (6,'POP before all owned words read'),(7,'unexpected pretask MMIO read'),
+                (8,'W cursor setup'),(9,'result response absent/changed before retirement')]
             for mode,rejected in cases:
                 result=run(['vvp',str(binary),'+MODE='+str(mode),'+GOLDEN='+str(d/'golden.hex')],d,'actual-wrapper-mode-%d.log'%mode,180)
                 if rejected is None:
