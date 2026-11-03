@@ -29,7 +29,73 @@ module tb_accel_soc;
   `define ITCM `CPU.u_e203_srams.u_e203_itcm_ram.u_e203_itcm_gnrl_ram.u_sirv_sim_ram
   `define ACCEL dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave
 
-`ifdef XU_ACCEL_PE32
+`ifdef XU_ACCEL_PE64
+  wire [63:0] xu_observed_pe_enables = {
+    `ACCEL.u_linear_compute_core.core.pes_63.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_62.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_61.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_60.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_59.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_58.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_57.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_56.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_55.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_54.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_53.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_52.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_51.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_50.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_49.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_48.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_47.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_46.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_45.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_44.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_43.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_42.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_41.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_40.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_39.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_38.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_37.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_36.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_35.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_34.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_33.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_32.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_31.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_30.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_29.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_28.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_27.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_26.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_25.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_24.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_23.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_22.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_21.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_20.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_19.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_18.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_17.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_16.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_15.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_14.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_13.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_12.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_11.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_10.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_9.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_8.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_7.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_6.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_5.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_4.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_3.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_2.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_1.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_0.io_enable};
+`elsif XU_ACCEL_PE32
   wire [31:0] xu_observed_pe_enables = {
     `ACCEL.u_linear_compute_core.core.pes_31.io_enable,
     `ACCEL.u_linear_compute_core.core.pes_30.io_enable,
@@ -81,7 +147,9 @@ module tb_accel_soc;
   integer perf_shared_reads, perf_shared_writes, perf_shared_stall;
   integer perf_auto_rows, perf_auto_pops, perf_auto_overlap, perf_auto_full;
   integer perf_lane_macs;
-`ifdef XU_ACCEL_PE32
+`ifdef XU_ACCEL_PE64
+  `define XU_ROW_GROUPS (`ACCEL.row_mode == 2 ? 4 : (`ACCEL.row_mode == 1 ? 8 : 32))
+`elsif XU_ACCEL_PE32
   `define XU_ROW_GROUPS (`ACCEL.row_wide ? 8 : 32)
 `else
   `define XU_ROW_GROUPS 32
@@ -152,13 +220,14 @@ module tb_accel_soc;
         if (mmio_accept && `ACCEL.cmd_read &&
             ((`ACCEL.cmd_addr[11:0]>=12'h080 && `ACCEL.cmd_addr[11:0]<=12'h0bc) ||
              (`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h13c) ||
-             (`ACCEL.cmd_addr[11:0]>=12'h200 && `ACCEL.cmd_addr[11:0]<=12'h2fc))) begin
+             (`ACCEL.cmd_addr[11:0]>=12'h200 && `ACCEL.cmd_addr[11:0]<=12'h2fc) ||
+             (`ACCEL.cmd_addr[11:0]>=12'h400 && `ACCEL.cmd_addr[11:0]<=12'h5fc))) begin
           phase_now=PERF_WRITEBACK; phase_next=PERF_WRITEBACK;
         end
         if (start_accept || row_start_accept) begin
           phase_now=PERF_COMPUTE; phase_next=PERF_COMPUTE;
         end
-        if (mmio_accept && `ACCEL.cmd_read && (`ACCEL.cmd_addr[11:0]==12'h0c4 || `ACCEL.cmd_addr[11:0]==12'h0d4)) begin
+        if (mmio_accept && `ACCEL.cmd_read && (`ACCEL.cmd_addr[11:0]==12'h0c4 || `ACCEL.cmd_addr[11:0]==12'h0d4 || `ACCEL.cmd_addr[11:0]==12'h0e4)) begin
           phase_now=PERF_COMPUTE; phase_next=PERF_COMPUTE;
         end
         // Source reads can precede their matching MMIO load operation.
@@ -189,7 +258,15 @@ module tb_accel_soc;
           perf_auto_overlap=perf_auto_overlap+1;
         if (`ACCEL.row_active && `ACCEL.row_count==2 && !`ACCEL.row_running)
           perf_auto_full=perf_auto_full+1;
-`ifdef XU_ACCEL_PE32
+`ifdef XU_ACCEL_PE64
+        // Count observed enabled lanes, including compatibility-mode masks.
+        if (`ACCEL.parallel_mac_fire) perf_mac_fire=perf_mac_fire+1;
+        if ((^xu_observed_pe_enables) === 1'bx ||
+            `ACCEL.parallel_lane_macs !== $countones(xu_observed_pe_enables) ||
+            `ACCEL.parallel_mac_fire !== (|xu_observed_pe_enables))
+          $fatal(1,"physical PE enable observer disagrees with core activity outputs");
+        perf_lane_macs=perf_lane_macs+$countones(xu_observed_pe_enables);
+`elsif XU_ACCEL_PE32
         // Count observed enabled lanes, including compatibility-mode masks.
         if (`ACCEL.parallel_mac_fire) perf_mac_fire=perf_mac_fire+1;
         if ((^xu_observed_pe_enables) === 1'bx ||
@@ -245,7 +322,10 @@ module tb_accel_soc;
       if (shared_accept)
         perf_shared_end_writeback=!cmd_read && cmd_addr>=BASE+YOFF &&
           cmd_addr<BASE+YOFF+50688*4 &&
-`ifdef XU_ACCEL_PE32
+`ifdef XU_ACCEL_PE64
+          (`ACCEL.row_mode == 2 ? cmd_addr[8:0]==9'h1fc :
+           (`ACCEL.row_mode == 1 ? cmd_addr[7:0]==8'hfc : cmd_addr[5:0]==6'h3c));
+`elsif XU_ACCEL_PE32
           (`ACCEL.row_wide ? cmd_addr[7:0]==8'hfc : cmd_addr[5:0]==6'h3c);
 `else
           cmd_addr[5:0]==6'h3c;
@@ -267,7 +347,12 @@ module tb_accel_soc;
         $display("AUTO_TASK layer=%0d rows=%0d pops_retired=%0d compute_writeback_overlap=%0d fifo_full_wait=%0d",
           layer,perf_auto_rows,perf_auto_pops,perf_auto_overlap,perf_auto_full);
       end
-`ifdef XU_ACCEL_PE32
+`ifdef XU_ACCEL_PE64
+      if ($bits(`ACCEL.u_linear_compute_core.core.io_laneMask)!=64 || perf_lane_macs!=1622016)
+        $fatal(1,"physical enabled-lane MAC work or geometry mismatch");
+      $display("PE_TASK layer=%0d physical_pes=64 mac_beats=%0d lane_macs=%0d useful_macs=1622016",
+        layer,perf_mac_fire,perf_lane_macs);
+`elsif XU_ACCEL_PE32
       if ($bits(`ACCEL.u_linear_compute_core.core.io_laneMask)!=32 || perf_lane_macs!=1622016)
         $fatal(1,"physical enabled-lane MAC work or geometry mismatch");
       $display("PE_TASK layer=%0d physical_pes=32 mac_beats=%0d lane_macs=%0d useful_macs=1622016",

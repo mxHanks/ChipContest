@@ -15,7 +15,7 @@ object GenerateRTL {
         "LinearCachedCore" -> (() => new LinearCachedCore),
         "LinearAutoGroupCore" -> (() => new LinearAutoGroupCore),
         "XuParallelAutoGroupCore32" -> (() => new XuParallelAutoGroupCore(32)),
-        "XuParallelAutoGroupCore64" -> (() => new XuParallelAutoGroupCore(64)),
+        "XuParallelAutoGroupCore64" -> (() => new XuParallel64AutoGroupCore),
         "BiasBankCache" -> (() => new BiasBankCache),
         "LinearLayerEngine" -> (() => new LinearLayerEngine)
     )

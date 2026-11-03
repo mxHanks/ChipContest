@@ -8,7 +8,7 @@ PES = 8
 MACS_PER_TASK = 99 * 64 * 256
 OUTPUTS_PER_TASK = 99 * 256
 SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-window',
-             'bias-hw-stream16-window', 'bias-hw-pack32-window', 'bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window')
+             'bias-hw-stream16-window', 'bias-hw-pack32-window', 'bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window', 'bias-hw-pe64-autogroup-window')
 OPTIMIZATIONS = ('-Os', '-O2', '-O3')
 EXPERIMENTS = ('none', 'bias-unroll', 'result-unroll', 'both-unroll', 'no-masks',
                'bias-unroll-no-masks', 'result-unroll-no-masks', 'both-unroll-no-masks')
@@ -57,13 +57,25 @@ def compiler_defines(config):
     # Keep every legacy command line unchanged; streaming modes are opt-in.
     if config['schedule'] == 'bias-hw-stream16-window':
         values['XU_HARDWARE_STREAM16'] = True
-    if config['schedule'] in ('bias-hw-pack32-window', 'bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window'):
+    if config['schedule'] in ('bias-hw-pack32-window', 'bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window', 'bias-hw-pe64-autogroup-window'):
         values['XU_HARDWARE_PACK32'] = True
-    if config['schedule'] in ('bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window'):
+    if config['schedule'] in ('bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window', 'bias-hw-pe64-autogroup-window'):
         values['XU_HARDWARE_AUTO_GROUP'] = True
     if config['schedule'] == 'bias-hw-pe32-autogroup-window':
         values['XU_HARDWARE_PE32'] = True
+    if config['schedule'] == 'bias-hw-pe64-autogroup-window':
+        values['XU_HARDWARE_PE64'] = True
     return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
+
+
+def physical_pes(variant, schedule='baseline'):
+    configuration(schedule)
+    if variant not in ('pe8', 'pe32', 'pe64'):
+        raise ValueError('invalid physical accelerator variant')
+    if (schedule == 'bias-hw-pe64-autogroup-window' and variant != 'pe64') or (
+            schedule == 'bias-hw-pe32-autogroup-window' and variant not in ('pe32', 'pe64')):
+        raise ValueError('firmware width exceeds the physical accelerator variant')
+    return {'pe8':8, 'pe32':32, 'pe64':64}[variant]
 
 
 def task_contract(schedule='baseline'):
@@ -84,9 +96,9 @@ def task_contract(schedule='baseline'):
     if schedule == 'bias-hw-autogroup-window':
         # One STARTROW and 32 response-retired POPs per row. No GROUP/W1C.
         mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 99 * (1 + 32)
-    pes = 32 if schedule == 'bias-hw-pe32-autogroup-window' else PES
-    if pes == 32:
-        mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 99 * (1 + 8)
+    pes = {'bias-hw-pe32-autogroup-window':32, 'bias-hw-pe64-autogroup-window':64}.get(schedule, PES)
+    if pes in (32, 64):
+        mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 99 * (1 + 256 // pes)
     return dict(w_shared_reads=w_reads, x_shared_reads=x_reads, bias_shared_reads=bias_reads,
                 shared_reads=w_reads + x_reads + bias_reads, shared_writes=50688,
                 bias_mmio_writes=bias_writes, mmio_writes=mmio_writes,

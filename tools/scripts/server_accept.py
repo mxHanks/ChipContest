@@ -43,9 +43,8 @@ def acceptance_steps(out, cross_prefix, sim='verilator', full=False, offline=Fal
     firmware_args=['--firmware-schedule',config['schedule'],
                    '--firmware-opt='+config['optimization'],
                    '--firmware-experiment',config['experiment']]
-    if accel_variant not in ('pe8', 'pe32') or (firmware_schedule == 'bias-hw-pe32-autogroup-window' and accel_variant != 'pe32'):
-        raise ValueError('invalid physical accelerator variant')
-    if accel_variant == 'pe32': firmware_args += ['--accel-variant', accel_variant]
+    soc.contract.physical_pes(accel_variant, firmware_schedule)
+    if accel_variant != 'pe8': firmware_args += ['--accel-variant', accel_variant]
     if sim=='vcs' and full:
         raise ValueError('VCS platform acceptance is separate from --full Icarus/Chisel acceptance')
     host_command=[sys.executable,'-m','unittest','discover','-s','tests/e203','-p','test_*.py']
@@ -56,7 +55,10 @@ def acceptance_steps(out, cross_prefix, sim='verilator', full=False, offline=Fal
     if sim=='vcs' and accel_variant=='pe32':
         host_command=['env','XU_PE32_WRAPPER_SIM=vcs',
                       'XU_PE32_WRAPPER_LOG_DIR='+str(out/'host-pe32-wrapper-vcs'),*host_command]
-    steps=[('host',host_command,900 if accel_variant=='pe32' else 300),
+    if sim=='vcs' and accel_variant=='pe64':
+        host_command=['env','XU_PE64_WRAPPER_SIM=vcs',
+                      'XU_PE64_WRAPPER_LOG_DIR='+str(out/'host-pe64-wrapper-vcs'),*host_command]
+    steps=[('host',host_command,1200 if accel_variant=='pe64' else (900 if accel_variant=='pe32' else 300)),
            ('numeric',[sys.executable,'-m','unittest','discover','-s','tests/numeric','-v'],240)]
     for name,mode,tasks,backend in [('vectors','check-vectors',12,sim),
             ('doctor','doctor',1,sim),('baseline','baseline',1,'vcs' if sim=='vcs' else 'iverilog'),
@@ -81,7 +83,7 @@ def main():
                         help='vcs selects a separate platform flow without Icarus or Chisel')
     parser.add_argument('--full',action='store_true',help='also run Icarus real1 and all Chisel tests')
     parser.add_argument('--offline',action='store_true',help='use pre-populated Scala dependency cache with --full')
-    parser.add_argument('--accel-variant', choices=['pe8', 'pe32'], default='pe8')
+    parser.add_argument('--accel-variant', choices=['pe8', 'pe32', 'pe64'], default='pe8')
     soc.contract.add_arguments(parser)
     args=parser.parse_args()
     if args.sim=='vcs' and args.full:

@@ -11,13 +11,23 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
 #ifndef XU_HARDWARE_PE32
 #define XU_HARDWARE_PE32 0
 #endif
-#define XU_GROUP_LANES (XU_HARDWARE_PE32 ? 32u : 8u)
+#ifndef XU_HARDWARE_PE64
+#define XU_HARDWARE_PE64 0
+#endif
+#if XU_HARDWARE_PE32 && XU_HARDWARE_PE64
+#error incompatible firmware widths
+#endif
+#define XU_GROUP_LANES (XU_HARDWARE_PE64 ? 64u : (XU_HARDWARE_PE32 ? 32u : 8u))
 
 #ifndef XU_HARDWARE_AUTO_GROUP
 #define XU_HARDWARE_AUTO_GROUP 0
 #endif
 #if XU_HARDWARE_AUTO_GROUP
-#if XU_HARDWARE_PE32
+#if XU_HARDWARE_PE64
+enum { AUTO_CAPABILITY = 0xdc / 4, ROW_CTRL = 0xe0 / 4,
+       ROW_STATUS = 0xe4 / 4, ROW_POP = 0xe8 / 4 };
+#define XU_RESULT_WINDOW (0x400 / 4)
+#elif XU_HARDWARE_PE32
 enum { AUTO_CAPABILITY = 0x7c / 4, ROW_CTRL = 0xd0 / 4,
        ROW_STATUS = 0xd4 / 4, ROW_POP = 0xd8 / 4 };
 #define XU_RESULT_WINDOW (0x200 / 4)
@@ -95,7 +105,9 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
 #endif
 #if XU_HARDWARE_AUTO_GROUP
     uint32_t auto_cap = reg[AUTO_CAPABILITY];
-#if XU_HARDWARE_PE32
+#if XU_HARDWARE_PE64
+    if (auto_cap != 0x58364001u) return -7;
+#elif XU_HARDWARE_PE32
     if (auto_cap != 0x58332001u) return -7;
 #else
     if ((auto_cap & 0xffff0000u) != 0x58410000u || !(auto_cap & 1u)) return -7;
@@ -218,7 +230,7 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             XU_READ_RESULT(4);
             XU_READ_RESULT(5);
             XU_READ_RESULT(6);
-#if XU_HARDWARE_PE32
+#if XU_HARDWARE_PE32 || XU_HARDWARE_PE64
             XU_READ_RESULT(7);
             XU_READ_RESULT(8);
             XU_READ_RESULT(9);
@@ -243,6 +255,40 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             XU_READ_RESULT(28);
             XU_READ_RESULT(29);
             XU_READ_RESULT(30);
+#endif
+#if XU_HARDWARE_PE64
+            XU_READ_RESULT(31);
+            XU_READ_RESULT(32);
+            XU_READ_RESULT(33);
+            XU_READ_RESULT(34);
+            XU_READ_RESULT(35);
+            XU_READ_RESULT(36);
+            XU_READ_RESULT(37);
+            XU_READ_RESULT(38);
+            XU_READ_RESULT(39);
+            XU_READ_RESULT(40);
+            XU_READ_RESULT(41);
+            XU_READ_RESULT(42);
+            XU_READ_RESULT(43);
+            XU_READ_RESULT(44);
+            XU_READ_RESULT(45);
+            XU_READ_RESULT(46);
+            XU_READ_RESULT(47);
+            XU_READ_RESULT(48);
+            XU_READ_RESULT(49);
+            XU_READ_RESULT(50);
+            XU_READ_RESULT(51);
+            XU_READ_RESULT(52);
+            XU_READ_RESULT(53);
+            XU_READ_RESULT(54);
+            XU_READ_RESULT(55);
+            XU_READ_RESULT(56);
+            XU_READ_RESULT(57);
+            XU_READ_RESULT(58);
+            XU_READ_RESULT(59);
+            XU_READ_RESULT(60);
+            XU_READ_RESULT(61);
+            XU_READ_RESULT(62);
 #endif
 #if !XU_HARDWARE_AUTO_GROUP
             XU_READ_RESULT(7);

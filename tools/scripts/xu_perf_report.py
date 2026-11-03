@@ -19,9 +19,7 @@ def summarize(result, frequency_mhz):
         raise ValueError('a passing real-task simulation is required')
     config = contract.configuration_from_result(result)
     variant = result.get('accel_variant', 'pe8')
-    if variant not in ('pe8', 'pe32') or (config['schedule'] == 'bias-hw-pe32-autogroup-window' and variant != 'pe32'):
-        raise ValueError('invalid physical accelerator variant')
-    pes = 32 if variant == 'pe32' else PES
+    pes = contract.physical_pes(variant, config['schedule'])
     explicit = 'firmware_schedule' in result
     layers = result['layers']
     if (type(result['tasks']) is not int or not 1 <= result['tasks'] <= 12 or
@@ -35,8 +33,8 @@ def summarize(result, frequency_mhz):
         raise ValueError('incomplete performance profiles')
     if (explicit or config['schedule'] != 'baseline') and not all('performance' in x for x in layers):
         raise ValueError('explicit firmware schedule requires complete performance profiles')
-    if pes == 32:
-        expected_activity = [dict(layer=layer['layer'], physical_pes=32,
+    if pes in (32, 64):
+        expected_activity = [dict(layer=layer['layer'], physical_pes=pes,
             mac_beats=contract.task_contract(config['schedule'])['mac_fire'],
             lane_macs=MACS_PER_TASK, useful_macs=MACS_PER_TASK) for layer in layers]
         if result.get('pe_activity') != expected_activity:
