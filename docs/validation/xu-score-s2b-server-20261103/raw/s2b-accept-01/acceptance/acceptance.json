@@ -1,0 +1,260 @@
+{
+  "status": "PASS",
+  "scope": "VCS development acceptance; original default Icarus helper tests identified separately; no S0/PPA/retention claim",
+  "profile": "vcs-s2b-packed-with-explicit-direct-vcs",
+  "steps": [
+    {
+      "name": "host",
+      "command": [
+        "env",
+        "XU_WRAPPER_SIM=vcs",
+        "XU_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2b-accept-01/acceptance/host-wrapper-vcs",
+        "/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "PASS",
+      "tests": 54,
+      "skipped": 2,
+      "helper_backends": {
+        "cached": "vcs",
+        "packed_and_stream": "iverilog if present; otherwise unittest skips; mandatory VCS supplements above"
+      }
+    },
+    {
+      "name": "numeric",
+      "command": [
+        "/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/numeric",
+        "-v"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "vectors",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "check-vectors",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2b-accept-01/acceptance/vectors",
+        "--firmware-schedule",
+        "bias-hw-pack32-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "doctor",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2b-accept-01/acceptance/doctor",
+        "--firmware-schedule",
+        "bias-hw-pack32-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "baseline",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "baseline",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2b-accept-01/acceptance/baseline",
+        "--firmware-schedule",
+        "bias-hw-pack32-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic1",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2b-accept-01/acceptance/synthetic1",
+        "--firmware-schedule",
+        "bias-hw-pack32-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 1211034
+    },
+    {
+      "name": "synthetic2",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "2",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2b-accept-01/acceptance/synthetic2",
+        "--firmware-schedule",
+        "bias-hw-pack32-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 2422069
+    },
+    {
+      "name": "real12",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2b-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2b-accept-01/acceptance/real12",
+        "--firmware-schedule",
+        "bias-hw-pack32-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 14532449
+    }
+  ],
+  "direct_vcs": {
+    "packed": {
+      "status": "PASS",
+      "counts": [
+        9653,
+        9653,
+        16457,
+        16390,
+        67,
+        33
+      ],
+      "source_sha256": {
+        "tests/e203/tb_xu_packed_wrapper.sv": "342dd006552843aa8a36fdc76a7bb95463656302040e722c675b25c39a1c1f6f",
+        "third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+        "third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+        "third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv": "dab19731a961020ce07edb17a0d5afae5ffe43a96fcd62a89a4df47f1d3e0a7a",
+        "third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "876b0530970ffe7a1be08f2a7e447e52ccdb8f4af85da74a17451f97fb61f452",
+        "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+        "third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "eff7304b504eac3dceaa4c88ebf7e3fafa384e5091a77bf40dd25086b1568468"
+      },
+      "binary_sha256": "d068221a9cae5210f7969c40a51a8285a4fc389070998d9524b499445dda7671",
+      "log_sha256": {
+        "compile.log": "6a288c32c1e6be06bdc11df3610296bf63a72979262cf6a84dcb662bfb4ec6c0",
+        "simulation.log": "2adc89c0e8b751e4ba116b6a1151b72b38a5bbbe7f2a568f976aa9518c6f5f32"
+      }
+    },
+    "stream": {
+      "status": "PASS",
+      "counts": [
+        17828,
+        17828,
+        16454,
+        16387,
+        67,
+        33
+      ],
+      "source_sha256": {
+        "tests/e203/tb_xu_stream_wrapper.sv": "a7b1c899e9441de33dcc81a03f21c3fa1ccb2045c94a4a6fdc76afe3ca491bf0",
+        "third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+        "third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+        "third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv": "dab19731a961020ce07edb17a0d5afae5ffe43a96fcd62a89a4df47f1d3e0a7a",
+        "third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "876b0530970ffe7a1be08f2a7e447e52ccdb8f4af85da74a17451f97fb61f452",
+        "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+        "third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "eff7304b504eac3dceaa4c88ebf7e3fafa384e5091a77bf40dd25086b1568468"
+      },
+      "binary_sha256": "7bd7ee0321dd3626960ecff9be4c54133fdce22726184ac677e0dddc6532eb7f",
+      "log_sha256": {
+        "compile.log": "db4a89294e4521ea5af7db8d69d50b750c61d1906e0569361851d04bd529154e",
+        "simulation.log": "0517d95b5350b326fb69d685bfa3e45ef061db88d01c23c60ab7f874247dfd1c"
+      }
+    }
+  },
+  "not_run": [
+    "candidate formal clear/request window",
+    "Chisel",
+    "candidate PPA/power/retention"
+  ],
+  "firmware_configuration": {
+    "schedule": "bias-hw-pack32-window",
+    "optimization": "-O2",
+    "experiment": "both-unroll-no-masks"
+  }
+}
