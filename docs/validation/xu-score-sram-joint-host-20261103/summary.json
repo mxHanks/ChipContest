@@ -1,0 +1,52 @@
+{
+  "actual_library_report_sha256": "f1d18b00fece31f942a514505d808e704179c3a99437aebb9abf152823757ba7",
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/host",
+    "-p",
+    "test_xu_sram_joint_activity.py",
+    "-v"
+  ],
+  "environment": {
+    "XU_JOINT_TEST_EVIDENCE": "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-joint-tests-04"
+  },
+  "implementation_commits": [
+    "d8ac2bd",
+    "b2df9ff"
+  ],
+  "limitations": [
+    "No original collector/baseline helper changed. Formal context/window/mapped inventory integration is a separate new producer step.",
+    "Actual Icarus continuous callbacks are measured; actual VCS callbacks/active/NBA/readonly and SAIF/PT state_condition definitions are not proven.",
+    "352-instance open micro scale module is not the specified vendor SRAM, SoC or PPA model.",
+    "Callback ordinal is observation order, not an asserted simulator delta cycle index. Simultaneous condition selection stays unresolved for energy.",
+    "No power/energy/STA/contest qualification is claimed."
+  ],
+  "producer_commit": "b2df9ffcfa250e43c7008b1e83ecda7a136e3b10",
+  "schema": "xu-sram-joint-host-tests-v1",
+  "scope": {
+    "actual_library_arcs": 121,
+    "all_scale_q_true_condition_unknown_fs": 100000000,
+    "byte_identical_pre_post_cache_raw_outputs": 10,
+    "destructive_semantic_cases": 13,
+    "incomplete_capture_rejected": true,
+    "known_control_combinations": 256,
+    "macro_pin_bits": 67,
+    "real_role_precision_rejections": 2,
+    "real_vpi_port_callbacks": true,
+    "scale_clock_edges": 70400,
+    "scale_duration_fs": 100000000,
+    "scale_instances": 352
+  },
+  "source_root": "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity",
+  "status": "HOST_MICRO_TESTS_PASS_NOT_VCS_SAIF_PT_STA_OR_ENERGY_QUALIFIED",
+  "unittest": {
+    "duration_seconds": 2.666,
+    "result": "OK",
+    "skipped": 0,
+    "tests": 9
+  }
+}
