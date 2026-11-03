@@ -6,7 +6,8 @@ module tb_xu_s2c_reset_guard;
   reg clk=0,rst_n=0,clock_enabled=0,reset_request=1;
   always #5 clk=~clk;
   wire accel_clk=clk && clock_enabled;
-  wire synchronized_reset,accel_rst_n=~synchronized_reset;
+  wire synchronized_reset;
+  wire accel_rst_n=~synchronized_reset;
   sirv_ResetCatchAndSync_2 actual_platform_reset(.clock(accel_clk),.reset(reset_request),
       .test_mode(1'b0),.io_sync_reset(synchronized_reset));
   reg bus_valid=0;
