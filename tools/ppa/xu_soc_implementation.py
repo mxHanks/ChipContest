@@ -59,7 +59,7 @@ def review_identity(ppa, root, path, tool_root=ROOT):
     return record
 
 
-def topology_identity(ppa, root, tool_root=ROOT):
+def topology_identity(ppa, root, tool_root=ROOT, profile='baseline'):
     # Source guards locate the hierarchy later checked against actual linked
     # cells/ref_names by DC/PT. They are not an elaboration/equivalence result.
     checks = [
@@ -76,6 +76,16 @@ def topology_identity(ppa, root, tool_root=ROOT):
         (ppa.RTL+'/core/e203_srams.v', r'\be203_dtcm_ram\s+u_e203_dtcm_ram\s*\(', 'DTCM'),
         ('tools/ppa/xu_shared_icb_sram.sv', r'\bsirv_sim_ram\s*#\s*\(.*?\)\s*storage\s*\(', 'shared macro storage'),
     ]
+    if profile == 's3-pe32':
+        checks[6] = (ppa.RTL+'/subsys/e203_subsys_perips.v',
+            r'`ifdef\s+XU_ACCEL_PE32\s+xu_pe32_icb_slave\s+u_accel_icb_slave\s*\(\s*'
+            r'`else\s+accel_icb_slave\s+u_accel_icb_slave\s*\(\s*`endif',
+            'explicit PE32 accelerator selection with original fallback instance')
+        checks += [
+            (ppa.RTL+'/perips/xu_pe32_icb_slave.v', r'\bXuParallelAutoGroupCore32\s+u_linear_compute_core\s*\(', 'PE32 scheduler'),
+            (ppa.RTL+'/perips/XuParallelAutoGroupCore32.sv', r'\bXuParallelComputeCore32\s+core\s*\(', 'single PE32 compute array'),
+            (ppa.RTL+'/perips/XuParallelWeightBank32.sv', r'\bSram1024x16\s+ram\s*\(', 'PE32 weight macro adapter'),
+        ]
     sources = {}
     for relative, pattern, label in checks:
         path = (tool_root if relative.startswith('tools/') else root)/relative
@@ -104,7 +114,7 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
     ppa.require(len({record['path'] for record in libraries})==len(libraries),'library paths must differ')
     profile_identity=ppa.source_profile_identity(root,profile)
     inv = ppa.inventory(root)
-    topology = topology_identity(ppa, root)
+    topology = topology_identity(ppa, root, profile=profile)
     if clock_review is not None:
         review = review_identity(ppa, root, clock_review)
     out.mkdir(parents=True)
@@ -134,12 +144,18 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
                                  memory_groups_sha256=ppa.digest(impl['memory_groups']),
                                  libraries_sha256=ppa.digest(libraries),
                                  source_manifest_sha256=inv['platform_source_manifest_sha256'])
+    if profile == 's3-pe32':
+        impl['source_freeze'].update(defines_sha256=ppa.digest(impl['defines']),
+                                    accelerator_configuration_sha256=ppa.digest(impl['accelerator_configuration']))
     impl['tool_producer'] = dict(implementation_generator=identity(ppa,__file__),
                                 ppa=identity(ppa,ppa.__file__),
                                 clock_reviewer=identity(ppa,ROOT/'tools/ppa/xu_review_full_soc_clocks.py'))
-    impl['note'] = ('Actual '+profile+' full-digital-SoC development configuration, exact 336 RAMSP1024X16 macros. '
+    macros_1024 = sum(group['count'] for group in impl['memory_groups'] if group['macro_ref']=='RAMSP1024X16')
+    impl['note'] = ('Actual '+profile+' full-digital-SoC development configuration, exact '+str(macros_1024)+' RAMSP1024X16 macros. '
                     +('Bias SRAM adds 24 RAMSP128X16: 10240 logical bits, 49152 physical bits including 38912 padding bits. '
                       if profile=='sram-bias' else '')+
+                    ('PE32 uses one32-bank W array: 32768 logical bytes, 65536 physical bytes, 32768 padding bytes. '
+                     if profile=='s3-pe32' else '')+
                     'Mapping/PVT/netlist equivalence are unreviewed; no timing, power, or contest pass claimed. '
                     'No vendor simulation models are in the synthesis source list.')
     proof_path = out/'mapping-proof.json'
@@ -153,6 +169,9 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
                    macro_total=sum(group['count'] for group in impl['memory_groups']),
                    source_profile=profile_identity, tool_producer=impl['tool_producer'],
                    generator_sha256=ppa.sha(__file__))
+    if profile == 's3-pe32':
+        receipt.update(accel_variant='pe32', defines_sha256=ppa.digest(impl['defines']),
+                       accelerator_configuration=impl['accelerator_configuration'])
     ppa.write(out/'generation.json', receipt)
     return receipt
 
@@ -165,7 +184,7 @@ def main():
     parser.add_argument('--standard-cell-sha256', required=True)
     parser.add_argument('--sram-db', required=True, type=Path)
     parser.add_argument('--sram-sha256', required=True)
-    parser.add_argument('--profile',choices=['baseline','h2-only','sram-bias','s2b-packed','s2c-autogroup'],default='baseline',
+    parser.add_argument('--profile',choices=sorted(ppa_module().SOURCE_PROFILES),default='baseline',
                         help='explicit approved child/source geometry; baseline remains strict f49a5fc')
     parser.add_argument('--bias-sram-db',type=Path,help='RAMSP128X16 library; required only for sram-bias')
     parser.add_argument('--bias-sram-sha256',help='supplied RAMSP128X16 library SHA256; required only for sram-bias')

@@ -1,0 +1,135 @@
+{
+  "candidate_child": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+  "candidate_main": "94ce6f0f54fffdd590ff9a3ebad0197ec0fd9114",
+  "configuration": {
+    "accel_variant": "pe32",
+    "fixed_soc_macros": 320,
+    "full_soc_macros": 352,
+    "logical_weight_banks": 32,
+    "logical_weight_bytes": 32768,
+    "logical_weight_depth": 512,
+    "physical_pes": 32,
+    "physical_weight_bytes": 65536,
+    "physical_weight_depth": 1024,
+    "weight_macros": 32,
+    "weight_padding_bytes": 32768,
+    "weight_word_bits": 16,
+    "wrapper_reference": "xu_pe32_icb_slave"
+  },
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1",
+    "XU_ACCEL_PE32=1"
+  ],
+  "gaps": [
+    "mapping:macro_functional_model:NOT_RUN",
+    "mapping:byte_write_masks:NOT_RUN",
+    "mapping:read_latency_and_hold:NOT_RUN",
+    "mapping:bank_boundaries:NOT_RUN",
+    "mapping:write_read_collision:NOT_RUN",
+    "mapping:icb_backpressure_retirement:NOT_RUN",
+    "mapping:whole_soc_functional_equivalence:NOT_RUN",
+    "mapping:sram_pvt_timing_eligibility:NOT_RUN",
+    "mapped-equivalence:NOT_RUN",
+    "mapping-review:UNREVIEWED"
+  ],
+  "implementation_sha256": "95660fa2d3f07e7e3347c46e120fae7cf64d5564f37078762c3371cfe7cf504b",
+  "macro_total": 352,
+  "producer_sha256": "165ef5c1a3a933fb34795f072eff41756b435514f427801621a4282803632028",
+  "source_freeze": {
+    "accelerator_configuration_sha256": "3dac74bbc0e810159168385b61ecda5d40ecc23000a7a9c7331fe31c1ecb5146",
+    "defines_sha256": "37c286ab16cedc645b114187f69d2663fa39606ba9fd53599db1c3e0d30fd73c",
+    "e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+    "libraries_sha256": "2c28d8dfbc5fe17d9b6c6b4e8f633fdd6ebdbc26c73c764ef764bb85583dcf3c",
+    "main_commit": "94ce6f0f54fffdd590ff9a3ebad0197ec0fd9114",
+    "memory_groups_sha256": "85a3649549e3d9637655c1c0156b010db0c0188e5b1647bf03b2212a270f264b",
+    "profile": {
+      "actual_child_tree_manifest_sha256": "20a1b14266b4c82ba61422334156522d344451577d3abb31f4d1af090fbb241e",
+      "approved_tree": "2f7b5ea902a5fa8f4e08ce008c4e2632c7e35527",
+      "baseline_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+      "baseline_tree": "c4218b8275403189e0063f147d160f272416d11a",
+      "changed_files": [
+        "rtl/e203/perips/LinearAutoGroupCore.sv",
+        "rtl/e203/perips/XuParallelAutoGroupCore32.sv",
+        "rtl/e203/perips/XuParallelBiasCache32.sv",
+        "rtl/e203/perips/XuParallelComputeCore32.sv",
+        "rtl/e203/perips/XuParallelWeightBank32.sv",
+        "rtl/e203/perips/accel_icb_slave.v",
+        "rtl/e203/perips/xu_pe32_icb_slave.v",
+        "rtl/e203/subsys/e203_subsys_perips.v",
+        "vsim/bin/run.makefile"
+      ],
+      "e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+      "fixed_tree_file_count": 1062,
+      "name": "s3-pe32"
+    },
+    "source_manifest_sha256": "66cb74bb4a9214ce2c1001fae7b4d4d1a9dff9bb178ce74eeddf8b94e1777300",
+    "topology_sources": {
+      "third-party/e203_hbirdv2/rtl/e203/core/e203_cpu_top.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/core/e203_cpu_top.v",
+        "sha256": "0970379eabe2253a5d1af51a6c3cab5d44183108ad974b56ed2841bccbbabb5a"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/core/e203_srams.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/core/e203_srams.v",
+        "sha256": "b7dcaf04823b7968862ab8a9e989a176e864f6715aa5e120c4f618a1c7aba550"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/perips/XuParallelAutoGroupCore32.sv": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/perips/XuParallelAutoGroupCore32.sv",
+        "sha256": "cc6c8ca5f646d662cefabb038b7dd8d488cb2e250b394ba5a791fe1211b38c30"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/perips/XuParallelWeightBank32.sv": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/perips/XuParallelWeightBank32.sv",
+        "sha256": "bcc28530c0749983b01e54951d0e58698940be7e3d2280da069d81e95feb0197"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/perips/xu_pe32_icb_slave.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/perips/xu_pe32_icb_slave.v",
+        "sha256": "63f3c08440912ca27e2c69064ca0cb686b32934f243344142ee57993d0ccfb66"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/soc/e203_soc_top.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/soc/e203_soc_top.v",
+        "sha256": "1502c8f1fc39f01f9dff32302a11d34d49d3ff8701305a1ba3f3bdba13018aff"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v",
+        "sha256": "4258161cac87bc56ef19f22ee8c82dbcae9d3effb2f0159282d3f8acd85c015c"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_perips.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_perips.v",
+        "sha256": "ce22b3e27242a7604aab73956d603dfe45843d3d905e5011d043abed2c811414"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_top.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_top.v",
+        "sha256": "dcf1a6d8161f724926ef5fb58c52b67c9911444abbd08901b5fb9bd158b0339f"
+      },
+      "tools/ppa/xu_shared_icb_sram.sv": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_shared_icb_sram.sv",
+        "sha256": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d"
+      },
+      "tools/ppa/xu_soc_ppa_top.sv": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_soc_ppa_top.sv",
+        "sha256": "8d0e5fd38f2425e7ea8041dd5b8c3a8fd4ce7fa171afb1bf0ebeb6f53446f28a"
+      }
+    }
+  },
+  "source_profile": {
+    "actual_child_tree_manifest_sha256": "20a1b14266b4c82ba61422334156522d344451577d3abb31f4d1af090fbb241e",
+    "approved_tree": "2f7b5ea902a5fa8f4e08ce008c4e2632c7e35527",
+    "baseline_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+    "baseline_tree": "c4218b8275403189e0063f147d160f272416d11a",
+    "changed_files": [
+      "rtl/e203/perips/LinearAutoGroupCore.sv",
+      "rtl/e203/perips/XuParallelAutoGroupCore32.sv",
+      "rtl/e203/perips/XuParallelBiasCache32.sv",
+      "rtl/e203/perips/XuParallelComputeCore32.sv",
+      "rtl/e203/perips/XuParallelWeightBank32.sv",
+      "rtl/e203/perips/accel_icb_slave.v",
+      "rtl/e203/perips/xu_pe32_icb_slave.v",
+      "rtl/e203/subsys/e203_subsys_perips.v",
+      "vsim/bin/run.makefile"
+    ],
+    "e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+    "fixed_tree_file_count": 1062,
+    "name": "s3-pe32"
+  },
+  "status": "HOST_PREPARATION_PASS_NOT_EDA"
+}

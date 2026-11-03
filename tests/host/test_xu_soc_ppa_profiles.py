@@ -86,12 +86,21 @@ class XuSourceProfileGuardTest(unittest.TestCase):
 
 
 class XuPpaProfileConfigurationTest(unittest.TestCase):
+    def test_cli_exposes_every_implemented_profile(self):
+        result=subprocess.run(['python3',str(ROOT/'tools/ppa/xu_soc_implementation.py'),'--help'],
+            stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,check=True)
+        choices=result.stdout.split('--profile {',1)[1].split('}',1)[0].split(',')
+        self.assertEqual(choices,sorted(PPA.SOURCE_PROFILES))
+
     def identity(self, path):
         return dict(path=str(path.resolve()),sha256=PPA.sha(path))
 
     def fixture(self, directory, profile='sram-bias'):
         inv=dict(root=str(ROOT),main_commit='HOST',e203_commit='HOST',platform_source_manifest_sha256='HOST')
         impl=PPA.template(inv,profile)
+        if profile=='s3-pe32':
+            inv.update(main_commit=PPA.PE32_MAIN_COMMIT, source_profile=profile,
+                       accelerator_configuration=dict(PPA.PE32_CONFIGURATION))
         impl['replacements']={
             PPA.RTL+'/general/sirv_sim_ram.v':self.identity(ROOT/'tools/ppa/xu_sirv_sram_adapter.sv'),
             PPA.RTL+'/perips/mem_1024x16.sv':self.identity(ROOT/'tools/ppa/xu_weight_sram_adapter.sv')}
@@ -107,6 +116,11 @@ class XuPpaProfileConfigurationTest(unittest.TestCase):
         for name in ['primary_clocks','generated_clock_policy','reset_exceptions','clock_domain_crossings','untested_check_policy']:
             review[name]='HOST FIXTURE ONLY'
         path=directory/'clock-review.json';path.write_text(json.dumps(review));impl['clock_review']=self.identity(path)
+        if profile=='s3-pe32':
+            impl['source_freeze']=dict(profile={},main_commit=inv['main_commit'],e203_commit='HOST',
+                memory_groups_sha256=PPA.digest(impl['memory_groups']),libraries_sha256=PPA.digest(impl['libraries']),
+                defines_sha256=PPA.digest(impl['defines']),
+                accelerator_configuration_sha256=PPA.digest(impl['accelerator_configuration']))
         path=directory/'proof.json';path.write_text(json.dumps(PPA.mapping_review_template(impl)));impl['mapping_proof']=self.identity(path)
         return inv,impl
 
@@ -195,7 +209,7 @@ proc get_object_name {cell} {return $cell}
 proc get_attribute {cell attribute} {dict get $::refs $cell}
 proc foreach_in_collection {variable cells body} {uplevel 1 [list foreach $variable $cells $body]}
 '''
-        for profile in ['baseline','h2-only','sram-bias','s2b-packed','s2c-autogroup']:
+        for profile in ['baseline','h2-only','sram-bias','s2b-packed','s2c-autogroup','s3-pe32']:
             impl=PPA.template(dict(platform_source_manifest_sha256='HOST'),profile)
             refs={}
             for group in impl['memory_groups']:
@@ -212,6 +226,83 @@ proc foreach_in_collection {variable cells body} {uplevel 1 [list foreach $varia
                                       mock_tcl+PPA.guarded_tcl(PPA.memory_checks(impl),'HOST_ACCOUNTING_PASS'))
                     result=subprocess.run(['tclsh',str(script)],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
                     self.assertEqual(result.returncode==0,extra is None,result.stdout)
+
+    def test_pe32_requires_frozen_physical_variant_and_complete_padding(self):
+        with tempfile.TemporaryDirectory() as temporary, mock.patch.object(PPA,'source_profile_identity',return_value={}):
+            inv,impl=self.fixture(Path(temporary),'s3-pe32')
+            PPA.checked_implementation(impl,inv,allow_unqualified=True)
+            self.assertEqual([g['count'] for g in impl['memory_groups']],[32,32,256,32])
+            self.assertEqual(sum(g['count'] for g in impl['memory_groups']),352)
+            weight=impl['memory_groups'][-1]
+            self.assertEqual((weight['logical_bits'],weight['physical_bits'],weight['padding_bits']),(262144,524288,262144))
+            # Re-hash the changed manifest as an attacker might; fixed geometry
+            # and variant guards must still reject a self-consistent mutation.
+            mutations=[lambda x:x['defines'].pop(),lambda x:x['defines'].append('XU_ACCEL_PE32=0'),
+                lambda x:x.update(accel_variant='pe8'),
+                lambda x:x['accelerator_configuration'].update(weight_padding_bytes=0),
+                lambda x:x['memory_groups'][-1].update(count=16),
+                lambda x:x['memory_groups'][-1].update(physical_bits=262144,padding_bits=0),
+                lambda x:x['memory_groups'][-1].update(logical_depth=1024),
+                lambda x:x['memory_groups'][-1].update(instance_pattern=PPA.MEMORY_SCOPES['accelerator_weights']),
+                lambda x:x['retained_instances'][0].update(reference_pattern='accel_icb_slave*')]
+            for mutate in mutations:
+                with self.subTest(mutation=mutations.index(mutate)):
+                    bad=copy.deepcopy(impl);mutate(bad)
+                    bad['source_freeze'].update(memory_groups_sha256=PPA.digest(bad['memory_groups']),
+                        defines_sha256=PPA.digest(bad['defines']),
+                        accelerator_configuration_sha256=PPA.digest(bad['accelerator_configuration']))
+                    with self.assertRaises(ValueError):PPA.checked_implementation(bad,inv,allow_unqualified=True)
+
+    def test_pe32_proof_and_source_freeze_bind_the_compile_branch(self):
+        with tempfile.TemporaryDirectory() as temporary, mock.patch.object(PPA,'source_profile_identity',return_value={}):
+            inv,impl=self.fixture(Path(temporary),'s3-pe32')
+            for mutate in [lambda x:x.pop('source_freeze'),
+                           lambda x:x['source_freeze'].pop('defines_sha256'),
+                           lambda x:x['source_freeze'].pop('accelerator_configuration_sha256')]:
+                bad=copy.deepcopy(impl);mutate(bad)
+                with self.assertRaisesRegex(ValueError,'source freeze'):
+                    PPA.checked_implementation(bad,inv,allow_unqualified=True)
+            old_proof=PPA.mapping_review_template(impl)
+            old_proof['mapping_sha256']=PPA.digest(dict(replacements=impl['replacements'],added_sources=impl['added_sources']))
+            path=Path(temporary)/'old-8pe-proof.json';path.write_text(json.dumps(old_proof))
+            impl['mapping_proof']=self.identity(path)
+            with self.assertRaisesRegex(ValueError,'mapping proof is not bound'):
+                PPA.checked_implementation(impl,inv,allow_unqualified=True)
+
+    def test_inventory_identifies_the_32pe_child_instead_of_reporting_16_weight_macros(self):
+        # Source inventory classification only; neither mock commit identity
+        # nor file declarations constitute an elaboration or SRAM-model test.
+        def fixture_git(root,*args):
+            return PPA.SOURCE_PROFILES['s3-pe32']['commit'] if Path(root)==ROOT/PPA.SUB else 'HOST_MAIN'
+        with mock.patch.object(PPA,'git',side_effect=fixture_git):
+            inv=PPA.inventory(ROOT)
+        self.assertEqual(inv['source_profile'],'s3-pe32')
+        self.assertEqual(inv['memories']['accelerator_weights']['physical_1024x16_macros'],32)
+        self.assertEqual(inv['hypothetical_1024x16_macro_total'],352)
+        self.assertEqual(inv['required_compile_defines'],PPA.PE32_DEFINES)
+        self.assertEqual(PPA.template(inv,'s3-pe32')['defines'],PPA.PE32_DEFINES)
+
+    def test_pe32_define_cannot_silently_select_a_different_baseline_architecture(self):
+        with tempfile.TemporaryDirectory() as temporary, mock.patch.object(PPA,'source_profile_identity',return_value={}):
+            inv,impl=self.fixture(Path(temporary),'baseline')
+            impl['defines'].append('XU_ACCEL_PE32=1')
+            with self.assertRaisesRegex(ValueError,'only for s3-pe32'):
+                PPA.checked_implementation(impl,inv,allow_unqualified=True)
+
+    def test_pe32_cannot_prepare_a_different_main_with_the_same_child_pin(self):
+        with tempfile.TemporaryDirectory() as temporary, mock.patch.object(PPA,'source_profile_identity',return_value={}):
+            inv,impl=self.fixture(Path(temporary),'s3-pe32')
+            inv['main_commit']='UNAPPROVED_MAIN'
+            impl['source_freeze']['main_commit']=inv['main_commit']
+            with self.assertRaisesRegex(ValueError,'exact approved candidate main commit'):
+                PPA.checked_implementation(impl,inv,allow_unqualified=True)
+
+    def test_pe32_legacy_vcd_power_cannot_reuse_unbound_eight_pe_activity(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory=Path(temporary)
+            (directory/'prepared.json').write_text(json.dumps(dict(implementation=dict(source_profile='s3-pe32'))))
+            with self.assertRaisesRegex(ValueError,'candidate-specific clear/request-window'):
+                PPA.activity_power(directory,{}, {})
 
 
 if __name__=='__main__':

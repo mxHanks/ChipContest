@@ -1,0 +1,224 @@
+{
+  "accel_variant": "pe32",
+  "accelerator_configuration": {
+    "accel_variant": "pe32",
+    "fixed_soc_macros": 320,
+    "full_soc_macros": 352,
+    "logical_weight_banks": 32,
+    "logical_weight_bytes": 32768,
+    "logical_weight_depth": 512,
+    "physical_pes": 32,
+    "physical_weight_bytes": 65536,
+    "physical_weight_depth": 1024,
+    "weight_macros": 32,
+    "weight_padding_bytes": 32768,
+    "weight_word_bits": 16,
+    "wrapper_reference": "xu_pe32_icb_slave"
+  },
+  "activity": null,
+  "added_sources": [
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_soc_ppa_top.sv",
+      "sha256": "8d0e5fd38f2425e7ea8041dd5b8c3a8fd4ce7fa171afb1bf0ebeb6f53446f28a"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_shared_icb_sram.sv",
+      "sha256": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d"
+    }
+  ],
+  "clock_review": {
+    "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/build/xu-pe32-ppa-host-01/implementation/clock-review/clock-review.json",
+    "sha256": "21d05f6824c7437feac739f6c705d721c65c3ad9587f89d0e69f424a3985f84f"
+  },
+  "constraints": {
+    "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_full_soc.sdc",
+    "sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98"
+  },
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1",
+    "XU_ACCEL_PE32=1"
+  ],
+  "libraries": [
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/build/xu-pe32-ppa-host-01/standard.db",
+      "role": "standard_cell",
+      "sha256": "291db2868d82ccf3e7ac6320b8942a99068d984c10b57a60383875ef43c1f8ec"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/build/xu-pe32-ppa-host-01/sram.db",
+      "role": "sram",
+      "sha256": "444e73df40f4b8c010e3158858c80b994bb03c582443f6988b942f68fe7928a8"
+    }
+  ],
+  "mapping_proof": {
+    "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/build/xu-pe32-ppa-host-01/implementation/mapping-proof.json",
+    "sha256": "d4f2c1a2e27df05dfdb1d92000e31e754c25fd6bd14faeabbb1bbae03cfc67a3"
+  },
+  "memory_groups": [
+    {
+      "count": 32,
+      "depth": 1024,
+      "instance_pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_srams/u_e203_itcm_ram/*",
+      "logical_bits": 524288,
+      "macro_ref": "RAMSP1024X16",
+      "name": "itcm",
+      "width": 16
+    },
+    {
+      "count": 32,
+      "depth": 1024,
+      "instance_pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_srams/u_e203_dtcm_ram/*",
+      "logical_bits": 524288,
+      "macro_ref": "RAMSP1024X16",
+      "name": "dtcm",
+      "width": 16
+    },
+    {
+      "count": 256,
+      "depth": 1024,
+      "instance_pattern": "u_shared/storage/*",
+      "logical_bits": 4194304,
+      "macro_ref": "RAMSP1024X16",
+      "name": "shared",
+      "width": 16
+    },
+    {
+      "count": 32,
+      "depth": 1024,
+      "instance_pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_accel_icb_slave/u_linear_compute_core/core/banks_*",
+      "logical_banks": 32,
+      "logical_bits": 262144,
+      "logical_depth": 512,
+      "logical_width": 16,
+      "macro_ref": "RAMSP1024X16",
+      "name": "accelerator_weights",
+      "padding_bits": 262144,
+      "physical_bits": 524288,
+      "width": 16
+    }
+  ],
+  "note": "Actual s3-pe32 full-digital-SoC development configuration, exact 352 RAMSP1024X16 macros. PE32 uses one32-bank W array: 32768 logical bytes, 65536 physical bytes, 32768 padding bytes. Mapping/PVT/netlist equivalence are unreviewed; no timing, power, or contest pass claimed. No vendor simulation models are in the synthesis source list.",
+  "platform_source_manifest_sha256": "66cb74bb4a9214ce2c1001fae7b4d4d1a9dff9bb178ce74eeddf8b94e1777300",
+  "replacements": {
+    "third-party/e203_hbirdv2/rtl/e203/general/sirv_sim_ram.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_sirv_sram_adapter.sv",
+      "sha256": "b2b2baaa1e105ed794382886439cd2c16fd280a0f29b54c4d925351e6f90a0c5"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_weight_sram_adapter.sv",
+      "sha256": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707"
+    }
+  },
+  "retained_instances": [
+    {
+      "name": "accelerator",
+      "pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_accel_icb_slave",
+      "reference_pattern": "xu_pe32_icb_slave*"
+    },
+    {
+      "name": "cpu",
+      "pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top",
+      "reference_pattern": "e203_cpu_top*"
+    },
+    {
+      "name": "interconnect",
+      "pattern": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_sirv_ppi_fab",
+      "reference_pattern": "sirv_icb1to16_bus*"
+    }
+  ],
+  "schema": "xu-full-soc-implementation-v1",
+  "search_paths": [],
+  "source_freeze": {
+    "accelerator_configuration_sha256": "3dac74bbc0e810159168385b61ecda5d40ecc23000a7a9c7331fe31c1ecb5146",
+    "defines_sha256": "37c286ab16cedc645b114187f69d2663fa39606ba9fd53599db1c3e0d30fd73c",
+    "e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+    "libraries_sha256": "d8f6f5da49014bc4b52b113bcfd4d9171f7ed09458087f8e343de5a611aba4da",
+    "main_commit": "94ce6f0f54fffdd590ff9a3ebad0197ec0fd9114",
+    "memory_groups_sha256": "85a3649549e3d9637655c1c0156b010db0c0188e5b1647bf03b2212a270f264b",
+    "profile": {
+      "actual_child_tree_manifest_sha256": "20a1b14266b4c82ba61422334156522d344451577d3abb31f4d1af090fbb241e",
+      "approved_tree": "2f7b5ea902a5fa8f4e08ce008c4e2632c7e35527",
+      "baseline_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+      "baseline_tree": "c4218b8275403189e0063f147d160f272416d11a",
+      "changed_files": [
+        "rtl/e203/perips/LinearAutoGroupCore.sv",
+        "rtl/e203/perips/XuParallelAutoGroupCore32.sv",
+        "rtl/e203/perips/XuParallelBiasCache32.sv",
+        "rtl/e203/perips/XuParallelComputeCore32.sv",
+        "rtl/e203/perips/XuParallelWeightBank32.sv",
+        "rtl/e203/perips/accel_icb_slave.v",
+        "rtl/e203/perips/xu_pe32_icb_slave.v",
+        "rtl/e203/subsys/e203_subsys_perips.v",
+        "vsim/bin/run.makefile"
+      ],
+      "e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+      "fixed_tree_file_count": 1062,
+      "name": "s3-pe32"
+    },
+    "source_manifest_sha256": "66cb74bb4a9214ce2c1001fae7b4d4d1a9dff9bb178ce74eeddf8b94e1777300",
+    "topology_sources": {
+      "third-party/e203_hbirdv2/rtl/e203/core/e203_cpu_top.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/core/e203_cpu_top.v",
+        "sha256": "0970379eabe2253a5d1af51a6c3cab5d44183108ad974b56ed2841bccbbabb5a"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/core/e203_srams.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/core/e203_srams.v",
+        "sha256": "b7dcaf04823b7968862ab8a9e989a176e864f6715aa5e120c4f618a1c7aba550"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/perips/XuParallelAutoGroupCore32.sv": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/perips/XuParallelAutoGroupCore32.sv",
+        "sha256": "cc6c8ca5f646d662cefabb038b7dd8d488cb2e250b394ba5a791fe1211b38c30"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/perips/XuParallelWeightBank32.sv": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/perips/XuParallelWeightBank32.sv",
+        "sha256": "bcc28530c0749983b01e54951d0e58698940be7e3d2280da069d81e95feb0197"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/perips/xu_pe32_icb_slave.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/perips/xu_pe32_icb_slave.v",
+        "sha256": "63f3c08440912ca27e2c69064ca0cb686b32934f243344142ee57993d0ccfb66"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/soc/e203_soc_top.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/soc/e203_soc_top.v",
+        "sha256": "1502c8f1fc39f01f9dff32302a11d34d49d3ff8701305a1ba3f3bdba13018aff"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v",
+        "sha256": "4258161cac87bc56ef19f22ee8c82dbcae9d3effb2f0159282d3f8acd85c015c"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_perips.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_perips.v",
+        "sha256": "ce22b3e27242a7604aab73956d603dfe45843d3d905e5011d043abed2c811414"
+      },
+      "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_top.v": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_top.v",
+        "sha256": "dcf1a6d8161f724926ef5fb58c52b67c9911444abbd08901b5fb9bd158b0339f"
+      },
+      "tools/ppa/xu_shared_icb_sram.sv": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_shared_icb_sram.sv",
+        "sha256": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d"
+      },
+      "tools/ppa/xu_soc_ppa_top.sv": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_soc_ppa_top.sv",
+        "sha256": "8d0e5fd38f2425e7ea8041dd5b8c3a8fd4ce7fa171afb1bf0ebeb6f53446f28a"
+      }
+    }
+  },
+  "source_profile": "s3-pe32",
+  "tool_assets_root": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa",
+  "tool_producer": {
+    "clock_reviewer": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_review_full_soc_clocks.py",
+      "sha256": "8d5d78be3bee507d9b037916a6a2b1c8604477cef91ae6fab2afdba583f1d098"
+    },
+    "implementation_generator": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/ppa/xu_soc_implementation.py",
+      "sha256": "a598e759b1a6a26ffa5f91ca65c5bbf5b21ccdc6036156a4fd9b67ec90f4cc48"
+    },
+    "ppa": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe32-ppa/tools/scripts/xu_soc_ppa.py",
+      "sha256": "b0d82df0d09228be9688a9eaf6f339cf59c48b487d380eafed07fdbe41937a52"
+    }
+  },
+  "top": "xu_soc_ppa_top"
+}
