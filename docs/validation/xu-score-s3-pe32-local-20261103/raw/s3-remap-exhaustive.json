@@ -1,0 +1,27 @@
+{
+  "status": "ARITHMETIC_MAPPING_REVIEW_PASS",
+  "scope": "exhaustive independent mathematical remap, not RTL simulation or source implementation proof",
+  "main": "d276b55ffecbe8d620f9a361bf5d0859299ba7b5",
+  "child": "49a9436e01ea8ceeead94242e4a99c16e31a0865",
+  "legacy_pairs": 16384,
+  "new_banks": 32,
+  "logical_words_per_bank": 512,
+  "logical_bytes": 32768,
+  "physical_RAMSP1024X16_macros": 32,
+  "physical_bytes": 65536,
+  "bijection": "complete 8x2048 old ->32x512 new, all16384 stream indices agree",
+  "wide_task": {
+    "starts": 792,
+    "pops": 792,
+    "mac_beats": 50688,
+    "lane_macs": 1622016,
+    "mmio_writes": 13121,
+    "shared_reads": 23232,
+    "shared_writes": 50688,
+    "result_word_reads": 50688
+  },
+  "endpoint_old_bank7_addr2047": {
+    "new_bank": 31,
+    "new_addr": 511
+  }
+}

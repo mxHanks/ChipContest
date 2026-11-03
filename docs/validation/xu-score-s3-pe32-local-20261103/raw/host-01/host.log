@@ -1,0 +1,49 @@
+Starting first
+Starting broken
+Starting first
+.....................F...F.................missing tools: vcs
+FAIL: /tmp/tmplr_oe8do/baseline/result.json
+missing tools: iverilog, vvp
+FAIL: /tmp/tmptxujib7y/baseline/result.json
+.....missing tools: riscv64-unknown-elf-gcc
+FAIL: /tmp/tmpikowgd9h/doctor/result.json
+......Starting host
+Starting numeric
+Starting vectors
+Starting doctor
+Starting baseline
+Starting synthetic1
+Starting synthetic2
+Starting real12
+.PASS rv32ui-p-add
+PASS accel_mmio
+PASS accel_compute
+PASS accel_multigroup
+PASS accel_repeat_x
+......
+======================================================================
+FAIL: test_autogroup_replaces_only_group_control_with_row_and_retired_pops (test_hardware_contract.HardwareContractTests.test_autogroup_replaces_only_group_control_with_row_and_retired_pops)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/tests/e203/test_hardware_contract.py", line 91, in test_autogroup_replaces_only_group_control_with_row_and_retired_pops
+    self.assertEqual('-DXU_HARDWARE_AUTO_GROUP=1' in defines,
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     schedule == 'bias-hw-autogroup-window')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True != False
+
+======================================================================
+FAIL: test_packed_stream_is_opt_in_and_preserves_source_and_output_work (test_hardware_contract.HardwareContractTests.test_packed_stream_is_opt_in_and_preserves_source_and_output_work)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/tests/e203/test_hardware_contract.py", line 79, in test_packed_stream_is_opt_in_and_preserves_source_and_output_work
+    self.assertEqual('-DXU_HARDWARE_PACK32=1' in defines,
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     schedule in ('bias-hw-pack32-window', 'bias-hw-autogroup-window'))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True != False
+
+----------------------------------------------------------------------
+Ran 61 tests in 29.669s
+
+FAILED (failures=2)

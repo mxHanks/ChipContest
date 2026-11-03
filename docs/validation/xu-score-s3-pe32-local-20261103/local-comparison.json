@@ -1,0 +1,150 @@
+{
+  "status": "LOCAL_SCREEN_PASS_NOT_QUALIFIED",
+  "scope": "one real layer00, local GCC14.2/Verilator5.032 at historical development clocks; clear/request-window/server12/physical qualification pending",
+  "main_commit": "d46486c9820e909ab9469a5fa1f10eee022988c3",
+  "e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+  "rows": [
+    {
+      "case": "pe8_auto",
+      "variant": "pe8",
+      "schedule": "bias-hw-autogroup-window",
+      "cycles": 1013171,
+      "performance": {
+        "w_load": 183503,
+        "x_load": 71182,
+        "bias_load": 7774,
+        "compute_wait": 48114,
+        "writeback": 670230,
+        "other": 32368,
+        "busy": 215424,
+        "mac_fire": 202752,
+        "mmio_reads": 54648,
+        "mmio_writes": 15497,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "shared_stall": 9599,
+        "mmio_stall": 0,
+        "starts": 3168,
+        "dones": 3168
+      },
+      "pe_activity": [],
+      "autogroup_activity": [
+        {
+          "layer": 0,
+          "rows": 99,
+          "pops_retired": 3168,
+          "compute_writeback_overlap": 136125,
+          "fifo_full_wait": 508959
+        }
+      ]
+    },
+    {
+      "case": "pe32_auto",
+      "variant": "pe32",
+      "schedule": "bias-hw-autogroup-window",
+      "cycles": 1013171,
+      "performance": {
+        "w_load": 183503,
+        "x_load": 71182,
+        "bias_load": 7774,
+        "compute_wait": 48114,
+        "writeback": 670230,
+        "other": 32368,
+        "busy": 215424,
+        "mac_fire": 202752,
+        "mmio_reads": 54648,
+        "mmio_writes": 15497,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "shared_stall": 9599,
+        "mmio_stall": 0,
+        "starts": 3168,
+        "dones": 3168
+      },
+      "pe_activity": [
+        {
+          "layer": 0,
+          "physical_pes": 32,
+          "mac_beats": 202752,
+          "lane_macs": 1622016,
+          "useful_macs": 1622016
+        }
+      ],
+      "autogroup_activity": [
+        {
+          "layer": 0,
+          "rows": 99,
+          "pops_retired": 3168,
+          "compute_writeback_overlap": 136125,
+          "fifo_full_wait": 508959
+        }
+      ]
+    },
+    {
+      "case": "pe32_wide",
+      "variant": "pe32",
+      "schedule": "bias-hw-pe32-autogroup-window",
+      "cycles": 957040,
+      "performance": {
+        "w_load": 183503,
+        "x_load": 71278,
+        "bias_load": 7774,
+        "compute_wait": 17226,
+        "writeback": 668847,
+        "other": 8412,
+        "busy": 53856,
+        "mac_fire": 50688,
+        "mmio_reads": 52272,
+        "mmio_writes": 13121,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "shared_stall": 12272,
+        "mmio_stall": 0,
+        "starts": 792,
+        "dones": 792
+      },
+      "pe_activity": [
+        {
+          "layer": 0,
+          "physical_pes": 32,
+          "mac_beats": 50688,
+          "lane_macs": 1622016,
+          "useful_macs": 1622016
+        }
+      ],
+      "autogroup_activity": [
+        {
+          "layer": 0,
+          "rows": 99,
+          "pops_retired": 792,
+          "compute_writeback_overlap": 31581,
+          "fifo_full_wait": 551631
+        }
+      ]
+    }
+  ],
+  "wide_reduction_vs_same_pe32_auto_percent": 5.5401309354491985,
+  "common_identity": [
+    "main_commit",
+    "e203_commit",
+    "source_sha256",
+    "runner_sha256",
+    "contract_sha256",
+    "versions",
+    "tools",
+    "vectors",
+    "fixture",
+    "firmware_sha256",
+    "firmware_opt",
+    "firmware_experiment"
+  ],
+  "same_pe32_simulator_sha256": "f06162cf4dd98ed1d03f80288b677c0afe981fb6273c0eebf041de2457b6bbb0",
+  "pe8_simulator_sha256": "edfaa490cce9610d8ed3521e0e769df255300033f523189d18be2a69aa64cebc",
+  "actual_lane_macs_per_task": 1622016,
+  "host_tests": 62,
+  "numeric_tests": 42,
+  "chisel_tests": 1,
+  "legacy_cases": 5,
+  "raw_payloads": 111,
+  "retained": false
+}

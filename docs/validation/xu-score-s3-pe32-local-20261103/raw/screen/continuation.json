@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "steps": [
+    {
+      "name": "pe32-auto-real1",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "1",
+        "--sim",
+        "verilator",
+        "--accel-variant",
+        "pe32",
+        "--firmware-schedule",
+        "bias-hw-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/build/xu-pe32-screen-01/pe32-auto-real1"
+      ],
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "name": "pe8-auto-real1",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "1",
+        "--sim",
+        "verilator",
+        "--accel-variant",
+        "pe8",
+        "--firmware-schedule",
+        "bias-hw-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/build/xu-pe32-screen-01/pe8-auto-real1"
+      ],
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "name": "pe32-legacy5",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/tools/scripts/e203_soc.py",
+        "--mode",
+        "baseline",
+        "--tasks",
+        "1",
+        "--sim",
+        "iverilog",
+        "--accel-variant",
+        "pe32",
+        "--firmware-schedule",
+        "bias-hw-pe32-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe32/build/xu-pe32-screen-01/pe32-legacy5"
+      ],
+      "status": "PASS",
+      "returncode": 0
+    }
+  ]
+}
