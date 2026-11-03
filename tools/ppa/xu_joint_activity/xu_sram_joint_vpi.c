@@ -49,7 +49,8 @@ static void grow(Counts *c) { size_t i,n=c->capacity;Entry *old=c->items;c->capa
 static void add(Counts *c,uint64_t key,uint64_t value) { size_t i;if(!value)return;if(!c->capacity||c->size*10>=c->capacity*7)grow(c);i=hash_key(key)&(c->capacity-1);while(c->items[i].used&&c->items[i].key!=key)i=(i+1)&(c->capacity-1);if(!c->items[i].used){c->items[i].used=1;c->items[i].key=key;c->size++;}if(UINT64_MAX-c->items[i].value<value){fail("counter overflow");return;}c->items[i].value+=value; }
 static uint64_t projection(Macro *m,int p) {
     uint64_t k=0;int i;
-    if(p==0||p==1){for(i=0;i<8;i++)k|=(uint64_t)m->state[controls[i]]<<(2*i);if(p==1)k|=(uint64_t)m->state[11]<<16;}
+    if(p==0){for(i=0;i<8;i++)k|=(uint64_t)m->state[controls[i]]<<(2*i);}
+    else if(p==1){k=m->proj_key[0]|((uint64_t)m->state[11]<<16);}
     else if(p<18){i=p-2;k=m->state[51+i]|((uint64_t)m->state[33]<<2)|((uint64_t)m->state[12+i]<<4);}
     else {i=p-18;k=m->state[50]|((uint64_t)m->state[33]<<2)|((uint64_t)m->state[34+i]<<4);}
     return k;
@@ -83,8 +84,7 @@ static PLI_INT32 changed(p_cb_data cb) {
     if(!active)return 0;
     memcpy(fresh,m->state,BITS);
     /* cb value is the delivered event value, never a read of other live ports. */
-    for(i=0;i<widths[p->port];i++){unsigned a=(cb->value->value.vector[0].aval>>i)&1,b=(cb->value->value.vector[0].bval>>i)&1;fresh[offsets[p->port]+i]=(unsigned char)(b?(a?2:3):a);}
-    for(i=0;i<BITS;i++)if(fresh[i]!=m->state[i])changed_any=1;
+    for(i=0;i<widths[p->port];i++){unsigned a=(cb->value->value.vector[0].aval>>i)&1,b=(cb->value->value.vector[0].bval>>i)&1;fresh[offsets[p->port]+i]=(unsigned char)(b?(a?2:3):a);if(fresh[offsets[p->port]+i]!=m->state[offsets[p->port]+i])changed_any=1;}
     if(!changed_any)return 0;
     t=now_tick();o=next_ordinal(t);m->callback_events++;
     if(m->pending_valid&&m->pending_tick!=t)flush_pending(m,m->pending_tick==start_tick);
