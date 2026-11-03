@@ -1,0 +1,185 @@
+{
+  "actual_preparation": {
+    "files": {
+      "clock-review.tcl": {
+        "bytes": 3803,
+        "sha256": "10e118b2c131b46a9f26cd27b00f30018737bd73da552c7ae13379d8ccd5d0ee"
+      },
+      "constraints.sdc": {
+        "bytes": 6384,
+        "sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98"
+      },
+      "rtl.f": {
+        "bytes": 22971,
+        "sha256": "e6d4e38c7d0e20d1692c2a66c22c7952d6f31ec02ed467be52bc282d2ed3dd32"
+      },
+      "sta.tcl": {
+        "bytes": 5931,
+        "sha256": "f7b0b5fd559aaa835fd5fd0d1d84950e42857debf84edb52c261e26e165fc686"
+      },
+      "synth.tcl": {
+        "bytes": 35644,
+        "sha256": "eadd0bbe53751ab2ffa9bb7ca03c93007c8e442e00e4e42a3b02333fea128c10"
+      }
+    },
+    "macro_total": 352,
+    "prior_tool_commit": "ffa34db",
+    "status": "HOST_PREPARATION_AND_TCL_BYTE_IDENTICAL_NOT_EDA"
+  },
+  "candidate": "/home/mxhanks/Projects/ChipContest-xu-s3-pe32",
+  "cases": [
+    {
+      "error": "PE32 main tree worktree bytes differ from approved pin: tests/e203/tb_accel_soc.sv",
+      "git_status": "",
+      "name": "hidden-tb-assume-unchanged",
+      "ordinary_git_status": "",
+      "output_exists": false,
+      "status": "REJECTED_BEFORE_OUTPUT"
+    },
+    {
+      "error": "PE32 main tree worktree bytes differ from approved pin: tests/e203/tb_accel_soc.sv",
+      "git_status": "",
+      "name": "hidden-tb-skip-worktree",
+      "ordinary_git_status": "",
+      "output_exists": false,
+      "status": "REJECTED_BEFORE_OUTPUT"
+    },
+    {
+      "error": "PE32 main tree file mode changed: tests/e203/tb_accel_soc.sv",
+      "git_status": "M tests/e203/tb_accel_soc.sv",
+      "name": "executable-mode-change",
+      "ordinary_git_status": "M tests/e203/tb_accel_soc.sv",
+      "output_exists": false,
+      "status": "REJECTED_BEFORE_OUTPUT"
+    },
+    {
+      "error": "PE32 main tree file missing/changed: tests/e203/tb_accel_soc.sv",
+      "git_status": "T tests/e203/tb_accel_soc.sv",
+      "name": "same-bytes-symlink-substitution",
+      "ordinary_git_status": "T tests/e203/tb_accel_soc.sv",
+      "output_exists": false,
+      "status": "REJECTED_BEFORE_OUTPUT"
+    },
+    {
+      "error": "PE32 main untracked active source files: tools/scripts/xu_injected_guard_probe.py",
+      "git_status": "?? tools/scripts/xu_injected_guard_probe.py",
+      "name": "untracked-active-tool",
+      "ordinary_git_status": "?? tools/scripts/xu_injected_guard_probe.py",
+      "output_exists": false,
+      "status": "REJECTED_BEFORE_OUTPUT"
+    },
+    {
+      "error": "PE32 main untracked active source files: tests/e203/xu_ignored_guard_probe.sv",
+      "git_status": "",
+      "name": "ignored-active-testbench",
+      "ordinary_git_status": "",
+      "output_exists": false,
+      "status": "REJECTED_BEFORE_OUTPUT"
+    },
+    {
+      "error": "PE32 main tree worktree bytes differ from approved pin: tests/e203/tb_accel_soc.sv",
+      "git_status": "M  tests/e203/tb_accel_soc.sv",
+      "name": "main-replace-object-hidden-tb",
+      "ordinary_git_status": "",
+      "output_exists": false,
+      "status": "REJECTED_BEFORE_OUTPUT"
+    }
+  ],
+  "cases_count": 7,
+  "child": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+  "clock_contract_tcl_bytes_equal": true,
+  "compatibility": {
+    "baseline": {
+      "macro_check_tcl_bytes_equal": true,
+      "macro_check_tcl_sha256": "475a7cd516a21caf0935997f8971f1490cae511636e6250ed67aef51a072b35c",
+      "template_bytes_equal": true,
+      "template_sha256": "f29af44fd4a824b812100e41039433fe99952d4761fd7f341238e9184207d178"
+    },
+    "h2-only": {
+      "macro_check_tcl_bytes_equal": true,
+      "macro_check_tcl_sha256": "475a7cd516a21caf0935997f8971f1490cae511636e6250ed67aef51a072b35c",
+      "template_bytes_equal": true,
+      "template_sha256": "d2a075c7d8b53b3deea1c4baf53359d659b054501d9043182337f7741c71cadc"
+    },
+    "s2b-packed": {
+      "macro_check_tcl_bytes_equal": true,
+      "macro_check_tcl_sha256": "475a7cd516a21caf0935997f8971f1490cae511636e6250ed67aef51a072b35c",
+      "template_bytes_equal": true,
+      "template_sha256": "1878a65aa8328d5a718d4930facf6b1a52c0f48917d85157d5e6250c018368d4"
+    },
+    "s2c-autogroup": {
+      "macro_check_tcl_bytes_equal": true,
+      "macro_check_tcl_sha256": "475a7cd516a21caf0935997f8971f1490cae511636e6250ed67aef51a072b35c",
+      "template_bytes_equal": true,
+      "template_sha256": "97b1104b0ea46f01ee408e1d8bb5875c0f766eb5cd0a9e57f59ce61a10caf1e6"
+    },
+    "s3-pe32": {
+      "macro_check_tcl_bytes_equal": true,
+      "macro_check_tcl_sha256": "bae7abf1d02db7355254cea30cea6bfa65044d6d45fb23a2e6c7f73dec52e7bc",
+      "template_bytes_equal": true,
+      "template_sha256": "ee7cca9fe92904a968c7ae381d54c6f9406ac3d8f3b1f861f8334f0b6bad53a2"
+    },
+    "sram-bias": {
+      "macro_check_tcl_bytes_equal": true,
+      "macro_check_tcl_sha256": "4d96338016e6a9fc7c7117b464f8a6b76c6969ec31dec0e1ef2176b6c54de06a",
+      "template_bytes_equal": true,
+      "template_sha256": "116069c17d564f9c865903c3fb322ed65dc2705b38e6d2bb6eb6b62dd431b482"
+    }
+  },
+  "main": "94ce6f0f54fffdd590ff9a3ebad0197ec0fd9114",
+  "original_after": {
+    "actual_child_tree_manifest_sha256": "20a1b14266b4c82ba61422334156522d344451577d3abb31f4d1af090fbb241e",
+    "approved_tree": "2f7b5ea902a5fa8f4e08ce008c4e2632c7e35527",
+    "baseline_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+    "baseline_tree": "c4218b8275403189e0063f147d160f272416d11a",
+    "changed_files": [
+      "rtl/e203/perips/LinearAutoGroupCore.sv",
+      "rtl/e203/perips/XuParallelAutoGroupCore32.sv",
+      "rtl/e203/perips/XuParallelBiasCache32.sv",
+      "rtl/e203/perips/XuParallelComputeCore32.sv",
+      "rtl/e203/perips/XuParallelWeightBank32.sv",
+      "rtl/e203/perips/accel_icb_slave.v",
+      "rtl/e203/perips/xu_pe32_icb_slave.v",
+      "rtl/e203/subsys/e203_subsys_perips.v",
+      "vsim/bin/run.makefile"
+    ],
+    "e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+    "fixed_tree_file_count": 1062,
+    "main_source_freeze": {
+      "actual_main_tree_manifest_sha256": "748009146102ecd9391bb9027bb87d9f671c0639d40d9dd0d07812597cb3ad11",
+      "approved_main_tree": "a2b41d5e9819a9dddab899eb3a6849723d8850d1",
+      "main_commit": "94ce6f0f54fffdd590ff9a3ebad0197ec0fd9114",
+      "tracked_main_entries": 1440
+    },
+    "name": "s3-pe32"
+  },
+  "original_before": {
+    "actual_child_tree_manifest_sha256": "20a1b14266b4c82ba61422334156522d344451577d3abb31f4d1af090fbb241e",
+    "approved_tree": "2f7b5ea902a5fa8f4e08ce008c4e2632c7e35527",
+    "baseline_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+    "baseline_tree": "c4218b8275403189e0063f147d160f272416d11a",
+    "changed_files": [
+      "rtl/e203/perips/LinearAutoGroupCore.sv",
+      "rtl/e203/perips/XuParallelAutoGroupCore32.sv",
+      "rtl/e203/perips/XuParallelBiasCache32.sv",
+      "rtl/e203/perips/XuParallelComputeCore32.sv",
+      "rtl/e203/perips/XuParallelWeightBank32.sv",
+      "rtl/e203/perips/accel_icb_slave.v",
+      "rtl/e203/perips/xu_pe32_icb_slave.v",
+      "rtl/e203/subsys/e203_subsys_perips.v",
+      "vsim/bin/run.makefile"
+    ],
+    "e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+    "fixed_tree_file_count": 1062,
+    "main_source_freeze": {
+      "actual_main_tree_manifest_sha256": "748009146102ecd9391bb9027bb87d9f671c0639d40d9dd0d07812597cb3ad11",
+      "approved_main_tree": "a2b41d5e9819a9dddab899eb3a6849723d8850d1",
+      "main_commit": "94ce6f0f54fffdd590ff9a3ebad0197ec0fd9114",
+      "tracked_main_entries": 1440
+    },
+    "name": "s3-pe32"
+  },
+  "producer_sha256": "537fd0858676eeb8fdd66eaf85145cd330f0891ab9a2fa639b5ae654872bd037",
+  "schema": "xu-pe32-main-source-guard-host-v1",
+  "status": "HOST_MUTATIONS_REJECTED_NOT_EDA"
+}

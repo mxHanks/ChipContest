@@ -129,6 +129,80 @@ def git(root, *args):
     return subprocess.check_output(['git','--no-replace-objects']+list(args), cwd=str(root)).decode().strip()
 
 
+def pe32_main_identity(root):
+    """Bind the PE32 main worktree to its approved Git objects, not the index.
+
+    The original profile checked the main HEAD only. Git index flags can hide
+    changed TB/runner/firmware bytes from status, while a replacement object can
+    present another tree under the same commit name. Read the original objects
+    and check every actual tracked blob, mode, symlink and gitlink instead.
+    """
+    root = Path(root)
+    require(not root.is_symlink(), 'PE32 main source root is a symlink')
+    require(git(root, 'rev-parse', 'HEAD') == PE32_MAIN_COMMIT,
+            'PE32 main commit differs from the approved pin')
+    output = subprocess.check_output(
+        ['git', '--no-replace-objects', 'ls-tree', '-rz', PE32_MAIN_COMMIT], cwd=str(root))
+    selected = {}
+    for entry in output.split(b'\0'):
+        if not entry:
+            continue
+        metadata, name = entry.split(b'\t', 1)
+        mode, kind, oid = metadata.decode('ascii').split()
+        selected[os.fsdecode(name)] = (mode, kind, oid)
+    require({name for name, value in selected.items() if value[1] == 'commit'} == {SUB},
+            'PE32 main gitlink set differs from the approved single E203 child')
+    worktree = {}
+    for name, (mode, kind, oid) in selected.items():
+        path = root / name
+        # A symlinked directory can otherwise redirect regular tracked files
+        # outside the frozen tree without changing the leaf's bytes or mode.
+        require(all(not (root / Path(*Path(name).parts[:index])).is_symlink()
+                    for index in range(1, len(Path(name).parts))),
+                'PE32 main source parent is a symlink: ' + name)
+        if kind == 'commit':
+            require(mode == '160000' and name == SUB and oid == SOURCE_PROFILES['s3-pe32']['commit'],
+                    'PE32 main approved child gitlink differs: ' + name)
+            require(path.is_dir() and not path.is_symlink() and git(path, 'rev-parse', 'HEAD') == oid,
+                    'PE32 main actual child gitlink differs: ' + name)
+            worktree[name] = dict(mode=mode, commit=oid)
+            continue
+        require(kind == 'blob', 'unsupported PE32 main tree entry: ' + name)
+        if mode == '120000':
+            require(path.is_symlink(), 'PE32 main tree symlink changed: ' + name)
+            content = os.fsencode(os.readlink(str(path)))
+        else:
+            require(path.is_file() and not path.is_symlink(), 'PE32 main tree file missing/changed: ' + name)
+            require(mode in ['100644', '100755'] and bool(path.stat().st_mode & 0o111) == (mode == '100755'),
+                    'PE32 main tree file mode changed: ' + name)
+            content = path.read_bytes()
+        blob = hashlib.sha1(b'blob ' + str(len(content)).encode('ascii') + b'\0' + content).hexdigest()
+        require(blob == oid, 'PE32 main tree worktree bytes differ from approved pin: ' + name)
+        worktree[name] = dict(mode=mode, sha256=hashlib.sha256(content).hexdigest())
+    # These are the main-repository namespaces from which the candidate's
+    # source, firmware, TB, vectors and runner can be discovered. Include
+    # ignored files: .gitignore is not a source-freeze exemption. Build/report
+    # output directories and bytecode caches do not become source inputs.
+    untracked = []
+    for options in [[], ['--ignored']]:
+        output = subprocess.check_output(
+            ['git', '--no-replace-objects', 'ls-files', '--others', '-z', '--exclude-standard'] + options,
+            cwd=str(root))
+        untracked += [os.fsdecode(name) for name in output.split(b'\0') if name]
+    active_roots = {'src', 'tools', 'tests', 'model'}
+    source_suffixes = {'.scala', '.sbt', '.v', '.sv', '.vh', '.svh', '.py', '.c', '.h', '.sh', '.mk'}
+    extras = []
+    for name in sorted(set(untracked)):
+        relative = Path(name)
+        bytecode = '__pycache__' in relative.parts and relative.suffix in {'.pyc', '.pyo'}
+        if not bytecode and (relative.parts[0] in active_roots or
+                             len(relative.parts) == 1 and relative.suffix in source_suffixes):
+            extras.append(name)
+    require(not extras, 'PE32 main untracked active source files: ' + ', '.join(extras))
+    return dict(main_commit=PE32_MAIN_COMMIT, approved_main_tree=git(root, 'rev-parse', PE32_MAIN_COMMIT + '^{tree}'),
+                tracked_main_entries=len(selected), actual_main_tree_manifest_sha256=digest(worktree))
+
+
 def source_profile_identity(root, profile='baseline'):
     """Check approved commit, its complete delta, and actual child worktree bytes.
 
@@ -171,11 +245,14 @@ def source_profile_identity(root, profile='baseline'):
     rtl_names={name for name in selected if name.startswith('rtl/e203/')}
     actual_rtl={p.relative_to(child).as_posix() for p in (child/'rtl/e203').rglob('*') if p.is_file() or p.is_symlink()}
     require(actual_rtl==rtl_names, 'untracked/missing fixed-platform RTL files')
-    return dict(name=profile, baseline_e203_commit=FROZEN_E203, e203_commit=actual,
+    identity = dict(name=profile, baseline_e203_commit=FROZEN_E203, e203_commit=actual,
                 baseline_tree=git(child,'rev-parse',FROZEN_E203+'^{tree}'),
                 approved_tree=git(child,'rev-parse',actual+'^{tree}'),
                 changed_files=changed, fixed_tree_file_count=len(selected)-len(changed),
                 actual_child_tree_manifest_sha256=digest(worktree))
+    if profile == 's3-pe32':
+        identity['main_source_freeze'] = pe32_main_identity(root)
+    return identity
 
 
 def inventory(root):
