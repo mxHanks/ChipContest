@@ -215,7 +215,7 @@ def checked_window(log, task_id, layer, legacy):
 
 
 def checked_log(ctx, log, task_id):
-    failures = re.findall(r'^.*(?:FATAL|TEST_FAIL|%Error|Time Out|timeout).*$', log, re.I | re.M)
+    failures = re.findall(r'^.*(?:FATAL|TEST_FAIL|%Error|Time Out|timeout).*$(?:\n[^\n]*)?', log, re.I | re.M)
     require(not failures, 'candidate simulation reported failure: '+(failures[0] if failures else ''))
     lf = re.findall(r'^XU_LF_CLOCK_STATIC_PASS nominal_hz=32768 checked_edges=(\d+) max_phase_error_fs=1$', log, re.M)
     require(len(lf)==1 and int(lf[0])>0, 'candidate LF phase assertions missing')
