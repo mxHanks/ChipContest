@@ -55,11 +55,18 @@ def golden_file(path):
     path.write_text(''.join('%012x\n' % (v & ((1<<48)-1)) for v in values))
 
 
-def rtl_probe(ctx):
+def observer_declarations(ctx):
     window = collector.common_collector().CLEAR_WINDOW_DECLARATIONS.replace('      if (xu_payload_phase) xu_observe_upload();\n','')
     window = ctx.base.once(window,'      // Once per post-reset edge,','      xu_observe_candidate();\n      // Once per post-reset edge,')
-    declarations = (ROOT/'tools/ppa/xu_s2c_activity_observer.svh').read_text()+collector.clear_observer(ctx)+window
-    return (ROOT/'tests/ppa/tb_xu_s2c_task_observer.sv').read_text().replace('@DECLARATIONS@',declarations)
+    return (ROOT/'tools/ppa/xu_s2c_activity_observer.svh').read_text()+collector.clear_observer(ctx)+window
+
+
+def rtl_probe(ctx):
+    return (ROOT/'tests/ppa/tb_xu_s2c_task_observer.sv').read_text().replace('@DECLARATIONS@',observer_declarations(ctx))
+
+
+def reset_probe(ctx):
+    return (ROOT/'tests/ppa/tb_xu_s2c_reset_guard.sv').read_text().replace('@DECLARATIONS@',observer_declarations(ctx))
 
 
 def raw_saif(path, pairs, missing=None, extra=None):
@@ -120,6 +127,10 @@ class CandidateSyntaxTests(unittest.TestCase):
                         log.replace('XU_SOURCE_REQUEST task=7','XU_SOURCE_REQUEST task=8'),log+log):
             with self.assertRaises(ValueError): collector.checked_window(damaged,7,layer,legacy)
 
+    def test_actual_simulation_fatal_is_not_hidden_by_later_missing_lf_marker(self):
+        with self.assertRaisesRegex(ValueError,'unknown commit/FIFO ownership state'):
+            collector.checked_log(None,'Fatal: XU_CANDIDATE_REJECT unknown commit/FIFO ownership state\n',0)
+
 
 @unittest.skipUnless(SOURCE,'explicit XU_S2C_SOURCE_ROOT is required')
 class CandidateActivityTests(unittest.TestCase):
@@ -137,6 +148,7 @@ class CandidateActivityTests(unittest.TestCase):
         self.assertIn('xu_lf_target_ns=xu_lf_half_index*15258.7890625;',text)
         self.assertNotIn('xu_observe_upload()',text)
         self.assertIn('task_setup_writes=0 actual_commits=1 fifo_reset_empty=1',text)
+        self.assertIn('      xu_observe_candidate_reset_window();',text)
         save('generated-candidate-tb.sv',text)
 
     @unittest.skipUnless(shutil.which('riscv64-unknown-elf-gcc'),'actual RISC-V toolchain required')
@@ -274,6 +286,34 @@ class CandidateActivityTests(unittest.TestCase):
                     self.assertIn(rejected,result.stdout)
             save('actual-wrapper-generated-probe.sv',source.read_text())
             save('actual-wrapper-golden-sha256.json',json.dumps(context.identity(d/'golden.hex'))+'\n')
+            self.ctx.recheck()
+
+    @unittest.skipUnless(shutil.which('iverilog') and shutil.which('vvp'),'actual Icarus required')
+    def test_actual_platform_reset_chain_and_unclocked_fifo_startup(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2c-actual-reset-') as t:
+            d=Path(t);source=d/'reset.sv';source.write_text(reset_probe(self.ctx));binary=d/'reset.vvp'
+            perips=self.ctx.base.RTL/'perips'
+            actual_reset=['sirv_ResetCatchAndSync_2.v','sirv_AsyncResetRegVec_129.v','sirv_AsyncResetReg.v']
+            command=['iverilog','-g2012','-DXU_TASK_ACTIVITY_HOST_CHECK','-s','tb_xu_s2c_reset_guard','-o',str(binary),str(source)]
+            command += [str(perips/n) for n in PERIPS_SOURCES+actual_reset]
+            result=run(command,d,'actual-reset-chain-build.log')
+            self.assertEqual(result.returncode,0,result.stdout)
+            cases=[(0,None),(1,'request before actual reset ready'),(2,'request before actual reset ready'),
+                (3,'no actual accelerator clock sampled asserted reset'),(4,'reset reasserted'),
+                (5,'reset.*unknown'),(6,'FIFO logical ownership was not reset'),
+                (7,'unknown commit/FIFO ownership state'),(8,'unknown commit/FIFO ownership state')]
+            for mode,rejected in cases:
+                result=run(['vvp',str(binary),'+MODE='+str(mode)],d,'actual-reset-chain-mode-%d.log'%mode)
+                self.assertIn('XU_RESET_FIXTURE_UNCLOCKED_FIFO_X actual_rst_n=0 sampled_reset_edges=0',result.stdout)
+                if rejected is None:
+                    self.assertEqual(result.returncode,0,result.stdout)
+                    self.assertIn('XU_RESET_GUARD_PASS actual_20stage_chain=1 wrapper_sync_fifo=1 stopped_clock_startup_x=1',result.stdout)
+                    self.assertIn('XU_CANDIDATE_RESET_READY task=7',result.stdout)
+                else:
+                    self.assertNotEqual(result.returncode,0,result.stdout)
+                    self.assertRegex(result.stdout,rejected)
+            save('actual-reset-chain-generated-probe.sv',source.read_text())
+            save('actual-reset-chain-source-sha256.json',json.dumps([context.identity(perips/n) for n in actual_reset],indent=2)+'\n')
             self.ctx.recheck()
 
 

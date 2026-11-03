@@ -26,7 +26,7 @@ module tb_xu_s2c_task_observer;
 @DECLARATIONS@
   always @(posedge clk) if(rst_n) begin
     cycles=cycles+1;
-    xu_observe_clear_window();
+    xu_observe_candidate_reset_window();
   end
   // Faults corrupt actual core inputs; the observer must see sampling-edge data.
   initial begin

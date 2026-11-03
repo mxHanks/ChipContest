@@ -12,6 +12,50 @@
   integer xu_w_cursor_setups=0, xu_x_cursor_setups=0, xu_cache_mode_writes=0;
   reg xu_result_response_pending=0;
   reg [31:0] xu_result_response_word=0;
+  integer xu_accel_reset_clock_edges=0, xu_accel_startup_observer_edges=0;
+  reg xu_accel_reset_seen=0, xu_accel_observation_ready=0;
+  real xu_accel_reset_first_tick=-1.0, xu_accel_reset_last_tick=-1.0;
+
+  // The SoC accelerator uses bus_rst_n, released by its own synchronous
+  // reset chain; TB rst_n is not that pin. In particular the synchronous
+  // Chisel FIFO may remain X while its actual clock has not yet run in reset.
+  // Count actual reset-sampling edges without changing any reset or DUT pin.
+  always @(posedge `ACCEL.clk) begin
+    if (`ACCEL.rst_n===1'b0) begin
+      if (xu_accel_observation_ready || xu_saif_started)
+        $fatal(1,"XU_CANDIDATE_RESET_REJECT accelerator reset reasserted after observation ready");
+      if (!xu_accel_reset_seen) xu_accel_reset_first_tick=$realtime*1000000.0;
+      xu_accel_reset_seen=1;
+      xu_accel_reset_clock_edges=xu_accel_reset_clock_edges+1;
+      xu_accel_reset_last_tick=$realtime*1000000.0;
+    end else if (`ACCEL.rst_n!==1'b1 && xu_accel_reset_seen)
+      $fatal(1,"XU_CANDIDATE_RESET_REJECT accelerator reset unknown after known assertion");
+  end
+
+  task xu_observe_candidate_reset_window;
+    reg source_request;
+    begin
+      source_request=cmd_valid && cmd_read && cmd_addr>=BASE && cmd_addr<BASE+'h18800;
+      if (`ACCEL.rst_n===1'b1) begin
+        if (!xu_accel_reset_seen || xu_accel_reset_clock_edges<=0)
+          $fatal(1,"XU_CANDIDATE_RESET_REJECT no actual accelerator clock sampled asserted reset");
+        if (!xu_accel_observation_ready) begin
+          xu_accel_observation_ready=1;
+          // This still checks every original known-commit/FIFO/clear assertion.
+          xu_observe_clear_window();
+          $display("XU_CANDIDATE_RESET_READY task=%0d actual_reset_clock_edges=%0d startup_observer_edges=%0d first_reset_tick=%0.0f last_reset_tick=%0.0f first_ready_cycle=%0d first_ready_tick=%0.0f actual_rst_n=1 checked_empty_fifo=1",xu_global_task,xu_accel_reset_clock_edges,xu_accel_startup_observer_edges,xu_accel_reset_first_tick,xu_accel_reset_last_tick,cycles,$realtime*1000000.0);
+        end else xu_observe_clear_window();
+      end else begin
+        if (xu_accel_observation_ready || xu_saif_started)
+          $fatal(1,"XU_CANDIDATE_RESET_REJECT reset reasserted/unknown after observation ready");
+        if (`ACCEL.cmd_valid===1'b1 || source_request===1'b1)
+          $fatal(1,"XU_CANDIDATE_RESET_REJECT accelerator/source request before actual reset ready");
+        if (`ACCEL.rst_n!==1'b0 && xu_accel_reset_seen)
+          $fatal(1,"XU_CANDIDATE_RESET_REJECT reset unknown after known assertion");
+        xu_accel_startup_observer_edges=xu_accel_startup_observer_edges+1;
+      end
+    end
+  endtask
 
   task xu_observe_candidate;
     integer a, logical_index, lane, bit_index, b;

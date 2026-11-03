@@ -101,7 +101,7 @@ def generate_tb(ctx):
 `endif
     #1; // Finish vendor initialization before the first HF edge.''')
     text = ctx.base.once(text, '      // Match the existing inclusive first-input/final-Y-response interval.',
-                         '      xu_observe_clear_window();\n      // Match the existing inclusive first-input/final-Y-response interval.')
+                         '      xu_observe_candidate_reset_window();\n      // Match the existing inclusive first-input/final-Y-response interval.')
     # The retained candidate TB still owns its legacy accept-based diagnostics.
     text = ctx.base.once(text, '          $display("XU_ACTIVITY_BEGIN task=%0d tick=%0.0f",layer,$realtime*1000000.0);', '')
     text = ctx.base.once(text, '          $display("XU_ACTIVITY_END task=%0d tick=%0.0f",layer,$realtime*1000000.0);', '''          if (xu_request_cycle<0 || xu_accept_cycle<xu_request_cycle ||
@@ -215,6 +215,8 @@ def checked_window(log, task_id, layer, legacy):
 
 
 def checked_log(ctx, log, task_id):
+    failures = re.findall(r'^.*(?:FATAL|TEST_FAIL|%Error|Time Out|timeout).*$', log, re.I | re.M)
+    require(not failures, 'candidate simulation reported failure: '+(failures[0] if failures else ''))
     lf = re.findall(r'^XU_LF_CLOCK_STATIC_PASS nominal_hz=32768 checked_edges=(\d+) max_phase_error_fs=1$', log, re.M)
     require(len(lf)==1 and int(lf[0])>0, 'candidate LF phase assertions missing')
     layers = ctx.soc.check_log(log, 1)
@@ -226,6 +228,18 @@ def checked_log(ctx, log, task_id):
               'drained=1 cache_enable=0 idle=1 source_request=1 task_setup_writes=0 actual_commits=1 fifo_reset_empty=1')
     require(re.findall(r'^XU_TASK_CLEAR_OBSERVED.*$', log, re.M) == [marker], 'candidate actual clear evidence differs')
     window = checked_window(log, task_id, layers[0], legacy)
+    reset = re.findall(r'^XU_CANDIDATE_RESET_READY task=(\d+) actual_reset_clock_edges=(\d+) '
+        r'startup_observer_edges=(\d+) first_reset_tick=(\d+) last_reset_tick=(\d+) '
+        r'first_ready_cycle=(\d+) first_ready_tick=(\d+) actual_rst_n=1 checked_empty_fifo=1$', log, re.M)
+    require(len(reset)==1 and int(reset[0][0])==task_id, 'candidate actual accelerator reset readiness missing/duplicate')
+    values = list(map(int,reset[0]))
+    require(values[1]>0 and values[3]<=values[4]<values[6] and
+            values[5]<=window['pretask_clear']['begin']['cycle'] and values[6]<=window['pretask_clear']['begin']['tick'],
+            'candidate actual accelerator reset readiness ordering/count differs')
+    window['accelerator_reset_readiness'] = dict(actual_reset_clock_edges=values[1],startup_observer_edges=values[2],
+        first_reset_tick=values[3],last_reset_tick=values[4],first_ready_cycle=values[5],first_ready_tick=values[6],
+        actual_reset_pin='ACCEL.rst_n (SoC bus_rst_n, distinct from external TB rst_n)',checked_empty_fifo=True,
+        policy='actual ACCEL.clk must sample asserted reset; no accelerator/source request before internal reset release; no later reset/X')
     for kind, value in (('BEGIN', window['begin']['tick']), ('END', window['end']['tick'])):
         require(re.findall(r'^XU_ACTIVITY_' + kind + '.*$', log, re.M) ==
                 ['XU_ACTIVITY_%s task=%d tick=%d' % (kind, task_id, value)], 'candidate global activity boundary differs')
@@ -313,6 +327,7 @@ def main(argv=None):
                       activity_scope=SCOPE, monitoring_policy='rtl_on', simulator_defines=defines,
                       process_policy='one fresh process, TASKS=1 and one source-REQUEST/final-Y-response-RETIRE window per real task',
                       clear_policy='33697 CPU legacy actual-zero writes; all W/X/bias commits checked; no pre-source candidate setup writes',
+                      reset_policy='actual accelerator clock must sample reset before internal bus_rst_n release; startup excludes only reset interval with no accelerator/source request; first ready checks all known/FIFO assertions; later reset/X rejected',
                       sram_alias=mapping, sram_alias_mapping=identity(mapping_path))
         frozen = {}
         for item in config['rtl_sources'] + config['producer_sources'] + ctx.tool['frozen_common_tools'] + firmware_record['inputs'] + firmware_record['toolchain'] + fixture_sources:
