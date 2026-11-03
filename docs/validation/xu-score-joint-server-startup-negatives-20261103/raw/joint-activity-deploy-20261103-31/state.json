@@ -1,0 +1,48 @@
+{
+  "error": "",
+  "finished_epoch": 1793715359.1180935,
+  "runs": [
+    {
+      "command": [
+        "python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-joint-activity-tools-20261103-31/tools/ppa/xu_candidate_joint_task_activity.py",
+        "--tool-root",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-joint-activity-tools-20261103-31",
+        "--source-root",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02",
+        "--profile",
+        "s2c-autogroup",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31",
+        "--vendor-model",
+        "/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP1024X16/verilog/RAMSP1024X16.v",
+        "--netlist",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-ppa-campaign-20261103-01/ppa/mapped.v",
+        "--mapped-inventory",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-pt-macro-pin-inventory-20261103-20/inventory.json",
+        "--constraints",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-pt-compatible-05/constraints.sdc",
+        "--vcs",
+        "/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs",
+        "--vpi-include",
+        "/eda/synopsys/vcs/vcs_2020.03-SP2-6/include",
+        "--cc",
+        "gcc",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--task-ids",
+        "0",
+        "--prepare-only"
+      ],
+      "out": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31",
+      "receipt_sha256": "916b50191bef13956a9131d9ca72f2118615bbca86e21150d28a247761135841",
+      "result_status": "FAIL",
+      "returncode": 1,
+      "stage": "prepare",
+      "status": "RUNNING_NOT_QUALIFIED"
+    }
+  ],
+  "stage": "prepare",
+  "started_epoch": 1793715342.020712,
+  "status": "FAIL"
+}
