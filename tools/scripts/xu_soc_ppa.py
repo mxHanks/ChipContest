@@ -44,6 +44,14 @@ SOURCE_PROFILES = {
         'rtl/e203/perips/XuParallelWeightBank32.sv',
         'rtl/e203/perips/accel_icb_slave.v', 'rtl/e203/perips/xu_pe32_icb_slave.v',
         'rtl/e203/subsys/e203_subsys_perips.v', 'vsim/bin/run.makefile']),
+    's3-pe64': dict(commit='7aae96776e116d5e95d6ebb49d29a5fccce04ab9', changed_files=[
+        'rtl/e203/perips/LinearAutoGroupCore.sv',
+        'rtl/e203/perips/XuParallelAutoGroupCore32.sv', 'rtl/e203/perips/XuParallelAutoGroupCore64.sv',
+        'rtl/e203/perips/XuParallelBiasCache32.sv', 'rtl/e203/perips/XuParallelBiasCache64.sv',
+        'rtl/e203/perips/XuParallelComputeCore32.sv', 'rtl/e203/perips/XuParallelComputeCore64.sv',
+        'rtl/e203/perips/XuParallelWeightBank32.sv', 'rtl/e203/perips/XuParallelWeightBank64.sv',
+        'rtl/e203/perips/accel_icb_slave.v', 'rtl/e203/perips/xu_pe32_icb_slave.v',
+        'rtl/e203/perips/xu_pe64_icb_slave.v', 'rtl/e203/subsys/e203_subsys_perips.v', 'vsim/bin/run.makefile']),
 }
 BIAS_MEMORY = RTL+'/perips/mem_32x40.sv'
 BIAS_ADAPTER_SHA256 = '019f86f6acc3bdf0e3d2678de1b90540deac1ec50850c010d0263e3d2231c2fd'
@@ -81,17 +89,34 @@ PE32_WEIGHT_GROUP = dict(name='accelerator_weights', logical_bits=32768*8,
                          physical_bits=65536*8, padding_bits=32768*8)
 
 
+PE64_MAIN_COMMIT = '3443fad8945577626d226b1cd53eadec89331a20'
+PE64_DEFINES = ['SYNTHESIS', 'DISABLE_SV_ASSERTION=1', 'XU_ACCEL_PE64=1']
+PE64_CONFIGURATION = dict(accel_variant='pe64', physical_pes=64, wrapper_reference='xu_pe64_icb_slave',
+                          logical_weight_bytes=32768, logical_weight_banks=64,
+                          logical_weight_depth=256, weight_word_bits=16,
+                          weight_macros=64, physical_weight_depth=1024,
+                          physical_weight_bytes=131072, weight_padding_bytes=98304,
+                          fixed_soc_macros=320, full_soc_macros=384)
+PE64_WEIGHT_GROUP = dict(name='accelerator_weights', logical_bits=32768*8,
+                         instance_pattern=MAIN+'/u_e203_subsys_perips/u_accel_icb_slave/u_linear_compute_core/core/banks_*',
+                         macro_ref='RAMSP1024X16', depth=1024, width=16, count=64,
+                         logical_banks=64, logical_depth=256, logical_width=16,
+                         physical_bits=131072*8, padding_bits=98304*8)
+
+
 def retained_instances(profile):
     retained = dict(RETAINED)
     if profile == 's3-pe32':
         retained['accelerator'] = (RETAINED['accelerator'][0], 'xu_pe32_icb_slave*')
+    if profile == 's3-pe64':
+        retained['accelerator'] = (RETAINED['accelerator'][0], 'xu_pe64_icb_slave*')
     return retained
 
 
 def mapping_identity(impl):
     identity = dict(replacements=impl['replacements'], added_sources=impl['added_sources'])
-    if impl.get('source_profile') == 's3-pe32':
-        identity.update(source_profile='s3-pe32', defines=impl['defines'],
+    if impl.get('source_profile') in ('s3-pe32', 's3-pe64'):
+        identity.update(source_profile=impl['source_profile'], defines=impl['defines'],
                         accelerator_configuration=impl['accelerator_configuration'],
                         source_freeze=impl.get('source_freeze', {}))
     return identity
@@ -129,8 +154,8 @@ def git(root, *args):
     return subprocess.check_output(['git','--no-replace-objects']+list(args), cwd=str(root)).decode().strip()
 
 
-def pe32_main_identity(root):
-    """Bind the PE32 main worktree to its approved Git objects, not the index.
+def parallel_main_identity(root, profile, approved_main, label):
+    """Bind an approved parallel candidate main worktree to its approved Git objects, not the index.
 
     The original profile checked the main HEAD only. Git index flags can hide
     changed TB/runner/firmware bytes from status, while a replacement object can
@@ -138,11 +163,11 @@ def pe32_main_identity(root):
     and check every actual tracked blob, mode, symlink and gitlink instead.
     """
     root = Path(root)
-    require(not root.is_symlink(), 'PE32 main source root is a symlink')
-    require(git(root, 'rev-parse', 'HEAD') == PE32_MAIN_COMMIT,
-            'PE32 main commit differs from the approved pin')
+    require(not root.is_symlink(), label+' main source root is a symlink')
+    require(git(root, 'rev-parse', 'HEAD') == approved_main,
+            label+' main commit differs from the approved pin')
     output = subprocess.check_output(
-        ['git', '--no-replace-objects', 'ls-tree', '-rz', PE32_MAIN_COMMIT], cwd=str(root))
+        ['git', '--no-replace-objects', 'ls-tree', '-rz', approved_main], cwd=str(root))
     selected = {}
     for entry in output.split(b'\0'):
         if not entry:
@@ -151,7 +176,7 @@ def pe32_main_identity(root):
         mode, kind, oid = metadata.decode('ascii').split()
         selected[os.fsdecode(name)] = (mode, kind, oid)
     require({name for name, value in selected.items() if value[1] == 'commit'} == {SUB},
-            'PE32 main gitlink set differs from the approved single E203 child')
+            label+' main gitlink set differs from the approved single E203 child')
     worktree = {}
     for name, (mode, kind, oid) in selected.items():
         path = root / name
@@ -159,25 +184,25 @@ def pe32_main_identity(root):
         # outside the frozen tree without changing the leaf's bytes or mode.
         require(all(not (root / Path(*Path(name).parts[:index])).is_symlink()
                     for index in range(1, len(Path(name).parts))),
-                'PE32 main source parent is a symlink: ' + name)
+                label+' main source parent is a symlink: ' + name)
         if kind == 'commit':
-            require(mode == '160000' and name == SUB and oid == SOURCE_PROFILES['s3-pe32']['commit'],
-                    'PE32 main approved child gitlink differs: ' + name)
+            require(mode == '160000' and name == SUB and oid == SOURCE_PROFILES[profile]['commit'],
+                    label+' main approved child gitlink differs: ' + name)
             require(path.is_dir() and not path.is_symlink() and git(path, 'rev-parse', 'HEAD') == oid,
-                    'PE32 main actual child gitlink differs: ' + name)
+                    label+' main actual child gitlink differs: ' + name)
             worktree[name] = dict(mode=mode, commit=oid)
             continue
-        require(kind == 'blob', 'unsupported PE32 main tree entry: ' + name)
+        require(kind == 'blob', 'unsupported '+label+' main tree entry: ' + name)
         if mode == '120000':
-            require(path.is_symlink(), 'PE32 main tree symlink changed: ' + name)
+            require(path.is_symlink(), label+' main tree symlink changed: ' + name)
             content = os.fsencode(os.readlink(str(path)))
         else:
-            require(path.is_file() and not path.is_symlink(), 'PE32 main tree file missing/changed: ' + name)
+            require(path.is_file() and not path.is_symlink(), label+' main tree file missing/changed: ' + name)
             require(mode in ['100644', '100755'] and bool(path.stat().st_mode & 0o111) == (mode == '100755'),
-                    'PE32 main tree file mode changed: ' + name)
+                    label+' main tree file mode changed: ' + name)
             content = path.read_bytes()
         blob = hashlib.sha1(b'blob ' + str(len(content)).encode('ascii') + b'\0' + content).hexdigest()
-        require(blob == oid, 'PE32 main tree worktree bytes differ from approved pin: ' + name)
+        require(blob == oid, label+' main tree worktree bytes differ from approved pin: ' + name)
         worktree[name] = dict(mode=mode, sha256=hashlib.sha256(content).hexdigest())
     # These are the main-repository namespaces from which the candidate's
     # source, firmware, TB, vectors and runner can be discovered. Include
@@ -198,10 +223,17 @@ def pe32_main_identity(root):
         if not bytecode and (relative.parts[0] in active_roots or
                              len(relative.parts) == 1 and relative.suffix in source_suffixes):
             extras.append(name)
-    require(not extras, 'PE32 main untracked active source files: ' + ', '.join(extras))
-    return dict(main_commit=PE32_MAIN_COMMIT, approved_main_tree=git(root, 'rev-parse', PE32_MAIN_COMMIT + '^{tree}'),
+    require(not extras, label+' main untracked active source files: ' + ', '.join(extras))
+    return dict(main_commit=approved_main, approved_main_tree=git(root, 'rev-parse', approved_main + '^{tree}'),
                 tracked_main_entries=len(selected), actual_main_tree_manifest_sha256=digest(worktree))
 
+
+def pe32_main_identity(root):
+    return parallel_main_identity(root, 's3-pe32', PE32_MAIN_COMMIT, 'PE32')
+
+
+def pe64_main_identity(root):
+    return parallel_main_identity(root, 's3-pe64', PE64_MAIN_COMMIT, 'PE64')
 
 def source_profile_identity(root, profile='baseline'):
     """Check approved commit, its complete delta, and actual child worktree bytes.
@@ -252,6 +284,8 @@ def source_profile_identity(root, profile='baseline'):
                 actual_child_tree_manifest_sha256=digest(worktree))
     if profile == 's3-pe32':
         identity['main_source_freeze'] = pe32_main_identity(root)
+    elif profile == 's3-pe64':
+        identity['main_source_freeze'] = pe64_main_identity(root)
     return identity
 
 
@@ -286,11 +320,17 @@ def inventory(root):
                                         physical_1024x16_macros=16)
     child_commit = git(root/SUB, 'rev-parse', 'HEAD')
     pe32 = child_commit == SOURCE_PROFILES['s3-pe32']['commit']
+    pe64 = child_commit == SOURCE_PROFILES['s3-pe64']['commit']
     if pe32:
         sizes['accelerator_weights'].update(
             implementation='32 banks, one mem_1024x16 each; upper512 rows per macro unreachable',
             physical_1024x16_macros=32, logical_banks=32, logical_depth=512,
             physical_depth=1024, physical_bits=65536*8, padding_bits=32768*8)
+    if pe64:
+        sizes['accelerator_weights'].update(
+            implementation='64 banks, one mem_1024x16 each; upper768 rows per macro unreachable',
+            physical_1024x16_macros=64, logical_banks=64, logical_depth=256,
+            physical_depth=1024, physical_bits=131072*8, padding_bits=98304*8)
     arrays = []
     for path in paths:
         text = comments(path.read_text())
@@ -327,6 +367,12 @@ def inventory(root):
                       total_physical_sram_bits=352*1024*16,
                       hypothetical_1024x16_macro_counts=dict(itcm=32, dtcm=32, shared=256, accelerator_weights=32),
                       hypothetical_1024x16_macro_total=352)
+    if pe64:
+        result.update(source_profile='s3-pe64', accelerator_configuration=dict(PE64_CONFIGURATION),
+                      required_compile_defines=list(PE64_DEFINES),
+                      total_physical_sram_bits=384*1024*16,
+                      hypothetical_1024x16_macro_counts=dict(itcm=32, dtcm=32, shared=256, accelerator_weights=64),
+                      hypothetical_1024x16_macro_total=384)
     return result
 
 
@@ -359,6 +405,10 @@ def template(inv, profile='baseline'):
         result.update(accel_variant='pe32', accelerator_configuration=dict(PE32_CONFIGURATION),
                       defines=list(PE32_DEFINES))
         result['memory_groups'][-1] = dict(PE32_WEIGHT_GROUP)
+    if profile == 's3-pe64':
+        result.update(accel_variant='pe64', accelerator_configuration=dict(PE64_CONFIGURATION),
+                      defines=list(PE64_DEFINES))
+        result['memory_groups'][-1] = dict(PE64_WEIGHT_GROUP)
     return result
 
 
@@ -446,9 +496,25 @@ def checked_implementation(impl, inv, allow_unqualified=False):
         require(freeze and freeze.get('defines_sha256') == digest(defines) and
                 freeze.get('accelerator_configuration_sha256') == digest(PE32_CONFIGURATION),
                 's3-pe32 source freeze must bind exact defines and accelerator configuration')
+    elif profile == 's3-pe64':
+        require(inv.get('main_commit') == PE64_MAIN_COMMIT,
+                's3-pe64 requires the exact approved candidate main commit')
+        require(defines == PE64_DEFINES, 's3-pe64 requires the exact frozen PE64 compile defines')
+        require(impl.get('accel_variant') == 'pe64' and
+                encoded(impl.get('accelerator_configuration')) == encoded(PE64_CONFIGURATION),
+                's3-pe64 accelerator variant/geometry/padding differs')
+        require(inv.get('source_profile') == 's3-pe64' and
+                encoded(inv.get('accelerator_configuration')) == encoded(PE64_CONFIGURATION),
+                's3-pe64 source inventory must describe the same physical variant')
+        require(freeze and freeze.get('defines_sha256') == digest(defines) and
+                freeze.get('accelerator_configuration_sha256') == digest(PE64_CONFIGURATION),
+                's3-pe64 source freeze must bind exact defines and accelerator configuration')
     else:
         require(not any(x.split('=')[0] == 'XU_ACCEL_PE32' for x in defines),
                 'PE32 compile define is allowed only for s3-pe32 profile')
+    if profile != 's3-pe64':
+        require(not any(x.split('=')[0] == 'XU_ACCEL_PE64' for x in defines),
+                'PE64 compile define is allowed only for s3-pe64 profile')
     groups=impl.get('memory_groups',[])
     expected_names=set(REQUIRED_BITS)|({'accelerator_bias'} if profile=='sram-bias' else set())
     require({g.get('name') for g in groups}==expected_names and len(groups)==len(expected_names),
@@ -459,6 +525,9 @@ def checked_implementation(impl, inv, allow_unqualified=False):
             continue
         if g['name']=='accelerator_weights' and profile=='s3-pe32':
             require(encoded(g)==encoded(PE32_WEIGHT_GROUP), 'frozen PE32 weight macro geometry/scope/padding differs')
+            continue
+        if g['name']=='accelerator_weights' and profile=='s3-pe64':
+            require(encoded(g)==encoded(PE64_WEIGHT_GROUP), 'frozen PE64 weight macro geometry/scope/padding differs')
             continue
         require(g.get('logical_bits')==REQUIRED_BITS[g['name']], 'logical memory capacity differs: '+g['name'])
         for k in ['count','width','depth']:
@@ -686,6 +755,8 @@ def activity_power(out, record, env):
     prepared=json.loads((out/'prepared.json').read_text());impl=prepared['implementation']
     require(impl.get('source_profile') != 's3-pe32',
             'PE32 energy requires candidate-specific clear/request-window activity; legacy VCD power is not supported')
+    require(impl.get('source_profile') != 's3-pe64',
+            'PE64 energy requires candidate-specific clear/request-window activity; legacy VCD power is not supported')
     execution=json.loads((out/'execution.json').read_text())
     require(execution.get('status')=='EXECUTED_NOT_QUALIFIED','DC/PT execution must complete before power')
     vcd=absolute_file(record.get('vcd'),'VCD')
@@ -767,7 +838,7 @@ def activity_power(out, record, env):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('action',choices=['inventory','review-template','prepare','run','power'])
+    p.add_argument('action',choices=['inventory','review-template','prepare','verify','run','power'])
     p.add_argument('--root',type=Path,default=ROOT)
     p.add_argument('--out',required=True,type=Path)
     p.add_argument('--implementation',type=Path)
@@ -788,6 +859,8 @@ def main():
     require((out/'prepared.json').is_file(),'prepare first')
     manifest=json.loads((out/'prepared.json').read_text())
     verify_prepared(root,out,manifest)
+    if a.action=='verify':
+        print('VERIFIED_PREPARED_NOT_QUALIFIED '+str(out));return 0
     env=dict(os.environ,SYNOPSYS_LC_ROOT=str(a.lc_root));env['PATH']=str(a.lc_root/'bin')+os.pathsep+env.get('PATH','')
     if a.action=='run':
         run=dict(schema='xu-full-soc-ppa-execution-v1',status='RUNNING_NOT_QUALIFIED',started_utc=datetime.now(timezone.utc).isoformat())

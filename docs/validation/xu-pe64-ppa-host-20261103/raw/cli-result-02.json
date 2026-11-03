@@ -1,0 +1,56 @@
+{
+  "status": "PASS_HOST_ONLY_NOT_QUALIFIED",
+  "commands": [
+    {
+      "name": "generate-02",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/xu_soc_implementation.py",
+        "--root",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe64",
+        "--profile",
+        "s3-pe64",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/implementation-02",
+        "--standard-cell-db",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/standard.db",
+        "--standard-cell-sha256",
+        "bfd1bad1b9b668ad06710baaaae33aa7645ca20ebe92e1c3de336fa2cba505d0",
+        "--sram-db",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/sram.db",
+        "--sram-sha256",
+        "e42a6744b17dfcb107197faab50afef5dec3f6c97847a2eb4e83a069d29eece2"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "prepare-02",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/scripts/xu_soc_ppa.py",
+        "prepare",
+        "--root",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe64",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/prepared-02",
+        "--implementation",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/implementation-02/implementation.json",
+        "--allow-unqualified-mapping"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "verify-02",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/scripts/xu_soc_ppa.py",
+        "verify",
+        "--root",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe64",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/prepared-02"
+      ],
+      "returncode": 0
+    }
+  ]
+}

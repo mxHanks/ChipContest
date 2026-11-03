@@ -120,9 +120,10 @@ class XuPpaProfileConfigurationTest(unittest.TestCase):
     def fixture(self, directory, profile='sram-bias'):
         inv=dict(root=str(ROOT),main_commit='HOST',e203_commit='HOST',platform_source_manifest_sha256='HOST')
         impl=PPA.template(inv,profile)
-        if profile=='s3-pe32':
-            inv.update(main_commit=PPA.PE32_MAIN_COMMIT, source_profile=profile,
-                       accelerator_configuration=dict(PPA.PE32_CONFIGURATION))
+        if profile in ('s3-pe32','s3-pe64'):
+            prefix = 'PE32' if profile=='s3-pe32' else 'PE64'
+            inv.update(main_commit=getattr(PPA,prefix+'_MAIN_COMMIT'), source_profile=profile,
+                       accelerator_configuration=dict(getattr(PPA,prefix+'_CONFIGURATION')))
         impl['replacements']={
             PPA.RTL+'/general/sirv_sim_ram.v':self.identity(ROOT/'tools/ppa/xu_sirv_sram_adapter.sv'),
             PPA.RTL+'/perips/mem_1024x16.sv':self.identity(ROOT/'tools/ppa/xu_weight_sram_adapter.sv')}
@@ -138,7 +139,7 @@ class XuPpaProfileConfigurationTest(unittest.TestCase):
         for name in ['primary_clocks','generated_clock_policy','reset_exceptions','clock_domain_crossings','untested_check_policy']:
             review[name]='HOST FIXTURE ONLY'
         path=directory/'clock-review.json';path.write_text(json.dumps(review));impl['clock_review']=self.identity(path)
-        if profile=='s3-pe32':
+        if profile in ('s3-pe32','s3-pe64'):
             impl['source_freeze']=dict(profile={},main_commit=inv['main_commit'],e203_commit='HOST',
                 memory_groups_sha256=PPA.digest(impl['memory_groups']),libraries_sha256=PPA.digest(impl['libraries']),
                 defines_sha256=PPA.digest(impl['defines']),

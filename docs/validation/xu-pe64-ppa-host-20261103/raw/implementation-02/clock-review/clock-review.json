@@ -1,0 +1,249 @@
+{
+  "clock_domain_crossings": {
+    "clock_groups": [],
+    "false_paths": [],
+    "policy": "report all HF/LF/JTAG crossings and review synchronizer inputs, handshakes and resets individually"
+  },
+  "constraints_sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+  "created_utc": "2026-11-03T10:35:16.264614+00:00",
+  "generated_clock_policy": {
+    "default": "150MHz conservative pulse envelope; no register cases",
+    "divider": "by1 or period=2*(div+1)*Tsource, high=Tsource/2; edges=1,2,4*(div+1)+1",
+    "gates": "latch+AND clock propagation and clock-gating checks remain enabled",
+    "modes": [
+      "envelope",
+      "reset_bypass",
+      "divider"
+    ],
+    "pll": "actual RTL assign-through; no analog PLL claim"
+  },
+  "io_contract": {
+    "clock_uncertainty_ns": 0.1,
+    "jtag_max_delay_ns": 5,
+    "max_delay_ns": 0.5,
+    "min_delay_ns": 0,
+    "note": "Not official board/pad/SRAM timing qualification; no async reset-release guarantee",
+    "output_load_in_library_units": 0.01,
+    "status": "PROVISIONAL_ENGINEERING_ASSUMPTION",
+    "transition_ns": 0.1
+  },
+  "lf_clock_scope": {
+    "development_tb_period_ns": 66,
+    "note": "AON boot/deglitch/reset delay changes; actual twelve-task window comparison is required, not inferred from this unit test",
+    "ratio": 462.3875473484849,
+    "target_period_ns": 30517.578125
+  },
+  "pending": [
+    "real DC/PT execution and mapped selector/clock coverage audit",
+    "setup, hold, recovery, removal, gating and minimum pulse-width closure",
+    "all untested paths and HF/LF/JTAG CDC/reset review",
+    "32.768kHz actual full-SoC startup and measured task-window replay",
+    "official external I/O timing and same-corner SRAM PVT/EMA timing eligibility"
+  ],
+  "primary_clocks": [
+    {
+      "name": "xu_hfextclk",
+      "period_ns": 6.666666667,
+      "purpose": "150MHz digital target"
+    },
+    {
+      "name": "xu_lfextclk",
+      "period_ns": 30517.578125,
+      "purpose": "32.768kHz platform LF reference"
+    },
+    {
+      "name": "xu_jtag_tck",
+      "period_ns": 100,
+      "purpose": "10MHz engineering assumption"
+    }
+  ],
+  "reset_exceptions": {
+    "case_on_reset": [],
+    "false_paths": [],
+    "recovery_removal": "retained; async external release/CDC must be reviewed; no blanket waiver"
+  },
+  "review_scope": "source-derived digital constraints and local lightweight checks only",
+  "schema": "xu-full-soc-clock-review-v1",
+  "source_files": {
+    "tests/e203/firmware/accel.c": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/firmware/accel.c",
+      "sha256": "60f5cfcf1a964bd6dc6198df77996b8cdbb2963e7a00c41becf4543f091bece0"
+    },
+    "tests/e203/firmware/accel.h": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/firmware/accel.h",
+      "sha256": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e"
+    },
+    "tests/e203/firmware/main.c": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/firmware/main.c",
+      "sha256": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc"
+    },
+    "tests/e203/firmware/start.S": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/firmware/start.S",
+      "sha256": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+    },
+    "tests/e203/tb_accel_soc.sv": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/tb_accel_soc.sv",
+      "sha256": "b8c85d114f033ad5932a6c24fd30501f64c35c13df64ced44c993efa55fce348"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/core/config.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/core/config.v",
+      "sha256": "235fc827eb88290dab3e4d6ecaf9cd22aa897ac8f5da9abf562a308ded191d9c"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/core/e203_clk_ctrl.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/core/e203_clk_ctrl.v",
+      "sha256": "85432dcfbf7cc0fa977f7880ffd2856d5bf3389494cddafbf360bba359750d51"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/core/e203_clkgate.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/core/e203_clkgate.v",
+      "sha256": "246adffd3af4cc8ffbd1a87f7aafbece1221c538a9f8c66137e388068991c742"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/core/e203_cpu_top.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/core/e203_cpu_top.v",
+      "sha256": "0970379eabe2253a5d1af51a6c3cab5d44183108ad974b56ed2841bccbbabb5a"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/core/e203_defines.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/core/e203_defines.v",
+      "sha256": "50348b28a961b87eff4040cecc44b35e163acc28042eb6fa53bd1c2e69682109"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/core/e203_reset_ctrl.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/core/e203_reset_ctrl.v",
+      "sha256": "9486347d26c4f8ff5bf5769d5a01c402edc6ef3c52be11e94f5e8f70b2c75282"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/debug/sirv_debug_module.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/debug/sirv_debug_module.v",
+      "sha256": "cb1a2aa61cbc22c1e718844fa6cff4df95dafd2d056a64b3a574db01118258e9"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/debug/sirv_jtag_dtm.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/debug/sirv_jtag_dtm.v",
+      "sha256": "e458dabf62b8f70bf02d3fba96ca8be58b5e294db47b3423136af315e794bd03"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_dffs.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_dffs.v",
+      "sha256": "cd903d78882040cc17b6fb8bec3862f8d440726d7027ba9c61310d18801f8d83"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_DeglitchShiftRegister.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/sirv_DeglitchShiftRegister.v",
+      "sha256": "332ad5b31f2e002d14f4a278e1057aede1ba05d0ff16d494cb2b49b981ea53be"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync.v",
+      "sha256": "b6d9378451815c6ba48c86ad32d6ee5d67b337ea01e0dd61fb956800c8516e4c"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync_2.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync_2.v",
+      "sha256": "1276066c3cb7b5b758c151682c049e6fe4629ef807d69331ca841003f9d669d7"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_aon.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/sirv_aon.v",
+      "sha256": "265f166b9246d475cb4cf5d847eee5b2c209ad6ada7710059e3858c61b03e163"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_aon_porrst.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/sirv_aon_porrst.v",
+      "sha256": "1bc839e9b50a8169a65e5819c62bcf88b75755f0b60c46b30307fb190eaa285d"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_aon_top.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/sirv_aon_top.v",
+      "sha256": "1fe9f4ee5d8832de744b7253e756d11d2f961e358955634e2e44db6c00e9ac91"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_aon_wrapper.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/sirv_aon_wrapper.v",
+      "sha256": "da4ba087072df5e1e1c290e9dca8f9f01726666d9e7f7ed7d6613d6218c99e3d"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_hclkgen_regs.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/sirv_hclkgen_regs.v",
+      "sha256": "4da8c7eab7218ca7c401e76b3fab5f4ff69c5d74527fa57fc92d61b0b32c0f94"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/soc/e203_soc_top.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/soc/e203_soc_top.v",
+      "sha256": "1502c8f1fc39f01f9dff32302a11d34d49d3ff8701305a1ba3f3bdba13018aff"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_gfcm.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_gfcm.v",
+      "sha256": "4ab432eabba1f038cdb52c6b42f2d62f5e17e0f17e4f7f3d8fb60c85f209c865"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_hclkgen.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_hclkgen.v",
+      "sha256": "d9ec8c4324562a463f1b03453f627cab034cc2dd3a47d8ba6e1b0668d14ac0d5"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_hclkgen_rstsync.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_hclkgen_rstsync.v",
+      "sha256": "a016aa4e050a7ba4672649186e95a2ac6d203202c5406767edff2c572b96e7e3"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v",
+      "sha256": "4258161cac87bc56ef19f22ee8c82dbcae9d3effb2f0159282d3f8acd85c015c"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_perips.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_perips.v",
+      "sha256": "56be556082fd18570810f1efc7839a3f711bb80288e6929fb139a6d399a51508"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_pll.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_pll.v",
+      "sha256": "b838d57c4d125f04b73ace93c0c8a02bc77460cd8a428f179404ae9d7266ca13"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_pllclkdiv.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_pllclkdiv.v",
+      "sha256": "652153dcf7c940083dbf3f4094473d35207ba3c20f3cf2bf7a16277b750c000a"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_top.v": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_top.v",
+      "sha256": "dcf1a6d8161f724926ef5fb58c52b67c9911444abbd08901b5fb9bd158b0339f"
+    },
+    "tools/ppa/tb_xu_full_soc_clocks.sv": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/tb_xu_full_soc_clocks.sv",
+      "sha256": "d28d62c1bf26b0fc3b70def765b51623ce673ec83c33e50a54f88fb1598fe898"
+    },
+    "tools/ppa/xu_full_soc.sdc": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/xu_full_soc.sdc",
+      "sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98"
+    },
+    "tools/ppa/xu_full_soc_clock_review.tcl": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/xu_full_soc_clock_review.tcl",
+      "sha256": "10e118b2c131b46a9f26cd27b00f30018737bd73da552c7ae13379d8ccd5d0ee"
+    },
+    "tools/ppa/xu_review_full_soc_clocks.py": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/xu_review_full_soc_clocks.py",
+      "sha256": "8d5d78be3bee507d9b037916a6a2b1c8604477cef91ae6fab2afdba583f1d098"
+    },
+    "tools/ppa/xu_shared_icb_sram.sv": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/xu_shared_icb_sram.sv",
+      "sha256": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d"
+    },
+    "tools/ppa/xu_soc_ppa_top.sv": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/xu_soc_ppa_top.sv",
+      "sha256": "8d0e5fd38f2425e7ea8041dd5b8c3a8fd4ce7fa171afb1bf0ebeb6f53446f28a"
+    }
+  },
+  "source_roots": {
+    "platform": "/home/mxhanks/Projects/ChipContest-xu-s3-pe64",
+    "tools": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa"
+  },
+  "sta_status": "NOT_RUN_NO_DC_PT_RESULT",
+  "status": "REVIEWED",
+  "tests": {
+    "rtl_clock": {
+      "status": "NOT_RUN"
+    },
+    "sdc_mock": {
+      "command": [
+        "tclsh",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/implementation-02/clock-review/sdc-mock.tcl"
+      ],
+      "log": {
+        "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/implementation-02/clock-review/sdc-mock.log",
+        "sha256": "76c22c0c8c2520cf263bd8a5898d843cb8a87b91607d97d8d8274a5af095009d"
+      },
+      "returncode": 0,
+      "scope": "Tcl syntax and control flow with mock collections; no DC/PT selector, timing, or library validation",
+      "status": "PASS"
+    }
+  },
+  "tools": {
+    "dc_shell": null,
+    "iverilog": "/usr/bin/iverilog",
+    "pt_shell": null,
+    "tclsh": "/usr/bin/tclsh",
+    "vvp": "/usr/bin/vvp"
+  },
+  "untested_check_policy": "retain check_timing + PT analysis coverage, endpoint clocks, SRAM CLK clocks, recovery/removal/gating/pulse-width and all command failures; every untested check requires explicit classification"
+}

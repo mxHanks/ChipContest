@@ -15,6 +15,9 @@ SPEC.loader.exec_module(PPA)
 
 
 class XuPe32MainSourceGuardTest(unittest.TestCase):
+    PROFILE = 's3-pe32'
+    MAIN_PIN_ATTRIBUTE = 'PE32_MAIN_COMMIT'
+
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
@@ -46,9 +49,9 @@ class XuPe32MainSourceGuardTest(unittest.TestCase):
         self.git(self.root, 'add', '.')
         self.git(self.root, 'commit', '-qm', 'frozen main fixture')
         self.main_commit = self.git(self.root, 'rev-parse', 'HEAD')
-        profiles = {'s3-pe32': dict(commit=self.child_commit, changed_files=[])}
+        profiles = {self.PROFILE: dict(commit=self.child_commit, changed_files=[])}
         for patch in [mock.patch.object(PPA, 'FROZEN_E203', self.child_commit),
-                      mock.patch.object(PPA, 'PE32_MAIN_COMMIT', self.main_commit),
+                      mock.patch.object(PPA, self.MAIN_PIN_ATTRIBUTE, self.main_commit),
                       mock.patch.object(PPA, 'SOURCE_PROFILES', profiles)]:
             patch.start()
             self.addCleanup(patch.stop)
@@ -63,7 +66,7 @@ class XuPe32MainSourceGuardTest(unittest.TestCase):
         self.git(path, 'config', 'commit.gpgsign', 'false')
 
     def check(self):
-        return PPA.source_profile_identity(self.root, 's3-pe32')
+        return PPA.source_profile_identity(self.root, self.PROFILE)
 
     def test_clean_complete_main_and_child_trees_have_hash_bound_identities(self):
         identity = self.check()
@@ -140,7 +143,7 @@ class XuPe32MainSourceGuardTest(unittest.TestCase):
         wrong_oid = 'f'*40
         self.git(self.root, 'update-index', '--cacheinfo', '160000,'+wrong_oid+','+PPA.SUB)
         self.git(self.root, 'commit', '-qm', 'wrong gitlink object fixture')
-        with mock.patch.object(PPA, 'PE32_MAIN_COMMIT', self.git(self.root, 'rev-parse', 'HEAD')):
+        with mock.patch.object(PPA, self.MAIN_PIN_ATTRIBUTE, self.git(self.root, 'rev-parse', 'HEAD')):
             with self.assertRaisesRegex(ValueError, 'approved child gitlink differs'):
                 self.check()
 
@@ -178,7 +181,7 @@ class XuPe32MainSourceGuardTest(unittest.TestCase):
     def test_extra_gitlink_is_rejected_even_if_main_commit_is_locally_re_pinned(self):
         self.git(self.root, 'update-index', '--add', '--cacheinfo', '160000,'+self.child_commit+',extra-child')
         self.git(self.root, 'commit', '-qm', 'extra gitlink fixture')
-        with mock.patch.object(PPA, 'PE32_MAIN_COMMIT', self.git(self.root, 'rev-parse', 'HEAD')):
+        with mock.patch.object(PPA, self.MAIN_PIN_ATTRIBUTE, self.git(self.root, 'rev-parse', 'HEAD')):
             with self.assertRaisesRegex(ValueError, 'main gitlink set differs'):
                 self.check()
 
