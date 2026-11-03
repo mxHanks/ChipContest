@@ -1,0 +1,129 @@
+{
+  "actual_header_sha256": "bb041cdc68c3d204b7cd2f2fb180e6c169121d523a5beed6bc966b890c5d0990",
+  "limitations": [
+    "Actual VCS microbench, not vendor cell model or full SoC task.",
+    "Independent probe agreement validates these observed callbacks; no cross-simulator equivalence or native SAIF event mapping is inferred.",
+    "No complete PT state-condition, full SoC energy or STA qualification."
+  ],
+  "observations": {
+    "equal_marginal_distinct_joint": [
+      {
+        "CEN_dwell": [
+          2000000,
+          2000000,
+          0,
+          0
+        ],
+        "GWEN_dwell": [
+          2000000,
+          2000000,
+          0,
+          0
+        ],
+        "condition": "RET1N & !CEN & GWEN & !EMA[2] & !EMA[1] & !EMA[0]",
+        "condition_dwell_false_true_unknown": [
+          4000000,
+          0,
+          0
+        ],
+        "mode": 1
+      },
+      {
+        "CEN_dwell": [
+          2000000,
+          2000000,
+          0,
+          0
+        ],
+        "GWEN_dwell": [
+          2000000,
+          2000000,
+          0,
+          0
+        ],
+        "condition": "RET1N & !CEN & GWEN & !EMA[2] & !EMA[1] & !EMA[0]",
+        "condition_dwell_false_true_unknown": [
+          2000000,
+          2000000,
+          0
+        ],
+        "mode": 2
+      }
+    ],
+    "modes": [
+      {
+        "actual_pin_bits": 67,
+        "different_dwell_pins": [
+          "tb_xu_sram_joint_micro/dut/CLK",
+          "tb_xu_sram_joint_micro/dut/EMAW[0]",
+          "tb_xu_sram_joint_micro/dut/EMAW[1]"
+        ],
+        "different_native_TC_vs_known_binary_pins": [
+          "tb_xu_sram_joint_micro/dut/CEN",
+          "tb_xu_sram_joint_micro/dut/CLK",
+          "tb_xu_sram_joint_micro/dut/D[2]",
+          "tb_xu_sram_joint_micro/dut/D[3]",
+          "tb_xu_sram_joint_micro/dut/EMAW[0]",
+          "tb_xu_sram_joint_micro/dut/EMAW[1]",
+          "tb_xu_sram_joint_micro/dut/EMA[0]",
+          "tb_xu_sram_joint_micro/dut/EMA[1]",
+          "tb_xu_sram_joint_micro/dut/EMA[2]",
+          "tb_xu_sram_joint_micro/dut/GWEN"
+        ],
+        "duration_ticks": 524000000,
+        "independent_probe_current_difference_events": 0,
+        "independent_probe_matching_bits": 34,
+        "independent_probes": 8,
+        "mode": 0
+      },
+      {
+        "actual_pin_bits": 67,
+        "different_dwell_pins": [],
+        "different_native_TC_vs_known_binary_pins": [],
+        "duration_ticks": 4000000,
+        "independent_probe_current_difference_events": 0,
+        "independent_probe_matching_bits": 34,
+        "independent_probes": 8,
+        "mode": 1
+      },
+      {
+        "actual_pin_bits": 67,
+        "different_dwell_pins": [],
+        "different_native_TC_vs_known_binary_pins": [],
+        "duration_ticks": 4000000,
+        "independent_probe_current_difference_events": 0,
+        "independent_probe_matching_bits": 34,
+        "independent_probes": 8,
+        "mode": 2
+      }
+    ],
+    "status": "ACTUAL_VCS_INDEPENDENT_CALLBACK_PROBES_MATCH_JOINT_NATIVE_SAIF_DIFFERENCES_RETAINED_NOT_ENERGY_QUALIFIED",
+    "transition_counterexamples": {
+      "CEN": {
+        "native_IG": 1,
+        "native_TC": 5,
+        "vpi_known_binary_edges": 6
+      },
+      "CLK": {
+        "native_IG": 1,
+        "native_TC": 513,
+        "vpi_known_binary_edges": 514
+      },
+      "D[2]": {
+        "native_IG": 0,
+        "native_TC": 4,
+        "vpi_known_binary_edges": 6
+      },
+      "D[3]": {
+        "native_IG": 0,
+        "native_TC": 3,
+        "vpi_known_binary_edges": 5
+      }
+    },
+    "unfinished_negative_retained": true
+  },
+  "original_export_raw_directory": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/next-results-export-41/vcs-joint-micro-saif-20261103-34",
+  "schema": "xu-vcs-joint-native-saif-actual-fields-v1",
+  "source_export41_tar_sha256": "1dd38367c7e76f59e11ce5ecd7a970c75e6ec78894ee497824b3becc31f69bfb",
+  "status": "ACTUAL_VCS_INDEPENDENT_CALLBACK_PROBES_MATCH_JOINT_NATIVE_SAIF_DIFFERENCES_RETAINED_NOT_ENERGY_QUALIFIED"
+}
