@@ -78,6 +78,12 @@ python3 /path/to/clean-joint-tool/tools/ppa/xu_candidate_joint_task_activity.py 
 host prepare 的 Icarus header 只是显式记录的编译接口检查，不允许
 拿它进行实际 VCS run。默认不定义 INITIALIZE_MEMORY。
 
+VPI include 目录使用 `-isystem`，因为实际 VCS 头文件的第三方旧式
+函数指针声明会触发 `-Wstrict-prototypes`。自身 C 代码仍使用全部
+`-Wall -Wextra -Wshadow -Wstrict-prototypes -Werror`；不修改 vendor
+头文件，也不关闭自身警告。依赖输出使用 `-MD`，仍包含并冻结实际
+system header 及递归 include 的字节。旧入口/旧 micro23 原件保持不变。
+
 本地复现，必须保持工具树已提交且干净：
 
 ```sh

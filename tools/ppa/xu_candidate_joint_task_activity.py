@@ -186,7 +186,7 @@ def compile_vpi(ctx,build,cc,include,timeout):
     compiler=identity(Path(executable).resolve());header=identity((include.resolve()/'vpi_user.h'))
     source=identity(JOINT/'xu_sram_joint_vpi.c');library=build/'xu_sram_joint_vpi.so';deps=build/'joint-vpi-dependencies.d'
     command=[compiler['path'],'-std=c99','-D_POSIX_C_SOURCE=200809L','-fPIC','-shared','-Wall','-Wextra','-Wshadow',
-        '-Wstrict-prototypes','-Werror','-O2','-I'+str(include.resolve()),'-MD','-MF',str(deps),source['path'],'-o',str(library)]
+        '-Wstrict-prototypes','-Werror','-O2','-isystem',str(include.resolve()),'-MD','-MF',str(deps),source['path'],'-o',str(library)]
     ctx.soc.run([compiler['path'],'--version'],build,build/'joint-cc-version.log',timeout)
     ctx.soc.run(command,build,build/'joint-vpi-build.log',timeout)
     require(library.is_file() and library.stat().st_size>0,'joint VPI compile did not produce library')

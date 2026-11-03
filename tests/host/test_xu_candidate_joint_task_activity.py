@@ -14,7 +14,9 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest import mock
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tools/ppa'))
@@ -64,6 +66,60 @@ class JointGuards(unittest.TestCase):
     def test_host_header_cannot_be_used_for_actual_vcs_run(self):
         with self.assertRaisesRegex(ValueError,'same selected VCS installation'):
             collector.actual_vcs_header_guard(Path('/eda/vcs/bin/vcs'),Path('/usr/include/iverilog'))
+
+    @unittest.skipUnless(shutil.which('cc') and Path('/usr/include/iverilog/vpi_user.h').is_file(),
+        'actual C compiler and stand-in VPI interface required')
+    def test_system_vendor_header_keeps_own_werror_and_dependency_freeze(self):
+        # This is a synthetic warning-class fixture, not the actual VCS header
+        # or an actual VCS positive prepare. Compile the unchanged production C.
+        with tempfile.TemporaryDirectory(prefix='xu-joint-header-class-') as t:
+            d=Path(t);include=d/'vendor';include.mkdir();build=d/'build';build.mkdir()
+            header=include/'vpi_user.h'
+            header.write_text('#include "/usr/include/iverilog/vpi_user.h"\n'
+                'extern void (*xu_vendor_old_startup[])();\n')
+
+            class Runner:
+                @staticmethod
+                def run(command,cwd,log,timeout):
+                    result=run(command,cwd,'header-class-'+Path(log).name,timeout)
+                    Path(log).write_text(result.stdout)
+                    if result.returncode:raise ValueError('actual C compile failed: '+str(log))
+                    return result.stdout
+
+            ctx=SimpleNamespace(soc=Runner())
+            compiled=collector.compile_vpi(ctx,build,'cc',include,300)
+            command=compiled['command'];position=command.index('-isystem')
+            self.assertEqual(command[position+1],str(include.resolve()))
+            self.assertNotIn('-I'+str(include.resolve()),command)
+            for option in ('-Wall','-Wextra','-Wshadow','-Wstrict-prototypes','-Werror','-MD'):
+                self.assertIn(option,command)
+            paths={record['path'] for record in compiled['dependencies']}
+            self.assertIn(str(header.resolve()),paths)
+            self.assertIn('/usr/include/iverilog/vpi_user.h',paths)
+            collector.check_frozen(compiled['frozen_files'])
+
+            control=list(command);control[position]='-I'
+            control[control.index('-o')+1]=str(d/'rejected-vendor.so')
+            control[control.index('-MF')+1]=str(d/'rejected-vendor.d')
+            rejected=run(control,d,'header-class-user-vendor-rejected.log')
+            self.assertNotEqual(rejected.returncode,0,rejected.stdout)
+            self.assertIn('-Werror=strict-prototypes',rejected.stdout)
+
+            own=d/'own-source';own.mkdir();bad=own/'xu_sram_joint_vpi.c'
+            bad.write_bytes((collector.JOINT/'xu_sram_joint_vpi.c').read_bytes()+
+                b'\nint xu_own_old_style() { return 0; }\n')
+            own_build=d/'own-build';own_build.mkdir()
+            with mock.patch.object(collector,'JOINT',own):
+                with self.assertRaisesRegex(ValueError,'actual C compile failed'):
+                    collector.compile_vpi(ctx,own_build,'cc',include,300)
+            self.assertIn('-Werror=strict-prototypes',(own_build/'joint-vpi-build.log').read_text())
+            header.write_text(header.read_text()+'// changed third-party header after compile\n')
+            with self.assertRaisesRegex(ValueError,'bytes/type/mode changed'):
+                collector.check_frozen(compiled['frozen_files'])
+            save('header-class-actual-compile.json',json.dumps(dict(
+                status='HOST_SYNTHETIC_HEADER_CLASS_PASS_NOT_VCS_EXECUTION',
+                compile=compiled,vendor_user_header_control_returncode=rejected.returncode,
+                own_source_old_prototype_rejected=True,system_header_mutation_rejected=True),indent=2)+'\n')
 
     def test_raw_inventory_table_requires_exact_macro_pin_and_direction_rows(self):
         # This synthetic two-pin fragment exercises only the table comparator;
