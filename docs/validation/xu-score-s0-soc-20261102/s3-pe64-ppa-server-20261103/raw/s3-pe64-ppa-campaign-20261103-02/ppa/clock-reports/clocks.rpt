@@ -1,0 +1,31 @@
+****************************************
+Report : clock
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 22:23:51 2026
+****************************************
+
+Attributes:
+    p - Propagated clock
+    G - Generated  clock
+    I - Inactive   clock
+
+Clock             Period          Waveform            Attrs     Sources
+-----------------------------------------------------------------------
+xu_hfextclk         6.67          {0 3.33333}         p         {hfextclk}
+xu_jtag_tck       100.00          {0 50}              p         {io_pads_jtag_TCK_i_ival}
+xu_lfextclk     30517.58          {0 15258.8}         p         {lfextclk}
+xu_plldiv_envelope
+                    6.67          {0 3.33333}         p, G      {u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clkout}
+
+
+
+Generated     Master          Generated       Master          Waveform
+Clock         Source          Source          Clock           Modification
+-------------------------------------------------------------------------------
+xu_plldiv_envelope
+              u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clk
+                              u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clkout
+                                              xu_hfextclk     div(1)
+
+1

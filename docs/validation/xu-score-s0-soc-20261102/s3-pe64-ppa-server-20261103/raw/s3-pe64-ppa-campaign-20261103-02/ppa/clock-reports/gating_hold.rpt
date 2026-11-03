@@ -1,0 +1,46 @@
+****************************************
+Report : constraint
+	-verbose
+	-clock_gating_hold
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 22:24:05 2026
+****************************************
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Last common pin: hfextclk
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                           3.33       3.33
+  clock network delay (propagated)                        0.00       3.33
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/enb_reg/EN (LALQV0_12TR40)
+                                                          0.00       3.33 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/enb_reg/Q (LALQV0_12TR40)
+                                                          0.09       3.42 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/U2/A1 (AND2V0_12TR40)
+                                                          0.00       3.42 f
+  data arrival time                                                  3.42
+
+  clock xu_hfextclk (fall edge)                           3.33       3.33
+  clock network delay (propagated)                        0.00       3.33
+  clock reconvergence pessimism                           0.00       3.33
+  clock uncertainty                                       0.10       3.43
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/U2/A2 (AND2V0_12TR40)
+                                                                     3.43 f
+  clock gating hold time                                  0.10       3.53
+  data required time                                                 3.53
+  ------------------------------------------------------------------------------
+  data required time                                                 3.53
+  data arrival time                                                 -3.42
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -0.11
+
+
+1

@@ -1,0 +1,187 @@
+{
+  "status": "ALL_SEMANTIC_MUTATIONS_REJECTED",
+  "cases": 45,
+  "rejections": [
+    {
+      "case": "area/local_cell_area_substituted",
+      "rejection": "actual canonical accelerator/whole area differs"
+    },
+    {
+      "case": "area/wholeSoC_scope_substituted",
+      "rejection": "canonical complete accelerator row is missing/duplicate"
+    },
+    {
+      "case": "area/mm2_treated_as_library_area",
+      "rejection": "actual canonical accelerator/whole area differs"
+    },
+    {
+      "case": "area/wholeSoC_value_changed",
+      "rejection": "actual canonical accelerator/whole area differs"
+    },
+    {
+      "case": "area/duplicate_complete_row",
+      "rejection": "canonical complete accelerator row is missing/duplicate"
+    },
+    {
+      "case": "macro/area_count_changed",
+      "rejection": "actual area report macro total differs"
+    },
+    {
+      "case": "macro/footprint_removed",
+      "rejection": "macro footprint area differs"
+    },
+    {
+      "case": "macro/DC_W64_changed",
+      "rejection": "actual pre/post/PT macro geometry differs"
+    },
+    {
+      "case": "macro/PT_W64_changed",
+      "rejection": "actual pre/post/PT macro geometry differs"
+    },
+    {
+      "case": "macro/generation_total_changed",
+      "rejection": "exact384 macro groups differ"
+    },
+    {
+      "case": "macro/resigned_weight_padding_zero",
+      "rejection": "PE64 defines/geometry/padding differ"
+    },
+    {
+      "case": "macro/resigned_memory_count_changed",
+      "rejection": "exact384 macro groups differ"
+    },
+    {
+      "case": "identity/main_pin_changed",
+      "rejection": "main/child freeze differs"
+    },
+    {
+      "case": "identity/child_pin_changed",
+      "rejection": "main/child freeze differs"
+    },
+    {
+      "case": "identity/resigned_define_PE32",
+      "rejection": "PE64 defines/geometry/padding differ"
+    },
+    {
+      "case": "identity/frozen_main_blob_changed",
+      "rejection": "full source byte/mode/gitlink manifest differs"
+    },
+    {
+      "case": "identity/frozen_main_mode_changed",
+      "rejection": "full source byte/mode/gitlink manifest differs"
+    },
+    {
+      "case": "identity/frozen_main_gitlink_changed",
+      "rejection": "full source byte/mode/gitlink manifest differs"
+    },
+    {
+      "case": "identity/frozen_child_blob_changed",
+      "rejection": "full source byte/mode/gitlink manifest differs"
+    },
+    {
+      "case": "identity/source_adapter_bytes_changed",
+      "rejection": "actual returned prepared source differs"
+    },
+    {
+      "case": "identity/standard_library_changed",
+      "rejection": "exact same-server two libraries differ"
+    },
+    {
+      "case": "identity/SRAM_library_role_changed",
+      "rejection": "exact same-server two libraries differ"
+    },
+    {
+      "case": "identity/netlist_changed",
+      "rejection": "original mapped net/analysis SDC differs"
+    },
+    {
+      "case": "identity/analysisSDC_changed",
+      "rejection": "original mapped net/analysis SDC differs"
+    },
+    {
+      "case": "identity/producer_changed",
+      "rejection": "actual tool producer differs"
+    },
+    {
+      "case": "units/PT_time_changed",
+      "rejection": "time unit is not ns"
+    },
+    {
+      "case": "units/DC_time_changed",
+      "rejection": "time unit is not ns"
+    },
+    {
+      "case": "units/physical_micron_dimension_changed",
+      "rejection": "exact SRAM LEF/Liberty area unit differs"
+    },
+    {
+      "case": "units/physical_area_label_changed",
+      "rejection": "physical area unit basis differs"
+    },
+    {
+      "case": "units/conversion_changed",
+      "rejection": "physical area unit basis differs"
+    },
+    {
+      "case": "units/standard_cell_dimension_changed",
+      "rejection": "standard-cell physical unit proof differs"
+    },
+    {
+      "case": "completeness/missing_ppa/area.rpt",
+      "rejection": "returned report set is incomplete"
+    },
+    {
+      "case": "completeness/missing_ppa/dc.log",
+      "rejection": "missing mandatory raw: ppa/dc.log"
+    },
+    {
+      "case": "completeness/missing_ppa/pt-sta.log",
+      "rejection": "missing mandatory raw: ppa/pt-sta.log"
+    },
+    {
+      "case": "completeness/missing_ppa/units.rpt",
+      "rejection": "returned report set is incomplete"
+    },
+    {
+      "case": "completeness/missing_ppa/analysis-coverage.rpt",
+      "rejection": "returned report set is incomplete"
+    },
+    {
+      "case": "completeness/missing_ppa/timing-slack.tsv",
+      "rejection": "returned report set is incomplete"
+    },
+    {
+      "case": "completeness/missing_ppa/setup.rpt",
+      "rejection": "returned report set is incomplete"
+    },
+    {
+      "case": "completeness/missing_ppa/rtl/perips/XuParallelComputeCore64.sv",
+      "rejection": "returned prepared source subset is incomplete"
+    },
+    {
+      "case": "timing/hidden_original_negative_slack",
+      "rejection": "original negative propagated STA differs"
+    },
+    {
+      "case": "timing/hidden_untested_checks",
+      "rejection": "actual original timing coverage differs"
+    },
+    {
+      "case": "timing/qualified_status_forged",
+      "rejection": "original timing issues were hidden"
+    },
+    {
+      "case": "timing/unsupported_report_hidden",
+      "rejection": "actual unsupported report was hidden"
+    },
+    {
+      "case": "execution/live_step_forged_as_terminal",
+      "rejection": "three actual PPA steps differ"
+    },
+    {
+      "case": "prerequisite/truncated_control_cycles",
+      "rejection": "actual VCS prerequisite identity differs"
+    }
+  ],
+  "scope": "In-memory altered raw/context data with available transport/execution/generated-control hashes re-signed; no EDA rerun or real input alteration"
+}

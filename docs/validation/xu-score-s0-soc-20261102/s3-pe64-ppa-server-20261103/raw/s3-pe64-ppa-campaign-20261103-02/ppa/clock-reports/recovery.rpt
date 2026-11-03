@@ -1,0 +1,62 @@
+****************************************
+Report : constraint
+	-verbose
+	-recovery
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 22:24:05 2026
+****************************************
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (rising edge-triggered flip-flop clocked by xu_plldiv_envelope)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_apb_if/r_timer0_ch1_mode_reg[2]
+               (recovery check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       21.58      21.58
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00      21.58 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/Q (DRNQV0_12TR40)
+                                                          3.62      25.20 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/U2/ZN (CLKINV0_12TR40)
+                                                          0.05      25.25 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/U69/ZN (CLKINV0_12TR40)
+                                                          0.03      25.28 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/U3/Z (BUFV2RQ_12TR40)
+                                                          0.51      25.79 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/U4/Z (CLKBUFV2_12TR40)
+                                                          0.94      26.73 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_apb_if/U13/Z (CLKBUFV2_12TR40)
+                                                          0.78      27.51 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_apb_if/U4/Z (CLKBUFV2_12TR40)
+                                                          0.70      28.21 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_apb_if/U11/Z (CLKBUFV2_12TR40)
+                                                          0.70      28.91 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_apb_if/U8/Z (CLKBUFV2_12TR40)
+                                                          0.63      29.54 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_apb_if/r_timer0_ch1_mode_reg[2]/RDN (DRNQV0_12TR40)
+                                                          0.00      29.54 r
+  data arrival time                                                 29.54
+
+  clock xu_hfextclk (rise edge)                           6.67       6.67
+  clock network delay (propagated)                        8.31      14.98
+  clock reconvergence pessimism                          13.27      28.25
+  clock uncertainty                                      -0.10      28.15
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_apb_if/r_timer0_ch1_mode_reg[2]/CK (DRNQV0_12TR40)
+                                                                    28.15 r
+  library recovery time                                   3.00      31.14
+  data required time                                                31.14
+  ------------------------------------------------------------------------------
+  data required time                                                31.14
+  data arrival time                                                -29.54
+  ------------------------------------------------------------------------------
+  slack (MET)                                                        1.61
+
+
+1
