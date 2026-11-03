@@ -13,7 +13,9 @@
 
 已完成：Chisel定向测试1项；真实四态单bank测试遍历512个逻辑地址、四depth交错，含520次写、524次读、4次未初始化X读、128边界及采样地址改变后的返回depth；generated SRAM上的wide/compat wrapper各两行512结果；69项host PASS，其中2项因本地无指定RAMSP128X16模型而明确skip；42项numeric PASS；**本候选实际SoC legacy5** PASS。host的mock PASS不代替这些真实legacy日志。严格重放再独立计算两份固定向量共50,688个整数结果。20份原8/32PE生成SV和wrapper与原子 `fc3977d` 逐字节相同；全部16,384个旧W地址到 `(bank, depth, word)` 的映射穷举为双射。
 
-`raw/manifest.json` 冻结105份原始payload（包含初次及最终host、实际驱动命令、direct、向量、ELF/image、原始工具输出）；`raw/source-files.json` 冻结1178份生产/测试/工具及子树源文件的字节、模式、符号链接目标。原文中的nonfatal下载失败、mock失败文字及指定宏缺失负例完整保留。`local-comparison.json` 由重放生成，非人工填写的性能汇总。
+`raw/manifest.json` 冻结105份原始payload（包含初次及最终host、实际驱动命令、direct、向量、ELF/image、原始工具输出）；`raw/source-files.json` 冻结1178份生产/测试/工具及子树源文件的字节、模式、符号链接目标。重放器将所选主树根目录与完整子树的路径集合、模式及Git blob绑定到历史提交，复核实际gitlink和子树HEAD；不会因删减记录并重签manifest就减少检查范围。原文中的nonfatal下载失败、mock失败文字及指定宏缺失负例完整保留。`local-comparison.json` 由重放生成，非人工填写的性能汇总。
+
+只读独立审查后补齐了上述历史树绑定及打包前实际执行位检查。`replay-rejections.json` 记录9个真实破坏负测全部拒绝：包括改周期、POP、整数向量、legacy variant、skip数量、子提交、模式、删源记录并重签manifest，以及临时clone实际提交错误gitlink。`prepare-mode-rejection.json` 另验证临时clone中 `core.filemode=false` 隐藏实际执行位变化时，打包仍明确拒绝；没有修改原实验树。
 
 ## 改动的Chisel
 
@@ -32,6 +34,8 @@
 python3 docs/validation/xu-score-s3-pe32-bank128-local-20261103/audit_local.py \
   --root "$PWD" --raw "$PWD/docs/validation/xu-score-s3-pe32-bank128-local-20261103/raw" \
   --out /absolute/new/xu-bank128-replay.json
+python3 docs/validation/xu-score-s3-pe32-bank128-local-20261103/check_replay_rejections.py \
+  --root "$PWD" --out /absolute/new/xu-bank128-replay-rejections.json
 python3 tools/scripts/e203_soc.py --mode real --tasks 1 --sim verilator \
   --accel-variant pe32-bank128 --firmware-schedule bias-hw-pe32-autogroup-window \
   --firmware-opt=-O2 --firmware-experiment both-unroll-no-masks --out /absolute/new/xu-bank128-real1

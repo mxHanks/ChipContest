@@ -63,6 +63,8 @@ def main():
             else:
                 if not path.is_file() or path.is_symlink():
                     raise ValueError('tracked source must be regular')
+                if bool(path.stat().st_mode & 0o111) != (mode == '100755'):
+                    raise ValueError('tracked executable mode differs: ' + prefix + name)
                 data = path.read_bytes()
             expected = subprocess.check_output(['git', 'show', 'HEAD:' + name], cwd=str(directory))
             if data != expected:

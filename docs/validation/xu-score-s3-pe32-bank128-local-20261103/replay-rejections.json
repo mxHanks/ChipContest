@@ -1,0 +1,62 @@
+{
+  "status": "PASS_ALL_9_REJECTED",
+  "scope": "actual mutations in temporary copies; original evidence/repositories unchanged",
+  "audit_sha256": "b50f63a4bf27722d81a9806547df364f1a0b97ab9d90352eb5a26bc4dac68252",
+  "checker_sha256": "d6c409be3420abb76f1e84fa2fd4d25364b9c86ddb1b91f6c293efeb47c88b6f",
+  "raw_manifest_sha256": "e100249f0e694356a029c3ccd190adeb133994fe68eb8462f9d446bd1febb6f4",
+  "cases": [
+    {
+      "case": "result-cycles",
+      "exit_code": 1,
+      "diagnostic": "ValueError: run identity/counters differ: real1-bank128",
+      "mutated_manifest_sha256": "54cd63df871e6a48db6523bab99ac3039dcfc0e872913dc83eb427d3b243f02f"
+    },
+    {
+      "case": "row-retirement",
+      "exit_code": 1,
+      "diagnostic": "ValueError: autonomous row retirement or overlap differs from the contract",
+      "mutated_manifest_sha256": "4ba456d12590650f40c8dc36dd6d6909f82c747f7048361bd38aa04faf85924b"
+    },
+    {
+      "case": "integer-vector",
+      "exit_code": 1,
+      "diagnostic": "ValueError: vector mismatch layer=0 row=0 col=0: expected 351287, got 351001",
+      "mutated_manifest_sha256": "c7f19e0b7288be8c22defc1030d9c47e8ae7c8ac6345e3ac092c9777ecef5bd7"
+    },
+    {
+      "case": "legacy-variant",
+      "exit_code": 1,
+      "diagnostic": "ValueError: actual legacy5 incomplete",
+      "mutated_manifest_sha256": "9eed066db85715c15dcd6ca93902344ba80a0a6cc6f8e6d27028bb280b3eba9f"
+    },
+    {
+      "case": "host-skips",
+      "exit_code": 1,
+      "diagnostic": "ValueError: host completion differs",
+      "mutated_manifest_sha256": "acfb2f0d1d2bccd3784b1cd75068a79afd07afe3a6b09f8039c1668996399afe"
+    },
+    {
+      "case": "child-identity",
+      "exit_code": 1,
+      "diagnostic": "ValueError: source provenance differs",
+      "mutated_manifest_sha256": "88a91e51e86864df2e1cb429bb79763e3f0ba3f9137222861c2e2f5f42033558"
+    },
+    {
+      "case": "source-mode",
+      "exit_code": 1,
+      "diagnostic": "ValueError: historical source mode differs: src/main/scala/GenerateRTL.scala",
+      "mutated_manifest_sha256": "d95f368ef4d1e626072f216c6cce2b3048641501390c2c4397010ab0f5fdd408"
+    },
+    {
+      "case": "deleted-source-record",
+      "exit_code": 1,
+      "diagnostic": "ValueError: selected historical source set differs",
+      "mutated_manifest_sha256": "06977c99ed2d7e5ccad553d88ad83235b9071e575b75a522c90ff799ddfa8fb2"
+    },
+    {
+      "case": "actual-head-gitlink",
+      "exit_code": 1,
+      "diagnostic": "ValueError: actual or historical gitlink differs"
+    }
+  ]
+}

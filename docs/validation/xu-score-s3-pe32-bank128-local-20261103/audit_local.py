@@ -52,10 +52,38 @@ def main():
     identity = load(raw / 'identity.json')
     require(identity['production_main'] == 'c684402dc38bcc4437bf822f24d9ea4f401e1da3' and
             identity['child'] == '52cfbea1f79f10e44f7d1696f54015797f886b96' and
+            identity['test_gate_main'] == '6e59ec89c31376e6facaa77f21f2840525ec32a7' and
             identity['main_clean'] and identity['child_clean'], 'source provenance differs')
     source_files = load(raw / 'source-files.json')
+
+    def tree(directory, revision):
+        result = {}
+        data = subprocess.check_output(['git', 'ls-tree', '-r', '-z', revision], cwd=directory)
+        for entry in data.split(b'\0'):
+            if entry:
+                metadata, name = entry.split(b'\t', 1)
+                mode, kind, oid = metadata.decode().split()
+                result[name.decode()] = (mode, kind, oid)
+        return result
+
+    child_root = root / 'third-party/e203_hbirdv2'
+    historical_main = tree(root, identity['test_gate_main'])
+    historical_production = tree(root, identity['production_main'])
+    current_main = tree(root, 'HEAD')
+    for revision in (historical_main, historical_production, current_main):
+        require(revision['third-party/e203_hbirdv2'] == ('160000', 'commit', identity['child']),
+                'actual or historical gitlink differs')
+    require(subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=child_root, text=True).strip() == identity['child'],
+            'actual child HEAD differs')
+    selected_roots = ('src/', 'tests/e203/', 'tools/scripts/', 'tools/ppa/')
+    expected_sources = {name:record for name, record in historical_main.items()
+                        if name.startswith(selected_roots) and record[1] == 'blob'}
+    expected_sources.update({'third-party/e203_hbirdv2/' + name:record
+                             for name, record in tree(child_root, identity['child']).items() if record[1] == 'blob'})
+    require(set(source_files) == set(expected_sources), 'selected historical source set differs')
     for name, record in source_files.items():
         path = root / name
+        require(record['git_mode'] == expected_sources[name][0], 'historical source mode differs: ' + name)
         if record['git_mode'] == '120000':
             require(path.is_symlink(), 'missing source symlink: ' + name)
             data = os.readlink(path).encode()
@@ -67,6 +95,8 @@ def main():
                     'source executable mode differs: ' + name)
         require(len(data) == record['bytes'] and hashlib.sha256(data).hexdigest() == record['sha256'],
                 'source bytes differ: ' + name)
+        blob = b'blob ' + str(len(data)).encode() + b'\0' + data
+        require(hashlib.sha1(blob).hexdigest() == expected_sources[name][2], 'historical source blob differs: ' + name)
 
     schedule = 'bias-hw-pe32-autogroup-window'
 
@@ -164,7 +194,8 @@ def main():
     require(len(mapped) == 16384 and mapped == {(b, d, a) for b in range(32) for d in range(4) for a in range(128)},
             'full legacy W address mapping is not bijective')
     result = dict(status='LOCAL_SCREEN_PASS_NOT_QUALIFIED', production_main=identity['production_main'],
-        child=identity['child'], scope='local GCC14.2/Verilator5.032, one real layer00, historical HF4ns/LF66ns; not formal-clear/request or physical qualification',
+        child=identity['child'], historical_source_tree=identity['test_gate_main'], actual_gitlink_and_child_head_verified=True,
+        scope='local GCC14.2/Verilator5.032, one real layer00, historical HF4ns/LF66ns; not formal-clear/request or physical qualification',
         rows=[dict(variant=r['accel_variant'], cycles=r['layers'][0]['cycles'],
                    performance=r['layers'][0]['performance'], simulator_sha256=r['simulator_sha256'])
               for r in (compact, original)], cycle_difference=compact['layers'][0]['cycles']-original['layers'][0]['cycles'],
