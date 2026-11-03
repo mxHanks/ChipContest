@@ -1,0 +1,7 @@
+{"command": ["vvp", "/tmp/xu-s2c-actual-reset-nlf4rack/reset.vvp", "+MODE=5"], "cwd": "/tmp/xu-s2c-actual-reset-nlf4rack", "returncode": 1}
+XU_RESET_FIXTURE_UNCLOCKED_FIFO_X actual_rst_n=x sampled_reset_edges=0
+XU_CANDIDATE_RESET_READY task=7 actual_reset_clock_edges=22 startup_observer_edges=27 first_reset_tick=95000000 last_reset_tick=305000000 first_ready_cycle=32 first_ready_tick=315000000 actual_rst_n=1 checked_empty_fifo=1
+FATAL: /tmp/xu-s2c-actual-reset-nlf4rack/reset.sv:77: XU_CANDIDATE_RESET_REJECT reset reasserted/unknown after observation ready
+       Time: 325000000  Scope: tb_xu_s2c_reset_guard.xu_observe_candidate_reset_window
+FATAL: /tmp/xu-s2c-actual-reset-nlf4rack/reset.sv:59: XU_CANDIDATE_RESET_REJECT accelerator reset unknown after known assertion
+       Time: 325000000  Scope: tb_xu_s2c_reset_guard

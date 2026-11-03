@@ -1,0 +1,11 @@
+{"command": ["vvp", "/tmp/xu-s2c-actual-observer-b3hr2xpa/probe.vvp", "+MODE=6", "+GOLDEN=/tmp/xu-s2c-actual-observer-b3hr2xpa/golden.hex"], "cwd": "/tmp/xu-s2c-actual-observer-b3hr2xpa", "returncode": 1}
+XU_CANDIDATE_RESET_READY task=7 actual_reset_clock_edges=4 startup_observer_edges=0 first_reset_tick=5000000 last_reset_tick=35000000 first_ready_cycle=1 first_ready_tick=45000000 actual_rst_n=1 checked_empty_fifo=1
+XU_TASK_CLEAR_BEGIN task=7 cycle=2 tick=55000000
+XU_TASK_CLEAR_LAST_WRITE task=7 cycle=168482 tick=1684855000000 writes=33697
+XU_TASK_CLEAR_OBSERVED writes=33697 w=16384 bias=256 legacy_bias=8 x=64 drained=1 cache_enable=0 idle=1 source_request=1 task_setup_writes=0 actual_commits=1 fifo_reset_empty=1
+XU_SOURCE_REQUEST task=7 cycle=168517 tick=1685205000000
+XU_ACTIVITY_BEGIN task=7 tick=1685205000000
+XU_CACHE_INITIAL task=7 fresh_process=1 cache_enable=0 busy=0 prior_uploads=0 prior_starts=0
+XU_SOURCE_ACCEPT task=7 cycle=168521 tick=1685245000000
+FATAL: /tmp/xu-s2c-actual-observer-b3hr2xpa/probe.sv:254: XU_CANDIDATE_REJECT POP before all owned words read / wrong group
+       Time: 2301075000000  Scope: tb_xu_s2c_task_observer.xu_observe_candidate

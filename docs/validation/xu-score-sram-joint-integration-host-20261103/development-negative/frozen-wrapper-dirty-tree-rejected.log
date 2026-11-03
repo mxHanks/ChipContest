@@ -1,0 +1,88 @@
+test_actual_platform_reset_chain_and_unclocked_fifo_startup (test_xu_candidate_task_activity.CandidateActivityTests.test_actual_platform_reset_chain_and_unclocked_fifo_startup) ... ok
+test_actual_riscv_firmware_and_partial_prepare (test_xu_candidate_task_activity.CandidateActivityTests.test_actual_riscv_firmware_and_partial_prepare) ... ok
+test_actual_wrapper_99_rows_all_groups_and_destructive_faults (test_xu_candidate_task_activity.CandidateActivityTests.test_actual_wrapper_99_rows_all_groups_and_destructive_faults) ... ERROR
+test_complete_22512_pin_alias_normalization_preserves_unknowns_and_rejects_tamper (test_xu_candidate_task_activity.CandidateActivityTests.test_complete_22512_pin_alias_normalization_preserves_unknowns_and_rejects_tamper) ... ERROR
+test_full_candidate_336_macros_and_all_22512_direct_alias_paths_elaborate (test_xu_candidate_task_activity.CandidateActivityTests.test_full_candidate_336_macros_and_all_22512_direct_alias_paths_elaborate) ... ERROR
+test_full_context_and_independent_candidate_tb (test_xu_candidate_task_activity.CandidateActivityTests.test_full_context_and_independent_candidate_tb) ... ERROR
+test_strict_source_blob_guard_rejects_assume_unchanged_edits (test_xu_candidate_task_activity.CandidateActivityTests.test_strict_source_blob_guard_rejects_assume_unchanged_edits) ... ok
+test_actual_lf_absolute_phase_has_no_accumulated_rounding (test_xu_candidate_task_activity.CandidateSyntaxTests.test_actual_lf_absolute_phase_has_no_accumulated_rounding) ... ok
+test_actual_simulation_fatal_is_not_hidden_by_later_missing_lf_marker (test_xu_candidate_task_activity.CandidateSyntaxTests.test_actual_simulation_fatal_is_not_hidden_by_later_missing_lf_marker) ... ok
+test_candidate_window_checks_actual_integer_timestamps_without_log_rewrite (test_xu_candidate_task_activity.CandidateSyntaxTests.test_candidate_window_checks_actual_integer_timestamps_without_log_rewrite) ... ok
+test_python36_syntax_and_frozen_common_bytes (test_xu_candidate_task_activity.CandidateSyntaxTests.test_python36_syntax_and_frozen_common_bytes) ... ok
+
+======================================================================
+ERROR: test_actual_wrapper_99_rows_all_groups_and_destructive_faults (test_xu_candidate_task_activity.CandidateActivityTests.test_actual_wrapper_99_rows_all_groups_and_destructive_faults)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tests/host/test_xu_candidate_task_activity.py", line 289, in test_actual_wrapper_99_rows_all_groups_and_destructive_faults
+    self.ctx.recheck()
+    ~~~~~~~~~~~~~~~~^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 156, in recheck
+    require(self.tool == tool_identity(), 'tool identity changed during collection')
+                         ~~~~~~~~~~~~~^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 121, in tool_identity
+    require(not git(TOOL_ROOT, 'status', '--porcelain', '--untracked-files=all'), 'tool checkout must be clean and committed')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 38, in require
+    raise ValueError(message)
+ValueError: tool checkout must be clean and committed
+
+======================================================================
+ERROR: test_complete_22512_pin_alias_normalization_preserves_unknowns_and_rejects_tamper (test_xu_candidate_task_activity.CandidateActivityTests.test_complete_22512_pin_alias_normalization_preserves_unknowns_and_rejects_tamper)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tests/host/test_xu_candidate_task_activity.py", line 205, in test_complete_22512_pin_alias_normalization_preserves_unknowns_and_rejects_tamper
+    mapping=aliases.generate(SOURCE,d/'aliases')
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_sram_activity_alias.py", line 167, in generate
+    macros, sources = full_soc_macros(root, dut_scope)
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_sram_activity_alias.py", line 72, in full_soc_macros
+    context.tool_identity()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 121, in tool_identity
+    require(not git(TOOL_ROOT, 'status', '--porcelain', '--untracked-files=all'), 'tool checkout must be clean and committed')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 38, in require
+    raise ValueError(message)
+ValueError: tool checkout must be clean and committed
+
+======================================================================
+ERROR: test_full_candidate_336_macros_and_all_22512_direct_alias_paths_elaborate (test_xu_candidate_task_activity.CandidateActivityTests.test_full_candidate_336_macros_and_all_22512_direct_alias_paths_elaborate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tests/host/test_xu_candidate_task_activity.py", line 248, in test_full_candidate_336_macros_and_all_22512_direct_alias_paths_elaborate
+    mapping=aliases.generate(SOURCE,d/'aliases',placement='include')
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_sram_activity_alias.py", line 167, in generate
+    macros, sources = full_soc_macros(root, dut_scope)
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_sram_activity_alias.py", line 72, in full_soc_macros
+    context.tool_identity()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 121, in tool_identity
+    require(not git(TOOL_ROOT, 'status', '--porcelain', '--untracked-files=all'), 'tool checkout must be clean and committed')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 38, in require
+    raise ValueError(message)
+ValueError: tool checkout must be clean and committed
+
+======================================================================
+ERROR: test_full_context_and_independent_candidate_tb (test_xu_candidate_task_activity.CandidateActivityTests.test_full_context_and_independent_candidate_tb)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tests/host/test_xu_candidate_task_activity.py", line 142, in test_full_context_and_independent_candidate_tb
+    self.ctx.recheck()
+    ~~~~~~~~~~~~~~~~^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 156, in recheck
+    require(self.tool == tool_identity(), 'tool identity changed during collection')
+                         ~~~~~~~~~~~~~^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 121, in tool_identity
+    require(not git(TOOL_ROOT, 'status', '--porcelain', '--untracked-files=all'), 'tool checkout must be clean and committed')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_candidate_activity_context.py", line 38, in require
+    raise ValueError(message)
+ValueError: tool checkout must be clean and committed
+
+----------------------------------------------------------------------
+Ran 11 tests in 76.087s
+
+FAILED (errors=4)
