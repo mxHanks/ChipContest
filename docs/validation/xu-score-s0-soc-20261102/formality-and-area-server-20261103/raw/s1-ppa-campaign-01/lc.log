@@ -1,0 +1,46 @@
+["lc_shell", "-f", "compile-bias-library.tcl"]
+
+                             Library Compiler (TM)
+                                 DesignWare (R)
+
+             Version T-2022.03-SP5 for linux64 - Oct 13, 2022 -SLE
+
+                    Copyright (c) 1988 - 2022 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+ 
+Initializing...
+if {[catch {
+read_lib {/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP128X16/lib/RAMSP128X16_ss_0p99v_0p99v_125c.lib}
+write_lib {RAMSP128X16_ss_0p99v_0p99v_125c} -format db -output {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/xu-ramsp128x16-ss-0p99v-125c.db}
+puts "XU_BIAS_LIBRARY_COMPILED"
+} e]} {puts stderr "XU_BIAS_LC_ERROR $e";exit 1}
+Reading '/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP128X16/lib/RAMSP128X16_ss_0p99v_0p99v_125c.lib' ...
+Warning: Line 65, The 'internal_power_calculation' attribute in char_config group is required for NLPM library. 
+	No default can be applied to this attribute. (LBDB-366)
+Warning: Line 3920, Cell 'RAMSP128X16', pin 'EMA[2]', The pin 'EMA[2]' does not have a internal_power group. (LBDB-607)
+Warning: Line 3994, Cell 'RAMSP128X16', pin 'EMAW[1]', The pin 'EMAW[1]' does not have a internal_power group. (LBDB-607)
+Warning: Line 4152, Cell 'RAMSP128X16', pin 'RET1N', is a 'save_restore' class retention pin but is missing all recommended attributes. (LBDB-982)
+Information: Line 306, Cell 'RAMSP128X16', The cell 'RAMSP128X16' contiains memory/memory_read/memory_write groups which are deprecated, use the is_memory_cell attribute instead. (LIBG-280)
+Technology library 'RAMSP128X16_ss_0p99v_0p99v_125c' read successfully
+Wrote the 'RAMSP128X16_ss_0p99v_0p99v_125c' library to '/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/xu-ramsp128x16-ss-0p99v-125c.db' successfully
+XU_BIAS_LIBRARY_COMPILED
+exit 0
+Maximum memory usage for this session: 112.66 MB
+CPU usage for this session:      2 seconds (  0.00 hours)
+Elapsed time for this session:      3 seconds (  0.00 hours)
+Thank you for using Library Compiler.
+
+Thank you...

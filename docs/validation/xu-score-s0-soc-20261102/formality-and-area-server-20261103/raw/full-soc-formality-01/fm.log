@@ -1,0 +1,56 @@
+
+                                 Formality (R)
+
+               Version R-2020.09-SP5 for linux64 - Apr 14, 2021 
+
+                    Copyright (c) 1988 - 2021 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+  Inclusivity & Diversity - Visit SolvNetPlus to read the “Synopsys Statement
+         on Inclusivity and Diversity” (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Build: 6994249
+Hostname: RDserver04
+Current time: Mon Nov  2 22:07:00 2026
+
+Loading db file '/eda/synopsys/fm/fm_2020.09-SP5/libraries/syn/gtech.db'
+
+Script: verify.tcl
+
+if {[catch {
+set synopsys_auto_setup true
+set hdlin_unresolved_modules black_box
+set verification_timeout_limit 3600
+set_svf {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/default.svf}
+read_db -technology_library {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db}
+read_db -technology_library {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db}
+read_sverilog -r -define {SYNTHESIS DISABLE_SV_ASSERTION=1} -vcs {+incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/core +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/debug +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/fab +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/general +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/mems +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/perips +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/perips/apb_adv_timer +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/perips/apb_gpio +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/perips/apb_i2c +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/perips/apb_spi_master +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/perips/apb_uart +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/soc +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/subsys +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl/xu-added} -f {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/rtl.f}
+set_top r:/WORK/xu_soc_ppa_top
+read_verilog -i {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/mapped.v}
+set_top i:/WORK/xu_soc_ppa_top
+match
+report_unmatched_points > unmatched.rpt
+if {[verify]} {puts "XU_FULL_SOC_FORMALITY_PASS";exit 0} else {report_failing_points > failing.rpt;puts "XU_FULL_SOC_FORMALITY_FAIL";exit 1}
+} xu_error]} {puts stderr "XU_FULL_SOC_FORMALITY_SCRIPT_ERROR $xu_error";exit 1}
+SVF set to '/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/default.svf'.
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db'
+Error: Cannot specify '-vcs' with '-f'. (CMD-001)
+XU_FULL_SOC_FORMALITY_SCRIPT_ERROR 
+
+Maximum memory usage for this session: 897 MB
+CPU usage for this session: 2.38 seconds ( 0.00 hours )
+Current time: Mon Nov  2 22:07:01 2026
+Elapsed time: 2 seconds ( 0.00 hours )
+
+Thank you for using Formality (R)!

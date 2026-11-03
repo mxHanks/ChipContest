@@ -1,0 +1,75 @@
+{
+  "archive": {
+    "bytes": 54088,
+    "sha256": "3ccdf038cbb4ff5172c2d4e622280a7152b9e678e0591d2d35e91c34914f5d70",
+    "unique_payload_count": 37
+  },
+  "area": [
+    {
+      "accelerator_area_mm2": 0.28578603370000005,
+      "accelerator_area_um2": 285786.0337,
+      "candidate": "baseline",
+      "full_soc_150mhz_timing_qualified": false,
+      "source_report_sha256": "924fa580644c3ae8125b94e935fe48565db9f76a8f49e259cb578ebc1a17c95e",
+      "under_area_limit": true,
+      "whole_soc_area_um2": 3356776.688916
+    },
+    {
+      "accelerator_area_mm2": 0.1785626035,
+      "accelerator_area_um2": 178562.6035,
+      "analysis_sdc_sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+      "candidate": "h2",
+      "execution_status": "EXECUTED_NOT_QUALIFIED",
+      "full_soc_150mhz_timing_qualified": false,
+      "mapped_netlist_sha256": "45ea28b8571c58e73a254e27e8a095da95d13792e62e944ac9f44a89932a2f9d",
+      "source_report_sha256": "0105d5a68f6c0ea8642a77873acc48ca3d2ed055f2f8e9a559109803d7571a57",
+      "timing_slack_tsv": "delay_type\tpath_count\tworst_slack\nmax\t1\t-18.028177\nmin\t1\t-14.807570\n",
+      "under_area_limit": true,
+      "whole_soc_area_um2": 3249519.742708
+    },
+    {
+      "accelerator_area_mm2": 0.2469499369,
+      "accelerator_area_um2": 246949.9369,
+      "analysis_sdc_sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+      "candidate": "sram",
+      "execution_status": "EXECUTED_NOT_QUALIFIED",
+      "full_soc_150mhz_timing_qualified": false,
+      "mapped_netlist_sha256": "b20516c5dd52e44b355828a9cc2f7e508528612d3e6d584ed6ca599023fafb7d",
+      "source_report_sha256": "6b8d3b4cefcf9f73fd3a55bb344c2a8d3d88d5ae41daa9d74a40348406e2f18b",
+      "timing_slack_tsv": "delay_type\tpath_count\tworst_slack\nmax\t1\t-18.132763\nmin\t1\t-15.292112\n",
+      "under_area_limit": true,
+      "whole_soc_area_um2": 3317884.732166
+    }
+  ],
+  "area_limit_mm2": 2.25,
+  "area_scope": "DC hierarchical accelerator instance including internal SRAM; excludes fixed CPU/TCM/shared memory/platform. Cell area, no placement/routing.",
+  "formality": {
+    "auto_setup": true,
+    "log_sha256": "7efb5cbb8abee3b7aeb9fdbfec3aa5093376cdffc0a36c3214f43a3b55a4b587",
+    "macro_internal_function_proved": false,
+    "netlist_sha256": "0f4898ba5ab6571c2125978cdce0a9984a87d4df9901757cb1c00662e4ef3616",
+    "passing_by_type": {
+      "BBPin": 17136,
+      "DFF": 24143,
+      "LAT": 39,
+      "Port": 144
+    },
+    "passing_compare_points": 41462,
+    "source_child_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+    "source_main_commit": "664186d",
+    "status": "VERIFIED_REVIEW_PENDING",
+    "svf_sha256": "84e1db4df8586c660e52e15149a624e8fe6c7f4d824ca002a71a1d817c3a1e67",
+    "undriven_signals": "synthesis",
+    "unmatched_reference": 17,
+    "unmatched_reference_classification": {
+      "fixed_platform_pmu_count_bit15": 1,
+      "weight_sram_valid_read_dff": 16
+    },
+    "unread_not_compared": 511,
+    "verify_directly_undriven_output": false
+  },
+  "official_energy_or_score_computed": false,
+  "schema": "xu-formality-and-area-evidence-v1",
+  "server": "RDserver04",
+  "status": "TOOL_RESULTS_REVIEW_PENDING_NOT_TIMING_OR_SCORE_QUALIFIED"
+}
