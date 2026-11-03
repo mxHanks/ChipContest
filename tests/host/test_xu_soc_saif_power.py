@@ -167,12 +167,30 @@ class SaifPowerTests(unittest.TestCase):
                       firmware_input_sources_sha256={str(vendor): power.sha(vendor)}, build_command=['HOST_SYNTHETIC_NOT_VCS'])
         activity = directory / 'result.json'
         power.write(activity, report)
+        macros = []
+        for macro in alias_config['mapping']['macros']:
+            canonical = collector.sram_alias.slash(macro['instance'])[len(power.STRIP) + 1:]
+            # Synthetic modeled DC spelling: literal dotted leaf after storage.
+            actual = canonical.replace('/macro_storage/', '/macro_storage.').replace('/depth_bank', '.depth_bank').replace('/width_lane', '.width_lane')
+            if '/macro_storage.' in actual:
+                actual = actual.rsplit('/macro', 1)[0] + '.macro'
+            macros.append(dict(instance=actual, ref_name='RAMSP1024X16', lib_cell='HOST_LIBRARY/RAMSP1024X16',
+                pins=[dict(name=name, full_name=actual + '/' + name, direction='out' if name.startswith('Q[') else 'in')
+                      for name in sorted(power.mapped_macros.PIN_NAMES)]))
+        power.write(directory / 'mapped-inventory.json', dict(schema=power.mapped_macros.INVENTORY_SCHEMA,
+            status='EXPORTED_REVIEW_PENDING', netlist=power.identity(netlist), libraries=impl['libraries'],
+            provenance=dict(host_fixture=power.identity(vendor), scope='SYNTHETIC HOST INVENTORY; not actual PT export'),
+            macro_count=336, pin_bit_count=22512, macros=macros))
         return impl_path, impl, activity, report, netlist
+
+    def power_prepare(self, activity, *args, **kwargs):
+        kwargs.setdefault('mapped_sram_inventory', Path(activity).parent / 'mapped-inventory.json')
+        return power.prepare(activity, *args, **kwargs)
 
     def prepare(self, directory):
         impl_path, impl, activity, report, netlist = self.fixture(directory)
         out = directory / 'power-probe'
-        prepared = power.prepare(activity, impl_path, None, netlist, impl['constraints']['path'], out)
+        prepared = self.power_prepare(activity, impl_path, None, netlist, impl['constraints']['path'], out)
         return out, prepared, report
 
     def test_prepare_keeps_partial_unknowns_exact_inputs_and_manual_supported_saif_options(self):
@@ -191,6 +209,10 @@ class SaifPowerTests(unittest.TestCase):
             self.assertIn('set XU_CLOCK_MODE envelope', script)
             self.assertIn('total must be exactly 336', script)
             self.assertIn('get_lib_cells -of_objects $xu_all_macros', script)
+            self.assertNotIn('string map {. /}', script)
+            self.assertIn('task-mapped.saif', script)
+            self.assertEqual(prepared['tasks'][0]['mapped_macro_bridge_receipt']['relocated_pin_bits_added_as_port'], 21440)
+            self.assertEqual(prepared['tasks'][0]['mapped_macro_bridge_receipt']['unchanged_pin_bits_verified'], 1072)
             for phase in ('before', 'after'):
                 self.assertIn('source-default-%s.rpt' % phase, script)
                 self.assertIn('sram-pins-%s.rpt' % phase, script)
@@ -201,7 +223,7 @@ class SaifPowerTests(unittest.TestCase):
             self.assertGreater(sum(pin['TX'] for pin in states), 0)
             self.assertIn(report['tasks'][0]['sram_pin_alias_capture']['raw_saif']['path'], prepared['input_sha256'])
             with self.assertRaisesRegex(ValueError, 'must be new'):
-                power.prepare(prepared['activity']['path'], None, None, prepared['netlist']['path'], prepared['analysis_sdc']['path'], out)
+                self.power_prepare(prepared['activity']['path'], None, None, prepared['netlist']['path'], prepared['analysis_sdc']['path'], out)
 
     def test_mismatched_netlist_sdc_source_taskset_and_unsimulated_status_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -221,14 +243,14 @@ class SaifPowerTests(unittest.TestCase):
                 mutate(changed)
                 power.write(activity, changed)
                 with self.subTest(field=field), self.assertRaises(ValueError):
-                    power.prepare(activity, impl_path, None, net, sdc, directory / ('out-' + field.replace(' ', '-')), ids)
+                    self.power_prepare(activity, impl_path, None, net, sdc, directory / ('out-' + field.replace(' ', '-')), ids)
             changed = copy.deepcopy(report)
             key = next(key for key in changed['configuration']['rtl_sources_sha256'] if 'third-party' in key)
             changed['configuration']['rtl_sources_sha256'].pop(key)
             changed['configuration_sha256'] = collector.activity.canonical_hash(changed['configuration'])
             power.write(activity, changed)
             with self.assertRaisesRegex(ValueError, 'source differs'):
-                power.prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / 'out-source')
+                self.power_prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / 'out-source')
 
     def test_raw_log_request_window_and_macro_inventory_tampering_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -241,14 +263,14 @@ class SaifPowerTests(unittest.TestCase):
                 mutate(changed)
                 power.write(activity, changed)
                 with self.subTest(label=label), self.assertRaises(ValueError):
-                    power.prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / ('out-' + label))
+                    self.power_prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / ('out-' + label))
             changed = copy.deepcopy(report)
             log = Path(changed['tasks'][0]['boundary_log']['path'])
             log.write_text(log.read_text().replace('source_request=1 task_setup_writes=2', 'source_request=0 task_setup_writes=2'))
             changed['tasks'][0]['boundary_log'] = power.identity(log)
             power.write(activity, changed)
             with self.assertRaisesRegex(ValueError, 'clear evidence missing'):
-                power.prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / 'out-log')
+                self.power_prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / 'out-log')
 
     def test_ppa_prepared_bundle_is_checked_and_full_twelve_cannot_use_partial_collector(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -257,16 +279,16 @@ class SaifPowerTests(unittest.TestCase):
             ppa_out = directory / 'ppa-prepared'
             ppa.prepare(ROOT, ppa_out, impl, allow_unqualified=True)
             out = directory / 'power-prepared'
-            prepared = power.prepare(activity, None, ppa_out / 'prepared.json', netlist,
+            prepared = self.power_prepare(activity, None, ppa_out / 'prepared.json', netlist,
                                      ppa_out / 'constraints.sdc', out)
             self.assertEqual(prepared['ppa_prepared']['sha256'], power.sha(ppa_out / 'prepared.json'))
             self.assertIn(str(ppa_out / 'clock-review.tcl'), prepared['input_sha256'])
             with self.assertRaisesRegex(ValueError, 'absent from completed collector'):
-                power.prepare(activity, impl_path, None, netlist, impl['constraints']['path'],
+                self.power_prepare(activity, impl_path, None, netlist, impl['constraints']['path'],
                               directory / 'all-twelve', list(range(12)))
             (ppa_out / 'sta.tcl').write_text('changed generated PPA control\n')
             with self.assertRaisesRegex(ValueError, 'generated control changed'):
-                power.prepare(activity, None, ppa_out / 'prepared.json', netlist,
+                self.power_prepare(activity, None, ppa_out / 'prepared.json', netlist,
                               ppa_out / 'constraints.sdc', directory / 'bad-ppa')
 
     def test_library_roles_macro_count_and_runtime_input_mutation_fail_closed(self):
@@ -279,10 +301,10 @@ class SaifPowerTests(unittest.TestCase):
                 mutate(changed)
                 power.write(impl_path, changed)
                 with self.subTest(label=label), self.assertRaises(ValueError):
-                    power.prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / ('out-' + label.replace(' ', '-')))
+                    self.power_prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / ('out-' + label.replace(' ', '-')))
             power.write(impl_path, impl)
             out = directory / 'probe'
-            prepared = power.prepare(activity, impl_path, None, netlist, impl['constraints']['path'], out)
+            prepared = self.power_prepare(activity, impl_path, None, netlist, impl['constraints']['path'], out)
             Path(impl['libraries'][0]['path']).write_text('changed after prepare\n')
             with self.assertRaisesRegex(ValueError, 'SHA256 differs'):
                 power.run(out, sys.executable)
@@ -371,6 +393,29 @@ class SaifPowerTests(unittest.TestCase):
                                    directory, log, 5, environment)
             self.assertEqual(result['returncode'], 0)
             self.assertEqual(log.read_text().splitlines()[1:], [str(directory), str(directory / 'bin')])
+
+    def test_mapped_inventory_identity_and_mapped_activity_mutation_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            impl_path, impl, activity, report, netlist = self.fixture(directory)
+            inventory_path = directory / 'mapped-inventory.json'
+            inventory = power.read_json(inventory_path)
+            with self.assertRaisesRegex(ValueError, 'actual mapped SRAM pin inventory required'):
+                power.prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / 'missing')
+            for label, mutate, error in [
+                ('netlist', lambda x: x['netlist'].update(sha256='0' * 64), 'inventory netlist differs'),
+                ('library', lambda x: x['libraries'][0].update(sha256='0' * 64), 'inventory libraries differ'),
+                ('pin', lambda x: x['macros'][0]['pins'].pop(), '67 bit pins'),
+            ]:
+                changed = copy.deepcopy(inventory); mutate(changed); power.write(inventory_path, changed)
+                with self.subTest(label=label), self.assertRaisesRegex(ValueError, error):
+                    self.power_prepare(activity, impl_path, None, netlist, impl['constraints']['path'], directory / label)
+            power.write(inventory_path, inventory)
+            out = directory / 'prepared'
+            prepared = self.power_prepare(activity, impl_path, None, netlist, impl['constraints']['path'], out)
+            Path(prepared['tasks'][0]['saif']['path']).write_text('tampered mapped activity')
+            with self.assertRaisesRegex(ValueError, 'SHA256 differs'):
+                power.run(out, sys.executable)
 
 
 if __name__ == '__main__':

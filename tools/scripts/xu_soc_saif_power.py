@@ -20,12 +20,13 @@ import uuid
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools/ppa'))
 import xu_soc_task_activity as collector
+import xu_saif_mapped_macros as mapped_macros
 
 _spec = importlib.util.spec_from_file_location('xu_saif_power_ppa', ROOT / 'tools/scripts/xu_soc_ppa.py')
 ppa = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(ppa)
 require, sha, digest, write, tcl = ppa.require, ppa.sha, ppa.digest, ppa.write, ppa.tcl
-SCHEMA = 'xu-soc-saif-power-prepared-v1'
+SCHEMA = 'xu-soc-saif-power-prepared-v2'
 STRIP = 'tb_xu_soc_ppa/dut'
 REVIEW = 'Annotation file/default/propagated coverage, every SRAM pin including unknown dwell, and SRAM Liberty when/internal_power operating modes require review; no energy or score claim'
 DIAGNOSTIC = re.compile(r'^\s*(?:Error:|Error-|Fatal:|XU_FATAL:)|^\s*.*\b[1-9][0-9]* errors?\b', re.I)
@@ -202,7 +203,7 @@ def generate_tcl(impl, netlist, constraints, task, marker):
             ppa.clock_contract_checks() + 'set_propagated_clock [all_clocks]\nupdate_timing\n' + ppa.memory_checks(impl))
     body += 'set xu_expected_macros [list ' + ' '.join(tcl(name) for name in task['macro_names']) + ']\n'
     body += '''foreach_in_collection xu_c $xu_all_macros {
-  if {[lsearch -exact $xu_expected_macros [string map {. /} [get_object_name $xu_c]]] < 0} {error {mapped SRAM name differs from normalized activity}}
+  if {[lsearch -exact $xu_expected_macros [get_object_name $xu_c]] < 0} {error {mapped SRAM name differs from exported inventory}}
   if {[sizeof_collection [get_lib_cells -of_objects $xu_c]] != 1} {error {SRAM is unresolved or has no unique actual library cell}}
 }
 redirect -file units.rpt {report_units}
@@ -224,7 +225,7 @@ redirect -file check-timing.rpt {check_timing -verbose}
     set xu_pins [get_pins -quiet -of_objects $xu_c]
     if {[sizeof_collection $xu_pins] != 67} {error {SRAM signal pin count differs; review library interface}}
     foreach_in_collection xu_p $xu_pins {
-      puts "XU_SRAM_PIN name=[string map {. /} [get_object_name $xu_p]]"
+      puts "XU_SRAM_PIN name=[get_object_name $xu_p]"
       report_attribute -application $xu_p
     }
   }
@@ -234,7 +235,7 @@ redirect -file check-timing.rpt {check_timing -verbose}
 redirect -file power-hierarchy.rpt {report_power -hierarchy -verbose}
 redirect -file sram-power.rpt {
   foreach_in_collection xu_c $xu_all_macros {
-    puts "XU_SRAM_POWER_CELL name=[string map {. /} [get_object_name $xu_c]] ref=[get_attribute $xu_c ref_name]"
+    puts "XU_SRAM_POWER_CELL name=[get_object_name $xu_c] ref=[get_attribute $xu_c ref_name]"
     report_power -cell_power -nosplit -include_lib_cells $xu_c
   }
 }
@@ -259,7 +260,8 @@ redirect -file sram-library.rpt {
     return ppa.guarded_tcl(body, marker)
 
 
-def prepare(activity, implementation, prepared_path, netlist, constraints, out, task_ids=(0,), root=ROOT):
+def prepare(activity, implementation, prepared_path, netlist, constraints, out, task_ids=(0,), root=ROOT,
+            mapped_sram_inventory=None):
     out = Path(out).absolute()
     require(not out.exists() and not out.is_symlink(), 'output directory must be new; reuse is forbidden')
     require((implementation is None) != (prepared_path is None), 'choose exactly one implementation or PPA prepared manifest')
@@ -293,7 +295,19 @@ def prepare(activity, implementation, prepared_path, netlist, constraints, out, 
     task_ids = list(task_ids)
     require(task_ids and task_ids == sorted(set(task_ids)) and all(type(x) is int and 0 <= x < 12 for x in task_ids), 'task IDs must be unique increasing values in 0..11')
     tasks = checked_activity(report, impl, inventory, netlist_record, constraints_record, task_ids, records)
-    for path in (Path(__file__), Path(ppa.__file__), Path(collector.__file__), Path(collector.activity.__file__), Path(collector.sram_alias.__file__)):
+    require(mapped_sram_inventory is not None, 'actual mapped SRAM pin inventory required')
+    inventory_record = remember(records, mapped_sram_inventory)
+    mapped_inventory, actual_macros, _ = mapped_macros.inventory_macros(mapped_sram_inventory)
+    require(mapped_inventory['netlist']['sha256'] == netlist_record['sha256'] and
+            Path(mapped_inventory['netlist']['path']).resolve() == Path(netlist_record['path']).resolve(),
+            'mapped SRAM inventory netlist differs')
+    require(len(mapped_inventory['libraries']) == len(impl['libraries']) and
+            {(x['path'], x['sha256']) for x in mapped_inventory['libraries']} ==
+            {(x['path'], x['sha256']) for x in impl['libraries']}, 'mapped SRAM inventory libraries differ')
+    require(mapped_inventory['macro_count'] == 336 and mapped_inventory['pin_bit_count'] == 22512,
+            'actual mapped SRAM inventory must cover all 336 macros')
+    collect_identities(mapped_inventory, records)
+    for path in (Path(__file__), Path(ppa.__file__), Path(collector.__file__), Path(collector.activity.__file__), Path(collector.sram_alias.__file__), Path(mapped_macros.__file__)):
         remember(records, path)
     verify_inputs(records)
     full = task_ids == list(range(12)) and report['taskset_complete']
@@ -302,11 +316,31 @@ def prepare(activity, implementation, prepared_path, netlist, constraints, out, 
                     qualification='NOT_QUALIFIED', review_pending=REVIEW, method='one independent averaged PT process per task; read_saif normalized measured activity',
                     activity=activity_record, ppa_prepared=prepared_record, implementation=impl, root=str(Path(root).resolve()),
                     netlist=netlist_record, analysis_sdc=constraints_record, strip_path=STRIP,
+                    mapped_sram_inventory=inventory_record,
                     requested_task_ids=task_ids, taskset_complete=full, collector_taskset_complete=report['taskset_complete'],
                     qualification_gaps=gaps, input_sha256=records, producer_sha256=sha(__file__), tasks=[])
     for task in tasks:
         directory = out / ('task_%02d' % task['task_id'])
         directory.mkdir()
+        canonical_saif = task['saif']
+        bridge_receipt = mapped_macros.relocate(canonical_saif['path'],
+            report['configuration']['sram_pin_alias']['mapping_file']['path'], mapped_sram_inventory,
+            directory / 'task-mapped.saif', STRIP, directory / 'task-mapped-receipt.json')
+        measured = collector.activity.read_saif(directory / 'task-mapped.saif')
+        by_path = {}
+        for pin in measured['signals']:
+            by_path.setdefault(pin['path'], []).append(pin)
+        states_list = []
+        for macro in actual_macros.values():
+            for pin in macro['pins']:
+                candidates = by_path.get(STRIP + '/' + pin['full_name'], [])
+                require(candidates and all(collector.sram_alias.stats(x) == collector.sram_alias.stats(candidates[0]) for x in candidates),
+                        'mapped macro pin missing or conflicting: ' + pin['full_name'])
+                states_list.append(dict(candidates[0], mapped_path=pin['full_name']))
+        task.update(canonical_saif=canonical_saif, saif=identity(directory / 'task-mapped.saif'),
+                    mapped_macro_bridge=identity(directory / 'task-mapped-receipt.json'),
+                    mapped_macro_bridge_receipt=bridge_receipt,
+                    macro_names=sorted(actual_macros), measured_sram_pin_states=states_list)
         marker = 'XU_SOC_SAIF_POWER_TASK_%02d_COMPLETE_REVIEW_PENDING_%s' % (task['task_id'], uuid.uuid4().hex)
         states = directory / 'measured-sram-pins.json'
         write(states, dict(status='MEASURED_ACTIVITY_NOT_POWER_QUALIFIED', pins=task.pop('measured_sram_pin_states'),
@@ -331,10 +365,11 @@ def verify_prepared(out, manifest):
             'prepared taskset/completion identity differs')
     for task in manifest['tasks']:
         require(Path(task['directory']).name == task['directory'], 'invalid task output directory')
-        for key in ('script', 'measured_sram_pin_states'):
+        for key in ('script', 'measured_sram_pin_states', 'saif', 'mapped_macro_bridge'):
             record = task[key]
             require(Path(record['path']).absolute().parent == out / task['directory'], 'prepared task path escapes output')
             remember({}, record['path'], record['sha256'])
+        require(read_json(task['mapped_macro_bridge']['path']) == task['mapped_macro_bridge_receipt'], 'mapped macro bridge receipt differs')
     ppa.checked_implementation(manifest['implementation'], ppa.inventory(manifest['root']), allow_unqualified=True)
 
 
@@ -456,6 +491,8 @@ def main(argv=None):
     pre.add_argument('--netlist', type=Path, required=True)
     pre.add_argument('--constraints', type=Path, required=True)
     pre.add_argument('--root', type=Path, default=ROOT)
+    pre.add_argument('--mapped-sram-inventory', type=Path, required=True,
+                     help='actual PT-exported complete SRAM cell/pin inventory for the exact mapped netlist')
     pre.add_argument('--task-ids', type=collector.parse_task_ids, default=[0])
     pre.add_argument('--out', type=Path, required=True)
     exe = sub.add_parser('run')
@@ -466,7 +503,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     require(args.action is not None, 'choose prepare or run')
     if args.action == 'prepare':
-        result = prepare(args.activity, args.implementation, args.ppa_prepared, args.netlist, args.constraints, args.out, args.task_ids, args.root)
+        result = prepare(args.activity, args.implementation, args.ppa_prepared, args.netlist, args.constraints,
+                         args.out, args.task_ids, args.root, args.mapped_sram_inventory)
     else:
         result = run(args.out, args.pt, args.timeout, args.lc_root)
     print(result['status'] + ': ' + str(args.out))

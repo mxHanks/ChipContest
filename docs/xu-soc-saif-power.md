@@ -14,6 +14,7 @@ python3 tools/scripts/xu_soc_saif_power.py prepare \
   --implementation /private/implementation/implementation.json \
   --netlist /private/ppa/mapped.v \
   --constraints /private/ppa/constraints.sdc \
+  --mapped-sram-inventory /private/actual-pt-inventory/inventory.json \
   --out /private/saif-power-task0 \
   --task-ids 0
 ```
@@ -77,3 +78,22 @@ requires `-application` to include application attributes. The pin and library
 reports now use that option. Linked SRAM cells additionally get the documented
 `report_lib -power_arcs` report for review of the actual power arcs; this still
 does not automatically establish complete SRAM power-mode coverage.
+
+Actual DC names must now be supplied with the mandatory prepare option
+`--mapped-sram-inventory /private/actual-pt-inventory/inventory.json`.
+The inventory is an actual PT export for the exact mapped netlist and actual DB
+libraries, with every actual macro, library cell, 67 bit pins and their directions.
+Preparation freezes its provenance files and rejects mismatched netlist/library
+identities. A separately hashed `task-mapped.saif` relocates all canonical SRAM
+pin statistics through `xu_saif_mapped_macros.py`; literal dots inside DC's
+flattened instance names remain literal. The original raw and canonical SAIF
+remain immutable. The original capture/window/normalization guards still run
+before this bridge. Generated power Tcl uses actual names for every per-pin and
+per-macro report; it does not flatten names for reporting comparisons.
+
+The bridge records a complete name bijection and exact statistics, including
+unknown dwell, and every generated activity file/receipt is frozen before PT.
+This solves the observed canonical-name/mapped-name mismatch only. Coverage of
+mapped standard cells still requires file/default/propagation review, and linked
+SRAM libraries still need independent power-mode review. No complete annotation
+or energy qualification follows just from successful name relocation.
