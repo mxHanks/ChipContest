@@ -29,7 +29,9 @@ require, sha, digest, write, tcl = ppa.require, ppa.sha, ppa.digest, ppa.write, 
 SCHEMA = 'xu-soc-saif-power-prepared-v2'
 STRIP = 'tb_xu_soc_ppa/dut'
 REVIEW = 'Annotation file/default/propagated coverage, every SRAM pin including unknown dwell, and SRAM Liberty when/internal_power operating modes require review; no energy or score claim'
-DIAGNOSTIC = re.compile(r'^\s*(?:Error:|Error-|Fatal:|XU_FATAL:)|^\s*.*\b[1-9][0-9]* errors?\b', re.I)
+# Search already visits each position. A leading \s*.* on the count branch
+# needlessly re-scanned indentation in very large PT attribute reports.
+DIAGNOSTIC = re.compile(r'^[ \t]*(?:Error:|Error-|Fatal:|XU_FATAL:)|\b[1-9][0-9]* errors?\b', re.I)
 
 
 def identity(path):

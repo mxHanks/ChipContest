@@ -394,6 +394,17 @@ class SaifPowerTests(unittest.TestCase):
             self.assertEqual(result['returncode'], 0)
             self.assertEqual(log.read_text().splitlines()[1:], [str(directory), str(directory / 'bin')])
 
+    def test_report_diagnostic_scan_handles_long_indentation_without_backtracking(self):
+        for text in [' Error: bad', '\tError-[BAD] bad', 'XU_FATAL: bad', 'summary: 2 errors', '1 error']:
+            self.assertIsNotNone(power.DIAGNOSTIC.search(text))
+        for text in ['0 errors', 'ordinary attribute 64 value', 'Warning: no activity']:
+            self.assertIsNone(power.DIAGNOSTIC.search(text))
+        # A subprocess timeout makes a regression fail instead of hanging the
+        # suite while scanning unusually long whitespace in large reports.
+        code = 'import re; p=re.compile(' + repr(power.DIAGNOSTIC.pattern) + ',re.I); assert p.search(" "*40000+"ordinary_attribute") is None'
+        result = subprocess.run([sys.executable, '-c', code], timeout=3)
+        self.assertEqual(result.returncode, 0)
+
     def test_mapped_inventory_identity_and_mapped_activity_mutation_are_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
