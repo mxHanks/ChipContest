@@ -1,0 +1,177 @@
+{"command": ["pt_shell", "-f", "probe.tcl"], "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pt-activity-conversion-515-probe-20261103-03/tc515-witness-fs", "started_utc": "2026-11-03T06:34:50.813715+00:00", "timeout_seconds": 1200}
+
+                                 PrimeTime (R)
+
+              Version T-2022.03-SP5-1 for linux64 - Mar 28, 2023 
+
+                    Copyright (c) 1988 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+if {[catch {
+set_app_var power_enable_analysis true
+set_app_var power_analysis_mode averaged
+set_app_var link_path [list * {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db} {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db}]
+redirect -file tool-version.rpt {puts $sh_product_version}
+read_verilog {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/mapped.v}
+if {![link_design {xu_soc_ppa_top}]} {error {PT power link failed}}
+
+redirect -file units.rpt {report_units}
+redirect -file read-saif.rpt {if {![read_saif {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pt-activity-conversion-515-probe-20261103-03/tc515-witness-fs/synthetic.saif} -strip_path {probe/dut} -report_inconsistent_annotation inconsistent.rpt]} {error {synthetic SAIF read failed}}}
+set xu_f [open pins.tsv {WRONLY CREAT EXCL}]
+puts $xu_f "phase\tdesired_name\treported_name\ttoggle_rate\ttoggle_source\tglitch_rate\tglitch_source\tstatic_probability\tstatic_source"
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/A[0]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/Q[0]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/A[1]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/Q[1]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/A[2]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/Q[2]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/A[3]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/Q[3]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/Q[4]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/Q[5]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/Q[6]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+set xu_p [get_pins -quiet {u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro/Q[7]}]
+if {[sizeof_collection $xu_p] != 1} {error {actual probe pin absent}}
+set xu_name [get_object_name $xu_p]
+set xu_a [get_switching_activity -toggle_rate -glitch_rate -static_probability $xu_p]
+if {[llength $xu_a] != 1 || [llength [lindex $xu_a 0]] != 7} {error {unexpected actual query tuple}}
+set xu_row [linsert [lindex $xu_a 0] 0 before $xu_name]
+foreach xu_field $xu_row {if {[regexp {[\t\r\n]} $xu_field]} {error {TSV control in actual query}}}
+puts $xu_f [join $xu_row "\t"]
+close $xu_f
+puts {XU_ACTIVITY_CONVERSION_EXPORTED_REVIEW_PENDING}
+
+puts {XU_ACTIVITY_CONVERSION_PROBE_COMPLETE}
+} xu_error]} {
+  puts stderr "XU_FATAL: $xu_error"
+  exit 1
+}
+Information: Checked out license 'PrimePower' (PT-019)
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/mapped.v'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db'
+Linking design xu_soc_ppa_top...
+Information: Removing 926 unneeded designs..... (LNK-034)
+Information: 979 (76.72%) library cells are unused in library scc40nll_vhsc40_rvt_ss_v0p99_125c_basic..... (LNK-045)
+Information: total 979 library cells are unused (LNK-046)
+Design 'xu_soc_ppa_top' was successfully linked.
+Information: There are 122228 leaf cells, ports, hiers and 209384 nets in the design (LNK-047)
+Warning: No clock specified. 
+	 PrimePower will derive a default switching activity of (0.1/ns) from the library time unit (1ns), 
+	 because no clock is defined in the design. In order to calculate power accurately,
+	 PrimePower needs to know what frequency your design works on. 
+	 You can specify the frequency by defining one or more clocks. 
+	 For designs without clocks, you can specify a virtual clock 
+	 by using the command 
+	 'create_clock -name virtual_clock_name -period your_design_period'. 
+
+  (PWR-171)
+XU_ACTIVITY_CONVERSION_EXPORTED_REVIEW_PENDING
+XU_ACTIVITY_CONVERSION_PROBE_COMPLETE
+exit 0
+Information: Defining new variable 'xu_name'. (CMD-041)
+Information: Defining new variable 'xu_field'. (CMD-041)
+Information: Defining new variable 'xu_error'. (CMD-041)
+Information: Defining new variable 'xu_row'. (CMD-041)
+Information: Defining new variable 'xu_a'. (CMD-041)
+Information: Defining new variable 'xu_f'. (CMD-041)
+Information: Defining new variable 'xu_p'. (CMD-041)
+
+Timing updates: 0 (0 implicit, 0 explicit) (0 incremental, 0 full, 0 logical)
+Noise updates: 0 (0 implicit, 0 explicit) (0 incremental, 0 full)
+Maximum memory usage for this session: 3146.85 MB
+CPU usage for this session: 9 seconds 
+Elapsed time for this session: 7 seconds
+Elapsed time spent in memory sampling: 0 seconds
+Diagnostics summary: 1 warning, 12 informationals
+
+Thank you for using pt_shell!
