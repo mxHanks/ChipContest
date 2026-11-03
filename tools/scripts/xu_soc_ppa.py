@@ -36,6 +36,14 @@ SOURCE_PROFILES = {
     's2d-doublebuf': dict(commit='dd692c190dadafd9baa6dffe8514a3f684e7fbf5', changed_files=[
         'rtl/e203/perips/LinearAutoGroupCore.sv', 'rtl/e203/perips/LinearBufferedComputeCore.sv',
         'rtl/e203/perips/LinearDoubleBufferCore.sv', 'rtl/e203/perips/accel_icb_slave.v']),
+    's3-pe32': dict(commit='fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5', changed_files=[
+        'rtl/e203/perips/LinearAutoGroupCore.sv',
+        'rtl/e203/perips/XuParallelAutoGroupCore32.sv',
+        'rtl/e203/perips/XuParallelBiasCache32.sv',
+        'rtl/e203/perips/XuParallelComputeCore32.sv',
+        'rtl/e203/perips/XuParallelWeightBank32.sv',
+        'rtl/e203/perips/accel_icb_slave.v', 'rtl/e203/perips/xu_pe32_icb_slave.v',
+        'rtl/e203/subsys/e203_subsys_perips.v', 'vsim/bin/run.makefile']),
 }
 BIAS_MEMORY = RTL+'/perips/mem_32x40.sv'
 BIAS_ADAPTER_SHA256 = '019f86f6acc3bdf0e3d2678de1b90540deac1ec50850c010d0263e3d2231c2fd'
@@ -58,6 +66,35 @@ BIAS_GROUP = dict(name='accelerator_bias', logical_bits=8*32*40,
 RETAINED = {'cpu': (MAIN+'/u_e203_cpu_top', 'e203_cpu_top*'),
             'accelerator': (MAIN+'/u_e203_subsys_perips/u_accel_icb_slave', 'accel_icb_slave*'),
             'interconnect': (MAIN+'/u_e203_subsys_perips/u_sirv_ppi_fab', 'sirv_icb1to16_bus*')}
+PE32_MAIN_COMMIT = '94ce6f0f54fffdd590ff9a3ebad0197ec0fd9114'
+PE32_DEFINES = ['SYNTHESIS', 'DISABLE_SV_ASSERTION=1', 'XU_ACCEL_PE32=1']
+PE32_CONFIGURATION = dict(accel_variant='pe32', physical_pes=32, wrapper_reference='xu_pe32_icb_slave',
+                          logical_weight_bytes=32768, logical_weight_banks=32,
+                          logical_weight_depth=512, weight_word_bits=16,
+                          weight_macros=32, physical_weight_depth=1024,
+                          physical_weight_bytes=65536, weight_padding_bytes=32768,
+                          fixed_soc_macros=320, full_soc_macros=352)
+PE32_WEIGHT_GROUP = dict(name='accelerator_weights', logical_bits=32768*8,
+                         instance_pattern=MAIN+'/u_e203_subsys_perips/u_accel_icb_slave/u_linear_compute_core/core/banks_*',
+                         macro_ref='RAMSP1024X16', depth=1024, width=16, count=32,
+                         logical_banks=32, logical_depth=512, logical_width=16,
+                         physical_bits=65536*8, padding_bits=32768*8)
+
+
+def retained_instances(profile):
+    retained = dict(RETAINED)
+    if profile == 's3-pe32':
+        retained['accelerator'] = (RETAINED['accelerator'][0], 'xu_pe32_icb_slave*')
+    return retained
+
+
+def mapping_identity(impl):
+    identity = dict(replacements=impl['replacements'], added_sources=impl['added_sources'])
+    if impl.get('source_profile') == 's3-pe32':
+        identity.update(source_profile='s3-pe32', defines=impl['defines'],
+                        accelerator_configuration=impl['accelerator_configuration'],
+                        source_freeze=impl.get('source_freeze', {}))
+    return identity
 
 def require(ok, message):
     if not ok:
@@ -170,6 +207,13 @@ def inventory(root):
     sizes['accelerator_weights'] = dict(bytes=32768, bits=32768*8, words=16384, word_bits=16,
                                         implementation='16 mem_1024x16 behavioral instances unless substituted',
                                         physical_1024x16_macros=16)
+    child_commit = git(root/SUB, 'rev-parse', 'HEAD')
+    pe32 = child_commit == SOURCE_PROFILES['s3-pe32']['commit']
+    if pe32:
+        sizes['accelerator_weights'].update(
+            implementation='32 banks, one mem_1024x16 each; upper512 rows per macro unreachable',
+            physical_1024x16_macros=32, logical_banks=32, logical_depth=512,
+            physical_depth=1024, physical_bits=65536*8, padding_bits=32768*8)
     arrays = []
     for path in paths:
         text = comments(path.read_text())
@@ -177,9 +221,9 @@ def inventory(root):
             arrays.append(dict(path=path.relative_to(root).as_posix(), kind=match[1],
                                width=match[2], name=match[3], bounds=match[4],
                                note='source-level declaration only; elaboration determines live storage'))
-    return dict(schema='xu-full-soc-source-inventory-v1', status='INVENTORIED_NOT_QUALIFIED',
+    result = dict(schema='xu-full-soc-source-inventory-v1', status='INVENTORIED_NOT_QUALIFIED',
                 created_utc=datetime.now(timezone.utc).isoformat(), root=str(root),
-                main_commit=git(root, 'rev-parse', 'HEAD'), e203_commit=git(root/SUB, 'rev-parse', 'HEAD'),
+                main_commit=git(root, 'rev-parse', 'HEAD'), e203_commit=child_commit,
                 platform_source=source, platform_source_manifest_sha256=digest(source),
                 testbench=dict(path=str(tb_path), sha256=sha(tb_path)), memories=sizes,
                 total_required_sram_bits=sum(REQUIRED_BITS.values()),
@@ -200,12 +244,19 @@ def inventory(root):
                     'Wrapper-only VCD cannot measure CPU/interconnect/shared SRAM energy',
                     'Mapped gate/SRAM functional equivalence and twelve-task full-scope activity remain required'],
                 scope='inventory only; no synthesized area, timing closure, power, or contest qualification assertion')
+    if pe32:
+        result.update(source_profile='s3-pe32', accelerator_configuration=dict(PE32_CONFIGURATION),
+                      required_compile_defines=list(PE32_DEFINES),
+                      total_physical_sram_bits=352*1024*16,
+                      hypothetical_1024x16_macro_counts=dict(itcm=32, dtcm=32, shared=256, accelerator_weights=32),
+                      hypothetical_1024x16_macro_total=352)
+    return result
 
 
 def template(inv, profile='baseline'):
     require(profile in SOURCE_PROFILES, 'unknown source profile: '+str(profile))
     replacements=REPLACEABLE|({BIAS_MEMORY} if profile=='sram-bias' else set())
-    return dict(schema='xu-full-soc-implementation-v1', top='xu_soc_ppa_top',
+    result = dict(schema='xu-full-soc-implementation-v1', top='xu_soc_ppa_top',
                 source_profile=profile,
                 platform_source_manifest_sha256=inv['platform_source_manifest_sha256'],
                 replacements={name:dict(path='/absolute/qualified/replacement/'+Path(name).name, sha256='REQUIRED')
@@ -222,11 +273,16 @@ def template(inv, profile='baseline'):
                                     macro_ref='RAMSP1024X16', depth=1024, width=16, count=bits//16384)
                                for name,bits in REQUIRED_BITS.items()]+([dict(BIAS_GROUP)] if profile=='sram-bias' else []),
                 retained_instances=[dict(name=name,pattern=record[0],reference_pattern=record[1])
-                                    for name,record in sorted(RETAINED.items())],
+                                    for name,record in sorted(retained_instances(profile).items())],
                 mapping_proof=dict(path='/absolute/verified/mapping-proof.json', sha256='REQUIRED'),
                 clock_review=dict(path='/absolute/reviewed/clock-review.json', sha256='REQUIRED'),
                 activity=None,
                 note='Fill actual paths/hashes after SRAM-model, byte-mask, timing, bus and whole-SoC functional checks. No defaults qualify.')
+    if profile == 's3-pe32':
+        result.update(accel_variant='pe32', accelerator_configuration=dict(PE32_CONFIGURATION),
+                      defines=list(PE32_DEFINES))
+        result['memory_groups'][-1] = dict(PE32_WEIGHT_GROUP)
+    return result
 
 
 def absolute_file(record, label):
@@ -265,7 +321,7 @@ def mapping_review_template(impl):
     for record in list(impl['replacements'].values())+impl['added_sources']:
         absolute_file(record,'mapping source')
     return dict(schema='xu-full-soc-mapping-review-v1',status='UNREVIEWED',
-                mapping_sha256=digest(dict(replacements=impl['replacements'],added_sources=impl['added_sources'])),
+                mapping_sha256=digest(mapping_identity(impl)),
                 checks={name:dict(status='NOT_RUN',log=None,review=None) for name in MAPPING_CHECKS},
                 mapped_equivalence=dict(status='NOT_RUN',netlist_sha256=None,log=None),
                 note='No prefilled PASS. Whole-SoC RTL mapping checks do not substitute mapped-netlist equivalence or SRAM PVT timing eligibility.')
@@ -300,6 +356,22 @@ def checked_implementation(impl, inv, allow_unqualified=False):
     defines=impl.get('defines',[])
     require('SYNTHESIS' in defines and not any('FPGA_SOURCE' in x for x in defines), 'ASIC SYNTHESIS with actual clock gating is required')
     require(all(re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*(?:=[A-Za-z0-9_]+)?', x) for x in defines), 'invalid defines')
+    if profile == 's3-pe32':
+        require(inv.get('main_commit') == PE32_MAIN_COMMIT,
+                's3-pe32 requires the exact approved candidate main commit')
+        require(defines == PE32_DEFINES, 's3-pe32 requires the exact frozen PE32 compile defines')
+        require(impl.get('accel_variant') == 'pe32' and
+                encoded(impl.get('accelerator_configuration')) == encoded(PE32_CONFIGURATION),
+                's3-pe32 accelerator variant/geometry/padding differs')
+        require(inv.get('source_profile') == 's3-pe32' and
+                encoded(inv.get('accelerator_configuration')) == encoded(PE32_CONFIGURATION),
+                's3-pe32 source inventory must describe the same physical variant')
+        require(freeze and freeze.get('defines_sha256') == digest(defines) and
+                freeze.get('accelerator_configuration_sha256') == digest(PE32_CONFIGURATION),
+                's3-pe32 source freeze must bind exact defines and accelerator configuration')
+    else:
+        require(not any(x.split('=')[0] == 'XU_ACCEL_PE32' for x in defines),
+                'PE32 compile define is allowed only for s3-pe32 profile')
     groups=impl.get('memory_groups',[])
     expected_names=set(REQUIRED_BITS)|({'accelerator_bias'} if profile=='sram-bias' else set())
     require({g.get('name') for g in groups}==expected_names and len(groups)==len(expected_names),
@@ -307,6 +379,9 @@ def checked_implementation(impl, inv, allow_unqualified=False):
     for g in groups:
         if g['name']=='accelerator_bias':
             require(g==BIAS_GROUP, 'frozen bias SRAM geometry/count/scope/padding differs')
+            continue
+        if g['name']=='accelerator_weights' and profile=='s3-pe32':
+            require(encoded(g)==encoded(PE32_WEIGHT_GROUP), 'frozen PE32 weight macro geometry/scope/padding differs')
             continue
         require(g.get('logical_bits')==REQUIRED_BITS[g['name']], 'logical memory capacity differs: '+g['name'])
         for k in ['count','width','depth']:
@@ -317,12 +392,11 @@ def checked_implementation(impl, inv, allow_unqualified=False):
     retained=impl.get('retained_instances',[])
     require({x.get('name') for x in retained}=={'cpu','accelerator','interconnect'} and len(retained)==3,
             'CPU/accelerator/interconnect hierarchy checks required')
-    require(all((x.get('pattern'),x.get('reference_pattern'))==RETAINED[x['name']] for x in retained),
+    require(all((x.get('pattern'),x.get('reference_pattern'))==retained_instances(profile)[x['name']] for x in retained),
             'actual fixed CPU/accelerator/interconnect hierarchy and reference guards required')
     proof_path=absolute_file(impl.get('mapping_proof'), 'mapping proof')
     proof=json.loads(proof_path.read_text())
-    mapping_identity=dict(replacements=impl['replacements'],added_sources=impl['added_sources'])
-    require(proof.get('mapping_sha256')==digest(mapping_identity), 'mapping proof is not bound to exact implementation sources')
+    require(proof.get('mapping_sha256')==digest(mapping_identity(impl)), 'mapping proof is not bound to exact implementation sources')
     checks=proof.get('checks',{})
     gaps=[]
     for name in MAPPING_CHECKS:
@@ -533,6 +607,8 @@ def verify_prepared(root,out,manifest):
 
 def activity_power(out, record, env):
     prepared=json.loads((out/'prepared.json').read_text());impl=prepared['implementation']
+    require(impl.get('source_profile') != 's3-pe32',
+            'PE32 energy requires candidate-specific clear/request-window activity; legacy VCD power is not supported')
     execution=json.loads((out/'execution.json').read_text())
     require(execution.get('status')=='EXECUTED_NOT_QUALIFIED','DC/PT execution must complete before power')
     vcd=absolute_file(record.get('vcd'),'VCD')
@@ -541,7 +617,7 @@ def activity_power(out, record, env):
     result=json.loads(resultpath.read_text());log=logpath.read_text(errors='replace')
     require(result.get('status')=='PASS' and result.get('tasks')==12 and result.get('outputs')==304128 and result.get('write_words')==608256,
             'activity must accompany complete twelve-task numerical verification')
-    require(record.get('mapping_sha256')==digest(dict(replacements=impl['replacements'],added_sources=impl['added_sources'])), 'activity mapping source differs')
+    require(record.get('mapping_sha256')==digest(mapping_identity(impl)), 'activity mapping source differs')
     require(record.get('source_manifest_sha256')==prepared['input_manifest_sha256'],'activity full source manifest differs')
     # Preserve DC's mapped SDC identity separately from the exact contract sourced by PT.
     require(record.get('netlist_sha256')==sha(out/'mapped.v')==execution.get('netlist_sha256') and
@@ -624,7 +700,7 @@ def main():
     a=p.parse_args();out=a.out.resolve();root=a.root.resolve()
     if a.action=='inventory':
         require(not out.exists(),'inventory output exists');out.mkdir(parents=True)
-        inv=inventory(root);write(out/'inventory.json',inv);write(out/'implementation-template.json',template(inv));print('INVENTORIED_NOT_QUALIFIED '+str(out));return 0
+        inv=inventory(root);write(out/'inventory.json',inv);write(out/'implementation-template.json',template(inv,inv.get('source_profile','baseline')));print('INVENTORIED_NOT_QUALIFIED '+str(out));return 0
     if a.action=='review-template':
         require(a.implementation is not None,'--implementation required')
         require(not out.exists(),'review output exists');out.mkdir(parents=True)
