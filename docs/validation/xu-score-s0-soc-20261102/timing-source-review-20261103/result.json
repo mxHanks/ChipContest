@@ -1,0 +1,47 @@
+{
+  "independent_fresh_proof": {
+    "boundary_bits": [
+      6,
+      7,
+      8,
+      68,
+      69,
+      70,
+      118
+    ],
+    "copied_combinational_cell_count": 21,
+    "latch_enable_polarity": 0,
+    "limitations": "No analog delay, APB setup/hold, metastability, mapped-latch timing or full-SoC qualification; this proves one Boolean relation only",
+    "returncode": 0,
+    "sha256": {
+      "enable-cone.json": "72597908bcc1afea80d496203b6b1d0dc9afbbc08f7d463b8a3d9af0709c4251",
+      "prove-enable.log": "d94cf3a7d788f9fdb168949865cc02c9cc1482ef048da2ffd64c46452d65c70e",
+      "prove-enable.py": "d87d0227d4651f1e8ae0773133ba3621194135f9c0c4d3d405ecdee91ebbdfbe",
+      "prove-enable.ys": "ff49f06c4c3f073215ee55dff52e7430bfa4f620c394bddb3de1bec2e169e8d4",
+      "uart-proc.json": "6f06602a9d78a3540cfbee0b9f4dd6831a802b9f6a7f6da203b2f93746351fe3"
+    },
+    "statement": "actual UART latch transparency enable iff fifo_tx_valid, for arbitrary current register state and all two-state APB inputs; D is PWDATA[7:0]",
+    "status": "BOOLEAN_ENABLE_RELATION_PROVED_NOT_TIMING_QUALIFIED"
+  },
+  "not_established": [
+    "No analog latch delay or setup/hold, APB temporal protocol, metastability/MTBF,150MHz SoC qualification",
+    "Historical07/15 timing findings do not establish current08 residual check counts; full08 reports not yet retrieved",
+    "No production RTL/SDC changes or timing exceptions applied"
+  ],
+  "source_scope": {
+    "APB_ADDR_WIDTH": 32,
+    "json_sha256": "6f06602a9d78a3540cfbee0b9f4dd6831a802b9f6a7f6da203b2f93746351fe3",
+    "log_sha256": "4958f2f8bcb91c27d309bf201a3e02ce629d4628e201389dac66c4abfbdcd47d",
+    "returncode": 0,
+    "sources": {
+      "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/apb_uart.v": "bd31f4a19b8e81ba2c8ce02b3244ada38cf211445d8ec96151d55f7e946ecadc",
+      "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/io_generic_fifo.v": "106ee607c8e48cee322a61295b52cc275c0fa540ec6d78547723cca5e9dfd0b1",
+      "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_interrupt.v": "75298c2bfb4921cee757641927d55500a54f8604d808f59717834e8507045e60",
+      "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_rx.v": "3eaff563777043772c66d1bf504ff5ddcd5723689b53a50444bb90aec618c39a",
+      "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_tx.v": "d21960c4faffb9bbd0687db02d119ac1e95b6f495b5b49f5efcaed18667dbe83"
+    },
+    "status": "EXTRACTED_SOURCE_ONLY_NOT_TIMING_QUALIFIED",
+    "tool": "Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)"
+  },
+  "status": "SOURCE_BOOLEAN_RELATION_RECHECKED_NOT_TIMING_QUALIFIED"
+}
