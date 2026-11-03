@@ -355,14 +355,20 @@ class CompactEvidenceTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError,'actual Tcl bound'):
                     m.audit_request(request,fixture.output())
 
-    def test_sentinel_source_contradiction_is_not_erased(self):
+    def test_uninitialized_value_preserves_source_as_in_actual_installed_man(self):
         name='hier/generate.dot[0]/A[0]'
         pin=dict(mapped_path=name,path='tb/dut/'+name,kind='PORT',T0=50,T1=50,TX=0,TC=25,IG=0)
-        for value,source in (('-1','file'),('.25','UNINITIALIZED')):
+        for value,source,reason in (
+                ('-1','file','QUERY_VALUE_UNINITIALIZED_WITH_DECLARED_SOURCE_REVIEW_REQUIRED'),
+                ('.25','UNINITIALIZED','VALUE_SOURCE_SENTINEL_CONTRADICTION')):
             row=dict(toggle_rate=value,toggle_source=source,glitch_rate='0',glitch_source='file',static_probability='.5',static_source='file')
             row.update({field+'_value':m.decimal_value(row[field],field) for field in m.FIELDS})
             review=m.review_pin(pin,row,100,Decimal('1e-9'),Decimal('1e-9'))
-            self.assertIn('toggle_rate:VALUE_SOURCE_SENTINEL_CONTRADICTION',review['review_reasons'])
+            self.assertIn('toggle_rate:'+reason,review['review_reasons'])
+            if value == '-1':
+                self.assertNotIn('toggle_rate:VALUE_SOURCE_SENTINEL_CONTRADICTION',review['review_reasons'])
+                self.assertEqual(review['observations']['toggle_rate']['source'],'file')
+                self.assertEqual(review['observations']['toggle_rate']['value'],'-1')
 
     def test_decimal_print_interval_does_not_invent_count_precision_or_zero(self):
         name='hier/dot.macro/A[0]';pin=dict(mapped_path=name,path='tb/dut/'+name,kind='PORT',T0=50,T1=50,TX=0,TC=26,IG=0)

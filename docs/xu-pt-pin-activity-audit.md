@@ -48,7 +48,7 @@ TSV 必须保留原始 9 列表头和 LF 换行：
 phase desired_name reported_name toggle_rate toggle_source glitch_rate glitch_source static_probability static_source
 ```
 
-分隔符为 TAB。每阶段的 actual inventory pin 恰好出现一次，`desired_name=reported_name`，phase 不可互换。每项 source 单独保留，支持安装版命令所列的 `file`、`propagated`、`default`、`UNINITIALIZED`、`create_clock`、`set_switching_activity`、`set_case_analysis`、`implied`。`-2`、NaN/Inf、非法负数、额外/缺失/重复 pin 和无效数值均为结构失败；`-1` 保留为未标注发现。source 与 sentinel 相矛盾会逐 pin 记录。
+分隔符为 TAB。每阶段的 actual inventory pin 恰好出现一次，`desired_name=reported_name`，phase 不可互换。每项 source 单独保留，支持安装版命令所列的 `file`、`propagated`、`default`、`UNINITIALIZED`、`create_clock`、`set_switching_activity`、`set_case_analysis`、`implied`。`-2`、NaN/Inf、非法负数、额外/缺失/重复 pin 和无效数值均为结构失败；`-1` 保留为未标注发现。安装版 man 的 time-based VCD 示例明确允许数值为 `-1`、来源仍为 `file`：来源已知而查询值尚未解析完成，需单列待审，不能据此称来源矛盾。来源为 `UNINITIALIZED` 却具有非 `-1` 值时仍单列不一致。此区别不把任何 `-1` 转成零。
 
 measured 状态必须恰好 join actual inventory，保留 `T0/T1/TX/TZ/TB/TC/IG`；非负整数 dwell 总和必须等于正式任务 duration。未识别统计字段会失败，避免静默丢弃。原始路径必须为 prepared strip path 加实际 mapped pin 路径。程序审核的是先前冻结的 measured 提取文件，本次不重新解析原始 SAIF；该限制写入结果。
 

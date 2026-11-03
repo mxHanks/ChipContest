@@ -457,8 +457,12 @@ def review_pin(pin, query, duration, timescale, library_unit):
         source = query[SOURCE_KEY[field]]
         if source != 'file':
             reasons.append(field + ':SOURCE_' + source)
-        if (found == -1) != (source == 'UNINITIALIZED'):
+        if source == 'UNINITIALIZED' and found != -1:
             reasons.append(field + ':VALUE_SOURCE_SENTINEL_CONTRADICTION')
+        if found == -1 and source != 'UNINITIALIZED':
+            # Installed PT man explicitly shows -1 with source=file before
+            # time-based update_power. Source is known while value is pending.
+            reasons.append(field + ':QUERY_VALUE_UNINITIALIZED_WITH_DECLARED_SOURCE_REVIEW_REQUIRED')
         if found == -1:
             reasons.append(field + ':UNINITIALIZED')
         if 'expected' not in observation or found == -1:
