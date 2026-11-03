@@ -195,7 +195,7 @@ proc get_object_name {cell} {return $cell}
 proc get_attribute {cell attribute} {dict get $::refs $cell}
 proc foreach_in_collection {variable cells body} {uplevel 1 [list foreach $variable $cells $body]}
 '''
-        for profile in ['baseline','h2-only','sram-bias']:
+        for profile in ['baseline','h2-only','sram-bias','s2b-packed','s2c-autogroup']:
             impl=PPA.template(dict(platform_source_manifest_sha256='HOST'),profile)
             refs={}
             for group in impl['memory_groups']:

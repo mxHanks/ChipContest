@@ -29,6 +29,10 @@ SOURCE_PROFILES = {
     'sram-bias': dict(commit='eee41507965d562066af3335192e3ef93ef36d31', changed_files=[
         'rtl/e203/perips/BiasSramCache.sv', 'rtl/e203/perips/LinearSramCachedCore.sv',
         'rtl/e203/perips/accel_icb_slave.v', 'rtl/e203/perips/mem_32x40.sv']),
+    's2b-packed': dict(commit='d5faa5e8c857fa35df62a68de667bdb8a6e954f7', changed_files=[
+        'rtl/e203/perips/accel_icb_slave.v']),
+    's2c-autogroup': dict(commit='dd149bb34aa1c3feca066ffbf9bdd3311f4b954c', changed_files=[
+        'rtl/e203/perips/LinearAutoGroupCore.sv', 'rtl/e203/perips/accel_icb_slave.v']),
 }
 BIAS_MEMORY = RTL+'/perips/mem_32x40.sv'
 BIAS_ADAPTER_SHA256 = '019f86f6acc3bdf0e3d2678de1b90540deac1ec50850c010d0263e3d2231c2fd'
