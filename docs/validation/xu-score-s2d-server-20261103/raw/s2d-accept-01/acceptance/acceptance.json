@@ -1,0 +1,369 @@
+{
+  "status": "PASS",
+  "scope": "VCS development acceptance; default Icarus helper tests identified separately; no S0/PPA/power/retention claim",
+  "profile": "vcs-s2d-doublebuf-with-four-direct-vcs-and-autogroup-control",
+  "steps": [
+    {
+      "name": "host",
+      "command": [
+        "env",
+        "XU_WRAPPER_SIM=vcs",
+        "XU_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-accept-01/acceptance/host-wrapper-vcs",
+        "/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "PASS",
+      "tests": 59,
+      "skipped": 4,
+      "helper_backends": {
+        "cached": "vcs via XU_WRAPPER_SIM=vcs",
+        "packed_stream_autogroup_doublebuf": "Icarus if installed; else skip; mandatory VCS supplements above"
+      }
+    },
+    {
+      "name": "numeric",
+      "command": [
+        "/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/numeric",
+        "-v"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "vectors",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "check-vectors",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-accept-01/acceptance/vectors",
+        "--firmware-schedule",
+        "bias-hw-doublebuf-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "doctor",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-accept-01/acceptance/doctor",
+        "--firmware-schedule",
+        "bias-hw-doublebuf-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "baseline",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "baseline",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-accept-01/acceptance/baseline",
+        "--firmware-schedule",
+        "bias-hw-doublebuf-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic1",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-accept-01/acceptance/synthetic1",
+        "--firmware-schedule",
+        "bias-hw-doublebuf-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 988259
+    },
+    {
+      "name": "synthetic2",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "2",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-accept-01/acceptance/synthetic2",
+        "--firmware-schedule",
+        "bias-hw-doublebuf-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 1976521
+    },
+    {
+      "name": "real12",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-accept-01/acceptance/real12",
+        "--firmware-schedule",
+        "bias-hw-doublebuf-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 11859141
+    },
+    {
+      "name": "autogroup-control-real12",
+      "command": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-accept-01/acceptance/autogroup-control-real12",
+        "--firmware-schedule",
+        "bias-hw-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 11842200
+    }
+  ],
+  "direct_vcs": {
+    "doublebuf": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        4,
+        128,
+        1024,
+        1844,
+        48,
+        131,
+        131,
+        11862,
+        11862
+      ],
+      "source_sha256": {
+        "tests/e203/tb_xu_doublebuf_wrapper.sv": "69527ef974213b525cbd82eade86086eedd336333f0e2f1f490b4479a42fbc70",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearDoubleBufferCore.sv": "64cf4be336ed8e44db83561c5e7612ec5e5ea3aac870a41a8939e7204d3d0681",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearBufferedComputeCore.sv": "53478c72bef61ae00048c3de93a94a57debd4a8286861ebb6aa4e736544d5ad7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv": "fd853fc7be0949eabf9aa56885850115ab4b68b9a654f5a7abcd436e1baa613c",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+        "third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+        "third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv": "dab19731a961020ce07edb17a0d5afae5ffe43a96fcd62a89a4df47f1d3e0a7a",
+        "third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "876b0530970ffe7a1be08f2a7e447e52ccdb8f4af85da74a17451f97fb61f452",
+        "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+        "third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "cb122bd14b96a52b37aa7d375e42536201ebeca5a430990c760f04f758a2bec7"
+      },
+      "binary_sha256": "efc30cca76a4efe0a2e1626a6d71396470b48f3dad84a74eda63dd6d3cd281b8",
+      "log_sha256": {
+        "compile.log": "66c0372e1a44794a868ff56dbe86ce559131818d6dddb5d9840054f6425e2a10",
+        "simulation.log": "52c782ce2add5de1db68121f9f6178d4f048b27eba7ba23f37e62236f46f0434"
+      }
+    },
+    "autogroup": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        2,
+        64,
+        512,
+        958,
+        99,
+        99,
+        11719,
+        11719
+      ],
+      "source_sha256": {
+        "tests/e203/tb_xu_autogroup_wrapper.sv": "f5fb5bac6e126fe2160d99322700a0c821e913be469e12fb27e042eb881f194b",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearDoubleBufferCore.sv": "64cf4be336ed8e44db83561c5e7612ec5e5ea3aac870a41a8939e7204d3d0681",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearBufferedComputeCore.sv": "53478c72bef61ae00048c3de93a94a57debd4a8286861ebb6aa4e736544d5ad7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv": "fd853fc7be0949eabf9aa56885850115ab4b68b9a654f5a7abcd436e1baa613c",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+        "third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+        "third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv": "dab19731a961020ce07edb17a0d5afae5ffe43a96fcd62a89a4df47f1d3e0a7a",
+        "third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "876b0530970ffe7a1be08f2a7e447e52ccdb8f4af85da74a17451f97fb61f452",
+        "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+        "third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "cb122bd14b96a52b37aa7d375e42536201ebeca5a430990c760f04f758a2bec7"
+      },
+      "binary_sha256": "a82a346636c3473b46c10fd6731c63025bca77ec69862976755d6391051c4c20",
+      "log_sha256": {
+        "compile.log": "01f91c4d43ed9a40e64e8f481eb1b6a3c9a1287c74a0a3208c9a053d658b8c8a",
+        "simulation.log": "225f076544b44c5bcf975ecfc245a515e3c58932244996bd71b7918ffd9d44b1"
+      }
+    },
+    "packed": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        9653,
+        9653,
+        16457,
+        16390,
+        67,
+        33
+      ],
+      "source_sha256": {
+        "tests/e203/tb_xu_packed_wrapper.sv": "342dd006552843aa8a36fdc76a7bb95463656302040e722c675b25c39a1c1f6f",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearDoubleBufferCore.sv": "64cf4be336ed8e44db83561c5e7612ec5e5ea3aac870a41a8939e7204d3d0681",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearBufferedComputeCore.sv": "53478c72bef61ae00048c3de93a94a57debd4a8286861ebb6aa4e736544d5ad7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv": "fd853fc7be0949eabf9aa56885850115ab4b68b9a654f5a7abcd436e1baa613c",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+        "third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+        "third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv": "dab19731a961020ce07edb17a0d5afae5ffe43a96fcd62a89a4df47f1d3e0a7a",
+        "third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "876b0530970ffe7a1be08f2a7e447e52ccdb8f4af85da74a17451f97fb61f452",
+        "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+        "third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "cb122bd14b96a52b37aa7d375e42536201ebeca5a430990c760f04f758a2bec7"
+      },
+      "binary_sha256": "2ae13a31fde41dc38e4ac244f33f9e75cdcaf60b81b36858c76cdd7757588f4c",
+      "log_sha256": {
+        "compile.log": "a451118966533199e998d0379d2e1c1ffcd8cdb591780efd75b5a6833c17126f",
+        "simulation.log": "e3f570281e6205ea65f16dd77092d623387fffb21d381c5d5bdbe612a5f19f53"
+      }
+    },
+    "stream": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        17828,
+        17828,
+        16454,
+        16387,
+        67,
+        33
+      ],
+      "source_sha256": {
+        "tests/e203/tb_xu_stream_wrapper.sv": "a7b1c899e9441de33dcc81a03f21c3fa1ccb2045c94a4a6fdc76afe3ca491bf0",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearDoubleBufferCore.sv": "64cf4be336ed8e44db83561c5e7612ec5e5ea3aac870a41a8939e7204d3d0681",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearBufferedComputeCore.sv": "53478c72bef61ae00048c3de93a94a57debd4a8286861ebb6aa4e736544d5ad7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv": "fd853fc7be0949eabf9aa56885850115ab4b68b9a654f5a7abcd436e1baa613c",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+        "third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+        "third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+        "third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+        "third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv": "dab19731a961020ce07edb17a0d5afae5ffe43a96fcd62a89a4df47f1d3e0a7a",
+        "third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "876b0530970ffe7a1be08f2a7e447e52ccdb8f4af85da74a17451f97fb61f452",
+        "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+        "third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "cb122bd14b96a52b37aa7d375e42536201ebeca5a430990c760f04f758a2bec7"
+      },
+      "binary_sha256": "78797811f3b7cc180b660dddf678ca7c9ce0a6dd68d03d728836a99651be05fc",
+      "log_sha256": {
+        "compile.log": "af5620ba1c8a0182002939d582dba82da242c375329f9d10be1c2cc43facdf90",
+        "simulation.log": "18278934e98053f5d539c53ff7226cf4ce4521e065f716dd98cfe577b3d58523"
+      }
+    }
+  },
+  "not_run": [
+    "candidate formal clear/request window",
+    "Chisel",
+    "candidate PPA/power/retention"
+  ],
+  "firmware_configuration": {
+    "schedule": "bias-hw-doublebuf-window",
+    "optimization": "-O2",
+    "experiment": "both-unroll-no-masks"
+  }
+}
