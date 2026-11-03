@@ -363,6 +363,8 @@ module tb_xu_packed_wrapper;
     // Valid-looking full-word writes also fail atomically while computing.
     put('h054,40,15,0); put('h060,16,15,0);
     put('h010,0,15,0); put('h008,1,15,0); saved_commits=committed;
+    if (!dut.busy) $fatal(1,"busy read test did not begin during compute");
+    expect_read('h05c,0); expect_read('h068,0);
     put('h054,0,15,1); put('h058,32'h7fff,15,1);
     put('h060,0,15,1); put('h064,32'h8000,15,1);
     put('h05c,32'h7fff8000,15,1); put('h068,32'h80007fff,15,1);

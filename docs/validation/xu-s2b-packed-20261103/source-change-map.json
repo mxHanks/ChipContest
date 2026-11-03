@@ -1,0 +1,23 @@
+{
+  "scope": "S2b source change map, compared with S2a parent; no generated RTL or Chisel changes",
+  "main_base": "3c13930c1f36d6516577d33d8587d89a86b49563",
+  "main_measured": "b625b49f4a14496c41a9914f2de484e83933014c",
+  "e203_base": "faaa3e3d8b7832012fe48a8e27f684e5b5706306",
+  "e203_measured": "d5faa5e8c857fa35df62a68de667bdb8a6e954f7",
+  "main_changed_paths": [
+    "docs/xu-s2b-packed.md",
+    "tests/e203/firmware/accel.c",
+    "tests/e203/tb_accel_soc.sv",
+    "tests/e203/tb_xu_packed_wrapper.sv",
+    "tests/e203/test_hardware_contract.py",
+    "tests/e203/test_packed_wrapper.py",
+    "third-party/e203_hbirdv2",
+    "tools/scripts/xu_firmware_contract.py"
+  ],
+  "e203_changed_paths": [
+    "rtl/e203/perips/accel_icb_slave.v"
+  ],
+  "chisel_changed_paths": [],
+  "final_packed_tb_sha256": "342dd006552843aa8a36fdc76a7bb95463656302040e722c675b25c39a1c1f6f",
+  "final_packed_tb_change": "add busy assertion and zero read checks for W_PACK32 and X_PACK32; actual SoC RTL/TB and firmware unchanged"
+}

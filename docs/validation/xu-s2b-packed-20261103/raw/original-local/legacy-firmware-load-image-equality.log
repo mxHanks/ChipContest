@@ -1,0 +1,13 @@
+baseline -Os none: equal 726 bytes 73580aa9e1162c331f41fce2beb43cdec2359abe1617bc917d4d18ef29e61607
+baseline -O2 both-unroll-no-masks: equal 1040 bytes 6d07bb00a113f52414986f0478682ccf9b494729fc4dee5d8cee3beecaed9ddc
+bias-dtcm -Os none: equal 762 bytes 5a9190471e19ccd68244f5bbed31cc5ba5f2f5361cdd54906c36652139b03ef1
+bias-dtcm -O2 both-unroll-no-masks: equal 1064 bytes 5bad5afd000d263b17ead3f4fb0932477221cf136c383dfba197d395d1a84d90
+bias-hw -Os none: equal 714 bytes 47e2645496bac651231b0bdec771980dfc88be8d8005becef8b58417bb63486b
+bias-hw -O2 both-unroll-no-masks: equal 848 bytes abee91483fcc2ad49a1cb5a9a8607461724596e52dd58b326b28648d31da0834
+bias-dtcm-window -Os none: equal 764 bytes f64c968530e4ec6da887b443e870d6f0a0a9a211a097824aea0d7a06ccc20385
+bias-dtcm-window -O2 both-unroll-no-masks: equal 1074 bytes 373105e84f02aa82fbe235303a3149f15c84409d1819ba178f17803d57713a32
+bias-hw-window -Os none: equal 700 bytes 6d185a667ecc01c9f60508e0b44080c8a774eea7cbbfe04a3724e6a0925add08
+bias-hw-window -O2 both-unroll-no-masks: equal 932 bytes c3512d474237786091e9b9f8d4a6add617670b7096c1d577676013fdf33d9806
+bias-hw-stream16-window -Os none: equal 654 bytes abf0959a3aa22882011ee37f1bcf127ae86530d3f2a9c635d3cf792ef821df96
+bias-hw-stream16-window -O2 both-unroll-no-masks: equal 908 bytes e09cd31c6171382de8f632ef35a3035ffd3b85ee04768cd33a013ef2062d7859
+PASS 12 comparison pairs; /home/mxhanks/Projects/ChipContest-xu-s2b-packed/build/xu-s2b-local/legacy-firmware-load-image-equality.json

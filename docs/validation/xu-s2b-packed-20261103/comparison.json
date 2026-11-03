@@ -1,0 +1,323 @@
+{
+  "status": "PASS",
+  "scope": "same-toolchain local fixed layer_00 only; no qualification, PPA or retention claim",
+  "identities_identical": [
+    "main_commit",
+    "e203_commit",
+    "source_sha256",
+    "runner_sha256",
+    "contract_sha256",
+    "versions",
+    "tools",
+    "vectors",
+    "fixture",
+    "firmware_sha256",
+    "simulator_sha256",
+    "firmware_opt",
+    "firmware_experiment"
+  ],
+  "variants": {
+    "oldabi": {
+      "directory": "/home/mxhanks/Projects/ChipContest-xu-s2b-packed/docs/validation/xu-s2b-packed-20261103/raw/oldabi-real1",
+      "result_sha256": "fe6281181cb63ba1586b826c521be2836393deec7d588cd9c6446ba4d9416ba9",
+      "simulation_log_sha256": "e3bad7db8f4ae4d856acf6c441723f5cf039dff0f82051db4626b4e0253efa1f",
+      "vectors": [
+        {
+          "layer": 0,
+          "outputs": 25344,
+          "sha256": {
+            "bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+            "w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+            "x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+            "y.mem": "ccc8b950f2bc79a688ea1d9d6cf577441d1eefc4eb04b558cb011080e0427719"
+          }
+        }
+      ]
+    },
+    "scalar": {
+      "directory": "/home/mxhanks/Projects/ChipContest-xu-s2b-packed/docs/validation/xu-s2b-packed-20261103/raw/scalar-real1",
+      "result_sha256": "c5e1ab91803cc5a49cf78232b57fb029a346eaa83ce25c2afe7907c7d825235d",
+      "simulation_log_sha256": "e02b14146a4d56051b6707dd7e64a96058c4e5ddaecd56d73373b40dc66d2fd8",
+      "vectors": [
+        {
+          "layer": 0,
+          "outputs": 25344,
+          "sha256": {
+            "bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+            "w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+            "x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+            "y.mem": "ccc8b950f2bc79a688ea1d9d6cf577441d1eefc4eb04b558cb011080e0427719"
+          }
+        }
+      ]
+    },
+    "packed": {
+      "directory": "/home/mxhanks/Projects/ChipContest-xu-s2b-packed/docs/validation/xu-s2b-packed-20261103/raw/packed-real1",
+      "result_sha256": "65e6ef44e1d8c68ebd6a7dab2084d0b9b3c09217ee971530598dc8e0b1b5d192",
+      "simulation_log_sha256": "024a5864ca92667d2f430fc4537671ede1a922b6dbdd9f258a43a9d8a540fb24",
+      "vectors": [
+        {
+          "layer": 0,
+          "outputs": 25344,
+          "sha256": {
+            "bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+            "w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+            "x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+            "y.mem": "ccc8b950f2bc79a688ea1d9d6cf577441d1eefc4eb04b558cb011080e0427719"
+          }
+        }
+      ]
+    }
+  },
+  "measured_source": {
+    "main_commit": "b625b49f4a14496c41a9914f2de484e83933014c",
+    "e203_commit": "d5faa5e8c857fa35df62a68de667bdb8a6e954f7"
+  },
+  "firmware_elf_sha256": {
+    "oldabi": "509280a00bc25ac7da6284703da87be98b52149185c3fb9cbe02e8a9e8ee537f",
+    "scalar": "43d4251029b524cd7660c2733870a519d469a5385852cedfce45f489e9fda6b1",
+    "packed": "01ead4ec9ff533b177de9d4655881a1fd5be30c9939e3b1cd167d20a5666c3b4"
+  },
+  "firmware_image_sha256": {
+    "oldabi": "8d2ff853f5444d0188d5bca63020aa8048ce8a1b29675ef65cdf8b3b40203185",
+    "scalar": "6c7a680af1af7e0fb39db95d97a3ebb0a979accc5ddb3161b82ad33501c7e167",
+    "packed": "beacb33ac3496dbef5fb0c71c7e54c4119bd8a2d10e731b332bdad2f3eab8a89"
+  },
+  "simulator_sha256": "69de071fd08ac78ea3a8187ceb30786a5c14c7374f13ee3b8625de82a9024152",
+  "simulator_binary_rehashed": true,
+  "fixture_and_actual_vector_hashes_checked": true,
+  "firmware_source_build_elf_image_hashes_checked": true,
+  "rows": {
+    "oldabi": {
+      "cycles": 1387720,
+      "firmware_cycles": 1387823,
+      "w_load": 299301,
+      "x_load": 114906,
+      "bias_load": 7773,
+      "compute_wait": 218592,
+      "writeback": 663663,
+      "other": 83485,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 76032,
+      "mmio_writes": 55720,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 9374,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    },
+    "scalar": {
+      "cycles": 1286374,
+      "firmware_cycles": 1286455,
+      "w_load": 229385,
+      "x_load": 88407,
+      "bias_load": 7773,
+      "compute_wait": 218592,
+      "writeback": 661419,
+      "other": 80798,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 76032,
+      "mmio_writes": 33094,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 24780,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    },
+    "packed": {
+      "cycles": 1250899,
+      "firmware_cycles": 1250988,
+      "w_load": 183516,
+      "x_load": 71279,
+      "bias_load": 7773,
+      "compute_wait": 218592,
+      "writeback": 663597,
+      "other": 106142,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 76032,
+      "mmio_writes": 21734,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 9400,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    }
+  },
+  "comparisons": {
+    "packed_minus_oldabi": {
+      "cycles": -136821,
+      "firmware_cycles": -136835,
+      "w_load": -115785,
+      "x_load": -43627,
+      "bias_load": 0,
+      "compute_wait": 0,
+      "writeback": -66,
+      "other": 22657,
+      "busy": 0,
+      "mac_fire": 0,
+      "mmio_reads": 0,
+      "mmio_writes": -33986,
+      "shared_reads": 0,
+      "shared_writes": 0,
+      "shared_stall": 26,
+      "mmio_stall": 0,
+      "starts": 0,
+      "dones": 0
+    },
+    "packed_cycle_reduction_percent_vs_oldabi": 9.859409679186003,
+    "packed_minus_scalar": {
+      "cycles": -35475,
+      "firmware_cycles": -35467,
+      "w_load": -45869,
+      "x_load": -17128,
+      "bias_load": 0,
+      "compute_wait": 0,
+      "writeback": 2178,
+      "other": 25344,
+      "busy": 0,
+      "mac_fire": 0,
+      "mmio_reads": 0,
+      "mmio_writes": -11360,
+      "shared_reads": 0,
+      "shared_writes": 0,
+      "shared_stall": -15380,
+      "mmio_stall": 0,
+      "starts": 0,
+      "dones": 0
+    },
+    "packed_cycle_reduction_percent_vs_scalar": 2.75775163366175
+  },
+  "legacy_baseline_tests": [
+    "rv32ui-p-add",
+    "accel_mmio",
+    "accel_compute",
+    "accel_multigroup",
+    "accel_repeat_x"
+  ],
+  "legacy_loadable_image_comparisons": 12,
+  "legacy_archived_source_elf_image_bytes_rehashed": true,
+  "negative_actual_record_checks": [
+    {
+      "case": "one_missing_mmio_write",
+      "rejected": true
+    },
+    {
+      "case": "one_extra_mmio_write",
+      "rejected": true
+    },
+    {
+      "case": "phase_gap",
+      "rejected": true
+    },
+    {
+      "case": "phase_overlap",
+      "rejected": true
+    },
+    {
+      "case": "one_missing_mac_fire",
+      "rejected": true
+    },
+    {
+      "case": "one_extra_mac_fire",
+      "rejected": true
+    },
+    {
+      "case": "wrong_schedule",
+      "rejected": true
+    },
+    {
+      "case": "one_missing_output",
+      "rejected": true
+    },
+    {
+      "case": "one_missing_y_word",
+      "rejected": true
+    },
+    {
+      "case": "shared_reads_missing_one",
+      "rejected": true
+    },
+    {
+      "case": "shared_reads_extra_one",
+      "rejected": true
+    },
+    {
+      "case": "shared_writes_missing_one",
+      "rejected": true
+    },
+    {
+      "case": "shared_writes_extra_one",
+      "rejected": true
+    },
+    {
+      "case": "starts_missing_one",
+      "rejected": true
+    },
+    {
+      "case": "starts_extra_one",
+      "rejected": true
+    },
+    {
+      "case": "dones_missing_one",
+      "rejected": true
+    },
+    {
+      "case": "dones_extra_one",
+      "rejected": true
+    },
+    {
+      "case": "missing_PERF_TASK",
+      "rejected": true
+    },
+    {
+      "case": "duplicate_PERF_TASK",
+      "rejected": true
+    },
+    {
+      "case": "missing_TASK_PASS",
+      "rejected": true
+    },
+    {
+      "case": "duplicate_TASK_PASS",
+      "rejected": true
+    },
+    {
+      "case": "PERF_wrong_layer",
+      "rejected": true
+    },
+    {
+      "case": "PERF_wrong_cycles",
+      "rejected": true
+    },
+    {
+      "case": "PERF_missing_field",
+      "rejected": true
+    },
+    {
+      "case": "PERF_extra_field",
+      "rejected": true
+    },
+    {
+      "case": "missing_SOC_PASS",
+      "rejected": true
+    },
+    {
+      "case": "duplicate_SOC_PASS",
+      "rejected": true
+    },
+    {
+      "case": "SOC_wrong_totals",
+      "rejected": true
+    },
+    {
+      "case": "appended_FATAL",
+      "rejected": true
+    }
+  ]
+}

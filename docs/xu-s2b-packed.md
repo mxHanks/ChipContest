@@ -46,4 +46,6 @@ python3 tools/scripts/e203_soc.py --mode real --tasks 1 --sim verilator \
   --firmware-experiment both-unroll-no-masks --out build/xu-s2b-packed-real1-repro
 ```
 
-输出目录必须尚不存在。旧 ABI、S2a、S2b 应用同一版本 GCC/Verilator、本候选 RTL、固定 layer_00 向量、相同 O2/实验设置进行本地比较，不能拼接别的 S1 的面积/能量。实际比较与哈希证据后续记录于独立验证目录。
+输出目录必须尚不存在。旧 ABI、S2a、S2b 应用同一版本 GCC/Verilator、本候选 RTL、固定 layer_00 向量、相同 O2/实验设置进行本地比较，不能拼接别的 S1 的面积/能量。
+
+本地实际比较与哈希证据已保存在 [`validation/xu-s2b-packed-20261103/README.md`](validation/xu-s2b-packed-20261103/README.md)。同一候选 RTL 下，旧 ABI / S2a / S2b 的完整窗口分别为 **1,387,720 / 1,286,374 / 1,250,899 周期**；S2b 相对前两者减少 **9.859410% / 2.757752%**。三组固定 layer_00 的 25,344 个输出全部精确通过，host 54 项、numeric 42 项、三种直接 wrapper TB、5 个旧用例和 12 组旧固件装载字节兼容检查通过。实际改动的 Chisel 文件：**无**。这些是本地筛查结果，不构成 S0、服务器周期或 PPA 结论。
