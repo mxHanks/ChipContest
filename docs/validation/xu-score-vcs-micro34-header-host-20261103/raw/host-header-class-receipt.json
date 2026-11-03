@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "case": "vendor-user-header-rejected",
+      "diagnostics": "In file included from <xu temporary>/xu_clean.c:1:\n<xu temporary>/vendor/vpi_user.h:1:1: error: function declaration isn\u2019t a prototype [-Werror=strict-prototypes]\n    1 | extern void (*vlog_startup_routines[])();\n      | ^~~~~~\ncc1: all warnings being treated as errors\n",
+      "expected_success": false,
+      "returncode": 1
+    },
+    {
+      "case": "vendor-system-header-accepted",
+      "diagnostics": "",
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "case": "own-source-warning-retained",
+      "diagnostics": "<xu temporary>/xu_bad.c:2:5: error: function declaration isn\u2019t a prototype [-Werror=strict-prototypes]\n    2 | int xu_own_old_style() { return 0; }\n      |     ^~~~~~~~~~~~~~~~\ncc1: all warnings being treated as errors\n",
+      "expected_success": false,
+      "returncode": 1
+    },
+    {
+      "case": "system-vendor-header-retained-in-M-dependencies",
+      "contains_vendor_header": true,
+      "returncode": 0
+    }
+  ],
+  "gcc_path": "/usr/bin/gcc",
+  "gcc_version": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "helper_sha256": "ff000e571c5a6d0e7fa0f395c14827077afb23a28579d4a61af5e07c24f9ef11",
+  "limitations": [
+    "Synthetic header exercises warning class only; actual VCS header is not available locally.",
+    "No VCS simulation, native SAIF equivalence, power or energy qualification."
+  ],
+  "status": "HOST_HEADER_CLASS_CHECK_PASS_NOT_SERVER_EXECUTION"
+}
