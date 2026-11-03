@@ -1,0 +1,340 @@
+{
+  "schema": "xu-uart-source-boundary-proof-v1",
+  "status": "FUNCTIONAL_BOUNDARY_PROVED_NOT_TIMING_QUALIFIED",
+  "source_snapshot": {
+    "docs/validation/xu-uart-path-proof-20261103/uart_boundary.sv": {
+      "sha256": "86eac49fdf123fa101065978ec8e3215c6002b19d65da92cc5f8bc62d6ab26d7",
+      "bytes": 1475
+    },
+    "third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_icbs.v": {
+      "sha256": "35eb816a2960f3444af19150845447f6140990a0a3e30a4626edcd242bcf3db8",
+      "bytes": 61041
+    },
+    "third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_bufs.v": {
+      "sha256": "d46f8701f99a79b321cecd2e2b776caa2d7a76925e07b675bbd3952a47fb3ab2",
+      "bytes": 15365
+    },
+    "third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_dffs.v": {
+      "sha256": "cd903d78882040cc17b6fb8bec3862f8d440726d7027ba9c61310d18801f8d83",
+      "bytes": 6294
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync_2.v": {
+      "sha256": "1276066c3cb7b5b758c151682c049e6fe4629ef807d69331ca841003f9d669d7",
+      "bytes": 2274
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_129.v": {
+      "sha256": "59f7b19022abe58b21db8f5b9880bacc71c14c4d7f0320c37fb91605c93b4e64",
+      "bytes": 9927
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetReg.v": {
+      "sha256": "2ca876742ad8590abe6544097ab30054b91e6adae7a6d3976b5941714efe25d9",
+      "bytes": 1729
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/apb_uart.v": {
+      "sha256": "bd31f4a19b8e81ba2c8ce02b3244ada38cf211445d8ec96151d55f7e946ecadc",
+      "bytes": 12578
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/io_generic_fifo.v": {
+      "sha256": "106ee607c8e48cee322a61295b52cc275c0fa540ec6d78547723cca5e9dfd0b1",
+      "bytes": 4361
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_interrupt.v": {
+      "sha256": "75298c2bfb4921cee757641927d55500a54f8604d808f59717834e8507045e60",
+      "bytes": 2969
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_rx.v": {
+      "sha256": "3eaff563777043772c66d1bf504ff5ddcd5723689b53a50444bb90aec618c39a",
+      "bytes": 6713
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_tx.v": {
+      "sha256": "d21960c4faffb9bbd0687db02d119ac1e95b6f495b5b49f5efcaed18667dbe83",
+      "bytes": 5872
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v": {
+      "sha256": "4258161cac87bc56ef19f22ee8c82dbcae9d3effb2f0159282d3f8acd85c015c",
+      "bytes": 35792
+    },
+    "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_perips.v": {
+      "sha256": "7cfe072f79e41fa8b41eb917f89db2702b0c26a0747678f044e051b739d0537c",
+      "bytes": 78275
+    },
+    "docs/validation/xu-uart-path-proof-20261103/tb_uart_path.sv": {
+      "sha256": "0b9e67ca08454ccb4d4c568ad93fda884b3932442d9b09070b4394702f93631d",
+      "bytes": 8904
+    },
+    "docs/validation/xu-uart-path-proof-20261103/run_proof.py": {
+      "sha256": "076dedcf39a6e562ea6b4c52cf37f654f859aa1cee7cafce125b9fe576ad8335",
+      "bytes": 18422
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "iverilog",
+        "-V"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/iverilog-version.log",
+      "sha256": "f9199cc8658f4afcec3edeb93f29f23bb2aebf66d3eeb217cdc728aaa692f946",
+      "bytes": 3294
+    },
+    {
+      "argv": [
+        "yosys",
+        "-V"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/yosys-version.log",
+      "sha256": "239d92e36e753a9dff4e79d97878ed5d55304b675d411895ec57508bc134e28e",
+      "bytes": 63
+    },
+    {
+      "argv": [
+        "iverilog",
+        "-g2012",
+        "-DDISABLE_SV_ASSERTION=1",
+        "-s",
+        "tb_xu_uart_path",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/docs/validation/xu-uart-path-proof-20261103/tb_uart_path.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/docs/validation/xu-uart-path-proof-20261103/uart_boundary.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_icbs.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_bufs.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_dffs.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync_2.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_129.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetReg.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/apb_uart.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/io_generic_fifo.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_interrupt.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_rx.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_tx.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/xu_uart_counterfactual.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/xu_counterfactual_boundary.sv"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "+SEED=1"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/seed-1.log",
+      "sha256": "963b91091e93d61c0852942e30060a63d4e350999a8190af3a6b7866eca0a54e",
+      "bytes": 431
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "+SEED=7"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/seed-7.log",
+      "sha256": "95423f15fcc68b17a34938ec3c4e2243d1404a61cbb7f1dc6ac271d5776f5850",
+      "bytes": 445
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "+SEED=13"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/seed-13.log",
+      "sha256": "c5a924b3be5e42825673922244eed0c022b4ff934c08547c105138239f066db8",
+      "bytes": 455
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "+SEED=42"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/seed-42.log",
+      "sha256": "a2872c42642fb2600c1b99840a4e2a568fab765dc09f691536732d8e2227f8ca",
+      "bytes": 480
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "+SEED=12345"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/seed-12345.log",
+      "sha256": "b785b0a8541a13d3f0dd14ceae71fdb8035034cc65bd20515c7449c01b5f74a8",
+      "bytes": 439
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "+SEED=987654321"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/seed-987654321.log",
+      "sha256": "dc735056bdcbae7b3234b669bbeaf35716b926733dfcaa84e326cbabbeddecb6",
+      "bytes": 461
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "+SEED=2654435769"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/seed-2654435769.log",
+      "sha256": "5922a117e65232c67f41015b8d3a19b5c181d9b4f4901e062dc2f668abc698d9",
+      "bytes": 441
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "+SEED=4294967295"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/seed-4294967295.log",
+      "sha256": "624e0843c6916fa2b47a2977f2e210327d9b06b471c47abfe55d3378f2b57452",
+      "bytes": 454
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/uart.vvp",
+        "+SEED=1",
+        "+XU_CORRUPT_STALLED"
+      ],
+      "exit_code": 1,
+      "log": "build/xu-uart-path-proof-20261103/run-09/negative-illegal-stall.log",
+      "sha256": "6dda80fdc1d37be0862be83f8b6a3259af326890e2cc98883f1a1fc6e966d93f",
+      "bytes": 229
+    },
+    {
+      "argv": [
+        "iverilog",
+        "-g2012",
+        "-DDISABLE_SV_ASSERTION=1",
+        "-s",
+        "tb_xu_uart_path",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/mutant.vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/docs/validation/xu-uart-path-proof-20261103/tb_uart_path.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/docs/validation/xu-uart-path-proof-20261103/uart_boundary.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_icbs.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_bufs.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_dffs.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync_2.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_129.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetReg.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/xu_mutant_current_byte.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/io_generic_fifo.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_interrupt.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_rx.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/third-party/e203_hbirdv2/rtl/e203/perips/apb_uart/uart_tx.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/xu_uart_counterfactual.v",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/xu_counterfactual_boundary.sv"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/mutant-compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/mutant.vvp",
+        "+SEED=1"
+      ],
+      "exit_code": 1,
+      "log": "build/xu-uart-path-proof-20261103/run-09/negative-current-byte.log",
+      "sha256": "c763836d8273ad167669c8e8673e89675b5e643bd0dfeca76990501cda33999e",
+      "bytes": 202
+    },
+    {
+      "argv": [
+        "yosys",
+        "-Q",
+        "-T",
+        "-s",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/extract.ys"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/extract.log",
+      "sha256": "b305c9d8276601915470abdf0882674d8acc2720acc16360c1b43cb9fafc4409",
+      "bytes": 137472
+    },
+    {
+      "argv": [
+        "yosys",
+        "-Q",
+        "-T",
+        "-s",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/miter-positive.ys"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/miter-positive.log",
+      "sha256": "7dfce974410f5a0a73ae9a1e7f624b58fe60ecc0e97417954c7df8fd94c1c1b7",
+      "bytes": 26608
+    },
+    {
+      "argv": [
+        "yosys",
+        "-Q",
+        "-T",
+        "-s",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/bridge-induction.ys"
+      ],
+      "exit_code": 0,
+      "log": "build/xu-uart-path-proof-20261103/run-09/bridge-induction.log",
+      "sha256": "3323caa5cebd59444867f60ea1527de23bc4b4bf0c04b2e68c91423ff2301797",
+      "bytes": 25821
+    },
+    {
+      "argv": [
+        "yosys",
+        "-Q",
+        "-T",
+        "-s",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/miter-inverted_latch_enable.ys"
+      ],
+      "exit_code": 1,
+      "log": "build/xu-uart-path-proof-20261103/run-09/miter-inverted_latch_enable.log",
+      "sha256": "64dc8bf370da2cae8c23bbe93041c8c8ac7e540f9597d940051a3422f51ed32d",
+      "bytes": 38068
+    },
+    {
+      "argv": [
+        "yosys",
+        "-Q",
+        "-T",
+        "-s",
+        "/home/mxhanks/Projects/ChipContest-xu-uart-path-proof/build/xu-uart-path-proof-20261103/run-09/miter-fifo_memory_always_writes.ys"
+      ],
+      "exit_code": 1,
+      "log": "build/xu-uart-path-proof-20261103/run-09/miter-fifo_memory_always_writes.log",
+      "sha256": "9e340682479ea2aebe3d34a725e7315cf3dd804f71916fb83421b21a9c4849ec",
+      "bytes": 38072
+    }
+  ],
+  "seeds": 8,
+  "expanded_state_cells": 85,
+  "expanded_state_bits": 465,
+  "simulation_clock_period_ns": 10,
+  "source_git_head": "c12d89fffcfe4dac9584df8108fee3be314698f1",
+  "rtl_git_head": "f49a5fc914971426bd4530db39e270a84b41139f",
+  "limitations": [
+    "two-state one-step functional induction with an ideal transparent-latch sampling boundary",
+    "four-state simulation is finite coverage, not a four-state exhaustive proof",
+    "selected UART boundary omits CPU/fabric/clock gating and is not a full-SoC proof",
+    "no STA exemption, transparent-latch timing, CDC, RDC, metastability, or MTBF claim"
+  ]
+}
