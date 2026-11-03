@@ -165,7 +165,7 @@ def main():
     parser.add_argument('--standard-cell-sha256', required=True)
     parser.add_argument('--sram-db', required=True, type=Path)
     parser.add_argument('--sram-sha256', required=True)
-    parser.add_argument('--profile',choices=['baseline','h2-only','sram-bias','s2b-packed','s2c-autogroup'],default='baseline',
+    parser.add_argument('--profile',choices=sorted(ppa_module().SOURCE_PROFILES),default='baseline',
                         help='explicit approved child/source geometry; baseline remains strict f49a5fc')
     parser.add_argument('--bias-sram-db',type=Path,help='RAMSP128X16 library; required only for sram-bias')
     parser.add_argument('--bias-sram-sha256',help='supplied RAMSP128X16 library SHA256; required only for sram-bias')

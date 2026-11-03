@@ -6,6 +6,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+import sys
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -86,6 +87,27 @@ class XuSourceProfileGuardTest(unittest.TestCase):
 
 
 class XuPpaProfileConfigurationTest(unittest.TestCase):
+    def test_registered_profiles_reach_the_command_line_generator(self):
+        # The deployed S2d command previously stopped in argparse even though
+        # direct generate()/memory-geometry tests passed.
+        arguments=['xu_soc_implementation.py','--root','candidate','--out','new-output',
+                   '--standard-cell-db','std.db','--standard-cell-sha256','a'*64,
+                   '--sram-db','ram.db','--sram-sha256','b'*64]
+        for profile in PPA.SOURCE_PROFILES:
+            with self.subTest(profile=profile), \
+                    mock.patch.object(sys,'argv',arguments+['--profile',profile]), \
+                    mock.patch.object(IMPL,'generate',return_value={}) as generate, \
+                    mock.patch('builtins.print'):
+                IMPL.main()
+                self.assertEqual(generate.call_args.args[7],profile)
+        with mock.patch.object(sys,'argv',arguments+['--profile','unapproved-child']), \
+                mock.patch.object(IMPL,'generate') as generate, \
+                mock.patch('sys.stderr'):
+            with self.assertRaises(SystemExit) as rejected:
+                IMPL.main()
+            self.assertEqual(rejected.exception.code,2)
+            generate.assert_not_called()
+
     def identity(self, path):
         return dict(path=str(path.resolve()),sha256=PPA.sha(path))
 
