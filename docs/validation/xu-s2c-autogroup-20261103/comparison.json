@@ -1,0 +1,162 @@
+{
+  "status": "PASS",
+  "scope": "local fixed layer_00 exact real-core/CPU screen; no qualification, remote VCS, PPA, energy, score, retention claim",
+  "measured_main": "4a6aa1ae7a8ddd5b0ede15dde9359b88b3656b11",
+  "measured_e203": "dd149bb34aa1c3feca066ffbf9bdd3311f4b954c",
+  "identities_identical": [
+    "main_commit",
+    "e203_commit",
+    "source_sha256",
+    "runner_sha256",
+    "contract_sha256",
+    "versions",
+    "tools",
+    "vectors",
+    "fixture",
+    "firmware_sha256",
+    "simulator_sha256",
+    "firmware_opt",
+    "firmware_experiment"
+  ],
+  "simulator_sha256": "94c613053a7a99672d622c7dd55db99527a093f06c4d624abade3202103e957b",
+  "rows": {
+    "oldabi": {
+      "cycles": 1387720,
+      "firmware_cycles": 1387823,
+      "w_load": 299301,
+      "x_load": 114906,
+      "bias_load": 7773,
+      "compute_wait": 218592,
+      "writeback": 663663,
+      "other": 83485,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 76032,
+      "mmio_writes": 55720,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 9374,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    },
+    "packed": {
+      "cycles": 1250899,
+      "firmware_cycles": 1250988,
+      "w_load": 183516,
+      "x_load": 71279,
+      "bias_load": 7773,
+      "compute_wait": 218592,
+      "writeback": 663597,
+      "other": 106142,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 76032,
+      "mmio_writes": 21734,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 9400,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    },
+    "autogroup": {
+      "cycles": 1013171,
+      "firmware_cycles": 1013254,
+      "w_load": 183503,
+      "x_load": 71182,
+      "bias_load": 7774,
+      "compute_wait": 48114,
+      "writeback": 670230,
+      "other": 32368,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 54648,
+      "mmio_writes": 15497,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 9599,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    }
+  },
+  "comparisons": {
+    "autogroup_minus_oldabi": {
+      "cycles": -374549,
+      "firmware_cycles": -374569,
+      "w_load": -115798,
+      "x_load": -43724,
+      "bias_load": 1,
+      "compute_wait": -170478,
+      "writeback": 6567,
+      "other": -51117,
+      "busy": 0,
+      "mac_fire": 0,
+      "mmio_reads": -21384,
+      "mmio_writes": -40223,
+      "shared_reads": 0,
+      "shared_writes": 0,
+      "shared_stall": 225,
+      "mmio_stall": 0,
+      "starts": 0,
+      "dones": 0
+    },
+    "autogroup_cycle_reduction_percent_vs_oldabi": 26.99024298849912,
+    "autogroup_minus_packed": {
+      "cycles": -237728,
+      "firmware_cycles": -237734,
+      "w_load": -13,
+      "x_load": -97,
+      "bias_load": 1,
+      "compute_wait": -170478,
+      "writeback": 6633,
+      "other": -73774,
+      "busy": 0,
+      "mac_fire": 0,
+      "mmio_reads": -21384,
+      "mmio_writes": -6237,
+      "shared_reads": 0,
+      "shared_writes": 0,
+      "shared_stall": 199,
+      "mmio_stall": 0,
+      "starts": 0,
+      "dones": 0
+    },
+    "autogroup_cycle_reduction_percent_vs_packed": 19.004571911880976
+  },
+  "autogroup_activity": [
+    {
+      "layer": 0,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 136125,
+      "fifo_full_wait": 508959
+    }
+  ],
+  "versions": {
+    "riscv64-unknown-elf-gcc": [
+      "riscv64-unknown-elf-gcc (14.2.0+19) 14.2.0",
+      "Copyright (C) 2024 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ],
+    "verilator": [
+      "Verilator 5.032 2025-01-01 rev (Debian 5.032-1)"
+    ],
+    "g++": [
+      "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+      "Copyright (C) 2025 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ]
+  },
+  "firmware_elf_sha256": {
+    "oldabi": "bad2ce3c435f9a111bc3cd868a8ac0e5480d64396f0225ed4d300130fd99e8d3",
+    "packed": "7896bca680ae9476a4848ce861e314f0d2f3c5b07a897fde7b37f4c455e89783",
+    "autogroup": "7482d36b277ca8dcf90fdd6730601a810c3abab0f524e6c31e36fffb53ad4a73"
+  },
+  "result_sha256": {
+    "oldabi": "7c354acc3bcb6792bbe6156a378ab424549fbbea41be5b7361033e102219e8a7",
+    "packed": "219a5793cc6912db325e05f289815d249af01a17f5709eb8c697bd50ea33837d",
+    "autogroup": "fa5376c488135839af1a21db00a4e80d3e2c13d0c7fa5769f82cbd31e61e16cb"
+  }
+}

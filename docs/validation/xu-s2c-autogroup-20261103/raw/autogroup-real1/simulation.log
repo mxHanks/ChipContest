@@ -1,0 +1,9 @@
+["/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/build/e203/sim-6d1efff5a4e1c899/accel_soc", "+TESTCASE=/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/build/s2c-autogroup-real1/accel_soc", "+VECTORS=/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/build/s2c-autogroup-real1/vectors", "+TASKS=1", "+DUMPWAVE=0", "+MAX_CYCLES=200000000"]
+TASK_PASS layer=0 outputs=25344 writes=50688 cycles=1013171 firmware_cycles=1013254
+AUTO_TASK layer=0 rows=99 pops_retired=3168 compute_writeback_overlap=136125 fifo_full_wait=508959
+PERF_TASK layer=0 cycles=1013171 w_load=183503 x_load=71182 bias_load=7774 compute_wait=48114 writeback=670230 other=32368 busy=215424 mac_fire=202752 mmio_reads=54648 mmio_writes=15497 shared_reads=23232 shared_writes=50688 shared_stall=9599 mmio_stall=0 starts=3168 dones=3168
+SOC_PASS tasks=1 outputs=25344 writes=50688
+- /home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/tests/e203/tb_accel_soc.sv:349: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.032 2025-01-01
+- Verilator: $finish at 4us; walltime 42.781 s; speed 95.275 ns/s
+- Verilator: cpu 42.728 s on 1 threads; alloced 107 MB
