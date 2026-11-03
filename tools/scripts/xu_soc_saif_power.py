@@ -407,7 +407,12 @@ def checked_reports(directory, task):
             all(ref == 'RAMSP1024X16' for name, ref in names), 'missing/duplicate/unexpected SRAM power cell report')
     expected_pins = sorted(pin['mapped_path'] for pin in read_json(task['measured_sram_pin_states']['path'])['pins'])
     for phase in ('before', 'after'):
-        names = re.findall(r'^XU_SRAM_PIN name=(.+)$', (directory / ('sram-pins-%s.rpt' % phase)).read_text(), re.M)
+        names = []
+        with (directory / ('sram-pins-%s.rpt' % phase)).open() as report:
+            for line in report:
+                match = re.fullmatch(r'XU_SRAM_PIN name=(.+)', line.rstrip('\n'))
+                if match:
+                    names.append(match.group(1))
         require(sorted(names) == expected_pins, 'missing/duplicate/unexpected SRAM pin report: ' + phase)
     return reports
 
