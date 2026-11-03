@@ -1,0 +1,6 @@
+{"command": ["vvp", "/tmp/xu-s2c-actual-observer-rtrgtoff/probe.vvp", "+MODE=1", "+GOLDEN=/tmp/xu-s2c-actual-observer-rtrgtoff/golden.hex"], "cwd": "/tmp/xu-s2c-actual-observer-rtrgtoff", "returncode": 1}
+XU_CANDIDATE_RESET_READY task=7 actual_reset_clock_edges=4 startup_observer_edges=0 first_reset_tick=5000000 last_reset_tick=35000000 first_ready_cycle=1 first_ready_tick=45000000 actual_rst_n=1 checked_empty_fifo=1
+XU_TASK_CLEAR_BEGIN task=7 cycle=2 tick=55000000
+XU_TASK_CLEAR_LAST_WRITE task=7 cycle=168482 tick=1684855000000 writes=33697
+FATAL: /tmp/xu-s2c-actual-observer-rtrgtoff/probe.sv:315: XU_CLEAR_REJECT candidate setup/data write before first source request
+       Time: 1685205000000  Scope: tb_xu_s2c_task_observer.xu_observe_task_clear
