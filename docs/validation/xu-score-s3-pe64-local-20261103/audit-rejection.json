@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "scope": "Five actual mutations of disposable original evidence, four with re-signed SHA metadata",
+  "cases": [
+    {
+      "name": "raw-byte",
+      "status": "REJECTED_AS_REQUIRED",
+      "reason": "raw changed: direct-02/wide64/simulation.log"
+    },
+    {
+      "name": "resigned-cycles",
+      "status": "REJECTED_AS_REQUIRED",
+      "reason": "run identity/counters differ: wide64-real1-02"
+    },
+    {
+      "name": "resigned-direct-work",
+      "status": "REJECTED_AS_REQUIRED",
+      "reason": "direct physical work differs"
+    },
+    {
+      "name": "resigned-legacy-variant",
+      "status": "REJECTED_AS_REQUIRED",
+      "reason": "legacy physical64 execution differs: accel_compute"
+    },
+    {
+      "name": "resigned-boundary-mode",
+      "status": "REJECTED_AS_REQUIRED",
+      "reason": "boundary actual coverage incomplete"
+    }
+  ]
+}

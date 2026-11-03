@@ -1,0 +1,321 @@
+{
+  "status": "LOCAL_SCREEN_PASS_NOT_QUALIFIED",
+  "main_commit": "286b95a4e0b05b78f39ef4d648d1f922e684d7fc",
+  "e203_commit": "7aae96776e116d5e95d6ebb49d29a5fccce04ab9",
+  "scope": "Local GCC14.2/Verilator5.032, real layer00 only, historical development clocks and no formal clear/request window",
+  "frozen_files": 2521,
+  "raw_payloads": 162,
+  "host_tests": 67,
+  "additional_boundary_tests": 1,
+  "boundary_modes": 3,
+  "boundary_unknown_reads": 42,
+  "boundary_mode_errors": 3,
+  "numeric_tests": 42,
+  "chisel_tests": 1,
+  "legacy_cases": 5,
+  "cycles": {
+    "wide64-real1-02": 945952,
+    "compat32-real1-01": 957040,
+    "compat8-real1-01": 1013171,
+    "physical32-real1-01": 957040,
+    "physical8-real1-01": 1013171
+  },
+  "enabled_lane_macs_per_task": 1622016,
+  "same_physical64_binary": "1d33460e37adc0146400b31ef2e89f6bf09e5a772e9c3113c1f7411ee21ba604",
+  "common_identity": [
+    "main_commit",
+    "e203_commit",
+    "source_sha256",
+    "runner_sha256",
+    "contract_sha256",
+    "versions",
+    "tools",
+    "vectors",
+    "fixture",
+    "firmware_sha256",
+    "firmware_opt",
+    "firmware_experiment"
+  ],
+  "direct": [
+    {
+      "mode": "wide64",
+      "lanes": 64,
+      "counts": [
+        8,
+        62,
+        15,
+        15,
+        11031,
+        11031
+      ]
+    },
+    {
+      "mode": "compat32",
+      "lanes": 32,
+      "counts": [
+        16,
+        190,
+        27,
+        27,
+        11131,
+        11131
+      ]
+    },
+    {
+      "mode": "compat8",
+      "lanes": 8,
+      "counts": [
+        64,
+        958,
+        99,
+        99,
+        11731,
+        11731
+      ]
+    }
+  ],
+  "wide64_reduction_vs_same64_schedule32_percent": 1.1585722644821532,
+  "wide64_reduction_vs_same64_schedule8_percent": 6.6345167794972415,
+  "rows": [
+    {
+      "case": "wide64-real1-02",
+      "variant": "pe64",
+      "schedule": "bias-hw-pe64-autogroup-window",
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 945952,
+          "firmware_cycles": 946030,
+          "performance": {
+            "w_load": 183503,
+            "x_load": 71082,
+            "bias_load": 7774,
+            "compute_wait": 12078,
+            "writeback": 667161,
+            "other": 4354,
+            "busy": 26928,
+            "mac_fire": 25344,
+            "mmio_reads": 51876,
+            "mmio_writes": 12725,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 11578,
+            "mmio_stall": 0,
+            "starts": 396,
+            "dones": 396
+          }
+        }
+      ],
+      "pe_activity": [
+        {
+          "layer": 0,
+          "physical_pes": 64,
+          "mac_beats": 25344,
+          "lane_macs": 1622016,
+          "useful_macs": 1622016
+        }
+      ],
+      "autogroup_activity": [
+        {
+          "layer": 0,
+          "rows": 99,
+          "pops_retired": 396,
+          "compute_writeback_overlap": 14157,
+          "fifo_full_wait": 484605
+        }
+      ]
+    },
+    {
+      "case": "compat32-real1-01",
+      "variant": "pe64",
+      "schedule": "bias-hw-pe32-autogroup-window",
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 957040,
+          "firmware_cycles": 957119,
+          "performance": {
+            "w_load": 183503,
+            "x_load": 71278,
+            "bias_load": 7774,
+            "compute_wait": 17226,
+            "writeback": 668847,
+            "other": 8412,
+            "busy": 53856,
+            "mac_fire": 50688,
+            "mmio_reads": 52272,
+            "mmio_writes": 13121,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 12272,
+            "mmio_stall": 0,
+            "starts": 792,
+            "dones": 792
+          }
+        }
+      ],
+      "pe_activity": [
+        {
+          "layer": 0,
+          "physical_pes": 64,
+          "mac_beats": 50688,
+          "lane_macs": 1622016,
+          "useful_macs": 1622016
+        }
+      ],
+      "autogroup_activity": [
+        {
+          "layer": 0,
+          "rows": 99,
+          "pops_retired": 792,
+          "compute_writeback_overlap": 31581,
+          "fifo_full_wait": 551631
+        }
+      ]
+    },
+    {
+      "case": "compat8-real1-01",
+      "variant": "pe64",
+      "schedule": "bias-hw-autogroup-window",
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 1013171,
+          "firmware_cycles": 1013254,
+          "performance": {
+            "w_load": 183503,
+            "x_load": 71182,
+            "bias_load": 7774,
+            "compute_wait": 48114,
+            "writeback": 670230,
+            "other": 32368,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 54648,
+            "mmio_writes": 15497,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 9599,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        }
+      ],
+      "pe_activity": [
+        {
+          "layer": 0,
+          "physical_pes": 64,
+          "mac_beats": 202752,
+          "lane_macs": 1622016,
+          "useful_macs": 1622016
+        }
+      ],
+      "autogroup_activity": [
+        {
+          "layer": 0,
+          "rows": 99,
+          "pops_retired": 3168,
+          "compute_writeback_overlap": 136125,
+          "fifo_full_wait": 508959
+        }
+      ]
+    },
+    {
+      "case": "physical32-real1-01",
+      "variant": "pe32",
+      "schedule": "bias-hw-pe32-autogroup-window",
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 957040,
+          "firmware_cycles": 957119,
+          "performance": {
+            "w_load": 183503,
+            "x_load": 71278,
+            "bias_load": 7774,
+            "compute_wait": 17226,
+            "writeback": 668847,
+            "other": 8412,
+            "busy": 53856,
+            "mac_fire": 50688,
+            "mmio_reads": 52272,
+            "mmio_writes": 13121,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 12272,
+            "mmio_stall": 0,
+            "starts": 792,
+            "dones": 792
+          }
+        }
+      ],
+      "pe_activity": [
+        {
+          "layer": 0,
+          "physical_pes": 32,
+          "mac_beats": 50688,
+          "lane_macs": 1622016,
+          "useful_macs": 1622016
+        }
+      ],
+      "autogroup_activity": [
+        {
+          "layer": 0,
+          "rows": 99,
+          "pops_retired": 792,
+          "compute_writeback_overlap": 31581,
+          "fifo_full_wait": 551631
+        }
+      ]
+    },
+    {
+      "case": "physical8-real1-01",
+      "variant": "pe8",
+      "schedule": "bias-hw-autogroup-window",
+      "layers": [
+        {
+          "layer": 0,
+          "cycles": 1013171,
+          "firmware_cycles": 1013254,
+          "performance": {
+            "w_load": 183503,
+            "x_load": 71182,
+            "bias_load": 7774,
+            "compute_wait": 48114,
+            "writeback": 670230,
+            "other": 32368,
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 54648,
+            "mmio_writes": 15497,
+            "shared_reads": 23232,
+            "shared_writes": 50688,
+            "shared_stall": 9599,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          }
+        }
+      ],
+      "pe_activity": [],
+      "autogroup_activity": [
+        {
+          "layer": 0,
+          "rows": 99,
+          "pops_retired": 3168,
+          "compute_writeback_overlap": 136125,
+          "fifo_full_wait": 508959
+        }
+      ]
+    }
+  ],
+  "retained": false,
+  "not_run": [
+    "server VCS full12",
+    "mapped equivalence",
+    "complete150MHz STA",
+    "same-library area",
+    "fullSoC task energy"
+  ]
+}

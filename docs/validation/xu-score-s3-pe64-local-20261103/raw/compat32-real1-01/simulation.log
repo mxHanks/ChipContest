@@ -1,0 +1,10 @@
+["/home/mxhanks/Projects/ChipContest-xu-s3-pe64/build/e203/sim-e847cd058eda8bf8/accel_soc", "+TESTCASE=/home/mxhanks/Projects/ChipContest-xu-s3-pe64/build/xu-s3-pe64-local-20261103/compat32-real1-01/accel_soc", "+VECTORS=/home/mxhanks/Projects/ChipContest-xu-s3-pe64/build/xu-s3-pe64-local-20261103/compat32-real1-01/vectors", "+TASKS=1", "+DUMPWAVE=0", "+MAX_CYCLES=200000000"]
+TASK_PASS layer=0 outputs=25344 writes=50688 cycles=957040 firmware_cycles=957119
+AUTO_TASK layer=0 rows=99 pops_retired=792 compute_writeback_overlap=31581 fifo_full_wait=551631
+PE_TASK layer=0 physical_pes=64 mac_beats=50688 lane_macs=1622016 useful_macs=1622016
+PERF_TASK layer=0 cycles=957040 w_load=183503 x_load=71278 bias_load=7774 compute_wait=17226 writeback=668847 other=8412 busy=53856 mac_fire=50688 mmio_reads=52272 mmio_writes=13121 shared_reads=23232 shared_writes=50688 shared_stall=12272 mmio_stall=0 starts=792 dones=792
+SOC_PASS tasks=1 outputs=25344 writes=50688
+- /home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/tb_accel_soc.sv:498: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.032 2025-01-01
+- Verilator: $finish at 4us; walltime 44.040 s; speed 87.419 ns/s
+- Verilator: cpu 43.999 s on 1 threads; alloced 107 MB

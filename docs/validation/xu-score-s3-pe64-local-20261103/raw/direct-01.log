@@ -1,0 +1,57 @@
+test_real_single_w_array_both_abis (test_pe64_wrapper.XuPe64WrapperTests.test_real_single_w_array_both_abis) ... 
+  test_real_single_w_array_both_abis (test_pe64_wrapper.XuPe64WrapperTests.test_real_single_w_array_both_abis) (kind='wide64') ... FAIL
+  test_real_single_w_array_both_abis (test_pe64_wrapper.XuPe64WrapperTests.test_real_single_w_array_both_abis) (kind='compat32') ... FAIL
+  test_real_single_w_array_both_abis (test_pe64_wrapper.XuPe64WrapperTests.test_real_single_w_array_both_abis) (kind='compat8') ... FAIL
+
+======================================================================
+FAIL: test_real_single_w_array_both_abis (test_pe64_wrapper.XuPe64WrapperTests.test_real_single_w_array_both_abis) (kind='wide64')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/test_pe64_wrapper.py", line 52, in test_real_single_w_array_both_abis
+    run(command, 'compile.log', 600)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/test_pe64_wrapper.py", line 49, in run
+    self.assertEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : /home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/xu_pe64_icb_slave.v:175: error: Unknown module type: XuParallelAutoGroupCore64
+2 error(s) during elaboration.
+*** These modules were missing:
+        XuParallelAutoGroupCore64 referenced 1 times.
+***
+
+
+======================================================================
+FAIL: test_real_single_w_array_both_abis (test_pe64_wrapper.XuPe64WrapperTests.test_real_single_w_array_both_abis) (kind='compat32')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/test_pe64_wrapper.py", line 52, in test_real_single_w_array_both_abis
+    run(command, 'compile.log', 600)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/test_pe64_wrapper.py", line 49, in run
+    self.assertEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : /home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/tb_xu_pe64_wrapper.sv:4: syntax error
+/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/tb_xu_pe64_wrapper.sv:4: error: Invalid module item.
+
+
+======================================================================
+FAIL: test_real_single_w_array_both_abis (test_pe64_wrapper.XuPe64WrapperTests.test_real_single_w_array_both_abis) (kind='compat8')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/test_pe64_wrapper.py", line 52, in test_real_single_w_array_both_abis
+    run(command, 'compile.log', 600)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/test_pe64_wrapper.py", line 49, in run
+    self.assertEqual(result.returncode, 0, result.stdout)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : /home/mxhanks/Projects/ChipContest-xu-s3-pe64/third-party/e203_hbirdv2/rtl/e203/perips/xu_pe64_icb_slave.v:175: error: Unknown module type: XuParallelAutoGroupCore64
+2 error(s) during elaboration.
+*** These modules were missing:
+        XuParallelAutoGroupCore64 referenced 1 times.
+***
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.102s
+
+FAILED (failures=3)
