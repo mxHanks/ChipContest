@@ -17,7 +17,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCES = ['BiasBankCache.sv', 'LinearCachedCore.sv', 'LinearComputeCore.sv',
+SOURCES = ['BiasBankCache.sv', 'LinearAutoGroupCore.sv', 'LinearCachedCore.sv', 'LinearComputeCore.sv',
            'DotProductEngine.sv', 'MacController.sv', 'MacPEArray.sv', 'MacPE.sv',
            'XRowBuffer.sv', 'WeightBankArray.sv', 'WeightBank.sv', 'Sram1024x16.sv',
            'mem_1024x16.sv', 'accel_icb_slave.v']

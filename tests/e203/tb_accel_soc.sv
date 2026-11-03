@@ -43,6 +43,7 @@ module tb_accel_soc;
   integer perf_busy, perf_mac_fire, perf_starts, perf_dones;
   integer perf_mmio_reads, perf_mmio_writes, perf_mmio_stall;
   integer perf_shared_reads, perf_shared_writes, perf_shared_stall;
+  integer perf_auto_rows, perf_auto_pops, perf_auto_overlap, perf_auto_full;
 
   task reset_performance;
     begin
@@ -53,13 +54,14 @@ module tb_accel_soc;
       perf_busy=0; perf_mac_fire=0; perf_starts=0; perf_dones=0;
       perf_mmio_reads=0; perf_mmio_writes=0; perf_mmio_stall=0;
       perf_shared_reads=0; perf_shared_writes=0; perf_shared_stall=0;
+      perf_auto_rows=0; perf_auto_pops=0; perf_auto_overlap=0; perf_auto_full=0;
     end
   endtask
 
   task observe_performance;
     integer phase_now, phase_next;
     reg shared_accept, shared_retire, mmio_accept, mmio_retire, start_accept;
-    reg in_window;
+    reg in_window, row_start_accept;
     begin
       shared_accept=cmd_valid && cmd_ready;
       shared_retire=rsp_valid && rsp_ready;
@@ -68,6 +70,7 @@ module tb_accel_soc;
       start_accept=mmio_accept && !`ACCEL.cmd_read &&
                    `ACCEL.cmd_addr[11:0]==12'h008 &&
                    `ACCEL.cmd_wdata[0] && !`ACCEL.busy;
+      row_start_accept=`ACCEL.row_start_accept;
       // Match the existing inclusive first-input/final-Y-response interval.
       in_window=perf_active || (first_cycle<0 && shared_accept && cmd_read &&
                                cmd_addr>=BASE && cmd_addr<BASE+'h18800);
@@ -80,7 +83,8 @@ module tb_accel_soc;
         phase_now=perf_phase;
         phase_next=perf_phase;
         if ((mmio_retire && perf_mmio_end_phase) ||
-            (shared_retire && perf_shared_end_writeback) || `ACCEL.core_done)
+            (shared_retire && perf_shared_end_writeback) ||
+            (`ACCEL.core_done && (!`ACCEL.row_active || perf_phase==PERF_COMPUTE)))
           phase_next=PERF_OTHER;
 
         if (mmio_accept && !`ACCEL.cmd_read) begin
@@ -103,10 +107,14 @@ module tb_accel_soc;
         end
         // The read-only window has no RESULT_INDEX write to start writeback.
         if (mmio_accept && `ACCEL.cmd_read &&
-            `ACCEL.cmd_addr[11:0]>=12'h080 && `ACCEL.cmd_addr[11:0]<=12'h0bc) begin
+            ((`ACCEL.cmd_addr[11:0]>=12'h080 && `ACCEL.cmd_addr[11:0]<=12'h0bc) ||
+             (`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h13c))) begin
           phase_now=PERF_WRITEBACK; phase_next=PERF_WRITEBACK;
         end
-        if (start_accept) begin
+        if (start_accept || row_start_accept) begin
+          phase_now=PERF_COMPUTE; phase_next=PERF_COMPUTE;
+        end
+        if (mmio_accept && `ACCEL.cmd_read && `ACCEL.cmd_addr[11:0]==12'h0c4) begin
           phase_now=PERF_COMPUTE; phase_next=PERF_COMPUTE;
         end
         // Source reads can precede their matching MMIO load operation.
@@ -129,11 +137,19 @@ module tb_accel_soc;
           PERF_WRITEBACK: perf_writeback=perf_writeback+1;
           default: perf_other=perf_other+1;
         endcase
-        if (`ACCEL.busy) perf_busy=perf_busy+1;
+        if (`ACCEL.manual_busy || `ACCEL.row_running ||
+            (`ACCEL.row_active && `ACCEL.compute_start)) perf_busy=perf_busy+1;
+        if (row_start_accept) perf_auto_rows=perf_auto_rows+1;
+        if (`ACCEL.row_pop) perf_auto_pops=perf_auto_pops+1;
+        if (`ACCEL.row_running && phase_now==PERF_WRITEBACK)
+          perf_auto_overlap=perf_auto_overlap+1;
+        if (`ACCEL.row_active && `ACCEL.row_count==2 && !`ACCEL.row_running)
+          perf_auto_full=perf_auto_full+1;
         // All eight PEs share this enable: one fire means eight signed16 MACs.
         if (`ACCEL.u_linear_compute_core.core.engine.peArray.io_enable)
           perf_mac_fire=perf_mac_fire+1;
-        if (start_accept) perf_starts=perf_starts+1;
+        if (start_accept || (`ACCEL.row_active && `ACCEL.compute_start))
+          perf_starts=perf_starts+1;
         if (`ACCEL.core_done) perf_dones=perf_dones+1;
         if (mmio_accept) begin
           if (`ACCEL.cmd_read) perf_mmio_reads=perf_mmio_reads+1;
@@ -185,6 +201,14 @@ module tb_accel_soc;
           perf_w_load+perf_x_load+perf_bias_load+perf_compute_wait+
           perf_writeback+perf_other!=perf_cycles)
         $fatal(1,"performance interval or phase sum mismatch");
+      if (perf_auto_rows!=0) begin
+        if (perf_auto_rows!=99 || perf_auto_pops!=3168 || `ACCEL.row_active ||
+            `ACCEL.row_retired!=32 || `ACCEL.row_produced!=32 || `ACCEL.row_count!=0 ||
+            perf_auto_overlap==0)
+          $fatal(1,"autonomous row/POP retirement or overlap contract mismatch");
+        $display("AUTO_TASK layer=%0d rows=%0d pops_retired=%0d compute_writeback_overlap=%0d fifo_full_wait=%0d",
+          layer,perf_auto_rows,perf_auto_pops,perf_auto_overlap,perf_auto_full);
+      end
       $display("PERF_TASK layer=%0d cycles=%0d w_load=%0d x_load=%0d bias_load=%0d compute_wait=%0d writeback=%0d other=%0d busy=%0d mac_fire=%0d mmio_reads=%0d mmio_writes=%0d shared_reads=%0d shared_writes=%0d shared_stall=%0d mmio_stall=%0d starts=%0d dones=%0d",
         layer,perf_cycles,perf_w_load,perf_x_load,perf_bias_load,
         perf_compute_wait,perf_writeback,perf_other,perf_busy,perf_mac_fire,

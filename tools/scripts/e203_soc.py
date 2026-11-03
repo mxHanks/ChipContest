@@ -101,6 +101,7 @@ def check_log(log, tasks):
 def check_performance(log, layers, schedule='baseline'):
     """Require complete observer records in addition to numerical completion."""
     contract.configuration(schedule)
+    check_autogroup_activity(log, layers, schedule)
     fields = contract.PERFORMANCE_FIELDS
     pattern = r'^PERF_TASK ' + ' '.join(name + r'=(\d+)' for name in fields) + r'$'
     found = re.findall(pattern, log, re.M)
@@ -113,6 +114,22 @@ def check_performance(log, layers, schedule='baseline'):
         contract.validate_performance({k: v for k, v in row.items()
                                        if k not in ['layer', 'cycles']}, row['cycles'], schedule)
     return [{k: v for k, v in row.items() if k not in ['layer', 'cycles']} for row in records]
+
+
+def check_autogroup_activity(log, layers, schedule):
+    names = ['layer', 'rows', 'pops_retired', 'compute_writeback_overlap', 'fifo_full_wait']
+    pattern = r'^AUTO_TASK ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
+    records = [dict(zip(names, map(int, row))) for row in re.findall(pattern, log, re.M)]
+    expected = len(layers) if schedule == 'bias-hw-autogroup-window' else 0
+    if len(records) != expected or len(records) != len(re.findall(r'^AUTO_TASK\b', log, re.M)):
+        raise ValueError('missing, duplicate or unexpected autonomous row activity')
+    for record, layer in zip(records, layers):
+        if (record['layer'] != layer['layer'] or record['rows'] != 99 or
+                record['pops_retired'] != 3168 or
+                not 0 < record['compute_writeback_overlap'] <= layer['cycles'] or
+                not 0 <= record['fifo_full_wait'] <= layer['cycles']):
+            raise ValueError('autonomous row retirement or overlap differs from the contract')
+    return records
 
 
 def build_key(report, sim, waves):
@@ -395,6 +412,9 @@ def main():
                         f'+TASKS={args.tasks}',f'+DUMPWAVE={2 if args.accel_waves else int(args.waves)}',
                         f'+MAX_CYCLES={args.max_cycles}'],out,out/'simulation.log',7200)
                 report['layers']=check_log(log,args.tasks)
+                if args.firmware_schedule == 'bias-hw-autogroup-window':
+                    report['autogroup_activity']=check_autogroup_activity(
+                        log,report['layers'],args.firmware_schedule)
                 for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
                     layer['performance'] = counters
                 report['outputs']=args.tasks*25344

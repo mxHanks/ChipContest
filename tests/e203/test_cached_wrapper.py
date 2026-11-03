@@ -24,7 +24,7 @@ class XuCachedWrapperTests(unittest.TestCase):
                 destination.mkdir(parents=True, exist_ok=True)
                 (destination / name).write_text(output)
         perips = root / 'third-party/e203_hbirdv2/rtl/e203/perips'
-        sources = ['BiasBankCache.sv', 'LinearCachedCore.sv', 'LinearComputeCore.sv',
+        sources = ['BiasBankCache.sv', 'LinearAutoGroupCore.sv', 'LinearCachedCore.sv', 'LinearComputeCore.sv',
                    'DotProductEngine.sv', 'MacController.sv', 'MacPEArray.sv',
                    'MacPE.sv', 'XRowBuffer.sv', 'WeightBankArray.sv',
                    'WeightBank.sv', 'Sram1024x16.sv', 'mem_1024x16.sv',

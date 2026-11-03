@@ -8,6 +8,17 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
        CACHE_LO = 0x48 / 4, CACHE_HI = 0x4c / 4,
        CAPABILITY = 0x50 / 4, RESULT_WINDOW = 0x80 / 4 };
 
+#ifndef XU_HARDWARE_AUTO_GROUP
+#define XU_HARDWARE_AUTO_GROUP 0
+#endif
+#if XU_HARDWARE_AUTO_GROUP
+enum { AUTO_CAPABILITY = 0x78 / 4, ROW_CTRL = 0xc0 / 4,
+       ROW_STATUS = 0xc4 / 4, ROW_POP = 0xc8 / 4 };
+#define XU_RESULT_WINDOW (0x100 / 4)
+#else
+#define XU_RESULT_WINDOW RESULT_WINDOW
+#endif
+
 #ifndef XU_HARDWARE_STREAM16
 #define XU_HARDWARE_STREAM16 0
 #endif
@@ -48,8 +59,8 @@ static uint32_t bias_cache[2 * COLS];
 #if XU_HARDWARE_RESULT_WINDOW
 #define XU_READ_RESULT(bank) do { \
     unsigned index = 2 * (row * COLS + group * 8 + (bank)); \
-    y[index] = reg[RESULT_WINDOW + 2 * (bank)]; \
-    y[index + 1] = (uint32_t)(int32_t)(int16_t)reg[RESULT_WINDOW + 2 * (bank) + 1]; \
+    y[index] = reg[XU_RESULT_WINDOW + 2 * (bank)]; \
+    y[index + 1] = (uint32_t)(int32_t)(int16_t)reg[XU_RESULT_WINDOW + 2 * (bank) + 1]; \
 } while (0)
 #else
 #define XU_READ_RESULT(bank) do { \
@@ -70,6 +81,10 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
 #if XU_HARDWARE_BIAS_CACHE || XU_HARDWARE_RESULT_WINDOW
     /* Reject old RTL instead of silently accepting writes to absent registers. */
     if (reg[CAPABILITY] != 0x58550003u) return -4;
+#endif
+#if XU_HARDWARE_AUTO_GROUP
+    uint32_t auto_cap = reg[AUTO_CAPABILITY];
+    if ((auto_cap & 0xffff0000u) != 0x58410000u || !(auto_cap & 1u)) return -7;
 #endif
 #if XU_HARDWARE_PACK32
     if (reg[STREAM_CAPABILITY] != 0x58530003u) return -5;
@@ -141,6 +156,9 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             reg[X_DATA] = XU_LOW16(x[row * INNER + k]);
         }
 #endif
+#if XU_HARDWARE_AUTO_GROUP
+        reg[ROW_CTRL] = 1;
+#endif
         for (unsigned group = 0; group < 32; ++group) {
 #if XU_HARDWARE_BIAS_CACHE
             /* Chisel selects all eight cached bias values using GROUP. */
@@ -161,12 +179,22 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                 reg[BIAS_HI] = XU_LOW8(task_bias[2 * col + 1]);
             }
 #endif
+#if XU_HARDWARE_AUTO_GROUP
+            unsigned polls = 0;
+            uint32_t status;
+            do {
+                status = reg[ROW_STATUS];
+                if (++polls >= poll_limit) return -3;
+            } while (!(status & 2u));
+            if (((status >> 6) & 31u) != group) return -8;
+#else
             reg[GROUP] = group;
             reg[STATUS] = 2; /* W1C, including a previous task's completion. */
             reg[CTRL] = 1;
             unsigned polls = 0;
             while (!(reg[STATUS] & 2u))
                 if (++polls >= poll_limit) return -3;
+#endif
 #if XU_FIRMWARE_RESULT_UNROLL
             XU_READ_RESULT(0);
             XU_READ_RESULT(1);
@@ -175,19 +203,32 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             XU_READ_RESULT(4);
             XU_READ_RESULT(5);
             XU_READ_RESULT(6);
+#if !XU_HARDWARE_AUTO_GROUP
             XU_READ_RESULT(7);
+#endif
 #else
-            for (unsigned bank = 0; bank < 8; ++bank) {
+            for (unsigned bank = 0; bank < (XU_HARDWARE_AUTO_GROUP ? 7u : 8u); ++bank) {
                 unsigned index = 2 * (row * COLS + group * 8 + bank);
 #if XU_HARDWARE_RESULT_WINDOW
-                y[index] = reg[RESULT_WINDOW + 2 * bank];
-                y[index + 1] = (uint32_t)(int32_t)(int16_t)reg[RESULT_WINDOW + 2 * bank + 1];
+                y[index] = reg[XU_RESULT_WINDOW + 2 * bank];
+                y[index + 1] = (uint32_t)(int32_t)(int16_t)reg[XU_RESULT_WINDOW + 2 * bank + 1];
 #else
                 reg[RESULT_INDEX] = bank;
                 y[index] = reg[RESULT_LO];
                 y[index + 1] = (uint32_t)(int32_t)(int16_t)reg[RESULT_HI];
 #endif
             }
+#endif
+#if XU_HARDWARE_AUTO_GROUP
+            // Read every word while the head is owned. Retire POP before the
+            // final two shared writes, so even the final row's POP remains in
+            // the existing first-input/final-Y-response measurement window.
+            uint32_t last_lo = reg[XU_RESULT_WINDOW + 14];
+            uint32_t last_hi = (uint32_t)(int32_t)(int16_t)reg[XU_RESULT_WINDOW + 15];
+            reg[ROW_POP] = 1;
+            unsigned last_index = 2 * (row * COLS + group * 8 + 7);
+            y[last_index] = last_lo;
+            y[last_index + 1] = last_hi;
 #endif
         }
     }

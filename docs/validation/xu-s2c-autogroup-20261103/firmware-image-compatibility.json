@@ -1,0 +1,105 @@
+{
+  "status": "PASS",
+  "scope": "all seven frozen schedules with original default -Os/none and local screen -O2/both-unroll-no-masks",
+  "compiler": "riscv64-unknown-elf-gcc 14.2.0+19",
+  "comparisons": [
+    {
+      "schedule": "baseline",
+      "optimization": "-Os",
+      "experiment": "none",
+      "image_sha256": "c13067f310b0ac199965740d8bc876bc10562e8e77f6776975968bad468a8d42",
+      "identical": true
+    },
+    {
+      "schedule": "baseline",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "image_sha256": "872e68c6ecf69ab57907db71042bec4aaf701bce27dfb37e9a8ac1cfa9d71b6f",
+      "identical": true
+    },
+    {
+      "schedule": "bias-dtcm",
+      "optimization": "-Os",
+      "experiment": "none",
+      "image_sha256": "693a18d609f91cbdc40cf32764b57d35c9f4b0c978d3d9495902f51420c44943",
+      "identical": true
+    },
+    {
+      "schedule": "bias-dtcm",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "image_sha256": "1e038157321ac5891329762064d7da77125fbf0134dfe29600e94105b5acefd8",
+      "identical": true
+    },
+    {
+      "schedule": "bias-hw",
+      "optimization": "-Os",
+      "experiment": "none",
+      "image_sha256": "bcd1622eefebb42050f4a5541cede81d5821627c499ed85f29b778fbcf66ac2b",
+      "identical": true
+    },
+    {
+      "schedule": "bias-hw",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "image_sha256": "f1d1648d3d52a3d69e7380e161fa02c842270897c4dcbc4002ab2f886c0ed4ba",
+      "identical": true
+    },
+    {
+      "schedule": "bias-dtcm-window",
+      "optimization": "-Os",
+      "experiment": "none",
+      "image_sha256": "16b1839233f1e3df515f1b99eb6d7f37bf181bf9c30c5342199609a059bcf790",
+      "identical": true
+    },
+    {
+      "schedule": "bias-dtcm-window",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "image_sha256": "47dbdc70da139059d4df2dae55b5abcab9424c1dfd78b0abe79e3f5fb1940d05",
+      "identical": true
+    },
+    {
+      "schedule": "bias-hw-window",
+      "optimization": "-Os",
+      "experiment": "none",
+      "image_sha256": "03ddb741671fcbe95cf2d048a9592ed1e4fad5dc16016dfd78f052b0845dc83f",
+      "identical": true
+    },
+    {
+      "schedule": "bias-hw-window",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "image_sha256": "8d2ff853f5444d0188d5bca63020aa8048ce8a1b29675ef65cdf8b3b40203185",
+      "identical": true
+    },
+    {
+      "schedule": "bias-hw-stream16-window",
+      "optimization": "-Os",
+      "experiment": "none",
+      "image_sha256": "742c5b3a016f750074e8eee1fbbc951ac4a9d5343bc67355f6179e0b0db1bb0a",
+      "identical": true
+    },
+    {
+      "schedule": "bias-hw-stream16-window",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "image_sha256": "6c7a680af1af7e0fb39db95d97a3ebb0a979accc5ddb3161b82ad33501c7e167",
+      "identical": true
+    },
+    {
+      "schedule": "bias-hw-pack32-window",
+      "optimization": "-Os",
+      "experiment": "none",
+      "image_sha256": "8330915874f97d3fbac4356db1ea7ba24ff0f9cdf172b929bf6f4091a56dfd6d",
+      "identical": true
+    },
+    {
+      "schedule": "bias-hw-pack32-window",
+      "optimization": "-O2",
+      "experiment": "both-unroll-no-masks",
+      "image_sha256": "beacb33ac3496dbef5fb0c71c7e54c4119bd8a2d10e731b332bdad2f3eab8a89",
+      "identical": true
+    }
+  ]
+}

@@ -15,7 +15,8 @@ class HardwareContractTests(unittest.TestCase):
         for schedule, writes in [('bias-dtcm', 156326), ('bias-hw', 81064),
                                  ('bias-dtcm-window', 130982), ('bias-hw-window', 55720),
                                  ('bias-hw-stream16-window', 33094),
-                                 ('bias-hw-pack32-window', 21734)]:
+                                 ('bias-hw-pack32-window', 21734),
+                                 ('bias-hw-autogroup-window', 15497)]:
             with self.subTest(schedule=schedule):
                 work = contract.task_contract(schedule)
                 self.assertEqual(work['mmio_writes'], writes)
@@ -38,6 +39,9 @@ class HardwareContractTests(unittest.TestCase):
                 log = 'PERF_TASK ' + ' '.join(
                     f'{key}={row[key] if key in row else counters[key]}'
                     for key in contract.PERFORMANCE_FIELDS) + '\n'
+                if schedule == 'bias-hw-autogroup-window':
+                    log += ('AUTO_TASK layer=0 rows=99 pops_retired=3168 '
+                            'compute_writeback_overlap=100 fifo_full_wait=200\n')
                 self.assertEqual(soc.check_performance(log, [row], schedule)[0]['mmio_writes'], writes)
                 for other in contract.SCHEDULES:
                     if other == schedule:
@@ -73,8 +77,35 @@ class HardwareContractTests(unittest.TestCase):
         for schedule in contract.SCHEDULES:
             defines = contract.compiler_defines(contract.configuration(schedule))
             self.assertEqual('-DXU_HARDWARE_PACK32=1' in defines,
-                             schedule == 'bias-hw-pack32-window')
+                             schedule in ('bias-hw-pack32-window', 'bias-hw-autogroup-window'))
             self.assertNotIn('-DXU_HARDWARE_PACK32=0', defines)
+
+    def test_autogroup_replaces_only_group_control_with_row_and_retired_pops(self):
+        auto = contract.task_contract('bias-hw-autogroup-window')
+        packed = contract.task_contract('bias-hw-pack32-window')
+        self.assertEqual(packed['mmio_writes'] - auto['mmio_writes'], 99 * (96 - 33))
+        for field in packed.keys() - {'mmio_writes'}:
+            self.assertEqual(auto[field], packed[field])
+        for schedule in contract.SCHEDULES:
+            defines = contract.compiler_defines(contract.configuration(schedule))
+            self.assertEqual('-DXU_HARDWARE_AUTO_GROUP=1' in defines,
+                             schedule == 'bias-hw-autogroup-window')
+            self.assertNotIn('-DXU_HARDWARE_AUTO_GROUP=0', defines)
+
+    def test_auto_activity_requires_actual_retired_pops_and_overlap_records(self):
+        layer = [dict(layer=0, cycles=1000000)]
+        valid = ('AUTO_TASK layer=0 rows=99 pops_retired=3168 '
+                 'compute_writeback_overlap=100 fifo_full_wait=200\n')
+        self.assertEqual(soc.check_autogroup_activity(valid, layer,
+                         'bias-hw-autogroup-window')[0]['pops_retired'], 3168)
+        for invalid in ['', valid + valid, valid.replace('3168', '3167'),
+                        valid.replace('rows=99', 'rows=98'),
+                        valid.replace('layer=0', 'layer=1'),
+                        valid.replace('overlap=100', 'overlap=0')]:
+            with self.assertRaises(ValueError):
+                soc.check_autogroup_activity(invalid, layer, 'bias-hw-autogroup-window')
+        with self.assertRaises(ValueError):
+            soc.check_autogroup_activity(valid, layer, 'bias-hw-pack32-window')
 
     def test_legacy_and_scalar_stream_compiler_commands_remain_unchanged(self):
         names = ['XU_FIRMWARE_BIAS_DTCM', 'XU_HARDWARE_BIAS_CACHE',
