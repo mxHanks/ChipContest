@@ -1,0 +1,16 @@
+if {[catch {
+set synopsys_auto_setup true
+set hdlin_unresolved_modules black_box
+set verification_timeout_limit 3600
+set_svf {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/default.svf}
+read_db -technology_library {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db}
+read_db -technology_library {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db}
+read_db -technology_library {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/xu-ramsp128x16-ss-0p99v-125c.db}
+read_sverilog -r -define {SYNTHESIS DISABLE_SV_ASSERTION=1} -vcs {+incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/core +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/debug +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/fab +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/general +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/mems +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/perips +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/perips/apb_adv_timer +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/perips/apb_gpio +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/perips/apb_i2c +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/perips/apb_spi_master +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/perips/apb_uart +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/soc +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/subsys +incdir+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl/xu-added -f /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/rtl.f}
+set_top r:/WORK/xu_soc_ppa_top
+read_verilog -i {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s1-ppa-campaign-01/sram/ppa/mapped.v}
+set_top i:/WORK/xu_soc_ppa_top
+match
+report_unmatched_points > unmatched.rpt
+if {[verify]} {puts "XU_FULL_SOC_FORMALITY_PASS";exit 0} else {report_failing_points > failing.rpt;puts "XU_FULL_SOC_FORMALITY_FAIL";exit 1}
+} xu_error]} {puts stderr "XU_FULL_SOC_FORMALITY_SCRIPT_ERROR $xu_error";exit 1}
