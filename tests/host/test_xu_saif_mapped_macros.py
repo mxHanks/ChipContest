@@ -110,6 +110,8 @@ class MappedMacroTests(unittest.TestCase):
             self.assertIn('tb/dut/shared/storage/macro_storage.depth_bank[0].width_lane[0].macro', instances)
             self.assertEqual(alias.decode_atom(instances['tb/dut/shared/storage/macro_storage.depth_bank[0].width_lane[0].macro'][1]),
                              'macro_storage.depth_bank[0].width_lane[0].macro')
+            self.assertEqual(instances['tb/dut/shared/storage/macro_storage.depth_bank[0].width_lane[0].macro'][1],
+                             r'macro_storage\.depth_bank\[0\]\.width_lane\[0\]\.macro')
             self.assertNotIn('tb/dut/shared/storage/macro_storage/depth_bank[0]/width_lane[0]/macro', instances)
             self.assertIn('tb/dut/shared/storage/macro_storage/depth_bank[0]/width_lane[0]/macro_extra', instances)
             self.assertIn('(DURATION 10.00)', (d / 'mapped.saif').read_text())

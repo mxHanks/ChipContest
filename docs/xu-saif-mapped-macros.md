@@ -83,6 +83,12 @@ at `/`. Thus actual cell
 `u_shared/storage/macro_storage.depth_bank[0].width_lane[0].macro` creates
 one literal leaf INSTANCE named
 `macro_storage.depth_bank[0].width_lane[0].macro`, under `u_shared/storage`.
+The serialized new INSTANCE atom escapes literal periods (`\.`) as required by
+the actual PT SAIF lexer, as well as bus brackets. Existing input atoms are
+preserved, including any existing escapes. Decoding the escaped output must
+still produce exactly the same actual name and pin statistics. A real server
+PT probe confirmed that the period-escaped representation parses; this proves
+syntax compatibility, not complete activity annotation or power qualification.
 
 Every canonical pin needs measured NET and/or PORT statistics. If both kinds
 exist they must agree, including the exact attribute key set. Existing actual

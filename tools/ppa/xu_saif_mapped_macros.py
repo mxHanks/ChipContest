@@ -232,7 +232,11 @@ def relocate(saif, mapping_path, inventory_path, out, strip_path, receipt_path=N
         for depth in range(1, len(parts) + 1):
             key = '/'.join(parts[:depth])
             if key not in instances:
-                node = ['INSTANCE', alias.atom(parts[depth - 1])]
+                # PT's SAIF lexer requires escaped literal periods in INSTANCE
+                # names. Existing source atoms remain untouched; newly built
+                # mapped names are decoded strings, so each period is escaped
+                # exactly once. This changes no decoded hierarchy or stats.
+                node = ['INSTANCE', alias.atom(parts[depth - 1]).replace('.', r'\.')]
                 (tree if depth == 1 else instances['/'.join(parts[:depth - 1])]).append(node)
                 instances[key] = node
         destination = instances[scope]
