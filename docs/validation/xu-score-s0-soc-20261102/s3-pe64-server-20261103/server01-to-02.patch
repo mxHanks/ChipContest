@@ -1,0 +1,143 @@
+diff --git a/docs/validation/xu-score-s3-pe64-python36-20261103/README.md b/docs/validation/xu-score-s3-pe64-python36-20261103/README.md
+new file mode 100644
+index 0000000..1cd7cd1
+--- /dev/null
++++ b/docs/validation/xu-score-s3-pe64-python36-20261103/README.md
+@@ -0,0 +1,17 @@
++# xu PE64 服务器 Python3.6 接口修复
++
++仅将新增 contract 测试和部署 producer 的 `subprocess.check_output(text=True)` 改为 Python3.6 支持的 `universal_newlines=True`。bootstrap 的新目录改为 `ChipContest-s3-pe64-02`、`s3-pe64-accept-02` 和 `s3-pe64-deploy-20261103-02`，原 01 目录及其失败证据保留。完整 VCS launcher 的八步验收与四项完整 12 层控制不变；本提交没有改 Chisel、RTL、数值、向量、固件或旧 generated 文件。
++
++`contract-replay.log` 是本地兼容接口复查，**没有在本机运行 Python3.6**。相同 subprocess 关键字拒绝 guard 对原 6f47746 的四项 contract 测试准确复现一项 `text` TypeError；修复后四项均 PASS。另检查 server 实际执行的三份新增测试与三份 PE64 producer，未发现 `text`、`capture_output`、`missing_ok`、`dirs_exist_ok` 这些不兼容关键字。它不能替代服务器新 main 的真实 Python3.6 / VCS 验收。旧 local raw snapshot 中的 producer 保持原字节，不按本次修复回写。
++
++受影响测试可直接复现：
++
++```bash
++python3 -m unittest discover -s tests/e203 -p test_pe64_contract.py -v
++python3 tools/scripts/xu_prepare_pe64_deployment.py --out /absolute/new/xu-pe64-deployment-02
++python3 /absolute/new/xu-pe64-deployment-02/launch.py --prepare-only \
++  --previous-source /absolute/ChipContest-xu-s3-pe32 \
++  --source /absolute/new/ChipContest-s3-pe64-02 --out /absolute/new/s3-pe64-prepare-only-02
++```
++
++正式服务器必须使用新包 receipt 的 main commit、SHA256 和字节数；不得把 01 状态改成通过或复用其 source/output。新 bootstrap 保持精确七文件白名单、哈希检查、全新目录及独立 PID/log。新结果仍需真实 VCS direct / boundary、host68、numeric42、legacy5、synthetic1/2、real12 和四项 real12 控制，尚未形成新的吞吐、面积或能量结论。
+diff --git a/docs/validation/xu-score-s3-pe64-python36-20261103/contract-replay.log b/docs/validation/xu-score-s3-pe64-python36-20261103/contract-replay.log
+new file mode 100644
+index 0000000..84705aa
+--- /dev/null
++++ b/docs/validation/xu-score-s3-pe64-python36-20261103/contract-replay.log
+@@ -0,0 +1,52 @@
++NEGATIVE original 6f47746 with Python3.6 unsupported keyword guard
++test_64_work_contract_and_legacy_widths (xu_pe64_original_python36.XuPe64ContractTests.test_64_work_contract_and_legacy_widths) ... ok
++test_original_generated_and_chisel_files_remain_frozen (xu_pe64_original_python36.XuPe64ContractTests.test_original_generated_and_chisel_files_remain_frozen) ... ERROR
++test_report_requires_same_physical_geometry_and_useful_work (xu_pe64_original_python36.XuPe64ContractTests.test_report_requires_same_physical_geometry_and_useful_work) ... ok
++test_server_every_step_same_variant_and_required_direct_vcs (xu_pe64_original_python36.XuPe64ContractTests.test_server_every_step_same_variant_and_required_direct_vcs) ... ok
++
++======================================================================
++ERROR: test_original_generated_and_chisel_files_remain_frozen (xu_pe64_original_python36.XuPe64ContractTests.test_original_generated_and_chisel_files_remain_frozen)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/test_pe64_contract.py", line 66, in test_original_generated_and_chisel_files_remain_frozen
++    tracked=subprocess.check_output(['git','ls-tree','-r','--name-only','fc3977d','rtl/e203/perips'],cwd=child,universal_newlines=True).splitlines()
++            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++  File "/usr/lib/python3.14/unittest/mock.py", line 1176, in __call__
++    return self._mock_call(*args, **kwargs)
++           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
++  File "/usr/lib/python3.14/unittest/mock.py", line 1180, in _mock_call
++    return self._execute_mock_call(*args, **kwargs)
++           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
++  File "/usr/lib/python3.14/unittest/mock.py", line 1247, in _execute_mock_call
++    result = effect(*args, **kwargs)
++  File "<stdin>", line 9, in python36_check_output
++TypeError: __init__() got an unexpected keyword argument 'text'
++
++----------------------------------------------------------------------
++Ran 4 tests in 0.009s
++
++FAILED (errors=1)
++EXPECTED_NEGATIVE exactly1 text keyword TypeError; this is not actual Python3.6
++POSITIVE corrected actual contract tests with same keyword guard
++test_64_work_contract_and_legacy_widths (xu_pe64_corrected_python36.XuPe64ContractTests.test_64_work_contract_and_legacy_widths) ... ok
++test_original_generated_and_chisel_files_remain_frozen (xu_pe64_corrected_python36.XuPe64ContractTests.test_original_generated_and_chisel_files_remain_frozen) ... ok
++test_report_requires_same_physical_geometry_and_useful_work (xu_pe64_corrected_python36.XuPe64ContractTests.test_report_requires_same_physical_geometry_and_useful_work) ... ok
++test_server_every_step_same_variant_and_required_direct_vcs (xu_pe64_corrected_python36.XuPe64ContractTests.test_server_every_step_same_variant_and_required_direct_vcs) ... ok
++
++----------------------------------------------------------------------
++Ran 4 tests in 0.102s
++
++OK
++{
++  "status": "PASS_HOST_API_REPLAY_NOT_SERVER_PY36",
++  "tests": 4,
++  "inspected": [
++    "tests/e203/test_pe64_contract.py",
++    "tests/e203/test_pe64_wrapper.py",
++    "tests/e203/test_pe64_boundaries.py",
++    "tools/scripts/xu_s3_pe64_server.py",
++    "tools/scripts/xu_s3_pe64_bootstrap.py",
++    "tools/scripts/xu_prepare_pe64_deployment.py"
++  ],
++  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]"
++}
+diff --git a/docs/validation/xu-score-s3-pe64-python36-20261103/payload-manifest.json b/docs/validation/xu-score-s3-pe64-python36-20261103/payload-manifest.json
+new file mode 100644
+index 0000000..8e5e4a1
+--- /dev/null
++++ b/docs/validation/xu-score-s3-pe64-python36-20261103/payload-manifest.json
+@@ -0,0 +1,6 @@
++{
++  "contract-replay.log": {
++    "bytes": 3480,
++    "sha256": "db16e8979dee0fcf92cdcb4ac28f2f9e89e37f265565a3370a0836db4b308227"
++  }
++}
+diff --git a/tests/e203/test_pe64_contract.py b/tests/e203/test_pe64_contract.py
+index 21831ca..e84f948 100644
+--- a/tests/e203/test_pe64_contract.py
++++ b/tests/e203/test_pe64_contract.py
+@@ -63,7 +63,7 @@ class XuPe64ContractTests(unittest.TestCase):
+             expected=subprocess.check_output(['git','show','94ce6f0:'+relative],cwd=root)
+             self.assertEqual((root/relative).read_bytes(),expected)
+         child=root/'third-party/e203_hbirdv2'
+-        tracked=subprocess.check_output(['git','ls-tree','-r','--name-only','fc3977d','rtl/e203/perips'],cwd=child,text=True).splitlines()
++        tracked=subprocess.check_output(['git','ls-tree','-r','--name-only','fc3977d','rtl/e203/perips'],cwd=child,universal_newlines=True).splitlines()
+         frozen=[p for p in tracked if p.endswith('.sv')or p.endswith('/xu_pe32_icb_slave.v')or p.endswith('/accel_icb_slave.v')]
+         for relative in frozen:
+             expected=subprocess.check_output(['git','show','fc3977d:'+relative],cwd=child)
+diff --git a/tools/scripts/xu_prepare_pe64_deployment.py b/tools/scripts/xu_prepare_pe64_deployment.py
+index 9e31c09..bf035c9 100644
+--- a/tools/scripts/xu_prepare_pe64_deployment.py
++++ b/tools/scripts/xu_prepare_pe64_deployment.py
+@@ -18,7 +18,7 @@ def sha(path):
+ 
+ 
+ def git(repo, *args):
+-    return subprocess.check_output(['git', *args], cwd=repo, text=True).strip()
++    return subprocess.check_output(['git', *args], cwd=repo, universal_newlines=True).strip()
+ 
+ 
+ def require(value, message):
+@@ -73,7 +73,7 @@ def main():
+ Requires the recorded32PE base commits available in the previous-source repository and child. This package contains no credentials. Extract into a new directory, verify its archive identity, and run:
+ 
+ ```sh
+-python3 launch.py --source /absolute/new/ChipContest-s3-pe64-01 --out /absolute/new/s3-pe64-accept-01 --previous-source /absolute/server/ChipContest-s3-pe32-01
++python3 launch.py --source /absolute/new/ChipContest-s3-pe64-02 --out /absolute/new/s3-pe64-accept-02 --previous-source /absolute/server/ChipContest-s3-pe32-01
+ ```
+ 
+ The default cross prefix is the previously measured server SiFive10.2 toolchain. Source, output and deployment directories must be new. The launcher checks exact GCC/VCS versions, full tracked file bytes and modes before/after, mandatory physical64 direct64/32/8 and boundary VCS, stock host/numeric/vector/doctor/legacy5/synthetic1/synthetic2/wide64-real12, plus four complete12 physical/schedule controls. Retention, full150MHz, mapping and fullSoC energy remain separate gates. Do not overwrite any32/default source or old raw capture.
+diff --git a/tools/scripts/xu_s3_pe64_bootstrap.py b/tools/scripts/xu_s3_pe64_bootstrap.py
+index 74f7535..c9415f3 100644
+--- a/tools/scripts/xu_s3_pe64_bootstrap.py
++++ b/tools/scripts/xu_s3_pe64_bootstrap.py
+@@ -32,8 +32,8 @@ def main():
+     archive, base = args.archive.resolve(), args.base.resolve()
+     require(re.fullmatch('[0-9a-f]{64}', args.sha256) is not None, 'invalid expected SHA256')
+     require(args.bytes > 0 and archive.stat().st_size == args.bytes and sha(archive) == args.sha256, 'archive identity differs')
+-    deployment = base / 's3-pe64-deploy-20261103-01'
+-    source, out = base / 'ChipContest-s3-pe64-01', base / 's3-pe64-accept-01'
++    deployment = base / 's3-pe64-deploy-20261103-02'
++    source, out = base / 'ChipContest-s3-pe64-02', base / 's3-pe64-accept-02'
+     require(not deployment.exists() and not source.exists() and not out.exists(), 'fresh deployment/source/output directories required')
+     allowed = {'launch.py', 'main.bundle', 'child.bundle', 'source-files.json', 'source-identity.json', 'package-files.json', 'README.md'}
+     with tarfile.open(str(archive), 'r:xz') as tar:

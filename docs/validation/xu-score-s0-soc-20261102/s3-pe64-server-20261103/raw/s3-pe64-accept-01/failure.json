@@ -1,0 +1,104 @@
+{
+  "status": "FAIL",
+  "main_commit": "6f47746a916e14d0bbdcbb799c6338acd5c979a7",
+  "e203_commit": "7aae96776e116d5e95d6ebb49d29a5fccce04ab9",
+  "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-01",
+  "steps": [
+    {
+      "name": "host",
+      "argv": [
+        "env",
+        "XU_PE64_WRAPPER_SIM=vcs",
+        "XU_PE64_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-01/acceptance/host-pe64-wrapper-vcs",
+        "env",
+        "XU_WRAPPER_SIM=vcs",
+        "XU_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-01/acceptance/host-wrapper-vcs",
+        "/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "FAIL"
+    }
+  ],
+  "direct_vcs": {
+    "wide64": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        8,
+        62,
+        15,
+        15,
+        11031,
+        11031
+      ],
+      "logs": {
+        "compile.log": "45829c6f0966fc5d20ceea2a1e38c5c86726a381551bda2b875f95e12567a74e",
+        "simulation.log": "98e67e8425075c7f93225910a344459fd6641a264da9150ef04332fd56e08083"
+      }
+    },
+    "compat32": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        16,
+        190,
+        27,
+        27,
+        11131,
+        11131
+      ],
+      "logs": {
+        "compile.log": "afedfad8b1b18e96410425142154473e1214a3176dd22a2b7a80c4112b72f34d",
+        "simulation.log": "cad0945f98cddb8ed8bdab14f95d45a6eaa2f827ae8c24669c347f3e35221713"
+      }
+    },
+    "compat8": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        64,
+        958,
+        99,
+        99,
+        11731,
+        11731
+      ],
+      "logs": {
+        "compile.log": "6224d7eb0e2bb0da0ee5399f3a102839391374b5bb780b52bab6e3dc27ded7c3",
+        "simulation.log": "8579fb0168e8ed5a28cc709427e267392aebfbd52d80c0c06a39786eb1fe01db"
+      }
+    },
+    "boundary": {
+      "status": "PASS",
+      "backend": "vcs",
+      "modes": 3,
+      "unknown_reads": 42,
+      "mode_errors": 3,
+      "logs": {
+        "compile.log": "d051bb3b32a3052e619032a73bb55ae1a02192800b88ecde6a62b8b201cb1779",
+        "simulation.log": "8993a6c70e73f56b8dff0cfdfe14a0865169dac2faf0d9c0a0095cb50d8334af"
+      }
+    }
+  },
+  "scope": "VCS development acceptance and physical-variant controls; no S0/area/power/retention claim",
+  "verified_source_paths": 2710,
+  "updated_utc": "2026-11-03T10:33:58.382530+00:00",
+  "tools": {
+    "git": "/bin/git",
+    "make": "/bin/make",
+    "vcs": "/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs",
+    "gcc": "/bin/gcc",
+    "g++": "/bin/g++",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objcopy": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objcopy",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objdump": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objdump"
+  },
+  "stage": "host",
+  "error": "exit 1: /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-01/acceptance/host.log"
+}

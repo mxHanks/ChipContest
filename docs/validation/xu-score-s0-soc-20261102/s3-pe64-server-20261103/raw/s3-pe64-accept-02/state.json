@@ -1,0 +1,392 @@
+{
+  "status": "VCS_ACCEPTED_NOT_RETAINED",
+  "main_commit": "3443fad8945577626d226b1cd53eadec89331a20",
+  "e203_commit": "7aae96776e116d5e95d6ebb49d29a5fccce04ab9",
+  "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02",
+  "steps": [
+    {
+      "name": "host",
+      "argv": [
+        "env",
+        "XU_PE64_WRAPPER_SIM=vcs",
+        "XU_PE64_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/host-pe64-wrapper-vcs",
+        "env",
+        "XU_WRAPPER_SIM=vcs",
+        "XU_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/host-wrapper-vcs",
+        "/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "PASS",
+      "tests": 68,
+      "skipped": 4,
+      "required_actual_vcs": [
+        "cached-wrapper",
+        "pe64-wide64",
+        "pe64-compat32",
+        "pe64-compat8",
+        "pe64-boundaries"
+      ],
+      "optional_icarus_helpers": "packed/stream/autogroup may skip when Icarus unavailable; their physical64 paths covered by mandatory three-mode VCS"
+    },
+    {
+      "name": "numeric",
+      "argv": [
+        "/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/numeric",
+        "-v"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "vectors",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "check-vectors",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/vectors",
+        "--firmware-schedule",
+        "bias-hw-pe64-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--accel-variant",
+        "pe64"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "doctor",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/doctor",
+        "--firmware-schedule",
+        "bias-hw-pe64-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--accel-variant",
+        "pe64"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "baseline",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "baseline",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/baseline",
+        "--firmware-schedule",
+        "bias-hw-pe64-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--accel-variant",
+        "pe64"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic1",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "1",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/synthetic1",
+        "--firmware-schedule",
+        "bias-hw-pe64-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--accel-variant",
+        "pe64"
+      ],
+      "status": "PASS",
+      "total_cycles": 941800
+    },
+    {
+      "name": "synthetic2",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "synthetic",
+        "--tasks",
+        "2",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/synthetic2",
+        "--firmware-schedule",
+        "bias-hw-pe64-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--accel-variant",
+        "pe64"
+      ],
+      "status": "PASS",
+      "total_cycles": 1883600
+    },
+    {
+      "name": "real12",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/real12",
+        "--firmware-schedule",
+        "bias-hw-pe64-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks",
+        "--accel-variant",
+        "pe64"
+      ],
+      "status": "PASS",
+      "total_cycles": 11301600
+    },
+    {
+      "name": "same64-schedule32-control-real12",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/same64-schedule32-control-real12",
+        "--accel-variant",
+        "pe64",
+        "--firmware-schedule",
+        "bias-hw-pe32-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 11376501
+    },
+    {
+      "name": "same64-schedule8-control-real12",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/same64-schedule8-control-real12",
+        "--accel-variant",
+        "pe64",
+        "--firmware-schedule",
+        "bias-hw-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 11842200
+    },
+    {
+      "name": "physical32-wide32-control-real12",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/physical32-wide32-control-real12",
+        "--accel-variant",
+        "pe32",
+        "--firmware-schedule",
+        "bias-hw-pe32-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 11376501
+    },
+    {
+      "name": "physical8-auto8-control-real12",
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-02/tools/scripts/e203_soc.py",
+        "--mode",
+        "real",
+        "--tasks",
+        "12",
+        "--sim",
+        "vcs",
+        "--cross-prefix",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-02/acceptance/physical8-auto8-control-real12",
+        "--accel-variant",
+        "pe8",
+        "--firmware-schedule",
+        "bias-hw-autogroup-window",
+        "--firmware-opt=-O2",
+        "--firmware-experiment",
+        "both-unroll-no-masks"
+      ],
+      "status": "PASS",
+      "total_cycles": 11842200
+    }
+  ],
+  "direct_vcs": {
+    "wide64": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        8,
+        62,
+        15,
+        15,
+        11031,
+        11031
+      ],
+      "logs": {
+        "compile.log": "c5a73f08661593e2739664e855ac1302cc4ab6161d18456ca94738b3f8370e07",
+        "simulation.log": "3f1c3dfdb010cb92ef763ae65746e95062b987284dca290a844b7a69210c5ab5"
+      }
+    },
+    "compat32": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        16,
+        190,
+        27,
+        27,
+        11131,
+        11131
+      ],
+      "logs": {
+        "compile.log": "08c3da93f918fe4c8f8b00a5997c8371186bef8d8504a3f6be722eb0c07cf501",
+        "simulation.log": "932e7d0b3d1c06b5b9045ef72b189f7abf5127ff3e3c6dee66c507a07b176a90"
+      }
+    },
+    "compat8": {
+      "status": "PASS",
+      "backend": "vcs",
+      "counts": [
+        64,
+        958,
+        99,
+        99,
+        11731,
+        11731
+      ],
+      "logs": {
+        "compile.log": "932a87dac41fd6cac7b6d04ed22f7a547c0c38ec253fa0803e41fcdf31ac6f4d",
+        "simulation.log": "7f5b7d10d2989727547e927661774c8d8d6efd151f20401e2b38a91893f994a9"
+      }
+    },
+    "boundary": {
+      "status": "PASS",
+      "backend": "vcs",
+      "modes": 3,
+      "unknown_reads": 42,
+      "mode_errors": 3,
+      "logs": {
+        "compile.log": "44d2721f9f7f2f2c06720261ecadc5f0e16dd0ab4d8ac7d4d9ae9a5dfc5ff88b",
+        "simulation.log": "979bcd8f4d24ed15e882bfab4bdf55e28cebfd0f267842171fb8f4de7da3cbfb"
+      }
+    }
+  },
+  "scope": "VCS development acceptance and physical-variant controls; no S0/area/power/retention claim",
+  "verified_source_paths": 2713,
+  "updated_utc": "2026-11-03T13:51:50.241876+00:00",
+  "tools": {
+    "git": "/bin/git",
+    "make": "/bin/make",
+    "vcs": "/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs",
+    "gcc": "/bin/gcc",
+    "g++": "/bin/g++",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objcopy": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objcopy",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objdump": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objdump"
+  },
+  "stage": "physical8-auto8-control-real12",
+  "acceptance_status": "PASS",
+  "not_run": [
+    "candidate formal-clear/request activity",
+    "mapped consistency",
+    "complete150MHz STA",
+    "same-library area",
+    "fullSoC energy",
+    "retention"
+  ]
+}

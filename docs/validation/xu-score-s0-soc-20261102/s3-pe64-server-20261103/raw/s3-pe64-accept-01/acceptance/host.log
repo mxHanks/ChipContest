@@ -1,0 +1,40 @@
+{"argv": ["env", "XU_PE64_WRAPPER_SIM=vcs", "XU_PE64_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-01/acceptance/host-pe64-wrapper-vcs", "env", "XU_WRAPPER_SIM=vcs", "XU_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-accept-01/acceptance/host-wrapper-vcs", "/bin/python3", "-m", "unittest", "discover", "-s", "tests/e203", "-p", "test_*.py"], "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-01"}
+Starting first
+Starting broken
+Starting first
+.s.................................s....s..E......FAIL: /tmp/tmp9gmjpl1v/baseline/result.json
+FAIL: /tmp/tmppcpngrrj/baseline/result.json
+missing tools: vcs
+missing tools: iverilog, vvp
+.....FAIL: /tmp/tmpdpqjrhql/doctor/result.json
+missing tools: riscv64-unknown-elf-gcc
+.....sStarting host
+Starting numeric
+Starting vectors
+Starting doctor
+Starting baseline
+Starting synthetic1
+Starting synthetic2
+Starting real12
+.PASS rv32ui-p-add
+PASS accel_mmio
+PASS accel_compute
+PASS accel_multigroup
+PASS accel_repeat_x
+......
+======================================================================
+ERROR: test_original_generated_and_chisel_files_remain_frozen (test_pe64_contract.XuPe64ContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe64-01/tests/e203/test_pe64_contract.py", line 66, in test_original_generated_and_chisel_files_remain_frozen
+    tracked=subprocess.check_output(['git','ls-tree','-r','--name-only','fc3977d','rtl/e203/perips'],cwd=child,text=True).splitlines()
+  File "/usr/lib64/python3.6/subprocess.py", line 356, in check_output
+    **kwargs).stdout
+  File "/usr/lib64/python3.6/subprocess.py", line 423, in run
+    with Popen(*popenargs, **kwargs) as process:
+TypeError: __init__() got an unexpected keyword argument 'text'
+
+----------------------------------------------------------------------
+Ran 68 tests in 20.639s
+
+FAILED (errors=1, skipped=4)
