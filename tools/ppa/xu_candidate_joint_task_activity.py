@@ -47,7 +47,7 @@ def joint_binding(ctx,mapping,inventory_path,netlist_path,out):
     require(netlist['sha256']==S2C_MAPPED_SHA,
         'joint collector requires exact measured S2c netlist; equal macro names are insufficient')
     require(inventory['netlist']['sha256']==netlist['sha256'] and
-        Path(inventory['netlist']['path']).resolve()==Path(netlist['path']),
+        Path(inventory['netlist']['path']).resolve()==Path(netlist['path']).resolve(),
         'joint mapped inventory belongs to a different exact netlist')
     libraries=[]
     for record in inventory['libraries']:
@@ -70,7 +70,7 @@ def joint_binding(ctx,mapping,inventory_path,netlist_path,out):
         'joint exact S2c actual mapped/RTL macro bijection missing/extra')
     pairs=[dict(rtl_instance=canonical[k]['instance'],group=canonical[k]['group'],mapped_instance=comparison[k],
         actual_lib_cell=actual[comparison[k]]['lib_cell']) for k in sorted(canonical)]
-    frozen=[identity(inventory_path.resolve()),netlist]+libraries
+    frozen=[identity(inventory_path),netlist]+libraries
     # Any declared file provenance is verified rather than copied as authority.
     def provenance_files(value):
         if isinstance(value,dict):
@@ -83,7 +83,7 @@ def joint_binding(ctx,mapping,inventory_path,netlist_path,out):
             for child in value:provenance_files(child)
     provenance_files(inventory['provenance'])
     result=dict(schema='xu-s2c-joint-mapped-binding-v1',status='EXACT_NAME_PIN_LIBRARY_INPUT_BIJECTION_NOT_EQUIVALENCE_OR_ENERGY_QUALIFIED',
-        source_context=ctx.source,tool_context=ctx.joint_tool,inventory=identity(inventory_path.resolve()),
+        source_context=ctx.source,tool_context=ctx.joint_tool,inventory=identity(inventory_path),
         inventory_netlist=inventory['netlist'],inventory_provenance=inventory['provenance'],netlist=netlist,
         libraries=libraries,macro_count=336,pin_bit_count=22512,pairs=pairs,frozen_files=frozen,
         expected_s2c_netlist_sha256=S2C_MAPPED_SHA,

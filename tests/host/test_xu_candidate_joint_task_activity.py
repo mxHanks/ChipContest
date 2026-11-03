@@ -84,6 +84,8 @@ class JointGuards(unittest.TestCase):
             joint=joint_auditor().audit(stats,side)
             checked=collector.check_boundary_sidecar(joint,side)
             self.assertEqual((checked['checked_macros'],checked['checked_pin_bits']),(1,67))
+            save('boundary-actual.stats.jsonl',stats.read_text())
+            save('boundary-actual.simultaneous.jsonl',side.read_text())
             original=[json.loads(line) for line in side.read_text().splitlines()]
             cases=[]
             x=copy.deepcopy(original);x[0]['initial_state_lsb_ports']='1'+x[0]['initial_state_lsb_ports'][1:];cases.append(('initial-state',x))
@@ -106,6 +108,7 @@ class JointGuards(unittest.TestCase):
             compared=collector.compare_saif_joint(Reader,saif,joint,dict(pin_bit_count=67))
             self.assertEqual(compared['different_or_tb_pin_bits'],0)
             self.assertIn('NOT_CALIBRATED',compared['status'])
+            save('boundary-synthetic-dwell-only.saif',saif.read_text())
             wrong=copy.deepcopy(joint);wrong['window']['duration_ticks']+=1
             with self.assertRaisesRegex(ValueError,'duration or precision differs'):
                 collector.compare_saif_joint(Reader,saif,wrong,dict(pin_bit_count=67))
