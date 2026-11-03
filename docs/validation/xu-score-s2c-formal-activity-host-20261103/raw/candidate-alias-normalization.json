@@ -1,0 +1,46 @@
+{
+  "schema": "xu-s2c-sram-activity-normalization-v1",
+  "status": "NORMALIZED_NOT_ANNOTATION_OR_POWER_QUALIFIED",
+  "raw_saif": {
+    "path": "/tmp/xu-s2c-alias-sqzlrb00/task.saif",
+    "sha256": "da5b430113257b31a80e41715f9ec9c36e16895ebae8453b315987a7cf539cdc",
+    "bytes": 1458499
+  },
+  "normalized_saif": {
+    "path": "/tmp/xu-s2c-alias-sqzlrb00/normalized.saif",
+    "sha256": "5fae8f977903500e34df56a646af7d9c2c852753bb511d939e2bb26c4f50d383",
+    "bytes": 1748100
+  },
+  "mapping": {
+    "path": "/tmp/xu-s2c-alias-sqzlrb00/aliases/xu_candidate_sram_activity_alias.mapping.json",
+    "sha256": "9ffe04cd471a3276cb25a50f1f2fca35c1f80709a975ba9b886b888315e073ea",
+    "bytes": 66206
+  },
+  "observer_source": {
+    "bytes": 1350260,
+    "path": "/tmp/xu-s2c-alias-sqzlrb00/aliases/xu_candidate_sram_activity_alias.sv",
+    "sha256": "c359d9643ebf4d5d97dbdc6d509c76a08d489ae44be41edae9d78f6f8d2027ec"
+  },
+  "generator": {
+    "path": "/home/mxhanks/Projects/ChipContest-xu-candidate-activity/tools/ppa/xu_candidate_sram_activity_alias.py",
+    "sha256": "840b362e04c7d06d014cf0e4520efc18c15705e1313c5e9ec184ed8b261c77b7",
+    "bytes": 24593
+  },
+  "macro_count": 336,
+  "alias_bit_count": 22512,
+  "alias_name_encoding_counts": {
+    "hierarchical": 22512,
+    "vcs_generate_net_atom": 0
+  },
+  "alias_name_comparison_sha256": "c4ba94389a7cfed921c85b3698765f897160b521a209ce90c084c70d934afc2f",
+  "mapped_pin_bits_added_as_port": 22512,
+  "native_pin_bits_verified_reused": 0,
+  "preexisting_native_net_and_port_bits_preserved": 0,
+  "nonalias_raw_signal_count_preserved": 1,
+  "per_bit_comparison_sha256": "72c80346816524001ef109046677c04d4993fb0acf15caf4447fbe8b4481c3c5",
+  "duration_ticks": 10,
+  "timescale_seconds": "1E-9",
+  "alias_unknown_bit_ticks": 112560,
+  "policy": "Complete bijection; exact per-bit dwell/TC/all statistics; native duplicates must agree; no inferred activity; raw immutable.",
+  "limitation": "Observer capture qualification, mapped PT annotation, native cross-kind duplicates, Liberty power and contest qualification require separate review."
+}
