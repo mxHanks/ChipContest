@@ -1,0 +1,1851 @@
+****************************************
+Report : Averaged Power
+	-hierarchy
+	-verbose
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 10:54:38 2026
+****************************************
+
+Library(s) Used:
+
+    scc40nll_vhsc40_rvt_ss_v0p99_125c_basic (File: /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db)
+    RAMSP1024X16_ss_0p99v_0p99v_125c (File: /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db)
+
+
+Operating Conditions: ss_v0p99_125c   Library: scc40nll_vhsc40_rvt_ss_v0p99_125c_basic
+Wire Load Model Mode: top
+
+<no wire load model is set>
+
+Power-specific unit information :
+    Voltage Units = 1 V
+    Capacitance Units = 1 pf
+    Time Units = 1 ns
+    Dynamic Power Units = 1 W
+    Leakage Power Units = 1 W
+
+
+
+                                      Int      Switch   Leak     Total
+Hierarchy                             Power    Power    Power    Power    %
+----------------------------------------------------------------------------------
+xu_soc_ppa_top                        2.38e-02 2.79e-03 6.25e-03 3.29e-02 100.0
+  u_soc (e203_soc_top_EXTERNAL_SYSMEM1)
+                                      2.15e-02 2.69e-03 1.62e-03 2.58e-02  78.4
+    u_e203_subsys_top (e203_subsys_top)
+                                      2.15e-02 2.69e-03 1.62e-03 2.58e-02  78.4
+      u_sirv_aon_top (sirv_aon_top)   1.90e-07 2.56e-09 6.42e-06 6.62e-06   0.0
+        u_sirv_aon_wrapper (sirv_aon_wrapper)
+                                      1.68e-07 2.52e-09 5.65e-06 5.82e-06   0.0
+          aonrst_catch (sirv_ResetCatchAndSync_1)
+                                      5.72e-10    0.000 1.30e-08 1.35e-08   0.0
+            reset_n_catch_reg (sirv_AsyncResetRegVec_36_1)
+                                      5.72e-10    0.000 1.23e-08 1.29e-08   0.0
+              reg_1 (sirv_AsyncResetReg_15)
+                                      1.91e-10    0.000 4.11e-09 4.30e-09   0.0
+              reg_2 (sirv_AsyncResetReg_14)
+                                      1.91e-10    0.000 4.11e-09 4.30e-09   0.0
+              reg_0 (sirv_AsyncResetReg_16)
+                                      1.91e-10    0.000 4.11e-09 4.30e-09   0.0
+          u_sirv_aon (sirv_aon)       1.65e-07 2.49e-09 5.58e-06 5.75e-06   0.0
+            wdog (sirv_wdog)          1.16e-08 2.44e-10 4.66e-07 4.78e-07   0.0
+              AsyncResetRegVec_2_1 (sirv_AsyncResetRegVec_5)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+                reg_0 (sirv_AsyncResetReg_4)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+              AsyncResetRegVec_3_1 (sirv_AsyncResetRegVec_4)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+                reg_0 (sirv_AsyncResetReg_3)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+              AsyncResetRegVec_4_1 (sirv_AsyncResetRegVec_3)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+                reg_0 (sirv_AsyncResetReg_2)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+              AsyncResetRegVec_5_1 (sirv_AsyncResetRegVec_2)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+                reg_0 (sirv_AsyncResetReg_1)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+              AsyncResetRegVec_6_1 (sirv_AsyncResetRegVec_0)
+                                      1.91e-10    0.000 5.15e-09 5.34e-09   0.0
+                reg_0 (sirv_AsyncResetReg_0)
+                                      1.91e-10    0.000 5.15e-09 5.34e-09   0.0
+            rtc (sirv_rtc)            1.64e-08    0.000 6.41e-07 6.58e-07   0.0
+              AsyncResetRegVec_1 (sirv_AsyncResetRegVec_6)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+                reg_0 (sirv_AsyncResetReg_10)
+                                      1.91e-10    0.000 5.28e-09 5.47e-09   0.0
+            u_queue_1 (sirv_queue)    1.08e-08 8.65e-10 2.29e-07 2.41e-07   0.0
+            u_sirv_pmu (sirv_pmu)     3.52e-08 1.48e-10 1.14e-06 1.17e-06   0.0
+              u_pmu_core (sirv_pmu_core)
+                                      3.27e-08 1.29e-10 1.07e-06 1.10e-06   0.0
+              AsyncResetRegVec_1_1 (sirv_AsyncResetRegVec_1)
+                                      9.55e-10    0.000 2.51e-08 2.61e-08   0.0
+                reg_4 (sirv_AsyncResetReg_5)
+                                      1.91e-10    0.000 5.03e-09 5.22e-09   0.0
+                reg_0 (sirv_AsyncResetReg_9)
+                                      1.91e-10    0.000 5.01e-09 5.20e-09   0.0
+                reg_1 (sirv_AsyncResetReg_8)
+                                      1.91e-10    0.000 5.01e-09 5.20e-09   0.0
+                reg_2 (sirv_AsyncResetReg_7)
+                                      1.91e-10    0.000 5.03e-09 5.22e-09   0.0
+                reg_3 (sirv_AsyncResetReg_6)
+                                      1.91e-10    0.000 5.03e-09 5.22e-09   0.0
+          dwakeup_deglitch (sirv_DeglitchShiftRegister_0)
+                                      7.10e-10    0.000 1.41e-08 1.49e-08   0.0
+          ResetCatchAndSync_1_1 (sirv_ResetCatchAndSync_0)
+                                      5.72e-10    0.000 1.30e-08 1.35e-08   0.0
+            reset_n_catch_reg (sirv_AsyncResetRegVec_36_0)
+                                      5.72e-10    0.000 1.23e-08 1.29e-08   0.0
+              reg_1 (sirv_AsyncResetReg_12)
+                                      1.91e-10    0.000 4.11e-09 4.30e-09   0.0
+              reg_2 (sirv_AsyncResetReg_11)
+                                      1.91e-10    0.000 4.11e-09 4.30e-09   0.0
+              reg_0 (sirv_AsyncResetReg_13)
+                                      1.91e-10    0.000 4.11e-09 4.30e-09   0.0
+          bootrom_deglitch (sirv_DeglitchShiftRegister_1)
+                                      7.08e-10    0.000 1.26e-08 1.33e-08   0.0
+          io_rtc_dffr (sirv_gnrl_dffr_DW1_41)
+                                      3.14e-10 2.25e-11 3.89e-09 4.23e-09   0.0
+        u_aon_1to2_icb (sirv_icb1to2_bus_0_1_15_32_1_1_0200_8)
+                                      8.56e-10 3.85e-11 1.40e-07 1.41e-07   0.0
+          u_sirv_gnrl_icb_buffer (sirv_gnrl_icb_buffer_OUTS_CNT_W1_AW15_DW32_CMD_CUT_READY1_RSP_CUT_READY1_CMD_DP0_RSP_DP0_USR_W1)
+                                      1.91e-10    0.000 9.07e-09 9.26e-09   0.0
+            u_sirv_gnrl_cmd_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP0_DW61)
+                                         0.000    0.000    0.000    0.000   N/A
+            u_sirv_gnrl_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP0_DW35)
+                                         0.000    0.000    0.000    0.000   N/A
+            outs_cnt_dfflr (sirv_gnrl_dfflr_DW1_114)
+                                      1.91e-10    0.000 5.38e-09 5.57e-09   0.0
+          u_i_icb_splt (sirv_gnrl_icb_splt_AW15_DW32_FIFO_OUTS_NUM1_FIFO_CUT_READY1_SPLT_NUM2_SPLT_PTR_1HOT1_SPLT_PTR_W2_ALLOW_DIFF0_ALLOW_0CYCL_RSP1_VLD_MSK_PAYLOAD1_USR_W1)
+                                      6.65e-10 3.85e-11 1.29e-07 1.30e-07   0.0
+            splt_num_gt_1_gen.fifo_dp_1.u_sirv_gnrl_rspid_fifo (sirv_gnrl_pipe_stage_CUT_READY1_DP1_DW2)
+                                      6.65e-10 3.85e-11 1.78e-08 1.85e-08   0.0
+              dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW2_6)
+                                      4.74e-10 3.85e-11 1.04e-08 1.09e-08   0.0
+              dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_82)
+                                      1.91e-10    0.000 5.38e-09 5.57e-09   0.0
+        u_aon_icb_cdc_tx (sirv_gnrl_cdc_tx_DW32_SYNC_DP2)
+                                      7.08e-09    0.000 2.02e-07 2.09e-07   0.0
+          vld_dfflr (sirv_gnrl_dfflr_DW1_146)
+                                      1.91e-10    0.000 5.38e-09 5.57e-09   0.0
+          buf_nrdy_dfflr (sirv_gnrl_dfflr_DW1_145)
+                                      1.91e-10    0.000 5.38e-09 5.57e-09   0.0
+          dat_dfflr (sirv_gnrl_dfflr_DW32_25)
+                                      6.12e-09    0.000 1.72e-07 1.78e-07   0.0
+          u_o_rdy_sync (sirv_gnrl_sync_DP2_DW1_9)
+                                      3.82e-10    0.000 7.70e-09 8.08e-09   0.0
+            sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_24)
+                                      1.91e-10    0.000 3.85e-09 4.04e-09   0.0
+            sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_25)
+                                      1.91e-10    0.000 3.85e-09 4.04e-09   0.0
+          o_rdy_sync_dffr (sirv_gnrl_dffr_DW1_43)
+                                      1.91e-10    0.000 3.85e-09 4.04e-09   0.0
+        u_aon_lclkgen_regs (sirv_aon_lclkgen_regs)
+                                      1.90e-10    0.000 8.81e-09 9.00e-09   0.0
+          lfxoscen_dfflrs (sirv_gnrl_dfflrs_DW1_104)
+                                      1.90e-10    0.000 4.20e-09 4.39e-09   0.0
+        u_aon_icb_cdc_rx (sirv_gnrl_cdc_rx_DW65_SYNC_DP2)
+                                      1.34e-08    0.000 3.58e-07 3.72e-07   0.0
+          buf_vld_dfflr (sirv_gnrl_dfflr_DW1_143)
+                                      1.91e-10    0.000 5.38e-09 5.57e-09   0.0
+          i_rdy_dfflr (sirv_gnrl_dfflr_DW1_144)
+                                      1.91e-10    0.000 5.38e-09 5.57e-09   0.0
+          u_i_vld_sync (sirv_gnrl_sync_DP2_DW1_8)
+                                      3.82e-10    0.000 7.70e-09 8.08e-09   0.0
+            sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_22)
+                                      1.91e-10    0.000 3.85e-09 4.04e-09   0.0
+            sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_23)
+                                      1.91e-10    0.000 3.85e-09 4.04e-09   0.0
+          buf_dat_dfflr (sirv_gnrl_dfflr_DW65_1)
+                                      1.24e-08    0.000 3.29e-07 3.42e-07   0.0
+          i_vld_sync_dffr (sirv_gnrl_dffr_DW1_42)
+                                      1.91e-10    0.000 3.85e-09 4.04e-09   0.0
+      u_sirv_debug_module (sirv_debug_module_SUPPORT_JTAG_DTM1_ASYNC_FF_LEVELS2_PC_SIZE32_HART_NUM1_HART_ID_W1)
+                                      3.76e-04 1.06e-09 3.29e-06 3.80e-04   1.2
+        u_dm_ResetCatchAndSync_2_1 (sirv_ResetCatchAndSync_2_0)
+                                      1.84e-05    0.000 8.90e-08 1.85e-05   0.1
+          reset_n_catch_reg (sirv_AsyncResetRegVec_129_0)
+                                      1.84e-05    0.000 8.84e-08 1.85e-05   0.1
+            reg_0 (sirv_AsyncResetReg_39)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_1 (sirv_AsyncResetReg_38)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_2 (sirv_AsyncResetReg_37)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_3 (sirv_AsyncResetReg_36)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_4 (sirv_AsyncResetReg_35)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_5 (sirv_AsyncResetReg_34)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_6 (sirv_AsyncResetReg_33)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_7 (sirv_AsyncResetReg_32)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_8 (sirv_AsyncResetReg_31)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_9 (sirv_AsyncResetReg_30)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_10 (sirv_AsyncResetReg_29)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_11 (sirv_AsyncResetReg_28)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_12 (sirv_AsyncResetReg_27)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_13 (sirv_AsyncResetReg_26)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_14 (sirv_AsyncResetReg_25)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_15 (sirv_AsyncResetReg_24)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_16 (sirv_AsyncResetReg_23)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_17 (sirv_AsyncResetReg_22)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_18 (sirv_AsyncResetReg_21)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_19 (sirv_AsyncResetReg_20)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+        u_jtag_ResetCatchAndSync_3_1 (sirv_ResetCatchAndSync_3)
+                                         0.000    0.000 1.50e-08 1.50e-08   0.0
+          reset_n_catch_reg (sirv_AsyncResetRegVec_36_2)
+                                         0.000    0.000 1.48e-08 1.48e-08   0.0
+            reg_1 (sirv_AsyncResetReg_18)
+                                         0.000    0.000 4.76e-09 4.76e-09   0.0
+            reg_2 (sirv_AsyncResetReg_17)
+                                         0.000    0.000 5.31e-09 5.31e-09   0.0
+            reg_0 (sirv_AsyncResetReg_19)
+                                         0.000    0.000 4.76e-09 4.76e-09   0.0
+        u_dm2dtm_cdc_rx (sirv_gnrl_cdc_rx_DW41_SYNC_DP2)
+                                      4.21e-05    0.000 2.36e-07 4.23e-05   0.1
+          buf_vld_dfflr (sirv_gnrl_dfflr_DW1_147)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+          i_rdy_dfflr (sirv_gnrl_dfflr_DW1_148)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+          u_i_vld_sync (sirv_gnrl_sync_DP2_DW1_10)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+            sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_26)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+            sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_27)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+          buf_dat_dfflr (sirv_gnrl_dfflr_DW41_1)
+                                      3.75e-05    0.000 2.08e-07 3.77e-05   0.1
+          i_vld_sync_dffr (sirv_gnrl_dffr_DW1_44)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+        u_sirv_debug_rom (sirv_debug_rom)
+                                         0.000    0.000 6.96e-08 6.96e-08   0.0
+        jtag_dtm_gen.u_sirv_jtag_dtm (sirv_jtag_dtm_ASYNC_FF_LEVELS2)
+                                      4.34e-09 1.06e-09 8.82e-07 8.87e-07   0.0
+          u_jtag2debug_cdc_rx (sirv_gnrl_cdc_rx_DW36_SYNC_DP2)
+                                         0.000    0.000 1.74e-07 1.74e-07   0.0
+            buf_vld_dfflr (sirv_gnrl_dfflr_DW1_115)
+                                         0.000    0.000 4.69e-09 4.69e-09   0.0
+            i_rdy_dfflr (sirv_gnrl_dfflr_DW1_116)
+                                         0.000    0.000 4.69e-09 4.69e-09   0.0
+            u_i_vld_sync (sirv_gnrl_sync_DP2_DW1_4)
+                                         0.000    0.000 6.33e-09 6.33e-09   0.0
+              sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_11)
+                                         0.000    0.000 3.17e-09 3.17e-09   0.0
+              sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_12)
+                                         0.000    0.000 3.17e-09 3.17e-09   0.0
+            buf_dat_dfflr (sirv_gnrl_dfflr_DW36_0)
+                                         0.000    0.000 1.49e-07 1.49e-07   0.0
+            i_vld_sync_dffr (sirv_gnrl_dffr_DW1_30)
+                                         0.000    0.000 3.17e-09 3.17e-09   0.0
+          u_jtag2debug_cdc_tx (sirv_gnrl_cdc_tx_DW41_SYNC_DP2)
+                                         0.000    0.000 2.06e-07 2.06e-07   0.0
+            vld_dfflr (sirv_gnrl_dfflr_DW1_118)
+                                         0.000    0.000 4.69e-09 4.69e-09   0.0
+            buf_nrdy_dfflr (sirv_gnrl_dfflr_DW1_117)
+                                         0.000    0.000 4.69e-09 4.69e-09   0.0
+            dat_dfflr (sirv_gnrl_dfflr_DW41_0)
+                                         0.000    0.000 1.80e-07 1.80e-07   0.0
+            u_o_rdy_sync (sirv_gnrl_sync_DP2_DW1_5)
+                                         0.000    0.000 6.33e-09 6.33e-09   0.0
+              sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_13)
+                                         0.000    0.000 3.17e-09 3.17e-09   0.0
+              sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_14)
+                                         0.000    0.000 3.17e-09 3.17e-09   0.0
+            o_rdy_sync_dffr (sirv_gnrl_dffr_DW1_31)
+                                         0.000    0.000 3.17e-09 3.17e-09   0.0
+        sethaltnot_dfflr (sirv_gnrl_dfflr_DW1_158)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+        dm_halt_int_gen[0].dm_haltnot_dfflr (sirv_gnrl_dfflr_DW1_157)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+        u_sirv_debug_ram (sirv_debug_ram)
+                                      2.05e-04    0.000 1.24e-06 2.06e-04   0.6
+          debug_ram_gen[1].ram_dfflr (sirv_gnrl_dfflr_DW32_31)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+          debug_ram_gen[3].ram_dfflr (sirv_gnrl_dfflr_DW32_29)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+          debug_ram_gen[5].ram_dfflr (sirv_gnrl_dfflr_DW32_27)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+          debug_ram_gen[0].ram_dfflr (sirv_gnrl_dfflr_DW32_32)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+          debug_ram_gen[2].ram_dfflr (sirv_gnrl_dfflr_DW32_30)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+          debug_ram_gen[4].ram_dfflr (sirv_gnrl_dfflr_DW32_28)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+          debug_ram_gen[6].ram_dfflr (sirv_gnrl_dfflr_DW32_26)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+        cleardebint_dfflr (sirv_gnrl_dfflr_DW1_159)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+        u_sirv_debug_csr (sirv_debug_csr_PC_SIZE32)
+                                      7.08e-05    0.000 3.93e-07 7.12e-05   0.2
+          ebreakm_dfflr (sirv_gnrl_dfflr_DW1_151)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+          dscratch_dfflr (sirv_gnrl_dfflr_DW32_33)
+                                      3.19e-05    0.000 1.62e-07 3.21e-05   0.1
+          fullreset_dfflr (sirv_gnrl_dfflr_DW1_154)
+                                      9.97e-07    0.000 4.84e-09 1.00e-06   0.0
+          halt_dfflr (sirv_gnrl_dfflr_DW1_153)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+          dpc_dfflr (sirv_gnrl_dfflr_DW32_34)
+                                      3.09e-05    0.000 1.51e-07 3.11e-05   0.1
+          dcause_dfflr (sirv_gnrl_dfflr_DW3_23)
+                                      2.99e-06    0.000 1.46e-08 3.01e-06   0.0
+          step_dfflr (sirv_gnrl_dfflr_DW1_152)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+          ndreset_dfflr (sirv_gnrl_dfflr_DW1_155)
+                                      9.97e-07    0.000 4.84e-09 1.00e-06   0.0
+        u_dm2dtm_cdc_tx (sirv_gnrl_cdc_tx_DW36_SYNC_DP2)
+                                      3.57e-05    0.000 2.02e-07 3.59e-05   0.1
+          vld_dfflr (sirv_gnrl_dfflr_DW1_150)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+          buf_nrdy_dfflr (sirv_gnrl_dfflr_DW1_149)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+          dat_dfflr (sirv_gnrl_dfflr_DW36_1)
+                                      3.11e-05    0.000 1.72e-07 3.13e-05   0.1
+          u_o_rdy_sync (sirv_gnrl_sync_DP2_DW1_11)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+            sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_28)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+            sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_29)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+          o_rdy_sync_dffr (sirv_gnrl_dffr_DW1_45)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+        dm_hartid_dfflr (sirv_gnrl_dfflr_DW1_160)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+        dm_halt_int_gen[0].dm_debint_dfflr (sirv_gnrl_dfflr_DW1_156)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+        u_jtag_pins (sirv_jtaggpioport)
+                                         0.000    0.000    0.000    0.000   N/A
+      u_e203_subsys_main (e203_subsys_main)
+                                      2.11e-02 2.69e-03 1.61e-03 2.54e-02  77.2
+        u_e203_subsys_perips (e203_subsys_perips)
+                                      1.80e-02 3.47e-04 4.22e-04 1.87e-02  57.0
+          u_sirv_hclkgen_regs (sirv_hclkgen_regs)
+                                      2.38e-05    0.000 1.47e-07 2.39e-05   0.1
+            hfxoscen_dfflrs (sirv_gnrl_dfflrs_DW1_103)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+            pll_OD_0_dfflr (sirv_gnrl_dfflr_DW1_121)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            pll_M_4_dfflr (sirv_gnrl_dfflrs_DW1_100)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+            pll_RESET_dfflrs (sirv_gnrl_dfflr_DW1_120)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            pll_M_1_dfflr (sirv_gnrl_dfflrs_DW1_99)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+            pll_ASLEEP_dfflrs (sirv_gnrl_dfflr_DW1_119)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            pll_M_5_dfflr (sirv_gnrl_dfflrs_DW1_101)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+            pllbypass_dfflrs (sirv_gnrl_dfflrs_DW1_97)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+            plloutdivby1_dfflrs (sirv_gnrl_dfflrs_DW1_96)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+            pll_OD_1_dfflrs (sirv_gnrl_dfflrs_DW1_98)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+            pll_N_42_dfflr (sirv_gnrl_dfflr_DW3_22)
+                                      2.74e-06    0.000 1.54e-08 2.76e-06   0.0
+            pll_M_2_dfflr (sirv_gnrl_dfflr_DW1_123)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            pll_M_6_dfflr (sirv_gnrl_dfflr_DW1_125)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            plloutdiv_dfflr (sirv_gnrl_dfflr_DW6_1)
+                                      5.49e-06    0.000 3.05e-08 5.52e-06   0.0
+            pll_N_0_dfflr (sirv_gnrl_dfflr_DW1_127)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            pll_M_3_dfflr (sirv_gnrl_dfflr_DW1_124)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            pll_M_7_dfflr (sirv_gnrl_dfflr_DW1_126)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            pll_M_0_dfflr (sirv_gnrl_dfflr_DW1_122)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            pll_N_1_dfflr (sirv_gnrl_dfflrs_DW1_102)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+          u_perips_apb_spi1 (apb_spi_master_APB_ADDR_WIDTH32_1)
+                                      8.92e-04    0.000 5.90e-06 8.98e-04   2.7
+            u_spictrl (spi_master_controller_1)
+                                      1.43e-04    0.000 1.10e-06 1.44e-04   0.4
+              u_txreg (spi_master_tx_1)
+                                      5.94e-05    0.000 4.20e-07 5.99e-05   0.2
+              u_rxreg (spi_master_rx_1)
+                                      6.04e-05    0.000 3.91e-07 6.08e-05   0.2
+              u_clkgen (spi_master_clkgen_1)
+                                      1.65e-05    0.000 1.11e-07 1.66e-05   0.1
+            u_rxfifo (spi_master_fifo_DATA_WIDTH32_BUFFER_DEPTH10_2)
+                                      3.05e-04    0.000 1.90e-06 3.06e-04   0.9
+            u_axiregs (spi_master_apb_if_BUFFER_DEPTH10_APB_ADDR_WIDTH32_1)
+                                      1.40e-04    0.000 9.60e-07 1.41e-04   0.4
+            u_txfifo (spi_master_fifo_DATA_WIDTH32_BUFFER_DEPTH10_3)
+                                      3.05e-04    0.000 1.91e-06 3.06e-04   0.9
+          u_perips_apb_spi2 (apb_spi_master_APB_ADDR_WIDTH32_0)
+                                      8.92e-04    0.000 5.90e-06 8.98e-04   2.7
+            u_spictrl (spi_master_controller_0)
+                                      1.43e-04    0.000 1.10e-06 1.44e-04   0.4
+              u_txreg (spi_master_tx_0)
+                                      5.94e-05    0.000 4.21e-07 5.99e-05   0.2
+              u_rxreg (spi_master_rx_0)
+                                      6.04e-05    0.000 3.89e-07 6.07e-05   0.2
+              u_clkgen (spi_master_clkgen_0)
+                                      1.65e-05    0.000 1.11e-07 1.66e-05   0.1
+            u_rxfifo (spi_master_fifo_DATA_WIDTH32_BUFFER_DEPTH10_0)
+                                      3.05e-04    0.000 1.91e-06 3.06e-04   0.9
+            u_axiregs (spi_master_apb_if_BUFFER_DEPTH10_APB_ADDR_WIDTH32_0)
+                                      1.40e-04    0.000 9.58e-07 1.41e-04   0.4
+            u_txfifo (spi_master_fifo_DATA_WIDTH32_BUFFER_DEPTH10_1)
+                                      3.05e-04    0.000 1.90e-06 3.06e-04   0.9
+          u_perips_expl_axi_slv (sirv_expl_axi_slv_AW32_DW32_1)
+                                         0.000    0.000    0.000    0.000   N/A
+          u_perips_apb_pwm (apb_adv_timer_APB_ADDR_WIDTH32)
+                                      7.85e-04    0.000 1.05e-05 7.96e-04   2.4
+            u_tim0 (timer_module_NUM_BITS16_N_EXTSIG48_3)
+                                      1.31e-10    0.000 1.29e-06 1.29e-06   0.0
+              u_comp_ch0 (comparator_15)
+                                         0.000    0.000 1.46e-07 1.46e-07   0.0
+              u_comp_ch1 (comparator_14)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch2 (comparator_13)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch3 (comparator_12)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_counter (up_down_counter_3)
+                                         0.000    0.000 4.52e-07 4.52e-07   0.0
+              u_prescaler (prescaler_3)
+                                         0.000    0.000 1.11e-07 1.11e-07   0.0
+              u_controller (timer_cntrl_3)
+                                         0.000    0.000 1.51e-08 1.51e-08   0.0
+              u_in_stage (input_stage_EXTSIG_NUM48_3)
+                                      1.31e-10    0.000 1.23e-07 1.23e-07   0.0
+            u_tim1 (timer_module_NUM_BITS16_N_EXTSIG48_2)
+                                      1.31e-10    0.000 1.29e-06 1.29e-06   0.0
+              u_comp_ch0 (comparator_11)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch1 (comparator_10)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch2 (comparator_9)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch3 (comparator_8)
+                                         0.000    0.000 1.46e-07 1.46e-07   0.0
+              u_counter (up_down_counter_2)
+                                         0.000    0.000 4.53e-07 4.53e-07   0.0
+              u_prescaler (prescaler_2)
+                                         0.000    0.000 1.12e-07 1.12e-07   0.0
+              u_controller (timer_cntrl_2)
+                                         0.000    0.000 1.51e-08 1.51e-08   0.0
+              u_in_stage (input_stage_EXTSIG_NUM48_2)
+                                      1.31e-10    0.000 1.26e-07 1.26e-07   0.0
+            u_tim2 (timer_module_NUM_BITS16_N_EXTSIG48_1)
+                                      1.31e-10    0.000 1.29e-06 1.29e-06   0.0
+              u_comp_ch0 (comparator_7)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch1 (comparator_6)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch2 (comparator_5)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch3 (comparator_4)
+                                         0.000    0.000 1.46e-07 1.46e-07   0.0
+              u_counter (up_down_counter_1)
+                                         0.000    0.000 4.52e-07 4.52e-07   0.0
+              u_prescaler (prescaler_1)
+                                         0.000    0.000 1.11e-07 1.11e-07   0.0
+              u_controller (timer_cntrl_1)
+                                         0.000    0.000 1.51e-08 1.51e-08   0.0
+              u_in_stage (input_stage_EXTSIG_NUM48_1)
+                                      1.31e-10    0.000 1.26e-07 1.26e-07   0.0
+            u_tim3 (timer_module_NUM_BITS16_N_EXTSIG48_0)
+                                      1.31e-10    0.000 1.29e-06 1.29e-06   0.0
+              u_comp_ch0 (comparator_3)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch1 (comparator_2)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch2 (comparator_1)
+                                         0.000    0.000 1.47e-07 1.47e-07   0.0
+              u_comp_ch3 (comparator_0)
+                                         0.000    0.000 1.46e-07 1.46e-07   0.0
+              u_counter (up_down_counter_0)
+                                         0.000    0.000 4.52e-07 4.52e-07   0.0
+              u_prescaler (prescaler_0)
+                                         0.000    0.000 1.11e-07 1.11e-07   0.0
+              u_controller (timer_cntrl_0)
+                                         0.000    0.000 1.51e-08 1.51e-08   0.0
+              u_in_stage (input_stage_EXTSIG_NUM48_0)
+                                      1.31e-10    0.000 1.23e-07 1.23e-07   0.0
+            u_apb_if (adv_timer_apb_if_APB_ADDR_WIDTH32)
+                                      7.76e-04    0.000 5.27e-06 7.81e-04   2.4
+            i_clk_gate_timer0 (e203_clkgate_11)
+                                      4.90e-07    0.000 2.70e-09 4.92e-07   0.0
+            i_clk_gate_timer1 (e203_clkgate_10)
+                                      4.90e-07    0.000 2.70e-09 4.92e-07   0.0
+            i_clk_gate_timer2 (e203_clkgate_9)
+                                      4.90e-07    0.000 2.70e-09 4.92e-07   0.0
+            i_clk_gate_timer3 (e203_clkgate_8)
+                                      4.90e-07    0.000 2.70e-09 4.92e-07   0.0
+          u_i2c1_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_1)
+                                      1.63e-05 3.08e-10 1.01e-07 1.64e-05   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_1)
+                                      1.54e-05 3.08e-10 9.29e-08 1.54e-05   0.0
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_35)
+                                      1.35e-05 3.08e-10 7.91e-08 1.36e-05   0.0
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_69)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_86)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_129)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_accel_icb_slave (accel_icb_slave)
+                                      1.20e-02 3.31e-04 3.77e-04 1.27e-02  38.5
+            u_linear_compute_core (LinearCachedCore)
+                                      1.15e-02 3.25e-04 3.74e-04 1.22e-02  37.2
+              core (LinearComputeCore)
+                                      2.75e-03 2.78e-04 3.12e-04 3.34e-03  10.1
+                engine (DotProductEngine)
+                                      1.10e-03 2.64e-04 1.74e-05 1.38e-03   4.2
+                  controller (MacController)
+                                      8.02e-06 3.31e-07 5.81e-08 8.41e-06   0.0
+                  peArray (MacPEArray)
+                                      7.58e-04 2.63e-04 1.54e-05 1.04e-03   3.2
+                    pes_7 (MacPE_0)   9.56e-05 3.36e-05 1.94e-06 1.31e-04   0.4
+                    pes_0 (MacPE_7)   9.49e-05 3.28e-05 1.91e-06 1.30e-04   0.4
+                    pes_1 (MacPE_6)   9.41e-05 3.24e-05 1.92e-06 1.28e-04   0.4
+                    pes_2 (MacPE_5)   9.53e-05 3.33e-05 1.93e-06 1.30e-04   0.4
+                    pes_3 (MacPE_4)   9.48e-05 3.31e-05 1.93e-06 1.30e-04   0.4
+                    pes_4 (MacPE_3)   9.42e-05 3.21e-05 1.92e-06 1.28e-04   0.4
+                    pes_5 (MacPE_2)   9.46e-05 3.24e-05 1.93e-06 1.29e-04   0.4
+                    pes_6 (MacPE_1)   9.48e-05 3.27e-05 1.92e-06 1.29e-04   0.4
+                weightBanks (WeightBankArray)
+                                      6.96e-04 1.02e-05 2.90e-04 9.96e-04   3.0
+                  banks_0 (WeightBank_7)
+                                      8.70e-05 1.28e-06 3.62e-05 1.24e-04   0.4
+                    sram0 (Sram1024x16_15)
+                                      4.29e-05 3.15e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_15)
+                                      4.29e-05 3.15e-08 1.81e-05 6.10e-05   0.2
+                    sram1 (Sram1024x16_14)
+                                      4.29e-05 3.36e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_14)
+                                      4.29e-05 3.36e-08 1.81e-05 6.10e-05   0.2
+                  banks_1 (WeightBank_6)
+                                      8.70e-05 1.28e-06 3.62e-05 1.24e-04   0.4
+                    sram0 (Sram1024x16_13)
+                                      4.29e-05 2.97e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_13)
+                                      4.29e-05 2.97e-08 1.81e-05 6.10e-05   0.2
+                    sram1 (Sram1024x16_12)
+                                      4.29e-05 3.44e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_12)
+                                      4.29e-05 3.44e-08 1.81e-05 6.10e-05   0.2
+                  banks_2 (WeightBank_5)
+                                      8.70e-05 1.28e-06 3.62e-05 1.24e-04   0.4
+                    sram0 (Sram1024x16_11)
+                                      4.29e-05 3.16e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_11)
+                                      4.29e-05 3.16e-08 1.81e-05 6.10e-05   0.2
+                    sram1 (Sram1024x16_10)
+                                      4.29e-05 3.36e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_10)
+                                      4.29e-05 3.36e-08 1.81e-05 6.10e-05   0.2
+                  banks_3 (WeightBank_4)
+                                      8.70e-05 1.30e-06 3.62e-05 1.25e-04   0.4
+                    sram0 (Sram1024x16_9)
+                                      4.29e-05 3.17e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_9)
+                                      4.29e-05 3.17e-08 1.81e-05 6.10e-05   0.2
+                    sram1 (Sram1024x16_8)
+                                      4.29e-05 3.43e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_8)
+                                      4.29e-05 3.43e-08 1.81e-05 6.10e-05   0.2
+                  banks_4 (WeightBank_3)
+                                      8.70e-05 1.28e-06 3.62e-05 1.24e-04   0.4
+                    sram0 (Sram1024x16_7)
+                                      4.29e-05 3.12e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_7)
+                                      4.29e-05 3.12e-08 1.81e-05 6.10e-05   0.2
+                    sram1 (Sram1024x16_6)
+                                      4.29e-05 3.42e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_6)
+                                      4.29e-05 3.42e-08 1.81e-05 6.10e-05   0.2
+                  banks_5 (WeightBank_2)
+                                      8.70e-05 1.29e-06 3.62e-05 1.25e-04   0.4
+                    sram0 (Sram1024x16_5)
+                                      4.29e-05 3.13e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_5)
+                                      4.29e-05 3.13e-08 1.81e-05 6.10e-05   0.2
+                    sram1 (Sram1024x16_4)
+                                      4.29e-05 3.43e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_4)
+                                      4.29e-05 3.43e-08 1.81e-05 6.10e-05   0.2
+                  banks_6 (WeightBank_1)
+                                      8.70e-05 1.31e-06 3.62e-05 1.25e-04   0.4
+                    sram0 (Sram1024x16_3)
+                                      4.29e-05 3.17e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_3)
+                                      4.29e-05 3.17e-08 1.81e-05 6.10e-05   0.2
+                    sram1 (Sram1024x16_2)
+                                      4.29e-05 3.46e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_2)
+                                      4.29e-05 3.46e-08 1.81e-05 6.10e-05   0.2
+                  banks_7 (WeightBank_0)
+                                      8.70e-05 1.19e-06 3.62e-05 1.24e-04   0.4
+                    sram0 (Sram1024x16_1)
+                                      4.29e-05 3.09e-08 1.81e-05 6.11e-05   0.2
+                      mem_ext (mem_1024x16_1)
+                                      4.29e-05 3.09e-08 1.81e-05 6.11e-05   0.2
+                    sram1 (Sram1024x16_0)
+                                      4.29e-05 3.44e-08 1.81e-05 6.10e-05   0.2
+                      mem_ext (mem_1024x16_0)
+                                      4.29e-05 3.44e-08 1.81e-05 6.10e-05   0.2
+                xBuffer (XRowBuffer)  9.52e-04 4.29e-06 5.00e-06 9.62e-04   2.9
+              biasCache (BiasBankCache)
+                                      8.78e-03 4.69e-05 6.13e-05 8.89e-03  27.0
+          u_pwm_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_0)
+                                      2.98e-05 6.15e-10 1.80e-07 3.00e-05   0.1
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_128)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_0)
+                                      2.89e-05 6.15e-10 1.72e-07 2.90e-05   0.1
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_34)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_66)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_85)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_gpioA_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_9)
+                                      2.98e-05 6.15e-10 1.80e-07 3.00e-05   0.1
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_137)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_9)
+                                      2.89e-05 6.15e-10 1.72e-07 2.90e-05   0.1
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_43)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_93)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_94)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_spi1_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_4)
+                                      2.98e-05 6.15e-10 1.80e-07 3.00e-05   0.1
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_132)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_4)
+                                      2.89e-05 6.15e-10 1.72e-07 2.90e-05   0.1
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_38)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_78)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_89)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_perips_apb_gpioA (apb_gpio_APB_ADDR_WIDTH32_1)
+                                      4.69e-04    0.000 2.84e-06 4.72e-04   1.4
+          u_perips_apb_gpioB (apb_gpio_APB_ADDR_WIDTH32_0)
+                                      4.69e-04    0.000 2.84e-06 4.72e-04   1.4
+          u_uart1_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_6)
+                                      9.50e-06 1.54e-10 6.18e-08 9.57e-06   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_6)
+                                      8.59e-06 1.54e-10 5.34e-08 8.64e-06   0.0
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_40)
+                                      6.76e-06 1.54e-10 3.96e-08 6.80e-06   0.0
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_84)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_91)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_134)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_sirv_qspi0_top (sirv_flash_qspi_top)
+                                      3.73e-04    0.000 2.74e-06 3.75e-04   1.1
+            u_sirv_flash_qspi (sirv_flash_qspi)
+                                      3.14e-04    0.000 2.31e-06 3.16e-04   1.0
+              mac (sirv_qspi_media)   6.22e-05    0.000 4.71e-07 6.27e-05   0.2
+                phy (sirv_qspi_physical)
+                                      5.58e-05    0.000 3.96e-07 5.62e-05   0.2
+              fifo (sirv_qspi_fifo)   1.27e-04    0.000 8.55e-07 1.27e-04   0.4
+                txq (sirv_queue_1_1)  6.19e-05    0.000 4.05e-07 6.23e-05   0.2
+                rxq (sirv_queue_1_0)  6.19e-05    0.000 4.04e-07 6.23e-05   0.2
+              flash (sirv_qspi_flashmap)
+                                      5.49e-06    0.000 1.59e-07 5.65e-06   0.0
+              arb (sirv_qspi_arbiter) 9.13e-07    0.000 3.98e-08 9.53e-07   0.0
+            qspi_TLFragmenter_1 (sirv_tlfragmenter_qspi_1)
+                                      3.48e-05    0.000 2.51e-07 3.50e-05   0.1
+              u_repeater (sirv_repeater_6)
+                                      2.93e-05    0.000 2.02e-07 2.95e-05   0.1
+            qspi_TLWidthWidget (sirv_tlwidthwidget_qspi)
+                                      2.38e-05    0.000 1.81e-07 2.40e-05   0.1
+              Repeater_5_1 (sirv_tl_repeater_5)
+                                         0.000    0.000    0.000    0.000   N/A
+          u_aon_icb_cdc_rx (sirv_gnrl_cdc_rx_DW33_SYNC_DP2)
+                                      3.38e-05    0.000 1.92e-07 3.40e-05   0.1
+            buf_vld_dfflr (sirv_gnrl_dfflr_DW1_138)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+            i_rdy_dfflr (sirv_gnrl_dfflr_DW1_139)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+            u_i_vld_sync (sirv_gnrl_sync_DP2_DW1_6)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+              sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_15)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+              sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_16)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+            buf_dat_dfflr (sirv_gnrl_dfflr_DW33)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+            i_vld_sync_dffr (sirv_gnrl_dffr_DW1_32)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+          u_perips_apb_uart0 (apb_uart_sv_APB_ADDR_WIDTH32_2)
+                                      3.73e-04 1.03e-10 2.46e-06 3.76e-04   1.1
+            uart_interrupt_i (uart_interrupt_TX_FIFO_DEPTH16_RX_FIFO_DEPTH16_2)
+                                      1.83e-06    0.000 2.06e-08 1.85e-06   0.0
+            uart_rx_i (uart_rx_2)     3.29e-05    0.000 2.49e-07 3.32e-05   0.1
+            uart_rx_fifo_i (io_generic_fifo_DATA_WIDTH9_BUFFER_DEPTH16_2)
+                                      1.44e-04    0.000 9.08e-07 1.45e-04   0.4
+            uart_tx_i (uart_tx_2)     2.93e-05    0.000 2.03e-07 2.95e-05   0.1
+            uart_tx_fifo_i (io_generic_fifo_DATA_WIDTH8_BUFFER_DEPTH16_2)
+                                      1.29e-04    0.000 8.20e-07 1.30e-04   0.4
+          u_perips_apb_uart1 (apb_uart_sv_APB_ADDR_WIDTH32_1)
+                                      3.73e-04 1.03e-10 2.47e-06 3.76e-04   1.1
+            uart_interrupt_i (uart_interrupt_TX_FIFO_DEPTH16_RX_FIFO_DEPTH16_1)
+                                      1.83e-06    0.000 2.06e-08 1.85e-06   0.0
+            uart_rx_i (uart_rx_1)     3.29e-05    0.000 2.49e-07 3.32e-05   0.1
+            uart_rx_fifo_i (io_generic_fifo_DATA_WIDTH9_BUFFER_DEPTH16_1)
+                                      1.44e-04    0.000 9.09e-07 1.45e-04   0.4
+            uart_tx_i (uart_tx_1)     2.93e-05    0.000 2.03e-07 2.95e-05   0.1
+            uart_tx_fifo_i (io_generic_fifo_DATA_WIDTH8_BUFFER_DEPTH16_1)
+                                      1.29e-04    0.000 8.24e-07 1.30e-04   0.4
+          u_perips_apb_uart2 (apb_uart_sv_APB_ADDR_WIDTH32_0)
+                                      3.73e-04 1.03e-10 2.46e-06 3.76e-04   1.1
+            uart_interrupt_i (uart_interrupt_TX_FIFO_DEPTH16_RX_FIFO_DEPTH16_0)
+                                      1.83e-06    0.000 2.06e-08 1.85e-06   0.0
+            uart_rx_i (uart_rx_0)     3.29e-05    0.000 2.49e-07 3.32e-05   0.1
+            uart_rx_fifo_i (io_generic_fifo_DATA_WIDTH9_BUFFER_DEPTH16_0)
+                                      1.44e-04    0.000 9.07e-07 1.45e-04   0.4
+            uart_tx_i (uart_tx_0)     2.93e-05    0.000 2.03e-07 2.95e-05   0.1
+            uart_tx_fifo_i (io_generic_fifo_DATA_WIDTH8_BUFFER_DEPTH16_0)
+                                      1.29e-04    0.000 8.20e-07 1.30e-04   0.4
+          u_i2c0_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_2)
+                                      1.63e-05 3.08e-10 1.01e-07 1.64e-05   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_2)
+                                      1.54e-05 3.08e-10 9.29e-08 1.54e-05   0.0
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_36)
+                                      1.35e-05 3.08e-10 7.91e-08 1.36e-05   0.0
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_72)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_87)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_130)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_perips_apb_i2c0 (apb_i2c_APB_ADDR_WIDTH32_1)
+                                      1.32e-04    0.000 8.41e-07 1.33e-04   0.4
+            byte_controller (i2c_master_byte_ctrl_1)
+                                      9.06e-05    0.000 5.68e-07 9.11e-05   0.3
+              bit_controller (i2c_master_bit_ctrl_1)
+                                      6.77e-05    0.000 4.21e-07 6.81e-05   0.2
+          u_perips_apb_i2c1 (apb_i2c_APB_ADDR_WIDTH32_0)
+                                      1.32e-04    0.000 8.41e-07 1.33e-04   0.4
+            byte_controller (i2c_master_byte_ctrl_0)
+                                      9.06e-05    0.000 5.68e-07 9.11e-05   0.3
+              bit_controller (i2c_master_bit_ctrl_0)
+                                      6.77e-05    0.000 4.21e-07 6.81e-05   0.2
+          u_gpioB_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_8)
+                                      2.98e-05 6.15e-10 1.80e-07 3.00e-05   0.1
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_136)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_8)
+                                      2.89e-05 6.15e-10 1.72e-07 2.90e-05   0.1
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_42)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_90)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_93)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_uart0_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_7)
+                                      9.50e-06 1.54e-10 6.18e-08 9.57e-06   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_7)
+                                      8.59e-06 1.54e-10 5.34e-08 8.64e-06   0.0
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_41)
+                                      6.76e-06 1.54e-10 3.96e-08 6.80e-06   0.0
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_87)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_92)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_135)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_spi2_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_3)
+                                      2.98e-05 6.15e-10 1.80e-07 3.00e-05   0.1
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_131)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_3)
+                                      2.89e-05 6.15e-10 1.72e-07 2.90e-05   0.1
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_37)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_75)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_88)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_aon_icb_cdc_tx (sirv_gnrl_cdc_tx_DW65_SYNC_DP2)
+                                      6.40e-05    0.000 3.64e-07 6.44e-05   0.2
+            vld_dfflr (sirv_gnrl_dfflr_DW1_141)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+            buf_nrdy_dfflr (sirv_gnrl_dfflr_DW1_140)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+            dat_dfflr (sirv_gnrl_dfflr_DW65_0)
+                                      5.94e-05    0.000 3.34e-07 5.98e-05   0.2
+            u_o_rdy_sync (sirv_gnrl_sync_DP2_DW1_7)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+              sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_17)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+              sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_18)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+            o_rdy_sync_dffr (sirv_gnrl_dffr_DW1_33)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+          u_sirv_ppi_fab (sirv_icb1to16_bus_2_1_32_32_1_1_10000000_15_10008000_12_10012000_12_10013000_12_10014000_12_10015000_12_10023000_12_10024000_12_10025000_12_10033000_12_10034000_12_10035000_12_11000000_24_10040000_12_10041000_12_10042000_12)
+                                      2.19e-04 1.66e-05 1.89e-06 2.38e-04   0.7
+            u_sirv_gnrl_icb_buffer (sirv_gnrl_icb_buffer_OUTS_CNT_W1_AW32_DW32_CMD_CUT_READY1_RSP_CUT_READY1_CMD_DP2_RSP_DP2_USR_W1_1)
+                                      1.97e-04 5.86e-06 1.28e-06 2.04e-04   0.6
+              u_sirv_gnrl_cmd_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW78_1)
+                                      1.30e-04 3.63e-06 8.47e-07 1.34e-04   0.4
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_14)
+                                      2.00e-06 1.12e-07 1.06e-08 2.13e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_79)
+                                      1.01e-06 3.38e-08 5.16e-09 1.05e-06   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW78_3)
+                                      6.10e-05 6.65e-07 3.43e-07 6.20e-05   0.2
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_59)
+                                      1.01e-06 2.68e-08 5.20e-09 1.04e-06   0.0
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_57)
+                                      9.73e-07 1.39e-08 4.64e-09 9.92e-07   0.0
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_58)
+                                      1.01e-06 2.91e-08 5.18e-09 1.04e-06   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW78_4)
+                                      6.10e-05 6.84e-07 3.44e-07 6.21e-05   0.2
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_80)
+                                      1.01e-06 2.61e-08 5.16e-09 1.04e-06   0.0
+              u_sirv_gnrl_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW35_3)
+                                      6.58e-05 2.09e-06 4.22e-07 6.83e-05   0.2
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_54)
+                                      1.03e-06 2.60e-08 4.64e-09 1.06e-06   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_56)
+                                      1.01e-06 2.31e-07 5.19e-09 1.25e-06   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW35_8)
+                                      2.91e-05 3.12e-07 1.62e-07 2.95e-05   0.1
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_55)
+                                      1.01e-06 2.85e-08 5.21e-09 1.04e-06   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_78)
+                                      1.01e-06 2.16e-07 5.16e-09 1.23e-06   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_13)
+                                      2.03e-06 1.27e-07 1.06e-08 2.17e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_77)
+                                      1.01e-06 3.33e-08 5.16e-09 1.05e-06   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW35_7)
+                                      2.91e-05 3.12e-07 1.62e-07 2.95e-05   0.1
+              outs_cnt_dfflr (sirv_gnrl_dfflr_DW1_95)
+                                      1.12e-06 5.24e-08 5.30e-09 1.17e-06   0.0
+            u_buf_icb_splt (sirv_gnrl_icb_splt_AW32_DW32_FIFO_OUTS_NUM1_FIFO_CUT_READY1_SPLT_NUM17_SPLT_PTR_1HOT1_SPLT_PTR_W17_ALLOW_DIFF0_ALLOW_0CYCL_RSP1_VLD_MSK_PAYLOAD1_USR_W1)
+                                      2.23e-05 1.05e-05 5.83e-07 3.35e-05   0.1
+              splt_num_gt_1_gen.fifo_dp_1.u_sirv_gnrl_rspid_fifo (sirv_gnrl_pipe_stage_CUT_READY1_DP1_DW17)
+                                      1.62e-05 9.67e-07 8.75e-08 1.73e-05   0.1
+                dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW17)
+                                      1.49e-05 2.35e-07 7.96e-08 1.53e-05   0.0
+                dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_76)
+                                      1.15e-06 2.61e-07 5.39e-09 1.42e-06   0.0
+          u_uart2_apb_icb2apb (sirv_gnrl_icb2apb_AW32_DW32_5)
+                                      9.50e-06 1.54e-10 6.18e-08 9.57e-06   0.0
+            u_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW32_5)
+                                      8.59e-06 1.54e-10 5.34e-08 8.64e-06   0.0
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW32_39)
+                                      6.76e-06 1.54e-10 3.96e-08 6.80e-06   0.0
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_81)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_90)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+            apb_enable_dfflr (sirv_gnrl_dfflr_DW1_133)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+          u_expl_axi_icb2axi (sirv_gnrl_icb2axi_AXI_FIFO_DP2_AXI_FIFO_CUT_READY1_AW32_FIFO_OUTS_NUM1_FIFO_CUT_READY1_DW32)
+                                      2.04e-04 3.86e-09 1.45e-06 2.05e-04   0.6
+            u_sirv_gnrl_axi_buffer (sirv_gnrl_axi_buffer_CHNL_FIFO_DP2_CHNL_FIFO_CUT_READY1_AW32_DW32_1)
+                                      2.01e-04 3.85e-09 1.42e-06 2.02e-04   0.6
+              o_axi_bresp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW2_1)
+                                      6.40e-06    0.000 4.24e-08 6.44e-06   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_8)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_67)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_39)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_66)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_41)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_40)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              o_axi_rdata_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW35_2)
+                                      6.40e-06    0.000 4.34e-08 6.44e-06   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_9)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_69)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_42)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_68)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_44)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_43)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              o_axi_wdata_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW37_1)
+                                      6.72e-05 1.38e-09 4.79e-07 6.77e-05   0.2
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_45)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_47)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW37_3)
+                                      3.04e-05 6.92e-10 1.78e-07 3.06e-05   0.1
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_46)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_71)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_10)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_70)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW37_2)
+                                      3.04e-05 6.92e-10 1.78e-07 3.06e-05   0.1
+              o_axi_ar_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW50_3)
+                                      6.05e-05 1.23e-09 4.31e-07 6.09e-05   0.2
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_51)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_53)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW50_7)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_52)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_75)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_12)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_74)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW50_6)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+              o_axi_aw_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW50_2)
+                                      6.05e-05 1.23e-09 4.29e-07 6.09e-05   0.2
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_48)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_50)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW50_5)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_49)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_73)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_11)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_72)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW50_4)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+            u_sirv_gnrl_rw_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO1_DP1_DW1)
+                                      2.67e-06 1.92e-11 1.81e-08 2.69e-06   0.0
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW1_19)
+                                      8.45e-07 1.92e-11 3.86e-09 8.49e-07   0.0
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_63)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_84)
+                                      9.15e-07    0.000 4.84e-09 9.19e-07   0.0
+        u_e203_subsys_hclkgen (e203_subsys_hclkgen)
+                                      2.81e-05 2.02e-03 2.34e-07 2.05e-03   6.2
+          u_e203_subsys_gfcm (e203_subsys_gfcm)
+                                      1.78e-05 2.02e-03 1.65e-07 2.03e-03   6.2
+            u_clk1_clkgate (e203_clkgate_12)
+                                      2.81e-06 4.20e-07 2.10e-08 3.25e-06   0.0
+            u_clk0_clkgate (e203_clkgate_13)
+                                      2.11e-07    0.000 6.70e-09 2.18e-07   0.0
+          u_e203_subsys_pll (e203_subsys_pll)
+                                         0.000    0.000    0.000    0.000   N/A
+          u_e203_subsys_pllclkdiv (e203_subsys_pllclkdiv)
+                                      6.77e-06 7.78e-07 5.25e-08 7.60e-06   0.0
+            div_cnt_dfflr (sirv_gnrl_dfflr_DW6_2)
+                                      5.25e-06    0.000 3.05e-08 5.28e-06   0.0
+            u_pllclkdiv_clkgate (e203_clkgate_14)
+                                      6.44e-07 7.78e-07 3.23e-09 1.43e-06   0.0
+            flag_dfflr (sirv_gnrl_dfflr_DW1_142)
+                                      8.75e-07    0.000 5.38e-09 8.81e-07   0.0
+          plloutclk_rstsync (e203_subsys_hclkgen_rstsync_1)
+                                      1.75e-06    0.000 7.88e-09 1.75e-06   0.0
+          hfextclk_rstsync (e203_subsys_hclkgen_rstsync_0)
+                                      1.75e-06    0.000 7.88e-09 1.75e-06   0.0
+        u_e203_subsys_mems (e203_subsys_mems)
+                                      4.18e-04 1.58e-05 3.23e-06 4.37e-04   1.3
+          u_perips_expl_axi_slv (sirv_expl_axi_slv_AW32_DW32_0)
+                                         0.000    0.000    0.000    0.000   N/A
+          u_sirv_mrom_top (sirv_mrom_top_AW12_DW32_DP1024)
+                                         0.000    0.000 3.74e-09 3.74e-09   0.0
+            u_sirv_mrom (sirv_mrom_AW12_DW32_DP1024)
+                                         0.000    0.000 3.56e-09 3.56e-09   0.0
+          u_sirv_mem_fab (sirv_icb1to8_bus_2_1_32_32_1_1_00000000_12_00001000_12_00020000_17_20000000_29_80000000_31_40000000_28_00000000_0_00000000_0)
+                                      2.02e-04 1.58e-05 1.69e-06 2.19e-04   0.7
+            u_sirv_gnrl_icb_buffer (sirv_gnrl_icb_buffer_OUTS_CNT_W1_AW32_DW32_CMD_CUT_READY1_RSP_CUT_READY1_CMD_DP2_RSP_DP2_USR_W1_0)
+                                      1.94e-04 3.35e-06 1.30e-06 1.98e-04   0.6
+              u_sirv_gnrl_cmd_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW78_0)
+                                      1.28e-04 2.14e-06 8.65e-07 1.31e-04   0.4
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_7)
+                                      1.93e-06 7.34e-08 1.05e-08 2.01e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_64)
+                                      9.70e-07 1.90e-08 5.09e-09 9.94e-07   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW78_1)
+                                      6.04e-05 4.19e-07 3.51e-07 6.12e-05   0.2
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_38)
+                                      9.69e-07 1.49e-08 5.36e-09 9.89e-07   0.0
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_36)
+                                      9.50e-07 8.01e-09 4.47e-09 9.63e-07   0.0
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_37)
+                                      9.70e-07 1.74e-08 5.36e-09 9.92e-07   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW78_2)
+                                      6.04e-05 4.18e-07 3.52e-07 6.11e-05   0.2
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_65)
+                                      9.69e-07 1.32e-08 5.09e-09 9.88e-07   0.0
+              u_sirv_gnrl_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW35_1)
+                                      6.45e-05 1.13e-06 4.22e-07 6.60e-05   0.2
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_33)
+                                      9.79e-07 1.42e-08 4.47e-09 9.98e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_35)
+                                      9.68e-07 1.30e-07 5.38e-09 1.10e-06   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW35_4)
+                                      2.87e-05 1.65e-07 1.63e-07 2.91e-05   0.1
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_34)
+                                      9.70e-07 1.71e-08 5.35e-09 9.92e-07   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_63)
+                                      9.69e-07 1.21e-07 5.09e-09 1.10e-06   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_6)
+                                      1.94e-06 7.70e-08 1.05e-08 2.03e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_62)
+                                      9.69e-07 1.85e-08 5.09e-09 9.93e-07   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW35_3)
+                                      2.87e-05 1.64e-07 1.63e-07 2.91e-05   0.1
+              outs_cnt_dfflr (sirv_gnrl_dfflr_DW1_83)
+                                      1.04e-06 3.22e-08 5.33e-09 1.07e-06   0.0
+            u_i_icb_splt (sirv_gnrl_icb_splt_AW32_DW32_FIFO_OUTS_NUM1_FIFO_CUT_READY1_SPLT_NUM9_SPLT_PTR_1HOT1_SPLT_PTR_W9_ALLOW_DIFF0_ALLOW_0CYCL_RSP1_VLD_MSK_PAYLOAD1_USR_W1)
+                                      8.10e-06 1.24e-05 3.87e-07 2.09e-05   0.1
+              splt_num_gt_1_gen.fifo_dp_1.u_sirv_gnrl_rspid_fifo (sirv_gnrl_pipe_stage_CUT_READY1_DP1_DW9)
+                                      6.39e-06 2.66e-07 3.68e-08 6.69e-06   0.0
+                dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW9)
+                                      5.29e-06 5.47e-08 2.93e-08 5.37e-06   0.0
+                dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_61)
+                                      1.05e-06 8.55e-08 5.39e-09 1.14e-06   0.0
+          u_expl_axi_icb2axi (sirv_gnrl_icb2axi_AXI_FIFO_DP2_AXI_FIFO_CUT_READY1_AW32_FIFO_OUTS_NUM4_FIFO_CUT_READY1_DW32)
+                                      2.16e-04 3.94e-09 1.54e-06 2.18e-04   0.7
+            u_sirv_gnrl_axi_buffer (sirv_gnrl_axi_buffer_CHNL_FIFO_DP2_CHNL_FIFO_CUT_READY1_AW32_DW32_0)
+                                      2.01e-04 3.85e-09 1.42e-06 2.02e-04   0.6
+              o_axi_bresp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW2_0)
+                                      6.40e-06    0.000 4.24e-08 6.44e-06   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_1)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_52)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_18)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_51)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_20)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_19)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              o_axi_rdata_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW35_0)
+                                      6.40e-06    0.000 4.34e-08 6.44e-06   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_2)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_54)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_21)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_53)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_23)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_22)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              o_axi_wdata_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW37_0)
+                                      6.72e-05 1.38e-09 4.79e-07 6.77e-05   0.2
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_24)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_26)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW37_1)
+                                      3.04e-05 6.92e-10 1.78e-07 3.06e-05   0.1
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_25)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_56)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_3)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_55)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW37_0)
+                                      3.04e-05 6.92e-10 1.78e-07 3.06e-05   0.1
+              o_axi_ar_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW50_1)
+                                      6.05e-05 1.23e-09 4.31e-07 6.09e-05   0.2
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_30)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_32)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW50_3)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_31)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_60)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_5)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_59)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW50_2)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+              o_axi_aw_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP2_DW50_0)
+                                      6.05e-05 1.23e-09 4.29e-07 6.09e-05   0.2
+                dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_27)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_29)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW50_1)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+                dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_28)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+                dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_58)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW2_4)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+                dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW1_57)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+                dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW50_0)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+            u_sirv_gnrl_rw_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO1_DP4_DW1)
+                                      1.53e-05 9.38e-11 1.01e-07 1.54e-05   0.0
+              dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW4_2)
+                                      3.66e-06    0.000 2.04e-08 3.68e-06   0.0
+              dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW1_17)
+                                      8.45e-07 1.92e-11 3.86e-09 8.49e-07   0.0
+              dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW3_4)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_60)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.fifo_rf[3].fifo_rf_dffl (sirv_gnrl_dffl_DW1_15)
+                                      8.45e-07 1.92e-11 3.86e-09 8.49e-07   0.0
+              dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW1_18)
+                                      8.45e-07 1.92e-11 3.86e-09 8.49e-07   0.0
+              dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW3_3)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              dp_gt0.fifo_rf[2].fifo_rf_dffl (sirv_gnrl_dffl_DW1_16)
+                                      8.45e-07 1.92e-11 3.86e-09 8.49e-07   0.0
+              dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_62)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+              dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_61)
+                                      9.13e-07    0.000 4.20e-09 9.18e-07   0.0
+        u_e203_cpu_top (e203_cpu_top) 2.37e-03 3.04e-04 1.18e-03 3.85e-03  11.7
+          u_e203_cpu (e203_cpu_MASTER1)
+                                      2.08e-03 2.97e-04 2.18e-05 2.40e-03   7.3
+            u_e203_core (e203_core)   1.81e-03 1.06e-04 1.81e-05 1.93e-03   5.9
+              u_e203_exu (e203_exu)   1.46e-03 5.20e-05 1.36e-05 1.52e-03   4.6
+                u_e203_exu_alu (e203_exu_alu)
+                                      1.16e-04 2.31e-05 4.14e-06 1.43e-04   0.4
+                  u_e203_exu_nice (e203_exu_nice)
+                                      1.69e-05 9.52e-11 1.16e-07 1.70e-05   0.1
+                    u_nice_itag_fifo (sirv_gnrl_fifo_CUT_READY1_DP4_DW1)
+                                      1.69e-05 9.52e-11 1.03e-07 1.70e-05   0.1
+                      dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_0)
+                                      1.01e-06    0.000 4.71e-09 1.01e-06   0.0
+                      dp_gt0.fifo_rf[2].fifo_rf_dffl (sirv_gnrl_dffl_DW1_2)
+                                      9.80e-07 1.92e-11 4.58e-09 9.84e-07   0.0
+                      dp_gt0.rptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_2)
+                                      1.01e-06    0.000 4.71e-09 1.01e-06   0.0
+                      dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW1_4)
+                                      9.80e-07 1.92e-11 4.58e-09 9.84e-07   0.0
+                      dp_gt0.fifo_rf[3].fifo_rf_dffl (sirv_gnrl_dffl_DW1_1)
+                                      9.80e-07 1.92e-11 4.58e-09 9.84e-07   0.0
+                      dp_gt0.wptr_vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_1)
+                                      1.01e-06    0.000 4.71e-09 1.01e-06   0.0
+                      dp_gt0.dp_gt1.rptr_vec_31_dfflr (sirv_gnrl_dfflr_DW3_1)
+                                      2.99e-06    0.000 1.51e-08 3.01e-06   0.0
+                      dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW4_0)
+                                      3.99e-06    0.000 1.94e-08 4.01e-06   0.0
+                      dp_gt0.dp_gt1.wptr_vec_31_dfflr (sirv_gnrl_dfflr_DW3_0)
+                                      2.99e-06    0.000 1.51e-08 3.01e-06   0.0
+                      dp_gt0.fifo_rf[1].fifo_rf_dffl (sirv_gnrl_dffl_DW1_3)
+                                      9.80e-07 1.92e-11 4.58e-09 9.84e-07   0.0
+                  u_e203_exu_alu_lsuagu (e203_exu_alu_lsuagu)
+                                      6.02e-06 1.51e-06 3.61e-07 7.90e-06   0.0
+                    icb_state_dfflr (sirv_gnrl_dfflr_DW4_1)
+                                      2.99e-06    0.000 1.46e-08 3.01e-06   0.0
+                    icb_leftover_err_dfflr (sirv_gnrl_dfflr_DW1_17)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+                  u_e203_exu_alu_muldiv (e203_exu_alu_muldiv)
+                                      1.30e-05 9.33e-07 6.97e-07 1.47e-05   0.0
+                    part_prdt_sft1_dfflr (sirv_gnrl_dfflr_DW1_15)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+                    exec_cnt_dfflr (sirv_gnrl_dfflr_DW6_0)
+                                      5.98e-06    0.000 2.97e-08 6.01e-06   0.0
+                    flushed_dfflr (sirv_gnrl_dfflr_DW1_16)
+                                      1.01e-06 2.45e-10 5.91e-09 1.02e-06   0.0
+                    muldiv_state_dfflr (sirv_gnrl_dfflr_DW3_2)
+                                      2.99e-06    0.000 1.46e-08 3.01e-06   0.0
+                    part_remd_sft1_dfflr (sirv_gnrl_dfflr_DW1_14)
+                                      9.97e-07    0.000 5.00e-09 1.00e-06   0.0
+                  u_e203_exu_alu_bjp (e203_exu_alu_bjp)
+                                      1.29e-07 7.27e-08 1.11e-07 3.13e-07   0.0
+                  u_e203_exu_alu_csrctrl (e203_exu_alu_csrctrl)
+                                         0.000    0.000 7.17e-08 7.17e-08   0.0
+                  u_e203_exu_alu_rglr (e203_exu_alu_rglr)
+                                      5.40e-07 9.95e-07 1.93e-07 1.73e-06   0.0
+                  u_e203_exu_alu_dpath (e203_exu_alu_dpath)
+                                      7.51e-05 1.10e-05 1.96e-06 8.80e-05   0.3
+                    sbf_0_dffl (sirv_gnrl_dffl_DW33_2)
+                                      3.23e-05 6.34e-10 1.51e-07 3.25e-05   0.1
+                    sbf_1_dffl (sirv_gnrl_dffl_DW33_1)
+                                      3.23e-05 6.34e-10 1.55e-07 3.25e-05   0.1
+                u_e203_exu_decode (e203_exu_decode_1)
+                                      4.23e-06 5.95e-06 4.56e-07 1.06e-05   0.0
+                u_e203_exu_csr (e203_exu_csr)
+                                      2.74e-04 3.23e-06 1.91e-06 2.79e-04   0.8
+                  minstret_dfflr (sirv_gnrl_dfflr_DW32_9)
+                                      3.39e-05 1.66e-06 1.69e-07 3.58e-05   0.1
+                  meip_dffr (sirv_gnrl_dffr_DW1_2)
+                                      9.97e-07    0.000 3.85e-09 1.00e-06   0.0
+                  status_mpie_dfflr (sirv_gnrl_dfflr_DW1_27)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+                  mie_dfflr (sirv_gnrl_dfflr_DW32_14)
+                                      2.99e-06    0.000 1.46e-08 3.01e-06   0.0
+                  itcmnohold_dfflr (sirv_gnrl_dfflr_DW32_6)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+                  status_mie_dfflr (sirv_gnrl_dfflr_DW1_26)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+                  mcycleh_dfflr (sirv_gnrl_dfflr_DW32_10)
+                                      2.93e-05    0.000 1.57e-07 2.94e-05   0.1
+                  mscratch_dfflr (sirv_gnrl_dfflr_DW32_12)
+                                      3.19e-05    0.000 1.56e-07 3.21e-05   0.1
+                  badaddr_dfflr (sirv_gnrl_dfflr_DW32_1)
+                                      3.19e-05    0.000 1.56e-07 3.21e-05   0.1
+                  msip_dffr (sirv_gnrl_dffr_DW1_1)
+                                      9.97e-07    0.000 3.85e-09 1.00e-06   0.0
+                  mdvnob2b_dfflr (sirv_gnrl_dfflr_DW32_5)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+                  epc_dfflr (sirv_gnrl_dfflr_DW32_3)
+                                      3.09e-05    0.000 1.51e-07 3.11e-05   0.1
+                  mcgstop_dfflr (sirv_gnrl_dfflr_DW32_4)
+                                      1.99e-06    0.000 9.72e-09 2.00e-06   0.0
+                  counterstop_dfflr (sirv_gnrl_dfflr_DW32_7)
+                                      2.99e-06    0.000 1.46e-08 3.01e-06   0.0
+                  minstreth_dfflr (sirv_gnrl_dfflr_DW32_8)
+                                      3.19e-05    0.000 1.56e-07 3.21e-05   0.1
+                  mtip_dffr (sirv_gnrl_dffr_DW1_0)
+                                      9.97e-07    0.000 3.85e-09 1.00e-06   0.0
+                  mcycle_dfflr (sirv_gnrl_dfflr_DW32_11)
+                                      3.08e-05 7.85e-07 1.79e-07 3.18e-05   0.1
+                  mtvec_dfflr (sirv_gnrl_dfflr_DW32_13)
+                                      3.19e-05    0.000 1.56e-07 3.21e-05   0.1
+                  cause_dfflr (sirv_gnrl_dfflr_DW32_2)
+                                      4.99e-06    0.000 2.43e-08 5.01e-06   0.0
+                u_e203_exu_regfile (e203_exu_regfile)
+                                      9.72e-04 5.39e-06 5.54e-06 9.82e-04   3.0
+                  regfile[12].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_21)
+                                      3.22e-05 4.83e-07 1.42e-07 3.28e-05   0.1
+                  regfile[22].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_11)
+                                      3.14e-05 6.15e-10 1.48e-07 3.15e-05   0.1
+                  regfile[5].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_28)
+                                      3.13e-05 1.83e-12 1.41e-07 3.14e-05   0.1
+                  regfile[19].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_14)
+                                      3.10e-05    0.000 1.41e-07 3.12e-05   0.1
+                  regfile[29].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_4)
+                                      3.13e-05 3.75e-12 1.41e-07 3.14e-05   0.1
+                  regfile[13].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_20)
+                                      3.13e-05 1.10e-08 1.41e-07 3.14e-05   0.1
+                  regfile[23].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_10)
+                                      3.14e-05 6.15e-10 1.48e-07 3.15e-05   0.1
+                  regfile[6].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_27)
+                                      3.11e-05 2.47e-10 1.41e-07 3.13e-05   0.1
+                  regfile[14].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_19)
+                                      3.11e-05 3.96e-08 1.41e-07 3.13e-05   0.1
+                  regfile[24].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_9)
+                                      3.14e-05 6.15e-10 1.48e-07 3.15e-05   0.1
+                  regfile[7].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_26)
+                                      3.13e-05 3.10e-13 1.41e-07 3.14e-05   0.1
+                  regfile[1].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_32)
+                                      3.11e-05    0.000 1.41e-07 3.12e-05   0.1
+                  regfile[15].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_18)
+                                      3.12e-05 1.95e-08 1.41e-07 3.14e-05   0.1
+                  regfile[25].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_8)
+                                      3.14e-05 6.15e-10 1.48e-07 3.15e-05   0.1
+                  regfile[8].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_25)
+                                      3.14e-05 2.96e-08 1.41e-07 3.16e-05   0.1
+                  regfile[2].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_31)
+                                      3.07e-05    0.000 1.41e-07 3.08e-05   0.1
+                  regfile[16].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_17)
+                                      3.12e-05 4.53e-10 1.42e-07 3.13e-05   0.1
+                  regfile[26].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_7)
+                                      3.14e-05 6.15e-10 1.48e-07 3.15e-05   0.1
+                  regfile[10].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_23)
+                                      3.13e-05 2.03e-10 1.41e-07 3.14e-05   0.1
+                  regfile[20].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_13)
+                                      3.13e-05    0.000 1.41e-07 3.14e-05   0.1
+                  regfile[9].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_24)
+                                      3.09e-05    0.000 1.41e-07 3.10e-05   0.1
+                  regfile[30].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_3)
+                                      3.10e-05    0.000 1.41e-07 3.12e-05   0.1
+                  regfile[3].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_30)
+                                      3.14e-05 6.15e-10 1.48e-07 3.15e-05   0.1
+                  regfile[17].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_16)
+                                      3.11e-05 1.08e-10 1.41e-07 3.13e-05   0.1
+                  regfile[27].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_6)
+                                      3.14e-05 6.15e-10 1.48e-07 3.15e-05   0.1
+                  regfile[11].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_22)
+                                      3.11e-05 3.43e-10 1.41e-07 3.13e-05   0.1
+                  regfile[21].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_12)
+                                      3.14e-05 6.15e-10 1.48e-07 3.15e-05   0.1
+                  regfile[31].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_2)
+                                      3.13e-05 4.49e-13 1.41e-07 3.14e-05   0.1
+                  regfile[4].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_29)
+                                      3.14e-05 6.15e-10 1.48e-07 3.15e-05   0.1
+                  regfile[18].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_15)
+                                      3.10e-05    0.000 1.41e-07 3.12e-05   0.1
+                  regfile[28].rfno0.rf_dffl (sirv_gnrl_dffl_DW32_5)
+                                      3.11e-05 5.84e-11 1.41e-07 3.12e-05   0.1
+                u_e203_exu_longpwbck (e203_exu_longpwbck)
+                                      1.43e-06 1.38e-06 7.68e-08 2.89e-06   0.0
+                u_e203_exu_oitf (e203_exu_oitf)
+                                      8.13e-05 3.32e-06 5.58e-07 8.52e-05   0.3
+                  depth_gt1.alc_ptr_flg_dfflrs (sirv_gnrl_dfflr_DW1_33)
+                                      1.09e-06 2.73e-08 5.41e-09 1.12e-06   0.0
+                  oitf_entries[1].pc_dfflrs (sirv_gnrl_dffl_DW32_0)
+                                      3.05e-05 1.12e-07 1.38e-07 3.07e-05   0.1
+                  oitf_entries[0].rdidx_dfflrs (sirv_gnrl_dffl_DW5_1)
+                                      4.96e-06 5.28e-08 2.27e-08 5.03e-06   0.0
+                  oitf_entries[1].vld_dfflrs (sirv_gnrl_dfflr_DW1_28)
+                                      1.19e-06 5.46e-08 5.62e-09 1.25e-06   0.0
+                  depth_gt1.alc_ptr_dfflrs (sirv_gnrl_dfflr_DW1_32)
+                                      1.17e-06 7.95e-08 5.44e-09 1.25e-06   0.0
+                  depth_gt1.ret_ptr_flg_dfflrs (sirv_gnrl_dfflr_DW1_31)
+                                      1.09e-06 3.04e-08 5.41e-09 1.12e-06   0.0
+                  oitf_entries[0].pc_dfflrs (sirv_gnrl_dffl_DW32_1)
+                                      3.05e-05 1.13e-07 1.38e-07 3.07e-05   0.1
+                  oitf_entries[0].rdwen_dfflrs (sirv_gnrl_dffl_DW1_14)
+                                      9.95e-07 1.52e-08 4.72e-09 1.01e-06   0.0
+                  oitf_entries[1].rdwen_dfflrs (sirv_gnrl_dffl_DW1_12)
+                                      9.95e-07 1.48e-08 4.73e-09 1.01e-06   0.0
+                  oitf_entries[1].rdidx_dfflrs (sirv_gnrl_dffl_DW5_0)
+                                      4.96e-06 5.25e-08 2.27e-08 5.03e-06   0.0
+                  oitf_entries[0].vld_dfflrs (sirv_gnrl_dfflr_DW1_29)
+                                      1.19e-06 5.49e-08 5.62e-09 1.25e-06   0.0
+                  depth_gt1.ret_ptr_dfflrs (sirv_gnrl_dfflr_DW1_30)
+                                      1.17e-06 7.83e-08 5.44e-09 1.25e-06   0.0
+                u_e203_exu_disp (e203_exu_disp)
+                                      1.19e-06 5.01e-07 6.64e-08 1.76e-06   0.0
+                u_e203_exu_wbck (e203_exu_wbck)
+                                      9.77e-07 7.12e-06 1.12e-07 8.21e-06   0.0
+                u_e203_exu_commit (e203_exu_commit)
+                                      6.64e-06 1.96e-06 7.80e-07 9.39e-06   0.0
+                  u_e203_exu_excp (e203_exu_excp)
+                                      3.48e-06 4.40e-07 2.49e-07 4.17e-06   0.0
+                    wfi_flag_dfflr (sirv_gnrl_dfflr_DW1_13)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+                    wfi_halt_req_dfflr (sirv_gnrl_dfflr_DW1_12)
+                                      9.97e-07    0.000 4.86e-09 1.00e-06   0.0
+                    step_req_dfflr (sirv_gnrl_dfflr_DW1_11)
+                                      9.97e-07    0.000 5.40e-09 1.00e-06   0.0
+                  u_e203_exu_branchslv (e203_exu_branchslv)
+                                      2.31e-06 1.38e-06 3.51e-07 4.04e-06   0.0
+              u_e203_ifu (e203_ifu)   1.81e-04 3.00e-05 2.70e-06 2.14e-04   0.7
+                u_e203_ifu_ift2icb (e203_ifu_ift2icb)
+                                      6.10e-05 1.16e-05 9.98e-07 7.35e-05   0.2
+                  req_need_0uop_dfflr (sirv_gnrl_dfflr_DW1_38)
+                                      1.09e-06 6.81e-08 5.63e-09 1.16e-06   0.0
+                  req_need_2uop_dfflr (sirv_gnrl_dfflr_DW1_39)
+                                      8.95e-07 1.17e-08 4.90e-09 9.11e-07   0.0
+                  icb2itcm_dfflr (sirv_gnrl_dfflr_DW1_36)
+                                      8.84e-07 1.26e-08 6.01e-09 9.03e-07   0.0
+                  leftover_dffl (sirv_gnrl_dffl_DW16)
+                                      1.32e-05 1.43e-07 7.36e-08 1.34e-05   0.0
+                  icb_state_dfflr (sirv_gnrl_dfflr_DW2_0)
+                                      2.01e-06 1.51e-07 1.02e-08 2.18e-06   0.0
+                  leftover_err_dfflr (sirv_gnrl_dfflr_DW1_34)
+                                      8.65e-07    0.000 4.86e-09 8.70e-07   0.0
+                  u_e203_ifetch_rsp_bypbuf (sirv_gnrl_bypbuf_DP1_DW33)
+                                      3.28e-05 5.83e-06 2.66e-07 3.89e-05   0.1
+                    u_bypbuf_fifo (sirv_gnrl_fifo_CUT_READY1_DP1_DW33)
+                                      3.12e-05 3.42e-06 1.70e-07 3.47e-05   0.1
+                      dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW33_0)
+                                      2.87e-05 8.27e-07 1.52e-07 2.97e-05   0.1
+                      dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_3)
+                                      9.24e-07 2.66e-08 5.42e-09 9.56e-07   0.0
+                      dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_1)
+                                      1.15e-06 6.79e-07 5.39e-09 1.84e-06   0.0
+                  icb2mem_dfflr (sirv_gnrl_dfflr_DW1_35)
+                                      8.66e-07    0.000 4.85e-09 8.71e-07   0.0
+                  req_lane_cross_dfflr (sirv_gnrl_dfflr_DW1_37)
+                                      9.70e-07 3.02e-08 5.05e-09 1.01e-06   0.0
+                  req_same_cross_holdup_dfflr (sirv_gnrl_dfflr_DW1_40)
+                                      9.46e-07 2.27e-08 4.99e-09 9.73e-07   0.0
+                  icb_addr_2_1_dffl (sirv_gnrl_dffl_DW2_1)
+                                      1.85e-06 1.42e-07 9.21e-09 2.01e-06   0.0
+                u_e203_ifu_ifetch (e203_ifu_ifetch)
+                                      1.20e-04 1.85e-05 1.70e-06 1.40e-04   0.4
+                  ifu_lo_ir_dfflr (sirv_gnrl_dfflr_DW16_0)
+                                      1.73e-05 1.73e-06 1.67e-07 1.92e-05   0.1
+                  ir_valid_dfflr (sirv_gnrl_dfflr_DW1_47)
+                                      9.13e-07 2.81e-08 6.10e-09 9.48e-07   0.0
+                  halt_ack_dfflr (sirv_gnrl_dfflr_DW1_49)
+                                      8.63e-07    0.000 5.40e-09 8.68e-07   0.0
+                  ifu_pc_dfflr (sirv_gnrl_dfflr_DW32_16)
+                                      2.78e-05 6.01e-07 1.57e-07 2.86e-05   0.1
+                  ir_muldiv_b2b_dfflr (sirv_gnrl_dfflr_DW1_43)
+                                      8.67e-07    0.000 4.84e-09 8.72e-07   0.0
+                  u_e203_ifu_litebpu (e203_ifu_litebpu)
+                                      2.22e-06 7.01e-07 8.32e-08 3.00e-06   0.0
+                    rs1xn_rdrf_dfflrs (sirv_gnrl_dfflr_DW1_19)
+                                      8.63e-07    0.000 5.40e-09 8.68e-07   0.0
+                  ifu_hi_ir_dfflr (sirv_gnrl_dfflr_DW16_1)
+                                      1.58e-05 7.85e-07 1.20e-07 1.67e-05   0.1
+                  reset_req_dfflr (sirv_gnrl_dfflr_DW1_50)
+                                      8.63e-07    0.000 5.40e-09 8.68e-07   0.0
+                  ir_rs2idx_dfflr (sirv_gnrl_dfflr_DW5_0)
+                                      4.84e-06 1.21e-07 4.99e-08 5.01e-06   0.0
+                  pc_dfflr (sirv_gnrl_dfflr_DW32_15)
+                                      2.79e-05 6.08e-07 1.57e-07 2.86e-05   0.1
+                  dly_flush_dfflr (sirv_gnrl_dfflr_DW1_48)
+                                      8.63e-07 2.82e-10 5.40e-09 8.69e-07   0.0
+                  ir_pc_vld_dfflr (sirv_gnrl_dfflr_DW1_46)
+                                      8.92e-07 1.65e-08 6.11e-09 9.15e-07   0.0
+                  pc_newpend_dfflr (sirv_gnrl_dfflr_DW1_41)
+                                      9.10e-07 2.15e-08 6.10e-09 9.38e-07   0.0
+                  ifu_err_dfflr (sirv_gnrl_dfflr_DW1_45)
+                                      8.67e-07    0.000 4.84e-09 8.72e-07   0.0
+                  u_e203_ifu_minidec (e203_ifu_minidec)
+                                      5.41e-06 6.90e-06 3.46e-07 1.27e-05   0.0
+                    u_e203_exu_decode (e203_exu_decode_0)
+                                      5.41e-06 6.90e-06 3.46e-07 1.27e-05   0.0
+                  out_flag_dfflr (sirv_gnrl_dfflr_DW1_42)
+                                      8.91e-07 1.67e-08 6.11e-09 9.14e-07   0.0
+                  ir_rs1idx_dfflr (sirv_gnrl_dfflr_DW5_1)
+                                      5.01e-06 3.36e-07 4.51e-08 5.39e-06   0.0
+                  reset_flag_dffrs (sirv_gnrl_dffrs_DW1)
+                                      8.51e-07    0.000 4.64e-09 8.56e-07   0.0
+                  ifu_prdt_taken_dfflr (sirv_gnrl_dfflr_DW1_44)
+                                      9.47e-07 2.40e-08 5.00e-09 9.76e-07   0.0
+              u_e203_biu (e203_biu)   1.01e-04 1.39e-05 7.81e-07 1.15e-04   0.4
+                u_biu_icb_arbt (sirv_gnrl_icb_arbt_AW32_DW32_USR_W1_ARBT_SCHEME0_FIFO_OUTS_NUM1_FIFO_CUT_READY1_ARBT_NUM2_ALLOW_0CYCL_RSP0_ARBT_PTR_W1)
+                                      3.99e-06 2.16e-06 9.39e-08 6.25e-06   0.0
+                  arbt_num_gt_1_gen.dp_1.u_sirv_gnrl_rspid_fifo (sirv_gnrl_pipe_stage_CUT_READY1_DP1_DW1)
+                                      1.94e-06 3.20e-07 1.43e-08 2.28e-06   0.0
+                    dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW1_6)
+                                      7.20e-07    0.000 4.39e-09 7.25e-07   0.0
+                    dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_9)
+                                      1.08e-06 1.85e-07 7.51e-09 1.27e-06   0.0
+                u_biu_icb_splt (sirv_gnrl_icb_splt_AW32_DW32_FIFO_OUTS_NUM1_FIFO_CUT_READY1_SPLT_NUM6_SPLT_PTR_1HOT1_SPLT_PTR_W6_ALLOW_DIFF0_ALLOW_0CYCL_RSP1_USR_W1)
+                                      8.55e-06 4.33e-06 1.42e-07 1.30e-05   0.0
+                  splt_num_gt_1_gen.fifo_dp_1.u_sirv_gnrl_rspid_fifo (sirv_gnrl_pipe_stage_CUT_READY1_DP1_DW6)
+                                      5.88e-06 7.46e-07 3.69e-08 6.66e-06   0.0
+                    dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW6)
+                                      4.63e-06 1.76e-07 2.90e-08 4.83e-06   0.0
+                    dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_6)
+                                      1.09e-06 2.21e-07 5.51e-09 1.32e-06   0.0
+                u_sirv_gnrl_icb_buffer (sirv_gnrl_icb_buffer_OUTS_CNT_W1_AW32_DW32_CMD_CUT_READY1_RSP_CUT_READY1_CMD_DP1_RSP_DP1_USR_W1)
+                                      8.79e-05 7.30e-06 5.33e-07 9.57e-05   0.3
+                  u_sirv_gnrl_cmd_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW78)
+                                      5.89e-05 4.82e-06 3.53e-07 6.40e-05   0.2
+                    dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW78_0)
+                                      5.67e-05 3.63e-06 3.35e-07 6.06e-05   0.2
+                    dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_15)
+                                      8.69e-07 2.44e-08 5.39e-09 8.99e-07   0.0
+                    dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_8)
+                                      1.02e-06 1.86e-07 5.09e-09 1.21e-06   0.0
+                  u_sirv_gnrl_rsp_fifo (sirv_gnrl_fifo_CUT_READY1_MSKO0_DP1_DW35)
+                                      2.78e-05 2.26e-06 1.68e-07 3.02e-05   0.1
+                    dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW35_0)
+                                      2.57e-05 8.14e-07 1.51e-07 2.66e-05   0.1
+                    dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_12)
+                                      8.70e-07 2.43e-08 4.89e-09 8.99e-07   0.0
+                    dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_7)
+                                      1.05e-06 1.49e-07 6.79e-09 1.21e-06   0.0
+                  outs_cnt_dfflr (sirv_gnrl_dfflr_DW1_24)
+                                      1.07e-06 7.87e-08 5.58e-09 1.15e-06   0.0
+              u_e203_lsu (e203_lsu)   6.84e-05 1.04e-05 9.31e-07 7.97e-05   0.2
+                u_e203_lsu_ctrl (e203_lsu_ctrl)
+                                      6.83e-05 1.04e-05 9.29e-07 7.96e-05   0.2
+                  excl_flg_dffl (sirv_gnrl_dfflr_DW1_25)
+                                      7.73e-07    0.000 5.44e-09 7.79e-07   0.0
+                  u_e203_lsu_splt_stage (sirv_gnrl_pipe_stage_CUT_READY0_DP1_DW44)
+                                      3.36e-05 2.31e-06 2.04e-07 3.62e-05   0.1
+                    dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW44)
+                                      3.24e-05 5.38e-07 1.93e-07 3.31e-05   0.1
+                    dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_10)
+                                      1.04e-06 1.58e-07 5.94e-09 1.21e-06   0.0
+                  excl_addr_dffl (sirv_gnrl_dfflr_DW32_0)
+                                      2.47e-05    0.000 1.59e-07 2.49e-05   0.1
+                  u_lsu_icb_arbt (sirv_gnrl_icb_arbt_AW32_DW32_USR_W39_ARBT_SCHEME0_FIFO_OUTS_NUM1_FIFO_CUT_READY0_ARBT_NUM2_ALLOW_0CYCL_RSP0_ARBT_PTR_W1)
+                                      4.47e-06 3.11e-06 1.96e-07 7.78e-06   0.0
+                    arbt_num_gt_1_gen.dp_1.u_sirv_gnrl_rspid_fifo (sirv_gnrl_pipe_stage_CUT_READY0_DP1_DW1_0)
+                                      2.02e-06 3.92e-07 1.48e-08 2.43e-06   0.0
+                      dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW1_0)
+                                      7.75e-07 1.80e-08 4.77e-09 7.98e-07   0.0
+                      dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_0)
+                                      1.04e-06 1.68e-07 5.94e-09 1.22e-06   0.0
+            u_e203_nice_core (e203_subsys_nice_core)
+                                      2.17e-04 1.01e-07 2.05e-06 2.19e-04   0.7
+              rowbuf_cnt_dfflr (sirv_gnrl_dfflr_DW2_16)
+                                      1.83e-06    0.000 1.03e-08 1.84e-06   0.0
+              rcv_data_buf_valid_dfflr (sirv_gnrl_dfflr_DW1_113)
+                                      9.31e-07    0.000 5.58e-09 9.37e-07   0.0
+              state_dfflr (sirv_gnrl_dfflr_DW2_20)
+                                      1.83e-06    0.000 9.72e-09 1.84e-06   0.0
+              sbuf_cnt_dfflr (sirv_gnrl_dfflr_DW2_18)
+                                      1.83e-06    0.000 9.72e-09 1.84e-06   0.0
+              maddr_acc_dfflr (sirv_gnrl_dfflr_DW32_18)
+                                      2.93e-05    0.000 1.57e-07 2.94e-05   0.1
+              sbuf_cmd_cnt_dfflr (sirv_gnrl_dfflr_DW2_17)
+                                      1.83e-06    0.000 9.72e-09 1.84e-06   0.0
+              rcv_data_buf_dfflr (sirv_gnrl_dfflr_DW32_24)
+                                      2.93e-05    0.000 1.66e-07 2.94e-05   0.1
+              gen_rowbuf[1].rowbuf_dfflr (sirv_gnrl_dfflr_DW32_21)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+              gen_rowbuf[2].rowbuf_dfflr (sirv_gnrl_dfflr_DW32_20)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+              gen_rowbuf[3].rowbuf_dfflr (sirv_gnrl_dfflr_DW32_19)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+              gen_rowbuf[0].rowbuf_dfflr (sirv_gnrl_dfflr_DW32_22)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+              rowsum_acc_dfflr (sirv_gnrl_dfflr_DW32_23)
+                                      2.93e-05    0.000 1.62e-07 2.94e-05   0.1
+              lbuf_cnt_dfflr (sirv_gnrl_dfflr_DW2_19)
+                                      1.83e-06    0.000 9.72e-09 1.84e-06   0.0
+              rowbuf_cnt_d_dfflr (sirv_gnrl_dfflr_DW2_15)
+                                      1.83e-06    0.000 9.72e-09 1.84e-06   0.0
+            u_e203_clk_ctrl (e203_clk_ctrl)
+                                      1.03e-05 1.81e-04 4.30e-08 1.91e-04   0.6
+              dtcm_active_dffr (sirv_gnrl_dffr_DW1_20)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+              u_biu_clkgate (e203_clkgate_4)
+                                      1.11e-06 1.09e-05 3.94e-09 1.20e-05   0.0
+              u_ifu_clkgate (e203_clkgate_7)
+                                      1.21e-06 1.68e-05 3.23e-09 1.81e-05   0.1
+              u_itcm_clkgate (e203_clkgate_3)
+                                      8.43e-07 4.02e-06 3.80e-09 4.87e-06   0.0
+              u_dtcm_clkgate (e203_clkgate_2)
+                                      4.90e-07    0.000 2.70e-09 4.92e-07   0.0
+              u_exu_clkgate (e203_clkgate_6)
+                                      3.54e-06 1.42e-04 3.23e-09 1.46e-04   0.4
+              u_lsu_clkgate (e203_clkgate_5)
+                                      1.02e-06 6.87e-06 3.18e-09 7.89e-06   0.0
+              itcm_active_dffr (sirv_gnrl_dffr_DW1_21)
+                                      1.04e-06 1.16e-08 3.87e-09 1.06e-06   0.0
+            u_e203_irq_sync (e203_irq_sync_MASTER1)
+                                      7.32e-06    0.000 3.08e-08 7.35e-06   0.0
+              master_gen.u_ext_irq_sync (sirv_gnrl_sync_DP2_DW1_2)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+                sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_7)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+                sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_8)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+              master_gen.u_tmr_irq_sync (sirv_gnrl_sync_DP2_DW1_0)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+                sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_3)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+                sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_4)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+              master_gen.u_sft_irq_sync (sirv_gnrl_sync_DP2_DW1_1)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+                sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_5)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+                sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_6)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+              master_gen.u_dbg_irq_sync (sirv_gnrl_sync_DP2_DW1_3)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+                sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_9)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+                sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_10)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+            u_e203_itcm_ctrl (e203_itcm_ctrl)
+                                      3.42e-05 9.38e-06 1.05e-06 4.47e-05   0.1
+              ifu_holdup_dffl (sirv_gnrl_dfflr_DW1_112)
+                                      4.25e-07 1.62e-08 6.05e-09 4.48e-07   0.0
+              u_itcm_icb_arbt (sirv_gnrl_icb_arbt_AW16_DW64_USR_W1_ARBT_SCHEME0_FIFO_OUTS_NUM1_FIFO_CUT_READY0_ARBT_NUM2_ALLOW_0CYCL_RSP0_ARBT_PTR_W1)
+                                      3.43e-07    0.000 6.42e-08 4.08e-07   0.0
+                arbt_num_gt_1_gen.dp_1.u_sirv_gnrl_rspid_fifo (sirv_gnrl_pipe_stage_CUT_READY0_DP1_DW1_3)
+                                      3.36e-07    0.000 8.57e-09 3.44e-07   0.0
+                  dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_21)
+                                      3.36e-07    0.000 5.66e-09 3.41e-07   0.0
+              u_itcm_icb_lsu2itcm_n2w (sirv_gnrl_icb_n2w_AW16_USR_W1_FIFO_OUTS_NUM1_FIFO_CUT_READY0_X_W32_Y_W64_1)
+                                      1.16e-06 1.14e-07 8.04e-08 1.35e-06   0.0
+                fifo_dp_1.u_sirv_gnrl_n2w_fifo (sirv_gnrl_pipe_stage_CUT_READY0_DP1_DW1_5)
+                                      6.45e-07 1.92e-11 1.34e-08 6.59e-07   0.0
+                  dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW1_10)
+                                      3.09e-07 1.92e-11 4.89e-09 3.14e-07   0.0
+                  dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_23)
+                                      3.36e-07    0.000 5.66e-09 3.41e-07   0.0
+              u_itcm_icb_ext2itcm_n2w (sirv_gnrl_icb_n2w_AW16_USR_W1_FIFO_OUTS_NUM1_FIFO_CUT_READY0_X_W32_Y_W64_0)
+                                         0.000    0.000    0.000    0.000   N/A
+              u_sram_icb_ctrl (sirv_sram_icb_ctrl_DW64_MW8_AW16_AW_LSB3_USR_W2)
+                                      3.14e-05 8.54e-06 7.90e-07 4.07e-05   0.1
+                u_byp_icb_cmd_buf (sirv_gnrl_bypbuf_DP1_DW91)
+                                      2.92e-05 4.11e-07 7.54e-07 3.04e-05   0.1
+                  u_bypbuf_fifo (sirv_gnrl_fifo_CUT_READY1_DP1_DW91)
+                                      2.88e-05 1.75e-09 4.56e-07 2.93e-05   0.1
+                    dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW91)
+                                      2.82e-05 1.75e-09 4.40e-07 2.86e-05   0.1
+                    dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_9)
+                                      3.33e-07    0.000 4.95e-09 3.38e-07   0.0
+                    dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_5)
+                                      3.36e-07    0.000 5.12e-09 3.41e-07   0.0
+                u_sirv_1cyc_sram_ctrl (sirv_1cyc_sram_ctrl_DW64_MW8_AW16_AW_LSB3_USR_W2)
+                                      2.06e-06 8.08e-06 3.36e-08 1.02e-05   0.0
+                  u_e1_stage (sirv_gnrl_pipe_stage_CUT_READY0_DP1_DW2)
+                                      1.57e-06 3.33e-07 2.01e-08 1.92e-06   0.0
+                    dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW2_0)
+                                      8.04e-07 2.88e-08 9.11e-09 8.42e-07   0.0
+                    dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_4)
+                                      6.23e-07 1.61e-07 7.58e-09 7.91e-07   0.0
+                  u_ram_clkgate (e203_clkgate_1)
+                                      2.67e-07 7.56e-06 3.52e-09 7.83e-06   0.0
+            u_e203_reset_ctrl (e203_reset_ctrl_MASTER1)
+                                      1.84e-06    0.000 7.88e-09 1.85e-06   0.0
+            u_e203_dtcm_ctrl (e203_dtcm_ctrl)
+                                      1.20e-08 1.04e-09 5.98e-07 6.11e-07   0.0
+              u_dtcm_icb_arbt (sirv_gnrl_icb_arbt_AW16_DW32_USR_W1_ARBT_SCHEME0_FIFO_OUTS_NUM1_FIFO_CUT_READY0_ARBT_NUM2_ALLOW_0CYCL_RSP0_ARBT_PTR_W1)
+                                      6.80e-09    0.000 8.38e-08 9.06e-08   0.0
+                arbt_num_gt_1_gen.dp_1.u_sirv_gnrl_rspid_fifo (sirv_gnrl_pipe_stage_CUT_READY0_DP1_DW1_2)
+                                         0.000    0.000 8.74e-09 8.74e-09   0.0
+                  dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_20)
+                                         0.000    0.000 5.83e-09 5.83e-09   0.0
+              u_sram_icb_ctrl (sirv_sram_icb_ctrl_DW32_MW4_AW16_AW_LSB2_USR_W1)
+                                      5.16e-09 1.04e-09 5.12e-07 5.18e-07   0.0
+                u_byp_icb_cmd_buf (sirv_gnrl_bypbuf_DP1_DW54)
+                                      5.16e-09 1.04e-09 4.84e-07 4.90e-07   0.0
+                  u_bypbuf_fifo (sirv_gnrl_fifo_CUT_READY1_DP1_DW54)
+                                      5.16e-09 1.04e-09 2.82e-07 2.88e-07   0.0
+                    dp_gt0.fifo_rf[0].fifo_rf_dffl (sirv_gnrl_dffl_DW54)
+                                      5.16e-09 1.04e-09 2.62e-07 2.68e-07   0.0
+                    dp_gt0.vec_0_dfflrs (sirv_gnrl_dfflrs_DW1_6)
+                                         0.000    0.000 5.10e-09 5.10e-09   0.0
+                    dp_gt0.vec_31_dfflr (sirv_gnrl_dfflr_DW1_3)
+                                         0.000    0.000 5.29e-09 5.29e-09   0.0
+                u_sirv_1cyc_sram_ctrl (sirv_1cyc_sram_ctrl_DW32_MW4_AW16_AW_LSB2_USR_W1)
+                                         0.000    0.000 2.45e-08 2.45e-08   0.0
+                  u_e1_stage (sirv_gnrl_pipe_stage_CUT_READY0_DP1_DW1_1)
+                                         0.000    0.000 1.51e-08 1.51e-08   0.0
+                    dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW1_5)
+                                         0.000    0.000 4.65e-09 4.65e-09   0.0
+                    dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_2)
+                                         0.000    0.000 7.55e-09 7.55e-09   0.0
+                  u_ram_clkgate (e203_clkgate_0)
+                                         0.000    0.000 2.31e-09 2.31e-09   0.0
+          u_e203_srams (e203_srams)   2.89e-04 7.57e-06 1.16e-03 1.46e-03   4.4
+            u_e203_dtcm_ram (e203_dtcm_ram)
+                                      1.68e-08 1.70e-08 5.79e-04 5.79e-04   1.8
+              u_e203_dtcm_gnrl_ram (sirv_gnrl_ram_DP16384_DW32_FORCE_X2ZERO1_MW4_AW14)
+                                      1.68e-08 1.70e-08 5.79e-04 5.79e-04   1.8
+                u_sirv_sim_ram (sirv_sim_ram_DP16384_FORCE_X2ZERO1_DW32_MW4_AW14)
+                                      1.68e-08 1.70e-08 5.79e-04 5.79e-04   1.8
+            u_e203_itcm_ram (e203_itcm_ram)
+                                      2.89e-04 7.56e-06 5.79e-04 8.76e-04   2.7
+              u_e203_itcm_gnrl_ram (sirv_gnrl_ram_DP8192_DW64_FORCE_X2ZERO0_MW8_AW13)
+                                      2.89e-04 7.56e-06 5.79e-04 8.76e-04   2.7
+                u_sirv_sim_ram (sirv_sim_ram_DP8192_FORCE_X2ZERO0_DW64_MW8_AW13)
+                                      2.89e-04 7.56e-06 5.79e-04 8.76e-04   2.7
+        u_e203_subsys_clint (e203_subsys_clint)
+                                      1.21e-04 4.53e-07 9.81e-07 1.22e-04   0.4
+          u_sirv_clint_top (sirv_clint_top)
+                                      1.19e-04 4.53e-07 9.72e-07 1.20e-04   0.4
+            io_rtcToggle_dffr (sirv_gnrl_dffr_DW1_34)
+                                      9.17e-07 2.35e-11 3.89e-09 9.21e-07   0.0
+            u_sirv_clint (sirv_clint) 1.18e-04 4.52e-07 9.63e-07 1.19e-04   0.4
+          u_aon_rtctoggle_sync (sirv_gnrl_sync_DP2_DW1_12)
+                                      1.83e-06 2.18e-11 7.79e-09 1.84e-06   0.0
+            sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_35)
+                                      9.17e-07 9.89e-12 3.89e-09 9.21e-07   0.0
+            sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_36)
+                                      9.17e-07 1.19e-11 3.89e-09 9.21e-07   0.0
+        u_main_ResetCatchAndSync_2_1 (sirv_ResetCatchAndSync_2_1)
+                                      1.84e-05    0.000 8.90e-08 1.85e-05   0.1
+          reset_n_catch_reg (sirv_AsyncResetRegVec_129_1)
+                                      1.84e-05    0.000 8.84e-08 1.85e-05   0.1
+            reg_0 (sirv_AsyncResetReg_59)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_1 (sirv_AsyncResetReg_58)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_2 (sirv_AsyncResetReg_57)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_3 (sirv_AsyncResetReg_56)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_4 (sirv_AsyncResetReg_55)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_5 (sirv_AsyncResetReg_54)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_6 (sirv_AsyncResetReg_53)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_7 (sirv_AsyncResetReg_52)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_8 (sirv_AsyncResetReg_51)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_9 (sirv_AsyncResetReg_50)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_10 (sirv_AsyncResetReg_49)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_11 (sirv_AsyncResetReg_48)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_12 (sirv_AsyncResetReg_47)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_13 (sirv_AsyncResetReg_46)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_14 (sirv_AsyncResetReg_45)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_15 (sirv_AsyncResetReg_44)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_16 (sirv_AsyncResetReg_43)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_17 (sirv_AsyncResetReg_42)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_18 (sirv_AsyncResetReg_41)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+            reg_19 (sirv_AsyncResetReg_40)
+                                      9.19e-07    0.000 4.42e-09 9.23e-07   0.0
+        u_e203_subsys_plic (e203_subsys_plic)
+                                      1.60e-04 1.49e-07 1.23e-06 1.61e-04   0.5
+          u_wdg_irq_sync (sirv_gnrl_sync_DP2_DW1_13)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+            sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_37)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+            sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_38)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+          u_sirv_plic_top (sirv_plic_top)
+                                      1.56e-04 1.49e-07 1.21e-06 1.57e-04   0.5
+            u_sirv_plic_man (sirv_plic_man_PLIC_PRIO_WIDTH3_PLIC_IRQ_NUM17_PLIC_IRQ_NUM_LOG26_PLIC_ICB_RSP_FLOP1_PLIC_IRQ_I_FLOP1_PLIC_IRQ_O_FLOP1)
+                                      1.56e-04 1.49e-07 1.21e-06 1.57e-04   0.5
+              irq_thod_dfflr (sirv_gnrl_dfflr_DW3_5)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[2].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_110)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[3].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_19)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[3].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_109)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[4].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_18)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              flop_o_irq.plic_irq_id_dffr (sirv_gnrl_dffr_DW6)
+                                      4.57e-06    0.000 1.92e-08 4.59e-06   0.0
+              source_gen[10].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_102)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[11].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_11)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[7].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_105)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[8].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_14)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[14].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_98)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[15].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_7)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[9].u_LevelGateway_1_1 (sirv_LevelGateway_7)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              flop_icb_rsp.u_buf_icb_rsp_buf (sirv_gnrl_pipe_stage_CUT_READY1_DP1_DW32)
+                                      2.80e-05 6.15e-10 1.65e-07 2.81e-05   0.1
+                dp_gt_0.dat_dfflr (sirv_gnrl_dffl_DW32_33)
+                                      2.70e-05 6.15e-10 1.58e-07 2.72e-05   0.1
+                dp_gt_0.vld_dfflr (sirv_gnrl_dfflr_DW1_81)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[8].u_LevelGateway_1_1 (sirv_LevelGateway_8)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[15].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_97)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[7].u_LevelGateway_1_1 (sirv_LevelGateway_9)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[16].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_6)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[6].u_LevelGateway_1_1 (sirv_LevelGateway_10)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[5].u_LevelGateway_1_1 (sirv_LevelGateway_11)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[16].u_LevelGateway_1_1 (sirv_LevelGateway_0)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              flop_i_irq.plic_irq_i_dffr (sirv_gnrl_dffr_DW17)
+                                      1.46e-05    0.000 6.16e-08 1.47e-05   0.0
+              source_gen[4].u_LevelGateway_1_1 (sirv_LevelGateway_12)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[15].u_LevelGateway_1_1 (sirv_LevelGateway_1)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[14].u_LevelGateway_1_1 (sirv_LevelGateway_2)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[3].u_LevelGateway_1_1 (sirv_LevelGateway_13)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[13].u_LevelGateway_1_1 (sirv_LevelGateway_3)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[2].u_LevelGateway_1_1 (sirv_LevelGateway_14)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[1].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_21)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              enab_r_i[0].irq_enab_dfflr (sirv_gnrl_dfflr_DW32_17)
+                                      2.84e-05    0.000 1.63e-07 2.85e-05   0.1
+              source_gen[12].u_LevelGateway_1_1 (sirv_LevelGateway_4)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[1].u_LevelGateway_1_1 (sirv_LevelGateway_15)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[11].u_LevelGateway_1_1 (sirv_LevelGateway_5)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[4].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_108)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[10].u_LevelGateway_1_1 (sirv_LevelGateway_6)
+                                      9.68e-07    0.000 6.77e-09 9.75e-07   0.0
+              source_gen[5].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_17)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[11].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_101)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[12].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_10)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[8].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_104)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[9].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_13)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[12].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_100)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              flop_o_irq.plic_irq_prio_dffr (sirv_gnrl_dffr_DW3)
+                                      2.74e-06    0.000 1.15e-08 2.76e-06   0.0
+              source_gen[13].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_9)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[16].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_96)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              flop_o_irq.plic_irq_o_dffr (sirv_gnrl_dffr_DW1_19)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+              source_gen[1].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_111)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[2].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_20)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[5].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_107)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[6].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_16)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[10].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_12)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[6].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_106)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[9].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_103)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[7].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_15)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+              source_gen[13].irq_pend_dfflr (sirv_gnrl_dfflr_DW1_99)
+                                      9.15e-07    0.000 5.38e-09 9.20e-07   0.0
+              source_gen[14].irq_prio_dfflr (sirv_gnrl_dfflr_DW3_8)
+                                      2.74e-06    0.000 1.60e-08 2.76e-06   0.0
+          u_rtc_irq_sync (sirv_gnrl_sync_DP2_DW1_14)
+                                      1.83e-06    0.000 7.70e-09 1.84e-06   0.0
+            sync_gen[1].i_is_not_0.sync_dffr (sirv_gnrl_dffr_DW1_39)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+            sync_gen[0].i_is_0.sync_dffr (sirv_gnrl_dffr_DW1_40)
+                                      9.15e-07    0.000 3.85e-09 9.18e-07   0.0
+  u_shared (xu_shared_icb_sram)       2.37e-03 1.04e-04 4.63e-03 7.11e-03  21.6
+    storage (sirv_sim_ram_DP131072_FORCE_X2ZERO0_DW32_MW4_AW17)
+                                      2.37e-03 1.03e-04 4.63e-03 7.10e-03  21.6
+1

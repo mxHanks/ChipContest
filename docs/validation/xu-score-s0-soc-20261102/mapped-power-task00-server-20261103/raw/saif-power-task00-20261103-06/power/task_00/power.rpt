@@ -1,0 +1,51 @@
+****************************************
+Report : Averaged Power
+	-verbose
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 10:54:38 2026
+****************************************
+
+Library(s) Used:
+
+    scc40nll_vhsc40_rvt_ss_v0p99_125c_basic (File: /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db)
+    RAMSP1024X16_ss_0p99v_0p99v_125c (File: /storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db)
+
+
+Operating Conditions: ss_v0p99_125c   Library: scc40nll_vhsc40_rvt_ss_v0p99_125c_basic
+Wire Load Model Mode: top
+
+<no wire load model is set>
+
+Power-specific unit information :
+    Voltage Units = 1 V
+    Capacitance Units = 1 pf
+    Time Units = 1 ns
+    Dynamic Power Units = 1 W
+    Leakage Power Units = 1 W
+
+
+
+  Attributes
+  ----------
+      i  -  Including register clock pin internal power
+      u  -  User defined power group
+
+                        Internal  Switching  Leakage    Total
+Power Group             Power     Power      Power      Power   (     %)  Attrs
+--------------------------------------------------------------------------------
+clock_network              0.0200 2.206e-03 1.764e-07    0.0222 (67.45%)  i
+register                3.561e-05 1.452e-05 8.506e-05 1.352e-04 ( 0.41%)  
+combinational           5.493e-04 5.682e-04 8.994e-05 1.207e-03 ( 3.67%)  
+sequential                 0.0000    0.0000 4.333e-08 4.333e-08 ( 0.00%)  
+memory                  3.284e-03 7.569e-07 6.072e-03 9.357e-03 (28.47%)  
+io_pad                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+black_box                  0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+
+  Net Switching Power  = 2.789e-03   ( 8.49%)
+  Cell Internal Power  =    0.0238   (72.51%)
+  Cell Leakage Power   = 6.247e-03   (19.01%)
+                         ---------
+Total Power            =    0.0329  (100.00%)
+
+1

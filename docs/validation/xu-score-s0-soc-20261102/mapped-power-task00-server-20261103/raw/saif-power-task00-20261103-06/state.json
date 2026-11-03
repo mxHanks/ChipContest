@@ -1,0 +1,66 @@
+{
+  "analysis_producer_commit": "fc25468f33ae1da4e1bdddbb6c94e001a1c2a04e",
+  "commands": [
+    [
+      "/bin/python3",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/ppa/xu_soc_implementation.py",
+      "--root",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103",
+      "--out",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/saif-power-task00-20261103-06/implementation",
+      "--standard-cell-db",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+      "--standard-cell-sha256",
+      "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723",
+      "--sram-db",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+      "--sram-sha256",
+      "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+    ],
+    [
+      "/bin/python3",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/scripts/xu_soc_saif_power.py",
+      "prepare",
+      "--root",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103",
+      "--activity",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/task-activity-clear-alias-20261103-01/task00/result.json",
+      "--implementation",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/saif-power-task00-20261103-06/implementation/implementation.json",
+      "--netlist",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-campaign-03-ppa/ppa-ss-01/mapped.v",
+      "--constraints",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-pt-compatible-05/constraints.sdc",
+      "--out",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/saif-power-task00-20261103-06/power",
+      "--task-ids",
+      "0",
+      "--mapped-sram-inventory",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pt-macro-pin-inventory-20261103-01/inventory.json"
+    ],
+    [
+      "/bin/python3",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-clear-alias-20261103/tools/scripts/xu_soc_saif_power.py",
+      "run",
+      "--out",
+      "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/saif-power-task00-20261103-06/power",
+      "--pt",
+      "pt_shell",
+      "--timeout",
+      "21600",
+      "--lc-root",
+      "/eda/synopsys/lib_compiler/lib_compiler_2022.03-SP5"
+    ]
+  ],
+  "finished_epoch": 1793675302.1510952,
+  "started_epoch": 1793674306.8001971,
+  "status": "EXECUTED_REVIEW_PENDING",
+  "tool_only_changed_files": [
+    "docs/xu-saif-mapped-macros.md",
+    "tests/host/test_xu_saif_mapped_macros.py",
+    "tests/host/test_xu_soc_ppa_profiles.py",
+    "tools/ppa/xu_saif_mapped_macros.py",
+    "tools/ppa/xu_soc_implementation.py",
+    "tools/scripts/xu_soc_ppa.py"
+  ]
+}
