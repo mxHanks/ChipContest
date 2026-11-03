@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-joint31.py", line 20, in <module>
+    receipt=out/'result.json';assert receipt.is_file();result=json.loads(receipt.read_text());entry.update(returncode=r.returncode,result_status=result['status'],receipt_sha256=hashlib.sha256(receipt.read_bytes()).hexdigest());save(j);assert r.returncode==0 and result['status']==expected;entry['status']='EXECUTED_REVIEW_PENDING_NOT_QUALIFIED';save(j)
+AssertionError

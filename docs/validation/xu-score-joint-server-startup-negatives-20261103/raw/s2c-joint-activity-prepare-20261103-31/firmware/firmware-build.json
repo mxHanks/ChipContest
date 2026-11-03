@@ -1,0 +1,133 @@
+{
+  "command": [
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+    "-march=rv32imac_zicsr2p0_zifencei2p0",
+    "-mabi=ilp32",
+    "-O2",
+    "-DXU_FIRMWARE_BIAS_DTCM=0",
+    "-DXU_HARDWARE_BIAS_CACHE=1",
+    "-DXU_HARDWARE_RESULT_WINDOW=1",
+    "-DXU_FIRMWARE_BIAS_UNROLL=1",
+    "-DXU_FIRMWARE_RESULT_UNROLL=1",
+    "-DXU_FIRMWARE_NO_MASKS=1",
+    "-DXU_HARDWARE_PACK32=1",
+    "-DXU_HARDWARE_AUTO_GROUP=1",
+    "-fstack-usage",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-msmall-data-limit=0",
+    "-nostdlib",
+    "-nostartfiles",
+    "-static",
+    "-mcmodel=medany",
+    "-Wl,--no-relax",
+    "-T",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/link.ld",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/start.S",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31/firmware/xu_s2c_clear_main.c",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/accel.c",
+    "-o",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31/firmware/accel_soc"
+  ],
+  "compiler_version": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31/firmware/gcc-version.log",
+    "sha256": "5fad73530f26d1c54a671b384a3f5c96ba2425c6fcb3aed95cfce1a5b9f356fb"
+  },
+  "configuration": {
+    "experiment": "both-unroll-no-masks",
+    "optimization": "-O2",
+    "schedule": "bias-hw-autogroup-window"
+  },
+  "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31/firmware",
+  "elf": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31/firmware/accel_soc",
+    "sha256": "10a5084492ef6d4a6bcfb157099afab29163ca4fa39680050d4c8259fade5167"
+  },
+  "frozen_main": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/main.c",
+    "sha256": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc"
+  },
+  "image": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31/firmware/accel_soc.verilog",
+    "sha256": "919df46282e114317e2cbf30d7606f67ec2e00a7e3c22803aa14bfb360b0a128"
+  },
+  "inputs": [
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/accel.c",
+      "sha256": "8a2aa1a228ca8da834cfcd87eec738e7b7ade250a76a4214f50501f3045a3670"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/accel.h",
+      "sha256": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/link.ld",
+      "sha256": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/main.c",
+      "sha256": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/start.S",
+      "sha256": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31/firmware/xu_s2c_clear_main.c",
+      "sha256": "dcfe28c5e0b30f573d97e52e87defc9dab2e5b2eb0f4e02bd9717ff2a40a4f9b"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-joint-activity-tools-20261103-31/tools/ppa/xu_task_clear_protocol.py",
+      "sha256": "467e51abbaefa1ef40e3c2d5cfbc18376be351886b212f7667f0a44934488ee8"
+    }
+  ],
+  "memory": {
+    "bss_bytes": 0,
+    "data_bytes": 0,
+    "dtcm_capacity_bytes": 65536,
+    "itcm_bytes": 976,
+    "itcm_capacity_bytes": 65536,
+    "itcm_remaining_bytes": 64560,
+    "max_static_stack_frame_bytes": 32,
+    "stack_capacity_after_bss_bytes": 65520,
+    "stack_frames": [
+      {
+        "bytes": 0,
+        "kind": "static",
+        "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/accel.c:75:5:accel_linear"
+      },
+      {
+        "bytes": 32,
+        "kind": "static",
+        "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2c-02/tests/e203/firmware/main.c:3:5:xu_frozen_task_main"
+      },
+      {
+        "bytes": 0,
+        "kind": "static",
+        "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31/firmware/xu_s2c_clear_main.c:37:5:main"
+      }
+    ],
+    "stack_top": 2415984624,
+    "stack_top_guard_bytes": 16,
+    "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+  },
+  "recipe": "s2c-cpu-legacy-33697-zero-clear-before-source-request-v1",
+  "toolchain": [
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+      "sha256": "1094274e53a2732173d4c765c9c0739a9d21fce999eca291ec4a340d47969369"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objcopy",
+      "sha256": "a64cf15673a4c9eebdd11aacb351a091c33b7af722f0f43f7c7a05fe703153e1"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-objdump",
+      "sha256": "f1297969ec07526a2dc4a35860bbffb97753aeb5349110e161082f414ba19531"
+    }
+  ],
+  "wrapper": {
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-prepare-20261103-31/firmware/xu_s2c_clear_main.c",
+    "sha256": "dcfe28c5e0b30f573d97e52e87defc9dab2e5b2eb0f4e02bd9717ff2a40a4f9b"
+  }
+}
