@@ -1,0 +1,48 @@
+[
+  {
+    "name": "real1-old32",
+    "argv": [
+      "/usr/bin/python3",
+      "tools/scripts/e203_soc.py",
+      "--mode",
+      "real",
+      "--tasks",
+      "1",
+      "--sim",
+      "verilator",
+      "--accel-variant",
+      "pe32",
+      "--firmware-schedule",
+      "bias-hw-pe32-autogroup-window",
+      "--firmware-opt=-O2",
+      "--firmware-experiment",
+      "both-unroll-no-masks",
+      "--out",
+      "/home/mxhanks/Projects/ChipContest-xu-pe32-bank128/build/xu-pe32-bank128-20261103/real1-old32"
+    ],
+    "state": "PASS",
+    "exit_code": 0
+  },
+  {
+    "name": "legacy5-bank128",
+    "argv": [
+      "/usr/bin/python3",
+      "tools/scripts/e203_soc.py",
+      "--mode",
+      "baseline",
+      "--sim",
+      "iverilog",
+      "--accel-variant",
+      "pe32-bank128",
+      "--firmware-schedule",
+      "bias-hw-pe32-autogroup-window",
+      "--firmware-opt=-O2",
+      "--firmware-experiment",
+      "both-unroll-no-masks",
+      "--out",
+      "/home/mxhanks/Projects/ChipContest-xu-pe32-bank128/build/xu-pe32-bank128-20261103/legacy5-bank128"
+    ],
+    "state": "PASS",
+    "exit_code": 0
+  }
+]

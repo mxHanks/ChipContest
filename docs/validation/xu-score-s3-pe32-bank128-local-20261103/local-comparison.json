@@ -1,0 +1,99 @@
+{
+  "status": "LOCAL_SCREEN_PASS_NOT_QUALIFIED",
+  "production_main": "c684402dc38bcc4437bf822f24d9ea4f401e1da3",
+  "child": "52cfbea1f79f10e44f7d1696f54015797f886b96",
+  "scope": "local GCC14.2/Verilator5.032, one real layer00, historical HF4ns/LF66ns; not formal-clear/request or physical qualification",
+  "rows": [
+    {
+      "variant": "pe32-bank128",
+      "cycles": 957040,
+      "performance": {
+        "w_load": 183503,
+        "x_load": 71278,
+        "bias_load": 7774,
+        "compute_wait": 17226,
+        "writeback": 668847,
+        "other": 8412,
+        "busy": 53856,
+        "mac_fire": 50688,
+        "mmio_reads": 52272,
+        "mmio_writes": 13121,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "shared_stall": 12272,
+        "mmio_stall": 0,
+        "starts": 792,
+        "dones": 792
+      },
+      "simulator_sha256": "6109b22e4f4006d5b237a1b5a47c81ed059a6aeab46f2d764b759a512e2ff3b1"
+    },
+    {
+      "variant": "pe32",
+      "cycles": 957040,
+      "performance": {
+        "w_load": 183503,
+        "x_load": 71278,
+        "bias_load": 7774,
+        "compute_wait": 17226,
+        "writeback": 668847,
+        "other": 8412,
+        "busy": 53856,
+        "mac_fire": 50688,
+        "mmio_reads": 52272,
+        "mmio_writes": 13121,
+        "shared_reads": 23232,
+        "shared_writes": 50688,
+        "shared_stall": 12272,
+        "mmio_stall": 0,
+        "starts": 792,
+        "dones": 792
+      },
+      "simulator_sha256": "b8f7e074418e51e162614fdd941e24df36f1185656907265d2554ede8dbd108d"
+    }
+  ],
+  "cycle_difference": 0,
+  "common_identity": [
+    "main_commit",
+    "e203_commit",
+    "source_sha256",
+    "runner_sha256",
+    "contract_sha256",
+    "versions",
+    "tools",
+    "vectors",
+    "fixture",
+    "firmware_sha256",
+    "firmware_opt",
+    "firmware_experiment",
+    "firmware_image_sha256",
+    "layers",
+    "autogroup_activity",
+    "pe_activity"
+  ],
+  "source_files": 1178,
+  "original_files": 20,
+  "raw_payloads": 105,
+  "logical_w_bytes": 32768,
+  "physical_w_bytes": 32768,
+  "macro_geometry": "32 banks x 4 depths x 128x16 single-RW",
+  "expected_full_soc_macros": {
+    "RAMSP128X16": 128,
+    "RAMSP1024X16": 320
+  },
+  "host_tests": 69,
+  "skipped_designated_model_tests": 2,
+  "numeric_tests": 42,
+  "chisel_bank_tests": 1,
+  "independently_recomputed_outputs": 50688,
+  "legacy_cases": 5,
+  "retained": false,
+  "not_qualified": [
+    "actual designated SRAM model VCS",
+    "same-toolchain full12",
+    "mapped consistency",
+    "complete150MHz STA",
+    "same-library area",
+    "fullSoC task energy",
+    "retention"
+  ]
+}
