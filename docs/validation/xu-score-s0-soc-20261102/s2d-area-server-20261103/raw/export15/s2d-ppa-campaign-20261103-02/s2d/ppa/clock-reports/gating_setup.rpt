@@ -1,0 +1,46 @@
+****************************************
+Report : constraint
+	-verbose
+	-clock_gating_setup
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 17:54:41 2026
+****************************************
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                           3.33       3.33
+  clock network delay (propagated)                        4.55       7.88
+  time given to startpoint                               16.10      23.98
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/enb_reg/D (LALQV0_12TR40)
+                                                          0.00      23.98 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/enb_reg/Q (LALQV0_12TR40)
+                                                          0.08      24.07 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/U2/A1 (AND2V0_12TR40)
+                                                          0.00      24.07 r
+  data arrival time                                                 24.07
+
+  clock xu_hfextclk (rise edge)                           6.67       6.67
+  clock network delay (propagated)                        7.92      14.58
+  clock reconvergence pessimism                           0.00      14.58
+  clock uncertainty                                      -0.10      14.48
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/U2/A2 (AND2V0_12TR40)
+                                                                    14.48 r
+  clock gating setup time                                -0.10      14.38
+  data required time                                                14.38
+  ------------------------------------------------------------------------------
+  data required time                                                14.38
+  data arrival time                                                -24.07
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -9.69
+
+
+1

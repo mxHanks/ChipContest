@@ -1,0 +1,144 @@
+{
+  "accelerator_area_mm2": "0.303630271",
+  "accelerator_area_um2": "303630.2710",
+  "actual_final_payloads": 52,
+  "actual_prepared_rtl_payloads": 18,
+  "analysis_sdc_sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+  "child_commit": "dd692c190dadafd9baa6dffe8514a3f684e7fbf5",
+  "coverage": {
+    "All Checks": {
+      "met": 246839,
+      "total": 314592,
+      "untested": 26963,
+      "violated": 40790
+    },
+    "clock_gating_hold": {
+      "met": 24,
+      "total": 27,
+      "untested": 0,
+      "violated": 3
+    },
+    "clock_gating_setup": {
+      "met": 2,
+      "total": 27,
+      "untested": 0,
+      "violated": 25
+    },
+    "hold": {
+      "met": 61237,
+      "total": 76845,
+      "untested": 3652,
+      "violated": 11956
+    },
+    "min_period": {
+      "met": 416,
+      "total": 10832,
+      "untested": 10416,
+      "violated": 0
+    },
+    "min_pulse_width": {
+      "met": 99087,
+      "total": 114082,
+      "untested": 9239,
+      "violated": 5756
+    },
+    "out_hold": {
+      "met": 144,
+      "total": 144,
+      "untested": 0,
+      "violated": 0
+    },
+    "out_setup": {
+      "met": 3,
+      "total": 144,
+      "untested": 0,
+      "violated": 141
+    },
+    "recovery": {
+      "met": 17821,
+      "total": 17823,
+      "untested": 2,
+      "violated": 0
+    },
+    "removal": {
+      "met": 17086,
+      "total": 17823,
+      "untested": 0,
+      "violated": 737
+    },
+    "setup": {
+      "met": 51019,
+      "total": 76845,
+      "untested": 3654,
+      "violated": 22172
+    }
+  },
+  "initial_failure_payloads": 3,
+  "local_candidate": {
+    "actual_child_entries": 1068,
+    "main_blob_count": 1423,
+    "platform_source_files": 153,
+    "status": "LOCAL_FROZEN_SOURCE_AND_SERVER_MANIFEST_MATCH"
+  },
+  "macro_count": 336,
+  "main_commit": "3af4db98b893edd2103771fa132d69350b82ba96",
+  "mapped_netlist_sha256": "025240541e4c58318c9fa44e816b54cbcc78f29cd8b5ea8672343a3840118137",
+  "negative_tests": {
+    "cases": [
+      "raw/export15/s2d-ppa-campaign-20261103-02/s2d/ppa/area.rpt",
+      "raw/export15/s2d-ppa-campaign-20261103-02/s2d/ppa/dc.log",
+      "raw/export15/s2d-ppa-campaign-20261103-02/s2d/ppa/pt-sta.log",
+      "raw/export15/s2d-ppa-campaign-20261103-02/s2d/ppa/analysis-coverage.rpt",
+      "raw/export15/s2d-ppa-campaign-20261103-02/s2d/ppa/execution.json",
+      "raw/export15/s2d-ppa-campaign-20261103-02/s2d/implementation/implementation.json",
+      "raw/export12/s2d-ppa-campaign-20261103-01/s2d/step-0.log",
+      "producer/tools/scripts/xu_soc_ppa.py",
+      "original-export15-manifest.json",
+      "duplicate selected path",
+      "area corruption with selected manifest resigned"
+    ],
+    "count": 11,
+    "status": "HOST_CORRUPTION_REJECTED"
+  },
+  "not_exported_artifacts": [
+    "mapped.v",
+    "mapped.sdc",
+    "remaining137 prepared RTL files",
+    "vendor DB bytes"
+  ],
+  "not_exported_reports": {
+    "clock-reports/constraints.rpt": {
+      "bytes": 293817499,
+      "sha256": "20c3872e0e08f699dfb31395aa982efad9222271424c76c23aab0d92f81fe534"
+    },
+    "clock-reports/exceptions.rpt.unavailable.txt": {
+      "bytes": 107,
+      "sha256": "fd32285381f398cddd15073b64bc5ae1aa636d256b1c25461896a97e161ac041"
+    },
+    "clock-reports/review_status.txt": {
+      "bytes": 232,
+      "sha256": "e545cd970d0799eb1439434f6ffd24aefceaaf5068e32864b1e215eee9439c8a"
+    },
+    "violations.rpt": {
+      "bytes": 14644920,
+      "sha256": "b0afd640844320c7a5526034e7c207e11f30c04403eb2295f17f0cf2e7b38bf7"
+    }
+  },
+  "not_proven": [
+    "mapped equivalence",
+    "complete150MHz timing",
+    "fullSoC task energy",
+    "retention"
+  ],
+  "original_propagated_uncts_slack_ns": {
+    "max": -20.981373,
+    "min": -22.642344
+  },
+  "producer_commit": "cf836cf677d120d046d366c4b4b0a0bc33ba48ff",
+  "qualification": "NOT_QUALIFIED",
+  "schema": "xu-s2d-actual-ppa-review-v1",
+  "selected_payloads": 73,
+  "status": "EVIDENCE_CHECKED_NOT_QUALIFIED",
+  "verified_report_receipts": 29,
+  "whole_soc_cell_area_um2": "3374602.731896"
+}

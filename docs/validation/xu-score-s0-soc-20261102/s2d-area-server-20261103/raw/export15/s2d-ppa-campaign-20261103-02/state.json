@@ -1,0 +1,55 @@
+{
+  "finished_epoch": 1793699685.3443167,
+  "runs": [
+    {
+      "acceptance_sha256": "c2d685bc5cbeef760170e2c315802063676778dac4d7155203a427832f98fa72",
+      "candidate": "s2d",
+      "commands": [
+        [
+          "/bin/python3",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-ppa-tools-20261103-03/tools/ppa/xu_soc_implementation.py",
+          "--root",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01",
+          "--profile",
+          "s2d-doublebuf",
+          "--out",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-ppa-campaign-20261103-02/s2d/implementation",
+          "--standard-cell-db",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+          "--standard-cell-sha256",
+          "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723",
+          "--sram-db",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+          "--sram-sha256",
+          "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+        ],
+        [
+          "/bin/python3",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-ppa-tools-20261103-03/tools/scripts/xu_soc_ppa.py",
+          "prepare",
+          "--root",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01",
+          "--implementation",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-ppa-campaign-20261103-02/s2d/implementation/implementation.json",
+          "--out",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-ppa-campaign-20261103-02/s2d/ppa",
+          "--allow-unqualified-mapping"
+        ],
+        [
+          "/bin/python3",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-ppa-tools-20261103-03/tools/scripts/xu_soc_ppa.py",
+          "run",
+          "--root",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01",
+          "--out",
+          "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-ppa-campaign-20261103-02/s2d/ppa"
+        ]
+      ],
+      "profile": "s2d-doublebuf",
+      "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s2d-01",
+      "status": "EXECUTED_NOT_QUALIFIED"
+    }
+  ],
+  "started_epoch": 1793698361.4367096,
+  "status": "EXECUTED_NOT_QUALIFIED"
+}

@@ -1,0 +1,1919 @@
+****************************************
+Report : timing
+	-path_type full
+	-delay_type min
+	-slack_lesser_than 0.00
+	-max_paths 50
+	-sort_by slack
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 17:54:42 2026
+****************************************
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_1/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_1/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_1/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_1/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_2/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_2/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_2/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_2/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_3/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_3/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_3/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_4/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_4/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_4/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_4/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_5/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_5/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_5/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_5/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_6/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_6/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_6/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_6/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_7/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_7/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_7/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_7/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_8/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_8/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_8/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_8/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_9/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_9/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_9/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_9/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_10/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_10/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_10/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_10/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_11/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_11/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_11/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_11/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_12/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_12/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_12/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_12/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_13/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_13/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_13/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_13/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_14/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_14/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_14/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_14/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_15/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_15/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_15/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_15/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_16/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_16/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_16/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_16/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_17/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_17/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_17/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_17/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_18/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_18/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_18/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_18/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_19/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_19/U3/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_19/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_19/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_1/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_1/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_1/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_1/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_2/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_2/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_2/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_2/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_3/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_3/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_3/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_4/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_4/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_4/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_4/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_5/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_5/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_5/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_5/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_6/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_6/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_6/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_6/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_7/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_7/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_7/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_7/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_8/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_8/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_8/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_8/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_9/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_9/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_9/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_9/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_10/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_10/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_10/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_10/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_11/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_11/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_11/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_11/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_12/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_12/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_12/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_12/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_13/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_13/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_13/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_13/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_14/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_14/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_14/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_14/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_15/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_15/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_15/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_15/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_16/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_16/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_16/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_16/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_17/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_17/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_17/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_17/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_18/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_18/U2/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_18/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_18/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_19/q_reg
+               (removal check against rising-edge clock xu_plldiv_envelope)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        0.00       0.00
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/AsyncResetRegVec_1_1/reg_3/q_reg/Q (DRNQV0_12TR40)
+                                                          0.25       0.25 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U4/ZN (CLKINV2_12TR40)
+                                                          0.62       0.86 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_19/U3/ZN (CLKINV2_12TR40)
+                                                          0.12       0.99 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_19/q_reg/RDN (DRNQV0_12TR40)
+                                                          0.00       0.99 r
+  data arrival time                                                  0.99
+
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  clock reconvergence pessimism                           0.00      15.27
+  clock uncertainty                                       0.10      15.37
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_19/q_reg/CK (DRNQV0_12TR40)
+                                                                    15.37 r
+  library removal time                                    2.10      17.47
+  data required time                                                17.47
+  ------------------------------------------------------------------------------
+  data required time                                                17.47
+  data arrival time                                                 -0.99
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -16.49
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_reset_ctrl/rst_sync_r_reg[1]
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.rptr_vec_0_dfflrs/qout_r_reg[0]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_reset_ctrl/rst_sync_r_reg[1]/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_reset_ctrl/rst_sync_r_reg[1]/Q (DRNQV0_12TR40)
+                                                          2.80       8.53 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/U5/Z (CLKBUFV2_12TR40)
+                                                          0.64       9.16 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.rptr_vec_0_dfflrs/qout_r_reg[0]/SDN (DSNQV0_12TR40)
+                                                          0.00       9.16 r
+  data arrival time                                                  9.16
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.rptr_vec_0_dfflrs/qout_r_reg[0]/CK (DSNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.83      23.92
+  data required time                                                23.92
+  ------------------------------------------------------------------------------
+  data required time                                                23.92
+  data arrival time                                                 -9.16
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.75
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_reset_ctrl/rst_sync_r_reg[1]
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.wptr_vec_0_dfflrs/qout_r_reg[0]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_reset_ctrl/rst_sync_r_reg[1]/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_reset_ctrl/rst_sync_r_reg[1]/Q (DRNQV0_12TR40)
+                                                          2.80       8.53 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/U5/Z (CLKBUFV2_12TR40)
+                                                          0.64       9.16 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.wptr_vec_0_dfflrs/qout_r_reg[0]/SDN (DSNQV0_12TR40)
+                                                          0.00       9.16 r
+  data arrival time                                                  9.16
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.wptr_vec_0_dfflrs/qout_r_reg[0]/CK (DSNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.83      23.92
+  data required time                                                23.92
+  ------------------------------------------------------------------------------
+  data required time                                                23.92
+  data arrival time                                                 -9.16
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.75
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_reset_ctrl/rst_sync_r_reg[1]
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.vec_0_dfflrs/qout_r_reg[0]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_reset_ctrl/rst_sync_r_reg[1]/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_reset_ctrl/rst_sync_r_reg[1]/Q (DRNQV0_12TR40)
+                                                          2.80       8.53 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/U5/Z (CLKBUFV2_12TR40)
+                                                          0.64       9.16 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.vec_0_dfflrs/qout_r_reg[0]/SDN (DSNQV0_12TR40)
+                                                          0.00       9.16 r
+  data arrival time                                                  9.16
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.vec_0_dfflrs/qout_r_reg[0]/CK (DSNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.83      23.92
+  data required time                                                23.92
+  ------------------------------------------------------------------------------
+  data required time                                                23.92
+  data arrival time                                                 -9.16
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.75
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[6]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/Q (DRNQV0_12TR40)
+                                                          2.58       8.31 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/U2/ZN (CLKINV0_12TR40)
+                                                          0.05       8.36 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/U9/ZN (CLKINV3_12TR40)
+                                                          0.55       8.92 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[6]/RDN (DRNQV0_12TR40)
+                                                          0.00       8.92 r
+  data arrival time                                                  8.92
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[6]/CK (DRNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.08      23.17
+  data required time                                                23.17
+  ------------------------------------------------------------------------------
+  data required time                                                23.17
+  data arrival time                                                 -8.92
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.25
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[9]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/Q (DRNQV0_12TR40)
+                                                          2.58       8.31 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/U2/ZN (CLKINV0_12TR40)
+                                                          0.05       8.36 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/U9/ZN (CLKINV3_12TR40)
+                                                          0.55       8.92 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[9]/RDN (DRNQV0_12TR40)
+                                                          0.00       8.92 r
+  data arrival time                                                  8.92
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[9]/CK (DRNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.08      23.17
+  data required time                                                23.17
+  ------------------------------------------------------------------------------
+  data required time                                                23.17
+  data arrival time                                                 -8.92
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.25
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[11]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/Q (DRNQV0_12TR40)
+                                                          2.58       8.31 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/U2/ZN (CLKINV0_12TR40)
+                                                          0.05       8.36 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/U9/ZN (CLKINV3_12TR40)
+                                                          0.55       8.92 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[11]/RDN (DRNQV0_12TR40)
+                                                          0.00       8.92 r
+  data arrival time                                                  8.92
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[11]/CK (DRNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.08      23.17
+  data required time                                                23.17
+  ------------------------------------------------------------------------------
+  data required time                                                23.17
+  data arrival time                                                 -8.92
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.25
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[14]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/Q (DRNQV0_12TR40)
+                                                          2.58       8.31 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/U2/ZN (CLKINV0_12TR40)
+                                                          0.05       8.36 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/U9/ZN (CLKINV3_12TR40)
+                                                          0.55       8.92 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[14]/RDN (DRNQV0_12TR40)
+                                                          0.00       8.92 r
+  data arrival time                                                  8.92
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[14]/CK (DRNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.08      23.17
+  data required time                                                23.17
+  ------------------------------------------------------------------------------
+  data required time                                                23.17
+  data arrival time                                                 -8.92
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.25
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[18]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/Q (DRNQV0_12TR40)
+                                                          2.58       8.31 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/U2/ZN (CLKINV0_12TR40)
+                                                          0.05       8.36 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/U9/ZN (CLKINV3_12TR40)
+                                                          0.55       8.92 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[18]/RDN (DRNQV0_12TR40)
+                                                          0.00       8.92 r
+  data arrival time                                                  8.92
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[18]/CK (DRNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.08      23.17
+  data required time                                                23.17
+  ------------------------------------------------------------------------------
+  data required time                                                23.17
+  data arrival time                                                 -8.92
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.25
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[21]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/Q (DRNQV0_12TR40)
+                                                          2.58       8.31 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/U2/ZN (CLKINV0_12TR40)
+                                                          0.05       8.36 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/U9/ZN (CLKINV3_12TR40)
+                                                          0.55       8.92 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[21]/RDN (DRNQV0_12TR40)
+                                                          0.00       8.92 r
+  data arrival time                                                  8.92
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[21]/CK (DRNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.08      23.17
+  data required time                                                23.17
+  ------------------------------------------------------------------------------
+  data required time                                                23.17
+  data arrival time                                                 -8.92
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.25
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (rising edge-triggered flip-flop clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[25]
+               (removal check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                        5.72       5.72
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00       5.72 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/Q (DRNQV0_12TR40)
+                                                          2.58       8.31 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_dm_ResetCatchAndSync_2_1/U2/ZN (CLKINV0_12TR40)
+                                                          0.05       8.36 f
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/U9/ZN (CLKINV3_12TR40)
+                                                          0.55       8.92 r
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[25]/RDN (DRNQV0_12TR40)
+                                                          0.00       8.92 r
+  data arrival time                                                  8.92
+
+  clock xu_hfextclk (rise edge)                           0.00       0.00
+  clock network delay (propagated)                       18.99      18.99
+  clock reconvergence pessimism                          -0.00      18.99
+  clock uncertainty                                       0.10      19.09
+  u_soc/u_e203_subsys_top/u_sirv_debug_module/u_sirv_debug_csr/dscratch_dfflr/qout_r_reg[25]/CK (DRNQV0_12TR40)
+                                                                    19.09 r
+  library removal time                                    4.08      23.17
+  data required time                                                23.17
+  ------------------------------------------------------------------------------
+  data required time                                                23.17
+  data arrival time                                                 -8.92
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                 -14.25
+
+Warning: report_timing has satisfied the max_paths criteria. There are 321 further endpoints which have paths of interest with slack less than     0.00 that were not considered when generating this report. (UITE-502)
+
+1

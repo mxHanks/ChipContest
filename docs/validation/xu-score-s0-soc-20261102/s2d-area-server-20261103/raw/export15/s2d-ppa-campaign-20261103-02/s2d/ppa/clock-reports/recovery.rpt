@@ -1,0 +1,60 @@
+****************************************
+Report : constraint
+	-verbose
+	-recovery
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 17:54:41 2026
+****************************************
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg
+               (rising edge-triggered flip-flop clocked by xu_plldiv_envelope)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_gpioB/gpio_padcfg_reg[2]
+               (recovery check against rising-edge clock xu_hfextclk)
+  Last common pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z
+  Path Group: **async_default**
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       15.27      15.27
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                          0.00      15.27 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/reset_n_catch_reg/reg_0/q_reg/Q (DRNQV0_12TR40)
+                                                          2.58      17.85 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_main_ResetCatchAndSync_2_1/U2/ZN (CLKINV0_12TR40)
+                                                          0.06      17.91 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/U3/ZN (CLKINV4_12TR40)
+                                                          0.69      18.60 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_gpioB/U15/Z (CLKBUFV2_12TR40)
+                                                          0.60      19.20 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_gpioB/U11/Z (CLKBUFV2_12TR40)
+                                                          0.86      20.06 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_gpioB/U12/Z (CLKBUFV2_12TR40)
+                                                          1.00      21.06 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_gpioB/U18/Z (CLKBUFV2_12TR40)
+                                                          0.79      21.85 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_gpioB/U14/Z (CLKBUFV2_12TR40)
+                                                          0.66      22.51 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_gpioB/gpio_padcfg_reg[2]/RDN (DRNQV0_12TR40)
+                                                          0.00      22.51 r
+  data arrival time                                                 22.51
+
+  clock xu_hfextclk (rise edge)                           6.67       6.67
+  clock network delay (propagated)                        5.72      12.39
+  clock reconvergence pessimism                           9.54      21.93
+  clock uncertainty                                      -0.10      21.83
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_gpioB/gpio_padcfg_reg[2]/CK (DRNQV0_12TR40)
+                                                                    21.83 r
+  library recovery time                                   2.01      23.85
+  data required time                                                23.85
+  ------------------------------------------------------------------------------
+  data required time                                                23.85
+  data arrival time                                                -22.51
+  ------------------------------------------------------------------------------
+  slack (MET)                                                        1.34
+
+
+1
