@@ -1,0 +1,52 @@
+NEGATIVE original 6f47746 with Python3.6 unsupported keyword guard
+test_64_work_contract_and_legacy_widths (xu_pe64_original_python36.XuPe64ContractTests.test_64_work_contract_and_legacy_widths) ... ok
+test_original_generated_and_chisel_files_remain_frozen (xu_pe64_original_python36.XuPe64ContractTests.test_original_generated_and_chisel_files_remain_frozen) ... ERROR
+test_report_requires_same_physical_geometry_and_useful_work (xu_pe64_original_python36.XuPe64ContractTests.test_report_requires_same_physical_geometry_and_useful_work) ... ok
+test_server_every_step_same_variant_and_required_direct_vcs (xu_pe64_original_python36.XuPe64ContractTests.test_server_every_step_same_variant_and_required_direct_vcs) ... ok
+
+======================================================================
+ERROR: test_original_generated_and_chisel_files_remain_frozen (xu_pe64_original_python36.XuPe64ContractTests.test_original_generated_and_chisel_files_remain_frozen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-s3-pe64/tests/e203/test_pe64_contract.py", line 66, in test_original_generated_and_chisel_files_remain_frozen
+    tracked=subprocess.check_output(['git','ls-tree','-r','--name-only','fc3977d','rtl/e203/perips'],cwd=child,universal_newlines=True).splitlines()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/unittest/mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/unittest/mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/unittest/mock.py", line 1247, in _execute_mock_call
+    result = effect(*args, **kwargs)
+  File "<stdin>", line 9, in python36_check_output
+TypeError: __init__() got an unexpected keyword argument 'text'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.009s
+
+FAILED (errors=1)
+EXPECTED_NEGATIVE exactly1 text keyword TypeError; this is not actual Python3.6
+POSITIVE corrected actual contract tests with same keyword guard
+test_64_work_contract_and_legacy_widths (xu_pe64_corrected_python36.XuPe64ContractTests.test_64_work_contract_and_legacy_widths) ... ok
+test_original_generated_and_chisel_files_remain_frozen (xu_pe64_corrected_python36.XuPe64ContractTests.test_original_generated_and_chisel_files_remain_frozen) ... ok
+test_report_requires_same_physical_geometry_and_useful_work (xu_pe64_corrected_python36.XuPe64ContractTests.test_report_requires_same_physical_geometry_and_useful_work) ... ok
+test_server_every_step_same_variant_and_required_direct_vcs (xu_pe64_corrected_python36.XuPe64ContractTests.test_server_every_step_same_variant_and_required_direct_vcs) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.102s
+
+OK
+{
+  "status": "PASS_HOST_API_REPLAY_NOT_SERVER_PY36",
+  "tests": 4,
+  "inspected": [
+    "tests/e203/test_pe64_contract.py",
+    "tests/e203/test_pe64_wrapper.py",
+    "tests/e203/test_pe64_boundaries.py",
+    "tools/scripts/xu_s3_pe64_server.py",
+    "tools/scripts/xu_s3_pe64_bootstrap.py",
+    "tools/scripts/xu_prepare_pe64_deployment.py"
+  ],
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]"
+}

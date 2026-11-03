@@ -63,7 +63,7 @@ class XuPe64ContractTests(unittest.TestCase):
             expected=subprocess.check_output(['git','show','94ce6f0:'+relative],cwd=root)
             self.assertEqual((root/relative).read_bytes(),expected)
         child=root/'third-party/e203_hbirdv2'
-        tracked=subprocess.check_output(['git','ls-tree','-r','--name-only','fc3977d','rtl/e203/perips'],cwd=child,text=True).splitlines()
+        tracked=subprocess.check_output(['git','ls-tree','-r','--name-only','fc3977d','rtl/e203/perips'],cwd=child,universal_newlines=True).splitlines()
         frozen=[p for p in tracked if p.endswith('.sv')or p.endswith('/xu_pe32_icb_slave.v')or p.endswith('/accel_icb_slave.v')]
         for relative in frozen:
             expected=subprocess.check_output(['git','show','fc3977d:'+relative],cwd=child)

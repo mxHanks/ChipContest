@@ -32,8 +32,8 @@ def main():
     archive, base = args.archive.resolve(), args.base.resolve()
     require(re.fullmatch('[0-9a-f]{64}', args.sha256) is not None, 'invalid expected SHA256')
     require(args.bytes > 0 and archive.stat().st_size == args.bytes and sha(archive) == args.sha256, 'archive identity differs')
-    deployment = base / 's3-pe64-deploy-20261103-01'
-    source, out = base / 'ChipContest-s3-pe64-01', base / 's3-pe64-accept-01'
+    deployment = base / 's3-pe64-deploy-20261103-02'
+    source, out = base / 'ChipContest-s3-pe64-02', base / 's3-pe64-accept-02'
     require(not deployment.exists() and not source.exists() and not out.exists(), 'fresh deployment/source/output directories required')
     allowed = {'launch.py', 'main.bundle', 'child.bundle', 'source-files.json', 'source-identity.json', 'package-files.json', 'README.md'}
     with tarfile.open(str(archive), 'r:xz') as tar:
