@@ -1,0 +1,112 @@
+{
+  "accelerator_area_mm2": 0.5186033811,
+  "actual_vcs_cycles": {
+    "pe32-autogroup-control-real12": 11842200,
+    "pe8-autogroup-control-real12": 11842200,
+    "real12": 11376501
+  },
+  "area_limit_mm2": 2.25,
+  "configuration": {
+    "accel_variant": "pe32",
+    "fixed_soc_macros": 320,
+    "full_soc_macros": 352,
+    "logical_weight_banks": 32,
+    "logical_weight_bytes": 32768,
+    "logical_weight_depth": 512,
+    "physical_pes": 32,
+    "physical_weight_bytes": 65536,
+    "physical_weight_depth": 1024,
+    "weight_macros": 32,
+    "weight_padding_bytes": 32768,
+    "weight_word_bits": 16,
+    "wrapper_reference": "xu_pe32_icb_slave"
+  },
+  "e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+  "initial_timing": {
+    "met": 216444,
+    "total_checks": 342065,
+    "untested": 28336,
+    "violated": 97285
+  },
+  "limit_percent": 23.04903916,
+  "locally_checked_reports": [
+    "analysis-coverage.rpt",
+    "area.rpt",
+    "check-timing.rpt",
+    "clock-reports/analysis_coverage.rpt",
+    "clock-reports/async_pin_max.rpt",
+    "clock-reports/async_pin_min.rpt",
+    "clock-reports/case_analysis.rpt",
+    "clock-reports/check_timing.rpt",
+    "clock-reports/clock_endpoints.tsv",
+    "clock-reports/clocks.rpt",
+    "clock-reports/exceptions.rpt",
+    "clock-reports/gating_hold.rpt",
+    "clock-reports/gating_setup.rpt",
+    "clock-reports/hold.rpt",
+    "clock-reports/pulse_width.rpt",
+    "clock-reports/recovery.rpt",
+    "clock-reports/removal.rpt",
+    "clock-reports/setup.rpt",
+    "clocks.rpt",
+    "dc-units.rpt",
+    "hold.rpt",
+    "postcheck.rpt",
+    "precheck.rpt",
+    "pt-clocks.rpt",
+    "qor.rpt",
+    "references.rpt",
+    "setup.rpt",
+    "timing-slack.tsv",
+    "units.rpt"
+  ],
+  "main_commit": "94ce6f0f54fffdd590ff9a3ebad0197ec0fd9114",
+  "netlist_sha256": "ca1d17a9adcd1a15e7b69758754e68d962c7535d8f2b31407c47d9bd136014c8",
+  "not_qualified": [
+    "Original unbuffered propagated preCTS clock diagnostic is not closed150MHz timing",
+    "Actual PT log and listed large reports not downloaded; do not pretend full local log replay",
+    "FM17 is separate pending proof, macro internals require separate functional mapping evidence",
+    "No same-configuration formal-clear/request capture or qualified fullSoC task energy for PE32 yet",
+    "Sourceguard strengthening ba9d89a is later tool identity, not retroactively assigned to this actual run"
+  ],
+  "producer_commit": "6798c492136db3f1f944b8d2eb19d940bb85e64a",
+  "raw_files": 73,
+  "relative_s2c_area_increase_percent": 75.91592529351871,
+  "status": "ACTUAL_PE32_SAME_LIBRARY_AREA_REVIEWED_NOT_QUALIFIED",
+  "unreturned_pt_log": {
+    "log_sha256": "6ea068c7ae9f209114de314be3cc8a59c82d8a7b74ee803c215234d54d4d5676",
+    "returncode": 0,
+    "scope": "tool execution only; reports require coverage/hold/setup assessment"
+  },
+  "unreturned_report_receipts": [
+    {
+      "path": "clock-reports/constraints.rpt",
+      "receipt": {
+        "bytes": 463707075,
+        "sha256": "992bb262ecd11bdbe4778ff3e4678dd459db10a77740d6dd30e5607ddf366c55"
+      }
+    },
+    {
+      "path": "clock-reports/exceptions.rpt.unavailable.txt",
+      "receipt": {
+        "bytes": 107,
+        "sha256": "fd32285381f398cddd15073b64bc5ae1aa636d256b1c25461896a97e161ac041"
+      }
+    },
+    {
+      "path": "clock-reports/review_status.txt",
+      "receipt": {
+        "bytes": 232,
+        "sha256": "79ed783c49cc446f68eb01d390b44006a797628a75a10864f3503d5a520f9faf"
+      }
+    },
+    {
+      "path": "violations.rpt",
+      "receipt": {
+        "bytes": 28420297,
+        "sha256": "adb18841c25c1cbf5a7038d7120a225db397140dde81aeff0cec3f48e23f0b01"
+      }
+    }
+  ],
+  "whole_soc_area_mm2": 3.589560839551
+}

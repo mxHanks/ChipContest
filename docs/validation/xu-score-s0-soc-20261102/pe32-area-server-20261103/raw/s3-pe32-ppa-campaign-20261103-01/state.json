@@ -1,0 +1,87 @@
+{
+  "status": "EXECUTED_NOT_QUALIFIED",
+  "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe32-01",
+  "producer_root": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-ppa-tools-20261103-05",
+  "profile": "s3-pe32",
+  "steps": [
+    {
+      "index": 0,
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-ppa-tools-20261103-05/tools/ppa/xu_soc_implementation.py",
+        "--root",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe32-01",
+        "--profile",
+        "s3-pe32",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-ppa-campaign-20261103-01/implementation",
+        "--standard-cell-db",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+        "--standard-cell-sha256",
+        "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723",
+        "--sram-db",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+        "--sram-sha256",
+        "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+      ],
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "index": 1,
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-ppa-tools-20261103-05/tools/scripts/xu_soc_ppa.py",
+        "prepare",
+        "--root",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe32-01",
+        "--implementation",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-ppa-campaign-20261103-01/implementation/implementation.json",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-ppa-campaign-20261103-01/ppa",
+        "--allow-unqualified-mapping"
+      ],
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "index": 2,
+      "argv": [
+        "/bin/python3",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-ppa-tools-20261103-05/tools/scripts/xu_soc_ppa.py",
+        "run",
+        "--root",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-s3-pe32-01",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-ppa-campaign-20261103-01/ppa"
+      ],
+      "status": "PASS",
+      "returncode": 0
+    }
+  ],
+  "acceptance": {
+    "state_sha256": "8b8504805ede0ae32f4b64cee2896aae3a45fb081efbd84a60893cbdffe87b22",
+    "result_sha256": {
+      "real12": "7e0d6800d2eb512f3d8452dc4c2243a5345c9b9cadbc4e145f97a61c8ea13ac2",
+      "pe32-autogroup-control-real12": "ddca0550a94fade24a6991ebf65b6a2885387f9e4044a49915a0c975ae85d970",
+      "pe8-autogroup-control-real12": "324db1a6568811504b608cf3ff133503a6bf75d6b68ce7d70a2469158450eaa1"
+    },
+    "measured_total_cycles": {
+      "real12": 11376501,
+      "pe32-autogroup-control-real12": 11842200,
+      "pe8-autogroup-control-real12": 11842200
+    }
+  },
+  "updated_utc": "2026-11-03T10:00:57.168487+00:00",
+  "tool_sha256": {
+    "tools/ppa/xu_soc_implementation.py": "95660fa2d3f07e7e3347c46e120fae7cf64d5564f37078762c3371cfe7cf504b",
+    "tools/scripts/xu_soc_ppa.py": "ffe6076833a97058cb9d345eee175ec5988c12c801dfb50621b059608545e698"
+  },
+  "execution_sha256": "43a0a0c0657120e60e668fd5a0c8714a44e7f903bc4264a6e92720d1a6231c31",
+  "not_run": [
+    "candidate-specific formal clear/request activity",
+    "mapped consistency",
+    "fullSoC task energy",
+    "retention"
+  ]
+}
