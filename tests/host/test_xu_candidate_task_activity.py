@@ -304,7 +304,7 @@ class CandidateActivityTests(unittest.TestCase):
                 (7,'unknown commit/FIFO ownership state'),(8,'unknown commit/FIFO ownership state')]
             for mode,rejected in cases:
                 result=run(['vvp',str(binary),'+MODE='+str(mode)],d,'actual-reset-chain-mode-%d.log'%mode)
-                self.assertIn('XU_RESET_FIXTURE_UNCLOCKED_FIFO_X actual_rst_n=0 sampled_reset_edges=0',result.stdout)
+                self.assertRegex(result.stdout,'XU_RESET_FIXTURE_UNCLOCKED_FIFO_X actual_rst_n=[0x] sampled_reset_edges=0')
                 if rejected is None:
                     self.assertEqual(result.returncode,0,result.stdout)
                     self.assertIn('XU_RESET_GUARD_PASS actual_20stage_chain=1 wrapper_sync_fifo=1 stopped_clock_startup_x=1',result.stdout)

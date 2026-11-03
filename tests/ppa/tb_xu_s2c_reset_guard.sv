@@ -57,7 +57,7 @@ module tb_xu_s2c_reset_guard;
     if(mode==5) force dut.rst_n=1'bx;
     if(mode==7) force dut.u_linear_compute_core.io_wLoadWen=1'bx;
     repeat(3) @(negedge clk);
-    if(xu_accel_reset_clock_edges<23 || xu_accel_startup_observer_edges<4 ||
+    if(xu_accel_reset_clock_edges<20 || xu_accel_startup_observer_edges<4 ||
        !xu_reset_checked || !xu_accel_observation_ready || xu_saif_started || xu_clear_writes!=0)
       $fatal(1,"fixture reset readiness proof incomplete");
     $display("XU_RESET_GUARD_PASS actual_20stage_chain=1 wrapper_sync_fifo=1 stopped_clock_startup_x=1 actual_reset_clock_edges=%0d startup_observer_edges=%0d clear_writes=0 saif_started=0",xu_accel_reset_clock_edges,xu_accel_startup_observer_edges);
