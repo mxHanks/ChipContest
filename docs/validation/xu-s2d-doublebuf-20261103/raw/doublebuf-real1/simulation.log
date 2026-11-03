@@ -1,0 +1,9 @@
+["/home/mxhanks/Projects/ChipContest-xu-s2d-doublebuf/build/e203/sim-f5aba371a76e9ac7/accel_soc", "+TESTCASE=/home/mxhanks/Projects/ChipContest-xu-s2d-doublebuf/build/xu-s2d-local-screen-20261103/doublebuf-real1/accel_soc", "+VECTORS=/home/mxhanks/Projects/ChipContest-xu-s2d-doublebuf/build/xu-s2d-local-screen-20261103/doublebuf-real1/vectors", "+TASKS=1", "+DUMPWAVE=0", "+MAX_CYCLES=200000000"]
+TASK_PASS layer=0 outputs=25344 writes=50688 cycles=1018530 firmware_cycles=1018607
+DB_TASK layer=0 rows=99 pops_retired=3168 compute_writeback_overlap=126762 compute_xload_overlap=3618 fifo_full_wait=610826
+PERF_TASK layer=0 cycles=1018530 w_load=183503 x_load=71131 bias_load=7773 compute_wait=51287 writeback=671648 other=33188 busy=215424 mac_fire=202752 mmio_reads=53856 mmio_writes=15499 shared_reads=23232 shared_writes=50688 shared_stall=10924 mmio_stall=0 starts=3168 dones=3168
+SOC_PASS tasks=1 outputs=25344 writes=50688
+- /home/mxhanks/Projects/ChipContest-xu-s2d-doublebuf/tests/e203/tb_accel_soc.sv:368: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.032 2025-01-01
+- Verilator: $finish at 4us; walltime 49.195 s; speed 83.822 ns/s
+- Verilator: cpu 48.821 s on 1 threads; alloced 107 MB

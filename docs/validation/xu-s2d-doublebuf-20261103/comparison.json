@@ -1,0 +1,91 @@
+{
+  "status": "PASS",
+  "scope": "local real layer00 full CPU/core task screen; not server12/qualified/retained",
+  "measured_e203": "dd692c190dadafd9baa6dffe8514a3f684e7fbf5",
+  "versions": {
+    "riscv64-unknown-elf-gcc": [
+      "riscv64-unknown-elf-gcc (14.2.0+19) 14.2.0",
+      "Copyright (C) 2024 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ],
+    "verilator": [
+      "Verilator 5.032 2025-01-01 rev (Debian 5.032-1)"
+    ],
+    "g++": [
+      "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+      "Copyright (C) 2025 Free Software Foundation, Inc.",
+      "This is free software; see the source for copying conditions.  There is NO"
+    ]
+  },
+  "rows": {
+    "doublebuf-real1": {
+      "main_commit": "9f1362f2e8c15b67993cf598ce3a5a64880dc38d",
+      "schedule": "bias-hw-doublebuf-window",
+      "cycles": 1018530,
+      "firmware_cycles": 1018607,
+      "w_load": 183503,
+      "x_load": 71131,
+      "bias_load": 7773,
+      "compute_wait": 51287,
+      "writeback": 671648,
+      "other": 33188,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 53856,
+      "mmio_writes": 15499,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 10924,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    },
+    "autogroup-control-real1": {
+      "main_commit": "9f1362f2e8c15b67993cf598ce3a5a64880dc38d",
+      "schedule": "bias-hw-autogroup-window",
+      "cycles": 1013171,
+      "firmware_cycles": 1013254,
+      "w_load": 183503,
+      "x_load": 71182,
+      "bias_load": 7774,
+      "compute_wait": 48114,
+      "writeback": 670230,
+      "other": 32368,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 54648,
+      "mmio_writes": 15497,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 9599,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    },
+    "doublebuf-combined-tag-real1": {
+      "main_commit": "0ad5e047a20df59f8211cbba9ef5bb77e8baffbb",
+      "schedule": "bias-hw-doublebuf-window",
+      "cycles": 1003527,
+      "firmware_cycles": 1003601,
+      "w_load": 183503,
+      "x_load": 71083,
+      "bias_load": 7773,
+      "compute_wait": 38615,
+      "writeback": 672559,
+      "other": 29994,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 53856,
+      "mmio_writes": 15499,
+      "shared_reads": 23232,
+      "shared_writes": 50688,
+      "shared_stall": 11755,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    }
+  },
+  "initial_minus_control": 5359,
+  "final_minus_control": -9644,
+  "final_cycle_reduction_percent": 0.9518630122654518
+}

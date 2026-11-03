@@ -1,0 +1,36 @@
+# xu S2d independent read-only source review
+
+Reviewed hardware snapshot: main `9f1362f2e8c15b67993cf598ce3a5a64880dc38d`, child `dd692c190dadafd9baa6dffe8514a3f684e7fbf5`. Follow-up main `0ad5e04` changes only firmware tag checking and the directed test; child and all production Chisel/RTL are identical. Both snapshots were clean when observed; the implementation agent remains responsible for final freezing/evidence. No server access, source mutations, independent RTL simulation or synthesis were performed by this reviewer.
+
+## Findings and resolution
+
+No actionable production correctness finding in reviewed ownership/FIFO/response lifecycle scope.
+
+One concrete test coverage bug was reported: original `tb_xu_doublebuf_wrapper.sv:94` matched old ROW_POP offset `0c8`, so the local exact-once retirement assertion never exercised DB_POP offset `0e4`. The implementation agent fixed it in `0ad5e04`, also adding final POP retirement plus submission collision, immediately followed by old error-response retirement plus a new accepted submission and held-response metadata checks. I read the changed test and its actual pre-existing Icarus log: PASS rows=4/groups=128/lanes=1024, launches/dones=131/131, accepted/retired=11862/11862. This is review of an actual run, not my rerun; simulator/compiler identities and complete evidence archive remain implementation-agent deliverables.
+
+## Ownership and architecture
+
+- `LinearBufferedComputeCore.scala:18..20` instantiates exactly two XRowBuffer, one WeightBankArray and one DotProductEngine. X bank read mux directly feeds the same PE engine; no row-copy cycle and no replicated W storage/PE engine. W geometry, capacity, numerical widths and bias cache are unchanged.
+- `LinearDoubleBufferCore.scala:74..121` has two descriptors (bank+7-bit tag), separate descriptor and outstanding counts, two result-group slots with 7-bit row tags/5-bit group tags. A submit acquires a free bank; the descriptor remains at producer head through all32 groups. The producer group wraps31→0 exactly when group31 is captured. Bank ownership is released at final compute capture, independent of result POP; captured result bits/tags then remain FIFO-owned until POP. Thus uploading a later row after compute completion cannot corrupt retained results.
+- Only one group can be in flight. Launch requires a free result slot; the sole producer cannot consume the implicit reservation before its own enqueue. Full FIFO prevents launch. Simultaneous enqueue/POP updates both pointers and conserves count. Descriptor submit/final-produce and outstanding submit/final-consume similarly use XOR count update, preserving simultaneous events. At descriptor depth1, simultaneous enqueue-to-tail and final-consume-of-head use distinct slots; full descriptor submission is rejected. Same-bank submit at release edge is conservatively rejected by pre-state bank-free check.
+- `owned` becomes free only on group31 capture; pending wrapper db_submit explicitly blocks X write/cursor selection to that bank before Chisel sees acquisition. cmd_ready blocks all commands while packed X has either internal write beat pending. New descriptor therefore cannot race incomplete X writes. Old W and bias writes are blocked whenever DB mode is enabled, stronger than only while outstanding; a single W array cannot collide with computation.
+- `rsp_db_pop` belongs to the existing single response slot. Only response retirement releases FIFO head, never acceptance. On retirement old metadata clears; a same-edge new successful POP is rejected via db_pop, so it cannot inherit/replay the old head. The added final-POP/new-SUBMIT next-edge test exercises old error metadata clearing. Old and DB result slots share the same physical `results` Vec, while mutually exclusive modes/empty-only transition prevent concurrent writers.
+- DB mode enable/disable requires no manual/core strobe, active/pending S2c row, delayed legacy write, db_submit, descriptor/outstanding/result count or in-flight DB group; cmd_ready additionally excludes pending streams. This prevents a new mode from observing old computation or letting old result/response metadata release a new head. Busy intentionally remains asserted for all of opt-in DB mode; legacy behavior applies when DB is disabled.
+- Reset clears descriptors, outstanding, all FIFO pointers/counts, bank ownership, DB mode/submission and bus response metadata. SRAM/X/result contents are not promised initialized. DB_STATUS row/group fields are meaningful only when DB-valid; unknown values when empty must not be converted to assumed zero activity for power.
+
+## Byte compatibility and measured scope
+
+Independently read all original12 generated SV files from S2b child `d5faa5e...` git objects and compared current bytes: all identical. Separately compared `LinearAutoGroupCore.sv` against S2c carry child `2b4b5dc`: identical. The optional new generator adds `LinearDoubleBufferCore`, whose generation emits new BufferedComputeCore/DoubleBufferCore SV; old default output files remain untouched. This static proof does not itself prove old-mode waveforms; original direct autogroup log on the new top exists and reports rows2/groups64/lanes512, launches/dones99, accepted/retired11719.
+
+The initial actual local real1 at frozen9f main reports 1,018,530 cycles. I independently reparsed its TASK/PERF/DB records, checked all154 source digests against the measured main/child git blobs (mapping installed RTL paths to tracked RTL), all11 actual log digests, all4 vector digests against the original fixture, runner/contract/firmware source digests and actual ELF/image SHA against build metadata. All matched. This is one local GCC14.2/Verilator5.032 task, not server full12/150MHz/PPA/energy or retention; no performance comparison claim until same-RTL controls and new0ad firmware run finish. The current implementation agent intentionally changed firmware after this measurement, so 9f evidence must stay bound to frozen9f blobs.
+
+Next validation should independently bind final-main source/test hashes, same-RTL old ABI/packed/S2c/DB controls, all99 row/tag transitions and final mode-disable before last Y retirement. Recheck old loadable image bytes, actual source inventory, W/bias load exclusion, metadata collision logs and complete raw hashes. Full server VCS, candidate formal clear/request activity, mapped equivalence,150MHz STA and full-SoC energy remain required for scoring. No PPA result is inferred from two-bank register bits or borrowed from S2c.
+
+## Reviewed production identities
+
+- `src/main/scala/GenerateRTL.scala`: `fd2ce52ffa002cedead699b12e8f38c28d979625e1aba664ab65ea573ae34b6c`
+- `src/main/scala/linear/LinearBufferedComputeCore.scala`: `2b72d34828f2e98ace32dd62171969f53ba9b6b752e4a5db86c6c085981371a2`
+- `src/main/scala/linear/LinearDoubleBufferCore.scala`: `7f9df9d3537e394b8c9bad7980b65942d926590a81a3d08a789fc31379ed8adc`
+- `third-party/e203_hbirdv2/rtl/e203/perips/LinearBufferedComputeCore.sv`: `53478c72bef61ae00048c3de93a94a57debd4a8286861ebb6aa4e736544d5ad7`
+- `third-party/e203_hbirdv2/rtl/e203/perips/LinearDoubleBufferCore.sv`: `64cf4be336ed8e44db83561c5e7612ec5e5ea3aac870a41a8939e7204d3d0681`
+- `third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v`: `cb122bd14b96a52b37aa7d375e42536201ebeca5a430990c760f04f758a2bec7`
