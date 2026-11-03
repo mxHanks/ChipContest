@@ -1,0 +1,197 @@
+
+                                 PrimeTime (R)
+
+              Version T-2022.03-SP5-1 for linux64 - Mar 28, 2023 
+
+                    Copyright (c) 1988 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+if {[catch {
+set_app_var link_path [list * {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db} {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db}]
+read_verilog mapped.v
+if {![link_design xu_soc_ppa_top]} {error {PT link failed}}
+set XU_CLOCK_MODE envelope
+set XU_PLL_DIV 0
+source {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-pt-compatible-05/constraints.sdc}
+set XU_AUDIT_FORWARD_CLOCK_EXPERIMENT 1
+source {/storage2/2026contest/server4/s4_23usr/Desktop/xu-ts16.tcl}
+# Exact post-elaboration macro groups; overlapping matches and missing/extra cells fail.
+set xu_seen [dict create]
+set xu_cells [get_cells -quiet -hierarchical -filter {full_name =~ u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_srams/u_e203_itcm_ram/* && ref_name == RAMSP1024X16 && is_hierarchical == false}]
+if {[sizeof_collection $xu_cells] != 32} {error {wrong macro count: itcm}}
+foreach_in_collection xu_c $xu_cells {
+  set xu_n [get_object_name $xu_c]
+  if {[dict exists $xu_seen $xu_n]} {error "overlapping SRAM group: $xu_n"}
+  dict set xu_seen $xu_n 1
+  if {[get_attribute $xu_c ref_name] != {RAMSP1024X16}} {error "wrong SRAM reference: $xu_n"}
+}
+puts "XU_SRAM_GROUP itcm count=32 macro_ref=RAMSP1024X16 logical_bits=524288 physical_bits=524288 padding_bits=0"
+set xu_cells [get_cells -quiet -hierarchical -filter {full_name =~ u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_srams/u_e203_dtcm_ram/* && ref_name == RAMSP1024X16 && is_hierarchical == false}]
+if {[sizeof_collection $xu_cells] != 32} {error {wrong macro count: dtcm}}
+foreach_in_collection xu_c $xu_cells {
+  set xu_n [get_object_name $xu_c]
+  if {[dict exists $xu_seen $xu_n]} {error "overlapping SRAM group: $xu_n"}
+  dict set xu_seen $xu_n 1
+  if {[get_attribute $xu_c ref_name] != {RAMSP1024X16}} {error "wrong SRAM reference: $xu_n"}
+}
+puts "XU_SRAM_GROUP dtcm count=32 macro_ref=RAMSP1024X16 logical_bits=524288 physical_bits=524288 padding_bits=0"
+set xu_cells [get_cells -quiet -hierarchical -filter {full_name =~ u_shared/storage/* && ref_name == RAMSP1024X16 && is_hierarchical == false}]
+if {[sizeof_collection $xu_cells] != 256} {error {wrong macro count: shared}}
+foreach_in_collection xu_c $xu_cells {
+  set xu_n [get_object_name $xu_c]
+  if {[dict exists $xu_seen $xu_n]} {error "overlapping SRAM group: $xu_n"}
+  dict set xu_seen $xu_n 1
+  if {[get_attribute $xu_c ref_name] != {RAMSP1024X16}} {error "wrong SRAM reference: $xu_n"}
+}
+puts "XU_SRAM_GROUP shared count=256 macro_ref=RAMSP1024X16 logical_bits=4194304 physical_bits=4194304 padding_bits=0"
+set xu_cells [get_cells -quiet -hierarchical -filter {full_name =~ u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_accel_icb_slave/* && ref_name == RAMSP1024X16 && is_hierarchical == false}]
+if {[sizeof_collection $xu_cells] != 16} {error {wrong macro count: accelerator_weights}}
+foreach_in_collection xu_c $xu_cells {
+  set xu_n [get_object_name $xu_c]
+  if {[dict exists $xu_seen $xu_n]} {error "overlapping SRAM group: $xu_n"}
+  dict set xu_seen $xu_n 1
+  if {[get_attribute $xu_c ref_name] != {RAMSP1024X16}} {error "wrong SRAM reference: $xu_n"}
+}
+puts "XU_SRAM_GROUP accelerator_weights count=16 macro_ref=RAMSP1024X16 logical_bits=262144 physical_bits=262144 padding_bits=0"
+# RAMSP is the explicit technology SRAM namespace; reject every extra leaf/reference.
+set xu_allowed_refs [list {RAMSP1024X16}]
+set xu_all_macros [get_cells -quiet -hierarchical -filter {ref_name =~ RAMSP* && is_hierarchical == false}]
+if {[sizeof_collection $xu_all_macros] != 336 || [dict size $xu_seen] != 336} {error {full-SoC SRAM total must be exactly 336}}
+foreach_in_collection xu_c $xu_all_macros {
+  if {[lsearch -exact $xu_allowed_refs [get_attribute $xu_c ref_name]] < 0} {error {unexpected SRAM reference}}
+  if {![dict exists $xu_seen [get_object_name $xu_c]]} {error {ungrouped/unaccounted SRAM macro}}
+}
+if {[sizeof_collection [get_cells -quiet -hierarchical -filter {full_name == u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_accel_icb_slave && ref_name =~ accel_icb_slave*}]] != 1} {error {missing/wrong accelerator}}
+if {[sizeof_collection [get_cells -quiet -hierarchical -filter {full_name == u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top && ref_name =~ e203_cpu_top*}]] != 1} {error {missing/wrong cpu}}
+if {[sizeof_collection [get_cells -quiet -hierarchical -filter {full_name == u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_sirv_ppi_fab && ref_name =~ sirv_icb1to16_bus*}]] != 1} {error {missing/wrong interconnect}}
+redirect -file units.rpt {report_units}
+redirect -file check-timing.rpt {check_timing -verbose}
+redirect -file setup.rpt {report_timing -delay_type max -max_paths 50 -significant_digits 8}
+redirect -file hold.rpt {report_timing -delay_type min -max_paths 50 -significant_digits 8}
+redirect -file constraints.rpt {report_constraint -all_violators -verbose}
+redirect -file exceptions.rpt {report_exceptions}
+redirect -file analysis-coverage.rpt {report_analysis_coverage -status_details untested}
+redirect -file clocks.rpt {report_clock -attributes}
+set f [open timing-slack.tsv w]
+puts $f "delay_type\tpath_count\tworst_slack"
+foreach type {max min} {set paths [get_timing_paths -delay_type $type -max_paths 1];if {[sizeof_collection $paths]!=1} {error {timing path missing}};puts $f "$type\t[sizeof_collection $paths]\t[get_attribute $paths slack]"}
+close $f
+
+puts {XU_FULL_SOC_HOLD_REPAIR_PT_DONE_NOT_QUALIFIED}
+} xu_error]} {
+  puts stderr "XU_FATAL: $xu_error"
+  exit 1
+}
+Loading verilog file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-gating-margin-repair-20261103-09/mapped.v'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db'
+Loading db file '/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db'
+Linking design xu_soc_ppa_top...
+Information: Removing 926 unneeded designs..... (LNK-034)
+Information: 970 (76.02%) library cells are unused in library scc40nll_vhsc40_rvt_ss_v0p99_125c_basic..... (LNK-045)
+Information: total 970 library cells are unused (LNK-046)
+Design 'xu_soc_ppa_top' was successfully linked.
+Information: There are 123779 leaf cells, ports, hiers and 210977 nets in the design (LNK-047)
+Warning: Creating a generated clock on hierarchical pin 'u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clkout'. (UITE-136)
+Warning: Some timing arcs have been disabled for breaking timing loops or because of constant propagation. Use the 'report_disable_timing' command to get the list of these disabled timing arcs. (PTE-003)
+Information: Building multi voltage information for entire design. (MV-022)
+Warning: Cannot set output delay on a clock port (io_pads_gpioA_o_oval[31]) that does not fanout to any data sink. (UITE-485)
+Warning: Cannot set output delay on a clock port (io_pads_gpioA_o_oval[30]) that does not fanout to any data sink. (UITE-485)
+Warning: Cannot set output delay on a clock port (io_pads_gpioA_o_oval[29]) that does not fanout to any data sink. (UITE-485)
+Warning: Cannot set output delay on a clock port (io_pads_gpioA_o_oval[27]) that does not fanout to any data sink. (UITE-485)
+Warning: Cannot set output delay on a clock port (io_pads_gpioA_o_oval[26]) that does not fanout to any data sink. (UITE-485)
+Warning: No clock-gating check is inferred for clock xu_jtag_tck at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U63/A1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U63/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U63. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_jtag_tck at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U63/B1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U63/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U63. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_jtag_tck at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U63/B2 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U63/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U63. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_hfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/A1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U64. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_plldiv_envelope at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/A1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U64. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_hfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/B1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U64. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_plldiv_envelope at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/B1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U64. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_hfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/B2 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U64. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_plldiv_envelope at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/B2 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U64. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_hfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U67/A1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U67/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U67. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_hfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U67/B1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U67/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U67. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_hfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U67/B2 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U67/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U67. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_lfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U66/A1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U66/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U66. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_lfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U66/B1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U66/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U66. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_lfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U66/B2 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U66/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U66. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_hfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U68/A1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U68/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U68. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_hfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U68/B1 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U68/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U68. (PTE-060)
+Warning: No clock-gating check is inferred for clock xu_hfextclk at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U68/B2 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U68/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U68. (PTE-060)
+Information: Inferring 15 clock-gating checks. (PTE-017)
+Warning: For computing a common base period for a number of clocks PrimeTime limits the waveform expansion of the smallest period to be no more than 1000 times and the waveform expansion of the largest period to be no more than 101 times. Since the largest period is too large compared to the smallest period, no common base period is possible satisfying these limits, and PrimeTime has taken the largest period as the common base period but still has not expanded the smallest period beyond its limit. In certain situations, this can cause paths between these clocks to be unconstrained. (PTE-052)
+Information: Expanding clock 'xu_hfextclk' to base period of 6666.667 (old period was 6.667, added 1998 edges). (PTE-016)
+Information: Expanding clock 'xu_plldiv_envelope' to base period of 6666.667 (old period was 6.667, added 1998 edges). (PTE-016)
+Information: Expanding clock 'xu_jtag_tck' to base period of 30600.000 (old period was 100.000, added 610 edges). (PTE-016)
+1
+XU_SRAM_GROUP itcm count=32 macro_ref=RAMSP1024X16 logical_bits=524288 physical_bits=524288 padding_bits=0
+XU_SRAM_GROUP dtcm count=32 macro_ref=RAMSP1024X16 logical_bits=524288 physical_bits=524288 padding_bits=0
+XU_SRAM_GROUP shared count=256 macro_ref=RAMSP1024X16 logical_bits=4194304 physical_bits=4194304 padding_bits=0
+XU_SRAM_GROUP accelerator_weights count=16 macro_ref=RAMSP1024X16 logical_bits=262144 physical_bits=262144 padding_bits=0
+XU_FULL_SOC_HOLD_REPAIR_PT_DONE_NOT_QUALIFIED
+exit 0
+Information: Defining new variable 'xu_main'. (CMD-041)
+Information: Defining new variable 'f'. (CMD-041)
+Information: Defining new variable 'xu_audit_aon'. (CMD-041)
+Information: Defining new variable 'xu_bank'. (CMD-041)
+Information: Defining new variable 'xu_seen'. (CMD-041)
+Information: Defining new variable 'XU_IO_MAX_NS'. (CMD-041)
+Information: Defining new variable 'xu_hf'. (CMD-041)
+Information: Defining new variable 'xu_lf'. (CMD-041)
+Information: Defining new variable 'XU_IO_MIN_NS'. (CMD-041)
+Information: Defining new variable 'xu_allowed_refs'. (CMD-041)
+Information: Defining new variable 'paths'. (CMD-041)
+Information: Defining new variable 'XU_PLL_DIV'. (CMD-041)
+Information: Defining new variable 'xu_other_inputs'. (CMD-041)
+Information: Defining new variable 'xu_other_outputs'. (CMD-041)
+Information: Defining new variable 'xu_fwd_core_src'. (CMD-041)
+Information: Defining new variable 'type'. (CMD-041)
+Information: Defining new variable 'xu_spec'. (CMD-041)
+Information: Defining new variable 'xu_audit_main'. (CMD-041)
+Information: Defining new variable 'xu_audit_perips'. (CMD-041)
+Information: Defining new variable 'xu_jtag_inputs'. (CMD-041)
+Information: Defining new variable 'xu_all_macros'. (CMD-041)
+Information: Defining new variable 'xu_error'. (CMD-041)
+Information: Defining new variable 'xu_dst'. (CMD-041)
+Information: Defining new variable 'xu_pair'. (CMD-041)
+Information: Defining new variable 'xu_hclkregs'. (CMD-041)
+Information: Defining new variable 'XU_PROPAGATE_CLOCKS'. (CMD-041)
+Information: Defining new variable 'xu_div_source'. (CMD-041)
+Information: Defining new variable 'xu_tck'. (CMD-041)
+Information: Defining new variable 'xu_src'. (CMD-041)
+Information: Defining new variable 'xu_tim'. (CMD-041)
+Information: Defining new variable 'XU_CLOCK_MODE'. (CMD-041)
+Information: Defining new variable 'xu_cells'. (CMD-041)
+Information: Defining new variable 'xu_div_target'. (CMD-041)
+Information: Defining new variable 'xu_b'. (CMD-041)
+Information: Defining new variable 'xu_c'. (CMD-041)
+Information: Defining new variable 'xu_n'. (CMD-041)
+Information: Defining new variable 'XU_JTAG_IO_MAX_NS'. (CMD-041)
+Information: Defining new variable 'xu_hclkgen'. (CMD-041)
+Information: Defining new variable 'xu_master'. (CMD-041)
+Information: Defining new variable 'XU_OUTPUT_LOAD'. (CMD-041)
+Information: Defining new variable 'xu_fwd_core_dst'. (CMD-041)
+Information: Defining new variable 'xu_clock_ports'. (CMD-041)
+Information: Defining new variable 'XU_AUDIT_FORWARD_CLOCK_EXPERIMENT'. (CMD-041)
+Information: Defining new variable 'xu_jtag_outputs'. (CMD-041)
+
+Timing updates: 1 (0 implicit, 1 explicit) (0 incremental, 1 full, 0 logical)
+Noise updates: 0 (0 implicit, 0 explicit) (0 incremental, 0 full)
+Maximum memory usage for this session: 3151.67 MB
+CPU usage for this session: 46 seconds 
+Elapsed time for this session: 19 seconds
+Elapsed time spent in memory sampling: 0 seconds
+Diagnostics summary: 26 warnings, 53 informationals
+
+Thank you for using pt_shell!

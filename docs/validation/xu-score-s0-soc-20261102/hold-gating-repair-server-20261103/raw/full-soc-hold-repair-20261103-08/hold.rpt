@@ -1,0 +1,554 @@
+****************************************
+Report : timing
+	-path_type full
+	-delay_type min
+	-slack_lesser_than 0.00000000
+	-max_paths 50
+	-sort_by slack
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 09:33:39 2026
+****************************************
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg
+               (removal check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  input external delay                                0.00000000 0.00000000 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 0.00000000 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U5/ZN (CLKINV0_12TR40)
+                                                      0.06102309 0.06102309 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U3/ZN (CLKINV0_12TR40)
+                                                      0.06681897 0.12784207 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN (DSNQV0_12TR40)
+                                                      0.00000000 0.12784207 r
+  data arrival time                                              0.12784207
+
+  clock xu_lfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/CK (DSNQV0_12TR40)
+                                                                 0.10000000 r
+  library removal time                                0.14932489 0.24932489
+  data required time                                             0.24932489
+  ------------------------------------------------------------------------------
+  data required time                                             0.24932489
+  data arrival time                                              -0.12784207
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.12148283
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg
+               (removal check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  input external delay                                0.00000000 0.00000000 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 0.00000000 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U5/ZN (CLKINV0_12TR40)
+                                                      0.06102309 0.06102309 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U3/ZN (CLKINV0_12TR40)
+                                                      0.06681897 0.12784207 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN (DSNQNV0_12TR40)
+                                                      0.00000000 0.12784207 r
+  data arrival time                                              0.12784207
+
+  clock xu_lfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/CK (DSNQNV0_12TR40)
+                                                                 0.10000000 r
+  library removal time                                0.14632173 0.24632174
+  data required time                                             0.24632174
+  ------------------------------------------------------------------------------
+  data required time                                             0.24632174
+  data arrival time                                              -0.12784207
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.11847966
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg
+               (removal check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  input external delay                                0.00000000 0.00000000 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 0.00000000 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U11/ZN (NAND2BV0_12TR40)
+                                                      0.07644130 0.07644130 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/U2/ZN (CLKINV0_12TR40)
+                                                      0.04456939 0.12101069 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN (DRNQV0_12TR40)
+                                                      0.00000000 0.12101069 r
+  data arrival time                                              0.12101069
+
+  clock xu_lfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/CK (DRNQV0_12TR40)
+                                                                 0.10000000 r
+  library removal time                                0.06111633 0.16111633
+  data required time                                             0.16111633
+  ------------------------------------------------------------------------------
+  data required time                                             0.16111633
+  data arrival time                                              -0.12101069
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.04010564
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg
+               (removal check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  input external delay                                0.00000000 0.00000000 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 0.00000000 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U11/ZN (NAND2BV0_12TR40)
+                                                      0.07644130 0.07644130 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/U3/ZN (CLKINV0_12TR40)
+                                                      0.04456939 0.12101069 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN (DRNQV0_12TR40)
+                                                      0.00000000 0.12101069 r
+  data arrival time                                              0.12101069
+
+  clock xu_lfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/CK (DRNQV0_12TR40)
+                                                                 0.10000000 r
+  library removal time                                0.06111633 0.16111633
+  data required time                                             0.16111633
+  ------------------------------------------------------------------------------
+  data required time                                             0.16111633
+  data arrival time                                              -0.12101069
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.04010564
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg
+               (removal check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  input external delay                                0.00000000 0.00000000 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 0.00000000 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U11/ZN (NAND2BV0_12TR40)
+                                                      0.07644130 0.07644130 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/U2/ZN (CLKINV0_12TR40)
+                                                      0.04456939 0.12101069 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN (DRNQV0_12TR40)
+                                                      0.00000000 0.12101069 r
+  data arrival time                                              0.12101069
+
+  clock xu_lfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                                 0.10000000 r
+  library removal time                                0.06111633 0.16111633
+  data required time                                             0.16111633
+  ------------------------------------------------------------------------------
+  data required time                                             0.16111633
+  data arrival time                                              -0.12101069
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.04010564
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer0/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer0/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer0/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer0/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer0/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer0/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer0/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer1/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer1/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer1/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer1/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer1/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer1/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer1/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer2/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer2/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer2/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer2/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer2/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer2/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer2/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer3/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer3/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer3/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer3/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer3/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer3/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer3/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_exu_clkgate/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_exu_clkgate/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_exu_clkgate/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_exu_clkgate/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_exu_clkgate/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_exu_clkgate/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_exu_clkgate/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_lsu_clkgate/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_lsu_clkgate/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_lsu_clkgate/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_lsu_clkgate/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_lsu_clkgate/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_lsu_clkgate/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_lsu_clkgate/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_ifu_clkgate/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_ifu_clkgate/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_ifu_clkgate/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_ifu_clkgate/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_ifu_clkgate/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_ifu_clkgate/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_ifu_clkgate/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_dtcm_clkgate/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_dtcm_clkgate/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_dtcm_clkgate/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_dtcm_clkgate/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_dtcm_clkgate/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_dtcm_clkgate/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_dtcm_clkgate/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+  Startpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/enb_reg
+               (negative level-sensitive latch clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/U2
+               (rising clock gating-check end-point clocked by xu_hfextclk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                       3.33310556 3.33310556
+  clock network delay (ideal)                         0.00000000 3.33310556
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/enb_reg/EN (LALQV0_12TR40)
+                                                      0.00000000 3.33310556 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/enb_reg/Q (LALQV0_12TR40)
+                                                      0.13260692 3.46571255 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/U1/Z (BUFV1_12TR40)
+                                                      0.06787109 3.53358364 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/U2/A1 (AND2V0_12TR40)
+                                                      0.00000000 3.53358364 r
+  data arrival time                                              3.53358364
+
+  clock xu_hfextclk (fall edge)                       3.33359385 3.33359385
+  clock network delay (ideal)                         0.00000000 3.33359385
+  clock reconvergence pessimism                       0.00000000 3.33359385
+  clock uncertainty                                   0.10000000 3.43359375
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/U2/A2 (AND2V0_12TR40)
+                                                                 3.43359375 f
+  clock gating hold time                              0.10000000 3.53359389
+  data required time                                             3.53359389
+  ------------------------------------------------------------------------------
+  data required time                                             3.53359389
+  data arrival time                                              -3.53358364
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.00001027
+
+
+1

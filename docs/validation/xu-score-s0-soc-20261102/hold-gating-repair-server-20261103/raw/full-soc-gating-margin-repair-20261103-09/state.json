@@ -1,0 +1,92 @@
+{
+  "clock_scope": "pre-CTS ideal clocks; exact70firstDcuts and6forwarded output clocks; no reset/gate/SRAM/UART waiver; DC gating hold target0.12ns conservative margin; final PT uses original0.1ns unchanged",
+  "finished_epoch": 1793687378.9063582,
+  "input_sha256": {
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-hold-repair-20261103-08/mapped.v": "b77b8bb33cda339a4165f9d6ceb04d06ef833b6d586f0a5c15c3166e41d96988",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-pt-compatible-05/constraints.sdc": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-ts16.tcl": "45037c4a36a41ec1e9184b90d84160835112f5738d53aadea9d0cb89524ad76e",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+  },
+  "mapped_netlist_sha256": "5610f32b23220c87d39b45f24133adbf867d7faeb7284eed5f75d84b77ef4fca",
+  "pid": 255346,
+  "reports": {
+    "analysis-coverage.rpt": {
+      "bytes": 7917605,
+      "sha256": "6268c19547d97d16ebb714c8501c2cec30edc7c1c8a3042927183b558d36cd5b"
+    },
+    "area.rpt": {
+      "bytes": 228984,
+      "sha256": "6ef8cdf64533ddb2e1df44beface36ddfe71550971b835d719e70af4fb932bff"
+    },
+    "check-timing.rpt": {
+      "bytes": 7116,
+      "sha256": "32a9e7768b2eb1e294bf8451093d78d3afa660b7bf822529b3902788cbb0d208"
+    },
+    "clocks.rpt": {
+      "bytes": 3158,
+      "sha256": "0105b5a3df740e12b80aba35c46c285ba18882e86c674d0ab1779bebbe23a305"
+    },
+    "constraints.rpt": {
+      "bytes": 462417,
+      "sha256": "c67cdd29bce465b834c749729f8ca10721f0b6f148822bdff7c7a96d413f4cfb"
+    },
+    "dc-hold.rpt": {
+      "bytes": 1102559,
+      "sha256": "458d733e59ec711cfe2e70ec812d085ed4d8023f515125a302051d6299514f1e"
+    },
+    "dc-setup.rpt": {
+      "bytes": 3447652,
+      "sha256": "c910ccea4a5580c82cf3f7cbabf9a9ffccf4d4a40004e5710712de67dd5b9660"
+    },
+    "dc-units.rpt": {
+      "bytes": 435,
+      "sha256": "c904c2868791850d45222e3e42982b629c0c582e9bd7cdc81ebcb90774527efa"
+    },
+    "dc-violations.rpt": {
+      "bytes": 525,
+      "sha256": "0e2edba3900df6af5b34ecb62fb99e00bd6986ae862b42ae6c5a884199f4b4c3"
+    },
+    "exceptions.rpt": {
+      "bytes": 16108,
+      "sha256": "c83ecf6489ed465b08181b869535a4a75d4972cb6a9cc8f6a98f57e541d07189"
+    },
+    "hold.rpt": {
+      "bytes": 12606,
+      "sha256": "b7e0f2f89b72fc30c228f106603bbf7386c13f6f754260e78a38d786fde86a8f"
+    },
+    "qor.rpt": {
+      "bytes": 3835,
+      "sha256": "119463a83c745c7ca175dd97958ee3225be7972bd924baff4e5dbe3e80535bec"
+    },
+    "setup.rpt": {
+      "bytes": 323,
+      "sha256": "885584a0e9d5d5b21f3b3953cc39ce77a90a49c0e4fe364c1167d5a0fae8608a"
+    },
+    "units.rpt": {
+      "bytes": 436,
+      "sha256": "12fa75123124f27ecefce2123f8b81bdb93806019f9d06327c74ace821ba04ef"
+    }
+  },
+  "runs": [
+    {
+      "errors": [],
+      "log_sha256": "703dd1fba110c34c728fa78f52d2fa09e5321fca83d4445808fac31f5e775537",
+      "marker_count": 1,
+      "returncode": 0,
+      "script_sha256": "5461c3b34da9006648186095fa253f072c4c5f424d8e95866c4908e0d82e2fbb",
+      "tool": "dc_shell"
+    },
+    {
+      "errors": [],
+      "log_sha256": "fbf0fbd5836751e1c3b6252d3135a039a3ee0416149bd9baf6b9f996623a4fcd",
+      "marker_count": 1,
+      "returncode": 0,
+      "script_sha256": "e0c4885ae4554569f2c14ca5abd6c1c8ecb8640e16499402b3682c04aabdaf8b",
+      "tool": "pt_shell"
+    }
+  ],
+  "started_epoch": 1793687285.8283458,
+  "status": "EXECUTED_NOT_QUALIFIED",
+  "timing": "delay_type\tpath_count\tworst_slack\nmax\t1\t0.000000\nmin\t1\t-0.121483\n"
+}

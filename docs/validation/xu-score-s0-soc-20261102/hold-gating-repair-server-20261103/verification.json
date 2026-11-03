@@ -1,0 +1,193 @@
+{
+  "classification_scope": "Report reason/pin taxonomy only; no waiver or eligibility conclusion. Mapped/DB/SVF hashes are remote execution records; those large binaries are not locally rehashed.",
+  "fm": {
+    "direct_undriven_outputs_verified": false,
+    "passing": 41462,
+    "sram_internals": "black_box_not_proven",
+    "unmatched_reference": 17,
+    "unread": 511
+  },
+  "raw_bytes": 28277584,
+  "raw_files": 54,
+  "repairs": {
+    "full-soc-gating-margin-repair-20261103-09": {
+      "constraint_report_violated_timing_paths": 5,
+      "coverage": {
+        "clock_gating_hold": {
+          "met": 27,
+          "total": 27,
+          "untested": 0,
+          "violated": 0
+        },
+        "clock_gating_setup": {
+          "met": 27,
+          "total": 27,
+          "untested": 0,
+          "violated": 0
+        },
+        "hold": {
+          "met": 67251,
+          "total": 71041,
+          "untested": 3790,
+          "violated": 0
+        },
+        "min_period": {
+          "met": 416,
+          "total": 10832,
+          "untested": 10416,
+          "violated": 0
+        },
+        "min_pulse_width": {
+          "met": 96931,
+          "total": 106060,
+          "untested": 9129,
+          "violated": 0
+        },
+        "out_hold": {
+          "met": 139,
+          "total": 139,
+          "untested": 0,
+          "violated": 0
+        },
+        "out_setup": {
+          "met": 139,
+          "total": 139,
+          "untested": 0,
+          "violated": 0
+        },
+        "recovery": {
+          "met": 17601,
+          "total": 17603,
+          "untested": 2,
+          "violated": 0
+        },
+        "removal": {
+          "met": 17598,
+          "total": 17603,
+          "untested": 0,
+          "violated": 5
+        },
+        "setup": {
+          "met": 67251,
+          "total": 71041,
+          "untested": 3790,
+          "violated": 0
+        }
+      },
+      "electrical_slack_scope": "Original report uses low precision: 0.00 marked VIOLATED is not zero or a pass; precise diagnosis pending.",
+      "electrical_violation_pin_blocks": {
+        "max_capacitance": 56,
+        "min_capacitance": 1404
+      },
+      "mapped_netlist_sha256": "5610f32b23220c87d39b45f24133adbf867d7faeb7284eed5f75d84b77ef4fca",
+      "timing": "delay_type\tpath_count\tworst_slack\nmax\t1\t0.000000\nmin\t1\t-0.121483\n"
+    },
+    "full-soc-hold-repair-20261103-08": {
+      "constraint_report_violated_timing_paths": 15,
+      "coverage": {
+        "clock_gating_hold": {
+          "met": 8,
+          "total": 27,
+          "untested": 0,
+          "violated": 19
+        },
+        "clock_gating_setup": {
+          "met": 27,
+          "total": 27,
+          "untested": 0,
+          "violated": 0
+        },
+        "hold": {
+          "met": 67251,
+          "total": 71041,
+          "untested": 3790,
+          "violated": 0
+        },
+        "min_period": {
+          "met": 416,
+          "total": 10832,
+          "untested": 10416,
+          "violated": 0
+        },
+        "min_pulse_width": {
+          "met": 96931,
+          "total": 106060,
+          "untested": 9129,
+          "violated": 0
+        },
+        "out_hold": {
+          "met": 139,
+          "total": 139,
+          "untested": 0,
+          "violated": 0
+        },
+        "out_setup": {
+          "met": 139,
+          "total": 139,
+          "untested": 0,
+          "violated": 0
+        },
+        "recovery": {
+          "met": 17601,
+          "total": 17603,
+          "untested": 2,
+          "violated": 0
+        },
+        "removal": {
+          "met": 17598,
+          "total": 17603,
+          "untested": 0,
+          "violated": 5
+        },
+        "setup": {
+          "met": 67251,
+          "total": 71041,
+          "untested": 3790,
+          "violated": 0
+        }
+      },
+      "electrical_slack_scope": "Original report uses low precision: 0.00 marked VIOLATED is not zero or a pass; precise diagnosis pending.",
+      "electrical_violation_pin_blocks": {
+        "max_capacitance": 56,
+        "min_capacitance": 1404
+      },
+      "mapped_netlist_sha256": "b77b8bb33cda339a4165f9d6ceb04d06ef833b6d586f0a5c15c3166e41d96988",
+      "timing": "delay_type\tpath_count\tworst_slack\nmax\t1\t0.000000\nmin\t1\t-0.121483\n"
+    }
+  },
+  "status": "CONDITIONAL_MAPPED_CONSISTENCY_VERIFIED_TIMING_NOT_QUALIFIED",
+  "unresolved_pin_roles": [
+    {
+      "checks": 24,
+      "pin": "E",
+      "reason": "no_clock"
+    },
+    {
+      "checks": 8676,
+      "pin": "RDN",
+      "reason": "no_clock"
+    },
+    {
+      "checks": 429,
+      "pin": "SDN",
+      "reason": "no_clock"
+    },
+    {
+      "checks": 48,
+      "pin": "D",
+      "reason": "no_endpoint_clock"
+    },
+    {
+      "checks": 2,
+      "pin": "SDN",
+      "reason": "unknown"
+    }
+  ],
+  "untested_reasons": {
+    "constant_disabled": 17672,
+    "false_paths": 276,
+    "no_clock": 9129,
+    "no_endpoint_clock": 48,
+    "unknown": 2
+  }
+}
