@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/cp4.py", line 33, in <module>
+    with(O/'ports.vcd').open()as f:act.vcd_to_saif(f,O/'ports-direct.saif',22000000,62000000,'tb_xu_cell/dut/macro')
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/alias-tools-02/tools/scripts/xu_soc_activity.py", line 393, in vcd_to_saif
+    require(not snapshot and largest_time >= end, 'VCD ends before task end / in snapshot')
+  File "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/alias-tools-02/tools/scripts/xu_soc_activity.py", line 25, in require
+    raise ValueError(message)
+ValueError: VCD ends before task end / in snapshot

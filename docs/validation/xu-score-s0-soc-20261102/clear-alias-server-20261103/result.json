@@ -1,0 +1,157 @@
+{
+  "archive": {
+    "bytes": 45104,
+    "payload_count": 24,
+    "sha256": "e8cf2c1ef7cc84a2efb6782668b3c3c4d87ad7a0a139388dba466e2d499191e7"
+  },
+  "configuration_sha256": "dadf381aa45e6b0c761d3059d4f869b10ad0ce01de85745a4b0f09c38f5cef19",
+  "dtcm": {
+    "idle_control_bits": 96,
+    "macro_count": 32,
+    "state": "OBSERVED_KNOWN_STATIC_DISABLED",
+    "unknown_bit_ticks": 5437728800000000,
+    "zero_power_inferred": false
+  },
+  "full_task_saif_bytes_retrieved": false,
+  "layer": {
+    "cycles": 1370857,
+    "firmware_cycles": 1370927,
+    "layer": 0,
+    "performance": {
+      "bias_load": 7776,
+      "busy": 215424,
+      "compute_wait": 218592,
+      "dones": 3168,
+      "mac_fire": 202752,
+      "mmio_reads": 76032,
+      "mmio_stall": 0,
+      "mmio_writes": 55720,
+      "other": 80004,
+      "shared_reads": 23232,
+      "shared_stall": 8413,
+      "shared_writes": 50688,
+      "starts": 3168,
+      "w_load": 299315,
+      "writeback": 650232,
+      "x_load": 114938
+    }
+  },
+  "macro_count": 336,
+  "micro_status": "VERIFIED_67_PIN_HAND_EXPECTATIONS_REVIEW_PENDING",
+  "normalized_saif": {
+    "bytes": 12707556,
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/task-activity-clear-alias-20261103-01/task00/task_00/task-normalized.saif",
+    "sha256": "3799d77185447a680d4444f5d9568ca66370e5c456fe72b19e9eb751c13e0f06"
+  },
+  "official_energy_or_score_computed": false,
+  "pin_bits": 22512,
+  "probe_task_id": 0,
+  "raw_saif": {
+    "bytes": 25301213,
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/task-activity-clear-alias-20261103-01/task00/task_00/task.saif",
+    "sha256": "1f545129409db7c546d5c3a1446cc54612de7bb122d2b694ded25961144b1b0e"
+  },
+  "schema": "xu-first-clear-alias-server-evidence-v1",
+  "scope_activity": {
+    "accelerator": {
+      "signal_count": 22531,
+      "state": "OBSERVED_ACTIVITY",
+      "total_toggles": 450955660,
+      "unknown_bit_ticks": 10377533463040000
+    },
+    "cpu": {
+      "signal_count": 35985,
+      "state": "OBSERVED_ACTIVITY",
+      "total_toggles": 2237895277,
+      "unknown_bit_ticks": 27193906919639957
+    },
+    "dtcm": {
+      "macro_count": 32,
+      "signal_count": 2490,
+      "state": "OBSERVED_KNOWN_STATIC_DISABLED",
+      "total_toggles": 0,
+      "unknown_bit_ticks": 5437728800000000,
+      "unknown_state_policy": "internal unknown dwell retained; no zero-power inference"
+    },
+    "interconnect": {
+      "signal_count": 3418,
+      "state": "OBSERVED_ACTIVITY",
+      "total_toggles": 250121888,
+      "unknown_bit_ticks": 584898560000000
+    },
+    "itcm": {
+      "signal_count": 2721,
+      "state": "OBSERVED_ACTIVITY",
+      "total_toggles": 100783069,
+      "unknown_bit_ticks": 4971637760000000
+    },
+    "shared": {
+      "signal_count": 17440,
+      "state": "OBSERVED_ACTIVITY",
+      "total_toggles": 1746983610,
+      "unknown_bit_ticks": 32001724823039744
+    }
+  },
+  "source_child_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+  "source_main_commit": "854164105f1ab7a9aac79ceaadddad41a1bb6c5f",
+  "status": "PARTIAL_COLLECTED_REVIEW_PENDING",
+  "window": {
+    "begin": {
+      "cycle": 1403981,
+      "tick": 9359876666667
+    },
+    "duration_ticks": 9139040000000,
+    "end": {
+      "cycle": 2774837,
+      "tick": 18498916666667,
+      "time_ns": "18498916.666666999459"
+    },
+    "first_source_accept": {
+      "cycle": 1403981,
+      "tick": 9359876666667
+    },
+    "formal_elapsed_cycles": 1370856,
+    "formal_inclusive_cycles": 1370857,
+    "initial_source_wait_cycles": 0,
+    "interval": "first valid input/parameter source read request through final Y response retired; physical [begin,end)",
+    "layer": 0,
+    "legacy_accept_window": {
+      "begin": {
+        "cycle": 1403981,
+        "tick": 9359876666667,
+        "time_ns": "9359876.666666999459"
+      },
+      "duration_ticks": 9139040000000,
+      "end": {
+        "cycle": 2774837,
+        "tick": 18498916666667,
+        "time_ns": "18498916.666666999459"
+      },
+      "interval": "first input/parameter read accepted through final Y response retired; elapsed span excludes an extra inclusive cycle",
+      "layer": 0,
+      "nominal_hf_period_seconds": 6.666666666666667e-09,
+      "timescale_seconds": 1e-15
+    },
+    "legacy_performance_status": "unchanged acceptance-based diagnostic",
+    "legacy_task_pass_inclusive_cycles": 1370857,
+    "nominal_hf_period_seconds": 6.666666666666667e-09,
+    "pretask_clear": {
+      "accepted_write_span_cycles": 202193,
+      "accepted_write_span_ticks": 1347953333334,
+      "accepted_writes": 33697,
+      "activity_status": "outside task SAIF; no clear-phase SAIF measured",
+      "begin": {
+        "cycle": 1201701,
+        "tick": 8011343333333
+      },
+      "last_write": {
+        "cycle": 1403894,
+        "tick": 9359296666667
+      },
+      "last_write_to_source_request_cycles": 87,
+      "original_task_destination_setup_writes_before_source": 2,
+      "verification_at_first_source_request": true
+    },
+    "timescale_seconds": 1e-15
+  }
+}
