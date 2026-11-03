@@ -1,0 +1,86 @@
+{
+  "status": "HOST_VALIDATED_NOT_EDA",
+  "parent_tool_commit": "e19304cb3f1f45ad2b691a9e316702ff2aeea9d1",
+  "candidate_main": "f75880d4f06ccb7f1c16115bee501f53d9a2abb7",
+  "candidate_child": "52cfbea1f79f10e44f7d1696f54015797f886b96",
+  "host_tests": 63,
+  "cli_generated_macros": {
+    "RAMSP1024X16": 320,
+    "RAMSP128X16": 128
+  },
+  "source_sha256": {
+    "tools/ppa/xu_soc_implementation.py": "123500049ddfa3cb4aaa03148f4a0aab0ca71cbbb7cd2336da06226995694767",
+    "tools/scripts/xu_soc_ppa.py": "5db6fc3da0484adc73b7221cab24512eb8ab53d036739c9f93f1d136e91d4b8b",
+    "tools/ppa/xu_weight128_sram_adapter.sv": "13e1077201f8eb751d34eee718b34d350cc5dfbc58cf0d853933b010c29faa79",
+    "tools/ppa/xu_bank128_ppa_server.py": "474d6f0033eda5498aecb55eae632e5dbd53e83f5c211ba9d5307796e65e6a42",
+    "tests/host/test_xu_soc_bank128_ppa_profile.py": "cfc06cecf40f1602d6d7b979117e5f40e17466128a6bc8b7af881407671791ef",
+    "tests/host/test_xu_soc_bank128_ppa_server.py": "bd55c46b598893cc2973e6d37f94b279a5df032374eb20c1245a6d6ab093e3c4"
+  },
+  "files": {
+    "raw/cli-generate.log": {
+      "bytes": 4571,
+      "sha256": "e4c34c0db1bbbbeb9c3ae5e69187dedc1349a9be3d1a4c96ede545a2e8fee5b2"
+    },
+    "raw/cli-prepare.log": {
+      "bytes": 587,
+      "sha256": "ebb0775179e26d939f8c7aefe71800fdfda5b4b3ba5802e3fd278b3dfbba4594"
+    },
+    "raw/clock-review.json": {
+      "bytes": 13653,
+      "sha256": "390da78fa44c42030c6eb8aaf40c7a58024641d7d4240b95d2eada5d4622ec3c"
+    },
+    "raw/constraints.sdc": {
+      "bytes": 6384,
+      "sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98"
+    },
+    "raw/generation.json": {
+      "bytes": 3889,
+      "sha256": "e9a85ed1032651464d24b38c616a78882c118bbc12e37f3ae36f5da9b3f3023e"
+    },
+    "raw/host-ppa.log": {
+      "bytes": 11587,
+      "sha256": "69f1bc877813de297b3931dad054c9d085b9524cea516901bc1e667f575bd018"
+    },
+    "raw/host-sram1024.db": {
+      "bytes": 43,
+      "sha256": "d8fe5258dbcfa12d934a988dac3b95ea207b62939c3672db132bed137b7867bf"
+    },
+    "raw/host-sram128.db": {
+      "bytes": 42,
+      "sha256": "a91e86693d86aa06eca3b52c738b29d515358fbd6c8549c06283e749820185ee"
+    },
+    "raw/host-standard.db": {
+      "bytes": 43,
+      "sha256": "45bcd1cd5f368f187ad912aae6dbbf7eff4e764bdde8f437d74b2f3d5d9797f7"
+    },
+    "raw/implementation.json": {
+      "bytes": 12050,
+      "sha256": "6161fa8e7770b62a7d1a004bc2682ae08478733fadde76fca422c490346cb670"
+    },
+    "raw/mapping-proof.json": {
+      "bytes": 1270,
+      "sha256": "c73058fe364dba9b5381d7431bfd832bc4c75abd32dc9eb24a4e11187b026ce3"
+    },
+    "raw/prepared.json": {
+      "bytes": 156666,
+      "sha256": "604a506164ed2bad39d9285bb8240cd734554331ac86e56b8e7e1b0caa409a14"
+    },
+    "raw/rtl.f": {
+      "bytes": 19786,
+      "sha256": "b29816c16e189b908c04b4aefe48671978557a3797cc1f5f4a0b6947b0fd8f39"
+    },
+    "raw/sta.tcl": {
+      "bytes": 6026,
+      "sha256": "01496dff51566e048a66d0e03e8899daae2696933ec22d5dbf0b5288b1fb5a6a"
+    },
+    "raw/synth.tcl": {
+      "bytes": 32249,
+      "sha256": "bab2ab6d34c4130fa7746ba4e77c80dc253a409966408ca70279df728f2f4ba4"
+    }
+  },
+  "limitations": [
+    "Three clearly marked dummy DB fixtures only; no commercial files copied",
+    "No actual DC/PT, mapped consistency, qualified150MHz, area, energy or retention result",
+    "Actual official128 model SHA/bytes pin was supplied by root from server state; original state transfer is separate evidence"
+  ]
+}

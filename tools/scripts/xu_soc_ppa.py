@@ -52,9 +52,20 @@ SOURCE_PROFILES = {
         'rtl/e203/perips/XuParallelWeightBank32.sv', 'rtl/e203/perips/XuParallelWeightBank64.sv',
         'rtl/e203/perips/accel_icb_slave.v', 'rtl/e203/perips/xu_pe32_icb_slave.v',
         'rtl/e203/perips/xu_pe64_icb_slave.v', 'rtl/e203/subsys/e203_subsys_perips.v', 'vsim/bin/run.makefile']),
+    's3-pe32-bank128': dict(commit='52cfbea1f79f10e44f7d1696f54015797f886b96', changed_files=[
+        'rtl/e203/perips/LinearAutoGroupCore.sv', 'rtl/e203/perips/Sram128x16.sv',
+        'rtl/e203/perips/XuParallelAutoGroupCore32.sv', 'rtl/e203/perips/XuParallelAutoGroupCore32Bank128.sv',
+        'rtl/e203/perips/XuParallelBiasCache32.sv',
+        'rtl/e203/perips/XuParallelComputeCore32.sv', 'rtl/e203/perips/XuParallelComputeCore32Bank128.sv',
+        'rtl/e203/perips/XuParallelWeightBank32.sv', 'rtl/e203/perips/XuParallelWeightBank32Bank128.sv',
+        'rtl/e203/perips/accel_icb_slave.v', 'rtl/e203/perips/mem_128x16.sv',
+        'rtl/e203/perips/xu_pe32_bank128_icb_slave.v', 'rtl/e203/perips/xu_pe32_icb_slave.v',
+        'rtl/e203/subsys/e203_subsys_perips.v', 'vsim/bin/run.makefile']),
 }
 BIAS_MEMORY = RTL+'/perips/mem_32x40.sv'
 BIAS_ADAPTER_SHA256 = '019f86f6acc3bdf0e3d2678de1b90540deac1ec50850c010d0263e3d2231c2fd'
+BANK128_MEMORY = RTL+'/perips/mem_128x16.sv'
+BANK128_ADAPTER_SHA256 = '13e1077201f8eb751d34eee718b34d350cc5dfbc58cf0d853933b010c29faa79'
 REQUIRED_BITS = {'itcm': 65536*8, 'dtcm': 65536*8,
                  'shared': 524288*8, 'accelerator_weights': 32768*8}
 REPLACEABLE = {RTL+'/general/sirv_sim_ram.v', RTL+'/perips/mem_1024x16.sv'}
@@ -103,6 +114,20 @@ PE64_WEIGHT_GROUP = dict(name='accelerator_weights', logical_bits=32768*8,
                          logical_banks=64, logical_depth=256, logical_width=16,
                          physical_bits=131072*8, padding_bits=98304*8)
 
+BANK128_MAIN_COMMIT = 'f75880d4f06ccb7f1c16115bee501f53d9a2abb7'
+BANK128_DEFINES = ['SYNTHESIS', 'DISABLE_SV_ASSERTION=1', 'XU_ACCEL_PE32=1', 'XU_ACCEL_PE32_BANK128=1']
+BANK128_CONFIGURATION = dict(accel_variant='pe32-bank128', physical_pes=32,
+    wrapper_reference='xu_pe32_bank128_icb_slave', logical_weight_bytes=32768,
+    logical_weight_banks=32, logical_weight_depth=512, weight_word_bits=16,
+    weight_macros=128, weight_depth_slices=4, physical_weight_depth=128,
+    physical_weight_bytes=32768, weight_padding_bytes=0, read_latency_cycles=1,
+    single_rw=True, fixed_soc_macros=320, full_soc_macros=448)
+BANK128_WEIGHT_GROUP = dict(name='accelerator_weights', logical_bits=32768*8,
+    instance_pattern=MAIN+'/u_e203_subsys_perips/u_accel_icb_slave/u_linear_compute_core/core/banks_*',
+    macro_ref='RAMSP128X16', depth=128, width=16, count=128,
+    logical_banks=32, logical_depth=512, logical_width=16, depth_slices=4,
+    read_latency_cycles=1, single_rw=True, physical_bits=32768*8, padding_bits=0)
+
 
 def retained_instances(profile):
     retained = dict(RETAINED)
@@ -110,12 +135,14 @@ def retained_instances(profile):
         retained['accelerator'] = (RETAINED['accelerator'][0], 'xu_pe32_icb_slave*')
     if profile == 's3-pe64':
         retained['accelerator'] = (RETAINED['accelerator'][0], 'xu_pe64_icb_slave*')
+    if profile == 's3-pe32-bank128':
+        retained['accelerator'] = (RETAINED['accelerator'][0], 'xu_pe32_bank128_icb_slave*')
     return retained
 
 
 def mapping_identity(impl):
     identity = dict(replacements=impl['replacements'], added_sources=impl['added_sources'])
-    if impl.get('source_profile') in ('s3-pe32', 's3-pe64'):
+    if impl.get('source_profile') in ('s3-pe32', 's3-pe64', 's3-pe32-bank128'):
         identity.update(source_profile=impl['source_profile'], defines=impl['defines'],
                         accelerator_configuration=impl['accelerator_configuration'],
                         source_freeze=impl.get('source_freeze', {}))
@@ -235,6 +262,10 @@ def pe32_main_identity(root):
 def pe64_main_identity(root):
     return parallel_main_identity(root, 's3-pe64', PE64_MAIN_COMMIT, 'PE64')
 
+
+def bank128_main_identity(root):
+    return parallel_main_identity(root, 's3-pe32-bank128', BANK128_MAIN_COMMIT, 'BANK128')
+
 def source_profile_identity(root, profile='baseline'):
     """Check approved commit, its complete delta, and actual child worktree bytes.
 
@@ -286,6 +317,8 @@ def source_profile_identity(root, profile='baseline'):
         identity['main_source_freeze'] = pe32_main_identity(root)
     elif profile == 's3-pe64':
         identity['main_source_freeze'] = pe64_main_identity(root)
+    elif profile == 's3-pe32-bank128':
+        identity['main_source_freeze'] = bank128_main_identity(root)
     return identity
 
 
@@ -321,6 +354,7 @@ def inventory(root):
     child_commit = git(root/SUB, 'rev-parse', 'HEAD')
     pe32 = child_commit == SOURCE_PROFILES['s3-pe32']['commit']
     pe64 = child_commit == SOURCE_PROFILES['s3-pe64']['commit']
+    bank128 = child_commit == SOURCE_PROFILES['s3-pe32-bank128']['commit']
     if pe32:
         sizes['accelerator_weights'].update(
             implementation='32 banks, one mem_1024x16 each; upper512 rows per macro unreachable',
@@ -331,6 +365,12 @@ def inventory(root):
             implementation='64 banks, one mem_1024x16 each; upper768 rows per macro unreachable',
             physical_1024x16_macros=64, logical_banks=64, logical_depth=256,
             physical_depth=1024, physical_bits=131072*8, padding_bits=98304*8)
+    if bank128:
+        sizes['accelerator_weights'].update(
+            implementation='32 banks, each4 single-RW mem_128x16 depths; sampled return-depth, one-cycle read',
+            physical_1024x16_macros=0, physical_128x16_macros=128,
+            logical_banks=32, logical_depth=512, depth_slices=4,
+            physical_depth=128, physical_bits=32768*8, padding_bits=0)
     arrays = []
     for path in paths:
         text = comments(path.read_text())
@@ -373,12 +413,21 @@ def inventory(root):
                       total_physical_sram_bits=384*1024*16,
                       hypothetical_1024x16_macro_counts=dict(itcm=32, dtcm=32, shared=256, accelerator_weights=64),
                       hypothetical_1024x16_macro_total=384)
+    if bank128:
+        result.update(source_profile='s3-pe32-bank128', accelerator_configuration=dict(BANK128_CONFIGURATION),
+            required_compile_defines=list(BANK128_DEFINES), total_physical_sram_bits=320*1024*16+128*128*16,
+            hypothetical_1024x16_macro_counts=dict(itcm=32,dtcm=32,shared=256,accelerator_weights=0),
+            hypothetical_1024x16_macro_total=320, hypothetical_128x16_macro_counts=dict(accelerator_weights=128),
+            hypothetical_128x16_macro_total=128, hypothetical_total_macros=448,
+            expected_macro_counts_by_reference={'RAMSP1024X16':320,'RAMSP128X16':128})
     return result
 
 
 def template(inv, profile='baseline'):
     require(profile in SOURCE_PROFILES, 'unknown source profile: '+str(profile))
     replacements=REPLACEABLE|({BIAS_MEMORY} if profile=='sram-bias' else set())
+    if profile == 's3-pe32-bank128':
+        replacements = replacements | {BANK128_MEMORY}
     result = dict(schema='xu-full-soc-implementation-v1', top='xu_soc_ppa_top',
                 source_profile=profile,
                 platform_source_manifest_sha256=inv['platform_source_manifest_sha256'],
@@ -409,6 +458,11 @@ def template(inv, profile='baseline'):
         result.update(accel_variant='pe64', accelerator_configuration=dict(PE64_CONFIGURATION),
                       defines=list(PE64_DEFINES))
         result['memory_groups'][-1] = dict(PE64_WEIGHT_GROUP)
+    if profile == 's3-pe32-bank128':
+        result.update(accel_variant='pe32-bank128', accelerator_configuration=dict(BANK128_CONFIGURATION),
+                      defines=list(BANK128_DEFINES))
+        result['memory_groups'][-1] = dict(BANK128_WEIGHT_GROUP)
+        result['libraries'].append(dict(path='/absolute/same-corner/RAMSP128X16.db',sha256='REQUIRED',role='weight_sram128'))
     return result
 
 
@@ -430,8 +484,14 @@ def tcl(value):
 def library_paths(impl):
     libraries=impl.get('libraries',[])
     require(isinstance(libraries,list) and len(libraries)>=2, 'standard cell and SRAM libraries are required')
-    require(all(record.get('role') in ['standard_cell','sram','bias_sram'] for record in libraries),
-            'each library needs an explicit standard_cell, sram or bias_sram role')
+    require(all(record.get('role') in ['standard_cell','sram','bias_sram','weight_sram128'] for record in libraries),
+            'each library needs an explicit standard_cell, sram, bias_sram or weight_sram128 role')
+    weight_count=sum(record.get('role')=='weight_sram128' for record in libraries)
+    require(weight_count==(1 if impl.get('source_profile')=='s3-pe32-bank128' else 0),
+            'exactly one weight_sram128 library is required only for s3-pe32-bank128 profile')
+    if impl.get('source_profile') == 's3-pe32-bank128':
+        require(sorted(record.get('role') for record in libraries)==['sram','standard_cell','weight_sram128'],
+                'bank128 requires exactly one standard, one1024 SRAM and one128 W SRAM library')
     bias_count=sum(record.get('role')=='bias_sram' for record in libraries)
     require(bias_count==(1 if impl.get('source_profile','baseline')=='sram-bias' else 0),
             'exactly one bias_sram library is required only for sram-bias profile')
@@ -469,12 +529,17 @@ def checked_implementation(impl, inv, allow_unqualified=False):
                 freeze.get('libraries_sha256')==digest(impl.get('libraries')),
                 'source freeze memory/library configuration differs')
     replaceable=REPLACEABLE|({BIAS_MEMORY} if profile=='sram-bias' else set())
+    if profile == 's3-pe32-bank128':
+        replaceable = replaceable | {BANK128_MEMORY}
     require(set(impl.get('replacements',{}))==replaceable, 'only exact profile behavioral RAM definitions may be replaced')
     for name,record in impl['replacements'].items():
         absolute_file(record, 'replacement '+name)
     if profile=='sram-bias':
         require(impl['replacements'][BIAS_MEMORY]['sha256']==BIAS_ADAPTER_SHA256,
                 'sram-bias requires the exact approved bias SRAM adapter')
+    if profile=='s3-pe32-bank128':
+        require(impl['replacements'][BANK128_MEMORY]['sha256']==BANK128_ADAPTER_SHA256,
+                'bank128 requires the exact approved single-RW W SRAM adapter')
     require(impl.get('added_sources'), 'full-scope top / shared RAM implementation is missing')
     for n,record in enumerate(impl['added_sources']):
         absolute_file(record, 'added source '+str(n))
@@ -509,12 +574,28 @@ def checked_implementation(impl, inv, allow_unqualified=False):
         require(freeze and freeze.get('defines_sha256') == digest(defines) and
                 freeze.get('accelerator_configuration_sha256') == digest(PE64_CONFIGURATION),
                 's3-pe64 source freeze must bind exact defines and accelerator configuration')
+    elif profile == 's3-pe32-bank128':
+        require(inv.get('main_commit') == BANK128_MAIN_COMMIT,
+                's3-pe32-bank128 requires the exact approved candidate main commit')
+        require(defines == BANK128_DEFINES, 'bank128 requires the exact frozen compile defines')
+        require(impl.get('accel_variant') == 'pe32-bank128' and
+                encoded(impl.get('accelerator_configuration')) == encoded(BANK128_CONFIGURATION),
+                'bank128 accelerator variant/geometry/single-RW/latency differs')
+        require(inv.get('source_profile') == 's3-pe32-bank128' and
+                encoded(inv.get('accelerator_configuration')) == encoded(BANK128_CONFIGURATION),
+                'bank128 source inventory must describe the same physical variant')
+        require(freeze and freeze.get('defines_sha256') == digest(defines) and
+                freeze.get('accelerator_configuration_sha256') == digest(BANK128_CONFIGURATION),
+                'bank128 source freeze must bind exact defines and accelerator configuration')
     else:
         require(not any(x.split('=')[0] == 'XU_ACCEL_PE32' for x in defines),
                 'PE32 compile define is allowed only for s3-pe32 profile')
     if profile != 's3-pe64':
         require(not any(x.split('=')[0] == 'XU_ACCEL_PE64' for x in defines),
                 'PE64 compile define is allowed only for s3-pe64 profile')
+    if profile != 's3-pe32-bank128':
+        require(not any(x.split('=')[0]=='XU_ACCEL_PE32_BANK128' for x in defines),
+                'BANK128 compile define is allowed only for s3-pe32-bank128 profile')
     groups=impl.get('memory_groups',[])
     expected_names=set(REQUIRED_BITS)|({'accelerator_bias'} if profile=='sram-bias' else set())
     require({g.get('name') for g in groups}==expected_names and len(groups)==len(expected_names),
@@ -528,6 +609,9 @@ def checked_implementation(impl, inv, allow_unqualified=False):
             continue
         if g['name']=='accelerator_weights' and profile=='s3-pe64':
             require(encoded(g)==encoded(PE64_WEIGHT_GROUP), 'frozen PE64 weight macro geometry/scope/padding differs')
+            continue
+        if g['name']=='accelerator_weights' and profile=='s3-pe32-bank128':
+            require(encoded(g)==encoded(BANK128_WEIGHT_GROUP), 'frozen BANK128 weight macro geometry/scope/single-RW/latency differs')
             continue
         require(g.get('logical_bits')==REQUIRED_BITS[g['name']], 'logical memory capacity differs: '+g['name'])
         for k in ['count','width','depth']:
@@ -757,6 +841,8 @@ def activity_power(out, record, env):
             'PE32 energy requires candidate-specific clear/request-window activity; legacy VCD power is not supported')
     require(impl.get('source_profile') != 's3-pe64',
             'PE64 energy requires candidate-specific clear/request-window activity; legacy VCD power is not supported')
+    require(impl.get('source_profile') != 's3-pe32-bank128',
+            'BANK128 energy requires candidate-specific clear/request-window activity; legacy VCD power is not supported')
     execution=json.loads((out/'execution.json').read_text())
     require(execution.get('status')=='EXECUTED_NOT_QUALIFIED','DC/PT execution must complete before power')
     vcd=absolute_file(record.get('vcd'),'VCD')

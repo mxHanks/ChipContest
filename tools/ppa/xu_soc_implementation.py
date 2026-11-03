@@ -97,6 +97,21 @@ def topology_identity(ppa, root, tool_root=ROOT, profile='baseline'):
             (ppa.RTL+'/perips/XuParallelAutoGroupCore64.sv', r'\bXuParallelComputeCore64\s+core\s*\(', 'single PE64 compute array'),
             (ppa.RTL+'/perips/XuParallelWeightBank64.sv', r'\bSram1024x16\s+ram\s*\(', 'PE64 weight macro adapter'),
         ]
+    if profile == 's3-pe32-bank128':
+        checks[6] = (ppa.RTL+'/subsys/e203_subsys_perips.v',
+            r'`ifdef\s+XU_ACCEL_PE32_BANK128\s+xu_pe32_bank128_icb_slave\s+u_accel_icb_slave\s*\(\s*'
+            r'`elsif\s+XU_ACCEL_PE32\s+xu_pe32_icb_slave\s+u_accel_icb_slave\s*\(\s*'
+            r'`else\s+accel_icb_slave\s+u_accel_icb_slave\s*\(\s*`endif',
+            'explicit BANK128 selection preserving PE32 and original fallback instances')
+        checks += [
+            (ppa.RTL+'/perips/xu_pe32_bank128_icb_slave.v',
+             r'\bXuParallelAutoGroupCore32Bank128\s+u_linear_compute_core\s*\(', 'BANK128 scheduler'),
+            (ppa.RTL+'/perips/XuParallelAutoGroupCore32Bank128.sv',
+             r'\bXuParallelComputeCore32Bank128\s+core\s*\(', 'single BANK128 compute array'),
+            (ppa.RTL+'/perips/XuParallelWeightBank32Bank128.sv',
+             r'\bSram128x16\s+rams_0\s*\(.*?\bSram128x16\s+rams_1\s*\(.*?'
+             r'\bSram128x16\s+rams_2\s*\(.*?\bSram128x16\s+rams_3\s*\(', 'four single-RW depth macros per W bank'),
+        ]
     sources = {}
     for relative, pattern, label in checks:
         path = (tool_root if relative.startswith('tools/') else root)/relative
@@ -107,7 +122,8 @@ def topology_identity(ppa, root, tool_root=ROOT, profile='baseline'):
 
 
 def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_review=None,
-             profile='baseline', bias_sram_db=None, bias_sram_sha=None):
+             profile='baseline', bias_sram_db=None, bias_sram_sha=None,
+             weight_sram128_db=None, weight_sram128_sha=None):
     root = Path(root).resolve()
     out = Path(out).absolute()
     ppa = ppa_module()
@@ -122,6 +138,13 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
     else:
         ppa.require(bias_sram_db is None and bias_sram_sha is None,
                     'bias SRAM library is allowed only for sram-bias profile')
+    if profile=='s3-pe32-bank128':
+        ppa.require(weight_sram128_db is not None and weight_sram128_sha is not None,
+                    'bank128 profile requires --weight-sram128-db and --weight-sram128-sha256')
+        libraries.append(dict(identity(ppa,weight_sram128_db,weight_sram128_sha),role='weight_sram128'))
+    else:
+        ppa.require(weight_sram128_db is None and weight_sram128_sha is None,
+                    'W128 SRAM library is allowed only for bank128 profile')
     ppa.require(len({record['path'] for record in libraries})==len(libraries),'library paths must differ')
     profile_identity=ppa.source_profile_identity(root,profile)
     inv = ppa.inventory(root)
@@ -144,6 +167,8 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
         ppa.RTL+'/perips/mem_1024x16.sv': identity(ppa, ROOT/'tools/ppa/xu_weight_sram_adapter.sv')}
     if profile=='sram-bias':
         impl['replacements'][ppa.BIAS_MEMORY]=identity(ppa,ROOT/'tools/ppa/xu_bias_sram_adapter.sv',ppa.BIAS_ADAPTER_SHA256)
+    if profile=='s3-pe32-bank128':
+        impl['replacements'][ppa.BANK128_MEMORY]=identity(ppa,ROOT/'tools/ppa/xu_weight128_sram_adapter.sv',ppa.BANK128_ADAPTER_SHA256)
     impl['added_sources'] = [identity(ppa, ROOT/'tools/ppa'/name)
                              for name in ['xu_soc_ppa_top.sv', 'xu_shared_icb_sram.sv']]
     impl['libraries'] = libraries
@@ -155,7 +180,7 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
                                  memory_groups_sha256=ppa.digest(impl['memory_groups']),
                                  libraries_sha256=ppa.digest(libraries),
                                  source_manifest_sha256=inv['platform_source_manifest_sha256'])
-    if profile in ('s3-pe32', 's3-pe64'):
+    if profile in ('s3-pe32', 's3-pe64', 's3-pe32-bank128'):
         impl['source_freeze'].update(defines_sha256=ppa.digest(impl['defines']),
                                     accelerator_configuration_sha256=ppa.digest(impl['accelerator_configuration']))
     impl['tool_producer'] = dict(implementation_generator=identity(ppa,__file__),
@@ -169,6 +194,9 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
                      if profile=='s3-pe32' else '')+
                     ('PE64 uses one64-bank W array: 32768 logical bytes, 131072 physical bytes, 98304 padding bytes. '
                      if profile=='s3-pe64' else '')+
+                    ('BANK128 uses32 banks of4 single-RW128x16 depths: 32768 logical/physical bytes, zero padding; '
+                     '128 RAMSP128X16 W macros plus320 fixed RAMSP1024X16 =448 total. '
+                     if profile=='s3-pe32-bank128' else '')+
                     'Mapping/PVT/netlist equivalence are unreviewed; no timing, power, or contest pass claimed. '
                     'No vendor simulation models are in the synthesis source list.')
     proof_path = out/'mapping-proof.json'
@@ -188,6 +216,10 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
     if profile == 's3-pe64':
         receipt.update(accel_variant='pe64', defines_sha256=ppa.digest(impl['defines']),
                        accelerator_configuration=impl['accelerator_configuration'])
+    if profile == 's3-pe32-bank128':
+        receipt.update(accel_variant='pe32-bank128', defines_sha256=ppa.digest(impl['defines']),
+                       accelerator_configuration=impl['accelerator_configuration'],
+                       macro_counts_by_reference={'RAMSP1024X16':320,'RAMSP128X16':128})
     ppa.write(out/'generation.json', receipt)
     return receipt
 
@@ -204,11 +236,14 @@ def main():
                         help='explicit approved child/source geometry; baseline remains strict f49a5fc')
     parser.add_argument('--bias-sram-db',type=Path,help='RAMSP128X16 library; required only for sram-bias')
     parser.add_argument('--bias-sram-sha256',help='supplied RAMSP128X16 library SHA256; required only for sram-bias')
+    parser.add_argument('--weight-sram128-db',type=Path,help='designated W RAMSP128X16 library; required only for bank128')
+    parser.add_argument('--weight-sram128-sha256',help='supplied W RAMSP128X16 library SHA256; required only for bank128')
     parser.add_argument('--clock-review', type=Path, help='existing source-derived review; otherwise generate one now')
     args = parser.parse_args()
     receipt = generate(args.root, args.out, args.standard_cell_db, args.standard_cell_sha256,
                        args.sram_db, args.sram_sha256, args.clock_review,
-                       args.profile,args.bias_sram_db,args.bias_sram_sha256)
+                       args.profile,args.bias_sram_db,args.bias_sram_sha256,
+                       args.weight_sram128_db,args.weight_sram128_sha256)
     print(json.dumps(receipt, sort_keys=True))
 
 
