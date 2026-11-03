@@ -164,13 +164,8 @@ def generate(root, out, dut_scope='tb_xu_soc_ppa.dut', observer_scope=None, plac
     require(placement in ('bind', 'include'), 'unknown observer placement')
     require(not out.exists(), 'observer output directory must be new')
     require(macro_paths is None, 'candidate mapping forbids unguarded explicit probes')
-    if macro_paths is None:
-        macros, sources = full_soc_macros(root, dut_scope)
-        mode = 'frozen_s2c_source_guarded_full_soc_336'
-    else:
-        require(macro_paths and len(set(macro_paths)) == len(macro_paths), 'explicit probe macro paths must be nonempty and unique')
-        macros = [{'group': 'explicit_probe', 'instance': hierarchy(path)} for path in macro_paths]
-        sources, mode = [], 'explicit_probe_only'
+    macros, sources = full_soc_macros(root, dut_scope)
+    mode = 'frozen_s2c_source_guarded_full_soc_336'
     require(all(m['instance'].startswith(dut_scope + '.') for m in macros), 'macro is outside DUT scope')
     require(not any(observer_scope.startswith(m['instance'] + '.') for m in macros), 'observer must not be inside a macro')
     out.mkdir(parents=True)
@@ -205,11 +200,9 @@ def validate_mapping(path):
     require(mapping.get('profile') == context.PROFILE, 'candidate mapping profile differs')
     require(mapping.get('source_context') == context.source_identity(mapping['root']), 'candidate mapping source context differs')
     require(mapping.get('tool_context') == context.tool_identity(), 'candidate mapping tool context differs')
-    if mapping['mode'] == 'frozen_s2c_source_guarded_full_soc_336':
-        expected, sources = full_soc_macros(mapping['root'], mapping['dut_scope'])
-        require(macros == expected and sources == mapping['source_files'], 'full-SoC macro mapping differs from guarded topology')
-    else:
-        require(mapping['mode'] == 'explicit_probe_only' and not mapping['source_files'], 'unsupported mapping mode')
+    require(mapping['mode'] == 'frozen_s2c_source_guarded_full_soc_336', 'candidate mapping forbids unguarded/probe mode')
+    expected, sources = full_soc_macros(mapping['root'], mapping['dut_scope'])
+    require(macros == expected and sources == mapping['source_files'], 'full-SoC macro mapping differs from guarded topology')
     expected_source = render_observer(macros, mapping['dut_scope'], mapping['observer_scope'], mapping['placement'])
     require(Path(mapping['observer_source']['path']).read_text() == expected_source, 'observer source does not implement mapping')
     pairs = {}
@@ -442,7 +435,6 @@ def main():
     gen.add_argument('--dut-scope', default='tb_xu_soc_ppa.dut')
     gen.add_argument('--observer-scope')
     gen.add_argument('--placement', choices=['bind', 'include'], default='bind')
-    gen.add_argument('--macro-path', action='append', help='explicit absolute probe macro; omit for exact current full SoC')
     norm = sub.add_parser('normalize')
     norm.add_argument('--raw', type=Path, required=True)
     norm.add_argument('--mapping', type=Path, required=True)
@@ -451,7 +443,7 @@ def main():
     args = parser.parse_args()
     require(args.command is not None, 'choose generate or normalize')
     if args.command == 'generate':
-        result = generate(args.root, args.out, args.dut_scope, args.observer_scope, args.placement, args.macro_path)
+        result = generate(args.root, args.out, args.dut_scope, args.observer_scope, args.placement)
         print(json.dumps({key: result[key] for key in ('status', 'macro_count', 'alias_bit_count', 'observer_source')}, sort_keys=True))
     else:
         print(json.dumps(normalize(args.raw, args.mapping, args.out, args.receipt), sort_keys=True))

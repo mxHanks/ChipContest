@@ -216,6 +216,9 @@ class CandidateActivityTests(unittest.TestCase):
                           (first+'/unexpected','NET',dict(T0=10,T1=0,TX=0,TZ=0,TC=0)) if mode=='extra' else None)
                 with self.assertRaises(ValueError): aliases.normalize(broken,mp,d/(mode+'-out.saif'))
                 self.assertFalse((d/(mode+'-out.saif')).exists())
+            forged=copy.deepcopy(mapping);forged['mode']='explicit_probe_only';forged['source_files']=[]
+            fp=d/'forged.mapping.json';fp.write_text(json.dumps(forged))
+            with self.assertRaisesRegex(ValueError,'forbids unguarded/probe mode'): aliases.validate_mapping(fp)
             observer=Path(mapping['observer_source']['path'])
             with observer.open('a') as stream: stream.write('// source tamper\n')
             with self.assertRaisesRegex(ValueError,'identity changed'): aliases.validate_mapping(mp)
