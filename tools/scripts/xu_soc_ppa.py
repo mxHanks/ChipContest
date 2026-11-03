@@ -31,7 +31,7 @@ SOURCE_PROFILES = {
         'rtl/e203/perips/accel_icb_slave.v', 'rtl/e203/perips/mem_32x40.sv']),
     's2b-packed': dict(commit='d5faa5e8c857fa35df62a68de667bdb8a6e954f7', changed_files=[
         'rtl/e203/perips/accel_icb_slave.v']),
-    's2c-autogroup': dict(commit='dd149bb34aa1c3feca066ffbf9bdd3311f4b954c', changed_files=[
+    's2c-autogroup': dict(commit='49a9436e01ea8ceeead94242e4a99c16e31a0865', changed_files=[
         'rtl/e203/perips/LinearAutoGroupCore.sv', 'rtl/e203/perips/accel_icb_slave.v']),
 }
 BIAS_MEMORY = RTL+'/perips/mem_32x40.sv'
