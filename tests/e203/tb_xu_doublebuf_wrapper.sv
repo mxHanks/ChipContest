@@ -91,7 +91,7 @@ module tb_xu_doublebuf_wrapper;
       result=held;
       @(negedge clk); rsp_ready=1;
       @(posedge clk); #1;
-      if (!reading && offset=='hc8 && !error_expected && pops!=saved_retired+1)
+      if (!reading && offset=='he4 && !error_expected && pops!=saved_retired+1)
         $fatal(1,"POP response did not retire exactly once");
       @(negedge clk); rsp_ready=0;
     end
@@ -152,6 +152,41 @@ module tb_xu_doublebuf_wrapper;
     end
   endtask
 
+  task automatic collide_final_pop_and_submit(input integer next_row);
+    integer saved;
+    reg [31:0] submit_data;
+    begin
+      saved=pops; submit_data=(next_row<<8)|(next_row%2);
+      @(negedge clk); cmd_valid=1; cmd_read=0; cmd_addr=32'h100420e4;
+      cmd_wdata=1; cmd_wmask=15; rsp_ready=0;
+      @(posedge clk); #1;
+      @(negedge clk); cmd_valid=0;
+      repeat(4) begin
+        @(posedge clk); #1;
+        if(!rsp_valid || rsp_err || pops!=saved) $fatal(1,"final DB POP moved before retirement");
+      end
+      // Pre-retirement outstanding=2 rejects the same-edge submission.
+      @(negedge clk); cmd_valid=1; cmd_addr=32'h100420e0; cmd_wdata=submit_data; rsp_ready=1;
+      @(posedge clk); #1;
+      if(!rsp_valid || !rsp_err || dut.db_submit || pops!=saved+1 || dut.db_outstanding!=1)
+        $fatal(1,"ambiguous final POP/submission boundary");
+      // On the next edge the old error response retires and a fresh valid
+      // submission is accepted. Its metadata must never act as another POP.
+      @(posedge clk); #1;
+      if(!rsp_valid || rsp_err || !dut.db_submit || dut.rsp_db_pop || pops!=saved+1)
+        $fatal(1,"new DB submission inherited old error/POP metadata");
+      @(negedge clk); cmd_valid=0; rsp_ready=0;
+      repeat(4) begin
+        @(posedge clk); #1;
+        if(!rsp_valid || rsp_err || pops!=saved+1 || dut.db_outstanding!=2)
+          $fatal(1,"stalled new submission repeated or lost ownership");
+      end
+      @(negedge clk); rsp_ready=1;
+      @(posedge clk); #1;
+      @(negedge clk); rsp_ready=0;
+    end
+  endtask
+
   initial begin
     repeat(4) @(negedge clk); rst_n=1;
     get('h050,32'h58550003,2); get('h070,32'h58530003,2);
@@ -201,9 +236,9 @@ module tb_xu_doublebuf_wrapper;
           load_x(row+2);
           put('he0,((row+2)<<8)|(row%2),15,1); // two rows still outstanding
         end
-        if(g==0) collide_pop_and_read();
+        if(g==31 && row<2) collide_final_pop_and_submit(row+2);
+        else if(g==0) collide_pop_and_read();
         else transfer(0,'he4,1,15,0,(g%7==0)?170:0,response);
-        if(g==31 && row<2) put('he0,((row+2)<<8)|(row%2),15,0);
       end
     end
     if(dut.db_outstanding || dut.db_queued || dut.db_count || dut.db_running ||

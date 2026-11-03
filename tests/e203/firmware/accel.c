@@ -225,7 +225,8 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                 if (++polls >= poll_limit) return -3;
             } while (!(status & 2u));
 #if XU_HARDWARE_DOUBLEBUF
-            if (((status >> 11) & 31u) != group || ((status >> 16) & 127u) != row) return -8;
+            /* DB_STATUS upper nine bits are zero; validate the combined row/group tag. */
+            if ((status >> 11) != row * 32u + group) return -8;
 #else
             if (((status >> 6) & 31u) != group) return -8;
 #endif
