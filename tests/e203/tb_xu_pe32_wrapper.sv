@@ -7,7 +7,11 @@ module tb_xu_pe32_wrapper;
   reg [3:0] cmd_wmask=0;
   wire cmd_ready, rsp_valid, rsp_err;
   wire [31:0] rsp_rdata;
+`ifdef XU_PE32_BANK128
+  xu_pe32_bank128_icb_slave dut(.*);
+`else
   xu_pe32_icb_slave dut(.*);
+`endif
   wire [31:0] observed_pe_enables = {
     dut.u_linear_compute_core.core.pes_31.io_enable,
     dut.u_linear_compute_core.core.pes_30.io_enable,

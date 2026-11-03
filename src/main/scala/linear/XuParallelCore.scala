@@ -1,16 +1,18 @@
 package linear
 
 import chisel3._
-import chisel3.util.{Cat, Fill, PopCount, log2Ceil}
+import chisel3.util.{Cat, Fill, PopCount, RegEnable, log2Ceil}
 import dotproduct.{MacController, MacPE}
-import memory.{Sram1024x16, XRowBuffer}
+import memory.{Sram1024x16, Sram128x16, XRowBuffer}
 
 /** Fixed 64x256 logical W; one designated 1024x16 1RW macro per output lane.
   * 32 lanes use 512 words/bank (2x physical padding); 64 use 256 (4x).
   * Padding addresses are unreachable, never additional logical parameters.
   */
-case class XuParallelGeometry(pes: Int) {
+case class XuParallelGeometry(pes: Int, bank128: Boolean = false) {
     require(Set(32, 64).contains(pes))
+    require(!bank128 || pes == 32, "128-depth experiment is independently qualified only for 32PE")
+    val bankTag = if (bank128) "Bank128" else ""
     val bankBits = log2Ceil(pes)
     val groups = 256 / pes
     val groupBits = log2Ceil(groups)
@@ -19,7 +21,7 @@ case class XuParallelGeometry(pes: Int) {
 }
 
 class XuParallelWeightBank(g: XuParallelGeometry) extends Module {
-    override def desiredName = s"XuParallelWeightBank${g.pes}"
+    override def desiredName = s"XuParallelWeightBank${g.pes}${g.bankTag}"
     val io = IO(new Bundle {
         val wen = Input(Bool())
         val ren = Input(Bool())
@@ -27,17 +29,33 @@ class XuParallelWeightBank(g: XuParallelGeometry) extends Module {
         val data = Input(SInt(16.W))
         val result = Output(SInt(16.W))
     })
-    private val ram = Module(new Sram1024x16)
     assert(!(io.wen && io.ren))
-    ram.io.en := io.wen || io.ren
-    ram.io.isWrite := io.wen
-    ram.io.addr := Cat(0.U((10 - g.addrBits).W), io.addr)
-    ram.io.wdata := io.data
-    io.result := ram.io.rdata
+    if (g.bank128) {
+        // Depth multiplexing preserves the original single-RW, one-cycle read.
+        // The current request address cannot select the previous read's Q.
+        val depth = io.addr(8, 7)
+        val returnDepth = RegEnable(depth, io.ren)
+        val rams = Seq.fill(4)(Module(new Sram128x16))
+        for ((ram, index) <- rams.zipWithIndex) {
+            val selected = depth === index.U
+            ram.io.en := selected && (io.wen || io.ren)
+            ram.io.isWrite := selected && io.wen
+            ram.io.addr := Mux(selected, io.addr(6, 0), 0.U)
+            ram.io.wdata := Mux(selected && io.wen, io.data, 0.S)
+        }
+        io.result := VecInit(rams.map(_.io.rdata))(returnDepth)
+    } else {
+        val ram = Module(new Sram1024x16)
+        ram.io.en := io.wen || io.ren
+        ram.io.isWrite := io.wen
+        ram.io.addr := Cat(0.U((10 - g.addrBits).W), io.addr)
+        ram.io.wdata := io.data
+        io.result := ram.io.rdata
+    }
 }
 
 class XuParallelComputeCore(g: XuParallelGeometry) extends Module {
-    override def desiredName = s"XuParallelComputeCore${g.pes}"
+    override def desiredName = s"XuParallelComputeCore${g.pes}${g.bankTag}"
     val io = IO(new Bundle {
         val start = Input(Bool())
         val group = Input(UInt(g.groupBits.W))
@@ -118,9 +136,9 @@ class XuParallelBiasCache(g: XuParallelGeometry) extends Module {
   * Old modes enable only their eight lanes; no discarded arithmetic is hidden.
   * Every legacy load address maps bijectively into the same 16384 words.
   */
-class XuParallelAutoGroupCore(val peCount: Int = 32) extends Module {
-    private val g = XuParallelGeometry(peCount)
-    override def desiredName = s"XuParallelAutoGroupCore${g.pes}"
+class XuParallelAutoGroupCore(val peCount: Int = 32, bank128: Boolean = false) extends Module {
+    private val g = XuParallelGeometry(peCount, bank128)
+    override def desiredName = s"XuParallelAutoGroupCore${g.pes}${g.bankTag}"
     val io = IO(new LinearCachedCoreIO {
         val rowStart = Input(Bool())
         val rowWide = Input(Bool())

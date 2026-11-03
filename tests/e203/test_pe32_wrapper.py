@@ -10,13 +10,16 @@ import unittest
 
 
 class XuPe32WrapperTests(unittest.TestCase):
+    environment = 'XU_PE32_WRAPPER'
+    bank128 = False
+
     def test_real_single_w_array_both_abis(self):
-        backend = os.environ.get('XU_PE32_WRAPPER_SIM', 'iverilog')
+        backend = os.environ.get(self.environment+'_SIM', 'iverilog')
         self.assertIn(backend, ('iverilog', 'vcs'))
         needed = ['vcs'] if backend == 'vcs' else ['iverilog', 'vvp']
         missing = [name for name in needed if not shutil.which(name)]
         if missing:
-            if 'XU_PE32_WRAPPER_SIM' in os.environ:
+            if self.environment+'_SIM' in os.environ:
                 self.fail('explicit PE32 backend unavailable: ' + ', '.join(missing))
             self.skipTest('PE32 direct simulation needs ' + ', '.join(missing))
         root = Path(__file__).resolve().parents[2]
@@ -25,7 +28,12 @@ class XuPe32WrapperTests(unittest.TestCase):
                  'XuParallelBiasCache32.sv', 'XuParallelWeightBank32.sv',
                  'MacController.sv', 'MacPE.sv', 'XRowBuffer.sv',
                  'Sram1024x16.sv', 'mem_1024x16.sv', 'xu_pe32_icb_slave.v']
-        log_root = os.environ.get('XU_PE32_WRAPPER_LOG_DIR')
+        if self.bank128:
+            names = ['XuParallelAutoGroupCore32Bank128.sv', 'XuParallelComputeCore32Bank128.sv',
+                     'XuParallelBiasCache32.sv', 'XuParallelWeightBank32Bank128.sv',
+                     'MacController.sv', 'MacPE.sv', 'XRowBuffer.sv',
+                     'Sram128x16.sv', 'mem_128x16.sv', 'xu_pe32_bank128_icb_slave.v']
+        log_root = os.environ.get(self.environment+'_LOG_DIR')
         for kind, top, work in [('wide', 'tb_xu_pe32_wrapper', (16, 27)),
                                 ('compat', 'tb_xu_pe32_compat_wrapper', (64, 99))]:
             with self.subTest(kind=kind), tempfile.TemporaryDirectory(prefix='xu-pe32-' + kind + '-') as temporary:
@@ -35,6 +43,8 @@ class XuPe32WrapperTests(unittest.TestCase):
                 command = (['vcs', '-full64', '-sverilog', '-timescale=1ns/10ps', '-top', top,
                             '+define+DISABLE_SV_ASSERTION=1', '-Mdir=' + str(directory / 'csrc')]
                            if backend == 'vcs' else ['iverilog', '-g2012', '-s', top])
+                if self.bank128:
+                    command += ['+define+XU_PE32_BANK128=1' if backend=='vcs' else '-DXU_PE32_BANK128=1']
                 command += ['-o', str(binary)] + [str(path) for path in sources]
 
                 def run(argv, name, timeout):

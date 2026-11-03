@@ -19,9 +19,9 @@ def summarize(result, frequency_mhz):
         raise ValueError('a passing real-task simulation is required')
     config = contract.configuration_from_result(result)
     variant = result.get('accel_variant', 'pe8')
-    if variant not in ('pe8', 'pe32') or (config['schedule'] == 'bias-hw-pe32-autogroup-window' and variant != 'pe32'):
+    if variant not in ('pe8', 'pe32', 'pe32-bank128') or (config['schedule'] == 'bias-hw-pe32-autogroup-window' and variant == 'pe8'):
         raise ValueError('invalid physical accelerator variant')
-    pes = 32 if variant == 'pe32' else PES
+    pes = 32 if variant in ('pe32', 'pe32-bank128') else PES
     explicit = 'firmware_schedule' in result
     layers = result['layers']
     if (type(result['tasks']) is not int or not 1 <= result['tasks'] <= 12 or
