@@ -93,6 +93,10 @@ for field in same:
     require(len({json.dumps(r[field], sort_keys=True) for r in variants.values()}) == 1,
             'common screen identity differs: ' + field)
 
+change_map = json.loads((HERE / 'source-change-map.json').read_text())
+for path, digest in change_map['source_sha256'].items():
+    require(sha(ROOT / path) == digest, 'reviewed source/test changed: ' + path)
+
 compat = json.loads((HERE / 'rtl-compatibility.json').read_text())
 for name, row in compat['default_files'].items():
     path = ROOT / 'third-party/e203_hbirdv2/rtl/e203/perips' / name

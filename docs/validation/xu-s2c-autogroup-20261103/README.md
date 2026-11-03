@@ -46,3 +46,5 @@ Observed complete windows: **1,387,720 cycles old ABI, 1,250,899 S2b control, 1,
 | Shared reads / writes | 23,232 / 50,688 | 23,232 / 50,688 | 23,232 / 50,688 |
 
 All five unchanged full-SoC Icarus programs passed on the candidate: `rv32ui-p-add`, `accel_mmio`, `accel_compute`, `accel_multigroup`, `accel_repeat_x`; actual logs/ELFs/images are retained in `raw/legacy-baseline/`.
+
+[independent-review.md](independent-review.md) records the separate static lifecycle review: no actionable correctness findings. Its noted nonblocking final-POP/new-STARTROW test gap was subsequently covered by an actual directed Icarus test for both rows; production and measured real1 identities remain unchanged. This is not an independent rerun or VCS claim.

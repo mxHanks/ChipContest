@@ -120,7 +120,7 @@ module tb_xu_autogroup_wrapper;
     end
   endtask
 
-  task automatic collide_pop_retirement(input bit next_read);
+  task automatic collide_pop_retirement(input integer next_command);
     integer saved;
     begin
       saved=dut.row_retired;
@@ -133,10 +133,11 @@ module tb_xu_autogroup_wrapper;
         if(!rsp_valid || rsp_err || dut.row_retired!=saved)
           $fatal(1,"blocked POP lost its owned head");
       end
-      // The new command sees pre-retirement state on this edge. Explicitly
-      // reject a head read/second POP rather than returning/popping stale data.
-      @(negedge clk); cmd_valid=1; cmd_read=next_read;
-      cmd_addr=next_read ? 32'h10042100 : 32'h100420c8;
+      // New commands see pre-retirement state. Reject an ambiguous head
+      // read/second POP, or a new STARTROW on the final POP retirement edge.
+      @(negedge clk); cmd_valid=1; cmd_read=next_command==1;
+      cmd_addr=next_command==1 ? 32'h10042100 :
+               (next_command==2 ? 32'h100420c0 : 32'h100420c8);
       rsp_ready=1;
       @(posedge clk); #1;
       if(dut.row_retired!=saved+1 || !rsp_valid || !rsp_err)
@@ -165,6 +166,44 @@ module tb_xu_autogroup_wrapper;
         $fatal(1,"STARTROW accepted with an old load strobe in flight");
       @(negedge clk); cmd_valid=0;
       @(posedge clk); #1;
+      @(negedge clk); rsp_ready=0;
+    end
+  endtask
+
+  task automatic final_pop_immediate_restart;
+    integer selected_group;
+    begin
+      put('hc0,1,15,0);
+      // Drain this row quickly to isolate the final response-slot boundary.
+      for(selected_group=0;selected_group<31;selected_group=selected_group+1) begin
+        wait_valid(); put('hc8,1,15,0);
+      end
+      wait_valid();
+      @(negedge clk); cmd_valid=1; cmd_read=0; cmd_addr=32'h100420c8;
+      cmd_wdata=1; cmd_wmask=15; rsp_ready=0;
+      @(posedge clk); #1;
+      if(!rsp_valid || rsp_err || dut.row_retired!=31) $fatal(1,"final POP precondition");
+      @(negedge clk); cmd_addr=32'h100420c0; rsp_ready=1;
+      @(posedge clk); #1;
+      if(!rsp_valid || !rsp_err || dut.row_active || dut.row_start || dut.row_retired!=32)
+        $fatal(1,"STARTROW was not rejected on the final POP retirement edge");
+      // The very next edge retires that error response and accepts STARTROW.
+      // Its old response metadata must not clear/pop the new row afterward.
+      @(posedge clk); #1;
+      if(!rsp_valid || rsp_err || !dut.row_start || dut.row_active || dut.rsp_row_pop)
+        $fatal(1,"STARTROW did not succeed one edge after final POP retirement");
+      @(negedge clk); cmd_valid=0; rsp_ready=0;
+      repeat(200) begin
+        @(posedge clk); #1;
+        if(!rsp_valid || rsp_err || dut.rsp_row_pop || dut.row_retired!=0)
+          $fatal(1,"previous error response corrupted new row metadata");
+      end
+      if(!dut.row_active || dut.row_count!=2 || dut.row_produced!=2 || dut.row_running)
+        $fatal(1,"restarted row did not retain both produced slots");
+      @(negedge clk); rsp_ready=1;
+      @(posedge clk); #1;
+      if(dut.row_retired!=0 || dut.row_count!=2 || !dut.row_active)
+        $fatal(1,"new STARTROW response retirement incorrectly popped its FIFO");
       @(negedge clk); rsp_ready=0;
     end
   endtask
@@ -213,7 +252,8 @@ module tb_xu_autogroup_wrapper;
           get('h104+lane*8,{16'b0,raw[47:32]},0);
         end
         put('hc8,0,15,1); put('hc8,1,1,1);
-        if(g==0) collide_pop_retirement(row==0);
+        if(g==0) collide_pop_retirement(row==0 ? 1 : 0);
+        else if(g==31) collide_pop_retirement(2);
         else transfer(0,'hc8,1,15,0,(g%7==0)?170:0,response);
       end
       if(dut.row_active || dut.row_count!=0 || dut.row_retired!=32 || dut.row_produced!=32 ||
@@ -233,8 +273,9 @@ module tb_xu_autogroup_wrapper;
     if(accepts!=retires) $fatal(1,"orphan/duplicate response");
     // Reset is the only abort: pending results disappear and cache selection
     // resets. Storage data is deliberately not claimed to have been cleared.
-    put('hc0,1,15,0);
-    repeat(170) @(negedge clk);
+    final_pop_immediate_restart();
+    if(accepts!=retires) $fatal(1,"restart sequence lost a response");
+    if(starts!=99 || dones!=99) $fatal(1,"unexpected complete/aborted-row work count");
     if(dut.row_count!=2) $fatal(1,"reset-abort precondition");
     rst_n=0;
     repeat(4) @(negedge clk);
@@ -242,7 +283,8 @@ module tb_xu_autogroup_wrapper;
     if(dut.row_active || dut.row_valid || dut.row_count || dut.row_retired ||
         dut.row_produced || dut.cache_enable || dut.rsp_row_pop)
       $fatal(1,"reset did not abort autonomous state");
-    $display("XU_AUTOGROUP_WRAPPER_PASS rows=2 groups=64 lanes=512 overlap=%0d",overlap);
+    $display("XU_AUTOGROUP_WRAPPER_PASS rows=2 groups=64 lanes=512 overlap=%0d launches=%0d dones=%0d accepted=%0d retired=%0d",
+      overlap,starts,dones,accepts,retires);
     $finish;
   end
   initial begin #5000000; $fatal(1,"wrapper timeout"); end
