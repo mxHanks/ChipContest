@@ -1,0 +1,1729 @@
+XU_SRAM_LIBERTY_WHEN_INTERNAL_POWER_MODE_REVIEW_PENDING
+XU_SRAM_LIBRARY_CELL RAMSP1024X16_ss_0p99v_0p99v_125c/RAMSP1024X16
+****************************************
+Report : Attribute
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 10:54:39 2026
+****************************************
+
+Design          Object             Type      Attribute Name          Value
+--------------------------------------------------------------------------------
+RAMSP1024X16    RAMSP1024X16       boolean   always_on               false
+RAMSP1024X16    RAMSP1024X16       float     area                    9148.524414
+RAMSP1024X16    RAMSP1024X16       string    base_name               RAMSP1024X16
+RAMSP1024X16    RAMSP1024X16       boolean   disable_timing          false
+RAMSP1024X16    RAMSP1024X16       boolean   dont_touch              true
+RAMSP1024X16    RAMSP1024X16       boolean   dont_use                true
+RAMSP1024X16    RAMSP1024X16       string    full_name               RAMSP1024X16_ss_0p99v_0p99v_125c/RAMSP1024X16
+RAMSP1024X16    RAMSP1024X16       string    function_id             unknown
+RAMSP1024X16    RAMSP1024X16       boolean   has_multi_ground_rails  false
+RAMSP1024X16    RAMSP1024X16       boolean   has_multi_power_rails   true
+RAMSP1024X16    RAMSP1024X16       boolean   has_rail_specific_power_tables
+                                                                     true
+RAMSP1024X16    RAMSP1024X16       boolean   is_black_box            true
+RAMSP1024X16    RAMSP1024X16       boolean   is_black_box_for_propagation
+                                                                     true
+RAMSP1024X16    RAMSP1024X16       boolean   is_case_sequential_propagation
+                                                                     false
+RAMSP1024X16    RAMSP1024X16       boolean   is_combinational        false
+RAMSP1024X16    RAMSP1024X16       boolean   is_fall_edge_triggered  false
+RAMSP1024X16    RAMSP1024X16       boolean   is_instantiated         true
+RAMSP1024X16    RAMSP1024X16       boolean   is_integrated_clock_gating_cell
+                                                                     false
+RAMSP1024X16    RAMSP1024X16       boolean   is_isolation            false
+RAMSP1024X16    RAMSP1024X16       boolean   is_level_shifter        false
+RAMSP1024X16    RAMSP1024X16       boolean   is_macro_switch         false
+RAMSP1024X16    RAMSP1024X16       boolean   is_mux                  false
+RAMSP1024X16    RAMSP1024X16       boolean   is_negative_level_sensitive
+                                                                     false
+RAMSP1024X16    RAMSP1024X16       boolean   is_pad_cell             false
+RAMSP1024X16    RAMSP1024X16       boolean   is_pll_cell             false
+RAMSP1024X16    RAMSP1024X16       boolean   is_positive_level_sensitive
+                                                                     false
+RAMSP1024X16    RAMSP1024X16       boolean   is_retention            true
+RAMSP1024X16    RAMSP1024X16       boolean   is_rise_edge_triggered  true
+RAMSP1024X16    RAMSP1024X16       boolean   is_sequential           true
+RAMSP1024X16    RAMSP1024X16       boolean   is_shared_timing_model  false
+RAMSP1024X16    RAMSP1024X16       boolean   is_three_state          false
+RAMSP1024X16    RAMSP1024X16       collection
+                                             lib_pg_pin_info         ...
+RAMSP1024X16    RAMSP1024X16       int       number_of_pins          67
+RAMSP1024X16    RAMSP1024X16       string    object_class            lib_cell
+RAMSP1024X16    RAMSP1024X16       string    timing_model_type       ITS
+****************************************
+Report : library
+	-power_arcs
+Library: RAMSP1024X16_ss_0p99v_0p99v_125c
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 10:54:39 2026
+****************************************
+
+Time Unit                                    : 1 ns
+Capacitance Unit                             : 1 pF
+Pulling Resistance Unit                      : Not specified.
+Voltage Unit                                 : 1 V
+Current Unit                                 : 0.001 A
+Leakage Power Unit                           : 0.001 W
+
+Scaling Factors:
+
+    *Global*
+    ------------------------------------------------------------------------
+    k_process_cell_rise                      :           0.000000
+    k_temp_cell_rise                         :           0.000000
+    k_volt_cell_rise                         :           0.000000
+    k_process_cell_fall                      :           0.000000
+    k_temp_cell_fall                         :           0.000000
+    k_volt_cell_fall                         :           0.000000
+    k_process_rise_transition                :           0.000000
+    k_temp_rise_transition                   :           0.000000
+    k_volt_rise_transition                   :           0.000000
+    k_process_fall_transition                :           0.000000
+    k_temp_fall_transition                   :           0.000000
+    k_volt_fall_transition                   :           0.000000
+    k_process_rise_propagation               :           0.000000
+    k_temp_rise_propagation                  :           0.000000
+    k_volt_rise_propagation                  :           0.000000
+    k_process_fall_propagation               :           0.000000
+    k_temp_fall_propagation                  :           0.000000
+    k_volt_fall_propagation                  :           0.000000
+    k_process_intrinsic_rise                 :           0.000000
+    k_temp_intrinsic_rise                    :           0.000000
+    k_volt_intrinsic_rise                    :           0.000000
+    k_process_intrinsic_fall                 :           0.000000
+    k_temp_intrinsic_fall                    :           0.000000
+    k_volt_intrinsic_fall                    :           0.000000
+    k_process_drive_rise                     :           0.000000
+    k_temp_drive_rise                        :           0.000000
+    k_volt_drive_rise                        :           0.000000
+    k_process_drive_fall                     :           0.000000
+    k_temp_drive_fall                        :           0.000000
+    k_volt_drive_fall                        :           0.000000
+    k_process_setup_rise                     :           0.000000
+    k_temp_setup_rise                        :           0.000000
+    k_volt_setup_rise                        :           0.000000
+    k_process_setup_fall                     :           0.000000
+    k_temp_setup_fall                        :           0.000000
+    k_volt_setup_fall                        :           0.000000
+    k_process_hold_rise                      :           0.000000
+    k_temp_hold_rise                         :           0.000000
+    k_volt_hold_rise                         :           0.000000
+    k_process_hold_fall                      :           0.000000
+    k_temp_hold_fall                         :           0.000000
+    k_volt_hold_fall                         :           0.000000
+    k_process_nochange_rise                  :           0.000000
+    k_temp_nochange_rise                     :           0.000000
+    k_volt_nochange_rise                     :           0.000000
+    k_process_nochange_fall                  :           0.000000
+    k_temp_nochange_fall                     :           0.000000
+    k_volt_nochange_fall                     :           0.000000
+    k_process_recovery_rise                  :           0.000000
+    k_temp_recovery_rise                     :           0.000000
+    k_volt_recovery_rise                     :           0.000000
+    k_process_recovery_fall                  :           0.000000
+    k_temp_recovery_fall                     :           0.000000
+    k_volt_recovery_fall                     :           0.000000
+    k_process_removal_rise                   :           0.000000
+    k_temp_removal_rise                      :           0.000000
+    k_volt_removal_rise                      :           0.000000
+    k_process_removal_fall                   :           0.000000
+    k_temp_removal_fall                      :           0.000000
+    k_volt_removal_fall                      :           0.000000
+    k_process_skew_rise                      :           0.000000
+    k_temp_skew_rise                         :           0.000000
+    k_volt_skew_rise                         :           0.000000
+    k_process_skew_fall                      :           0.000000
+    k_temp_skew_fall                         :           0.000000
+    k_volt_skew_fall                         :           0.000000
+    k_process_min_pulse_width_high           :           0.000000
+    k_temp_min_pulse_width_high              :           0.000000
+    k_volt_min_pulse_width_high              :           0.000000
+    k_process_min_pulse_width_low            :           0.000000
+    k_temp_min_pulse_width_low               :           0.000000
+    k_volt_min_pulse_width_low               :           0.000000
+    k_process_min_period                     :           0.000000
+    k_temp_min_period                        :           0.000000
+    k_volt_min_period                        :           0.000000
+    k_process_wire_res                       :           0.000000
+    k_temp_wire_res                          :           0.000000
+    k_volt_wire_res                          :           0.000000
+    k_process_wire_cap                       :           0.000000
+    k_temp_wire_cap                          :           0.000000
+    k_volt_wire_cap                          :           0.000000
+
+
+Operating Conditions:
+
+    Name               Process     Temp        Voltage     Tree Type
+    ------------------------------------------------------------------------
+    ss_0p99v_0p99v_125c    1.00     125.00        0.99     balanced_case
+
+Wire Load Models:
+
+Name           :   sample
+Location       :   RAMSP1024X16_ss_0p99v_0p99v_125c
+Resistance     :   1.6e-05
+Capacitance    :   0.0002
+Area           :   1.7
+Slope          :   500
+Fanout   Length   Points Average Cap Std Deviation
+------------------------------------------------------------
+     1   500.00
+
+
+Wire Loading Model Selection Group    No wire load selection groups specified
+
+
+Delay Threshold Trip-Points
+    input_threshold_pct_rise                 : 50
+    output_threshold_pct_rise                : 50
+    input_threshold_pct_fall                 : 50
+    output_threshold_pct_fall                : 50
+
+
+Slew Threshold Trip-Points
+    slew_lower_threshold_pct_rise            : 30
+    slew_upper_threshold_pct_rise            : 70
+    slew_lower_threshold_pct_fall            : 30
+    slew_upper_threshold_pct_fall            : 70
+
+    slew_derate_from_lib                     : 0.5
+
+
+default_cell_leakage_power                   : NOT SPECIFIED
+default_leakage_power_density                : 0
+
+Power Information:
+
+    Attributes:
+       a - average power specification
+       i - internal power
+       l - leakage power
+      rf - rise and fall power specification
+      pg - power pg pin specification
+      pl - power_level power specification
+
+                                      Power          Source
+    Cell         Attributes  #        Toggling pin   of path  When
+    ----------------------------------------------------------------------------
+    RAMSP1024X16 l           0                                !RET1N
+                 l           1                                
+                 i,rf,pg     2        A[0]                    
+                 i,rf,pg     3        A[1]                    
+                 i,rf,pg     4        A[2]                    
+                 i,rf,pg     5        A[3]                    
+                 i,rf,pg     6        A[4]                    
+                 i,rf,pg     7        A[5]                    
+                 i,rf,pg     8        A[6]                    
+                 i,rf,pg     9        A[7]                    
+                 i,rf,pg     10       A[8]                    
+                 i,rf,pg     11       A[9]                    
+                 i,rf,pg     12       CEN                     
+                 i,rf,pg     13       CLK                     RET1N & !CEN & GWEN & !EMA[2] & !EMA[1] & !EMA[0]
+                 i,rf,pg     14       CLK                     RET1N & !CEN & GWEN & !EMA[2] & !EMA[1] & EMA[0]
+                 i,rf,pg     15       CLK                     RET1N & !CEN & GWEN & !EMA[2] & EMA[1] & !EMA[0]
+                 i,rf,pg     16       CLK                     RET1N & !CEN & GWEN & !EMA[2] & EMA[1] & EMA[0]
+                 i,rf,pg     17       CLK                     RET1N & !CEN & GWEN & EMA[2] & !EMA[1] & !EMA[0]
+                 i,rf,pg     18       CLK                     RET1N & !CEN & GWEN & EMA[2] & !EMA[1] & EMA[0]
+                 i,rf,pg     19       CLK                     RET1N & !CEN & GWEN & EMA[2] & EMA[1] & !EMA[0]
+                 i,rf,pg     20       CLK                     RET1N & !CEN & GWEN & EMA[2] & EMA[1] & EMA[0]
+                 i,rf,pg     21       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & !EMA[0] & !EMAW[1]                 & !EMAW[0]
+                 i,rf,pg     22       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & !EMA[0] & !EMAW[1]                 & EMAW[0]
+                 i,rf,pg     23       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & !EMA[0] & EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     24       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & !EMA[0] & EMAW[1] &                 EMAW[0]
+                 i,rf,pg     25       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & EMA[0] & !EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     26       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & EMA[0] & !EMAW[1] &                 EMAW[0]
+                 i,rf,pg     27       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & EMA[0] & EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     28       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & EMA[0] & EMAW[1] &                 EMAW[0]
+                 i,rf,pg     29       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & !EMA[0] & !EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     30       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & !EMA[0] & !EMAW[1] &                 EMAW[0]
+                 i,rf,pg     31       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & !EMA[0] & EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     32       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & !EMA[0] & EMAW[1] &                 EMAW[0]
+                 i,rf,pg     33       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & EMA[0] & !EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     34       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & EMA[0] & !EMAW[1] &                 EMAW[0]
+                 i,rf,pg     35       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & EMA[0] & EMAW[1] & !EMAW[0]
+                 i,rf,pg     36       CLK                     RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & EMA[0] & EMAW[1] & EMAW[0]
+                 i,rf,pg     37       CLK                     RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & !EMA[0] & !EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     38       CLK                     RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & !EMA[0] & !EMAW[1] &                 EMAW[0]
+                 i,rf,pg     39       CLK                     RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & !EMA[0] & EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     40       CLK                     RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & !EMA[0] & EMAW[1] &                 EMAW[0]
+                 i,rf,pg     41       CLK                     RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & EMA[0] & !EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     42       CLK                     RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & EMA[0] & !EMAW[1] &                 EMAW[0]
+                 i,rf,pg     43       CLK                     RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & EMA[0] & EMAW[1] & !EMAW[0]
+                 i,rf,pg     44       CLK                     RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & EMA[0] & EMAW[1] & EMAW[0]
+                 i,rf,pg     45       CLK                     RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & !EMA[0] & !EMAW[1] &                 !EMAW[0]
+                 i,rf,pg     46       CLK                     RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & !EMA[0] & !EMAW[1] &                 EMAW[0]
+                 i,rf,pg     47       CLK                     RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & !EMA[0] & EMAW[1] & !EMAW[0]
+                 i,rf,pg     48       CLK                     RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & !EMA[0] & EMAW[1] & EMAW[0]
+                 i,rf,pg     49       CLK                     RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & EMA[0] & !EMAW[1] & !EMAW[0]
+                 i,rf,pg     50       CLK                     RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & EMA[0] & !EMAW[1] & EMAW[0]
+                 i,rf,pg     51       CLK                     RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & EMA[0] & EMAW[1] & !EMAW[0]
+                 i,rf,pg     52       CLK                     RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & EMA[0] & EMAW[1] & EMAW[0]
+                 i,rf,pg     53       CLK                     !RET1N
+                 i,rf,pg     54       CLK                     RET1N & CEN
+                 i,rf,pg     55       D[0]                    !WEN[0] & !GWEN
+                 i,rf,pg     56       D[0]                    WEN[0] & GWEN
+                 i,rf,pg     57       D[10]                   !WEN[10] & !GWEN
+                 i,rf,pg     58       D[10]                   WEN[10] & GWEN
+                 i,rf,pg     59       D[11]                   !WEN[11] & !GWEN
+                 i,rf,pg     60       D[11]                   WEN[11] & GWEN
+                 i,rf,pg     61       D[12]                   !WEN[12] & !GWEN
+                 i,rf,pg     62       D[12]                   WEN[12] & GWEN
+                 i,rf,pg     63       D[13]                   !WEN[13] & !GWEN
+                 i,rf,pg     64       D[13]                   WEN[13] & GWEN
+                 i,rf,pg     65       D[14]                   !WEN[14] & !GWEN
+                 i,rf,pg     66       D[14]                   WEN[14] & GWEN
+                 i,rf,pg     67       D[15]                   !WEN[15] & !GWEN
+                 i,rf,pg     68       D[15]                   WEN[15] & GWEN
+                 i,rf,pg     69       D[1]                    !WEN[1] & !GWEN
+                 i,rf,pg     70       D[1]                    WEN[1] & GWEN
+                 i,rf,pg     71       D[2]                    !WEN[2] & !GWEN
+                 i,rf,pg     72       D[2]                    WEN[2] & GWEN
+                 i,rf,pg     73       D[3]                    !WEN[3] & !GWEN
+                 i,rf,pg     74       D[3]                    WEN[3] & GWEN
+                 i,rf,pg     75       D[4]                    !WEN[4] & !GWEN
+                 i,rf,pg     76       D[4]                    WEN[4] & GWEN
+                 i,rf,pg     77       D[5]                    !WEN[5] & !GWEN
+                 i,rf,pg     78       D[5]                    WEN[5] & GWEN
+                 i,rf,pg     79       D[6]                    !WEN[6] & !GWEN
+                 i,rf,pg     80       D[6]                    WEN[6] & GWEN
+                 i,rf,pg     81       D[7]                    !WEN[7] & !GWEN
+                 i,rf,pg     82       D[7]                    WEN[7] & GWEN
+                 i,rf,pg     83       D[8]                    !WEN[8] & !GWEN
+                 i,rf,pg     84       D[8]                    WEN[8] & GWEN
+                 i,rf,pg     85       D[9]                    !WEN[9] & !GWEN
+                 i,rf,pg     86       D[9]                    WEN[9] & GWEN
+                 i,rf,pg     87       GWEN                    
+                 i,rf,pg     88       RET1N                   CEN
+                 i,rf,pg     89       WEN[0]                  
+                 i,rf,pg     90       WEN[10]                 
+                 i,rf,pg     91       WEN[11]                 
+                 i,rf,pg     92       WEN[12]                 
+                 i,rf,pg     93       WEN[13]                 
+                 i,rf,pg     94       WEN[14]                 
+                 i,rf,pg     95       WEN[15]                 
+                 i,rf,pg     96       WEN[1]                  
+                 i,rf,pg     97       WEN[2]                  
+                 i,rf,pg     98       WEN[3]                  
+                 i,rf,pg     99       WEN[4]                  
+                 i,rf,pg     100      WEN[5]                  
+                 i,rf,pg     101      WEN[6]                  
+                 i,rf,pg     102      WEN[7]                  
+                 i,rf,pg     103      WEN[8]                  
+                 i,rf,pg     104      WEN[9]                  
+                 i,rf,pg     105      Q[0]                    RET1N & GWEN
+                 i,rf,pg     106      Q[10]                   RET1N & GWEN
+                 i,rf,pg     107      Q[11]                   RET1N & GWEN
+                 i,rf,pg     108      Q[12]                   RET1N & GWEN
+                 i,rf,pg     109      Q[13]                   RET1N & GWEN
+                 i,rf,pg     110      Q[14]                   RET1N & GWEN
+                 i,rf,pg     111      Q[15]                   RET1N & GWEN
+                 i,rf,pg     112      Q[1]                    RET1N & GWEN
+                 i,rf,pg     113      Q[2]                    RET1N & GWEN
+                 i,rf,pg     114      Q[3]                    RET1N & GWEN
+                 i,rf,pg     115      Q[4]                    RET1N & GWEN
+                 i,rf,pg     116      Q[5]                    RET1N & GWEN
+                 i,rf,pg     117      Q[6]                    RET1N & GWEN
+                 i,rf,pg     118      Q[7]                    RET1N & GWEN
+                 i,rf,pg     119      Q[8]                    RET1N & GWEN
+                 i,rf,pg     120      Q[9]                    RET1N & GWEN
+
+Number of reported cells: 1
+****************************************
+Report : library
+Library: scc40nll_vhsc40_rvt_ss_v0p99_125c_basic
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 10:54:39 2026
+****************************************
+
+Time Unit                   : 1 ns
+Capacitance Unit            : 1 pF
+Default Wire Load Mode      : top
+Default Wire Load Model     : Not specified.
+Default Wire Selection Group: Not specified.
+
+Operating Conditions:
+
+   Name                Process     Temp        Voltage     Tree Type
+   ---------------------------------------------------------------------------
+   ss_v0p99_125c          1.00      125.00        0.99     balanced_case
+
+Wire Load Models: none specified
+
+Wire Load Selection Groups: none specified
+
+
+Delay Threshold Trip-Points
+
+	input_threshold_pct_rise:		0.5
+	output_threshold_pct_rise:		0.5
+	input_threshold_pct_fall:		0.5
+	output_threshold_pct_fall:		0.5
+
+Slew Threshold Trip-Points
+
+	slew_lower_threshold_pct_rise:		0.3
+	slew_upper_threshold_pct_rise:		0.7
+	slew_lower_threshold_pct_fall:		0.3
+	slew_upper_threshold_pct_fall:		0.7
+
+	slew_derate_from_lib:			0.5
+
+Variation parameters: none specified
+
+Library Cells:
+
+   Attributes:
+    b - black box (function unknown)
+    d - dont_touch
+    s - state table
+    u - dont_use
+    A - abstracted timing model
+    E - extracted timing model
+    I - Interface timing spec model (ITS)
+    S - Stamp timing model
+    Q - Quick timing model (QTM)
+
+Lib Cell                Attributes
+--------------------    ---------------
+   AC1CINV2_12TR40         
+   AC1CINV3_12TR40         
+   AC1CINV4_12TR40         
+   AC1CONV2_12TR40         
+   AC1CONV3_12TR40         
+   AC1CONV4_12TR40         
+   AC2CINV2_12TR40         
+   AC2CINV3_12TR40         
+   AC2CINV4_12TR40         
+   AC2CONV2_12TR40         
+   AC2CONV3_12TR40         
+   AC2CONV4_12TR40         
+   ACH2CONV2_12TR40        
+   ACH2CONV3_12TR40        
+   ACH2CONV4_12TR40        
+   AD142V2_12TR40          
+   AD142V3_12TR40          
+   AD142V4_12TR40          
+   AD1CINV2_12TR40         
+   AD1CINV3_12TR40         
+   AD1CINV4_12TR40         
+   AD1CONV2_12TR40         
+   AD1CONV3_12TR40         
+   AD1CONV4_12TR40         
+   AD1V2C_12TR40           
+   AD1V2R_12TR40           
+   AD1V2T_12TR40           
+   AD1V2_12TR40            
+   AD1V3C_12TR40           
+   AD1V3R_12TR40           
+   AD1V3T_12TR40           
+   AD1V3_12TR40            
+   AD1V4C_12TR40           
+   AD1V4R_12TR40           
+   AD1V4T_12TR40           
+   AD1V4_12TR40            
+   AD2CSCINV2_12TR40       
+   AD2CSCINV3_12TR40       
+   AD2CSCINV4_12TR40       
+   AD2CSCONV2_12TR40       
+   AD2CSCONV3_12TR40       
+   AD2CSCONV4_12TR40       
+   ADH1CINV2C_12TR40       
+   ADH1CINV2_12TR40        
+   ADH1CINV3C_12TR40       
+   ADH1CINV3_12TR40        
+   ADH1CINV4C_12TR40       
+   ADH1CINV4_12TR40        
+   ADH1CONV2_12TR40        
+   ADH1CONV3_12TR40        
+   ADH1CONV4_12TR40        
+   ADH1CSCINV2_12TR40      
+   ADH1CSCINV3_12TR40      
+   ADH1CSCINV4_12TR40      
+   ADH1CSCONV2_12TR40      
+   ADH1CSCONV3_12TR40      
+   ADH1CSCONV4_12TR40      
+   ADH1V2C_12TR40          
+   ADH1V2_12TR40           
+   ADH1V3C_12TR40          
+   ADH1V3_12TR40           
+   ADH1V4C_12TR40          
+   ADH1V4_12TR40           
+   AND2V0_12TR40           
+   AND2V10RD_12TR40        
+   AND2V12_12TR40          
+   AND2V16_12TR40          
+   AND2V1RD_12TR40         
+   AND2V1_12TR40           
+   AND2V20_12TR40          
+   AND2V24_12TR40          
+   AND2V2RD_12TR40         
+   AND2V2_12TR40           
+   AND2V3_12TR40           
+   AND2V4RD_12TR40         
+   AND2V4_12TR40           
+   AND2V6RD_12TR40         
+   AND2V6_12TR40           
+   AND2V8RD_12TR40         
+   AND2V8_12TR40           
+   AND3V0_12TR40           
+   AND3V10RD_12TR40        
+   AND3V12_12TR40          
+   AND3V16_12TR40          
+   AND3V1RD_12TR40         
+   AND3V1_12TR40           
+   AND3V2RD_12TR40         
+   AND3V2_12TR40           
+   AND3V3_12TR40           
+   AND3V4RD_12TR40         
+   AND3V4_12TR40           
+   AND3V6RD_12TR40         
+   AND3V6_12TR40           
+   AND3V8RD_12TR40         
+   AND3V8_12TR40           
+   AND4V0_12TR40           
+   AND4V10RD_12TR40        
+   AND4V12_12TR40          
+   AND4V16_12TR40          
+   AND4V1RD_12TR40         
+   AND4V1_12TR40           
+   AND4V2RD_12TR40         
+   AND4V2_12TR40           
+   AND4V3_12TR40           
+   AND4V4RD_12TR40         
+   AND4V4_12TR40           
+   AND4V6RD_12TR40         
+   AND4V6_12TR40           
+   AND4V8RD_12TR40         
+   AND4V8_12TR40           
+   AO1B2V0_12TR40          
+   AO1B2V12_12TR40         
+   AO1B2V1_12TR40          
+   AO1B2V2_12TR40          
+   AO1B2V3_12TR40          
+   AO1B2V4_12TR40          
+   AO1B2V6_12TR40          
+   AO1B2V8_12TR40          
+   AO211V1_12TR40          
+   AO211V2_12TR40          
+   AO211V4_12TR40          
+   AO211V8_12TR40          
+   AO21BV0_12TR40          
+   AO21BV12_12TR40         
+   AO21BV1_12TR40          
+   AO21BV2_12TR40          
+   AO21BV3_12TR40          
+   AO21BV4_12TR40          
+   AO21BV6_12TR40          
+   AO21BV8_12TR40          
+   AO21V0_12TR40           
+   AO21V12_12TR40          
+   AO21V1_12TR40           
+   AO21V2_12TR40           
+   AO21V3_12TR40           
+   AO21V4_12TR40           
+   AO21V6_12TR40           
+   AO21V8_12TR40           
+   AO221V1_12TR40          
+   AO221V2_12TR40          
+   AO221V4_12TR40          
+   AO221V8_12TR40          
+   AO222V1_12TR40          
+   AO222V2_12TR40          
+   AO222V4_12TR40          
+   AO222V8_12TR40          
+   AO22V0_12TR40           
+   AO22V12_12TR40          
+   AO22V1_12TR40           
+   AO22V2_12TR40           
+   AO22V3_12TR40           
+   AO22V4_12TR40           
+   AO22V6_12TR40           
+   AO22V8_12TR40           
+   AO31V1_12TR40           
+   AO31V2_12TR40           
+   AO31V4_12TR40           
+   AO31V8_12TR40           
+   AO32V1_12TR40           
+   AO32V2_12TR40           
+   AO32V4_12TR40           
+   AO32V8_12TR40           
+   AO33V1_12TR40           
+   AO33V2_12TR40           
+   AO33V4_12TR40           
+   AO33V8_12TR40           
+   AOA211V1_12TR40         
+   AOA211V2_12TR40         
+   AOA211V4_12TR40         
+   AOA211V8_12TR40         
+   AOAI211V0_12TR40        
+   AOAI211V12_12TR40       
+   AOAI211V1_12TR40        
+   AOAI211V2_12TR40        
+   AOAI211V3_12TR40        
+   AOAI211V4_12TR40        
+   AOAI211V6_12TR40        
+   AOAI211V8_12TR40        
+   AOAOAOI211111V1_12TR40  
+   AOAOAOI211111V2_12TR40  
+   AOAOAOI211111V4_12TR40  
+   AOAOAOI211111V8_12TR40  
+   AOAOI2111V1_12TR40      
+   AOAOI2111V2_12TR40      
+   AOAOI2111V4_12TR40      
+   AOAOI2111V8_12TR40      
+   AOI211V0_12TR40         
+   AOI211V1_12TR40         
+   AOI211V2_12TR40         
+   AOI211V3_12TR40         
+   AOI211V4_12TR40         
+   AOI211V6_12TR40         
+   AOI211V8_12TR40         
+   AOI21BV0_12TR40         
+   AOI21BV12_12TR40        
+   AOI21BV16_12TR40        
+   AOI21BV1_12TR40         
+   AOI21BV2_12TR40         
+   AOI21BV3_12TR40         
+   AOI21BV4_12TR40         
+   AOI21BV6_12TR40         
+   AOI21BV8_12TR40         
+   AOI21V0_12TR40          
+   AOI21V12_12TR40         
+   AOI21V16_12TR40         
+   AOI21V1_12TR40          
+   AOI21V2_12TR40          
+   AOI21V3_12TR40          
+   AOI21V4_12TR40          
+   AOI21V6_12TR40          
+   AOI21V8_12TR40          
+   AOI221V0_12TR40         
+   AOI221V1_12TR40         
+   AOI221V2_12TR40         
+   AOI221V3_12TR40         
+   AOI221V4_12TR40         
+   AOI221V6_12TR40         
+   AOI221V8_12TR40         
+   AOI222V0_12TR40         
+   AOI222V1_12TR40         
+   AOI222V2_12TR40         
+   AOI222V3_12TR40         
+   AOI222V4_12TR40         
+   AOI222V6_12TR40         
+   AOI222V8_12TR40         
+   AOI22BBV0_12TR40        
+   AOI22BBV12_12TR40       
+   AOI22BBV16_12TR40       
+   AOI22BBV1_12TR40        
+   AOI22BBV2_12TR40        
+   AOI22BBV3_12TR40        
+   AOI22BBV4_12TR40        
+   AOI22BBV6_12TR40        
+   AOI22BBV8_12TR40        
+   AOI22V0_12TR40          
+   AOI22V12_12TR40         
+   AOI22V16_12TR40         
+   AOI22V1_12TR40          
+   AOI22V2_12TR40          
+   AOI22V3_12TR40          
+   AOI22V4_12TR40          
+   AOI22V6_12TR40          
+   AOI22V8_12TR40          
+   AOI2XB1V0_12TR40        
+   AOI2XB1V12_12TR40       
+   AOI2XB1V16_12TR40       
+   AOI2XB1V1_12TR40        
+   AOI2XB1V2_12TR40        
+   AOI2XB1V3_12TR40        
+   AOI2XB1V4_12TR40        
+   AOI2XB1V6_12TR40        
+   AOI2XB1V8_12TR40        
+   AOI31V0_12TR40          
+   AOI31V12_12TR40         
+   AOI31V1_12TR40          
+   AOI31V2_12TR40          
+   AOI31V3_12TR40          
+   AOI31V4_12TR40          
+   AOI31V6_12TR40          
+   AOI31V8_12TR40          
+   AOI32V0_12TR40          
+   AOI32V12_12TR40         
+   AOI32V1_12TR40          
+   AOI32V2_12TR40          
+   AOI32V3_12TR40          
+   AOI32V4_12TR40          
+   AOI32V6_12TR40          
+   AOI32V8_12TR40          
+   AOI33V1_12TR40          
+   AOI33V2_12TR40          
+   AOI33V4_12TR40          
+   AOI33V8_12TR40          
+   BENCV12_12TR40          
+   BENCV16_12TR40          
+   BENCV20_12TR40          
+   BENCV32_12TR40          
+   BENCV4_12TR40           
+   BENCV6_12TR40           
+   BENCV8_12TR40           
+   BMUXNV1_12TR40          
+   BMUXNV2_12TR40          
+   BMUXNV3_12TR40          
+   BMUXNV4_12TR40          
+   BMUXV1_12TR40           
+   BMUXV2_12TR40           
+   BMUXV3_12TR40           
+   BMUXV4_12TR40           
+   BUFV10RD_12TR40         
+   BUFV10RO_12TR40         
+   BUFV10RQ_12TR40         
+   BUFV10_12TR40           
+   BUFV12RD_12TR40         
+   BUFV12RO_12TR40         
+   BUFV12RQ_12TR40         
+   BUFV12_12TR40           
+   BUFV16RD_12TR40         
+   BUFV16RO_12TR40         
+   BUFV16RQ_12TR40         
+   BUFV16_12TR40           
+   BUFV1RD_12TR40          
+   BUFV1_12TR40            
+   BUFV20RD_12TR40         
+   BUFV20RO_12TR40         
+   BUFV20RQ_12TR40         
+   BUFV20_12TR40           
+   BUFV24RD_12TR40         
+   BUFV24RO_12TR40         
+   BUFV24RQ_12TR40         
+   BUFV24_12TR40           
+   BUFV2RD_12TR40          
+   BUFV2RQ_12TR40          
+   BUFV2_12TR40            
+   BUFV32RD_12TR40         
+   BUFV32RO_12TR40         
+   BUFV32RQ_12TR40         
+   BUFV32_12TR40           
+   BUFV3RD_12TR40          
+   BUFV3RQ_12TR40          
+   BUFV3_12TR40            
+   BUFV4RD_12TR40          
+   BUFV4RO_12TR40          
+   BUFV4RQ_12TR40          
+   BUFV4_12TR40            
+   BUFV5RD_12TR40          
+   BUFV5RO_12TR40          
+   BUFV5RQ_12TR40          
+   BUFV5_12TR40            
+   BUFV6RD_12TR40          
+   BUFV6RO_12TR40          
+   BUFV6RQ_12TR40          
+   BUFV6_12TR40            
+   BUFV7RD_12TR40          
+   BUFV7RO_12TR40          
+   BUFV7RQ_12TR40          
+   BUFV7_12TR40            
+   BUFV8RD_12TR40          
+   BUFV8RO_12TR40          
+   BUFV8RQ_12TR40          
+   BUFV8_12TR40            
+   CLKAND2V0_12TR40        
+   CLKAND2V12_12TR40       
+   CLKAND2V16_12TR40       
+   CLKAND2V1_12TR40        
+   CLKAND2V20_12TR40       
+   CLKAND2V24_12TR40       
+   CLKAND2V2_12TR40        
+   CLKAND2V3_12TR40        
+   CLKAND2V4_12TR40        
+   CLKAND2V6_12TR40        
+   CLKAND2V8_12TR40        
+   CLKBUFV10RQ_12TR40      
+   CLKBUFV10_12TR40        
+   CLKBUFV12RQ_12TR40      
+   CLKBUFV12_12TR40        
+   CLKBUFV16RQ_12TR40      
+   CLKBUFV16_12TR40        
+   CLKBUFV1_12TR40         
+   CLKBUFV20RQ_12TR40      
+   CLKBUFV20_12TR40        
+   CLKBUFV24RQ_12TR40      
+   CLKBUFV24_12TR40        
+   CLKBUFV2_12TR40         
+   CLKBUFV32_12TR40        
+   CLKBUFV3_12TR40         
+   CLKBUFV4RQ_12TR40       
+   CLKBUFV4_12TR40         
+   CLKBUFV5_12TR40         
+   CLKBUFV6RQ_12TR40       
+   CLKBUFV6_12TR40         
+   CLKBUFV7_12TR40         
+   CLKBUFV8RQ_12TR40       
+   CLKBUFV8_12TR40         
+   CLKINV0_12TR40          
+   CLKINV10_12TR40         
+   CLKINV12_12TR40         
+   CLKINV16_12TR40         
+   CLKINV1_12TR40          
+   CLKINV20_12TR40         
+   CLKINV24_12TR40         
+   CLKINV2_12TR40          
+   CLKINV32_12TR40         
+   CLKINV3_12TR40          
+   CLKINV4_12TR40          
+   CLKINV5_12TR40          
+   CLKINV6_12TR40          
+   CLKINV7_12TR40          
+   CLKINV8_12TR40          
+   CLKLAHAQV0_12TR40       s
+   CLKLAHAQV10_12TR40      s
+   CLKLAHAQV12_12TR40      s
+   CLKLAHAQV16_12TR40      s
+   CLKLAHAQV1_12TR40       s
+   CLKLAHAQV20_12TR40      s
+   CLKLAHAQV24_12TR40      s
+   CLKLAHAQV2_12TR40       s
+   CLKLAHAQV3_12TR40       s
+   CLKLAHAQV4_12TR40       s
+   CLKLAHAQV6_12TR40       s
+   CLKLAHAQV8_12TR40       s
+   CLKLAHQV0_12TR40        s
+   CLKLAHQV10_12TR40       s
+   CLKLAHQV12_12TR40       s
+   CLKLAHQV16_12TR40       s
+   CLKLAHQV1_12TR40        s
+   CLKLAHQV20_12TR40       s
+   CLKLAHQV24_12TR40       s
+   CLKLAHQV2_12TR40        s
+   CLKLAHQV3_12TR40        s
+   CLKLAHQV4_12TR40        s
+   CLKLAHQV6_12TR40        s
+   CLKLAHQV8_12TR40        s
+   CLKLANAQV0_12TR40       s
+   CLKLANAQV10_12TR40      s
+   CLKLANAQV12_12TR40      s
+   CLKLANAQV16_12TR40      s
+   CLKLANAQV1_12TR40       s
+   CLKLANAQV20_12TR40      s
+   CLKLANAQV24_12TR40      s
+   CLKLANAQV2_12TR40       s
+   CLKLANAQV3_12TR40       s
+   CLKLANAQV4_12TR40       s
+   CLKLANAQV6_12TR40       s
+   CLKLANAQV8_12TR40       s
+   CLKLANQV0_12TR40        s
+   CLKLANQV10_12TR40       s
+   CLKLANQV12_12TR40       s
+   CLKLANQV16_12TR40       s
+   CLKLANQV1_12TR40        s
+   CLKLANQV20_12TR40       s
+   CLKLANQV24_12TR40       s
+   CLKLANQV2_12TR40        s
+   CLKLANQV3_12TR40        s
+   CLKLANQV4_12TR40        s
+   CLKLANQV6_12TR40        s
+   CLKLANQV8_12TR40        s
+   CLKMUX2V0_12TR40        
+   CLKMUX2V12_12TR40       
+   CLKMUX2V1_12TR40        
+   CLKMUX2V2_12TR40        
+   CLKMUX2V3_12TR40        
+   CLKMUX2V4_12TR40        
+   CLKMUX2V6_12TR40        
+   CLKMUX2V8_12TR40        
+   CLKNAND2V0_12TR40       
+   CLKNAND2V12_12TR40      
+   CLKNAND2V16_12TR40      
+   CLKNAND2V1_12TR40       
+   CLKNAND2V2_12TR40       
+   CLKNAND2V3_12TR40       
+   CLKNAND2V4_12TR40       
+   CLKNAND2V6_12TR40       
+   CLKNAND2V8_12TR40       
+   CLKXOR2V1_12TR40        
+   CLKXOR2V2_12TR40        
+   CLKXOR2V4_12TR40        
+   CLKXOR2V8_12TR40        
+   DEL2V0_12TR40           
+   DEL2V2_12TR40           
+   DEL2V4_12TR40           
+   DEL2V8_12TR40           
+   DEL4V0_12TR40           
+   DEL4V2_12TR40           
+   DEL4V4_12TR40           
+   DEL4V8_12TR40           
+   DGRNQNV2_12TR40         s
+   DGRNQNV4_12TR40         s
+   DGRNQNV6_12TR40         s
+   DGRNQV2_12TR40          s
+   DGRNQV4_12TR40          s
+   DGRNQV6_12TR40          s
+   DGRSNQNV2_12TR40        s
+   DGRSNQNV4_12TR40        s
+   DGRSNQNV6_12TR40        s
+   DGRSNQV2_12TR40         s
+   DGRSNQV4_12TR40         s
+   DGRSNQV6_12TR40         s
+   DGSNQNV2_12TR40         s
+   DGSNQNV4_12TR40         s
+   DGSNQNV6_12TR40         s
+   DGSNQV2_12TR40          s
+   DGSNQV4_12TR40          s
+   DGSNQV6_12TR40          s
+   DQNV0_12TR40            s
+   DQNV2_12TR40            s
+   DQNV4_12TR40            s
+   DQNV6_12TR40            s
+   DQV0_12TR40             s
+   DQV2_12TR40             s
+   DQV4_12TR40             s
+   DQV6_12TR40             s
+   DQV8_12TR40             s
+   DRNQNV0_12TR40          s
+   DRNQNV2_12TR40          s
+   DRNQNV4_12TR40          s
+   DRNQNV6_12TR40          s
+   DRNQV0_12TR40           s
+   DRNQV2_12TR40           s
+   DRNQV4_12TR40           s
+   DRNQV6_12TR40           s
+   DRNQV8_12TR40           s
+   DRSNQNV0_12TR40         s
+   DRSNQNV2_12TR40         s
+   DRSNQNV4_12TR40         s
+   DRSNQNV6_12TR40         s
+   DRSNQV0_12TR40          s
+   DRSNQV2_12TR40          s
+   DRSNQV4_12TR40          s
+   DRSNQV6_12TR40          s
+   DRSNQV8_12TR40          s
+   DSNQNV0_12TR40          s
+   DSNQNV2_12TR40          s
+   DSNQNV4_12TR40          s
+   DSNQNV6_12TR40          s
+   DSNQV0_12TR40           s
+   DSNQV2_12TR40           s
+   DSNQV4_12TR40           s
+   DSNQV6_12TR40           s
+   DSNQV8_12TR40           s
+   DXQNV2_12TR40           s
+   DXQNV4_12TR40           s
+   DXQNV6_12TR40           s
+   DXQV2_12TR40            s
+   DXQV4_12TR40            s
+   DXQV6_12TR40            s
+   EDGRNQNV2_12TR40        s
+   EDGRNQNV4_12TR40        s
+   EDGRNQNV6_12TR40        s
+   EDGRNQV2_12TR40         s
+   EDGRNQV4_12TR40         s
+   EDGRNQV6_12TR40         s
+   EDQNV2_12TR40           s
+   EDQNV4_12TR40           s
+   EDQNV6_12TR40           s
+   EDQV2_12TR40            s
+   EDQV4_12TR40            s
+   EDQV6_12TR40            s
+   EDRNQNV2_12TR40         s
+   EDRNQNV4_12TR40         s
+   EDRNQNV6_12TR40         s
+   EDRNQV2_12TR40          s
+   EDRNQV4_12TR40          s
+   EDRNQV6_12TR40          s
+   FDCAP128_12TR40         b
+   FDCAP16_12TR40          b
+   FDCAP32_12TR40          b
+   FDCAP4_12TR40           b
+   FDCAP64_12TR40          b
+   FDCAP8_12TR40           b
+   F_DIODE2_12TR40         b
+   F_DIODE4_12TR40         b
+   F_DIODE8_12TR40         b
+   INV0SR_12TR40           
+   INV0_12TR40             
+   INV10SR_12TR40          
+   INV10_12TR40            
+   INV12SR_12TR40          
+   INV12_12TR40            
+   INV16SR_12TR40          
+   INV16_12TR40            
+   INV1SR_12TR40           
+   INV1_12TR40             
+   INV20SR_12TR40          
+   INV20_12TR40            
+   INV24SR_12TR40          
+   INV24_12TR40            
+   INV2SR_12TR40           
+   INV2_12TR40             
+   INV32SR_12TR40          
+   INV32_12TR40            
+   INV3SR_12TR40           
+   INV3_12TR40             
+   INV4SR_12TR40           
+   INV4_12TR40             
+   INV5SR_12TR40           
+   INV5_12TR40             
+   INV6SR_12TR40           
+   INV6_12TR40             
+   INV7SR_12TR40           
+   INV7_12TR40             
+   INV8SR_12TR40           
+   INV8_12TR40             
+   LAHQNV0_12TR40          s
+   LAHQNV2_12TR40          s
+   LAHQNV4_12TR40          s
+   LAHQNV6_12TR40          s
+   LAHQNV8_12TR40          s
+   LAHQV0_12TR40           s
+   LAHQV2_12TR40           s
+   LAHQV4_12TR40           s
+   LAHQV6_12TR40           s
+   LAHRNQNV0_12TR40        s
+   LAHRNQNV2_12TR40        s
+   LAHRNQNV4_12TR40        s
+   LAHRNQNV6_12TR40        s
+   LAHRNQNV8_12TR40        s
+   LAHRNQV0_12TR40         s
+   LAHRNQV2_12TR40         s
+   LAHRNQV4_12TR40         s
+   LAHRNQV6_12TR40         s
+   LAHRSNQNV2_12TR40       s
+   LAHRSNQNV4_12TR40       s
+   LAHRSNQNV6_12TR40       s
+   LAHRSNQV2_12TR40        s
+   LAHRSNQV4_12TR40        s
+   LAHRSNQV6_12TR40        s
+   LAHSNQNV0_12TR40        s
+   LAHSNQNV2_12TR40        s
+   LAHSNQNV4_12TR40        s
+   LAHSNQNV6_12TR40        s
+   LAHSNQNV8_12TR40        s
+   LAHSNQV2_12TR40         s
+   LAHSNQV4_12TR40         s
+   LAHSNQV6_12TR40         s
+   LALQNV0_12TR40          s
+   LALQNV2_12TR40          s
+   LALQNV4_12TR40          s
+   LALQNV6_12TR40          s
+   LALQNV8_12TR40          s
+   LALQV0_12TR40           s
+   LALQV2_12TR40           s
+   LALQV4_12TR40           s
+   LALQV6_12TR40           s
+   LALRNQNV2_12TR40        s
+   LALRNQNV4_12TR40        s
+   LALRNQNV6_12TR40        s
+   LALRNQV2_12TR40         s
+   LALRNQV4_12TR40         s
+   LALRNQV6_12TR40         s
+   LALRSNQNV2_12TR40       s
+   LALRSNQNV4_12TR40       s
+   LALRSNQNV6_12TR40       s
+   LALRSNQV2_12TR40        s
+   LALRSNQV4_12TR40        s
+   LALRSNQV6_12TR40        s
+   LALSNQNV0_12TR40        s
+   LALSNQNV2_12TR40        s
+   LALSNQNV4_12TR40        s
+   LALSNQNV6_12TR40        s
+   LALSNQNV8_12TR40        s
+   LALSNQV2_12TR40         s
+   LALSNQV4_12TR40         s
+   LALSNQV6_12TR40         s
+   MAJ23V2_12TR40          
+   MAJ23V3_12TR40          
+   MAJ23V4_12TR40          
+   MAOI222V1_12TR40        
+   MAOI222V2_12TR40        
+   MAOI222V4_12TR40        
+   MAOI222V8_12TR40        
+   MUX2NV0_12TR40          
+   MUX2NV1_12TR40          
+   MUX2NV2_12TR40          
+   MUX2NV3_12TR40          
+   MUX2NV4_12TR40          
+   MUX2NV6_12TR40          
+   MUX2NV8_12TR40          
+   MUX2V0_12TR40           
+   MUX2V12_12TR40          
+   MUX2V1_12TR40           
+   MUX2V2_12TR40           
+   MUX2V3_12TR40           
+   MUX2V4_12TR40           
+   MUX2V6_12TR40           
+   MUX2V8_12TR40           
+   MUX3NV1_12TR40          
+   MUX3NV2_12TR40          
+   MUX3NV4_12TR40          
+   MUX3NV8_12TR40          
+   MUX3V1_12TR40           
+   MUX3V2_12TR40           
+   MUX3V4_12TR40           
+   MUX3V8_12TR40           
+   MUX4NV0_12TR40          
+   MUX4NV1_12TR40          
+   MUX4NV2_12TR40          
+   MUX4NV3_12TR40          
+   MUX4NV4_12TR40          
+   MUX4NV6_12TR40          
+   MUX4V0_12TR40           
+   MUX4V1_12TR40           
+   MUX4V2_12TR40           
+   MUX4V3_12TR40           
+   MUX4V4_12TR40           
+   MUX4V6_12TR40           
+   NAND2BV0_12TR40         
+   NAND2BV12_12TR40        
+   NAND2BV16_12TR40        
+   NAND2BV1_12TR40         
+   NAND2BV2_12TR40         
+   NAND2BV3_12TR40         
+   NAND2BV4_12TR40         
+   NAND2BV6_12TR40         
+   NAND2BV8_12TR40         
+   NAND2CV0_12TR40         
+   NAND2CV12_12TR40        
+   NAND2CV16_12TR40        
+   NAND2CV1_12TR40         
+   NAND2CV2_12TR40         
+   NAND2CV3_12TR40         
+   NAND2CV4_12TR40         
+   NAND2CV6_12TR40         
+   NAND2CV8_12TR40         
+   NAND2V0_12TR40          
+   NAND2V12_12TR40         
+   NAND2V16_12TR40         
+   NAND2V1_12TR40          
+   NAND2V2_12TR40          
+   NAND2V3_12TR40          
+   NAND2V4_12TR40          
+   NAND2V6_12TR40          
+   NAND2V8_12TR40          
+   NAND2XBV0_12TR40        
+   NAND2XBV12_12TR40       
+   NAND2XBV16_12TR40       
+   NAND2XBV1_12TR40        
+   NAND2XBV2_12TR40        
+   NAND2XBV3_12TR40        
+   NAND2XBV4_12TR40        
+   NAND2XBV6_12TR40        
+   NAND2XBV8_12TR40        
+   NAND3BBV0_12TR40        
+   NAND3BBV12_12TR40       
+   NAND3BBV16_12TR40       
+   NAND3BBV1_12TR40        
+   NAND3BBV2_12TR40        
+   NAND3BBV3_12TR40        
+   NAND3BBV4_12TR40        
+   NAND3BBV6_12TR40        
+   NAND3BBV8_12TR40        
+   NAND3BV0_12TR40         
+   NAND3BV12_12TR40        
+   NAND3BV1_12TR40         
+   NAND3BV2_12TR40         
+   NAND3BV3_12TR40         
+   NAND3BV4_12TR40         
+   NAND3BV6_12TR40         
+   NAND3BV8_12TR40         
+   NAND3CV0_12TR40         
+   NAND3CV12_12TR40        
+   NAND3CV1_12TR40         
+   NAND3CV2_12TR40         
+   NAND3CV3_12TR40         
+   NAND3CV4_12TR40         
+   NAND3CV6_12TR40         
+   NAND3CV8_12TR40         
+   NAND3V0_12TR40          
+   NAND3V12_12TR40         
+   NAND3V1_12TR40          
+   NAND3V2_12TR40          
+   NAND3V3_12TR40          
+   NAND3V4_12TR40          
+   NAND3V6_12TR40          
+   NAND3V8_12TR40          
+   NAND3XXBV0_12TR40       
+   NAND3XXBV12_12TR40      
+   NAND3XXBV1_12TR40       
+   NAND3XXBV2_12TR40       
+   NAND3XXBV3_12TR40       
+   NAND3XXBV4_12TR40       
+   NAND3XXBV6_12TR40       
+   NAND3XXBV8_12TR40       
+   NAND4BBV0_12TR40        
+   NAND4BBV12_12TR40       
+   NAND4BBV1_12TR40        
+   NAND4BBV2_12TR40        
+   NAND4BBV3_12TR40        
+   NAND4BBV4_12TR40        
+   NAND4BBV6_12TR40        
+   NAND4BBV8_12TR40        
+   NAND4BV0_12TR40         
+   NAND4BV1_12TR40         
+   NAND4BV2_12TR40         
+   NAND4BV3_12TR40         
+   NAND4BV4_12TR40         
+   NAND4BV6_12TR40         
+   NAND4BV8_12TR40         
+   NAND4CV0_12TR40         
+   NAND4CV1_12TR40         
+   NAND4CV2_12TR40         
+   NAND4CV3_12TR40         
+   NAND4CV4_12TR40         
+   NAND4CV6_12TR40         
+   NAND4CV8_12TR40         
+   NAND4V0_12TR40          
+   NAND4V1_12TR40          
+   NAND4V2_12TR40          
+   NAND4V3_12TR40          
+   NAND4V4_12TR40          
+   NAND4V6_12TR40          
+   NAND4V8_12TR40          
+   NAND4XXXBV0_12TR40      
+   NAND4XXXBV1_12TR40      
+   NAND4XXXBV2_12TR40      
+   NAND4XXXBV3_12TR40      
+   NAND4XXXBV4_12TR40      
+   NAND4XXXBV6_12TR40      
+   NAND4XXXBV8_12TR40      
+   NDQNV2_12TR40           s
+   NDQNV4_12TR40           s
+   NDQNV6_12TR40           s
+   NDQV2_12TR40            s
+   NDQV4_12TR40            s
+   NDQV6_12TR40            s
+   NDRNQNV2_12TR40         s
+   NDRNQNV4_12TR40         s
+   NDRNQNV6_12TR40         s
+   NDRNQV2_12TR40          s
+   NDRNQV4_12TR40          s
+   NDRNQV6_12TR40          s
+   NDRSNQNV2_12TR40        s
+   NDRSNQNV4_12TR40        s
+   NDRSNQNV6_12TR40        s
+   NDRSNQV2_12TR40         s
+   NDRSNQV4_12TR40         s
+   NDRSNQV6_12TR40         s
+   NDSNQNV2_12TR40         s
+   NDSNQNV4_12TR40         s
+   NDSNQNV6_12TR40         s
+   NDSNQV2_12TR40          s
+   NDSNQV4_12TR40          s
+   NDSNQV6_12TR40          s
+   NOR2BV0_12TR40          
+   NOR2BV12_12TR40         
+   NOR2BV16_12TR40         
+   NOR2BV1_12TR40          
+   NOR2BV2_12TR40          
+   NOR2BV3_12TR40          
+   NOR2BV4_12TR40          
+   NOR2BV6_12TR40          
+   NOR2BV8_12TR40          
+   NOR2CV0_12TR40          
+   NOR2CV12_12TR40         
+   NOR2CV16_12TR40         
+   NOR2CV1_12TR40          
+   NOR2CV2_12TR40          
+   NOR2CV3_12TR40          
+   NOR2CV4_12TR40          
+   NOR2CV6_12TR40          
+   NOR2CV8_12TR40          
+   NOR2V0_12TR40           
+   NOR2V12_12TR40          
+   NOR2V16_12TR40          
+   NOR2V1_12TR40           
+   NOR2V2_12TR40           
+   NOR2V3_12TR40           
+   NOR2V4_12TR40           
+   NOR2V6_12TR40           
+   NOR2V8_12TR40           
+   NOR2XBV0_12TR40         
+   NOR2XBV12_12TR40        
+   NOR2XBV16_12TR40        
+   NOR2XBV1_12TR40         
+   NOR2XBV2_12TR40         
+   NOR2XBV3_12TR40         
+   NOR2XBV4_12TR40         
+   NOR2XBV6_12TR40         
+   NOR2XBV8_12TR40         
+   NOR3BBV0_12TR40         
+   NOR3BBV12_12TR40        
+   NOR3BBV16_12TR40        
+   NOR3BBV1_12TR40         
+   NOR3BBV2_12TR40         
+   NOR3BBV3_12TR40         
+   NOR3BBV4_12TR40         
+   NOR3BBV6_12TR40         
+   NOR3BBV8_12TR40         
+   NOR3BV1_12TR40          
+   NOR3BV2_12TR40          
+   NOR3BV4_12TR40          
+   NOR3BV8_12TR40          
+   NOR3CV0_12TR40          
+   NOR3CV1_12TR40          
+   NOR3CV2_12TR40          
+   NOR3CV3_12TR40          
+   NOR3CV4_12TR40          
+   NOR3CV6_12TR40          
+   NOR3CV8_12TR40          
+   NOR3V0_12TR40           
+   NOR3V1_12TR40           
+   NOR3V2_12TR40           
+   NOR3V3_12TR40           
+   NOR3V4_12TR40           
+   NOR3V6_12TR40           
+   NOR3V8_12TR40           
+   NOR4BBV0_12TR40         
+   NOR4BBV1_12TR40         
+   NOR4BBV2_12TR40         
+   NOR4BBV3_12TR40         
+   NOR4BBV4_12TR40         
+   NOR4BBV6_12TR40         
+   NOR4BBV8_12TR40         
+   NOR4BV1_12TR40          
+   NOR4BV2_12TR40          
+   NOR4BV4_12TR40          
+   NOR4BV8_12TR40          
+   NOR4CV1_12TR40          
+   NOR4CV2_12TR40          
+   NOR4CV4_12TR40          
+   NOR4V1_12TR40           
+   NOR4V2_12TR40           
+   NOR4V4_12TR40           
+   OA1B2V0_12TR40          
+   OA1B2V12_12TR40         
+   OA1B2V16_12TR40         
+   OA1B2V1_12TR40          
+   OA1B2V2_12TR40          
+   OA1B2V3_12TR40          
+   OA1B2V4_12TR40          
+   OA1B2V6_12TR40          
+   OA1B2V8_12TR40          
+   OA211V0_12TR40          
+   OA211V12_12TR40         
+   OA211V1_12TR40          
+   OA211V2_12TR40          
+   OA211V3_12TR40          
+   OA211V4_12TR40          
+   OA211V6_12TR40          
+   OA211V8_12TR40          
+   OA21BV0_12TR40          
+   OA21BV12_12TR40         
+   OA21BV16_12TR40         
+   OA21BV1_12TR40          
+   OA21BV2_12TR40          
+   OA21BV3_12TR40          
+   OA21BV4_12TR40          
+   OA21BV6_12TR40          
+   OA21BV8_12TR40          
+   OA21V0_12TR40           
+   OA21V12_12TR40          
+   OA21V16_12TR40          
+   OA21V1_12TR40           
+   OA21V2_12TR40           
+   OA21V3_12TR40           
+   OA21V4_12TR40           
+   OA21V6_12TR40           
+   OA21V8_12TR40           
+   OA221V1_12TR40          
+   OA221V2_12TR40          
+   OA221V4_12TR40          
+   OA221V8_12TR40          
+   OA222V1_12TR40          
+   OA222V2_12TR40          
+   OA222V4_12TR40          
+   OA222V8_12TR40          
+   OA22V0_12TR40           
+   OA22V12_12TR40          
+   OA22V16_12TR40          
+   OA22V1_12TR40           
+   OA22V2_12TR40           
+   OA22V3_12TR40           
+   OA22V4_12TR40           
+   OA22V6_12TR40           
+   OA22V8_12TR40           
+   OA31V1_12TR40           
+   OA31V2_12TR40           
+   OA31V4_12TR40           
+   OA31V8_12TR40           
+   OA32V1_12TR40           
+   OA32V2_12TR40           
+   OA32V4_12TR40           
+   OA32V8_12TR40           
+   OA33V1_12TR40           
+   OA33V2_12TR40           
+   OA33V4_12TR40           
+   OA33V8_12TR40           
+   OAI211V0_12TR40         
+   OAI211V1_12TR40         
+   OAI211V2_12TR40         
+   OAI211V3_12TR40         
+   OAI211V4_12TR40         
+   OAI211V6_12TR40         
+   OAI211V8_12TR40         
+   OAI21BV0_12TR40         
+   OAI21BV12_12TR40        
+   OAI21BV16_12TR40        
+   OAI21BV1_12TR40         
+   OAI21BV2_12TR40         
+   OAI21BV3_12TR40         
+   OAI21BV4_12TR40         
+   OAI21BV6_12TR40         
+   OAI21BV8_12TR40         
+   OAI21V0_12TR40          
+   OAI21V12_12TR40         
+   OAI21V16_12TR40         
+   OAI21V1_12TR40          
+   OAI21V2_12TR40          
+   OAI21V3_12TR40          
+   OAI21V4_12TR40          
+   OAI21V6_12TR40          
+   OAI21V8_12TR40          
+   OAI221V0_12TR40         
+   OAI221V1_12TR40         
+   OAI221V2_12TR40         
+   OAI221V3_12TR40         
+   OAI221V4_12TR40         
+   OAI221V6_12TR40         
+   OAI221V8_12TR40         
+   OAI222V0_12TR40         
+   OAI222V1_12TR40         
+   OAI222V2_12TR40         
+   OAI222V3_12TR40         
+   OAI222V4_12TR40         
+   OAI222V6_12TR40         
+   OAI222V8_12TR40         
+   OAI22BBV0_12TR40        
+   OAI22BBV12_12TR40       
+   OAI22BBV16_12TR40       
+   OAI22BBV1_12TR40        
+   OAI22BBV2_12TR40        
+   OAI22BBV3_12TR40        
+   OAI22BBV4_12TR40        
+   OAI22BBV6_12TR40        
+   OAI22BBV8_12TR40        
+   OAI22V0_12TR40          
+   OAI22V12_12TR40         
+   OAI22V16_12TR40         
+   OAI22V1_12TR40          
+   OAI22V2_12TR40          
+   OAI22V3_12TR40          
+   OAI22V4_12TR40          
+   OAI22V6_12TR40          
+   OAI22V8_12TR40          
+   OAI2XB1V0_12TR40        
+   OAI2XB1V12_12TR40       
+   OAI2XB1V16_12TR40       
+   OAI2XB1V1_12TR40        
+   OAI2XB1V2_12TR40        
+   OAI2XB1V3_12TR40        
+   OAI2XB1V4_12TR40        
+   OAI2XB1V6_12TR40        
+   OAI2XB1V8_12TR40        
+   OAI31V0_12TR40          
+   OAI31V12_12TR40         
+   OAI31V1_12TR40          
+   OAI31V2_12TR40          
+   OAI31V3_12TR40          
+   OAI31V4_12TR40          
+   OAI31V6_12TR40          
+   OAI31V8_12TR40          
+   OAI32V1_12TR40          
+   OAI32V2_12TR40          
+   OAI32V4_12TR40          
+   OAI32V8_12TR40          
+   OAI33V1_12TR40          
+   OAI33V2_12TR40          
+   OAI33V4_12TR40          
+   OAI33V8_12TR40          
+   OAO211V1_12TR40         
+   OAO211V2_12TR40         
+   OAO211V4_12TR40         
+   OAO211V8_12TR40         
+   OAOAI2111V1_12TR40      
+   OAOAI2111V2_12TR40      
+   OAOAI2111V4_12TR40      
+   OAOAI2111V8_12TR40      
+   OAOAOAI211111V1_12TR40  
+   OAOAOAI211111V2_12TR40  
+   OAOAOAI211111V4_12TR40  
+   OAOAOAI211111V8_12TR40  
+   OAOI211V0_12TR40        
+   OAOI211V12_12TR40       
+   OAOI211V1_12TR40        
+   OAOI211V2_12TR40        
+   OAOI211V3_12TR40        
+   OAOI211V4_12TR40        
+   OAOI211V6_12TR40        
+   OAOI211V8_12TR40        
+   OR2V0_12TR40            
+   OR2V10RD_12TR40         
+   OR2V12_12TR40           
+   OR2V16_12TR40           
+   OR2V1RD_12TR40          
+   OR2V1_12TR40            
+   OR2V22_12TR40           
+   OR2V2RD_12TR40          
+   OR2V2_12TR40            
+   OR2V3_12TR40            
+   OR2V4RD_12TR40          
+   OR2V4_12TR40            
+   OR2V6RD_12TR40          
+   OR2V6_12TR40            
+   OR2V8RD_12TR40          
+   OR2V8_12TR40            
+   OR3V0_12TR40            
+   OR3V10RD_12TR40         
+   OR3V12_12TR40           
+   OR3V16_12TR40           
+   OR3V1RD_12TR40          
+   OR3V1_12TR40            
+   OR3V2RD_12TR40          
+   OR3V2_12TR40            
+   OR3V3_12TR40            
+   OR3V4RD_12TR40          
+   OR3V4_12TR40            
+   OR3V6RD_12TR40          
+   OR3V6_12TR40            
+   OR3V8RD_12TR40          
+   OR3V8_12TR40            
+   OR4V0_12TR40            
+   OR4V10RD_12TR40         
+   OR4V12_12TR40           
+   OR4V16_12TR40           
+   OR4V1RD_12TR40          
+   OR4V1_12TR40            
+   OR4V2RD_12TR40          
+   OR4V2_12TR40            
+   OR4V3_12TR40            
+   OR4V4RD_12TR40          
+   OR4V4_12TR40            
+   OR4V6RD_12TR40          
+   OR4V6_12TR40            
+   OR4V8RD_12TR40          
+   OR4V8_12TR40            
+   OR6V0_12TR40            
+   OR6V12_12TR40           
+   OR6V1_12TR40            
+   OR6V2_12TR40            
+   OR6V3_12TR40            
+   OR6V4_12TR40            
+   OR6V6_12TR40            
+   OR6V8_12TR40            
+   PULL0_12TR40            d,u
+   PULL1_12TR40            d,u
+   SDGRNQNV2_12TR40        s
+   SDGRNQNV4_12TR40        s
+   SDGRNQNV6_12TR40        s
+   SDGRNQV2_12TR40         s
+   SDGRNQV4_12TR40         s
+   SDGRNQV6_12TR40         s
+   SDGRSNQNV2_12TR40       s
+   SDGRSNQNV4_12TR40       s
+   SDGRSNQNV6_12TR40       s
+   SDGRSNQV2_12TR40        s
+   SDGRSNQV4_12TR40        s
+   SDGRSNQV6_12TR40        s
+   SDGSNQNV2_12TR40        s
+   SDGSNQNV4_12TR40        s
+   SDGSNQNV6_12TR40        s
+   SDGSNQV2_12TR40         s
+   SDGSNQV4_12TR40         s
+   SDGSNQV6_12TR40         s
+   SDQNV0_12TR40           s
+   SDQNV2_12TR40           s
+   SDQNV4_12TR40           s
+   SDQNV6_12TR40           s
+   SDQV0_12TR40            s
+   SDQV2_12TR40            s
+   SDQV4_12TR40            s
+   SDQV6_12TR40            s
+   SDQV8_12TR40            s
+   SDRNQNV0_12TR40         s
+   SDRNQNV2_12TR40         s
+   SDRNQNV4_12TR40         s
+   SDRNQNV6_12TR40         s
+   SDRNQV0_12TR40          s
+   SDRNQV2_12TR40          s
+   SDRNQV4_12TR40          s
+   SDRNQV6_12TR40          s
+   SDRNQV8_12TR40          s
+   SDRSNQNV0_12TR40        s
+   SDRSNQNV2_12TR40        s
+   SDRSNQNV4_12TR40        s
+   SDRSNQNV6_12TR40        s
+   SDRSNQV0_12TR40         s
+   SDRSNQV2_12TR40         s
+   SDRSNQV4_12TR40         s
+   SDRSNQV6_12TR40         s
+   SDRSNQV8_12TR40         s
+   SDSNQNV0_12TR40         s
+   SDSNQNV2_12TR40         s
+   SDSNQNV4_12TR40         s
+   SDSNQNV6_12TR40         s
+   SDSNQV0_12TR40          s
+   SDSNQV2_12TR40          s
+   SDSNQV4_12TR40          s
+   SDSNQV6_12TR40          s
+   SDSNQV8_12TR40          s
+   SDXQNV0_12TR40          s
+   SDXQNV2_12TR40          s
+   SDXQNV4_12TR40          s
+   SDXQNV6_12TR40          s
+   SDXQV0_12TR40           s
+   SDXQV2_12TR40           s
+   SDXQV4_12TR40           s
+   SDXQV6_12TR40           s
+   SDXQV8_12TR40           s
+   SEDGRNQNV2_12TR40       s
+   SEDGRNQNV4_12TR40       s
+   SEDGRNQNV6_12TR40       s
+   SEDGRNQV2_12TR40        s
+   SEDGRNQV4_12TR40        s
+   SEDGRNQV6_12TR40        s
+   SEDQNV0_12TR40          s
+   SEDQNV2_12TR40          s
+   SEDQNV4_12TR40          s
+   SEDQNV6_12TR40          s
+   SEDQV0_12TR40           s
+   SEDQV2_12TR40           s
+   SEDQV4_12TR40           s
+   SEDQV6_12TR40           s
+   SEDRNQNV2_12TR40        s
+   SEDRNQNV4_12TR40        s
+   SEDRNQNV6_12TR40        s
+   SEDRNQV2_12TR40         s
+   SEDRNQV4_12TR40         s
+   SEDRNQV6_12TR40         s
+   SNDQNV2_12TR40          s
+   SNDQNV4_12TR40          s
+   SNDQNV6_12TR40          s
+   SNDQV2_12TR40           s
+   SNDQV4_12TR40           s
+   SNDQV6_12TR40           s
+   SNDRNQNV2_12TR40        s
+   SNDRNQNV4_12TR40        s
+   SNDRNQNV6_12TR40        s
+   SNDRNQV2_12TR40         s
+   SNDRNQV4_12TR40         s
+   SNDRNQV6_12TR40         s
+   SNDRSNQNV2_12TR40       s
+   SNDRSNQNV4_12TR40       s
+   SNDRSNQNV6_12TR40       s
+   SNDRSNQV2_12TR40        s
+   SNDRSNQV4_12TR40        s
+   SNDRSNQV6_12TR40        s
+   SNDSNQNV2_12TR40        s
+   SNDSNQNV4_12TR40        s
+   SNDSNQNV6_12TR40        s
+   SNDSNQV2_12TR40         s
+   SNDSNQV4_12TR40         s
+   SNDSNQV6_12TR40         s
+   TBUFV12_12TR40          
+   TBUFV16_12TR40          
+   TBUFV20_12TR40          
+   TBUFV24_12TR40          
+   TBUFV2_12TR40           
+   TBUFV32_12TR40          
+   TBUFV3_12TR40           
+   TBUFV4_12TR40           
+   TBUFV6_12TR40           
+   TBUFV8_12TR40           
+   XNOR2V0_12TR40          
+   XNOR2V1_12TR40          
+   XNOR2V2_12TR40          
+   XNOR2V3_12TR40          
+   XNOR2V4_12TR40          
+   XNOR2V6_12TR40          
+   XNOR2V8_12TR40          
+   XNOR3V0_12TR40          
+   XNOR3V1_12TR40          
+   XNOR3V2_12TR40          
+   XNOR3V3_12TR40          
+   XNOR3V4_12TR40          
+   XNOR3V6_12TR40          
+   XNOR3V8_12TR40          
+   XNOR4V1_12TR40          
+   XNOR4V2_12TR40          
+   XNOR4V4_12TR40          
+   XNOR4V8_12TR40          
+   XOR2V0_12TR40           
+   XOR2V1_12TR40           
+   XOR2V2_12TR40           
+   XOR2V3_12TR40           
+   XOR2V4_12TR40           
+   XOR2V6_12TR40           
+   XOR2V8_12TR40           
+   XOR3V0_12TR40           
+   XOR3V1_12TR40           
+   XOR3V2_12TR40           
+   XOR3V3_12TR40           
+   XOR3V4_12TR40           
+   XOR3V6_12TR40           
+   XOR3V8_12TR40           
+   XOR4V1_12TR40           
+   XOR4V2_12TR40           
+   XOR4V4_12TR40           
+   XOR4V8_12TR40           
+
+****************************************
+Report : library
+Library: RAMSP1024X16_ss_0p99v_0p99v_125c
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 10:54:39 2026
+****************************************
+
+Time Unit                   : 1 ns
+Capacitance Unit            : 1 pF
+Default Wire Load Mode      : top
+Default Wire Load Model     : Not specified.
+Default Wire Selection Group: Not specified.
+
+Operating Conditions:
+
+   Name                Process     Temp        Voltage     Tree Type
+   ---------------------------------------------------------------------------
+   ss_0p99v_0p99v_125c    1.00      125.00        0.99     balanced_case
+
+Wire Load Models:
+
+   Name
+   ---------------------------------------------------------------------------
+   sample
+
+Wire Load Selection Groups: none specified
+
+
+Delay Threshold Trip-Points
+
+	input_threshold_pct_rise:		0.5
+	output_threshold_pct_rise:		0.5
+	input_threshold_pct_fall:		0.5
+	output_threshold_pct_fall:		0.5
+
+Slew Threshold Trip-Points
+
+	slew_lower_threshold_pct_rise:		0.3
+	slew_upper_threshold_pct_rise:		0.7
+	slew_lower_threshold_pct_fall:		0.3
+	slew_upper_threshold_pct_fall:		0.7
+
+	slew_derate_from_lib:			0.5
+
+Variation parameters: none specified
+
+Library Cells:
+
+   Attributes:
+    b - black box (function unknown)
+    d - dont_touch
+    s - state table
+    u - dont_use
+    A - abstracted timing model
+    E - extracted timing model
+    I - Interface timing spec model (ITS)
+    S - Stamp timing model
+    Q - Quick timing model (QTM)
+
+Lib Cell                Attributes
+--------------------    ---------------
+   RAMSP1024X16            b,d,u,I
+
