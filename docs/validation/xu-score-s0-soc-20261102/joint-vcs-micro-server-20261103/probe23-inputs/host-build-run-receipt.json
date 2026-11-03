@@ -1,0 +1,106 @@
+{
+  "status": "HOST_EXERCISED_NO_NATIVE_SAIF_VCS_PENDING",
+  "steps": [
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-D_POSIX_C_SOURCE=200809L",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Wshadow",
+        "-Wstrict-prototypes",
+        "-Werror",
+        "-O2",
+        "-I/usr/include/iverilog",
+        "-shared",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/xu_sram_joint_vpi23.c",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/xu_sram_joint_vpi.vpi"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-D_POSIX_C_SOURCE=200809L",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Wshadow",
+        "-Wstrict-prototypes",
+        "-Werror",
+        "-O2",
+        "-I/usr/include/iverilog",
+        "-shared",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/xu_joint_probe23.c",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/xu_sram_probe_vpi.vpi"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-DXU_JOINT_HOST_NO_SAIF",
+        "-s",
+        "tb_xu_sram_joint_micro",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/host.vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/tb_xu_sram_joint_micro23.sv"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe",
+        "-mxu_sram_joint_vpi",
+        "-mxu_sram_probe_vpi",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/host.vvp",
+        "+MODE=0",
+        "+OUT=/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/host-mode-0"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe",
+        "-mxu_sram_joint_vpi",
+        "-mxu_sram_probe_vpi",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/host.vvp",
+        "+MODE=1",
+        "+OUT=/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/host-mode-1"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe",
+        "-mxu_sram_joint_vpi",
+        "-mxu_sram_probe_vpi",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/host.vvp",
+        "+MODE=2",
+        "+OUT=/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/host-mode-2"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe",
+        "-mxu_sram_joint_vpi",
+        "-mxu_sram_probe_vpi",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/host.vvp",
+        "+MODE=3",
+        "+OUT=/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs23-saif-probe/host-mode-3"
+      ],
+      "returncode": 0
+    }
+  ]
+}

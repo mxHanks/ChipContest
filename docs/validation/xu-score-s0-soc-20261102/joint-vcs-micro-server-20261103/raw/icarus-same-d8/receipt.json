@@ -1,0 +1,115 @@
+{
+  "status": "ICARUS_SAME_D8_SOURCE_EXECUTED_NOT_VCS_OR_ENERGY_QUALIFIED",
+  "steps": [
+    {
+      "command": [
+        "cc",
+        "--version"
+      ],
+      "returncode": 0,
+      "log": "step-0.log"
+    },
+    {
+      "command": [
+        "iverilog",
+        "-V"
+      ],
+      "returncode": 0,
+      "log": "step-1.log"
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-D_POSIX_C_SOURCE=200809L",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Wshadow",
+        "-Wstrict-prototypes",
+        "-Werror",
+        "-O2",
+        "-I/usr/include/iverilog",
+        "-shared",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/xu_sram_joint_vpi.c",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/xu_sram_joint_vpi.vpi"
+      ],
+      "returncode": 0,
+      "log": "step-2.log"
+    },
+    {
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-s",
+        "tb_xu_sram_joint_micro",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/micro.vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/tb_xu_sram_joint_micro.sv"
+      ],
+      "returncode": 0,
+      "log": "step-3.log"
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay",
+        "-mxu_sram_joint_vpi",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/micro.vvp",
+        "+MODE=0",
+        "+OUT=/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/mode-0"
+      ],
+      "returncode": 0,
+      "log": "step-4.log"
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay",
+        "-mxu_sram_joint_vpi",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/micro.vvp",
+        "+MODE=1",
+        "+OUT=/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/mode-1"
+      ],
+      "returncode": 0,
+      "log": "step-5.log"
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay",
+        "-mxu_sram_joint_vpi",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/micro.vvp",
+        "+MODE=2",
+        "+OUT=/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/mode-2"
+      ],
+      "returncode": 0,
+      "log": "step-6.log"
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay",
+        "-mxu_sram_joint_vpi",
+        "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/micro.vvp",
+        "+MODE=3",
+        "+OUT=/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/mode-3"
+      ],
+      "returncode": 0,
+      "log": "step-7.log"
+    }
+  ],
+  "sources": [
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/xu_sram_joint_vpi.c",
+      "bytes": 15999,
+      "sha256": "4656d8567607359321cd3f773476251bf6f0b73e7e51fee7d85aa77828fc22d6"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/build/xu-vcs19-replay/tb_xu_sram_joint_micro.sv",
+      "bytes": 2339,
+      "sha256": "ed0cc4cbeff912a3420933679ada244f2535f7f5cb5b2cac8af36bce55342b06"
+    }
+  ]
+}

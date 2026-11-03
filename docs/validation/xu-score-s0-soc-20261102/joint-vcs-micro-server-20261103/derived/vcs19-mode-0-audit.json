@@ -1,0 +1,9906 @@
+{
+  "arc_count_per_macro": 121,
+  "arc_ledger_report_sha256": "f1d18b00fece31f942a514505d808e704179c3a99437aebb9abf152823757ba7",
+  "control_tuple_order": [
+    "RET1N",
+    "CEN",
+    "GWEN",
+    "EMA[2]",
+    "EMA[1]",
+    "EMA[0]",
+    "EMAW[1]",
+    "EMAW[0]"
+  ],
+  "inputs": [
+    {
+      "bytes": 54081,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/docs/validation/xu-score-s0-soc-20261102/joint-vcs-micro-server-20261103/raw/vcs19/mode-0.stats.jsonl",
+      "sha256": "0eff1f4adeb4e7514ee8699032dd57ceb5f1b1699953bbc47fcb38f1d4b7969e"
+    },
+    {
+      "bytes": 82684,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/docs/validation/xu-score-s0-soc-20261102/joint-vcs-micro-server-20261103/raw/vcs19/mode-0.simultaneous.jsonl",
+      "sha256": "a18d0ba1a676ea89fc3d57c387244ff1ab9373159b6e3b42390ce71196fde718"
+    },
+    {
+      "bytes": 17438,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/docs/validation/xu-score-s0-soc-20261102/joint-vcs-micro-server-20261103/evidence-tools/xu_sram1024x16_arc_ledger.json",
+      "sha256": "b950b6d0c8922073a2de6cc17a09aa66a5d7ae3d646acb6a5460bedfd440536b"
+    }
+  ],
+  "limitations": [
+    "Callback ordinal is observed VPI callback order; actual VCS active/NBA/readonly behavior must be calibrated.",
+    "Simultaneous control/toggling and window-boundary events are retained; no unique effective PT energy condition is assumed.",
+    "Macro membership must additionally match actual mapped inventory and producer/source provenance; no such identity is inferred here.",
+    "No SAIF TC/TX/TZ/TB/IG or PT state_condition agreement, timing qualification or power/energy claim."
+  ],
+  "macro_count": 1,
+  "macros": [
+    {
+      "arcs": [
+        {
+          "arc_id": 0,
+          "condition_dwell_false_true_unknown": [
+            265000000,
+            259000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "leakage",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": null,
+          "toggling_pin": null,
+          "when": "!RET1N"
+        },
+        {
+          "arc_id": 1,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "leakage",
+          "leakage_default_policy": "recorded fallback condition; not additive independent leakage",
+          "pin_joint_dwell": null,
+          "toggling_pin": null,
+          "when": "default"
+        },
+        {
+          "arc_id": 2,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[0]",
+          "when": "default"
+        },
+        {
+          "arc_id": 3,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[1]",
+          "when": "default"
+        },
+        {
+          "arc_id": 4,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[2]",
+          "when": "default"
+        },
+        {
+          "arc_id": 5,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[3]",
+          "when": "default"
+        },
+        {
+          "arc_id": 6,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[4]",
+          "when": "default"
+        },
+        {
+          "arc_id": 7,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[5]",
+          "when": "default"
+        },
+        {
+          "arc_id": 8,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[6]",
+          "when": "default"
+        },
+        {
+          "arc_id": 9,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[7]",
+          "when": "default"
+        },
+        {
+          "arc_id": 10,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[8]",
+          "when": "default"
+        },
+        {
+          "arc_id": 11,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              524000000,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "A[9]",
+          "when": "default"
+        },
+        {
+          "arc_id": 12,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              3
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              3
+            ],
+            [
+              1,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              2,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              257000000,
+              264000000,
+              3000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CEN",
+          "when": "default"
+        },
+        {
+          "arc_id": 13,
+          "condition_dwell_false_true_unknown": [
+            515000000,
+            9000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              253
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              252
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              5
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              261000000,
+              252000000,
+              1000000,
+              1000000
+            ],
+            [
+              4000000,
+              5000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & GWEN & !EMA[2] & !EMA[1] & !EMA[0]"
+        },
+        {
+          "arc_id": 14,
+          "condition_dwell_false_true_unknown": [
+            516000000,
+            8000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              253
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              253
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              4
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              261000000,
+              253000000,
+              1000000,
+              1000000
+            ],
+            [
+              4000000,
+              4000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & GWEN & !EMA[2] & !EMA[1] & EMA[0]"
+        },
+        {
+          "arc_id": 15,
+          "condition_dwell_false_true_unknown": [
+            516000000,
+            8000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              253
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              253
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              4
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              261000000,
+              253000000,
+              1000000,
+              1000000
+            ],
+            [
+              4000000,
+              4000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & GWEN & !EMA[2] & EMA[1] & !EMA[0]"
+        },
+        {
+          "arc_id": 16,
+          "condition_dwell_false_true_unknown": [
+            516000000,
+            8000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              253
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              253
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              4
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              261000000,
+              253000000,
+              1000000,
+              1000000
+            ],
+            [
+              4000000,
+              4000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & GWEN & !EMA[2] & EMA[1] & EMA[0]"
+        },
+        {
+          "arc_id": 17,
+          "condition_dwell_false_true_unknown": [
+            516000000,
+            8000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              253
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              253
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              4
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              261000000,
+              253000000,
+              1000000,
+              1000000
+            ],
+            [
+              4000000,
+              4000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & GWEN & EMA[2] & !EMA[1] & !EMA[0]"
+        },
+        {
+          "arc_id": 18,
+          "condition_dwell_false_true_unknown": [
+            516000000,
+            8000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              253
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              253
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              4
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              261000000,
+              253000000,
+              1000000,
+              1000000
+            ],
+            [
+              4000000,
+              4000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & GWEN & EMA[2] & !EMA[1] & EMA[0]"
+        },
+        {
+          "arc_id": 19,
+          "condition_dwell_false_true_unknown": [
+            516000000,
+            8000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              253
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              253
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              4
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              261000000,
+              253000000,
+              1000000,
+              1000000
+            ],
+            [
+              4000000,
+              4000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & GWEN & EMA[2] & EMA[1] & !EMA[0]"
+        },
+        {
+          "arc_id": 20,
+          "condition_dwell_false_true_unknown": [
+            516000000,
+            8000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              253
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              253
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              4
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              261000000,
+              253000000,
+              1000000,
+              1000000
+            ],
+            [
+              4000000,
+              4000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & GWEN & EMA[2] & EMA[1] & EMA[0]"
+        },
+        {
+          "arc_id": 21,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & !EMA[0] & !EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 22,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & !EMA[0] & !EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 23,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & !EMA[0] & EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 24,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & !EMA[0] & EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 25,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & EMA[0] & !EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 26,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & EMA[0] & !EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 27,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & EMA[0] & EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 28,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & !EMA[1] & EMA[0] & EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 29,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & !EMA[0] & !EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 30,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & !EMA[0] & !EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 31,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & !EMA[0] & EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 32,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & !EMA[0] & EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 33,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & EMA[0] & !EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 34,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & EMA[0] & !EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 35,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & EMA[0] & EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 36,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & !EMA[2] & EMA[1] & EMA[0] & EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 37,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & !EMA[0] & !EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 38,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & !EMA[0] & !EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 39,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & !EMA[0] & EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 40,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & !EMA[0] & EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 41,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & EMA[0] & !EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 42,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & EMA[0] & !EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 43,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & EMA[0] & EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 44,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & !EMA[1] & EMA[0] & EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 45,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & !EMA[0] & !EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 46,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & !EMA[0] & !EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 47,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & !EMA[0] & EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 48,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & !EMA[0] & EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 49,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & EMA[0] & !EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 50,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & EMA[0] & !EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 51,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & EMA[0] & EMAW[1] & !EMAW[0]"
+        },
+        {
+          "arc_id": 52,
+          "condition_dwell_false_true_unknown": [
+            522000000,
+            2000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              256
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              256
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              264000000,
+              256000000,
+              1000000,
+              1000000
+            ],
+            [
+              1000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & !CEN & !GWEN & EMA[2] & EMA[1] & EMA[0] & EMAW[1] & EMAW[0]"
+        },
+        {
+          "arc_id": 53,
+          "condition_dwell_false_true_unknown": [
+            265000000,
+            259000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              129
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              129
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              128
+            ],
+            [
+              1,
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              128
+            ],
+            [
+              1,
+              1,
+              2,
+              3,
+              1
+            ],
+            [
+              1,
+              1,
+              3,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              136000000,
+              129000000,
+              0,
+              0
+            ],
+            [
+              129000000,
+              128000000,
+              1000000,
+              1000000
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "!RET1N"
+        },
+        {
+          "arc_id": 54,
+          "condition_dwell_false_true_unknown": [
+            388000000,
+            136000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              192
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              193
+            ],
+            [
+              0,
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              65
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              64
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              193000000,
+              193000000,
+              1000000,
+              1000000
+            ],
+            [
+              72000000,
+              64000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "CLK",
+          "when": "RET1N & CEN"
+        },
+        {
+          "arc_id": 55,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              522000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[0]",
+          "when": "!WEN[0] & !GWEN"
+        },
+        {
+          "arc_id": 56,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              262000000,
+              0,
+              0,
+              0
+            ],
+            [
+              3000000,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[0]",
+          "when": "WEN[0] & GWEN"
+        },
+        {
+          "arc_id": 57,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              521000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[10]",
+          "when": "!WEN[10] & !GWEN"
+        },
+        {
+          "arc_id": 58,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              3000000,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[10]",
+          "when": "WEN[10] & GWEN"
+        },
+        {
+          "arc_id": 59,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              518000000,
+              5000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[11]",
+          "when": "!WEN[11] & !GWEN"
+        },
+        {
+          "arc_id": 60,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              3000000,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[11]",
+          "when": "WEN[11] & GWEN"
+        },
+        {
+          "arc_id": 61,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              521000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[12]",
+          "when": "!WEN[12] & !GWEN"
+        },
+        {
+          "arc_id": 62,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              3000000,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[12]",
+          "when": "WEN[12] & GWEN"
+        },
+        {
+          "arc_id": 63,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              518000000,
+              5000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[13]",
+          "when": "!WEN[13] & !GWEN"
+        },
+        {
+          "arc_id": 64,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              3000000,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[13]",
+          "when": "WEN[13] & GWEN"
+        },
+        {
+          "arc_id": 65,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              521000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[14]",
+          "when": "!WEN[14] & !GWEN"
+        },
+        {
+          "arc_id": 66,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              3000000,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[14]",
+          "when": "WEN[14] & GWEN"
+        },
+        {
+          "arc_id": 67,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              518000000,
+              5000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[15]",
+          "when": "!WEN[15] & !GWEN"
+        },
+        {
+          "arc_id": 68,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              3000000,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[15]",
+          "when": "WEN[15] & GWEN"
+        },
+        {
+          "arc_id": 69,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              518000000,
+              5000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[1]",
+          "when": "!WEN[1] & !GWEN"
+        },
+        {
+          "arc_id": 70,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              3000000,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[1]",
+          "when": "WEN[1] & GWEN"
+        },
+        {
+          "arc_id": 71,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              3
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              522000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[2]",
+          "when": "!WEN[2] & !GWEN"
+        },
+        {
+          "arc_id": 72,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              262000000,
+              0,
+              0,
+              0
+            ],
+            [
+              3000000,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[2]",
+          "when": "WEN[2] & GWEN"
+        },
+        {
+          "arc_id": 73,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              517000000,
+              6000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[3]",
+          "when": "!WEN[3] & !GWEN"
+        },
+        {
+          "arc_id": 74,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              260000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              0,
+              3000000,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[3]",
+          "when": "WEN[3] & GWEN"
+        },
+        {
+          "arc_id": 75,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              521000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[4]",
+          "when": "!WEN[4] & !GWEN"
+        },
+        {
+          "arc_id": 76,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              3000000,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[4]",
+          "when": "WEN[4] & GWEN"
+        },
+        {
+          "arc_id": 77,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              517000000,
+              6000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[5]",
+          "when": "!WEN[5] & !GWEN"
+        },
+        {
+          "arc_id": 78,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              260000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              0,
+              3000000,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[5]",
+          "when": "WEN[5] & GWEN"
+        },
+        {
+          "arc_id": 79,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              521000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[6]",
+          "when": "!WEN[6] & !GWEN"
+        },
+        {
+          "arc_id": 80,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              3000000,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[6]",
+          "when": "WEN[6] & GWEN"
+        },
+        {
+          "arc_id": 81,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              518000000,
+              5000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[7]",
+          "when": "!WEN[7] & !GWEN"
+        },
+        {
+          "arc_id": 82,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              261000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              3000000,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[7]",
+          "when": "WEN[7] & GWEN"
+        },
+        {
+          "arc_id": 83,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              522000000,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[8]",
+          "when": "!WEN[8] & !GWEN"
+        },
+        {
+          "arc_id": 84,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              262000000,
+              0,
+              0,
+              0
+            ],
+            [
+              3000000,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[8]",
+          "when": "WEN[8] & GWEN"
+        },
+        {
+          "arc_id": 85,
+          "condition_dwell_false_true_unknown": [
+            523000000,
+            1000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              517000000,
+              6000000,
+              0,
+              0
+            ],
+            [
+              0,
+              1000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[9]",
+          "when": "!WEN[9] & !GWEN"
+        },
+        {
+          "arc_id": 86,
+          "condition_dwell_false_true_unknown": [
+            259000000,
+            262000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              0,
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              257000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              260000000,
+              2000000,
+              0,
+              0
+            ],
+            [
+              0,
+              3000000,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "D[9]",
+          "when": "WEN[9] & GWEN"
+        },
+        {
+          "arc_id": 87,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              5
+            ],
+            [
+              1,
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              6
+            ],
+            [
+              1,
+              1,
+              2,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              258000000,
+              263000000,
+              3000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "GWEN",
+          "when": "default"
+        },
+        {
+          "arc_id": 88,
+          "condition_dwell_false_true_unknown": [
+            257000000,
+            264000000,
+            3000000
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ],
+            [
+              2,
+              2,
+              0,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              128000000,
+              129000000,
+              0,
+              0
+            ],
+            [
+              128000000,
+              136000000,
+              0,
+              0
+            ],
+            [
+              3000000,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "RET1N",
+          "when": "CEN"
+        },
+        {
+          "arc_id": 89,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[0]",
+          "when": "default"
+        },
+        {
+          "arc_id": 90,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[10]",
+          "when": "default"
+        },
+        {
+          "arc_id": 91,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[11]",
+          "when": "default"
+        },
+        {
+          "arc_id": 92,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[12]",
+          "when": "default"
+        },
+        {
+          "arc_id": 93,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[13]",
+          "when": "default"
+        },
+        {
+          "arc_id": 94,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[14]",
+          "when": "default"
+        },
+        {
+          "arc_id": 95,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[15]",
+          "when": "default"
+        },
+        {
+          "arc_id": 96,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[1]",
+          "when": "default"
+        },
+        {
+          "arc_id": 97,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[2]",
+          "when": "default"
+        },
+        {
+          "arc_id": 98,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[3]",
+          "when": "default"
+        },
+        {
+          "arc_id": 99,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[4]",
+          "when": "default"
+        },
+        {
+          "arc_id": 100,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[5]",
+          "when": "default"
+        },
+        {
+          "arc_id": 101,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[6]",
+          "when": "default"
+        },
+        {
+          "arc_id": 102,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[7]",
+          "when": "default"
+        },
+        {
+          "arc_id": 103,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[8]",
+          "when": "default"
+        },
+        {
+          "arc_id": 104,
+          "condition_dwell_false_true_unknown": [
+            0,
+            524000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              2
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2000000,
+              522000000,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "WEN[9]",
+          "when": "default"
+        },
+        {
+          "arc_id": 105,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[0]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 106,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[10]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 107,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[11]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 108,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[12]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 109,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              0,
+              1000000,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[13]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 110,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[14]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 111,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[15]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 112,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              0,
+              1000000,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[1]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 113,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[2]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 114,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[3]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 115,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[4]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 116,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              0,
+              1000000,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[5]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 117,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[6]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 118,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[7]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 119,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              1000000,
+              0,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[8]",
+          "when": "RET1N & GWEN"
+        },
+        {
+          "arc_id": 120,
+          "condition_dwell_false_true_unknown": [
+            389000000,
+            135000000,
+            0
+          ],
+          "conditional_transitions": [
+            [
+              1,
+              1,
+              2,
+              1,
+              1
+            ]
+          ],
+          "kind": "internal",
+          "leakage_default_policy": null,
+          "pin_joint_dwell": [
+            [
+              0,
+              0,
+              389000000,
+              0
+            ],
+            [
+              0,
+              1000000,
+              134000000,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "toggling_pin": "Q[9]",
+          "when": "RET1N & GWEN"
+        }
+      ],
+      "control_joint_dwell": [
+        [
+          0,
+          2000000
+        ],
+        [
+          1,
+          2000000
+        ],
+        [
+          4,
+          2000000
+        ],
+        [
+          5,
+          2000000
+        ],
+        [
+          16,
+          2000000
+        ],
+        [
+          17,
+          3000000
+        ],
+        [
+          20,
+          2000000
+        ],
+        [
+          21,
+          6000000
+        ],
+        [
+          64,
+          2000000
+        ],
+        [
+          65,
+          2000000
+        ],
+        [
+          68,
+          2000000
+        ],
+        [
+          69,
+          2000000
+        ],
+        [
+          80,
+          2000000
+        ],
+        [
+          81,
+          2000000
+        ],
+        [
+          84,
+          2000000
+        ],
+        [
+          85,
+          2000000
+        ],
+        [
+          256,
+          2000000
+        ],
+        [
+          257,
+          2000000
+        ],
+        [
+          260,
+          2000000
+        ],
+        [
+          261,
+          2000000
+        ],
+        [
+          272,
+          2000000
+        ],
+        [
+          273,
+          2000000
+        ],
+        [
+          276,
+          2000000
+        ],
+        [
+          277,
+          2000000
+        ],
+        [
+          320,
+          2000000
+        ],
+        [
+          321,
+          2000000
+        ],
+        [
+          324,
+          2000000
+        ],
+        [
+          325,
+          2000000
+        ],
+        [
+          336,
+          2000000
+        ],
+        [
+          337,
+          2000000
+        ],
+        [
+          340,
+          2000000
+        ],
+        [
+          341,
+          2000000
+        ],
+        [
+          1024,
+          2000000
+        ],
+        [
+          1025,
+          2000000
+        ],
+        [
+          1028,
+          2000000
+        ],
+        [
+          1029,
+          2000000
+        ],
+        [
+          1040,
+          2000000
+        ],
+        [
+          1041,
+          2000000
+        ],
+        [
+          1044,
+          2000000
+        ],
+        [
+          1045,
+          2000000
+        ],
+        [
+          1088,
+          2000000
+        ],
+        [
+          1089,
+          2000000
+        ],
+        [
+          1092,
+          2000000
+        ],
+        [
+          1093,
+          2000000
+        ],
+        [
+          1104,
+          2000000
+        ],
+        [
+          1105,
+          2000000
+        ],
+        [
+          1108,
+          2000000
+        ],
+        [
+          1109,
+          2000000
+        ],
+        [
+          1280,
+          2000000
+        ],
+        [
+          1281,
+          2000000
+        ],
+        [
+          1284,
+          2000000
+        ],
+        [
+          1285,
+          2000000
+        ],
+        [
+          1296,
+          2000000
+        ],
+        [
+          1297,
+          2000000
+        ],
+        [
+          1300,
+          2000000
+        ],
+        [
+          1301,
+          2000000
+        ],
+        [
+          1344,
+          2000000
+        ],
+        [
+          1345,
+          2000000
+        ],
+        [
+          1348,
+          2000000
+        ],
+        [
+          1349,
+          2000000
+        ],
+        [
+          1360,
+          2000000
+        ],
+        [
+          1361,
+          2000000
+        ],
+        [
+          1364,
+          2000000
+        ],
+        [
+          1365,
+          2000000
+        ],
+        [
+          4096,
+          2000000
+        ],
+        [
+          4097,
+          2000000
+        ],
+        [
+          4100,
+          2000000
+        ],
+        [
+          4101,
+          2000000
+        ],
+        [
+          4112,
+          2000000
+        ],
+        [
+          4113,
+          2000000
+        ],
+        [
+          4116,
+          2000000
+        ],
+        [
+          4117,
+          2000000
+        ],
+        [
+          4160,
+          2000000
+        ],
+        [
+          4161,
+          2000000
+        ],
+        [
+          4164,
+          2000000
+        ],
+        [
+          4165,
+          2000000
+        ],
+        [
+          4176,
+          2000000
+        ],
+        [
+          4177,
+          2000000
+        ],
+        [
+          4180,
+          2000000
+        ],
+        [
+          4181,
+          2000000
+        ],
+        [
+          4352,
+          2000000
+        ],
+        [
+          4353,
+          2000000
+        ],
+        [
+          4356,
+          2000000
+        ],
+        [
+          4357,
+          2000000
+        ],
+        [
+          4368,
+          2000000
+        ],
+        [
+          4369,
+          2000000
+        ],
+        [
+          4372,
+          2000000
+        ],
+        [
+          4373,
+          2000000
+        ],
+        [
+          4416,
+          2000000
+        ],
+        [
+          4417,
+          2000000
+        ],
+        [
+          4420,
+          2000000
+        ],
+        [
+          4421,
+          2000000
+        ],
+        [
+          4432,
+          2000000
+        ],
+        [
+          4433,
+          2000000
+        ],
+        [
+          4436,
+          2000000
+        ],
+        [
+          4437,
+          2000000
+        ],
+        [
+          5120,
+          2000000
+        ],
+        [
+          5121,
+          2000000
+        ],
+        [
+          5124,
+          2000000
+        ],
+        [
+          5125,
+          2000000
+        ],
+        [
+          5136,
+          2000000
+        ],
+        [
+          5137,
+          2000000
+        ],
+        [
+          5140,
+          2000000
+        ],
+        [
+          5141,
+          2000000
+        ],
+        [
+          5184,
+          2000000
+        ],
+        [
+          5185,
+          2000000
+        ],
+        [
+          5188,
+          2000000
+        ],
+        [
+          5189,
+          2000000
+        ],
+        [
+          5200,
+          2000000
+        ],
+        [
+          5201,
+          2000000
+        ],
+        [
+          5204,
+          2000000
+        ],
+        [
+          5205,
+          2000000
+        ],
+        [
+          5376,
+          2000000
+        ],
+        [
+          5377,
+          2000000
+        ],
+        [
+          5380,
+          2000000
+        ],
+        [
+          5381,
+          2000000
+        ],
+        [
+          5392,
+          2000000
+        ],
+        [
+          5393,
+          2000000
+        ],
+        [
+          5396,
+          2000000
+        ],
+        [
+          5397,
+          2000000
+        ],
+        [
+          5440,
+          2000000
+        ],
+        [
+          5441,
+          2000000
+        ],
+        [
+          5444,
+          2000000
+        ],
+        [
+          5445,
+          2000000
+        ],
+        [
+          5456,
+          2000000
+        ],
+        [
+          5457,
+          2000000
+        ],
+        [
+          5460,
+          2000000
+        ],
+        [
+          5461,
+          2000000
+        ],
+        [
+          16384,
+          2000000
+        ],
+        [
+          16385,
+          2000000
+        ],
+        [
+          16388,
+          2000000
+        ],
+        [
+          16389,
+          2000000
+        ],
+        [
+          16400,
+          2000000
+        ],
+        [
+          16401,
+          2000000
+        ],
+        [
+          16404,
+          2000000
+        ],
+        [
+          16405,
+          2000000
+        ],
+        [
+          16448,
+          2000000
+        ],
+        [
+          16449,
+          2000000
+        ],
+        [
+          16452,
+          2000000
+        ],
+        [
+          16453,
+          2000000
+        ],
+        [
+          16464,
+          2000000
+        ],
+        [
+          16465,
+          2000000
+        ],
+        [
+          16468,
+          2000000
+        ],
+        [
+          16469,
+          2000000
+        ],
+        [
+          16640,
+          2000000
+        ],
+        [
+          16641,
+          2000000
+        ],
+        [
+          16644,
+          2000000
+        ],
+        [
+          16645,
+          2000000
+        ],
+        [
+          16656,
+          2000000
+        ],
+        [
+          16657,
+          2000000
+        ],
+        [
+          16660,
+          2000000
+        ],
+        [
+          16661,
+          2000000
+        ],
+        [
+          16704,
+          2000000
+        ],
+        [
+          16705,
+          2000000
+        ],
+        [
+          16708,
+          2000000
+        ],
+        [
+          16709,
+          2000000
+        ],
+        [
+          16720,
+          2000000
+        ],
+        [
+          16721,
+          2000000
+        ],
+        [
+          16724,
+          2000000
+        ],
+        [
+          16725,
+          2000000
+        ],
+        [
+          17408,
+          2000000
+        ],
+        [
+          17409,
+          2000000
+        ],
+        [
+          17412,
+          2000000
+        ],
+        [
+          17413,
+          2000000
+        ],
+        [
+          17424,
+          2000000
+        ],
+        [
+          17425,
+          2000000
+        ],
+        [
+          17428,
+          2000000
+        ],
+        [
+          17429,
+          2000000
+        ],
+        [
+          17472,
+          2000000
+        ],
+        [
+          17473,
+          2000000
+        ],
+        [
+          17476,
+          2000000
+        ],
+        [
+          17477,
+          2000000
+        ],
+        [
+          17488,
+          2000000
+        ],
+        [
+          17489,
+          2000000
+        ],
+        [
+          17492,
+          2000000
+        ],
+        [
+          17493,
+          2000000
+        ],
+        [
+          17664,
+          2000000
+        ],
+        [
+          17665,
+          2000000
+        ],
+        [
+          17668,
+          2000000
+        ],
+        [
+          17669,
+          2000000
+        ],
+        [
+          17680,
+          2000000
+        ],
+        [
+          17681,
+          2000000
+        ],
+        [
+          17684,
+          2000000
+        ],
+        [
+          17685,
+          2000000
+        ],
+        [
+          17728,
+          2000000
+        ],
+        [
+          17729,
+          2000000
+        ],
+        [
+          17732,
+          2000000
+        ],
+        [
+          17733,
+          2000000
+        ],
+        [
+          17744,
+          2000000
+        ],
+        [
+          17745,
+          2000000
+        ],
+        [
+          17748,
+          2000000
+        ],
+        [
+          17749,
+          2000000
+        ],
+        [
+          20480,
+          2000000
+        ],
+        [
+          20481,
+          2000000
+        ],
+        [
+          20484,
+          2000000
+        ],
+        [
+          20485,
+          2000000
+        ],
+        [
+          20496,
+          2000000
+        ],
+        [
+          20497,
+          2000000
+        ],
+        [
+          20500,
+          2000000
+        ],
+        [
+          20501,
+          2000000
+        ],
+        [
+          20544,
+          2000000
+        ],
+        [
+          20545,
+          2000000
+        ],
+        [
+          20548,
+          2000000
+        ],
+        [
+          20549,
+          2000000
+        ],
+        [
+          20560,
+          2000000
+        ],
+        [
+          20561,
+          2000000
+        ],
+        [
+          20564,
+          2000000
+        ],
+        [
+          20565,
+          2000000
+        ],
+        [
+          20736,
+          2000000
+        ],
+        [
+          20737,
+          2000000
+        ],
+        [
+          20740,
+          2000000
+        ],
+        [
+          20741,
+          2000000
+        ],
+        [
+          20752,
+          2000000
+        ],
+        [
+          20753,
+          2000000
+        ],
+        [
+          20756,
+          2000000
+        ],
+        [
+          20757,
+          2000000
+        ],
+        [
+          20800,
+          2000000
+        ],
+        [
+          20801,
+          2000000
+        ],
+        [
+          20804,
+          2000000
+        ],
+        [
+          20805,
+          2000000
+        ],
+        [
+          20816,
+          2000000
+        ],
+        [
+          20817,
+          2000000
+        ],
+        [
+          20820,
+          2000000
+        ],
+        [
+          20821,
+          2000000
+        ],
+        [
+          21504,
+          2000000
+        ],
+        [
+          21505,
+          2000000
+        ],
+        [
+          21508,
+          2000000
+        ],
+        [
+          21509,
+          2000000
+        ],
+        [
+          21520,
+          2000000
+        ],
+        [
+          21521,
+          2000000
+        ],
+        [
+          21524,
+          2000000
+        ],
+        [
+          21525,
+          2000000
+        ],
+        [
+          21568,
+          2000000
+        ],
+        [
+          21569,
+          2000000
+        ],
+        [
+          21572,
+          2000000
+        ],
+        [
+          21573,
+          2000000
+        ],
+        [
+          21584,
+          2000000
+        ],
+        [
+          21585,
+          2000000
+        ],
+        [
+          21588,
+          2000000
+        ],
+        [
+          21589,
+          2000000
+        ],
+        [
+          21760,
+          2000000
+        ],
+        [
+          21761,
+          2000000
+        ],
+        [
+          21764,
+          2000000
+        ],
+        [
+          21765,
+          2000000
+        ],
+        [
+          21776,
+          2000000
+        ],
+        [
+          21777,
+          2000000
+        ],
+        [
+          21780,
+          2000000
+        ],
+        [
+          21781,
+          2000000
+        ],
+        [
+          21824,
+          2000000
+        ],
+        [
+          21825,
+          2000000
+        ],
+        [
+          21828,
+          2000000
+        ],
+        [
+          21829,
+          4000000
+        ],
+        [
+          21840,
+          2000000
+        ],
+        [
+          21841,
+          2000000
+        ],
+        [
+          21844,
+          2000000
+        ],
+        [
+          21845,
+          4000000
+        ],
+        [
+          64168,
+          3000000
+        ]
+      ],
+      "macro": "tb_xu_sram_joint_micro.dut",
+      "pin_dwell": {
+        "A[0]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "A[1]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "A[2]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "A[3]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "A[4]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "A[5]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "A[6]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "A[7]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "A[8]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "A[9]": [
+          524000000,
+          0,
+          0,
+          0
+        ],
+        "CEN": [
+          257000000,
+          264000000,
+          3000000,
+          0
+        ],
+        "CLK": [
+          265000000,
+          257000000,
+          1000000,
+          1000000
+        ],
+        "D[0]": [
+          522000000,
+          2000000,
+          0,
+          0
+        ],
+        "D[10]": [
+          521000000,
+          3000000,
+          0,
+          0
+        ],
+        "D[11]": [
+          518000000,
+          6000000,
+          0,
+          0
+        ],
+        "D[12]": [
+          521000000,
+          3000000,
+          0,
+          0
+        ],
+        "D[13]": [
+          518000000,
+          6000000,
+          0,
+          0
+        ],
+        "D[14]": [
+          521000000,
+          3000000,
+          0,
+          0
+        ],
+        "D[15]": [
+          518000000,
+          6000000,
+          0,
+          0
+        ],
+        "D[1]": [
+          518000000,
+          6000000,
+          0,
+          0
+        ],
+        "D[2]": [
+          522000000,
+          2000000,
+          0,
+          0
+        ],
+        "D[3]": [
+          517000000,
+          7000000,
+          0,
+          0
+        ],
+        "D[4]": [
+          521000000,
+          3000000,
+          0,
+          0
+        ],
+        "D[5]": [
+          517000000,
+          7000000,
+          0,
+          0
+        ],
+        "D[6]": [
+          521000000,
+          3000000,
+          0,
+          0
+        ],
+        "D[7]": [
+          518000000,
+          6000000,
+          0,
+          0
+        ],
+        "D[8]": [
+          522000000,
+          2000000,
+          0,
+          0
+        ],
+        "D[9]": [
+          517000000,
+          7000000,
+          0,
+          0
+        ],
+        "EMAW[0]": [
+          261000000,
+          260000000,
+          0,
+          3000000
+        ],
+        "EMAW[1]": [
+          261000000,
+          260000000,
+          0,
+          3000000
+        ],
+        "EMA[0]": [
+          261000000,
+          260000000,
+          3000000,
+          0
+        ],
+        "EMA[1]": [
+          261000000,
+          260000000,
+          3000000,
+          0
+        ],
+        "EMA[2]": [
+          261000000,
+          260000000,
+          3000000,
+          0
+        ],
+        "GWEN": [
+          258000000,
+          263000000,
+          3000000,
+          0
+        ],
+        "Q[0]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[10]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[11]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[12]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[13]": [
+          0,
+          1000000,
+          523000000,
+          0
+        ],
+        "Q[14]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[15]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[1]": [
+          0,
+          1000000,
+          523000000,
+          0
+        ],
+        "Q[2]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[3]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[4]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[5]": [
+          0,
+          1000000,
+          523000000,
+          0
+        ],
+        "Q[6]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[7]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[8]": [
+          1000000,
+          0,
+          523000000,
+          0
+        ],
+        "Q[9]": [
+          0,
+          1000000,
+          523000000,
+          0
+        ],
+        "RET1N": [
+          259000000,
+          265000000,
+          0,
+          0
+        ],
+        "WEN[0]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[10]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[11]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[12]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[13]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[14]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[15]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[1]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[2]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[3]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[4]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[5]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[6]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[7]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[8]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ],
+        "WEN[9]": [
+          2000000,
+          522000000,
+          0,
+          0
+        ]
+      },
+      "pin_transitions": {
+        "A[0]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "A[1]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "A[2]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "A[3]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "A[4]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "A[5]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "A[6]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "A[7]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "A[8]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "A[9]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "CEN": [
+          0,
+          3,
+          0,
+          0,
+          3,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "CLK": [
+          0,
+          257,
+          1,
+          0,
+          257,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "D[0]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[10]": [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[11]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[12]": [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[13]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[14]": [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[15]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[1]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[2]": [
+          0,
+          3,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[3]": [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[4]": [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[5]": [
+          0,
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[6]": [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[7]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[8]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "D[9]": [
+          0,
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "EMAW[0]": [
+          0,
+          128,
+          0,
+          0,
+          127,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "EMAW[1]": [
+          0,
+          64,
+          0,
+          0,
+          63,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "EMA[0]": [
+          0,
+          32,
+          0,
+          0,
+          31,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "EMA[1]": [
+          0,
+          16,
+          0,
+          0,
+          15,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "EMA[2]": [
+          0,
+          8,
+          0,
+          0,
+          7,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "GWEN": [
+          0,
+          5,
+          1,
+          0,
+          6,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[0]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[10]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[11]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[12]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[13]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[14]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[15]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[1]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[2]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[3]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[4]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[5]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[6]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[7]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[8]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Q[9]": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "RET1N": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[0]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[10]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[11]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[12]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[13]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[14]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[15]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[1]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[2]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[3]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[4]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[5]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[6]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[7]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[8]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "WEN[9]": [
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "schema": "xu-sram-joint-activity-audit-v1",
+  "simultaneous_records": 264,
+  "status": "INTEGER_INVARIANTS_PASS_NOT_SIMULATOR_SAIF_PT_OR_ENERGY_QUALIFIED",
+  "window": {
+    "begin_callback_ordinal": 1,
+    "begin_transaction": "micro_request",
+    "duration_ticks": 524000000,
+    "end_callback_ordinal": 3,
+    "end_tick": 526000000,
+    "end_transaction": "micro_final_y_retire",
+    "liberty_arc_count": 121,
+    "macro_count": 1,
+    "pin_bits_per_macro": 67,
+    "schema": "xu-sram-joint-projections-v1",
+    "start_tick": 2000000,
+    "status": "CAPTURED_CALLBACK_ORDER_REQUIRES_SIMULATOR_AND_SAIF_CALIBRATION_NOT_QUALIFIED",
+    "task_id": 0,
+    "timescale_fs": 1
+  }
+}

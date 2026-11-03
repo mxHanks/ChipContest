@@ -1,0 +1,139 @@
+{
+  "finished_epoch": 1793701922.7303839,
+  "inputs": {
+    "/storage2/2026contest/server4/s4_23usr/Desktop/tb_xu_sram_joint_micro19.sv": {
+      "bytes": 2339,
+      "sha256": "ed0cc4cbeff912a3420933679ada244f2535f7f5cb5b2cac8af36bce55342b06"
+    },
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu_sram_joint_vpi19.c": {
+      "bytes": 15999,
+      "sha256": "4656d8567607359321cd3f773476251bf6f0b73e7e51fee7d85aa77828fc22d6"
+    }
+  },
+  "outputs": {
+    "mode-0.simultaneous.jsonl": {
+      "bytes": 82684,
+      "sha256": "a18d0ba1a676ea89fc3d57c387244ff1ab9373159b6e3b42390ce71196fde718"
+    },
+    "mode-0.stats.jsonl": {
+      "bytes": 54081,
+      "sha256": "0eff1f4adeb4e7514ee8699032dd57ceb5f1b1699953bbc47fcb38f1d4b7969e"
+    },
+    "mode-1.simultaneous.jsonl": {
+      "bytes": 350,
+      "sha256": "17d72e974e3b7db5c2002608f787ad33367e5dfdd1842a51c4761db7c502a9e9"
+    },
+    "mode-1.stats.jsonl": {
+      "bytes": 6402,
+      "sha256": "b384b9090168a001f8d48d17059eab3738d8a3342a13d728bd7463077b1edef8"
+    },
+    "mode-2.simultaneous.jsonl": {
+      "bytes": 350,
+      "sha256": "cae40756cae42459ac841a65dbfb6ea2b117f7d5abfbe00c00d624cf965fd1f3"
+    },
+    "mode-2.stats.jsonl": {
+      "bytes": 6404,
+      "sha256": "dd7329b21ec384aeb0f4a92e8754312788d7a7e08f46660f51f7d8314cff9ecf"
+    },
+    "mode-3.simultaneous.jsonl": {
+      "bytes": 177,
+      "sha256": "54a294bfa9e34c3586527454cff9a6f3381390e70a34bc38a521a00dac7d69a3"
+    },
+    "mode-3.stats.jsonl": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "started_epoch": 1793701917.9009352,
+  "status": "MICRO_EXECUTED_REVIEW_PENDING_NOT_QUALIFIED",
+  "steps": [
+    {
+      "command": [
+        "vcs",
+        "-ID"
+      ],
+      "log_sha256": "c6c05cfef033be385064ceaa89b35b9cf4832c731d0da8d0c9b135c6c28abf65",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "gcc",
+        "--version"
+      ],
+      "log_sha256": "d2e920a8a48872176e616af49794693e74855ab90a1d7c225beae9f3deced49c",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "gcc",
+        "-std=c99",
+        "-D_POSIX_C_SOURCE=200809L",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-O2",
+        "-I/eda/synopsys/vcs/vcs_2020.03-SP2-6/include",
+        "-shared",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu_sram_joint_vpi19.c",
+        "-o",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/joint.so"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "vcs",
+        "-full64",
+        "-sverilog",
+        "-timescale=1ns/1fs",
+        "-debug_access+all",
+        "-load",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/joint.so:xu_sram_joint_register_tasks",
+        "-top",
+        "tb_xu_sram_joint_micro",
+        "-o",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/micro",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/tb_xu_sram_joint_micro19.sv"
+      ],
+      "log_sha256": "b7cfa08df2df75f3d293e02c65b0f28e7e72ac69ba35e7a9489638c792d2097a",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/micro",
+        "+MODE=0",
+        "+OUT=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/mode-0"
+      ],
+      "log_sha256": "e24b975e36a616a83fd2e99c74ea329c55fce1f524143211f147e13eaa5ed8d7",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/micro",
+        "+MODE=1",
+        "+OUT=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/mode-1"
+      ],
+      "log_sha256": "075317895fefe28312ec845fd7c2d09bac6b0de274f2a1048d8ddb70674a3cc6",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/micro",
+        "+MODE=2",
+        "+OUT=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/mode-2"
+      ],
+      "log_sha256": "59a9b1438c799865a08cdfb243ccea2bdeb51de6ef3fbf69de042cb453db36e2",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/micro",
+        "+MODE=3",
+        "+OUT=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/vcs-joint-micro-20261103-19/mode-3"
+      ],
+      "log_sha256": "165333aa4bc324630ad9086e6289c4cf4479dc3e82d7820196ecbefa4b51f951",
+      "returncode": 0
+    }
+  ]
+}
