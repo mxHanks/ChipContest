@@ -1,0 +1,103 @@
+{
+  "status": "PASS_HOST_ONLY_NOT_QUALIFIED",
+  "commands": [
+    {
+      "name": "generate",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/xu_soc_implementation.py",
+        "--root",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe64",
+        "--profile",
+        "s3-pe64",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/revalidation-03/implementation",
+        "--standard-cell-db",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/revalidation-03/standard.db",
+        "--standard-cell-sha256",
+        "4037c6f05227be6caaee4e3770196263934d95dc3809c5ef9f26cf7bcac9b7bd",
+        "--sram-db",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/revalidation-03/sram.db",
+        "--sram-sha256",
+        "d9f744e8d4d42c76b6b8465acab110071ff8f9aee968f2a499ba4fd63d142714"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "prepare",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/scripts/xu_soc_ppa.py",
+        "prepare",
+        "--root",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe64",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/revalidation-03/prepared",
+        "--implementation",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/revalidation-03/implementation/implementation.json",
+        "--allow-unqualified-mapping"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "verify",
+      "argv": [
+        "/usr/bin/python3",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/scripts/xu_soc_ppa.py",
+        "verify",
+        "--root",
+        "/home/mxhanks/Projects/ChipContest-xu-s3-pe64",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/revalidation-03/prepared"
+      ],
+      "returncode": 0
+    }
+  ],
+  "source_profile": {
+    "actual_child_tree_manifest_sha256": "9de1f5aca6b0773906555316d3d6c50a719036016c471a1201ddd7f16d4d54b2",
+    "approved_tree": "de46845651fd746d8060f2c17699281c18aed6e1",
+    "baseline_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+    "baseline_tree": "c4218b8275403189e0063f147d160f272416d11a",
+    "changed_files": [
+      "rtl/e203/perips/LinearAutoGroupCore.sv",
+      "rtl/e203/perips/XuParallelAutoGroupCore32.sv",
+      "rtl/e203/perips/XuParallelAutoGroupCore64.sv",
+      "rtl/e203/perips/XuParallelBiasCache32.sv",
+      "rtl/e203/perips/XuParallelBiasCache64.sv",
+      "rtl/e203/perips/XuParallelComputeCore32.sv",
+      "rtl/e203/perips/XuParallelComputeCore64.sv",
+      "rtl/e203/perips/XuParallelWeightBank32.sv",
+      "rtl/e203/perips/XuParallelWeightBank64.sv",
+      "rtl/e203/perips/accel_icb_slave.v",
+      "rtl/e203/perips/xu_pe32_icb_slave.v",
+      "rtl/e203/perips/xu_pe64_icb_slave.v",
+      "rtl/e203/subsys/e203_subsys_perips.v",
+      "vsim/bin/run.makefile"
+    ],
+    "e203_commit": "7aae96776e116d5e95d6ebb49d29a5fccce04ab9",
+    "fixed_tree_file_count": 1062,
+    "main_source_freeze": {
+      "actual_main_tree_manifest_sha256": "a4587fc98a837251787aeb72eb0820be2c1899177b593fb2336d0e933ab94f42",
+      "approved_main_tree": "03e60bf367f039a382a57c5defca814735fe1ad6",
+      "main_commit": "3443fad8945577626d226b1cd53eadec89331a20",
+      "tracked_main_entries": 1637
+    },
+    "name": "s3-pe64"
+  },
+  "macro_total": 384,
+  "accelerator_configuration": {
+    "accel_variant": "pe64",
+    "fixed_soc_macros": 320,
+    "full_soc_macros": 384,
+    "logical_weight_banks": 64,
+    "logical_weight_bytes": 32768,
+    "logical_weight_depth": 256,
+    "physical_pes": 64,
+    "physical_weight_bytes": 131072,
+    "physical_weight_depth": 1024,
+    "weight_macros": 64,
+    "weight_padding_bytes": 98304,
+    "weight_word_bits": 16,
+    "wrapper_reference": "xu_pe64_icb_slave"
+  }
+}

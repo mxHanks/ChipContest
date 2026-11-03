@@ -1,0 +1,84 @@
+{
+  "accel_variant": "pe64",
+  "accelerator_configuration": {
+    "accel_variant": "pe64",
+    "fixed_soc_macros": 320,
+    "full_soc_macros": 384,
+    "logical_weight_banks": 64,
+    "logical_weight_bytes": 32768,
+    "logical_weight_depth": 256,
+    "physical_pes": 64,
+    "physical_weight_bytes": 131072,
+    "physical_weight_depth": 1024,
+    "weight_macros": 64,
+    "weight_padding_bytes": 98304,
+    "weight_word_bits": 16,
+    "wrapper_reference": "xu_pe64_icb_slave"
+  },
+  "defines_sha256": "824db30e0c390dd78deed3fb4eebe21179150a4bc9c9b877d32afe971473c9c7",
+  "generator_sha256": "ad07c257a969eef9438fbc868f01af9e790c4b7a117bd55bcfbcd7eb36d113d1",
+  "implementation": {
+    "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/build/xu-pe64-ppa-profile-20261103/implementation-02/implementation.json",
+    "sha256": "8d2acd1d07414ff8759f8a8b5b77c61555800a78e4446ab8c2c7df86ac2295eb"
+  },
+  "macro_total": 384,
+  "qualification_gaps": [
+    "mapping:macro_functional_model:NOT_RUN",
+    "mapping:byte_write_masks:NOT_RUN",
+    "mapping:read_latency_and_hold:NOT_RUN",
+    "mapping:bank_boundaries:NOT_RUN",
+    "mapping:write_read_collision:NOT_RUN",
+    "mapping:icb_backpressure_retirement:NOT_RUN",
+    "mapping:whole_soc_functional_equivalence:NOT_RUN",
+    "mapping:sram_pvt_timing_eligibility:NOT_RUN",
+    "mapped-equivalence:NOT_RUN",
+    "mapping-review:UNREVIEWED"
+  ],
+  "schema": "xu-full-soc-implementation-generation-v1",
+  "source_profile": {
+    "actual_child_tree_manifest_sha256": "9de1f5aca6b0773906555316d3d6c50a719036016c471a1201ddd7f16d4d54b2",
+    "approved_tree": "de46845651fd746d8060f2c17699281c18aed6e1",
+    "baseline_e203_commit": "f49a5fc914971426bd4530db39e270a84b41139f",
+    "baseline_tree": "c4218b8275403189e0063f147d160f272416d11a",
+    "changed_files": [
+      "rtl/e203/perips/LinearAutoGroupCore.sv",
+      "rtl/e203/perips/XuParallelAutoGroupCore32.sv",
+      "rtl/e203/perips/XuParallelAutoGroupCore64.sv",
+      "rtl/e203/perips/XuParallelBiasCache32.sv",
+      "rtl/e203/perips/XuParallelBiasCache64.sv",
+      "rtl/e203/perips/XuParallelComputeCore32.sv",
+      "rtl/e203/perips/XuParallelComputeCore64.sv",
+      "rtl/e203/perips/XuParallelWeightBank32.sv",
+      "rtl/e203/perips/XuParallelWeightBank64.sv",
+      "rtl/e203/perips/accel_icb_slave.v",
+      "rtl/e203/perips/xu_pe32_icb_slave.v",
+      "rtl/e203/perips/xu_pe64_icb_slave.v",
+      "rtl/e203/subsys/e203_subsys_perips.v",
+      "vsim/bin/run.makefile"
+    ],
+    "e203_commit": "7aae96776e116d5e95d6ebb49d29a5fccce04ab9",
+    "fixed_tree_file_count": 1062,
+    "main_source_freeze": {
+      "actual_main_tree_manifest_sha256": "84b63a75f464d040e752b2962bbda0e26c97330736e74076cdad47d5884a771b",
+      "approved_main_tree": "916c3bf13f91a5c7993bd7eb03a4bf2f3e47756d",
+      "main_commit": "6f47746a916e14d0bbdcbb799c6338acd5c979a7",
+      "tracked_main_entries": 1634
+    },
+    "name": "s3-pe64"
+  },
+  "status": "GENERATED_NOT_QUALIFIED",
+  "tool_producer": {
+    "clock_reviewer": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/xu_review_full_soc_clocks.py",
+      "sha256": "8d5d78be3bee507d9b037916a6a2b1c8604477cef91ae6fab2afdba583f1d098"
+    },
+    "implementation_generator": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/ppa/xu_soc_implementation.py",
+      "sha256": "ad07c257a969eef9438fbc868f01af9e790c4b7a117bd55bcfbcd7eb36d113d1"
+    },
+    "ppa": {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-pe64-ppa/tools/scripts/xu_soc_ppa.py",
+      "sha256": "8b79c2e9e10acaa8335915ae53aa78007f4f1dcfc16f2093f4c0cbf0bdfd6bed"
+    }
+  }
+}

@@ -86,6 +86,17 @@ def topology_identity(ppa, root, tool_root=ROOT, profile='baseline'):
             (ppa.RTL+'/perips/XuParallelAutoGroupCore32.sv', r'\bXuParallelComputeCore32\s+core\s*\(', 'single PE32 compute array'),
             (ppa.RTL+'/perips/XuParallelWeightBank32.sv', r'\bSram1024x16\s+ram\s*\(', 'PE32 weight macro adapter'),
         ]
+    if profile == 's3-pe64':
+        checks[6] = (ppa.RTL+'/subsys/e203_subsys_perips.v',
+            r'`ifdef\s+XU_ACCEL_PE64\s+xu_pe64_icb_slave\s+u_accel_icb_slave\s*\(\s*'
+            r'`elsif\s+XU_ACCEL_PE32\s+xu_pe32_icb_slave\s+u_accel_icb_slave\s*\(\s*'
+            r'`else\s+accel_icb_slave\s+u_accel_icb_slave\s*\(\s*`endif',
+            'explicit PE64 selection preserving PE32 and original fallback instances')
+        checks += [
+            (ppa.RTL+'/perips/xu_pe64_icb_slave.v', r'\bXuParallelAutoGroupCore64\s+u_linear_compute_core\s*\(', 'PE64 scheduler'),
+            (ppa.RTL+'/perips/XuParallelAutoGroupCore64.sv', r'\bXuParallelComputeCore64\s+core\s*\(', 'single PE64 compute array'),
+            (ppa.RTL+'/perips/XuParallelWeightBank64.sv', r'\bSram1024x16\s+ram\s*\(', 'PE64 weight macro adapter'),
+        ]
     sources = {}
     for relative, pattern, label in checks:
         path = (tool_root if relative.startswith('tools/') else root)/relative
@@ -144,7 +155,7 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
                                  memory_groups_sha256=ppa.digest(impl['memory_groups']),
                                  libraries_sha256=ppa.digest(libraries),
                                  source_manifest_sha256=inv['platform_source_manifest_sha256'])
-    if profile == 's3-pe32':
+    if profile in ('s3-pe32', 's3-pe64'):
         impl['source_freeze'].update(defines_sha256=ppa.digest(impl['defines']),
                                     accelerator_configuration_sha256=ppa.digest(impl['accelerator_configuration']))
     impl['tool_producer'] = dict(implementation_generator=identity(ppa,__file__),
@@ -156,6 +167,8 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
                       if profile=='sram-bias' else '')+
                     ('PE32 uses one32-bank W array: 32768 logical bytes, 65536 physical bytes, 32768 padding bytes. '
                      if profile=='s3-pe32' else '')+
+                    ('PE64 uses one64-bank W array: 32768 logical bytes, 131072 physical bytes, 98304 padding bytes. '
+                     if profile=='s3-pe64' else '')+
                     'Mapping/PVT/netlist equivalence are unreviewed; no timing, power, or contest pass claimed. '
                     'No vendor simulation models are in the synthesis source list.')
     proof_path = out/'mapping-proof.json'
@@ -171,6 +184,9 @@ def generate(root, out, standard_db, standard_sha, sram_db, sram_sha, clock_revi
                    generator_sha256=ppa.sha(__file__))
     if profile == 's3-pe32':
         receipt.update(accel_variant='pe32', defines_sha256=ppa.digest(impl['defines']),
+                       accelerator_configuration=impl['accelerator_configuration'])
+    if profile == 's3-pe64':
+        receipt.update(accel_variant='pe64', defines_sha256=ppa.digest(impl['defines']),
                        accelerator_configuration=impl['accelerator_configuration'])
     ppa.write(out/'generation.json', receipt)
     return receipt
