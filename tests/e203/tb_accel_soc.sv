@@ -29,6 +29,42 @@ module tb_accel_soc;
   `define ITCM `CPU.u_e203_srams.u_e203_itcm_ram.u_e203_itcm_gnrl_ram.u_sirv_sim_ram
   `define ACCEL dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave
 
+`ifdef XU_ACCEL_PE32
+  wire [31:0] xu_observed_pe_enables = {
+    `ACCEL.u_linear_compute_core.core.pes_31.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_30.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_29.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_28.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_27.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_26.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_25.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_24.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_23.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_22.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_21.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_20.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_19.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_18.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_17.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_16.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_15.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_14.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_13.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_12.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_11.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_10.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_9.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_8.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_7.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_6.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_5.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_4.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_3.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_2.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_1.io_enable,
+    `ACCEL.u_linear_compute_core.core.pes_0.io_enable};
+`endif
+
   // Observation only: these counters never drive the SoC or its memory model.
   // A phase includes software and bus gaps between its first and last operation.
   // Load phases end when the final data-write response retires; writeback ends
@@ -44,6 +80,12 @@ module tb_accel_soc;
   integer perf_mmio_reads, perf_mmio_writes, perf_mmio_stall;
   integer perf_shared_reads, perf_shared_writes, perf_shared_stall;
   integer perf_auto_rows, perf_auto_pops, perf_auto_overlap, perf_auto_full;
+  integer perf_lane_macs;
+`ifdef XU_ACCEL_PE32
+  `define XU_ROW_GROUPS (`ACCEL.row_wide ? 8 : 32)
+`else
+  `define XU_ROW_GROUPS 32
+`endif
 
   task reset_performance;
     begin
@@ -54,6 +96,7 @@ module tb_accel_soc;
       perf_busy=0; perf_mac_fire=0; perf_starts=0; perf_dones=0;
       perf_mmio_reads=0; perf_mmio_writes=0; perf_mmio_stall=0;
       perf_shared_reads=0; perf_shared_writes=0; perf_shared_stall=0;
+      perf_lane_macs=0;
       perf_auto_rows=0; perf_auto_pops=0; perf_auto_overlap=0; perf_auto_full=0;
     end
   endtask
@@ -108,13 +151,14 @@ module tb_accel_soc;
         // The read-only window has no RESULT_INDEX write to start writeback.
         if (mmio_accept && `ACCEL.cmd_read &&
             ((`ACCEL.cmd_addr[11:0]>=12'h080 && `ACCEL.cmd_addr[11:0]<=12'h0bc) ||
-             (`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h13c))) begin
+             (`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h13c) ||
+             (`ACCEL.cmd_addr[11:0]>=12'h200 && `ACCEL.cmd_addr[11:0]<=12'h2fc))) begin
           phase_now=PERF_WRITEBACK; phase_next=PERF_WRITEBACK;
         end
         if (start_accept || row_start_accept) begin
           phase_now=PERF_COMPUTE; phase_next=PERF_COMPUTE;
         end
-        if (mmio_accept && `ACCEL.cmd_read && `ACCEL.cmd_addr[11:0]==12'h0c4) begin
+        if (mmio_accept && `ACCEL.cmd_read && (`ACCEL.cmd_addr[11:0]==12'h0c4 || `ACCEL.cmd_addr[11:0]==12'h0d4)) begin
           phase_now=PERF_COMPUTE; phase_next=PERF_COMPUTE;
         end
         // Source reads can precede their matching MMIO load operation.
@@ -145,9 +189,18 @@ module tb_accel_soc;
           perf_auto_overlap=perf_auto_overlap+1;
         if (`ACCEL.row_active && `ACCEL.row_count==2 && !`ACCEL.row_running)
           perf_auto_full=perf_auto_full+1;
-        // All eight PEs share this enable: one fire means eight signed16 MACs.
+`ifdef XU_ACCEL_PE32
+        // Count observed enabled lanes, including compatibility-mode masks.
+        if (`ACCEL.parallel_mac_fire) perf_mac_fire=perf_mac_fire+1;
+        if ((^xu_observed_pe_enables) === 1'bx ||
+            `ACCEL.parallel_lane_macs !== $countones(xu_observed_pe_enables) ||
+            `ACCEL.parallel_mac_fire !== (|xu_observed_pe_enables))
+          $fatal(1,"physical PE enable observer disagrees with core activity outputs");
+        perf_lane_macs=perf_lane_macs+$countones(xu_observed_pe_enables);
+`else
         if (`ACCEL.u_linear_compute_core.core.engine.peArray.io_enable)
           perf_mac_fire=perf_mac_fire+1;
+`endif
         if (start_accept || (`ACCEL.row_active && `ACCEL.compute_start))
           perf_starts=perf_starts+1;
         if (`ACCEL.core_done) perf_dones=perf_dones+1;
@@ -191,7 +244,12 @@ module tb_accel_soc;
       if (shared_retire) perf_shared_end_writeback=0;
       if (shared_accept)
         perf_shared_end_writeback=!cmd_read && cmd_addr>=BASE+YOFF &&
-          cmd_addr<BASE+YOFF+50688*4 && cmd_addr[5:0]==6'h3c;
+          cmd_addr<BASE+YOFF+50688*4 &&
+`ifdef XU_ACCEL_PE32
+          (`ACCEL.row_wide ? cmd_addr[7:0]==8'hfc : cmd_addr[5:0]==6'h3c);
+`else
+          cmd_addr[5:0]==6'h3c;
+`endif
     end
   endtask
 
@@ -202,13 +260,19 @@ module tb_accel_soc;
           perf_writeback+perf_other!=perf_cycles)
         $fatal(1,"performance interval or phase sum mismatch");
       if (perf_auto_rows!=0) begin
-        if (perf_auto_rows!=99 || perf_auto_pops!=3168 || `ACCEL.row_active ||
-            `ACCEL.row_retired!=32 || `ACCEL.row_produced!=32 || `ACCEL.row_count!=0 ||
+        if (perf_auto_rows!=99 || perf_auto_pops!=99*`XU_ROW_GROUPS || `ACCEL.row_active ||
+            `ACCEL.row_retired!=`XU_ROW_GROUPS || `ACCEL.row_produced!=`XU_ROW_GROUPS || `ACCEL.row_count!=0 ||
             perf_auto_overlap==0)
           $fatal(1,"autonomous row/POP retirement or overlap contract mismatch");
         $display("AUTO_TASK layer=%0d rows=%0d pops_retired=%0d compute_writeback_overlap=%0d fifo_full_wait=%0d",
           layer,perf_auto_rows,perf_auto_pops,perf_auto_overlap,perf_auto_full);
       end
+`ifdef XU_ACCEL_PE32
+      if ($bits(`ACCEL.u_linear_compute_core.core.io_laneMask)!=32 || perf_lane_macs!=1622016)
+        $fatal(1,"physical enabled-lane MAC work or geometry mismatch");
+      $display("PE_TASK layer=%0d physical_pes=32 mac_beats=%0d lane_macs=%0d useful_macs=1622016",
+        layer,perf_mac_fire,perf_lane_macs);
+`endif
       $display("PERF_TASK layer=%0d cycles=%0d w_load=%0d x_load=%0d bias_load=%0d compute_wait=%0d writeback=%0d other=%0d busy=%0d mac_fire=%0d mmio_reads=%0d mmio_writes=%0d shared_reads=%0d shared_writes=%0d shared_stall=%0d mmio_stall=%0d starts=%0d dones=%0d",
         layer,perf_cycles,perf_w_load,perf_x_load,perf_bias_load,
         perf_compute_wait,perf_writeback,perf_other,perf_busy,perf_mac_fire,

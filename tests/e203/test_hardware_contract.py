@@ -77,7 +77,7 @@ class HardwareContractTests(unittest.TestCase):
         for schedule in contract.SCHEDULES:
             defines = contract.compiler_defines(contract.configuration(schedule))
             self.assertEqual('-DXU_HARDWARE_PACK32=1' in defines,
-                             schedule in ('bias-hw-pack32-window', 'bias-hw-autogroup-window'))
+                             schedule in ('bias-hw-pack32-window', 'bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window'))
             self.assertNotIn('-DXU_HARDWARE_PACK32=0', defines)
 
     def test_autogroup_replaces_only_group_control_with_row_and_retired_pops(self):
@@ -89,7 +89,7 @@ class HardwareContractTests(unittest.TestCase):
         for schedule in contract.SCHEDULES:
             defines = contract.compiler_defines(contract.configuration(schedule))
             self.assertEqual('-DXU_HARDWARE_AUTO_GROUP=1' in defines,
-                             schedule == 'bias-hw-autogroup-window')
+                             schedule in ('bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window'))
             self.assertNotIn('-DXU_HARDWARE_AUTO_GROUP=0', defines)
 
     def test_auto_activity_requires_actual_retired_pops_and_overlap_records(self):

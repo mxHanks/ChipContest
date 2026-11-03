@@ -18,6 +18,10 @@ def summarize(result, frequency_mhz):
     if result.get('status') != 'PASS' or result.get('mode') != 'real':
         raise ValueError('a passing real-task simulation is required')
     config = contract.configuration_from_result(result)
+    variant = result.get('accel_variant', 'pe8')
+    if variant not in ('pe8', 'pe32') or (config['schedule'] == 'bias-hw-pe32-autogroup-window' and variant != 'pe32'):
+        raise ValueError('invalid physical accelerator variant')
+    pes = 32 if variant == 'pe32' else PES
     explicit = 'firmware_schedule' in result
     layers = result['layers']
     if (type(result['tasks']) is not int or not 1 <= result['tasks'] <= 12 or
@@ -31,6 +35,14 @@ def summarize(result, frequency_mhz):
         raise ValueError('incomplete performance profiles')
     if (explicit or config['schedule'] != 'baseline') and not all('performance' in x for x in layers):
         raise ValueError('explicit firmware schedule requires complete performance profiles')
+    if pes == 32:
+        expected_activity = [dict(layer=layer['layer'], physical_pes=32,
+            mac_beats=contract.task_contract(config['schedule'])['mac_fire'],
+            lane_macs=MACS_PER_TASK, useful_macs=MACS_PER_TASK) for layer in layers]
+        if result.get('pe_activity') != expected_activity:
+            raise ValueError('missing or inconsistent actual enabled-lane activity')
+    elif result.get('pe_activity', []) != []:
+        raise ValueError('unexpected physical PE activity')
     hz = frequency_mhz * 1e6
     rows = []
     for layer in layers:
@@ -42,7 +54,7 @@ def summarize(result, frequency_mhz):
                    conditional_latency_ms=cycles / hz * 1000,
                    conditional_tasks_per_second=hz / cycles,
                    conditional_gmac_per_second=MACS_PER_TASK / cycles * hz / 1e9,
-                   end_to_end_peak_fraction=MACS_PER_TASK / (cycles * PES))
+                   end_to_end_peak_fraction=MACS_PER_TASK / (cycles * pes))
         perf = layer.get('performance')
         if perf is not None:
             contract.validate_performance(perf, cycles, config['schedule'])
@@ -59,7 +71,7 @@ def summarize(result, frequency_mhz):
                      conditional_tasks_per_second=count * hz / total,
                      conditional_gmac_per_second=count * MACS_PER_TASK / total * hz / 1e9,
                      conditional_gops=count * MACS_PER_TASK * 2 / total * hz / 1e9,
-                     end_to_end_peak_fraction=count * MACS_PER_TASK / (total * PES))
+                     end_to_end_peak_fraction=count * MACS_PER_TASK / (total * pes))
     if all('counters' in x for x in rows):
         keys = rows[0]['counters'].keys()
         aggregate['counters'] = {k: sum(x['counters'][k] for x in rows) for k in keys}
@@ -72,14 +84,14 @@ def summarize(result, frequency_mhz):
                 source_identity={key:result[key] for key in [
                     'main_commit','e203_commit','runner_sha256','contract_sha256',
                     'firmware_sha256','firmware_elf_sha256','firmware_image_sha256',
-                    'source_sha256','vectors','tools','versions','simulator_sha256','log_sha256']
+                    'source_sha256','vectors','accel_variant','pe_activity','tools','versions','simulator_sha256','log_sha256']
                     if key in result},
                 frequency_status='conditional conversion; physical timing closure not established',
                 scope='12 independent FFN1 layers at most; development shared SRAM with modulo-7 backpressure; '
                       'first shared input/parameter read acceptance through final Y write-response retirement; '
                       'TB/ITCM preload and between-task host loading excluded',
-                ops_per_mac=2, pes=PES, macs_per_task=MACS_PER_TASK,
-                conditional_peak_gmac_per_second=PES * hz / 1e9,
+                ops_per_mac=2, accel_variant=variant, pes=pes, macs_per_task=MACS_PER_TASK,
+                conditional_peak_gmac_per_second=pes * hz / 1e9,
                 layers=rows, aggregate=aggregate)
 
 

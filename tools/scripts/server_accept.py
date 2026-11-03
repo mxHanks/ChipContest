@@ -14,11 +14,11 @@ VCS_SCOPE=('VCS four-state development platform acceptance; Icarus and Chisel no
 
 
 def execute_steps(steps, out, scope=DEFAULT_SCOPE, profile='development-standard', not_run=None,
-                  firmware_config=None):
+                  firmware_config=None, accel_variant='pe8'):
     if not steps: raise ValueError('acceptance must contain at least one step')
     result={'status':'RUNNING','started_utc':datetime.now(timezone.utc).isoformat(),
             'scope':scope,'profile':profile,'not_run':not_run or [],
-            'steps':[]}
+            'steps':[],'accel_variant':accel_variant}
     if firmware_config is not None:
         result['firmware_configuration']=firmware_config
     try:
@@ -38,11 +38,14 @@ def execute_steps(steps, out, scope=DEFAULT_SCOPE, profile='development-standard
 
 
 def acceptance_steps(out, cross_prefix, sim='verilator', full=False, offline=False,
-                     firmware_schedule='baseline', firmware_opt='-Os', firmware_experiment='none'):
+                     firmware_schedule='baseline', firmware_opt='-Os', firmware_experiment='none', accel_variant='pe8'):
     config=soc.contract.configuration(firmware_schedule,firmware_opt,firmware_experiment)
     firmware_args=['--firmware-schedule',config['schedule'],
                    '--firmware-opt='+config['optimization'],
                    '--firmware-experiment',config['experiment']]
+    if accel_variant not in ('pe8', 'pe32') or (firmware_schedule == 'bias-hw-pe32-autogroup-window' and accel_variant != 'pe32'):
+        raise ValueError('invalid physical accelerator variant')
+    if accel_variant == 'pe32': firmware_args += ['--accel-variant', accel_variant]
     if sim=='vcs' and full:
         raise ValueError('VCS platform acceptance is separate from --full Icarus/Chisel acceptance')
     host_command=[sys.executable,'-m','unittest','discover','-s','tests/e203','-p','test_*.py']
@@ -50,7 +53,10 @@ def acceptance_steps(out, cross_prefix, sim='verilator', full=False, offline=Fal
         # The additive cache/window interface test also uses the chosen backend.
         host_command=['env','XU_WRAPPER_SIM=vcs',
                       'XU_WRAPPER_LOG_DIR='+str(out/'host-wrapper-vcs'),*host_command]
-    steps=[('host',host_command,300),
+    if sim=='vcs' and accel_variant=='pe32':
+        host_command=['env','XU_PE32_WRAPPER_SIM=vcs',
+                      'XU_PE32_WRAPPER_LOG_DIR='+str(out/'host-pe32-wrapper-vcs'),*host_command]
+    steps=[('host',host_command,900 if accel_variant=='pe32' else 300),
            ('numeric',[sys.executable,'-m','unittest','discover','-s','tests/numeric','-v'],240)]
     for name,mode,tasks,backend in [('vectors','check-vectors',12,sim),
             ('doctor','doctor',1,sim),('baseline','baseline',1,'vcs' if sim=='vcs' else 'iverilog'),
@@ -75,6 +81,7 @@ def main():
                         help='vcs selects a separate platform flow without Icarus or Chisel')
     parser.add_argument('--full',action='store_true',help='also run Icarus real1 and all Chisel tests')
     parser.add_argument('--offline',action='store_true',help='use pre-populated Scala dependency cache with --full')
+    parser.add_argument('--accel-variant', choices=['pe8', 'pe32'], default='pe8')
     soc.contract.add_arguments(parser)
     args=parser.parse_args()
     if args.sim=='vcs' and args.full:
@@ -84,11 +91,11 @@ def main():
     out=(args.out or soc.ROOT/'build/acceptance'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')).resolve()
     out.mkdir(parents=True,exist_ok=False)
     steps=acceptance_steps(out,args.cross_prefix,args.sim,args.full,args.offline,
-                           args.firmware_schedule,args.firmware_opt,args.firmware_experiment)
+                           args.firmware_schedule,args.firmware_opt,args.firmware_experiment,args.accel_variant)
     result=execute_steps(steps,out,VCS_SCOPE if args.sim=='vcs' else DEFAULT_SCOPE,
                          'vcs-platform' if args.sim=='vcs' else 'development-full' if args.full else 'development-standard',
                          ['icarus1','chisel'] if args.sim=='vcs' else [],
-                         soc.contract.configuration(args.firmware_schedule,args.firmware_opt,args.firmware_experiment))
+                         soc.contract.configuration(args.firmware_schedule,args.firmware_opt,args.firmware_experiment),args.accel_variant)
     print(f'{result["status"]}: {out / "acceptance.json"}',flush=True)
     return 0 if result['status']=='PASS' else 1
 

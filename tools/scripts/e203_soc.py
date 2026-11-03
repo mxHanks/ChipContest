@@ -98,10 +98,11 @@ def check_log(log, tasks):
     return [dict(layer=int(a), cycles=int(b), firmware_cycles=int(c)) for a,b,c in found]
 
 
-def check_performance(log, layers, schedule='baseline'):
+def check_performance(log, layers, schedule='baseline', accel_variant='pe8'):
     """Require complete observer records in addition to numerical completion."""
     contract.configuration(schedule)
     check_autogroup_activity(log, layers, schedule)
+    check_pe_activity(log, layers, schedule, accel_variant)
     fields = contract.PERFORMANCE_FIELDS
     pattern = r'^PERF_TASK ' + ' '.join(name + r'=(\d+)' for name in fields) + r'$'
     found = re.findall(pattern, log, re.M)
@@ -120,21 +121,41 @@ def check_autogroup_activity(log, layers, schedule):
     names = ['layer', 'rows', 'pops_retired', 'compute_writeback_overlap', 'fifo_full_wait']
     pattern = r'^AUTO_TASK ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
     records = [dict(zip(names, map(int, row))) for row in re.findall(pattern, log, re.M)]
-    expected = len(layers) if schedule == 'bias-hw-autogroup-window' else 0
+    expected = len(layers) if schedule in ('bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window') else 0
     if len(records) != expected or len(records) != len(re.findall(r'^AUTO_TASK\b', log, re.M)):
         raise ValueError('missing, duplicate or unexpected autonomous row activity')
     for record, layer in zip(records, layers):
         if (record['layer'] != layer['layer'] or record['rows'] != 99 or
-                record['pops_retired'] != 3168 or
+                record['pops_retired'] != contract.task_contract(schedule)['starts'] or
                 not 0 < record['compute_writeback_overlap'] <= layer['cycles'] or
                 not 0 <= record['fifo_full_wait'] <= layer['cycles']):
             raise ValueError('autonomous row retirement or overlap differs from the contract')
     return records
 
 
+def check_pe_activity(log, layers, schedule, accel_variant='pe8'):
+    if accel_variant not in ('pe8', 'pe32'):
+        raise ValueError('invalid physical accelerator variant')
+    names = ['layer', 'physical_pes', 'mac_beats', 'lane_macs', 'useful_macs']
+    pattern = r'^PE_TASK ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
+    records = [dict(zip(names, map(int, row))) for row in re.findall(pattern, log, re.M)]
+    expected = len(layers) if accel_variant == 'pe32' else 0
+    if (len(records) != expected or len(records) != len(re.findall(r'^PE_TASK\b', log, re.M)) or
+            (schedule == 'bias-hw-pe32-autogroup-window' and accel_variant != 'pe32')):
+        raise ValueError('missing, duplicate or unexpected physical PE activity')
+    for record, layer in zip(records, layers):
+        if (record['layer'] != layer['layer'] or record['physical_pes'] != 32 or
+                record['mac_beats'] != contract.task_contract(schedule)['mac_fire'] or
+                record['lane_macs'] != contract.MACS_PER_TASK or
+                record['useful_macs'] != contract.MACS_PER_TASK):
+            raise ValueError('actual enabled-lane MAC work differs from the contract')
+    return records
+
+
 def build_key(report, sim, waves):
     identity=[report['source_sha256'],report['versions'],report['runner_sha256'],
               report.get('tools',{}),sim,waves]
+    if report.get('accel_variant', 'pe8') != 'pe8': identity.append(report['accel_variant'])
     return hashlib.sha256(json.dumps(identity,sort_keys=True).encode()).hexdigest()[:16]
 
 
@@ -155,15 +176,16 @@ def matrix_sources(installed):
     return sorted(p for p in installed.rglob('*') if p.suffix in ['.v','.sv'])+[TESTS/'tb_accel_soc.sv']
 
 
-def vcs_build_command(cache, filelist, includes, waves):
+def vcs_build_command(cache, filelist, includes, waves, accel_variant='pe8'):
     return ['vcs','-full64','-sverilog','-timescale=1ns/10ps',
             '-top','tb_accel_soc','+define+DISABLE_SV_ASSERTION=1',
+            *(['+define+XU_ACCEL_PE32=1'] if accel_variant == 'pe32' else []),
             *(['-debug_access+all'] if waves else []),
             *['+incdir+'+str(p) for p in includes],'-f',str(filelist),
             '-Mdir='+str(cache/'csrc'),'-o',str(cache/'accel_soc')]
 
 
-def build_simulator(sim, cache, filelist, includes, waves, out):
+def build_simulator(sim, cache, filelist, includes, waves, out, accel_variant='pe8'):
     binary=cache/('accel_soc.vvp' if sim=='iverilog' else 'accel_soc')
     if sim=='vcs':
         # A failed VCS link can leave a binary behind. Only reuse a completed build.
@@ -176,17 +198,18 @@ def build_simulator(sim, cache, filelist, includes, waves, out):
                 pass
         if not valid:
             if receipt.exists(): receipt.unlink()
-            run(vcs_build_command(cache,filelist,includes,waves),cache,out/'simulator-build.log')
+            run(vcs_build_command(cache,filelist,includes,waves,accel_variant),cache,out/'simulator-build.log')
             receipt.write_text(json.dumps({'binary_sha256':sha(binary)})+'\n')
         return binary,[str(binary)]
     if sim=='verilator':
         if not binary.exists():
             run(['verilator','--binary','--timing',*(['--trace'] if waves else []),'-j','2','-Wno-fatal',
                  '--top-module','tb_accel_soc','-Mdir',str(cache),'-o','accel_soc',
-                 '-DDISABLE_SV_ASSERTION=1',*['-I'+str(p) for p in includes],'-f',str(filelist)],
+                 '-DDISABLE_SV_ASSERTION=1',*(['-DXU_ACCEL_PE32=1'] if accel_variant == 'pe32' else []),*['-I'+str(p) for p in includes],'-f',str(filelist)],
                 ROOT,out/'simulator-build.log')
         return binary,[str(binary)]
     run(['iverilog','-g2012','-s','tb_accel_soc','-DDISABLE_SV_ASSERTION=1',
+         *(['-DXU_ACCEL_PE32=1'] if accel_variant == 'pe32' else []),
          *['-I'+str(p) for p in includes],'-o',str(binary),'-f',str(filelist)],ROOT,out/'simulator-build.log')
     return binary,['vvp',str(binary)]
 
@@ -280,7 +303,7 @@ def verify_submodule(root, submodule):
     return commit
 
 
-def baseline(out, prefix, sim='iverilog'):
+def baseline(out, prefix, sim='iverilog', accel_variant='pe8'):
     vsim=E203/'vsim'
     results=[]
     inputs={}
@@ -296,7 +319,8 @@ def baseline(out, prefix, sim='iverilog'):
             run([prefix+'objcopy','-O','verilog',str(target),str(target)+'.verilog'],ROOT,out/(name+'-objcopy.log'))
             image=Path(str(target)+'.verilog')
             image.write_text(image.read_text().replace('@800','@000'))
-        log=run(['make','run_test','SIM='+sim,'DUMPWAVE=0','TESTCASE='+str(target)],
+        log=run(['make','run_test','SIM='+sim,'DUMPWAVE=0','TESTCASE='+str(target),
+                 *(['XU_ACCEL_PE32=1'] if accel_variant == 'pe32' else [])],
                 vsim,out/(name+'.log'))
         if 'TEST_PASS' not in log or re.search(r'TEST_FAIL|Time Out|FATAL|ERROR:',log):
             raise ValueError(f'baseline did not pass: {name}')
@@ -321,8 +345,12 @@ def main():
     parser.add_argument('--accel-waves',action='store_true',
                         help='dump accelerator-only VCD during measured task windows for activity analysis')
     parser.add_argument('--max-cycles',type=int,default=200000000)
+    parser.add_argument('--accel-variant', choices=['pe8', 'pe32'], default='pe8',
+                        help='physical accelerator selection, independent of firmware schedule')
     contract.add_arguments(parser)
     args=parser.parse_args()
+    if args.firmware_schedule == 'bias-hw-pe32-autogroup-window' and args.accel_variant != 'pe32':
+        parser.error('PE32 schedule requires --accel-variant pe32')
     if args.max_cycles < 1:
         parser.error('--max-cycles must be positive')
     if args.waves and args.accel_waves:
@@ -332,7 +360,7 @@ def main():
     out.mkdir(parents=True,exist_ok=False)
     selected_sim='iverilog' if args.mode=='baseline' and args.sim=='verilator' else args.sim
     report={'status':'RUNNING','mode':args.mode,'tasks':args.tasks,'simulator':selected_sim,
-            'firmware_schedule':args.firmware_schedule,'firmware_opt':args.firmware_opt,
+            'accel_variant':args.accel_variant,'firmware_schedule':args.firmware_schedule,'firmware_opt':args.firmware_opt,
             'firmware_experiment':args.firmware_experiment,
             'transaction_contract':contract.task_contract(args.firmware_schedule),
             'contract_sha256':sha(Path(contract.__file__)),
@@ -376,7 +404,7 @@ def main():
             installed=E203/'vsim/install/rtl'
             report['source_sha256']={str(p.relative_to(ROOT)):sha(p) for p in sorted(installed.rglob('*')) if p.suffix in ['.v','.sv']}
             if args.mode=='baseline':
-                report.update(baseline(out,args.cross_prefix,selected_sim))
+                report.update(baseline(out,args.cross_prefix,selected_sim,args.accel_variant))
             else:
                 if args.mode=='synthetic':
                     directory=out/'vectors'
@@ -405,18 +433,19 @@ def main():
                 filelist=cache/'rtl.f'
                 filelist.write_text('\n'.join(str(p) for p in sources)+'\n')
                 includes=[str(installed/p) for p in ['core','perips','perips/apb_i2c']]
-                binary,command=build_simulator(selected_sim,cache,filelist,includes,trace_enabled,out)
+                binary,command=build_simulator(selected_sim,cache,filelist,includes,trace_enabled,out,args.accel_variant)
                 report['simulator_sha256']=sha(binary)
                 print(f'Running {args.mode}: {args.tasks} tasks; logs: {out}',flush=True)
                 log=run(command+[f'+TESTCASE={firmware}',f'+VECTORS={directory}',
                         f'+TASKS={args.tasks}',f'+DUMPWAVE={2 if args.accel_waves else int(args.waves)}',
                         f'+MAX_CYCLES={args.max_cycles}'],out,out/'simulation.log',7200)
                 report['layers']=check_log(log,args.tasks)
-                if args.firmware_schedule == 'bias-hw-autogroup-window':
+                if args.firmware_schedule in ('bias-hw-autogroup-window', 'bias-hw-pe32-autogroup-window'):
                     report['autogroup_activity']=check_autogroup_activity(
                         log,report['layers'],args.firmware_schedule)
-                for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
+                for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule,args.accel_variant)):
                     layer['performance'] = counters
+                report['pe_activity']=check_pe_activity(log,report['layers'],args.firmware_schedule,args.accel_variant)
                 report['outputs']=args.tasks*25344
                 report['write_words']=args.tasks*50688
             report['status']='PASS'
