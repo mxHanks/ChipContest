@@ -453,6 +453,9 @@ def run(out, pt='pt_shell', timeout=21600, lc_root=None):
             execution = execute([str(executable), '-f', 'power.tcl'], directory, directory / 'pt.log', timeout, environment)
             entry = dict(task_id=task['task_id'], execution=execution, status='TOOL_EXECUTION_UNREVIEWED')
             receipt['tasks'].append(entry)
+            # Report inspection can be long for full-SoC attribute dumps. Keep
+            # the actual tool exit/log receipt observable before that review.
+            write(out / 'execution.json', receipt)
             verify_prepared(out, manifest)
             remember({}, manifest_path, manifest_record['sha256'])
             remember({}, tool['path'], tool['sha256'])

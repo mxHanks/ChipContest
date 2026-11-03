@@ -321,8 +321,16 @@ class SaifPowerTests(unittest.TestCase):
                     log.write_text(task['completion_marker'] + '\n')
                     return dict(command=command, returncode=0, log=power.identity(log))
                 execute.side_effect = fake
-                with self.assertRaisesRegex(ValueError, 'regular non-symlink file missing'):
-                    power.run(out, sys.executable)
+                original_check = power.checked_reports
+                def inspect_after_persist(directory, task):
+                    pending = power.read_json(out / 'execution.json')
+                    self.assertEqual(pending['status'], 'RUNNING_REVIEW_PENDING')
+                    self.assertEqual(pending['tasks'][0]['status'], 'TOOL_EXECUTION_UNREVIEWED')
+                    self.assertEqual(pending['tasks'][0]['execution']['returncode'], 0)
+                    return original_check(directory, task)
+                with mock.patch.object(power, 'checked_reports', side_effect=inspect_after_persist):
+                    with self.assertRaisesRegex(ValueError, 'regular non-symlink file missing'):
+                        power.run(out, sys.executable)
             receipt = power.read_json(out / 'execution.json')
             self.assertEqual(receipt['status'], 'FAIL')
             self.assertEqual(receipt['qualification'], 'NOT_QUALIFIED')
