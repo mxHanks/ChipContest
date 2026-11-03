@@ -61,3 +61,12 @@ Run host guard tests with:
 ```bash
 python3 -m unittest discover -s tests/host -p test_xu_soc_saif_power.py -v
 ```
+
+The first actual server execution exposed two startup incompatibilities before
+SAIF reading: PT T-2022.03-SP5-1 has no `version` command, and its Library
+Compiler executable path was unset. The Tcl now reads the actual PT shell's
+`sh_product_version` variable (confirmed with `printvar *version*` on that
+installation). Supply `--lc-root /eda/synopsys/lib_compiler/lib_compiler_2022.03-SP5`
+to `run` to set `SYNOPSYS_LC_ROOT` and prepend its `bin` in the child environment;
+the selected root is recorded. Omission preserves the existing environment.
+This startup fix is not a successful power run or annotation qualification.

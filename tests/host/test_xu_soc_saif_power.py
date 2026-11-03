@@ -295,7 +295,7 @@ class SaifPowerTests(unittest.TestCase):
             # A host command only exercises orchestration rejection. It is never
             # a simulated successful EDA result and cannot produce EXECUTED.
             with mock.patch.object(power, 'execute') as execute:
-                def fake(command, directory, log, timeout):
+                def fake(command, directory, log, timeout, environment):
                     log.write_text(task['completion_marker'] + '\n')
                     return dict(command=command, returncode=0, log=power.identity(log))
                 execute.side_effect = fake
@@ -356,6 +356,21 @@ class SaifPowerTests(unittest.TestCase):
                                    directory, directory / 'timeout.log', 1)
             self.assertNotEqual(result['returncode'], 0)
             self.assertIn('PT timeout; process group killed', (directory / 'timeout.log').read_text())
+
+    def test_library_compiler_environment_reaches_real_host_process(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            with self.assertRaisesRegex(ValueError, 'Library Compiler root/bin'):
+                power.execution_environment(directory / 'missing')
+            (directory / 'bin').mkdir()
+            environment = power.execution_environment(directory)
+            self.assertEqual(environment['SYNOPSYS_LC_ROOT'], str(directory))
+            self.assertTrue(environment['PATH'].startswith(str(directory / 'bin') + os.pathsep))
+            log = directory / 'host-environment.log'
+            result = power.execute([sys.executable, '-c', 'import os; print(os.environ["SYNOPSYS_LC_ROOT"]); print(os.environ["PATH"].split(os.pathsep)[0])'],
+                                   directory, log, 5, environment)
+            self.assertEqual(result['returncode'], 0)
+            self.assertEqual(log.read_text().splitlines()[1:], [str(directory), str(directory / 'bin')])
 
 
 if __name__ == '__main__':

@@ -196,7 +196,7 @@ def generate_tcl(impl, netlist, constraints, task, marker):
     _, libraries = ppa.library_paths(impl)
     body = ('set_app_var power_enable_analysis true\nset_app_var power_analysis_mode averaged\n'
             'set_app_var link_path [list * ' + ' '.join(tcl(path) for path in libraries) + ']\n'
-            'redirect -file tool-version.rpt {puts [version]}\nread_verilog ' + tcl(netlist['path']) + '\n'
+            'redirect -file tool-version.rpt {puts $sh_product_version}\nread_verilog ' + tcl(netlist['path']) + '\n'
             'if {![link_design ' + tcl(impl['top']) + ']} {error {PT power link failed}}\n'
             'set XU_CLOCK_MODE envelope\nset XU_PLL_DIV 0\nsource ' + tcl(constraints['path']) + '\n' +
             ppa.clock_contract_checks() + 'set_propagated_clock [all_clocks]\nupdate_timing\n' + ppa.memory_checks(impl))
@@ -336,13 +336,13 @@ def verify_prepared(out, manifest):
     ppa.checked_implementation(manifest['implementation'], ppa.inventory(manifest['root']), allow_unqualified=True)
 
 
-def execute(command, directory, log_path, timeout):
+def execute(command, directory, log_path, timeout, environment=None):
     started = datetime.now(timezone.utc).isoformat()
     with log_path.open('x') as log:
         log.write(json.dumps(dict(command=command, cwd=str(directory), started_utc=started, timeout_seconds=timeout)) + '\n')
         log.flush()
         process = subprocess.Popen(command, cwd=str(directory), stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,
-                                   env=os.environ.copy(), start_new_session=True)
+                                   env=os.environ.copy() if environment is None else environment, start_new_session=True)
         try:
             rc = process.wait(timeout=timeout)
         except subprocess.TimeoutExpired:
@@ -373,9 +373,20 @@ def checked_reports(directory, task):
     return reports
 
 
-def run(out, pt='pt_shell', timeout=21600):
+def execution_environment(lc_root=None):
+    environment = os.environ.copy()
+    if lc_root is not None:
+        lc_root = Path(lc_root).resolve()
+        require(lc_root.is_dir() and (lc_root / 'bin').is_dir(), 'Library Compiler root/bin directory missing')
+        environment['SYNOPSYS_LC_ROOT'] = str(lc_root)
+        environment['PATH'] = str(lc_root / 'bin') + os.pathsep + environment.get('PATH', '')
+    return environment
+
+
+def run(out, pt='pt_shell', timeout=21600, lc_root=None):
     out = Path(out).absolute()
     require(type(timeout) is int and timeout > 0, 'positive timeout required')
+    environment = execution_environment(lc_root)
     manifest_path = out / 'prepared.json'
     manifest_record = identity(manifest_path)
     manifest = read_json(manifest_path)
@@ -384,13 +395,14 @@ def run(out, pt='pt_shell', timeout=21600):
     for task in manifest['tasks']:
         directory = out / task['directory']
         require(not any((directory / name).exists() for name in task['expected_reports'] + ['pt.log']), 'task reports/log already exist; reuse forbidden')
-    executable = shutil.which(pt)
+    executable = shutil.which(pt, path=environment.get('PATH'))
     require(executable is not None, 'PT executable not found: ' + pt)
     executable = str(Path(executable).resolve())
     tool = identity(executable)
     receipt = dict(schema='xu-soc-saif-power-execution-v1', status='RUNNING_REVIEW_PENDING', qualification='NOT_QUALIFIED',
                    prepared=manifest_record, tool=tool, input_sha256_before=dict(manifest['input_sha256']),
                    requested_task_ids=manifest['requested_task_ids'], taskset_complete=manifest['taskset_complete'],
+                   library_compiler_root=environment.get('SYNOPSYS_LC_ROOT'),
                    review_pending=REVIEW, tasks=[], started_utc=datetime.now(timezone.utc).isoformat())
     write(out / 'execution.json', receipt)
     try:
@@ -399,7 +411,7 @@ def run(out, pt='pt_shell', timeout=21600):
             remember({}, manifest_path, manifest_record['sha256'])
             remember({}, tool['path'], tool['sha256'])
             directory = out / task['directory']
-            execution = execute([str(executable), '-f', 'power.tcl'], directory, directory / 'pt.log', timeout)
+            execution = execute([str(executable), '-f', 'power.tcl'], directory, directory / 'pt.log', timeout, environment)
             entry = dict(task_id=task['task_id'], execution=execution, status='TOOL_EXECUTION_UNREVIEWED')
             receipt['tasks'].append(entry)
             verify_prepared(out, manifest)
@@ -448,12 +460,13 @@ def main(argv=None):
     exe.add_argument('--out', type=Path, required=True)
     exe.add_argument('--pt', default='pt_shell')
     exe.add_argument('--timeout', type=int, default=21600)
+    exe.add_argument('--lc-root', type=Path, help='actual Library Compiler root; prepend its bin and set SYNOPSYS_LC_ROOT for PT')
     args = parser.parse_args(argv)
     require(args.action is not None, 'choose prepare or run')
     if args.action == 'prepare':
         result = prepare(args.activity, args.implementation, args.ppa_prepared, args.netlist, args.constraints, args.out, args.task_ids, args.root)
     else:
-        result = run(args.out, args.pt, args.timeout)
+        result = run(args.out, args.pt, args.timeout, args.lc_root)
     print(result['status'] + ': ' + str(args.out))
     return 0
 
