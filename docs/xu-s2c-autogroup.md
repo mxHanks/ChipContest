@@ -60,3 +60,13 @@ python3 tools/scripts/e203_soc.py --mode real --tasks 1 --sim verilator \
 Output directories must be new. Direct Icarus tests use the actual Chisel core and real SRAM RTL, checking two complete rows/all 64 groups/512 signed48 lanes with signed16 and signed40 limits, FIFO-full stalls, real compute/readback overlap, stable stalled read and POP responses, reset-abort, exact enqueue/pop conservation, head commands and a final-POP STARTROW colliding with POP retirement, immediate next-edge restart while the old error response retires without corrupting new-row metadata, cache-required/illegal/masked operations, legacy write in-flight rejection, protected old/new writes and return to manual START. Existing cached/scalar/packed tests remain intact. Chisel simulation separately tests two rows/all numeric lanes, rapid/stalled draining, persistent full backpressure, exact 32/32 counts and manual return.
 
 Local screen and immutable artifact checks are recorded in [validation/xu-s2c-autogroup-20261103/README.md](validation/xu-s2c-autogroup-20261103/README.md).
+
+2026-11-03 actual server VCS direct compilation rejected five declarations used
+before their explicit definitions in the `row_start_accept` guard. The follow-up
+child `49a9436` moves only that complete wire initializer below those existing
+register/wire declarations. No guard condition, register, Chisel or generated
+compute module changes. The actual Icarus direct FIFO/numeric/retirement test
+passed after the reorder. The original server failure is retained; a new frozen
+main/child and fresh server acceptance output are required before VCS success
+can be claimed for this update. Earlier local cycle results remain tied to their
+original commits.
