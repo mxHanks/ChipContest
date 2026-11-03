@@ -21,6 +21,13 @@ instance 中的字面点号保留。仅允许原 SMIC SS 标准单元 DB 与原
 证明。121 弧 ledger 逐字节绑定既有实际 SRAM library report；不将
 未知 Q、standby Q 或未覆盖 D 条件当作零功耗。
 
+inventory 必须保留实际 PT 的 raw TSV、Tcl、工具/版本/log 与运行前后
+输入哈希。采集入口逐字节重验这些原件，检查 TSV/JSON 的全部宏、
+pin/direction 集合一致，Tcl 唯一网表输入和两个 link library 与声明
+一致，并要求 before/after 覆盖相同网表、SDC 和库。SDC 在这里仅作为
+输入身份冻结；该 inventory 导出脚本没有进行时序分析，不能据此称
+150MHz 已合格。网表、SDC、库或原始导出原件在导出后发生变化都会拒绝。
+
 每项任务新进程，原始 12 层 fixture 先全部通过整数校验，再将该任务
 逐字节映射为 layer_00。CPU 执行原 33,697 个 legacy-MMIO 零写，实际
 W/X/bias 提交及内部 reset、FIFO 所有权保持原成熟观测。首个源读取

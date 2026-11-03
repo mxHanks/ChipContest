@@ -65,6 +65,35 @@ class JointGuards(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'same selected VCS installation'):
             collector.actual_vcs_header_guard(Path('/eda/vcs/bin/vcs'),Path('/usr/include/iverilog'))
 
+    def test_raw_inventory_table_requires_exact_macro_pin_and_direction_rows(self):
+        # This synthetic two-pin fragment exercises only the table comparator;
+        # it cannot satisfy the collector's mandatory real 336/22512 binding.
+        actual={'scope/macro.with.literal.dot':dict(ref_name='RAMSP1024X16',
+            lib_cell='lib/RAMSP1024X16',pins=[
+                dict(full_name='scope/macro.with.literal.dot/CLK',direction='in'),
+                dict(full_name='scope/macro.with.literal.dot/Q[0]',direction='out')])}
+        lines=['kind\tcell\tref_or_pin\tlibcell_or_direction',
+            'MACRO\tscope/macro.with.literal.dot\tRAMSP1024X16\tlib/RAMSP1024X16',
+            'PIN\tscope/macro.with.literal.dot\tscope/macro.with.literal.dot/CLK\tin',
+            'PIN\tscope/macro.with.literal.dot\tscope/macro.with.literal.dot/Q[0]\tout']
+        with tempfile.TemporaryDirectory(prefix='xu-raw-inventory-') as t:
+            p=Path(t)/'table.tsv';p.write_text('\n'.join(lines)+'\n')
+            result=collector.check_raw_inventory_table(p,actual)
+            self.assertEqual((result['macros'],result['pin_bits']),(1,2))
+            cases={
+                'header':['wrong']+lines[1:],
+                'duplicate':lines+[lines[-1]],
+                'missing':lines[:-1],
+                'direction':lines[:-1]+[lines[-1].replace('\tout','\tin')],
+                'literal-dot': [s.replace('macro.with.literal.dot','macro/with/literal/dot') for s in lines],
+                'wrong-library':[s.replace('lib/RAMSP1024X16','other/RAMSP1024X16') for s in lines],
+                'extra-kind':lines+['NET\tscope/macro\tx\tin']}
+            for name,changed in cases.items():
+                p.write_text('\n'.join(changed)+'\n')
+                with self.subTest(name=name),self.assertRaises(ValueError):
+                    collector.check_raw_inventory_table(p,actual)
+            save('raw-inventory-table-tamper-cases.json',json.dumps(sorted(cases))+'\n')
+
     @unittest.skipUnless(shutil.which('cc') and shutil.which('iverilog') and shutil.which('vvp') and
         Path('/usr/include/iverilog/vpi_user.h').is_file(),'actual C/Icarus/VPI header required')
     def test_actual_callback_boundary_and_saif_crosschecks_reject_resigned_changes(self):

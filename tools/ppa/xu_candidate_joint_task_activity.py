@@ -40,7 +40,26 @@ def check_frozen(records):
         require(identity(record['path'])==record,'joint frozen file bytes/type/mode changed: '+record['path'])
 
 
-def joint_binding(ctx,mapping,inventory_path,netlist_path,out):
+def check_raw_inventory_table(path,actual):
+    rows=Path(path).read_text().splitlines()
+    require(rows and rows[0]=='kind\tcell\tref_or_pin\tlibcell_or_direction',
+        'actual PT macro/pin table header differs')
+    seen=set();macros=set();pins=set()
+    for line in rows[1:]:
+        fields=line.split('\t')
+        require(len(fields)==4 and tuple(fields) not in seen,'actual PT duplicate/malformed table row')
+        seen.add(tuple(fields));kind,cell,third,fourth=fields
+        require(kind in ('MACRO','PIN'),'actual PT unknown table row kind')
+        (macros if kind=='MACRO' else pins).add((cell,third,fourth))
+    expected_macros={(name,record['ref_name'],record['lib_cell']) for name,record in actual.items()}
+    expected_pins={(name,pin['full_name'],pin['direction']) for name,record in actual.items() for pin in record['pins']}
+    require(macros==expected_macros and pins==expected_pins,
+        'actual PT raw table/JSON macro, library, pin or direction differs')
+    return dict(status='ACTUAL_PT_RAW_TABLE_JSON_EXACT_MATCH_NOT_ACTIVITY_OR_EQUIVALENCE_QUALIFIED',
+        raw_table=identity(path),macros=len(macros),pin_bits=len(pins))
+
+
+def joint_binding(ctx,mapping,inventory_path,netlist_path,constraints_path,out):
     bridge=context.load('xu_joint_exact_inventory_bridge',HERE/'xu_saif_mapped_macros.py')
     inventory,actual,comparison=bridge.inventory_macros(inventory_path)
     netlist=identity(netlist_path)
@@ -59,6 +78,12 @@ def joint_binding(ctx,mapping,inventory_path,netlist_path,out):
         'joint collector requires actual same-server 1024x16 SS and SMIC SS libraries')
     require(all(r['lib_cell']=='RAMSP1024X16_ss_0p99v_0p99v_125c/RAMSP1024X16' for r in actual.values()),
         'joint 121-arc ledger does not describe actual mapped macro library')
+    require(inventory.get('design')=='xu_soc_ppa_top','actual inventory linked design differs')
+    bridge.declared_identity(inventory.get('constraints'),'inventory.constraints')
+    constraints=identity(constraints_path)
+    require(constraints['sha256']==inventory['constraints']['sha256'] and
+        Path(constraints['path']).resolve()==Path(inventory['constraints']['path']).resolve(),
+        'actual inventory/collector analysis SDC identity differs')
     canonical={}
     for record in mapping['macros']:
         full=record['instance']
@@ -70,22 +95,53 @@ def joint_binding(ctx,mapping,inventory_path,netlist_path,out):
         'joint exact S2c actual mapped/RTL macro bijection missing/extra')
     pairs=[dict(rtl_instance=canonical[k]['instance'],group=canonical[k]['group'],mapped_instance=comparison[k],
         actual_lib_cell=actual[comparison[k]]['lib_cell']) for k in sorted(canonical)]
-    frozen=[identity(inventory_path),netlist]+libraries
+    frozen=[identity(inventory_path),netlist,constraints]+libraries
     # Any declared file provenance is verified rather than copied as authority.
     def provenance_files(value):
         if isinstance(value,dict):
             if isinstance(value.get('path'),str) and isinstance(value.get('sha256'),str):
                 current=identity(value['path'])
-                require(current['sha256']==value['sha256'],'inventory provenance file changed')
+                require(current['sha256']==value['sha256'] and
+                    ('bytes' not in value or (type(value['bytes']) is int and current['bytes']==value['bytes'])),
+                    'inventory provenance file changed or declared size differs')
                 frozen.append(current)
             for child in value.values():provenance_files(child)
         elif isinstance(value,list):
             for child in value:provenance_files(child)
     provenance_files(inventory['provenance'])
+    provenance=inventory['provenance']
+    before,after=provenance.get('input_sha256_before'),provenance.get('input_sha256_after')
+    require(isinstance(before,dict) and before and before==after,
+        'actual inventory export input before/after hashes missing or changed')
+    exported_inputs={}
+    for path,digest in before.items():
+        require(isinstance(path,str) and Path(path).is_absolute() and isinstance(digest,str) and
+            re.fullmatch(r'[0-9a-f]{64}',digest),'actual inventory input hash map malformed')
+        current=identity(path);canonical_path=str(Path(path).resolve())
+        require(canonical_path not in exported_inputs,'actual inventory input path alias collision')
+        require(current['sha256']==digest,'actual inventory export input changed after export')
+        exported_inputs[canonical_path]=digest;frozen.append(current)
+    for record in [netlist,constraints]+libraries:
+        require(exported_inputs.get(str(Path(record['path']).resolve()))==record['sha256'],
+            'actual inventory before/after does not cover exact netlist/SDC/library input')
+    require(isinstance(provenance.get('raw_tsv'),dict) and isinstance(provenance.get('script'),dict),
+        'actual inventory raw table/script provenance missing')
+    table=check_raw_inventory_table(provenance['raw_tsv']['path'],actual)
+    script=Path(provenance['script']['path']).read_text()
+    reads=re.findall(r'^\s*read_verilog\s+\{([^\n{}]+)\}\s*$',script,re.M)
+    require(len(reads)==1 and Path(reads[0]).resolve()==Path(netlist['path']).resolve(),
+        'actual inventory Tcl read_verilog does not identify exact S2c netlist')
+    links=re.findall(r'^\s*set_app_var\s+link_path\s+\[list\s+\*\s*((?:\{[^{}\n]+\}\s*)+)\]\s*$',script,re.M)
+    require(len(links)==1,'actual inventory Tcl library link command missing/ambiguous')
+    link_paths=[str(Path(p).resolve()) for p in re.findall(r'\{([^{}\n]+)\}',links[0])]
+    require(len(link_paths)==len(set(link_paths))==2 and
+        set(link_paths)=={str(Path(r['path']).resolve()) for r in libraries},
+        'actual inventory Tcl linked libraries differ')
     result=dict(schema='xu-s2c-joint-mapped-binding-v1',status='EXACT_NAME_PIN_LIBRARY_INPUT_BIJECTION_NOT_EQUIVALENCE_OR_ENERGY_QUALIFIED',
         source_context=ctx.source,tool_context=ctx.joint_tool,inventory=identity(inventory_path),
         inventory_netlist=inventory['netlist'],inventory_provenance=inventory['provenance'],netlist=netlist,
-        libraries=libraries,macro_count=336,pin_bit_count=22512,pairs=pairs,frozen_files=frozen,
+        libraries=libraries,constraints=constraints,raw_table_comparison=table,
+        macro_count=336,pin_bit_count=22512,pairs=pairs,frozen_files=frozen,
         expected_s2c_netlist_sha256=S2C_MAPPED_SHA,
         name_policy='dot/slash comparison only over complete validated finite macro inventories; actual mapped instance strings remain unchanged')
     write_json(out,result);result['binding_file']=identity(out);result['frozen_files'].append(result['binding_file'])
@@ -345,7 +401,7 @@ def main(argv=None):
         checked, pairs = aliases.validate_mapping(mapping_path)
         require(checked == mapping and len(pairs) == 22512, 'candidate SRAM pin mapping differs')
         sources.append(Path(mapping['observer_source']['path']))
-        binding=joint_binding(ctx,mapping,args.mapped_inventory,args.netlist,build/'joint-binding.json')
+        binding=joint_binding(ctx,mapping,args.mapped_inventory,args.netlist,args.constraints,build/'joint-binding.json')
         tb.write_text(generate_tb(ctx,mapping))
         vpi=compile_vpi(ctx,build,args.cc,args.vpi_include,args.build_timeout)
         calibration=identity(args.calibration_receipt) if args.calibration_receipt else None
