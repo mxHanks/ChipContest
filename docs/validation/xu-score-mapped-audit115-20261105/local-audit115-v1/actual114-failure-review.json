@@ -1,0 +1,252 @@
+{
+  "before_original_source_request_fs": 480000000,
+  "causality": "The response FIFO hold violation precedes the unknown-handshake rejection. No claim that it uniquely caused X without a dedicated trace/notifier analysis.",
+  "native_timing_violation_count": 25,
+  "observed_native_failure": {
+    "finish_tick_fs": 9359423333333,
+    "line": 216,
+    "message": "XU_MAPPED111_PROTOCOL_REJECT unknown_shared_handshake",
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/mapped-task00-public-diagnostic-20261104-111/tb_xu_mapped_task00111.sv",
+    "scope": "tb_xu_soc_ppa.public_scoreboard",
+    "source_line": "    if((^{cmd_valid,cmd_ready,rsp_valid,rsp_ready})===1'bx)$fatal(1,\"XU_MAPPED111_PROTOCOL_REJECT unknown_shared_handshake\");",
+    "tick_fs": 9359423333333
+  },
+  "observed_simulation_returncode": 0,
+  "original_driver_parser_error": {
+    "message": "required private gate unexpectedly returned zero",
+    "traceback": "Traceback (most recent call last):\n  File \"/storage2/2026contest/server4/s4_23usr/Desktop/xu_build_mapped_task00111.py\", line 322, in main\n    with EvidenceRun(a.out)as run:work(a,run)\n  File \"/storage2/2026contest/server4/s4_23usr/Desktop/xu_build_mapped_task00111.py\", line 315, in work\n    code,raw=run.step('simulation',command,21600,require_zero=False);run.state.update(classify_public_log(raw,code));run.save()\n  File \"/storage2/2026contest/server4/s4_23usr/Desktop/xu_build_mapped_task00111.py\", line 146, in classify_public_log\n    need(returncode!=0,'required private gate unexpectedly returned zero')\n  File \"/storage2/2026contest/server4/s4_23usr/Desktop/xu_build_mapped_task00111.py\", line 18, in need\n    if not ok:raise ValueError(msg)\nValueError: required private gate unexpectedly returned zero\n",
+    "type": "ValueError"
+  },
+  "private_gate_pending_count": 60,
+  "public_task_complete": false,
+  "qualification": "NOT_QUALIFIED",
+  "scope": "Rehash and describe existing111 failure only; no VCS rerun, no pending gate removal, no timing-check disable",
+  "status": "AUDITED_ACTUAL111_NATIVE_UNKNOWN_SHARED_HANDSHAKE_FAILURE_NOT_QUALIFIED",
+  "timing_violations": [
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.\\fifo_tx_data_reg[7]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 100720,
+      "offset_start": 100364,
+      "raw_sha256": "8972854d990e97369f967ee7635f103af24ccba77ac9ea33786d356dd53db8e0",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.\\fifo_tx_data_reg[6]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 101077,
+      "offset_start": 100721,
+      "raw_sha256": "738eb34da6de712d13c3e341828402e39b021dda0132576cff726427c3f4ac0b",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.\\fifo_tx_data_reg[5]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 101434,
+      "offset_start": 101078,
+      "raw_sha256": "78d5d1398ffbb7a0b9170b4789992bbe701e17c885a36564bbb75d1c48a256eb",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.\\fifo_tx_data_reg[4]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 101791,
+      "offset_start": 101435,
+      "raw_sha256": "e83d7be00fcd993d2876d2c1fb69afc415ba9b32df068c2b33158596f2adc2bb",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.\\fifo_tx_data_reg[3]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 102148,
+      "offset_start": 101792,
+      "raw_sha256": "ab7a4b1a88bd1c753c6d06ddbff89d9c88fe83dd24e0f634c8f15a1ffb0da7a8",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.\\fifo_tx_data_reg[2]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 102505,
+      "offset_start": 102149,
+      "raw_sha256": "c4f766e61509727d411ddc892627acc453bc3b446c07f20be8c389c03a3056b0",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.\\fifo_tx_data_reg[1]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 102862,
+      "offset_start": 102506,
+      "raw_sha256": "573207576f433153a6b7100d933836acf7d6119902cc3f0dc331d93ab28e554c",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.\\fifo_tx_data_reg[0]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 103219,
+      "offset_start": 102863,
+      "raw_sha256": "d6253249bfdf62036f927c4e0a8a3dcef0fa87811e823f207d27da6562ef1b3e",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart1.\\fifo_tx_data_reg[7]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 103576,
+      "offset_start": 103220,
+      "raw_sha256": "b4b5c8aa63a2cf82ed7b0ae85287063e5e34f544cf4722501b768a17f14a9826",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart1.\\fifo_tx_data_reg[6]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 103933,
+      "offset_start": 103577,
+      "raw_sha256": "efa2fea5c61bab10ba6c65eb0808a49e0f9eaf21157b59a568694342cb1acd73",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart1.\\fifo_tx_data_reg[5]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 104290,
+      "offset_start": 103934,
+      "raw_sha256": "a42ab2cffe6202c0f9b959f34618912b1f8196b8855f374a76d5647c67def52a",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart1.\\fifo_tx_data_reg[4]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 104647,
+      "offset_start": 104291,
+      "raw_sha256": "ba0a9b4be5ab7be7177ccfc3b3ea908068155cb7ab6b1162240c7d3efd3c76be",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart1.\\fifo_tx_data_reg[3]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 105004,
+      "offset_start": 104648,
+      "raw_sha256": "f157699be0ed5443008ed316103ee99f4a1b2d11d79aa03bb3f3635ee942ce4f",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart1.\\fifo_tx_data_reg[2]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 105361,
+      "offset_start": 105005,
+      "raw_sha256": "ced99da5ae47fdf8a4ce505f1b2e92b5bf4d8a0d658ea10fb1f1606ce9f88cb8",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart1.\\fifo_tx_data_reg[1]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 105718,
+      "offset_start": 105362,
+      "raw_sha256": "201fd262d70fb7126ae0d7a6047b6392a88a5ae815f88d0895b28ff99a83f714",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart1.\\fifo_tx_data_reg[0]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 106075,
+      "offset_start": 105719,
+      "raw_sha256": "4b8666475c718c6ce2aef37b04c7f31ca1d1ddb156b825ea48796852c9d2c4b4",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart0.\\fifo_tx_data_reg[7]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 106432,
+      "offset_start": 106076,
+      "raw_sha256": "42ef9f1810953b06fb8eddb5a9aec5a3c00363c312b9adb696ccf54c6ce35324",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart0.\\fifo_tx_data_reg[6]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 106789,
+      "offset_start": 106433,
+      "raw_sha256": "7937178175b418373aeb0f149fd188e4e90967bbc5939fcb49e759255220075f",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart0.\\fifo_tx_data_reg[5]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 107146,
+      "offset_start": 106790,
+      "raw_sha256": "6f64df1e3123db467e1dd47b676087ddf4c9bda2404bee59c3cb9df4de379aa1",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart0.\\fifo_tx_data_reg[4]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 107503,
+      "offset_start": 107147,
+      "raw_sha256": "631e68898fb2fc37b71fa5582463f69068f1b241b89cdeaeca192dd3b818149a",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart0.\\fifo_tx_data_reg[3]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 107860,
+      "offset_start": 107504,
+      "raw_sha256": "5caa870d5ad930f7df9fe41ce032396a49648ef1f51f80b21c31506738ffc10b",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart0.\\fifo_tx_data_reg[2]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 108217,
+      "offset_start": 107861,
+      "raw_sha256": "9cd7d30f744a5af140152761f388a4cd418e32ac3e507bea274965f598c52770",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart0.\\fifo_tx_data_reg[1]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 108574,
+      "offset_start": 108218,
+      "raw_sha256": "7a120c9b9121914a0aeda7a7d7e12a0f670c41ee4ff0c2b0991c48ab00f1c723",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart0.\\fifo_tx_data_reg[0]",
+      "native_check": "$hold( negedge E:130000, negedge D:130000, limit: 10000 );",
+      "offset_end": 108931,
+      "offset_start": 108575,
+      "raw_sha256": "19ce8d7b6f942c13368899b39f63bc00f6080e831d1b5c6fdb98255f05e46e26",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 44258
+    },
+    {
+      "instance": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.\\dp_gt0.vec_31_dfflr .\\qout_r_reg[0]",
+      "native_check": "$hold( posedge CK &&& (ENABLE_RDN === 1'b1):9359390050000, negedge D &&& (ENABLE_RDN === 1'b1):9359390050000, limit: 10000 );",
+      "offset_end": 109700,
+      "offset_start": 109223,
+      "raw_sha256": "8f59d84d0e0f6c329f4ab875410fd4d020ed8e550a6d3bd451044bd59d3ea3d1",
+      "source_file": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+      "source_line": 38887
+    }
+  ]
+}

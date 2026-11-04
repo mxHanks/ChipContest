@@ -1,0 +1,77 @@
+{
+  "commands": [
+    {
+      "command": [
+        "cc",
+        "-std=gnu99",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fPIC",
+        "-shared",
+        "-isystem",
+        "/usr/include/iverilog",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/xu_mapped_causal117.c",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1/causal117.vpi"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "cc",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-s",
+        "tb_xu_soc_ppa",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1/reference.vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1/reference.sv"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "reference-compile",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1",
+        "-mcausal117",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1/reference.vvp"
+      ],
+      "log_sha256": "c37a7e6ec1ebd697b35b7c74051c235bd68b7a2a814f9c1584a64df9b1e35648",
+      "name": "reference-run",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-s",
+        "tb_xu_soc_ppa",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1/missing-target.vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1/missing-target.sv"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "missing-target-compile",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "vvp",
+        "-M/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1",
+        "-mcausal117",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1/missing-target.vvp"
+      ],
+      "log_sha256": "b8b40a031a586d8f4caa3ebf18e706b458f787221d1e0a3745540fd1b3ab788d",
+      "name": "missing-target-run",
+      "returncode": 0
+    }
+  ],
+  "negative": "missing target yields failed=1, no fake binding success",
+  "positive": "actual callback serial/tick/four-state notifier/Q/shared handshake in synthetic hierarchy",
+  "scope": "ICARUS_PASSIVE_CALLBACK_MECHANISM_ONLY_NOT_VENDOR_OR_MAPPED_VCS",
+  "source_sha256": "c12e150fe15304aab10929f876343764a451a6979243f587256a992e0d9e0ac6"
+}

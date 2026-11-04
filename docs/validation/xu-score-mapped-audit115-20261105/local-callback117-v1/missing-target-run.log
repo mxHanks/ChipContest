@@ -1,0 +1,46 @@
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=1 name=tb_xu_soc_ppa.dut.u_shared.clk
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=1 name=tb_xu_soc_ppa.dut.u_shared.rst_n
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=1 name=tb_xu_soc_ppa.dut.u_shared.cmd_valid
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=1 name=tb_xu_soc_ppa.dut.u_shared.cmd_ready
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=1 name=tb_xu_soc_ppa.dut.u_shared.cmd_read
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=32 name=tb_xu_soc_ppa.dut.u_shared.cmd_addr
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=32 name=tb_xu_soc_ppa.dut.u_shared.cmd_wdata
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=4 name=tb_xu_soc_ppa.dut.u_shared.cmd_wmask
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=1 name=tb_xu_soc_ppa.dut.u_shared.rsp_valid
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=1 name=tb_xu_soc_ppa.dut.u_shared.rsp_ready
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=32 name=tb_xu_soc_ppa.dut.u_shared.rsp_rdata
+XU_CAUSAL117_BIND role=actual_shared_port type=48 bits=1 name=tb_xu_soc_ppa.dut.u_shared.rsp_err
+XU_CAUSAL117_BIND role=fifo_native_reg type=48 bits=1 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.i_rdy
+XU_CAUSAL117_BIND role=fifo_native_reg type=48 bits=1 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.i_vld
+XU_CAUSAL117_BIND role=fifo_native_reg type=48 bits=1 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.o_rdy
+XU_CAUSAL117_BIND role=fifo_native_reg type=48 bits=1 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.o_vld
+XU_CAUSAL117_BIND role=fifo_native_reg type=48 bits=2 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.vec_r
+XU_CAUSAL117_BIND role=actual_accel_clock type=48 bits=1 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.clk
+XU_CAUSAL117_BIND role=actual_accel_reset type=48 bits=1 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.rst_n
+XU_CAUSAL117_READY target_cells=0 fifo_modules=1 shared_modules=1 accel_modules=1 observed_nodes=19 failed=1 start_fs=9359300000000 stop_fs=9359500000000 writes=0 forces=0 timing_controls_changed=0 NOT_FUNCTIONAL_OR_150MHZ_OR_ENERGY_QUALIFIED
+XU_CAUSAL117_EVENT serial=1 tick_fs=9359390050000 reason=value_change role=actual_shared_port bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.cmd_valid
+XU_CAUSAL117_EVENT serial=2 tick_fs=9359390050000 reason=value_change role=actual_accel_clock bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.clk
+XU_CAUSAL117_EVENT serial=3 tick_fs=9359390050000 reason=value_change role=fifo_native_reg bits=2 aval=0000000000000003 bval=0000000000000003 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.vec_r
+XU_CAUSAL117_EVENT serial=4 tick_fs=9359400050000 reason=value_change role=actual_shared_port bits=1 aval=0000000000000001 bval=0000000000000001 name=tb_xu_soc_ppa.dut.u_shared.cmd_ready
+HOST117_MECHANISM_DONE NO_DUT_OR_TIMING_PROOF
+/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private-next115/local-callback117-v1/missing-target.sv:4: $finish called at 9359424000000 (1fs)
+XU_CAUSAL117_EVENT serial=5 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=1 aval=0000000000000000 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.clk
+XU_CAUSAL117_EVENT serial=6 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.rst_n
+XU_CAUSAL117_EVENT serial=7 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.cmd_valid
+XU_CAUSAL117_EVENT serial=8 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=1 aval=0000000000000001 bval=0000000000000001 name=tb_xu_soc_ppa.dut.u_shared.cmd_ready
+XU_CAUSAL117_EVENT serial=9 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.cmd_read
+XU_CAUSAL117_EVENT serial=10 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=32 aval=0000000000000000 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.cmd_addr
+XU_CAUSAL117_EVENT serial=11 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=32 aval=0000000000000000 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.cmd_wdata
+XU_CAUSAL117_EVENT serial=12 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=4 aval=000000000000000f bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.cmd_wmask
+XU_CAUSAL117_EVENT serial=13 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=1 aval=0000000000000000 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.rsp_valid
+XU_CAUSAL117_EVENT serial=14 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.rsp_ready
+XU_CAUSAL117_EVENT serial=15 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=32 aval=0000000000000000 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.rsp_rdata
+XU_CAUSAL117_EVENT serial=16 tick_fs=9359424000000 reason=end_snapshot role=actual_shared_port bits=1 aval=0000000000000000 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_shared.rsp_err
+XU_CAUSAL117_EVENT serial=17 tick_fs=9359424000000 reason=end_snapshot role=fifo_native_reg bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.i_rdy
+XU_CAUSAL117_EVENT serial=18 tick_fs=9359424000000 reason=end_snapshot role=fifo_native_reg bits=1 aval=0000000000000000 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.i_vld
+XU_CAUSAL117_EVENT serial=19 tick_fs=9359424000000 reason=end_snapshot role=fifo_native_reg bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.o_rdy
+XU_CAUSAL117_EVENT serial=20 tick_fs=9359424000000 reason=end_snapshot role=fifo_native_reg bits=1 aval=0000000000000000 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.o_vld
+XU_CAUSAL117_EVENT serial=21 tick_fs=9359424000000 reason=end_snapshot role=fifo_native_reg bits=2 aval=0000000000000003 bval=0000000000000003 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.vec_r
+XU_CAUSAL117_EVENT serial=22 tick_fs=9359424000000 reason=end_snapshot role=actual_accel_clock bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.clk
+XU_CAUSAL117_EVENT serial=23 tick_fs=9359424000000 reason=end_snapshot role=actual_accel_reset bits=1 aval=0000000000000001 bval=0000000000000000 name=tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.rst_n
+XU_CAUSAL117_END events_in_slice=4 observed_nodes=19 failed=1 final_tick_fs=9359424000000 writes=0 forces=0 NOT_FUNCTIONAL_OR_150MHZ_OR_ENERGY_QUALIFIED
