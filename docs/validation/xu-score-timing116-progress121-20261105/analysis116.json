@@ -1,0 +1,190 @@
+{
+  "archive_members": 88,
+  "constraints_no_violator_sections": true,
+  "coverage_header": [
+    "--------------------------------------------------------------------------------",
+    "setup                 71035     67245 ( 95%)         0 (  0%)      3790 (  5%)",
+    "hold                  71035     67245 ( 95%)         0 (  0%)      3790 (  5%)",
+    "recovery              17597     17595 (100%)         0 (  0%)         2 (  0%)",
+    "removal               17597     17597 (100%)         0 (  0%)         0 (  0%)",
+    "min_period            10832       416 (  4%)         0 (  0%)     10416 ( 96%)",
+    "min_pulse_width      106045     96919 ( 91%)         0 (  0%)      9126 (  9%)",
+    "clock_gating_setup       27        27 (100%)         0 (  0%)         0 (  0%)",
+    "clock_gating_hold        27        27 (100%)         0 (  0%)         0 (  0%)",
+    "out_setup               139       139 (100%)         0 (  0%)         0 (  0%)",
+    "out_hold                139       139 (100%)         0 (  0%)         0 (  0%)",
+    "--------------------------------------------------------------------------------",
+    "All Checks           294473    267349 ( 91%)         0 (  0%)     27124 (  9%)"
+  ],
+  "final_mapped_receipt": {
+    "bytes": 13671648,
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-timing-combined-20261105-116/mapped.v",
+    "sha256": "16d29dea71ed2668b33c893e1a38be01a6eea02ca190ba8aabcb4658fe610292"
+  },
+  "final_svf_receipt": {
+    "bytes": 9984,
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-timing-combined-20261105-116/repair.svf",
+    "sha256": "2574d971c759fc2650ed660b52b6219928c54117be156cdf616ccbea10f1d90a"
+  },
+  "global_slacks_ns": {
+    "hold": {
+      "all_reported_met": true,
+      "reported_paths": 50,
+      "worst": 0.00601495
+    },
+    "setup": {
+      "all_reported_met": true,
+      "reported_paths": 50,
+      "worst": 0.0
+    }
+  },
+  "limits": [
+    "FM running at snapshot; truncated logs are not a final result.",
+    "Export121 suffix allowlist omitted .tsv/.tcl/.v/.svf bodies; omitted121-bodies.json empty only means no selected-suffix file exceeded size cap.",
+    "Full mapped/SVF, cleanup-rounds, removed-cells, reset-paths/timing-slack TSV and exact executed Tcl scripts not present.",
+    "DC/PT actual logs match state receipts; script bodies have receipts only.",
+    "Baseline116 is not S2e mapped qualification or a contest area/energy result."
+  ],
+  "native_completed_runs": [
+    {
+      "command": [
+        "/eda/synopsys/dc/dc_2022.03-SP5-5/bin/dc_shell",
+        "-f",
+        "repair.tcl"
+      ],
+      "errors": [],
+      "finished_epoch": 1793810714.3249383,
+      "label": "dc",
+      "log": {
+        "bytes": 103959,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-timing-combined-20261105-116/dc.log",
+        "sha256": "dab39cd8761219d57312e8d9df64d6c0a102f40fc5f97f8197a483335a89759b"
+      },
+      "marker_count": 1,
+      "returncode": 0,
+      "script": {
+        "bytes": 36965,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-timing-combined-20261105-116/repair.tcl",
+        "sha256": "ac0aa971c51e53df0c60aff14028fe0d7070d2c7ae9fc8c9bee10869b9bc5556"
+      },
+      "started_epoch": 1793810681.8830829
+    },
+    {
+      "command": [
+        "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+        "-f",
+        "sta.tcl"
+      ],
+      "errors": [],
+      "finished_epoch": 1793810735.9081225,
+      "label": "pt",
+      "log": {
+        "bytes": 31739,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-timing-combined-20261105-116/pt.log",
+        "sha256": "83bc484bbec6b0083e4cbad501febdea1a5e3c9f72f98b4bbecd590696567507"
+      },
+      "marker_count": 1,
+      "returncode": 0,
+      "script": {
+        "bytes": 19111,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-timing-combined-20261105-116/sta.tcl",
+        "sha256": "7f344a3c017b6de915b522aef798be5fcae06119592391008f16e75841b2aed3"
+      },
+      "started_epoch": 1793810714.4143019
+    }
+  ],
+  "payload_bytes": 24741085,
+  "pid": 25920,
+  "qualification": "NOT_QUALIFIED",
+  "reset_paths": {
+    "reset-hf_reset-0-recovery.rpt": {
+      "slacks_ns": [],
+      "status": "NO_CONSTRAINED_PATH_UNKNOWN"
+    },
+    "reset-hf_reset-0-removal.rpt": {
+      "slacks_ns": [
+        0.13275149
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-hf_reset-1-recovery.rpt": {
+      "slacks_ns": [],
+      "status": "NO_CONSTRAINED_PATH_UNKNOWN"
+    },
+    "reset-hf_reset-1-removal.rpt": {
+      "slacks_ns": [
+        0.13641581
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-hf_reset-2-recovery.rpt": {
+      "slacks_ns": [],
+      "status": "NO_CONSTRAINED_PATH_UNKNOWN"
+    },
+    "reset-hf_reset-2-removal.rpt": {
+      "slacks_ns": [
+        0.22710226
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-hf_reset-3-recovery.rpt": {
+      "slacks_ns": [],
+      "status": "NO_CONSTRAINED_PATH_UNKNOWN"
+    },
+    "reset-hf_reset-3-removal.rpt": {
+      "slacks_ns": [
+        0.22710226
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-hf_reset-4-recovery.rpt": {
+      "slacks_ns": [],
+      "status": "NO_CONSTRAINED_PATH_UNKNOWN"
+    },
+    "reset-hf_reset-4-removal.rpt": {
+      "slacks_ns": [
+        0.22710226
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-lf_watchdog-2-recovery.rpt": {
+      "slacks_ns": [
+        30516.76953125
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-lf_watchdog-2-removal.rpt": {
+      "slacks_ns": [
+        0.56059015
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-lf_watchdog-3-recovery.rpt": {
+      "slacks_ns": [
+        30516.76953125
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-lf_watchdog-3-removal.rpt": {
+      "slacks_ns": [
+        0.56059015
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-lf_watchdog-4-recovery.rpt": {
+      "slacks_ns": [
+        30516.76953125
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    },
+    "reset-lf_watchdog-4-removal.rpt": {
+      "slacks_ns": [
+        0.56059015
+      ],
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY"
+    }
+  },
+  "scope": "ACTUAL116_DC_PT_PROGRESS_SNAPSHOT_NOT_FM_COMPLETION",
+  "snapshot_phase": "fm",
+  "snapshot_state_status": "RUNNING_NOT_QUALIFIED"
+}
