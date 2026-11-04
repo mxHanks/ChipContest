@@ -1,0 +1,1147 @@
+#@ # 
+#@ # Running pt_shell Version T-2022.03-SP5-1 for linux64 -- Mar 28, 2023
+#@ # Date:   Tue Nov  3 22:46:34 2026
+#@ # Run by: s4_23usr@RDserver04
+#@ 
+
+source /eda/synopsys/prime/prime_2022.03-SP5-1/admin/setup/.synopsys_pt.setup
+#@ # -- Starting source /eda/synopsys/prime/prime_2022.03-SP5-1/admin/setup/.synopsys_pt.setup
+
+#@ #
+#@ # .synopsys_pt.setup: Initialization File for PrimeTime
+#@ #
+#@ 
+#@ 
+#@ #
+#@ # Enable stack trace output on fatal.  Not available for all architectures.
+#@ #
+#@ if { $sh_arch == "sparcOS5" || $sh_arch == "hpux10" || \
+#@      $sh_arch == "hp32" || $sh_arch == "linux" } {
+#@   set_unix_variable SYNOPSYS_TRACE ""
+#@ }
+#@ 
+#@ #
+#@ # Variable settings
+#@ #
+#@ 
+#@ #
+#@ # Synopsys strongly recommends that you use new variable message
+#@ # tracing for debugging purposes only.
+#@ #
+#@ set sh_new_variable_message true
+#@ 
+#@ #
+#@ # Synopsys strongly recommends that you uncomment the following command
+#@ # in order to set sh_command_abbrev_mode to the value "Command-Line-Only".
+#@ # Command abbreviation is intended as an interactive convenience.  Using
+#@ # abbreviations in scripts can cause commands to fail in subsequent releases.
+#@ # 
+#@ #set sh_command_abbrev_mode "Command-Line-Only"
+#@ 
+#@ #
+#@ # Some useful aliases
+#@ #
+#@ alias list_commands		help
+#@ alias report_constraints	report_constraint
+#@ alias report_clocks		report_clock
+#@ 
+#@ #
+#@ # The alias for get_clock was added when get_clock_network_objects
+#@ # was introduced, as it conflicts with get_clocks (and get_clock is a
+#@ # typical abbreviation for get_clocks)
+#@ #
+#@ alias get_clock get_clocks
+#@ 
+#@ 
+#@ #
+#@ #
+#@ # The alias of q to quit is commented out.  Remove the comment 
+#@ # character if you want this alias.  Some users find that having 
+#@ # this particular alias causes problems when mixed with page-mode
+#@ # for reports - an accidental repeated 'q' not only cancels the
+#@ # output but exits the tool.
+#@ #
+#@ #alias q quit
+#@ 
+#@ # -- End source /eda/synopsys/prime/prime_2022.03-SP5-1/admin/setup/.synopsys_pt.setup
+
+#@ # -- Starting source /eda/synopsys/prime/prime_2022.03-SP5-1/auxx/tcllib/lib/itcl4.2.1/itcl.tcl
+
+#@ #
+#@ # itcl.tcl
+#@ # ----------------------------------------------------------------------
+#@ # Invoked automatically upon startup to customize the interpreter
+#@ # for [incr Tcl].
+#@ # ----------------------------------------------------------------------
+#@ #   AUTHOR:  Michael J. McLennan
+#@ #            Bell Labs Innovations for Lucent Technologies
+#@ #            mmclennan@lucent.com
+#@ #            http://www.tcltk.com/itcl
+#@ # ----------------------------------------------------------------------
+#@ #            Copyright (c) 1993-1998  Lucent Technologies, Inc.
+#@ # ======================================================================
+#@ # See the file "license.terms" for information on usage and
+#@ # redistribution of this file, and for a DISCLAIMER OF ALL WARRANTIES.
+#@ 
+#@ proc ::itcl::delete_helper { name args } {
+#@     ::itcl::delete object $name
+#@ }
+#@ 
+#@ # ----------------------------------------------------------------------
+#@ #  USAGE:  local <className> <objName> ?<arg> <arg>...?
+#@ #
+#@ #  Creates a new object called <objName> in class <className>, passing
+#@ #  the remaining <arg>'s to the constructor.  Unlike the usual
+#@ #  [incr Tcl] objects, however, an object created by this procedure
+#@ #  will be automatically deleted when the local call frame is destroyed.
+#@ #  This command is useful for creating objects that should only remain
+#@ #  alive until a procedure exits.
+#@ # ----------------------------------------------------------------------
+#@ proc ::itcl::local {class name args} {
+#@     set ptr [uplevel [list $class $name] $args]
+#@     uplevel [list set itcl-local-$ptr $ptr]
+#@     set cmd [uplevel namespace which -command $ptr]
+#@     uplevel [list trace variable itcl-local-$ptr u \
+#@         "::itcl::delete_helper $cmd"]
+#@     return $ptr
+#@ }
+#@ 
+#@ # ----------------------------------------------------------------------
+#@ # auto_mkindex
+#@ # ----------------------------------------------------------------------
+#@ # Define Itcl commands that will be recognized by the auto_mkindex
+#@ # parser in Tcl...
+#@ #
+#@ 
+#@ #
+#@ # USAGE:  itcl::class name body
+#@ # Adds an entry for the given class declaration.
+#@ #
+#@ foreach __cmd {itcl::class class itcl::type type ictl::widget widget itcl::widgetadaptor widgetadaptor itcl::extendedclass extendedclass} {
+#@     auto_mkindex_parser::command $__cmd {name body} {
+#@ 	variable index
+#@ 	variable scriptFile
+#@ 	append index "set [list auto_index([fullname $name])]"
+#@ 	append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+#@ 
+#@ 	variable parser
+#@ 	variable contextStack
+#@ 	set contextStack [linsert $contextStack 0 $name]
+#@ 	$parser eval $body
+#@ 	set contextStack [lrange $contextStack 1 end]
+#@     }
+#@ }
+#@ # -- Starting source /eda/synopsys/prime/prime_2022.03-SP5-1/auxx/tcllib/lib/tcl8.6/auto.tcl
+
+#@ # auto.tcl --
+#@ #
+#@ # utility procs formerly in init.tcl dealing with auto execution of commands
+#@ # and can be auto loaded themselves.
+#@ #
+#@ # Copyright (c) 1991-1993 The Regents of the University of California.
+#@ # Copyright (c) 1994-1998 Sun Microsystems, Inc.
+#@ #
+#@ # See the file "license.terms" for information on usage and redistribution of
+#@ # this file, and for a DISCLAIMER OF ALL WARRANTIES.
+#@ #
+#@ 
+#@ # auto_reset --
+#@ #
+#@ # Destroy all cached information for auto-loading and auto-execution, so that
+#@ # the information gets recomputed the next time it's needed.  Also delete any
+#@ # commands that are listed in the auto-load index.
+#@ #
+#@ # Arguments:
+#@ # None.
+#@ 
+#@ proc auto_reset {} {
+#@     global auto_execs auto_index auto_path
+#@     if {[array exists auto_index]} {
+#@ 	foreach cmdName [array names auto_index] {
+#@ 	    set fqcn [namespace which $cmdName]
+#@ 	    if {$fqcn eq ""} {
+#@ 		continue
+#@ 	    }
+#@ 	    rename $fqcn {}
+#@ 	}
+#@     }
+#@     unset -nocomplain auto_execs auto_index ::tcl::auto_oldpath
+#@     if {[catch {llength $auto_path}]} {
+#@ 	set auto_path [list [info library]]
+#@     } elseif {[info library] ni $auto_path} {
+#@ 	lappend auto_path [info library]
+#@     }
+#@ }
+#@ 
+#@ # tcl_findLibrary --
+#@ #
+#@ #	This is a utility for extensions that searches for a library directory
+#@ #	using a canonical searching algorithm. A side effect is to source the
+#@ #	initialization script and set a global library variable.
+#@ #
+#@ # Arguments:
+#@ # 	basename	Prefix of the directory name, (e.g., "tk")
+#@ #	version		Version number of the package, (e.g., "8.0")
+#@ #	patch		Patchlevel of the package, (e.g., "8.0.3")
+#@ #	initScript	Initialization script to source (e.g., tk.tcl)
+#@ #	enVarName	environment variable to honor (e.g., TK_LIBRARY)
+#@ #	varName		Global variable to set when done (e.g., tk_library)
+#@ 
+#@ proc tcl_findLibrary {basename version patch initScript enVarName varName} {
+#@     upvar #0 $varName the_library
+#@     global auto_path env tcl_platform
+#@ 
+#@     set dirs {}
+#@     set errors {}
+#@ 
+#@     # The C application may have hardwired a path, which we honor
+#@ 
+#@     if {[info exists the_library] && $the_library ne ""} {
+#@ 	lappend dirs $the_library
+#@     } else {
+#@ 	# Do the canonical search
+#@ 
+#@ 	# 1. From an environment variable, if it exists.  Placing this first
+#@ 	#    gives the end-user ultimate control to work-around any bugs, or
+#@ 	#    to customize.
+#@ 
+#@         if {[info exists env($enVarName)]} {
+#@             lappend dirs $env($enVarName)
+#@         }
+#@ 
+#@ 	# 2. In the package script directory registered within the
+#@ 	#    configuration of the package itself.
+#@ 
+#@ 	catch {
+#@ 	    lappend dirs [::${basename}::pkgconfig get scriptdir,runtime]
+#@ 	}
+#@ 
+#@ 	# 3. Relative to auto_path directories.  This checks relative to the
+#@ 	# Tcl library as well as allowing loading of libraries added to the
+#@ 	# auto_path that is not relative to the core library or binary paths.
+#@ 	foreach d $auto_path {
+#@ 	    lappend dirs [file join $d $basename$version]
+#@ 	    if {$tcl_platform(platform) eq "unix"
+#@ 		    && $tcl_platform(os) eq "Darwin"} {
+#@ 		# 4. On MacOSX, check the Resources/Scripts subdir too
+#@ 		lappend dirs [file join $d $basename$version Resources Scripts]
+#@ 	    }
+#@ 	}
+#@ 
+#@ 	# 3. Various locations relative to the executable
+#@ 	# ../lib/foo1.0		(From bin directory in install hierarchy)
+#@ 	# ../../lib/foo1.0	(From bin/arch directory in install hierarchy)
+#@ 	# ../library		(From unix directory in build hierarchy)
+#@ 	#
+#@ 	# Remaining locations are out of date (when relevant, they ought to be
+#@ 	# covered by the $::auto_path seach above) and disabled.
+#@ 	#
+#@ 	# ../../library		(From unix/arch directory in build hierarchy)
+#@ 	# ../../foo1.0.1/library
+#@ 	#		(From unix directory in parallel build hierarchy)
+#@ 	# ../../../foo1.0.1/library
+#@ 	#		(From unix/arch directory in parallel build hierarchy)
+#@ 
+#@         set parentDir [file dirname [file dirname [info nameofexecutable]]]
+#@         set grandParentDir [file dirname $parentDir]
+#@         lappend dirs [file join $parentDir lib $basename$version]
+#@         lappend dirs [file join $grandParentDir lib $basename$version]
+#@         lappend dirs [file join $parentDir library]
+#@ 	if {0} {
+#@ 	    lappend dirs [file join $grandParentDir library]
+#@ 	    lappend dirs [file join $grandParentDir $basename$patch library]
+#@ 	    lappend dirs [file join [file dirname $grandParentDir] \
+#@ 			      $basename$patch library]
+#@ 	}
+#@     }
+#@     # uniquify $dirs in order
+#@     array set seen {}
+#@     foreach i $dirs {
+#@ 	# Make sure $i is unique under normalization. Avoid repeated [source].
+#@ 	if {[interp issafe]} {
+#@ 	    # Safe interps have no [file normalize].
+#@ 	    set norm $i
+#@ 	} else {
+#@ 	    set norm [file normalize $i]
+#@ 	}
+#@ 	if {[info exists seen($norm)]} {
+#@ 	    continue
+#@ 	}
+#@ 	set seen($norm) {}
+#@ 
+#@         set the_library $i
+#@         set file [file join $i $initScript]
+#@ 
+#@ 	# source everything when in a safe interpreter because we have a
+#@ 	# source command, but no file exists command
+#@ 
+#@         if {[interp issafe] || [file exists $file]} {
+#@             if {![catch {uplevel #0 [list source $file]} msg opts]} {
+#@                 return
+#@             }
+#@ 	    append errors "$file: $msg\n"
+#@ 	    append errors [dict get $opts -errorinfo]\n
+#@         }
+#@     }
+#@     unset -nocomplain the_library
+#@     set msg "Can't find a usable $initScript in the following directories: \n"
+#@     append msg "    $dirs\n\n"
+#@     append msg "$errors\n\n"
+#@     append msg "This probably means that $basename wasn't installed properly.\n"
+#@     error $msg
+#@ }
+#@ 
+#@ 
+#@ # ----------------------------------------------------------------------
+#@ # auto_mkindex
+#@ # ----------------------------------------------------------------------
+#@ # The following procedures are used to generate the tclIndex file from Tcl
+#@ # source files.  They use a special safe interpreter to parse Tcl source
+#@ # files, writing out index entries as "proc" commands are encountered.  This
+#@ # implementation won't work in a safe interpreter, since a safe interpreter
+#@ # can't create the special parser and mess with its commands.
+#@ 
+#@ if {[interp issafe]} {
+#@     return	;# Stop sourcing the file here
+#@ }
+#@ 
+#@ # auto_mkindex --
+#@ # Regenerate a tclIndex file from Tcl source files.  Takes as argument the
+#@ # name of the directory in which the tclIndex file is to be placed, followed
+#@ # by any number of glob patterns to use in that directory to locate all of the
+#@ # relevant files.
+#@ #
+#@ # Arguments:
+#@ # dir -		Name of the directory in which to create an index.
+#@ 
+#@ # args -	Any number of additional arguments giving the names of files
+#@ #		within dir.  If no additional are given auto_mkindex will look
+#@ #		for *.tcl.
+#@ 
+#@ proc auto_mkindex {dir args} {
+#@     if {[interp issafe]} {
+#@         error "can't generate index within safe interpreter"
+#@     }
+#@ 
+#@     set oldDir [pwd]
+#@     cd $dir
+#@ 
+#@     append index "# Tcl autoload index file, version 2.0\n"
+#@     append index "# This file is generated by the \"auto_mkindex\" command\n"
+#@     append index "# and sourced to set up indexing information for one or\n"
+#@     append index "# more commands.  Typically each line is a command that\n"
+#@     append index "# sets an element in the auto_index array, where the\n"
+#@     append index "# element name is the name of a command and the value is\n"
+#@     append index "# a script that loads the command.\n\n"
+#@     if {![llength $args]} {
+#@ 	set args *.tcl
+#@     }
+#@ 
+#@     auto_mkindex_parser::init
+#@     foreach file [lsort [glob -- {*}$args]] {
+#@ 	try {
+#@ 	    append index [auto_mkindex_parser::mkindex $file]
+#@ 	} on error {msg opts} {
+#@ 	    cd $oldDir
+#@ 	    return -options $opts $msg
+#@ 	}
+#@     }
+#@     auto_mkindex_parser::cleanup
+#@ 
+#@     set fid [open "tclIndex" w]
+#@     puts -nonewline $fid $index
+#@     close $fid
+#@     cd $oldDir
+#@ }
+#@ 
+#@ # Original version of auto_mkindex that just searches the source code for
+#@ # "proc" at the beginning of the line.
+#@ 
+#@ proc auto_mkindex_old {dir args} {
+#@     set oldDir [pwd]
+#@     cd $dir
+#@     set dir [pwd]
+#@     append index "# Tcl autoload index file, version 2.0\n"
+#@     append index "# This file is generated by the \"auto_mkindex\" command\n"
+#@     append index "# and sourced to set up indexing information for one or\n"
+#@     append index "# more commands.  Typically each line is a command that\n"
+#@     append index "# sets an element in the auto_index array, where the\n"
+#@     append index "# element name is the name of a command and the value is\n"
+#@     append index "# a script that loads the command.\n\n"
+#@     if {![llength $args]} {
+#@ 	set args *.tcl
+#@     }
+#@     foreach file [lsort [glob -- {*}$args]] {
+#@ 	set f ""
+#@ 	set error [catch {
+#@ 	    set f [open $file]
+#@ 	    fconfigure $f -eofchar \032
+#@ 	    while {[gets $f line] >= 0} {
+#@ 		if {[regexp {^proc[ 	]+([^ 	]*)} $line match procName]} {
+#@ 		    set procName [lindex [auto_qualify $procName "::"] 0]
+#@ 		    append index "set [list auto_index($procName)]"
+#@ 		    append index " \[list source \[file join \$dir [list $file]\]\]\n"
+#@ 		}
+#@ 	    }
+#@ 	    close $f
+#@ 	} msg opts]
+#@ 	if {$error} {
+#@ 	    catch {close $f}
+#@ 	    cd $oldDir
+#@ 	    return -options $opts $msg
+#@ 	}
+#@     }
+#@     set f ""
+#@     set error [catch {
+#@ 	set f [open tclIndex w]
+#@ 	puts -nonewline $f $index
+#@ 	close $f
+#@ 	cd $oldDir
+#@     } msg opts]
+#@     if {$error} {
+#@ 	catch {close $f}
+#@ 	cd $oldDir
+#@ 	error $msg $info $code
+#@ 	return -options $opts $msg
+#@     }
+#@ }
+#@ 
+#@ # Create a safe interpreter that can be used to parse Tcl source files
+#@ # generate a tclIndex file for autoloading.  This interp contains commands for
+#@ # things that need index entries.  Each time a command is executed, it writes
+#@ # an entry out to the index file.
+#@ 
+#@ namespace eval auto_mkindex_parser {
+#@     variable parser ""          ;# parser used to build index
+#@     variable index ""           ;# maintains index as it is built
+#@     variable scriptFile ""      ;# name of file being processed
+#@     variable contextStack ""    ;# stack of namespace scopes
+#@     variable imports ""         ;# keeps track of all imported cmds
+#@     variable initCommands       ;# list of commands that create aliases
+#@     if {![info exists initCommands]} {
+#@ 	set initCommands [list]
+#@     }
+#@ 
+#@     proc init {} {
+#@ 	variable parser
+#@ 	variable initCommands
+#@ 
+#@ 	if {![interp issafe]} {
+#@ 	    set parser [interp create -safe]
+#@ 	    $parser hide info
+#@ 	    $parser hide rename
+#@ 	    $parser hide proc
+#@ 	    $parser hide namespace
+#@ 	    $parser hide eval
+#@ 	    $parser hide puts
+#@ 	    foreach ns [$parser invokehidden namespace children ::] {
+#@ 		# MUST NOT DELETE "::tcl" OR BAD THINGS HAPPEN!
+#@ 		if {$ns eq "::tcl"} continue
+#@ 		$parser invokehidden namespace delete $ns
+#@ 	    }
+#@ 	    foreach cmd [$parser invokehidden info commands ::*] {
+#@ 		$parser invokehidden rename $cmd {}
+#@ 	    }
+#@ 	    $parser invokehidden proc unknown {args} {}
+#@ 
+#@ 	    # We'll need access to the "namespace" command within the
+#@ 	    # interp.  Put it back, but move it out of the way.
+#@ 
+#@ 	    $parser expose namespace
+#@ 	    $parser invokehidden rename namespace _%@namespace
+#@ 	    $parser expose eval
+#@ 	    $parser invokehidden rename eval _%@eval
+#@ 
+#@ 	    # Install all the registered psuedo-command implementations
+#@ 
+#@ 	    foreach cmd $initCommands {
+#@ 		eval $cmd
+#@ 	    }
+#@ 	}
+#@     }
+#@     proc cleanup {} {
+#@ 	variable parser
+#@ 	interp delete $parser
+#@ 	unset parser
+#@     }
+#@ }
+#@ 
+#@ # auto_mkindex_parser::mkindex --
+#@ #
+#@ # Used by the "auto_mkindex" command to create a "tclIndex" file for the given
+#@ # Tcl source file.  Executes the commands in the file, and handles things like
+#@ # the "proc" command by adding an entry for the index file.  Returns a string
+#@ # that represents the index file.
+#@ #
+#@ # Arguments:
+#@ #	file	Name of Tcl source file to be indexed.
+#@ 
+#@ proc auto_mkindex_parser::mkindex {file} {
+#@     variable parser
+#@     variable index
+#@     variable scriptFile
+#@     variable contextStack
+#@     variable imports
+#@ 
+#@     set scriptFile $file
+#@ 
+#@     set fid [open $file]
+#@     fconfigure $fid -eofchar \032
+#@     set contents [read $fid]
+#@     close $fid
+#@ 
+#@     # There is one problem with sourcing files into the safe interpreter:
+#@     # references like "$x" will fail since code is not really being executed
+#@     # and variables do not really exist.  To avoid this, we replace all $ with
+#@     # \0 (literally, the null char) later, when getting proc names we will
+#@     # have to reverse this replacement, in case there were any $ in the proc
+#@     # name.  This will cause a problem if somebody actually tries to have a \0
+#@     # in their proc name.  Too bad for them.
+#@     set contents [string map [list \$ \0] $contents]
+#@ 
+#@     set index ""
+#@     set contextStack ""
+#@     set imports ""
+#@ 
+#@     $parser eval $contents
+#@ 
+#@     foreach name $imports {
+#@         catch {$parser eval [list _%@namespace forget $name]}
+#@     }
+#@     return $index
+#@ }
+#@ 
+#@ # auto_mkindex_parser::hook command
+#@ #
+#@ # Registers a Tcl command to evaluate when initializing the child interpreter
+#@ # used by the mkindex parser.  The command is evaluated in the parent
+#@ # interpreter, and can use the variable auto_mkindex_parser::parser to get to
+#@ # the child
+#@ 
+#@ proc auto_mkindex_parser::hook {cmd} {
+#@     variable initCommands
+#@ 
+#@     lappend initCommands $cmd
+#@ }
+#@ 
+#@ # auto_mkindex_parser::slavehook command
+#@ #
+#@ # Registers a Tcl command to evaluate when initializing the child interpreter
+#@ # used by the mkindex parser.  The command is evaluated in the child
+#@ # interpreter.
+#@ 
+#@ proc auto_mkindex_parser::slavehook {cmd} {
+#@     variable initCommands
+#@ 
+#@     # The $parser variable is defined to be the name of the child interpreter
+#@     # when this command is used later.
+#@ 
+#@     lappend initCommands "\$parser eval [list $cmd]"
+#@ }
+#@ 
+#@ # auto_mkindex_parser::command --
+#@ #
+#@ # Registers a new command with the "auto_mkindex_parser" interpreter that
+#@ # parses Tcl files.  These commands are fake versions of things like the
+#@ # "proc" command.  When you execute them, they simply write out an entry to a
+#@ # "tclIndex" file for auto-loading.
+#@ #
+#@ # This procedure allows extensions to register their own commands with the
+#@ # auto_mkindex facility.  For example, a package like [incr Tcl] might
+#@ # register a "class" command so that class definitions could be added to a
+#@ # "tclIndex" file for auto-loading.
+#@ #
+#@ # Arguments:
+#@ #	name 	Name of command recognized in Tcl files.
+#@ #	arglist	Argument list for command.
+#@ #	body 	Implementation of command to handle indexing.
+#@ 
+#@ proc auto_mkindex_parser::command {name arglist body} {
+#@     hook [list auto_mkindex_parser::commandInit $name $arglist $body]
+#@ }
+#@ 
+#@ # auto_mkindex_parser::commandInit --
+#@ #
+#@ # This does the actual work set up by auto_mkindex_parser::command. This is
+#@ # called when the interpreter used by the parser is created.
+#@ #
+#@ # Arguments:
+#@ #	name 	Name of command recognized in Tcl files.
+#@ #	arglist	Argument list for command.
+#@ #	body 	Implementation of command to handle indexing.
+#@ 
+#@ proc auto_mkindex_parser::commandInit {name arglist body} {
+#@     variable parser
+#@ 
+#@     set ns [namespace qualifiers $name]
+#@     set tail [namespace tail $name]
+#@     if {$ns eq ""} {
+#@         set fakeName [namespace current]::_%@fake_$tail
+#@     } else {
+#@         set fakeName [namespace current]::[string map {:: _} _%@fake_$name]
+#@     }
+#@     proc $fakeName $arglist $body
+#@ 
+#@     # YUK!  Tcl won't let us alias fully qualified command names, so we can't
+#@     # handle names like "::itcl::class".  Instead, we have to build procs with
+#@     # the fully qualified names, and have the procs point to the aliases.
+#@ 
+#@     if {[string match *::* $name]} {
+#@         set exportCmd [list _%@namespace export [namespace tail $name]]
+#@         $parser eval [list _%@namespace eval $ns $exportCmd]
+#@ 
+#@ 	# The following proc definition does not work if you want to tolerate
+#@ 	# space or something else diabolical in the procedure name, (i.e.,
+#@ 	# space in $alias). The following does not work:
+#@ 	#   "_%@eval {$alias} \$args"
+#@ 	# because $alias gets concat'ed to $args.  The following does not work
+#@ 	# because $cmd is somehow undefined
+#@ 	#   "set cmd {$alias} \; _%@eval {\$cmd} \$args"
+#@ 	# A gold star to someone that can make test autoMkindex-3.3 work
+#@ 	# properly
+#@ 
+#@         set alias [namespace tail $fakeName]
+#@         $parser invokehidden proc $name {args} "_%@eval {$alias} \$args"
+#@         $parser alias $alias $fakeName
+#@     } else {
+#@         $parser alias $name $fakeName
+#@     }
+#@     return
+#@ }
+#@ 
+#@ # auto_mkindex_parser::fullname --
+#@ #
+#@ # Used by commands like "proc" within the auto_mkindex parser.  Returns the
+#@ # qualified namespace name for the "name" argument.  If the "name" does not
+#@ # start with "::", elements are added from the current namespace stack to
+#@ # produce a qualified name.  Then, the name is examined to see whether or not
+#@ # it should really be qualified.  If the name has more than the leading "::",
+#@ # it is returned as a fully qualified name.  Otherwise, it is returned as a
+#@ # simple name.  That way, the Tcl autoloader will recognize it properly.
+#@ #
+#@ # Arguments:
+#@ # name -		Name that is being added to index.
+#@ 
+#@ proc auto_mkindex_parser::fullname {name} {
+#@     variable contextStack
+#@ 
+#@     if {![string match ::* $name]} {
+#@         foreach ns $contextStack {
+#@             set name "${ns}::$name"
+#@             if {[string match ::* $name]} {
+#@                 break
+#@             }
+#@         }
+#@     }
+#@ 
+#@     if {[namespace qualifiers $name] eq ""} {
+#@         set name [namespace tail $name]
+#@     } elseif {![string match ::* $name]} {
+#@         set name "::$name"
+#@     }
+#@ 
+#@     # Earlier, mkindex replaced all $'s with \0.  Now, we have to reverse that
+#@     # replacement.
+#@     return [string map [list \0 \$] $name]
+#@ }
+#@ 
+#@ # auto_mkindex_parser::indexEntry --
+#@ #
+#@ # Used by commands like "proc" within the auto_mkindex parser to add a
+#@ # correctly-quoted entry to the index. This is shared code so it is done
+#@ # *right*, in one place.
+#@ #
+#@ # Arguments:
+#@ # name -		Name that is being added to index.
+#@ 
+#@ proc auto_mkindex_parser::indexEntry {name} {
+#@     variable index
+#@     variable scriptFile
+#@ 
+#@     # We convert all metacharacters to their backslashed form, and pre-split
+#@     # the file name that we know about (which will be a proper list, and so
+#@     # correctly quoted).
+#@ 
+#@     set name [string range [list \}[fullname $name]] 2 end]
+#@     set filenameParts [file split $scriptFile]
+#@ 
+#@     append index [format \
+#@ 	    {set auto_index(%s) [list source [file join $dir %s]]%s} \
+#@ 	    $name $filenameParts \n]
+#@     return
+#@ }
+#@ 
+#@ if {[llength $::auto_mkindex_parser::initCommands]} {
+#@     return
+#@ }
+#@ 
+#@ # Register all of the procedures for the auto_mkindex parser that will build
+#@ # the "tclIndex" file.
+#@ 
+#@ # AUTO MKINDEX:  proc name arglist body
+#@ # Adds an entry to the auto index list for the given procedure name.
+#@ 
+#@ auto_mkindex_parser::command proc {name args} {
+#@     indexEntry $name
+#@ }
+#@ 
+#@ # Conditionally add support for Tcl byte code files.  There are some tricky
+#@ # details here.  First, we need to get the tbcload library initialized in the
+#@ # current interpreter.  We cannot load tbcload into the child until we have
+#@ # done so because it needs access to the tcl_patchLevel variable.  Second,
+#@ # because the package index file may defer loading the library until we invoke
+#@ # a command, we need to explicitly invoke auto_load to force it to be loaded.
+#@ # This should be a noop if the package has already been loaded
+#@ 
+#@ auto_mkindex_parser::hook {
+#@     try {
+#@ 	package require tbcload
+#@     } on error {} {
+#@ 	# OK, don't have it so do nothing
+#@     } on ok {} {
+#@ 	if {[namespace which -command tbcload::bcproc] eq ""} {
+#@ 	    auto_load tbcload::bcproc
+#@ 	}
+#@ 	load {} tbcload $auto_mkindex_parser::parser
+#@ 
+#@ 	# AUTO MKINDEX:  tbcload::bcproc name arglist body
+#@ 	# Adds an entry to the auto index list for the given pre-compiled
+#@ 	# procedure name.
+#@ 
+#@ 	auto_mkindex_parser::commandInit tbcload::bcproc {name args} {
+#@ 	    indexEntry $name
+#@ 	}
+#@     }
+#@ }
+#@ 
+#@ # AUTO MKINDEX:  namespace eval name command ?arg arg...?
+#@ # Adds the namespace name onto the context stack and evaluates the associated
+#@ # body of commands.
+#@ #
+#@ # AUTO MKINDEX:  namespace import ?-force? pattern ?pattern...?
+#@ # Performs the "import" action in the parser interpreter.  This is important
+#@ # for any commands contained in a namespace that affect the index.  For
+#@ # example, a script may say "itcl::class ...", or it may import "itcl::*" and
+#@ # then say "class ...".  This procedure does the import operation, but keeps
+#@ # track of imported patterns so we can remove the imports later.
+#@ 
+#@ auto_mkindex_parser::command namespace {op args} {
+#@     switch -- $op {
+#@         eval {
+#@             variable parser
+#@             variable contextStack
+#@ 
+#@             set name [lindex $args 0]
+#@             set args [lrange $args 1 end]
+#@ 
+#@             set contextStack [linsert $contextStack 0 $name]
+#@ 	    $parser eval [list _%@namespace eval $name] $args
+#@             set contextStack [lrange $contextStack 1 end]
+#@         }
+#@         import {
+#@             variable parser
+#@             variable imports
+#@             foreach pattern $args {
+#@                 if {$pattern ne "-force"} {
+#@                     lappend imports $pattern
+#@                 }
+#@             }
+#@             catch {$parser eval "_%@namespace import $args"}
+#@         }
+#@ 	ensemble {
+#@ 	    variable parser
+#@ 	    variable contextStack
+#@ 	    if {[lindex $args 0] eq "create"} {
+#@ 		set name ::[join [lreverse $contextStack] ::]
+#@ 		catch {
+#@ 		    set name [dict get [lrange $args 1 end] -command]
+#@ 		    if {![string match ::* $name]} {
+#@ 			set name ::[join [lreverse $contextStack] ::]$name
+#@ 		    }
+#@ 		    regsub -all ::+ $name :: name
+#@ 		}
+#@ 		# create artifical proc to force an entry in the tclIndex
+#@ 		$parser eval [list ::proc $name {} {}]
+#@ 	    }
+#@ 	}
+#@     }
+#@ }
+#@ 
+#@ # AUTO MKINDEX:  oo::class create name ?definition?
+#@ # Adds an entry to the auto index list for the given class name.
+#@ auto_mkindex_parser::command oo::class {op name {body ""}} {
+#@     if {$op eq "create"} {
+#@ 	indexEntry $name
+#@     }
+#@ }
+#@ auto_mkindex_parser::command class {op name {body ""}} {
+#@     if {$op eq "create"} {
+#@ 	indexEntry $name
+#@     }
+#@ }
+#@ 
+#@ return
+#@ # -- End source /eda/synopsys/prime/prime_2022.03-SP5-1/auxx/tcllib/lib/tcl8.6/auto.tcl
+
+#@ 
+#@ #
+#@ # USAGE:  itcl::body name arglist body
+#@ # Adds an entry for the given method/proc body.
+#@ #
+#@ foreach __cmd {itcl::body body} {
+#@     auto_mkindex_parser::command $__cmd {name arglist body} {
+#@ 	variable index
+#@ 	variable scriptFile
+#@ 	append index "set [list auto_index([fullname $name])]"
+#@ 	append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+#@     }
+#@ }
+#@ 
+#@ #
+#@ # USAGE:  itcl::configbody name arglist body
+#@ # Adds an entry for the given method/proc body.
+#@ #
+#@ foreach __cmd {itcl::configbody configbody} {
+#@     auto_mkindex_parser::command $__cmd {name body} {
+#@ 	variable index
+#@ 	variable scriptFile
+#@ 	append index "set [list auto_index([fullname $name])]"
+#@ 	append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+#@     }
+#@ }
+#@ 
+#@ #
+#@ # USAGE:  ensemble name ?body?
+#@ # Adds an entry to the auto index list for the given ensemble name.
+#@ #
+#@ foreach __cmd {itcl::ensemble ensemble} {
+#@     auto_mkindex_parser::command $__cmd {name {body ""}} {
+#@ 	variable index
+#@ 	variable scriptFile
+#@ 	append index "set [list auto_index([fullname $name])]"
+#@ 	append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+#@     }
+#@ }
+#@ 
+#@ #
+#@ # USAGE:  public arg ?arg arg...?
+#@ #         protected arg ?arg arg...?
+#@ #         private arg ?arg arg...?
+#@ #
+#@ # Evaluates the arguments as commands, so we can recognize proc
+#@ # declarations within classes.
+#@ #
+#@ foreach __cmd {public protected private} {
+#@     auto_mkindex_parser::command $__cmd {args} {
+#@         variable parser
+#@         $parser eval $args
+#@     }
+#@ }
+#@ 
+#@ # SF bug #246 unset variable __cmd to avoid problems in user programs!!
+#@ unset __cmd
+#@ 
+#@ # ----------------------------------------------------------------------
+#@ # auto_import
+#@ # ----------------------------------------------------------------------
+#@ # This procedure overrides the usual "auto_import" function in the
+#@ # Tcl library.  It is invoked during "namespace import" to make see
+#@ # if the imported commands reside in an autoloaded library.  If so,
+#@ # stubs are created to represent the commands.  Executing a stub
+#@ # later on causes the real implementation to be autoloaded.
+#@ #
+#@ # Arguments -
+#@ # pattern	The pattern of commands being imported (like "foo::*")
+#@ #               a canonical namespace as returned by [namespace current]
+#@ 
+#@ proc auto_import {pattern} {
+#@     global auto_index
+#@ 
+#@     set ns [uplevel namespace current]
+#@     set patternList [auto_qualify $pattern $ns]
+#@ 
+#@     auto_load_index
+#@ 
+#@     foreach pattern $patternList {
+#@         foreach name [array names auto_index $pattern] {
+#@             if {"" == [info commands $name]} {
+#@                 ::itcl::import::stub create $name
+#@             }
+#@         }
+#@     }
+#@ }
+#@ # -- End source /eda/synopsys/prime/prime_2022.03-SP5-1/auxx/tcllib/lib/itcl4.2.1/itcl.tcl
+
+source -echo -verbose sta.tcl
+#@ # -- Starting source sta.tcl
+
+#@ if {[catch {
+#@ set_app_var link_path [list * {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db} {/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db}]
+#@ read_verilog mapped.v
+#@ if {![link_design xu_soc_ppa_top]} {error {PT link failed}}
+#@ set XU_CLOCK_MODE envelope
+#@ set XU_PLL_DIV 0
+#@ source {/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-pt-compatible-05/constraints.sdc}
+#@ set XU_AUDIT_FORWARD_CLOCK_EXPERIMENT 1
+#@ source {/storage2/2026contest/server4/s4_23usr/Desktop/xu-ts16.tcl}
+#@ # Exact post-elaboration macro groups; overlapping matches and missing/extra cells fail.
+#@ set xu_seen [dict create]
+#@ set xu_cells [get_cells -quiet -hierarchical -filter {full_name =~ u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_srams/u_e203_itcm_ram/* && ref_name == RAMSP1024X16 && is_hierarchical == false}]
+#@ if {[sizeof_collection $xu_cells] != 32} {error {wrong macro count: itcm}}
+#@ foreach_in_collection xu_c $xu_cells {
+#@   set xu_n [get_object_name $xu_c]
+#@   if {[dict exists $xu_seen $xu_n]} {error "overlapping SRAM group: $xu_n"}
+#@   dict set xu_seen $xu_n 1
+#@   if {[get_attribute $xu_c ref_name] != {RAMSP1024X16}} {error "wrong SRAM reference: $xu_n"}
+#@ }
+#@ puts "XU_SRAM_GROUP itcm count=32 macro_ref=RAMSP1024X16 logical_bits=524288 physical_bits=524288 padding_bits=0"
+#@ set xu_cells [get_cells -quiet -hierarchical -filter {full_name =~ u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_srams/u_e203_dtcm_ram/* && ref_name == RAMSP1024X16 && is_hierarchical == false}]
+#@ if {[sizeof_collection $xu_cells] != 32} {error {wrong macro count: dtcm}}
+#@ foreach_in_collection xu_c $xu_cells {
+#@   set xu_n [get_object_name $xu_c]
+#@   if {[dict exists $xu_seen $xu_n]} {error "overlapping SRAM group: $xu_n"}
+#@   dict set xu_seen $xu_n 1
+#@   if {[get_attribute $xu_c ref_name] != {RAMSP1024X16}} {error "wrong SRAM reference: $xu_n"}
+#@ }
+#@ puts "XU_SRAM_GROUP dtcm count=32 macro_ref=RAMSP1024X16 logical_bits=524288 physical_bits=524288 padding_bits=0"
+#@ set xu_cells [get_cells -quiet -hierarchical -filter {full_name =~ u_shared/storage/* && ref_name == RAMSP1024X16 && is_hierarchical == false}]
+#@ if {[sizeof_collection $xu_cells] != 256} {error {wrong macro count: shared}}
+#@ foreach_in_collection xu_c $xu_cells {
+#@   set xu_n [get_object_name $xu_c]
+#@   if {[dict exists $xu_seen $xu_n]} {error "overlapping SRAM group: $xu_n"}
+#@   dict set xu_seen $xu_n 1
+#@   if {[get_attribute $xu_c ref_name] != {RAMSP1024X16}} {error "wrong SRAM reference: $xu_n"}
+#@ }
+#@ puts "XU_SRAM_GROUP shared count=256 macro_ref=RAMSP1024X16 logical_bits=4194304 physical_bits=4194304 padding_bits=0"
+#@ set xu_cells [get_cells -quiet -hierarchical -filter {full_name =~ u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_accel_icb_slave/* && ref_name == RAMSP1024X16 && is_hierarchical == false}]
+#@ if {[sizeof_collection $xu_cells] != 16} {error {wrong macro count: accelerator_weights}}
+#@ foreach_in_collection xu_c $xu_cells {
+#@   set xu_n [get_object_name $xu_c]
+#@   if {[dict exists $xu_seen $xu_n]} {error "overlapping SRAM group: $xu_n"}
+#@   dict set xu_seen $xu_n 1
+#@   if {[get_attribute $xu_c ref_name] != {RAMSP1024X16}} {error "wrong SRAM reference: $xu_n"}
+#@ }
+#@ puts "XU_SRAM_GROUP accelerator_weights count=16 macro_ref=RAMSP1024X16 logical_bits=262144 physical_bits=262144 padding_bits=0"
+#@ # RAMSP is the explicit technology SRAM namespace; reject every extra leaf/reference.
+#@ set xu_allowed_refs [list {RAMSP1024X16}]
+#@ set xu_all_macros [get_cells -quiet -hierarchical -filter {ref_name =~ RAMSP* && is_hierarchical == false}]
+#@ if {[sizeof_collection $xu_all_macros] != 336 || [dict size $xu_seen] != 336} {error {full-SoC SRAM total must be exactly 336}}
+#@ foreach_in_collection xu_c $xu_all_macros {
+#@   if {[lsearch -exact $xu_allowed_refs [get_attribute $xu_c ref_name]] < 0} {error {unexpected SRAM reference}}
+#@   if {![dict exists $xu_seen [get_object_name $xu_c]]} {error {ungrouped/unaccounted SRAM macro}}
+#@ }
+#@ if {[sizeof_collection [get_cells -quiet -hierarchical -filter {full_name == u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_accel_icb_slave && ref_name =~ accel_icb_slave*}]] != 1} {error {missing/wrong accelerator}}
+#@ if {[sizeof_collection [get_cells -quiet -hierarchical -filter {full_name == u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top && ref_name =~ e203_cpu_top*}]] != 1} {error {missing/wrong cpu}}
+#@ if {[sizeof_collection [get_cells -quiet -hierarchical -filter {full_name == u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_sirv_ppi_fab && ref_name =~ sirv_icb1to16_bus*}]] != 1} {error {missing/wrong interconnect}}
+#@ redirect -file units.rpt {report_units}
+#@ redirect -file check-timing.rpt {check_timing -verbose}
+#@ redirect -file setup.rpt {report_timing -delay_type max -max_paths 50 -significant_digits 8}
+#@ redirect -file hold.rpt {report_timing -delay_type min -max_paths 50 -significant_digits 8}
+#@ redirect -file constraints.rpt {report_constraint -all_violators -verbose -significant_digits 8}
+#@ redirect -file exceptions.rpt {report_exceptions}
+#@ redirect -file analysis-coverage.rpt {report_analysis_coverage -status_details untested}
+#@ redirect -file clocks.rpt {report_clock -attributes}
+#@ set f [open timing-slack.tsv w]
+#@ puts $f "delay_type\tpath_count\tworst_slack"
+#@ foreach type {max min} {set paths [get_timing_paths -delay_type $type -max_paths 1];if {[sizeof_collection $paths]!=1} {error {timing path missing}};puts $f "$type\t[sizeof_collection $paths]\t[get_attribute $paths slack]"}
+#@ close $f
+#@ 
+#@ puts {XU_FULL_SOC_CAP_SIZE_REPAIR_PT_DONE_NOT_QUALIFIED}
+#@ } xu_error]} {
+#@   puts stderr "XU_FATAL: $xu_error"
+#@   exit 1
+#@ }
+#@ # -- Starting source /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-pt-compatible-05/constraints.sdc
+
+#@ # xu full-SoC digital timing contract. Time is ns; capacitance follows the library.
+#@ # Source after elaborating/linking xu_soc_ppa_top, before compile (and again in PT).
+#@ # Keep the named HCLKGEN/divider and register-bank boundaries when synthesizing.
+#@ # Defaults are a conservative frequency envelope, NOT an STA pass certificate.
+#@ # See docs/xu-full-soc-clock-review.md for assumptions, modes and outstanding checks.
+#@ 
+#@ if {![info exists XU_CLOCK_MODE]} { set XU_CLOCK_MODE envelope }
+#@ if {![info exists XU_PLL_DIV]} { set XU_PLL_DIV 0 }
+#@ if {![info exists XU_PROPAGATE_CLOCKS]} { set XU_PROPAGATE_CLOCKS 0 }
+#@ if {![info exists XU_IO_MAX_NS]} { set XU_IO_MAX_NS 0.5 }
+#@ if {![info exists XU_IO_MIN_NS]} { set XU_IO_MIN_NS 0.0 }
+#@ if {![info exists XU_JTAG_IO_MAX_NS]} { set XU_JTAG_IO_MAX_NS 5.0 }
+#@ if {![info exists XU_OUTPUT_LOAD]} { set XU_OUTPUT_LOAD 0.01 }
+#@ 
+#@ proc xu_require_one {kind name} {
+#@     if {$kind eq "port"} { set obj [get_ports -quiet $name] } else {
+#@         set obj [get_pins -quiet $name]
+#@     }
+#@     if {[sizeof_collection $obj] != 1} {
+#@         error "xu_full_soc.sdc: expected one $kind $name; preserve hierarchy/check top"
+#@     }
+#@     return $obj
+#@ }
+#@ if {$XU_CLOCK_MODE ni {envelope reset_bypass divider}} {
+#@     error "XU_CLOCK_MODE must be envelope, reset_bypass, or divider"
+#@ }
+#@ if {![string is integer -strict $XU_PLL_DIV] || $XU_PLL_DIV < 0 || $XU_PLL_DIV > 63} {
+#@     error "XU_PLL_DIV must be an integer in 0..63"
+#@ }
+#@ if {$XU_IO_MIN_NS > $XU_IO_MAX_NS} { error "xu I/O min exceeds max" }
+#@ 
+#@ set xu_hf [xu_require_one port hfextclk]
+#@ set xu_lf [xu_require_one port lfextclk]
+#@ set xu_tck [xu_require_one port io_pads_jtag_TCK_i_ival]
+#@ create_clock -name xu_hfextclk -period 6.666666667 -waveform {0 3.3333333335} $xu_hf
+#@ create_clock -name xu_lfextclk -period 30517.578125 -waveform {0 15258.7890625} $xu_lf
+#@ # 10 MHz is the explicit engineering JTAG assumption, not a contest requirement.
+#@ create_clock -name xu_jtag_tck -period 100.0 -waveform {0 50.0} $xu_tck
+#@ 
+#@ set xu_main u_soc/u_e203_subsys_top/u_e203_subsys_main
+#@ set xu_hclkgen ${xu_main}/u_e203_subsys_hclkgen
+#@ set xu_hclkregs ${xu_main}/u_e203_subsys_perips/u_sirv_hclkgen_regs
+#@ set xu_div_source [xu_require_one pin ${xu_hclkgen}/u_e203_subsys_pllclkdiv/clk]
+#@ set xu_div_target [xu_require_one pin ${xu_hclkgen}/u_e203_subsys_pllclkdiv/clkout]
+#@ 
+#@ if {$XU_CLOCK_MODE eq "envelope"} {
+#@     # Every real output pulse is a subset of source pulses: analyze the output
+#@     # at the fastest 150 MHz, with the real 50% source high pulse. No register
+#@     # value is assumed, and the clock-control logic remains timed. This can
+#@     # overconstrain slower programmed states; it never grants a longer cycle.
+#@     create_generated_clock -add -name xu_plldiv_envelope -master_clock xu_hfextclk \
+#@         -source $xu_div_source -divide_by 1 $xu_div_target
+#@ } else {
+#@     # These are sirv_hclkgen_regs register OUTPUT pins. Case values express a
+#@     # static operational mode; they do not prove reset/startup/mode-transition
+#@     # timing. Always retain the envelope run alongside a static-mode run.
+#@     set xu_bypass [xu_require_one pin ${xu_hclkregs}/pllbypass]
+#@     set xu_divby1 [xu_require_one pin ${xu_hclkregs}/plloutdivby1]
+#@     set_case_analysis [expr {$XU_CLOCK_MODE eq "reset_bypass" ? 1 : 0}] $xu_bypass
+#@     set_case_analysis [expr {$XU_CLOCK_MODE eq "reset_bypass" ? 1 : 0}] $xu_divby1
+#@     for {set xu_bit 0} {$xu_bit < 6} {incr xu_bit} {
+#@         set xu_bitpin [xu_require_one pin [format {%s/plloutdiv[%d]} $xu_hclkregs $xu_bit]]
+#@         set xu_value [expr {$XU_CLOCK_MODE eq "reset_bypass" ? 0 : (($XU_PLL_DIV >> $xu_bit) & 1)}]
+#@         set_case_analysis $xu_value $xu_bitpin
+#@     }
+#@     if {$XU_CLOCK_MODE eq "divider"} {
+#@         # RTL is pulse swallowing, not a 50% toggle divider. N=2*(div+1),
+#@         # output high time=Tsource/2, period=N*Tsource. Source edge indices
+#@         # 1,2,2*N+1 preserve the short high pulse needed for pulse-width checks.
+#@         create_generated_clock -add -name xu_plldiv_static -master_clock xu_hfextclk \
+#@             -source $xu_div_source -edges [list 1 2 [expr {4*($XU_PLL_DIV+1)+1}]] $xu_div_target
+#@     } else {
+#@         create_generated_clock -add -name xu_plldiv_by1 -master_clock xu_hfextclk \
+#@             -source $xu_div_source -divide_by 1 $xu_div_target
+#@     }
+#@ }
+#@ 
+#@ # PLL RTL is assign-through in both preprocessing branches. It is deliberately
+#@ # NOT modeled as an analog frequency multiplier. Mux and latch/AND clock gates
+#@ # propagate these clocks; the endpoint SRAM is clocked directly by hfextclk.
+#@ set_clock_uncertainty 0.1 [all_clocks]
+#@ set_clock_transition 0.1 [all_clocks]
+#@ set_clock_gating_check -setup 0.1 -hold 0.1 [all_clocks]
+#@ 
+#@ # Provisional external digital I/O contract, not board/datasheet signoff.
+#@ # Retain reset, wakeup, straps and peripheral I/O in timing. Referencing an
+#@ # asynchronous pad to a clock does not establish CDC safety or reset release.
+#@ set xu_clock_ports [get_ports {hfextclk lfextclk io_pads_jtag_TCK_i_ival}]
+#@ set xu_jtag_inputs [get_ports {io_pads_jtag_TMS_i_ival io_pads_jtag_TDI_i_ival}]
+#@ set xu_other_inputs [remove_from_collection [all_inputs] $xu_clock_ports]
+#@ set xu_other_inputs [remove_from_collection $xu_other_inputs $xu_jtag_inputs]
+#@ set_input_delay -max $XU_IO_MAX_NS -clock xu_hfextclk $xu_other_inputs
+#@ set_input_delay -min $XU_IO_MIN_NS -clock xu_hfextclk $xu_other_inputs
+#@ set_input_delay -max $XU_JTAG_IO_MAX_NS -clock xu_jtag_tck $xu_jtag_inputs
+#@ set_input_delay -min $XU_IO_MIN_NS -clock xu_jtag_tck $xu_jtag_inputs
+#@ set_input_transition 0.1 [remove_from_collection [all_inputs] $xu_clock_ports]
+#@ 
+#@ set xu_jtag_outputs [get_ports {io_pads_jtag_TDO_o_oval io_pads_jtag_TDO_o_oe}]
+#@ set xu_other_outputs [remove_from_collection [all_outputs] $xu_jtag_outputs]
+#@ set_output_delay -max $XU_IO_MAX_NS -clock xu_hfextclk $xu_other_outputs
+#@ set_output_delay -min $XU_IO_MIN_NS -clock xu_hfextclk $xu_other_outputs
+#@ set_output_delay -max $XU_JTAG_IO_MAX_NS -clock xu_jtag_tck $xu_jtag_outputs
+#@ set_output_delay -min $XU_IO_MIN_NS -clock xu_jtag_tck $xu_jtag_outputs
+#@ set_load $XU_OUTPUT_LOAD [all_outputs]
+#@ if {$XU_PROPAGATE_CLOCKS} { set_propagated_clock [all_clocks] }
+#@ 
+#@ # Intentionally no false paths, multicycle paths, asynchronous/exclusive clock
+#@ # groups, reset idealization or case analysis on reset/peripheral/gate enables.
+#@ # Unrelated domains are left visible until individual CDC/reset paths are
+#@ # reviewed; an envelope STA violation cannot be waived by a static-mode pass.
+#@ # -- End source /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-pt-compatible-05/constraints.sdc
+
+#@ # -- Starting source /storage2/2026contest/server4/s4_23usr/Desktop/xu-ts16.tcl
+
+#@ # xu read-only audit proposal. Do not source into the archived baseline session.
+#@ # Source the original 150 MHz envelope SDC in a fresh linked PT session first.
+#@ # This changes only proven first-D asynchronous sampling checks; it does not
+#@ # declare qualification. Root runner must archive exceptions and new coverage.
+#@ 
+#@ proc xu_audit_one {kind name} {
+#@     if {$kind eq "port"} {
+#@         set obj [get_ports -quiet $name]
+#@     } else {
+#@         set obj [get_pins -quiet $name]
+#@     }
+#@     if {[sizeof_collection $obj] != 1} {
+#@         error "xu scope audit expected one $kind: $name"
+#@     }
+#@     return $obj
+#@ }
+#@ set xu_audit_main u_soc/u_e203_subsys_top/u_e203_subsys_main
+#@ set xu_audit_perips ${xu_audit_main}/u_e203_subsys_perips
+#@ set xu_audit_aon u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper
+#@ 
+#@ # 64 exact pad -> first synchronizer D boundaries; never -to whole cells.
+#@ foreach xu_bank {A B} {
+#@     for {set xu_b 0} {$xu_b < 32} {incr xu_b} {
+#@         set xu_src [xu_audit_one port [format {io_pads_gpio%s_i_ival[%d]} $xu_bank $xu_b]]
+#@         set xu_dst [xu_audit_one pin [format {%s/u_perips_apb_gpio%s/r_gpio_sync0_reg[%d]/D} $xu_audit_perips $xu_bank $xu_b]]
+#@         set_false_path -from $xu_src -to $xu_dst
+#@     }
+#@ }
+#@ 
+#@ # 4 exact LF -> PWM first-D boundaries. Stages [1]/[2] remain timed.
+#@ foreach xu_tim {0 1 2 3} {
+#@     set xu_src [xu_audit_one port lfextclk]
+#@     set xu_dst [xu_audit_one pin [format {%s/u_perips_apb_pwm/u_tim%d/u_in_stage/r_ls_clk_sync_reg[0]/D} $xu_audit_perips $xu_tim]]
+#@     set_false_path -from $xu_src -to $xu_dst
+#@ }
+#@ 
+#@ # 2 raw asynchronous pads -> deglitch first-D boundaries. Missing/optimized
+#@ # mapped cells are an audit stop; do not silently widen matching or skip them.
+#@ foreach xu_pair {
+#@     {io_pads_bootrom_n_i_ival bootrom_deglitch}
+#@     {io_pads_aon_pmu_dwakeup_n_i_ival dwakeup_deglitch}
+#@ } {
+#@     set xu_src [xu_audit_one port [lindex $xu_pair 0]]
+#@     set xu_dst [xu_audit_one pin ${xu_audit_aon}/[lindex $xu_pair 1]/T_8_reg/D]
+#@     set_false_path -from $xu_src -to $xu_dst
+#@ }
+#@ 
+#@ # Optional generated-output-clock experiment. Disabled by default because PT
+#@ # classification and mux-mode coverage must be inspected, not presumed.
+#@ # No false path to these ports, output-delay deletion, or mode case is applied.
+#@ if {[info exists XU_AUDIT_FORWARD_CLOCK_EXPERIMENT] && $XU_AUDIT_FORWARD_CLOCK_EXPERIMENT} {
+#@     foreach xu_spec {
+#@         {xu_fwd_jtag xu_jtag_tck io_pads_jtag_TCK_i_ival 26}
+#@         {xu_fwd_lf xu_lfextclk lfextclk 29}
+#@         {xu_fwd_hf xu_hfextclk hfextclk 30}
+#@         {xu_fwd_pll xu_hfextclk hfextclk 31}
+#@     } {
+#@         create_generated_clock -add -name [lindex $xu_spec 0] \
+#@             -master_clock [lindex $xu_spec 1] \
+#@             -source [xu_audit_one port [lindex $xu_spec 2]] -combinational \
+#@             [xu_audit_one port [format {io_pads_gpioA_o_oval[%d]} [lindex $xu_spec 3]]]
+#@     }
+#@     set xu_fwd_core_src [xu_audit_one pin ${xu_audit_main}/u_e203_cpu_top/inspect_core_clk]
+#@     set xu_fwd_core_dst [xu_audit_one port {io_pads_gpioA_o_oval[27]}]
+#@     foreach xu_master {xu_hfextclk xu_plldiv_envelope} {
+#@         create_generated_clock -add -name xu_fwd_core_${xu_master} \
+#@             -master_clock $xu_master -source $xu_fwd_core_src -combinational \
+#@             $xu_fwd_core_dst
+#@     }
+#@ }
+#@ 
+#@ # Preserve every raw reset pin, gate, SRAM data pin, and UART latch check.
+#@ update_timing
+#@ # -- End source /storage2/2026contest/server4/s4_23usr/Desktop/xu-ts16.tcl
+
+#@ exit 0
+#@ if { [namespace which -command __pre_quit_tcl_procs] == "::__pre_quit_tcl_procs" } {   __pre_quit_tcl_procs}
+

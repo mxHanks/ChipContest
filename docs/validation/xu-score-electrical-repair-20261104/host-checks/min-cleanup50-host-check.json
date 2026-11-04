@@ -1,0 +1,36 @@
+{
+  "status": "HOST_CONTROL_FLOW_ONLY_NOT_EDA",
+  "helper_sha256": "8851dd70a5fe9cbfcaa62f3ffb37684d5b5bc80e55e14e9986d337be73616611",
+  "cases": [
+    {
+      "mode": "valid",
+      "expected_accept": true,
+      "returncode": 0,
+      "output": "CONTROL_FLOW_PASS 1404\n"
+    },
+    {
+      "mode": "extra_output",
+      "expected_accept": false,
+      "returncode": 1,
+      "output": "whole-cell output set differs from actual35/41proof\nREMOVED 0\n"
+    },
+    {
+      "mode": "live_receiver",
+      "expected_accept": false,
+      "returncode": 1,
+      "output": "full-output-set receiver appeared; refuse removal\nREMOVED 0\n"
+    },
+    {
+      "mode": "owner_shared",
+      "expected_accept": false,
+      "returncode": 1,
+      "output": "cleanup parent design must be unique before removal\nREMOVED 0\n"
+    },
+    {
+      "mode": "remove_noapply",
+      "expected_accept": false,
+      "returncode": 1,
+      "output": "remove_cell did not remove exact cell\nREMOVED 0\n"
+    }
+  ]
+}

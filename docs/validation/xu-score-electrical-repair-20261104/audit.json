@@ -1,0 +1,146 @@
+{
+  "actual42": {
+    "execution_evidence": "only3 raw driver/proposal/state files; no sizing result",
+    "phase": "proposal parser, before DC/PT",
+    "status": "FAIL"
+  },
+  "actual49": {
+    "actual_sized_cells": 56,
+    "capacitance_after": {
+      "max_capacitance": 0,
+      "min_capacitance": 1404
+    },
+    "capacitance_before": {
+      "max_capacitance": 56,
+      "min_capacitance": 1404
+    },
+    "coverage": {
+      "All Checks": {
+        "met": 267380,
+        "total": 294512,
+        "untested": 27127,
+        "violated": 5
+      },
+      "clock_gating_hold": {
+        "met": 27,
+        "total": 27,
+        "untested": 0,
+        "violated": 0
+      },
+      "clock_gating_setup": {
+        "met": 27,
+        "total": 27,
+        "untested": 0,
+        "violated": 0
+      },
+      "hold": {
+        "met": 67251,
+        "total": 71041,
+        "untested": 3790,
+        "violated": 0
+      },
+      "min_period": {
+        "met": 416,
+        "total": 10832,
+        "untested": 10416,
+        "violated": 0
+      },
+      "min_pulse_width": {
+        "met": 96931,
+        "total": 106060,
+        "untested": 9129,
+        "violated": 0
+      },
+      "out_hold": {
+        "met": 139,
+        "total": 139,
+        "untested": 0,
+        "violated": 0
+      },
+      "out_setup": {
+        "met": 139,
+        "total": 139,
+        "untested": 0,
+        "violated": 0
+      },
+      "recovery": {
+        "met": 17601,
+        "total": 17603,
+        "untested": 2,
+        "violated": 0
+      },
+      "removal": {
+        "met": 17598,
+        "total": 17603,
+        "untested": 0,
+        "violated": 5
+      },
+      "setup": {
+        "met": 67251,
+        "total": 71041,
+        "untested": 3790,
+        "violated": 0
+      }
+    },
+    "full_formal_equivalence": "NOT_RUN_AFTER49",
+    "mapped_netlist_sha256_declared_by_server_state": "5df0b568d1751d19388edb33d244f8b19051a9fa7c77b24a2e023bf1e2ee4b4c",
+    "max_setup_report": "No negative paths reported under original SDC",
+    "mincap_pin_set_limits_and_zero_loads_unchanged": true,
+    "reset_failures_unchanged": {
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg": {
+        "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN",
+        "ref": "DRNQV0_12TR40",
+        "slack_ns": -0.04010564
+      },
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg": {
+        "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN",
+        "ref": "DRNQV0_12TR40",
+        "slack_ns": -0.04010564
+      },
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg": {
+        "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN",
+        "ref": "DRNQV0_12TR40",
+        "slack_ns": -0.04010564
+      },
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg": {
+        "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN",
+        "ref": "DSNQNV0_12TR40",
+        "slack_ns": -0.11847966
+      },
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg": {
+        "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN",
+        "ref": "DSNQV0_12TR40",
+        "slack_ns": -0.12148283
+      }
+    },
+    "status": "EXECUTED_NOT_QUALIFIED"
+  },
+  "cleanup_candidates": {
+    "exact_unused_plic_priority_flops": 3,
+    "mandatory_next_gate": "50 rechecks every candidate against exact actual49 inside DC before any removal, audits upstream afterward, then full PT/FM",
+    "status": "ORIGINAL09_TOPOLOGY_CANDIDATES_ONLY_NOT_REMOVED",
+    "whole_cells_all_outputs_source_only": 1404
+  },
+  "host_only_helpers": {
+    "50": "5 existing host Tcl control modes; no DC/PT execution",
+    "54": "Python syntax and frozen-chain source prepared; no new full FM execution",
+    "55": "actual49 reset/actual41 palette binding and generated Tcl completeness; no insertion/PT/FM execution"
+  },
+  "raw_files_verified": 60,
+  "raw_groups": {
+    "actual42": 3,
+    "actual49": 27,
+    "baseline14": 14,
+    "palette41": 7,
+    "successful09": 3,
+    "topology35": 6
+  },
+  "scope": [
+    "Original SDC, original library hashes and original mapped RTL are unchanged by this evidence checker.",
+    "Actual49 mapped.v and SVFs were not in the27 returned raw files; this host audit verifies the collected state/report/script bytes, not absent server netlist/SVF bytes. Runtime helpers rehash those files.",
+    "35/41 prove original09 connectivity/library-output candidates only; actual49 topology must be checked again before removal.",
+    "Delay insertion plus full FM can test the existing HF-referenced0-input-delay/LF-check SDC scenario, not every asynchronous reset-release phase, protocol, or MTBF.",
+    "All50/54/55 artifacts remain HOST_ONLY and NOT_QUALIFIED."
+  ],
+  "status": "RAW_HASH_AND_COUNT_AUDIT_PASS_NOT_NEW_EDA_NOT_QUALIFIED"
+}

@@ -1,0 +1,122 @@
+{
+  "status": "SOURCE_AND_ACTUAL_LIBRARY_TOPOLOGY_EVIDENCE_ONLY_FULL_FM_PENDING",
+  "files": {
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_plic_man.v": {
+      "bytes": 24865,
+      "sha256": "b7b8022f306eb7a93f20fda6d131feaa725aa04315bae87d3154572ab052c028"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_plic_top.v": {
+      "bytes": 3975,
+      "sha256": "b9770b38590371538154eacfe139660ab4b680fa2794d8d710256316c227c0bc"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_dffs.v": {
+      "bytes": 6294,
+      "sha256": "cd903d78882040cc17b6fb8bec3862f8d440726d7027ba9c61310d18801f8d83"
+    }
+  },
+  "active_plic_irq_prio_occurrences": [
+    {
+      "line": 81,
+      "source_line": "wire [PLIC_PRIO_WIDTH-1:0] plic_irq_prio ;"
+    },
+    {
+      "line": 173,
+      "source_line": "sirv_gnrl_dffr #(PLIC_PRIO_WIDTH) plic_irq_prio_dffr(irq_prio_top , plic_irq_prio, clk, rst_n);"
+    },
+    {
+      "line": 178,
+      "source_line": "assign plic_irq_prio = irq_prio_top;"
+    }
+  ],
+  "live_interrupt_o_source": "plic_irq_o_pre",
+  "live_threshold_comparison_source": "irq_prio_top; registered plic_irq_prio unused",
+  "mapped_flops": [
+    {
+      "cell": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_plic/u_sirv_plic_top/u_sirv_plic_man/flop_o_irq.plic_irq_prio_dffr/qout_r_reg[0]",
+      "libcell": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40",
+      "outputs": [
+        "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_plic/u_sirv_plic_top/u_sirv_plic_man/flop_o_irq.plic_irq_prio_dffr/qout_r_reg[0]/Q"
+      ],
+      "proof": "Every output pin in the actual library palette is independently source-only under actual all_connected -leaf across all segments."
+    },
+    {
+      "cell": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_plic/u_sirv_plic_top/u_sirv_plic_man/flop_o_irq.plic_irq_prio_dffr/qout_r_reg[1]",
+      "libcell": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40",
+      "outputs": [
+        "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_plic/u_sirv_plic_top/u_sirv_plic_man/flop_o_irq.plic_irq_prio_dffr/qout_r_reg[1]/Q"
+      ],
+      "proof": "Every output pin in the actual library palette is independently source-only under actual all_connected -leaf across all segments."
+    },
+    {
+      "cell": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_plic/u_sirv_plic_top/u_sirv_plic_man/flop_o_irq.plic_irq_prio_dffr/qout_r_reg[2]",
+      "libcell": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40",
+      "outputs": [
+        "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_plic/u_sirv_plic_top/u_sirv_plic_man/flop_o_irq.plic_irq_prio_dffr/qout_r_reg[2]/Q"
+      ],
+      "proof": "Every output pin in the actual library palette is independently source-only under actual all_connected -leaf across all segments."
+    }
+  ],
+  "actual_library_pins": [
+    {
+      "family": "DRNQV",
+      "libcell": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40",
+      "area": "6.064800",
+      "dont_use": "false",
+      "libpin": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40/D",
+      "direction": "in",
+      "function": "<ABSENT>",
+      "capacitance": "<ABSENT>",
+      "rise_capacitance": "<ABSENT>",
+      "fall_capacitance": "<ABSENT>",
+      "max_capacitance": "<ABSENT>",
+      "min_capacitance": "<ABSENT>"
+    },
+    {
+      "family": "DRNQV",
+      "libcell": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40",
+      "area": "6.064800",
+      "dont_use": "false",
+      "libpin": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40/CK",
+      "direction": "in",
+      "function": "<ABSENT>",
+      "capacitance": "<ABSENT>",
+      "rise_capacitance": "<ABSENT>",
+      "fall_capacitance": "<ABSENT>",
+      "max_capacitance": "<ABSENT>",
+      "min_capacitance": "<ABSENT>"
+    },
+    {
+      "family": "DRNQV",
+      "libcell": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40",
+      "area": "6.064800",
+      "dont_use": "false",
+      "libpin": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40/RDN",
+      "direction": "in",
+      "function": "<ABSENT>",
+      "capacitance": "<ABSENT>",
+      "rise_capacitance": "<ABSENT>",
+      "fall_capacitance": "<ABSENT>",
+      "max_capacitance": "<ABSENT>",
+      "min_capacitance": "<ABSENT>"
+    },
+    {
+      "family": "DRNQV",
+      "libcell": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40",
+      "area": "6.064800",
+      "dont_use": "false",
+      "libpin": "scc40nll_vhsc40_rvt_ss_v0p99_125c_basic/DRNQV0_12TR40/Q",
+      "direction": "out",
+      "function": "<ABSENT>",
+      "capacitance": "<ABSENT>",
+      "rise_capacitance": "<ABSENT>",
+      "fall_capacitance": "<ABSENT>",
+      "max_capacitance": "0.057022",
+      "min_capacitance": "0.000500"
+    }
+  ],
+  "actual_plan_sha256": "4b82faf7d1f7a057c8472548759ba79abc3ba81410a712fdd2c11a6abef9365c",
+  "limitations": [
+    "No RTL was modified.",
+    "Original all-SoC mapped formal proof is required after cleanup; source-reference evidence alone is not formal equivalence."
+  ]
+}

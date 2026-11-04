@@ -1,0 +1,43 @@
+ 
+****************************************
+Report : constraint
+        -all_violators
+        -verbose
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-5
+Date   : Tue Nov  3 22:46:19 2026
+****************************************
+
+
+  Startpoint: hfextclk (clock source 'xu_hfextclk')
+  Endpoint: io_pads_gpioA_o_oval[27]
+            (output port clocked by xu_hfextclk)
+  Path Group: xu_hfextclk
+  Path Type: max
+
+  Point                                                                                                                           Incr       Path
+  --------------------------------------------------------------------------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                                                                                                   0.00       0.00
+  hfextclk (in)                                                                                                                   0.00       0.00 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk1_clkgate/U2/Z (AND2V10RD_12TR40)      0.07       0.07 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U3/ZN (NOR2V6_12TR40)                       0.02       0.09 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U5/Z (BUFV24RD_12TR40)                      0.04       0.13 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U4/ZN (INV32SR_12TR40)                      0.02       0.15 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/U8/Z (BUFV32_12TR40)                      372.13 #   372.27 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/U64/Z (AO22V12_12TR40)                                                               0.10 #   372.37 r
+  io_pads_gpioA_o_oval[27] (out)                                                                                                  0.00     372.37 r
+  data arrival time                                                                                                                        372.37
+
+  clock xu_hfextclk (rise edge)                                                                                                   6.67       6.67
+  clock network delay (ideal)                                                                                                     0.00       6.67
+  clock uncertainty                                                                                                              -0.10       6.57
+  output external delay                                                                                                          -0.50       6.07
+  data required time                                                                                                                         6.07
+  --------------------------------------------------------------------------------------------------------------------------------------------------
+  data required time                                                                                                                         6.07
+  data arrival time                                                                                                                       -372.37
+  --------------------------------------------------------------------------------------------------------------------------------------------------
+  slack (VIOLATED)                                                                                                                        -366.31
+
+
+1

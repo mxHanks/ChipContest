@@ -1,0 +1,57 @@
+****************************************
+Report : clock
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 17:47:00 2026
+****************************************
+
+Attributes:
+    p - Propagated clock
+    G - Generated  clock
+    I - Inactive   clock
+
+Clock             Period          Waveform            Attrs     Sources
+-----------------------------------------------------------------------
+xu_fwd_core_xu_hfextclk
+                    6.67          {0 3.33333}         G         {io_pads_gpioA_o_oval[27]}
+xu_fwd_core_xu_plldiv_envelope
+                    6.67          {0 3.33333}         G         {io_pads_gpioA_o_oval[27]}
+xu_fwd_hf           6.67          {0 3.33333}         G         {io_pads_gpioA_o_oval[30]}
+xu_fwd_jtag       100.00          {0 50}              G         {io_pads_gpioA_o_oval[26]}
+xu_fwd_lf       30517.58          {0 15258.8}         G         {io_pads_gpioA_o_oval[29]}
+xu_fwd_pll          6.67          {0 3.33333}         G         {io_pads_gpioA_o_oval[31]}
+xu_hfextclk         6.67          {0 3.33333}                   {hfextclk}
+xu_jtag_tck       100.00          {0 50}                        {io_pads_jtag_TCK_i_ival}
+xu_lfextclk     30517.58          {0 15258.8}                   {lfextclk}
+xu_plldiv_envelope
+                    6.67          {0 3.33333}         G         {u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clkout}
+
+
+
+Generated     Master          Generated       Master          Waveform
+Clock         Source          Source          Clock           Modification
+-------------------------------------------------------------------------------
+xu_fwd_core_xu_hfextclk
+              u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/inspect_core_clk
+                              io_pads_gpioA_o_oval[27]
+                                              xu_hfextclk     div(1), combinational
+xu_fwd_core_xu_plldiv_envelope
+              u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/inspect_core_clk
+                              io_pads_gpioA_o_oval[27]
+                                              xu_plldiv_envelope
+                                                              div(1), combinational
+xu_fwd_hf     hfextclk        io_pads_gpioA_o_oval[30]
+                                              xu_hfextclk     div(1), combinational
+xu_fwd_jtag   io_pads_jtag_TCK_i_ival
+                              io_pads_gpioA_o_oval[26]
+                                              xu_jtag_tck     div(1), combinational
+xu_fwd_lf     lfextclk        io_pads_gpioA_o_oval[29]
+                                              xu_lfextclk     div(1), combinational
+xu_fwd_pll    hfextclk        io_pads_gpioA_o_oval[31]
+                                              xu_hfextclk     div(1), combinational
+xu_plldiv_envelope
+              u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clk
+                              u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clkout
+                                              xu_hfextclk     div(1)
+
+1
