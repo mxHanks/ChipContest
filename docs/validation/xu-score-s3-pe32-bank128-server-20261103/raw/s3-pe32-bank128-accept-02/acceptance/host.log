@@ -1,0 +1,28 @@
+{"argv": ["env", "XU_PE32_BANK128_WRAPPER_SIM=vcs", "XU_PE32_BANK128_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-bank128-accept-02/acceptance/host-pe32-bank128-wrapper-vcs", "env", "XU_PE32_WRAPPER_SIM=vcs", "XU_PE32_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-bank128-accept-02/acceptance/host-pe32-wrapper-vcs", "env", "XU_WRAPPER_SIM=vcs", "XU_WRAPPER_LOG_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-bank128-accept-02/acceptance/host-wrapper-vcs", "/bin/python3", "-m", "unittest", "discover", "-s", "tests/e203", "-p", "test_*.py"], "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02"}
+Starting first
+Starting broken
+Starting first
+.s.................................s...............FAIL: /tmp/tmpdsfom74f/baseline/result.json
+FAIL: /tmp/tmpm0jgqi2u/baseline/result.json
+missing tools: vcs
+missing tools: iverilog, vvp
+.....FAIL: /tmp/tmpr7350l5a/doctor/result.json
+missing tools: riscv64-unknown-elf-gcc
+.....sStarting host
+Starting numeric
+Starting vectors
+Starting doctor
+Starting baseline
+Starting synthetic1
+Starting synthetic2
+Starting real12
+.PASS rv32ui-p-add
+PASS accel_mmio
+PASS accel_compute
+PASS accel_multigroup
+PASS accel_repeat_x
+......
+----------------------------------------------------------------------
+Ran 69 tests in 31.288s
+
+OK (skipped=3)

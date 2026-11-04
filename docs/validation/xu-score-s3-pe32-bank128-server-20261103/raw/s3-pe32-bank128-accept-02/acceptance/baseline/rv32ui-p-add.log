@@ -1,0 +1,2740 @@
+["make", "run_test", "SIM=vcs", "DUMPWAVE=0", "TESTCASE=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/riscv-tools/riscv-tests/isa/generated/rv32ui-p-add", "XU_ACCEL_PE32=1", "XU_ACCEL_PE32_BANK128=1"]
+mkdir -p /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run
+rm -f /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/Makefile
+ln -s /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/bin/run.makefile /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/Makefile
+make compile RUN_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run SIM_TOOL=vcs -C /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run
+make[1]: Entering directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run'
+sed -i '1i\`define vcs\'  /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v
+vcs +v2k -sverilog -q +lint=all,noSVA-NSVU,noVCDE,noUI,noSVA-CE,noSVA-DIU  -debug_access+all -full64 -timescale=1ns/10ps +incdir+"/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/"+"/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/"+"/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/" +define+XU_ACCEL_PE32=1 +define+XU_ACCEL_PE32_BANK128=1  /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_pllclkdiv.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_plic.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_hclkgen.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_nice_core.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_mems.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_gfcm.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_hclkgen_rstsync.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_top.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_pll.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_perips.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_main.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/subsys/e203_subsys_clint.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/mems/sirv_mrom.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/mems/sirv_mrom_top.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_aon_wrapper.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_tl_repeater_5.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_flash_qspi.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_clint.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_DeglitchShiftRegister.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_AsyncResetRegVec_1.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_repeater_6.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_AsyncResetRegVec_36.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_pmu_core.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_aon.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_queue.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_jtaggpioport.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_qspi_fifo.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_clint_top.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_rtc.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_spi_flashmap.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_ResetCatchAndSync.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_ResetCatchAndSync_2.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_flash_qspi_top.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_tlwidthwidget_qspi.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_aon_top.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_hclkgen_regs.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_AsyncResetRegVec.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_expl_axi_slv.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_LevelGateway.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/xu_pe32_icb_slave.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_top.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/xu_pe32_bank128_icb_slave.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_aon_porrst.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/accel_icb_slave.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_pmu.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_queue_1.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_qspi_media.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_tlfragmenter_qspi_1.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_AsyncResetRegVec_129.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_aon_lclkgen_regs.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_wdog.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_qspi_physical.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_AsyncResetReg.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_qspi_arbiter.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_irq_sync.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_lsu.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_alu_muldiv.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_lsu_ctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_csr.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/config.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_ifu_minidec.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_longpwbck.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_cpu_top.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_dtcm_ram.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_alu_lsuagu.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_alu.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_biu.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_extend_csr.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_defines.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_itcm_ram.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_reset_ctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_disp.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_alu_csrctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_nice.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_ifu_litebpu.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_alu_bjp.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_ifu.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_ifu_ifetch.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_decode.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_branchslv.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_core.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_clk_ctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_srams.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_commit.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_excp.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_alu_dpath.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_oitf.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_cpu.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_clkgate.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_wbck.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_itcm_ctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_alu_rglr.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_dtcm_ctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_ifu_ift2icb.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/soc/e203_soc_top.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_rom.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_jtag_dtm.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_module.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_ram.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_csr.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/fab/sirv_icb1to2_bus.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/fab/sirv_icb1to16_bus.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/fab/sirv_icb1to8_bus.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_bufs.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_xchecker.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_dffs.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_1cyc_sram_ctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_ram.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_sim_ram.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_sram_icb_ctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/i2c_master_byte_ctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/i2c_master_defines.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/i2c_master_bit_ctrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/apb_i2c.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_tx.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_clkgen.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_controller.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/apb_spi_master.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_rx.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/comparator.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/timer_cntrl.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/input_stage.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/timer_module.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/apb_adv_timer.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_interrupt.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_tx.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/apb_uart.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_rx.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_gpio/apb_gpio.v /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/XuParallelWeightBank32.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/mem_128x16.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/LinearAutoGroupCore.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/Sram1024x16.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/XRowBuffer.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/MacPEArray.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/XuParallelWeightBank32Bank128.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/WeightBankArray.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/XuParallelComputeCore32Bank128.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/WeightBank.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/XuParallelComputeCore32.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/mem_2048x16.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/DotProductEngine.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/XuParallelAutoGroupCore32.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/XuParallelBiasCache32.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/mem_1024x16.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/LinearCachedCore.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/BiasBankCache.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/XuParallelAutoGroupCore32Bank128.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/MacPE.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/LinearComputeCore.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/MacController.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/Sram128x16.sv /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v ;
+
+Lint-[TFIPC-L] Too few instance port connections
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v, 308
+tb_top, "e203_soc_top u_e203_soc_top( .hfextclk (hfclk),  .lfextclk (lfextclk),  .io_pads_jtag_TCK_i_ival (jtag_TCK),  .io_pads_jtag_TMS_i_ival (jtag_TMS),  .io_pads_jtag_TDI_i_ival (jtag_TDI),  .io_pads_jtag_TDO_o_oval (jtag_TDO),  .io_pads_gpioA_i_ival (32'b0),  .io_pads_gpioB_i_ival (32'b0),  .io_pads_qspi0_dq_0_i_ival (1'b1),  .io_pads_qspi0_dq_1_i_ival (1'b1),  .io_pads_qspi0_dq_2_i_ival (1'b1),  .io_pads_qspi0_dq_3_i_ival (1'b1),  .io_pads_aon_erst_n_i_ival (rst_n),  .io_pads_aon_pmu_dwakeup_n_i_ival (1'b1),  .io_pads_bootrom_n_i_ival (1'b0),  .io_pads_dbgmode0_n_i_ival (1'b1),  .io_pads_dbgmode1_n_i_ival (1'b1),  .io_pads_dbgmode2_n_i_ival (1'b1));"
+  The above instance has fewer port connections than the module definition,
+  There are 47 port(s) in module "e203_soc_top" definition, but only 37 port 
+  connect(s) in the instance.
+  output port 'ext_sysmem_cmd_valid' is not connected,
+  input port 'ext_sysmem_cmd_ready' is not connected,
+  output port 'ext_sysmem_cmd_addr' is not connected,
+  output port 'ext_sysmem_cmd_read' is not connected,
+  output port 'ext_sysmem_cmd_wdata' is not connected,
+  output port 'ext_sysmem_cmd_wmask' is not connected,
+  input port 'ext_sysmem_rsp_valid' is not connected,
+  output port 'ext_sysmem_rsp_ready' is not connected,
+  input port 'ext_sysmem_rsp_err' is not connected,
+  input port 'ext_sysmem_rsp_rdata' is not connected.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/xu_pe32_icb_slave.v, 425
+xu_pe32_icb_slave, "(row_produced == (row_wide ? 8 : 32))"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'row_produced' of type wire [5:0]
+  with '(row_wide ? 8 : 32)' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/xu_pe32_bank128_icb_slave.v, 426
+xu_pe32_bank128_icb_slave, "(row_produced == (row_wide ? 8 : 32))"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'row_produced' of type wire [5:0]
+  with '(row_wide ? 8 : 32)' of type int.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_qspi_media.v, 322
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 2-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: cs_id <= 2'b0;
+  Expression: cs_id
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/i2c_master_bit_ctrl.v, 248
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 16-bit wide expression is assigned to a 14-bit LHS target:
+  Source info: filter_cnt <= (clk_cnt >> 2);
+  Expression: filter_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/i2c_master_bit_ctrl.v, 249
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 14-bit LHS target:
+  Source info: filter_cnt <= (filter_cnt - 1);
+  Expression: filter_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/apb_i2c.v, 84
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_pre <= 'b0;
+  Expression: r_pre
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/apb_i2c.v, 85
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_ctrl <= 'b0;
+  Expression: r_ctrl
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/apb_i2c.v, 86
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_tx <= 'b0;
+  Expression: r_tx
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_i2c/apb_i2c.v, 87
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_cmd <= 'b0;
+  Expression: r_cmd
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_tx.v, 85
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_next = (counter + 1);
+  Expression: counter_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_tx.v, 89
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_next = 0;
+  Expression: counter_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_tx.v, 116
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter <= 0;
+  Expression: counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_tx.v, 117
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_trgt <= 'h00000008;
+  Expression: counter_trgt
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_tx.v, 62
+spi_master_tx, "(counter == (counter_trgt - 1))"
+  A left 16-bit expression is compared to a right 32-bit expression.
+  Comparing 'counter' of type reg [15:0]
+  with '(counter_trgt - 1)' of type logic [31:0].
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_clkgen.v, 42
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: counter_next = 0;
+  Expression: counter_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_clkgen.v, 51
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: counter_next = (counter + 1);
+  Expression: counter_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_clkgen.v, 58
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: counter_trgt <= 'b0;
+  Expression: counter_trgt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_clkgen.v, 59
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: counter <= 'b0;
+  Expression: counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v, 89
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: spi_clk_div <= 'b0;
+  Expression: spi_clk_div
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v, 92
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 6-bit LHS target:
+  Source info: spi_cmd_len <= 'b0;
+  Expression: spi_cmd_len
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v, 93
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 6-bit LHS target:
+  Source info: spi_addr_len <= 'b0;
+  Expression: spi_addr_len
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v, 94
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: spi_data_len <= 'b0;
+  Expression: spi_data_len
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v, 95
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: spi_dummy_rd <= 'b0;
+  Expression: spi_dummy_rd
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v, 96
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: spi_dummy_wr <= 'b0;
+  Expression: spi_dummy_wr
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v, 97
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: spi_csreg <= 'b0;
+  Expression: spi_csreg
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v, 98
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: spi_int_th_tx <= 'b0;
+  Expression: spi_int_th_tx
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_apb_if.v, 99
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: spi_int_th_rx <= 'b0;
+  Expression: spi_int_th_rx
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_controller.v, 203
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_tx = 'b0;
+  Expression: counter_tx
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_controller.v, 205
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_rx = 'b0;
+  Expression: counter_rx
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_controller.v, 212
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 7-bit LHS target:
+  Source info: spi_status = 'b0;
+  Expression: spi_status
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_controller.v, 226
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 14-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_tx = {8'b0, spi_cmd_len};
+  Expression: counter_tx
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_controller.v, 234
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 14-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_tx = {8'b0, spi_addr_len};
+  Expression: counter_tx
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_controller.v, 288
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 14-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_tx = {8'b0, spi_addr_len};
+  Expression: counter_tx
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 48
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= 0;
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 50
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= 0;
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 56
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= (elements - 1);
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 59
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= (elements + 1);
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 77
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= 0;
+  Expression: pointer_out
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 78
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= 0;
+  Expression: pointer_in
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 80
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= 0;
+  Expression: pointer_out
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 81
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= 0;
+  Expression: pointer_in
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 88
+spi_master_fifo, "(pointer_in == $unsigned((BUFFER_DEPTH - 1)))"
+  A left 4-bit expression is compared to a right 32-bit expression.
+  Comparing 'pointer_in' of type reg [(LOG_BUFFER_DEPTH - 1):0]
+  with '$unsigned((BUFFER_DEPTH - 1))' of type int unsigned.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 89
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= 0;
+  Expression: pointer_in
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 91
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= (pointer_in + 1);
+  Expression: pointer_in
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 100
+spi_master_fifo, "(pointer_out == $unsigned((BUFFER_DEPTH - 1)))"
+  A left 4-bit expression is compared to a right 32-bit expression.
+  Comparing 'pointer_out' of type reg [(LOG_BUFFER_DEPTH - 1):0]
+  with '$unsigned((BUFFER_DEPTH - 1))' of type int unsigned.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 101
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= 0;
+  Expression: pointer_out
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 103
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= (pointer_out + 1);
+  Expression: pointer_out
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_fifo.v, 43
+spi_master_fifo, "(elements == BUFFER_DEPTH)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'elements' of type reg [LOG_BUFFER_DEPTH:0]
+  with 'BUFFER_DEPTH' of type int.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_rx.v, 79
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_next = (counter + 1);
+  Expression: counter_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_rx.v, 87
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_next = 0;
+  Expression: counter_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_rx.v, 120
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter <= 0;
+  Expression: counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_rx.v, 121
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: counter_trgt <= 'h00000008;
+  Expression: counter_trgt
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_spi_master/spi_master_rx.v, 59
+spi_master_rx, "(counter == (counter_trgt - 1))"
+  A left 16-bit expression is compared to a right 32-bit expression.
+  Comparing 'counter' of type reg [15:0]
+  with '(counter_trgt - 1)' of type logic [31:0].
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/comparator.v, 54
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_comp <= 0;
+  Expression: r_comp
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/comparator.v, 55
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_comp_op <= 0;
+  Expression: r_comp_op
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/comparator.v, 64
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_value <= 0;
+  Expression: r_value
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/timer_cntrl.v, 56
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_active <= 0;
+  Expression: r_active
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/timer_cntrl.v, 57
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_pending <= 0;
+  Expression: r_pending
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/timer_cntrl.v, 60
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_active <= 1;
+  Expression: r_active
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/timer_cntrl.v, 62
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_active <= 0;
+  Expression: r_active
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/timer_cntrl.v, 65
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_pending <= 0;
+  Expression: r_pending
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/timer_cntrl.v, 67
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_pending <= 1;
+  Expression: r_pending
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 506
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_timer0_in_sel <= 'b0;
+  Expression: r_timer0_in_sel
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 507
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_timer0_in_clk <= 'b0;
+  Expression: r_timer0_in_clk
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 508
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer0_in_mode <= 'b0;
+  Expression: r_timer0_in_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 509
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_timer0_presc <= 'b0;
+  Expression: r_timer0_presc
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 516
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer0_ch0_th <= 'b0;
+  Expression: r_timer0_ch0_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 517
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer0_ch0_mode <= 'b0;
+  Expression: r_timer0_ch0_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 518
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer0_ch0_lut <= 'b0;
+  Expression: r_timer0_ch0_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 519
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer0_ch0_flt <= 'b0;
+  Expression: r_timer0_ch0_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 520
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer0_ch1_th <= 'b0;
+  Expression: r_timer0_ch1_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 521
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer0_ch1_mode <= 'b0;
+  Expression: r_timer0_ch1_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 522
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer0_ch1_lut <= 'b0;
+  Expression: r_timer0_ch1_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 523
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer0_ch1_flt <= 'b0;
+  Expression: r_timer0_ch1_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 524
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer0_ch2_th <= 'b0;
+  Expression: r_timer0_ch2_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 525
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer0_ch2_mode <= 'b0;
+  Expression: r_timer0_ch2_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 526
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer0_ch2_lut <= 'b0;
+  Expression: r_timer0_ch2_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 527
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer0_ch2_flt <= 'b0;
+  Expression: r_timer0_ch2_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 528
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer0_ch3_th <= 'b0;
+  Expression: r_timer0_ch3_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 529
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer0_ch3_mode <= 'b0;
+  Expression: r_timer0_ch3_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 530
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer0_ch3_lut <= 'b0;
+  Expression: r_timer0_ch3_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 531
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer0_ch3_flt <= 'b0;
+  Expression: r_timer0_ch3_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 534
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_timer1_in_sel <= 'b0;
+  Expression: r_timer1_in_sel
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 535
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_timer1_in_clk <= 'b0;
+  Expression: r_timer1_in_clk
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 536
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer1_in_mode <= 'b0;
+  Expression: r_timer1_in_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 537
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_timer1_presc <= 'b0;
+  Expression: r_timer1_presc
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 544
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer1_ch0_th <= 'b0;
+  Expression: r_timer1_ch0_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 545
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer1_ch0_mode <= 'b0;
+  Expression: r_timer1_ch0_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 546
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer1_ch0_lut <= 'b0;
+  Expression: r_timer1_ch0_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 547
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer1_ch0_flt <= 'b0;
+  Expression: r_timer1_ch0_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 548
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer1_ch1_th <= 'b0;
+  Expression: r_timer1_ch1_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 549
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer1_ch1_mode <= 'b0;
+  Expression: r_timer1_ch1_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 550
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer1_ch1_lut <= 'b0;
+  Expression: r_timer1_ch1_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 551
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer1_ch1_flt <= 'b0;
+  Expression: r_timer1_ch1_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 552
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer1_ch2_th <= 'b0;
+  Expression: r_timer1_ch2_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 553
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer1_ch2_mode <= 'b0;
+  Expression: r_timer1_ch2_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 554
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer1_ch2_lut <= 'b0;
+  Expression: r_timer1_ch2_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 555
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer1_ch2_flt <= 'b0;
+  Expression: r_timer1_ch2_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 556
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer1_ch3_th <= 'b0;
+  Expression: r_timer1_ch3_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 557
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer1_ch3_mode <= 'b0;
+  Expression: r_timer1_ch3_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 558
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer1_ch3_lut <= 'b0;
+  Expression: r_timer1_ch3_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 559
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer1_ch3_flt <= 'b0;
+  Expression: r_timer1_ch3_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 562
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_timer2_in_sel <= 'b0;
+  Expression: r_timer2_in_sel
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 563
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_timer2_in_clk <= 'b0;
+  Expression: r_timer2_in_clk
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 564
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer2_in_mode <= 'b0;
+  Expression: r_timer2_in_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 565
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_timer2_presc <= 'b0;
+  Expression: r_timer2_presc
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 572
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer2_ch0_th <= 'b0;
+  Expression: r_timer2_ch0_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 573
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer2_ch0_mode <= 'b0;
+  Expression: r_timer2_ch0_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 574
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer2_ch0_lut <= 'b0;
+  Expression: r_timer2_ch0_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 575
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer2_ch0_flt <= 'b0;
+  Expression: r_timer2_ch0_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 576
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer2_ch1_th <= 'b0;
+  Expression: r_timer2_ch1_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 577
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer2_ch1_mode <= 'b0;
+  Expression: r_timer2_ch1_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 578
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer2_ch1_lut <= 'b0;
+  Expression: r_timer2_ch1_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 579
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer2_ch1_flt <= 'b0;
+  Expression: r_timer2_ch1_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 580
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer2_ch2_th <= 'b0;
+  Expression: r_timer2_ch2_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 581
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer2_ch2_mode <= 'b0;
+  Expression: r_timer2_ch2_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 582
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer2_ch2_lut <= 'b0;
+  Expression: r_timer2_ch2_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 583
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer2_ch2_flt <= 'b0;
+  Expression: r_timer2_ch2_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 584
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer2_ch3_th <= 'b0;
+  Expression: r_timer2_ch3_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 585
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer2_ch3_mode <= 'b0;
+  Expression: r_timer2_ch3_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 586
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer2_ch3_lut <= 'b0;
+  Expression: r_timer2_ch3_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 587
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer2_ch3_flt <= 'b0;
+  Expression: r_timer2_ch3_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 590
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_timer3_in_sel <= 'b0;
+  Expression: r_timer3_in_sel
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 591
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_timer3_in_clk <= 'b0;
+  Expression: r_timer3_in_clk
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 592
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer3_in_mode <= 'b0;
+  Expression: r_timer3_in_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 593
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_timer3_presc <= 'b0;
+  Expression: r_timer3_presc
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 600
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer3_ch0_th <= 'b0;
+  Expression: r_timer3_ch0_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 601
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer3_ch0_mode <= 'b0;
+  Expression: r_timer3_ch0_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 602
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer3_ch0_lut <= 'b0;
+  Expression: r_timer3_ch0_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 603
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer3_ch0_flt <= 'b0;
+  Expression: r_timer3_ch0_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 604
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer3_ch1_th <= 'b0;
+  Expression: r_timer3_ch1_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 605
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer3_ch1_mode <= 'b0;
+  Expression: r_timer3_ch1_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 606
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer3_ch1_lut <= 'b0;
+  Expression: r_timer3_ch1_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 607
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer3_ch1_flt <= 'b0;
+  Expression: r_timer3_ch1_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 608
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer3_ch2_th <= 'b0;
+  Expression: r_timer3_ch2_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 609
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer3_ch2_mode <= 'b0;
+  Expression: r_timer3_ch2_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 610
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer3_ch2_lut <= 'b0;
+  Expression: r_timer3_ch2_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 611
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer3_ch2_flt <= 'b0;
+  Expression: r_timer3_ch2_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 612
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer3_ch3_th <= 'b0;
+  Expression: r_timer3_ch3_th
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 613
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_timer3_ch3_mode <= 'b0;
+  Expression: r_timer3_ch3_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 614
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_timer3_ch3_lut <= 'b0;
+  Expression: r_timer3_ch3_lut
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 615
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_timer3_ch3_flt <= 'b0;
+  Expression: r_timer3_ch3_flt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 617
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: r_event_sel_0 <= 'b0;
+  Expression: r_event_sel_0
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 618
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: r_event_sel_1 <= 'b0;
+  Expression: r_event_sel_1
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 619
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: r_event_sel_2 <= 'b0;
+  Expression: r_event_sel_2
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 620
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: r_event_sel_3 <= 'b0;
+  Expression: r_event_sel_3
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 621
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: r_event_en <= 'b0;
+  Expression: r_event_en
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/adv_timer_apb_if.v, 623
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: r_clk_en <= 'b0;
+  Expression: r_clk_en
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 66
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_event <= 0;
+  Expression: r_event
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 67
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_pending_update <= 0;
+  Expression: r_pending_update
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 78
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: s_do_update = 0;
+  Expression: s_do_update
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 82
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: s_pending_update = 0;
+  Expression: s_pending_update
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 83
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: s_do_update = 1;
+  Expression: s_do_update
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 85
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: s_pending_update = 0;
+  Expression: s_pending_update
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 88
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: s_pending_update = 1;
+  Expression: s_pending_update
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 89
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: s_do_update = 0;
+  Expression: s_do_update
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 92
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: s_pending_update = 0;
+  Expression: s_pending_update
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 93
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: s_do_update = 1;
+  Expression: s_do_update
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 117
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: s_counter = (r_counter - 1);
+  Expression: s_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 121
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: s_counter = (r_counter + 1);
+  Expression: s_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 124
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: s_counter = (r_counter - 1);
+  Expression: s_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 126
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: s_counter = (r_counter + 1);
+  Expression: s_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 134
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_counter <= 0;
+  Expression: r_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 135
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_start <= 0;
+  Expression: r_start
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 136
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: r_end <= 0;
+  Expression: r_end
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 137
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_direction <= 0;
+  Expression: r_direction
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/up_down_counter.v, 62
+up_down_counter, "(r_counter == (r_start - 1))"
+  A left 16-bit expression is compared to a right 32-bit expression.
+  Comparing 'r_counter' of type reg [(NUM_BITS - 1):0]
+  with '(r_start - 1)' of type logic [31:0].
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/input_stage.v, 50
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_ls_clk_sync <= 'b0;
+  Expression: r_ls_clk_sync
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/input_stage.v, 58
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: r_mode <= 0;
+  Expression: r_mode
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/input_stage.v, 59
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_sel <= 0;
+  Expression: r_sel
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/input_stage.v, 102
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: s_int_sig = 0;
+  Expression: s_int_sig
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/input_stage.v, 104
+input_stage, "(r_sel == i)"
+  A left 8-bit expression is compared to a right 32-bit expression.
+  Comparing 'r_sel' of type reg [7:0]
+  with 'i' of type integer.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/input_stage.v, 129
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: r_oldval <= 0;
+  Expression: r_oldval
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v, 29
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_presc <= 0;
+  Expression: r_presc
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v, 37
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_counter <= 0;
+  Expression: r_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v, 38
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: event_o <= 0;
+  Expression: event_o
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v, 40
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_counter <= 0;
+  Expression: r_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v, 41
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: event_o <= 0;
+  Expression: event_o
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v, 48
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_counter <= 0;
+  Expression: r_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v, 51
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_counter <= (r_counter + 1);
+  Expression: r_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v, 57
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: r_counter <= 0;
+  Expression: r_counter
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/prescaler.v, 58
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: event_o <= 0;
+  Expression: event_o
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/apb_adv_timer.v, 594
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_event_sync_0 <= 0;
+  Expression: r_event_sync_0
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/apb_adv_timer.v, 595
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_event_sync_1 <= 0;
+  Expression: r_event_sync_1
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/apb_adv_timer.v, 596
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_event_sync_2 <= 0;
+  Expression: r_event_sync_2
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_adv_timer/apb_adv_timer.v, 597
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 2-bit LHS target:
+  Source info: r_event_sync_3 <= 0;
+  Expression: r_event_sync_3
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_tx.v, 99
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: reg_bit_count_next = 'b0;
+  Expression: reg_bit_count_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_tx.v, 105
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: reg_bit_count_next = (reg_bit_count + 1);
+  Expression: reg_bit_count_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_tx.v, 149
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: reg_bit_count <= 'b0;
+  Expression: reg_bit_count
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_tx.v, 168
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: baud_cnt <= 'b0;
+  Expression: baud_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_tx.v, 172
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: baud_cnt <= 'b0;
+  Expression: baud_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_tx.v, 176
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: baud_cnt <= (baud_cnt + 1);
+  Expression: baud_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_tx.v, 180
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: baud_cnt <= 'b0;
+  Expression: baud_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 45
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= 0;
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 47
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= 0;
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 53
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= (elements - 1);
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 56
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= (elements + 1);
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 64
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 9-bit LHS target:
+  Source info: buffer[loop1] <= 0;
+  Expression: buffer[loop1]
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 73
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= 0;
+  Expression: pointer_out
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 74
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= 0;
+  Expression: pointer_in
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 76
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= 0;
+  Expression: pointer_out
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 77
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= 0;
+  Expression: pointer_in
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 85
+io_generic_fifo, "(pointer_in == $unsigned((BUFFER_DEPTH - 1)))"
+  A left 4-bit expression is compared to a right 32-bit expression.
+  Comparing 'pointer_in' of type reg [(LOG_BUFFER_DEPTH - 1):0]
+  with '$unsigned((BUFFER_DEPTH - 1))' of type int unsigned.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 86
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= 0;
+  Expression: pointer_in
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 88
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= (pointer_in + 1);
+  Expression: pointer_in
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 98
+io_generic_fifo, "(pointer_out == $unsigned((BUFFER_DEPTH - 1)))"
+  A left 4-bit expression is compared to a right 32-bit expression.
+  Comparing 'pointer_out' of type reg [(LOG_BUFFER_DEPTH - 1):0]
+  with '$unsigned((BUFFER_DEPTH - 1))' of type int unsigned.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 99
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= 0;
+  Expression: pointer_out
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 101
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= (pointer_out + 1);
+  Expression: pointer_out
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 40
+io_generic_fifo, "(elements == BUFFER_DEPTH)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'elements' of type reg [LOG_BUFFER_DEPTH:0]
+  with 'BUFFER_DEPTH' of type int.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_rx.v, 112
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: reg_bit_count_next = 'b0;
+  Expression: reg_bit_count_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_rx.v, 115
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: reg_bit_count_next = (reg_bit_count + 1);
+  Expression: reg_bit_count_next
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_rx.v, 156
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 3-bit LHS target:
+  Source info: reg_bit_count <= 'b0;
+  Expression: reg_bit_count
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_rx.v, 186
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: baud_cnt <= 'b0;
+  Expression: baud_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_rx.v, 190
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: baud_cnt <= 'b0;
+  Expression: baud_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_rx.v, 193
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: baud_cnt <= 'b0;
+  Expression: baud_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_rx.v, 196
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: baud_cnt <= (baud_cnt + 1);
+  Expression: baud_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/uart_rx.v, 200
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 16-bit LHS target:
+  Source info: baud_cnt <= 'b0;
+  Expression: baud_cnt
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v, 177
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: pc_write_to_host_flag <= 0;
+  Expression: pc_write_to_host_flag
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v, 178
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: clk <= 0;
+  Expression: clk
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v, 179
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: lfextclk <= 0;
+  Expression: lfextclk
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v, 180
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: rst_n <= 0;
+  Expression: rst_n
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v, 181
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: rst_n <= 1;
+  Expression: rst_n
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v, 183
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: rst_n <= 1;
+  Expression: rst_n
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 1)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '1' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 2)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '2' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 3)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '3' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 4)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '4' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 5)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '5' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 6)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '6' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 7)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '7' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 8)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '8' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 9)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '9' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 10)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '10' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 11)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '11' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 12)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '12' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 13)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '13' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 14)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '14' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 15)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '15' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 16)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '16' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 17)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '17' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 18)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '18' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 19)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '19' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 20)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '20' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 21)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '21' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 22)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '22' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 23)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '23' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 24)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '24' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 25)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '25' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 26)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '26' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 27)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '27' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 28)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '28' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 29)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '29' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 30)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '30' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_regfile.v, 70
+e203_exu_regfile, "(wbck_dest_idx == 31)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'wbck_dest_idx' of type wire [(5 - 1):0]
+  with '31' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_oitf.v, 91
+e203_exu_oitf, "(alc_ptr_r == $unsigned((2 - 1)))"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'alc_ptr_r' of type wire [(1 - 1):0]
+  with '$unsigned((2 - 1))' of type int unsigned.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_oitf.v, 104
+e203_exu_oitf, "(ret_ptr_r == $unsigned((2 - 1)))"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'ret_ptr_r' of type wire [(1 - 1):0]
+  with '$unsigned((2 - 1))' of type int unsigned.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_oitf.v, 144
+e203_exu_oitf, "(alc_ptr_r == 0)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'alc_ptr_r' of type wire [(1 - 1):0]
+  with '0' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_oitf.v, 145
+e203_exu_oitf, "(ret_ptr_r == 0)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'ret_ptr_r' of type wire [(1 - 1):0]
+  with '0' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_oitf.v, 144
+e203_exu_oitf, "(alc_ptr_r == 1)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'alc_ptr_r' of type wire [(1 - 1):0]
+  with '1' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/core/e203_exu_oitf.v, 145
+e203_exu_oitf, "(ret_ptr_r == 1)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'ret_ptr_r' of type wire [(1 - 1):0]
+  with '1' of type int.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 255
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: i_arbt_indic_id = (i_arbt_indic_id | ({ARBT_PTR_W 
+  {i_bus_icb_cmd_sel[j]}} & $unsigned(j)));
+  Expression: i_arbt_indic_id
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 194
+sirv_gnrl_icb_arbt, "(o_icb_rsp_port_id == 0)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'o_icb_rsp_port_id' of type wire [(ARBT_PTR_W - 1):0]
+  with '0' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 194
+sirv_gnrl_icb_arbt, "(o_icb_rsp_port_id == 1)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'o_icb_rsp_port_id' of type wire [(ARBT_PTR_W - 1):0]
+  with '1' of type int.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 255
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: i_arbt_indic_id = (i_arbt_indic_id | ({ARBT_PTR_W 
+  {i_bus_icb_cmd_sel[j]}} & $unsigned(j)));
+  Expression: i_arbt_indic_id
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 194
+sirv_gnrl_icb_arbt, "(o_icb_rsp_port_id == 0)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'o_icb_rsp_port_id' of type wire [(ARBT_PTR_W - 1):0]
+  with '0' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 194
+sirv_gnrl_icb_arbt, "(o_icb_rsp_port_id == 1)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'o_icb_rsp_port_id' of type wire [(ARBT_PTR_W - 1):0]
+  with '1' of type int.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 255
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: i_arbt_indic_id = (i_arbt_indic_id | ({ARBT_PTR_W 
+  {i_bus_icb_cmd_sel[j]}} & $unsigned(j)));
+  Expression: i_arbt_indic_id
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 194
+sirv_gnrl_icb_arbt, "(o_icb_rsp_port_id == 0)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'o_icb_rsp_port_id' of type wire [(ARBT_PTR_W - 1):0]
+  with '0' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 194
+sirv_gnrl_icb_arbt, "(o_icb_rsp_port_id == 1)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'o_icb_rsp_port_id' of type wire [(ARBT_PTR_W - 1):0]
+  with '1' of type int.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 255
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 1-bit LHS target:
+  Source info: i_arbt_indic_id = (i_arbt_indic_id | ({ARBT_PTR_W 
+  {i_bus_icb_cmd_sel[j]}} & $unsigned(j)));
+  Expression: i_arbt_indic_id
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 194
+sirv_gnrl_icb_arbt, "(o_icb_rsp_port_id == 0)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'o_icb_rsp_port_id' of type wire [(ARBT_PTR_W - 1):0]
+  with '0' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/general/sirv_gnrl_icbs.v, 194
+sirv_gnrl_icb_arbt, "(o_icb_rsp_port_id == 1)"
+  A left 1-bit expression is compared to a right 32-bit expression.
+  Comparing 'o_icb_rsp_port_id' of type wire [(ARBT_PTR_W - 1):0]
+  with '1' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(0) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(0) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(1) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(1) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(2) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(2) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(3) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(3) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(4) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(4) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(5) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(5) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(6) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(6) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(7) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(7) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(8) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(8) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(9) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(9) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(10) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(10) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(11) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(11) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(12) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(12) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(13) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(13) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(14) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(14) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(15) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(15) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 405
+sirv_plic_man, "(icb_cmd_addr == ($unsigned(16) * 4))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '($unsigned(16) * 4)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 412
+sirv_plic_man, "(icb_cmd_addr == (($unsigned(0) * 4) + 24'h001000))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '(($unsigned(0) * 4) + 24'h001000)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 421
+sirv_plic_man, "(icb_cmd_addr == (($unsigned(0) * 4) + 24'h002000))"
+  A left 24-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_addr' of type wire [(24 - 1):0]
+  with '(($unsigned(0) * 4) + 24'h002000)' of type bit [31:0].
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 0)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '0' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 1)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '1' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 2)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '2' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 3)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '3' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 4)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '4' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 5)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '5' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 6)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '6' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 7)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '7' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 8)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '8' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 9)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '9' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 10)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '10' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 11)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '11' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 12)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '12' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 13)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '13' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 14)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '14' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 15)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '15' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/sirv_plic_man.v, 515
+sirv_plic_man, "(icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0] == 16)"
+  A left 6-bit expression is compared to a right 32-bit expression.
+  Comparing 'icb_cmd_wdata[(PLIC_IRQ_NUM_LOG2 - 1):0]' of type wire [5:0]
+  with '16' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_ram.v, 49
+sirv_debug_ram, "(ram_addr == 0)"
+  A left 3-bit expression is compared to a right 32-bit expression.
+  Comparing 'ram_addr' of type wire [(3 - 1):0]
+  with '0' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_ram.v, 49
+sirv_debug_ram, "(ram_addr == 1)"
+  A left 3-bit expression is compared to a right 32-bit expression.
+  Comparing 'ram_addr' of type wire [(3 - 1):0]
+  with '1' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_ram.v, 49
+sirv_debug_ram, "(ram_addr == 2)"
+  A left 3-bit expression is compared to a right 32-bit expression.
+  Comparing 'ram_addr' of type wire [(3 - 1):0]
+  with '2' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_ram.v, 49
+sirv_debug_ram, "(ram_addr == 3)"
+  A left 3-bit expression is compared to a right 32-bit expression.
+  Comparing 'ram_addr' of type wire [(3 - 1):0]
+  with '3' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_ram.v, 49
+sirv_debug_ram, "(ram_addr == 4)"
+  A left 3-bit expression is compared to a right 32-bit expression.
+  Comparing 'ram_addr' of type wire [(3 - 1):0]
+  with '4' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_ram.v, 49
+sirv_debug_ram, "(ram_addr == 5)"
+  A left 3-bit expression is compared to a right 32-bit expression.
+  Comparing 'ram_addr' of type wire [(3 - 1):0]
+  with '5' of type int.
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/debug/sirv_debug_ram.v, 49
+sirv_debug_ram, "(ram_addr == 6)"
+  A left 3-bit expression is compared to a right 32-bit expression.
+  Comparing 'ram_addr' of type wire [(3 - 1):0]
+  with '6' of type int.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 45
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= 0;
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 47
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= 0;
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 53
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= (elements - 1);
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 56
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 5-bit LHS target:
+  Source info: elements <= (elements + 1);
+  Expression: elements
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 64
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 8-bit LHS target:
+  Source info: buffer[loop1] <= 0;
+  Expression: buffer[loop1]
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 73
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= 0;
+  Expression: pointer_out
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 74
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= 0;
+  Expression: pointer_in
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 76
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= 0;
+  Expression: pointer_out
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 77
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= 0;
+  Expression: pointer_in
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 85
+io_generic_fifo, "(pointer_in == $unsigned((BUFFER_DEPTH - 1)))"
+  A left 4-bit expression is compared to a right 32-bit expression.
+  Comparing 'pointer_in' of type reg [(LOG_BUFFER_DEPTH - 1):0]
+  with '$unsigned((BUFFER_DEPTH - 1))' of type int unsigned.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 86
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= 0;
+  Expression: pointer_in
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 88
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_in <= (pointer_in + 1);
+  Expression: pointer_in
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 98
+io_generic_fifo, "(pointer_out == $unsigned((BUFFER_DEPTH - 1)))"
+  A left 4-bit expression is compared to a right 32-bit expression.
+  Comparing 'pointer_out' of type reg [(LOG_BUFFER_DEPTH - 1):0]
+  with '$unsigned((BUFFER_DEPTH - 1))' of type int unsigned.
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 99
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= 0;
+  Expression: pointer_out
+
+
+Lint-[WMIA-L] Width mismatch in assignment
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 101
+  Width mismatch between LHS and RHS is found in assignment:
+  The following 32-bit wide expression is assigned to a 4-bit LHS target:
+  Source info: pointer_out <= (pointer_out + 1);
+  Expression: pointer_out
+
+
+Lint-[ULCO] Unequal length in comparison operator
+/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/rtl/perips/apb_uart/io_generic_fifo.v, 40
+io_generic_fifo, "(elements == BUFFER_DEPTH)"
+  A left 5-bit expression is compared to a right 32-bit expression.
+  Comparing 'elements' of type reg [LOG_BUFFER_DEPTH:0]
+  with 'BUFFER_DEPTH' of type int.
+
+
+Notice: Ports coerced to inout, use -notice for details
+80 modules and 0 UDP read.
+make[2]: Entering directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/csrc'
+make[2]: Warning: File `filelist.hsopt.llvm2_0.objs' has modification time 0.069 s in the future
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+make[2]: Leaving directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/csrc'
+make[2]: Entering directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/csrc'
+../simv up to date
+make[2]: Leaving directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/csrc'
+touch compile.flg
+make[1]: Leaving directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run'
+make run DUMPWAVE=0 TESTCASE=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/riscv-tools/riscv-tests/isa/generated/rv32ui-p-add SIM_TOOL=vcs RUN_DIR=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run -C /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run
+make[1]: Entering directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run'
+make[1]: Warning: File `compile.flg' has modification time 0.081 s in the future
+rm -rf rv32ui-p-add
+mkdir rv32ui-p-add
+cd rv32ui-p-add; /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/simv +ntb_random_seed_automatic +DUMPWAVE=0 +TESTCASE=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/riscv-tools/riscv-tests/isa/generated/rv32ui-p-add +SIM_TOOL=vcs 2>&1 | tee rv32ui-p-add.log; cd /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run; 
+Chronologic VCS simulator copyright 1991-2020
+Contains Synopsys proprietary information.
+Compiler version Q-2020.03-SP2-6_Full64; Runtime version Q-2020.03-SP2-6_Full64;  Nov  3 22:21 2026
+NOTE: automatic random seed used: 1242870450
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+TESTCASE=                                                                                                                            /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/riscv-tools/riscv-tests/isa/generated/rv32ui-p-add
+ITCM 0x00: 340510730001aa0d
+ITCM 0x01: ff85051300002517
+ITCM 0x02: 01f5222301e52023
+ITCM 0x03: 040f416334202f73
+ITCM 0x04: 4fa507ff02634fa1
+ITCM 0x05: 0c634fad05ff0f63
+ITCM 0x06: 0bff05634f8505ff
+ITCM 0x07: 4f9d0dff00634f95
+ITCM 0x16: 2f03f52505130000
+ITCM 0x20: 2f8300052f03f065
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~ Test Result Summary ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~TESTCASE:                                                                                                                             /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/riscv-tools/riscv-tests/isa/generated/rv32ui-p-add ~~~~~~~~~~~~~
+~~~~~~~~~~~~~~Total cycle_count value:      25804 ~~~~~~~~~~~~~
+~~~~~~~~~~The valid Instruction Count:      16560 ~~~~~~~~~~~~~
+~~~~~The test ending reached at cycle:      25758 ~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~The final x3 Reg value:          1 ~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~ TEST_PASS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~ #####     ##     ####    #### ~~~~~~~~~~~~~~~~
+~~~~~~~~~ #    #   #  #   #       #     ~~~~~~~~~~~~~~~~
+~~~~~~~~~ #    #  #    #   ####    #### ~~~~~~~~~~~~~~~~
+~~~~~~~~~ #####   ######       #       #~~~~~~~~~~~~~~~~
+~~~~~~~~~ #       #    #  #    #  #    #~~~~~~~~~~~~~~~~
+~~~~~~~~~ #       #    #   ####    #### ~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$finish called from file "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run/../install/tb/tb_top.v", line 222.
+$finish at simulation time             10334600
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 103346000 ps
+CPU Time:      2.320 seconds;       Data structure size:   2.5Mb
+Tue Nov  3 22:21:40 2026
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory `/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/third-party/e203_hbirdv2/vsim/run'

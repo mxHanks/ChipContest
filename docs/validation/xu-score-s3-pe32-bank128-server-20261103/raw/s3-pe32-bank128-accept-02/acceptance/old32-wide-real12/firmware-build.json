@@ -1,0 +1,73 @@
+{
+  "configuration": {
+    "schedule": "bias-hw-pe32-autogroup-window",
+    "optimization": "-O2",
+    "experiment": "both-unroll-no-masks"
+  },
+  "command": [
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-platform-eval-20261101-codex/sifive-rv32-c/bin/riscv64-unknown-elf-gcc",
+    "-march=rv32imac_zicsr2p0_zifencei2p0",
+    "-mabi=ilp32",
+    "-O2",
+    "-DXU_FIRMWARE_BIAS_DTCM=0",
+    "-DXU_HARDWARE_BIAS_CACHE=1",
+    "-DXU_HARDWARE_RESULT_WINDOW=1",
+    "-DXU_FIRMWARE_BIAS_UNROLL=1",
+    "-DXU_FIRMWARE_RESULT_UNROLL=1",
+    "-DXU_FIRMWARE_NO_MASKS=1",
+    "-DXU_HARDWARE_PACK32=1",
+    "-DXU_HARDWARE_AUTO_GROUP=1",
+    "-DXU_HARDWARE_PE32=1",
+    "-fstack-usage",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-msmall-data-limit=0",
+    "-nostdlib",
+    "-nostartfiles",
+    "-static",
+    "-mcmodel=medany",
+    "-Wl,--no-relax",
+    "-T",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/tests/e203/firmware/link.ld",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/tests/e203/firmware/start.S",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/tests/e203/firmware/main.c",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/tests/e203/firmware/accel.c",
+    "-o",
+    "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-bank128-accept-02/acceptance/old32-wide-real12/accel_soc"
+  ],
+  "cwd": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-bank128-accept-02/acceptance/old32-wide-real12",
+  "source_sha256": {
+    "accel.c": "58e20c95af0650b52bbc778ad61aa8ceb85f63b2ed3da0a86e2f57e4efb110a2",
+    "accel.h": "aac8f5b86e5db596c0dc85cdcac34cec86c09d973183135858940c79164d046e",
+    "link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+    "main.c": "11ea61ea5f4c6f334143954babf79c8ed39d98d68cae4248a19a4d0631e5d3bc",
+    "start.S": "fc1f67b418212b88cc2b9b4e1fe6cedae8ee567f287c7f5aa909d80b45ffed5e"
+  },
+  "elf_sha256": "662aa0347cba59d6d849e8514b7c13f3755d56f13f6779fbfe653980159a6c35",
+  "image_sha256": "b890c26f3a0221779cc9987781583bf583b6f2f154a563ee40f088dc01078276",
+  "memory": {
+    "itcm_bytes": 1274,
+    "itcm_capacity_bytes": 65536,
+    "itcm_remaining_bytes": 64262,
+    "data_bytes": 0,
+    "bss_bytes": 0,
+    "dtcm_capacity_bytes": 65536,
+    "stack_top": 2415984624,
+    "stack_capacity_after_bss_bytes": 65520,
+    "stack_top_guard_bytes": 16,
+    "stack_frames": [
+      {
+        "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/tests/e203/firmware/accel.c:86:5:accel_linear",
+        "bytes": 0,
+        "kind": "static"
+      },
+      {
+        "source": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/ChipContest-bank128-02/tests/e203/firmware/main.c:3:5:main",
+        "bytes": 32,
+        "kind": "static"
+      }
+    ],
+    "max_static_stack_frame_bytes": 32,
+    "stack_usage_scope": "GCC static per-function frames; runtime high-water mark not measured"
+  }
+}
