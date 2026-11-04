@@ -267,6 +267,7 @@ def main(argv=None):
     parser.add_argument('--out', required=True, type=Path)
     parser.add_argument('--vendor-model', required=True, type=Path)
     parser.add_argument('--ppa-root', required=True, type=Path, help='completed own S2e89 DC/full-Formality/PT campaign; identities are read from actual outputs')
+    parser.add_argument('--formality-root',type=Path,help='explicit completed109 original-own-FM audit; original89 remains unchanged')
     parser.add_argument('--vectors', type=Path)
     parser.add_argument('--vcs', default='vcs')
     parser.add_argument('--cross-prefix', default='riscv64-unknown-elf-')
@@ -287,7 +288,7 @@ def main(argv=None):
     try:
         require(args.tool_root.resolve() == context.TOOL_ROOT, 'explicit tool root differs from this producer')
         ctx = context.Context(args.root)
-        mapped=context.checked_mapped_context(ctx.root,args.ppa_root)
+        mapped=context.checked_mapped_context(ctx.root,args.ppa_root,args.formality_root)
         args.netlist=Path(mapped['netlist']['path'])
         args.constraints=Path(mapped['constraints']['path'])
         common = common_collector()

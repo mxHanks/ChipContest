@@ -41,13 +41,14 @@ def main():
     parser.add_argument('action',choices=['task00','tasks12'])
     parser.add_argument('--source-root',type=Path,default=BASE/'ChipContest-s2e-74')
     parser.add_argument('--ppa-root',type=Path,default=BASE/'s2e-ppa-campaign-20261104-89')
+    parser.add_argument('--formality-root',type=Path,help='explicit completed109 own-native-FM audit, rechecked against original89')
     parser.add_argument('--task00-proof',type=Path,default=BASE/'s2e-formal-activity-task00-20261104-104')
     parser.add_argument('--out',type=Path)
     parser.add_argument('--prepare-only',action='store_true')
     parser.add_argument('--foreground',action='store_true')
     args=parser.parse_args()
     ctx=context.Context(args.source_root)
-    mapped=context.checked_mapped_context(ctx.root,args.ppa_root)
+    mapped=context.checked_mapped_context(ctx.root,args.ppa_root,args.formality_root)
     task00=checked_task00(args.task00_proof,ctx,mapped) if args.action=='tasks12' else None
     out=(args.out or BASE/('s2e-formal-activity-task00-20261104-104' if args.action=='task00' else 's2e-formal-activity12-20261104-104')).resolve()
     context.require(not out.exists(),'fresh isolated activity output required')
@@ -55,6 +56,7 @@ def main():
              '--profile',context.PROFILE,'--ppa-root',str(args.ppa_root.resolve()),'--out',str(out),'--vendor-model',VENDOR,
              '--vcs',VCS,'--cross-prefix',CROSS,'--task-ids','0' if args.action=='task00' else ','.join(map(str,range(12)))]
     if args.prepare_only:command.append('--prepare-only')
+    if args.formality_root:command+=['--formality-root',str(args.formality_root.resolve())]
     log=out.with_name(out.name+'-driver.log')
     context.require(not log.exists(),'fresh activity driver log required')
     with log.open('x') as stream:

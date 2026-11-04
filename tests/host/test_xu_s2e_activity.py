@@ -59,7 +59,7 @@ class XuS2eSyntaxAndPolicyTests(unittest.TestCase):
                 context.checked_record(dict(path=str(link),bytes=path.stat().st_size,sha256=context.sha(path)),'host fixture')
 
     def test_python36_and_common_tools_remain_frozen(self):
-        for name in ['xu_s2e_activity_context.py','xu_s2e_task_activity.py','xu_s2e_sram_activity_alias.py','xu_s2e_activity_server.py']:
+        for name in ['xu_s2e_activity_context.py','xu_s2e_task_activity.py','xu_s2e_sram_activity_alias.py','xu_s2e_activity_server.py','xu_s2e_formality_audit.py']:
             ast.parse((ROOT/'tools/ppa'/name).read_text(),feature_version=(3,6))
         for name,digest in context.FROZEN_TOOLS.items():self.assertEqual(context.sha(ROOT/name),digest,name)
         self.assertEqual(context.MAIN_COMMIT,'5bf123bfead8f2a37f97f3234d4e40ce8201aae9')
@@ -72,6 +72,15 @@ class XuS2eSyntaxAndPolicyTests(unittest.TestCase):
             (root/'result.json').write_text(json.dumps(dict(status='PARTIAL_PREPARED_NOT_SIMULATED',requested_task_ids=[0],tasks=[{}])))
             with self.assertRaisesRegex(ValueError,'actual completed isolated S2e task00'):
                 server.checked_task00(root,None,None)
+
+    def test_missing_or_running109_audit_does_not_allow_own_fm_gate(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e109-audit-refusal-') as temporary:
+            root=Path(temporary)
+            with self.assertRaises(FileNotFoundError):context.checked_audit_receipt(root,root,root)
+            for status in ['RUNNING_NOT_QUALIFIED','FAIL','PREPARED_NOT_EXECUTED_NOT_QUALIFIED']:
+                (root/'state.json').write_text(json.dumps(dict(schema='xu-s2e-native-own-fm-audit-v1',status=status)))
+                with self.assertRaisesRegex(ValueError,'completed explicit original-own-FM audit required'):
+                    context.checked_audit_receipt(root,root,root)
 
     @unittest.skipUnless(shutil.which('iverilog') and shutil.which('vvp'),'Icarus required')
     def test_absolute_lf_phase_preserved(self):
