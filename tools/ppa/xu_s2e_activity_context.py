@@ -121,7 +121,8 @@ def tool_identity():
     require(Path(git(TOOL_ROOT, 'rev-parse', '--show-toplevel')).resolve() == TOOL_ROOT, 'tool root is not repository root')
     require(not git(TOOL_ROOT, 'status', '--porcelain', '--untracked-files=all'), 'tool checkout must be clean and committed')
     for name in ('xu_s2e_activity_context.py','xu_s2e_task_activity.py',
-                 'xu_s2e_sram_activity_alias.py','xu_s2e_activity_observer.svh','xu_s2e_activity_server.py'):
+                 'xu_s2e_sram_activity_alias.py','xu_s2e_activity_observer.svh','xu_s2e_activity_server.py',
+                 'xu_s2e_formality_audit.py'):
         relative='tools/ppa/'+name
         data=(TOOL_ROOT/relative).read_bytes()
         expected=git(TOOL_ROOT,'rev-parse','HEAD:'+relative)
@@ -133,17 +134,19 @@ def tool_identity():
                 baseline_tools_policy='S2e explicitly pins current PPA profile guard; every other common asset is unchanged. Old S2c producer/context is untouched.')
 
 
-def checked_mapped_context(root,ppa_root):
+def checked_mapped_context(root,ppa_root,formality_root=None):
     """Bind actual completed S2e89 synthesis/FМ, never an arbitrary/S2c netlist."""
     root,ppa_root=Path(root).resolve(),Path(ppa_root).resolve()
     ppa=load('xu_s2e_mapping_profile_guard',TOOL_ROOT/'tools/scripts/xu_soc_ppa.py')
     source=ppa.source_profile_identity(root,PROFILE)
     state_path=ppa_root/'state.json';state=json.loads(state_path.read_text())
-    require(state.get('status')=='EXECUTED_NOT_QUALIFIED','completed S2e89 DC/Formality/PT context required')
+    expected_status='EXECUTED_FORMALITY_FAILED_NOT_QUALIFIED' if formality_root else 'EXECUTED_NOT_QUALIFIED'
+    require(state.get('status')==expected_status,'completed S2e89 DC/Formality/PT context required')
     require(state.get('source_before')==state.get('source_after')==source,'mapped S2e source freeze differs')
     require(state.get('inputs_before') and state.get('inputs_before')==state.get('inputs_after'),'mapped tool/library freeze differs')
-    require(state.get('formality',{}).get('status')=='VERIFIED_FULL_SOC_REVIEW_PENDING_NOT_QUALIFIED',
+    require(formality_root is not None or state.get('formality',{}).get('status')=='VERIFIED_FULL_SOC_REVIEW_PENDING_NOT_QUALIFIED',
             'own S2e full-SoC Formality completion required')
+    proof_audit=checked_audit_receipt(root,ppa_root,formality_root) if formality_root else None
     prepared_path=ppa_root/'ppa/prepared.json';prepared=json.loads(prepared_path.read_text())
     ppa.verify_prepared(root,ppa_root/'ppa',prepared)
     impl=prepared['implementation']
@@ -177,11 +180,8 @@ def checked_mapped_context(root,ppa_root):
     require(formal.get('returncode')==0 and
             checked_record(formal.get('log',{}),'actual own Formality log')==identity(formal_log),
             'actual own Formality log identity/return code differs')
-    proof_text=formal_log.read_text(errors='replace')
-    require('Version R-2020.09-SP5' in proof_text and
-            re.findall(r'^XU_S2E_FULL_SOC_FORMALITY_PASS\s*$',proof_text,re.M)==['XU_S2E_FULL_SOC_FORMALITY_PASS'] and
-            not re.search(r'^\s*(?:Error:|Fatal:|XU_S2E_FULL_SOC_FORMALITY_(?:FAIL|SCRIPT_ERROR))',proof_text,re.M),
-            'actual own full-SoC Formality completion missing/failed')
+    checker=load('xu_s2e_activity_native_full_fm',TOOL_ROOT/'tools/ppa/xu_s2e_formality_audit.py')
+    native=checker.native_result(formal_log.read_text(errors='replace'),formal['returncode'])
     execution_path=ppa_root/'ppa/execution.json'
     execution=json.loads(execution_path.read_text())
     require(execution.get('status') in ('EXECUTED_NOT_QUALIFIED','DC_EXECUTED_PT_INCOMPLETE_NOT_QUALIFIED') and
@@ -203,9 +203,28 @@ def checked_mapped_context(root,ppa_root):
         require(sha(ppa_root/'ppa'/name)==record['sha256'],'prepared mapping RTL bytes differ: '+name)
     identities=[identity(p) for p in (state_path,prepared_path,execution_path,formal_path,formal_log,
                                     ppa_root/'ppa/default.svf',ppa_root/'ppa/mapped.sdc',dc_log)]+frozen
+    if proof_audit:identities+=proof_audit['inputs']
     identities=list({item['path']:item for item in identities}.values())
     return dict(schema='xu-s2e-actual-mapped-context-v1',source_profile=source,netlist=netlist,constraints=constraints,
-                inputs=identities,limitations='Identity and prior own-SVF full proof only; no timing or power qualification')
+                inputs=identities,native_formality=native,formality_audit=proof_audit,
+                limitations='Identity and actual own-SVF full proof only; original89 receipt retained if independently re-audited; no timing or power qualification')
+
+
+def checked_audit_receipt(root,ppa_root,formality_root):
+    """Explicit109 audit is revalidated against actual own DC/source/native proof."""
+    checker=load('xu_s2e_checked_original_native_audit',TOOL_ROOT/'tools/ppa/xu_s2e_formality_audit.py')
+    receipt_path=Path(formality_root).resolve()/'state.json'
+    receipt=json.loads(receipt_path.read_text())
+    require(receipt.get('schema')=='xu-s2e-native-own-fm-audit-v1' and receipt.get('status')==checker.STATUS,
+            'completed explicit original-own-FM audit required')
+    require(checked_record(receipt.get('producer',{}),'109 audit producer')['sha256']==sha(checker.__file__),
+            '109 audit producer bytes differ from committed checker')
+    actual=checker.audit(root,receipt['context']['original_tools'],ppa_root)
+    require(receipt.get('context')==actual and receipt.get('frozen_before')==receipt.get('frozen_after')==actual['frozen_inputs'],
+            '109 audit actual own source/DC/SVF/native proof/runtime binding differs')
+    inputs=checked_frozen_records(actual['frozen_inputs'],'explicit109 audit frozen inputs')
+    inputs+=[identity(receipt_path),identity(receipt['producer']['path'])]
+    return dict(receipt=identity(receipt_path),status=checker.STATUS,inputs=inputs)
 
 
 def checked_record(record,label):
