@@ -41,6 +41,23 @@ def declarations(ctx):
 
 
 class XuS2eSyntaxAndPolicyTests(unittest.TestCase):
+    def test_receipt_equality_does_not_replace_actual_native_file_rehash(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-native-freeze-') as temporary:
+            root=Path(temporary);path=root/'own.svf';path.write_bytes(b'local host fixture, not EDA evidence\n')
+            record=dict(path=str(path),bytes=path.stat().st_size,sha256=context.sha(path))
+            self.assertEqual(context.checked_frozen_records({str(path):record},'host fixture'),[context.identity(path)])
+            for changed in [dict(record,bytes=record['bytes']+1),dict(record,sha256='0'*64),
+                            {key:value for key,value in record.items() if key!='bytes'}]:
+                with self.assertRaises(ValueError):context.checked_frozen_records({str(path):changed},'host fixture')
+            with self.assertRaisesRegex(ValueError,'key/path differs'):
+                context.checked_frozen_records({str(root/'wrong'):record},'host fixture')
+            path.write_bytes(b'changed native input with identical receipt dictionaries\n')
+            with self.assertRaisesRegex(ValueError,'actual bytes/hash differ'):
+                context.checked_frozen_records({str(path):record},'host fixture')
+            link=root/'link.svf';link.symlink_to(path)
+            with self.assertRaisesRegex(ValueError,'non-symlink'):
+                context.checked_record(dict(path=str(link),bytes=path.stat().st_size,sha256=context.sha(path)),'host fixture')
+
     def test_python36_and_common_tools_remain_frozen(self):
         for name in ['xu_s2e_activity_context.py','xu_s2e_task_activity.py','xu_s2e_sram_activity_alias.py','xu_s2e_activity_server.py']:
             ast.parse((ROOT/'tools/ppa'/name).read_text(),feature_version=(3,6))
