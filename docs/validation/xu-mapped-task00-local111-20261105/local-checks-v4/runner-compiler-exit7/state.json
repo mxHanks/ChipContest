@@ -1,0 +1,45 @@
+{
+  "error": {
+    "message": "native child failed: compiler returncode=7",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 119, in case\n    with m.EvidenceRun(out)as run:body(run);run.state['status']='LOCAL_MECHANISM_EXECUTED_NOT_NATIVE_VCS'\n                                  ~~~~^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 125, in <lambda>\n    case('compiler-exit7',lambda r:r.step('compiler',[sys.executable,'-c','import sys;sys.exit(7)'],5),'ValueError')\n                                   ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 213, in step\n    if require_zero:need(code==0,'native child failed: '+name+' returncode='+str(code))\n                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 18, in need\n    if not ok:raise ValueError(msg)\n              ^^^^^^^^^^^^^^^^^^^^^\nValueError: native child failed: compiler returncode=7\n",
+    "type": "ValueError"
+  },
+  "finished_epoch": 1793807916.6400723,
+  "identity_errors": [],
+  "inputs_after": [],
+  "inputs_before": [],
+  "inputs_equal_before_after": true,
+  "pid": 255689,
+  "qualification": "NOT_QUALIFIED",
+  "runtime_trees": [],
+  "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+  "started_epoch": 1793807916.603166,
+  "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+  "steps": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-c",
+        "import sys;sys.exit(7)"
+      ],
+      "finished_epoch": 1793807916.6369588,
+      "log": {
+        "bytes": 0,
+        "ctime_ns": 1793807916603537538,
+        "device": 66309,
+        "inode": 24384584,
+        "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-compiler-exit7/compiler.log",
+        "mtime_ns": 1793807916603537538,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-compiler-exit7/compiler.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "name": "compiler",
+      "pid": 255810,
+      "process_group": 255810,
+      "returncode": 7,
+      "started_epoch": 1793807916.6033926,
+      "status": "EXITED",
+      "timeout_seconds": 5
+    }
+  ]
+}

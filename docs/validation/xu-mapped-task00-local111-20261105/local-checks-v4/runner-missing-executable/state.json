@@ -1,0 +1,41 @@
+{
+  "error": {
+    "message": "[Errno 2] No such file or directory: '/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-compiler'",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 119, in case\n    with m.EvidenceRun(out)as run:body(run);run.state['status']='LOCAL_MECHANISM_EXECUTED_NOT_NATIVE_VCS'\n                                  ~~~~^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 126, in <lambda>\n    case('missing-executable',lambda r:r.step('compiler',[str(O/'missing-compiler')],5),'FileNotFoundError')\n                                       ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 201, in step\n    p=subprocess.Popen(command,cwd=str(self.out),stdin=subprocess.DEVNULL,stdout=f,stderr=subprocess.STDOUT,start_new_session=True)\n  File \"/usr/lib/python3.14/subprocess.py\", line 1039, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                        pass_fds, cwd, env,\n                        ^^^^^^^^^^^^^^^^^^^\n    ...<5 lines>...\n                        gid, gids, uid, umask,\n                        ^^^^^^^^^^^^^^^^^^^^^^\n                        start_new_session, process_group)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/subprocess.py\", line 1990, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: '/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-compiler'\n",
+    "type": "FileNotFoundError"
+  },
+  "finished_epoch": 1793807916.6463923,
+  "identity_errors": [],
+  "inputs_after": [],
+  "inputs_before": [],
+  "inputs_equal_before_after": true,
+  "pid": 255689,
+  "qualification": "NOT_QUALIFIED",
+  "runtime_trees": [],
+  "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+  "started_epoch": 1793807916.6409376,
+  "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+  "steps": [
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-compiler"
+      ],
+      "error": "FileNotFoundError: [Errno 2] No such file or directory: '/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-compiler'",
+      "finished_epoch": 1793807916.6443248,
+      "log": {
+        "bytes": 1118,
+        "ctime_ns": 1793807916642910283,
+        "device": 66309,
+        "inode": 24384587,
+        "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-missing-executable/compiler.log",
+        "mtime_ns": 1793807916642910283,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-missing-executable/compiler.log",
+        "sha256": "f7945471b36e59a2dee46d8d4d8938311180d74bc837f7c64ab0cc93b1e5e459"
+      },
+      "name": "compiler",
+      "started_epoch": 1793807916.6411476,
+      "status": "EXCEPTION",
+      "timeout_seconds": 5
+    }
+  ]
+}

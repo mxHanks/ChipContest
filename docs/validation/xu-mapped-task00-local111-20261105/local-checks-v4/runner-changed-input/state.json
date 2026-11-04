@@ -1,0 +1,71 @@
+{
+  "error": {
+    "message": "frozen input identity verification failed",
+    "type": "ValueError"
+  },
+  "finished_epoch": 1793807922.2256362,
+  "identity_errors": [
+    {
+      "error": "INPUT_IDENTITY_CHANGED",
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt"
+    }
+  ],
+  "inputs_after": [
+    {
+      "bytes": 5,
+      "ctime_ns": 1793807922199967449,
+      "device": 66309,
+      "inode": 24384593,
+      "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt",
+      "mtime_ns": 1793807922199967449,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt",
+      "sha256": "f39592393ef0859cb196a52693d2cea00fb2df784b3c04ae54aa7cadb8e562f8"
+    }
+  ],
+  "inputs_before": [
+    {
+      "bytes": 6,
+      "ctime_ns": 1793807922159679377,
+      "device": 66309,
+      "inode": 24384593,
+      "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt",
+      "mtime_ns": 1793807922159679377,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt",
+      "sha256": "6db7d803e74f1ffa7d8f5adc0bf95b3e15bf4c8373fffadf546227cc6c6742cb"
+    }
+  ],
+  "inputs_equal_before_after": false,
+  "pid": 255689,
+  "qualification": "NOT_QUALIFIED",
+  "runtime_trees": [],
+  "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+  "started_epoch": 1793807922.1598113,
+  "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+  "steps": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-c",
+        "from pathlib import Path;Path('/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt').write_text(\"after\")"
+      ],
+      "finished_epoch": 1793807922.2248747,
+      "log": {
+        "bytes": 0,
+        "ctime_ns": 1793807922160224208,
+        "device": 66309,
+        "inode": 24384596,
+        "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-changed-input/mutator.log",
+        "mtime_ns": 1793807922160224208,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-changed-input/mutator.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "name": "mutator",
+      "pid": 255957,
+      "process_group": 255957,
+      "returncode": 0,
+      "started_epoch": 1793807922.1601586,
+      "status": "EXITED",
+      "timeout_seconds": 5
+    }
+  ]
+}

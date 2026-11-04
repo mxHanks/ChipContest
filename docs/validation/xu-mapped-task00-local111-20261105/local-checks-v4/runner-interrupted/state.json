@@ -1,0 +1,50 @@
+{
+  "error": {
+    "message": "",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 11, in <module>\n    with m.EvidenceRun(out)as run:run.step('interrupt-child',[sys.executable,'-c','import time;time.sleep(30)'],60)\n                                  ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 203, in step\n    code=p.wait(timeout=timeout);row.update(returncode=code,status='EXITED')\n  File \"/usr/lib/python3.14/subprocess.py\", line 1279, in wait\n    return self._wait(timeout=timeout)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/subprocess.py\", line 2078, in _wait\n    time.sleep(delay)\n    ~~~~~~~~~~^^^^^^^\nKeyboardInterrupt\n",
+    "type": "KeyboardInterrupt"
+  },
+  "finished_epoch": 1793807922.654072,
+  "identity_errors": [],
+  "inputs_after": [],
+  "inputs_before": [],
+  "inputs_equal_before_after": true,
+  "pid": 255959,
+  "qualification": "NOT_QUALIFIED",
+  "runtime_trees": [],
+  "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+  "started_epoch": 1793807922.383774,
+  "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+  "steps": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-c",
+        "import time;time.sleep(30)"
+      ],
+      "error": "KeyboardInterrupt: ",
+      "finished_epoch": 1793807922.6519728,
+      "log": {
+        "bytes": 511,
+        "ctime_ns": 1793807922650802209,
+        "device": 66309,
+        "inode": 24384602,
+        "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-interrupted/interrupt-child.log",
+        "mtime_ns": 1793807922650802209,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-interrupted/interrupt-child.log",
+        "sha256": "30a9e96b959c4aa6992c25bf58449e64bcc54728fb4611779d6c0f2d51751d34"
+      },
+      "name": "interrupt-child",
+      "pid": 255960,
+      "process_group": 255960,
+      "started_epoch": 1793807922.3840835,
+      "status": "EXCEPTION",
+      "termination_reason": "KeyboardInterrupt",
+      "termination_returncode": -15,
+      "termination_signals": [
+        "SIGTERM"
+      ],
+      "timeout_seconds": 60
+    }
+  ]
+}

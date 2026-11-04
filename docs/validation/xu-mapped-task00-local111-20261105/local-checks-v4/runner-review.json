@@ -1,0 +1,456 @@
+{
+  "cases": [
+    {
+      "error": null,
+      "name": "success",
+      "raw_state_sha256": "0f47b5d374de07465ba1658614fd43acd03519f10895069d5f8070d69de93432",
+      "state": {
+        "finished_epoch": 1793807916.6021774,
+        "identity_errors": [],
+        "inputs_after": [],
+        "inputs_before": [],
+        "inputs_equal_before_after": true,
+        "pid": 255689,
+        "qualification": "NOT_QUALIFIED",
+        "runtime_trees": [],
+        "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+        "started_epoch": 1793807916.5716608,
+        "status": "LOCAL_MECHANISM_EXECUTED_NOT_NATIVE_VCS",
+        "steps": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-c",
+              "print(\"ordinary-child\")"
+            ],
+            "finished_epoch": 1793807916.600572,
+            "log": {
+              "bytes": 15,
+              "ctime_ns": 1793807916594911135,
+              "device": 66309,
+              "inode": 24384581,
+              "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-success/ok.log",
+              "mtime_ns": 1793807916594911135,
+              "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-success/ok.log",
+              "sha256": "97de2280775502ea6731083e4270de998891a4507a209fe02679427743fad43e"
+            },
+            "name": "ok",
+            "pid": 255809,
+            "process_group": 255809,
+            "returncode": 0,
+            "started_epoch": 1793807916.5720463,
+            "status": "EXITED",
+            "timeout_seconds": 5
+          }
+        ]
+      }
+    },
+    {
+      "error": "ValueError",
+      "name": "compiler-exit7",
+      "raw_state_sha256": "83d566fc31a3644f76fb00fb280260486e2b429625e1ad5b56e4ca1859b743f6",
+      "state": {
+        "error": {
+          "message": "native child failed: compiler returncode=7",
+          "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 119, in case\n    with m.EvidenceRun(out)as run:body(run);run.state['status']='LOCAL_MECHANISM_EXECUTED_NOT_NATIVE_VCS'\n                                  ~~~~^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 125, in <lambda>\n    case('compiler-exit7',lambda r:r.step('compiler',[sys.executable,'-c','import sys;sys.exit(7)'],5),'ValueError')\n                                   ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 213, in step\n    if require_zero:need(code==0,'native child failed: '+name+' returncode='+str(code))\n                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 18, in need\n    if not ok:raise ValueError(msg)\n              ^^^^^^^^^^^^^^^^^^^^^\nValueError: native child failed: compiler returncode=7\n",
+          "type": "ValueError"
+        },
+        "finished_epoch": 1793807916.6400723,
+        "identity_errors": [],
+        "inputs_after": [],
+        "inputs_before": [],
+        "inputs_equal_before_after": true,
+        "pid": 255689,
+        "qualification": "NOT_QUALIFIED",
+        "runtime_trees": [],
+        "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+        "started_epoch": 1793807916.603166,
+        "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+        "steps": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-c",
+              "import sys;sys.exit(7)"
+            ],
+            "finished_epoch": 1793807916.6369588,
+            "log": {
+              "bytes": 0,
+              "ctime_ns": 1793807916603537538,
+              "device": 66309,
+              "inode": 24384584,
+              "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-compiler-exit7/compiler.log",
+              "mtime_ns": 1793807916603537538,
+              "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-compiler-exit7/compiler.log",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "name": "compiler",
+            "pid": 255810,
+            "process_group": 255810,
+            "returncode": 7,
+            "started_epoch": 1793807916.6033926,
+            "status": "EXITED",
+            "timeout_seconds": 5
+          }
+        ]
+      }
+    },
+    {
+      "error": "FileNotFoundError",
+      "name": "missing-executable",
+      "raw_state_sha256": "670909881e7a79db30835147036896dbfe8a80a89f1bd54a20897b0f534bf4f6",
+      "state": {
+        "error": {
+          "message": "[Errno 2] No such file or directory: '/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-compiler'",
+          "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 119, in case\n    with m.EvidenceRun(out)as run:body(run);run.state['status']='LOCAL_MECHANISM_EXECUTED_NOT_NATIVE_VCS'\n                                  ~~~~^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 126, in <lambda>\n    case('missing-executable',lambda r:r.step('compiler',[str(O/'missing-compiler')],5),'FileNotFoundError')\n                                       ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 201, in step\n    p=subprocess.Popen(command,cwd=str(self.out),stdin=subprocess.DEVNULL,stdout=f,stderr=subprocess.STDOUT,start_new_session=True)\n  File \"/usr/lib/python3.14/subprocess.py\", line 1039, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                        pass_fds, cwd, env,\n                        ^^^^^^^^^^^^^^^^^^^\n    ...<5 lines>...\n                        gid, gids, uid, umask,\n                        ^^^^^^^^^^^^^^^^^^^^^^\n                        start_new_session, process_group)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/subprocess.py\", line 1990, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: '/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-compiler'\n",
+          "type": "FileNotFoundError"
+        },
+        "finished_epoch": 1793807916.6463923,
+        "identity_errors": [],
+        "inputs_after": [],
+        "inputs_before": [],
+        "inputs_equal_before_after": true,
+        "pid": 255689,
+        "qualification": "NOT_QUALIFIED",
+        "runtime_trees": [],
+        "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+        "started_epoch": 1793807916.6409376,
+        "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+        "steps": [
+          {
+            "command": [
+              "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-compiler"
+            ],
+            "error": "FileNotFoundError: [Errno 2] No such file or directory: '/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-compiler'",
+            "finished_epoch": 1793807916.6443248,
+            "log": {
+              "bytes": 1118,
+              "ctime_ns": 1793807916642910283,
+              "device": 66309,
+              "inode": 24384587,
+              "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-missing-executable/compiler.log",
+              "mtime_ns": 1793807916642910283,
+              "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-missing-executable/compiler.log",
+              "sha256": "f7945471b36e59a2dee46d8d4d8938311180d74bc837f7c64ab0cc93b1e5e459"
+            },
+            "name": "compiler",
+            "started_epoch": 1793807916.6411476,
+            "status": "EXCEPTION",
+            "timeout_seconds": 5
+          }
+        ]
+      }
+    },
+    {
+      "error": "TimeoutExpired",
+      "name": "timeout",
+      "raw_state_sha256": "3b0e22ad054cbd9b88b3b8b1f599a5566567c0d9cf91d4f33a069cdd7aec033b",
+      "state": {
+        "error": {
+          "message": "Command '['/usr/bin/python3', '-c', 'import subprocess,signal,time,pathlib;signal.signal(signal.SIGTERM,signal.SIG_IGN);p=subprocess.Popen([\"/usr/bin/python3\",\"-c\",\"import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(30)\"]);pathlib.Path(\\'/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/timeout-descendant.pid\\').write_text(str(p.pid));time.sleep(30)']' timed out after 0.5 seconds",
+          "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 119, in case\n    with m.EvidenceRun(out)as run:body(run);run.state['status']='LOCAL_MECHANISM_EXECUTED_NOT_NATIVE_VCS'\n                                  ~~~~^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 129, in <lambda>\n    timed=case('timeout',lambda r:r.step('hung-compiler',[sys.executable,'-c',code],0.5),'TimeoutExpired');pid=int(child_pid.read_text());assert terminal_or_missing(pid);assert terminal_or_missing(timed['steps'][0]['pid'])\n                                  ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 203, in step\n    code=p.wait(timeout=timeout);row.update(returncode=code,status='EXITED')\n  File \"/usr/lib/python3.14/subprocess.py\", line 1279, in wait\n    return self._wait(timeout=timeout)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/subprocess.py\", line 2076, in _wait\n    raise TimeoutExpired(self.args, timeout)\nsubprocess.TimeoutExpired: Command '['/usr/bin/python3', '-c', 'import subprocess,signal,time,pathlib;signal.signal(signal.SIGTERM,signal.SIG_IGN);p=subprocess.Popen([\"/usr/bin/python3\",\"-c\",\"import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(30)\"]);pathlib.Path(\\'/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/timeout-descendant.pid\\').write_text(str(p.pid));time.sleep(30)']' timed out after 0.5 seconds\n",
+          "type": "TimeoutExpired"
+        },
+        "finished_epoch": 1793807922.155425,
+        "identity_errors": [],
+        "inputs_after": [],
+        "inputs_before": [],
+        "inputs_equal_before_after": true,
+        "pid": 255689,
+        "qualification": "NOT_QUALIFIED",
+        "runtime_trees": [],
+        "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+        "started_epoch": 1793807916.6470304,
+        "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+        "steps": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-c",
+              "import subprocess,signal,time,pathlib;signal.signal(signal.SIGTERM,signal.SIG_IGN);p=subprocess.Popen([\"/usr/bin/python3\",\"-c\",\"import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(30)\"]);pathlib.Path('/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/timeout-descendant.pid').write_text(str(p.pid));time.sleep(30)"
+            ],
+            "error": "TimeoutExpired: Command '['/usr/bin/python3', '-c', 'import subprocess,signal,time,pathlib;signal.signal(signal.SIGTERM,signal.SIG_IGN);p=subprocess.Popen([\"/usr/bin/python3\",\"-c\",\"import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(30)\"]);pathlib.Path(\\'/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/timeout-descendant.pid\\').write_text(str(p.pid));time.sleep(30)']' timed out after 0.5 seconds",
+            "finished_epoch": 1793807922.1534982,
+            "log": {
+              "bytes": 969,
+              "ctime_ns": 1793807922151811295,
+              "device": 66309,
+              "inode": 24384590,
+              "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-timeout/hung-compiler.log",
+              "mtime_ns": 1793807922151811295,
+              "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-timeout/hung-compiler.log",
+              "sha256": "22a86b9e77705c4608736813428e22987b2f2ce0f78eae96eaeaab5d76762b9c"
+            },
+            "name": "hung-compiler",
+            "pid": 255812,
+            "process_group": 255812,
+            "started_epoch": 1793807916.6471832,
+            "status": "EXCEPTION",
+            "termination_reason": "TimeoutExpired",
+            "termination_returncode": -9,
+            "termination_signals": [
+              "SIGTERM",
+              "SIGKILL"
+            ],
+            "timeout_seconds": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "error": "ValueError",
+      "name": "changed-input",
+      "raw_state_sha256": "6242b8f1d5d009132df5bdbb821f2b79c7644e09aca3e5685f7cf4dbf3be820a",
+      "state": {
+        "error": {
+          "message": "frozen input identity verification failed",
+          "type": "ValueError"
+        },
+        "finished_epoch": 1793807922.2256362,
+        "identity_errors": [
+          {
+            "error": "INPUT_IDENTITY_CHANGED",
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt"
+          }
+        ],
+        "inputs_after": [
+          {
+            "bytes": 5,
+            "ctime_ns": 1793807922199967449,
+            "device": 66309,
+            "inode": 24384593,
+            "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt",
+            "mtime_ns": 1793807922199967449,
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt",
+            "sha256": "f39592393ef0859cb196a52693d2cea00fb2df784b3c04ae54aa7cadb8e562f8"
+          }
+        ],
+        "inputs_before": [
+          {
+            "bytes": 6,
+            "ctime_ns": 1793807922159679377,
+            "device": 66309,
+            "inode": 24384593,
+            "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt",
+            "mtime_ns": 1793807922159679377,
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt",
+            "sha256": "6db7d803e74f1ffa7d8f5adc0bf95b3e15bf4c8373fffadf546227cc6c6742cb"
+          }
+        ],
+        "inputs_equal_before_after": false,
+        "pid": 255689,
+        "qualification": "NOT_QUALIFIED",
+        "runtime_trees": [],
+        "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+        "started_epoch": 1793807922.1598113,
+        "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+        "steps": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-c",
+              "from pathlib import Path;Path('/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/mutable-input.txt').write_text(\"after\")"
+            ],
+            "finished_epoch": 1793807922.2248747,
+            "log": {
+              "bytes": 0,
+              "ctime_ns": 1793807922160224208,
+              "device": 66309,
+              "inode": 24384596,
+              "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-changed-input/mutator.log",
+              "mtime_ns": 1793807922160224208,
+              "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-changed-input/mutator.log",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "name": "mutator",
+            "pid": 255957,
+            "process_group": 255957,
+            "returncode": 0,
+            "started_epoch": 1793807922.1601586,
+            "status": "EXITED",
+            "timeout_seconds": 5
+          }
+        ]
+      }
+    },
+    {
+      "error": "ValueError",
+      "name": "missing-input-with-primary-failure",
+      "raw_state_sha256": "cf955434c72999d7921563ee717ee3a116b875a111b280e4624697f52e5e07b8",
+      "state": {
+        "error": {
+          "message": "native child failed: compiler returncode=9",
+          "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 119, in case\n    with m.EvidenceRun(out)as run:body(run);run.state['status']='LOCAL_MECHANISM_EXECUTED_NOT_NATIVE_VCS'\n                                  ~~~~^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 136, in delete_then_fail\n    run.freeze(missing_file);run.step('compiler',[sys.executable,'-c','from pathlib import Path;import sys;Path('+repr(str(missing_file))+').unlink();sys.exit(9)'],5)\n                             ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 213, in step\n    if require_zero:need(code==0,'native child failed: '+name+' returncode='+str(code))\n                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 18, in need\n    if not ok:raise ValueError(msg)\n              ^^^^^^^^^^^^^^^^^^^^^\nValueError: native child failed: compiler returncode=9\n",
+          "type": "ValueError"
+        },
+        "finished_epoch": 1793807922.2950091,
+        "identity_errors": [
+          {
+            "error": "FileNotFoundError: [Errno 2] No such file or directory: '/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt'",
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt"
+          }
+        ],
+        "inputs_after": [],
+        "inputs_before": [
+          {
+            "bytes": 6,
+            "ctime_ns": 1793807922226809929,
+            "device": 66309,
+            "inode": 24384595,
+            "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt",
+            "mtime_ns": 1793807922226809929,
+            "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt",
+            "sha256": "6db7d803e74f1ffa7d8f5adc0bf95b3e15bf4c8373fffadf546227cc6c6742cb"
+          }
+        ],
+        "inputs_equal_before_after": false,
+        "pid": 255689,
+        "qualification": "NOT_QUALIFIED",
+        "runtime_trees": [],
+        "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+        "started_epoch": 1793807922.227674,
+        "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+        "steps": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-c",
+              "from pathlib import Path;import sys;Path('/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt').unlink();sys.exit(9)"
+            ],
+            "finished_epoch": 1793807922.293059,
+            "log": {
+              "bytes": 0,
+              "ctime_ns": 1793807922228137787,
+              "device": 66309,
+              "inode": 24384600,
+              "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-missing-input-with-primary-failure/compiler.log",
+              "mtime_ns": 1793807922228137787,
+              "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-missing-input-with-primary-failure/compiler.log",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "name": "compiler",
+            "pid": 255958,
+            "process_group": 255958,
+            "returncode": 9,
+            "started_epoch": 1793807922.2280564,
+            "status": "EXITED",
+            "timeout_seconds": 5
+          }
+        ]
+      }
+    },
+    {
+      "name": "interrupted",
+      "raw_state_sha256": "1ee9d559eff239fcb23ec5eb35459585b5b09169814e92f14aa23cb0dbf4e9cf",
+      "returncode": -2,
+      "state": {
+        "error": {
+          "message": "",
+          "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 11, in <module>\n    with m.EvidenceRun(out)as run:run.step('interrupt-child',[sys.executable,'-c','import time;time.sleep(30)'],60)\n                                  ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 203, in step\n    code=p.wait(timeout=timeout);row.update(returncode=code,status='EXITED')\n  File \"/usr/lib/python3.14/subprocess.py\", line 1279, in wait\n    return self._wait(timeout=timeout)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/subprocess.py\", line 2078, in _wait\n    time.sleep(delay)\n    ~~~~~~~~~~^^^^^^^\nKeyboardInterrupt\n",
+          "type": "KeyboardInterrupt"
+        },
+        "finished_epoch": 1793807922.654072,
+        "identity_errors": [],
+        "inputs_after": [],
+        "inputs_before": [],
+        "inputs_equal_before_after": true,
+        "pid": 255959,
+        "qualification": "NOT_QUALIFIED",
+        "runtime_trees": [],
+        "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+        "started_epoch": 1793807922.383774,
+        "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+        "steps": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-c",
+              "import time;time.sleep(30)"
+            ],
+            "error": "KeyboardInterrupt: ",
+            "finished_epoch": 1793807922.6519728,
+            "log": {
+              "bytes": 511,
+              "ctime_ns": 1793807922650802209,
+              "device": 66309,
+              "inode": 24384602,
+              "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-interrupted/interrupt-child.log",
+              "mtime_ns": 1793807922650802209,
+              "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-interrupted/interrupt-child.log",
+              "sha256": "30a9e96b959c4aa6992c25bf58449e64bcc54728fb4611779d6c0f2d51751d34"
+            },
+            "name": "interrupt-child",
+            "pid": 255960,
+            "process_group": 255960,
+            "started_epoch": 1793807922.3840835,
+            "status": "EXCEPTION",
+            "termination_reason": "KeyboardInterrupt",
+            "termination_returncode": -15,
+            "termination_signals": [
+              "SIGTERM"
+            ],
+            "timeout_seconds": 60
+          }
+        ]
+      }
+    }
+  ],
+  "classification_negative": [
+    {
+      "name": "zero-return",
+      "rejection": "required private gate unexpectedly returned zero"
+    },
+    {
+      "name": "duplicate-public",
+      "rejection": "unique complete public diagnostic and exact pending-private failure missing"
+    },
+    {
+      "name": "wrong-count",
+      "rejection": "unique complete public diagnostic and exact pending-private failure missing"
+    },
+    {
+      "name": "missing-pending",
+      "rejection": "unique complete public diagnostic and exact pending-private failure missing"
+    },
+    {
+      "name": "invented-pending-substring",
+      "rejection": "unique complete public diagnostic and exact pending-private failure missing"
+    },
+    {
+      "name": "missing-preload",
+      "rejection": "exact unique actual public boundary/preload marker missing"
+    },
+    {
+      "name": "wrong-boundary",
+      "rejection": "exact unique actual public boundary/preload marker missing"
+    },
+    {
+      "name": "unexpected-SOC-PASS",
+      "rejection": "unexpected full-pass/rejection in public diagnostic"
+    },
+    {
+      "name": "earlier-rejection",
+      "rejection": "unexpected full-pass/rejection in public diagnostic"
+    },
+    {
+      "name": "missing-full-geometry",
+      "rejection": "each mapped macro needs its own actual full256-row native geometry proof"
+    },
+    {
+      "name": "wrong-row255-proof",
+      "rejection": "each mapped macro needs its own actual full256-row native geometry proof"
+    },
+    {
+      "name": "wrong-source-count",
+      "rejection": "frozen full X/W/bias source-read count differs"
+    }
+  ],
+  "classification_positive": {
+    "functional_qualification": "NOT_QUALIFIED",
+    "public_diagnostic_marker_count": 1,
+    "required_gate_failure_count": 1,
+    "source_reads": 23232,
+    "status": "PUBLIC_TASK00_DIAGNOSTIC_COMPLETE_REQUIRED_PRIVATE_GATE_FAILED"
+  },
+  "status": "LOCAL_RUNNER_AND_CLASSIFIER_MECHANISMS_ONLY_NOT_VCS"
+}

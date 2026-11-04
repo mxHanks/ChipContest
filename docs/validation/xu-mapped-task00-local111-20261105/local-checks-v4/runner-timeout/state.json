@@ -1,0 +1,51 @@
+{
+  "error": {
+    "message": "Command '['/usr/bin/python3', '-c', 'import subprocess,signal,time,pathlib;signal.signal(signal.SIGTERM,signal.SIG_IGN);p=subprocess.Popen([\"/usr/bin/python3\",\"-c\",\"import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(30)\"]);pathlib.Path(\\'/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/timeout-descendant.pid\\').write_text(str(p.pid));time.sleep(30)']' timed out after 0.5 seconds",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 119, in case\n    with m.EvidenceRun(out)as run:body(run);run.state['status']='LOCAL_MECHANISM_EXECUTED_NOT_NATIVE_VCS'\n                                  ~~~~^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 129, in <lambda>\n    timed=case('timeout',lambda r:r.step('hung-compiler',[sys.executable,'-c',code],0.5),'TimeoutExpired');pid=int(child_pid.read_text());assert terminal_or_missing(pid);assert terminal_or_missing(timed['steps'][0]['pid'])\n                                  ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 203, in step\n    code=p.wait(timeout=timeout);row.update(returncode=code,status='EXITED')\n  File \"/usr/lib/python3.14/subprocess.py\", line 1279, in wait\n    return self._wait(timeout=timeout)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/subprocess.py\", line 2076, in _wait\n    raise TimeoutExpired(self.args, timeout)\nsubprocess.TimeoutExpired: Command '['/usr/bin/python3', '-c', 'import subprocess,signal,time,pathlib;signal.signal(signal.SIGTERM,signal.SIG_IGN);p=subprocess.Popen([\"/usr/bin/python3\",\"-c\",\"import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(30)\"]);pathlib.Path(\\'/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/timeout-descendant.pid\\').write_text(str(p.pid));time.sleep(30)']' timed out after 0.5 seconds\n",
+    "type": "TimeoutExpired"
+  },
+  "finished_epoch": 1793807922.155425,
+  "identity_errors": [],
+  "inputs_after": [],
+  "inputs_before": [],
+  "inputs_equal_before_after": true,
+  "pid": 255689,
+  "qualification": "NOT_QUALIFIED",
+  "runtime_trees": [],
+  "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+  "started_epoch": 1793807916.6470304,
+  "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+  "steps": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-c",
+        "import subprocess,signal,time,pathlib;signal.signal(signal.SIGTERM,signal.SIG_IGN);p=subprocess.Popen([\"/usr/bin/python3\",\"-c\",\"import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(30)\"]);pathlib.Path('/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/timeout-descendant.pid').write_text(str(p.pid));time.sleep(30)"
+      ],
+      "error": "TimeoutExpired: Command '['/usr/bin/python3', '-c', 'import subprocess,signal,time,pathlib;signal.signal(signal.SIGTERM,signal.SIG_IGN);p=subprocess.Popen([\"/usr/bin/python3\",\"-c\",\"import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(30)\"]);pathlib.Path(\\'/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/timeout-descendant.pid\\').write_text(str(p.pid));time.sleep(30)']' timed out after 0.5 seconds",
+      "finished_epoch": 1793807922.1534982,
+      "log": {
+        "bytes": 969,
+        "ctime_ns": 1793807922151811295,
+        "device": 66309,
+        "inode": 24384590,
+        "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-timeout/hung-compiler.log",
+        "mtime_ns": 1793807922151811295,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-timeout/hung-compiler.log",
+        "sha256": "22a86b9e77705c4608736813428e22987b2f2ce0f78eae96eaeaab5d76762b9c"
+      },
+      "name": "hung-compiler",
+      "pid": 255812,
+      "process_group": 255812,
+      "started_epoch": 1793807916.6471832,
+      "status": "EXCEPTION",
+      "termination_reason": "TimeoutExpired",
+      "termination_returncode": -9,
+      "termination_signals": [
+        "SIGTERM",
+        "SIGKILL"
+      ],
+      "timeout_seconds": 0.5
+    }
+  ]
+}

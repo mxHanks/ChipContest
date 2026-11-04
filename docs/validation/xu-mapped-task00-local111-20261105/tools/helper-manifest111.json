@@ -1,0 +1,440 @@
+{
+  "files": [
+    {
+      "bytes": 27607,
+      "name": "xu_build_mapped_task00111.py",
+      "sha256": "2a740fb35d8f6db7da3295031f4e7e66f1505d30c9ccf030a5cb1862cb8caa6d"
+    },
+    {
+      "bytes": 11879,
+      "name": "xu_mapped_task00_vpi111.c",
+      "sha256": "2403e25ee5ab453d017b6686da89df7553b79bcd89d70ca35be96281d5d8e7c7"
+    },
+    {
+      "bytes": 9671,
+      "name": "xu_public_observer111.svh",
+      "sha256": "f8dbc36126bc2773c23141bfa85b7cee67403421fcf2a7385343ff3af8b0a4f3"
+    },
+    {
+      "bytes": 4173,
+      "name": "launch_mapped_task00111.py",
+      "sha256": "5df7ff15139d60ac74c87bb272aee58fee0ea6627f67090813b7541158a5214c"
+    },
+    {
+      "bytes": 15288,
+      "name": "local_checks111.py",
+      "sha256": "1220820813e9200ff4cafa46a0099d560c8f23d6310d78a5752e34de7eb185d4"
+    },
+    {
+      "bytes": 3208,
+      "name": "test_public_observer111.sv",
+      "sha256": "54c69005733dcaf65f5a5555251d4f915136cd1b9a86f1ae208bcbc4305fb849"
+    }
+  ],
+  "local_review": {
+    "checks": [
+      {
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-I/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111",
+          "-s",
+          "tb_xu_soc_ppa",
+          "-o",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/public.vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/test_public_observer111.sv"
+        ],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "public-compile",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/public.vvp",
+          "+MODE=0"
+        ],
+        "log_sha256": "10c19f0f010e5c593a7243c06e3d14cd9d09bd5bce9a9707563d01f9fe70851b",
+        "name": "public-mode-0",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/public.vvp",
+          "+MODE=1"
+        ],
+        "log_sha256": "d7565ae36c8470540f76e3c60849838ef8aa826ae9f92cf5b75f0b9e2623dfe6",
+        "name": "public-mode-1",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/public.vvp",
+          "+MODE=2"
+        ],
+        "log_sha256": "0dfe804eb143fd57025d8e6c79490dd7a3ff51efcc79e0741c20d406e04bcee7",
+        "name": "public-mode-2",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/public.vvp",
+          "+MODE=3"
+        ],
+        "log_sha256": "900a48b6754e993360625b89f29a088b7e7c66f83d5dd47bd8f42096af1687fc",
+        "name": "public-mode-3",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/public.vvp",
+          "+MODE=4"
+        ],
+        "log_sha256": "24a7e2eb8526af1559a4c8c10584c85a9c2740c542bb0f00cdd956c7e43ac75c",
+        "name": "public-mode-4",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/public.vvp",
+          "+MODE=5"
+        ],
+        "log_sha256": "a94ba9fa40fe16e851284592b8e1f011faa27a7f11d33bd360c36ea8065268d2",
+        "name": "public-mode-5",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-s",
+          "tb_xu_soc_ppa",
+          "-o",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared-handshake.sv"
+        ],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "shared-compile",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=0"
+        ],
+        "log_sha256": "1192b94e895da74854f1e2aab2226463355464f0d648c4c3a23ceb68520aabc6",
+        "name": "shared-mode-0",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=1"
+        ],
+        "log_sha256": "fab06fdecacc9b393d547f6e4ec8efb20f010c4811a1632b26ec27824f7ceb89",
+        "name": "shared-mode-1",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=2"
+        ],
+        "log_sha256": "fab06fdecacc9b393d547f6e4ec8efb20f010c4811a1632b26ec27824f7ceb89",
+        "name": "shared-mode-2",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=3"
+        ],
+        "log_sha256": "fab06fdecacc9b393d547f6e4ec8efb20f010c4811a1632b26ec27824f7ceb89",
+        "name": "shared-mode-3",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=4"
+        ],
+        "log_sha256": "fab06fdecacc9b393d547f6e4ec8efb20f010c4811a1632b26ec27824f7ceb89",
+        "name": "shared-mode-4",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=5"
+        ],
+        "log_sha256": "fab06fdecacc9b393d547f6e4ec8efb20f010c4811a1632b26ec27824f7ceb89",
+        "name": "shared-mode-5",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=6"
+        ],
+        "log_sha256": "fab06fdecacc9b393d547f6e4ec8efb20f010c4811a1632b26ec27824f7ceb89",
+        "name": "shared-mode-6",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=7"
+        ],
+        "log_sha256": "fab06fdecacc9b393d547f6e4ec8efb20f010c4811a1632b26ec27824f7ceb89",
+        "name": "shared-mode-7",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=8"
+        ],
+        "log_sha256": "fab06fdecacc9b393d547f6e4ec8efb20f010c4811a1632b26ec27824f7ceb89",
+        "name": "shared-mode-8",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=9"
+        ],
+        "log_sha256": "26e30a9c486d23e15c1085a033acbd292b311f787bf3e99522e0207d15196eec",
+        "name": "shared-mode-9",
+        "returncode": 1
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=10"
+        ],
+        "log_sha256": "c1a7250e0153d865980f485fa5c09ccd0646a06a600f4cc849111677eec23eff",
+        "name": "shared-mode-10",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "vvp",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/shared.vvp",
+          "+MODE=11"
+        ],
+        "log_sha256": "950a0c8dc11dc9660f27f2b77ee7ec004ba625823c0a94815eec682033aba0a1",
+        "name": "shared-mode-11",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-isystem",
+          "/usr/include/iverilog",
+          "-I/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/prepared-local-v1",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/clock-callback.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/clock-callback"
+        ],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "clock-compile",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/clock-callback",
+          "0"
+        ],
+        "log_sha256": "11b4bd04f1fed3c9d6c90408e119ad924645d814cedfeb953f1653d8010f0e50",
+        "name": "clock-mode-0",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/clock-callback",
+          "1"
+        ],
+        "log_sha256": "5c7134b8d295f783d40d5d7205582121e2b31092ace2e8df115600f9c40f0488",
+        "name": "clock-mode-1",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/clock-callback",
+          "2"
+        ],
+        "log_sha256": "7340448cb600081da365d18e6e42781b03d305f86beddb9117364af58700481e",
+        "name": "clock-mode-2",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/clock-callback",
+          "3"
+        ],
+        "log_sha256": "ac59338bc2387b4cea1832afc4b205f5ac5dec725b3e6a627f4c1a2991cfb4b8",
+        "name": "clock-mode-3",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/clock-callback",
+          "4"
+        ],
+        "log_sha256": "fd16820514330ee459bbb5e7121bfdd1635c5663be307f9b749e77ff389e7cbd",
+        "name": "clock-mode-4",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/clock-callback",
+          "5"
+        ],
+        "log_sha256": "51d6e67318babd8d78972108c9e01486a8631cb5cdf63248c39fe989d4c24d67",
+        "name": "clock-mode-5",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-isystem",
+          "/usr/include/iverilog",
+          "-I/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/prepared-local-v1",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry"
+        ],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "geometry-compile",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "0"
+        ],
+        "log_sha256": "989fd47e806568f18c035cd712d74744d1351fde7d66689e755c730b90b44bb6",
+        "name": "geometry-mode-0",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "1"
+        ],
+        "log_sha256": "c52a7b81dff2a6fec04713fc728def92fd88efdabe109d78fb252bbfcab641c7",
+        "name": "geometry-mode-1",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "2"
+        ],
+        "log_sha256": "a3b4fc1c39a0b7007b9733adeac1dc746d44e5d64a299f4cd0316570437a50cd",
+        "name": "geometry-mode-2",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "3"
+        ],
+        "log_sha256": "535ae0d51ba4a49b34fa4d6e883217b0e1f689d915b9482e4a76b1d5f84a689c",
+        "name": "geometry-mode-3",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "4"
+        ],
+        "log_sha256": "413fe95e46519102c3b4c1f8b9cb7a6d9d44759e4f48ac75842579b5f7ddc45a",
+        "name": "geometry-mode-4",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "5"
+        ],
+        "log_sha256": "5570b3b63f353412a68e22af2198ab48e224b994f2784f0b1953298d55c19b42",
+        "name": "geometry-mode-5",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "6"
+        ],
+        "log_sha256": "a2d9ea1f475d31a7df6f5a7215c19a96c666f9551883fc75f721b21cc7c6c2a8",
+        "name": "geometry-mode-6",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "7"
+        ],
+        "log_sha256": "0ed118569a10a3d176e0e113f74a48600c4e9ed9ca61df880bd260a7484d12b3",
+        "name": "geometry-mode-7",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "8"
+        ],
+        "log_sha256": "59fc2fa464bbe08b578e53c75d9368f5924513ad28698f2eaf33a15c4f053c39",
+        "name": "geometry-mode-8",
+        "returncode": 0
+      },
+      {
+        "command": [
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/geometry",
+          "9"
+        ],
+        "log_sha256": "45d4628d040e72da4799a7292e871cb3cfe5a487079d7778536a6f2a1f8dca97",
+        "name": "geometry-mode-9",
+        "returncode": 0
+      }
+    ],
+    "classifier_negative_cases": 12,
+    "qualification": "NOT_QUALIFIED",
+    "runner_cases": 7,
+    "status": "LOCAL_PUBLIC_CALLBACK_RUNNER_MECHANISM_CHECKS_NOT_MAPPED_VCS_OR_QUALIFICATION"
+  },
+  "prepared_local_state_sha256": "91e6f0ea568d48d15635c50e7daa6e36fbefaa8dedbf3404f2a0950b79fec0a4",
+  "qualification": "NOT_QUALIFIED",
+  "scope": "MAPPED_TASK00_PUBLIC_DIAGNOSTIC_ONLY_REQUIRED_PRIVATE_GATE_FATAL_PRESERVED"
+}

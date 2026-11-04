@@ -1,0 +1,61 @@
+{
+  "error": {
+    "message": "native child failed: compiler returncode=9",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 119, in case\n    with m.EvidenceRun(out)as run:body(run);run.state['status']='LOCAL_MECHANISM_EXECUTED_NOT_NATIVE_VCS'\n                                  ~~~~^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local_checks111.py\", line 136, in delete_then_fail\n    run.freeze(missing_file);run.step('compiler',[sys.executable,'-c','from pathlib import Path;import sys;Path('+repr(str(missing_file))+').unlink();sys.exit(9)'],5)\n                             ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 213, in step\n    if require_zero:need(code==0,'native child failed: '+name+' returncode='+str(code))\n                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/xu_build_mapped_task00111.py\", line 18, in need\n    if not ok:raise ValueError(msg)\n              ^^^^^^^^^^^^^^^^^^^^^\nValueError: native child failed: compiler returncode=9\n",
+    "type": "ValueError"
+  },
+  "finished_epoch": 1793807922.2950091,
+  "identity_errors": [
+    {
+      "error": "FileNotFoundError: [Errno 2] No such file or directory: '/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt'",
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt"
+    }
+  ],
+  "inputs_after": [],
+  "inputs_before": [
+    {
+      "bytes": 6,
+      "ctime_ns": 1793807922226809929,
+      "device": 66309,
+      "inode": 24384595,
+      "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt",
+      "mtime_ns": 1793807922226809929,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt",
+      "sha256": "6db7d803e74f1ffa7d8f5adc0bf95b3e15bf4c8373fffadf546227cc6c6742cb"
+    }
+  ],
+  "inputs_equal_before_after": false,
+  "pid": 255689,
+  "qualification": "NOT_QUALIFIED",
+  "runtime_trees": [],
+  "scope": "PUBLIC_TASK00_DIAGNOSTIC_WITH_60_REQUIRED_PRIVATE_PATHS_PENDING",
+  "started_epoch": 1793807922.227674,
+  "status": "FAIL_PUBLIC_DIAGNOSTIC_NOT_QUALIFIED",
+  "steps": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-c",
+        "from pathlib import Path;import sys;Path('/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/missing-input.txt').unlink();sys.exit(9)"
+      ],
+      "finished_epoch": 1793807922.293059,
+      "log": {
+        "bytes": 0,
+        "ctime_ns": 1793807922228137787,
+        "device": 66309,
+        "inode": 24384600,
+        "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-missing-input-with-primary-failure/compiler.log",
+        "mtime_ns": 1793807922228137787,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/local-checks-v4/runner-missing-input-with-primary-failure/compiler.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "name": "compiler",
+      "pid": 255958,
+      "process_group": 255958,
+      "returncode": 9,
+      "started_epoch": 1793807922.2280564,
+      "status": "EXITED",
+      "timeout_seconds": 5
+    }
+  ]
+}
