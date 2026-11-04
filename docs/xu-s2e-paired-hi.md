@@ -39,6 +39,10 @@ The host actual-C macro test exercises all65,536 HI16 codes in each lane (524,28
 
 `xu_s2e_server_accept.py` is the strict server entry point. It requires full frozen main/child SHAs and clean tracked files, checks the original GCC10.2/VCS2020.03-SP2-6 versions and selected executable identities, freezes runtime source/tool files before and after, requires the mandatory VCS direct marker and all five legacy VCS tests, and checks both complete real12 runs have identical RTL/simulator/tool/vector identities. It records the measured cycle winner without promoting it to PPA/energy retention. It uses Python3.6 standard-library APIs and Git commands with `cwd`, with no `git -C` or network/credential access.
 
+The runtime freeze includes the upstream `tb`, original `rv32ui-p-add` ELF/load image, numerical tools/models, and documents actually read by host checks. The upstream committed `env/pm/link.ld` symlink is accepted with its literal target, link mode and resolved controlled-root input recorded; escape/loop inputs fail. Untracked inputs in `rtl`/`tb`, including ignored HDL, fail before execution and on postflight inventory. Interruptions and individual postflight/raw-log read failures persist terminal `FAIL` instead of leaving an apparently running campaign.
+
+Before VCS starts, the same selected compiler builds **all 192 original configurations** (8 old schedules ×3 optimization levels ×8 compiler experiments) from both pinned S2c firmware/contract and current firmware/contract. Compiler definitions and each exact RV32 load image must match. The receipt states explicitly that this is image equality rather than execution of all192 configurations; the five legacy SoC tests and two complete real12 runs remain mandatory execution checks.
+
 ```bash
 python3 tools/scripts/xu_s2e_server_accept.py \
   --expected-main "$XU_MAIN_SHA" --expected-e203 a0767db69628ef30e53de2d1e93dd0360c0ccf76 \
