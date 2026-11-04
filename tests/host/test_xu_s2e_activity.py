@@ -1,0 +1,156 @@
+"""S2e formal activity guards and actual RTL screening, never server activity/power evidence."""
+import ast
+import copy
+import importlib.util
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+import unittest
+
+ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/'tools/ppa'))
+import xu_s2e_activity_context as context
+import xu_s2e_task_activity as collector
+import xu_s2e_sram_activity_alias as aliases
+import xu_s2e_activity_server as server
+SOURCE=Path(os.environ['XU_S2E_SOURCE_ROOT']).resolve() if os.environ.get('XU_S2E_SOURCE_ROOT') else None
+EVIDENCE=Path(os.environ['XU_S2E_ACTIVITY_TEST_EVIDENCE']) if os.environ.get('XU_S2E_ACTIVITY_TEST_EVIDENCE') else None
+spec=importlib.util.spec_from_file_location('xu_old_activity_test_primitives',ROOT/'tests/host/test_xu_candidate_task_activity.py')
+primitives=importlib.util.module_from_spec(spec);spec.loader.exec_module(primitives)
+# Private helper module only: the original producer modules remain untouched.
+primitives.context=context;primitives.collector=collector;primitives.aliases=aliases;primitives.EVIDENCE=EVIDENCE
+
+def save(name,text):
+    if EVIDENCE:
+        EVIDENCE.mkdir(parents=True,exist_ok=True);(EVIDENCE/name).write_text(text)
+
+def run(argv,cwd,name,timeout=300):
+    result=subprocess.run(argv,cwd=str(cwd),stdout=subprocess.PIPE,stderr=subprocess.STDOUT,
+                          universal_newlines=True,timeout=timeout)
+    save(name,json.dumps(list(map(str,argv)))+'\n'+result.stdout)
+    return result
+
+def declarations(ctx):
+    window=collector.common_collector().CLEAR_WINDOW_DECLARATIONS.replace('      if (xu_payload_phase) xu_observe_upload();\n','')
+    window=ctx.base.once(window,'      // Once per post-reset edge,','      xu_observe_candidate();\n      // Once per post-reset edge,')
+    return (ROOT/'tools/ppa/xu_s2e_activity_observer.svh').read_text()+collector.clear_observer(ctx)+window
+
+
+class XuS2eSyntaxAndPolicyTests(unittest.TestCase):
+    def test_python36_and_common_tools_remain_frozen(self):
+        for name in ['xu_s2e_activity_context.py','xu_s2e_task_activity.py','xu_s2e_sram_activity_alias.py','xu_s2e_activity_server.py']:
+            ast.parse((ROOT/'tools/ppa'/name).read_text(),feature_version=(3,6))
+        for name,digest in context.FROZEN_TOOLS.items():self.assertEqual(context.sha(ROOT/name),digest,name)
+        self.assertEqual(context.MAIN_COMMIT,'5bf123bfead8f2a37f97f3234d4e40ce8201aae9')
+        self.assertEqual(context.PROFILE,'s2e-paired-hi')
+
+    def test_missing_or_prepared_task00_is_not_permission_for_full12(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-task00-refusal-') as temporary:
+            root=Path(temporary)
+            with self.assertRaises(FileNotFoundError):server.checked_task00(root,None,None)
+            (root/'result.json').write_text(json.dumps(dict(status='PARTIAL_PREPARED_NOT_SIMULATED',requested_task_ids=[0],tasks=[{}])))
+            with self.assertRaisesRegex(ValueError,'actual completed isolated S2e task00'):
+                server.checked_task00(root,None,None)
+
+    @unittest.skipUnless(shutil.which('iverilog') and shutil.which('vvp'),'Icarus required')
+    def test_absolute_lf_phase_preserved(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-lf-') as temporary:
+            root=Path(temporary);source=root/'lf.sv';binary=root/'lf.vvp'
+            source.write_text('`timescale 1ns/1fs\nmodule lf; reg lfclk=0;\n'+collector.nominal_lf_clock()+
+                '\ninitial begin #152587891; if(xu_lf_static_checks!=10000) $fatal(1,"LF count"); '+
+                '$display("XU_S2E_LF_PHASE_PASS edges=10000 max_phase_error_fs=1"); $finish; end endmodule\n')
+            built=run(['iverilog','-g2012','-s','lf','-o',str(binary),str(source)],root,'lf-build.log')
+            self.assertEqual(built.returncode,0,built.stdout)
+            actual=run(['vvp',str(binary)],root,'lf-simulation.log')
+            self.assertEqual(actual.returncode,0,actual.stdout)
+            self.assertIn('edges=10000 max_phase_error_fs=1',actual.stdout)
+
+
+@unittest.skipUnless(SOURCE,'explicit frozen XU_S2E_SOURCE_ROOT required')
+class XuS2eActualSourceTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):cls.ctx=context.Context(SOURCE)
+
+    def test_real_context_full_tb_and_future_mapping_refusal(self):
+        self.ctx.recheck()
+        text=collector.generate_tb(self.ctx)
+        for marker in ['task observe_result_reads;','xu_result_words!==16\'hffff','xu_result_response_pending',
+                       'xu_clear_w_commits!=16384','xu_clear_x_commits!=64','xu_clear_bias_commits!=256',
+                       'xu_result_legacy_reads!=25344','xu_result_packed_reads!=12672',
+                       'hf_nominal_period_ns=6.666666666666667 precision_fs=1',
+                       'xu_lf_target_ns=xu_lf_half_index*15258.7890625;',
+                       '$toggle_report("task.saif",1.0e-15,"tb_xu_soc_ppa.dut")',
+                       'actual_commits=1 fifo_reset_empty=1',"`ACCEL.cmd_addr[11:0]!=12'h0e0"]:
+            self.assertIn(marker,text)
+        save('generated-s2e-full-tb.sv',text)
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-mapped-refusal-') as temporary:
+            root=Path(temporary)
+            for state in [dict(status='RUNNING_NOT_QUALIFIED'),dict(status='EXECUTED_NOT_QUALIFIED',source_before=dict(name='s2c-autogroup'))]:
+                (root/'state.json').write_text(json.dumps(state))
+                with self.assertRaises(ValueError):context.checked_mapped_context(SOURCE,root)
+
+    def test_all_336_times_67_aliases_preserve_unknowns_and_reject_tamper(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-alias-') as temporary:
+            root=Path(temporary);mapping=aliases.generate(SOURCE,root/'aliases')
+            path=root/'aliases/xu_s2e_sram_activity_alias.mapping.json'
+            _,pairs=aliases.validate_mapping(path)
+            self.assertEqual((mapping['macro_count'],mapping['alias_bit_count'],len(pairs)),(336,22512,22512))
+            raw=root/'raw.saif';primitives.raw_saif(raw,pairs)
+            original=raw.read_bytes();receipt=aliases.normalize(raw,path,root/'normalized.saif')
+            self.assertEqual(raw.read_bytes(),original)
+            self.assertEqual(receipt['alias_unknown_bit_ticks'],22512*5)
+            missing=root/'missing.saif';primitives.raw_saif(missing,pairs,missing=next(iter(pairs)))
+            with self.assertRaises(ValueError):aliases.normalize(missing,path,root/'bad-normalized.saif')
+            self.assertFalse((root/'bad-normalized.saif').exists())
+            forged=copy.deepcopy(mapping);forged['profile']='s2c-autogroup'
+            fp=root/'forged.json';fp.write_text(json.dumps(forged))
+            with self.assertRaisesRegex(ValueError,'profile differs'):aliases.validate_mapping(fp)
+            save('alias-normalization-receipt.json',json.dumps(receipt,indent=2)+'\n')
+
+    @unittest.skipUnless(shutil.which('iverilog') and shutil.which('vvp'),'actual Icarus required')
+    def test_real_wrapper_all99_rows_and_destructive_faults(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-actual-observer-') as temporary:
+            root=Path(temporary);source=root/'probe.sv'
+            source.write_text((ROOT/'tests/ppa/tb_xu_s2e_task_observer.sv').read_text().replace('@DECLARATIONS@',declarations(self.ctx)))
+            primitives.golden_file(root/'golden.hex');binary=root/'probe.vvp';perips=self.ctx.base.RTL/'perips'
+            command=['iverilog','-g2012','-DXU_TASK_ACTIVITY_HOST_CHECK','-s','tb_xu_s2e_task_observer','-o',str(binary),str(source)]+[str(perips/n) for n in primitives.PERIPS_SOURCES]
+            built=run(command,root,'observer-build.log')
+            self.assertEqual(built.returncode,0,built.stdout)
+            cases=[(0,None),(1,'candidate setup/data write before first source request'),
+                   (2,'fixture-mismatched actual W commit'),(3,'nonzero actual X clear commit'),
+                   (4,'first source request changed before acceptance'),(5,'first source request changed before acceptance'),
+                   (6,'POP before all owned words read'),(7,'unexpected pretask MMIO read'),
+                   (8,'W cursor setup'),(9,'result response absent/changed before retirement'),
+                   (10,'incomplete/duplicate/incorrect owned FIFO result')]
+            for mode,expected in cases:
+                actual=run(['vvp',str(binary),'+MODE='+str(mode),'+GOLDEN='+str(root/'golden.hex')],root,'observer-mode-%d.log'%mode)
+                if expected is None:
+                    self.assertEqual(actual.returncode,0,actual.stdout)
+                    self.assertIn('XU_S2E_OBSERVER_RTL_PASS',actual.stdout)
+                    self.assertIn('actual_result_reads=38016 paired_hi=12672',actual.stdout)
+                else:
+                    self.assertNotEqual(actual.returncode,0,actual.stdout);self.assertIn(expected,actual.stdout)
+            save('generated-actual-observer-probe.sv',source.read_text())
+
+    @unittest.skipUnless(shutil.which('iverilog') and shutil.which('vvp'),'actual Icarus required')
+    def test_actual_platform_reset_chain_observation_is_preserved(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-reset-') as temporary:
+            root=Path(temporary);source=root/'reset.sv';binary=root/'reset.vvp'
+            source.write_text((ROOT/'tests/ppa/tb_xu_s2c_reset_guard.sv').read_text().replace('@DECLARATIONS@',declarations(self.ctx)))
+            perips=self.ctx.base.RTL/'perips';reset=['sirv_ResetCatchAndSync_2.v','sirv_AsyncResetRegVec_129.v','sirv_AsyncResetReg.v']
+            command=['iverilog','-g2012','-DXU_TASK_ACTIVITY_HOST_CHECK','-s','tb_xu_s2c_reset_guard','-o',str(binary),str(source)]+[str(perips/n) for n in primitives.PERIPS_SOURCES+reset]
+            built=run(command,root,'reset-build.log');self.assertEqual(built.returncode,0,built.stdout)
+            for mode,expected in [(0,None),(1,'request before actual reset ready'),(3,'no actual accelerator clock sampled asserted reset'),
+                                  (4,'reset reasserted'),(6,'FIFO logical ownership was not reset'),(7,'unknown commit/FIFO ownership state')]:
+                actual=run(['vvp',str(binary),'+MODE='+str(mode)],root,'reset-mode-%d.log'%mode)
+                if expected is None:
+                    self.assertEqual(actual.returncode,0,actual.stdout)
+                    self.assertIn('XU_RESET_GUARD_PASS actual_20stage_chain=1',actual.stdout)
+                else:self.assertNotEqual(actual.returncode,0,actual.stdout);self.assertIn(expected,actual.stdout)
+
+
+if __name__=='__main__':unittest.main()
