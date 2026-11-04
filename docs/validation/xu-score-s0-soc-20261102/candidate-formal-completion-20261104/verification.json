@@ -1,0 +1,265 @@
+{
+  "context_files": 9,
+  "expanded_bytes": 13478228,
+  "qualification": "NOT_QUALIFIED",
+  "runs": {
+    "pe32": {
+      "auto_setup_assumptions": [
+        "hdlin_ignore_parallel_case false",
+        "hdlin_ignore_full_case false",
+        "hdlin_error_on_mismatch_message false",
+        "hdlin_ignore_embedded_configuration true",
+        "verification_set_undriven_signals synthesis",
+        "verification_verify_directly_undriven_output false"
+      ],
+      "black_box_reference_implementation_warning_counts": {
+        "i": 352,
+        "r": 321
+      },
+      "campaign": "candidate-repaired-formality-20261103-27",
+      "executed_tcl": {
+        "bytes": 3337,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/candidate-repaired-formality-20261103-27/pe32/verify.tcl",
+        "sha256": "4846e364a063c67896b80f168adb18e8c3b6a52388e46c7babbf5a6aa7174ed8"
+      },
+      "formal_result": "CONDITIONAL_EQUIVALENCE_PASS",
+      "frozen_before_after_identical": 165,
+      "guidance_accepted_rejected_unsupported_unprocessed": [
+        11042,
+        0,
+        0,
+        0
+      ],
+      "libraries": [
+        {
+          "bytes": 48432887,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+          "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+        },
+        {
+          "bytes": 52224,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+          "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+        }
+      ],
+      "mapped": {
+        "bytes": 17460924,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pe32-hold-gating-repair-20261103-21/mapped.v",
+        "sha256": "8aa1d86f72e4752e35a117ffa5359cd4cb76f1fc11130f3f178693ed584b8bbb"
+      },
+      "matching_stage_unmatched_unread_reference_implementation": [
+        144,
+        0
+      ],
+      "ordered_svf_inputs": [
+        {
+          "bytes": 733440,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe32-ppa-campaign-20261103-01/ppa/default.svf",
+          "sha256": "a9c8048e5dbbc7c455ebbeef6fc9fa635f238b9bdda575399b5799d51e16696a"
+        },
+        {
+          "bytes": 9984,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pe32-hold-gating-repair-20261103-21/repair.svf",
+          "sha256": "fa6ffadae99d085e0a73e9d461365349dedebc0f72709a73c2b44e20ec539dd9"
+        }
+      ],
+      "passing_BBPin_Loop_BBNet_Cut_Port_DFF_LAT_TOTAL": [
+        17952,
+        0,
+        0,
+        0,
+        144,
+        29623,
+        39,
+        47758
+      ],
+      "retained_prior_tcl": [
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pe32-formality-campaign-20261103-17/pe32/verify.tcl"
+      ],
+      "returncode": 0,
+      "rtl_sources": 158,
+      "source_e203_commit": "fc3977d0a6d5f85fbfd871fd9439c01c9acab5f5",
+      "source_main_commit": "94ce6f0f54fffdd590ff9a3ebad0197ec0fd9114",
+      "undriven_reference_implementation_warning_counts": {
+        "i": 5166,
+        "r": 24
+      },
+      "unmatched_reference_implementation": [
+        33,
+        0
+      ],
+      "unread_DFF": 511
+    },
+    "pe64": {
+      "auto_setup_assumptions": [
+        "hdlin_ignore_parallel_case false",
+        "hdlin_ignore_full_case false",
+        "hdlin_error_on_mismatch_message false",
+        "hdlin_ignore_embedded_configuration true",
+        "verification_set_undriven_signals synthesis",
+        "verification_verify_directly_undriven_output false"
+      ],
+      "black_box_reference_implementation_warning_counts": {
+        "i": 384,
+        "r": 321
+      },
+      "campaign": "pe64-formality-campaign-20261103-37",
+      "executed_tcl": {
+        "bytes": 3204,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pe64-formality-campaign-20261103-37/pe64/verify.tcl",
+        "sha256": "b56f99692686e52efb769b74ba431e3bb8418703d327a2db020e2b9896d816ea"
+      },
+      "formal_result": "CONDITIONAL_EQUIVALENCE_PASS",
+      "frozen_before_after_identical": 169,
+      "guidance_accepted_rejected_unsupported_unprocessed": [
+        11431,
+        0,
+        0,
+        0
+      ],
+      "libraries": [
+        {
+          "bytes": 48432887,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+          "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+        },
+        {
+          "bytes": 52224,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+          "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+        }
+      ],
+      "mapped": {
+        "bytes": 21613289,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-ppa-campaign-20261103-02/ppa/mapped.v",
+        "sha256": "3e503963574a49d1111facf23b04877ccffed1eb317912871cbd7796593009ce"
+      },
+      "matching_stage_unmatched_unread_reference_implementation": [
+        144,
+        0
+      ],
+      "ordered_svf_inputs": [
+        {
+          "bytes": 1276672,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s3-pe64-ppa-campaign-20261103-02/ppa/default.svf",
+          "sha256": "f988245e52335080e909b4d9138f9df2fbeb7dc9566c9393e5b762176ec6cd66"
+        }
+      ],
+      "passing_BBPin_Loop_BBNet_Cut_Port_DFF_LAT_TOTAL": [
+        19584,
+        0,
+        0,
+        0,
+        144,
+        35770,
+        39,
+        55537
+      ],
+      "retained_prior_tcl": [
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pe32-formality-campaign-20261103-17/pe32/verify.tcl"
+      ],
+      "returncode": 0,
+      "rtl_sources": 163,
+      "source_e203_commit": "7aae96776e116d5e95d6ebb49d29a5fccce04ab9",
+      "source_main_commit": "3443fad8945577626d226b1cd53eadec89331a20",
+      "undriven_reference_implementation_warning_counts": {
+        "i": 5166,
+        "r": 24
+      },
+      "unmatched_reference_implementation": [
+        65,
+        0
+      ],
+      "unread_DFF": 511
+    },
+    "s2d": {
+      "auto_setup_assumptions": [
+        "hdlin_ignore_parallel_case false",
+        "hdlin_ignore_full_case false",
+        "hdlin_error_on_mismatch_message false",
+        "hdlin_ignore_embedded_configuration true",
+        "verification_set_undriven_signals synthesis",
+        "verification_verify_directly_undriven_output false"
+      ],
+      "black_box_reference_implementation_warning_counts": {
+        "i": 336,
+        "r": 321
+      },
+      "campaign": "candidate-repaired-formality-20261103-27",
+      "executed_tcl": {
+        "bytes": 3319,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/candidate-repaired-formality-20261103-27/s2d/verify.tcl",
+        "sha256": "94ba173bf31ff6c8d977175e0529ee86d1d78176c55ae4a3908d54e08671862d"
+      },
+      "formal_result": "CONDITIONAL_EQUIVALENCE_PASS",
+      "frozen_before_after_identical": 162,
+      "guidance_accepted_rejected_unsupported_unprocessed": [
+        11772,
+        0,
+        0,
+        0
+      ],
+      "libraries": [
+        {
+          "bytes": 48432887,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+          "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+        },
+        {
+          "bytes": 52224,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+          "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+        }
+      ],
+      "mapped": {
+        "bytes": 14574887,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-hold-gating-repair-20261103-19/mapped.v",
+        "sha256": "7f1c1efaa27d9eb06a6e8a1979d43df3b7a0eaadb992c1096c4bf36f19477bab"
+      },
+      "matching_stage_unmatched_unread_reference_implementation": [
+        144,
+        0
+      ],
+      "ordered_svf_inputs": [
+        {
+          "bytes": 327680,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-ppa-campaign-20261103-02/s2d/ppa/default.svf",
+          "sha256": "4886ea6c429f2630c09779dc3c872f1a800240f5a50e0343730ff2e694ef43d8"
+        },
+        {
+          "bytes": 9984,
+          "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-hold-gating-repair-20261103-19/repair.svf",
+          "sha256": "a5c7377ce47405c1f748dfab3817b59e0da253114028ba7ed77dfb624029a23a"
+        }
+      ],
+      "passing_BBPin_Loop_BBNet_Cut_Port_DFF_LAT_TOTAL": [
+        17136,
+        0,
+        0,
+        0,
+        144,
+        26121,
+        39,
+        43440
+      ],
+      "retained_prior_tcl": [
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2d-formality-campaign-20261103-16/s2d/verify.tcl"
+      ],
+      "returncode": 0,
+      "rtl_sources": 155,
+      "source_e203_commit": "dd692c190dadafd9baa6dffe8514a3f684e7fbf5",
+      "source_main_commit": "3af4db98b893edd2103771fa132d69350b82ba96",
+      "undriven_reference_implementation_warning_counts": {
+        "i": 5166,
+        "r": 24
+      },
+      "unmatched_reference_implementation": [
+        17,
+        0
+      ],
+      "unread_DFF": 511
+    }
+  },
+  "schema": "xu-candidate-formal-review-v1",
+  "selected_actual_raw_files": 22
+}
