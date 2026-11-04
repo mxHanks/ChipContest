@@ -52,6 +52,20 @@
 ## 接续顺序
 
 1. 已取回全部上述终态原件。继续追查HF→LF复位恢复路径为何未形成，实际只读86已确认外部HF reset到全部5端点均缺recovery，而LF watchdog到3个AON端点有路径；PTE-052边沿展开警告仍待证伪。逐批核查实际95余下17项无负载输出；保留原库、SDC及未测范围，不靠豁免取得通过。
-2. 已在独立S2e工作树实现两个结果高16位合并读回，保持原48bit数学值、64bit符号扩展Y内存、旧全部ABI及同RTL旧固件对照；无Chisel改动。[同一服务器GCC10.2/VCS完整验收](validation/xu-score-s2e-server-20261104/README.md)已实际完成：同新RTL调度对照11842200→10420140，减少12.0084106%；271项runtime身份不变、192旧配置image一致。[实际107原件](validation/xu-score-server-core107-20261104/README.md)已确认S2e自己的加速器面积约0.2950004mm²、own-SVF原生FM 42,338点成功；原driver因成功marker尾随换行误判，原FAIL状态保留，后继109独立重新哈希/更正receipt待执行。159项证明输入before/after相同；SRAM黑盒、511 unread和17 reference unmatched不隐藏。完整150MHz和全SoC能量仍未通过，未借用S2c结果。
+2. 已在独立S2e工作树实现两个结果高16位合并读回，保持原48bit数学值、64bit符号扩展Y内存、旧全部ABI及同RTL旧固件对照；无Chisel改动。[同一服务器GCC10.2/VCS完整验收](validation/xu-score-s2e-server-20261104/README.md)已实际完成：同新RTL调度对照11842200→10420140，减少12.0084106%；271项runtime身份不变、192旧配置image一致。[实际107原件](validation/xu-score-server-core107-20261104/README.md)已确认S2e自己的加速器面积约0.2950004mm²、own-SVF原生FM 42,338点成功；原driver因成功marker尾随换行误判，原FAIL状态保留，[后继109独立审计已实际完成](validation/xu-score-server-progress114-20261105/README.md)，原FAIL收据保留，181项原件身份和4138项验收文件重新哈希，未重跑DC/FM。159项证明输入before/after相同；SRAM黑盒、511 unread和17 reference unmatched不隐藏。完整150MHz和全SoC能量仍未通过，未借用S2c结果。
 3. 复用joint36整数主体及实际流式审查，补数字hold证明、首次未知边沿和标准单元下游能量包络；同时调查mapped门级全SoC活动采集以减少映射/传播不确定性。[实际同库VCS结构探测97](validation/xu-score-mapped-structure-server-20261104/README.md)已核对336宏/22512pin/288预加载句柄，仍仅1fs元数据探测；[实际101](validation/xu-score-server-export103-20261104/README.md)澄清148项共省略952端口全为output，无解析出的遗漏input/inout；两个UDP中一组token不同，调用/行为仍需独立108审查，不能当task00或能量通过。新整数事务API已真实VCS一宏验证，但不等于新全SoC采集通过。
 4. 依据同配置(T,E,A)和资格证据形成非支配集合，再决定保留与评分敏感性。尚无最终比赛最高分结论。
+
+
+## 2026-11-05关机前续接记录
+
+本机按用户要求在2026-11-05 01:00 CST关机，服务器分离进程继续；此处不将未完成实验标为通过。
+
+- [112实际全报告重放](validation/xu-score-native-audit118-20261105/README.md)已完成12任务、24阶段、540288 pin记录、19326860762B原生报告和131728568B compact；本地另独立核对8对原始样本和全汇总关系。全部22512 pins的native x_probability为0，然而每阶段5280个Q在输入SAIF有TX>0，其中4256个整窗TX、native SP=0.5/TR=0；物理未知Q及其下游能量尚未解决，不晋升正式能量。
+- [S2e实际task00采集](validation/xu-score-s2e-task00-119-20261105/README.md)已完成。nominal150/LF32768、任务前33697次清零、first source REQUEST至final Y RETIRE elapsed868343/inclusive868344、5788953333333fs；25344输出/50688Y写、3168 POP、25344旧LO加12672 packed-HI实际读。原SAIF SHA5390a5698d41d4734ae218e93c410076e0dd55f9c2e68dfc5cee764e2f7969c7，normalized SHA7d91fc3e15f3abe42c6f3e7572e46f41ad34f3afb6cd4db91be41827f32294d2；22512bit映射和114927非alias保真独立重算通过。只证明活动采集，不证明正式功耗。
+- S2e完整12任务活动已启动，服务器目录`s2e-formal-activity12-20261105-120`，采集进程PID18987。00:50时`/proc/18987/cmdline`真实存在；121快照仅RUNNING，不把12个预建task目录当12任务完成。不能因观察超时重启。
+- [111/115原始失败审计](validation/xu-score-mapped-audit115-20261105/README.md)确认公共门级任务在首REQUEST前480ns触发unknown_shared_handshake，VCS Fatal返回0，而原driver先抛退出码分类错误。111失败完整保留；115重哈希636输入前后相同。不能改成公共任务完成。
+- 117原生同检查模式被动回调实际采集完成，121已取回其完整log/453 events/状态；目标notifier变化后Q变X，但部分握手瞬态X更早，尚无完整连接因果证明。无force、DUT FF/Q写入或timing检查压制。
+- [116本地工具](validation/xu-score-timing116-local-20261105/README.md)实际部署并启动PID25920。在同一baseline95派生映射组合有界清理和40个native反相器，再重跑自己的DC/PT/FM；121快照DC/PT已执行、FM仍RUNNING，不能宣布最终通过，也不能借作S2e时序证明。
+
+本轮改动为采集/审计工具与证据；没有新Chisel修改。最终比赛资格、同配置全SoC能量和最终(T,E,A)选型仍未完成。
