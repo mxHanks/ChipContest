@@ -1,0 +1,117 @@
+{
+  "cases": [
+    {
+      "Q_pin_count": 16,
+      "case": "baseline",
+      "fresh_process_and_case_directory_required": true,
+      "original_annotation_count": 84,
+      "original_conditional_query_rows_per_phase": 303,
+      "query": "baseline/query.tcl",
+      "query_sha256": "417640f56cb1a2ce53ab6d8d972b4777627be40e89fa0e277bb649fc89e5b040",
+      "requested_Q_static_probability": null,
+      "requested_Q_toggle_rate": null
+    },
+    {
+      "Q_pin_count": 16,
+      "case": "q-sp0-tr0",
+      "fresh_process_and_case_directory_required": true,
+      "original_annotation_count": 84,
+      "original_conditional_query_rows_per_phase": 303,
+      "query": "q-sp0-tr0/query.tcl",
+      "query_sha256": "c7ee658923671bcb9989ec158ddddf791c74c9b661a2a2c5e8fd91a5b91b6b82",
+      "requested_Q_static_probability": 0,
+      "requested_Q_toggle_rate": 0
+    },
+    {
+      "Q_pin_count": 16,
+      "case": "q-sp1-tr0",
+      "fresh_process_and_case_directory_required": true,
+      "original_annotation_count": 84,
+      "original_conditional_query_rows_per_phase": 303,
+      "query": "q-sp1-tr0/query.tcl",
+      "query_sha256": "9529d185c0a1ad793178249ba3d316efbd9bd9824a1b91ecc90437055dde77f9",
+      "requested_Q_static_probability": 1,
+      "requested_Q_toggle_rate": 0
+    }
+  ],
+  "expected_case_outputs": [
+    "version.rpt",
+    "units.rpt",
+    "actual-library-cell.rpt",
+    "q-absolute-request.tsv",
+    "conditional-queries.tsv",
+    "all-macro-pin-activity-before.tsv",
+    "all-macro-pin-activity-after.tsv",
+    "coverage-before.rpt",
+    "coverage-after.rpt",
+    "update-power.rpt",
+    "fixture-power-diagnostic-only.rpt",
+    "macro-power-attributes.rpt",
+    "input-sha-before.tsv",
+    "input-sha-after.tsv"
+  ],
+  "expected_frozen_runtime_inputs": [
+    {
+      "bytes": 48432887,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+      "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+    },
+    {
+      "bytes": 52224,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+      "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+    },
+    {
+      "bytes": 327,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pt-joint-state-condition-20261103-48/single-macro.v",
+      "sha256": "c071aac630721664423ee26571e3b22b284b87259d63aa89ac7110af149cb958"
+    },
+    {
+      "bytes": 102009,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pt-joint-state-condition-20261103-48/query.tcl",
+      "sha256": "cd386f439e515adb2e6e24b40e483534cc61496621c93b489b4086fae0fbf169"
+    },
+    {
+      "bytes": 218037,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/pt-joint-state-condition-20261103-48/measured-joint-projection.json",
+      "sha256": "ed32512cb0b5acb91f7ad6af6766da240577da9a7e805789d16e44d01ebf104d"
+    }
+  ],
+  "generator_sha256": "31412c7239dc6862d23cdbe9a35805797945ce4e939195f074dccbbc573057f7",
+  "limitations": [
+    "This helper generates only. No PT or other EDA process is invoked.",
+    "Run each case in a separate fresh PT process and case directory; preserve the same DB/netlist/setup and original annotations.",
+    "Original annotation_policy fields remain source classifications; Q overrides do not make unresolved Q condition arcs measured.",
+    "SP0/SP1 with TR0 are hypothetical absolute annotations for observing side effects. They do not prove real Q zero activity or valid Q conditions.",
+    "Report group and exact macro internal/switching/leakage/total power, conditional results and all pin activity sources; compare them against the fresh baseline.",
+    "The fixture has one SRAM and deliberately retains the original default and missing-clock limitations. No whole-SoC or contest energy qualification follows.",
+    "Runtime input SHA checks must pass both before and after. Outer artifact manifests and tool invocation provenance remain the runner's responsibility."
+  ],
+  "optional_case_outputs": [
+    "macro-power-diagnostic-only.rpt",
+    "macro-report-unavailable.rpt"
+  ],
+  "original_fixture_diagnostic_power_w": 0.0006777,
+  "reused_setup_sha256": "6b9196bf15e6be5b39effac79de5e7e2dd3aedeb3e3707d464e5a177130a11e6",
+  "runtime_sha_scope": "Five fixture/source inputs plus each generated Tcl itself, before and after; not a complete toolchain freeze.",
+  "schema": "xu-pt-q-absolute-sweep-generation-v1",
+  "source_export_prefix": "pt-joint-state-condition-20261103-48/",
+  "source_files": [
+    {
+      "bytes": 102009,
+      "path": "pt-joint-state-condition-20261103-48/query.tcl",
+      "sha256": "cd386f439e515adb2e6e24b40e483534cc61496621c93b489b4086fae0fbf169"
+    },
+    {
+      "bytes": 12370,
+      "path": "pt-joint-state-condition-20261103-48/state.json",
+      "sha256": "d98a538a4354a961a54aeaa65fb4f55f42cb5d7c168f80d95eb14b752b5da146"
+    },
+    {
+      "bytes": 2013,
+      "path": "pt-joint-state-condition-20261103-48/fixture-power-diagnostic-only.rpt",
+      "sha256": "0acf6b3082e5cf03f45f4f1af43c7bd389f7cb41801ca72172ff898e462c2cda"
+    }
+  ],
+  "status": "GENERATED_NOT_RUN_NOT_ZERO_Q_OR_ENERGY_QUALIFIED"
+}

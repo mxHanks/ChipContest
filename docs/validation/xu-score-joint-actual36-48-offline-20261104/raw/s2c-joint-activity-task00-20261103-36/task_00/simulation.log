@@ -1,0 +1,35 @@
+["/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-task00-20261103-36/simulator/soc", "+TESTCASE=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-task00-20261103-36/firmware/accel_soc", "+VECTORS=/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-task00-20261103-36/task_00/vectors", "+TASKS=1", "+XU_GLOBAL_TASK=0", "+MAX_CYCLES=4000000", "+DUMPWAVE=0"]
+Chronologic VCS simulator copyright 1991-2020
+Contains Synopsys proprietary information.
+Compiler version Q-2020.03-SP2-6_Full64; Runtime version Q-2020.03-SP2-6_Full64;  Nov  3 22:22 2026
+XU_CACHE_RELOAD task=0 done_before_begin=1 scope=shared_fixture tick=1000000
+PPA_CLOCK mode=nominal150 hf_nominal_period_ns=6.666666666666667 precision_fs=1 reset_hf_edges=30
+PPA_PROGRESS cycles=1000000 layer=0 writes=0 completed=0
+XU_CANDIDATE_RESET_READY task=0 actual_reset_clock_edges=4594 startup_observer_edges=1201620 first_reset_tick=7980376666667 last_reset_tick=8010996666667 first_ready_cycle=1201650 first_ready_tick=8011003333333 actual_rst_n=1 checked_empty_fifo=1
+XU_TASK_CLEAR_BEGIN task=0 cycle=1201701 tick=8011343333333
+XU_TASK_CLEAR_LAST_WRITE task=0 cycle=1403894 tick=9359296666667 writes=33697
+XU_TASK_CLEAR_OBSERVED writes=33697 w=16384 bias=256 legacy_bias=8 x=64 drained=1 cache_enable=0 idle=1 source_request=1 task_setup_writes=0 actual_commits=1 fifo_reset_empty=1
+XU_JOINT_BEGIN task=0 tick=9359903333333 macros=336 callback_ordinal=1
+XU_SOURCE_REQUEST task=0 cycle=1403985 tick=9359903333333
+XU_ACTIVITY_BEGIN task=0 tick=9359903333333
+XU_CACHE_INITIAL task=0 fresh_process=1 cache_enable=0 busy=0 prior_uploads=0 prior_starts=0
+XU_SOURCE_ACCEPT task=0 cycle=1403985 tick=9359903333333
+PPA_WINDOW_BEGIN layer=0 cycle=1403985 time_ns=9359903.333333000541 tick_fs=9359903333333
+PPA_PROGRESS cycles=2000000 layer=0 writes=25614 completed=0
+PPA_WINDOW_END layer=0 cycle=2394641 time_ns=15964276.666666999459 tick_fs=15964276666667
+XU_JOINT_COMPLETE task=0 tick=15964276666667 duration_ticks=6604373333334 macros=336 simultaneous_records=24674210 NOT_QUALIFIED
+XU_ACTIVITY_END task=0 tick=15964276666667
+XU_TASK_WINDOW task=0 request_cycle=1403985 accept_cycle=1403985 end_cycle=2394641 initial_wait_cycles=0 legacy_inclusive_cycles=990657 formal_inclusive_cycles=990657 formal_elapsed_cycles=990656
+XU_CANDIDATE_UPLOAD_PASS task=0 w_commits=16384 bias=256 x_commits=6336 rows=99 starts=3168 dones=3168 pops_retired=3168 w_pack32=8192 x_pack32=3168 fifo_empty=1 checked_data=1
+TASK_PASS layer=0 outputs=25344 writes=50688 cycles=990657 firmware_cycles=990728
+AUTO_TASK layer=0 rows=99 pops_retired=3168 compute_writeback_overlap=153945 fifo_full_wait=487772
+PERF_TASK layer=0 cycles=990657 w_load=183502 x_load=71133 bias_load=7775 compute_wait=48114 writeback=666813 other=13320 busy=215424 mac_fire=202752 mmio_reads=54648 mmio_writes=15497 shared_reads=23232 shared_writes=50688 shared_stall=12469 mmio_stall=0 starts=3168 dones=3168
+XU_LF_CLOCK_STATIC_PASS nominal_hz=32768 checked_edges=1046 max_phase_error_fs=1
+XU_CLOCK_STATIC_PASS checked_hf_edges=2394654
+SOC_PASS tasks=1 outputs=25344 writes=50688
+$finish called from file "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-joint-activity-task00-20261103-36/simulator/tb_xu_s2c_joint_task_activity.sv", line 2098.
+$finish at simulation time       15964556666667
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 15964556666667 fs
+CPU Time:   1213.370 seconds;       Data structure size:   4.9Mb
+Tue Nov  3 22:42:35 2026
