@@ -14,6 +14,7 @@
 | S2a 顺序stream写 | 15361356 | 尚无独立面积结果 | [同一S2a接口的双调度验收](validation/xu-score-s2a-server-20261103/README.md) |
 | S2b packed W/X | 14532449 | 0.2869364304 | [S2b验收](validation/xu-score-s2b-server-20261103/README.md) |
 | S2c 自动分组+结果FIFO | 11842200 | 0.2948018380 | [S2c验收](validation/xu-score-s2c-server-20261103/README.md) |
+| S2e 高位合并读回 | 10420140 | 独立综合待测 | [同RTL旧调度11842200对照及完整服务器验收](validation/xu-score-s2e-server-20261104/README.md) |
 | S2d 双X缓冲 | 11859141 | 0.3036302710 | [S2d验收](validation/xu-score-s2d-server-20261103/README.md) |
 | S3 32PE / 1024宏 | 11376501 | 0.5186033811 | [32PE面积](validation/xu-score-s0-soc-20261102/pe32-area-server-20261103/README.md) |
 | S3 64PE / 1024宏 | 11301600 | 0.9184209509 | [64PE周期](validation/xu-score-s0-soc-20261102/s3-pe64-server-20261103/README.md)、[面积](validation/xu-score-s0-soc-20261102/s3-pe64-ppa-server-20261103/README.md) |
@@ -31,7 +32,7 @@
 |---|---|---|
 | S1 H2-only | `GenerateRTL.scala`、`linear/LinearCachedCore.scala` | 真正移除elaboration中的完整bias cache |
 | S1 SRAM bias | `GenerateRTL.scala`、新增`linear/BiasSramCache.scala`和`linear/LinearSramCachedCore.scala` | 同步SRAM bias存储及tile预取 |
-| S2a/S2b | 无新增Chisel改动 | stream/packed MMIO与固件调度变化在接口RTL中实施 |
+| S2a/S2b/S2e | 无新增Chisel改动 | stream/packed MMIO及paired-HI读回与固件调度变化在接口RTL中实施 |
 | S2c | `GenerateRTL.scala`、新增`linear/LinearAutoGroupCore.scala` | 外层group调度、两槽8×48结果FIFO，按POP响应退休释放 |
 | S2d | `GenerateRTL.scala`、新增`linear/LinearBufferedComputeCore.scala`及`linear/LinearDoubleBufferCore.scala` | 两套X行缓冲/描述符，保持单个8PE和W阵列 |
 | S3 32PE | `GenerateRTL.scala`、新增`linear/XuParallelCore.scala` | 单32PE/32bank、显式旧8lane mask和wide调度、两槽32×48结果FIFO |
@@ -44,13 +45,13 @@
 
 - 数值：固定整数格式与RTL逐位对照，以及可获得验证集的浮点误差评估已有独立证据。未公布的官方600样本不能冒充已测；静音12层不冒充完整encoder或全验证集。
 - 原网表数字逻辑综合一致性：baseline、S1、S2b/c/d和32PE已有各自完整Formality原件。[完整终态归档](validation/xu-score-s0-soc-20261102/candidate-formal-completion-20261104/README.md)确认S2d修复网表43440点、32PE修复网表47758点和64PE原网表55537点全部验证成功；SRAM内部黑盒、511 unread及17/33/65 reference unmatched保留。[新增实际证明](validation/xu-score-cleanup50-bank128-formal-server-20261104/README.md)确认紧凑32PE自己的三库/164RTL/own SVF证明52334点PASS、346输入before-after相同；清理50亦41462点PASS、176输入相同，508 unread。没有借用旧网结果证明新网。
-- 150MHz：有限CDC/forwarded-clock场景下，baseline修复49已将56项max-cap降至0；无负载清理分支50→63→73将min-cap1404→187→53→33，仍有5项reset removal及27124项untested。另一分支50→reset61实际插入40个库反相器，5项removal消失、最差min slack+0.00601495ns，但仍187项min-cap和2项PMU recovery unknown；[该61网表完整FM亦PASS41462点](validation/xu-score-server-export78-20261104/README.md)，217输入不变。两个分支不能拼接成同网表通过。完整时序资格仍未闭合，原全propagated未CTS负slack未改写。
+- 150MHz：有限CDC/forwarded-clock场景下，baseline修复49已将56项max-cap降至0；无负载清理分支50→63→73→79将min-cap1404→187→53→33→20，仍有5项reset removal及27124项untested。另一分支50→reset61实际插入40个库反相器，5项removal消失、最差min slack+0.00601495ns，但仍187项min-cap和2项PMU recovery unknown；[该61网表完整FM亦PASS41462点](validation/xu-score-server-export78-20261104/README.md)，217输入不变。两个分支不能拼接成同网表通过。完整时序资格仍未闭合，原全propagated未CTS负slack未改写。
 - 能量：正式窗口按任务前清空、first source REQUEST→final Y response RETIRE构造；baseline和[S2c均已完成完整12任务](validation/xu-score-s2c-full-soc-power-server-20261104/README.md)。S2c正式elapsed总11887872（990656/任务），对应原网表9c16的12次全SoC PT已实际完成：报告均值34.766666…mW，P×窗口合计2.7553445546669448mJ，仅诊断，不能代入评分。net活动file34.24%、propagated59.18%、default0.78%、implied5.80%；32.67%是至少一次toggle的覆盖，不能当file注释率。全部原生pin属性的24份约805MB报告和12mapped SAIF正文未返回，本地不冒充已完整重放。S2c joint36交易字符串损坏原件保留；12.3GB sidecar已有服务器完整流式SHA和672原始边界审查PASS，但稀疏子集仍不是完整波形或能量资格。
 - 原wrapper平均功耗和当前单macro诊断功率都不代入比赛全SoC单任务能耗评分。未知Q不直接赋0或0.5；满足指定宏真实hold前提的稳定未知Q可关闭其Q-edge能量，绝对状态对下游标准单元的影响另行分析。
 
 ## 接续顺序
 
-1. 已取回全部上述终态原件。继续追查2项PMU负recovery约束为何未形成路径，并逐批核查余下33项无负载输出；保留原库、SDC及未测范围，不靠豁免取得通过。
-2. 已在独立S2e工作树实现两个结果高16位合并读回，保持原48bit数学值、64bit符号扩展Y内存、旧全部ABI及同RTL旧固件对照；无Chisel改动。本地12层筛选PASS，服务器相同GCC/VCS完整验收尚待执行，不能把本地周期列入上表。
+1. 已取回全部上述终态原件。继续追查HF→LF复位恢复路径为何未形成，实际只读86已确认外部HF reset到全部5端点均缺recovery，而LF watchdog到3个AON端点有路径；PTE-052边沿展开警告仍待证伪。逐批核查余下20项无负载输出；保留原库、SDC及未测范围，不靠豁免取得通过。
+2. 已在独立S2e工作树实现两个结果高16位合并读回，保持原48bit数学值、64bit符号扩展Y内存、旧全部ABI及同RTL旧固件对照；无Chisel改动。[同一服务器GCC10.2/VCS完整验收](validation/xu-score-s2e-server-20261104/README.md)已实际完成：同新RTL调度对照11842200→10420140，减少12.0084106%；271项runtime身份不变、192旧配置image一致。新RTL面积、FM、150MHz和全SoC能量待独立测量，未借用S2c结果。
 3. 复用joint36整数主体及实际流式审查，补数字hold证明、首次未知边沿和标准单元下游能量包络；同时调查mapped门级全SoC活动采集以减少映射/传播不确定性。新整数事务API已真实VCS一宏验证，但不等于新全SoC采集通过。
 4. 依据同配置(T,E,A)和资格证据形成非支配集合，再决定保留与评分敏感性。尚无最终比赛最高分结论。
