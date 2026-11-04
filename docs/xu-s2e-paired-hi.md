@@ -36,3 +36,11 @@ python3 tools/scripts/server_accept.py --sim vcs --cross-prefix "$XU_RISCV_PREFI
 ```
 
 The host actual-C macro test exercises all65,536 HI16 codes in each lane (524,288 canonical64 results), using the actual macro text rather than a mirrored conversion implementation. The direct test uses real Chisel compute/SRAM/FIFO for two rows/all64 groups/512 lane results; its isolated forced-FIFO extreme-interface phase is explicitly labelled and does not claim impossible signed48 arithmetic extrema from the restricted dot-product/bias input domain. Local numerical checks and tools are development screening, not server VCS or official floating-point accuracy evidence.
+
+`xu_s2e_server_accept.py` is the strict server entry point. It requires full frozen main/child SHAs and clean tracked files, checks the original GCC10.2/VCS2020.03-SP2-6 versions and selected executable identities, freezes runtime source/tool files before and after, requires the mandatory VCS direct marker and all five legacy VCS tests, and checks both complete real12 runs have identical RTL/simulator/tool/vector identities. It records the measured cycle winner without promoting it to PPA/energy retention. It uses Python3.6 standard-library APIs and Git commands with `cwd`, with no `git -C` or network/credential access.
+
+```bash
+python3 tools/scripts/xu_s2e_server_accept.py \
+  --expected-main "$XU_MAIN_SHA" --expected-e203 a0767db69628ef30e53de2d1e93dd0360c0ccf76 \
+  --cross-prefix "$XU_RISCV_PREFIX" --out "$XU_FRESH_SERVER_OUTPUT"
+```
