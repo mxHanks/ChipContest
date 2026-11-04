@@ -48,7 +48,8 @@ def acceptance_steps(out, cross_prefix, sim='verilator', full=False, offline=Fal
     host_command=[sys.executable,'-m','unittest','discover','-s','tests/e203','-p','test_*.py']
     if sim=='vcs':
         # The additive cache/window interface test also uses the chosen backend.
-        host_command=['env','XU_WRAPPER_SIM=vcs',
+        host_command=['env','XU_WRAPPER_SIM=vcs','XU_PAIRED_HI_WRAPPER_SIM=vcs',
+                      'XU_PAIRED_HI_WRAPPER_LOG_DIR='+str(out/'host-paired-hi-vcs'),
                       'XU_WRAPPER_LOG_DIR='+str(out/'host-wrapper-vcs'),*host_command]
     steps=[('host',host_command,300),
            ('numeric',[sys.executable,'-m','unittest','discover','-s','tests/numeric','-v'],240)]
@@ -64,6 +65,13 @@ def acceptance_steps(out, cross_prefix, sim='verilator', full=False, offline=Fal
             '--out',str(out/'icarus1'),*firmware_args],10800))
         steps.append(('chisel',['scala-cli',*(['--power'] if offline else []),
             'test','.',*(['--offline'] if offline else []),'--server=false','--jvm','system'],7200))
+    if firmware_schedule == soc.contract.PAIRED_HI_SCHEDULE:
+        # One physical RTL/simulator; only the firmware readback schedule changes.
+        steps.append(('autogroup-control-real12', [sys.executable,
+            str(soc.ROOT/'tools/scripts/e203_soc.py'), '--mode','real','--tasks','12',
+            '--sim',sim,'--cross-prefix',cross_prefix,'--out',str(out/'autogroup-control-real12'),
+            '--firmware-schedule','bias-hw-autogroup-window','--firmware-opt='+firmware_opt,
+            '--firmware-experiment',firmware_experiment],10800))
     return steps
 
 

@@ -11,12 +11,31 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
 #ifndef XU_HARDWARE_AUTO_GROUP
 #define XU_HARDWARE_AUTO_GROUP 0
 #endif
+#ifndef XU_HARDWARE_PAIRED_HI
+#define XU_HARDWARE_PAIRED_HI 0
+#endif
 #if XU_HARDWARE_AUTO_GROUP
 enum { AUTO_CAPABILITY = 0x78 / 4, ROW_CTRL = 0xc0 / 4,
        ROW_STATUS = 0xc4 / 4, ROW_POP = 0xc8 / 4 };
 #define XU_RESULT_WINDOW (0x100 / 4)
 #else
 #define XU_RESULT_WINDOW RESULT_WINDOW
+#endif
+
+#if XU_HARDWARE_PAIRED_HI
+enum { PAIRED_HI_CAPABILITY = 0xe0 / 4, PAIRED_HI_WINDOW = 0x140 / 4 };
+/* Restore each HI16 sign independently into the original two-word Y ABI. */
+#define XU_READ_PAIRED_RESULT(pair) do { \
+    unsigned index = 2 * (row * COLS + group * 8 + 2 * (pair)); \
+    uint32_t lo0 = reg[XU_RESULT_WINDOW + 4 * (pair)]; \
+    uint32_t lo1 = reg[XU_RESULT_WINDOW + 4 * (pair) + 2]; \
+    uint32_t hi = reg[PAIRED_HI_WINDOW + (pair)]; \
+    y[index] = lo0; \
+    y[index + 1] = (uint32_t)(int32_t)(int16_t)hi; \
+    if ((pair) == 3) reg[ROW_POP] = 1; \
+    y[index + 2] = lo1; \
+    y[index + 3] = (uint32_t)((int32_t)hi >> 16); \
+} while (0)
 #endif
 
 #ifndef XU_HARDWARE_STREAM16
@@ -85,6 +104,9 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
 #if XU_HARDWARE_AUTO_GROUP
     uint32_t auto_cap = reg[AUTO_CAPABILITY];
     if ((auto_cap & 0xffff0000u) != 0x58410000u || !(auto_cap & 1u)) return -7;
+#endif
+#if XU_HARDWARE_PAIRED_HI
+    if (reg[PAIRED_HI_CAPABILITY] != 0x58480001u) return -9;
 #endif
 #if XU_HARDWARE_PACK32
     if (reg[STREAM_CAPABILITY] != 0x58530003u) return -5;
@@ -195,7 +217,16 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             while (!(reg[STATUS] & 2u))
                 if (++polls >= poll_limit) return -3;
 #endif
+#if XU_HARDWARE_PAIRED_HI
 #if XU_FIRMWARE_RESULT_UNROLL
+            XU_READ_PAIRED_RESULT(0);
+            XU_READ_PAIRED_RESULT(1);
+            XU_READ_PAIRED_RESULT(2);
+            XU_READ_PAIRED_RESULT(3);
+#else
+            for (unsigned pair = 0; pair < 4; ++pair) XU_READ_PAIRED_RESULT(pair);
+#endif
+#elif XU_FIRMWARE_RESULT_UNROLL
             XU_READ_RESULT(0);
             XU_READ_RESULT(1);
             XU_READ_RESULT(2);
@@ -219,7 +250,7 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
 #endif
             }
 #endif
-#if XU_HARDWARE_AUTO_GROUP
+#if XU_HARDWARE_AUTO_GROUP && !XU_HARDWARE_PAIRED_HI
             // Read every word while the head is owned. Retire POP before the
             // final two shared writes, so even the final row's POP remains in
             // the existing first-input/final-Y-response measurement window.

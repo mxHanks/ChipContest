@@ -44,6 +44,10 @@ module tb_accel_soc;
   integer perf_mmio_reads, perf_mmio_writes, perf_mmio_stall;
   integer perf_shared_reads, perf_shared_writes, perf_shared_stall;
   integer perf_auto_rows, perf_auto_pops, perf_auto_overlap, perf_auto_full;
+  integer perf_result_legacy, perf_result_packed, perf_result_logical;
+  reg [15:0] perf_result_seen, perf_result_pending_mask;
+  reg perf_result_pending, perf_result_pending_packed;
+  reg [31:0] perf_result_expected;
 
   task reset_performance;
     begin
@@ -55,6 +59,63 @@ module tb_accel_soc;
       perf_mmio_reads=0; perf_mmio_writes=0; perf_mmio_stall=0;
       perf_shared_reads=0; perf_shared_writes=0; perf_shared_stall=0;
       perf_auto_rows=0; perf_auto_pops=0; perf_auto_overlap=0; perf_auto_full=0;
+      perf_result_legacy=0; perf_result_packed=0; perf_result_logical=0;
+      perf_result_seen=0; perf_result_pending=0; perf_result_pending_mask=0;
+      perf_result_pending_packed=0; perf_result_expected=0;
+    end
+  endtask
+
+  // Observe each returned logical word independently of the firmware's schedule.
+  // Paired-HI covers two HI16 words, never two signs or two FIFO heads at once.
+  task observe_result_reads;
+    integer lane, index;
+    reg [15:0] mask;
+    begin
+      if (perf_result_pending) begin
+        if (!`ACCEL.rsp_valid || `ACCEL.rsp_err ||
+            `ACCEL.rsp_rdata!==perf_result_expected)
+          $fatal(1,"owned result response changed or differs from integer golden");
+        if (`ACCEL.rsp_ready) begin
+          perf_result_seen=perf_result_seen | perf_result_pending_mask;
+          if (perf_result_pending_packed) begin
+            perf_result_packed=perf_result_packed+1;
+            perf_result_logical=perf_result_logical+2;
+          end else begin
+            perf_result_legacy=perf_result_legacy+1;
+            perf_result_logical=perf_result_logical+1;
+          end
+          perf_result_pending=0;
+        end
+      end
+      if (`ACCEL.row_pop) begin
+        if (perf_result_seen!==16'hffff || perf_result_pending)
+          $fatal(1,"POP retired before all owned logical result words returned");
+        perf_result_seen=0;
+      end
+      if (`ACCEL.row_active && `ACCEL.cmd_valid && `ACCEL.cmd_ready &&
+          `ACCEL.cmd_read &&
+          ((`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h13c) ||
+           (`ACCEL.cmd_addr[11:0]>=12'h140 && `ACCEL.cmd_addr[11:0]<=12'h14c))) begin
+        if (!`ACCEL.row_valid || `ACCEL.row_pop || perf_result_pending ||
+            `ACCEL.cmd_addr[1:0]!=0)
+          $fatal(1,"ambiguous or unaligned owned result read");
+        lane=`ACCEL.cmd_addr[5:3];
+        perf_result_pending_packed=`ACCEL.cmd_addr[11:0]>=12'h140;
+        if (perf_result_pending_packed) lane=2*`ACCEL.cmd_addr[3:2];
+        index=(perf_auto_rows-1)*256+`ACCEL.row_group*8+lane;
+        if (perf_result_pending_packed) begin
+          mask=16'h000a << (2*lane);
+          perf_result_expected={golden[index+1][47:32],golden[index][47:32]};
+        end else begin
+          mask=16'h0001 << `ACCEL.cmd_addr[5:2];
+          perf_result_expected=`ACCEL.cmd_addr[2] ?
+            {16'b0,golden[index][47:32]} : golden[index][31:0];
+        end
+        if ((perf_result_seen & mask)!=0)
+          $fatal(1,"duplicate logical result word from owned FIFO head");
+        perf_result_pending_mask=mask;
+        perf_result_pending=1;
+      end
     end
   endtask
 
@@ -80,6 +141,7 @@ module tb_accel_soc;
       end
       if (in_window) begin
         perf_active=1;
+        observe_result_reads();
         phase_now=perf_phase;
         phase_next=perf_phase;
         if ((mmio_retire && perf_mmio_end_phase) ||
@@ -108,7 +170,7 @@ module tb_accel_soc;
         // The read-only window has no RESULT_INDEX write to start writeback.
         if (mmio_accept && `ACCEL.cmd_read &&
             ((`ACCEL.cmd_addr[11:0]>=12'h080 && `ACCEL.cmd_addr[11:0]<=12'h0bc) ||
-             (`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h13c))) begin
+             (`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h14c))) begin
           phase_now=PERF_WRITEBACK; phase_next=PERF_WRITEBACK;
         end
         if (start_accept || row_start_accept) begin
@@ -208,6 +270,10 @@ module tb_accel_soc;
           $fatal(1,"autonomous row/POP retirement or overlap contract mismatch");
         $display("AUTO_TASK layer=%0d rows=%0d pops_retired=%0d compute_writeback_overlap=%0d fifo_full_wait=%0d",
           layer,perf_auto_rows,perf_auto_pops,perf_auto_overlap,perf_auto_full);
+        if (perf_result_logical!=50688 || perf_result_seen || perf_result_pending)
+          $fatal(1,"incomplete logical FIFO results at final Y response retirement");
+        $display("RESULT_TASK layer=%0d legacy_words=%0d packed_words=%0d logical_words=%0d",
+          layer,perf_result_legacy,perf_result_packed,perf_result_logical);
       end
       $display("PERF_TASK layer=%0d cycles=%0d w_load=%0d x_load=%0d bias_load=%0d compute_wait=%0d writeback=%0d other=%0d busy=%0d mac_fire=%0d mmio_reads=%0d mmio_writes=%0d shared_reads=%0d shared_writes=%0d shared_stall=%0d mmio_stall=%0d starts=%0d dones=%0d",
         layer,perf_cycles,perf_w_load,perf_x_load,perf_bias_load,

@@ -8,7 +8,10 @@ PES = 8
 MACS_PER_TASK = 99 * 64 * 256
 OUTPUTS_PER_TASK = 99 * 256
 SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-window',
-             'bias-hw-stream16-window', 'bias-hw-pack32-window', 'bias-hw-autogroup-window')
+             'bias-hw-stream16-window', 'bias-hw-pack32-window', 'bias-hw-autogroup-window',
+             'bias-hw-autogroup-paired-hi-window')
+PAIRED_HI_SCHEDULE = 'bias-hw-autogroup-paired-hi-window'
+AUTOGROUP_SCHEDULES = ('bias-hw-autogroup-window', PAIRED_HI_SCHEDULE)
 OPTIMIZATIONS = ('-Os', '-O2', '-O3')
 EXPERIMENTS = ('none', 'bias-unroll', 'result-unroll', 'both-unroll', 'no-masks',
                'bias-unroll-no-masks', 'result-unroll-no-masks', 'both-unroll-no-masks')
@@ -57,10 +60,12 @@ def compiler_defines(config):
     # Keep every legacy command line unchanged; streaming modes are opt-in.
     if config['schedule'] == 'bias-hw-stream16-window':
         values['XU_HARDWARE_STREAM16'] = True
-    if config['schedule'] in ('bias-hw-pack32-window', 'bias-hw-autogroup-window'):
+    if config['schedule'] in ('bias-hw-pack32-window',) + AUTOGROUP_SCHEDULES:
         values['XU_HARDWARE_PACK32'] = True
-    if config['schedule'] == 'bias-hw-autogroup-window':
+    if config['schedule'] in AUTOGROUP_SCHEDULES:
         values['XU_HARDWARE_AUTO_GROUP'] = True
+    if config['schedule'] == PAIRED_HI_SCHEDULE:
+        values['XU_HARDWARE_PAIRED_HI'] = True
     return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
 
 
@@ -79,14 +84,34 @@ def task_contract(schedule='baseline'):
     if schedule == 'bias-hw-pack32-window':
         # Pack two signed 16-bit source values into each W/X data write.
         mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 3 * 99 * 32
-    if schedule == 'bias-hw-autogroup-window':
+    if schedule in AUTOGROUP_SCHEDULES:
         # One STARTROW and 32 response-retired POPs per row. No GROUP/W1C.
         mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 99 * (1 + 32)
-    return dict(w_shared_reads=w_reads, x_shared_reads=x_reads, bias_shared_reads=bias_reads,
+    result = dict(w_shared_reads=w_reads, x_shared_reads=x_reads, bias_shared_reads=bias_reads,
                 shared_reads=w_reads + x_reads + bias_reads, shared_writes=50688,
                 bias_mmio_writes=bias_writes, mmio_writes=mmio_writes,
                 starts=99 * 32, dones=99 * 32,
                 mac_fire=MACS_PER_TASK // PES, macs=MACS_PER_TASK, outputs=OUTPUTS_PER_TASK)
+    if schedule == PAIRED_HI_SCHEDULE:
+        result.update(result_mmio_reads=38016, paired_hi_mmio_reads=12672)
+    return result
+
+
+def validate_result_activity(records, layers, schedule):
+    """S2e records count real result responses, not total MMIO polling reads."""
+    required = schedule == PAIRED_HI_SCHEDULE
+    if not records and not required:
+        return
+    if schedule not in AUTOGROUP_SCHEDULES or len(records) != len(layers):
+        raise ValueError('missing or unexpected result activity records')
+    packed = 12672 if required else 0
+    legacy = 25344 if required else 50688
+    for record, layer in zip(records, layers):
+        if (set(record) != {'layer', 'legacy_words', 'packed_words', 'logical_words'} or
+                any(type(v) is not int or v < 0 for v in record.values()) or
+                record != dict(layer=layer['layer'], legacy_words=legacy,
+                               packed_words=packed, logical_words=50688)):
+            raise ValueError('result response work or canonical word coverage differs')
 
 
 def validate_performance(perf, cycles, schedule='baseline'):
