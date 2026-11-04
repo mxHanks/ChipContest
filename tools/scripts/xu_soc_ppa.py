@@ -33,6 +33,8 @@ SOURCE_PROFILES = {
         'rtl/e203/perips/accel_icb_slave.v']),
     's2c-autogroup': dict(commit='49a9436e01ea8ceeead94242e4a99c16e31a0865', changed_files=[
         'rtl/e203/perips/LinearAutoGroupCore.sv', 'rtl/e203/perips/accel_icb_slave.v']),
+    's2e-paired-hi': dict(commit='a0767db69628ef30e53de2d1e93dd0360c0ccf76', changed_files=[
+        'rtl/e203/perips/LinearAutoGroupCore.sv', 'rtl/e203/perips/accel_icb_slave.v']),
     's2d-doublebuf': dict(commit='dd692c190dadafd9baa6dffe8514a3f684e7fbf5', changed_files=[
         'rtl/e203/perips/LinearAutoGroupCore.sv', 'rtl/e203/perips/LinearBufferedComputeCore.sv',
         'rtl/e203/perips/LinearDoubleBufferCore.sv', 'rtl/e203/perips/accel_icb_slave.v']),
@@ -66,6 +68,7 @@ BIAS_MEMORY = RTL+'/perips/mem_32x40.sv'
 BIAS_ADAPTER_SHA256 = '019f86f6acc3bdf0e3d2678de1b90540deac1ec50850c010d0263e3d2231c2fd'
 BANK128_MEMORY = RTL+'/perips/mem_128x16.sv'
 BANK128_ADAPTER_SHA256 = '13e1077201f8eb751d34eee718b34d350cc5dfbc58cf0d853933b010c29faa79'
+S2E_MAIN_COMMIT = '5bf123bfead8f2a37f97f3234d4e40ce8201aae9'
 REQUIRED_BITS = {'itcm': 65536*8, 'dtcm': 65536*8,
                  'shared': 524288*8, 'accelerator_weights': 32768*8}
 REPLACEABLE = {RTL+'/general/sirv_sim_ram.v', RTL+'/perips/mem_1024x16.sv'}
@@ -266,6 +269,9 @@ def pe64_main_identity(root):
 def bank128_main_identity(root):
     return parallel_main_identity(root, 's3-pe32-bank128', BANK128_MAIN_COMMIT, 'BANK128')
 
+def s2e_main_identity(root):
+    return parallel_main_identity(root, 's2e-paired-hi', S2E_MAIN_COMMIT, 'S2E')
+
 def source_profile_identity(root, profile='baseline'):
     """Check approved commit, its complete delta, and actual child worktree bytes.
 
@@ -319,6 +325,8 @@ def source_profile_identity(root, profile='baseline'):
         identity['main_source_freeze'] = pe64_main_identity(root)
     elif profile == 's3-pe32-bank128':
         identity['main_source_freeze'] = bank128_main_identity(root)
+    elif profile == 's2e-paired-hi':
+        identity['main_source_freeze'] = s2e_main_identity(root)
     return identity
 
 
