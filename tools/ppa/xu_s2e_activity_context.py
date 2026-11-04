@@ -10,6 +10,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -157,13 +158,74 @@ def checked_mapped_context(root,ppa_root):
             'original nominal150MHz constraints differ')
     require(identity(ppa_root/'ppa/default.svf')['sha256']==state.get('own_svf',{}).get('sha256'),
             'actual own synthesis SVF identity differs')
+    # An equal pair of receipt dictionaries is not an on-disk freeze check.
+    # Rehash the actual original tool/library/RTL/SVF files, and re-read the
+    # own proof's terminal state and log. No S2c filename/hash is substituted.
+    frozen=checked_frozen_records(state['inputs_before'],'actual S2e89 tool/library inputs')
+    formal_path=ppa_root/'formality/state.json'
+    formal=json.loads(formal_path.read_text())
+    require(formal==state['formality'],'actual own Formality state differs from campaign state')
+    require(formal.get('frozen_before') and formal['frozen_before']==formal.get('frozen_after'),
+            'actual own Formality input freeze differs')
+    frozen+=checked_frozen_records(formal['frozen_before'],'actual own Formality inputs')
+    proof_paths={str(ppa_root/'ppa'/name) for name in ('mapped.v','default.svf','rtl.f')}
+    proof_paths|={str(Path(item['path'])) for item in impl['libraries']}
+    proof_paths|={str(p) for p in (ppa_root/'ppa/rtl').rglob('*') if p.is_file()}
+    proof_paths.add(str(ppa_root/'formality/verify.tcl'))
+    require(set(formal['frozen_before'])==proof_paths,'actual own Formality complete input set differs')
+    formal_log=ppa_root/'formality/fm.log'
+    require(formal.get('returncode')==0 and
+            checked_record(formal.get('log',{}),'actual own Formality log')==identity(formal_log),
+            'actual own Formality log identity/return code differs')
+    proof_text=formal_log.read_text(errors='replace')
+    require('Version R-2020.09-SP5' in proof_text and
+            re.findall(r'^XU_S2E_FULL_SOC_FORMALITY_PASS\s*$',proof_text,re.M)==['XU_S2E_FULL_SOC_FORMALITY_PASS'] and
+            not re.search(r'^\s*(?:Error:|Fatal:|XU_S2E_FULL_SOC_FORMALITY_(?:FAIL|SCRIPT_ERROR))',proof_text,re.M),
+            'actual own full-SoC Formality completion missing/failed')
+    execution_path=ppa_root/'ppa/execution.json'
+    execution=json.loads(execution_path.read_text())
+    require(execution.get('status') in ('EXECUTED_NOT_QUALIFIED','DC_EXECUTED_PT_INCOMPLETE_NOT_QUALIFIED') and
+            execution.get('netlist_sha256')==netlist['sha256'] and
+            execution.get('analysis_sdc_sha256')==constraints['sha256'] and
+            execution.get('sdc_sha256')==sha(ppa_root/'ppa/mapped.sdc') and
+            execution.get('dc')==state.get('dc') and execution.get('formality')==formal,
+            'actual own DC/execution/SVF proof context differs')
+    dc_log=ppa_root/'ppa/dc.log'
+    require(state.get('dc',{}).get('returncode')==0 and
+            state['dc'].get('log_sha256')==sha(dc_log),'actual own DC log identity/return code differs')
+    dc_text=dc_log.read_text(errors='replace')
+    require('Version T-2022.03-SP5-5' in dc_text and
+            re.findall(r'^XU_SOC_SYNTHESIS_COMPLETE_NOT_QUALIFIED[ \t]*$',dc_text,re.M)==['XU_SOC_SYNTHESIS_COMPLETE_NOT_QUALIFIED'] and
+            not re.search(r'^\s*(?:Error:|Fatal:|FATAL:|XU_FATAL:)',dc_text,re.M),
+            'actual own DC completion missing/failed')
     for name,record in prepared['source_files'].items():
         require(not Path(name).is_absolute() and '..' not in Path(name).parts,'unsafe prepared source path')
         require(sha(ppa_root/'ppa'/name)==record['sha256'],'prepared mapping RTL bytes differ: '+name)
-    identities=[identity(p) for p in (state_path,prepared_path,ppa_root/'ppa/execution.json',
-                                    ppa_root/'formality/state.json',ppa_root/'formality/fm.log',ppa_root/'ppa/default.svf')]
+    identities=[identity(p) for p in (state_path,prepared_path,execution_path,formal_path,formal_log,
+                                    ppa_root/'ppa/default.svf',ppa_root/'ppa/mapped.sdc',dc_log)]+frozen
+    identities=list({item['path']:item for item in identities}.values())
     return dict(schema='xu-s2e-actual-mapped-context-v1',source_profile=source,netlist=netlist,constraints=constraints,
                 inputs=identities,limitations='Identity and prior own-SVF full proof only; no timing or power qualification')
+
+
+def checked_record(record,label):
+    """Verify a native PPA record without silently dropping its byte count."""
+    require(isinstance(record,dict) and set(record)=={'path','bytes','sha256'},label+' record schema differs')
+    path=Path(record['path'])
+    require(path.is_absolute(),label+' must identify an absolute file')
+    actual=identity(path)
+    require(record['bytes']==path.stat().st_size and record['sha256']==actual['sha256'],
+            label+' actual bytes/hash differ: '+str(path))
+    return actual
+
+
+def checked_frozen_records(records,label):
+    require(isinstance(records,dict) and records,label+' missing')
+    result=[]
+    for path,record in sorted(records.items()):
+        require(isinstance(record,dict) and record.get('path')==path,label+' key/path differs')
+        result.append(checked_record(record,label))
+    return result
 
 
 class Context:
