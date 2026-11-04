@@ -1,0 +1,48 @@
+{
+  "status": "LOCAL_GUARD_SCREENING_PASS",
+  "scope": "Real frozen S2e main/child inventory, local prepare/verify using explicitly fake DB fixtures, runtime tamper refusal and host checks only; no DC/PT/FM invocation or EDA result",
+  "tests": {
+    "all_ppa_host": 66,
+    "s2e_targeted": 3,
+    "existing_profiles": 16
+  },
+  "source_main": "5bf123bfead8f2a37f97f3234d4e40ce8201aae9",
+  "source_child": "a0767db69628ef30e53de2d1e93dd0360c0ccf76",
+  "prior_failure": "Initial existing-profile suite lacked the new producer worktree baseline submodule; preserved original failure log. Initialized original fixed f49 child locally, then same suite passed16 tests. Candidate source was not changed.",
+  "source_records": {
+    "tools/scripts/xu_soc_ppa.py": {
+      "sha256": "cccbee4288193254f0ec0ca50c741bfe8836593a4cf67b26b4fdcd9b6f732c73",
+      "python36_syntax": "PASS"
+    },
+    "tools/ppa/xu_s2e_ppa_server.py": {
+      "sha256": "bf80eae3f91a19dc9e0408f498be804923fae9ca2999abb860cc25907b0f12ef",
+      "python36_syntax": "PASS"
+    },
+    "tests/host/test_xu_soc_s2e_ppa.py": {
+      "sha256": "6c010bb7298d1822734a53f73c4875c1d0126d8181f13d84fb31ff9e5142dfdf",
+      "python36_syntax": "PASS"
+    }
+  },
+  "raw_logs": {
+    "real-source-profile-smoke.log": {
+      "bytes": 844,
+      "sha256": "f2ec7aed97d16dcdfe5d97904a953abc5bd07cab3667feb81354adcfe6b3cda1"
+    },
+    "existing-profile-tests-v2.log": {
+      "bytes": 3157,
+      "sha256": "c6f275fcc90f08a74d4941bf0ae1af5351c9917d6a4ca36c85c86bfa66512e50"
+    },
+    "s2e-profile-tests.log": {
+      "bytes": 621,
+      "sha256": "7a3aa0aee8d94d4535a77d819beed5c63e90c6ff0399dd0607a8d44601ecb877"
+    },
+    "existing-profile-tests.log": {
+      "bytes": 4589,
+      "sha256": "dbc94ed18ec1f7bbad2c1be79fe463faf6d58067c4407921fa3f2c4b504f1f10"
+    },
+    "all-ppa-host-v2.log": {
+      "bytes": 12111,
+      "sha256": "04d7a01570df7196a4f2449d3b112a6cb77726ced9eab05a66f5796d747ff356"
+    }
+  }
+}
