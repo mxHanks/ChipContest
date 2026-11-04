@@ -1,0 +1,33 @@
+ 
+****************************************
+Report : clocks
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-5
+Date   : Tue Nov  3 23:05:19 2026
+****************************************
+
+Attributes:
+    d - dont_touch_network
+    f - fix_hold
+    p - propagated_clock
+    G - generated_clock
+    g - lib_generated_clock
+
+Clock          Period   Waveform            Attrs     Sources
+--------------------------------------------------------------------------------
+xu_hfextclk      6.67   {0 3.33333}         f         {hfextclk}
+xu_jtag_tck    100.00   {0 50}              f         {io_pads_jtag_TCK_i_ival}
+xu_lfextclk   30517.58  {0 15258.8}         f         {lfextclk}
+xu_plldiv_envelope
+                 6.67   {0 3.33333}         G f       {u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clkout}
+--------------------------------------------------------------------------------
+
+Generated     Master         Generated      Master         Waveform
+Clock         Source         Source         Clock          Modification
+--------------------------------------------------------------------------------
+xu_plldiv_envelope
+              u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clk
+                             {u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clkout}
+                                            xu_hfextclk    divide_by(1)
+--------------------------------------------------------------------------------
+1

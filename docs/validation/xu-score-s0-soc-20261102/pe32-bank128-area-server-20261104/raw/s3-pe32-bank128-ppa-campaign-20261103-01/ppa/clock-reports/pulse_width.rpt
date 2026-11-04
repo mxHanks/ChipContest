@@ -1,0 +1,75 @@
+****************************************
+Report : constraint
+	-verbose
+	-min_pulse_width
+Design : xu_soc_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Tue Nov  3 23:06:01 2026
+****************************************
+
+
+  Pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.rptr_vec_0_dfflrs/qout_r_reg[0]/CK
+  Related clock: xu_plldiv_envelope
+  Check: sequential_clock_pulse_width
+  Common point: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.rptr_vec_0_dfflrs/qout_r_reg[0]/CK
+
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock xu_plldiv_envelope (rise edge)                    0.00       0.00
+  clock network delay (propagated)                       31.97      31.97 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.rptr_vec_0_dfflrs/qout_r_reg[0]/CK
+                                                          0.00      31.97 r
+  open edge clock latency                                           31.97
+
+  clock xu_plldiv_envelope (fall edge)                    3.33       3.33
+  clock network delay (propagated)                       11.37      14.70 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_alu/u_e203_exu_nice/u_nice_itag_fifo/dp_gt0.rptr_vec_0_dfflrs/qout_r_reg[0]/CK
+                                                          0.00      14.70 f
+  clock reconvergence pessimism                          10.70      25.40
+  clock uncertainty                                      -0.10      25.30
+  close edge clock latency                                          25.30
+  ------------------------------------------------------------------------------
+  open edge clock latency                                           31.97
+  close edge clock latency                                          25.30
+  ------------------------------------------------------------------------------
+  actual pulse width                                                -6.66
+  ------------------------------------------------------------------------------
+  required pulse width (high)                                        0.14
+  actual pulse width                                                -6.66
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -6.80
+
+  Pin: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk1_clkgate/enb_reg/EN
+  Related clock: xu_hfextclk
+  Check: clock_tree_pulse_width
+  Common point: u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk1_clkgate/enb_reg/EN
+
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock xu_hfextclk (fall edge)                           3.33       3.33
+  clock network delay (propagated)                        0.00       3.33 f
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk1_clkgate/enb_reg/EN
+                                                          0.00       3.33 f
+  open edge clock latency                                            3.33
+
+  clock xu_hfextclk (rise edge)                           6.67       6.67
+  clock network delay (propagated)                        0.00       6.67 r
+  u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk1_clkgate/enb_reg/EN
+                                                          0.00       6.67 r
+  clock reconvergence pessimism                           0.00       6.67
+  clock uncertainty                                      -0.10       6.57
+  close edge clock latency                                           6.57
+  ------------------------------------------------------------------------------
+  open edge clock latency                                            3.33
+  close edge clock latency                                           6.57
+  ------------------------------------------------------------------------------
+  actual pulse width                                                 3.23
+  ------------------------------------------------------------------------------
+  required pulse width (low)                                         0.08
+  actual pulse width                                                 3.23
+  ------------------------------------------------------------------------------
+  slack (MET)                                                        3.16
+
+1

@@ -1,0 +1,111 @@
+{
+  "archived_source_blobs": 261,
+  "declared_logs_verified": 93,
+  "direct_paths": {
+    "bank-designated-macro": "XU_PE32_BANK128_PASS logical_words=512 depths=4 writes=520 reads=524 unknown_reads=4 selected_enable=1 latency=1",
+    "bank-generated": "XU_PE32_BANK128_PASS logical_words=512 depths=4 writes=520 reads=524 unknown_reads=4 selected_enable=1 latency=1",
+    "compat": "XU_PE32_COMPAT_WRAPPER_PASS rows=2 groups=64 lanes=512 overlap=958 launches=99 dones=99 accepted=11737 retired=11737",
+    "compat-designated-macro": "XU_PE32_COMPAT_WRAPPER_PASS rows=2 groups=64 lanes=512 overlap=958 launches=99 dones=99 accepted=11737 retired=11737",
+    "wide": "XU_PE32_WRAPPER_PASS rows=2 groups=16 lanes=512 overlap=190 launches=27 dones=27 accepted=11124 retired=11124",
+    "wide-designated-macro": "XU_PE32_WRAPPER_PASS rows=2 groups=16 lanes=512 overlap=190 launches=27 dones=27 accepted=11124 retired=11124"
+  },
+  "e203_commit": "52cfbea1f79f10e44f7d1696f54015797f886b96",
+  "full12_totals": {
+    "bank128_oldauto_cycles": 11842200,
+    "bank128_wide_cycles": 11376501,
+    "old32_wide_cycles": 11376501
+  },
+  "immutable_git_rechecked": true,
+  "integer_golden_outputs": 304128,
+  "limitations": [
+    "Actual Y bytes were compared in the frozen TB, not exported individually.",
+    "Whole-SoC development simulations use generated SRAM; designated macro proof is the six directed VCS paths.",
+    "No mapped equivalence, complete150MHz, PPA or energy qualification."
+  ],
+  "main_commit": "f75880d4f06ccb7f1c16115bee501f53d9a2abb7",
+  "raw_bytes": 859019,
+  "raw_files": 150,
+  "rows": [
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948039,
+      "layer": 0,
+      "old32_wide_cycles": 948039
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 1,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 2,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 3,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 4,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 5,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 6,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 7,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 8,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 9,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 10,
+      "old32_wide_cycles": 948042
+    },
+    {
+      "bank128_oldauto_cycles": 986850,
+      "bank128_wide_cycles": 948042,
+      "layer": 11,
+      "old32_wide_cycles": 948042
+    }
+  ],
+  "semantic_negatives_rejected": [
+    "missing_task",
+    "wrong_mac",
+    "missing_soc",
+    "late_fatal"
+  ],
+  "source_blobs": 2637,
+  "source_hash_checks": 977,
+  "status": "ACTUAL_VCS_DEVELOPMENT_REPLAY_PASS_NOT_PHYSICAL_OR_ENERGY_QUALIFICATION"
+}
