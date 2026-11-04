@@ -1,0 +1,36 @@
+{
+  "status": "HOST_EXACT_BOOLEAN_REGRESSION_AND_TCL_SYNTAX_ONLY_NOT_EDA",
+  "helper_sha256": "ce16e8e6f0e4cd1746a29c786b3cd3fccbb92713470ef5895420e5ab2a475339",
+  "original55_sha256": "63cfdb935ea0cb98849bd76e70258b350e98a4c09126364efad98262503e4959",
+  "actual55_dc_failure": "UID-101 dont_use absent then expected boolean value but got empty string before insertion",
+  "cases": [
+    {
+      "case": "actual55_empty",
+      "accepted": false,
+      "output": "expected boolean value but got \"\""
+    },
+    {
+      "case": "reset61_empty",
+      "accepted": true,
+      "output": "ACCEPTED"
+    },
+    {
+      "case": "reset61_false",
+      "accepted": true,
+      "output": "ACCEPTED"
+    },
+    {
+      "case": "reset61_true",
+      "accepted": false,
+      "output": "actual library candidate prohibited in DC"
+    },
+    {
+      "case": "reset61_bad_boolean",
+      "accepted": false,
+      "output": "DC dont_use attribute is not a valid boolean"
+    }
+  ],
+  "generated_insertion_tcl_syntax": "HOST_TCL_COMPLETE_ONLY",
+  "all_5_endpoints_4pairs_preserved": true,
+  "missing_recovery_path_gate": "unchanged; no path still fails rather than qualifying unknown checks"
+}
