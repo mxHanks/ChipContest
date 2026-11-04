@@ -49,6 +49,7 @@ class JointGuards(unittest.TestCase):
     def test_python36_syntax_and_old_producer_bytes_remain_frozen(self):
         for name in ('xu_candidate_joint_context.py','xu_candidate_joint_task_activity.py'):
             p=ROOT/'tools/ppa'/name;ast.parse(p.read_text(),filename=str(p),feature_version=(3,6))
+        p=collector.JOINT/'xu_joint_numeric_smoke.py';ast.parse(p.read_text(),filename=str(p),feature_version=(3,6))
         for name,digest in context.FROZEN_DERIVATION.items():self.assertEqual(context.sha(ROOT/name),digest,name)
         self.assertEqual(collector.S2C_MAPPED_SHA,'9c16d5ec6665cbfd2c0752c96e98d969d988e963d6ed2f729d81e6989efa7892')
 
@@ -212,10 +213,14 @@ class JointCandidateIntegration(unittest.TestCase):
             mapping=aliases.generate(SOURCE,Path(t)/'aliases')
             text=collector.generate_tb(self.ctx,mapping)
             self.assertEqual(text.count('$xu_sram_joint_register('),336)
-            self.assertEqual(text.count('$xu_sram_joint_begin('),1)
-            self.assertEqual(text.count('$xu_sram_joint_end('),1)
-            self.assertIn('$toggle_start();\n        $xu_sram_joint_begin(',text)
-            self.assertIn('$toggle_stop();\n          $xu_sram_joint_end(',text)
+            self.assertEqual(text.count('$xu_sram_joint_begin_transaction('),1)
+            self.assertEqual(text.count('$xu_sram_joint_end_transaction('),1)
+            self.assertIn('$toggle_start();\n        $xu_sram_joint_begin_transaction(',text)
+            self.assertIn('$toggle_stop();\n          $xu_sram_joint_end_transaction(',text)
+            self.assertIn('cmd_read,cmd_valid,cmd_ready);',text)
+            self.assertIn('rsp_valid,rsp_ready,writes);',text)
+            self.assertNotIn('$xu_sram_joint_begin(',text)
+            self.assertNotIn('$xu_sram_joint_end(',text)
             self.assertIn('xu_joint_final_request_addr=cmd_addr;',text)
             self.assertIn('xu_joint_final_request_addr!==BASE+YOFF+50687*4',text)
             self.assertIn('task_setup_writes=0 actual_commits=1 fifo_reset_empty=1',text)

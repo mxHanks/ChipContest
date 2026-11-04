@@ -37,6 +37,8 @@ static int active,finished,task_id;
 static uint64_t start_tick,end_tick,last_ordinal_tick,ordinal,begin_ordinal,end_ordinal,sidecar_records;
 static FILE *stats,*sidecar;
 static char *begin_identity;
+static int numeric_transaction;
+static uint32_t source_cycle;
 
 static void fail(const char *message) { vpi_printf("XU_JOINT_REJECT %s\n",message); vpi_control(vpiFinish,1); }
 static void *allocate(size_t n) { void *p=calloc(1,n); if(!p){fail("allocation failed");exit(2);} return p; }
@@ -109,7 +111,20 @@ static PLI_INT32 changed(p_cb_data cb) {
 }
 static vpiHandle argument(vpiHandle iterator) { vpiHandle p=vpi_scan(iterator);if(!p)fail("missing system-task argument");return p; }
 static int integer_argument(vpiHandle h) { s_vpi_value v;v.format=vpiIntVal;vpi_get_value(h,&v);return v.value.integer; }
-static char *string_argument(vpiHandle h) { s_vpi_value v;char *s;v.format=vpiStringVal;vpi_get_value(h,&v);s=allocate(strlen(v.value.str)+1);strcpy(s,v.value.str);return s; }
+static char *string_argument(vpiHandle h) { s_vpi_value v;char *s;v.format=vpiStringVal;vpi_get_value(h,&v);if(!v.value.str){fail("null string argument");return NULL;}s=allocate(strlen(v.value.str)+1);strcpy(s,v.value.str);return s; }
+/* Copy each four-state value before any further VPI call. Numeric transaction
+ * identities do not retain simulator-owned string buffers or SV expressions. */
+static int known_u32_arguments(vpiHandle it,uint32_t *out,unsigned count) {
+    unsigned i;for(i=0;i<count;i++){
+        vpiHandle h=vpi_scan(it);s_vpi_value v;int width;
+        if(!h){fail("missing numeric transaction argument");return 0;}
+        width=vpi_get(vpiSize,h);if(width<1||width>32){fail("numeric transaction argument width differs");return 0;}
+        v.format=vpiVectorVal;vpi_get_value(h,&v);
+        if(!v.value.vector||v.value.vector[0].bval){fail("numeric transaction argument contains X/Z");return 0;}
+        out[i]=(uint32_t)v.value.vector[0].aval;
+    }
+    if(vpi_scan(it)){fail("extra numeric transaction argument");return 0;}return 1;
+}
 static PLI_INT32 register_call(PLI_BYTE8 *unused) {
     vpiHandle call=vpi_handle(vpiSysTfCall,NULL),it=vpi_iterate(vpiArgument,call);Macro *m;int p;unsigned i;(void)unused;
     if(active||finished||macro_count==MAX_MACROS){fail("invalid registration phase/count");return 0;}
@@ -136,24 +151,38 @@ static PLI_INT32 register_call(PLI_BYTE8 *unused) {
     }
     if(vpi_scan(it)){fail("extra register argument");return 0;}macros[macro_count++]=m;return 0;
 }
-static PLI_INT32 begin_call(PLI_BYTE8 *unused) {
-    vpiHandle it=vpi_iterate(vpiArgument,vpi_handle(vpiSysTfCall,NULL));char *prefix,*name;unsigned i;int p;size_t n;(void)unused;
+static PLI_INT32 begin_window(int supplied,const char *prefix,const char *identity) {
+    char *name;unsigned i;int p;size_t n;
     if(active||finished||!macro_count||vpi_get(vpiTimePrecision,NULL)!=-15){fail("begin requires registered macros, fresh process, global 1fs precision");return 0;}
-    task_id=integer_argument(argument(it));prefix=string_argument(argument(it));begin_identity=string_argument(argument(it));if(task_id<0||task_id>11||vpi_scan(it)){fail("invalid begin task/arguments");return 0;}
-    n=strlen(prefix)+64;name=allocate(n);snprintf(name,n,"%s.stats.jsonl",prefix);stats=fopen(name,"wx");snprintf(name,n,"%s.simultaneous.jsonl",prefix);sidecar=fopen(name,"wx");free(name);free(prefix);
+    task_id=supplied;if(task_id<0||task_id>11||!prefix||!identity){fail("invalid begin task/arguments");return 0;}
+    begin_identity=allocate(strlen(identity)+1);strcpy(begin_identity,identity);
+    n=strlen(prefix)+64;name=allocate(n);snprintf(name,n,"%s.stats.jsonl",prefix);stats=fopen(name,"wx");snprintf(name,n,"%s.simultaneous.jsonl",prefix);sidecar=fopen(name,"wx");free(name);
     if(!stats||!sidecar){fail("output already exists or cannot be created");return 0;}
     start_tick=now_tick();begin_ordinal=next_ordinal(start_tick);
     for(i=0;i<macro_count;i++){Macro *m=macros[i];for(p=0;p<PORTS;p++)snapshot_port(m,p,m->state);for(p=0;p<BITS;p++)m->pin_last[p]=start_tick;for(p=0;p<PROJS;p++){m->proj_last[p]=start_tick;m->proj_key[p]=projection(m,p);}fprintf(sidecar,"{\"macro\":");json_string(sidecar,m->name);fprintf(sidecar,",\"begin_tick\":%"PRIu64",\"callback_ordinal\":%"PRIu64",\"initial_state_lsb_ports\":",start_tick,begin_ordinal);state_string(sidecar,m->state,BITS);fprintf(sidecar,"}\n");}
     active=1;vpi_printf("XU_JOINT_BEGIN task=%d tick=%"PRIu64" macros=%u callback_ordinal=%"PRIu64"\n",task_id,start_tick,macro_count,begin_ordinal);return 0;
 }
+static PLI_INT32 begin_call(PLI_BYTE8 *unused) {
+    vpiHandle it=vpi_iterate(vpiArgument,vpi_handle(vpiSysTfCall,NULL));char *prefix,*identity;int supplied;(void)unused;
+    supplied=integer_argument(argument(it));prefix=string_argument(argument(it));identity=string_argument(argument(it));
+    if(vpi_scan(it)){fail("extra begin argument");return 0;}numeric_transaction=0;
+    begin_window(supplied,prefix,identity);free(prefix);free(identity);return 0;
+}
+static PLI_INT32 begin_transaction_call(PLI_BYTE8 *unused) {
+    vpiHandle it=vpi_iterate(vpiArgument,vpi_handle(vpiSysTfCall,NULL));uint32_t a[6];char identity[192];(void)unused;
+    if(!known_u32_arguments(it,a,6))return 0;
+    if(a[0]>11||a[1]>INT32_MAX||a[2]<UINT32_C(0xa0000000)||a[2]>=UINT32_C(0xa0018800)||a[3]!=1||a[4]!=1||a[5]>1){fail("source REQUEST numeric identity differs");return 0;}
+    snprintf(identity,sizeof(identity),"source_request cycle=%"PRIu32" addr=%08"PRIx32" read=1 valid=1 accept=%"PRIu32,a[1],a[2],a[5]);
+    numeric_transaction=1;source_cycle=a[1];return begin_window((int)a[0],"task-joint",identity);
+}
 static int compare_entries(const void *a,const void *b){const Entry *x=a,*y=b;return x->key<y->key?-1:x->key>y->key;}
 static void print_counts(FILE *f,Counts *c) { size_t i,j=0;Entry *a=allocate(c->size*sizeof(Entry));for(i=0;i<c->capacity;i++)if(c->items[i].used)a[j++]=c->items[i];qsort(a,j,sizeof(Entry),compare_entries);fputc('[',f);for(i=0;i<j;i++){if(i)fputc(',',f);fprintf(f,"[%"PRIu64",%"PRIu64"]",a[i].key,a[i].value);}fputc(']',f);free(a); }
-static PLI_INT32 end_call(PLI_BYTE8 *unused) {
-    vpiHandle it=vpi_iterate(vpiArgument,vpi_handle(vpiSysTfCall,NULL));int supplied,p,s;char *identity;unsigned i;(void)unused;
+static PLI_INT32 end_window(int supplied,const char *identity) {
+    int p,s;unsigned i;
     if(!active||finished){fail("end outside active window");return 0;}
-    supplied=integer_argument(argument(it));identity=string_argument(argument(it));if(supplied!=task_id||vpi_scan(it)){fail("end task/arguments differ");return 0;}
+    if(supplied!=task_id||!identity){fail("end task/arguments differ");return 0;}
     end_tick=now_tick();end_ordinal=next_ordinal(end_tick);if(end_tick<=start_tick){fail("nonpositive activity duration");return 0;}active=0;finished=1;
-    fprintf(stats,"{\"schema\":\"xu-sram-joint-projections-v1\",\"status\":\"CAPTURED_CALLBACK_ORDER_REQUIRES_SIMULATOR_AND_SAIF_CALIBRATION_NOT_QUALIFIED\",\"task_id\":%d,\"start_tick\":%"PRIu64",\"end_tick\":%"PRIu64",\"duration_ticks\":%"PRIu64",\"timescale_fs\":1,\"begin_callback_ordinal\":%"PRIu64",\"end_callback_ordinal\":%"PRIu64",\"begin_transaction\":",task_id,start_tick,end_tick,end_tick-start_tick,begin_ordinal,end_ordinal);json_string(stats,begin_identity);fprintf(stats,",\"end_transaction\":");json_string(stats,identity);fprintf(stats,",\"macro_count\":%u,\"pin_bits_per_macro\":67,\"liberty_arc_count\":121}\n",macro_count);
+    fprintf(stats,"{\"schema\":\"xu-sram-joint-projections-v1\",\"status\":\"CAPTURED_CALLBACK_ORDER_REQUIRES_SIMULATOR_AND_SAIF_CALIBRATION_NOT_QUALIFIED\",\"task_id\":%d,\"start_tick\":%"PRIu64",\"end_tick\":%"PRIu64",\"duration_ticks\":%"PRIu64",\"timescale_fs\":1,\"begin_callback_ordinal\":%"PRIu64",\"end_callback_ordinal\":%"PRIu64",\"begin_transaction\":",task_id,start_tick,end_tick,end_tick-start_tick,begin_ordinal,end_ordinal);json_string(stats,begin_identity);fprintf(stats,",\"end_transaction\":");json_string(stats,identity);fprintf(stats,",\"transaction_argument_encoding\":\"%s\",\"macro_count\":%u,\"pin_bits_per_macro\":67,\"liberty_arc_count\":121}\n",numeric_transaction?"known-uint32-v1":"legacy-vpi-string",macro_count);
     for(i=0;i<macro_count;i++){
         Macro *m=macros[i];for(p=0;p<BITS;p++)m->pin_dwell[p][m->state[p]]+=end_tick-m->pin_last[p];for(p=0;p<PROJS;p++)touch(m,p,end_tick);flush_pending(m,m->pending_tick==end_tick||m->pending_tick==start_tick);
         fprintf(stats,"{\"macro\":");json_string(stats,m->name);fprintf(stats,",\"callback_events\":%"PRIu64",\"final_state_lsb_ports\":",m->callback_events);state_string(stats,m->state,BITS);
@@ -162,10 +191,23 @@ static PLI_INT32 end_call(PLI_BYTE8 *unused) {
     }
     fprintf(stats,"{\"complete\":true,\"macro_count\":%u,\"simultaneous_records\":%"PRIu64"}\n",macro_count,sidecar_records);
     if(fclose(stats)||fclose(sidecar)){fail("output close failed");return 0;}
-    vpi_printf("XU_JOINT_COMPLETE task=%d tick=%"PRIu64" duration_ticks=%"PRIu64" macros=%u simultaneous_records=%"PRIu64" NOT_QUALIFIED\n",task_id,end_tick,end_tick-start_tick,macro_count,sidecar_records);free(identity);return 0;
+    vpi_printf("XU_JOINT_COMPLETE task=%d tick=%"PRIu64" duration_ticks=%"PRIu64" macros=%u simultaneous_records=%"PRIu64" NOT_QUALIFIED\n",task_id,end_tick,end_tick-start_tick,macro_count,sidecar_records);free(begin_identity);begin_identity=NULL;return 0;
+}
+static PLI_INT32 end_call(PLI_BYTE8 *unused) {
+    vpiHandle it=vpi_iterate(vpiArgument,vpi_handle(vpiSysTfCall,NULL));int supplied;char *identity;(void)unused;
+    supplied=integer_argument(argument(it));identity=string_argument(argument(it));
+    if(vpi_scan(it)||numeric_transaction){fail("end task/arguments differ");return 0;}
+    end_window(supplied,identity);free(identity);return 0;
+}
+static PLI_INT32 end_transaction_call(PLI_BYTE8 *unused) {
+    vpiHandle it=vpi_iterate(vpiArgument,vpi_handle(vpiSysTfCall,NULL));uint32_t a[7];char identity[256];(void)unused;
+    if(!known_u32_arguments(it,a,7))return 0;
+    if(!numeric_transaction||a[0]>11||a[1]>INT32_MAX||a[2]<source_cycle||a[2]>=a[1]||a[3]!=UINT32_C(0xa00517fc)||a[4]!=1||a[5]!=1||a[6]!=50688){fail("final RETIRE numeric identity differs");return 0;}
+    snprintf(identity,sizeof(identity),"final_y_retire cycle=%"PRIu32" request_cycle=%"PRIu32" addr=%08"PRIx32" response_valid=1 response_ready=1 writes=50688",a[1],a[2],a[3]);
+    return end_window((int)a[0],identity);
 }
 static PLI_INT32 unfinished(p_cb_data cb){(void)cb;if(active) vpi_printf("XU_JOINT_INCOMPLETE active window at end of simulation; outputs have no completion footer\n");return 0;}
 void xu_sram_joint_register_tasks(void) {
-    s_vpi_systf_data t;s_cb_data c;memset(&t,0,sizeof(t));t.type=vpiSysTask;t.tfname="$xu_sram_joint_register";t.calltf=register_call;vpi_register_systf(&t);t.tfname="$xu_sram_joint_begin";t.calltf=begin_call;vpi_register_systf(&t);t.tfname="$xu_sram_joint_end";t.calltf=end_call;vpi_register_systf(&t);memset(&c,0,sizeof(c));c.reason=cbEndOfSimulation;c.cb_rtn=unfinished;vpi_register_cb(&c);
+    s_vpi_systf_data t;s_cb_data c;memset(&t,0,sizeof(t));t.type=vpiSysTask;t.tfname="$xu_sram_joint_register";t.calltf=register_call;vpi_register_systf(&t);t.tfname="$xu_sram_joint_begin";t.calltf=begin_call;vpi_register_systf(&t);t.tfname="$xu_sram_joint_end";t.calltf=end_call;vpi_register_systf(&t);t.tfname="$xu_sram_joint_begin_transaction";t.calltf=begin_transaction_call;vpi_register_systf(&t);t.tfname="$xu_sram_joint_end_transaction";t.calltf=end_transaction_call;vpi_register_systf(&t);memset(&c,0,sizeof(c));c.reason=cbEndOfSimulation;c.cb_rtn=unfinished;vpi_register_cb(&c);
 }
 void (*vlog_startup_routines[])(void)={xu_sram_joint_register_tasks,0};

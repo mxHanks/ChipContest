@@ -162,21 +162,22 @@ def generate_tb(ctx,mapping):
     registration.append('  end\n')
     text=ctx.base.once(text,'  // Observation only: these counters never drive','\n'.join(registration)+'\n  // Observation only: these counters never drive')
     text=ctx.base.once(text,'        $toggle_start();','''        $toggle_start();
-        $xu_sram_joint_begin(xu_global_task,"task-joint",
-          $sformatf("source_request cycle=%0d addr=%08h read=1 valid=1 accept=%b",cycles,cmd_addr,cmd_ready));''')
+        $xu_sram_joint_begin_transaction(xu_global_task,cycles,cmd_addr,
+          cmd_read,cmd_valid,cmd_ready);''')
     text=ctx.base.once(text,'          $toggle_stop();','''          if (!shared_retire || !final_write_pending || writes!=50688 ||
               xu_joint_final_request_cycle<xu_request_cycle || xu_joint_final_request_cycle>=cycles ||
               xu_joint_final_request_addr!==BASE+YOFF+50687*4)
             $fatal(1,"XU_JOINT_REJECT final response transaction identity differs");
           $toggle_stop();
-          $xu_sram_joint_end(xu_global_task,
-            $sformatf("final_y_retire cycle=%0d request_cycle=%0d addr=%08h response_valid=1 response_ready=1 writes=50688",cycles,xu_joint_final_request_cycle,xu_joint_final_request_addr));''')
+          $xu_sram_joint_end_transaction(xu_global_task,cycles,
+            xu_joint_final_request_cycle,xu_joint_final_request_addr,
+            rsp_valid,rsp_ready,writes);''')
     text=ctx.base.once(text,'              if (writes==50688) final_write_pending=1;','''              if (writes==50688) begin
                 final_write_pending=1;
                 xu_joint_final_request_cycle=cycles;
                 xu_joint_final_request_addr=cmd_addr;
               end''')
-    require(text.count('$xu_sram_joint_register(')==336 and text.count('$xu_sram_joint_begin(')==text.count('$xu_sram_joint_end(')==1,
+    require(text.count('$xu_sram_joint_register(')==336 and text.count('$xu_sram_joint_begin_transaction(')==text.count('$xu_sram_joint_end_transaction(')==1,
         'joint API generation count differs')
     return text
 
@@ -285,6 +286,8 @@ def inspect_joint(ctx,log,destination,task_id,window,binding):
     result=auditor.audit(stats,sidecar)
     require({r['macro'] for r in result['macros']}=={r['rtl_instance'] for r in binding['pairs']},'actual VPI macro set differs from exact RTL/mapped binding')
     header=result['window']
+    require(header.get('transaction_argument_encoding')=='known-uint32-v1',
+        'joint transaction metadata is not from the numeric argument API')
     require(header['task_id']==task_id and header['start_tick']==window['begin']['tick'] and header['end_tick']==window['end']['tick'] and
         header['duration_ticks']==window['duration_ticks'] and header['begin_callback_ordinal']==int(begin[0][3]) and
         header['end_callback_ordinal']>0 and result['simultaneous_records']==int(end[0][4]),'joint header/window/log differs')

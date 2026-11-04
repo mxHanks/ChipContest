@@ -93,6 +93,34 @@ class ActualVPITests(unittest.TestCase):
         self.assertEqual(m['arcs'][56]['condition_dwell_false_true_unknown'],[259000000,262000000,3000000])
         self.assertEqual(len(m['arcs']),121)
 
+    def test_numeric_transactions_copy_exact_values_and_reject_unknown_or_wrong_boundaries(self):
+        spec=importlib.util.spec_from_file_location('xu_numeric_smoke_check',DIR/'xu_joint_numeric_smoke.py')
+        smoke=importlib.util.module_from_spec(spec);spec.loader.exec_module(smoke)
+        binary=self.path/'numeric.vvp'
+        result=run(['iverilog','-g2012','-s','tb_xu_joint_numeric_smoke','-o',str(binary),
+            str(ROOT/'tests/ppa/tb_xu_sram_joint_micro.sv'),str(ROOT/'tests/ppa/tb_xu_joint_numeric_smoke.sv')],self.path,'numeric-build.log')
+        self.assertEqual(result.returncode,0,result.stdout)
+        for mode in range(5):
+            directory=self.path/('numeric-mode-%d'%mode);directory.mkdir()
+            result=run(['vvp','-M'+str(self.path),'-mxu_sram_joint_vpi',str(binary),'+MODE='+str(mode)],directory,'numeric-mode-%d-simulation.log'%mode)
+            if mode==0:
+                self.assertEqual(result.returncode,0,result.stdout)
+                self.assertNotIn('XU_JOINT_REJECT',result.stdout)
+                checked=smoke.check_positive(directory)
+                self.assertEqual(checked['arc_count'],121)
+                save=json.dumps(checked,sort_keys=True,indent=2)+'\n';preserve('numeric-positive-check.json',save)
+                observed=audit.audit(directory/'task-joint.stats.jsonl',directory/'task-joint.simultaneous.jsonl')
+                self.assertEqual(observed['macros'][0]['pin_transitions']['CLK'][1],1)
+                self.assertEqual(observed['macros'][0]['pin_transitions']['CLK'][4],1)
+            else:
+                expected={1:'numeric transaction argument contains X/Z',2:'end task/arguments differ',
+                    3:'final RETIRE numeric identity differs',4:'final RETIRE numeric identity differs'}[mode]
+                self.assertIn('XU_JOINT_REJECT '+expected,result.stdout)
+                self.assertNotIn('XU_JOINT_COMPLETE',result.stdout)
+            for kind in ('stats','simultaneous'):
+                path=directory/('task-joint.'+kind+'.jsonl')
+                if path.exists():preserve('numeric-mode-%d.%s.jsonl'%(mode,kind),path.read_text())
+
     def test_same_timestamp_active_inactive_nba_and_boundary_replay(self):
         side=[json.loads(s) for s in (self.path/'mode-0.simultaneous.jsonl').read_text().splitlines()]
         events=next(r for r in side if r.get('tick')==525000000)['events']

@@ -36,6 +36,34 @@ begin；最终 Y 写响应 RETIRE 紧邻 `$toggle_stop` 调用 VPI end。最后
 Y 请求地址/周期、最终共享响应退休及全部 50,688 写回数共同检查。
 1 fs 绝对 HF/LF 相位与原 signed16/40/48 数值检查不变。
 
+2026-11-04 新生产入口使用 `$xu_sram_joint_begin_transaction` 与
+`$xu_sram_joint_end_transaction`。它们直接接收原边界处的 task、cycle、
+address、read/valid/ready 和 writes 数值；C 逐个复制实际四态向量值，
+拒绝 X/Z、超宽值、错 task、错 final address/count/order，再在自身
+缓冲区生成 ASCII 事务标识。输出 prefix 固定为 `task-joint`，header
+标记 `transaction_argument_encoding=known-uint32-v1`；后处理仍与原
+REQUEST/RETIRE 日志、SAIF 起止 tick 和时长逐项核对。原通用字符串
+API 保留给历史 micro，原 activity producer 与其十二任务窗口不变。
+
+实际 VCS string probe56 的 18 种动态表达式、materialized string 与
+literal/handle-order 组合全部逐字节正确，未复现 full-SoC capture36
+头部损坏，因而不能宣称已确认临时字符串或 handle 迭代是根因。
+整数 API 是避免这条动态字符串传递路径的改动；它不会修补 capture36
+原始字节，也不构成 full-SoC 新采集已通过的证明。
+
+最小新服务器 smoke 使用实际生产 C collector、单个合成 pin fixture、
+一项正例与四项拒绝例，独立新输出目录：
+
+```sh
+python3 /path/to/new-clean-joint-tool/tools/ppa/xu_joint_activity/xu_joint_numeric_smoke.py \
+  --out /path/to/new-numeric-smoke62 \
+  --vcs /path/to/same-vcs/bin/vcs --include /path/to/same-vcs/include --cc gcc
+```
+
+smoke 的周期数字用于验证参数传递，不能解释为真实 CPU 用时；没有
+vendor SRAM、full SoC、SAIF/PT 条件功耗或能耗验收。下一次 full-SoC
+运行必须使用新目录并保留原件；不能复用或覆盖36。
+
 VPI 注册真实宏的 A/CEN/CLK/D/EMA/EMAW/GWEN/Q/RET1N/WEN 端口，且
 在 C 中检查真实 scope/name/width。它没有 DUT driver 或 force。
 `task-joint.stats.jsonl` 保存 67 bit 直接 dwell/16 类四态转换与 34
