@@ -128,6 +128,62 @@ class XuS2eActualSourceTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'profile differs'):aliases.validate_mapping(fp)
             save('alias-normalization-receipt.json',json.dumps(receipt,indent=2)+'\n')
 
+    @unittest.skipUnless(shutil.which('riscv64-unknown-elf-gcc'),'actual RISC-V compiler required')
+    def test_actual_paired_hi_firmware_with_unchanged_clear_wrapper_builds(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-firmware-') as temporary:
+            root=Path(temporary)
+            _,record=collector.compile_firmware(self.ctx,root,'riscv64-unknown-elf-')
+            self.assertEqual(record['configuration'],self.ctx.configuration)
+            self.assertIn('-DXU_HARDWARE_PAIRED_HI=1',record['command'])
+            self.assertIn('-DXU_HARDWARE_AUTO_GROUP=1',record['command'])
+            self.assertGreater(record['memory']['itcm_remaining_bytes'],0)
+            for name in ['firmware-build.json','firmware-build.log','firmware-sections.log','firmware.dump','xu_s2e_clear_main.c']:
+                save('actual-local-'+name,(root/name).read_text())
+
+    @unittest.skipUnless(shutil.which('iverilog'),'Icarus required')
+    def test_full336_macro_and_all22512_direct_pin_paths_elaborate(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-full-elab-') as temporary:
+            root=Path(temporary)
+            # Deliberately geometry only: this is path elaboration, never vendor
+            # behavior, VCS toggle collection, timing, or energy evidence.
+            model=root/'open-geometry-only.v'
+            model.write_text('module RAMSP1024X16(output reg [15:0] Q,input CLK,CEN,GWEN,RET1N, '+
+                'input [15:0] WEN,D,input [9:0] A,input [2:0] EMA,input [1:0] EMAW); '+
+                'reg [63:0] mem [0:255]; endmodule\n')
+            mapping=aliases.generate(SOURCE,root/'aliases',placement='include')
+            text=collector.generate_tb(self.ctx);point=text.rindex('endmodule')
+            tb=root/'full.sv';tb.write_text(text[:point]+Path(mapping['observer_source']['path']).read_text()+text[point:])
+            excluded={self.ctx.base.RTL/'general/sirv_sim_ram.v',self.ctx.base.RTL/'perips/mem_1024x16.sv'}
+            sources=sorted(p for p in self.ctx.base.RTL.rglob('*') if p.suffix in ('.v','.sv') and p not in excluded)
+            sources += [ROOT/'tools/ppa'/name for name in ['xu_sirv_sram_adapter.sv','xu_weight_sram_adapter.sv','xu_shared_icb_sram.sv','xu_soc_ppa_top.sv']]
+            sources += [model,tb]
+            filelist=root/'rtl.f';filelist.write_text('\n'.join(map(str,sources))+'\n')
+            command=['iverilog','-g2012','-s','tb_xu_soc_ppa','-DDISABLE_SV_ASSERTION=1','-DARM_UD_MODEL','-DXU_TASK_ACTIVITY_HOST_CHECK']
+            command += ['-I'+str(self.ctx.base.RTL/name) for name in ['core','perips','perips/apb_i2c']]
+            command += ['-o',str(root/'soc.vvp'),'-f',str(filelist)]
+            actual=run(command,root,'full336-macro22512-path-elaboration.log')
+            self.assertEqual(actual.returncode,0,actual.stdout)
+            save('full336-elaboration-sources.json',json.dumps(dict(status='ELABORATED_NOT_SIMULATED_OPEN_GEOMETRY_ONLY',
+                macro_count=336,pin_bits=22512,sources=[context.identity(p) for p in sources]),indent=2)+'\n')
+
+    def test_hidden_tracked_main_and_child_source_changes_are_rejected(self):
+        with tempfile.TemporaryDirectory(prefix='xu-s2e-hidden-source-') as temporary:
+            root=Path(temporary);clone=root/'source'
+            self.assertEqual(run(['git','clone','--shared','--no-checkout',str(SOURCE),str(clone)],root,'hidden-clone.log').returncode,0)
+            self.assertEqual(run(['git','checkout','--detach',context.MAIN_COMMIT],clone,'hidden-checkout.log').returncode,0)
+            child=clone/'third-party/e203_hbirdv2'
+            self.assertEqual(run(['git','clone','--shared',str(SOURCE/'third-party/e203_hbirdv2'),str(child)],clone,'hidden-child-clone.log').returncode,0)
+            self.assertEqual(run(['git','checkout','--detach','a0767db69628ef30e53de2d1e93dd0360c0ccf76'],child,'hidden-child-checkout.log').returncode,0)
+            context.source_identity(clone)
+            for repo,name in [(clone,'tests/e203/tb_accel_soc.sv'),(child,'rtl/e203/perips/accel_icb_slave.v')]:
+                path=repo/name;original=path.read_bytes()
+                self.assertEqual(run(['git','update-index','--assume-unchanged',name],repo,'hidden-flag-'+path.name+'.log').returncode,0)
+                path.write_bytes(original+b'\n// deliberately hidden host source mutation\n')
+                with self.assertRaisesRegex(ValueError,'bytes differ'):context.source_identity(clone)
+                path.write_bytes(original)
+                self.assertEqual(run(['git','update-index','--no-assume-unchanged',name],repo,'hidden-unflag-'+path.name+'.log').returncode,0)
+                context.source_identity(clone)
+
     @unittest.skipUnless(shutil.which('iverilog') and shutil.which('vvp'),'actual Icarus required')
     def test_real_wrapper_all99_rows_and_destructive_faults(self):
         with tempfile.TemporaryDirectory(prefix='xu-s2e-actual-observer-') as temporary:
@@ -161,13 +217,15 @@ class XuS2eActualSourceTests(unittest.TestCase):
             perips=self.ctx.base.RTL/'perips';reset=['sirv_ResetCatchAndSync_2.v','sirv_AsyncResetRegVec_129.v','sirv_AsyncResetReg.v']
             command=['iverilog','-g2012','-DXU_TASK_ACTIVITY_HOST_CHECK','-s','tb_xu_s2c_reset_guard','-o',str(binary),str(source)]+[str(perips/n) for n in primitives.PERIPS_SOURCES+reset]
             built=run(command,root,'reset-build.log');self.assertEqual(built.returncode,0,built.stdout)
-            for mode,expected in [(0,None),(1,'request before actual reset ready'),(3,'no actual accelerator clock sampled asserted reset'),
-                                  (4,'reset reasserted'),(6,'FIFO logical ownership was not reset'),(7,'unknown commit/FIFO ownership state')]:
+            for mode,expected in [(0,None),(1,'request before actual reset ready'),(2,'request before actual reset ready'),
+                                  (3,'no actual accelerator clock sampled asserted reset'),(4,'reset reasserted'),
+                                  (5,'reset.*unknown'),(6,'FIFO logical ownership was not reset'),
+                                  (7,'unknown commit/FIFO ownership state'),(8,'unknown commit/FIFO ownership state')]:
                 actual=run(['vvp',str(binary),'+MODE='+str(mode)],root,'reset-mode-%d.log'%mode)
                 if expected is None:
                     self.assertEqual(actual.returncode,0,actual.stdout)
                     self.assertIn('XU_RESET_GUARD_PASS actual_20stage_chain=1',actual.stdout)
-                else:self.assertNotEqual(actual.returncode,0,actual.stdout);self.assertIn(expected,actual.stdout)
+                else:self.assertNotEqual(actual.returncode,0,actual.stdout);self.assertRegex(actual.stdout,expected)
 
 
 if __name__=='__main__':unittest.main()
