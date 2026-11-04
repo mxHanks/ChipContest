@@ -151,9 +151,8 @@ def run_formal(out,ppa_dir,prepared,env):
         text=(out/'fm.log').read_text(errors='replace')
         result.update(returncode=actual.returncode,log=identity(out/'fm.log'))
         need('Version R-2020.09-SP5' in text,'same original Formality2020.09-SP5 required')
-        need(actual.returncode==0 and re.findall(r'^XU_S2E_FULL_SOC_FORMALITY_PASS\s*$',text,re.M)==['XU_S2E_FULL_SOC_FORMALITY_PASS'] and
-             not re.search(r'^\s*(?:Error:|Fatal:|XU_S2E_FULL_SOC_FORMALITY_(?:FAIL|SCRIPT_ERROR))',text,re.M),
-             'complete own-SVF formal proof failed or incomplete')
+        checker=load_module('xu_s2e_native_full_fm_checker',TOOLS/'tools/ppa/xu_s2e_formality_audit.py')
+        result['native_review']=checker.native_result(text,actual.returncode)
         result['status']='VERIFIED_FULL_SOC_REVIEW_PENDING_NOT_QUALIFIED'
     except BaseException as error:result.update(status='FAIL',error=type(error).__name__+': '+str(error))
     finally:
@@ -194,6 +193,7 @@ def main():
     save=lambda:write(out/'state.json',state)
     tools=[TOOLS/name for name in ASSETS]+[Path(__file__),TOOLS/'tools/ppa/xu_soc_implementation.py',
            TOOLS/'tools/scripts/xu_soc_ppa.py',TOOLS/'tools/ppa/xu_review_full_soc_clocks.py',TOOLS/'tools/ppa/xu_full_soc_clock_review.tcl',
+           TOOLS/'tools/ppa/xu_s2e_formality_audit.py',
            args.standard_cell_db,args.sram_db]
     before=None;save()
     try:
