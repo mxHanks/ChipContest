@@ -1,0 +1,1511 @@
+{
+  "matched_lines": [
+    {
+      "line": 112,
+      "text": "             operators, it reduces the expression to negation and"
+    },
+    {
+      "line": 113,
+      "text": "             logical AND or OR."
+    },
+    {
+      "line": 114,
+      "text": "   You can specify more than one argument. If you do use the + plus"
+    },
+    {
+      "line": 115,
+      "text": "   delimiter between arguments, for example:"
+    },
+    {
+      "line": 116,
+      "text": "   -cm_cond basic+allops"
+    },
+    {
+      "line": 224,
+      "text": "   when you include the yv argument. Specifies compiling for coverage"
+    },
+    {
+      "line": 225,
+      "text": "   module definitions that are under the `celldefine compiler directive"
+    },
+    {
+      "line": 226,
+      "text": "   when you include the celldefine argument. You can specify both"
+    },
+    {
+      "line": 227,
+      "text": "   arguments using the plus (+) delimiter."
+    },
+    {
+      "line": 228,
+      "text": ""
+    },
+    {
+      "line": 232,
+      "text": "   contassign  Enables line coverage for continuous assignments"
+    },
+    {
+      "line": 233,
+      "text": "   svtb        Enables line coverage for programs and class function/tasks"
+    },
+    {
+      "line": 234,
+      "text": "   You can specify more than one argument. If you do use the + plus"
+    },
+    {
+      "line": 235,
+      "text": "   delimiter between arguments, for example:"
+    },
+    {
+      "line": 236,
+      "text": "   -cm_line contassign+svtb"
+    },
+    {
+      "line": 244,
+      "text": "    Enables a more sophisticated constant analysis compared to "
+    },
+    {
+      "line": 245,
+      "text": "    -cm_noconst. This includes analysis of non-blocking"
+    },
+    {
+      "line": 246,
+      "text": "    assignments and continuous assignments with delays, as well as"
+    },
+    {
+      "line": 247,
+      "text": "    handling multiple assignments to the same bits of a signal. As"
+    },
+    {
+      "line": 248,
+      "text": "    with -cm_noconst, coverable objects that VCS detects can"
+    },
+    {
+      "line": 296,
+      "text": " "
+    },
+    {
+      "line": 297,
+      "text": "-F <filename>"
+    },
+    {
+      "line": 298,
+      "text": "   Same as the -f option but allows you to specify a path to the file"
+    },
+    {
+      "line": 299,
+      "text": "   and the source files listed in the file do not have to be absolute"
+    },
+    {
+      "line": 300,
+      "text": "   pathnames."
+    },
+    {
+      "line": 384,
+      "text": "   Links the <name> library to the resulting executable."
+    },
+    {
+      "line": 385,
+      "text": ""
+    },
+    {
+      "line": 386,
+      "text": "-load <shared_VPI_library>:<registration_routine>"
+    },
+    {
+      "line": 387,
+      "text": "   Specifies the registration routine in a shared library for a VPI "
+    },
+    {
+      "line": 388,
+      "text": "   application."
+    },
+    {
+      "line": 420,
+      "text": "   Makefile."
+    },
+    {
+      "line": 421,
+      "text": ""
+    },
+    {
+      "line": 422,
+      "text": "-negdelay"
+    },
+    {
+      "line": 423,
+      "text": "   Enables the use of negative values in IOPATH and INTERCONNECT"
+    },
+    {
+      "line": 424,
+      "text": "   entries in SDF files."
+    },
+    {
+      "line": 425,
+      "text": ""
+    },
+    {
+      "line": 426,
+      "text": "-noIncrComp"
+    },
+    {
+      "line": 440,
+      "text": ""
+    },
+    {
+      "line": 441,
+      "text": "-ntb_define <macro>"
+    },
+    {
+      "line": 442,
+      "text": "   Specifies any OpenVera macro name on the command line. You can specify "
+    },
+    {
+      "line": 443,
+      "text": "   multiple macro names using the + delimiter."
+    },
+    {
+      "line": 444,
+      "text": ""
+    },
+    {
+      "line": 445,
+      "text": "-ntb_filext <.ext>"
+    },
+    {
+      "line": 446,
+      "text": "   Specifies an OpenVera file extension. You can specify multiple filename "
+    },
+    {
+      "line": 447,
+      "text": "   extensions using the + delimiter."
+    },
+    {
+      "line": 448,
+      "text": ""
+    },
+    {
+      "line": 449,
+      "text": "-ntb_incdir <directory_path>"
+    },
+    {
+      "line": 450,
+      "text": "   Specifies the include directory path for OpenVera files. You can specify "
+    },
+    {
+      "line": 451,
+      "text": "   multiple include directories using the  + delimiter."
+    },
+    {
+      "line": 452,
+      "text": ""
+    },
+    {
+      "line": 475,
+      "text": "      Enter this argument with the dep_check argument. This argument tells "
+    },
+    {
+      "line": 476,
+      "text": "      VCS to display the dependencies for the source files on the screen or "
+    },
+    {
+      "line": 477,
+      "text": "      in the file that you specify."
+    },
+    {
+      "line": 478,
+      "text": ""
+    },
+    {
+      "line": 479,
+      "text": "   tb_timescale=<value>"
+    },
+    {
+      "line": 617,
+      "text": "   If only some source files contain the `timescale compiler directive"
+    },
+    {
+      "line": 618,
+      "text": "   and the ones that don't appear first on the vcs command line, use"
+    },
+    {
+      "line": 619,
+      "text": "   this option to specify the time scale for these source files."
+    },
+    {
+      "line": 620,
+      "text": " "
+    },
+    {
+      "line": 621,
+      "text": "-u"
+    },
+    {
+      "line": 657,
+      "text": ""
+    },
+    {
+      "line": 658,
+      "text": "+allmtm"
+    },
+    {
+      "line": 659,
+      "text": "   Allows you to specify at runtime which values in min:typ:max delay "
+    },
+    {
+      "line": 660,
+      "text": "   value triplets in compiled SDF files using the +mindelays, +maxdelays,"
+    },
+    {
+      "line": 661,
+      "text": "   or +typdelays runtime options."
+    },
+    {
+      "line": 662,
+      "text": ""
+    },
+    {
+      "line": 663,
+      "text": "+applylearn[+<filename>]"
+    },
+    {
+      "line": 692,
+      "text": "   switch such as tran, rtran, tranif1, or rtranif0."
+    },
+    {
+      "line": 693,
+      "text": ""
+    },
+    {
+      "line": 694,
+      "text": "+csdf+precompile"
+    },
+    {
+      "line": 695,
+      "text": "   Precompiles your SDF file into a format that is for VCS to parse "
+    },
+    {
+      "line": 696,
+      "text": "   when it is compiling your Verilog code."
+    },
+    {
+      "line": 697,
+      "text": ""
+    },
+    {
+      "line": 698,
+      "text": "+csdf+precomp+dir+<directory>"
+    },
+    {
+      "line": 699,
+      "text": "   Specifies the directory path where you want VCS to write the "
+    },
+    {
+      "line": 700,
+      "text": "   precompiled SDF file."
+    },
+    {
+      "line": 701,
+      "text": ""
+    },
+    {
+      "line": 702,
+      "text": "+csdf+precomp+ext+<ext>"
+    },
+    {
+      "line": 703,
+      "text": "   Specifies an alternative to the \"_c\" character string addition to "
+    },
+    {
+      "line": 704,
+      "text": "   the filename extension of the precompiled SDF file."
+    },
+    {
+      "line": 705,
+      "text": ""
+    },
+    {
+      "line": 706,
+      "text": "+define+<macro_name>=<value>"
+    },
+    {
+      "line": 708,
+      "text": "   source code using the `ifdef compiler directive."
+    },
+    {
+      "line": 709,
+      "text": ""
+    },
+    {
+      "line": 710,
+      "text": "+delay_mode_distributed"
+    },
+    {
+      "line": 711,
+      "text": "   Specifies ignoring the module path delays and use only the delay "
+    },
+    {
+      "line": 712,
+      "text": "   specifications on all gates, switches, and continuous assignments."
+    },
+    {
+      "line": 713,
+      "text": ""
+    },
+    {
+      "line": 714,
+      "text": "+delay_mode_path"
+    },
+    {
+      "line": 715,
+      "text": "   For modules with specify blocks, specifies ignoring the delay "
+    },
+    {
+      "line": 716,
+      "text": "   specifications on all gates and switches and use only the module "
+    },
+    {
+      "line": 717,
+      "text": "   path delays and the delay specifications on continuous assignments."
+    },
+    {
+      "line": 718,
+      "text": ""
+    },
+    {
+      "line": 719,
+      "text": "+delay_mode_unit"
+    },
+    {
+      "line": 720,
+      "text": "   Specifies ignoring the module path delays and change all the delay "
+    },
+    {
+      "line": 721,
+      "text": "   specifications on all gates, switches, and continuous assignments "
+    },
+    {
+      "line": 722,
+      "text": "   to the shortest time precision argument of all the `timescale compiler "
+    },
+    {
+      "line": 723,
+      "text": "   directives in the source code. "
+    },
+    {
+      "line": 724,
+      "text": ""
+    },
+    {
+      "line": 725,
+      "text": "+delay_mode_zero"
+    },
+    {
+      "line": 726,
+      "text": "   Change all the delay specifications on all gates, switches, and "
+    },
+    {
+      "line": 727,
+      "text": "   continuous assignments to zero and change all module path delays "
+    },
+    {
+      "line": 728,
+      "text": "   to zero."
+    },
+    {
+      "line": 729,
+      "text": ""
+    },
+    {
+      "line": 737,
+      "text": "+incdir+<directory>"
+    },
+    {
+      "line": 738,
+      "text": "   Specifies the directories that contain the files you specified with "
+    },
+    {
+      "line": 739,
+      "text": "   the `include compiler directive. You can specify more that one "
+    },
+    {
+      "line": 740,
+      "text": "   directory, separating each path name with the + character."
+    },
+    {
+      "line": 741,
+      "text": ""
+    },
+    {
+      "line": 742,
+      "text": "+libext+<extension>"
+    },
+    {
+      "line": 743,
+      "text": "   Specifies that VCS only search the source files in a Verilog library "
+    },
+    {
+      "line": 744,
+      "text": "   directory with the specified extension. You can specify more than one "
+    },
+    {
+      "line": 745,
+      "text": "   extension, separating each extension with the + character."
+    },
+    {
+      "line": 746,
+      "text": "   For example, +libext++.v specifies searches library files with no "
+    },
+    {
+      "line": 767,
+      "text": "   Enables or disables Lint messages about your Verilog code."
+    },
+    {
+      "line": 768,
+      "text": " "
+    },
+    {
+      "line": 769,
+      "text": "+maxdelays"
+    },
+    {
+      "line": 770,
+      "text": "   Use maximum value when min:typ:max values are encountered in delay "
+    },
+    {
+      "line": 771,
+      "text": "   specifications SDF files."
+    },
+    {
+      "line": 772,
+      "text": ""
+    },
+    {
+      "line": 773,
+      "text": "+memcbk "
+    },
+    {
+      "line": 795,
+      "text": "   This option is automatically included as part of -debug_access."
+    },
+    {
+      "line": 796,
+      "text": ""
+    },
+    {
+      "line": 797,
+      "text": "+mindelays"
+    },
+    {
+      "line": 798,
+      "text": "   Use minimum value when min:typ:max values are encountered in delay "
+    },
+    {
+      "line": 799,
+      "text": "   specifications and SDF files."
+    },
+    {
+      "line": 800,
+      "text": ""
+    },
+    {
+      "line": 801,
+      "text": "+multisource_int_delays"
+    },
+    {
+      "line": 802,
+      "text": "   Enables multisource interconnect delays."
+    },
+    {
+      "line": 803,
+      "text": ""
+    },
+    {
+      "line": 804,
+      "text": "+nbaopt"
+    },
+    {
+      "line": 805,
+      "text": "   Removes the intra-assignment delays from all the nonblocking "
+    },
+    {
+      "line": 806,
+      "text": "   assignment statements in your design."
+    },
+    {
+      "line": 807,
+      "text": ""
+    },
+    {
+      "line": 808,
+      "text": "+neg_tchk"
+    },
+    {
+      "line": 809,
+      "text": "   Enables negative values in timing checks."
+    },
+    {
+      "line": 810,
+      "text": ""
+    },
+    {
+      "line": 811,
+      "text": "+nocelldefinepli+0|1|2<+ports>"
+    },
+    {
+      "line": 812,
+      "text": "   For specifying what VCS records in the VPD file about nets and "
+    },
+    {
+      "line": 813,
+      "text": "   registers defined under the `celldefine compiler directive.  This"
+    },
+    {
+      "line": 814,
+      "text": "   option is not supported with -debug_access, but use -debug_region"
+    },
+    {
+      "line": 816,
+      "text": "   0: enables ACC debug capabilities in all modules defined under the"
+    },
+    {
+      "line": 817,
+      "text": "      `celldefine compiler directive or defined in a library that you"
+    },
+    {
+      "line": 818,
+      "text": "      specify with the -v or -y compile-time options. "
+    },
+    {
+      "line": 819,
+      "text": "   1: disables ACC debug capabilities in all modules defined under the"
+    },
+    {
+      "line": 820,
+      "text": "      `celldefine compiler directive. "
+    },
+    {
+      "line": 821,
+      "text": "   2: disables ACC debug capabilities in all modules defined under the"
+    },
+    {
+      "line": 822,
+      "text": "      `celldefine compiler directive or defined in a library that you"
+    },
+    {
+      "line": 823,
+      "text": "      specify with the -v or -y compile-time options whether the modules"
+    },
+    {
+      "line": 824,
+      "text": "      in these libraries are defined under the `celldefine compiler"
+    },
+    {
+      "line": 825,
+      "text": "      directive or not."
+    },
+    {
+      "line": 826,
+      "text": "   ports: enables ACC debug capabilities on the ports of all modules"
+    },
+    {
+      "line": 827,
+      "text": "     defined under the `celldefine compiler directive and/or defined"
+    },
+    {
+      "line": 828,
+      "text": "     in a library that you specify with the -v or -y compile-time options"
+    },
+    {
+      "line": 829,
+      "text": "     whether the modules in these libraries are defined under the"
+    },
+    {
+      "line": 830,
+      "text": "     `celldefine compiler directive or not."
+    },
+    {
+      "line": 840,
+      "text": "   are under the `celldefine compiler directive."
+    },
+    {
+      "line": 841,
+      "text": ""
+    },
+    {
+      "line": 842,
+      "text": "+nospecify"
+    },
+    {
+      "line": 843,
+      "text": "   Suppresses module path delays and timing checks in specify blocks."
+    },
+    {
+      "line": 844,
+      "text": ""
+    },
+    {
+      "line": 845,
+      "text": "+notimingcheck"
+    },
+    {
+      "line": 846,
+      "text": "   Suppresses timing checks in specify blocks."
+    },
+    {
+      "line": 847,
+      "text": ""
+    },
+    {
+      "line": 848,
+      "text": "+nowarnTFMPC"
+    },
+    {
+      "line": 850,
+      "text": "   during Verilog Compilation.\t"
+    },
+    {
+      "line": 851,
+      "text": ""
+    },
+    {
+      "line": 852,
+      "text": "+no_notifier"
+    },
+    {
+      "line": 853,
+      "text": "   Disables the toggling of the notifier register that you specify in "
+    },
+    {
+      "line": 854,
+      "text": "   some timing check system tasks."
+    },
+    {
+      "line": 855,
+      "text": ""
+    },
+    {
+      "line": 856,
+      "text": "+no_tchk_msg"
+    },
+    {
+      "line": 857,
+      "text": "   Disables the display of timing check warning messages but does not "
+    },
+    {
+      "line": 858,
+      "text": "   disable the toggling of notifier registers in timing checks. This "
+    },
+    {
+      "line": 859,
+      "text": "   is also a runtime option."
+    },
+    {
+      "line": 860,
+      "text": ""
+    },
+    {
+      "line": 864,
+      "text": "+overlap"
+    },
+    {
+      "line": 865,
+      "text": "   Enables accurate simulation of multiple non-overlapping violation "
+    },
+    {
+      "line": 866,
+      "text": "   windows for the same signals specified with negative delay values "
+    },
+    {
+      "line": 867,
+      "text": "   in timing checks."
+    },
+    {
+      "line": 868,
+      "text": "   See the section on \"Using Multiple Non-Overlapping Windows\" in the"
+    },
+    {
+      "line": 869,
+      "text": "   VCS/VCSi User Guide."
+    },
+    {
+      "line": 870,
+      "text": ""
+    },
+    {
+      "line": 871,
+      "text": "+pathpulse"
+    },
+    {
+      "line": 872,
+      "text": "   Enables the search for the PATHPULSE$ specparam in specify blocks."
+    },
+    {
+      "line": 873,
+      "text": ""
+    },
+    {
+      "line": 874,
+      "text": "+pli_unprotected"
+    },
+    {
+      "line": 878,
+      "text": ""
+    },
+    {
+      "line": 879,
+      "text": "+plusarg_save "
+    },
+    {
+      "line": 880,
+      "text": "   Enter this option in the file that you specify with the -f option so "
+    },
+    {
+      "line": 881,
+      "text": "   that VCS passes to the simv executable the options beginning with a "
+    },
+    {
+      "line": 882,
+      "text": "   plus + character that follow in the file."
+    },
+    {
+      "line": 883,
+      "text": ""
+    },
+    {
+      "line": 884,
+      "text": "+plusarg_ignore "
+    },
+    {
+      "line": 885,
+      "text": "   Also enter this option in the file that you specify with the -f option "
+    },
+    {
+      "line": 886,
+      "text": "   so that VCS does not pass to the simv executable the  options that "
+    },
+    {
+      "line": 887,
+      "text": "   follow in the file. Use this option with the +plusarg_save option to "
+    },
+    {
+      "line": 888,
+      "text": "   specify that other options should not be passed."
+    },
+    {
+      "line": 889,
+      "text": ""
+    },
+    {
+      "line": 890,
+      "text": "+print+bidir+warn"
+    },
+    {
+      "line": 899,
+      "text": "   Specifies flagging as error and drive X for any path pulse whose "
+    },
+    {
+      "line": 900,
+      "text": "   width is less than or equal to the percentage of the module path "
+    },
+    {
+      "line": 901,
+      "text": "   delay specified by the number argument."
+    },
+    {
+      "line": 902,
+      "text": ""
+    },
+    {
+      "line": 903,
+      "text": "+pulse_int_e/<number>"
+    },
+    {
+      "line": 904,
+      "text": "   Same as the +pulse_e option but only applies to interconnect delays."
+    },
+    {
+      "line": 905,
+      "text": ""
+    },
+    {
+      "line": 906,
+      "text": "+pulse_int_r/<number>"
+    },
+    {
+      "line": 907,
+      "text": "   Same as the +pulse_r option but only applies to interconnect delays."
+    },
+    {
+      "line": 908,
+      "text": ""
+    },
+    {
+      "line": 909,
+      "text": "+pulse_on_event"
+    },
+    {
+      "line": 910,
+      "text": "   Specifies that when VCS encounters a pulse shorter than the module "
+    },
+    {
+      "line": 911,
+      "text": "   path delay, VCS waits until the module path delay elapses and then "
+    },
+    {
+      "line": 912,
+      "text": "   drives an X value on the module output port and displays an error "
+    },
+    {
+      "line": 913,
+      "text": "   message."
+    },
+    {
+      "line": 915,
+      "text": "+pulse_on_detect"
+    },
+    {
+      "line": 916,
+      "text": "   Specifies that when VCS encounters a pulse shorter than the module "
+    },
+    {
+      "line": 917,
+      "text": "   path delay, VCS immediately drives an X value on the module output "
+    },
+    {
+      "line": 918,
+      "text": "   port, and displays an error message. It does not wait until the "
+    },
+    {
+      "line": 919,
+      "text": "   module path delay elapses. "
+    },
+    {
+      "line": 920,
+      "text": ""
+    },
+    {
+      "line": 921,
+      "text": "+pulse_r/<number>"
+    },
+    {
+      "line": 922,
+      "text": "   Reject any pulse whose width is less than number percent of module "
+    },
+    {
+      "line": 923,
+      "text": "   path delay. "
+    },
+    {
+      "line": 924,
+      "text": ""
+    },
+    {
+      "line": 925,
+      "text": "+putprotect+<target_dir>"
+    },
+    {
+      "line": 947,
+      "text": "   Performs Radiant Technology  optimizations on your design. "
+    },
+    {
+      "line": 948,
+      "text": ""
+    },
+    {
+      "line": 949,
+      "text": "+sdfprotect[<file_suffix>]"
+    },
+    {
+      "line": 950,
+      "text": "   Creates a protected SDF file."
+    },
+    {
+      "line": 951,
+      "text": ""
+    },
+    {
+      "line": 952,
+      "text": "+sdf_nocheck_celltype"
+    },
+    {
+      "line": 953,
+      "text": "   Tells VCs not to check to make sure that the CELLTYPE entry in the "
+    },
+    {
+      "line": 954,
+      "text": "   SDF file does not match the module identifier for a module instance "
+    },
+    {
+      "line": 955,
+      "text": "   before back annotating delay values from the SDF file to the module "
+    },
+    {
+      "line": 956,
+      "text": "   instance."
+    },
+    {
+      "line": 957,
+      "text": ""
+    },
+    {
+      "line": 958,
+      "text": "+sdfverbose"
+    },
+    {
+      "line": 959,
+      "text": "   Enables the display of more than ten warning and more than ten error"
+    },
+    {
+      "line": 960,
+      "text": "   messages about SDF back annotation."
+    },
+    {
+      "line": 961,
+      "text": ""
+    },
+    {
+      "line": 962,
+      "text": "+spl_read"
+    },
+    {
+      "line": 971,
+      "text": ""
+    },
+    {
+      "line": 972,
+      "text": "+tetramax"
+    },
+    {
+      "line": 973,
+      "text": "   Enter this option when simulating TetraMAX's testbench in zero delay "
+    },
+    {
+      "line": 974,
+      "text": "   mode."
+    },
+    {
+      "line": 975,
+      "text": ""
+    },
+    {
+      "line": 978,
+      "text": ""
+    },
+    {
+      "line": 979,
+      "text": "+timopt+<clock_period>"
+    },
+    {
+      "line": 980,
+      "text": "   Enables Timing Check Optimizations, the +<clock_period> argument"
+    },
+    {
+      "line": 981,
+      "text": "   specifies the clock period of the fastest clock in the design. "
+    },
+    {
+      "line": 982,
+      "text": "   Please refer to the VCS/VCSi User Guide for more information on this"
+    },
+    {
+      "line": 983,
+      "text": "   option."
+    },
+    {
+      "line": 984,
+      "text": ""
+    },
+    {
+      "line": 985,
+      "text": "   Starts the Timopt timing optimizer. the +<clock_period> argument "
+    },
+    {
+      "line": 986,
+      "text": "   specifies the clock period of the fastest clock in the design. "
+    },
+    {
+      "line": 987,
+      "text": "   Timopt applies timing optimizations to your design. Timopt also "
+    },
+    {
+      "line": 988,
+      "text": "   writes a timopt.cfg file in the current directory. This file "
+    },
+    {
+      "line": 989,
+      "text": "   contains clock signals and module definitions of sequential devices "
+    },
+    {
+      "line": 991,
+      "text": "   +<clock_period> argument to obtain more Timopt optimizations."
+    },
+    {
+      "line": 992,
+      "text": ""
+    },
+    {
+      "line": 993,
+      "text": "+transport_int_delays"
+    },
+    {
+      "line": 994,
+      "text": "   Enables transport delays with full pulse control for single source "
+    },
+    {
+      "line": 995,
+      "text": "   nets. "
+    },
+    {
+      "line": 996,
+      "text": ""
+    },
+    {
+      "line": 997,
+      "text": "+transport_path_delays"
+    },
+    {
+      "line": 998,
+      "text": "   Turns on the transport behavior for I/O paths."
+    },
+    {
+      "line": 999,
+      "text": ""
+    },
+    {
+      "line": 1000,
+      "text": "+typdelays"
+    },
+    {
+      "line": 1001,
+      "text": "   Use typical value when min:typ:max values are encountered in delay "
+    },
+    {
+      "line": 1002,
+      "text": "   specifications and SDF files."
+    },
+    {
+      "line": 1003,
+      "text": ""
+    },
+    {
+      "line": 1004,
+      "text": "+v2k"
+    },
+    {
+      "line": 1007,
+      "text": "+vc[+abstract][+allhdrs][+list]"
+    },
+    {
+      "line": 1008,
+      "text": "   Enables the direct call of C/C++ functions in your Verilog code "
+    },
+    {
+      "line": 1009,
+      "text": "   using the DirectC interface. The optional suffixes specify the following:"
+    },
+    {
+      "line": 1010,
+      "text": ""
+    },
+    {
+      "line": 1011,
+      "text": "   +abstract"
+    },
+    {
+      "line": 1065,
+      "text": ""
+    },
+    {
+      "line": 1066,
+      "text": "+vcs+mipdexpand"
+    },
+    {
+      "line": 1067,
+      "text": "   Intended to use with +oldsdf. When back annotating SDF delay values "
+    },
+    {
+      "line": 1068,
+      "text": "   from an ASCII text SDF file at run-time, if the SDF file contains "
+    },
+    {
+      "line": 1069,
+      "text": "   PORT entries for the individual bits of a port, using this compile-"
+    },
+    {
+      "line": 1070,
+      "text": "   time option enables VCS to backannotate these PORT entry delay values."
+    },
+    {
+      "line": 1071,
+      "text": "   Similarly, using this compile-time option enables a PLI application"
+    },
+    {
+      "line": 1072,
+      "text": "   to pass delay values to individual bits of a port."
+    },
+    {
+      "line": 1073,
+      "text": ""
+    },
+    {
+      "line": 1074,
+      "text": "+verilog1995ext+<ext>"
+    },
+    {
+      "line": 1084,
+      "text": "   design entity instances that you instantiate in your Verilog design."
+    },
+    {
+      "line": 1085,
+      "text": ""
+    },
+    {
+      "line": 1086,
+      "text": "+vpi<+1>|<+1+assertions>"
+    },
+    {
+      "line": 1087,
+      "text": "   Enables the use of VPI PLI access routines, and is automatically included"
+    },
+    {
+      "line": 1088,
+      "text": "   as part of -debug_access."
+    },
+    {
+      "line": 1265,
+      "text": "   It's a way of keeping VCS from overwriting these files from a prvious"
+    },
+    {
+      "line": 1266,
+      "text": "   simulation."
+    },
+    {
+      "line": 1267,
+      "text": "   If you just specify a name the alternatively named files will be in the "
+    },
+    {
+      "line": 1268,
+      "text": "   default directories. If you specify a pathname, with an  argument "
+    },
+    {
+      "line": 1269,
+      "text": "   containing the slash character /, you specify a different location and "
+    },
+    {
+      "line": 1270,
+      "text": "   name for these files, for example:"
+    },
+    {
+      "line": 1271,
+      "text": ""
+    },
+    {
+      "line": 1277,
+      "text": "-ova_report [<filename>]"
+    },
+    {
+      "line": 1278,
+      "text": "   Specifies writing an OpenVera Assertions report file. The default file "
+    },
+    {
+      "line": 1279,
+      "text": "   name and location is simv.vdb/report/ova.report but you can specify "
+    },
+    {
+      "line": 1280,
+      "text": "   a different name and location as an argument to this option."
+    },
+    {
+      "line": 1281,
+      "text": ""
+    },
+    {
+      "line": 1345,
+      "text": "      simulation time step."
+    },
+    {
+      "line": 1346,
+      "text": ""
+    },
+    {
+      "line": 1347,
+      "text": "+maxdelays"
+    },
+    {
+      "line": 1348,
+      "text": "   Species using the compiled SDF file for maximum delays generated"
+    },
+    {
+      "line": 1349,
+      "text": "   by the +allmtm compile-time option."
+    },
+    {
+      "line": 1350,
+      "text": "   Also specifies using maximum delays for SWIFT VMC or SmartModels"
+    },
+    {
+      "line": 1351,
+      "text": "   or Synopsys hardware models if you also enter the"
+    },
+    {
+      "line": 1352,
+      "text": "   +override_model_delays runtime option."
+    },
+    {
+      "line": 1353,
+      "text": " "
+    },
+    {
+      "line": 1354,
+      "text": "+mindelays"
+    },
+    {
+      "line": 1355,
+      "text": "   Specifies using the compiled SDF file for minimum delays generated"
+    },
+    {
+      "line": 1356,
+      "text": "   by the +allmtm compile-time option."
+    },
+    {
+      "line": 1357,
+      "text": "   Also specifies using minimum delays for SWIFT VMC or SmartModels"
+    },
+    {
+      "line": 1358,
+      "text": "   or Synopsys hardware models if you also enter the"
+    },
+    {
+      "line": 1359,
+      "text": "   +override_model_delays runtime option."
+    },
+    {
+      "line": 1360,
+      "text": " "
+    },
+    {
+      "line": 1361,
+      "text": "+no_notifier"
+    },
+    {
+      "line": 1362,
+      "text": "   Suppresses the toggling of notifier registers that are optional"
+    },
+    {
+      "line": 1363,
+      "text": "   arguments of timing check system tasks."
+    },
+    {
+      "line": 1364,
+      "text": " "
+    },
+    {
+      "line": 1365,
+      "text": "+no_pulse_msg"
+    },
+    {
+      "line": 1368,
+      "text": " "
+    },
+    {
+      "line": 1369,
+      "text": "+no_tchk_msg"
+    },
+    {
+      "line": 1370,
+      "text": "   Disables the display of timing check warning messages but does not"
+    },
+    {
+      "line": 1371,
+      "text": "   disable the toggling of notifier registers in timing checks. This"
+    },
+    {
+      "line": 1372,
+      "text": "   is also a compile-time option."
+    },
+    {
+      "line": 1373,
+      "text": " "
+    },
+    {
+      "line": 1374,
+      "text": "+notimingcheck"
+    },
+    {
+      "line": 1375,
+      "text": "   Suppress timing checks."
+    },
+    {
+      "line": 1376,
+      "text": ""
+    },
+    {
+      "line": 1377,
+      "text": "+ntb_cache_dir=<path_name_to_directory>"
+    },
+    {
+      "line": 1428,
+      "text": "   remaining code within the present simulation time."
+    },
+    {
+      "line": 1429,
+      "text": ""
+    },
+    {
+      "line": 1430,
+      "text": "+override_model_delays"
+    },
+    {
+      "line": 1431,
+      "text": "   Enables you to use the +mindelays, +typdelays, or +maxdelays runtime"
+    },
+    {
+      "line": 1432,
+      "text": "   options to specify timing for SWIFT SmartModels or Synopsys hardware"
+    },
+    {
+      "line": 1433,
+      "text": "   models."
+    },
+    {
+      "line": 1434,
+      "text": ""
+    },
+    {
+      "line": 1435,
+      "text": "+sdfverbose"
+    },
+    {
+      "line": 1436,
+      "text": "   Enables the display of more than ten warning and ten error messages"
+    },
+    {
+      "line": 1437,
+      "text": "   about SDF back annotation."
+    },
+    {
+      "line": 1438,
+      "text": ""
+    },
+    {
+      "line": 1439,
+      "text": "+typdelays"
+    },
+    {
+      "line": 1440,
+      "text": "   Specifies using the compiled SDF file for typical delays generated"
+    },
+    {
+      "line": 1441,
+      "text": "   by the +allmtm compile-time option."
+    },
+    {
+      "line": 1442,
+      "text": "   Also specifies using typical delays for SWIFT VMC or SmartModels"
+    },
+    {
+      "line": 1443,
+      "text": "   or Synopsys hardware models if you also enter the"
+    },
+    {
+      "line": 1444,
+      "text": "   +override_model_delays runtime option."
+    },
+    {
+      "line": 1445,
+      "text": ""
+    },
+    {
+      "line": 1446,
+      "text": "+vcs+dumparrays"
+    },
+    {
+      "line": 1510,
+      "text": "   When this happens you can use this option to disable such aliasing "
+    },
+    {
+      "line": 1511,
+      "text": "   for all ports whenever mip, mipb capabilities have been specified. "
+    },
+    {
+      "line": 1512,
+      "text": "   This option works for regular sdf annotation and not for compiled "
+    },
+    {
+      "line": 1513,
+      "text": "   SDF."
+    },
+    {
+      "line": 1514,
+      "text": ""
+    },
+    {
+      "line": 1515,
+      "text": "+vcs+nostdout"
+    },
+    {
+      "line": 1521,
+      "text": "   Stop simulation at time <t>. <ht> is the high 32 bits of a time "
+    },
+    {
+      "line": 1522,
+      "text": "   value greater than 32 bits (optional)."
+    },
+    {
+      "line": 1523,
+      "text": "   See the section on \"Specifying A Long Time Before Stopping Simulation\""
+    },
+    {
+      "line": 1524,
+      "text": "   in the VCS/VCSi User Guide."
+    },
+    {
+      "line": 1525,
+      "text": ""
+    },
+    {
+      "line": 1531,
+      "text": ""
+    },
+    {
+      "line": 1532,
+      "text": ""
+    },
+    {
+      "line": 1533,
+      "text": "Options for Specifying How VCS Writes the VPD File"
+    },
+    {
+      "line": 1534,
+      "text": "**************************************************"
+    },
+    {
+      "line": 1535,
+      "text": ""
+    },
+    {
+      "line": 1550,
+      "text": "   registers in your design, whichever is larger. "
+    },
+    {
+      "line": 1551,
+      "text": "   You can use this option to override the buffer size that VCS "
+    },
+    {
+      "line": 1552,
+      "text": "   calculates for the buffer size. You specify a buffer size in "
+    },
+    {
+      "line": 1553,
+      "text": "   megabytes."
+    },
+    {
+      "line": 1554,
+      "text": ""
+    }
+  ],
+  "returncode": 0,
+  "scope": "Native help text only; no timing/notifier/delay option is selected or applied",
+  "total_lines": 1637
+}
