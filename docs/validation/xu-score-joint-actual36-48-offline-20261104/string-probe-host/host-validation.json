@@ -1,0 +1,139 @@
+{
+  "status": "HOST_ICARUS_ONLY_NOT_SERVER_VCS",
+  "steps": [
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-fPIC",
+        "-shared",
+        "-Wall",
+        "-Wextra",
+        "-Wshadow",
+        "-Wstrict-prototypes",
+        "-Werror",
+        "-O2",
+        "-isystem",
+        "/usr/include/iverilog",
+        "tools/ppa/xu_joint_activity/xu_joint_string_probe.c",
+        "-o",
+        "build/xu-joint-string-probe-host-final-20261104/probe.vpi"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-s",
+        "tb_xu_joint_string_probe",
+        "-o",
+        "build/xu-joint-string-probe-host-final-20261104/probe.vvp",
+        "tests/ppa/tb_xu_joint_string_probe.sv"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "vvp",
+        "-Mbuild/xu-joint-string-probe-host-final-20261104",
+        "-mprobe",
+        "build/xu-joint-string-probe-host-final-20261104/probe.vvp"
+      ],
+      "returncode": 0
+    }
+  ],
+  "source_identities": [
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_joint_activity/xu_joint_string_probe.c",
+      "sha256": "ca23fe759398ae38dfe2ebc2ea9c776cbe13c78e7ab30b16789b5699225a56d0"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tools/ppa/xu_joint_activity/xu_joint_string_probe.py",
+      "sha256": "009f9f4421609c528e9712b56c8a8145a574655b00da37458624e269621a99d1"
+    },
+    {
+      "path": "/home/mxhanks/Projects/ChipContest-xu-sram-joint-activity/tests/ppa/tb_xu_joint_string_probe.sv",
+      "sha256": "0706ac4290b922752615fb42805340a9acce491c8c0322d1ca03ff2d8b6ca137"
+    },
+    {
+      "path": "/usr/include/iverilog/vpi_user.h",
+      "sha256": "9365a319491d22ba7ee2d38ab334afd37b6d09e2932545140c6bc8bd99daa250"
+    }
+  ],
+  "exact_match_cases": 18,
+  "case_keys": [
+    [
+      0,
+      10
+    ],
+    [
+      0,
+      11
+    ],
+    [
+      0,
+      12
+    ],
+    [
+      0,
+      20
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      22
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      11
+    ],
+    [
+      1,
+      12
+    ],
+    [
+      1,
+      20
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      1,
+      22
+    ],
+    [
+      2,
+      10
+    ],
+    [
+      2,
+      11
+    ],
+    [
+      2,
+      12
+    ],
+    [
+      2,
+      20
+    ],
+    [
+      2,
+      21
+    ],
+    [
+      2,
+      22
+    ]
+  ]
+}

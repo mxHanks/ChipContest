@@ -1,0 +1,28 @@
+{
+  "initialization": "three real instances; two normal write/read sequences seed output0 and outputffff; third never enabled and Q remains X",
+  "model_sha256": "81b55d87d5e6821d44037d6f0290ec89c9edb9582eb1932957f181aefc300d51",
+  "model_source": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/vendor-models-private-01/sram-models-private-01/RAMSP1024X16/RAMSP1024X16.v",
+  "negative_modes": [
+    "CEN enabled/read uninitialized word",
+    "RET changed to X"
+  ],
+  "positive_cycles": 256,
+  "runs": [
+    {
+      "expected": "PASS",
+      "mode": 0,
+      "returncode": 0
+    },
+    {
+      "expected": "premise-breaking negative rejected",
+      "mode": 1,
+      "returncode": 1
+    },
+    {
+      "expected": "premise-breaking negative rejected",
+      "mode": 2,
+      "returncode": 1
+    }
+  ],
+  "status": "ACTUAL_FROZEN_VENDOR_MODEL_HOST_ICARUS_HOLD_CHECKED_NOT_SERVER_VCS_OR_ENERGY"
+}

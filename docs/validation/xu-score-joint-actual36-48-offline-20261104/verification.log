@@ -1,0 +1,17 @@
+COMMAND ['/usr/bin/python', 'tools/ppa/xu_joint_activity/xu_sram_joint_actual_review.py', '--raw-dir', 'docs/validation/xu-score-joint-actual36-48-offline-20261104/raw', '--manifest', 'docs/validation/xu-score-joint-actual36-48-offline-20261104/original-export-manifest.json', '--out', 'docs/validation/xu-score-joint-actual36-48-offline-20261104/review.json', '--expanded-out', 'docs/validation/xu-score-joint-actual36-48-offline-20261104/body-audit.json.xz', '--vendor-model', '/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-s0/vendor-models-private-01/sram-models-private-01/RAMSP1024X16/RAMSP1024X16.v']
+RETURNCODE 0
+{"actual36": "ACTUAL_TASK_PASS_BODY336_INTEGER_PASS_TRANSACTION_HEADER_INVALID_SIDECAR_ABSENT", "actual48": "PASS_OFFLINE_PARTIAL_API_REVIEW_NOT_ENERGY_QUALIFIED", "closed_Q_arcs": 2688, "hold_macros": 168, "status": "OFFLINE_REVIEW_COMPLETE_NOT_WHOLE_SOC_ENERGY"}
+COMMAND ['/usr/bin/python', '-m', 'unittest', 'discover', '-s', 'tests/host', '-p', 'test_xu_joint_actual_review.py', '-v']
+RETURNCODE 0
+test_actual336_integer_audit_preserves_invalid_original_header (test_xu_joint_actual_review.ActualEvidence.test_actual336_integer_audit_preserves_invalid_original_header) ... ok
+test_actual48_full_query_review_and_reject_real_error (test_xu_joint_actual_review.ActualEvidence.test_actual48_full_query_review_and_reject_real_error) ... ok
+test_actual48_value_and_missing_row_are_rejected (test_xu_joint_actual_review.ActualEvidence.test_actual48_value_and_missing_row_are_rejected) ... ok
+test_counter_corruption_rejected_by_independent_projection_marginals (test_xu_joint_actual_review.ActualEvidence.test_counter_corruption_rejected_by_independent_projection_marginals) ... ok
+test_zero_dwell_unknown_control_edge_breaks_hold (test_xu_joint_actual_review.ActualEvidence.test_zero_dwell_unknown_control_edge_breaks_hold) ... ok
+test_stream_old_state_corruption_is_rejected (test_xu_joint_actual_review.StreamSubset.test_stream_old_state_corruption_is_rejected) ... ok
+test_stream_subset_original_boundary_bytes_and_flow (test_xu_joint_actual_review.StreamSubset.test_stream_subset_original_boundary_bytes_and_flow) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 3.277s
+
+OK
