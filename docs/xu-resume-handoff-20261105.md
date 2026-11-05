@@ -120,3 +120,33 @@ VCS两条Cannot open/readmem告警指向`accel_soc.verilog.verilog`，程序未�
 
 当前VNC PTY29641，FTP PTY12006；旧PTY已失效。grid159已q关闭。archive159 agent负责159归档以及157未完成目录收尾，
 勿覆盖其untracked；所有提交仍commit --only自有路径。160单文件已上传Desktop/defer160.py。
+
+## 13:00后最新范围：只S2e/S2c
+
+用户最终明确只保留 **S2e主方案、S2c对照基线**，其余候选均不追加评测（包括compact）。
+此决定取代前述八候选、六候选和保留compact的计划。已提交161六候选修复`439ebb1`不部署。
+[最新计划](xu-two-candidate-plan-20261105.md)与中心台账顶部均已更新。
+
+`934bae1`163将16项历史activity145/power146精确纳入行政暂停范围。服务器实际apply返回
+`DEFERRED_ORIGINAL_WORKERS_PRESERVED_CONTROLLER_RESUMED_NOT_QUALIFIED`，原回执：
+`B/unified-experiment-control-20261105-150.scope-two163-20261105-125942-fabdbee8ecb1/receipt.json`。
+当时旧24节点全部真实终态；原8活动因路径超时失败、8功耗BLOCKED、原总report已结束。
+没有worker被信号，没有删除/改写任何原结果或注册；同一冻结153总控已恢复。不要重复apply163。
+
+`0b863b5`157/159原件已独立完整归档，见各validation README；不再有上一节的untracked归档待完成。
+`4797770`[165两组比较](validation/xu-score-two-candidate165-20261105/README.md)：12对周期/功耗/能量和日志SHA完整，
+S2c原图9c16面积0.294801838mm²/诊断能量2.755345mJ；S2e原图0cfac面积0.2950003804mm²/诊断能量2.454516mJ。
+周期−12.3467%、诊断能量−10.9180%。S2e最新155图3440182e面积0.3003096339mm²单列，energy=null，不能拼接130能量。
+所有仍NOT_QUALIFIED。
+
+`f7dd86a`164修复156将原生“No nets found…”明确空列表误报为SHA不一致。原156保留，164继续完整SHA/前后身份、
+逐行提取+独立rawblock全文重读。六runtime+manifest已上传`D/xu-s2e-streamaudit164/`。
+`7e243d1`登记脚本168与唯一新job已冻结，register168命令已送服务器，须capture确认真实登记与worker，再观察同一PID，不可重启。
+输出`B/s2e-native-pin-streamaudit-20261105-164`；source仅own130，duration5788953333333fs；不套S2c旧duration。
+
+两条并行本地实施：agent two_qualification_audit在`build/xu-s2e-final-power166`做155目标独立功耗adapter（capture120/own89-109，target155三SVF证明，原SDC+scope方法显式）；
+agent scope_two163在`build/xu-s2c-observe167`准备147原fatal之前八信号/原notifier被动观测。两者未远程，不因完成工具就标资格。
+功能定位使用diagnosing-bugs技能。166须独立审阅capture/target分离和时钟模板，不能只替换旧NETLIST常量。
+
+当前VNC PTY29641、FTP PTY86945；Workspace1。最新daily入口仍campaign154.py status，旧24任务原样保留、新S2e/S2c任务继续追加同总控。
+本机既定01:00关机不改，服务器分离进程独立运行。当前无新增生产Chisel/RTL修改。
