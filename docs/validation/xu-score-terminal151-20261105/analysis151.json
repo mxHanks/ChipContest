@@ -1,0 +1,236 @@
+{
+  "archive_payload_bytes": 50892386,
+  "archive_payload_files": 191,
+  "historical_process_observation": [
+    {
+      "alive_now": false,
+      "command": "",
+      "epoch": 1793847553.5048144,
+      "name": "s2e-full-soc-power12-20261105-130",
+      "pid": 135097,
+      "status": "EXECUTED_12_TASKS_DIAGNOSTIC_REVIEW_PENDING"
+    },
+    {
+      "alive_now": false,
+      "command": "",
+      "epoch": 1793847553.5064113,
+      "name": "s2e-own-timing-repair-20261105-134",
+      "pid": 161452,
+      "status": "FAILED_NOT_QUALIFIED"
+    },
+    {
+      "alive_now": false,
+      "command": "",
+      "epoch": 1793847553.508104,
+      "name": "full-soc-rdc-next-20261105-142",
+      "pid": 167711,
+      "status": "EXECUTED_SAME116_READ_ONLY_RECOVERY_VISIBILITY_NOT_QUALIFIED"
+    },
+    {
+      "alive_now": true,
+      "command": "/bin/python3 -B /storage2/2026contest/server4/s4_23usr/Desktop/xu-experiment-control150/xu_experiments.py run --out /storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/unified-experiment-control-20261105-150 ",
+      "epoch": 1793847553.5083742,
+      "name": "control150",
+      "pid": 159584
+    }
+  ],
+  "limitations": [
+    "No numerical qualification, complete150MHz timing closure, or contest energy/score follows.",
+    "554/204/142 server input before/after receipts are equal; not all source/library bodies were returned locally.",
+    "130 original measured SAIF, native pin reports, and other detailed reports remain server-side with receipt hashes.",
+    "Both134 native-cells.tsv bodies were deliberately omitted; their returned hashes are not independent local body validation.",
+    "134 parser failure and every prior unknown/untested check are retained.",
+    "The live151 process observation is historical, not a current liveness check."
+  ],
+  "locally_matched_server_output_receipts": 107,
+  "power130": {
+    "arithmetic_scope": "Rounded native full-SoC power multiplied by physical task duration; no contest energy or score.",
+    "duration_fs_per_task": 5788953333333,
+    "formal_elapsed_cycles_per_task": 868343,
+    "formal_elapsed_total_cycles": 10420116,
+    "input_map_sha256": "340b1e64f817345253668ccd1393829c6646e87dd6853379d3d3ad1bdb6cf2ba",
+    "native_marker_counts": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "native_returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "native_tasks": 12,
+    "original_inclusive_cycles_per_task": 868344,
+    "reported_power_mean_w": "0.03533333333333333333333333333",
+    "server_input_before_after_equal": true,
+    "server_input_before_after_records": 554,
+    "status": "EXECUTED_12_TASKS_DIAGNOSTIC_REVIEW_PENDING",
+    "sum_diagnostic_energy_j": "0.0024545162133331920",
+    "unknown_q_receipts_per_task": {
+      "total_q": 5376,
+      "tx_full_window": 4256,
+      "tx_positive": 5280
+    },
+    "unknown_summary_scope": "Prepared/execution receipts agree; original SAIF and native pin reports are not in151."
+  },
+  "qualification": "NOT_QUALIFIED",
+  "rdc142": {
+    "enabled_async_ck_arcs": 10,
+    "full116_132_142_untested_multiset_equal": true,
+    "native_run": {
+      "log_sha256": "87c1ca090eb2ccb36df3709cddd5f1b4e60b3a5b92a543c62a279f2b719126df",
+      "marker_count": 1,
+      "returncode": 0,
+      "script_sha256": "89bd7559eca5e8737593346721a5a85c36fab127d4b3897e8e399870f4bbc7db",
+      "tool": "pt"
+    },
+    "queries": 21,
+    "recovery_qualification": "NOT_PROVEN",
+    "reports": [
+      {
+        "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg",
+        "finite_recovery_slacks": 0,
+        "index": 0,
+        "matched_filtered": "NO_PATH_UNKNOWN",
+        "recovery_qualification": "NOT_PROVEN",
+        "source_kind": "HF_RESET",
+        "unfiltered": "UNCONSTRAINED_PATH_DISPLAY_ONLY_NOT_RECOVERY_PROOF"
+      },
+      {
+        "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg",
+        "finite_recovery_slacks": 0,
+        "index": 1,
+        "matched_filtered": "NO_PATH_UNKNOWN",
+        "recovery_qualification": "NOT_PROVEN",
+        "source_kind": "HF_RESET",
+        "unfiltered": "UNCONSTRAINED_PATH_DISPLAY_ONLY_NOT_RECOVERY_PROOF"
+      },
+      {
+        "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg",
+        "finite_recovery_slacks": 0,
+        "index": 2,
+        "matched_filtered": "NO_PATH_UNKNOWN",
+        "recovery_qualification": "NOT_PROVEN",
+        "source_kind": "HF_RESET",
+        "unfiltered": "UNCONSTRAINED_PATH_DISPLAY_ONLY_NOT_RECOVERY_PROOF"
+      },
+      {
+        "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg",
+        "finite_recovery_slacks": 0,
+        "index": 3,
+        "matched_filtered": "NO_PATH_UNKNOWN",
+        "recovery_qualification": "NOT_PROVEN",
+        "source_kind": "HF_RESET",
+        "unfiltered": "UNCONSTRAINED_PATH_DISPLAY_ONLY_NOT_RECOVERY_PROOF"
+      },
+      {
+        "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg",
+        "finite_recovery_slacks": 0,
+        "index": 4,
+        "matched_filtered": "NO_PATH_UNKNOWN",
+        "recovery_qualification": "NOT_PROVEN",
+        "source_kind": "HF_RESET",
+        "unfiltered": "UNCONSTRAINED_PATH_DISPLAY_ONLY_NOT_RECOVERY_PROOF"
+      },
+      {
+        "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg",
+        "finite_recovery_slacks": 0,
+        "index": 0,
+        "matched_filtered": "NO_PATH_UNKNOWN",
+        "recovery_qualification": "NOT_PROVEN",
+        "source_kind": "ANY_ENDPOINT_SOURCE",
+        "unfiltered": "UNCONSTRAINED_PATH_DISPLAY_ONLY_NOT_RECOVERY_PROOF"
+      },
+      {
+        "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg",
+        "finite_recovery_slacks": 0,
+        "index": 1,
+        "matched_filtered": "NO_PATH_UNKNOWN",
+        "recovery_qualification": "NOT_PROVEN",
+        "source_kind": "ANY_ENDPOINT_SOURCE",
+        "unfiltered": "UNCONSTRAINED_PATH_DISPLAY_ONLY_NOT_RECOVERY_PROOF"
+      }
+    ],
+    "server_input_before_after_equal": true,
+    "server_input_before_after_records": 463,
+    "status": "EXECUTED_SAME116_READ_ONLY_RECOVERY_VISIBILITY_NOT_QUALIFIED",
+    "unchanged_case_exceptions_clocks": true,
+    "untested_rows": 27124,
+    "visibility_gaps": 7
+  },
+  "schema": "xu-terminal151-independent-audit-v1",
+  "timing134": {
+    "completed_native_runs": [
+      {
+        "log_sha256": "2cfd091d3f709089547f9af8f08aa7afad87e523bb895b9e66ce6094c2f87a2a",
+        "marker_count": 1,
+        "returncode": 0,
+        "script_sha256": "6e11192355d8ce3b54b9dac56638db968002e807dd3892fe80c0b3e854e81ce2",
+        "tool": "dc"
+      },
+      {
+        "log_sha256": "d350014553d54a687a6c04ff0e537f902fc897fe846101305836b669093a9e74",
+        "marker_count": 1,
+        "returncode": 0,
+        "script_sha256": "f6e4766cd4512faaf4754a227446cefa51180e6e9e00fb579ec35e5381e5212d",
+        "tool": "pt"
+      },
+      {
+        "log_sha256": "a34463a29f28d1f8a84457afbc5af64ec0d19ea5c53fbe0c66182f58622b2f94",
+        "marker_count": 1,
+        "returncode": 0,
+        "script_sha256": "cbd3945932d07322bf3d3b92e92d736940693f8f943c7ede8ae681c9ee58103b",
+        "tool": "dc"
+      },
+      {
+        "log_sha256": "8c7dd7ce8aacd75756f5660022ac34a6ae1ed1a25ecf109fa266f03978d46cc7",
+        "marker_count": 1,
+        "returncode": 0,
+        "script_sha256": "1344917b0fc72be4986b73acdc965e701f401b41b719de4c308bf6c8c93d9955",
+        "tool": "dc"
+      },
+      {
+        "log_sha256": "a6a6acb869cf425a3a6c01600a84aab2ad2105e6141f662dccacddf0af3dc0a3",
+        "marker_count": 1,
+        "returncode": 0,
+        "script_sha256": "61c3c88875944bcc6bbda097376d17d0dd9dec054fd0689a1187c7f71f7a6f52",
+        "tool": "pt"
+      }
+    ],
+    "completion_scope": "Five native commands passed; Python failed before repair-plan/final PT/full FM. No timing closure.",
+    "error": "Error: field larger than field limit (131072)",
+    "omitted_large_text": [
+      {
+        "bytes": 98866265,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2e-own-timing-repair-20261105-134/original-inventory/native-cells.tsv",
+        "sha256": "7c7f86330c889c21f9c6229a99067d424e0d9305759ff7ff419eff68ee429a8d"
+      },
+      {
+        "bytes": 99406716,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2e-own-timing-repair-20261105-134/posthold-inventory/native-cells.tsv",
+        "sha256": "2d7e3518ee0db58b25e71f97e2eb6688b410b85328014929561b96dd9e29946c"
+      }
+    ],
+    "server_input_before_after_equal": true,
+    "server_input_before_after_records": 204,
+    "status": "FAILED_NOT_QUALIFIED"
+  }
+}
