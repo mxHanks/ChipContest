@@ -1,0 +1,445 @@
+{
+  "checked_controller_sha256": "877a1624d45bdae7dd5095809f69e3e9c95eafafac17f354fe52f9781c9ef025",
+  "checked_plan_sha256": "8a3e6ac5b4cd7ba3cf039d4a00b653825f541b5375911775337a13d472cc7808",
+  "checks": [
+    {
+      "files": [
+        "run170.py",
+        "register170.py",
+        "build170.py"
+      ],
+      "name": "Python3.6 runtime and builder grammar",
+      "status": "PASS"
+    },
+    {
+      "name": "registration pins original153 and plan; registration only",
+      "plan_sha256": "8a3e6ac5b4cd7ba3cf039d4a00b653825f541b5375911775337a13d472cc7808",
+      "source_review": "Existing controller identity and scope163 receipt are required; same IDs require byte identity; no init/start/kill/Popen.",
+      "status": "PASS",
+      "worker": {
+        "bytes": 19039,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-campaign-batch154/control153/xu_experiments.py",
+        "sha256": "877a1624d45bdae7dd5095809f69e3e9c95eafafac17f354fe52f9781c9ef025"
+      }
+    },
+    {
+      "method": "runpy.run_path(entry, run_name=__main__) in same process",
+      "name": "wrapper has no exec or subprocess spawn",
+      "status": "PASS"
+    },
+    {
+      "name": "three job manifests and all19 frozen input references checked",
+      "reference_count": 19,
+      "status": "PASS",
+      "unique_frozen_files": 15
+    },
+    {
+      "name": "kernel argv process markers unique; original166 CLI retained in frozen command JSON",
+      "status": "PASS"
+    },
+    {
+      "dependencies": {
+        "s2c_unknown167": [
+          {
+            "id": "s2e_streamaudit164",
+            "policy": "terminal"
+          }
+        ],
+        "s2e_final155_power12_166": [
+          {
+            "id": "s2e_final155_preflight166",
+            "policy": "success"
+          }
+        ],
+        "s2e_final155_preflight166": [
+          {
+            "id": "s2c_unknown167",
+            "policy": "terminal"
+          },
+          {
+            "id": "s2e_timing155",
+            "policy": "success"
+          }
+        ]
+      },
+      "name": "dependency order and terminal statuses match actual167 and166 contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "original153 whole-worker native slot retained",
+      "source_evidence": "observe runs even for DONE rows and waits while a matching worker remains; guard refuses any existing native/reserved/live worker. No controller source changes.",
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/run170.py",
+        "--command",
+        "/tmp/xu170-wrapper-review-vtbk83zi/command.json",
+        "--out",
+        "/tmp/xu170-wrapper-review-vtbk83zi/only-live-output"
+      ],
+      "fixture_scope": "Temporary stub only, never actual166 or native EDA.",
+      "name": "temporary stub proves same PID, original argv, __file__, __main__, unchanged kernel argv",
+      "process_pid": 234641,
+      "result": {
+        "argv": [
+          "/tmp/xu170-wrapper-review-vtbk83zi/stub.py",
+          "campaign",
+          "--target-root",
+          "HISTORICAL_OTHER_MARKER",
+          "--preflight-root",
+          "PRIOR_JOB_MARKER",
+          "--out",
+          "/tmp/xu170-wrapper-review-vtbk83zi/only-live-output"
+        ],
+        "file": "/tmp/xu170-wrapper-review-vtbk83zi/stub.py",
+        "name": "__main__",
+        "pid": 234641,
+        "proc": [
+          "/usr/bin/python3",
+          "-B",
+          "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/run170.py",
+          "--command",
+          "/tmp/xu170-wrapper-review-vtbk83zi/command.json",
+          "--out",
+          "/tmp/xu170-wrapper-review-vtbk83zi/only-live-output",
+          ""
+        ],
+        "status": "STUB_ONLY_NOT_NATIVE"
+      },
+      "returncode": 0,
+      "status": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "temporary stub SystemExit7 propagated",
+      "returncode": 7,
+      "status": "PASS"
+    },
+    {
+      "name": "incorrect entry SHA rejected before stub execution",
+      "returncode": 1,
+      "status": "PASS",
+      "stderr_sha256": "d39a5d24112e7ff027167c8d9557e7b763b16b122504cbea21ee1048260ea952"
+    },
+    {
+      "name": "all nine170 source/declaration files unchanged before and after",
+      "source_files": [
+        {
+          "bytes": 5524,
+          "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/build170.py",
+          "sha256": "98a5185d24a18fd1c67cf5a2c0e0076964cf6dc8590118f8dc52d34c47bead51"
+        },
+        {
+          "bytes": 1235,
+          "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/manifest170.json",
+          "sha256": "8a3e6ac5b4cd7ba3cf039d4a00b653825f541b5375911775337a13d472cc7808"
+        },
+        {
+          "bytes": 3732,
+          "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/register170.py",
+          "sha256": "71c55a539aa19ae588ece3dee7940c408a450430169897187fa93f4cd94b0e3c"
+        },
+        {
+          "bytes": 1064,
+          "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/run170.py",
+          "sha256": "93c3cd323449252f9815175c5f587faa8c2fb31a22653c31c71751a11122df7d"
+        },
+        {
+          "bytes": 3383,
+          "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/s2c_unknown167.json",
+          "sha256": "f89cb4f5bea1d66cc1c827727628ec66263b33003007993aae100218ba743f03"
+        },
+        {
+          "bytes": 1692,
+          "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/s2e_final155_power12_166-command.json",
+          "sha256": "3d72014321ad17d70d6e9480a98927dd6312fd53e80aeeed5cc94837360ba0cc"
+        },
+        {
+          "bytes": 2387,
+          "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/s2e_final155_power12_166.json",
+          "sha256": "e61cd7cb3d605f69f9f7eb8247c4490e698c499e85981acf0bf24ab1929a46b4"
+        },
+        {
+          "bytes": 1555,
+          "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/s2e_final155_preflight166-command.json",
+          "sha256": "9b08b46996bb2bb8da02ac8dc0d947107dcc3a79b780e9206e790e1e94f8c395"
+        },
+        {
+          "bytes": 2483,
+          "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/s2e_final155_preflight166.json",
+          "sha256": "9846d8fd6d445b8ff86aa2710e8b840e6d8a283ea011da709bd8be23dd4070d1"
+        }
+      ],
+      "status": "PASS"
+    }
+  ],
+  "command": "python3 -B build/xu-two-candidate-batch170-review/check170_readonly.py",
+  "frozen_references": [
+    {
+      "job": "s2c_unknown167",
+      "local": {
+        "bytes": 16539,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/unknown167.py",
+        "sha256": "241fd58249e872ab0c06faa107b6e33221cc4b2622c7b267882cf95a8517a011"
+      },
+      "remote": {
+        "bytes": 16539,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2c-unknown167/unknown167.py",
+        "sha256": "241fd58249e872ab0c06faa107b6e33221cc4b2622c7b267882cf95a8517a011"
+      }
+    },
+    {
+      "job": "s2c_unknown167",
+      "local": {
+        "bytes": 8143,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/observer167.c.in",
+        "sha256": "b805ad524c23c074fb9dc54699d74831c5e2089145b62fc2f4a4bd7359259890"
+      },
+      "remote": {
+        "bytes": 8143,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2c-unknown167/observer167.c.in",
+        "sha256": "b805ad524c23c074fb9dc54699d74831c5e2089145b62fc2f4a4bd7359259890"
+      }
+    },
+    {
+      "job": "s2c_unknown167",
+      "local": {
+        "bytes": 5091,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/manifest167.json",
+        "sha256": "14799ee5a5a0f177a1cfd2a9c60a7c09e5051a95f159a24b2a71ec2a97c5ff48"
+      },
+      "remote": {
+        "bytes": 5091,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2c-unknown167/manifest167.json",
+        "sha256": "14799ee5a5a0f177a1cfd2a9c60a7c09e5051a95f159a24b2a71ec2a97c5ff48"
+      }
+    },
+    {
+      "job": "s2c_unknown167",
+      "local": {
+        "bytes": 86446,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-campaign-batch154/private147/actual133-inventory.json",
+        "sha256": "14a0aec91b4ceca013861ce7f4703142e90a8c762fe8c6da632f28a13ccdabb9"
+      },
+      "remote": {
+        "bytes": 86446,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-campaign-batch154/private147/actual133-inventory.json",
+        "sha256": "14a0aec91b4ceca013861ce7f4703142e90a8c762fe8c6da632f28a13ccdabb9"
+      }
+    },
+    {
+      "job": "s2c_unknown167",
+      "local": {
+        "bytes": 26274,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-campaign-batch154/private147/frozen-s2c-accel.v",
+        "sha256": "1a088c873c5e5de84ca92fdc74d693a326e430cc6191128979f573fe4e64ad45"
+      },
+      "remote": {
+        "bytes": 26274,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-campaign-batch154/private147/frozen-s2c-accel.v",
+        "sha256": "1a088c873c5e5de84ca92fdc74d693a326e430cc6191128979f573fe4e64ad45"
+      }
+    },
+    {
+      "job": "s2c_unknown167",
+      "local": {
+        "bytes": 11879,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-campaign-batch154/private147/frozen111-vpi.c",
+        "sha256": "2403e25ee5ab453d017b6686da89df7553b79bcd89d70ca35be96281d5d8e7c7"
+      },
+      "remote": {
+        "bytes": 11879,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-campaign-batch154/private147/frozen111-vpi.c",
+        "sha256": "2403e25ee5ab453d017b6686da89df7553b79bcd89d70ca35be96281d5d8e7c7"
+      }
+    },
+    {
+      "job": "s2c_unknown167",
+      "local": {
+        "bytes": 7451,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-campaign-batch154/private147/private147-runtime.c.in",
+        "sha256": "2c9044aeff474fd336195f81b4527385caabba6bee754325e01bc599feb4e282"
+      },
+      "remote": {
+        "bytes": 7451,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-campaign-batch154/private147/private147-runtime.c.in",
+        "sha256": "2c9044aeff474fd336195f81b4527385caabba6bee754325e01bc599feb4e282"
+      }
+    },
+    {
+      "job": "s2c_unknown167",
+      "local": {
+        "bytes": 27607,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-campaign-batch154/private147/support111.py",
+        "sha256": "2a740fb35d8f6db7da3295031f4e7e66f1505d30c9ccf030a5cb1862cb8caa6d"
+      },
+      "remote": {
+        "bytes": 27607,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-campaign-batch154/private147/support111.py",
+        "sha256": "2a740fb35d8f6db7da3295031f4e7e66f1505d30c9ccf030a5cb1862cb8caa6d"
+      }
+    },
+    {
+      "job": "s2c_unknown167",
+      "local": {
+        "bytes": 28019,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-campaign-batch154/private147/xu_private147.py",
+        "sha256": "5ee323cec482d465ccf3a641b18a31186e9d7ed5173caccbcdf7c446f2685743"
+      },
+      "remote": {
+        "bytes": 28019,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-campaign-batch154/private147/xu_private147.py",
+        "sha256": "5ee323cec482d465ccf3a641b18a31186e9d7ed5173caccbcdf7c446f2685743"
+      }
+    },
+    {
+      "job": "s2e_final155_preflight166",
+      "local": {
+        "bytes": 42079,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-final-power166/power166.py",
+        "sha256": "745d196537f95ee9822e9e8de41871749f449fa02cc296dc9371b641be8a9a2e"
+      },
+      "remote": {
+        "bytes": 42079,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2e-final-power166/power166.py",
+        "sha256": "745d196537f95ee9822e9e8de41871749f449fa02cc296dc9371b641be8a9a2e"
+      }
+    },
+    {
+      "job": "s2e_final155_preflight166",
+      "local": {
+        "bytes": 49042,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-final-power166/frozen130.py",
+        "sha256": "95caa5fab255c5126e5b51f6f0b06c9bf63283f9bbf89dd310202abc87515d46"
+      },
+      "remote": {
+        "bytes": 49042,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2e-final-power166/frozen130.py",
+        "sha256": "95caa5fab255c5126e5b51f6f0b06c9bf63283f9bbf89dd310202abc87515d46"
+      }
+    },
+    {
+      "job": "s2e_final155_preflight166",
+      "local": {
+        "bytes": 1439,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-final-power166/manifest166.json",
+        "sha256": "55b7a7f0c65ee2e7cdaec40201c5ea47d5aa242ff4445a64227a53e549486691"
+      },
+      "remote": {
+        "bytes": 1439,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2e-final-power166/manifest166.json",
+        "sha256": "55b7a7f0c65ee2e7cdaec40201c5ea47d5aa242ff4445a64227a53e549486691"
+      }
+    },
+    {
+      "job": "s2e_final155_preflight166",
+      "local": {
+        "bytes": 1064,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/run170.py",
+        "sha256": "93c3cd323449252f9815175c5f587faa8c2fb31a22653c31c71751a11122df7d"
+      },
+      "remote": {
+        "bytes": 1064,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-two-candidate-batch170/run170.py",
+        "sha256": "93c3cd323449252f9815175c5f587faa8c2fb31a22653c31c71751a11122df7d"
+      }
+    },
+    {
+      "job": "s2e_final155_preflight166",
+      "local": {
+        "bytes": 1555,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/s2e_final155_preflight166-command.json",
+        "sha256": "9b08b46996bb2bb8da02ac8dc0d947107dcc3a79b780e9206e790e1e94f8c395"
+      },
+      "remote": {
+        "bytes": 1555,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-two-candidate-batch170/s2e_final155_preflight166-command.json",
+        "sha256": "9b08b46996bb2bb8da02ac8dc0d947107dcc3a79b780e9206e790e1e94f8c395"
+      }
+    },
+    {
+      "job": "s2e_final155_power12_166",
+      "local": {
+        "bytes": 42079,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-final-power166/power166.py",
+        "sha256": "745d196537f95ee9822e9e8de41871749f449fa02cc296dc9371b641be8a9a2e"
+      },
+      "remote": {
+        "bytes": 42079,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2e-final-power166/power166.py",
+        "sha256": "745d196537f95ee9822e9e8de41871749f449fa02cc296dc9371b641be8a9a2e"
+      }
+    },
+    {
+      "job": "s2e_final155_power12_166",
+      "local": {
+        "bytes": 49042,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-final-power166/frozen130.py",
+        "sha256": "95caa5fab255c5126e5b51f6f0b06c9bf63283f9bbf89dd310202abc87515d46"
+      },
+      "remote": {
+        "bytes": 49042,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2e-final-power166/frozen130.py",
+        "sha256": "95caa5fab255c5126e5b51f6f0b06c9bf63283f9bbf89dd310202abc87515d46"
+      }
+    },
+    {
+      "job": "s2e_final155_power12_166",
+      "local": {
+        "bytes": 1439,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-final-power166/manifest166.json",
+        "sha256": "55b7a7f0c65ee2e7cdaec40201c5ea47d5aa242ff4445a64227a53e549486691"
+      },
+      "remote": {
+        "bytes": 1439,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2e-final-power166/manifest166.json",
+        "sha256": "55b7a7f0c65ee2e7cdaec40201c5ea47d5aa242ff4445a64227a53e549486691"
+      }
+    },
+    {
+      "job": "s2e_final155_power12_166",
+      "local": {
+        "bytes": 1064,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/run170.py",
+        "sha256": "93c3cd323449252f9815175c5f587faa8c2fb31a22653c31c71751a11122df7d"
+      },
+      "remote": {
+        "bytes": 1064,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-two-candidate-batch170/run170.py",
+        "sha256": "93c3cd323449252f9815175c5f587faa8c2fb31a22653c31c71751a11122df7d"
+      }
+    },
+    {
+      "job": "s2e_final155_power12_166",
+      "local": {
+        "bytes": 1692,
+        "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-batch170/s2e_final155_power12_166-command.json",
+        "sha256": "3d72014321ad17d70d6e9480a98927dd6312fd53e80aeeed5cc94837360ba0cc"
+      },
+      "remote": {
+        "bytes": 1692,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-two-candidate-batch170/s2e_final155_power12_166-command.json",
+        "sha256": "3d72014321ad17d70d6e9480a98927dd6312fd53e80aeeed5cc94837360ba0cc"
+      }
+    }
+  ],
+  "known_caveat_resolved": "Before wrapper, full12 preflight-root and155 target-root leaked older job process markers. Kernel argv uniqueness now checked and independently observed using a temporary stub.",
+  "limitations": [
+    "No remote registration, server /proc, native VCS/PT or EDA execution was performed.",
+    "The temporary stub verifies wrapper mechanics only; no synthetic result may be adopted as actual166 output.",
+    "Actual deployment requires server file SHA, live original153 identity, fresh outputs, and scope163 checks in register170.",
+    "All native results remain NOT_QUALIFIED; existing timing, function and unknown SRAM Q qualification debts are unchanged."
+  ],
+  "native_experiments": 0,
+  "production_source_changes": 0,
+  "qualification": "NOT_QUALIFIED",
+  "remote_actions": 0,
+  "reviewed_utc": "2026-11-05T08:01:46.824033+00:00",
+  "reviewer": "xu independent finish166_now agent",
+  "schema": "xu-two-candidate-batch170-independent-review-v1",
+  "status": "HOST_ONLY_REVIEW_PASS_NO_BLOCKING_FINDINGS_NOT_NATIVE_OR_QUALIFIED"
+}
