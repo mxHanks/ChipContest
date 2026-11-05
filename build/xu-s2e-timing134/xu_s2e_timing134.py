@@ -150,7 +150,7 @@ def plan(directory):
         r=bypin[pin];cell=r['cell'];rs=bycell[cell]
         if c['kind']=='min_capacitance':
             eligible=(all(x['all_outputs_unloaded']=='1' and x['sequential']=='false' and
-                       x['owner_count']=='1' and x['inout_count']=='0' for x in rs))
+                       x['owner_count']=='1' and x['inout_count']=='0' and x['owner_ref']!='<TOP>' for x in rs))
             if eligible: deletions[cell]=dict(cell=cell,ref=r['ref'],output=pin,owner_ref=r['owner_ref'])
             else: blocked.append(dict(pin=pin,cell=cell,sequential=r['sequential'],
                                       all_outputs_unloaded=r['all_outputs_unloaded'],reason='native nonsequential/no-consumer/unique-owner deletion gate not satisfied'))
@@ -464,6 +464,8 @@ def execute(args):
                 need(freeze(diagnostic['reports'])==diagnostic['reports'],'native inventory evidence changed')
         except BaseException as error:errors.append(type(error).__name__+': '+str(error));state['status']='FAILED_NOT_QUALIFIED'
         state.update(frozen_input_errors=errors,generated=generated,finished_epoch=time.time());dump(out/'state.json',state)
+    need(state['status']=='EXECUTED_OWN_S2E_SAME_MAPPED_DC_PT_FULL_FM_NOT_QUALIFIED',
+         'worker terminal integrity guard rejected completion')
     print(state['status'])
 
 

@@ -85,7 +85,7 @@ worker支持显式`--source/--tools/--original/--audit/--scope`以定位同一�
 python3 /home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-timing134/check_host134.py
 ```
 
-实际19项host检查通过：严格native cap解析/重复与格式拒绝、实测负载裕量、非时序/唯一owner/
+实际20项host检查通过：严格native cap解析/重复与格式拒绝、实测负载裕量、非时序/唯一owner/
 全部输出无接收者门槛、顺序单元保留、原生sizing兼容门槛、五精确reset对、Tcl完整结构。
 另用真实归档09的1460项和116的0项电气报告验证解析器格式；它们只作为parser样本，
 没有被用作S2e选择输入或证明。`hostchecks134.json`明确不声称执行native S2e修复。

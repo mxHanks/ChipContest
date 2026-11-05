@@ -10,7 +10,7 @@ import time
 
 HERE=Path(__file__).resolve().parent
 BASE=Path.home()/'Desktop/xu-score-optimization-20261102'
-EXPECTED={'xu_s2e_timing134.py':'39eff5564db15f5fb2724ca9f1fb0e0b6141d5abb32fbdc74f7fd76a5eade621','reset134.tcl':'8e50f0559a0f443cc4359b28cf55d7e0e54e6778ca8490bce4aac91b157ac33c'}
+EXPECTED={'xu_s2e_timing134.py':'dcf5341fb9c09cb7db545fb2a208a1c204e2a14309c4741a4c5cd63c0f8364ef','reset134.tcl':'8e50f0559a0f443cc4359b28cf55d7e0e54e6778ca8490bce4aac91b157ac33c'}
 OUTPUT=BASE/'s2e-own-timing-repair-20261105-134'
 LAUNCH=BASE/'s2e-own-timing-repair-launch-20261105-134'
 if len(sys.argv)!=1:raise SystemExit('No arguments accepted; no process spawned')
