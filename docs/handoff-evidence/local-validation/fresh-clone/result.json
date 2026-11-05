@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "scope": "Fresh no-local parent clone; child fetched from public remote; no source alternates or ignored build dependency",
+  "parent_commit": "0616eee747289dd80338f68ae8083566200a9859",
+  "child_commit": "a0767db69628ef30e53de2d1e93dd0360c0ccf76",
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "fsck",
+        "--connectivity-only",
+        "--no-dangling"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "check-00.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "doctor",
+        "--out",
+        "build/handoff-fresh-doctor"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "check-01.log",
+        "bytes": 88,
+        "sha256": "6914fa7c15b2d1dd9f972d64cfa5fe33e6d3debb4a9de4e60fc87082ce1c4325"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "tools/scripts/e203_soc.py",
+        "--mode",
+        "check-vectors",
+        "--tasks",
+        "12",
+        "--out",
+        "build/handoff-fresh-vectors"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "check-02.log",
+        "bytes": 89,
+        "sha256": "9bf06a5f3d6af08b633b1271b501c4bde8e770249170c7af9d62b66f87a6393e"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/e203",
+        "-p",
+        "test_*.py"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "check-03.log",
+        "bytes": 744,
+        "sha256": "85cd3b131e7e9087f1a5ab5650214aa88eabfc03913073104db8bd557f047608"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/host"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "check-04.log",
+        "bytes": 142,
+        "sha256": "f4bc983cb716c7ccbb0383d3c7450295bf5d7e3744fe171184791a033f0a787a"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/numeric"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "check-05.log",
+        "bytes": 141,
+        "sha256": "def10044f3089f82daa9cb4bccb745efad3c59d6516ec09cc82fa783365a7f56"
+      }
+    }
+  ]
+}

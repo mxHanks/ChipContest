@@ -1,0 +1,200 @@
+{
+  "chisel_tests": {
+    "command": [
+      "scala-cli",
+      "test",
+      ".",
+      "--server=false",
+      "--jvm",
+      "system"
+    ],
+    "failed": 0,
+    "note": "Result observed from original execution console; no fabricated native log.",
+    "passed": 14,
+    "raw_log_retained": false
+  },
+  "files": {
+    "fresh-clone/check-00.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fresh-clone/check-01.log": {
+      "bytes": 88,
+      "sha256": "6914fa7c15b2d1dd9f972d64cfa5fe33e6d3debb4a9de4e60fc87082ce1c4325"
+    },
+    "fresh-clone/check-02.log": {
+      "bytes": 89,
+      "sha256": "9bf06a5f3d6af08b633b1271b501c4bde8e770249170c7af9d62b66f87a6393e"
+    },
+    "fresh-clone/check-03.log": {
+      "bytes": 744,
+      "sha256": "85cd3b131e7e9087f1a5ab5650214aa88eabfc03913073104db8bd557f047608"
+    },
+    "fresh-clone/check-04.log": {
+      "bytes": 142,
+      "sha256": "f4bc983cb716c7ccbb0383d3c7450295bf5d7e3744fe171184791a033f0a787a"
+    },
+    "fresh-clone/check-05.log": {
+      "bytes": 141,
+      "sha256": "def10044f3089f82daa9cb4bccb745efad3c59d6516ec09cc82fa783365a7f56"
+    },
+    "fresh-clone/result.json": {
+      "bytes": 2477,
+      "sha256": "8ec8938670d1bae4e67a70d563bd5deae06e27963c99373e5fe286374df2f68b"
+    },
+    "portable-verification.json": {
+      "bytes": 37921,
+      "sha256": "8ddf1bba0f632ce71a8c08d23d6700d3613f12117d92460f5a66b99f3497a457"
+    },
+    "s2e-real12-firmware-build.json": {
+      "bytes": 2603,
+      "sha256": "0214cd94915d0692333d2e36e4b7111146772c90e9435787f7d33e614400f212"
+    },
+    "s2e-real12-result.json": {
+      "bytes": 47620,
+      "sha256": "32f4f4684f1a89bb602d2f3cef6668460919096b7723d1f3dbfee4d73128bd84"
+    },
+    "s2e-real12-riscv64-unknown-elf-gcc-version.log": {
+      "bytes": 286,
+      "sha256": "44d55abeabdb089d1459886560b7d95dfbed6ac57eae56d53c758bc041362558"
+    },
+    "s2e-real12-simulation.log": {
+      "bytes": 7081,
+      "sha256": "a351c55ba790cc0dac5de9d297cac8fb01f35484a5954c4df5fe2a5967b3b290"
+    },
+    "s2e-real12-verilator-version.log": {
+      "bytes": 75,
+      "sha256": "bcaac1d51a92960ef3bfe5cefc53e3f5450966ab512c87ad91aa0af043387c7b"
+    }
+  },
+  "fresh_clone": {
+    "checks": [
+      {
+        "argv": [
+          "git",
+          "fsck",
+          "--connectivity-only",
+          "--no-dangling"
+        ],
+        "log": {
+          "bytes": 0,
+          "path": "check-00.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "python3",
+          "-B",
+          "tools/scripts/e203_soc.py",
+          "--mode",
+          "doctor",
+          "--out",
+          "build/handoff-fresh-doctor"
+        ],
+        "log": {
+          "bytes": 88,
+          "path": "check-01.log",
+          "sha256": "6914fa7c15b2d1dd9f972d64cfa5fe33e6d3debb4a9de4e60fc87082ce1c4325"
+        },
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "python3",
+          "-B",
+          "tools/scripts/e203_soc.py",
+          "--mode",
+          "check-vectors",
+          "--tasks",
+          "12",
+          "--out",
+          "build/handoff-fresh-vectors"
+        ],
+        "log": {
+          "bytes": 89,
+          "path": "check-02.log",
+          "sha256": "9bf06a5f3d6af08b633b1271b501c4bde8e770249170c7af9d62b66f87a6393e"
+        },
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/e203",
+          "-p",
+          "test_*.py"
+        ],
+        "log": {
+          "bytes": 744,
+          "path": "check-03.log",
+          "sha256": "85cd3b131e7e9087f1a5ab5650214aa88eabfc03913073104db8bd557f047608"
+        },
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/host"
+        ],
+        "log": {
+          "bytes": 142,
+          "path": "check-04.log",
+          "sha256": "f4bc983cb716c7ccbb0383d3c7450295bf5d7e3744fe171184791a033f0a787a"
+        },
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/numeric"
+        ],
+        "log": {
+          "bytes": 141,
+          "path": "check-05.log",
+          "sha256": "def10044f3089f82daa9cb4bccb745efad3c59d6516ec09cc82fa783365a7f56"
+        },
+        "returncode": 0
+      }
+    ],
+    "child_commit": "a0767db69628ef30e53de2d1e93dd0360c0ccf76",
+    "parent_commit": "0616eee747289dd80338f68ae8083566200a9859",
+    "scope": "Fresh no-local parent clone; child fetched from public remote; no source alternates or ignored build dependency",
+    "status": "PASS"
+  },
+  "local_real12": {
+    "firmware_schedule": "bias-hw-autogroup-paired-hi-window",
+    "outputs": 304128,
+    "scope": "Local GCC14.2/Verilator development function check; not the frozen GCC10.2/150MHz benchmark. Does not replace formal10420116cycles or gate/energy qualification.",
+    "source_commit_recorded": "b2df5a6e80e71673b6c54806aa71a9d04a11ff4c",
+    "sum_elapsed_cycles": 10827459,
+    "write_words": 608256
+  },
+  "parent_source_integration": "2a4d614",
+  "python_tests": {
+    "e203": 64,
+    "fresh_clone_all_passed": true,
+    "host": 42,
+    "numeric": 42
+  },
+  "qualification": "NOT_QUALIFIED",
+  "schema": "xu-handoff-local-validation-v1",
+  "source_identity": "../source-identity.json",
+  "status": "PASS_LOCAL_REGRESSION_NOT_CONTEST_QUALIFIED"
+}

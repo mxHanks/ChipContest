@@ -75,6 +75,10 @@ python3 -B "$HOME/Desktop/xu-campaign-batch154/campaign154.py" status
 
 接手顺序建议：先便携验包及本地功能回归；再原服务器完整RTL VCS；随后解决严格mapped fatal、未知Q与clear窗口；再完成两图同配置完整150MHz资格；最后重测全SoC完整任务能耗并按8T+8E+4A评分。每项新实验保留原失败，使用新namespace/输出目录，记录冻结输入、逐层周期、面积、能量、原日志SHA及实际argv。
 
+## 本次交付验证
+
+原目录已通过14项Chisel、64项E203、42项数值、42项host测试及S2e完整12层本地回归（304128输出、608256字写回）。全新无本地对象复用的父仓库克隆、从GitHub取得的a076子仓库也通过doctor、12层向量及上述Python测试；便携验包独立通过。日志与命令见 [local-validation](docs/handoff-evidence/local-validation/validation.json)。本地GCC14.2/Verilator结果仅证明开发功能，不替代服务器GCC10.2的正式周期和剩余资格验收。
+
 ## 目录清理
 
 所有额外工作树永久删除，无外部归档。原始目录内的赛题指南PDF、原有assets/模型/库、本交付源码及关键证据保留。清理实际名单与验证结果在 `docs/handoff-evidence/cleanup.json`（最终清理后写入）。本机既有2026-11-06 01:00 CST关机安排未改动；服务器独立运行不依赖本机继续在线。
