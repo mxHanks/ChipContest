@@ -107,6 +107,26 @@ class Queries207(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'fresh207'):
                 q.run(Path(d), 1)
 
+    def test_native_timeout_stops_later_cases(self):
+        calls = []
+        def fake(case, out, timeout):
+            calls.append(case)
+            out.mkdir()
+            state = dict(status='FAIL_CASE207_NOT_QUALIFIED', native_runs=1,
+                         native_timeout=True, qualification='NOT_QUALIFIED')
+            q.write(out / 'state.json', state)
+            return state
+        with tempfile.TemporaryDirectory() as d:
+            out = Path(d) / 'fresh'
+            with mock.patch.object(q, 'run_case', side_effect=fake):
+                self.assertEqual(q.run(out, 1), 1)
+            state = q.read(out / 'state.json')
+            self.assertEqual(calls, q.CASES[:1])
+            self.assertTrue(state['stopped_after_native_timeout'])
+            self.assertEqual(state['remaining_cases_not_run'], q.CASES[1:])
+            self.assertEqual(state['status'], q.FAILURE)
+            self.assertTrue((out / 'output-manifest207.json').is_file())
+
     def test_mapping_cannot_fill_absent_clocks(self):
         with tempfile.TemporaryDirectory() as d:
             p = Path(d) / 'pin-clocks207.tsv'

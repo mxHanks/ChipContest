@@ -39,6 +39,7 @@ LIMITS = [
     'No model/library/manual body export; own177 syntactic model relationship metadata stays bounded.',
     'Actual177 model metadata records10ps/1ps and1.0 setuphold/width tokens; this does not establish correspondence to the SS DB or a same-corner SDF simulation.',
     'Fresh output root only, no resume/retry/registration; the original153 controller owns the native slot.',
+    'A native timeout stops later207 cases: terminating a PT launcher alone does not prove every native descendant exited.',
 ]
 
 
@@ -291,6 +292,8 @@ def run_case(case_id, out, timeout):
             try:
                 rc = proc.wait(timeout=timeout)
             except subprocess.TimeoutExpired:
+                state['native_timeout'] = True
+                write(out / 'state.json', state)
                 proc.terminate()
                 try:
                     proc.wait(timeout=30)
@@ -364,10 +367,22 @@ def run(out, timeout):
             item = run_case(case_id, out / case_id, timeout)
             state['cases'].append(dict(case_id=case_id, status=item['status'],
                 native_runs=item['native_runs'], result_state=str(out / case_id / 'state.json'),
-                error=item.get('error'), returncode=item.get('returncode')))
+                error=item.get('error'), returncode=item.get('returncode'),
+                native_timeout=item.get('native_timeout', False)))
             write(out / 'state.json', state)
             need([identity(x['path']) for x in runtime] == runtime, '207 runtime changed during native cases')
-        state['status'] = SUCCESS if all(x['status'] == 'EXECUTED_CASE207_NOT_QUALIFIED' for x in state['cases']) else FAILURE
+            if item.get('native_timeout'):
+                # pt_shell may be a launcher for native descendants. A timeout
+                # cannot release this worker's internal slot merely because
+                # that launcher exited; stop, leave original evidence, and let
+                # original153's native process scan gate any later job.
+                state['stopped_after_native_timeout'] = True
+                state['remaining_cases_not_run'] = CASES[len(state['cases']):]
+                break
+        complete = len(state['cases']) == 3 and not state.get('stopped_after_native_timeout')
+        complete = complete and all(x['status'] == 'EXECUTED_CASE207_NOT_QUALIFIED' and
+                                    x['native_runs'] == 1 and not x['native_timeout'] for x in state['cases'])
+        state['status'] = SUCCESS if complete else FAILURE
     except BaseException as exc:
         state.update(status=FAILURE, error=str(exc), traceback=traceback.format_exc())
     finally:

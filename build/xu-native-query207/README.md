@@ -1,8 +1,9 @@
 # xu207 native query compatibility replay
 
 `query207.py` is one foreground worker for the original153 controller. It runs
-three isolated PT sessions sequentially, retaining each case's failure and
-continuing to the next case:
+three isolated PT sessions sequentially, retaining each ordinary case failure
+and continuing to the next case. A native timeout stops the later cases because
+launcher termination does not prove that every native descendant exited:
 
 1. `s2c_original177`: own9c16 map, original177/57 all-clock propagated method.
 2. `s2c_common190`: same9c16 and404c7d SDC; exact clock method from actual190
@@ -64,8 +65,8 @@ python3 -B -u "$HOME/Desktop/xu-native-query207/query207.py" \
   --out "$HOME/Desktop/xu-score-optimization-20261102/native-query-replay-20261105-207"
 ```
 
-`manifest207.json` freezes23 runtime files. Ten local tests cover actual method
+`manifest207.json` freezes23 runtime files. Eleven local tests cover actual method
 bindings, unsupported command elimination, original required guards, wrong
 map/method rejection, fresh-root rejection, absent-clock integrity, Tcl syntax,
-and all-three-case continuation after a failure. They are host checks, not EDA
+ordinary-failure continuation and timeout stopping. They are host checks, not EDA
 or qualification results. Independent review210 separately tests the Tcl helper.
