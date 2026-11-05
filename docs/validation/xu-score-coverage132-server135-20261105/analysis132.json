@@ -1,0 +1,354 @@
+{
+  "absent_native_attributes": [
+    {
+      "detail": "NOT_INFERRED",
+      "field": "max_rise_arrival",
+      "scope": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/D",
+      "status": "ABSENT_NATIVE_ATTRIBUTE"
+    },
+    {
+      "detail": "NOT_INFERRED",
+      "field": "max_fall_arrival",
+      "scope": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/D",
+      "status": "ABSENT_NATIVE_ATTRIBUTE"
+    },
+    {
+      "detail": "NOT_INFERRED",
+      "field": "min_rise_arrival",
+      "scope": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/D",
+      "status": "ABSENT_NATIVE_ATTRIBUTE"
+    },
+    {
+      "detail": "NOT_INFERRED",
+      "field": "min_fall_arrival",
+      "scope": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/D",
+      "status": "ABSENT_NATIVE_ATTRIBUTE"
+    },
+    {
+      "detail": "NOT_INFERRED",
+      "field": "max_rise_arrival",
+      "scope": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/D",
+      "status": "ABSENT_NATIVE_ATTRIBUTE"
+    },
+    {
+      "detail": "NOT_INFERRED",
+      "field": "max_fall_arrival",
+      "scope": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/D",
+      "status": "ABSENT_NATIVE_ATTRIBUTE"
+    },
+    {
+      "detail": "NOT_INFERRED",
+      "field": "min_rise_arrival",
+      "scope": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/D",
+      "status": "ABSENT_NATIVE_ATTRIBUTE"
+    },
+    {
+      "detail": "NOT_INFERRED",
+      "field": "min_fall_arrival",
+      "scope": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/D",
+      "status": "ABSENT_NATIVE_ATTRIBUTE"
+    }
+  ],
+  "active_period_clocks": {
+    "xu_hfextclk": 336,
+    "xu_plldiv_envelope": 80
+  },
+  "active_period_met_checks": 416,
+  "archive_payload_bytes": 181183292,
+  "archive_payload_files": 165,
+  "case_exceptions_unchanged_after_removing_dates": true,
+  "inactive_period_checks": 10416,
+  "limitations": [
+    "359 frozen receipts equal on server; local archive does not contain all359 source/library bodies.",
+    "10000 ATTR-1 full_name warnings on timing_arc scope naming; owner/index/from/to arc TSV retained, generic collection scope is not full identity.",
+    "Five HF and two PMU any-source recovery queries remain unknown, even with DISPLAY true; INFINITY/empty values are not finite safety margins.",
+    "27124 untested, conditional reset pulse/skew, arbitrary async release, metastability, UART and150MHz qualification remain open.",
+    "Companion128/130 original bytes verified only; no functional or power semantic claim."
+  ],
+  "macro_active_clock_multiplicity": {
+    "one_clock": 256,
+    "two_clocks": 80
+  },
+  "macro_clock_arcs": 12768,
+  "native132_output_files": 84,
+  "native_runs": [
+    {
+      "log_sha256": "50d142d24299a931eaf6d148d04c773bfa814664becc6715d327bc54100700d7",
+      "marker_count": 1,
+      "returncode": 0,
+      "script": "installed-docs.tcl",
+      "script_sha256": "69575962e3c0ee26e72aad044712a4e99ec0d2c8180ece42d7a51f1bb0ebceb1"
+    },
+    {
+      "log_sha256": "0d5068bd7d3f372cba772ca4b7f8dd7d3b07afe30a4e3fe6d44fdf7f6d88b4b2",
+      "marker_count": 1,
+      "returncode": 0,
+      "script": "diagnosis.tcl",
+      "script_sha256": "cb64a0b9e28d014f66c8cb374cd0870ed7257300ce95aad5211eb4b47b3296be"
+    }
+  ],
+  "native_warning_code_counts": {
+    "ATTR-1": 10000,
+    "CMD-041": 76,
+    "LNK-034": 1,
+    "LNK-045": 1,
+    "LNK-046": 1,
+    "LNK-047": 1,
+    "MV-022": 1,
+    "PTE-003": 1,
+    "PTE-016": 3,
+    "PTE-017": 1,
+    "PTE-052": 1,
+    "PTE-060": 18,
+    "PTE-079": 68,
+    "UITE-136": 1,
+    "UITE-416": 6,
+    "UITE-485": 5
+  },
+  "ordinary_stage_slacks_ns": {
+    "stage-0-max.rpt": "30517.19531250",
+    "stage-0-min.rpt": "0.13130817",
+    "stage-1-max.rpt": "30517.18164062",
+    "stage-1-min.rpt": "0.13779064",
+    "stage-2-max.rpt": "30517.18164062",
+    "stage-2-min.rpt": "0.13779064"
+  },
+  "original_initial_final_untested_rows": 27124,
+  "physical_macro_count": 336,
+  "physical_mode_pin_rows": 2688,
+  "qualification": "NOT_QUALIFIED",
+  "report_display_original_restored": "false",
+  "reset_path_queries": [
+    {
+      "check": "recovery",
+      "count": "0",
+      "index": "0",
+      "source_kind": "HF_RESET",
+      "status": "NO_PATH_UNKNOWN",
+      "worst_slack": "UNKNOWN"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "0",
+      "source_kind": "HF_RESET",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.132751"
+    },
+    {
+      "check": "recovery",
+      "count": "0",
+      "index": "0",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "NO_PATH_UNKNOWN",
+      "worst_slack": "UNKNOWN"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "0",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.132751"
+    },
+    {
+      "check": "recovery",
+      "count": "0",
+      "index": "1",
+      "source_kind": "HF_RESET",
+      "status": "NO_PATH_UNKNOWN",
+      "worst_slack": "UNKNOWN"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "1",
+      "source_kind": "HF_RESET",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.136416"
+    },
+    {
+      "check": "recovery",
+      "count": "0",
+      "index": "1",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "NO_PATH_UNKNOWN",
+      "worst_slack": "UNKNOWN"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "1",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.136416"
+    },
+    {
+      "check": "recovery",
+      "count": "0",
+      "index": "2",
+      "source_kind": "HF_RESET",
+      "status": "NO_PATH_UNKNOWN",
+      "worst_slack": "UNKNOWN"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "2",
+      "source_kind": "HF_RESET",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.227102"
+    },
+    {
+      "check": "recovery",
+      "count": "1",
+      "index": "2",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "30516.769531"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "2",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.227102"
+    },
+    {
+      "check": "recovery",
+      "count": "1",
+      "index": "2",
+      "source_kind": "LF_WATCHDOG",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "30516.769531"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "2",
+      "source_kind": "LF_WATCHDOG",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.560590"
+    },
+    {
+      "check": "recovery",
+      "count": "0",
+      "index": "3",
+      "source_kind": "HF_RESET",
+      "status": "NO_PATH_UNKNOWN",
+      "worst_slack": "UNKNOWN"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "3",
+      "source_kind": "HF_RESET",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.227102"
+    },
+    {
+      "check": "recovery",
+      "count": "1",
+      "index": "3",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "30516.769531"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "3",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.227102"
+    },
+    {
+      "check": "recovery",
+      "count": "1",
+      "index": "3",
+      "source_kind": "LF_WATCHDOG",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "30516.769531"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "3",
+      "source_kind": "LF_WATCHDOG",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.560590"
+    },
+    {
+      "check": "recovery",
+      "count": "0",
+      "index": "4",
+      "source_kind": "HF_RESET",
+      "status": "NO_PATH_UNKNOWN",
+      "worst_slack": "UNKNOWN"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "4",
+      "source_kind": "HF_RESET",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.227102"
+    },
+    {
+      "check": "recovery",
+      "count": "1",
+      "index": "4",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "30516.769531"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "4",
+      "source_kind": "ANY_ENDPOINT_SOURCE",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.227102"
+    },
+    {
+      "check": "recovery",
+      "count": "1",
+      "index": "4",
+      "source_kind": "LF_WATCHDOG",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "30516.769531"
+    },
+    {
+      "check": "removal",
+      "count": "1",
+      "index": "4",
+      "source_kind": "LF_WATCHDOG",
+      "status": "PATH_PRESENT_DIAGNOSTIC_ONLY",
+      "worst_slack": "0.560590"
+    }
+  ],
+  "server_frozen_before_after_identity_records": 359,
+  "status": "ACTUAL132_SAME116_READ_ONLY_NATIVE_TERMINAL_INDEPENDENTLY_VERIFIED",
+  "structural_first_stage_consumers": [
+    {
+      "consumer": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/D",
+      "direction": "in",
+      "driver": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/Q",
+      "index": "0",
+      "net": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r",
+      "ref_or_class": "DSNQNV0_12TR40",
+      "sequential_or_endpoint": "true"
+    },
+    {
+      "consumer": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/D",
+      "direction": "in",
+      "driver": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/Q",
+      "index": "4",
+      "net": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q",
+      "ref_or_class": "DRNQV0_12TR40",
+      "sequential_or_endpoint": "true"
+    }
+  ],
+  "unconstrained_display_hf_recovery_reports_still_no_path": 5
+}
