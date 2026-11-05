@@ -58,7 +58,11 @@ def select191(s):
     s.generated('selection191.json',dict(schema='xu-final191-selection-v1',qualification='NOT_QUALIFIED',
         jobs=JOBS,roots=ROOTS,selector=identity(Path(__file__).resolve()),
         note='Only diagnostic relation reports; missing/failed stages retained, no qualification inferred.'))
-    need(not s.rejected,'rejected diagnostic source; preserve failure and inspect original source')
+    if s.rejected:
+        save(OUT/'source-rejections191.json',dict(schema='xu-final191-source-rejections-v1',
+            qualification='NOT_QUALIFIED',rejected_sources=s.rejected,
+            note='No archive published; diagnostic source paths retained for review.'))
+        raise ValueError('rejected diagnostic source; inspect source-rejections191.json')
 
 
 def need(ok,message):

@@ -62,6 +62,8 @@ class Checks(unittest.TestCase):
         (self.root/'bad.rpt').symlink_to(self.root/'state.json')
         self.assertEqual(self.runpack(),1);self.assertFalse(self.m.ARCHIVE.exists())
         self.assertEqual(json.loads((self.m.OUT/'state.json').read_text())['status'],self.m.FAIL)
+        detail=json.loads((self.m.OUT/'source-rejections191.json').read_text())
+        self.assertIn('bad.rpt',detail['rejected_sources'][0]['source_path'])
 
     def test_subdirectory_symlink_rejected(self):
         (self.root/'nested').symlink_to(self.d,target_is_directory=True)
