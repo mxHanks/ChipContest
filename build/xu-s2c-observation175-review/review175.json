@@ -1,0 +1,77 @@
+{
+  "archive": {
+    "bytes": 188212,
+    "sha256": "df0166018b47d6ad78917928f23fc77c5a32213b8f386b56610f4e67fa64dfd4"
+  },
+  "blocking_review_findings": [],
+  "events": {
+    "fatal_snapshot": 131,
+    "initial": 131,
+    "total": 566,
+    "value_change": 304
+  },
+  "fatal_operands": {
+    "bias_commit": "x",
+    "row_active": "0",
+    "row_count": "00",
+    "row_produced": "000000",
+    "row_retired": "000000",
+    "row_running": "0",
+    "w_commit": "0",
+    "x_commit": "0"
+  },
+  "first_observed_x_fs": {
+    "bias_commit": 9359416896667,
+    "fifo_D": 9359383443333,
+    "fifo_Q": 9359390060000
+  },
+  "initial_target": {
+    "fifo_CK": "1",
+    "fifo_D": "0",
+    "fifo_NOTIFIER": "x",
+    "fifo_Q": "0"
+  },
+  "limitations": [
+    "The native target hold warning and later X propagation are observations, not a proved causal path.",
+    "NOTIFIER starts X and invalid response data starts X; neither is proved to be the first fault.",
+    "Callbacks have dispatch serials, not scheduler phase labels; same-tick serial order cannot establish causality.",
+    "The 634 unreturned server input files were not independently rehashed locally.",
+    "The original mandatory fatal still rejects before the formal task window; VCS rc0 does not qualify functionality.",
+    "Library-model hold warning is not a complete SDF or STA timing proof."
+  ],
+  "native_target_hold_limit_fs": 10000,
+  "native_timing_warning_blocks": 25,
+  "new_native_experiments": 0,
+  "next_minimal_query": "Use the exact ownS2c9c16 netlist, own SDC/clock method and frozen libraries. Enumerate the literal escaped target components, assert unique D/CK/Q/RDN pins and ref DRNQV0_12TR40, then report exact D driver, CK source and native min-delay full data/clock path. Read the same cell model specify/UDP relationship on the server under a hash receipt. Do not infer Q-to-bias causality across unobserved/stateful boundaries.",
+  "original175_output_bytes_reproduced": true,
+  "production_source_changes": 0,
+  "qualification": "NOT_QUALIFIED",
+  "raw_log": {
+    "bytes": 322469,
+    "sha256": "6cc4f79e52fd9dcc809cdcbeb848e92ac6708e2317ef22dca720d0714f82b656"
+  },
+  "raw_payload_bytes": 5260127,
+  "raw_payload_files": 74,
+  "remote_actions": 0,
+  "reviewed175_entry": {
+    "bytes": 23329,
+    "sha256": "63baa874a170e4c528ecc7ed6edde56ba05d3f2280c865c6dfeec07d7ea929ff"
+  },
+  "schema": "xu-s2c-observation175-independent-review-v1",
+  "server_file_receipts_only": 634,
+  "shared_ports_observed": [
+    "clk",
+    "cmd_addr",
+    "cmd_read",
+    "cmd_ready",
+    "cmd_valid",
+    "cmd_wdata",
+    "cmd_wmask",
+    "rsp_err",
+    "rsp_rdata",
+    "rsp_ready",
+    "rsp_valid",
+    "rst_n"
+  ],
+  "status": "REVIEW_PASS_DIAGNOSTIC_INFERENCES_ONLY_NOT_QUALIFIED"
+}
