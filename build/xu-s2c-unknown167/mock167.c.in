@@ -1,0 +1,61 @@
+/* Synthetic VPI objects only. Never mapped VCS or scheduler/timing evidence. */
+#include <assert.h>
+#include <ctype.h>
+#include <stdint.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "vpi_user.h"
+static void canonical(const char *s,char *d,size_t n){size_t i=0;while(*s){unsigned char c=(unsigned char)*s++;if(c=='\\'||isspace(c))continue;assert(i+1<n);d[i++]=(char)c;}d[i]=0;}
+#include "observer167.c.in"
+typedef struct {char name[8192];unsigned width,kind,scope;s_vpi_vecval val[2];} Obj;
+typedef struct {unsigned type,scope,index;} Iter;
+static Obj root,tb,scopes[4],nodes[64];
+static Iter iterators[32];
+static unsigned node_count,it_count,mode,registered_cb,registered_tasks;
+static uint64_t clock_fs;
+static Obj *obj(vpiHandle h){return (Obj *)h;}
+PLI_INT32 vpi_printf(const char *fmt,...){int r;va_list a;va_start(a,fmt);r=vprintf(fmt,a);va_end(a);return r;}
+PLI_INT32 vpi_get(PLI_INT32 prop,vpiHandle h){Obj *o=obj(h);if(prop==vpiSize)return (PLI_INT32)o->width;if(prop==vpiType)return (PLI_INT32)o->kind;return 0;}
+PLI_BYTE8 *vpi_get_str(PLI_INT32 prop,vpiHandle h){static char wrong[8192];Obj *o=obj(h);if(prop==vpiDefName)return (PLI_BYTE8 *)"MOCK_DEFINITION";if(prop!=vpiFullName)return NULL;
+ if(mode==3&&!strcmp(o->name,"tb_xu_soc_ppa.xu147_o_022")){strcpy(wrong,"wrong.fullname");return(PLI_BYTE8 *)wrong;}return (PLI_BYTE8 *)o->name;}
+void vpi_get_time(vpiHandle h,p_vpi_time t){(void)h;t->high=(PLI_UINT32)(clock_fs>>32);t->low=(PLI_UINT32)clock_fs;}
+void vpi_get_value(vpiHandle h,p_vpi_value v){v->value.vector=mode==6?NULL:obj(h)->val;}
+vpiHandle vpi_register_cb(p_cb_data data){++registered_cb;if(mode==4)return NULL;return(vpiHandle)data;}
+vpiHandle vpi_register_systf(const s_vpi_systf_data *data){++registered_tasks;return(vpiHandle)data;}
+vpiHandle vpi_handle_by_name(const PLI_BYTE8 *name,vpiHandle scope){unsigned i;char wanted[8192];
+ if(!scope){if(!strcmp(name,root.name))return(vpiHandle)&root;if(!strcmp(name,tb.name))return(vpiHandle)&tb;return NULL;}
+ assert(strlen(obj(scope)->name)+strlen(name)+2<sizeof(wanted));strcpy(wanted,obj(scope)->name);strcat(wanted,".");strcat(wanted,name);
+ if(mode==1&&!strcmp(wanted,"tb_xu_soc_ppa.xu147_o_022"))return NULL;
+ for(i=0;i<node_count;++i)if(!strcmp(wanted,nodes[i].name))return(vpiHandle)&nodes[i];
+ return NULL;}
+vpiHandle vpi_iterate(PLI_INT32 type,vpiHandle h){Iter *it;unsigned scope;if(it_count>=32)return NULL;
+ if(type==vpiModule){if(h!=(vpiHandle)&root)return NULL;scope=99;}
+ else{for(scope=0;scope<4;++scope)if(h==(vpiHandle)&scopes[scope])break;if(scope==4)return NULL;}
+ it=&iterators[it_count++];it->type=(unsigned)type;it->scope=scope;it->index=0;return(vpiHandle)it;}
+vpiHandle vpi_scan(vpiHandle h){Iter *it=(Iter *)h;
+ if(it->type==vpiModule){if(it->index<4)return(vpiHandle)&scopes[it->index++];if(mode==5&&it->index++==4)return(vpiHandle)&scopes[2];return NULL;}
+ while(it->index<node_count){Obj *o=&nodes[it->index++];if(o->scope==it->scope&&o->kind==it->type)return(vpiHandle)o;}return NULL;}
+static void add(unsigned scope,const char *name,unsigned width,unsigned kind){Obj *o=&nodes[node_count++];const char *prefix=scope<4?xu167_scopes[scope]:tb.name;assert(node_count<=64&&strlen(prefix)+strlen(name)+2<sizeof(o->name));strcpy(o->name,prefix);strcat(o->name,".");strcat(o->name,name);o->scope=scope;o->width=width;o->kind=kind;o->val[0].aval=1;o->val[0].bval=1;}
+int main(int argc,char **argv){unsigned i;uint64_t serial;mode=argc>1?(unsigned)atoi(argv[1]):0;
+ strcpy(root.name,"tb_xu_soc_ppa.dut");strcpy(tb.name,"tb_xu_soc_ppa");
+ for(i=0;i<4;++i){strcpy(scopes[i].name,xu167_scopes[i]);scopes[i].kind=vpiModule;}
+ for(i=0;i<8;++i){add(0,xu167_eight_native[i],xu167_eight_width[i],vpiNet);add(4,xu167_eight_tb[i],xu167_eight_width[i],vpiReg);}
+ {static const char *n[]={"CK","D","Q","NOTIFIER"};for(i=0;i<4;++i)add(2,n[i],1,i==3?vpiReg:vpiNet);}
+ {static const char *n[]={"clk","rst_n","cmd_valid","cmd_ready","cmd_read","cmd_addr","cmd_wdata","cmd_wmask","rsp_valid","rsp_ready","rsp_rdata","rsp_err"};for(i=0;i<12;++i)add(3,n[i],i==5||i==6||i==10?32:i==7?4:1,vpiNet);}
+ add(1,"i_vld",1,vpiNet);add(1,"o_vld",1,vpiNet);add(1,"o_dat",35,vpiNet);add(2,"n0",1,vpiNet);
+ if(mode==2)nodes[15].width=7;
+ xu167_register();assert(registered_tasks==2);xu167_prepare_task(NULL);
+ if(mode>=1&&mode<=5){assert(xu167_failed);printf("MOCK167_EXPECTED_REJECTION mode=%u\n",mode);return 0;}
+ assert(xu167_count==node_count&&registered_cb==node_count&&!xu167_failed);
+ if(mode==6){xu167_fatal_snapshot_task(NULL);assert(xu167_failed==node_count);return 0;}
+ for(i=0;i<xu167_count;++i){clock_fs=XU167_START-1;xu167_changed(&xu167_callbacks[i]);}assert(!xu167_serial);
+ clock_fs=XU167_START;xu167_changed(&xu167_callbacks[0]);assert(xu167_serial==node_count+1);
+ serial=xu167_serial;clock_fs=XU167_STOP+1;xu167_changed(&xu167_callbacks[0]);assert(xu167_serial==serial);
+ /* Exercise the high vector word and X/Z encoding unchanged. */
+ for(i=0;i<node_count;++i)if(nodes[i].width==35){nodes[i].val[1].aval=5;nodes[i].val[1].bval=6;}
+ clock_fs=UINT64_C(9359423333333);xu167_fatal_snapshot_task(NULL);assert(!xu167_failed);
+ xu167_prepare_task(NULL);assert(xu167_failed==1);
+ printf("MOCK167_PASS nodes=%u callbacks=%u four_state=1 forbidden_VPI_write_symbols=0 native_VCS_proof=0\n",node_count,registered_cb);return 0;
+}

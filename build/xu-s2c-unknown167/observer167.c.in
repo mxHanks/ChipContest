@@ -1,0 +1,83 @@
+/* xu167 independent passive observations. No VPI writes, force, delay or timing control. */
+#define XU167_LIMIT 256
+#define XU167_START UINT64_C(9359300000000)
+#define XU167_STOP UINT64_C(9359500000000)
+static vpiHandle xu167_nodes[XU167_LIMIT];
+static char *xu167_names[XU167_LIMIT], *xu167_roles[XU167_LIMIT];
+static s_cb_data xu167_callbacks[XU167_LIMIT];
+static s_vpi_time xu167_times[XU167_LIMIT];
+static s_vpi_value xu167_values[XU167_LIMIT];
+static unsigned xu167_count, xu167_failed, xu167_ready, xu167_scope_counts[4], xu167_window_seen;
+static uint64_t xu167_serial;
+static const char *xu167_scopes[]={
+ "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+ "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo",
+ "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.dp_gt0.vec_31_dfflr.qout_r_reg[0]",
+ "tb_xu_soc_ppa.dut.u_shared"};
+static const char *xu167_eight_native[]={"io_wLoadWen","io_xLoadWen","io_cacheWriteEnable","io_rowActive","io_rowCount","io_rowRunning","io_rowProduced","io_rowRetired"};
+static const char *xu167_eight_tb[]={"xu147_o_048","xu147_o_051","xu147_o_043","xu147_o_016","xu147_o_017","xu147_o_023","xu147_o_020","xu147_o_022"};
+static const unsigned xu167_eight_width[]={1,1,1,1,2,1,6,6};
+static const char *xu167_eight_logical[]={"w_commit","x_commit","bias_commit","row_active","row_count","row_running","row_produced","row_retired"};
+static uint64_t xu167_tick(void){s_vpi_time t;memset(&t,0,sizeof(t));t.type=vpiSimTime;vpi_get_time(NULL,&t);return((uint64_t)t.high<<32)|(uint32_t)t.low;}
+static void xu167_snapshot(unsigned i,const char *why){
+ s_vpi_value v;unsigned width=(unsigned)vpi_get(vpiSize,xu167_nodes[i]);uint32_t a0,b0,a1=0,b1=0;
+ memset(&v,0,sizeof(v));v.format=vpiVectorVal;vpi_get_value(xu167_nodes[i],&v);
+ if(!v.value.vector||width<1||width>64){++xu167_failed;return;}
+ a0=(uint32_t)v.value.vector[0].aval;b0=(uint32_t)v.value.vector[0].bval;
+ if(width>32){a1=(uint32_t)v.value.vector[1].aval;b1=(uint32_t)v.value.vector[1].bval;}
+ vpi_printf("XU_UNKNOWN167_EVENT serial=%llu tick_fs=%llu reason=%s role=%s bits=%u aval=%08x%08x bval=%08x%08x name=%s\n",(unsigned long long)++xu167_serial,(unsigned long long)xu167_tick(),why,xu167_roles[i],width,a1,a0,b1,b0,xu167_names[i]);
+}
+static PLI_INT32 xu167_changed(p_cb_data cb){unsigned j,i=(unsigned)(uintptr_t)cb->user_data;uint64_t t=xu167_tick();if(i>=xu167_count){++xu167_failed;return 0;}if(t>=XU167_START&&t<=XU167_STOP){if(!xu167_window_seen){xu167_window_seen=1;for(j=0;j<xu167_count;++j)xu167_snapshot(j,"first_observed_window_event");}xu167_snapshot(i,"value_change");}return 0;}
+static void xu167_bind(vpiHandle h,const char *role,unsigned expected_width){
+ unsigned i;const char *raw;char full[8192];
+ if(!h||vpi_get(vpiSize,h)<1||vpi_get(vpiSize,h)>64||(expected_width&&vpi_get(vpiSize,h)!=(int)expected_width)){++xu167_failed;vpi_printf("XU_UNKNOWN167_BIND_REJECT role=%s reason=missing_or_width\n",role);return;}
+ raw=vpi_get_str(vpiFullName,h);canonical(raw?raw:"",full,sizeof(full));
+ /* Preserve distinct named native aliases; only the exact same fullname is
+    skipped when the generic inventory encounters an explicitly bound pin. */
+ for(i=0;i<xu167_count;++i)if(!strcmp(full,xu167_names[i]))return;
+ if(xu167_count>=XU167_LIMIT){++xu167_failed;return;}i=xu167_count++;xu167_nodes[i]=h;
+ xu167_names[i]=strdup(full);xu167_roles[i]=strdup(role);
+ memset(&xu167_callbacks[i],0,sizeof(xu167_callbacks[i]));memset(&xu167_times[i],0,sizeof(xu167_times[i]));memset(&xu167_values[i],0,sizeof(xu167_values[i]));
+ xu167_times[i].type=vpiSuppressTime;xu167_values[i].format=vpiSuppressVal;xu167_callbacks[i].reason=cbValueChange;xu167_callbacks[i].cb_rtn=xu167_changed;xu167_callbacks[i].obj=h;xu167_callbacks[i].time=&xu167_times[i];xu167_callbacks[i].value=&xu167_values[i];xu167_callbacks[i].user_data=(PLI_BYTE8 *)(uintptr_t)i;
+ if(!vpi_register_cb(&xu167_callbacks[i]))++xu167_failed;
+ vpi_printf("XU_UNKNOWN167_BIND role=%s bits=%d type=%d name=%s\n",role,vpi_get(vpiSize,h),vpi_get(vpiType,h),full);
+}
+static void xu167_bind_exact(vpiHandle mod,const char *name,const char *role,unsigned width){
+ const char *raw;char actual[8192],want[8192],scope[8192];vpiHandle h=vpi_handle_by_name((PLI_BYTE8 *)name,mod);
+ raw=vpi_get_str(vpiFullName,mod);canonical(raw?raw:"",scope,sizeof(scope));
+ if(strlen(scope)+strlen(name)+2>sizeof(want)){++xu167_failed;return;}
+ strcpy(want,scope);strcat(want,".");strcat(want,name);
+ if(!h){++xu167_failed;vpi_printf("XU_UNKNOWN167_BIND_REJECT role=%s reason=missing name=%s\n",role,want);return;}
+ raw=vpi_get_str(vpiFullName,h);canonical(raw?raw:"",actual,sizeof(actual));
+ if(strcmp(actual,want)){++xu167_failed;vpi_printf("XU_UNKNOWN167_BIND_REJECT role=%s reason=fullname name=%s\n",role,actual);return;}
+ xu167_bind(h,role,width);
+}
+static void xu167_walk(vpiHandle mod){
+ const char *raw=vpi_get_str(vpiFullName,mod);char full[8192];vpiHandle it,h;unsigned scope,i;canonical(raw?raw:"",full,sizeof(full));
+ for(scope=0;scope<4;++scope)if(!strcmp(full,xu167_scopes[scope])){
+  ++xu167_scope_counts[scope];
+  raw=vpi_get_str(vpiDefName,mod);vpi_printf("XU_UNKNOWN167_SCOPE index=%u definition=%s name=%s\n",scope,raw?raw:"ABSENT",full);
+  if(scope==0){for(i=0;i<8;++i)xu167_bind_exact(mod,xu167_eight_native[i],xu167_eight_logical[i],xu167_eight_width[i]);}
+  else if(scope==3){static const char *n[]={"clk","rst_n","cmd_valid","cmd_ready","cmd_read","cmd_addr","cmd_wdata","cmd_wmask","rsp_valid","rsp_ready","rsp_rdata","rsp_err"};for(i=0;i<12;++i)xu167_bind_exact(mod,n[i],"shared_port",0);}
+  else{
+   if(scope==2){static const char *n[]={"CK","D","Q","NOTIFIER"};static const char *r[]={"fifo_CK","fifo_D","fifo_Q","fifo_NOTIFIER"};for(i=0;i<4;++i)xu167_bind_exact(mod,n[i],r[i],1);}
+   it=vpi_iterate(vpiNet,mod);if(it)while((h=vpi_scan(it))!=NULL)if(vpi_get(vpiSize,h)>=1&&vpi_get(vpiSize,h)<=64)xu167_bind(h,scope==1?"fifo_net":"target_net",0);
+   it=vpi_iterate(vpiReg,mod);if(it)while((h=vpi_scan(it))!=NULL)if(vpi_get(vpiSize,h)>=1&&vpi_get(vpiSize,h)<=64)xu167_bind(h,scope==1?"fifo_reg":"target_reg",0);
+  }
+ }
+ it=vpi_iterate(vpiModule,mod);if(it)while((h=vpi_scan(it))!=NULL)xu167_walk(h);
+}
+static PLI_INT32 xu167_prepare_task(PLI_BYTE8 *unused){
+ vpiHandle root,tb;unsigned i;(void)unused;
+ if(xu167_ready++){++xu167_failed;return 0;}
+ root=vpi_handle_by_name((PLI_BYTE8 *)"tb_xu_soc_ppa.dut",NULL);tb=vpi_handle_by_name((PLI_BYTE8 *)"tb_xu_soc_ppa",NULL);
+ if(root&&tb){xu167_walk(root);for(i=0;i<8;++i)xu167_bind_exact(tb,xu167_eight_tb[i],"tb_fatal_operand",xu167_eight_width[i]);}else ++xu167_failed;
+ for(i=0;i<4;++i)if(xu167_scope_counts[i]!=1)++xu167_failed;
+ vpi_printf("XU_UNKNOWN167_READY native_operands=8 tb_operands=8 scopes=%u,%u,%u,%u observed_nodes=%u failed=%u start_fs=%llu stop_fs=%llu new_DUT_writes=0 new_TB_writes=0 forces=0 timing_controls_changed=0 NOT_QUALIFIED\n",xu167_scope_counts[0],xu167_scope_counts[1],xu167_scope_counts[2],xu167_scope_counts[3],xu167_count,xu167_failed,(unsigned long long)XU167_START,(unsigned long long)XU167_STOP);
+ return 0;
+}
+static PLI_INT32 xu167_fatal_snapshot_task(PLI_BYTE8 *unused){unsigned i;(void)unused;for(i=0;i<xu167_count;++i)xu167_snapshot(i,"before_original_unknown_fatal");vpi_printf("XU_UNKNOWN167_SNAPSHOT_DONE nodes=%u failed=%u tick_fs=%llu original_fatal_retained=1 NOT_QUALIFIED\n",xu167_count,xu167_failed,(unsigned long long)xu167_tick());return 0;}
+static void xu167_register(void){
+ s_vpi_systf_data d;memset(&d,0,sizeof(d));d.type=vpiSysTask;d.tfname=(PLI_BYTE8 *)"$xu_unknown167_prepare";d.calltf=xu167_prepare_task;vpi_register_systf(&d);
+ memset(&d,0,sizeof(d));d.type=vpiSysTask;d.tfname=(PLI_BYTE8 *)"$xu_unknown167_snapshot";d.calltf=xu167_fatal_snapshot_task;vpi_register_systf(&d);
+}

@@ -1,0 +1,117 @@
+{
+  "callback_serial_semantics": "CALLBACK_DISPATCH_ORDER_ONLY_NOT_CAUSALITY_OR_VPI_SCHEDULER_PHASE",
+  "cli": "unknown167.py",
+  "collected_status": "COLLECTED_ORIGINAL_UNKNOWN_FATAL167_NOT_QUALIFIED",
+  "deployment_status": "LOCAL_ONLY_NOT_DEPLOYED_OR_RUN_NATIVE",
+  "diagnostic_terminal_statuses": [
+    "COLLECTED_ORIGINAL_UNKNOWN_FATAL167_NOT_QUALIFIED",
+    "ORIGINAL_TB_EXU_HALT_REACHED_FINAL_QUALIFICATION_GATE_PENDING_NOT_QUALIFIED"
+  ],
+  "expected_cli_exit": 0,
+  "expected_simulator_exit": "RECORDED_VERBATIM_VCS_MAY_RETURN_ZERO_ON_ORIGINAL_FATAL",
+  "external_adapter147_default": "../xu-campaign-batch154/private147",
+  "failure_status": "FAIL_OBSERVATION167_NOT_QUALIFIED",
+  "forbidden": [
+    "DUT_FF_or_Q_writes",
+    "force",
+    "new_reset",
+    "replacement_RTL",
+    "two_state_conversion",
+    "timing_suppression",
+    "fatal_removal",
+    "sampling_phase_changes"
+  ],
+  "foreground": true,
+  "local_review": {
+    "path": "local-review167/review167.json",
+    "sha256": "e134468bdb18871618fd6510b9314b945f40e9f0cabc2765e0307dfb02b966c0",
+    "status": "LOCAL_STRUCTURE_MOCK_PARSER_PASS_NOT_NATIVE_VCS_OR_QUALIFICATION"
+  },
+  "new_dut_writes": 0,
+  "new_tb_writes": 0,
+  "observation_window_fs": [
+    9359300000000,
+    9359500000000
+  ],
+  "original147_files": {
+    "actual133-inventory.json": "14a0aec91b4ceca013861ce7f4703142e90a8c762fe8c6da632f28a13ccdabb9",
+    "frozen-s2c-accel.v": "1a088c873c5e5de84ca92fdc74d693a326e430cc6191128979f573fe4e64ad45",
+    "frozen111-vpi.c": "2403e25ee5ab453d017b6686da89df7553b79bcd89d70ca35be96281d5d8e7c7",
+    "private147-runtime.c.in": "2c9044aeff474fd336195f81b4527385caabba6bee754325e01bc599feb4e282",
+    "support111.py": "2a740fb35d8f6db7da3295031f4e7e66f1505d30c9ccf030a5cb1862cb8caa6d",
+    "xu_private147.py": "5ee323cec482d465ccf3a641b18a31186e9d7ed5173caccbcdf7c446f2685743"
+  },
+  "original147_tb_fatals_preserved": 87,
+  "original_always_blocks": 3,
+  "original_sampling_calls": 3,
+  "prepared_status": "PREPARED_UNCHANGED147_PASSIVE_UNKNOWN167_NOT_QUALIFIED",
+  "python_minimum": "3.6",
+  "qualification": "NOT_QUALIFIED",
+  "result_file": "state.json",
+  "runtime_files": [
+    {
+      "bytes": 16111,
+      "name": "unknown167.py",
+      "sha256": "27e6c8716ca2065e2f306d732ccac23287340770c22a963fdb6b95dcb53f262d"
+    },
+    {
+      "bytes": 7998,
+      "name": "observer167.c.in",
+      "sha256": "bb4185c3d575d2c81b94789b82f2f221018988352862ca367782445e40dd6ce3"
+    }
+  ],
+  "schema": "xu-unknown167-contract-v1",
+  "target_fifo_scope": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo",
+  "target_notifier_scope": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.dp_gt0.vec_31_dfflr.qout_r_reg[0]",
+  "unknown_operands": [
+    {
+      "logical": "w_commit",
+      "native": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_wLoadWen",
+      "tb": "xu147_o_048",
+      "width": 1
+    },
+    {
+      "logical": "x_commit",
+      "native": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_xLoadWen",
+      "tb": "xu147_o_051",
+      "width": 1
+    },
+    {
+      "logical": "bias_commit",
+      "native": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_cacheWriteEnable",
+      "tb": "xu147_o_043",
+      "width": 1
+    },
+    {
+      "logical": "row_active",
+      "native": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_rowActive",
+      "tb": "xu147_o_016",
+      "width": 1
+    },
+    {
+      "logical": "row_count",
+      "native": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_rowCount",
+      "tb": "xu147_o_017",
+      "width": 2
+    },
+    {
+      "logical": "row_running",
+      "native": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_rowRunning",
+      "tb": "xu147_o_023",
+      "width": 1
+    },
+    {
+      "logical": "row_produced",
+      "native": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_rowProduced",
+      "tb": "xu147_o_020",
+      "width": 6
+    },
+    {
+      "logical": "row_retired",
+      "native": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_rowRetired",
+      "tb": "xu147_o_022",
+      "width": 6
+    }
+  ],
+  "usage": "unknown167.py --adapter147 ORIGINAL_FROZEN147 [original147 args including --out FRESH --run]"
+}
