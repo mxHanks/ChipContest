@@ -58,7 +58,7 @@ python3 /home/mxhanks/Projects/ChipContest-xu-score-opt/docs/validation/xu-score
   --out /tmp/xu126-new-hostchecks
 ```
 
-本次实际复现已在 `/tmp/xu126-archive-hostchecks-20261105-01` 完成，rc0；最终结果与
+本次实际复现已在 `/tmp/xu126-archive-hostchecks-20261105-02` 完成，rc0；最终结果与
 原03的 `d22c7582…ce17b` 逐字节一致，见 `reproduction-receipt.json`。
 
 适配器不修改原checker，只将其输入根指向新输出目录中的fixture副本。三份实际116
