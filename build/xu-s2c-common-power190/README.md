@@ -35,7 +35,7 @@ Chisel、RTL、固件、向量、MMIO ABI、数值格式、SDC、库、功能模
   `output-manifest190.json`；失败也生成清单。原任务990656 cycles及真实窗口用于P×t，
   不外推task0为完整12层、不含测量窗外33697次clear写的能量。
 
-服务器只由现有153总控注册并启动，不直接手动运行。部署文件恰为下面8个：
+服务器只由现有153总控注册并启动，不直接手动运行。部署目标改为新的 `~/Desktop/xu-s2c-common-power198/`，旧190目录不覆盖。部署文件恰为下面9个：
 
 ```text
 power190.py
@@ -46,6 +46,7 @@ jobs190.py
 command-preflight190.json
 command-full12_190.json
 manifest190.json
+frozen-fm190.json
 ```
 
 `run190.py` 在同一PID内执行冻结命令，进程原argv只含本job唯一输出路径，避免full12的
@@ -64,9 +65,9 @@ B/s2c-common-scope-power12-20261105-190
 可审查的底层复现命令（实际调度仍交原总控）：
 
 ```sh
-python3 -B "$HOME/Desktop/xu-s2c-common-power190/power190.py" campaign \
+python3 -B "$HOME/Desktop/xu-s2c-common-power198/power190.py" campaign \
   --task-ids 0 --out "$B/s2c-common-scope-preflight-20261105-190"
-python3 -B "$HOME/Desktop/xu-s2c-common-power190/power190.py" campaign \
+python3 -B "$HOME/Desktop/xu-s2c-common-power198/power190.py" campaign \
   --task-ids all --preflight-root "$B/s2c-common-scope-preflight-20261105-190" \
   --out "$B/s2c-common-scope-power12-20261105-190"
 ```
@@ -85,9 +86,21 @@ python3 -B build/xu-s2c-common-power190/check_metadata190.py
 python3 -B build/xu-s2c-common-power190/power190.py --help
 ```
 
-18项host checks包含实际69/22原件的12层Tcl逆变换逐字节相同、原native日志、未知Q统计、
+19项host checks包含实际69/22原件的12层Tcl逆变换逐字节相同、原native日志、未知Q统计、
 负向守卫、报告完整性、超时回执和明确标注的合成生命周期。`check_metadata190.py`额外把
 返回的69/09/22实际元数据联接；未返回的服务器文件hash被明确mock，这一步仅检查字段
 兼容，不能冒充服务器输入重hash或EDA执行证明。服务器190结果仍待总控真正执行。
 
 `make_manifest190.py`只用于经审查后主动重建本地冻结命令/manifest；不部署、不自动调用。
+
+
+198接续修正：192在任何注册动作之前严格SHA检查发现 live aggregate
+`candidate-formality-campaign-20261103-01/state.json`已改变，因此未注册任何job。
+现在把09已归档的原始whole-state正文逐字节放入`frozen-fm190.json`（349702B，SHA
+`dadd3bb693a3ae17bf92682d9586fa1ba07e6ead468465e07b67fa91eabea5dd`）。
+references保留原路径/SHA的历史身份，但不再把可追加的live汇总文件列为冻结输入。
+新的隔离198 runtime自身严格冻结该正文；ownS2c原run、native日志、SVF、mapped9c16、
+所有原RTL及面积证据仍独立实际重hash。没有使用新汇总state替换历史证明或放松SHA。
+job IDs与输出190目录均不变；新的entry/command/job frozen bytes必须重新审查后登记。
+外部冻结清单另无可变汇总state；57的terminal capture23 result仍按原6eea4b… SHA严格核对，
+如果该原件变化仍会拒绝，不会自动忽略或恢复。

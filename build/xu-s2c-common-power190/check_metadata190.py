@@ -7,6 +7,8 @@ s=root/'build/xu-score-resume-20261103';p=root/'build/xu-s2c-common-power190/pow
 B='/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/'
 def local(path):
  p=Path(path)
+ if str(path)=='/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2c-common-power198/frozen-fm190.json':
+  return root/'build/xu-s2c-common-power190/frozen-fm190.json'
  if str(path).startswith(B):
   tail=str(path)[len(B):]
   for d in ['next-results-export-69','current-evidence-export-09','terminal-results-export-22']:

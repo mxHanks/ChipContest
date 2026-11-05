@@ -43,6 +43,19 @@ class ActualEvidence(unittest.TestCase):
         self.assertEqual(e['input_sha256_before'], ORIGINAL['input_sha256'])
         self.assertEqual(len(e['input_sha256_before']), 367)
 
+    def test_archived_original_fm_state_is_exact_and_not_live(self):
+        ref = api.read(HERE / 'references190.json')
+        original = WORK / 'build/xu-score-resume-20261103/current-evidence-export-09/candidate-formality-campaign-20261103-01/state.json'
+        self.assertEqual((HERE / 'frozen-fm190.json').read_bytes(), original.read_bytes())
+        self.assertEqual(api.sha(HERE / 'frozen-fm190.json'), ref['fm_state']['sha256'])
+        self.assertEqual(ref['fm_state']['sha256'], ref['fm_state_original']['sha256'])
+        self.assertTrue(ref['fm_state']['path'].endswith('/xu-s2c-common-power198/frozen-fm190.json'))
+        self.assertNotEqual(ref['fm_state']['path'], ref['fm_state_original']['path'])
+        for which in ['preflight190', 'full12_190']:
+            job = jobs.job(which)
+            self.assertNotIn(ref['fm_state_original']['path'], [x['path'] for x in job['frozen_inputs']])
+            self.assertTrue(any(x.endswith('/xu-s2c-common-power198/run190.py') for x in job['argv']))
+
     def test_all12_native_original_logs(self):
         e = api.read(OLD / 'execution.json')
         for task, native in zip(ORIGINAL['tasks'], e['tasks']):
@@ -117,7 +130,7 @@ class ActualEvidence(unittest.TestCase):
 class Guards(unittest.TestCase):
     def test_runtime_complete_freeze(self):
         rec = api.runtime()
-        self.assertEqual(len(rec), 8)
+        self.assertEqual(len(rec), 9)
         self.assertIn(str(HERE / 'manifest190.json'), rec)
 
     def test_runtime_omitted_duplicate_and_hash_rejected(self):

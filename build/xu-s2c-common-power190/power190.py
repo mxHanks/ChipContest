@@ -71,7 +71,7 @@ def runtime():
     m = read(HERE / 'manifest190.json')
     need(m['schema'] == 'xu-common190-manifest-v1', 'runtime manifest schema differs')
     records = {}
-    required = ['power190.py', 'frozen130.py', 'references190.json', 'run190.py', 'jobs190.py', 'command-preflight190.json', 'command-full12_190.json']
+    required = ['power190.py', 'frozen130.py', 'references190.json', 'run190.py', 'jobs190.py', 'command-preflight190.json', 'command-full12_190.json', 'frozen-fm190.json']
     need(sorted(row['name'] for row in m['runtime']) == sorted(required), 'complete unique runtime member set required')
     for row in m['runtime']:
         need(Path(row['name']).name == row['name'], 'unsafe runtime filename')
@@ -117,6 +117,10 @@ def source_context(records):
     need(ref['schema'] == 'xu-s2c-common190-references-v1', 'wrong190 references')
     for key in ['prepared57', 'execution57', 'fm_state', 'ppa_prepared', 'area', 'verify', 'scope']:
         checked(ref[key], records)
+    need(ref['fm_state']['sha256'] == ref['fm_state_original']['sha256'] == sha(HERE / 'frozen-fm190.json') and
+         ref['fm_state']['bytes'] == ref['fm_state_original']['bytes'] == 349702 and
+         ref['fm_state']['path'] == '/storage2/2026contest/server4/s4_23usr/Desktop/xu-s2c-common-power198/frozen-fm190.json',
+         'byte-identical original09 FM state must use isolated immutable198 runtime copy')
     prepared, execution = read(ref['prepared57']['path']), read(ref['execution57']['path'])
     need(prepared['schema'] == 'xu-s2c-full-soc-power-prepared-v1' and prepared['qualification'] == 'NOT_QUALIFIED' and
          prepared['requested_task_ids'] == list(range(12)) and prepared['taskset_complete'] is True and
@@ -187,7 +191,7 @@ def source_context(records):
     return dict(original_prepared=ref['prepared57'], original_execution=ref['execution57'],
                 netlist=prepared['netlist'], analysis_sdc=prepared['analysis_sdc'], clock_scope=ref['scope'],
                 source_context=prepared['source_context'], native_fm_log=native['log'],
-                native_fm_state=ref['fm_state'], passing_compare_points=42338, area_report=ref['area'],
+                native_fm_state=ref['fm_state'], archived_original_fm_state=ref['fm_state_original'], passing_compare_points=42338, area_report=ref['area'],
                 area=dict(accelerator_mm2='0.2948018380', full_soc_mm2='3.365797600429',
                           accelerator_limit_mm2='2.25', below_area_limit=True, qualification='NOT_QUALIFIED'),
                 original_configuration_sha256=prepared['original_capture_configuration_sha256']), prepared, execution, original_macros

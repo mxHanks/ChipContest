@@ -7,7 +7,7 @@ import power190 as api
 
 D = Path('/storage2/2026contest/server4/s4_23usr/Desktop')
 B = D / 'xu-score-optimization-20261102'
-ROOT = D / 'xu-s2c-common-power190'
+ROOT = D / 'xu-s2c-common-power198'
 OUTS = {'preflight190': B / 's2c-common-scope-preflight-20261105-190',
         'full12_190': B / 's2c-common-scope-power12-20261105-190'}
 
