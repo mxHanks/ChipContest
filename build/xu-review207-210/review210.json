@@ -1,0 +1,191 @@
+{
+  "blocking_findings": [],
+  "independent_python_tests": 10,
+  "independent_tcl_stub_cases": 15,
+  "limits": [
+    "This is an offline source/compatibility review; no native207 success or design qualification is asserted.",
+    "Original177 all-propagated, actual190 common-scope2c and own155scope2e remain separate cases bound to their own exact maps/clock setup.",
+    "Required reports/native failures and source input before/after checks are inherited from byte-identical original workers, with new clock-mapping completeness guards.",
+    "On timeout the wrapper is terminated and later internal cases stop. Descendant exit is not assumed; original153 native scanning must gate later jobs.",
+    "Tcl mocks establish control flow only. The original177 logs establish existing pin clocks attribute support on the installed PT version."
+  ],
+  "manifest_sha256": "65b5057e210ecc250207dce736cced0963710cd76c6ba1c746ca3e77b6035af4",
+  "native_runs": 0,
+  "original_tests": 11,
+  "qualification": "NOT_QUALIFIED",
+  "remote_actions": 0,
+  "resolved_findings": [
+    {
+      "issue": "A clocks attribute query could return rc0 while printing native Error.",
+      "resolution": "FAILED_NATIVE_DIAGNOSTICS is recorded, then the mandatory helper throws; independent Tcl check passes."
+    },
+    {
+      "issue": "After wrapper timeout the root loop could open another native session while a child survived.",
+      "resolution": "native_timeout ends the root loop; remaining cases are recorded as not run; success requires exactly three complete native runs. Independent fake-timeout test passes."
+    }
+  ],
+  "reviewed_commits": [
+    "35f2a65",
+    "95ee8b4"
+  ],
+  "reviewed_files": [
+    {
+      "bytes": 4036,
+      "path": "build/xu-native-query207/README.md",
+      "sha256": "07230d929e25dc34d731cc9afaf99e31128c6f4fba695878732f9b3c94b640b6"
+    },
+    {
+      "bytes": 931,
+      "path": "build/xu-native-query207/build207.py",
+      "sha256": "c019b312df76a1d8587e239fd20f3ff381a41dbe72e15fc37556c072a7bf7630"
+    },
+    {
+      "bytes": 4520,
+      "path": "build/xu-native-query207/compat207.tcl",
+      "sha256": "773db514000c26f14460a66e61f8c520a366317bad2e81edffaa5cf1fa627a56"
+    },
+    {
+      "bytes": 1702,
+      "path": "build/xu-native-query207/describe207.json",
+      "sha256": "a8079896a22539dd5b6995deb2e4210772012c08c5b9516b17912106b7287ff3"
+    },
+    {
+      "bytes": 45200,
+      "path": "build/xu-native-query207/frozen177/frozen-ownS2c-power57.tcl",
+      "sha256": "c99c65389f03d0a5d49b11bb50d9ce5a0440ae259ec72fe2c30f886c97e159b8"
+    },
+    {
+      "bytes": 2119,
+      "path": "build/xu-native-query207/frozen177/job177.py",
+      "sha256": "36202783ae4b58075380d78d6391a3796934b2b53ea4418a0596908aa1a1806e"
+    },
+    {
+      "bytes": 862,
+      "path": "build/xu-native-query207/frozen177/manifest177.json",
+      "sha256": "52096886d248179a51a55459ee9696876d60a19533f800596170b69a5469066c"
+    },
+    {
+      "bytes": 6934,
+      "path": "build/xu-native-query207/frozen177/query177.tcl.in",
+      "sha256": "ae96d6cf0259ec97aca8aeef064badbeaf1bc5dc996aaa736f5d75cea710b6da"
+    },
+    {
+      "bytes": 16894,
+      "path": "build/xu-native-query207/frozen177/readonly177.py",
+      "sha256": "21cdc13892d0f64476bfe903ad2dcfa87c6ef7b90e5f5bd280167055fd736e54"
+    },
+    {
+      "bytes": 6578,
+      "path": "build/xu-native-query207/frozen177/references177.json",
+      "sha256": "80d412d2b96fc0b3cfe8abb6e33a0e523107081ed7981d9ef8c133751453726f"
+    },
+    {
+      "bytes": 19207,
+      "path": "build/xu-native-query207/frozen186/coverage186.py",
+      "sha256": "ea1b78905a095e21be9f235e521aae514f0913f5f6a2180c08465982b31d4997"
+    },
+    {
+      "bytes": 19641,
+      "path": "build/xu-native-query207/frozen186/frozen-own155-sta.tcl",
+      "sha256": "91b0f70c83788a552d914d75e2884722048ad55cb7ce856e9a90faf7083a5f04"
+    },
+    {
+      "bytes": 16894,
+      "path": "build/xu-native-query207/frozen186/frozen177.py",
+      "sha256": "21cdc13892d0f64476bfe903ad2dcfa87c6ef7b90e5f5bd280167055fd736e54"
+    },
+    {
+      "bytes": 1802,
+      "path": "build/xu-native-query207/frozen186/job186.py",
+      "sha256": "6d63e4758195c7d768ee283eb7ae206bc8b8c806f1aaf5ff8f5c820cad2666fb"
+    },
+    {
+      "bytes": 1162,
+      "path": "build/xu-native-query207/frozen186/manifest186.json",
+      "sha256": "8d54d5f0e184aa96047434a2207ad86a08c9b4da2251c7572d454efa15b78664"
+    },
+    {
+      "bytes": 13278,
+      "path": "build/xu-native-query207/frozen186/query186.tcl.in",
+      "sha256": "33a7a3aea101f11e9848a0fcf2efb25a2be7eedc29fcc19e7bbd62ce44505a2e"
+    },
+    {
+      "bytes": 114207,
+      "path": "build/xu-native-query207/frozen186/references186.json",
+      "sha256": "2d2abc74a2da46fb27e42e63583d9b5c878d6549b1562f5a4dde83bf6bf8385d"
+    },
+    {
+      "bytes": 1638731,
+      "path": "build/xu-native-query207/frozen186/targets186.json",
+      "sha256": "426ae426b1a5ce72f8faf99b94b59917ffda07fe4949d13953bd4dae5001ea10"
+    },
+    {
+      "bytes": 6247,
+      "path": "build/xu-native-query207/frozen190/inventory/export.tcl",
+      "sha256": "f1599def36636830a2b879087e21b945989cba26d0ae4bae6ab3c41a0a43eef1"
+    },
+    {
+      "bytes": 275468,
+      "path": "build/xu-native-query207/frozen190/inventory/state.json",
+      "sha256": "64886bec93a0b94835939234104811d5a39c0a941c56f769d89293f191588286"
+    },
+    {
+      "bytes": 189617,
+      "path": "build/xu-native-query207/frozen190/prepared.json",
+      "sha256": "7457075833e86e3b8df91b010bdf937f6a464505fbddc14123be7039a31f2726"
+    },
+    {
+      "bytes": 275680,
+      "path": "build/xu-native-query207/frozen190/result.json",
+      "sha256": "bee37b06890c29104de955a7c4e98ea0e8e08bab24539af745eee532e9a87b97"
+    },
+    {
+      "bytes": 45252,
+      "path": "build/xu-native-query207/frozen190/task_00/power.tcl",
+      "sha256": "b2c16c81047501d0c1a3d1c2ef28a3ee1a1a1e49b55cf9158794fae70cbe341c"
+    },
+    {
+      "bytes": 701,
+      "path": "build/xu-native-query207/host-check207.json",
+      "sha256": "87fe48f150492ee20f0817b2b71199a01596b92912a403fe7beed0a271ea6232"
+    },
+    {
+      "bytes": 196,
+      "path": "build/xu-native-query207/host-check207.log",
+      "sha256": "2dbe9284b836202942fd8745a1df96899497ecc138f999693b52cb7f10afb8a7"
+    },
+    {
+      "bytes": 2294,
+      "path": "build/xu-native-query207/job207.py",
+      "sha256": "6f196f0119744166b69e255e2645b8682ae8ac5a040016186b8ed9abf9496d9b"
+    },
+    {
+      "bytes": 3766,
+      "path": "build/xu-native-query207/manifest207.json",
+      "sha256": "65b5057e210ecc250207dce736cced0963710cd76c6ba1c746ca3e77b6035af4"
+    },
+    {
+      "bytes": 12554,
+      "path": "build/xu-native-query207/native_query207.json",
+      "sha256": "4d5e913e9a17000747a7cf2f78d4272cb66af293c9cc76b901af3c819d12c96f"
+    },
+    {
+      "bytes": 23012,
+      "path": "build/xu-native-query207/query207.py",
+      "sha256": "a449b06d2c16752a520e18ec3413ad030b3e5bf488482efda8ccc05565fff353"
+    },
+    {
+      "bytes": 1819,
+      "path": "build/xu-native-query207/references207.json",
+      "sha256": "751dbc544c0772afbffed46611706f72354dbfe2aa2646be6f7450a514b1dcc1"
+    },
+    {
+      "bytes": 7658,
+      "path": "build/xu-native-query207/test207.py",
+      "sha256": "4d3b4a217986dbf5c0b9c8c386d5f574604a95415495f0430966beba4d759b92"
+    }
+  ],
+  "schema": "xu-independent-review207-210-v1",
+  "status": "FINAL207_OFFLINE_REVIEW_PASSED_NOT_QUALIFIED",
+  "worker_sha256": "a449b06d2c16752a520e18ec3413ad030b3e5bf488482efda8ccc05565fff353"
+}
