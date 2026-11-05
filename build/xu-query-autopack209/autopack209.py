@@ -29,6 +29,11 @@ def select209(s):
     for job in JOBS:
         s.add(control/'registrations'/(job+'.json'),control.name+'/registrations/'+job+'.json')
         s.tree(control/'runs'/job,control.name+'/runs/'+job,{'.json','.jsonl','.log','.txt'})
+    s.add(s.base/'two-candidate-followup-registration-20261105-208.json',
+          'two-candidate-followup-registration-20261105-208.json')
+    s.add(s.base/'followup208-install.json','followup208-install.json')
+    s.names(s.desktop/'xu-native-query-control208','desktop/xu-native-query-control208',
+            ['register208.py','frozen-jobs208.json'],s.desktop)
     for root in ROOTS:
         directory=s.base/root
         if not directory.exists():
