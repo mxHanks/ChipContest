@@ -22,12 +22,12 @@ static uint64_t xu167_tick(void){s_vpi_time t;memset(&t,0,sizeof(t));t.type=vpiS
 static void xu167_snapshot(unsigned i,const char *why){
  s_vpi_value v;unsigned width=(unsigned)vpi_get(vpiSize,xu167_nodes[i]);uint32_t a0,b0,a1=0,b1=0;
  memset(&v,0,sizeof(v));v.format=vpiVectorVal;vpi_get_value(xu167_nodes[i],&v);
- if(!v.value.vector||width<1||width>64){++xu167_failed;return;}
+ if(!v.value.vector||width<1||width>64){++xu167_failed;vpi_printf("XU_UNKNOWN167_READ_REJECT role=%s name=%s\n",xu167_roles[i],xu167_names[i]);return;}
  a0=(uint32_t)v.value.vector[0].aval;b0=(uint32_t)v.value.vector[0].bval;
  if(width>32){a1=(uint32_t)v.value.vector[1].aval;b1=(uint32_t)v.value.vector[1].bval;}
  vpi_printf("XU_UNKNOWN167_EVENT serial=%llu tick_fs=%llu reason=%s role=%s bits=%u aval=%08x%08x bval=%08x%08x name=%s\n",(unsigned long long)++xu167_serial,(unsigned long long)xu167_tick(),why,xu167_roles[i],width,a1,a0,b1,b0,xu167_names[i]);
 }
-static PLI_INT32 xu167_changed(p_cb_data cb){unsigned j,i=(unsigned)(uintptr_t)cb->user_data;uint64_t t=xu167_tick();if(i>=xu167_count){++xu167_failed;return 0;}if(t>=XU167_START&&t<=XU167_STOP){if(!xu167_window_seen){xu167_window_seen=1;for(j=0;j<xu167_count;++j)xu167_snapshot(j,"first_observed_window_event");}xu167_snapshot(i,"value_change");}return 0;}
+static PLI_INT32 xu167_changed(p_cb_data cb){unsigned j,i=(unsigned)(uintptr_t)cb->user_data;uint64_t t=xu167_tick();if(i>=xu167_count){++xu167_failed;vpi_printf("XU_UNKNOWN167_CALLBACK_REJECT index=%u\n",i);return 0;}if(t>=XU167_START&&t<=XU167_STOP){if(!xu167_window_seen){xu167_window_seen=1;for(j=0;j<xu167_count;++j)xu167_snapshot(j,"first_observed_window_event");}xu167_snapshot(i,"value_change");}return 0;}
 static void xu167_bind(vpiHandle h,const char *role,unsigned expected_width){
  unsigned i;const char *raw;char full[8192];
  if(!h||vpi_get(vpiSize,h)<1||vpi_get(vpiSize,h)>64||(expected_width&&vpi_get(vpiSize,h)!=(int)expected_width)){++xu167_failed;vpi_printf("XU_UNKNOWN167_BIND_REJECT role=%s reason=missing_or_width\n",role);return;}

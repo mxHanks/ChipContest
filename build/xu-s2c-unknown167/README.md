@@ -49,6 +49,8 @@ python3 -B "$HOME/Desktop/xu-s2c-unknown167/unknown167.py" \
 异常、句柄/宽度/名字不匹配、快照不完整或原fatal证据缺失为
 `FAIL_OBSERVATION167_NOT_QUALIFIED`。如果原流程后来到达原EXU halt资格fatal，
 保留原147诊断终态，仍为NOT_QUALIFIED。`--describe`返回完整合同。
+unknown分支和原EXU halt分支共用同一份新observer READY、完整scope和绑定检查；
+新observer的句柄、读取或回调拒绝均导致FAIL，不能因为原147到达诊断终点而跳过。
 
 本地复现（从本功能树根目录）：
 
@@ -57,8 +59,9 @@ python3 -B build/xu-s2c-unknown167/host_checks167.py \
   --out build/xu-s2c-unknown167/host-check-fresh
 ```
 
-`local-review167/`保存此次prepare、整C `gcc -Werror`、完整TB的Icarus结构语法检查、
-7种合成VPI对象、17项恶意日志拒绝的日志及SHA。另测试X/Z保持和当前native/已采样TB差异。
+`local-review167-v2/`保存最新prepare、整C `gcc -Werror`、完整TB的Icarus结构语法检查、
+7种合成VPI对象、17项unknown恶意日志及8项EXU halt分支observer拒绝测试的日志及SHA。
+另测试X/Z保持和当前native/已采样TB差异；首次本地审查的`local-review167/`原样保留。
 Icarus结构fixture与合成VPI对象均不会作为服务器DUT输入；
 `synthetic-parser-fixture.log`是明确的本地混合解析fixture，不能当native仿真结果。
 本地通过不证明服务器句柄存在、native调度、物理存储读回、时序、活动或能耗资格。

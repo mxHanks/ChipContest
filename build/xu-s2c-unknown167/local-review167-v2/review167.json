@@ -1,0 +1,166 @@
+{
+  "checks": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/unknown167.py",
+        "--adapter147",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-campaign-batch154/private147",
+        "--capture",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/next-results-export-53/s2c-formal-activity12-20261103-23",
+        "--macro-inventory",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/terminal-results-export-22/s2c-pt-macro-pin-inventory-20261103-20/inventory.json",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/prepared"
+      ],
+      "log_sha256": "ded3a965d73b11a17b162a6876bb6959fd48c0a6df6fdfd02d6e51399d14501d",
+      "name": "prepare",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gcc",
+        "-std=gnu99",
+        "-fsyntax-only",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-isystem",
+        "/usr/include/iverilog",
+        "-I/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/prepared",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/prepared/xu_private147.c"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "vpi-syntax",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gcc",
+        "-std=gnu99",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-isystem",
+        "/usr/include/iverilog",
+        "-I/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167",
+        "-x",
+        "c",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/mock167.c.in",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/mock167"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "mock-build",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/mock167",
+        "0"
+      ],
+      "log_sha256": "d07cc0d8c43a8a60c21e621507a6a03605363e5a526af6704bc3c048522fe675",
+      "name": "mock-00",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/mock167",
+        "1"
+      ],
+      "log_sha256": "09123a4ce5816522e9f1abe450051cc6578e0f20f2106f388bf387d2021ec9fb",
+      "name": "mock-01",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/mock167",
+        "2"
+      ],
+      "log_sha256": "485b6f30df9af2bdbc2e80e90613e5df8f834cc7ba42797066d387c5af693100",
+      "name": "mock-02",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/mock167",
+        "3"
+      ],
+      "log_sha256": "d262a5112d38ab70696a789ee23fd659d835194f78400405670e1d5e0326e5b9",
+      "name": "mock-03",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/mock167",
+        "4"
+      ],
+      "log_sha256": "773cfe14a051aa8578d6d11461ebd9a4e42faa9142544ddb949136abce5cfd07",
+      "name": "mock-04",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/mock167",
+        "5"
+      ],
+      "log_sha256": "1b02bfd28160459b9b456ac0d21ce8280452151d8417601b2a1476097b186f07",
+      "name": "mock-05",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/mock167",
+        "6"
+      ],
+      "log_sha256": "448c566ee762079d1dbda8281630887a9e648e7b1c828ed3be79adf70e2eb0b3",
+      "name": "mock-06",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "iverilog",
+        "-g2012",
+        "-DXU_TASK_ACTIVITY_HOST_CHECK",
+        "-s",
+        "tb_xu_soc_ppa",
+        "-tnull",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2c-unknown167/host-check-v6/prepared/tb_private147.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/structural-stub.sv"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "full-tb-syntax",
+      "returncode": 0
+    }
+  ],
+  "classifier_negative_cases": 17,
+  "fallback_observer_negative_cases": 8,
+  "fallback_original_classifier_called": 9,
+  "forbidden_controls": 0,
+  "generated167_c_sha256": "68fa345255cf95116db2df1bf2ac47c2813aea6a555c69f32dc4193881716792",
+  "generated167_tb_sha256": "9ea6a01b4e0946e768cd45c09376fa6dfc2cd58963ad1a4b35a51ee921ea10ff",
+  "limitations": [
+    "No native VCS run, timing, causality, physical storage, activity or energy qualification.",
+    "Icarus checks syntax only with a separate structural fixture; fake VPI objects do not prove native handle availability or scheduling.",
+    "Synthetic merged parser log is explicitly local; never adopt it as native or qualification evidence."
+  ],
+  "mock_modes": 7,
+  "new_vpi_writes": 0,
+  "original147_files": {
+    "actual133-inventory.json": "14a0aec91b4ceca013861ce7f4703142e90a8c762fe8c6da632f28a13ccdabb9",
+    "frozen-s2c-accel.v": "1a088c873c5e5de84ca92fdc74d693a326e430cc6191128979f573fe4e64ad45",
+    "frozen111-vpi.c": "2403e25ee5ab453d017b6686da89df7553b79bcd89d70ca35be96281d5d8e7c7",
+    "private147-runtime.c.in": "2c9044aeff474fd336195f81b4527385caabba6bee754325e01bc599feb4e282",
+    "support111.py": "2a740fb35d8f6db7da3295031f4e7e66f1505d30c9ccf030a5cb1862cb8caa6d",
+    "xu_private147.py": "5ee323cec482d465ccf3a641b18a31186e9d7ed5173caccbcdf7c446f2685743"
+  },
+  "original147_tb_sha256": "27bfbb1f2e8c1c837cdcc93c904a2adc855292c90bc2cb2b5a915ba66a20d524",
+  "original_actual159_log_sha256": "3a231022be64a2a8a2e341f9f1c86023c16bd53d9c029d2c60b5c0b41f86c6b3",
+  "original_always_blocks": 3,
+  "original_fatal_count": 87,
+  "original_sampler_calls": 3,
+  "qualification": "NOT_QUALIFIED",
+  "schema": "xu-unknown167-local-review-v1",
+  "status": "LOCAL_STRUCTURE_MOCK_PARSER_PASS_NOT_NATIVE_VCS_OR_QUALIFICATION"
+}

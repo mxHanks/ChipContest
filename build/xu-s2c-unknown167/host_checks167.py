@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from types import SimpleNamespace
 import unknown167 as u
 
 HERE=Path(__file__).resolve().parent
@@ -116,8 +117,36 @@ def main():
         try:u.classify_unknown(data,0,prepared/'tb_private147.sv',bindings)
         except ValueError:pass
         else:raise AssertionError('malformed fixture accepted: '+name)
+    # Exercise the installed fallback wrapper with a deliberately isolated
+    # original-classifier stand-in. This tests observer guards only; the
+    # production wrapper still calls the exact SHA-frozen original147 classifier.
+    original_calls=[]
+    def original_classify_stub(*unused):
+        original_calls.append(True)
+        return dict(status=m.TERMINAL,qualification='NOT_QUALIFIED')
+    fake=SimpleNamespace(generated_tb=m.generated_tb,generate_c=m.generate_c,
+        classify=original_classify_stub,work=m.work,base=SimpleNamespace(FAIL_STATUS='unused'),HERE=m.HERE)
+    u.install(fake);fallback_raw=(prefix+before).encode()
+    fallback=fake.classify(fallback_raw,1,prepared/'tb_private147.sv',bindings,{})
+    need(original_calls and fallback['status']==m.TERMINAL and not fallback['unknown_fatal_reproduced'] and
+         fallback['passive_observer_bindings']==36,'fallback must retain original classifier and validate observer')
+    ready_line=re.search(rb'^XU_UNKNOWN167_READY[^\n]*\n',fallback_raw,re.M).group(0)
+    fallback_negatives=[
+        ('no-observer-ready',fallback_raw.replace(ready_line,b'')),
+        ('observer-ready-failed',fallback_raw.replace(b'observed_nodes=36 failed=0',b'observed_nodes=36 failed=1')),
+        ('duplicate-ready',fallback_raw+ready_line),
+        ('missing-notifier-binding',fallback_raw.replace(b'role=fifo_NOTIFIER bits=',b'role=wrong_NOTIFIER bits=',1)),
+        ('binding-rejected',fallback_raw+b'XU_UNKNOWN167_BIND_REJECT role=bad\n'),
+        ('read-rejected',fallback_raw+b'XU_UNKNOWN167_READ_REJECT role=bad\n'),
+        ('callback-rejected',fallback_raw+b'XU_UNKNOWN167_CALLBACK_REJECT index=999\n'),
+        ('scope-rejected',fallback_raw.replace(b'SCOPE index=3 ',b'SCOPE index=4 ',1))]
+    for name,data in fallback_negatives:
+        try:fake.classify(data,1,prepared/'tb_private147.sv',bindings,{})
+        except ValueError:pass
+        else:raise AssertionError('fallback observer guard accepted: '+name)
     report=dict(schema='xu-unknown167-local-review-v1',status='LOCAL_STRUCTURE_MOCK_PARSER_PASS_NOT_NATIVE_VCS_OR_QUALIFICATION',
         qualification='NOT_QUALIFIED',checks=checks,classifier_negative_cases=len(negatives),mock_modes=7,
+        fallback_observer_negative_cases=len(fallback_negatives),fallback_original_classifier_called=len(original_calls),
         original147_files=u.FROZEN147,original_fatal_count=87,original_always_blocks=3,original_sampler_calls=3,
         original147_tb_sha256=hashlib.sha256(old_tb.encode()).hexdigest(),generated167_tb_sha256=u.sha(prepared/'tb_private147.sv'),
         generated167_c_sha256=u.sha(prepared/'xu_private147.c'),original_actual159_log_sha256=hashlib.sha256(actual.encode()).hexdigest(),

@@ -77,6 +77,29 @@ def c_instrument(text):
     return result
 
 
+def observer_bindings(text):
+    need(not re.search(r"^XU_UNKNOWN167_\w*REJECT\b",text,re.M), "passive observer reported a rejection")
+    ready=re.findall(r'^XU_UNKNOWN167_READY native_operands=8 tb_operands=8 scopes=1,1,1,1 observed_nodes=(\d+) failed=0 start_fs=(\d+) stop_fs=(\d+) new_DUT_writes=0 new_TB_writes=0 forces=0 timing_controls_changed=0 NOT_QUALIFIED$',text,re.M)
+    need(len(ready)==1 and tuple(int(x) for x in ready[0][1:])==WINDOW, 'passive observer binding incomplete')
+    observer_binds=re.findall(r'^XU_UNKNOWN167_BIND role=(\S+) bits=(\d+) type=(\d+) name=(\S+)$',text,re.M)
+    need(observer_binds and len({b[3] for b in observer_binds})==len(observer_binds), 'observer binding names missing or duplicated')
+    need(int(ready[0][0])==len(observer_binds), 'observer ready count differs from exact binding names')
+    need(all(1<=int(b[1])<=64 and int(b[2]) in [36,44,48] for b in observer_binds), 'observer binding geometry/type differs')
+    by_name={b[3]:b for b in observer_binds}
+    required={ACCEL+'.'+native:(logical,width) for (logical,_,width),native in zip(EIGHT,NATIVE)}
+    required.update({'tb_xu_soc_ppa.'+target:('tb_fatal_operand',width) for _,target,width in EIGHT})
+    required.update({TARGET+'.'+pin:('fifo_'+pin,1) for pin in ['CK','D','Q','NOTIFIER']})
+    for name,(role,width) in required.items():
+        need(name in by_name and by_name[name][:2]==(role,str(width)), 'required exact passive binding missing: '+name)
+    for name in SHARED:
+        need('tb_xu_soc_ppa.dut.u_shared.'+name in by_name and
+             by_name['tb_xu_soc_ppa.dut.u_shared.'+name][0]=='shared_port', 'shared pin binding missing: '+name)
+    scopes=re.findall(r'^XU_UNKNOWN167_SCOPE index=(\d+) definition=(\S+) name=(\S+)$',text,re.M)
+    need(sorted((int(s[0]),s[2]) for s in scopes)==list(enumerate([ACCEL,FIFO,TARGET,'tb_xu_soc_ppa.dut.u_shared'])) and
+         all(s[1]!='ABSENT' for s in scopes), 'exact four observer scopes missing')
+    return observer_binds,by_name
+
+
 def classify_unknown(raw, code, tb_path, bindings):
     text=raw.decode('utf-8',errors='replace')
     trigger=list(re.finditer(r'^XU_UNKNOWN167_TRIGGER tick_fs=(\d+) (.*)$',text,re.M))
@@ -102,24 +125,7 @@ def classify_unknown(raw, code, tb_path, bindings):
             tag,b['logical'],b['lane'],b['width'],b['parts'],b['phases'],b['scope'],b['names'][0],target)
         matches=[line[len(expected):] for line in bind_lines if line.startswith(expected)]
         need(len(matches)==1 and matches[0] in ['36','44','48'], 'original binding identity/type differs at tag='+str(tag))
-    ready=re.findall(r'^XU_UNKNOWN167_READY native_operands=8 tb_operands=8 scopes=1,1,1,1 observed_nodes=(\d+) failed=0 start_fs=(\d+) stop_fs=(\d+) new_DUT_writes=0 new_TB_writes=0 forces=0 timing_controls_changed=0 NOT_QUALIFIED$',text,re.M)
-    need(len(ready)==1 and tuple(int(x) for x in ready[0][1:])==WINDOW, 'passive observer binding incomplete')
-    observer_binds=re.findall(r'^XU_UNKNOWN167_BIND role=(\S+) bits=(\d+) type=(\d+) name=(\S+)$',text,re.M)
-    need(observer_binds and len({b[3] for b in observer_binds})==len(observer_binds), 'observer binding names missing or duplicated')
-    need(int(ready[0][0])==len(observer_binds), 'observer ready count differs from exact binding names')
-    need(all(1<=int(b[1])<=64 and int(b[2]) in [36,44,48] for b in observer_binds), 'observer binding geometry/type differs')
-    by_name={b[3]:b for b in observer_binds}
-    required={ACCEL+'.'+native:(logical,width) for (logical,_,width),native in zip(EIGHT,NATIVE)}
-    required.update({'tb_xu_soc_ppa.'+target:('tb_fatal_operand',width) for _,target,width in EIGHT})
-    required.update({TARGET+'.'+pin:('fifo_'+pin,1) for pin in ['CK','D','Q','NOTIFIER']})
-    for name,(role,width) in required.items():
-        need(name in by_name and by_name[name][:2]==(role,str(width)), 'required exact passive binding missing: '+name)
-    for name in SHARED:
-        need('tb_xu_soc_ppa.dut.u_shared.'+name in by_name and
-             by_name['tb_xu_soc_ppa.dut.u_shared.'+name][0]=='shared_port', 'shared pin binding missing: '+name)
-    scopes=re.findall(r'^XU_UNKNOWN167_SCOPE index=(\d+) definition=(\S+) name=(\S+)$',text,re.M)
-    need(sorted((int(s[0]),s[2]) for s in scopes)==list(enumerate([ACCEL,FIFO,TARGET,'tb_xu_soc_ppa.dut.u_shared'])) and
-         all(s[1]!='ABSENT' for s in scopes), 'exact four observer scopes missing')
+    observer_binds,by_name=observer_bindings(text)
     done=re.findall(r'^XU_UNKNOWN167_SNAPSHOT_DONE nodes=(\d+) failed=(\d+) tick_fs=(\d+) original_fatal_retained=1 NOT_QUALIFIED$',text,re.M)
     need(len(done)==1 and done[0][1]=='0' and done[0][2]==trigger[0].group(1),'unique same-tick passive snapshot missing')
     events=re.findall(r'^XU_UNKNOWN167_EVENT serial=(\d+) tick_fs=(\d+) reason=(\S+) role=(\S+) bits=(\d+) aval=([0-9a-f]{16}) bval=([0-9a-f]{16}) name=(\S+)$',text,re.M)
@@ -186,8 +192,10 @@ def install(module):
         if FATAL in raw.decode('utf-8',errors='replace'):
             return classify_unknown(raw,code,tb_path,bindings)
         result=original_classify(raw,code,tb_path,bindings,inventory)
+        observer_binds,_=observer_bindings(raw.decode("utf-8",errors="replace"))
         result.update(original_worker_verdict='ORIGINAL_TB_EXU_HALT_REACHED_FINAL_QUALIFICATION_GATE_PENDING_NOT_QUALIFIED',
-                      unknown_fatal_reproduced=False,qualification='NOT_QUALIFIED')
+                      unknown_fatal_reproduced=False,qualification='NOT_QUALIFIED',
+                      passive_observer_bindings=len(observer_binds),passive_observer_binding_check='COMPLETE_NOT_QUALIFIED')
         return result
     module.classify=classify
     def work(args,run):
