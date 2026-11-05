@@ -1,0 +1,26 @@
+test_blocked_parent_rejected_and_failure_preserved (__main__.Review.test_blocked_parent_rejected_and_failure_preserved) ... ERROR
+test_controller_dependency_and_identity_contract (__main__.Review.test_controller_dependency_and_identity_contract) ... ok
+test_frozen83012fd_bytes_and_manifest (__main__.Review.test_frozen83012fd_bytes_and_manifest) ... ok
+test_large_report_hash_only (__main__.Review.test_large_report_hash_only) ... ok
+test_safe171_inspect_and_unpack_real191_package (__main__.Review.test_safe171_inspect_and_unpack_real191_package) ... ok
+test_scope_bodies_are_excluded_and_reports_retained (__main__.Review.test_scope_bodies_are_excluded_and_reports_retained) ... ok
+
+======================================================================
+ERROR: test_blocked_parent_rejected_and_failure_preserved (__main__.Review.test_blocked_parent_rejected_and_failure_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-review191-193/review193.py", line 63, in test_blocked_parent_rejected_and_failure_preserved
+    rejected = json.loads((self.m.OUT / 'source-rejections191.json').read_text())
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 788, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 772, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpyt5mvuak/Desktop/xu-score-optimization-20261102/two-candidate-finalpack-20261105-191/source-rejections191.json'
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.228s
+
+FAILED (errors=1)
