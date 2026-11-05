@@ -1,0 +1,1867 @@
+{
+  "classification_counts": {
+    "1_RETAINED_NAMED_ENDPOINT": 37,
+    "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED": 23
+  },
+  "design_modules": 927,
+  "elaborated_scopes": 927,
+  "immutable_inputs": {
+    "mapped_parser123.py": "688aa9aa49b85c08d493e9cf50b150376f311acfa07bfa0245d80c14c100b4e9",
+    "original111-private-plan.json": "6f3f337ddbd93cb103182d82ca4b821d9c99cdf3f7b594da1195c4ff98ccb486",
+    "reference-candidates115.json": "156d575b34f5060cbeee2371217874f0549ff7e9529aaa99ca030f5932c9cca9"
+  },
+  "mapped_after": {
+    "bytes": 13671648,
+    "ctime_ns": 1793837133469646972,
+    "device": 66309,
+    "inode": 23207803,
+    "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/terminal122/full-soc-timing-combined-20261105-116/mapped.v",
+    "mtime_ns": 1793837133469646972,
+    "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/terminal122/full-soc-timing-combined-20261105-116/mapped.v",
+    "sha256": "16d29dea71ed2668b33c893e1a38be01a6eea02ca190ba8aabcb4658fe610292"
+  },
+  "mapped_before": {
+    "bytes": 13671648,
+    "ctime_ns": 1793837133469646972,
+    "device": 66309,
+    "inode": 23207803,
+    "input_path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/terminal122/full-soc-timing-combined-20261105-116/mapped.v",
+    "mtime_ns": 1793837133469646972,
+    "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/terminal122/full-soc-timing-combined-20261105-116/mapped.v",
+    "sha256": "16d29dea71ed2668b33c893e1a38be01a6eea02ca190ba8aabcb4658fe610292"
+  },
+  "original_preload_statements": 288,
+  "original_private_gates_remaining": 60,
+  "original_reference_count": 72,
+  "private_gates_discharged": 0,
+  "references": [
+    {
+      "candidate": "bias_index_reg",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": null,
+          "exact_width": true,
+          "expected_width": 3,
+          "kind": "named_net",
+          "module": "accel_icb_slave",
+          "net": "bias_index_reg",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.bias_index_reg",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+          "width": 3
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "bias_index_reg",
+      "original_tb_lines": [
+        414,
+        416,
+        684
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 3
+    },
+    {
+      "candidate": "u_linear_compute_core.io_bias_{0..7}",
+      "category": "existing_core_port_alias",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 40,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_bias_0",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_bias_0",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 40
+        },
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 40,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_bias_1",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_bias_1",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 40
+        },
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 40,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_bias_2",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_bias_2",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 40
+        },
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 40,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_bias_3",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_bias_3",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 40
+        },
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 40,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_bias_4",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_bias_4",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 40
+        },
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 40,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_bias_5",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_bias_5",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 40
+        },
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 40,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_bias_6",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_bias_6",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 40
+        },
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 40,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_bias_7",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_bias_7",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 40
+        }
+      ],
+      "lanes": 8,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "bias_regs",
+      "original_tb_lines": [
+        352
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 40
+    },
+    {
+      "candidate": "busy",
+      "category": "literal_wrapper_combinational_expression",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": null,
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "named_net",
+          "module": "accel_icb_slave",
+          "net": "busy",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.busy",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "busy",
+      "original_tb_lines": [
+        333,
+        539
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "2_RECONSTRUCT_FROM_SAME_NETLIST_PHYSICAL_OPERANDS",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteAddr",
+      "category": "existing_core_port_alias",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 8,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_cacheWriteAddr",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_cacheWriteAddr",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 8
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cache_addr_reg",
+      "original_tb_lines": [
+        409,
+        411
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 8
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheEnable",
+      "category": "existing_core_port_alias",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_cacheEnable",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_cacheEnable",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cache_enable",
+      "original_tb_lines": [
+        213,
+        268,
+        333
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_computeStart",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "compute_start",
+      "original_tb_lines": [
+        275,
+        613,
+        623
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_done",
+      "category": "existing_core_port_alias",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "output",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_done",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_done",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "core_done",
+      "original_tb_lines": [
+        281,
+        559,
+        625
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_start",
+      "category": "existing_core_port_alias",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_start",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_start",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "core_start",
+      "original_tb_lines": [
+        334
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "manual_busy",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "manual_busy",
+      "original_tb_lines": [
+        612
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowActive",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_active",
+      "original_tb_lines": [
+        143,
+        147,
+        156,
+        270,
+        275,
+        301,
+        347,
+        559,
+        613,
+        618,
+        623,
+        650,
+        700
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowCount",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_count",
+      "original_tb_lines": [
+        143,
+        147,
+        153,
+        154,
+        270,
+        347,
+        618,
+        650,
+        701
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 2
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowGroup",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_group",
+      "original_tb_lines": [
+        290,
+        302
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 5
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowPop",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_pop",
+      "original_tb_lines": [
+        300,
+        615
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowProduced",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_produced",
+      "original_tb_lines": [
+        144,
+        148,
+        153,
+        154,
+        348,
+        651,
+        701
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 6
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowResult_{0..7}",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "lanes": 8,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_result",
+      "original_tb_lines": [
+        291,
+        296,
+        297
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 48
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowRetired",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_retired",
+      "original_tb_lines": [
+        144,
+        148,
+        153,
+        154,
+        348,
+        651,
+        701
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 6
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowRunning",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_running",
+      "original_tb_lines": [
+        144,
+        147,
+        347,
+        612,
+        616,
+        618,
+        650
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowStart",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_start",
+      "original_tb_lines": [
+        156,
+        265,
+        540
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "row_start_accept",
+      "category": "literal_wrapper_combinational_expression",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_start_accept",
+      "original_tb_lines": [
+        265,
+        540
+      ],
+      "physical_expression_operand_lookups": {
+        "busy": [
+          {
+            "direction": null,
+            "exact_width": true,
+            "expected_width": 1,
+            "kind": "named_net",
+            "module": "accel_icb_slave",
+            "net": "busy",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.busy",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+            "width": 1
+          }
+        ],
+        "cache_enable": [
+          {
+            "direction": "input",
+            "exact_width": true,
+            "expected_width": 1,
+            "kind": "port",
+            "module": "LinearCachedCore",
+            "net": "io_cacheEnable",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_cacheEnable",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+            "width": 1
+          }
+        ],
+        "cmd_addr": [
+          {
+            "direction": "input",
+            "exact_width": true,
+            "expected_width": 32,
+            "kind": "port",
+            "module": "accel_icb_slave",
+            "net": "cmd_addr",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.cmd_addr",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+            "width": 32
+          }
+        ],
+        "cmd_read": [
+          {
+            "direction": "input",
+            "exact_width": true,
+            "expected_width": 1,
+            "kind": "port",
+            "module": "accel_icb_slave",
+            "net": "cmd_read",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.cmd_read",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+            "width": 1
+          }
+        ],
+        "cmd_ready": [
+          {
+            "direction": "output",
+            "exact_width": true,
+            "expected_width": 1,
+            "kind": "port",
+            "module": "accel_icb_slave",
+            "net": "cmd_ready",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.cmd_ready",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+            "width": 1
+          }
+        ],
+        "cmd_valid": [
+          {
+            "direction": "input",
+            "exact_width": true,
+            "expected_width": 1,
+            "kind": "port",
+            "module": "accel_icb_slave",
+            "net": "cmd_valid",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.cmd_valid",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+            "width": 1
+          }
+        ],
+        "cmd_wdata": [
+          {
+            "direction": "input",
+            "exact_width": true,
+            "expected_width": 32,
+            "kind": "port",
+            "module": "accel_icb_slave",
+            "net": "cmd_wdata",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.cmd_wdata",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+            "width": 32
+          }
+        ],
+        "cmd_wmask": [
+          {
+            "direction": "input",
+            "exact_width": true,
+            "expected_width": 4,
+            "kind": "port",
+            "module": "accel_icb_slave",
+            "net": "cmd_wmask",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.cmd_wmask",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+            "width": 4
+          }
+        ],
+        "core_start": [
+          {
+            "direction": "input",
+            "exact_width": true,
+            "expected_width": 1,
+            "kind": "port",
+            "module": "LinearCachedCore",
+            "net": "io_start",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_start",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+            "width": 1
+          }
+        ],
+        "row_count": [
+          null
+        ],
+        "row_start": [
+          null
+        ],
+        "w_load_wen": [
+          {
+            "direction": null,
+            "exact_width": true,
+            "expected_width": 1,
+            "kind": "named_net",
+            "module": "accel_icb_slave",
+            "net": "w_load_wen",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.w_load_wen",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+            "width": 1
+          }
+        ],
+        "x_load_wen": [
+          {
+            "direction": null,
+            "exact_width": true,
+            "expected_width": 1,
+            "kind": "named_net",
+            "module": "accel_icb_slave",
+            "net": "x_load_wen",
+            "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.x_load_wen",
+            "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+            "width": 1
+          }
+        ]
+      },
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "reconstruction_status": "SOURCE_EXPRESSION_KNOWN_PHYSICAL_OPERANDS_MISSING",
+      "source_strategy": "2_RECONSTRUCT_FROM_SAME_NETLIST_PHYSICAL_OPERANDS",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowValid",
+      "category": "existing_core_port_alias",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "row_valid",
+      "original_tb_lines": [
+        289,
+        302
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "stream_cursor",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "stream_cursor",
+      "original_tb_lines": [
+        184,
+        204
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 15
+    },
+    {
+      "candidate": "stream_error",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "stream_error",
+      "original_tb_lines": [
+        350
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "stream_is_w",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "stream_is_w",
+      "original_tb_lines": [
+        183,
+        203
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "stream_pair",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "stream_pair",
+      "original_tb_lines": [
+        183,
+        203
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "stream_pending",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "stream_pending",
+      "original_tb_lines": [
+        183,
+        203,
+        268,
+        342,
+        651
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "stream_second",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "stream_second",
+      "original_tb_lines": [
+        185,
+        205
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.core.engine.peArray.io_enable",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "MacPEArray",
+          "net": "io_enable",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.core.engine.peArray.io_enable",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.core.engine.peArray",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.core.engine.peArray.io_enable",
+      "original_tb_lines": [
+        621
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.core.io_group",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 5,
+          "kind": "port",
+          "module": "LinearComputeCore",
+          "net": "io_group",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.core.io_group",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.core",
+          "width": 5
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.core.io_group",
+      "original_tb_lines": [
+        277
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 5
+    },
+    {
+      "candidate": "u_linear_compute_core.head",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.head",
+      "original_tb_lines": [
+        149,
+        349
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteAddr",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 8,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_cacheWriteAddr",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_cacheWriteAddr",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 8
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_cacheWriteAddr",
+      "original_tb_lines": [
+        211
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 8
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteData",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 40,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_cacheWriteData",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_cacheWriteData",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 40
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_cacheWriteData",
+      "original_tb_lines": [
+        212,
+        222
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 40
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteEnable",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_cacheWriteEnable",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_cacheWriteEnable",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_cacheWriteEnable",
+      "original_tb_lines": [
+        142
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteMask",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 5,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_cacheWriteMask",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_cacheWriteMask",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 5
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_cacheWriteMask",
+      "original_tb_lines": [
+        213,
+        216
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 5
+    },
+    {
+      "candidate": "u_linear_compute_core.io_wLoadAddr",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 11,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_wLoadAddr",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_wLoadAddr",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 11
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_wLoadAddr",
+      "original_tb_lines": [
+        167,
+        171,
+        172,
+        173
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 11
+    },
+    {
+      "candidate": "u_linear_compute_core.io_wLoadBank",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 3,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_wLoadBank",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_wLoadBank",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 3
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_wLoadBank",
+      "original_tb_lines": [
+        166,
+        170,
+        174
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 3
+    },
+    {
+      "candidate": "u_linear_compute_core.io_wLoadData",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 16,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_wLoadData",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_wLoadData",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 16
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_wLoadData",
+      "original_tb_lines": [
+        168,
+        176,
+        181
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 16
+    },
+    {
+      "candidate": "u_linear_compute_core.io_wLoadWen",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_wLoadWen",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_wLoadWen",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_wLoadWen",
+      "original_tb_lines": [
+        140,
+        269
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_xLoadAddr",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 6,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_xLoadAddr",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_xLoadAddr",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 6
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_xLoadAddr",
+      "original_tb_lines": [
+        191,
+        194
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 6
+    },
+    {
+      "candidate": "u_linear_compute_core.io_xLoadData",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 16,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_xLoadData",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_xLoadData",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 16
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_xLoadData",
+      "original_tb_lines": [
+        192,
+        196,
+        201
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 16
+    },
+    {
+      "candidate": "u_linear_compute_core.io_xLoadWen",
+      "category": "existing_nested_module_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "LinearCachedCore",
+          "net": "io_xLoadWen",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core.io_xLoadWen",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.u_linear_compute_core",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_xLoadWen",
+      "original_tb_lines": [
+        141,
+        269
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.tail",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.tail",
+      "original_tb_lines": [
+        149,
+        349
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "w_addr_reg",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": null,
+          "exact_width": true,
+          "expected_width": 11,
+          "kind": "named_net",
+          "module": "accel_icb_slave",
+          "net": "w_addr_reg",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.w_addr_reg",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+          "width": 11
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "w_addr_reg",
+      "original_tb_lines": [
+        387,
+        389,
+        678
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 11
+    },
+    {
+      "candidate": "w_bank_reg",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": null,
+          "exact_width": true,
+          "expected_width": 3,
+          "kind": "named_net",
+          "module": "accel_icb_slave",
+          "net": "w_bank_reg",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.w_bank_reg",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+          "width": 3
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "w_bank_reg",
+      "original_tb_lines": [
+        387,
+        389,
+        678
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 3
+    },
+    {
+      "candidate": "w_cursor",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "w_cursor",
+      "original_tb_lines": [
+        350,
+        680,
+        682
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 15
+    },
+    {
+      "candidate": "w_load_wen",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": null,
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "named_net",
+          "module": "accel_icb_slave",
+          "net": "w_load_wen",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.w_load_wen",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "w_load_wen",
+      "original_tb_lines": [
+        342
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "x_addr_reg",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": null,
+          "exact_width": true,
+          "expected_width": 6,
+          "kind": "named_net",
+          "module": "accel_icb_slave",
+          "net": "x_addr_reg",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.x_addr_reg",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+          "width": 6
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "x_addr_reg",
+      "original_tb_lines": [
+        396,
+        398,
+        679
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 6
+    },
+    {
+      "candidate": "x_cursor",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "3_NOT_LOCATED_OR_FORMAL_CORRESPONDENCE_NEEDED",
+      "endpoint_lookups": [
+        null
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "missing_meaning": "ABSENCE_FROM_NAME_LOOKUP_IS_NOT_PROOF_OF_SYNTHESIS_REMOVAL",
+      "original_macro": "ACCEL",
+      "original_path": "x_cursor",
+      "original_tb_lines": [
+        350,
+        681,
+        683
+      ],
+      "physical_ff_candidates": [],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 7
+    },
+    {
+      "candidate": "x_load_wen",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": null,
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "named_net",
+          "module": "accel_icb_slave",
+          "net": "x_load_wen",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave.x_load_wen",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_accel_icb_slave",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "x_load_wen",
+      "original_tb_lines": [
+        342
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_e203_exu_commit.alu_cmt_i_pc",
+      "category": "existing_commit_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 32,
+          "kind": "port",
+          "module": "e203_exu_commit",
+          "net": "alu_cmt_i_pc",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_commit.alu_cmt_i_pc",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_commit",
+          "width": 32
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "EXU",
+      "original_path": "u_e203_exu_commit.alu_cmt_i_pc",
+      "original_tb_lines": [
+        1737
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 32
+    },
+    {
+      "candidate": "u_e203_exu_commit.alu_cmt_i_valid",
+      "category": "existing_commit_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "e203_exu_commit",
+          "net": "alu_cmt_i_valid",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_commit.alu_cmt_i_valid",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_commit",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "EXU",
+      "original_path": "u_e203_exu_commit.alu_cmt_i_valid",
+      "original_tb_lines": [
+        1737
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "u_e203_exu_regfile.regfile[3].rfno0.rf_dffl.qout",
+      "category": "existing_rf3_dff_output_candidate",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "condition": "source config E203_CFG_REGFILE_LATCH_BASED is disabled; actual mapped hierarchy still must be inspected",
+      "endpoint_lookups": [
+        {
+          "direction": "output",
+          "exact_width": true,
+          "expected_width": 32,
+          "kind": "port",
+          "module": "sirv_gnrl_dffl_DW32_30",
+          "net": "qout",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_regfile.regfile[3].rfno0.rf_dffl.qout",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_regfile.regfile[3].rfno0.rf_dffl",
+          "width": 32
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "only_original_referenced_element": 3,
+      "original_macro": "EXU",
+      "original_path": "u_e203_exu_regfile.rf_r",
+      "original_tb_lines": [
+        1738,
+        1739
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_RETAINED_NAME_THEN_2_PHYSICAL_FF_OR_3_FORMAL",
+      "width_each": 32
+    },
+    {
+      "candidate": "pll_ASLEEP",
+      "category": "existing_hclkgen_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "e203_subsys_hclkgen",
+          "net": "pll_ASLEEP",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.pll_ASLEEP",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_ASLEEP",
+      "original_tb_lines": [
+        13
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "pll_M",
+      "category": "existing_hclkgen_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 8,
+          "kind": "port",
+          "module": "e203_subsys_hclkgen",
+          "net": "pll_M",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.pll_M",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen",
+          "width": 8
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_M",
+      "original_tb_lines": [
+        14
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 8
+    },
+    {
+      "candidate": "pll_N",
+      "category": "existing_hclkgen_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 5,
+          "kind": "port",
+          "module": "e203_subsys_hclkgen",
+          "net": "pll_N",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.pll_N",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen",
+          "width": 5
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_N",
+      "original_tb_lines": [
+        14
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 5
+    },
+    {
+      "candidate": "pll_OD",
+      "category": "existing_hclkgen_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 2,
+          "kind": "port",
+          "module": "e203_subsys_hclkgen",
+          "net": "pll_OD",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.pll_OD",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen",
+          "width": 2
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_OD",
+      "original_tb_lines": [
+        14
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 2
+    },
+    {
+      "candidate": "pll_RESET",
+      "category": "existing_hclkgen_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "e203_subsys_hclkgen",
+          "net": "pll_RESET",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.pll_RESET",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_RESET",
+      "original_tb_lines": [
+        13
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "pllbypass",
+      "category": "existing_hclkgen_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "e203_subsys_hclkgen",
+          "net": "pllbypass",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.pllbypass",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pllbypass",
+      "original_tb_lines": [
+        12
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "plloutdiv",
+      "category": "existing_hclkgen_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 6,
+          "kind": "port",
+          "module": "e203_subsys_hclkgen",
+          "net": "plloutdiv",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.plloutdiv",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen",
+          "width": 6
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "plloutdiv",
+      "original_tb_lines": [
+        12,
+        13
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 6
+    },
+    {
+      "candidate": "plloutdivby1",
+      "category": "existing_hclkgen_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "e203_subsys_hclkgen",
+          "net": "plloutdivby1",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.plloutdivby1",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "plloutdivby1",
+      "original_tb_lines": [
+        12
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    },
+    {
+      "candidate": "test_mode",
+      "category": "existing_hclkgen_input_port",
+      "classification": "1_RETAINED_NAMED_ENDPOINT",
+      "endpoint_lookups": [
+        {
+          "direction": "input",
+          "exact_width": true,
+          "expected_width": 1,
+          "kind": "port",
+          "module": "e203_subsys_hclkgen",
+          "net": "test_mode",
+          "path": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.test_mode",
+          "scope": "u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen",
+          "width": 1
+        }
+      ],
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "test_mode",
+      "original_tb_lines": [
+        12
+      ],
+      "qualification": "NOT_QUALIFIED_RUNTIME_FOUR_STATE_AND_CORRESPONDENCE_PENDING",
+      "source_strategy": "1_EXISTING_RTL_PORT_OR_ALIAS_LOOKUP_FIRST",
+      "width_each": 1
+    }
+  ],
+  "runtime_adapters_implemented": 0,
+  "status": "OTHER_NETLIST116_PARSER_MECHANISM_ONLY",
+  "target_mapping_proved": false
+}
