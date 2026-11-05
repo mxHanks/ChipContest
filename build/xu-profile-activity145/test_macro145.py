@@ -7,7 +7,6 @@ import tempfile
 import unittest
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
 
 
 def load(path, name):
@@ -18,8 +17,8 @@ def load(path, name):
 
 
 m = load(HERE / 'macro145.py', 'xu_macro145_tested')
-h = load(ROOT / 'tools/ppa/xu_sram_activity_alias.py', 'xu_macro145_test_helpers')
-r = load(ROOT / 'tools/scripts/xu_soc_activity.py', 'xu_macro145_test_reader')
+h = load(HERE / 'assets/xu_sram_activity_alias.py', 'xu_macro145_test_helpers')
+r = load(HERE / 'assets/xu_soc_activity.py', 'xu_macro145_test_reader')
 
 
 class Macro145(unittest.TestCase):
