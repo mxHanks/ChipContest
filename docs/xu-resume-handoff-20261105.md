@@ -96,3 +96,27 @@ controller PID228660、start_ticks118030075真实`/proc`匹配；workers_signall
 155 PID228701/start_ticks118031670真实匹配，原五项接续完成、final DC/PT各rc0；快照时phase=final/fm，
 7条run回执（五adopt+两新native），FM仍在执行，不能提前宣布成功。
 两份约99MB复制TSV的SHA与134原件相同，只返回身份未返回正文。grid157已q关闭，VNC可用。
+
+## 12:46候选范围与实际失败根因
+
+用户提出不再考虑32PE、64PE，已按[范围调整](xu-candidate-scope-20261105.md)停止其后续修复/重跑计划，
+保留代码、原测量与失败日志；compact32/128未取消。`f672083`记录决定，`3091825`提供固定153的一次性行政操作160。
+12:46实际apply返回`DEFERRED_ORIGINAL_WORKERS_PRESERVED_CONTROLLER_RESUMED_NOT_QUALIFIED`，
+receipt原路径见范围文件；原PE两组此时活动已经失败、功耗均BLOCKED，不修改原失败行。
+compact活动正在运行PID11440，其他worker未信号，总控已恢复。不要再执行160 apply。
+
+159原包已完整取回：867328B SHA`676da6baf9142f6e7f234a0c6e870e9229102dcab73bf083ff3c20316fd128d1`，
+232payload46315396B，安全解包`build/xu-score-resume-20261103/serverfailed159`。
+包含5个保留候选及两PE的实际task00日志/原result/生成TB等；compact当时尚未运行。
+所有已失败145任务时间26666676666667fs，真实4m-cycle timeout；不是时序报告失败。
+已证实共同根因：`compile_firmware`返回`accel_soc.verilog`又被当成+TESTCASE前缀，原TB继续拼`.verilog`，
+VCS两条Cannot open/readmem告警指向`accel_soc.verilog.verilog`，程序未装入；reset有、clear/source事件0。
+原S2e120成功命令前缀为`accel_soc`，同4m上限。不要盲目增加maxcycles。
+
+新agent activity145_failure_local正在独立目录`build/xu-activity-repair161`做最小修复，原154/145冻结不动。
+保留145schema/API让146复用，新profile仅baseline/S1H2/S1SRAM/S2b/S2d/compact六项，明确排除pe32/pe64。
+161应绑定实际TB拼接得到的image SHA、修正runargv前缀，加入缺文件告警拒绝，给新活动→功耗162注册。
+尚未部署161或启动新实验。147与156失败原件也在159，继续各自定位，不能因155完整FM成功而解除其他资格。
+
+当前VNC PTY29641，FTP PTY12006；旧PTY已失效。grid159已q关闭。archive159 agent负责159归档以及157未完成目录收尾，
+勿覆盖其untracked；所有提交仍commit --only自有路径。160单文件已上传Desktop/defer160.py。
