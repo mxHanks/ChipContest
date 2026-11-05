@@ -202,3 +202,12 @@ root已另行请求只读progress快照`B/xu-server-two-candidate-progress-20261
 表示已通过准备/own155 native inventory并进入task0 PT，不等于单层完成。full12/173仍等待。
 本轮续行不重启原worker。接续177本地实现仅同S2c9c16连接/min path只读query，审查后才通过原总控登记；
 不改变TB采样、不关时序检查、不插任意delay、不借baseline116/155图。
+
+16:35 CST续行核实：166preflight=`EXECUTED_TASK0_DIAGNOSTIC_NOT_QUALIFIED`且原PID180321退出；
+full12 PID204745实际identity alive，PREPARING166，173仍WAIT_DEPENDENCY。不要重复启动。
+另请求preflight快照`B/xu-server-two-candidate-preflight-20261105-178.tar.xz`，尚待READY和取回，
+不要用progress174冒充单层终态原件。
+`a9bd436`175原分析已完整提交；独立复核`321f99b`重跑到fresh/tmp逐字节再现，原日志566事件/131节点、
+634服务器输入回执/原TB/C变换均核对；八项仅bias_commit=x，三路样本一致。更早D短暂x和初始NOTIFIER/rdata未知仍保留。
+175前agent未提交的问题已解决。新177实现同S2c9c16 native精确连接/min path，179准备对返回166单层/full12原件独立审计；
+二者仅本地开发中，尚未登记177 native。生产代码未改。
