@@ -1,0 +1,35 @@
+test_actual_four_job_guard_and_runtime_tar (__main__.Review.test_actual_four_job_guard_and_runtime_tar) ... ok
+test_builder_reproduces_archive_and_installer_byte_for_byte (__main__.Review.test_builder_reproduces_archive_and_installer_byte_for_byte) ... ok
+test_changed_guard_job_bytes_rejected (__main__.Review.test_changed_guard_job_bytes_rejected) ... ok
+test_conflicting_runtime_identities_rejected (__main__.Review.test_conflicting_runtime_identities_rejected) ... ok
+test_dependency_or_native_policy_change_rejected (__main__.Review.test_dependency_or_native_policy_change_rejected) ... ok
+test_duplicate_output_root_rejected (__main__.Review.test_duplicate_output_root_rejected) ... ok
+test_existing_changed_registration_preserved (__main__.Review.test_existing_changed_registration_preserved) ... ok
+test_frozen_fm_is_original09_and_runtime_isolated (__main__.Review.test_frozen_fm_is_original09_and_runtime_isolated) ... ok
+test_install198_preserves_every_existing192_runtime_byte (__main__.Review.test_install198_preserves_every_existing192_runtime_byte) ... FAIL
+test_job_change_after_validate_cannot_rebind_guard_identity (__main__.Review.test_job_change_after_validate_cannot_rebind_guard_identity) ... ok
+test_register_is_exact_namespace_clone_of_reviewed192 (__main__.Review.test_register_is_exact_namespace_clone_of_reviewed192) ... ok
+test_register_only_and_idempotent_original_bytes (__main__.Review.test_register_only_and_idempotent_original_bytes) ... ok
+test_reused_pid_identity_and_modified_controller_rejected (__main__.Review.test_reused_pid_identity_and_modified_controller_rejected) ... ok
+test_scope_expansion_rejected (__main__.Review.test_scope_expansion_rejected) ... ok
+test_unregistered_existing_output_and_broken_symlink_rejected (__main__.Review.test_unregistered_existing_output_and_broken_symlink_rejected) ... ok
+
+======================================================================
+FAIL: test_install198_preserves_every_existing192_runtime_byte (__main__.Review.test_install198_preserves_every_existing192_runtime_byte)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-review192-196/review198/review198.py", line 237, in test_install198_preserves_every_existing192_runtime_byte
+    runpy.run_path(str(SOURCE / 'install198.py'))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-two-candidate-control198/install198.py", line 24, in <module>
+    assert not dest.exists() or dest.is_file() and dest.read_bytes()==raw
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.322s
+
+FAILED (failures=1)
