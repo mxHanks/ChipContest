@@ -9,7 +9,7 @@ from pathlib import Path
 SCHEMA='xu-batch-scheduler138-plan-v1'
 BAD=re.compile(r'^\s*(?:Error:|Error-|Fatal:|XU_FATAL:)',re.I)
 TERMINAL_EXTERNAL={'EXECUTED_12_TASKS_DIAGNOSTIC_REVIEW_PENDING','NATIVE_TIMING_COMPLETE_REVIEW_PENDING_NOT_QUALIFIED','PASS_REVIEW_PENDING_NOT_QUALIFIED'}
-EDA_NAMES={'pt_shell','dc_shell','fm_shell','vcs','simv','lc_shell'}
+EDA_NAMES={'pt_shell','pt_shell_exec','dc_shell','dc_shell_exec','fm_shell','fm_shell_exec','vcs','vcs1','simv','lc_shell'}
 def need(ok,msg):
  if not ok:raise ValueError(msg)
 def read(path):
@@ -39,15 +39,15 @@ def checked(records):
  return actual,errors
 def git_identity(source):
  root=source['server_root']
- def git(*a):return subprocess.check_output(['git','-C',root,*a],stderr=subprocess.STDOUT,timeout=30).decode().strip()
- head=git('rev-parse','HEAD');child=subprocess.check_output(['git','-C',str(Path(root)/'third-party/e203_hbirdv2'),'rev-parse','HEAD'],stderr=subprocess.STDOUT,timeout=30).decode().strip()
+ def git(*a):return subprocess.check_output(['git',*a],cwd=root,stderr=subprocess.STDOUT,timeout=30).decode().strip()
+ head=git('rev-parse','HEAD');child=subprocess.check_output(['git','rev-parse','HEAD'],cwd=str(Path(root)/'third-party/e203_hbirdv2'),stderr=subprocess.STDOUT,timeout=30).decode().strip()
  need(head==source['main_commit'],'source main HEAD differs');need(child==source['child_commit'],'source child HEAD differs')
  dirty=git('status','--porcelain','--untracked-files=no');need(not dirty,'tracked source/index dirty: '+dirty[:1000])
- cd=subprocess.check_output(['git','-C',str(Path(root)/'third-party/e203_hbirdv2'),'status','--porcelain','--untracked-files=no'],stderr=subprocess.STDOUT,timeout=30).decode().strip();need(not cd,'tracked child/index dirty')
+ cd=subprocess.check_output(['git','status','--porcelain','--untracked-files=no'],cwd=str(Path(root)/'third-party/e203_hbirdv2'),stderr=subprocess.STDOUT,timeout=30).decode().strip();need(not cd,'tracked child/index dirty')
  return {'root':root,'main_commit':head,'main_tree':git('rev-parse','HEAD^{tree}'),'child_commit':child,'tracked_clean':True,'original_ppa_main_commit':source.get('original_ppa_main_commit'),'binding':'ACTUAL_CHECKOUT_HEAD_AND_ALL_DECLARED_INPUT_BODIES; original PPA main null remains null'}
 def tool_git_identity(tool):
  root=tool['assets_root']
- def git(*a):return subprocess.check_output(['git','-C',root,*a],stderr=subprocess.STDOUT,timeout=30).decode().strip()
+ def git(*a):return subprocess.check_output(['git',*a],cwd=root,stderr=subprocess.STDOUT,timeout=30).decode().strip()
  head=git('rev-parse','HEAD');expected=tool.get('main_commit')
  if expected:need(head==expected,'PPA tool HEAD differs from archive producer')
  need(not git('status','--porcelain','--untracked-files=no'),'tracked PPA tool checkout dirty')
@@ -58,7 +58,7 @@ def proc_snapshot():
   if not p.name.isdigit():continue
   try:
    raw=(p/'cmdline').read_bytes();argv=[x.decode(errors='replace') for x in raw.split(b'\0') if x]
-   if argv:result.append({'pid':int(p.name),'argv':argv})
+   if argv:result.append({'pid':int(p.name),'uid':p.stat().st_uid,'argv':argv})
   except (OSError,PermissionError):pass
  return result
 def resource_snapshot(out,processes=None):
@@ -66,7 +66,10 @@ def resource_snapshot(out,processes=None):
  for line in Path('/proc/meminfo').read_text().splitlines():
   k,v=line.split(':',1);mem[k]=int(v.strip().split()[0])*1024
  ps=proc_snapshot() if processes is None else processes
- return {'epoch':time.time(),'cpu_count':os.cpu_count(),'mem_available_bytes':mem['MemAvailable'],'disk_available_bytes':shutil.disk_usage(str(out)).free,'native_processes':[p for p in ps if any(Path(a).name in EDA_NAMES for a in p['argv'][:2])]}
+ native=[p for p in ps if any(Path(a).name in EDA_NAMES for a in p['argv'][:2])]
+ own=[p for p in native if p.get('uid')==os.getuid()]
+ others=[p for p in native if p.get('uid')!=os.getuid()]
+ return {'epoch':time.time(),'cpu_count':os.cpu_count(),'mem_available_bytes':mem['MemAvailable'],'disk_available_bytes':shutil.disk_usage(str(out)).free,'native_processes':own,'other_user_native_processes':others,'native_cap_scope':'CURRENT_UNIX_USER_PLUS_EXACT_ADOPTED_WORKERS; other users observed, not counted toward cap1'}
 def external_snapshot(plan,processes=None):
  ps=proc_snapshot() if processes is None else processes;rows=[]
  for x in plan.get('external_adoptions',[]):

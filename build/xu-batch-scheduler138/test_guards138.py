@@ -8,6 +8,26 @@ s=importlib.util.spec_from_file_location('batch138',str(HERE/'batch138.py'));m=i
 class Guards(unittest.TestCase):
  def setUp(self):
   self.plan=m.validate_plan(m.read(HERE/'queue-plan138.json'));self.g=copy.deepcopy(self.plan['guards']);self.res={'mem_available_bytes':10**15,'disk_available_bytes':10**15,'native_processes':[]};self.ext=[]
+ def test_old_git_uses_cwd_never_dash_C(self):
+  calls=[]
+  def fake(argv,**kw):
+   self.assertNotIn('-C',argv);self.assertIn('cwd',kw);calls.append((argv,kw['cwd']))
+   if argv[1:]==['rev-parse','HEAD']:return b'fixed\n'
+   if argv[1:]==['rev-parse','HEAD^{tree}']:return b'tree\n'
+   return b''
+  with patch.object(m.subprocess,'check_output',side_effect=fake):
+   m.git_identity({'server_root':'/source','main_commit':'fixed','child_commit':'fixed'})
+   m.tool_git_identity({'assets_root':'/tools','main_commit':'fixed'})
+  self.assertTrue(any(cwd=='/source/third-party/e203_hbirdv2' for _,cwd in calls))
+ def test_native_exec_names_and_uid_cap_scope(self):
+  with tempfile.TemporaryDirectory() as t:
+   ps=[{'pid':1,'uid':m.os.getuid(),'argv':['/eda/pt_shell_exec']},{'pid':2,'uid':m.os.getuid()+1,'argv':['/eda/dc_shell_exec']}]
+   res=m.resource_snapshot(t,ps);self.assertEqual([p['pid'] for p in res['native_processes']],[1]);self.assertEqual([p['pid'] for p in res['other_user_native_processes']],[2])
+ def test_other_user_dc_does_not_reserve_own_cap(self):
+  with tempfile.TemporaryDirectory() as t:
+   res=m.resource_snapshot(t,[{'pid':2,'uid':m.os.getuid()+1,'argv':['/eda/dc_shell_exec']}])
+   res.update(mem_available_bytes=10**15,disk_available_bytes=10**15)
+   self.assertTrue(m.native_guard(self.g,res,[],{'status':'UNKNOWN'}).startswith('ALLOW'))
  def test_exact_eight(self):
   p=copy.deepcopy(self.plan);p['candidates'].pop()
   with self.assertRaises(ValueError):m.validate_plan(p)
