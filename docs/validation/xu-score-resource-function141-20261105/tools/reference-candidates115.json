@@ -1,0 +1,1103 @@
+{
+  "counts": {
+    "already111_public_port": 12,
+    "existing_commit_input_port": 2,
+    "existing_core_port_alias": 16,
+    "existing_hclkgen_input_port": 9,
+    "existing_nested_module_port": 13,
+    "existing_rf3_dff_output_candidate": 1,
+    "literal_wrapper_combinational_expression": 2,
+    "mapped_private_state_or_equivalent_endpoint_needed": 17
+  },
+  "production_source_candidates": [
+    {
+      "local_path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v",
+      "local_sha256": "1a088c873c5e5de84ca92fdc74d693a326e430cc6191128979f573fe4e64ad45",
+      "manifest_key": "third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v",
+      "matching_actual_ppa_manifest_locations": [
+        "/inventory/platform_source/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v"
+      ],
+      "source_matches_actual_ppa_manifest": true
+    },
+    {
+      "local_path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv",
+      "local_sha256": "fd853fc7be0949eabf9aa56885850115ab4b68b9a654f5a7abcd436e1baa613c",
+      "manifest_key": "third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv",
+      "matching_actual_ppa_manifest_locations": [
+        "/inventory/platform_source/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv"
+      ],
+      "source_matches_actual_ppa_manifest": true
+    }
+  ],
+  "references": [
+    {
+      "candidate": "bias_index_reg",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "bias_index_reg",
+      "original_tb_lines": [
+        414,
+        416,
+        684
+      ],
+      "width_each": 3
+    },
+    {
+      "candidate": "u_linear_compute_core.io_bias_{0..7}",
+      "category": "existing_core_port_alias",
+      "lanes": 8,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "bias_regs",
+      "original_tb_lines": [
+        352
+      ],
+      "width_each": 40
+    },
+    {
+      "candidate": "busy",
+      "category": "literal_wrapper_combinational_expression",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "busy",
+      "original_tb_lines": [
+        333,
+        539
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteAddr",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cache_addr_reg",
+      "original_tb_lines": [
+        409,
+        411
+      ],
+      "width_each": 8
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheEnable",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cache_enable",
+      "original_tb_lines": [
+        213,
+        268,
+        333
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "clk",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "clk",
+      "original_tb_lines": [
+        98
+      ]
+    },
+    {
+      "candidate": "cmd_addr",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cmd_addr",
+      "original_tb_lines": [
+        234,
+        287,
+        288,
+        358,
+        359,
+        360,
+        361,
+        370,
+        407,
+        408,
+        419,
+        420,
+        429,
+        430,
+        538,
+        563,
+        582,
+        583,
+        589,
+        677,
+        679,
+        680,
+        681,
+        682,
+        683,
+        684,
+        685
+      ]
+    },
+    {
+      "candidate": "cmd_read",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cmd_read",
+      "original_tb_lines": [
+        232,
+        286,
+        356,
+        357,
+        458,
+        535,
+        537,
+        562,
+        581,
+        589,
+        627,
+        635,
+        676
+      ]
+    },
+    {
+      "candidate": "cmd_ready",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cmd_ready",
+      "original_tb_lines": [
+        232,
+        286,
+        356,
+        458,
+        535,
+        635
+      ]
+    },
+    {
+      "candidate": "cmd_valid",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cmd_valid",
+      "original_tb_lines": [
+        126,
+        232,
+        286,
+        356,
+        458,
+        535,
+        635
+      ]
+    },
+    {
+      "candidate": "cmd_wdata",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cmd_wdata",
+      "original_tb_lines": [
+        236,
+        241,
+        248,
+        367,
+        372,
+        376,
+        378,
+        380,
+        382,
+        384,
+        390,
+        399,
+        405,
+        539,
+        685
+      ]
+    },
+    {
+      "candidate": "cmd_wmask",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "cmd_wmask",
+      "original_tb_lines": [
+        236,
+        241,
+        247,
+        254,
+        258,
+        366
+      ]
+    },
+    {
+      "candidate": "u_linear_compute_core.io_computeStart",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "compute_start",
+      "original_tb_lines": [
+        275,
+        613,
+        623
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_done",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "core_done",
+      "original_tb_lines": [
+        281,
+        559,
+        625
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_start",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "core_start",
+      "original_tb_lines": [
+        334
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "manual_busy",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "manual_busy",
+      "original_tb_lines": [
+        612
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowActive",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_active",
+      "original_tb_lines": [
+        143,
+        147,
+        156,
+        270,
+        275,
+        301,
+        347,
+        559,
+        613,
+        618,
+        623,
+        650,
+        700
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowCount",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_count",
+      "original_tb_lines": [
+        143,
+        147,
+        153,
+        154,
+        270,
+        347,
+        618,
+        650,
+        701
+      ],
+      "width_each": 2
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowGroup",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_group",
+      "original_tb_lines": [
+        290,
+        302
+      ],
+      "width_each": 5
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowPop",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_pop",
+      "original_tb_lines": [
+        300,
+        615
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowProduced",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_produced",
+      "original_tb_lines": [
+        144,
+        148,
+        153,
+        154,
+        348,
+        651,
+        701
+      ],
+      "width_each": 6
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowResult_{0..7}",
+      "category": "existing_core_port_alias",
+      "lanes": 8,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_result",
+      "original_tb_lines": [
+        291,
+        296,
+        297
+      ],
+      "width_each": 48
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowRetired",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_retired",
+      "original_tb_lines": [
+        144,
+        148,
+        153,
+        154,
+        348,
+        651,
+        701
+      ],
+      "width_each": 6
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowRunning",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_running",
+      "original_tb_lines": [
+        144,
+        147,
+        347,
+        612,
+        616,
+        618,
+        650
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowStart",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_start",
+      "original_tb_lines": [
+        156,
+        265,
+        540
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "row_start_accept",
+      "category": "literal_wrapper_combinational_expression",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_start_accept",
+      "original_tb_lines": [
+        265,
+        540
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_rowValid",
+      "category": "existing_core_port_alias",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "row_valid",
+      "original_tb_lines": [
+        289,
+        302
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "rsp_err",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "rsp_err",
+      "original_tb_lines": [
+        163
+      ]
+    },
+    {
+      "candidate": "rsp_rdata",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "rsp_rdata",
+      "original_tb_lines": [
+        159
+      ]
+    },
+    {
+      "candidate": "rsp_ready",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "rsp_ready",
+      "original_tb_lines": [
+        161,
+        536,
+        636
+      ]
+    },
+    {
+      "candidate": "rsp_valid",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "rsp_valid",
+      "original_tb_lines": [
+        159,
+        163,
+        342,
+        536,
+        636
+      ]
+    },
+    {
+      "candidate": "rst_n",
+      "category": "already111_public_port",
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "rst_n",
+      "original_tb_lines": [
+        99,
+        106,
+        114,
+        128
+      ]
+    },
+    {
+      "candidate": "stream_cursor",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "stream_cursor",
+      "original_tb_lines": [
+        184,
+        204
+      ],
+      "width_each": 15
+    },
+    {
+      "candidate": "stream_error",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "stream_error",
+      "original_tb_lines": [
+        350
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "stream_is_w",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "stream_is_w",
+      "original_tb_lines": [
+        183,
+        203
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "stream_pair",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "stream_pair",
+      "original_tb_lines": [
+        183,
+        203
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "stream_pending",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "stream_pending",
+      "original_tb_lines": [
+        183,
+        203,
+        268,
+        342,
+        651
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "stream_second",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "stream_second",
+      "original_tb_lines": [
+        185,
+        205
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.core.engine.peArray.io_enable",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.core.engine.peArray.io_enable",
+      "original_tb_lines": [
+        621
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.core.io_group",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.core.io_group",
+      "original_tb_lines": [
+        277
+      ],
+      "width_each": 5
+    },
+    {
+      "candidate": "u_linear_compute_core.head",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.head",
+      "original_tb_lines": [
+        149,
+        349
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteAddr",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_cacheWriteAddr",
+      "original_tb_lines": [
+        211
+      ],
+      "width_each": 8
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteData",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_cacheWriteData",
+      "original_tb_lines": [
+        212,
+        222
+      ],
+      "width_each": 40
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteEnable",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_cacheWriteEnable",
+      "original_tb_lines": [
+        142
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_cacheWriteMask",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_cacheWriteMask",
+      "original_tb_lines": [
+        213,
+        216
+      ],
+      "width_each": 5
+    },
+    {
+      "candidate": "u_linear_compute_core.io_wLoadAddr",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_wLoadAddr",
+      "original_tb_lines": [
+        167,
+        171,
+        172,
+        173
+      ],
+      "width_each": 11
+    },
+    {
+      "candidate": "u_linear_compute_core.io_wLoadBank",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_wLoadBank",
+      "original_tb_lines": [
+        166,
+        170,
+        174
+      ],
+      "width_each": 3
+    },
+    {
+      "candidate": "u_linear_compute_core.io_wLoadData",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_wLoadData",
+      "original_tb_lines": [
+        168,
+        176,
+        181
+      ],
+      "width_each": 16
+    },
+    {
+      "candidate": "u_linear_compute_core.io_wLoadWen",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_wLoadWen",
+      "original_tb_lines": [
+        140,
+        269
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.io_xLoadAddr",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_xLoadAddr",
+      "original_tb_lines": [
+        191,
+        194
+      ],
+      "width_each": 6
+    },
+    {
+      "candidate": "u_linear_compute_core.io_xLoadData",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_xLoadData",
+      "original_tb_lines": [
+        192,
+        196,
+        201
+      ],
+      "width_each": 16
+    },
+    {
+      "candidate": "u_linear_compute_core.io_xLoadWen",
+      "category": "existing_nested_module_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.io_xLoadWen",
+      "original_tb_lines": [
+        141,
+        269
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_linear_compute_core.tail",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "u_linear_compute_core.tail",
+      "original_tb_lines": [
+        149,
+        349
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "w_addr_reg",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "w_addr_reg",
+      "original_tb_lines": [
+        387,
+        389,
+        678
+      ],
+      "width_each": 11
+    },
+    {
+      "candidate": "w_bank_reg",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "w_bank_reg",
+      "original_tb_lines": [
+        387,
+        389,
+        678
+      ],
+      "width_each": 3
+    },
+    {
+      "candidate": "w_cursor",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "w_cursor",
+      "original_tb_lines": [
+        350,
+        680,
+        682
+      ],
+      "width_each": 15
+    },
+    {
+      "candidate": "w_load_wen",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "w_load_wen",
+      "original_tb_lines": [
+        342
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "x_addr_reg",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "x_addr_reg",
+      "original_tb_lines": [
+        396,
+        398,
+        679
+      ],
+      "width_each": 6
+    },
+    {
+      "candidate": "x_cursor",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "x_cursor",
+      "original_tb_lines": [
+        350,
+        681,
+        683
+      ],
+      "width_each": 7
+    },
+    {
+      "candidate": "x_load_wen",
+      "category": "mapped_private_state_or_equivalent_endpoint_needed",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "ACCEL",
+      "original_path": "x_load_wen",
+      "original_tb_lines": [
+        342
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_e203_exu_commit.alu_cmt_i_pc",
+      "category": "existing_commit_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "EXU",
+      "original_path": "u_e203_exu_commit.alu_cmt_i_pc",
+      "original_tb_lines": [
+        1737
+      ],
+      "width_each": 32
+    },
+    {
+      "candidate": "u_e203_exu_commit.alu_cmt_i_valid",
+      "category": "existing_commit_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "EXU",
+      "original_path": "u_e203_exu_commit.alu_cmt_i_valid",
+      "original_tb_lines": [
+        1737
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "u_e203_exu_regfile.regfile[3].rfno0.rf_dffl.qout",
+      "category": "existing_rf3_dff_output_candidate",
+      "condition": "source config E203_CFG_REGFILE_LATCH_BASED is disabled; actual mapped hierarchy still must be inspected",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "only_original_referenced_element": 3,
+      "original_macro": "EXU",
+      "original_path": "u_e203_exu_regfile.rf_r",
+      "original_tb_lines": [
+        1738,
+        1739
+      ],
+      "width_each": 32
+    },
+    {
+      "candidate": "pll_ASLEEP",
+      "category": "existing_hclkgen_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_ASLEEP",
+      "original_tb_lines": [
+        13
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "pll_M",
+      "category": "existing_hclkgen_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_M",
+      "original_tb_lines": [
+        14
+      ],
+      "width_each": 8
+    },
+    {
+      "candidate": "pll_N",
+      "category": "existing_hclkgen_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_N",
+      "original_tb_lines": [
+        14
+      ],
+      "width_each": 5
+    },
+    {
+      "candidate": "pll_OD",
+      "category": "existing_hclkgen_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_OD",
+      "original_tb_lines": [
+        14
+      ],
+      "width_each": 2
+    },
+    {
+      "candidate": "pll_RESET",
+      "category": "existing_hclkgen_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pll_RESET",
+      "original_tb_lines": [
+        13
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "pllbypass",
+      "category": "existing_hclkgen_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "pllbypass",
+      "original_tb_lines": [
+        12
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "plloutdiv",
+      "category": "existing_hclkgen_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "plloutdiv",
+      "original_tb_lines": [
+        12,
+        13
+      ],
+      "width_each": 6
+    },
+    {
+      "candidate": "plloutdivby1",
+      "category": "existing_hclkgen_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "plloutdivby1",
+      "original_tb_lines": [
+        12
+      ],
+      "width_each": 1
+    },
+    {
+      "candidate": "test_mode",
+      "category": "existing_hclkgen_input_port",
+      "lanes": 1,
+      "mapped_runtime_status": "NOT_INSPECTED_IN_THIS_SOURCE_ONLY_REVIEW",
+      "original_macro": "XU_HCLK",
+      "original_path": "test_mode",
+      "original_tb_lines": [
+        12
+      ],
+      "width_each": 1
+    }
+  ],
+  "scope": "SOURCE_ONLY_MAPPED_HANDLES_NOT_VERIFIED",
+  "source_identities": [
+    {
+      "bytes": 122575,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/next-results-export-53/s2c-formal-activity12-20261103-23/simulator/tb_xu_s2c_task_activity.sv",
+      "sha256": "d39016ea50fafe7df8c97dd209702fbc3c4e7eb0e2bb8fded570e427fde6d850"
+    },
+    {
+      "bytes": 15208,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-task00-111/prepared-local-v3/private-reference-adapter-plan.json",
+      "sha256": "6f3f337ddbd93cb103182d82ca4b821d9c99cdf3f7b594da1195c4ff98ccb486"
+    },
+    {
+      "bytes": 153981,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/docs/validation/xu-score-s0-soc-20261102/s2bc-area-formality-server-20261103/raw/s2c-ppa-campaign-20261103-01/s2c/ppa/prepared.json",
+      "sha256": "ff5c5801449bf1e856f3f0176dc1afc3fa54682707def543893ca8f74e7ff32d"
+    },
+    {
+      "bytes": 26274,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v",
+      "sha256": "1a088c873c5e5de84ca92fdc74d693a326e430cc6191128979f573fe4e64ad45"
+    },
+    {
+      "bytes": 11541,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv",
+      "sha256": "fd853fc7be0949eabf9aa56885850115ab4b68b9a654f5a7abcd436e1baa613c"
+    },
+    {
+      "bytes": 3693,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_hclkgen.v",
+      "sha256": "d9ec8c4324562a463f1b03453f627cab034cc2dd3a47d8ba6e1b0668d14ac0d5"
+    },
+    {
+      "bytes": 5007,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/core/e203_exu_regfile.v",
+      "sha256": "bbe6a0a66263761659029e58bad2455d11b0387b1fe142931f575b5ff694d6f8"
+    },
+    {
+      "bytes": 12641,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/core/e203_exu_commit.v",
+      "sha256": "a70d86fc98c2458ed7b9725a640f5706a938ebe698cd311fbdadf242a7bcd173"
+    },
+    {
+      "bytes": 6294,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_dffs.v",
+      "sha256": "cd903d78882040cc17b6fb8bec3862f8d440726d7027ba9c61310d18801f8d83"
+    },
+    {
+      "bytes": 3756,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/core/config.v",
+      "sha256": "235fc827eb88290dab3e4d6ecaf9cd22aa897ac8f5da9abf562a308ded191d9c"
+    },
+    {
+      "bytes": 41575,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-s2c-autogroup/third-party/e203_hbirdv2/rtl/e203/core/e203_defines.v",
+      "sha256": "50348b28a961b87eff4040cecc44b35e163acc28042eb6fa53bd1c2e69682109"
+    }
+  ]
+}
