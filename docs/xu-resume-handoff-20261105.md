@@ -1,5 +1,7 @@
 # xu 2026-11-05上午续接
 
+最新实际运行见文末“16:08仅两候选已启动”；此前PTY和未部署状态均为历史。仍只使用原153/154总控，勿重复init/launch。
+
 最新用户指令的本机关机计划已再次核验：**2026-11-06 01:00 CST poweroff**，`/run/systemd/shutdown/scheduled` 为 `USEC=1793898000000000`、`MODE=poweroff`、`UID=1000`。不要取消、覆盖或重复设置。此前11月5日01:00记录属于历史。
 
 工作树 `/home/mxhanks/Projects/ChipContest-xu-score-opt`，分支 `codex/xu-score-opt`。原始优化目标仍未完成；[中心台账](xu-score-experiment-ledger-20261104.md)已补actual116和120完整终态。新交付：`a1c2c06`、`8c16b8c`、`7fd085f`；并行新归档提交请读取当前Git log，不对他人的untracked目录清理或批量add。
@@ -150,3 +152,27 @@ agent scope_two163在`build/xu-s2c-observe167`准备147原fatal之前八信号/�
 
 当前VNC PTY29641、FTP PTY86945；Workspace1。最新daily入口仍campaign154.py status，旧24任务原样保留、新S2e/S2c任务继续追加同总控。
 本机既定01:00关机不改，服务器分离进程独立运行。当前无新增生产Chisel/RTL修改。
+
+## 16:08仅两候选已启动
+
+`0e4cd37`166同155图功耗CLI、`ee510f7`+`e0a2d0e`167被动定位已完成并相互独立审查；
+`38cc29d`166审查、`9f22fe3`170批次审查保留本地检查原件。
+`b958d39`170的14文件原包38185B，SHA`d07498667307816b6fce000d5bbd6427a5e787469ad079b16ba05be6adb32bed`；
+manifest170 SHA`8a3e6ac5b4cd7ba3cf039d4a00b653825f541b5375911775337a13d472cc7808`。
+FTP因全局连接人数421暂拒，大段VNC终端粘贴失败后改1536字符分块；总包SHA及14文件完整身份由服务器严格验证后部署。
+
+170已真实登记，不要重跑任何worker。16:08 CST只读172查询经VNC[原图保存](validation/xu-score-queue170-observation-20261105/README.md)：
+原153 controller PID27671身份匹配true；164 PID37459已退出，状态`STREAM_AUDITED_24_ORIGINAL_REPORTS_NOT_QUALIFIED`；
+S2c167 PID172967真实RUNNING_CHILD；166preflight/full12均WAIT_DEPENDENCY。
+顺序：164terminal→167terminal→166task0（另155success）→task0success后full12；任何full12先验失败即BLOCKED。
+run170在同一Python进程运行原166，kernel argv仅当前唯一out，避免preflight-root/target-root交叉匹配旧job。
+
+输出：B/s2c-passive-unknown-20261105-167、B/s2e-final155-power-preflight-20261105-166、B/s2e-final155-power12-20261105-166。
+日常入口仍`python3 -B "$HOME/Desktop/xu-campaign-batch154/campaign154.py" status`，不是新建控制器。
+仅S2e/S2c；其它候选不追加，历史保持。155新图12层能量尚未产生，所有NOT_QUALIFIED；新代码均验收/调度，无生产Chisel改变。
+
+`a335d87`171只读导出与安全验包工具已完成，22本地检查；尚未取回171包。
+下一步：保持原167运行，自动接166；核实其原生状态并取回171包的原注册回执/164终态/新native日志，独立审核后更新对比。
+当前不再保留常驻VNC PTY（98663已正常quit）；可用受保护helper重新连接，Workspace1。
+FTP global421不是凭据丢失，不要请用户重建凭据。分块VNC传输已可用；绝不可在grid取回期间另操作VNC。
+本机既定2026-11-06 01:00关机不改；后台总控与worker独立于本机和模型额度。
