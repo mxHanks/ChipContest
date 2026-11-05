@@ -1,0 +1,130 @@
+"""Shared xu firmware identities and fixed development-task work contracts."""
+
+PHASES = ['w_load', 'x_load', 'bias_load', 'compute_wait', 'writeback', 'other']
+PERFORMANCE_FIELDS = ['layer', 'cycles', *PHASES, 'busy', 'mac_fire',
+                      'mmio_reads', 'mmio_writes', 'shared_reads', 'shared_writes',
+                      'shared_stall', 'mmio_stall', 'starts', 'dones']
+PES = 8
+MACS_PER_TASK = 99 * 64 * 256
+OUTPUTS_PER_TASK = 99 * 256
+SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-window',
+             'bias-hw-stream16-window', 'bias-hw-pack32-window', 'bias-hw-autogroup-window',
+             'bias-hw-autogroup-paired-hi-window')
+PAIRED_HI_SCHEDULE = 'bias-hw-autogroup-paired-hi-window'
+AUTOGROUP_SCHEDULES = ('bias-hw-autogroup-window', PAIRED_HI_SCHEDULE)
+OPTIMIZATIONS = ('-Os', '-O2', '-O3')
+EXPERIMENTS = ('none', 'bias-unroll', 'result-unroll', 'both-unroll', 'no-masks',
+               'bias-unroll-no-masks', 'result-unroll-no-masks', 'both-unroll-no-masks')
+
+
+def configuration(schedule='baseline', optimization='-Os', experiment='none'):
+    if schedule not in SCHEDULES:
+        raise ValueError('unknown firmware schedule: ' + str(schedule))
+    if optimization not in OPTIMIZATIONS:
+        raise ValueError('unknown firmware optimization: ' + str(optimization))
+    if experiment not in EXPERIMENTS:
+        raise ValueError('unknown firmware experiment: ' + str(experiment))
+    return dict(schedule=schedule, optimization=optimization, experiment=experiment)
+
+
+def configuration_from_result(result):
+    # Reports predating explicit configuration describe the historical -Os path.
+    config = configuration(result.get('firmware_schedule', 'baseline'),
+                           result.get('firmware_opt', '-Os'),
+                           result.get('firmware_experiment', 'none'))
+    built = (result.get('firmware_build') or {}).get('configuration')
+    if built is not None and built != config:
+        raise ValueError('firmware build and run configuration differ')
+    if ('transaction_contract' in result and
+            result['transaction_contract'] != task_contract(config['schedule'])):
+        raise ValueError('firmware transaction contract differs from the schedule')
+    return config
+
+
+def add_arguments(parser):
+    parser.add_argument('--firmware-schedule', choices=SCHEDULES, default='baseline')
+    parser.add_argument('--firmware-opt', choices=OPTIMIZATIONS, default='-Os',
+                        help='compiler optimization; use --firmware-opt=-O2 (default: -Os)')
+    parser.add_argument('--firmware-experiment', choices=EXPERIMENTS, default='none')
+
+
+def compiler_defines(config):
+    config = configuration(**config)
+    experiment = config['experiment']
+    values = {'XU_FIRMWARE_BIAS_DTCM': config['schedule'].startswith('bias-dtcm'),
+              'XU_HARDWARE_BIAS_CACHE': config['schedule'].startswith('bias-hw'),
+              'XU_HARDWARE_RESULT_WINDOW': config['schedule'].endswith('-window'),
+              'XU_FIRMWARE_BIAS_UNROLL': experiment.startswith(('bias-unroll', 'both-unroll')),
+              'XU_FIRMWARE_RESULT_UNROLL': experiment.startswith(('result-unroll', 'both-unroll')),
+              'XU_FIRMWARE_NO_MASKS': experiment.endswith('no-masks')}
+    # Keep every legacy command line unchanged; streaming modes are opt-in.
+    if config['schedule'] == 'bias-hw-stream16-window':
+        values['XU_HARDWARE_STREAM16'] = True
+    if config['schedule'] in ('bias-hw-pack32-window',) + AUTOGROUP_SCHEDULES:
+        values['XU_HARDWARE_PACK32'] = True
+    if config['schedule'] in AUTOGROUP_SCHEDULES:
+        values['XU_HARDWARE_AUTO_GROUP'] = True
+    if config['schedule'] == PAIRED_HI_SCHEDULE:
+        values['XU_HARDWARE_PAIRED_HI'] = True
+    return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
+
+
+def task_contract(schedule='baseline'):
+    configuration(schedule)
+    w_reads, x_reads = 16384, 6336
+    bias_reads = 99 * 512 if schedule == 'baseline' else 512
+    bias_writes = 768 if schedule.startswith('bias-hw') else 76032
+    control_writes = 2 if schedule.startswith('bias-hw') else 0
+    result_index_writes = 0 if schedule.endswith('-window') else OUTPUTS_PER_TASK
+    mmio_writes = 156326 - 76032 + bias_writes + control_writes - OUTPUTS_PER_TASK + result_index_writes
+    if schedule == 'bias-hw-stream16-window':
+        # W: cursor + 16384 data; X: 99*(cursor + 64 data).
+        # Unlike legacy BANK=0/ADDR=0, the stream W cursor is inside the window.
+        mmio_writes = (1 + w_reads) + 99 * (1 + 64) + 768 + 2 + 3 * 99 * 32
+    if schedule == 'bias-hw-pack32-window':
+        # Pack two signed 16-bit source values into each W/X data write.
+        mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 3 * 99 * 32
+    if schedule in AUTOGROUP_SCHEDULES:
+        # One STARTROW and 32 response-retired POPs per row. No GROUP/W1C.
+        mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 99 * (1 + 32)
+    result = dict(w_shared_reads=w_reads, x_shared_reads=x_reads, bias_shared_reads=bias_reads,
+                shared_reads=w_reads + x_reads + bias_reads, shared_writes=50688,
+                bias_mmio_writes=bias_writes, mmio_writes=mmio_writes,
+                starts=99 * 32, dones=99 * 32,
+                mac_fire=MACS_PER_TASK // PES, macs=MACS_PER_TASK, outputs=OUTPUTS_PER_TASK)
+    if schedule == PAIRED_HI_SCHEDULE:
+        result.update(result_mmio_reads=38016, paired_hi_mmio_reads=12672)
+    return result
+
+
+def validate_result_activity(records, layers, schedule):
+    """S2e records count real result responses, not total MMIO polling reads."""
+    required = schedule == PAIRED_HI_SCHEDULE
+    if not records and not required:
+        return
+    if schedule not in AUTOGROUP_SCHEDULES or len(records) != len(layers):
+        raise ValueError('missing or unexpected result activity records')
+    packed = 12672 if required else 0
+    legacy = 25344 if required else 50688
+    for record, layer in zip(records, layers):
+        if (set(record) != {'layer', 'legacy_words', 'packed_words', 'logical_words'} or
+                any(type(v) is not int or v < 0 for v in record.values()) or
+                record != dict(layer=layer['layer'], legacy_words=legacy,
+                               packed_words=packed, logical_words=50688)):
+            raise ValueError('result response work or canonical word coverage differs')
+
+
+def validate_performance(perf, cycles, schedule='baseline'):
+    expected = set(PERFORMANCE_FIELDS) - {'layer', 'cycles'}
+    if set(perf) != expected or any(type(v) is not int or v < 0 for v in perf.values()):
+        raise ValueError('missing or invalid performance counters')
+    if type(cycles) is not int or cycles <= 0 or sum(perf[p] for p in PHASES) != cycles:
+        raise ValueError('performance phases do not cover the task window')
+    if not perf['mac_fire'] <= perf['busy'] <= cycles:
+        raise ValueError('invalid MAC/busy activity')
+    contract = task_contract(schedule)
+    if any(perf[k] != contract[k] for k in ['mac_fire', 'starts', 'dones', 'mmio_writes',
+                                            'shared_reads', 'shared_writes']):
+        raise ValueError('performance work counters differ from the firmware schedule')
+    if any(value > cycles for value in perf.values()):
+        raise ValueError('performance counter exceeds measured window')
