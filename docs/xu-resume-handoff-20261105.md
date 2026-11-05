@@ -62,3 +62,37 @@ selected_mapped、有序SVF与各自FM日志绑定。正式活动/全SoC能量�
 每候选依赖activity→power；process_contains必须为唯一output_root字符串，不能全用同一个脚本名。
 所有同ID注册逐字节幂等，拒绝替换；失败/孤儿不自动重试，独立后继可继续。
 本机VNC Workspace1、PTY32648/FTP2326继续；grid149已q关闭，当前可用终端。
+
+## 11:20实际批量续行：以后只用campaign154
+
+本节取代上面的“145/146/147开发中”和旧PTY记录；历史原文保留。
+
+- `b45e3b7`：[151完整终态归档](validation/xu-score-terminal151-20261105/README.md)。191载荷50892386B已逐项复核，原包672360B SHA`84ad6475f61d14f68f51c52a4f2ecac4ae26aa43fe4c48227e579b435c1235ff`。130确实12层终态：554输入before/after相同、12PT各rc0/唯一marker，合计10420116周期；约35.3333mW、12层2.454516mJ仅诊断，5280个Q有TX/4256整窗TX未解除。134五native rc0后因CSV字段默认131072上限失败，原件保留，两个约99MB native-cells正文只在服务器。142完成21报告，但7处只是unconstrained路径展示、27124 untested未变，不是完整150MHz。
+- `6bb9540`145、`c4ce764`146、`c6a0fee`147、`fba98a6`156均已完成真实CLI/manifest/hostchecks。145固定原48张量与官方模型SHA；146同selected图重新测加速器子树面积和全SoC诊断功耗；147保留原完整TB/86条fatal/84 native四态绑定，仍额外资格fatal；156独立逐行+完整block重读130的24大报告，不将native x_probability=0当物理known Q。
+- `ec916c4`155在全新目录接续134的五项已完成native，完整重哈希原件且只允许Tcl输出目录重定位；仅提高CSV字段解析上限至64MiB，随后真正运行final DC/PT/full FM，own89→原134 hold字节→155 final，不借baseline116。原134不重启/覆盖。
+- `5a15ae0`153修复注册半写和Popen后记录失败时错误释放槽位，新增PID/startticks/argv恢复身份及失败success依赖终态阻断。23项hostchecks通过。150保持原字节；迁移先完整复制原控制目录，再只绑定新worker、续同一out，worker信号/重启数均为0。
+- `5d87300`[唯一日常入口154](../build/xu-campaign-batch154/README.md)已冻结、上传、现场校验并**实际登记20项新任务**，保留原4项，共24节点。tar201028B SHA`8de2a0f7181cd7e52b1ac92ada842cbd8d8003e75fbd68c2ed93d967118c6003`，manifest SHA`29a3a238ca27182b814035203a2e5cae3f651066f599bf859596546c4f752590`。独立复核86文件、20job无环/无缺依赖、473部署冻结项及2766外部冻结项；8候选全部固定同一绝对VCS/SiFive路径和基线四工具SHA。
+
+服务器日常只需：
+
+```sh
+python3 -B "$HOME/Desktop/xu-campaign-batch154/campaign154.py" status
+```
+
+`upgrade`已实际完成，不要重复停止控制器或重新init；新控制器沿用`B/unified-experiment-control-20261105-150`。
+11:20实际状态155为RUNNING，PID228701；其余新任务WAIT_DEPENDENCY。控制器已分离运行，
+20项现场enroll全部成功，下一步155→147→156→8活动链→8功耗→自动总报告。
+模型额度耗尽不会停止服务器队列。单原生实验槽位保持，license总配额未知。
+
+自动最终报告`B/campaign-summary-20261105-154`保留8候选/96逐层CSV、VCS/PT日志SHA及所用JSON原字节快照；
+原S2e/S2c/时序/诊断续行也保存在continuations快照。缺失或失败数值留空，全部NOT_QUALIFIED。
+只有在实际确认总控进程已退出后，才用同一入口`start`恢复；锁拒绝第二总控，原实验不自动重试。
+当前VNC PTY55141，FTP PTY56458（旧连接已超时关闭），仍Workspace1。157实际部署/迁移/运行证据正在取回。
+本机01:00关机计划不变；当前无新增生产Chisel/RTL改动。
+
+157已完整取回并安全校验：591260B SHA`37a340dc1d24f0d6b7eecc0194a492fee6077953818dea141b25021e4f30fe18`，
+167payload40767862B。actual迁移回执status=`MIGRATED_SAME_OUT_CONTROLLER153_RUNNING_NOT_QUALIFIED`，
+controller PID228660、start_ticks118030075真实`/proc`匹配；workers_signalled=workers_restarted=0。
+155 PID228701/start_ticks118031670真实匹配，原五项接续完成、final DC/PT各rc0；快照时phase=final/fm，
+7条run回执（五adopt+两新native），FM仍在执行，不能提前宣布成功。
+两份约99MB复制TSV的SHA与134原件相同，只返回身份未返回正文。grid157已q关闭，VNC可用。
