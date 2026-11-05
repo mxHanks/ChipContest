@@ -1,0 +1,34 @@
+usage: power166.py [-h] [--activity ACTIVITY] [--source-root SOURCE_ROOT]
+                   [--tool-root TOOL_ROOT] [--ppa-root PPA_ROOT]
+                   [--formality-root FORMALITY_ROOT]
+                   [--target-root TARGET_ROOT] --out OUT
+                   [--preflight-root PREFLIGHT_ROOT] [--task-ids TASK_IDS]
+                   [--pt PT] [--lc-root LC_ROOT] [--timeout TIMEOUT]
+                   [--inventory-timeout INVENTORY_TIMEOUT]
+                   {prepare,verify,run,campaign}
+
+Own S2e155 target power, with unchanged120/89/109 capture provenance.
+Python3.6+, standard library only. Task0 preflight and full12 campaign use the
+same code path. All results are diagnostic and NOT_QUALIFIED. Never restarts a
+native run or overwrites an existing campaign. No credentials or network.
+
+positional arguments:
+  {prepare,verify,run,campaign}
+
+options:
+  -h, --help            show this help message and exit
+  --activity ACTIVITY
+  --source-root SOURCE_ROOT
+  --tool-root TOOL_ROOT
+  --ppa-root PPA_ROOT
+  --formality-root FORMALITY_ROOT
+  --target-root TARGET_ROOT
+  --out OUT
+  --preflight-root PREFLIGHT_ROOT
+                        successful same155 task0 output; mandatory before
+                        full12 prepare/campaign
+  --task-ids TASK_IDS
+  --pt PT
+  --lc-root LC_ROOT
+  --timeout TIMEOUT
+  --inventory-timeout INVENTORY_TIMEOUT
