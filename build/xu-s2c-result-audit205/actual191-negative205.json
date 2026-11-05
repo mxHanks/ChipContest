@@ -1,0 +1,82 @@
+{
+  "archive": {
+    "bytes": 13216384,
+    "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/xu-server-two-candidate-final-20261105-191.tar.xz",
+    "sha256": "44770417f09a4244cbeea5690b4f21923e5d641de365094010ca7eeaf7c998b3"
+  },
+  "checks": [
+    {
+      "case": "borrow_other_mapping",
+      "error": "context input freeze inclusion: netlist",
+      "rejected": true
+    },
+    {
+      "case": "mutable_live_fm_state",
+      "error": "context input freeze inclusion: native_fm_state",
+      "rejected": true
+    },
+    {
+      "case": "drop_final_layer",
+      "error": "exact task0/full12 identities",
+      "rejected": true
+    },
+    {
+      "case": "inclusive_cycle_substitution",
+      "error": "original12 windows/cycles/macros/unknown unchanged",
+      "rejected": true
+    },
+    {
+      "case": "erase_unknown_q",
+      "error": "original12 windows/cycles/macros/unknown unchanged",
+      "rejected": true
+    },
+    {
+      "case": "missing_frozen_runtime",
+      "error": "recorded external frozen-input before/after",
+      "rejected": true
+    },
+    {
+      "case": "changed_external_after_hash",
+      "error": "recorded external frozen-input before/after",
+      "rejected": true
+    },
+    {
+      "case": "wrong_preflight_status",
+      "error": "same-map/method successful task0 guard",
+      "rejected": true
+    },
+    {
+      "case": "wrong_own_area",
+      "error": "same own9c16 area",
+      "rejected": true
+    },
+    {
+      "case": "omitted_pin_receipt_mismatch",
+      "error": "same summary tasks",
+      "rejected": true
+    },
+    {
+      "case": "pretend_qualified",
+      "error": "terminal/schema/qualification",
+      "rejected": true
+    },
+    {
+      "case": "wrong_original_archive_hash",
+      "error": "archive SHA256 differs",
+      "rejected": true
+    },
+    {
+      "case": "native_milliwatt_unit_substitution",
+      "error": "native explicit watts",
+      "rejected": true
+    }
+  ],
+  "count": 13,
+  "native_runs": 0,
+  "originals_modified": false,
+  "positive_full12": true,
+  "qualification": "NOT_QUALIFIED",
+  "remote_operations": 0,
+  "schema": "xu-audit205-actual-packet-adversarial-v1",
+  "status": "ALL_ACTUAL_PACKET_COUNTEREXAMPLES_REJECTED_NOT_QUALIFIED"
+}
