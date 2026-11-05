@@ -1,215 +1,36 @@
-# ChipContest
+# ChipContest · S2e 交付版
 
-基于 **Chisel + RISC-V E203** 的 AI 硬件加速器设计项目，用于嵌入式芯片与系统设计竞赛芯片设计赛道。
+基于 Chisel 与 E203 的八路 INT16 线性层加速器。`main` 交付当前主方案 **S2e paired-HI**，S2c 保留为测量对照。队友请先读 [HANDOFF.md](HANDOFF.md)。
 
-项目主要围绕神经网络计算加速、片上存储架构、SoC 集成、RTL 功能验证及 ASIC 面积与时序评估展开。
+**交付状态：12层性能与诊断能量已审计；完整150MHz、严格门级功能和比赛能耗资格仍待完成。** 当前不能据此报最终比赛得分。
 
-> **在开始 Work 之前，请先阅读 [`quickstart.md`](quickstart.md)，尤其注意环境搭建、Git Commit 和协作规范。**
->
-> 对于已经通过测试的稳定功能，及时提交 Git Commit，避免多个功能混杂在同一次提交中。
+| 同一服务器、同一分析方法 | S2c 对照 | S2e 主方案 |
+|---|---:|---:|
+| 真实12层总周期 | 11,887,872 | **10,420,116** |
+| 全SoC任务诊断能量（mJ） | 2.6384471466669330 | 2.3659452273331971 |
+| 加速器面积（mm²） | 0.2948018380 | 0.3003096339 |
 
-## 项目目标
-
-当前重点实现 INT16 线性层矩阵乘法加速器：
-
-$$
-Y_{99\times256}=X_{99\times64}\times W_{64\times256}+Bias
-$$
-
-主要架构：
-
-- 8 个并行 MAC（Multiply-Accumulate，乘累加）计算单元。
-- 每个 PE（Processing Element）使用 16-bit 输入、16-bit 权重和 48-bit 累加器。
-- 一次执行 8 路、每路 64 项的点积运算。
-- 使用 8 个 WeightBank 并行提供权重。
-- 使用同步 SRAM 读取与预取机制。
-- 通过外层 Controller 自动遍历 99 行和 32 个输出组。
-- 计划接入 Hummingbirdv2 E203 RISC-V SoC，完成软件与硬件协同验证。
-
-## 项目结构
-
-```text
-ChipContest/
-├── assets/
-│   ├── datasets/           # 数据集
-│   ├── libs/               # 标准单元库、工艺相关文件
-│   └── modles/             # 模型文件（现有目录名）
-├── build/                  # 构建及仿真生成文件
-├── generated/              # Chisel 生成的 SystemVerilog
-├── project.scala           # Scala CLI 配置
-├── quickstart.md           # 环境搭建和开发说明
-├── reports/
-│   └── baseline/           # 冻结的综合基线数据
-├── runs/                   # 仿真波形及运行产物
-├── src/
-│   ├── main/scala/         # Chisel RTL 源代码
-│   └── test/scala/         # ChiselSim / ScalaTest
-├── third-party/
-│   └── e203_hbirdv2/       # E203 SoC Git Submodule
-└── tools/
-    └── scripts/            # 综合、面积评估等工具脚本
-```
-
-### 核心模块
-
-| 模块                | 职责                         |
-|---------------------|------------------------------|
-| `MacPE`             | 执行单路乘累加               |
-| `MacPEArray`        | 包含 8 个并行 PE             |
-| `MacController`     | 管理点积运算状态与索引       |
-| `DotProductEngine`  | 组织点积运算和结果缓存       |
-| `XRowBuffer`        | 缓存当前输入行               |
-| `WeightBankArray`   | 8 路并行权重存储阵列         |
-| `WeightBank`        | 权重地址译码和 SRAM 选择     |
-| `Sram1024x16`       | 单端口 SRAM 行为模型         |
-| `LinearComputeCore` | 连接存储器与点积计算引擎     |
-| `LinearLayerEngine` | 自动调度行、组计算及结果握手 |
-
-## 快速开始
-
-### 1. 获取代码
-
-主仓库：
+S2e 周期减少12.35%，吞吐增加14.09%，诊断能量减少10.33%；面积占2.25mm²上限的13.35%。能量包含当前任务窗口内的全SoC，窗口外 clear 阶段未计入；未知活动等资格问题尚未解除。逐层数据、原日志哈希和原始证据见 [两候选测量包](docs/validation/xu-score-two-candidate-final-20261105/README.md)。
 
 ```bash
-git clone https://github.com/mxhanks/ChipContest.git
+git clone --branch main --recurse-submodules https://github.com/mxHanks/ChipContest.git
 cd ChipContest
+python3 -B tools/scripts/e203_soc.py --mode doctor
+python3 -B tools/scripts/e203_soc.py --mode check-vectors --tasks 12
+python3 -B tools/scripts/xu_verify_handoff.py
 ```
 
-当前 E203 集成工作位于 `feature/e203-integration` 分支：
+依赖与运行命令见 [quickstart.md](quickstart.md)。必须显式选择 S2e 固件参数，历史默认配置仍为 baseline：
 
 ```bash
-git switch feature/e203-integration
-git submodule update --init --recursive
+python3 -B tools/scripts/e203_soc.py --mode real --tasks 12 --sim verilator \
+  --firmware-schedule bias-hw-autogroup-paired-hi-window \
+  --firmware-opt=-O2 --firmware-experiment both-unroll-no-masks \
+  --out build/s2e-real12-new
 ```
 
-主仓库使用 Git Submodule 管理 E203， **不要在 `third-party` 中重新克隆另一个官方 E203 仓库**。
+这是本地功能复现；表内周期来自服务器正式测量窗口，不能用本地默认时钟替换。服务器工具链、面积与能量复现入口见 [交接文档](HANDOFF.md) 和 [冻结服务器工具](tools/repro/server/README.md)。
 
-### 2. 环境准备
+源代码保留八个PE、signed16输入/权重、signed40偏置、signed48计算结果。S2c 既有 Chisel 自动组调度与两槽结果FIFO位于 `src/main/scala/linear/LinearAutoGroupCore.scala`；S2e 新增优化是 E203 手写接口 `accel_icb_slave.v` 的成对高16位读取和固件 `tests/e203/firmware/accel.c` 的对应读取/写回，**S2e 没有新增 Chisel 计算架构改动**。
 
-主要开发环境：
-
-- Linux（当前主要使用 Ubuntu 24.04）
-- JDK / Scala CLI
-- Chisel 7.16.0、Scala 2.13.18
-- Icarus Verilog、GTKWave
-- Yosys
-- Nangate45 标准单元库（面积评估使用）
-
-依赖版本以 `project.scala` 为准。详细安装说明请查看 [`quickstart.md`](quickstart.md)。
-
-### 3. 运行 Chisel 功能测试
-
-在仓库根目录执行：
-
-```bash
-scala-cli test .
-```
-
-建议修改单个模块后先运行对应测试，再执行完整回归测试。
-
-### 4. 生成 SystemVerilog
-
-项目使用 `GenerateRTL` 作为 RTL 生成入口。
-
-例如：
-
-```bash
-scala-cli run . -M GenerateRTL -- LinearComputeCore
-```
-
-生成文件存放在：
-
-```text
-generated/LinearComputeCore/
-```
-
-其他顶层包括 `DotProductEngine` 和 `LinearLayerEngine`。
-
-### 5. ASIC 面积评估
-
-目前采用 Yosys + Nangate45 标准单元库：
-
-```bash
-./tools/scripts/area_eval.sh DotProductEngine
-./tools/scripts/area_eval.sh LinearComputeCore
-```
-
-报告输出到 `reports/`。
-
-注意：当前 `Sram1024x16` 仍为行为模型，不是真正的工艺 SRAM Macro。完整存储器若被综合为 DFF 和 MUX，所得面积不能直接作为最终芯片面积。
-
-## 开发进度
-
-| 项目                          | 状态   |
-|-------------------------------|--------|
-| 8 路 INT16 点积计算引擎       | 已验证 |
-| XRowBuffer 与 WeightBankArray | 已验证 |
-| 同步读取与权重预取            | 已验证 |
-| 1024×16 SRAM 行为模型封装     | 已验证 |
-| 自动行 / 组调度               | 已验证 |
-| 99×256 完整矩阵功能回归       | 已通过 |
-| 真实 KWT 模型数据逐位回归     | 待完善 |
-| E203 SoC 集成                 | 进行中 |
-| 真实 SRAM Macro 适配          | 待完成 |
-| 时序收敛、功耗及最终 PPA 报告 | 待完成 |
-
-完整矩阵回归通过不意味着已完成实际 SoC 数据搬运。当前测试仍由 Testbench 提供输入行、Bias 和结果接收握手。
-
-## Git 协作规范
-
-### 分支管理
-
-- `main`：经过验证的稳定代码。
-- `feature/*`：新功能，例如 `feature/e203-integration`。
-- `experiment/*`：架构探索或可能回退的实验。
-- `fix/*`：缺陷修复。
-
-开发时尽量保持每次提交只涉及一个明确的改动目标。
-
-### Commit 规范
-
-推荐使用以下前缀：
-
-| 前缀     | 用途           |
-|----------|----------------|
-| `新增：` | 新功能         |
-| `修复：` | Bug 修复       |
-| `重构：` | 重构           |
-| `测试：` | 测试           |
-| `文档：` | 文档           |
-| `维护：` | 工具及工程维护 |
-
-示例：
-
-```bash
-git add src/
-git commit -m "feat: add weight prefetch control"
-```
-
-提交前至少执行相关模块的测试，重要里程碑执行完整回归。
-
-### E203 子模块协作
-
-E203 是一个独立 Git 仓库，具有自己的 Commit 和 Remote。
-
-修改 E203 时：
-
-1. 在 `third-party/e203_hbirdv2/` 内提交并推送到团队 Fork。
-2. 回到 ChipContest 根目录，提交更新后的子模块引用。
-3. 再推送 ChipContest 分支。
-
-不要只提交主仓库的 Submodule 引用，却不推送对应的 E203 Commit，否则其他队友可能无法检出相同版本。
-
-## 参考资料
-
-- [E203 团队 Fork](https://github.com/mxhanks/e203_hbirdv2)
-- [E203 官方项目](https://github.com/riscv-mcu/e203_hbirdv2)
-- [Chisel 文档](https://www.chisel-lang.org/)
-- [Yosys 文档](https://yosyshq.readthedocs.io/)
-
-## 备注
-
-本项目持续开发中。当前的数值、性能和面积基线应以仓库中已经验证的测试和报告为准；未经验证的性能目标不得直接当作最终实现结果。
-
-第三方 IP、参考模型和工艺文件的使用，应遵守各自许可证及比赛提供文件的使用约束。
+`reports/baseline/`、Yosys/Nangate45 面积脚本和旧 PPA 生成器保留原有用途，不能代替这里的服务器工艺库结果。工艺库、工具许可证和访问凭据不包含在仓库中。修改子模块时先推送子仓库提交，再提交父仓库 gitlink。

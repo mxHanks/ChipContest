@@ -1,0 +1,9 @@
+# Frozen evidence must survive checkout without line-ending conversion.
+docs/handoff-evidence/** -text
+docs/handoff-evidence/*.rpt -diff
+docs/handoff-evidence/*.log -diff
+docs/validation/xu-score-two-candidate-final-20261105/** -text
+docs/validation/xu-score-two-candidate-final-20261105/*.csv -diff
+docs/validation/xu-score-s0-numeric-20261102/** -text
+docs/validation/xu-score-resource-function141-20261105/** -text
+tools/repro/server/** -text
