@@ -1,0 +1,16 @@
+{
+  "error": "ValueError: same155 Tcl net/SDC/scope and no propagated override",
+  "limitations": [
+    "NOT_QUALIFIED: no contest score or qualified energy is asserted.",
+    "Returned copied bytes are locally hashed; remote frozen-input before/after are recorded server receipts, not local rehashes of absent RTL/libraries/SAIF/netlist/SVF.",
+    "Huge pin reports are absent locally. Only stable bounded server SHA snapshots are matched to execution receipts; this is not local20GB pin-report replay.",
+    "336/22512 native inventory is locally reconstructed. Source-to-target SAIF preservation is receipt continuity to frozen130, not a new local SAIF parse.",
+    "Measured unknown Q and TX/TZ/TB remain; native x_probability=0 does not establish physical known Q.",
+    "SRAM conditional/internal power modes, repair-logic inferred activity, gate-level functionality and full150MHz timing coverage remain unqualified.",
+    "155 area is paired only with166 energy measured on155. Historical130 energy retains its original89 map and area."
+  ],
+  "qualification": "NOT_QUALIFIED",
+  "schema": "xu-s2e166-independent-audit179-v1",
+  "status": "FAILED_AUDIT_RETAINED_NOT_QUALIFIED",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 465, in main\n    result = audit(ev, refs); write_outputs(out, result)\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 423, in audit\n    zero = campaign(ev, ROOT0, [0], refs)\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 397, in campaign\n    inv, macros = inventory_check(ev, folder, prepared)\n                  ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 273, in inventory_check\n    script_check(ev.path(prefix + 'export.tcl').read_text(), prepared, None)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 296, in script_check\n    need(target['analysis_clock_contract'] in text and 'set_propagated_clock [all_clocks]' not in text and\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n         prepared['netlist']['path'] in text and 'link_design' in text, 'same155 Tcl net/SDC/scope and no propagated override')\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 56, in need\n    raise ValueError(message)\nValueError: same155 Tcl net/SDC/scope and no propagated override\n"
+}

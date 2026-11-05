@@ -1,0 +1,17 @@
+{
+  "error": "ValueError: source snapshot absent: s2e-final155-power-preflight-20261105-166/task_00/source-no_switching_activity-before.rpt",
+  "limitations": [
+    "NOT_QUALIFIED: no contest score or qualified energy is asserted.",
+    "Returned copied bytes are locally hashed; remote frozen-input before/after are recorded server receipts, not local rehashes of absent RTL/libraries/SAIF/netlist/SVF.",
+    "Huge pin reports are absent locally. Only stable bounded server SHA snapshots are matched to execution receipts; this is not local20GB pin-report replay.",
+    "336/22512 native inventory is locally reconstructed. Source-to-target SAIF preservation is receipt continuity to frozen130, not a new local SAIF parse.",
+    "Measured unknown Q and TX/TZ/TB remain; native x_probability=0 does not establish physical known Q.",
+    "SRAM conditional/internal power modes, repair-logic inferred activity, gate-level functionality and full150MHz timing coverage remain unqualified.",
+    "155 area is paired only with166 energy measured on155. Historical130 energy retains its original89 map and area.",
+    "New155 uses frozen forwarded-clock scope; historical S2c/130 used propagated clocks. Cross-method energy differences are not controlled architectural gains."
+  ],
+  "qualification": "NOT_QUALIFIED",
+  "schema": "xu-s2e166-independent-audit179-v1",
+  "status": "FAILED_AUDIT_RETAINED_NOT_QUALIFIED",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 478, in main\n    result = audit(ev, refs); write_outputs(out, result)\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 433, in audit\n    zero = campaign(ev, ROOT0, [0], refs)\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 408, in campaign\n    layers = [check_task(ev, folder, prepared, t, n, macros, refs) for t, n in zip(prepared['tasks'], execution['tasks'])]\n              ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 350, in check_task\n    ev.check(prefix + name, receipt, name.startswith('sram-pins-'))\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 212, in check\n    need(name in table, 'source snapshot absent: ' + name)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 64, in need\n    raise ValueError(message)\nValueError: source snapshot absent: s2e-final155-power-preflight-20261105-166/task_00/source-no_switching_activity-before.rpt\n"
+}

@@ -1,0 +1,16 @@
+{
+  "error": "ValueError: inventory own155 scope/counts",
+  "limitations": [
+    "NOT_QUALIFIED: no contest score or qualified energy is asserted.",
+    "Returned copied bytes are locally hashed; remote frozen-input before/after are recorded server receipts, not local rehashes of absent RTL/libraries/SAIF/netlist/SVF.",
+    "Huge pin reports are absent locally. Only stable bounded server SHA snapshots are matched to execution receipts; this is not local20GB pin-report replay.",
+    "336/22512 native inventory is locally reconstructed. Source-to-target SAIF preservation is receipt continuity to frozen130, not a new local SAIF parse.",
+    "Measured unknown Q and TX/TZ/TB remain; native x_probability=0 does not establish physical known Q.",
+    "SRAM conditional/internal power modes, repair-logic inferred activity, gate-level functionality and full150MHz timing coverage remain unqualified.",
+    "155 area is paired only with166 energy measured on155. Historical130 energy retains its original89 map and area."
+  ],
+  "qualification": "NOT_QUALIFIED",
+  "schema": "xu-s2e166-independent-audit179-v1",
+  "status": "FAILED_AUDIT_RETAINED_NOT_QUALIFIED",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 463, in main\n    result = audit(ev, refs); write_outputs(out, result)\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 421, in audit\n    zero = campaign(ev, ROOT0, [0], refs)\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 395, in campaign\n    inv, macros = inventory_check(ev, folder, prepared)\n                  ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 263, in inventory_check\n    need(inv['schema'] == 'xu-mapped-sram-pin-inventory-v1' and inv['status'] == 'EXPORTED_REVIEW_PENDING' and\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n         inv['macro_count'] == 336 and inv['pin_bit_count'] == 22512 and inv['netlist'] == prepared['netlist'] and\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n         inv['constraints'] == prepared['analysis_sdc'] and inv['libraries'] == prepared['implementation_controls']['libraries'], 'inventory own155 scope/counts')\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-result-audit179/audit179.py\", line 56, in need\n    raise ValueError(message)\nValueError: inventory own155 scope/counts\n"
+}

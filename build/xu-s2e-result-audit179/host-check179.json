@@ -1,0 +1,32 @@
+{
+  "actual_packet_checks": 15,
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "build/xu-s2e-result-audit179/test_audit179.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "build/xu-s2e-result-audit179/test_actual179.py",
+        "--evidence-root",
+        "build/xu-score-resume-20261103/preflight178",
+        "--archive",
+        "build/xu-score-resume-20261103/xu-server-two-candidate-preflight-20261105-178.tar.xz",
+        "--sha256",
+        "da981b5ed9d5c07524ece0b454fa7273f61e222917db9037d4155407e0a7ee1a",
+        "--out",
+        "build/xu-s2e-result-audit179/actual178-negative-final179.json"
+      ],
+      "returncode": 0
+    }
+  ],
+  "qualification": "NOT_QUALIFIED",
+  "schema": "xu-audit179-hostchecks-v1",
+  "unit_tests": 13
+}

@@ -1,0 +1,146 @@
+{
+  "archive_check": {
+    "archive": {
+      "bytes": 1313588,
+      "path": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/xu-server-two-candidate-preflight-20261105-178.tar.xz",
+      "sha256": "da981b5ed9d5c07524ece0b454fa7273f61e222917db9037d4155407e0a7ee1a"
+    },
+    "expected_archive_sha256_verified": true,
+    "payload_bytes": 41417609,
+    "payload_files": 110,
+    "qualification": "NOT_QUALIFIED",
+    "schema": "xu-checked-export171-v1",
+    "status": "VERIFIED_ALL_PACKAGED_BYTES_NOT_QUALIFIED"
+  },
+  "comparison": {
+    "analysis_method_mismatch": true,
+    "controlled_comparison_status": "CONTROLLED_COMPARISON_PENDING",
+    "diagnostic_energy_reduction_vs_s2c_percent": null,
+    "historical_s2c_and130_clock_method": "ORIGINAL_SDC_PLUS_ALL_CLOCK_PROPAGATION",
+    "new155_clock_method": "ORIGINAL_SDC_PLUS_FROZEN_FORWARDED_CLOCK_SCOPE_NO_ALL_CLOCK_PROPAGATION",
+    "original_map_comparison": {
+      "accelerator_area_increase_percent": "0.067347748354269080235517400",
+      "cycle_reduction_percent": "12.34666725886685186381549196",
+      "diagnostic_energy_reduction_percent": "10.91799357086633926708436753",
+      "s2c": {
+        "accelerator_area_mm2": "0.294801838",
+        "diagnostic_energy12_j": "0.0027553445546669448",
+        "elapsed_cycles12": 11887872,
+        "mapped_sha256": "9c16d5ec6665cbfd2c0752c96e98d969d988e963d6ed2f729d81e6989efa7892"
+      },
+      "s2e": {
+        "accelerator_area_mm2": "0.2950003804",
+        "diagnostic_energy12_j": "0.0024545162133331920",
+        "elapsed_cycles12": 10420116,
+        "mapped_sha256": "0cfac0b5e99ec05301ec8c0efde38ef2c96790dd1243e84727687b15b25c09d0"
+      }
+    },
+    "reason": "Own155 native diagnostics are measured, but the changed clock analysis method prevents a controlled energy comparison to historical S2c/130.",
+    "same155_final": {
+      "accelerator_area_mm2": "0.3003096339",
+      "area_limit_mm2": "2.25",
+      "diagnostic_energy12_j": null,
+      "elapsed_cycles12": null,
+      "mapped_sha256": "3440182eca862290a874bedc4eb3f94168681a7028d584d15217a13dbeafa794",
+      "within_area_limit": true
+    }
+  },
+  "frozen_safe171": {
+    "bytes": 7719,
+    "sha256": "c6c695f87e2ab2d0617ecd5ef0bd66c2162eb4af8c6ac960487e1dafa56d5ce1"
+  },
+  "full12": {
+    "complete": false,
+    "layers": [],
+    "missing": [
+      "s2e-final155-power12-20261105-166/prepared.json",
+      "s2e-final155-power12-20261105-166/execution.json",
+      "s2e-final155-power12-20261105-166/summary.json"
+    ],
+    "output": "s2e-final155-power12-20261105-166",
+    "qualification": "NOT_QUALIFIED",
+    "requested_task_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "source_error": null,
+    "source_status": "PREPARING166_NOT_QUALIFIED",
+    "status": "OBSERVED_INCOMPLETE_NOT_QUALIFIED"
+  },
+  "limitations": [
+    "NOT_QUALIFIED: no contest score or qualified energy is asserted.",
+    "Returned copied bytes are locally hashed; remote frozen-input before/after are recorded server receipts, not local rehashes of absent RTL/libraries/SAIF/netlist/SVF.",
+    "Huge pin reports are absent locally. Only stable bounded server SHA snapshots are matched to execution receipts; this is not local20GB pin-report replay.",
+    "Any other native report above the exporter copy limit is also hash-only: its body/error lines are not locally rescanned; exact omitted names and counts are reported per layer.",
+    "336/22512 native inventory is locally reconstructed. Source-to-target SAIF preservation is receipt continuity to frozen130, not a new local SAIF parse.",
+    "Measured unknown Q and TX/TZ/TB remain; native x_probability=0 does not establish physical known Q.",
+    "SRAM conditional/internal power modes, repair-logic inferred activity, gate-level functionality and full150MHz timing coverage remain unqualified.",
+    "155 area is paired only with166 energy measured on155. Historical130 energy retains its original89 map and area.",
+    "New155 uses frozen forwarded-clock scope; historical S2c/130 used propagated clocks. Cross-method energy differences are not controlled architectural gains."
+  ],
+  "paired_layers": [],
+  "producer": {
+    "bytes": 35845,
+    "sha256": "8b99e7aabc45037d0d0a8623ce644cda342e157bb50e6b4d1c1b40cc7715d955"
+  },
+  "qualification": "NOT_QUALIFIED",
+  "reference_index": {
+    "bytes": 5421,
+    "sha256": "c6fa79d87965da951d403697fb30730272339208f8d303ad706c40bca5cdab36"
+  },
+  "schema": "xu-s2e166-independent-audit179-v1",
+  "status": "AUDITED_TASK0_FULL12_INCOMPLETE_NOT_QUALIFIED",
+  "task0": {
+    "accelerator_area_mm2": "0.3003096339",
+    "capture_original89_sha256": "0cfac0b5e99ec05301ec8c0efde38ef2c96790dd1243e84727687b15b25c09d0",
+    "complete": true,
+    "inventory": {
+      "inventory_sha256": "ceea914d1acb0a7f4206fec72d85590306fc05207ddf1dfa67134c94b4d49cd4",
+      "macro_count": 336,
+      "pin_bit_count": 22512
+    },
+    "layers": [
+      {
+        "accelerator_area_mm2": "0.3003096339",
+        "all_window_unknown_q_bits": 4256,
+        "diagnostic_energy_j": "0.0001974033086666553",
+        "duration_fs": 5788953333333,
+        "elapsed_cycles": 868343,
+        "layer": 0,
+        "locally_rescanned_report_body_count": 21,
+        "mapped_sha256": "3440182eca862290a874bedc4eb3f94168681a7028d584d15217a13dbeafa794",
+        "native_log_sha256": "bfa160b71f83566643a8c4361fe415cf45b2f3035c36395cf47ed6cd356657f7",
+        "pin_after_server_bounded_sha256": "818c3b281d66c79c08fd871572a70f92f8297a149ef4522c13062bd58825ece5",
+        "pin_before_server_bounded_sha256": "81f001ea4b681362bd4e5ef882e290a035f0589db610eac3cb65605edfa6fcd5",
+        "power_report_sha256": "96ed96fe38de6fd56065993ff88e7d6a4cdc446746714e18d6cf7ec69ed8f190",
+        "qualification": "NOT_QUALIFIED",
+        "reported_total_power_w": "0.0341",
+        "server_bounded_hash_only_report_count": 6,
+        "server_bounded_hash_only_report_names": "source-no_switching_activity-before.rpt;source-propagated-after.rpt;sram-pins-after.rpt;sram-pins-before.rpt;unannotated-after.rpt;unannotated-before.rpt",
+        "unknown_q_bits": 5280
+      }
+    ],
+    "output": "s2e-final155-power-preflight-20261105-166",
+    "qualification": "NOT_QUALIFIED",
+    "recorded_input_guard": "SERVER_BEFORE_AFTER_RECEIPTS_EQUAL_NOT_LOCAL_EXTERNAL_REHASH",
+    "recorded_input_sha_count": 753,
+    "requested_task_ids": [
+      0
+    ],
+    "source_status": "EXECUTED_TASK0_DIAGNOSTIC_NOT_QUALIFIED",
+    "status": "AUDITED_NATIVE_TASK0_NOT_QUALIFIED",
+    "sum_diagnostic_energy_j": "0.0001974033086666553",
+    "target_mapped_sha256": "3440182eca862290a874bedc4eb3f94168681a7028d584d15217a13dbeafa794",
+    "total_elapsed_cycles": 868343
+  }
+}
