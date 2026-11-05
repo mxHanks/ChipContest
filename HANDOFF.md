@@ -2,7 +2,7 @@
 
 ## 交付决定与入口
 
-交付 **S2e paired-HI 为主方案，S2c 为唯一对照**。其余候选不追加评测。按项目所有者确认，当前S2e如实合入main；资格缺口继续公开保留。原始工作目录是 `/home/mxhanks/Projects/ChipContest`。额外22个工作树在交付核验和推送后永久删除，不建立外部归档；父仓库分支历史及本次S2e子仓提交保留；其他本地实验子仓/ignored结果随目录永久删除，交付所需证据放在本仓库。
+交付 **S2e paired-HI 为主方案，S2c 为唯一对照**。其余候选不追加评测。按项目所有者确认，当前S2e如实合入main；资格缺口继续公开保留。原始工作目录是 `/home/mxhanks/Projects/ChipContest`。额外22个工作树已在交付核验和推送后永久删除，不建立外部归档；父仓库分支历史及本次S2e子仓提交保留；其他本地实验子仓/ignored结果随目录永久删除，交付所需证据放在本仓库。
 
 入口：[快速开始](quickstart.md)、[原始两候选证据与逐层CSV](docs/validation/xu-score-two-candidate-final-20261105/README.md)、[冻结服务器复现工具](tools/repro/server/README.md)。
 
@@ -81,4 +81,4 @@ python3 -B "$HOME/Desktop/xu-campaign-batch154/campaign154.py" status
 
 ## 目录清理
 
-所有额外工作树永久删除，无外部归档。原始目录内的赛题指南PDF、原有assets/模型/库、本交付源码及关键证据保留。清理实际名单与验证结果在 `docs/handoff-evidence/cleanup.json`（最终清理后写入）。本机既有2026-11-06 01:00 CST关机安排未改动；服务器独立运行不依赖本机继续在线。
+所有额外工作树永久删除，无外部归档。原始目录内的赛题指南PDF、原有assets/模型/库、本交付源码及关键证据保留。清理实际名单、PDF前后SHA、父/子仓完整性及清理后验包结果见 [cleanup.json](docs/handoff-evidence/cleanup.json)。已释放约29GiB，`git worktree list`只保留原始目录，临时验证克隆也已删除。本机既有2026-11-06 01:00 CST关机安排未改动；服务器独立运行不依赖本机继续在线。
