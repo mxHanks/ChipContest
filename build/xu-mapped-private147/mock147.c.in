@@ -1,0 +1,87 @@
+/* Mechanism-only VPI objects: never a mapped simulation or native VCS proof. */
+#include <stdarg.h>
+#include <assert.h>
+#include "xu_private147.c"
+typedef struct { unsigned kind,tag,row; s_vpi_vecval vector[2]; } Obj;
+static Obj source_objects[84],target_objects[84],parents[84],modules[84];
+static Obj tb={9,0,0,{{0,0},{0,0}}},argument={8,0,0,{{0,0},{0,0}}};
+static Obj macro_objects[336],word_objects[336][256],program_objects[8192],ram_objects[131072];
+static Obj program_memory={10,0,0,{{0,0},{0,0}}},ram_memory={11,0,0,{{0,0},{0,0}}};
+static unsigned mode,phase,scan_count,observation_writes,preload_writes[3],bad_writes;
+static Obj *obj(vpiHandle h){return (Obj *)h;}
+PLI_INT32 vpi_printf(const char *fmt,...){PLI_INT32 n;va_list ap;va_start(ap,fmt);n=vprintf(fmt,ap);va_end(ap);return n;}
+void vpi_control(PLI_INT32 operation,...){(void)operation;}
+PLI_INT32 vpi_get(PLI_INT32 property,vpiHandle h){Obj *o=obj(h);
+ if(property==vpiSize)return (mode==3&&o->kind==1&&o->tag==83)?2:(PLI_INT32)xu_binding147[o->tag].width;
+ if(property==vpiType){if(o->kind==1)return mode==1&&o->tag==83?vpiMemory:vpiNet;
+  if(o->kind==2)return mode==2&&o->tag==83?vpiNet:vpiReg;
+  return vpiModule;}
+ return 0;
+}
+PLI_BYTE8 *vpi_get_str(PLI_INT32 property,vpiHandle h){static char names[4][8192];static unsigned next;char *n=names[(next++)%4];Obj *o=obj(h);const struct xu_binding147_t *s=&xu_binding147[o->tag];
+ if(property!=vpiFullName)return NULL;
+ if(o->kind==1)snprintf(n,8192,"%s.%s%s",s->scope,s->names[0],mode==4&&o->tag==83?"_wrong":"");
+ else if(s->lane<0)snprintf(n,8192,"tb_xu_soc_ppa.%s%s",s->target,mode==5&&o->tag==83?"_wrong":"");
+ else snprintf(n,8192,"tb_xu_soc_ppa.%s[%d]",s->target,s->lane);
+ return (PLI_BYTE8 *)n;
+}
+vpiHandle vpi_handle_by_name(const PLI_BYTE8 *name,vpiHandle scope){unsigned i;
+ if(!scope){if(!strcmp(name,"tb_xu_soc_ppa"))return (vpiHandle)&tb;
+  if(!strcmp(name,"tb_xu_soc_ppa.xu_program_words"))return(vpiHandle)&program_memory;
+  if(!strcmp(name,"tb_xu_soc_ppa.ram"))return(vpiHandle)&ram_memory;
+  return NULL;}
+ if(obj(scope)->kind==0){i=obj(scope)->tag;if(mode==6&&i==83)return NULL;
+  return !strcmp(name,xu_binding147[i].names[0])?(vpiHandle)&source_objects[i]:NULL;}
+ for(i=0;i<84;++i)if(!strcmp(name,xu_binding147[i].target)){
+  if(mode==7&&i==83)return NULL;
+  return (vpiHandle)(xu_binding147[i].lane<0?&target_objects[i]:&parents[i]);}
+ return NULL;
+}
+vpiHandle vpi_handle_by_index(vpiHandle h,PLI_INT32 index){Obj *o=obj(h);unsigned i;
+ if(o->kind==3){for(i=0;i<84;++i)if(!strcmp(xu_binding147[i].target,xu_binding147[o->tag].target)&&xu_binding147[i].lane==index)return (vpiHandle)&target_objects[i];}
+ if(o->kind==4&&index>=0&&index<256)return(vpiHandle)&word_objects[o->tag][index];
+ if(o->kind==10&&index>=0&&index<8192)return(vpiHandle)&program_objects[index];
+ if(o->kind==11&&index>=0&&index<131072)return(vpiHandle)&ram_objects[index];
+ return NULL;
+}
+PLI_INT32 vpi_compare_objects(vpiHandle a,vpiHandle b){if(mode==9&&obj(a)->kind==2&&obj(b)->kind==2)return 1;return a==b;}
+void vpi_get_value(vpiHandle h,p_vpi_value v){Obj *o=obj(h);
+ if(o->kind==8){v->value.integer=(PLI_INT32)phase;return;}
+ v->value.vector=(mode==10&&o->kind==1&&o->tag==83)?NULL:o->vector;
+}
+vpiHandle vpi_put_value(vpiHandle h,p_vpi_value v,p_vpi_time when,PLI_INT32 flags){Obj *o=obj(h);(void)when;
+ if(flags!=vpiNoDelay||v->format!=vpiVectorVal)++bad_writes;
+ if(o->kind==2)++observation_writes;
+ else if(o->kind==5&&xu_expected111[o->tag].role)++preload_writes[xu_expected111[o->tag].role];else ++bad_writes;
+ o->vector[0]=v->value.vector[0];if(o->kind==5||xu_binding147[o->tag].width>32)o->vector[1]=v->value.vector[1];return NULL;
+}
+vpiHandle vpi_handle(PLI_INT32 relation,vpiHandle reference){(void)reference;return relation==vpiSysTfCall?(vpiHandle)&tb:NULL;}
+vpiHandle vpi_iterate(PLI_INT32 type,vpiHandle reference){(void)type;(void)reference;scan_count=0;return(vpiHandle)&argument;}
+vpiHandle vpi_scan(vpiHandle iterator){(void)iterator;return scan_count++?NULL:(vpiHandle)&argument;}
+int main(int argc,char **argv){unsigned i,r,k,b,writes_expected;mode=argc>1?(unsigned)atoi(argv[1]):0;
+ for(i=0;i<84;++i){source_objects[i].kind=1;source_objects[i].tag=i;target_objects[i].kind=2;target_objects[i].tag=i;parents[i].kind=3;parents[i].tag=i;modules[i].tag=i;
+  source_objects[i].vector[0].aval=(PLI_INT32)(UINT32_C(0xa5a5a5a5)^i);source_objects[i].vector[0].bval=(PLI_INT32)(UINT32_C(0x3c3c3c3c)^i);
+  source_objects[i].vector[1].aval=(PLI_INT32)(UINT32_C(0x5a5a5a5a)^i);source_objects[i].vector[1].bval=(PLI_INT32)(UINT32_C(0xc3c3c3c3)^i);
+  bind_observation(i,(vpiHandle)&modules[i]);if(failed)break;}
+ if((mode>=1&&mode<=7)||mode==9){assert(failed);printf("MOCK147_REJECT mode=%u\n",mode);return 0;}
+ assert(!failed);
+ if(mode==8){bind_observation(83,(vpiHandle)&modules[83]);assert(failed);return 0;}
+ initialized=1;
+ for(phase=0;phase<3&&!failed;++phase){writes_expected=0;for(i=0;i<84;++i)if(xu_binding147[i].phases&(1u<<phase))++writes_expected;
+  observation_writes=0;sample147(NULL);if(failed)break;assert(observation_writes==writes_expected);
+  for(i=0;i<84;++i)if(xu_binding147[i].phases&(1u<<phase)){
+   assert(!memcmp(source_objects[i].vector,target_objects[i].vector,(xu_binding147[i].width>32?2u:1u)*sizeof(s_vpi_vecval)));}}
+ if(mode==10){assert(failed);return 0;}assert(!failed&&!bad_writes);
+ for(i=0;i<336;++i){macro_objects[i].kind=4;macro_objects[i].tag=i;macro_mem[i]=(vpiHandle)&macro_objects[i];
+  for(r=0;r<256;++r){word_objects[i][r].kind=5;word_objects[i][r].tag=i;word_objects[i][r].row=r;macro_words[i][r]=(vpiHandle)&word_objects[i][r];}}
+ for(i=0;i<131072;++i){ram_objects[i].kind=12;ram_objects[i].vector[0].aval=(PLI_INT32)(UINT32_C(0xa5a55a5a)^i);ram_objects[i].vector[0].bval=(PLI_INT32)(UINT32_C(0x33cccc33)^i);}
+ for(i=0;i<8192;++i){program_objects[i].kind=12;program_objects[i].vector[0]=ram_objects[i].vector[0];program_objects[i].vector[1].aval=(PLI_INT32)(UINT32_C(0x5a5aa5a5)^i);program_objects[i].vector[1].bval=(PLI_INT32)(UINT32_C(0xcc3333cc)^i);}
+ itcm147(NULL);shared147(NULL);assert(!failed&&!bad_writes&&preload_writes[1]==32*256&&preload_writes[2]==256*256);
+ for(i=0;i<336;++i)if(xu_expected111[i].role)for(r=0;r<256;++r)for(b=0;b<16;++b)for(k=0;k<4;++k){
+  unsigned address=(unsigned)xu_expected111[i].bank*1024+4*r+k,bit=(unsigned)xu_expected111[i].lane*16+b,dest=4*b+k;
+  Obj *input=xu_expected111[i].role==1?&program_objects[address]:&ram_objects[address];
+  assert((((uint32_t)input->vector[bit/32].aval>>(bit%32))&1u)==(((uint32_t)word_objects[i][r].vector[dest/32].aval>>(dest%32))&1u));
+  assert((((uint32_t)input->vector[bit/32].bval>>(bit%32))&1u)==(((uint32_t)word_objects[i][r].vector[dest/32].bval>>(dest%32))&1u));}
+ gate147(NULL);assert(!failed);itcm147(NULL);assert(failed&&preload_writes[1]==32*256);
+ printf("MOCK147_PASS bindings=84 phases=3 four_state=1 preload_macros=288 forbidden_writes=0 native_VCS_proof=0\n");return 0;
+}

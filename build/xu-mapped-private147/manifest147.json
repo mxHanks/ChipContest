@@ -1,0 +1,77 @@
+{
+  "capture_policy": "DISABLED_ORIGINAL_HOST_CHECK_GUARDS",
+  "cli": "xu_private147.py",
+  "expected_cli_exit": 0,
+  "expected_simulator_exit": "NONZERO_FINAL_QUALIFICATION_FATAL",
+  "expected_terminal_status": "ORIGINAL_TB_EXU_HALT_REACHED_FINAL_QUALIFICATION_GATE_PENDING_NOT_QUALIFIED",
+  "failure_status": "FAIL_PRIVATE147_NOT_QUALIFIED",
+  "final_gate": "XU_PRIVATE147_QUALIFICATION_GATE_PENDING physical_storage_readback native_warning_timing conditional_SRAM_joint_energy all_unresolved_gates_retained",
+  "forbidden": [
+    "force",
+    "DUT_Q_or_other_FF_writes",
+    "replacement_RTL",
+    "two_state_conversion",
+    "timing_suppression",
+    "original_fatal_removal",
+    "HOST_ACK_stop_shortcut"
+  ],
+  "foreground": true,
+  "local_review": {
+    "name": "host-review147.json",
+    "sha256": "05e941da8aed67021a3feae4ffced521102277c40fe8974bac42d8de3b6c6dd7",
+    "status": "LOCAL_MECHANISM_CHECKS_PASS_NOT_MAPPED_VCS_OR_QUALIFICATION"
+  },
+  "logical_references": 72,
+  "mapped_sha256": "9c16d5ec6665cbfd2c0752c96e98d969d988e963d6ed2f729d81e6989efa7892",
+  "native_bindings": 84,
+  "observations": "58 named private references expand to72 native bindings, plus12 public ports; busy/row_start_accept inline original four-state equations",
+  "original_capture_result_sha256": "6eea4bb5ebddb4e186564ba3610e69fb7a48a72b12f4f0ea777d9f33c6f96e4d",
+  "original_fatal_count": 86,
+  "original_fatals_preserved": true,
+  "original_macro_inventory_sha256": "721ce0773570c54a8757a32165a47f399cd5c1ee9e3a57eab612dbeeeea15d8d",
+  "original_preload_macro_count": 288,
+  "original_tb_sha256": "d39016ea50fafe7df8c97dd209702fbc3c4e7eb0e2bb8fded570e427fde6d850",
+  "prepare_status": "PREPARED_FULL_ORIGINAL_TB_PRIVATE147_NOT_QUALIFIED",
+  "private_references": 60,
+  "python_minimum": "3.6",
+  "qualification": "NOT_QUALIFIED",
+  "qualification_gates": [
+    "physical_storage_readback",
+    "native_warning_timing",
+    "conditional_SRAM_joint_energy",
+    "all_other_unresolved_gates"
+  ],
+  "runtime_files": [
+    {
+      "bytes": 28019,
+      "name": "xu_private147.py",
+      "sha256": "5ee323cec482d465ccf3a641b18a31186e9d7ed5173caccbcdf7c446f2685743"
+    },
+    {
+      "bytes": 7451,
+      "name": "private147-runtime.c.in",
+      "sha256": "2c9044aeff474fd336195f81b4527385caabba6bee754325e01bc599feb4e282"
+    },
+    {
+      "bytes": 27607,
+      "name": "support111.py",
+      "sha256": "2a740fb35d8f6db7da3295031f4e7e66f1505d30c9ccf030a5cb1862cb8caa6d"
+    },
+    {
+      "bytes": 11879,
+      "name": "frozen111-vpi.c",
+      "sha256": "2403e25ee5ab453d017b6686da89df7553b79bcd89d70ca35be96281d5d8e7c7"
+    },
+    {
+      "bytes": 26274,
+      "name": "frozen-s2c-accel.v",
+      "sha256": "1a088c873c5e5de84ca92fdc74d693a326e430cc6191128979f573fe4e64ad45"
+    },
+    {
+      "bytes": 86446,
+      "name": "actual133-inventory.json",
+      "sha256": "14a0aec91b4ceca013861ce7f4703142e90a8c762fe8c6da632f28a13ccdabb9"
+    }
+  ],
+  "schema": "xu.private147.controller150.v1"
+}

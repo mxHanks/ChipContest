@@ -1,0 +1,294 @@
+{
+  "binding_mock_modes": 11,
+  "checks": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/xu_private147.py",
+        "--capture",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/next-results-export-53/s2c-formal-activity12-20261103-23",
+        "--macro-inventory",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-score-resume-20261103/terminal-results-export-22/s2c-pt-macro-pin-inventory-20261103-20/inventory.json",
+        "--out",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/prepared"
+      ],
+      "log_sha256": "60d346d4806cbe5fa6663b5e2e7b8e221468aa7abd3284d8a5ca6ad74e52df53",
+      "name": "prepare",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "gcc",
+        "-std=gnu99",
+        "-fsyntax-only",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-isystem",
+        "/usr/include/iverilog",
+        "-I/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/prepared",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/prepared/xu_private147.c"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "vpi-syntax",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "gcc",
+        "-std=gnu99",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-isystem",
+        "/usr/include/iverilog",
+        "-I/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/prepared",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/prepared/mock147.c",
+        "-Wl,--gc-sections",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "mock-build",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "0"
+      ],
+      "log_sha256": "e2b42798ae5205ddd5c542521efa0f303f5f27553bf56c3ebced914f16202792",
+      "name": "mock-00",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "1"
+      ],
+      "log_sha256": "89e8af6369ee542c73b648f41bbd3abea95f772db386461fd7c8715ad1411e42",
+      "name": "mock-01",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "2"
+      ],
+      "log_sha256": "5ed16cd0e963ba770e1c08fc1a6c09a7b87ed0f745c891d8cac230b134c184fd",
+      "name": "mock-02",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "3"
+      ],
+      "log_sha256": "417c75b07aa13c0cce1dec7ab25ceab433befcb064299c97be323c3e7ab1e4cc",
+      "name": "mock-03",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "4"
+      ],
+      "log_sha256": "ecbeaef8034f3bb81da9ddff53a3de50dd07e3334c5137db7ddeba4b1eac1108",
+      "name": "mock-04",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "5"
+      ],
+      "log_sha256": "c31aca9b78e2b7c35077c1d4edc8d1cab55280365bd4891cb8abc946bcc9a550",
+      "name": "mock-05",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "6"
+      ],
+      "log_sha256": "772b13f7557b838fe4cd118e6ad0b33eab4b615d7ba482e2e1b521dd02940823",
+      "name": "mock-06",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "7"
+      ],
+      "log_sha256": "8b28bf7003ec45bfa4466a4d83cee2f103e1ec24eff3671a2d1feca59f57033e",
+      "name": "mock-07",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "8"
+      ],
+      "log_sha256": "ce456907cfeceea8e5311290b4d664abb3dbc7c01fc4dd4e39d3fd6bafb5d894",
+      "name": "mock-08",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "9"
+      ],
+      "log_sha256": "8b2298e98e966e2be04989fa72a58b30f7b54d7ded404da2eedf0707737ef1d4",
+      "name": "mock-09",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/mock147",
+        "10"
+      ],
+      "log_sha256": "3688f9d731560817b4946ebeef5bed1357fd6542e3a4fdea9754fc0df6ab0454",
+      "name": "mock-10",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-DXU_TASK_ACTIVITY_HOST_CHECK",
+        "-s",
+        "tb_xu_soc_ppa",
+        "-tnull",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/prepared/tb_private147.sv",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/structural-stub.sv"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "full-tb-syntax",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-s",
+        "tb",
+        "-o",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/four-state",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/four-state.sv"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "four-state-build",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-mapped-private147/local-checks-v1/four-state"
+      ],
+      "log_sha256": "d18e50a13ecfc31e98e72b916eeb05e588da5bffe6ea5c42c3c8b33710242138",
+      "name": "four-state-run",
+      "returncode": 0
+    }
+  ],
+  "classifier_negative_cases": 14,
+  "limitations": [
+    "C VPI mocks and Icarus structural/four-state fixtures only.",
+    "No actual mapped VCS execution, native scheduling, timing, storage-readback, activity, power or energy proof."
+  ],
+  "logical_references": 72,
+  "native_bindings": 84,
+  "original_fatals_preserved": 86,
+  "original_tb_sha256": "d39016ea50fafe7df8c97dd209702fbc3c4e7eb0e2bb8fded570e427fde6d850",
+  "private_references": 60,
+  "qualification": "NOT_QUALIFIED",
+  "schema": "xu.private147.local-review.v1",
+  "source_transform_review": {
+    "final_qualification_gate": "XU_PRIVATE147_QUALIFICATION_GATE_PENDING physical_storage_readback native_warning_timing conditional_SRAM_joint_energy all_unresolved_gates_retained",
+    "logical_references": 72,
+    "original_fatal_count": 86,
+    "original_fatals_preserved": true,
+    "original_read_occurrences": 241,
+    "original_sampling_edges_preserved": true,
+    "private_read_occurrences": 149,
+    "private_references": 60,
+    "replacements": {
+      "`ACCEL.bias_index_reg": 3,
+      "`ACCEL.bias_regs": 1,
+      "`ACCEL.busy": 2,
+      "`ACCEL.cache_addr_reg": 2,
+      "`ACCEL.cache_enable": 3,
+      "`ACCEL.clk": 1,
+      "`ACCEL.cmd_addr": 33,
+      "`ACCEL.cmd_read": 10,
+      "`ACCEL.cmd_ready": 6,
+      "`ACCEL.cmd_valid": 7,
+      "`ACCEL.cmd_wdata": 15,
+      "`ACCEL.cmd_wmask": 6,
+      "`ACCEL.compute_start": 3,
+      "`ACCEL.core_done": 3,
+      "`ACCEL.core_start": 1,
+      "`ACCEL.manual_busy": 1,
+      "`ACCEL.row_active": 13,
+      "`ACCEL.row_count": 9,
+      "`ACCEL.row_group": 2,
+      "`ACCEL.row_pop": 2,
+      "`ACCEL.row_produced": 7,
+      "`ACCEL.row_result": 3,
+      "`ACCEL.row_retired": 7,
+      "`ACCEL.row_running": 7,
+      "`ACCEL.row_start": 1,
+      "`ACCEL.row_start_accept": 2,
+      "`ACCEL.row_valid": 2,
+      "`ACCEL.rsp_err": 1,
+      "`ACCEL.rsp_rdata": 1,
+      "`ACCEL.rsp_ready": 3,
+      "`ACCEL.rsp_valid": 5,
+      "`ACCEL.rst_n": 4,
+      "`ACCEL.stream_cursor": 2,
+      "`ACCEL.stream_error": 1,
+      "`ACCEL.stream_is_w": 2,
+      "`ACCEL.stream_pair": 2,
+      "`ACCEL.stream_pending": 5,
+      "`ACCEL.stream_second": 2,
+      "`ACCEL.u_linear_compute_core.core.engine.peArray.io_enable": 1,
+      "`ACCEL.u_linear_compute_core.core.io_group": 1,
+      "`ACCEL.u_linear_compute_core.head": 2,
+      "`ACCEL.u_linear_compute_core.io_cacheWriteAddr": 1,
+      "`ACCEL.u_linear_compute_core.io_cacheWriteData": 2,
+      "`ACCEL.u_linear_compute_core.io_cacheWriteEnable": 1,
+      "`ACCEL.u_linear_compute_core.io_cacheWriteMask": 2,
+      "`ACCEL.u_linear_compute_core.io_wLoadAddr": 4,
+      "`ACCEL.u_linear_compute_core.io_wLoadBank": 3,
+      "`ACCEL.u_linear_compute_core.io_wLoadData": 3,
+      "`ACCEL.u_linear_compute_core.io_wLoadWen": 2,
+      "`ACCEL.u_linear_compute_core.io_xLoadAddr": 2,
+      "`ACCEL.u_linear_compute_core.io_xLoadData": 3,
+      "`ACCEL.u_linear_compute_core.io_xLoadWen": 2,
+      "`ACCEL.u_linear_compute_core.tail": 2,
+      "`ACCEL.w_addr_reg": 3,
+      "`ACCEL.w_bank_reg": 3,
+      "`ACCEL.w_cursor": 3,
+      "`ACCEL.w_load_wen": 1,
+      "`ACCEL.x_addr_reg": 3,
+      "`ACCEL.x_cursor": 3,
+      "`ACCEL.x_load_wen": 1,
+      "`EXU.u_e203_exu_commit.alu_cmt_i_pc": 1,
+      "`EXU.u_e203_exu_commit.alu_cmt_i_valid": 1,
+      "`EXU.u_e203_exu_regfile.rf_r[3]": 2,
+      "`XU_HCLK.pll_ASLEEP": 1,
+      "`XU_HCLK.pll_M": 1,
+      "`XU_HCLK.pll_N": 1,
+      "`XU_HCLK.pll_OD": 1,
+      "`XU_HCLK.pll_RESET": 1,
+      "`XU_HCLK.pllbypass": 1,
+      "`XU_HCLK.plloutdiv": 1,
+      "`XU_HCLK.plloutdivby1": 1,
+      "`XU_HCLK.test_mode": 1
+    },
+    "role_specific_preload_macros": 288
+  },
+  "status": "LOCAL_MECHANISM_CHECKS_PASS_NOT_MAPPED_VCS_OR_QUALIFICATION"
+}

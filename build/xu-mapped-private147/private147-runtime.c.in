@@ -1,0 +1,133 @@
+/* xu147: native read-only observations; writes only TB regs and original mem. */
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include "vpi_user.h"
+#include "xu_mapped_expected111.h"
+#include "xu_private147_bindings.h"
+static vpiHandle macro_mod[336], macro_mem[336], macro_words[336][256];
+static unsigned macro_seen[336], initialized, preload_calls[3];
+static int failed;
+static vpiHandle inputs[XU147_BINDINGS][48], outputs[XU147_BINDINGS];
+static unsigned bound[XU147_BINDINGS];
+static unsigned long long sample_counts[3];
+@@HELPERS@@
+@@GEOMETRY@@
+
+static void bind_observation(unsigned index,vpiHandle mod) {
+ const struct xu_binding147_t *s=&xu_binding147[index];unsigned bit,j;char full[8192],wanted[8192];
+ vpiHandle tb,parent,array;const char *raw;
+ if(bound[index]++){reject("duplicate_native_source_scope",s->scope);return;}
+ for(bit=0;bit<s->parts;++bit){
+  inputs[index][bit]=vpi_handle_by_name((PLI_BYTE8 *)s->names[bit],mod);
+  if(!inputs[index][bit]||vpi_get(vpiSize,inputs[index][bit])!=(int)(s->parts==1?s->width:1u)){
+   reject("native_source_absent_or_wrong_width",s->names[bit]);return;
+  }
+  if(vpi_get(vpiType,inputs[index][bit])!=vpiNet&&vpi_get(vpiType,inputs[index][bit])!=vpiReg&&
+     vpi_get(vpiType,inputs[index][bit])!=vpiPort){reject("native_source_not_net_reg_or_port",s->names[bit]);return;}
+  raw=vpi_get_str(vpiFullName,inputs[index][bit]);canonical(raw?raw:"",full,sizeof(full));
+  snprintf(wanted,sizeof(wanted),"%s.%s",s->scope,s->names[bit]);
+  if(strcmp(full,wanted)){reject("native_source_fullname_disagrees",full);return;}
+ }
+ tb=vpi_handle_by_name((PLI_BYTE8 *)"tb_xu_soc_ppa",NULL);
+ parent=vpi_handle_by_name((PLI_BYTE8 *)s->target,tb);
+ array=parent;
+ outputs[index]=s->lane<0?parent:vpi_handle_by_index(array,s->lane);
+ if(!outputs[index]||vpi_get(vpiSize,outputs[index])!=(int)s->width||
+    (vpi_get(vpiType,outputs[index])!=vpiReg&&vpi_get(vpiType,outputs[index])!=vpiMemoryWord)){
+  reject("observation_destination_not_exact_TB_reg",s->target);return;
+ }
+ raw=vpi_get_str(vpiFullName,outputs[index]);canonical(raw?raw:"",full,sizeof(full));
+ if(s->lane<0)snprintf(wanted,sizeof(wanted),"tb_xu_soc_ppa.%s",s->target);
+ else snprintf(wanted,sizeof(wanted),"tb_xu_soc_ppa.%s[%d]",s->target,s->lane);
+ if(strncmp(s->target,"xu147_o_",8)||strcmp(full,wanted)){
+  reject("destination_outside_TB_observation_allowlist",full);return;
+ }
+ for(j=0;j<index;++j)if(outputs[j]&&vpi_compare_objects(outputs[index],outputs[j])){
+  reject("TB_observation_destinations_alias",full);return;
+ }
+ vpi_printf("XU_PRIVATE147_BIND tag=%u logical=%s lane=%d width=%u sources=%u phase_mask=%u source=%s.%s target=%s source_type=%d\n",
+  index,s->logical,s->lane,s->width,s->parts,s->phases,s->scope,s->names[0],full,vpi_get(vpiType,inputs[index][0]));
+}
+
+static void walk(vpiHandle mod) {
+ const char *raw=vpi_get_str(vpiFullName,mod);char *name=raw?strdup(raw):NULL;
+ const char *definition=vpi_get_str(vpiDefName,mod);char *def=definition?strdup(definition):NULL;
+ char full[8192];vpiHandle it,child;unsigned i;canonical(name?name:"",full,sizeof(full));
+ if(def&&!strcmp(def,"RAMSP1024X16")){
+  unsigned found=0;
+  for(i=0;i<336;++i)if(!strcmp(full,xu_expected111[i].name)){
+   ++found;++macro_seen[i];macro_mod[i]=mod;macro_mem[i]=vpi_handle_by_name((PLI_BYTE8 *)"mem",mod);
+  }
+  if(found!=1)reject("inventory_macro_bijection",full);
+ }
+ for(i=0;i<XU147_BINDINGS;++i)if(!strcmp(full,xu_binding147[i].scope)){
+  if(!def||strcmp(def,xu_binding147[i].definition))reject("source_module_definition_disagrees",full);
+  else bind_observation(i,mod);
+ }
+ it=vpi_iterate(vpiModule,mod);if(it)while((child=vpi_scan(it))!=NULL)walk(child);
+ free(name);free(def);
+}
+
+static PLI_INT32 prepare147(PLI_BYTE8 *unused) {
+ vpiHandle root;unsigned i;(void)unused;
+ if(initialized++){reject("duplicate_prepare","");return 0;}
+ root=vpi_handle_by_name((PLI_BYTE8 *)"tb_xu_soc_ppa.dut",NULL);
+ if(!root){reject("mapped_root_absent","");return 0;}walk(root);
+ for(i=0;i<336;++i){if(macro_seen[i]!=1)reject("missing_inventory_macro",xu_expected111[i].name);else if(!geometry(i))return 0;}
+ for(i=0;i<XU147_BINDINGS;++i)if(bound[i]!=1||!outputs[i])reject("native_binding_missing",xu_binding147[i].logical);
+ if(!failed)vpi_printf("XU_PRIVATE147_ADAPTER_READY logical_references=72 private_references=60 native_bindings=%u original_preload_macros=288 Q_WRITES=0 OTHER_DUT_FF_WRITES=0\n",(unsigned)XU147_BINDINGS);
+ return 0;
+}
+
+static void copy_observation(unsigned i) {
+ const struct xu_binding147_t *s=&xu_binding147[i];s_vpi_value v;
+ s_vpi_vecval packed[2]={{0,0},{0,0}};unsigned bit;
+ if(s->parts==1){memset(&v,0,sizeof(v));v.format=vpiVectorVal;vpi_get_value(inputs[i][0],&v);
+  if(!v.value.vector){reject("native_source_vector_absent",s->logical);return;}
+ }
+ else{
+  for(bit=0;bit<s->parts;++bit){unsigned dest=s->width-1u-bit,word=dest/32u,shift=dest%32u;
+   memset(&v,0,sizeof(v));v.format=vpiVectorVal;vpi_get_value(inputs[i][bit],&v);
+   if(!v.value.vector){reject("native_source_vector_absent",s->logical);return;}
+   if((uint32_t)v.value.vector[0].aval&1u)packed[word].aval|=(PLI_INT32)(UINT32_C(1)<<shift);
+   if((uint32_t)v.value.vector[0].bval&1u)packed[word].bval|=(PLI_INT32)(UINT32_C(1)<<shift);
+  }
+  memset(&v,0,sizeof(v));v.format=vpiVectorVal;v.value.vector=packed;
+ }
+ /* outputs[] are bound and fullname/type checked TB observation regs only. */
+ vpi_put_value(outputs[i],&v,NULL,vpiNoDelay);
+}
+
+static PLI_INT32 sample147(PLI_BYTE8 *unused) {
+ vpiHandle call,it,arg,extra;s_vpi_value value;unsigned phase,i;(void)unused;
+ if(initialized!=1||failed){reject("sample_before_valid_prepare","");return 0;}
+ call=vpi_handle(vpiSysTfCall,NULL);it=vpi_iterate(vpiArgument,call);arg=it?vpi_scan(it):NULL;
+ extra=it?vpi_scan(it):NULL;
+ if(!arg||extra){reject("exact_sampling_context_argument_required","");return 0;}
+ memset(&value,0,sizeof(value));value.format=vpiIntVal;vpi_get_value(arg,&value);phase=(unsigned)value.value.integer;
+ if(phase>2){reject("unknown_sampling_context","");return 0;}
+ for(i=0;i<XU147_BINDINGS&&!failed;++i)if(xu_binding147[i].phases&(1u<<phase))copy_observation(i);
+ ++sample_counts[phase];return 0;
+}
+
+@@PRELOAD@@
+static PLI_INT32 itcm147(PLI_BYTE8 *unused){(void)unused;return preload_role(1);}
+static PLI_INT32 shared147(PLI_BYTE8 *unused){(void)unused;return preload_role(2);}
+static PLI_INT32 gate147(PLI_BYTE8 *unused){
+ (void)unused;
+ if(failed||initialized!=1||preload_calls[1]!=1||preload_calls[2]!=1||
+    !sample_counts[0]||!sample_counts[1]||!sample_counts[2]){
+  reject("incomplete_native_observation_or_preload_contexts","");return 0;
+ }
+ vpi_printf("XU_PRIVATE147_ORIGINAL_EXU_HALT_REACHED logical=72 private=60 bindings=%u pll_samples=%llu reset_samples=%llu main_samples=%llu Q_WRITES=0 OTHER_DUT_FF_WRITES=0 QUALIFICATION_PENDING=1\n",
+  (unsigned)XU147_BINDINGS,sample_counts[0],sample_counts[1],sample_counts[2]);return 0;
+}
+void xu_private147_register(void){
+ static const char *names[]={"$xu_private147_prepare","$xu_private147_sample","$xu_private147_itcm","$xu_private147_shared","$xu_private147_gate"};
+ PLI_INT32(*calls[])(PLI_BYTE8 *)={prepare147,sample147,itcm147,shared147,gate147};unsigned i;
+ for(i=0;i<5;++i){s_vpi_systf_data d;memset(&d,0,sizeof(d));d.type=vpiSysTask;d.tfname=(PLI_BYTE8 *)names[i];d.calltf=calls[i];vpi_register_systf(&d);}
+}
+void(*vlog_startup_routines[])(void)={xu_private147_register,NULL};
