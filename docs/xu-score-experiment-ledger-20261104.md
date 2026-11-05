@@ -79,3 +79,12 @@
 - [actual120完整12任务活动及125逐bit独立复核](validation/xu-score-s2e-activity120-server125-20261105/README.md)已完成，原顶层状态`COLLECTED_12_TASKS_REVIEW_PENDING`。每层elapsed868,343，总10,420,116；inclusive合计10,420,128。相同正式窗口S2c为11,887,872，减少12.3466673%；不混用开发窗口10,420,140/11,842,200。逐层CSV保存原12日志/24SAIF完整SHA。完整125原包8,171,768B，SHA `ebfba2f46193dca30362ccce4fbbe602be238abd21a316240da0da2f828fbf10`，88项465,539,700B无省略。独立实际重读12对SAIF，270,144个macro pin-bit与1,379,124条非alias信号逐项核对；原未知TX/TZ/TB保留。own89/109身份绑定及清零/窗口/向量层映射通过复核，仍只证明RTL活动采集和原件保真，不是mapped活动、功耗或比赛资格。交付提交`8c16b8c`。
 
 本轮仍无新Chisel修改。下一步在S2e自己原映射测量全SoC功耗，同时对baseline116做只读覆盖/RDC审查；不同网表的资格不互借。
+
+## 2026-11-05新增资格诊断与批量安排
+
+- [132完整只读覆盖/RDC](validation/xu-score-coverage132-server135-20261105/README.md)及两份真实Tcl/analysis已独立逐字节复现，提交`6eb1410`。416 active min-period MET，10416项属于常量禁用模式；27124 untested保持相同。5HF及2PMU any-source recovery仍未形成可报告路径，10000条timing_arc full_name属性警告、PTE边沿展开警告均保留，不能宣布完整150MHz。
+- [141完整原件](validation/xu-score-resource-function141-20261105/README.md)，提交`9891813`：128使用原111同binary/TB/vector/clock/reset，仅追加`+notimingcheck`，公共门级任务完成25344输出/50688Y写/elapsed990656；原60私有检查门槛仍Fatal。636输入服务器before/after相同，不升级完整功能、时序或能量资格。133对目标S2c网表只读定位58名称端点、1表达式物理操作数候选、1待对应，实际解除0项门槛。
+- own S2e时序134工具已独立冻结并上传，20项host检查及服务器完整readonly/preflight通过；尚未执行DC/PT/FM，不能借116的修复图/证明链。S2e130原进程继续自己的12任务全SoC功耗，在141快照时current_task_id=4，尚无最终能量结论。
+- 用户授权将其余8个有独立mapped原件的候选全部排队，候选内按依赖顺序执行，S2e原任务及S2c资格工作保留。137身份草案提交`1bd053d`，候选为H1+H2、两种S1、S2b、S2d、32PE、64PE、compact32/128；S2a缺独立mapped，未猜入。资源初查96核、约709GiB可用内存及1.54TB工作盘余量；许可证总配额/余量仍未知，不据已有checkout推断多席位。138可执行冻结/依赖队列准备中，未把准备完成写成服务器入队或能量完成。
+
+各候选仍需同配置的正式吞吐、全SoC单任务能量、面积与完整验收；所有失败和运行中快照保留，暂不计算比赛最终得分。这轮没有新增生产Chisel改动。
