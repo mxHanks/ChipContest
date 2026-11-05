@@ -1,0 +1,143 @@
+{
+  "archive_files": 121,
+  "archive_payload_bytes": 37978683,
+  "cleanup_removed_cells": 47,
+  "cleanup_rounds": [
+    {
+      "frontier": "17",
+      "removed": "17",
+      "round": "0",
+      "upstream": "36"
+    },
+    {
+      "frontier": "36",
+      "removed": "17",
+      "round": "1",
+      "upstream": "33"
+    },
+    {
+      "frontier": "33",
+      "removed": "7",
+      "round": "2",
+      "upstream": "15"
+    },
+    {
+      "frontier": "15",
+      "removed": "4",
+      "round": "3",
+      "upstream": "10"
+    },
+    {
+      "frontier": "10",
+      "removed": "2",
+      "round": "4",
+      "upstream": "5"
+    },
+    {
+      "frontier": "5",
+      "removed": "0",
+      "round": "5",
+      "upstream": "0"
+    }
+  ],
+  "companion120_scope": "Original bytes verified only; S2e120 semantic review belongs to its separate archive",
+  "coverage": {
+    "clock_gating_hold": {
+      "met": 27,
+      "total": 27,
+      "untested": 0,
+      "violated": 0
+    },
+    "clock_gating_setup": {
+      "met": 27,
+      "total": 27,
+      "untested": 0,
+      "violated": 0
+    },
+    "hold": {
+      "met": 67245,
+      "total": 71035,
+      "untested": 3790,
+      "violated": 0
+    },
+    "min_period": {
+      "met": 416,
+      "total": 10832,
+      "untested": 10416,
+      "violated": 0
+    },
+    "min_pulse_width": {
+      "met": 96919,
+      "total": 106045,
+      "untested": 9126,
+      "violated": 0
+    },
+    "out_hold": {
+      "met": 139,
+      "total": 139,
+      "untested": 0,
+      "violated": 0
+    },
+    "out_setup": {
+      "met": 139,
+      "total": 139,
+      "untested": 0,
+      "violated": 0
+    },
+    "recovery": {
+      "met": 17595,
+      "total": 17597,
+      "untested": 2,
+      "violated": 0
+    },
+    "removal": {
+      "met": 17597,
+      "total": 17597,
+      "untested": 0,
+      "violated": 0
+    },
+    "setup": {
+      "met": 67245,
+      "total": 71035,
+      "untested": 3790,
+      "violated": 0
+    }
+  },
+  "frozen_input_bodies_present_in_this_archive": 4,
+  "frozen_input_receipts": 274,
+  "global_reported_slacks_ns": {
+    "hold": 0.00601495,
+    "setup": 0.0
+  },
+  "hf_recovery_missing_paths": 5,
+  "inserted_reset_cells": 40,
+  "mapped_sha256": "16d29dea71ed2668b33c893e1a38be01a6eea02ca190ba8aabcb4658fe610292",
+  "native_runs": [
+    {
+      "label": "dc",
+      "log_sha256": "dab39cd8761219d57312e8d9df64d6c0a102f40fc5f97f8197a483335a89759b",
+      "marker_count": 1,
+      "returncode": 0,
+      "script_sha256": "ac0aa971c51e53df0c60aff14028fe0d7070d2c7ae9fc8c9bee10869b9bc5556"
+    },
+    {
+      "label": "pt",
+      "log_sha256": "83bc484bbec6b0083e4cbad501febdea1a5e3c9f72f98b4bbecd590696567507",
+      "marker_count": 1,
+      "returncode": 0,
+      "script_sha256": "7f344a3c017b6de915b522aef798be5fcae06119592391008f16e75841b2aed3"
+    },
+    {
+      "label": "fm",
+      "log_sha256": "05bf4f49e9ba3e09ae4d6f4cc1fb3536b8b8b225bef49e1ada8f5eeae443a56e",
+      "marker_count": 1,
+      "returncode": 0,
+      "script_sha256": "ac6922152a610c5e22a60331a62cac99a477bcec2b83464848e248fad5ed88f4"
+    }
+  ],
+  "outstanding": "27124 untested; reset/RDC/conditional pulses/UART; baseline116 is not S2e or power qualification",
+  "passing_compare_points": 41462,
+  "qualification": "NOT_QUALIFIED",
+  "status": "ACTUAL116_TERMINAL_BYTES_SAME_MAPPED_DC_PT_FM_VERIFIED",
+  "svf_sha256": "2574d971c759fc2650ed660b52b6219928c54117be156cdf616ccbea10f1d90a"
+}
