@@ -22,6 +22,16 @@ def need(value, message):
         raise ValueError(message)
 
 
+def decode(raw):
+    def unique(pairs):
+        result={}
+        for key,value in pairs:
+            need(key not in result,'duplicate JSON key: '+key)
+            result[key]=value
+        return result
+    return json.loads(raw.decode('utf-8'),object_pairs_hook=unique)
+
+
 def module(path, expected_sha):
     need(hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected_sha, 'reviewed frozen controller differs')
     spec = importlib.util.spec_from_file_location('xu_original150', str(path))
@@ -103,10 +113,11 @@ def enroll(controller, out, job_paths, receipt, expected_sha=CONTROL_SHA):
     incoming, bodies = {}, {}
     for path in files:
         need(path.is_file() and not path.is_symlink(), 'regular job file required')
-        job = control.read(path)
+        raw = path.read_bytes()
+        job = decode(raw)
         name = path.stem
         need(name not in incoming, 'duplicate batch ID')
-        incoming[name], bodies[name] = job, path.read_bytes()
+        incoming[name], bodies[name] = job, raw
     record = dict(schema='xu-atomic-enrollment152-v1', status='VALIDATING_NOT_QUALIFIED', qualification='NOT_QUALIFIED',
                   controller=control.identity(controller), controller_out=str(out), started_epoch=time.time(), jobs={})
     with (out/'register.lock').open('a') as lock:
