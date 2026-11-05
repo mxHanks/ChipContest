@@ -1,0 +1,207 @@
+{
+  "enrollment": {
+    "all_registration_bytes_equal_original_release": true,
+    "combined_queue_nodes": 24,
+    "current_status_counts": {
+      "COMPLETED_DIAGNOSTIC_NOT_QUALIFIED": 3,
+      "FAILED_REVIEW_REQUIRED": 1,
+      "RUNNING": 1,
+      "WAIT_DEPENDENCY": 19
+    },
+    "dependency_graph": "ACYCLIC_COMPLETE",
+    "new_jobs": 20,
+    "server_reported_verified_frozen_input_count": 3239,
+    "status": "REGISTERED_ATOMIC_BATCH_NOT_QUALIFIED",
+    "status_by_job": {
+      "activity145_baseline_h1_h2": "WAIT_DEPENDENCY",
+      "activity145_compact32_128": "WAIT_DEPENDENCY",
+      "activity145_pe32": "WAIT_DEPENDENCY",
+      "activity145_pe64": "WAIT_DEPENDENCY",
+      "activity145_s1_h2_only": "WAIT_DEPENDENCY",
+      "activity145_s1_sram_bias": "WAIT_DEPENDENCY",
+      "activity145_s2b": "WAIT_DEPENDENCY",
+      "activity145_s2d": "WAIT_DEPENDENCY",
+      "baseline_rdc142": "COMPLETED_DIAGNOSTIC_NOT_QUALIFIED",
+      "eight_freeze138": "COMPLETED_DIAGNOSTIC_NOT_QUALIFIED",
+      "mapped_private147": "WAIT_DEPENDENCY",
+      "power146_baseline_h1_h2": "WAIT_DEPENDENCY",
+      "power146_compact32_128": "WAIT_DEPENDENCY",
+      "power146_pe32": "WAIT_DEPENDENCY",
+      "power146_pe64": "WAIT_DEPENDENCY",
+      "power146_s1_h2_only": "WAIT_DEPENDENCY",
+      "power146_s1_sram_bias": "WAIT_DEPENDENCY",
+      "power146_s2b": "WAIT_DEPENDENCY",
+      "power146_s2d": "WAIT_DEPENDENCY",
+      "s2e_power130": "COMPLETED_DIAGNOSTIC_NOT_QUALIFIED",
+      "s2e_streamaudit156": "WAIT_DEPENDENCY",
+      "s2e_timing134": "FAILED_REVIEW_REQUIRED",
+      "s2e_timing155": "RUNNING",
+      "zz_campaign_report154": "WAIT_DEPENDENCY"
+    }
+  },
+  "limitations": [
+    "This is the immutable157 historical snapshot, not a current process-liveness assertion.",
+    "Enrollment byte counts and successful input checks are original server receipts; external library/source bodies are not all returned.",
+    "Two approximately99MB native-cells.tsv bodies and mapped/SVF bodies are absent; their hashes are receipts only.",
+    "Five155 phases are explicit134 adoptions, not new native executions. Only final DC/PT completed in157.",
+    "Full FM, terminal before/after rehash, complete150MHz qualification, measured energy eligibility and contest scoring remain unproven."
+  ],
+  "locally_matched_server_output_receipts": 36,
+  "migration": {
+    "confirmed_current_controller": {
+      "argv": [
+        "/bin/python3",
+        "-B",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-campaign-batch154/control153/xu_experiments.py",
+        "run",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/unified-experiment-control-20261105-150"
+      ],
+      "pid": 228660,
+      "start_ticks": 118030075,
+      "uid": 14023
+    },
+    "full_snapshot_inventory_entries": 13,
+    "locally_returned_snapshot_bodies": 11,
+    "old_controller": {
+      "argv": [
+        "/bin/python3",
+        "-B",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-experiment-control150/xu_experiments.py",
+        "run",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/unified-experiment-control-20261105-150"
+      ],
+      "pid": 159584,
+      "start_ticks": 117325331,
+      "uid": 14023
+    },
+    "original_four_job_dicts_unchanged": true,
+    "original_registration_and_run_bodies_unchanged": [
+      "registrations/baseline_rdc142.json",
+      "registrations/eight_freeze138.json",
+      "registrations/s2e_power130.json",
+      "registrations/s2e_timing134.json",
+      "runs/baseline_rdc142/launcher.log",
+      "runs/s2e_timing134/launcher.log"
+    ],
+    "status": "MIGRATED_SAME_OUT_CONTROLLER153_RUNNING_NOT_QUALIFIED",
+    "unreturned_zero_byte_lock_files": [
+      "controller.lock",
+      "register.lock"
+    ],
+    "workers_restarted": 0,
+    "workers_signalled": 0
+  },
+  "observation_epoch": 1793848883.9130416,
+  "original_payload_bytes": 40767862,
+  "original_payload_files": 167,
+  "qualification": "NOT_QUALIFIED",
+  "release_archive_sha256": "8de2a0f7181cd7e52b1ac92ada842cbd8d8003e75fbd68c2ed93d967118c6003",
+  "release_files": 86,
+  "release_manifest_sha256": "29a3a238ca27182b814035203a2e5cae3f651066f599bf859596546c4f752590",
+  "schema": "xu-campaign157-independent-audit-v1",
+  "timing155": {
+    "adopted_original_phases": 5,
+    "completed_runs": [
+      {
+        "index": 0,
+        "log_sha256": "2cfd091d3f709089547f9af8f08aa7afad87e523bb895b9e66ce6094c2f87a2a",
+        "marker_count": 1,
+        "returncode": 0,
+        "scope": "ADOPTED_ORIGINAL134",
+        "script_sha256": "6e11192355d8ce3b54b9dac56638db968002e807dd3892fe80c0b3e854e81ce2",
+        "tool": "dc"
+      },
+      {
+        "index": 1,
+        "log_sha256": "d350014553d54a687a6c04ff0e537f902fc897fe846101305836b669093a9e74",
+        "marker_count": 1,
+        "returncode": 0,
+        "scope": "ADOPTED_ORIGINAL134",
+        "script_sha256": "f6e4766cd4512faaf4754a227446cefa51180e6e9e00fb579ec35e5381e5212d",
+        "tool": "pt"
+      },
+      {
+        "index": 2,
+        "log_sha256": "a34463a29f28d1f8a84457afbc5af64ec0d19ea5c53fbe0c66182f58622b2f94",
+        "marker_count": 1,
+        "returncode": 0,
+        "scope": "ADOPTED_ORIGINAL134",
+        "script_sha256": "cbd3945932d07322bf3d3b92e92d736940693f8f943c7ede8ae681c9ee58103b",
+        "tool": "dc"
+      },
+      {
+        "index": 3,
+        "log_sha256": "8c7dd7ce8aacd75756f5660022ac34a6ae1ed1a25ecf109fa266f03978d46cc7",
+        "marker_count": 1,
+        "returncode": 0,
+        "scope": "ADOPTED_ORIGINAL134",
+        "script_sha256": "b43622bf708eda90f0409f4469f8457edc7e4858e2174e70e0d3f657ff395379",
+        "tool": "dc"
+      },
+      {
+        "index": 4,
+        "log_sha256": "a6a6acb869cf425a3a6c01600a84aab2ad2105e6141f662dccacddf0af3dc0a3",
+        "marker_count": 1,
+        "returncode": 0,
+        "scope": "ADOPTED_ORIGINAL134",
+        "script_sha256": "8a89bf372f7ed623492342d9bf3f8dafd5d599b1873934a0a3d18f46bf6e9341",
+        "tool": "pt"
+      },
+      {
+        "index": 5,
+        "log_sha256": "134ee83844405d2bec00690661cb7bb5e77943b5825f32a523e5bb6813f12f7e",
+        "marker_count": 1,
+        "returncode": 0,
+        "scope": "NEW_FINAL155",
+        "script_sha256": "75f06d87f9e4fe72d74b8793942c74ddba919079edeff37bdcf7ef206d695146",
+        "tool": "dc"
+      },
+      {
+        "index": 6,
+        "log_sha256": "e1aeb2a036ce99ca64b8a5b4ed27377d9e4734a305e0d2dd987965cf05756789",
+        "marker_count": 1,
+        "returncode": 0,
+        "scope": "NEW_FINAL155",
+        "script_sha256": "91b0f70c83788a552d914d75e2884722048ad55cb7ce856e9a90faf7083a5f04",
+        "tool": "pt"
+      }
+    ],
+    "final_mapped_receipt": {
+      "bytes": 14152273,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2e-own-timing-repair-20261105-155/final/mapped.v",
+      "sha256": "3440182eca862290a874bedc4eb3f94168681a7028d584d15217a13dbeafa794"
+    },
+    "full_fm": "RUNNING_SNAPSHOT_COMPLETION_NOT_PROVEN",
+    "live_worker": {
+      "argv": [
+        "/bin/python3",
+        "-B",
+        "-u",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-campaign-batch154/timing155/resume155.py",
+        "--out",
+        "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2e-own-timing-repair-20261105-155"
+      ],
+      "pid": 228701,
+      "start_ticks": 118031670,
+      "uid": 14023
+    },
+    "new_completed_native_phases": 2,
+    "omitted_large_text": [
+      {
+        "bytes": 98866265,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2e-own-timing-repair-20261105-155/original-inventory/native-cells.tsv",
+        "sha256": "7c7f86330c889c21f9c6229a99067d424e0d9305759ff7ff419eff68ee429a8d"
+      },
+      {
+        "bytes": 99406716,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2e-own-timing-repair-20261105-155/posthold-inventory/native-cells.tsv",
+        "sha256": "2d7e3518ee0db58b25e71f97e2eb6688b410b85328014929561b96dd9e29946c"
+      }
+    ],
+    "phase": "final/fm",
+    "status": "RUNNING_NOT_QUALIFIED",
+    "terminal_input_recheck": "PENDING"
+  }
+}
