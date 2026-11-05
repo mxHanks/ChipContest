@@ -1,5 +1,13 @@
 # xu 2026-11-05上午续接
 
+
+2026-11-05 20:00 CST最新事实：两候选的同方法完整12层已结束，原171/191全部payload核验、独立179/205审计及root逐字节重现完成，见[最终诊断对照](validation/xu-score-two-candidate-final-20261105/README.md)。
+S2e final155：10420116cycles、2.3659452273331971mJ诊断能量、0.3003096339mm²；S2c own9c16：11887872、2.6384471466669330mJ、0.2948018380mm²。
+共同404c7d+45037c方法下周期−12.3466673%、诊断能量−10.3281174%、面积+1.8683045%；未知Q/full150MHz/strict mapped VCS等仍NOT_QUALIFIED，不计算最终比赛分。
+198四项登记已在199原件8413aca核对，0直接启动/重启/信号；192可变汇总FM state被SHA守卫拒绝的原失败已保留，198改用原09全字节snapshot，未放松SHA。
+177/186原生诊断都因unsupported get_clocks -of_objects失败，另annotated两list互斥。951b866/206完整保存原错误，不能称图等价失败。
+新207兼容查询及第三S2c common-scope案例在本地开发/独立审查中；208登记/209自动包尚未部署。原153 PID27671继续活着，不重启、不启动第二controller。FTP当前global421，凭据正常，可用VNC分块fallback。
+
 最新实际运行见文末“16:08仅两候选已启动”；此前PTY和未部署状态均为历史。仍只使用原153/154总控，勿重复init/launch。
 
 最新用户指令的本机关机计划已再次核验：**2026-11-06 01:00 CST poweroff**，`/run/systemd/shutdown/scheduled` 为 `USEC=1793898000000000`、`MODE=poweroff`、`UID=1000`。不要取消、覆盖或重复设置。此前11月5日01:00记录属于历史。

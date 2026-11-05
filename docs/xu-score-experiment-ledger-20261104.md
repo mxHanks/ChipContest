@@ -1,5 +1,13 @@
 # xu：优化实验与资格证据台账
 
+
+2026-11-05 20:00 CST最新事实：两候选的同方法完整12层已结束，原171/191全部payload核验、独立179/205审计及root逐字节重现完成，见[最终诊断对照](validation/xu-score-two-candidate-final-20261105/README.md)。
+S2e final155：10420116cycles、2.3659452273331971mJ诊断能量、0.3003096339mm²；S2c own9c16：11887872、2.6384471466669330mJ、0.2948018380mm²。
+共同404c7d+45037c方法下周期−12.3466673%、诊断能量−10.3281174%、面积+1.8683045%；未知Q/full150MHz/strict mapped VCS等仍NOT_QUALIFIED，不计算最终比赛分。
+198四项登记已在199原件8413aca核对，0直接启动/重启/信号；192可变汇总FM state被SHA守卫拒绝的原失败已保留，198改用原09全字节snapshot，未放松SHA。
+177/186原生诊断都因unsupported get_clocks -of_objects失败，另annotated两list互斥。951b866/206完整保存原错误，不能称图等价失败。
+新207兼容查询及第三S2c common-scope案例在本地开发/独立审查中；208登记/209自动包尚未部署。原153 PID27671继续活着，不重启、不启动第二controller。FTP当前global421，凭据正常，可用VNC分块fallback。
+
 目标沿用[xu-score-optimization-plan.md](xu-score-optimization-plan.md)：通过资格门槛后，以同一冻结配置的吞吐、全SoC单任务能量、加速器面积比较评分和非支配候选。面积上限为 **2.25mm²**。本台账汇总已取回的实际原件，不替代各独立分支，不宣布最终选型或完整比赛资格。
 
 2026-11-05用户最终确定只保留 **S2e主方案、S2c对照**，其余候选停止追加评测，历史代码与日志全部保留。
