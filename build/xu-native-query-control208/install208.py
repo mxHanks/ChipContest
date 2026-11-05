@@ -2,9 +2,9 @@
 import hashlib,json,tarfile
 from pathlib import Path,PurePosixPath
 D=Path.home()/'Desktop'
-p=D/'xu-followup-runtime208-2669ccc1bd5f.tar.gz'
-assert p.is_file() and not p.is_symlink() and p.stat().st_size==266690
-assert hashlib.sha256(p.read_bytes()).hexdigest()=='2669ccc1bd5fce0ba76a300e6b2045eb29c7f5af246c5f549449098d03e6577b'
+p=D/'xu-followup-runtime208-19a29eea919f.tar.gz'
+assert p.is_file() and not p.is_symlink() and p.stat().st_size==266728
+assert hashlib.sha256(p.read_bytes()).hexdigest()=='19a29eea919fcd64f4f71482cae8a96477f1129676b6b527408f912e4444441f'
 payload={}
 with tarfile.open(str(p),'r:gz')as t:
  for m in t:
@@ -29,8 +29,8 @@ for n in sorted(payload):
   with dest.open('xb')as f:f.write(payload[n])
  assert dest.read_bytes()==payload[n]
 receipt=D/'xu-score-optimization-20261102/followup208-install.json'
-value=dict(schema='xu-runtime208-install-v1',status='INSTALLED_REVIEWED_RUNTIME_NOT_RUN_NOT_QUALIFIED',archive=dict(path=str(p),sha256='2669ccc1bd5fce0ba76a300e6b2045eb29c7f5af246c5f549449098d03e6577b',bytes=266690),manifest=manifest,new_native_runs=0)
+value=dict(schema='xu-runtime208-install-v1',status='INSTALLED_REVIEWED_RUNTIME_NOT_RUN_NOT_QUALIFIED',archive=dict(path=str(p),sha256='19a29eea919fcd64f4f71482cae8a96477f1129676b6b527408f912e4444441f',bytes=266728),manifest=manifest,new_native_runs=0)
 if receipt.exists():assert json.loads(receipt.read_text())==value
 else:
  with receipt.open('x')as f:json.dump(value,f,sort_keys=True,indent=2);f.write('\n')
-print('XU208_INSTALLED',len(payload),'2669ccc1bd5fce0ba76a300e6b2045eb29c7f5af246c5f549449098d03e6577b',flush=True)
+print('XU208_INSTALLED',len(payload),'19a29eea919fcd64f4f71482cae8a96477f1129676b6b527408f912e4444441f',flush=True)

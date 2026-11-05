@@ -78,12 +78,14 @@ def main():
     ancestor=m.read(guard['ancestry198']['path'])
     need(ancestor['status']=='REGISTERED_TWO_CANDIDATE_FOLLOWUP198_NOT_QUALIFIED' and len(ancestor['registrations'])==4,'actual198 must have registered the prior chain')
     terminal191=C/'registrations/two_candidate_finalpack191.json'
-    need(m.sha(terminal191)=='a4d97e89daadf68947331575350ffd2d8b9bbf2117f14ba650506f821b35312b','frozen preceding191 registration required')
+    original191=[r for r in ancestor['registrations']if r['path']==str(terminal191)]
+    need(len(original191)==1 and original191[0]['sha256']=='a4d97e89daadf68947331575350ffd2d8b9bbf2117f14ba650506f821b35312b' and
+         m.identity(terminal191)==original191[0],'frozen preceding191 registration required')
     jobs,records=validate_jobs(m,guard)
     job_identities=[dict(path=str(HERE/r['name']),bytes=r['bytes'],sha256=r['sha256'])for r in guard['jobs']]
     need(all(m.identity(p)==job_identities[i]for i,(p,j) in enumerate(jobs)),'job changed after guard validation')
     records += job_identities+[m.identity(WORKER),m.identity(Path(__file__).resolve()),
-        guard_identity,scope,previous,m.identity(oldreg),guard['ancestry198']]
+        guard_identity,scope,previous,m.identity(oldreg),guard['ancestry198'],original191[0]]
     records=merged(records)
     before=m.check_records(records)
     registrations=[]
