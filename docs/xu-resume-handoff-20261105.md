@@ -229,3 +229,10 @@ deps173terminal+167success、native=true保留单槽；**不要手动运行177�
 
 当前新发184只读状态命令，等待capture，最后真实full12PID204745活着PREPARED166、phase=prepared。
 本地新185只读分类155 untested/未约束，尚未native；不自动豁免或提升资格。原单入口154和01:00关机都不改。
+
+
+后续真实进展见[185–191](validation/xu-score-followup185-191-20261105/README.md)：原27671/204745均alive，power task6，未重启；最后UI epoch1793870299.7716434。
+185 19e7f08已完成；root fresh/tmp五输出逐字节复现。186/188由fresh agents补齐前agent未交付的本地代码，190实现自己的S2c共同scope task0→full12。
+191 112ad1a已做9tests，尚需独立审查/登记，输出新B/xu-server-two-candidate-final-20261105-191.tar.xz；不占173原171名字。
+FTP本轮重试认证成功，原421全局拥挤已缓解；可优先上传冻结tar，仍不得RETR550反复下载，grid时禁止其他VNC操作。
+无常驻VNC/FTP；remote_region170可按需连接，Workspace1。01:00关机不改。
