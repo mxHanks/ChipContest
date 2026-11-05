@@ -1,0 +1,99 @@
+{
+  "bounded_assign_relations": [
+    {
+      "destination": "ENABLE_D",
+      "expression": "(D) ? 1'b1:1'b0"
+    }
+  ],
+  "interpretation": "Syntactic relation metadata only; no notifier/unknown-causality or UDP behavioral proof.",
+  "model_sha256": "9ceaac7085f267c9a2da19d86aa9d88ddb25894df4b2485e32d13e04d0e46581",
+  "module": "DRNQV0_12TR40",
+  "module_body_exported": false,
+  "module_line": 38836,
+  "module_source_sha256": "84b1adaf6864970e2a856ba33108929da041d8c45a18bf15ed3b0ea506050400",
+  "nearest_preceding_timescale": "10 ps / 1 ps",
+  "primitive_instances": [
+    {
+      "instance": "I0",
+      "port_connections": {
+        "NOTIFIER": "NOTIFIER",
+        "clk": "clk",
+        "clr_": "xRN",
+        "in": "D",
+        "out": "n0",
+        "set_": "xSN"
+      },
+      "primitive": "udp_dff",
+      "source_line": 100995,
+      "source_sha256": "471d054e386387c96ea35439fb7dc2dbde2aa4281a04033e983fbdbde64815bd",
+      "table_exported": false
+    }
+  ],
+  "qualification": "NOT_QUALIFIED",
+  "relation_parse_gaps": [],
+  "schema": "xu-s2c177-model-relations-v1",
+  "source_timescale_tokens": [
+    "10 ps / 1 ps"
+  ],
+  "specify_sha256": "b886da138fb20841c5a06c6e95a3406e285efa4de0327bf62cc987746b5326e2",
+  "timing_checks": [
+    {
+      "arguments": [
+        "negedge CK",
+        "1.0",
+        "0",
+        "NOTIFIER"
+      ],
+      "kind": "width"
+    },
+    {
+      "arguments": [
+        "posedge CK",
+        "1.0",
+        "0",
+        "NOTIFIER"
+      ],
+      "kind": "width"
+    },
+    {
+      "arguments": [
+        "posedge CK &&& (ENABLE_RDN === 1'b1)",
+        "negedge D &&& (ENABLE_RDN === 1'b1)",
+        "1.0",
+        "1.0",
+        "NOTIFIER"
+      ],
+      "kind": "setuphold"
+    },
+    {
+      "arguments": [
+        "posedge CK &&& (ENABLE_RDN === 1'b1)",
+        "posedge D &&& (ENABLE_RDN === 1'b1)",
+        "1.0",
+        "1.0",
+        "NOTIFIER"
+      ],
+      "kind": "setuphold"
+    },
+    {
+      "arguments": [
+        "posedge CK &&& (ENABLE_D === 1'b1)",
+        "posedge RDN &&& (ENABLE_D === 1'b1)",
+        "1.0",
+        "1.0",
+        "NOTIFIER"
+      ],
+      "kind": "setuphold"
+    },
+    {
+      "arguments": [
+        "negedge RDN",
+        "1.0",
+        "0",
+        "NOTIFIER"
+      ],
+      "kind": "width"
+    }
+  ],
+  "udp_table_exported": false
+}
