@@ -22,3 +22,12 @@
 原图比较仍见[165](../xu-score-two-candidate165-20261105/README.md)。
 155的0.3003096339mm²面积独立于原130能量；新图完整12层能量尚未产生。
 完整150MHz、门级功能及未知SRAM Q资格仍待闭合，全部NOT_QUALIFIED。
+
+
+16:19 CST后续174只读查询已确认：S2c167采集原unknown fatal诊断终态，原worker已退出；
+S2e166单层预检PID180321真实存活、PREPARING166；完整12层仍WAIT_DEPENDENCY。
+`1067dae`自动归档173也已真实登记，WAIT_DEPENDENCY，仍由原153/154总控执行。
+该步骤在167和full12终态且164成功后，用原171只读导出成功/失败原件；不启动新的EDA实验。
+最终包固定为`B/xu-server-two-candidate-20261105-171.tar.xz`，不要提前手动写这个名字。
+173四runtime部署原包8149B、SHA`479a15ff2f2ff7650e1a3b17a85436ef9d4e00b93b3be577e78b231a24274073`，
+副本和逐文件manifest一并保留。`status174-ui.png`/command和转录JSON仍仅UI观察，原日志待174 progress包。

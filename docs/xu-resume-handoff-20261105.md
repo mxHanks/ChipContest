@@ -176,3 +176,29 @@ run170在同一Python进程运行原166，kernel argv仅当前唯一out，避免
 当前不再保留常驻VNC PTY（98663已正常quit）；可用受保护helper重新连接，Workspace1。
 FTP global421不是凭据丢失，不要请用户重建凭据。分块VNC传输已可用；绝不可在grid取回期间另操作VNC。
 本机既定2026-11-06 01:00关机不改；后台总控与worker独立于本机和模型额度。
+
+16:19 CST只读174后续已核：167=`COLLECTED_ORIGINAL_UNKNOWN_FATAL167_NOT_QUALIFIED`、原worker退出；
+166preflight PID180321真实存活，`PREPARING166_NOT_QUALIFIED`，full12仍等待成功先验。
+`1067dae`173自动归档已真实登记`REGISTERED_AUTOPACK173_NOT_QUALIFIED`，队列WAIT_DEPENDENCY。
+依赖167terminal/full12terminal/164success，native=true保留原槽；同PID调用固定171，不运行新EDA。
+最终自动包固定`B/xu-server-two-candidate-20261105-171.tar.xz`，**不要提前手动export这个名字**。
+173四文件部署包8149B SHA`479a15ff2f2ff7650e1a3b17a85436ef9d4e00b93b3be577e78b231a24274073`，
+manifest和原包已保存在172观察目录；仍是UI证据，须后续原件包核对。
+root已另行请求只读progress快照`B/xu-server-two-candidate-progress-20261105-174.tar.xz`，
+待capture其XU171_READY实际SHA/字节数后grid取回、安全check/unpack，再分析167原native日志。
+不要因167诊断采集成功称完整功能通过；未知fatal本身仍被原样保留。
+
+174 progress已实际取回，188212B SHA`df0166018b47d6ad78917928f23fc77c5a32213b8f386b56610f4e67fa64dfd4`；
+74载荷5260127B全部安全路径/逐字节校验，无source拒绝/省略、73份source读取期间metadata稳定。
+原包与可复现审查位于[174归档](validation/xu-score-progress174-20261105/README.md)，safe unpack于
+`build/xu-score-resume-20261103/progress174`。grid174已正常q关闭，无传输在运行。
+原件确证29注册、只有166preflight在跑；164 24份/540288pin block，两套服务器解析共重读19326997752B，
+本地仅核返回回执、约19.3GB原报告仍留服务器。554原输入before/after相同；每层5280Q有TX/4256整窗TX不变。
+原getter x_probability=0不能提升资格。175分析遗留于`build/xu-s2c-observation175`，前agent额度耗尽未提交；
+新review175_resume正在独立重放原日志/源码变换和manifest。fatal只有bias_commit=x，三路样本一致；
+目标FIFO有同刻CK/D hold告警并随后Q=x，但早D瞬态及未valid rdata未知仍保留，不作因果结论。
+
+16:32 CST176只读观察：166preflight PID180321仍真实alive，状态RUNNING166、phase=power、error=None；
+表示已通过准备/own155 native inventory并进入task0 PT，不等于单层完成。full12/173仍等待。
+本轮续行不重启原worker。接续177本地实现仅同S2c9c16连接/min path只读query，审查后才通过原总控登记；
+不改变TB采样、不关时序检查、不插任意delay、不借baseline116/155图。
