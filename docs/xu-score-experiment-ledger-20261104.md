@@ -69,3 +69,13 @@
 - [116本地工具](validation/xu-score-timing116-local-20261105/README.md)实际部署并启动PID25920。在同一baseline95派生映射组合有界清理和40个native反相器，再重跑自己的DC/PT/FM；121快照DC/PT已执行、FM仍RUNNING，不能宣布最终通过，也不能借作S2e时序证明。
 
 本轮改动为采集/审计工具与证据；没有新Chisel修改。最终比赛资格、同配置全SoC能量和最终(T,E,A)选型仍未完成。
+
+
+## 2026-11-05上午取回的完整终态
+
+关机前记录是当时快照，以下补充已取回的终态，不改写原运行中或失败原件。
+
+- [actual116同一最终映射DC/PT/FM](validation/xu-score-timing116-terminal122-20261105/README.md)已完成，DC/PT/FM各rc0且唯一marker，自己的完整FM41,462点成功。最终mapped SHA `16d29dea71ed2668b33c893e1a38be01a6eea02ca190ba8aabcb4658fe610292`，own repair SVF SHA `2574d971c759fc2650ed660b52b6219928c54117be156cdf616ccbea10f1d90a`；组合删除47个native证明非时序且无接收者的单元，五reset端点共插入40个CLKINV。274份冻结输入before/after相同；min-cap、max-cap、removal违例均为0。仍有27,124 untested、2个PMU recovery UNKNOWN、5个HF recovery定向查询缺路径、9,126脉宽及10,416宏条件周期未测；最差报告setup为clock-gate latch的0ns。该网表是baseline116方法实验，不能借作S2e资格或宣布完整150MHz通过。122原包1,283,388B，SHA `654e1c7b3a4d22f41810b0d3a7c1a73de9707f79e879b254e558374cf5dd6c50`，121项37,978,683B全部校验。
+- [actual120完整12任务活动及125逐bit独立复核](validation/xu-score-s2e-activity120-server125-20261105/README.md)已完成，原顶层状态`COLLECTED_12_TASKS_REVIEW_PENDING`。每层elapsed868,343，总10,420,116；inclusive合计10,420,128。相同正式窗口S2c为11,887,872，减少12.3466673%；不混用开发窗口10,420,140/11,842,200。逐层CSV保存原12日志/24SAIF完整SHA。完整125原包8,171,768B，SHA `ebfba2f46193dca30362ccce4fbbe602be238abd21a316240da0da2f828fbf10`，88项465,539,700B无省略。独立实际重读12对SAIF，270,144个macro pin-bit与1,379,124条非alias信号逐项核对；原未知TX/TZ/TB保留。own89/109身份绑定及清零/窗口/向量层映射通过复核，仍只证明RTL活动采集和原件保真，不是mapped活动、功耗或比赛资格。交付提交`8c16b8c`。
+
+本轮仍无新Chisel修改。下一步在S2e自己原映射测量全SoC功耗，同时对baseline116做只读覆盖/RDC审查；不同网表的资格不互借。
