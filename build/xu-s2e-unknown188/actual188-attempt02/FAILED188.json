@@ -1,0 +1,6 @@
+{
+  "error": "ValueError: dict contains fields not in fieldnames: 'UNKNOWN_AND_CEN1_CONSTANT', 'FULL_WINDOW_TX'",
+  "qualification": "NOT_QUALIFIED",
+  "status": "FAILED_CLASSIFICATION_RETAINED_NOT_QUALIFIED",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-unknown188/analyze188.py\", line 260, in main\n    result = analyze({k: getattr(args, k).absolute() for k in ['progress135', 'activity125', 'audit174']}, out)\n  File \"/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-s2e-unknown188/analyze188.py\", line 230, in analyze\n    writer = csv.DictWriter(stream, fieldnames=list(data[0])); writer.writeheader(); writer.writerows(data)\n                                                                                     ~~~~~~~~~~~~~~~~^^^^^^\n  File \"/usr/lib/python3.14/csv.py\", line 228, in writerows\n    return self.writer.writerows(map(self._dict_to_list, rowdicts))\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/csv.py\", line 220, in _dict_to_list\n    raise ValueError(\"dict contains fields not in fieldnames: \"\n                     + \", \".join([repr(x) for x in wrong_fields]))\nValueError: dict contains fields not in fieldnames: 'UNKNOWN_AND_CEN1_CONSTANT', 'FULL_WINDOW_TX'\n"
+}
