@@ -1,0 +1,51 @@
+test_actual_process_identity_has_start_ticks_and_command (__main__.Checks.test_actual_process_identity_has_start_ticks_and_command) ... ok
+test_atomic_registration_not_visible_until_complete (__main__.Checks.test_atomic_registration_not_visible_until_complete) ... REGISTERED a 07e24d744115e4733bf254814dc2b0806763b48edef080bde1a8e16613f65705
+ok
+test_changed_command_not_same_process (__main__.Checks.test_changed_command_not_same_process) ... ok
+test_changed_command_same_birth_keeps_slot (__main__.Checks.test_changed_command_same_birth_keeps_slot) ... ok
+test_direct_spawn_identity_recovered_from_receipt (__main__.Checks.test_direct_spawn_identity_recovered_from_receipt) ... ok
+test_done_row_with_live_worker_still_reserved (__main__.Checks.test_done_row_with_live_worker_still_reserved) ... ok
+test_done_rows_are_observed_on_tick (__main__.Checks.test_done_rows_are_observed_on_tick) ... REGISTERED a 6a914448b0261b771f3d480313c7535690af70acb702a3a50f5f9f055afb9539
+ok
+test_duplicate_controller_file_lock (__main__.Checks.test_duplicate_controller_file_lock) ... ok
+test_duplicate_init_rejected (__main__.Checks.test_duplicate_init_rejected) ... ok
+test_failed_success_dependency_blocks_only_descendant (__main__.Checks.test_failed_success_dependency_blocks_only_descendant) ... REGISTERED a_failed 3f36c4ba5eacf8d4cdc50ab002015a3fbe5ba2f009a76394590d023daee49b6d
+REGISTERED b_child de571fcdf786ea7024911ecd8636e7fb7c7d6c8f3c8c0a297c3df78f871e47b9
+REGISTERED c_independent 84a79f926bb89818001257e797bc46789233bfb09ff9453bd670fe1529184bc4
+ok
+test_input_change_rejected_before_any_spawn (__main__.Checks.test_input_change_rejected_before_any_spawn) ... ok
+test_launcher_nonzero_after_spawn_keeps_slot (__main__.Checks.test_launcher_nonzero_after_spawn_keeps_slot) ... REGISTERED a d4f9fb72080a47292f8f4f8692781e875f30dbfaf6247d9d9aa788a237a652ec
+REGISTERED b 726528d51205260b9a7911098e7e184a84c6a411c9d2d128e75e19a59b0f5b1a
+ok
+test_migration_rejects_running_original_controller (__main__.Checks.test_migration_rejects_running_original_controller) ... /usr/lib/python3.14/subprocess.py:1139: ResourceWarning: subprocess 163054 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_migration_snapshots_preserves_jobs_runs_and_starts_one_new_controller (__main__.Checks.test_migration_snapshots_preserves_jobs_runs_and_starts_one_new_controller) ... REGISTERED original 5b94bd6ba10ea61850c9e79899a2a44535af5f7a76a0797e8cfaa8b5eab4091a
+/usr/lib/python3.14/subprocess.py:1139: ResourceWarning: subprocess 163055 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_orphan_not_restarted_and_independent_can_advance (__main__.Checks.test_orphan_not_restarted_and_independent_can_advance) ... REGISTERED a e69ed4e0e1bab394f1eb2e1d7bb07ac85dfc5800e0534fa0fd80dae507bbe3f9
+ok
+test_post_spawn_receipt_error_keeps_slot (__main__.Checks.test_post_spawn_receipt_error_keeps_slot) ... REGISTERED a 93736af388e1bf9a2646cf91652b2341e5f3551b5fb20866d3053d15bab5f2cd
+REGISTERED b 3349aed3d907d1ead616aed748b6b3132782908e0a472e59aefce92eff7fab5c
+/usr/lib/python3.14/subprocess.py:1139: ResourceWarning: subprocess 163057 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_registration_idempotent_and_replacement_rejected (__main__.Checks.test_registration_idempotent_and_replacement_rejected) ... REGISTERED a 0cbcd0534be05f89390839246348bf78ce04ae8e5528b393427f0f54fba4486e
+ok
+test_resource_limits_and_live_intent (__main__.Checks.test_resource_limits_and_live_intent) ... ok
+test_reused_pid_is_not_rebound (__main__.Checks.test_reused_pid_is_not_rebound) ... ok
+test_terminal_policy_allows_failure_but_success_does_not (__main__.Checks.test_terminal_policy_allows_failure_but_success_does_not) ... REGISTERED a_failed c9a555c87cb9d8e1cfba96a6dbcdd893495423126213cb3b517a5a0ea0cf2aa3
+REGISTERED b_terminal 2425ed030927dc73ac9da6a07801e4a3c85fe34963c4a59ccfab9125fb484839
+ok
+test_terminal_requires_live_worker_exit (__main__.Checks.test_terminal_requires_live_worker_exit) ... ok
+test_transient_empty_live_handle_not_promoted_to_exit (__main__.Checks.test_transient_empty_live_handle_not_promoted_to_exit) ... ok
+test_wrong_worker_run_refused_before_any_state_write (__main__.Checks.test_wrong_worker_run_refused_before_any_state_write) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 1.217s
+
+OK

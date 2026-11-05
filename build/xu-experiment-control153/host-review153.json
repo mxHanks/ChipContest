@@ -1,0 +1,35 @@
+{
+  "checks": 23,
+  "limitations": [
+    "Temporary local files and ordinary Python worker/controller processes only.",
+    "Detached-Popen ResourceWarnings under local Python3.14 are preserved in raw log; test cleanup signals/reaps only its own temporary stand-ins.",
+    "No remote actions, EDA execution, candidate qualification or official score proof."
+  ],
+  "log": {
+    "bytes": 4628,
+    "name": "host-checks153-final.log",
+    "sha256": "165fb2a7487e14ebcab131bae9ffd6fcdde6a7be12ce4f049f6fd75c46ef7237"
+  },
+  "python36_syntax_checked": [
+    "xu_experiments.py",
+    "migration153.py",
+    "test_control153.py"
+  ],
+  "qualification": "NOT_QUALIFIED",
+  "returncode": 0,
+  "runtime_files": [
+    {
+      "bytes": 19039,
+      "name": "xu_experiments.py",
+      "sha256": "877a1624d45bdae7dd5095809f69e3e9c95eafafac17f354fe52f9781c9ef025"
+    },
+    {
+      "bytes": 9675,
+      "name": "migration153.py",
+      "sha256": "4eb8cb6c493838218e5af6a0e5ce69e5792532ed86b01d7875a0ef6ac5dc8d34"
+    }
+  ],
+  "schema": "xu-controller153-host-review-v1",
+  "source150_unchanged_sha256": "d7813ac3745ff1aa5b5efc92eef298a6577abef774259f9285aae605c466db2f",
+  "status": "HOST_CONTROLLER153_CHECKS_PASS_NO_EDA"
+}

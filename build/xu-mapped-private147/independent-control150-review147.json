@@ -1,0 +1,50 @@
+{
+  "controller_sha256": "d7813ac3745ff1aa5b5efc92eef298a6577abef774259f9285aae605c466db2f",
+  "controller_source": "/home/mxhanks/Projects/ChipContest-xu-score-opt/build/xu-experiment-control150/xu_experiments.py",
+  "eda_operations": 0,
+  "post_spawn_persistence_failure": {
+    "effects": "DONE failure skips later observe and loses reservation during native phase gaps.",
+    "first_job_status": "REJECTED_INPUT_REVIEW_REQUIRED",
+    "first_worker_alive_at_second_dispatch": true,
+    "first_worker_pid": 155214,
+    "live_worker_observations": [
+      {
+        "argv": [
+          "/usr/bin/python3",
+          "-c",
+          "import time;time.sleep(60)",
+          "/tmp/xu147-spawn-review-do3v1k1p/worker-a"
+        ],
+        "pid": 155214,
+        "uid": 1000
+      },
+      {
+        "argv": [
+          "/usr/bin/python3",
+          "-c",
+          "import time;time.sleep(60)",
+          "/tmp/xu147-spawn-review-do3v1k1p/worker-b"
+        ],
+        "pid": 155215,
+        "uid": 1000
+      }
+    ],
+    "scenario": "Popen succeeds, then spawn receipt save fails",
+    "second_job_status": "RUNNING",
+    "second_worker_pid": 155215,
+    "status": "REPRODUCED"
+  },
+  "qualification": "NOT_QUALIFIED",
+  "registration_race": {
+    "effects": "Controller run loop propagates exception; worker tasks are not killed by this fixture.",
+    "registration_completed_after_release": true,
+    "scenario": "register target exists before bytes become visible",
+    "status": "REPRODUCED",
+    "tick_outcome": {
+      "exception": "JSONDecodeError",
+      "message": "Expecting value: line 1 column 1 (char 0)"
+    }
+  },
+  "remote_operations": 0,
+  "schema": "xu.controller150.independent-review147.v1"
+}
