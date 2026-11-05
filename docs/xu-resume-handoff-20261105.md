@@ -211,3 +211,21 @@ full12 PID204745实际identity alive，PREPARING166，173仍WAIT_DEPENDENCY。�
 634服务器输入回执/原TB/C变换均核对；八项仅bias_commit=x，三路样本一致。更早D短暂x和初始NOTIFIER/rdata未知仍保留。
 175前agent未提交的问题已解决。新177实现同S2c9c16 native精确连接/min path，179准备对返回166单层/full12原件独立审计；
 二者仅本地开发中，尚未登记177 native。生产代码未改。
+
+178原包已实际取回/安全check/unpack：1313588B，SHA`da981b5ed9d5c07524ece0b454fa7273f61e222917db9037d4155407e0a7ee1a`，
+110载荷41417609B；safe root=`build/xu-score-resume-20261103/preflight178`，grid已q关闭。
+`3d6dddd`179独立审计真实task0通过，原native0.0341W×5788953333333fs=0.0001974033086666553J，
+同155面积0.3003096339mm²，336/22512pin一致，5280/4256未知Q保留；21报告正文重扫+6服务器boundedSHA明确分列。
+full12取样仍准备中、总能量null。新155forwarded scope与旧57/130 all-propagated时钟方法不同，
+179显式CONTROLLED_COMPARISON_PENDING，不能据新155算相对旧图节能百分比/评分。详见[178归档](validation/xu-score-preflight178-20261105/README.md)。
+
+177完成`f4963b0`，14本地检查/独立审阅`53121ca`通过。182登记`923dc4c`实际部署8文件，
+原包17662B SHA`cba322c974ec106895a006b095599fb5b36e5d883e511dbba188c42f8a5c3dc9`，
+worker21cdc138…、manifest52096886…、job a86e46ab…、register c37ce9dd…。
+16:51 CST184 UI核实原27671 controller true，182回执REGISTERED_OWN_S2C_READONLY177_NOT_QUALIFIED，177 WAIT_DEPENDENCY。
+回执原路径`B/s2c-readonly177-registration-20261105-182.json`，输出`B/s2c-own9c16-readonly-20261105-177`。
+deps173terminal+167success、native=true保留单槽；**不要手动运行177，不重复register/launch**。
+173最终171包在177之前生成，将包含177注册但没有177 native终态，后者按自己的output-manifest177单独取回。
+
+当前新发184只读状态命令，等待capture，最后真实full12PID204745活着PREPARED166、phase=prepared。
+本地新185只读分类155 untested/未约束，尚未native；不自动豁免或提升资格。原单入口154和01:00关机都不改。
