@@ -1,0 +1,115 @@
+{
+  "actual175": {
+    "bytes": 97497,
+    "path": "build/xu-s2c-observation175/analysis175.json",
+    "sha256": "991fe6d71eff588d091c936120a82fa49f4c851019a527a577943223f3d4b473"
+  },
+  "library_compiler_root": "/eda/synopsys/lib_compiler/lib_compiler_2022.03-SP5",
+  "model": {
+    "bytes": 2198450,
+    "ctime_ns": 1793789730446851261,
+    "device": 45,
+    "inode": 26267179567,
+    "input_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+    "mtime_ns": 1793789730443851261,
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/standard-cell-model-private-20261104-90/scc40nll_vhsc40_rvt.v",
+    "sha256": "9ceaac7085f267c9a2da19d86aa9d88ddb25894df4b2485e32d13e04d0e46581"
+  },
+  "next_minimal_readonly_query": {
+    "candidate_names_require_native_uniqueness_check": true,
+    "clock_method": "Reconstruct and explicitly freeze the ownS2c original analysis clock method. No inheritance from baseline116 or155; if a new method is explored, label it an independent experiment.",
+    "constraints": [
+      "No TB sampling changes",
+      "No force, DUT initialization, two-state conversion or timing-check suppression",
+      "No arbitrary inserted delay",
+      "No new EDA job launched by175 analysis",
+      "New native work must use the existing single-slot controller"
+    ],
+    "identifier_rule": "Preserve literal dp_gt0.vec_31_dfflr and qout_r_reg[0]; never dot-to-slash replacement or unreviewed wildcard matching.",
+    "implementation_status": "PROPOSED_ONLY_NOT_IMPLEMENTED_OR_RUN",
+    "inputs_to_freeze": [
+      "original S2c mapped9c16 bytes",
+      "original S2c analysis SDC and explicit clock scope/method",
+      "same standard/SRAM SS library bytes and native PT executable",
+      "target DRNQV0_12TR40 Verilog model SHA",
+      "query source and exact pin names"
+    ],
+    "own_s2c_libraries": [
+      {
+        "bytes": 48432887,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+        "role": "standard_cell",
+        "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+      },
+      {
+        "bytes": 52224,
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+        "role": "sram",
+        "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+      }
+    ],
+    "own_s2c_sdc": {
+      "bytes": 6384,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/full-soc-pt-compatible-05/constraints.sdc",
+      "sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98"
+    },
+    "priority": [
+      "Identify exact D driver cell/net, actual CK source/clock path and reset/ENABLE_RDN state on own9c16.",
+      "Run own9c16 native minimum-delay report to this exact D pin with the original S2c libraries/SDC/clock method; include full data/clock path and actual pin arcs. Do not borrow baseline116 or S2e155.",
+      "Read exact frozen DRNQV0_12TR40 specify/UDP relationship for NOTIFIER/n0/Q on the server, preserving model SHA; no model or testbench edits.",
+      "Trace native connectivity from target Q through observed FIFO protocol to io_cacheWriteEnable, naming any unobserved boundary; observations alone do not prove this path."
+    ],
+    "same_map_required": true,
+    "target": {
+      "bytes": 14199670,
+      "ctime_ns": 1793676047517613393,
+      "device": 45,
+      "inode": 18555473946,
+      "input_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-ppa-campaign-20261103-01/s2c/ppa/mapped.v",
+      "mtime_ns": 1793676047517613393,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-ppa-campaign-20261103-01/s2c/ppa/mapped.v",
+      "sha256": "9c16d5ec6665cbfd2c0752c96e98d969d988e963d6ed2f729d81e6989efa7892"
+    },
+    "target_identifier_components": [
+      "u_soc",
+      "u_e203_subsys_top",
+      "u_e203_subsys_main",
+      "u_e203_subsys_mems",
+      "u_sirv_mem_fab",
+      "u_sirv_gnrl_icb_buffer",
+      "u_sirv_gnrl_rsp_fifo",
+      "dp_gt0.vec_31_dfflr",
+      "qout_r_reg[0]"
+    ],
+    "target_pt_cell_candidate": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_sirv_mem_fab/u_sirv_gnrl_icb_buffer/u_sirv_gnrl_rsp_fifo/dp_gt0.vec_31_dfflr/qout_r_reg[0]",
+    "target_pt_pin_candidates": {
+      "CK": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_sirv_mem_fab/u_sirv_gnrl_icb_buffer/u_sirv_gnrl_rsp_fifo/dp_gt0.vec_31_dfflr/qout_r_reg[0]/CK",
+      "D": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_sirv_mem_fab/u_sirv_gnrl_icb_buffer/u_sirv_gnrl_rsp_fifo/dp_gt0.vec_31_dfflr/qout_r_reg[0]/D",
+      "Q": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_sirv_mem_fab/u_sirv_gnrl_icb_buffer/u_sirv_gnrl_rsp_fifo/dp_gt0.vec_31_dfflr/qout_r_reg[0]/Q",
+      "RDN": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_sirv_mem_fab/u_sirv_gnrl_icb_buffer/u_sirv_gnrl_rsp_fifo/dp_gt0.vec_31_dfflr/qout_r_reg[0]/RDN"
+    },
+    "target_vpi_display": "tb_xu_soc_ppa.dut.u_soc.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems.u_sirv_mem_fab.u_sirv_gnrl_icb_buffer.u_sirv_gnrl_rsp_fifo.dp_gt0.vec_31_dfflr.qout_r_reg[0]"
+  },
+  "original57_execution": {
+    "bytes": 415497,
+    "path": "build/xu-score-resume-20261103/next-results-export-69/s2c-full-soc-power12-20261104-57/execution.json",
+    "sha256": "45acb972f44b2a3009dca012836db6f2bde0a95d1de538d085fa27f882c6a3b9"
+  },
+  "original57_prepared": {
+    "bytes": 655697,
+    "path": "build/xu-score-resume-20261103/next-results-export-69/s2c-full-soc-power12-20261104-57/prepared.json",
+    "sha256": "cb363beafeac51329aab8f04843999021c17cf05dd22a1d1f3ee505ceb70a103"
+  },
+  "own_clock_method_source": {
+    "bytes": 45200,
+    "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102/s2c-full-soc-power12-20261104-57/task_00/power.tcl",
+    "sha256": "c99c65389f03d0a5d49b11bb50d9ce5a0440ae259ec72fe2c30f886c97e159b8"
+  },
+  "pt": {
+    "bytes": 463,
+    "path": "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+    "sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+  },
+  "qualification": "NOT_QUALIFIED",
+  "schema": "xu-s2c-readonly177-references-v1"
+}

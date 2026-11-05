@@ -1,0 +1,138 @@
+# Own9c16 read-only query. Placeholder substitutions are literal, not globs.
+if {[catch {
+@OWN_SETUP@
+set xu_status [open query-status.tsv w]
+puts $xu_status "report\tcatch_code\tmessage"
+proc xu177_report {filename script} {
+  global xu_status
+  puts "XU177_REPORT_BEGIN $filename"
+  set rc [catch {uplevel #0 [list redirect -file $filename $script]} msg]
+  puts "XU177_REPORT_END $filename catch=$rc"
+  puts $xu_status [join [list $filename $rc [string map [list "\n" { | } "\t" { }] $msg]] "\t"]
+  flush $xu_status
+}
+proc xu177_attr {obj attr} {
+  set rc [catch {get_attribute -quiet $obj $attr} value]
+  if {$rc} {return "UNAVAILABLE:$attr:$value"}
+  if {$value eq {}} {return "ABSENT_OR_EMPTY:$attr"}
+  return $value
+}
+set xu_exact {@TARGET@}
+set xu_cell [get_cells -quiet __XU177_INTENTIONALLY_ABSENT__]
+# Enumerate a reference class and compare native full_name by Tcl string equality.
+# In particular dp_gt0.vec_31_dfflr and qout_r_reg[0] retain their literal spelling.
+foreach_in_collection c [get_cells -quiet -hierarchical -filter {ref_name == DRNQV0_12TR40}] {
+  if {[get_object_name $c] eq $xu_exact} {set xu_cell [add_to_collection $xu_cell $c]}
+}
+if {[sizeof_collection $xu_cell] != 1} {error {XU177 exact cell is absent or ambiguous}}
+if {[get_attribute $xu_cell ref_name] ne {DRNQV0_12TR40}} {error {XU177 target reference changed}}
+set xu_pins [dict create]
+foreach_in_collection p [get_pins -quiet -of_objects $xu_cell] {
+  set pname [get_object_name $p]
+  foreach leaf {D CK Q RDN} {
+    if {$pname eq "$xu_exact/$leaf"} {
+      if {[dict exists $xu_pins $leaf]} {error {XU177 duplicate exact pin}}
+      dict set xu_pins $leaf $p
+    }
+  }
+}
+if {[dict size $xu_pins] != 4} {error {XU177 exact D CK Q RDN pin set missing}}
+foreach leaf {D CK Q RDN} {
+  set p [dict get $xu_pins $leaf]
+  set want in
+  if {$leaf eq {Q}} {set want out}
+  if {[get_attribute $p direction] ne $want} {error "XU177 wrong direction $leaf"}
+}
+set xu_D [dict get $xu_pins D]
+set xu_CK [dict get $xu_pins CK]
+set xu_Q [dict get $xu_pins Q]
+set xu_RDN [dict get $xu_pins RDN]
+redirect -file target-native.rpt {
+  puts "XU177_CELL name=[get_object_name $xu_cell] ref=[get_attribute $xu_cell ref_name]"
+  report_attribute -application $xu_cell
+  foreach leaf {D CK Q RDN} {
+    set p [dict get $xu_pins $leaf]
+    puts "XU177_PIN leaf=$leaf name=[get_object_name $p] direction=[get_attribute $p direction] owner=[get_object_name [get_cells -of_objects $p]]"
+    report_attribute -application $p
+  }
+}
+redirect -file direct-connectivity.rpt {
+  foreach leaf {D CK Q RDN} {
+    set p [dict get $xu_pins $leaf]
+    puts "XU177_NETS leaf=$leaf pin=[get_object_name $p]"
+    foreach_in_collection n [get_nets -quiet -of_objects $p] {
+      puts "NET [get_object_name $n]"
+      foreach_in_collection a [all_connected -leaf $n] {
+        puts "CONNECTED name=[get_object_name $a] class=[get_attribute $a object_class] direction=[xu177_attr $a direction]"
+        set owners [get_cells -quiet -of_objects $a]
+        foreach_in_collection owner $owners {
+          puts "OWNER name=[get_object_name $owner] ref=[get_attribute $owner ref_name] sequential=[xu177_attr $owner is_sequential]"
+        }
+      }
+    }
+  }
+}
+xu177_report target-libpins.rpt {
+  set lc [get_lib_cells -quiet */DRNQV0_12TR40]
+  if {[sizeof_collection $lc] != 1} {error {target lib-cell is absent or ambiguous}}
+  puts "XU177_LIBCELL [get_object_name $lc]"
+  foreach_in_collection lp [get_lib_pins -of_objects $lc] {
+    puts "LIBPIN [get_object_name $lp] direction=[get_attribute $lp direction]"
+    report_attribute -application $lp
+  }
+}
+xu177_report target-clock-reset.rpt {
+  foreach leaf {CK RDN} {
+    set p [dict get $xu_pins $leaf]
+    puts "XU177_CLOCK_RESET leaf=$leaf pin=[get_object_name $p]"
+    foreach a {case_value constant_value is_clock_pin clocks} {puts "$a=[xu177_attr $p $a]"}
+    puts "CLOCKS [get_object_name [get_clocks -quiet -of_objects $p]]"
+    puts "FANIN_STARTPOINTS [get_object_name [all_fanin -flat -startpoints_only -to $p]]"
+  }
+}
+xu177_report min-to-D.rpt {report_timing -delay_type min -to $xu_D -path_type full_clock_expanded -input_pins -nets -transition_time -capacitance -significant_digits 12 -max_paths 20 -nworst 20}
+xu177_report max-to-D.rpt {report_timing -delay_type max -to $xu_D -path_type full_clock_expanded -input_pins -nets -transition_time -capacitance -significant_digits 12 -max_paths 5}
+xu177_report min-path-native.rpt {
+  set paths [get_timing_paths -delay_type min -to $xu_D -max_paths 20 -nworst 20]
+  puts "XU177_MIN_PATH_COUNT [sizeof_collection $paths]"
+  foreach_in_collection path $paths {report_attribute -application $path}
+}
+xu177_report min-to-D-no-slack-filter.rpt {report_timing -delay_type min -to $xu_D -path_type full_clock_expanded -input_pins -nets -transition_time -significant_digits 12 -exceptions all}
+xu177_report clock-latency-to-CK.rpt {report_clock_timing -type latency -to $xu_CK}
+xu177_report check-timing.rpt {check_timing -verbose}
+xu177_report units.rpt {report_units}
+xu177_report clocks.rpt {report_clock}
+xu177_report clock-attributes.rpt {foreach_in_collection c [all_clocks] {report_attribute -application $c}}
+xu177_report analysis-coverage.rpt {report_analysis_coverage -status_details untested}
+xu177_report violations.rpt {report_constraint -all_violators}
+xu177_report case-analysis.rpt {report_case_analysis}
+xu177_report disabled-timing.rpt {report_disable_timing}
+xu177_report target-exceptions.rpt {report_exceptions -to $xu_D}
+xu177_report annotated-check.rpt {report_annotated_check -list_annotated -list_not_annotated}
+# all_fanout default timing graph stops at sequential endpoints; never use
+# -trace_arcs all or flatten a sequential arc into a combinational-causality claim.
+xu177_report Q-first-state-boundaries.rpt {
+  puts {SEMANTICS native timing-graph potential fanout only; STOP at every endpoint/state boundary; no Boolean sensitization or unknown-causality proof.}
+  set ends [all_fanout -flat -endpoints_only -from $xu_Q]
+  puts "ENDPOINT_COUNT [sizeof_collection $ends]"
+  foreach_in_collection e $ends {
+    puts "ENDPOINT name=[get_object_name $e] class=[get_attribute $e object_class]"
+    foreach_in_collection owner [get_cells -quiet -of_objects $e] {
+      puts "STOP_OWNER name=[get_object_name $owner] ref=[get_attribute $owner ref_name] sequential=[xu177_attr $owner is_sequential]"
+    }
+  }
+  set xu_bias_exact {@BIAS@}
+  set found 0
+  foreach_in_collection p [get_pins -quiet -hierarchical -filter {direction == out}] {
+    if {[get_object_name $p] eq $xu_bias_exact} {incr found; puts "BIAS_NATIVE_PIN [get_object_name $p]"}
+  }
+  puts "BIAS_PIN_MATCHES $found"
+  puts {No traversal beyond the listed state boundaries is performed. A missing direct fanout endpoint does not prove disconnectedness.}
+}
+close $xu_status
+puts {XU_OWN_S2C_READONLY177_COMPLETE_NOT_QUALIFIED}
+} xu_error]} {
+  puts stderr "XU177_FATAL: $xu_error"
+  exit 1
+}
+exit 0

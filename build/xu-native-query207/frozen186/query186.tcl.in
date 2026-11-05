@@ -1,0 +1,241 @@
+# Own155 read-only diagnostic, exact native names. No new clock/case/exception.
+if {[catch {
+@OWN_SETUP@
+set xu_status [open query-status.tsv w]
+puts $xu_status "report\tcatch_code\tmessage"
+proc xu186_row {f values} {
+  set safe {}
+  foreach v $values {lappend safe [string map [list "\t" { } "\n" { | }] $v]}
+  puts $f [join $safe "\t"]
+}
+set xu_attr_diag [open attribute-diagnostics.tsv w]
+xu186_row $xu_attr_diag {object_handle context attribute catch_code value raw_diagnostics}
+proc xu186_attr {obj attr {context {}}} {
+  global xu_attr_diag
+  set value {};set diagnostics {}
+  # Optional attributes differ between object types/installed releases. Capture
+  # their native text in a dedicated original diagnostic table, not the global
+  # required-command error stream. The value is never inferred from absence.
+  set rc [catch {redirect -variable diagnostics {set value [get_attribute -quiet $obj $attr]}} msg]
+  if {$rc || $diagnostics ne {} || $value eq {}} {
+    xu186_row $xu_attr_diag [list $obj $context $attr $rc $value "$diagnostics | $msg"]
+    flush $xu_attr_diag
+  }
+  if {$rc} {return "UNAVAILABLE:$attr:$msg"}
+  if {$value eq {}} {return "ABSENT_OR_EMPTY:$attr"}
+  return $value
+}
+proc xu186_report {filename script} {
+  global xu_status
+  puts "XU186_REPORT_BEGIN $filename"
+  set rc [catch {uplevel #0 [list redirect -file $filename $script]} msg]
+  puts "XU186_REPORT_END $filename catch=$rc"
+  xu186_row $xu_status [list $filename $rc $msg]
+  flush $xu_status
+}
+set xu_targets @EXACT_TARGETS@
+set xu_native [dict create]
+set xu_counts [dict create]
+set xu_wanted [dict create]
+foreach row $xu_targets {dict set xu_wanted [lindex $row 1] 1}
+# Names containing dot or [index] are never passed to a glob lookup.
+foreach_in_collection p [get_pins -quiet -hierarchical *] {
+  set n [get_object_name $p]
+  if {[dict exists $xu_wanted $n]} {dict set xu_native $n $p; dict incr xu_counts $n}
+}
+foreach_in_collection p [get_ports -quiet *] {
+  set n [get_object_name $p]
+  if {[dict exists $xu_wanted $n]} {dict set xu_native $n $p; dict incr xu_counts $n}
+}
+foreach n [dict keys $xu_wanted] {
+  if {![dict exists $xu_counts $n] || [dict get $xu_counts $n] != 1} {error "XU186 exact native pin/port absent or ambiguous: $n"}
+}
+proc xu186_exact {name} {
+  global xu_native
+  if {![dict exists $xu_native $name]} {error "XU186 exact object was not frozen: $name"}
+  return [dict get $xu_native $name]
+}
+set xu_meta [open static-metadata.tsv w]
+xu186_row $xu_meta {role object class direction owner ref is_sequential is_level_sensitive is_clock_pin is_async_pin clocks owner_clock_pins owner_clocks case_value constant_value user_case_value nets lib_pin min_pulse_width_high min_pulse_width_low}
+set xu_connections [open driver-load.tsv w]
+xu186_row $xu_connections {net connected_object class direction owner ref is_sequential}
+set xu_fanin [open net-startpoints.tsv w]
+xu186_row $xu_fanin {net representative_target startpoint class owner ref}
+set xu_seen_nets [dict create]
+set xu_owners [dict create]
+set xu_deep_owners [dict create]
+set xu_owner_clocks [dict create]
+set xu_lib_widths [dict create]
+foreach row $xu_targets {
+  lassign $row role name
+  set p [xu186_exact $name]
+  set owners {}
+  if {[get_attribute $p object_class] eq {pin}} {set owners [get_cells -quiet -of_objects $p]}
+  set owner {};set ref {};set seq {};set level {};set clockpins {};set ownerclocks {}
+  if {[sizeof_collection $owners] > 1} {error "XU186 multiple native owners: $name"}
+  if {[sizeof_collection $owners] == 1} {
+    set owner [get_object_name $owners];set ref [get_attribute $owners ref_name]
+    set seq [xu186_attr $owners is_sequential];set level [xu186_attr $owners is_level_sensitive]
+    dict set xu_owners $owner $owners
+    if {[string first {deep_} $role] >= 0} {dict set xu_deep_owners $owner $owners}
+    if {![dict exists $xu_owner_clocks $owner]} {
+      set cp [get_pins -quiet -of_objects $owners -filter {is_clock_pin == true}]
+      dict set xu_owner_clocks $owner [list [get_object_name $cp] [get_object_name [get_clocks -quiet -of_objects $cp]]]
+    }
+    lassign [dict get $xu_owner_clocks $owner] clockpins ownerclocks
+  }
+  set libpin {};set high {};set low {}
+  if {[get_attribute $p object_class] eq {pin}} {
+    set lp [get_lib_pins -quiet -of_objects $p]
+    if {[sizeof_collection $lp] != 1} {error "XU186 actual library pin absent/ambiguous: $name"}
+    set libpin [get_object_name $lp]
+    if {![dict exists $xu_lib_widths $libpin]} {
+      dict set xu_lib_widths $libpin [list [xu186_attr $lp min_pulse_width_high $libpin] [xu186_attr $lp min_pulse_width_low $libpin]]
+    }
+    lassign [dict get $xu_lib_widths $libpin] high low
+  }
+  set nets [get_nets -quiet -of_objects $p]
+  xu186_row $xu_meta [list $role $name [get_attribute $p object_class] [xu186_attr $p direction] $owner $ref $seq $level [xu186_attr $p is_clock_pin] [xu186_attr $p is_async_pin] [get_object_name [get_clocks -quiet -of_objects $p]] $clockpins $ownerclocks [xu186_attr $p case_value] [xu186_attr $p constant_value] [xu186_attr $p user_case_value] [get_object_name $nets] $libpin $high $low]
+  # All9219 pulse endpoints get metadata; only frozen critical targets get
+  # deep net/fanin. Missing deep traversal is explicit, never an exemption.
+  if {[string first {deep_} $role] < 0} {continue}
+  foreach_in_collection net $nets {
+    set nn [get_object_name $net]
+    if {[dict exists $xu_seen_nets $nn]} {continue}
+    dict set xu_seen_nets $nn 1
+    foreach_in_collection a [all_connected -leaf $net] {
+      set ac {}
+      if {[get_attribute $a object_class] eq {pin}} {set ac [get_cells -quiet -of_objects $a]}
+      set ar {};set as {}
+      if {[sizeof_collection $ac] == 1} {set ar [get_attribute $ac ref_name];set as [xu186_attr $ac is_sequential]}
+      xu186_row $xu_connections [list $nn [get_object_name $a] [get_attribute $a object_class] [xu186_attr $a direction] [get_object_name $ac] $ar $as]
+    }
+    foreach_in_collection a [all_fanin -flat -startpoints_only -to $p] {
+      set ac {};set ar {}
+      if {[get_attribute $a object_class] eq {pin}} {set ac [get_cells -quiet -of_objects $a]}
+      if {[sizeof_collection $ac] == 1} {set ar [get_attribute $ac ref_name]}
+      xu186_row $xu_fanin [list $nn $name [get_object_name $a] [get_attribute $a object_class] [get_object_name $ac] $ar]
+    }
+  }
+}
+close $xu_meta;close $xu_connections;close $xu_fanin
+# Query native arc identity using owner/index/from/to only: timing_arc has no full_name.
+proc xu186_arcs {f owner arcs fromattr toattr} {
+  set index 0
+  foreach_in_collection arc $arcs {
+    set from [get_attribute $arc $fromattr];set to [get_attribute $arc $toattr]
+    if {[sizeof_collection $from]!=1 || [sizeof_collection $to]!=1} {error {XU186 arc endpoints not unique}}
+    set values [list $owner $index [get_object_name $from] [get_object_name $to]]
+    foreach attr {sense when sdf_cond timing_type is_disabled is_user_disabled is_db_inherited_disabled delay_min delay_max} {
+      lappend values [xu186_attr $arc $attr "$owner#arc$index"]
+    }
+    xu186_row $f $values
+    incr index
+  }
+}
+xu186_report relevant-library.rpt {
+  set seen [dict create]
+  foreach owner [dict keys $xu_owners] {
+    set c [dict get $xu_owners $owner]
+    set lc [get_lib_cells -of_objects $c]
+    if {[sizeof_collection $lc] != 1} {error "XU186 ambiguous actual library cell: $owner"}
+    set ln [get_object_name $lc]
+    if {[dict exists $seen $ln]} {continue}
+    dict set seen $ln 1
+    puts "XU186_LIBCELL $ln"
+    foreach attr {is_sequential is_level_sensitive clock_gating_integrated_cell} {puts "$attr=[xu186_attr $lc $attr]"}
+    foreach_in_collection lp [get_lib_pins -of_objects $lc] {
+      puts "LIBPIN [get_object_name $lp] direction=[get_attribute $lp direction]"
+      foreach attr {clock is_clock_pin is_async_pin min_pulse_width_high min_pulse_width_low function} {puts "$attr=[xu186_attr $lp $attr]"}
+      # Deliberately bounded selected pin metadata; never dump a library body.
+    }
+  }
+}
+xu186_report relevant-arcs.rpt {
+  set df [open design-arcs.tsv w];set lf [open library-arcs.tsv w]
+  xu186_row $df {owner index from_pin to_pin sense when sdf_cond timing_type is_disabled is_user_disabled is_db_inherited_disabled delay_min delay_max}
+  xu186_row $lf {owner index from_lib_pin to_lib_pin sense when sdf_cond timing_type is_disabled is_user_disabled is_db_inherited_disabled delay_min delay_max}
+  set seen [dict create]
+  foreach owner [dict keys $xu_owners] {
+    set c [dict get $xu_owners $owner]
+    if {[dict exists $xu_deep_owners $owner]} {
+      xu186_arcs $df $owner [get_timing_arcs -of_objects $c] from_pin to_pin
+    }
+    set lc [get_lib_cells -of_objects $c];set ln [get_object_name $lc]
+    if {![dict exists $seen $ln]} {
+      dict set seen $ln 1
+      xu186_arcs $lf $ln [get_lib_timing_arcs -of_objects $lc] from_lib_pin to_lib_pin
+    }
+  }
+  close $df;close $lf
+  puts {XU186_NATIVE_ARCS_ENUMERATED_NO_TIMING_ARC_FULL_NAME}
+}
+set xu_uart_pairs @UART_PAIRS@
+foreach pair $xu_uart_pairs {
+  lassign $pair index ename dname
+  set xu_E [xu186_exact $ename];set xu_D [xu186_exact $dname]
+  set xu_c [get_cells -of_objects $xu_E]
+  if {[get_object_name [get_cells -of_objects $xu_D]] ne [get_object_name $xu_c]} {error {XU186 UART E/D owner mismatch}}
+  xu186_report "uart-$index-native.rpt" {
+    puts {SCOPE STATIC_SDC_ONLY; runtime disabled/unknown status is UNPROVEN without own mapped activity.}
+    report_attribute -application $xu_c
+    report_attribute -application $xu_E
+    report_attribute -application $xu_D
+    puts "E_CLOCKS [get_object_name [get_clocks -quiet -of_objects $xu_E]]"
+    puts "D_CLOCKS [get_object_name [get_clocks -quiet -of_objects $xu_D]]"
+    puts "E_FANIN_STARTPOINTS [get_object_name [all_fanin -flat -startpoints_only -to $xu_E]]"
+    puts "D_FANIN_STARTPOINTS [get_object_name [all_fanin -flat -startpoints_only -to $xu_D]]"
+  }
+  xu186_report "uart-$index-D-max.rpt" {report_timing -to $xu_D -delay_type max -path_type full_clock_expanded -input_pins -nets -significant_digits 12 -exceptions all}
+  xu186_report "uart-$index-D-min.rpt" {report_timing -to $xu_D -delay_type min -path_type full_clock_expanded -input_pins -nets -significant_digits 12 -exceptions all}
+}
+set xu_plic_pins @PLIC_PINS@
+foreach pair $xu_plic_pins {
+  lassign $pair index pname
+  set xu_plic [xu186_exact $pname]
+  xu186_report "plic-$index-load.rpt" {
+    report_attribute -application $xu_plic
+    puts "XU186_PLIC_NATIVE_LOAD_OBJECTS [get_object_name [all_connected -leaf [get_nets -of_objects $xu_plic]]]"
+  }
+}
+set xu_reset_queries @RESET_QUERIES@
+foreach row $xu_reset_queries {
+  lassign $row index srcname dstname
+  set xu_src [xu186_exact $srcname];set xu_dst [xu186_exact $dstname]
+  set xu_owner [get_cells -of_objects $xu_dst]
+  xu186_report "reset-$index-native.rpt" {
+    report_attribute -application $xu_owner
+    foreach_in_collection p [get_pins -of_objects $xu_owner] {report_attribute -application $p}
+    puts "ACTUAL_STARTPOINTS [get_object_name [all_fanin -flat -startpoints_only -to $xu_dst]]"
+    puts {QSOURCE semantics: actual startpoints only; suffix QN does not establish source-clock or conditional-arc activation.}
+  }
+  # Exact original source/target, no slack/nworst/max_paths restriction in unfiltered reports.
+  xu186_report "reset-$index-HF-recovery-unfiltered.rpt" {report_timing -from $xu_src -to $xu_dst -delay_type max -path_type full_clock_expanded -input_pins -nets -significant_digits 12 -exceptions all}
+  xu186_report "reset-$index-HF-removal-unfiltered.rpt" {report_timing -from $xu_src -to $xu_dst -delay_type min -path_type full_clock_expanded -input_pins -nets -significant_digits 12 -exceptions all}
+  xu186_report "reset-$index-any-recovery-unfiltered.rpt" {report_timing -to $xu_dst -delay_type max -path_type full_clock_expanded -input_pins -nets -significant_digits 12 -exceptions all}
+  xu186_report "reset-$index-any-removal-unfiltered.rpt" {report_timing -to $xu_dst -delay_type min -path_type full_clock_expanded -input_pins -nets -significant_digits 12 -exceptions all}
+  xu186_report "reset-$index-startpoint-paths.rpt" {
+    foreach_in_collection start [all_fanin -flat -startpoints_only -to $xu_dst] {
+      puts "XU186_ACTUAL_STARTPOINT [get_object_name $start]"
+      report_timing -from $start -to $xu_dst -delay_type max -path_type full_clock_expanded -input_pins -nets -significant_digits 12 -exceptions all
+    }
+  }
+}
+xu186_report check-timing.rpt {check_timing -verbose}
+xu186_report analysis-coverage.rpt {report_analysis_coverage -status_details untested}
+xu186_report constraints.rpt {report_constraint -all_violators -verbose -significant_digits 12}
+xu186_report clocks.rpt {report_clock -attributes}
+xu186_report clock-attributes.rpt {foreach_in_collection c [all_clocks] {report_attribute -application $c}}
+xu186_report case-analysis.rpt {report_case_analysis -all}
+xu186_report disabled-timing.rpt {report_disable_timing}
+xu186_report exceptions.rpt {report_exceptions}
+xu186_report annotated-check.rpt {report_annotated_check -list_annotated -list_not_annotated}
+xu186_report units.rpt {report_units}
+close $xu_status
+close $xu_attr_diag
+puts {XU_OWN_S2E_COVERAGE186_COMPLETE_NOT_QUALIFIED}
+} xu_error]} {
+  puts stderr "XU186_FATAL: $xu_error"
+  exit 1
+}
+exit 0
