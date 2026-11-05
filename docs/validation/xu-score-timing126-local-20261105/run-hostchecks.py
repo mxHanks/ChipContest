@@ -4,7 +4,6 @@ import argparse
 import importlib.util
 import json
 from pathlib import Path
-import shutil
 import sys
 
 sys.dont_write_bytecode = True
@@ -33,8 +32,8 @@ def main():
         (actual / name).write_bytes(raw)
     old = root / 'build/xu-score-resume-20261103/next-results-export-82/pmu-reset-condition-20261104-80'
     old.mkdir(parents=True)
-    for path in sorted((HERE / 'fixtures/attributes80').glob('*.txt')):
-        shutil.copyfile(path, old / path.name)
+    for name, raw in evidence.attribute_fixtures().items():
+        (old / name).write_bytes(raw)
     original = load('xu126_original_hostchecks', HERE / 'tools/check_local126.py')
     # The frozen checker imports its unchanged sibling worker. Only its local
     # input-root and command-line output path are rebound; no EDA is executed.

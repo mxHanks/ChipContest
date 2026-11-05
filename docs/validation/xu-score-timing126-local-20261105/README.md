@@ -41,7 +41,8 @@ reason的拒绝。人工表不证明服务器实际常量，语法检查不证�
 
 `original-delivery/`保留最初README/handoff原字节，其中“未执行”的状态属于当时本地
 交付回执。实际126远程运行状态及日志应在独立服务器证据归档核验，不能由这里推断。
-`fixtures/attributes80/`的4份实际旧属性列表仅供本地生成Tcl；旧导出中port/clock列表
+`attributes80-fixtures.tar.xz`的4份实际旧属性列表仅供本地生成Tcl，原字节及空格保留，
+`attributes80-members.json`逐份绑定哈希；旧导出中port/clock列表
 不存在，复现继续按原checker使用空列表，不能冒充126服务器属性发现结果。
 
 只读核验全部本地交付、原03成员和真实116输入来源：

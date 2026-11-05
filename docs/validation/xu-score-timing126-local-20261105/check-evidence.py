@@ -66,6 +66,15 @@ def parent_fixtures():
     return result
 
 
+def attribute_fixtures():
+    members = read_members((HERE / 'attributes80-fixtures.tar.xz').read_bytes())
+    receipts = json.loads((HERE / 'attributes80-members.json').read_text())
+    need(set(members) == set(receipts) and len(members) == 4, 'original80 attribute inventory differs')
+    for name, data in members.items():
+        need(ident(data) == receipts[name], 'original80 attribute bytes differ: ' + name)
+    return members
+
+
 def verify():
     manifest = json.loads((HERE / 'input-manifest.json').read_text())
     found = {p.relative_to(HERE).as_posix() for p in HERE.rglob('*') if p.is_file() and
@@ -96,6 +105,7 @@ def verify():
          reproduction['reproduced_result'] == reproduction['expected_original03_result'] == ident(result_raw),
          'independent reproduction receipt differs')
     fixtures = parent_fixtures()
+    attribute_fixtures()
     need(result['actual_input_sha256'] == {name: ident(data)['sha256'] for name, data in fixtures.items()},
          'hostcheck actual116 input hashes differ')
     handoff = json.loads((HERE / 'original-delivery/handoff126.json').read_text())
