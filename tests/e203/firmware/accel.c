@@ -23,6 +23,12 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
 #ifndef XU_NICE_DRAIN8
 #define XU_NICE_DRAIN8 0
 #endif
+#ifndef XU_NICE_DIRECT
+#define XU_NICE_DIRECT 0
+#endif
+#if XU_NICE_DIRECT && !XU_NICE_DRAIN8
+#error "direct result transport requires NICE drain8"
+#endif
 #if XU_NICE_DRAIN8 && (!XU_HARDWARE_Y32 || !XU_SHARED_W_PACKED16)
 #error "NICE drain8 requires the Y32 and packed16 shared-source profile"
 #endif
@@ -156,6 +162,12 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
     uint32_t first_w = w[0];
 #if XU_HARDWARE_Y32
     if (reg[Y32_CAPABILITY] != 0x59330001u) return -10;
+#endif
+#if XU_NICE_DIRECT
+    /* Opt-in capability is independent of every frozen capability word.
+     * This measured mode write preserves all old firmware load images. */
+    if (reg[0xf0 / 4] != 0x59440001u) return -12;
+    reg[0xf4 / 4] = 1;
 #endif
     reg[W_CURSOR] = 0;
     reg[W_PACK32] = first_w;

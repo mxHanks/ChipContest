@@ -1,0 +1,15 @@
+Command: ["python3", "-m", "unittest", "-v", "test_y32_wrapper", "test_autogroup_wrapper", "test_packed_wrapper", "test_cached_wrapper", "test_paired_hi_wrapper", "test_stream_wrapper", "test_bias_sram_wrapper"]
+Cwd: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203
+Environment: {"XU_BIAS_WRAPPER_SIM": "iverilog", "XU_PAIRED_HI_WRAPPER_SIM": "iverilog", "XU_WRAPPER_SIM": "iverilog", "XU_Y32_WRAPPER_SIM": "iverilog"}
+test_y32_wrapper.test_real_y32_numeric_legacy_ownership_and_illegal_domain_assertions ... ok
+test_autogroup_wrapper.test_real_fifo_all_groups_numeric_lanes_and_retirement_backpressure ... ok
+test_packed_wrapper.test_all_packed_positions_errors_commit_order_and_backpressure ... ok
+test_cached_wrapper.test_cache_masks_legacy_modes_result_window_and_backpressure ... ok
+test_paired_hi_wrapper.test_real_paired_hi_all_groups_numeric_ownership_and_isolated_extremes ... ok
+test_stream_wrapper.test_all_stream_positions_errors_commit_order_and_backpressure ... ok
+test_bias_sram_wrapper.test_masks_async_snapshots_retirement_clear_reset_and_runtime_protection ... ok
+
+Ran 7 tests in 32.981s
+OK
+Exit: 0
+Captured from agent tool transcript; per-test temporary compiler/simulator logs were not persisted.

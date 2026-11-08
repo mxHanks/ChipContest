@@ -1,0 +1,1818 @@
+{
+  "status": "POSTVALIDATED_SAVED_LOGS",
+  "scope": "current parser on saved raw logs only; no simulator rerun or campaign-result rewrite",
+  "comparison_native_exit": 0,
+  "comparison_log_sha256": "025901945b4be8df4a3ef5a34f718b04b12eaecb691957af9b39f54536ce56e2",
+  "comparison_sha256": "cb0b56c2cdd4d65c0064531d89c1c0f98617fe255f6b1c450df025906a8cd9cd",
+  "source_declarations_sha256": "64d8d67e73204bdb105fa1a394680a9fd71c9bf3c55bb09f4ab6e78bef873727",
+  "parser_source_sha256": {
+    "tools/scripts/e203_soc.py": "00ae2ccbf94b8f8856836aada16d2ee6e16bda239c54525d389d7ca139f85832",
+    "tools/scripts/xu_firmware_contract.py": "5032da5cbc605877db8ebeb053198fdc763385585a35699857382fc2f15ad719",
+    "tools/analysis/s3_writeback_report.py": "61f8a79741a801d389e10b2cc9b3c0bee5eb75726a87dbba3ba0a5a003c7a523"
+  },
+  "generated_clear_c_comparison": {
+    "baseline": {
+      "normalized_sha256": "d6fe60d34d7b6232d6716f8a9042231e2d6ca6bf370164c94aea3087f6563227",
+      "normalization": "only exact frozen-main snapshot include path; all other bytes unchanged"
+    },
+    "candidate": {
+      "normalized_sha256": "d6fe60d34d7b6232d6716f8a9042231e2d6ca6bf370164c94aea3087f6563227",
+      "normalization": "only exact frozen-main snapshot include path; all other bytes unchanged"
+    },
+    "equal": true
+  },
+  "campaigns": [
+    {
+      "label": "baseline",
+      "result_path": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/result.json",
+      "result_sha256": "774ad8e1a3cde32abd370b827cce2eefc3e2ece2147a9784825b5652d92f3533",
+      "schedule": "bias-hw-autogroup-y32-packed16-nice-read-pop-window",
+      "tasks": [
+        {
+          "original_layer": 0,
+          "raw_log_sha256": "8188208fa6e2f0072d5d55d6b3ba29c07f1d0c0c249d19ad0de80b48e83c4413",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-00/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 1,
+          "raw_log_sha256": "51cdf85048fe8f2f58d35bfb42c3f770f55b26e546ed13bc07ba71816b41bc5b",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-01/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 2,
+          "raw_log_sha256": "3382ff7da0802e43e200a66e437bc203023c6ce2031ff02888391ba4cbb6fe2d",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-02/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 3,
+          "raw_log_sha256": "7133d65ffef7a6c06a1ed0e3373ab106e88001b1bb197bc328cae3a4ab29d7a6",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-03/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 4,
+          "raw_log_sha256": "fa3410c1592fa97b74e6372b42c7087a22d76dec1bdab8f34ce7ca82cc9091db",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-04/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 5,
+          "raw_log_sha256": "b5f0482e777722c336e2efaf72caa4b2f9b6f3471a49f2cd1e26cfb4c76e6a68",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-05/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 6,
+          "raw_log_sha256": "b5e009e2437ddac3e70eeb952e6eeca40e3950814d696e5afaa9153e2a39af66",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-06/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 7,
+          "raw_log_sha256": "3f86b14d9b26386f67eda13b3e6c42777877ed379542ff66de1fe9842fd95e6b",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-07/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 8,
+          "raw_log_sha256": "f3671f4c232f9caa1b1f22e108028e6d7f6e260e09cc8ce47afa65b3315ffc0b",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-08/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 9,
+          "raw_log_sha256": "8950e3dce650f742cd5ee38bce7c048f91309c6f52c614faf9aa915df0241296",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-09/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 10,
+          "raw_log_sha256": "23f98ac73dafb47c0d5724a7121efaeee63c74e0ab66003e2fa25a14a0c22b4b",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-10/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        },
+        {
+          "original_layer": 11,
+          "raw_log_sha256": "e632e0c4dcaf01c13a21cc0c53f2b2ef2b8842fd55a2d956c928b2e42731f3d6",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/task-11/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_READ_POP=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 564118,
+              "firmware_cycles": 564211
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114698,
+              "x_load": 71082,
+              "bias_load": 10757,
+              "compute_wait": 30888,
+              "writeback": 297795,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 30394,
+              "mmio_writes": 12329,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 7780,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1966568,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 25344,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [],
+          "read_pop": [
+            {
+              "layer": 0,
+              "alias_reads": 3168,
+              "explicit_pops": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "direct",
+      "result_path": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/result.json",
+      "result_sha256": "3a45ed4122c6cfbedb797259bd67daa4a7fc4d060e4dbb82686eea61ef1f3077",
+      "schedule": "bias-hw-autogroup-y32-packed16-nice-direct-window",
+      "tasks": [
+        {
+          "original_layer": 0,
+          "raw_log_sha256": "028a684550f427091093b27624876c05f02e84b04c512f8ecd4d43802317e000",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-00/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 1,
+          "raw_log_sha256": "da34797e6072444a5c70651ea0b4907301f9e2df05142cbee08210e5e193075c",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-01/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 2,
+          "raw_log_sha256": "6dc99731f75992867f62befb5ba32f35b49a81f0246ae85f45d022cc9ae5497e",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-02/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 3,
+          "raw_log_sha256": "976ae44a5a1e15a9d224aec080f27443f4d09ffa56697bc12798b9d346ce235f",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-03/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 4,
+          "raw_log_sha256": "ce8496a402e5abb0861f678f25e0d9719a2914efadffd4b8a573379a74540796",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-04/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 5,
+          "raw_log_sha256": "7566f2eb8a72680050a70824b8c6776dd5e029648ccb00997f761b9a07513db9",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-05/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 6,
+          "raw_log_sha256": "6e59924637d4649bebaffb99bc3067235cce29678584af8036f0e741ae05f931",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-06/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 7,
+          "raw_log_sha256": "f4723042d7b588430aeddd97c4873d5f67c61ade578487bfea8fdef5a29dc214",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-07/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 8,
+          "raw_log_sha256": "f19e0cfef3050e39b9a3ab26adb73376f17e048038684f793127a8504e793e02",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-08/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 9,
+          "raw_log_sha256": "11b788fd500cee446796936fe175889584f63578820a8ad18176857adde8765f",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-09/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 10,
+          "raw_log_sha256": "f75b7bd312f5ed6f2fad3284fea295d072414791fac0cba7c6733f72223e904e",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-10/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        },
+        {
+          "original_layer": 11,
+          "raw_log_sha256": "3aa8565bd39a887cd58c1199c1bd46e2574950a882baffaaf1f1351b79402c1e",
+          "raw_command": [
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+            "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+            "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-11/vectors",
+            "+TASKS=1",
+            "+DUMPWAVE=0",
+            "+MAX_CYCLES=3000000",
+            "+FIRST_SOURCE_STALL=0",
+            "+OUTPUT_Y32=1",
+            "+SHARED_W_PACKED16=1",
+            "+NICE_DRAIN8=1",
+            "+NICE_DIRECT=1"
+          ],
+          "layers": [
+            {
+              "layer": 0,
+              "cycles": 453259,
+              "firmware_cycles": 453352
+            }
+          ],
+          "performance": [
+            {
+              "w_load": 114713,
+              "x_load": 71084,
+              "bias_load": 10760,
+              "compute_wait": 24552,
+              "writeback": 193252,
+              "other": 38898,
+              "busy": 215424,
+              "mac_fire": 202752,
+              "mmio_reads": 5051,
+              "mmio_writes": 12330,
+              "shared_reads": 15040,
+              "shared_writes": 25344,
+              "shared_stall": 14122,
+              "mmio_stall": 0,
+              "starts": 3168,
+              "dones": 3168
+            }
+          ],
+          "windows": [
+            {
+              "layer": 0,
+              "first_request": 1402451,
+              "first_accept": 1402451,
+              "final_y_response": 1855709,
+              "first_request_wait": 0
+            }
+          ],
+          "nice": [
+            {
+              "layer": 0,
+              "requests": 3168,
+              "responses": 3168,
+              "oitf_retired": 3168,
+              "status_polls": 5049,
+              "result_reads": 0,
+              "pops_retired": 3168,
+              "shared_writes": 25344
+            }
+          ],
+          "direct": [
+            {
+              "layer": 0,
+              "snapshots": 3168,
+              "lanes": 25344,
+              "pops_retired": 3168,
+              "result_mmio_reads": 0
+            }
+          ],
+          "read_pop": []
+        }
+      ]
+    }
+  ]
+}

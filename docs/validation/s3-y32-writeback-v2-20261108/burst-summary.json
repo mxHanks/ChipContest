@@ -1,0 +1,169 @@
+{
+  "status": "DEVELOPMENT_PASS_POLICY_PENDING",
+  "scope": "same-condition original 12 layers; 2-state Verilator, not official acceptance/STA/PPA",
+  "configuration": {
+    "schedule": "bias-hw-autogroup-y32-packed16-nice-drainn-read-pop-window",
+    "optimization": "-O2",
+    "experiment": "both-unroll-no-masks"
+  },
+  "tasks": [
+    {
+      "layer": 0,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 1,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 2,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 3,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 4,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 5,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 6,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 7,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 8,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 9,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 10,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    },
+    {
+      "layer": 11,
+      "baseline_cycles": 564118,
+      "candidate_cycles": 542635,
+      "clear_cycles": 198403,
+      "saved_cycles": 21483,
+      "payload_reduction_pct": 3.8082457925469493,
+      "including_clear_reduction_pct": 2.8173650299467163
+    }
+  ],
+  "changed_production_sources": {
+    "tests/e203/tb_accel_soc.sv": [
+      "8cfdeb52d000a572d2c46a6b58aee08191ffbb5e2cb2333c9fe0803e17438f9f",
+      "8a975291e0ec6788e214db9b2b869f1c29a67b2d34c9d983935f1170476a1837"
+    ],
+    "tests/e203/firmware/accel.c": [
+      "78deb0d04021ffb3bc11c3f555cae252fb900c91de273c13f1f8cbf9056442ae",
+      "de04a8e1db83848a8e00f07518b44d41790f55e6490b8e44b0d2572ee1e727ce"
+    ],
+    "tools/scripts/xu_firmware_contract.py": [
+      "75b874f749744389b807540a0df48751f58cd3dd2f0554f31b681a6d9c2e2577",
+      "1ade6c5f1f05d7ffd02975cf5ee25564caa0a33493588ca5390da2d4bcf924ed"
+    ],
+    "tools/scripts/e203_soc.py": [
+      "3b1dbe58c8f0a93261313db02febd853176ee1de3b584d887f3490e51c2a36eb",
+      "f70fe0d021228a24b863f9da695e11c18ae08eac38e50c345d64d9043847f330"
+    ],
+    "rtl/subsys/xu_nice_drain8.v": [
+      "004dd136ce73e8a87fd59adf0b005382483400d8fdaf16954f86882268d78cf4",
+      "55628a67ff7b2684dc6fe5e1b76b6951a7239432e37cb0ea1443eceec6eb51e0"
+    ]
+  },
+  "counts_per_task": {
+    "layer": 0,
+    "requests": 99,
+    "responses": 99,
+    "oitf_retired": 99,
+    "status_polls": 5049,
+    "result_reads": 25344,
+    "pops_retired": 3168,
+    "shared_writes": 25344
+  },
+  "added_generated_python_caches": [
+    "tools/ppa/__pycache__/s3_task_clear_protocol.cpython-314.pyc",
+    "tools/ppa/__pycache__/xu_task_clear_protocol.cpython-314.pyc",
+    "tools/scripts/__pycache__/e203_soc.cpython-314.pyc",
+    "tools/scripts/__pycache__/xu_firmware_contract.cpython-314.pyc"
+  ],
+  "evidence_sha256": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-20261108/read-pop-full12/result.json": "774ad8e1a3cde32abd370b827cce2eefc3e2ece2147a9784825b5652d92f3533",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-full12/result.json": "47d1060ff30b5547b3e5c38c2ac1ad6bebd10d587488ec321f448a42bfc65871",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-full12/plan.json": "0678060863c9f425c54053e3c7df9a1351a4bec5edebb5fe88522c70d8b3c949",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-unit/extended-result.json": "608f2803408a4610b6fa3c0dd7e15505f0350c17adeb06784895c8488686e9f3",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-legacy-task0/run.json": "0e146d03a167f184c4d42100dcdfc0259d0fc71118922f684174e878a9b7cd4d"
+  },
+  "limitations": [
+    "No VCS/vendor-SVA signoff: vcs executable unavailable.",
+    "No mapped area, STA, power, energy or official task-policy qualification.",
+    "No direct channel, polling-backoff, CPU-unroll or DMA changes combined."
+  ]
+}

@@ -36,8 +36,12 @@ def task_log(schedule, tasks=1):
         if schedule in contract.PACKED16_SCHEDULES:
             lines.append(f'W_PACKED16_TASK layer={layer} source_words=8192 uploaded_values=16384')
         if schedule in contract.NICE_SCHEDULES:
+            result_reads = 0 if schedule == contract.NICE_DIRECT_SCHEDULE else 25344
             lines.append(f'NICE_TASK layer={layer} requests=3168 responses=3168 oitf_retired=3168 '
-                         'status_polls=3168 result_reads=25344 pops_retired=3168 shared_writes=25344')
+                         f'status_polls=3168 result_reads={result_reads} pops_retired=3168 shared_writes=25344')
+        if schedule == contract.NICE_DIRECT_SCHEDULE:
+            lines.append(f'DIRECT_TASK layer={layer} snapshots=3168 lanes=25344 '
+                         'pops_retired=3168 result_mmio_reads=0')
         if schedule == contract.NICE_READ_POP_SCHEDULE:
             lines.append(f'READ_POP_TASK layer={layer} alias_reads=3168 explicit_pops=0')
     lines.append(f'SOC_PASS tasks={tasks} outputs={tasks*25344} '
@@ -258,6 +262,48 @@ class Y32FirmwareContractTests(unittest.TestCase):
                 self.assertEqual('+NICE_DRAIN8=1' in command, schedule in contract.NICE_SCHEDULES)
                 self.assertEqual('+NICE_READ_POP=1' in command,
                                  schedule == contract.NICE_READ_POP_SCHEDULE)
+
+    def test_direct_transport_work_and_opt_in_preserve_existing_encoding(self):
+        old, new = contract.NICE_READ_POP_SCHEDULE, contract.NICE_DIRECT_SCHEDULE
+        self.assertEqual(contract.task_contract(new),
+                         {**contract.task_contract(old), 'mmio_writes': 12330,
+                          'result_mmio_reads': 0, 'y32_mmio_reads': 0,
+                          'direct_snapshots': 3168, 'direct_lanes': 25344})
+        for optimization in contract.OPTIMIZATIONS:
+            for experiment in contract.EXPERIMENTS:
+                before = contract.compiler_defines(contract.configuration(old, optimization, experiment))
+                after = contract.compiler_defines(contract.configuration(new, optimization, experiment))
+                self.assertEqual(after, before + ['-DXU_NICE_DIRECT=1'])
+        self.assertEqual(contract.simulator_arguments(new),
+                         contract.simulator_arguments(contract.NICE_SCHEDULE) + ['+NICE_DIRECT=1'])
+
+    def test_direct_records_require_all_internal_results_and_no_mmio_result_reads(self):
+        schedule = contract.NICE_DIRECT_SCHEDULE
+        layers = [dict(layer=0, cycles=1000000)]
+        marker = ('DIRECT_TASK layer=0 snapshots=3168 lanes=25344 '
+                  'pops_retired=3168 result_mmio_reads=0\n')
+        self.assertEqual(soc.check_direct_activity(marker, layers, schedule),
+                         [dict(layer=0, snapshots=3168, lanes=25344,
+                               pops_retired=3168, result_mmio_reads=0)])
+        complete = task_log(schedule)
+        self.assertEqual(len(soc.check_performance(complete, layers, schedule)), 1)
+        bad_markers = ['', marker+marker, marker.replace('layer=0', 'layer=1'),
+                       marker.replace('snapshots=3168', 'snapshots=3167'),
+                       marker.replace('lanes=25344', 'lanes=25343'),
+                       marker.replace('pops_retired=3168', 'pops_retired=3167'),
+                       marker.replace('result_mmio_reads=0', 'result_mmio_reads=1'),
+                       marker.replace('lanes=25344', 'lanes=-1'),
+                       marker.replace(' result_mmio_reads=0', ''),
+                       marker.rstrip()+' other=0\n']
+        for bad in bad_markers:
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                soc.check_performance(complete.replace(marker, bad), layers, schedule)
+        for old in contract.SCHEDULES:
+            if old == schedule:
+                continue
+            self.assertEqual(soc.check_direct_activity('', layers, old), [])
+            with self.subTest(old=old), self.assertRaises(ValueError):
+                soc.check_direct_activity(marker, layers, old)
 
     def test_read_pop_changes_only_transport_work_and_keeps_firmware_abi(self):
         old, new = contract.NICE_SCHEDULE, contract.NICE_READ_POP_SCHEDULE

@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-s",
+        "tb_nice_drainN",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-full12/source/rtl/core",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-unit/drainN-extended.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-unit/tb_nice_drainN_extended.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-full12/source/rtl/subsys/xu_nice_drain8.v"
+      ],
+      "native_exit": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-unit/drainN-extended.vvp"
+      ],
+      "native_exit": 0,
+      "log_sha256": "1b8b168a84e706d86a2320c77349290377fa96500ac76ec922c2cdce74cfdeed"
+    }
+  ],
+  "source_sha256": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-unit/tb_nice_drainN_extended.sv": "5ddf133e5a27c7e479410e98b0ca6b83c28a185aa78768e430a7b0d132937e8a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/burst-full12/source/rtl/subsys/xu_nice_drain8.v": "55628a67ff7b2684dc6fe5e1b76b6951a7239432e37cb0ea1443eceec6eb51e0"
+  }
+}

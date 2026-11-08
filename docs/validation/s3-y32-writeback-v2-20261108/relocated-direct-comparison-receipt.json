@@ -1,0 +1,198 @@
+{
+  "status": "RELOCATED_STRICT_COMPARISON_PASS",
+  "scope": "Final archived reporter rehashes unpacked full campaigns; no simulator run",
+  "command": [
+    "/usr/bin/python3.12",
+    "-E",
+    "-B",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/handoff/verify-final-unpacked/s3-y32-writeback-v2-evidence/tools-current/s3_writeback_report.py",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/handoff/verify-final-unpacked/s3-y32-writeback-v2-evidence/campaigns/read-pop-full12/result.json",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/handoff/verify-final-unpacked/s3-y32-writeback-v2-evidence/campaigns/direct-full12/result.json",
+    "--allow-direct-transport",
+    "--out",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/handoff/relocated-direct-comparison.json",
+    "--expect-source-change",
+    "rtl/core/e203_cpu.v=4b6c3f5236fc373923fa2a91c9e9feb93fd4336dff7ac423943415e63ecd696b:757ac56dd2f58e914cba08b940ea89c5279045e61208768ad27d1a2c7f3d7261",
+    "--expect-source-change",
+    "rtl/core/e203_cpu_top.v=0970379eabe2253a5d1af51a6c3cab5d44183108ad974b56ed2841bccbbabb5a:01e51baeedbbed1ff74484966303da1e3c402469bb7afdcd4ac36bf237583d09",
+    "--expect-source-change",
+    "rtl/perips/accel_icb_slave.v=7a3832158198b72150b27be689f1e1c31e388afb47beb098131c0517452cc537:fafff9effe44060678e4a12fc29347278b531b7ba26805a1cdba3b20bbb48a57",
+    "--expect-source-change",
+    "rtl/subsys/e203_subsys_main.v=4258161cac87bc56ef19f22ee8c82dbcae9d3effb2f0159282d3f8acd85c015c:2db70d54fd8919a464e58e0aed4f57735a81a72f6e8a0c954caca56aa22f7dc2",
+    "--expect-source-change",
+    "rtl/subsys/e203_subsys_nice_core.v=c09c68ce03913acc41a5b9b20b128f978a01370b282f525ef82874ba184c6e47:f5dd1ac6e33f624df08fa5817139c52da4fb97ee4dcbf8cf474076ddc742af6e",
+    "--expect-source-change",
+    "rtl/subsys/e203_subsys_perips.v=7cfe072f79e41fa8b41eb917f89db2702b0c26a0747678f044e051b739d0537c:ffdee7025f9da4632c38b2e52de65c4ae1d4f4c05bef5480d63f93e108d07f41",
+    "--expect-source-change",
+    "rtl/subsys/xu_nice_drain8.v=004dd136ce73e8a87fd59adf0b005382483400d8fdaf16954f86882268d78cf4:eed8452364ebcb9847da7c89854b0b2acc6f20eec9b6d40104565ab4413838bc",
+    "--expect-source-change",
+    "tests/e203/firmware/accel.c=78deb0d04021ffb3bc11c3f555cae252fb900c91de273c13f1f8cbf9056442ae:f6dccf27145089e9aacda5082d4b99733d33bc61e87f35af433f95ce4776d37a",
+    "--expect-source-change",
+    "tests/e203/tb_accel_soc.sv=8cfdeb52d000a572d2c46a6b58aee08191ffbb5e2cb2333c9fe0803e17438f9f:cb3ed917542acdc16934380388480b8ae97b0478cb884138d98f5f028c149b0d",
+    "--expect-source-change",
+    "tools/scripts/e203_soc.py=3b1dbe58c8f0a93261313db02febd853176ee1de3b584d887f3490e51c2a36eb:00ae2ccbf94b8f8856836aada16d2ee6e16bda239c54525d389d7ca139f85832",
+    "--expect-source-change",
+    "tools/scripts/xu_firmware_contract.py=75b874f749744389b807540a0df48751f58cd3dd2f0554f31b681a6d9c2e2577:5032da5cbc605877db8ebeb053198fdc763385585a35699857382fc2f15ad719"
+  ],
+  "native_exit": 0,
+  "archive_sha256": "3b254c40e348eb4f0b883661be6b38d310980ba0e4d4a9495a7a38b545ee8ef9",
+  "reporter_sha256": "61f8a79741a801d389e10b2cc9b3c0bee5eb75726a87dbba3ba0a5a003c7a523",
+  "unpacked_comparison_sha256": "4a60152eafbc4d8d174d15268253b8e11ab9957710f0aec400f53ab294b817c0",
+  "original_comparison_sha256": "cb0b56c2cdd4d65c0064531d89c1c0f98617fe255f6b1c450df025906a8cd9cd",
+  "log_sha256": "d315dd6b0f4099f51986901ab94e3bcde09562094e4c26bc0ebbb4c74c0fbe04",
+  "identical_to_original": [
+    "totals",
+    "layers",
+    "source_changes",
+    "firmware_identity"
+  ],
+  "totals": {
+    "baseline": {
+      "auto": {
+        "compute_writeback_overlap": 1821204,
+        "fifo_full_wait": 1544436,
+        "pops_retired": 38016,
+        "rows": 1188
+      },
+      "bus_counters": {
+        "busy": 2585088,
+        "dones": 38016,
+        "mac_fire": 2433024,
+        "mmio_reads": 364728,
+        "mmio_stall": 0,
+        "mmio_writes": 147948,
+        "shared_reads": 180480,
+        "shared_stall": 93360,
+        "shared_writes": 304128,
+        "starts": 38016
+      },
+      "clear_cycles": 2380836,
+      "clear_to_source_gap": 1224,
+      "nice": {
+        "oitf_retired": 38016,
+        "pops_retired": 38016,
+        "requests": 38016,
+        "responses": 38016,
+        "result_reads": 304128,
+        "shared_writes": 304128,
+        "status_polls": 60588
+      },
+      "payload_cycles": 6769416,
+      "payload_plus_clear_cycles": 9150252,
+      "phases": {
+        "bias_load": 129084,
+        "compute_wait": 370656,
+        "other": 466776,
+        "w_load": 1376376,
+        "writeback": 3573540,
+        "x_load": 852984
+      },
+      "transport": {
+        "alias_reads": 38016,
+        "direct_lanes": 0,
+        "direct_pops": 0,
+        "direct_snapshots": 0,
+        "explicit_pops": 0,
+        "result_mmio_reads": 304128
+      }
+    },
+    "candidate": {
+      "auto": {
+        "compute_writeback_overlap": 1897236,
+        "fifo_full_wait": 248340,
+        "pops_retired": 38016,
+        "rows": 1188
+      },
+      "bus_counters": {
+        "busy": 2585088,
+        "dones": 38016,
+        "mac_fire": 2433024,
+        "mmio_reads": 60612,
+        "mmio_stall": 0,
+        "mmio_writes": 147960,
+        "shared_reads": 180480,
+        "shared_stall": 169464,
+        "shared_writes": 304128,
+        "starts": 38016
+      },
+      "clear_cycles": 2380836,
+      "clear_to_source_gap": 1224,
+      "nice": {
+        "oitf_retired": 38016,
+        "pops_retired": 38016,
+        "requests": 38016,
+        "responses": 38016,
+        "result_reads": 0,
+        "shared_writes": 304128,
+        "status_polls": 60588
+      },
+      "payload_cycles": 5439108,
+      "payload_plus_clear_cycles": 7819944,
+      "phases": {
+        "bias_load": 129120,
+        "compute_wait": 294624,
+        "other": 466776,
+        "w_load": 1376556,
+        "writeback": 2319024,
+        "x_load": 853008
+      },
+      "transport": {
+        "alias_reads": 0,
+        "direct_lanes": 304128,
+        "direct_pops": 38016,
+        "direct_snapshots": 38016,
+        "explicit_pops": 0,
+        "result_mmio_reads": 0
+      }
+    },
+    "delta": {
+      "auto": {
+        "compute_writeback_overlap": 76032,
+        "fifo_full_wait": -1296096,
+        "pops_retired": 0,
+        "rows": 0
+      },
+      "bus_counters": {
+        "busy": 0,
+        "dones": 0,
+        "mac_fire": 0,
+        "mmio_reads": -304116,
+        "mmio_stall": 0,
+        "mmio_writes": 12,
+        "shared_reads": 0,
+        "shared_stall": 76104,
+        "shared_writes": 0,
+        "starts": 0
+      },
+      "clear_cycles": 0,
+      "clear_to_source_gap": 0,
+      "nice": {
+        "oitf_retired": 0,
+        "pops_retired": 0,
+        "requests": 0,
+        "responses": 0,
+        "result_reads": -304128,
+        "shared_writes": 0,
+        "status_polls": 0
+      },
+      "payload_cycles": -1330308,
+      "payload_plus_clear_cycles": -1330308,
+      "phases": {
+        "bias_load": 36,
+        "compute_wait": -76032,
+        "other": 0,
+        "w_load": 180,
+        "writeback": -1254516,
+        "x_load": 24
+      },
+      "transport": {
+        "alias_reads": -38016,
+        "direct_lanes": 304128,
+        "direct_pops": 38016,
+        "direct_snapshots": 38016,
+        "explicit_pops": 0,
+        "result_mmio_reads": -304128
+      }
+    }
+  }
+}

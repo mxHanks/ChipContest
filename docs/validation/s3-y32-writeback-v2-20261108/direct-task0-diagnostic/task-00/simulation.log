@@ -1,0 +1,14 @@
+["/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-task0-diagnostic/verilator-obj/soc_sim", "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-task0-diagnostic/accel_soc", "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-task0-diagnostic/task-00/vectors", "+TASKS=1", "+DUMPWAVE=0", "+MAX_CYCLES=3000000", "+FIRST_SOURCE_STALL=0", "+OUTPUT_Y32=1", "+SHARED_W_PACKED16=1", "+NICE_DRAIN8=1", "+NICE_DIRECT=1"]
+S3_CLOCK_PROFILE domain=hf requested_half_ns=3.333333333 measured_half_ns=3.333333000 period_ns=6.666666000 frequency_hz=150000015.000001490 precision_fs=1
+S3_CLOCK_PROFILE domain=lf requested_half_ns=15258.7890625 measured_half_ns=15258.789063000 period_ns=30517.578126000 frequency_hz=32767.999998926 precision_fs=1
+S3_STARTUP_PROFILE event=second_assert time_ns=8011012.532232 cpu_reset_n=1
+S3_STARTUP_PROFILE event=second_release time_ns=8011132.532232 held_ns=120.000000 cpu_reset_n=0
+S3_STARTUP_PROFILE event=measurement_begin time_ns=8011132.532232 external_reset_n=1 cycle=0
+S3_CLEAR_OBSERVER_ARM cycle=1203947 actual_accel_reset_n=1
+S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=32930 w=16384 x=64 legacy_bias=8 bias_entries=0 sram_clear_commands=1 sram_done=1 commands=32935 responses=32935 clear_cycles=198403 response_end_cycle=198403 gap_to_source_request=102 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING
+TASK_PASS layer=0 outputs=25344 writes=25344 cycles=453259 firmware_cycles=453352
+WINDOW_TASK layer=0 first_request=1402451 first_accept=1402451 final_y_response=1855709 first_request_wait=0
+DIRECT_AUTO_DIAGNOSTIC rows=99 pops=3168 active=0 retired=32 produced=32 count=0 overlap=0 full_wait=20695 bundles=3168 direct_pops=3168 logical=25344
+[20382755000000] %Fatal: tb.sv:924: Assertion failed in tb_accel_soc.report_performance: autonomous row/POP retirement or overlap contract mismatch
+%Error: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-task0-diagnostic/tb.sv:924: Verilog $stop
+Aborting...

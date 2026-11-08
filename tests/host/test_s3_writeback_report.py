@@ -33,7 +33,7 @@ def unit_elf(entry=0x80000000, memsz=32, payload=b'unit-loaded-code', metadata=b
     return header + program_header + payload + metadata
 
 
-def unit_campaign(root, cycles=1000000, rtl='baseline', layers=(0, 1), read_pop=False):
+def unit_campaign(root, cycles=1000000, rtl='baseline', layers=(0, 1), read_pop=False, direct=False):
     """Manufacture parser inputs in temporary storage, not reusable run artifacts."""
     root.mkdir()
     root = root.resolve()
@@ -42,20 +42,26 @@ def unit_campaign(root, cycles=1000000, rtl='baseline', layers=(0, 1), read_pop=
     source.write_text(rtl)
     sources = {'rtl/subsys/xu_nice_drain8.v': sha(rtl)}
     for relative, text in (('tests/e203/firmware/main.c', 'unit-main'),
-                           ('tools/ppa/s3_task_clear_protocol.py', 'unit-clear-helper')):
+                           ('tools/ppa/s3_task_clear_protocol.py', 'unit-clear-helper'),
+                           ('tests/e203/firmware/accel.c', 'unit-accel-direct' if direct else 'unit-accel'),
+                           ('tools/scripts/xu_firmware_contract.py', 'unit-contract-direct' if direct else 'unit-contract'),
+                           ('rtl/perips/accel_icb_slave.v', 'unit-wrapper-direct' if direct else 'unit-wrapper')):
         path = root / 'source' / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
         sources[relative] = sha(text)
-    (root / 's3_clear_main.c').write_text('unit-generated-clear-main')
+    generated_clear = '#include "' + str(root / 'source/tests/e203/firmware/main.c') + '"\nunit-generated-clear-main\n'
+    (root / 's3_clear_main.c').write_text(generated_clear)
     (root / 'tb.sv').write_text('unit-generated-testbench')
-    (root / 'rtl.f').write_text(str(source) + '\n' + str(root / 'tb.sv') + '\n')
+    (root / 'rtl.f').write_text(''.join(str(root / 'source' / p) + '\n'
+        for p in sorted(sources) if p.startswith('rtl/')) + str(root / 'tb.sv') + '\n')
     save_json(root / 'clear-recipe.json', dict(
         frozen_main_sha256=sha('unit-main'), helper_sha256=sha('unit-clear-helper'),
-        generated_c_sha256=sha('unit-generated-clear-main'), generated_tb_sha256=sha('unit-generated-testbench'),
+        generated_c_sha256=sha(generated_clear), generated_tb_sha256=sha('unit-generated-testbench'),
         clear_counts={'unit_fixture_only': True}, tasks_per_process=1, reset='fresh native process',
         policy='REVIEW_PENDING', fifo_payload_physical_zero='UNPROVEN'))
-    schedule = reporter.READ_POP_SCHEDULE if read_pop else reporter.SCHEDULE
+    assert not (direct and read_pop)
+    schedule = reporter.DIRECT_SCHEDULE if direct else reporter.READ_POP_SCHEDULE if read_pop else reporter.SCHEDULE
     args = dict(out=str(root), repo='/unit-fixture-repository', schedule=schedule,
                 simulator='verilator', bias_kind='sram', cross_prefix='/unit/bin/riscv-',
                 layers=','.join(map(str, layers)), first_source_stall=0,
@@ -78,13 +84,16 @@ def unit_campaign(root, cycles=1000000, rtl='baseline', layers=(0, 1), read_pop=
         value['steps'].append(dict(name=name, command=command, native_exit=0,
                                    waitpid_completed=True, log_sha256=sha(text)))
 
-    (root / 'accel_soc').write_bytes(unit_elf())
-    for name, payload in [('accel_soc.verilog', 'unit-image'), ('simv', 'unit-simv-' + rtl)]:
+    loaded_payload = b'unit-direct-code' if direct else b'unit-loaded-code'
+    elf_bytes = unit_elf(payload=loaded_payload)
+    image = '@00000000\n' + ' '.join('%02X' % byte for byte in loaded_payload) + '\n'
+    (root / 'accel_soc').write_bytes(elf_bytes)
+    for name, payload in [('accel_soc.verilog', image), ('simv', 'unit-simv-' + rtl)]:
         (root / name).write_text(payload)
-    value.update(firmware_elf_sha256=hashlib.sha256(unit_elf()).hexdigest(), firmware_image_sha256=sha('unit-image'),
+    value.update(firmware_elf_sha256=hashlib.sha256(elf_bytes).hexdigest(), firmware_image_sha256=sha(image),
                  simulator_sha256=sha('unit-simv-' + rtl))
     step('version-unit-fixture-tool', ['unit-fixture-tool', '--version'], 'unit-fixture-version')
-    step('firmware-build', ['unit-fixture-gcc', '-DXU_NICE_DRAIN8=1',
+    step('firmware-build', ['unit-fixture-gcc', '-DXU_NICE_DRAIN8=1', *(['-DXU_NICE_DIRECT=1'] if direct else []),
                            str(root / 'source/tests/e203/firmware/accel.c'), '-o', str(root / 'accel_soc')],
          'unit fixture firmware build\n')
     step('simulator-build', ['unit-fixture-compiler', '-o', str(root / 'simv')], 'unit fixture build\n')
@@ -101,12 +110,12 @@ def unit_campaign(root, cycles=1000000, rtl='baseline', layers=(0, 1), read_pop=
             vectors[relative] = sha('unit-' + name + '-' + str(layer))
         performance = dict.fromkeys(reporter.PERFORMANCE, 0)
         performance.update(w_load=100, x_load=200, bias_load=300, compute_wait=400,
-                           writeback=cycles - 1100, other=100, mmio_reads=28513,
-                           mmio_writes=12329 if read_pop else 15497,
+                           writeback=cycles - 1100, other=100, mmio_reads=3170 if direct else 28513,
+                           mmio_writes=12330 if direct else 12329 if read_pop else 15497,
                            shared_reads=15040, shared_writes=25344, starts=3168, dones=3168,
                            mac_fire=202752, busy=210000)
         nice = dict(layer=0, requests=3168, responses=3168, oitf_retired=3168, status_polls=3168,
-                    result_reads=25344, pops_retired=3168, shared_writes=25344)
+                    result_reads=0 if direct else 25344, pops_retired=3168, shared_writes=25344)
         window = dict(layer=0, first_request=200001, first_accept=200001,
                       final_y_response=200000 + cycles, first_request_wait=0)
         clear = dict(mode_sram='1', writes='32930', commands='32935', responses='32935',
@@ -128,8 +137,10 @@ def unit_campaign(root, cycles=1000000, rtl='baseline', layers=(0, 1), read_pop=
         output += 'SOC_PASS tasks=1 outputs=25344 writes=25344\n'
         if read_pop:
             output += 'READ_POP_TASK layer=0 alias_reads=3168 explicit_pops=0\n'
+        if direct:
+            output += 'DIRECT_TASK layer=0 snapshots=3168 lanes=25344 pops_retired=3168 result_mmio_reads=0\n'
         step('task-%02d/simulation' % layer,
-             [str(root / 'simv'), '+TASKS=1', *(['+NICE_READ_POP=1'] if read_pop else [])], output)
+             [str(root / 'simv'), '+TASKS=1', *(['+NICE_DIRECT=1'] if direct else ['+NICE_READ_POP=1'] if read_pop else [])], output)
     value.update(cycles=cycles * len(layers), outputs=25344 * len(layers))
     save_json(root / 'result.json', value)
     save_json(root / 'plan.json', dict(value, arguments=args, simulator='verilator'))
@@ -309,6 +320,233 @@ class S3WritebackReportTests(unittest.TestCase):
             save_json(path, report)
             with self.subTest(replacement=replacement), self.assertRaises(ValueError):
                 reporter.load_campaign(path)
+
+    def direct_pair(self):
+        root = Path(self.temp.name)
+        before = unit_campaign(root / 'direct-base', read_pop=True)
+        after = unit_campaign(root / 'direct-candidate', cycles=900000, rtl='candidate', direct=True)
+        base, candidate = reporter.load_campaign(before), reporter.load_campaign(after)
+        expected = {p: (value, candidate['source_sha256'][p])
+                    for p, value in base['source_sha256'].items() if value != candidate['source_sha256'][p]}
+        return base, candidate, expected, after
+
+    def test_direct_exception_is_directed_explicit_and_reports_loaded_firmware_change(self):
+        base, candidate, expected, _ = self.direct_pair()
+        with self.assertRaisesRegex(ValueError, 'conditions differ'):
+            reporter.compare(base, candidate, expected)
+        with self.assertRaisesRegex(ValueError, 'source changes differ'):
+            reporter.compare(base, candidate, allow_direct_transport=True)
+        result = reporter.compare(base, candidate, expected, allow_direct_transport=True)
+        self.assertIn('read-pop to direct', result['transport_exception'])
+        self.assertEqual(result['totals']['delta']['transport'], dict(alias_reads=-6336, explicit_pops=0,
+            direct_snapshots=6336, direct_lanes=50688, direct_pops=6336, result_mmio_reads=-50688))
+        self.assertEqual(result['totals']['delta']['bus_counters']['mmio_writes'], 2)
+        identity = result['firmware_identity']
+        self.assertFalse(identity['loaded_image_sha256_equal'])
+        self.assertFalse(identity['elf_load_contract_equal'])
+        self.assertTrue(identity['loaded_firmware_change_allowed'])
+        self.assertIn('DIRECT_CTRL', identity['loaded_firmware_change_reason'])
+        self.assertTrue(all(value['verified'] for value in identity['independent_load_verification'].values()))
+        # Comparing must leave its input evidence untouched.
+        self.assertEqual(base['rows'][0]['transport'], dict(alias_reads=3168, explicit_pops=0))
+        old = reporter.load_campaign(self.base)
+        for before, after in ((candidate, base), (base, base), (candidate, candidate), (old, candidate)):
+            with self.subTest(direction=(before['result_path'], after['result_path'])):
+                with self.assertRaisesRegex(ValueError, 'directed read-pop to direct'):
+                    reporter.compare(before, after, expected, allow_direct_transport=True)
+        with self.assertRaisesRegex(ValueError, 'mutually exclusive'):
+            reporter.compare(base, candidate, expected, allow_read_pop_transport=True, allow_direct_transport=True)
+
+    def test_direct_exception_requires_paired_declared_sources_and_rejects_other_firmware(self):
+        base, candidate, expected, _ = self.direct_pair()
+        for path in reporter.DIRECT_REQUIRED_CHANGES:
+            changed = copy.deepcopy(candidate)
+            declared = copy.deepcopy(expected)
+            changed['source_sha256'][path] = base['source_sha256'][path]
+            del declared[path]
+            with self.subTest(missing=path), self.assertRaisesRegex(ValueError, 'requires declared'):
+                reporter.compare(base, changed, declared, allow_direct_transport=True)
+        for path in ('tests/e203/firmware/main.c', 'tools/ppa/s3_task_clear_protocol.py'):
+            changed, declared = copy.deepcopy(candidate), copy.deepcopy(expected)
+            changed['source_sha256'][path] = sha('unit-unrelated-source-change')
+            declared[path] = (base['source_sha256'][path], changed['source_sha256'][path])
+            with self.subTest(unexpected=path), self.assertRaisesRegex(ValueError, 'unexpected source changes'):
+                reporter.compare(base, changed, declared, allow_direct_transport=True)
+
+    def test_direct_exception_rejects_rehashed_generated_clear_c_body_changes(self):
+        base, candidate, expected, path = self.direct_pair()
+        self.assertEqual(base['generated_clear_c_identity'], candidate['generated_clear_c_identity'])
+        self.assertNotEqual(base['generated_c_sha256'], candidate['generated_c_sha256'])
+        generated = path.parent / 's3_clear_main.c'
+        recipe_path = path.parent / 'clear-recipe.json'
+        original, recipe = generated.read_bytes(), json.loads(recipe_path.read_text())
+        report, plan = json.loads(path.read_text()), json.loads((path.parent / 'plan.json').read_text())
+        # Even a simultaneously rehashed and explicitly declared allowed C
+        # source change cannot make an unrelated generated wrapper acceptable.
+        source_path = 'tests/e203/firmware/accel.c'
+        source = path.parent / 'source' / source_path
+        source.write_text(source.read_text() + '\n/* declared direct source change */\n')
+        source_hash = reporter.digest(source)
+        report['original_source_sha256'][source_path] = source_hash
+        plan['original_source_sha256'][source_path] = source_hash
+        expected[source_path] = (base['source_sha256'][source_path], source_hash)
+        save_json(path, report)
+        save_json(path.parent / 'plan.json', plan)
+        for content in (original + b'\n/* extra clear code */\n',
+                        original.replace(b'unit-generated-clear-main', b'unit-changed-clear-main'),
+                        original + str(path.parent).encode()):
+            generated.write_bytes(content)
+            recipe['generated_c_sha256'] = reporter.digest(generated)
+            save_json(recipe_path, recipe)
+            changed = reporter.load_campaign(path)
+            with self.subTest(content=content), self.assertRaisesRegex(ValueError, 'generated clear C differs'):
+                reporter.compare(base, changed, expected, allow_direct_transport=True)
+
+    def test_generated_clear_include_normalization_is_exact_and_keeps_other_paths(self):
+        root = Path(self.temp.name)
+        path = root / 'normalization.c'
+        directive = '#include "' + str(root / 'source/tests/e203/firmware/main.c') + '"'
+        for content in (directive + '\n' + directive, directive.replace('/source/', '/other/'),
+                        '/* ' + directive + ' */', directive + ' /* suffix */'):
+            path.write_text(content)
+            with self.subTest(content=content), self.assertRaisesRegex(ValueError, 'one exact'):
+                reporter.generated_clear_c_identity(path, root)
+        path.write_text(directive + '\nconst char *path="' + str(root) + '";\n')
+        before = reporter.generated_clear_c_identity(path, root)
+        other = root / 'other'
+        other_directive = '#include "' + str(other / 'source/tests/e203/firmware/main.c') + '"'
+        path.write_text(other_directive + '\nconst char *path="' + str(root) + '";\n')
+        self.assertEqual(before, reporter.generated_clear_c_identity(path, other))
+        path.write_text(other_directive + '\nconst char *path="' + str(other) + '";\n')
+        self.assertNotEqual(before, reporter.generated_clear_c_identity(path, other))
+    def test_direct_exception_only_normalizes_one_exact_macro_and_selector(self):
+        base, original, expected, _ = self.direct_pair()
+        mutations = ('missing_macro', 'duplicate_macro', 'false_macro', 'extra_macro',
+                     'missing_selector', 'duplicate_selector', 'false_selector', 'old_selector',
+                     'selector_in_build', 'macro_in_run', 'argument_order', 'optimization', 'clock', 'startup')
+        for mutation in mutations:
+            candidate = copy.deepcopy(original)
+            build = next(step['command'] for step in candidate['conditions']['commands'] if step['name'] == 'firmware-build')
+            run = next(step['command'] for step in candidate['conditions']['commands'] if step['name'].endswith('/simulation'))
+            if mutation == 'missing_macro': build.remove('-DXU_NICE_DIRECT=1')
+            elif mutation == 'duplicate_macro': build.append('-DXU_NICE_DIRECT=1')
+            elif mutation == 'false_macro': build[build.index('-DXU_NICE_DIRECT=1')] = '-DXU_NICE_DIRECT=0'
+            elif mutation == 'extra_macro': build.append('-DUNEXPECTED_PROFILE=1')
+            elif mutation == 'missing_selector': run.remove('+NICE_DIRECT=1')
+            elif mutation == 'duplicate_selector': run.append('+NICE_DIRECT=1')
+            elif mutation == 'false_selector': run[run.index('+NICE_DIRECT=1')] = '+NICE_DIRECT=0'
+            elif mutation == 'old_selector': run.append('+NICE_READ_POP=1')
+            elif mutation == 'selector_in_build': build.append('+NICE_DIRECT=1')
+            elif mutation == 'macro_in_run': run.append('-DXU_NICE_DIRECT=1')
+            elif mutation == 'argument_order': run.reverse()
+            elif mutation == 'optimization': candidate['conditions']['configuration']['optimization'] = '-O3'
+            elif mutation == 'clock': candidate['conditions']['clock_configuration']['profile'] = '150mhz'
+            else: candidate['conditions']['startup_profile'] = 'external-reset'
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                reporter.compare(base, candidate, expected, allow_direct_transport=True)
+
+    def test_direct_missing_duplicate_or_wrong_bundle_record_is_rejected(self):
+        _, _, _, path = self.direct_pair()
+        report = json.loads(path.read_text())
+        logpath = path.parent / 'task-00/simulation.log'
+        original = logpath.read_text()
+        marker = 'DIRECT_TASK layer=0 snapshots=3168 lanes=25344 pops_retired=3168 result_mmio_reads=0\n'
+        for replacement in ('', marker + marker, marker.replace('layer=0', 'layer=1'),
+                            marker.replace('snapshots=3168', 'snapshots=3167'),
+                            marker.replace('lanes=25344', 'lanes=25343'),
+                            marker.replace('pops_retired=3168', 'pops_retired=3167'),
+                            marker.replace('result_mmio_reads=0', 'result_mmio_reads=1'),
+                            marker.replace(' result_mmio_reads=0', ''),
+                            marker + 'READ_POP_TASK layer=0 alias_reads=3168 explicit_pops=0\n'):
+            logpath.write_text(original.replace(marker, replacement))
+            next(step for step in report['steps'] if step['name'] == 'task-00/simulation')['log_sha256'] = reporter.digest(logpath)
+            save_json(path, report)
+            with self.subTest(replacement=replacement), self.assertRaises(ValueError):
+                reporter.load_campaign(path)
+
+    def test_direct_loading_rejects_missing_build_or_rehashed_wrong_profile_arguments(self):
+        _, _, _, path = self.direct_pair()
+        original_report = json.loads(path.read_text())
+        buildpath = path.parent / 'firmware-build.log'
+        runpath = path.parent / 'task-00/simulation.log'
+        original_build, original_run = buildpath.read_text(), runpath.read_text()
+        for mutation in ('no_build', 'no_macro', 'duplicate_macro', 'no_selector', 'old_selector'):
+            report = copy.deepcopy(original_report)
+            buildpath.write_text(original_build)
+            runpath.write_text(original_run)
+            if mutation == 'no_build':
+                report['steps'] = [step for step in report['steps'] if step['name'] != 'firmware-build']
+            else:
+                is_build = mutation in ('no_macro', 'duplicate_macro')
+                name = 'firmware-build' if is_build else 'task-00/simulation'
+                step = next(step for step in report['steps'] if step['name'] == name)
+                if mutation == 'no_macro': step['command'].remove('-DXU_NICE_DIRECT=1')
+                elif mutation == 'duplicate_macro': step['command'].append('-DXU_NICE_DIRECT=1')
+                elif mutation == 'no_selector': step['command'].remove('+NICE_DIRECT=1')
+                else: step['command'].append('+NICE_READ_POP=1')
+                logpath = buildpath if is_build else runpath
+                output = logpath.read_text().split('\n', 1)[1]
+                logpath.write_text(json.dumps(step['command']) + '\n' + output)
+                step['log_sha256'] = reporter.digest(logpath)
+            save_json(path, report)
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                reporter.load_campaign(path)
+
+    def test_direct_joint_saved_and_raw_counter_drift_is_rejected(self):
+        _, _, _, path = self.direct_pair()
+        original_report = json.loads(path.read_text())
+        logpath = path.parent / 'task-00/simulation.log'
+        original_log = logpath.read_text()
+        mutations = [('NICE_TASK', 'nice_activity', key, 0) for key in
+            ('requests', 'responses', 'oitf_retired', 'status_polls', 'pops_retired', 'shared_writes')]
+        mutations += [('NICE_TASK', 'nice_activity', 'result_reads', 1)]
+        mutations += [('PERF_TASK', 'performance', key, 0) for key in
+            ('mac_fire', 'starts', 'dones', 'shared_reads', 'shared_writes', 'mmio_reads', 'mmio_writes')]
+        mutations += [('PERF_TASK', 'performance', 'mmio_reads', 3171),
+                      ('PERF_TASK', 'performance', 'mmio_writes', 12329)]
+        for marker, category, key, value in mutations:
+            report = copy.deepcopy(original_report)
+            task = report['task_results'][0]
+            old = task[category][key]
+            task[category][key] = value
+            line = next(line for line in original_log.splitlines(True) if line.startswith(marker + ' '))
+            tokens = [('%s=%s' % (key, value)) if token == '%s=%s' % (key, old) else token for token in line.split()]
+            logpath.write_text(original_log.replace(line, ' '.join(tokens) + '\n'))
+            next(step for step in report['steps'] if step['name'] == 'task-00/simulation')['log_sha256'] = reporter.digest(logpath)
+            save_json(path, report)
+            with self.subTest(marker=marker, key=key, value=value), self.assertRaises(ValueError):
+                reporter.load_campaign(path)
+
+    def test_direct_image_and_elf_load_bytes_must_agree_independently(self):
+        base, candidate, expected, path = self.direct_pair()
+        original_report = json.loads(path.read_text())
+        elfpath, imagepath = path.parent / 'accel_soc', path.parent / 'accel_soc.verilog'
+        original_elf, original_image = elfpath.read_bytes(), imagepath.read_text()
+        for image in ('not-a-verilog-image', original_image + '@00000000\n00\n',
+                      '@00010000\n00\n', original_image.replace('75 ', '00 ', 1),
+                      original_image + '00\n', '@00000000\n75\n'):
+            report = copy.deepcopy(original_report)
+            imagepath.write_text(image)
+            report['firmware_image_sha256'] = reporter.digest(imagepath)
+            save_json(path, report)
+            with self.subTest(image=image), self.assertRaises(ValueError):
+                reporter.load_campaign(path)
+        imagepath.write_text(original_image)
+        elfpath.write_bytes(unit_elf(payload=b'unit-wrong-code!'))
+        report = copy.deepcopy(original_report)
+        report['firmware_elf_sha256'] = reporter.digest(elfpath)
+        save_json(path, report)
+        with self.assertRaisesRegex(ValueError, 'image bytes differ from ELF'):
+            reporter.load_campaign(path)
+        elfpath.write_bytes(original_elf)
+        save_json(path, original_report)
+        # The read-pop side also needs its own ELF/image cross-check when the
+        # direct exception permits its loaded bytes to differ from the candidate.
+        baseline_image = Path(base['result_path']).parent / 'accel_soc.verilog'
+        baseline_image.write_text('@00000000\n00\n')
+        base['firmware_image_sha256'] = reporter.digest(baseline_image)
+        with self.assertRaisesRegex(ValueError, 'missing from firmware image'):
+            reporter.compare(base, candidate, expected, allow_direct_transport=True)
 
     def test_unknown_schedule_and_startup_profile_rejected_when_loading(self):
         original = json.loads(self.base.read_text())

@@ -1,0 +1,58 @@
+.....E...Running vectors: 1 tasks; logs: /tmp/tmpfnzj12te/out
+PASS: /tmp/tmpfnzj12te/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmppi1bwgfr/out
+PASS: /tmp/tmppi1bwgfr/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmpvc4beka4/out
+PASS: /tmp/tmpvc4beka4/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmpy8m8k52k/out
+PASS: /tmp/tmpy8m8k52k/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmpquw1ydeg/out
+PASS: /tmp/tmpquw1ydeg/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmpmh4bqbtg/out
+NICE instruction retirement or payload coverage differs
+FAIL: /tmp/tmpmh4bqbtg/out/result.json
+F..E
+======================================================================
+ERROR: test_performance_report_retains_y32_contract_and_rejects_cross_mode (test_y32_firmware_contract.Y32FirmwareContractTests.test_performance_report_retains_y32_contract_and_rejects_cross_mode)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/test_y32_firmware_contract.py", line 180, in test_performance_report_retains_y32_contract_and_rejects_cross_mode
+    layers[0]['performance'] = soc.check_performance(log, layers, schedule)[0]
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tools/scripts/e203_soc.py", line 111, in check_performance
+    nice_records = check_nice_activity(log, layers, schedule)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tools/scripts/e203_soc.py", line 183, in check_nice_activity
+    contract.validate_nice_activity(records, layers, schedule)
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tools/scripts/xu_firmware_contract.py", line 215, in validate_nice_activity
+    raise ValueError('NICE instruction retirement or payload coverage differs')
+ValueError: NICE instruction retirement or payload coverage differs
+
+======================================================================
+ERROR: test_y32_completion_requires_exact_counts_for_all_12_tasks (test_y32_firmware_contract.Y32FirmwareContractTests.test_y32_completion_requires_exact_counts_for_all_12_tasks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/test_y32_firmware_contract.py", line 127, in test_y32_completion_requires_exact_counts_for_all_12_tasks
+    self.assertEqual(len(soc.check_performance(log, layers, schedule)), 12)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tools/scripts/e203_soc.py", line 111, in check_performance
+    nice_records = check_nice_activity(log, layers, schedule)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tools/scripts/e203_soc.py", line 183, in check_nice_activity
+    contract.validate_nice_activity(records, layers, schedule)
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tools/scripts/xu_firmware_contract.py", line 215, in validate_nice_activity
+    raise ValueError('NICE instruction retirement or payload coverage differs')
+ValueError: NICE instruction retirement or payload coverage differs
+
+======================================================================
+FAIL: test_runner_selects_plusargs_and_output_counts_without_running_tools (test_y32_firmware_contract.Y32FirmwareContractTests.test_runner_selects_plusargs_and_output_counts_without_running_tools) (schedule='bias-hw-autogroup-y32-packed16-nice-direct-window')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/test_y32_firmware_contract.py", line 249, in test_runner_selects_plusargs_and_output_counts_without_running_tools
+    self.assertEqual(soc.main(), 0)
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.871s
+
+FAILED (failures=1, errors=2)

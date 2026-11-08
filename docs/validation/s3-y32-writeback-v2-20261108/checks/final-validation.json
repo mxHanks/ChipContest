@@ -1,0 +1,403 @@
+{
+  "status": "DEVELOPMENT_VALIDATION_COMPLETE",
+  "scope": "No synthesis, gate-level, STA, energy or official qualification",
+  "limited_unittest_collections": [
+    {
+      "log": "s3-numeric-final.log",
+      "tests": 11,
+      "status": "PASS",
+      "sha256": "8e9dd6021e36aac222876ae11f646635fc294dab1cd91b9d4cc31558c27d1d90"
+    },
+    {
+      "log": "firmware-contract-fixed.log",
+      "tests": 15,
+      "status": "PASS",
+      "sha256": "d9a4ab0ad6412485d80bd3d4b9f8e4e428208b7f0c5e9f07cee1ee23f09a06c9"
+    },
+    {
+      "log": "campaign-final.log",
+      "tests": 15,
+      "status": "PASS",
+      "sha256": "1b3b5a9e04068e44506a4f620c9f624943b5f2e51870cd87e0b430c905164a08"
+    },
+    {
+      "log": "report-final.log",
+      "tests": 30,
+      "status": "PASS",
+      "sha256": "2346b67b12772f8a4879572af2161260e728058845412d96695cb77c384a0dd1"
+    },
+    {
+      "log": "read-pop-final.log",
+      "tests": 1,
+      "status": "PASS",
+      "sha256": "20da92dfb8f041ca1952df86b0e4a7262dce1f8ac6832cbe8e0b19b7e3798abb"
+    },
+    {
+      "log": "direct-final-test.log",
+      "tests": 1,
+      "status": "PASS",
+      "sha256": "a9a961c7d20904243925c41b73b0a068610af484777118bbf1eb70c273749116"
+    }
+  ],
+  "legacy_wrapper_compatibility": {
+    "tests": [
+      {
+        "test": "test_y32_wrapper.test_real_y32_numeric_legacy_ownership_and_illegal_domain_assertions",
+        "status": "PASS",
+        "exit": 0,
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "-v",
+          "test_y32_wrapper",
+          "test_autogroup_wrapper",
+          "test_packed_wrapper",
+          "test_cached_wrapper",
+          "test_paired_hi_wrapper",
+          "test_stream_wrapper",
+          "test_bias_sram_wrapper"
+        ],
+        "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203",
+        "env": {
+          "XU_Y32_WRAPPER_SIM": "iverilog",
+          "XU_PAIRED_HI_WRAPPER_SIM": "iverilog",
+          "XU_WRAPPER_SIM": "iverilog",
+          "XU_BIAS_WRAPPER_SIM": "iverilog"
+        },
+        "log": "wrapper-unittest.log",
+        "execution": "one combined unittest invocation; all 7 passed"
+      },
+      {
+        "test": "test_autogroup_wrapper.test_real_fifo_all_groups_numeric_lanes_and_retirement_backpressure",
+        "status": "PASS",
+        "exit": 0,
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "-v",
+          "test_y32_wrapper",
+          "test_autogroup_wrapper",
+          "test_packed_wrapper",
+          "test_cached_wrapper",
+          "test_paired_hi_wrapper",
+          "test_stream_wrapper",
+          "test_bias_sram_wrapper"
+        ],
+        "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203",
+        "env": {
+          "XU_Y32_WRAPPER_SIM": "iverilog",
+          "XU_PAIRED_HI_WRAPPER_SIM": "iverilog",
+          "XU_WRAPPER_SIM": "iverilog",
+          "XU_BIAS_WRAPPER_SIM": "iverilog"
+        },
+        "log": "wrapper-unittest.log",
+        "execution": "one combined unittest invocation; all 7 passed"
+      },
+      {
+        "test": "test_packed_wrapper.test_all_packed_positions_errors_commit_order_and_backpressure",
+        "status": "PASS",
+        "exit": 0,
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "-v",
+          "test_y32_wrapper",
+          "test_autogroup_wrapper",
+          "test_packed_wrapper",
+          "test_cached_wrapper",
+          "test_paired_hi_wrapper",
+          "test_stream_wrapper",
+          "test_bias_sram_wrapper"
+        ],
+        "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203",
+        "env": {
+          "XU_Y32_WRAPPER_SIM": "iverilog",
+          "XU_PAIRED_HI_WRAPPER_SIM": "iverilog",
+          "XU_WRAPPER_SIM": "iverilog",
+          "XU_BIAS_WRAPPER_SIM": "iverilog"
+        },
+        "log": "wrapper-unittest.log",
+        "execution": "one combined unittest invocation; all 7 passed"
+      },
+      {
+        "test": "test_cached_wrapper.test_cache_masks_legacy_modes_result_window_and_backpressure",
+        "status": "PASS",
+        "exit": 0,
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "-v",
+          "test_y32_wrapper",
+          "test_autogroup_wrapper",
+          "test_packed_wrapper",
+          "test_cached_wrapper",
+          "test_paired_hi_wrapper",
+          "test_stream_wrapper",
+          "test_bias_sram_wrapper"
+        ],
+        "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203",
+        "env": {
+          "XU_Y32_WRAPPER_SIM": "iverilog",
+          "XU_PAIRED_HI_WRAPPER_SIM": "iverilog",
+          "XU_WRAPPER_SIM": "iverilog",
+          "XU_BIAS_WRAPPER_SIM": "iverilog"
+        },
+        "log": "wrapper-unittest.log",
+        "execution": "one combined unittest invocation; all 7 passed"
+      },
+      {
+        "test": "test_paired_hi_wrapper.test_real_paired_hi_all_groups_numeric_ownership_and_isolated_extremes",
+        "status": "PASS",
+        "exit": 0,
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "-v",
+          "test_y32_wrapper",
+          "test_autogroup_wrapper",
+          "test_packed_wrapper",
+          "test_cached_wrapper",
+          "test_paired_hi_wrapper",
+          "test_stream_wrapper",
+          "test_bias_sram_wrapper"
+        ],
+        "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203",
+        "env": {
+          "XU_Y32_WRAPPER_SIM": "iverilog",
+          "XU_PAIRED_HI_WRAPPER_SIM": "iverilog",
+          "XU_WRAPPER_SIM": "iverilog",
+          "XU_BIAS_WRAPPER_SIM": "iverilog"
+        },
+        "log": "wrapper-unittest.log",
+        "execution": "one combined unittest invocation; all 7 passed"
+      },
+      {
+        "test": "test_stream_wrapper.test_all_stream_positions_errors_commit_order_and_backpressure",
+        "status": "PASS",
+        "exit": 0,
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "-v",
+          "test_y32_wrapper",
+          "test_autogroup_wrapper",
+          "test_packed_wrapper",
+          "test_cached_wrapper",
+          "test_paired_hi_wrapper",
+          "test_stream_wrapper",
+          "test_bias_sram_wrapper"
+        ],
+        "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203",
+        "env": {
+          "XU_Y32_WRAPPER_SIM": "iverilog",
+          "XU_PAIRED_HI_WRAPPER_SIM": "iverilog",
+          "XU_WRAPPER_SIM": "iverilog",
+          "XU_BIAS_WRAPPER_SIM": "iverilog"
+        },
+        "log": "wrapper-unittest.log",
+        "execution": "one combined unittest invocation; all 7 passed"
+      },
+      {
+        "test": "test_bias_sram_wrapper.test_masks_async_snapshots_retirement_clear_reset_and_runtime_protection",
+        "status": "PASS",
+        "exit": 0,
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "-v",
+          "test_y32_wrapper",
+          "test_autogroup_wrapper",
+          "test_packed_wrapper",
+          "test_cached_wrapper",
+          "test_paired_hi_wrapper",
+          "test_stream_wrapper",
+          "test_bias_sram_wrapper"
+        ],
+        "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203",
+        "env": {
+          "XU_Y32_WRAPPER_SIM": "iverilog",
+          "XU_PAIRED_HI_WRAPPER_SIM": "iverilog",
+          "XU_WRAPPER_SIM": "iverilog",
+          "XU_BIAS_WRAPPER_SIM": "iverilog"
+        },
+        "log": "wrapper-unittest.log",
+        "execution": "one combined unittest invocation; all 7 passed"
+      },
+      {
+        "test": "tb_xu_bias_capability_wrapper SRAM",
+        "status": "PASS",
+        "exit": 0,
+        "commands": [
+          {
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-s",
+              "tb_xu_bias_capability_wrapper",
+              "-DXU_EXPECT_BIAS_SRAM=1",
+              "-o",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/capability-sram/wrapper.vvp",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_xu_bias_capability_wrapper.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_2048x16.sv",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v"
+            ],
+            "returncode": 0,
+            "log": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/capability-sram/compile.log"
+          },
+          {
+            "command": [
+              "vvp",
+              "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/capability-sram/wrapper.vvp"
+            ],
+            "returncode": 0,
+            "log": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/capability-sram/simulation.log"
+          }
+        ],
+        "logs": [
+          "capability-sram/compile.log",
+          "capability-sram/simulation.log"
+        ]
+      },
+      {
+        "test": "tb_xu_gate_wrapper current",
+        "status": "EXISTING_FAILURE",
+        "exit": 1,
+        "compile_exit": 0,
+        "commands": [
+          [
+            "/usr/bin/iverilog",
+            "-g2012",
+            "-s",
+            "tb_xu_gate_wrapper",
+            "-o",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/gate/wrapper.vvp",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/host/tb_xu_gate_wrapper.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_2048x16.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v"
+          ],
+          [
+            "/usr/bin/vvp",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/gate/wrapper.vvp",
+            "+TRACE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/gate/transactions.trace"
+          ]
+        ],
+        "logs": [
+          "gate/compile.log",
+          "gate/simulation.log"
+        ],
+        "failure": "missing/error response; Time: 826000ps, identical on current and baseline wrapper; not counted PASS"
+      },
+      {
+        "test": "tb_xu_gate_wrapper baseline accel_icb_slave",
+        "status": "EXISTING_FAILURE",
+        "exit": 1,
+        "compile_exit": 0,
+        "commands": [
+          [
+            "/usr/bin/iverilog",
+            "-g2012",
+            "-s",
+            "tb_xu_gate_wrapper",
+            "-o",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/gate-baseline/wrapper.vvp",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/host/tb_xu_gate_wrapper.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_2048x16.sv",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/gate-baseline/accel_icb_slave.v"
+          ],
+          [
+            "/usr/bin/vvp",
+            "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/gate-baseline/wrapper.vvp",
+            "+TRACE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/gate-baseline/transactions.trace"
+          ]
+        ],
+        "logs": [
+          "gate-baseline/compile.log",
+          "gate-baseline/simulation.log"
+        ],
+        "failure": "missing/error response; Time: 826000ps, identical on current and baseline wrapper; not counted PASS"
+      },
+      {
+        "test": "tb_xu_bias_capability_wrapper register variant",
+        "status": "NOT_RUN_MISSING_FIXTURE",
+        "exit": null,
+        "commands": [],
+        "reason": "No existing generated register variant; parent explicitly instructed no generation or extra EDA; not counted PASS"
+      }
+    ],
+    "passed_test_count": 8,
+    "existing_failed_runs": 2,
+    "not_run_missing_fixture": 1,
+    "source_changes_only": "9 legacy wildcard testbenches, 4 added declarations per file; no production changes/commits",
+    "checks": "git diff --check PASS",
+    "baseline_accel_wrapper_sha256": "7a3832158198b72150b27be689f1e1c31e388afb47beb098131c0517452cc537"
+  },
+  "direct_source_matches_frozen_campaign": {
+    "files": 170,
+    "receipt_sha256": "c1fd97abe2ef928966a0cdee09ec703b9080f71676da803a9d32c84db0abec46"
+  },
+  "direct_and_burst_full12": {
+    "direct_layers": 12,
+    "burst_layers": 12,
+    "baseline_payload_plus_clear": 9150252,
+    "direct_payload_plus_clear": 7819944,
+    "strict_comparison_sha256": "cb0b56c2cdd4d65c0064531d89c1c0f98617fe255f6b1c450df025906a8cd9cd"
+  },
+  "independent_review": {
+    "legacy_wildcard_port_regression": "fixed; only test fixtures changed",
+    "generated_clear_c_comparison_gap": "fixed; final independent read-only review confirms exact include-only normalization and both ELF/image identities",
+    "production_paths": "no remaining actionable finding"
+  },
+  "boundaries": {
+    "first_source_stall7_receipt_sha256": "d100b1209612481770668cf6d47fd77ef6bd5aaab7edf5f025daab9dcc87cf0c"
+  },
+  "reporter_sha256": "61f8a79741a801d389e10b2cc9b3c0bee5eb75726a87dbba3ba0a5a003c7a523"
+}

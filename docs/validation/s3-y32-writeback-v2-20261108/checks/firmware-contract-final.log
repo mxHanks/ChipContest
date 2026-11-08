@@ -1,0 +1,47 @@
+.F.........Running vectors: 1 tasks; logs: /tmp/tmpkv_oeclw/out
+PASS: /tmp/tmpkv_oeclw/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmpyij0ezd9/out
+PASS: /tmp/tmpyij0ezd9/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmpumhkxd59/out
+PASS: /tmp/tmpumhkxd59/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmp6f2of6cr/out
+PASS: /tmp/tmp6f2of6cr/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmp3urc5_c8/out
+PASS: /tmp/tmp3urc5_c8/out/result.json
+Running vectors: 1 tasks; logs: /tmp/tmpeb74db3n/out
+PASS: /tmp/tmpeb74db3n/out/result.json
+....
+======================================================================
+FAIL: test_direct_transport_work_and_opt_in_preserve_existing_encoding (test_y32_firmware_contract.Y32FirmwareContractTests.test_direct_transport_work_and_opt_in_preserve_existing_encoding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/test_y32_firmware_contract.py", line 268, in test_direct_transport_work_and_opt_in_preserve_existing_encoding
+    self.assertEqual(contract.task_contract(new),
+AssertionError: {'w_s[417 chars]etired': 3168, 'direct_snapshots': 3168, 'direct_lanes': 25344} != {'w_s[417 chars]etired': 3168}
+  {'bias_mmio_writes': 768,
+   'bias_shared_reads': 512,
+-  'direct_lanes': 25344,
+-  'direct_snapshots': 3168,
+   'dones': 3168,
+   'mac_fire': 202752,
+   'macs': 1622016,
+   'mmio_writes': 12330,
+   'nice_oitf_retired': 3168,
+   'nice_requests': 3168,
+   'nice_responses': 3168,
+   'outputs': 25344,
+   'pops_retired': 3168,
+   'result_mmio_reads': 0,
+   'rows': 99,
+   'shared_reads': 15040,
+   'shared_writes': 25344,
+   'starts': 3168,
+   'w_mmio_upload_words': 8192,
+   'w_shared_reads': 8192,
+   'x_shared_reads': 6336,
+   'y32_mmio_reads': 0}
+
+----------------------------------------------------------------------
+Ran 15 tests in 1.585s
+
+FAILED (failures=1)

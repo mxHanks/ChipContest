@@ -1,0 +1,64 @@
+{
+  "changed_files": [
+    "tests/e203/tb_xu_y32_wrapper.sv",
+    "tests/e203/tb_xu_autogroup_wrapper.sv",
+    "tests/e203/tb_xu_packed_wrapper.sv",
+    "tests/e203/tb_xu_bias_sram_wrapper.sv",
+    "tests/e203/tb_xu_bias_capability_wrapper.sv",
+    "tests/e203/tb_xu_cached_wrapper.sv",
+    "tests/e203/tb_xu_paired_hi_wrapper.sv",
+    "tests/e203/tb_xu_stream_wrapper.sv",
+    "tests/host/tb_xu_gate_wrapper.sv"
+  ],
+  "change": "Add disabled direct port declarations matching tb_xu_read_pop_wrapper; 4 added lines each; no production edits or commits.",
+  "icarus_unittest": {
+    "status": "PASS",
+    "count": 7,
+    "elapsed_seconds": 32.981,
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "-v",
+      "test_y32_wrapper",
+      "test_autogroup_wrapper",
+      "test_packed_wrapper",
+      "test_cached_wrapper",
+      "test_paired_hi_wrapper",
+      "test_stream_wrapper",
+      "test_bias_sram_wrapper"
+    ],
+    "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203",
+    "env": {
+      "XU_Y32_WRAPPER_SIM": "iverilog",
+      "XU_PAIRED_HI_WRAPPER_SIM": "iverilog",
+      "XU_WRAPPER_SIM": "iverilog",
+      "XU_BIAS_WRAPPER_SIM": "iverilog"
+    },
+    "exit_code": 0,
+    "modules": [
+      "test_y32_wrapper",
+      "test_autogroup_wrapper",
+      "test_packed_wrapper",
+      "test_cached_wrapper",
+      "test_paired_hi_wrapper",
+      "test_stream_wrapper",
+      "test_bias_sram_wrapper"
+    ]
+  },
+  "capability_sram": {
+    "status": "PASS",
+    "result": "capability-sram/result.json"
+  },
+  "capability_registers": {
+    "status": "NOT_RUN",
+    "reason": "No existing generated register variant found; no regeneration requested."
+  },
+  "host_gate": {
+    "compile": "PASS",
+    "simulation": "FAIL",
+    "reason": "Existing missing/error response assertion at 826000ps, reproduced identically with baseline accel_icb_slave.v",
+    "current_log": "gate/simulation.log",
+    "baseline_log": "gate-baseline/simulation.log"
+  }
+}

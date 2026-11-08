@@ -1,0 +1,36 @@
+{
+  "records": [
+    {
+      "parameter": 13,
+      "step": "compile",
+      "argv": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_nice_drain8",
+        "-Ptb_nice_drain8.POLL_BACKOFF_CYCLES=13",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/poll_backoff/unit/backoff-13.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/nice_reachability/tb_nice_drain8.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v"
+      ],
+      "exit": 0,
+      "log_sha256": "5120e45b53e9eb275de72ee71b1ab6971b98ae5134034c62d34d96d797ab7465"
+    },
+    {
+      "parameter": 13,
+      "step": "simulation",
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/poll_backoff/unit/backoff-13.vvp"
+      ],
+      "exit": 0,
+      "log_sha256": "db1de84cf00111216487db9599032eba72caced9ea8ae2ea02755df4ad6d8321"
+    }
+  ],
+  "source_sha256": {
+    "experiments/nice_reachability/tb_nice_drain8.sv": "2c632d003e22333240297f5c2641bf727df6180dbf529085f2d038678bf9cef4",
+    "third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v": "49a3eb4b1c550b9127968c205c35e75f76d6c20e3997b32ee6597f482838bd5b"
+  }
+}

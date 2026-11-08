@@ -1,0 +1,12 @@
+--- baseline/tests/e203/firmware/accel.c
++++ unroll4/tests/e203/firmware/accel.c
+@@ -234,6 +234,9 @@
+ #if XU_HARDWARE_AUTO_GROUP
+         reg[ROW_CTRL] = 1;
+ #endif
++#if XU_NICE_DRAIN8
++#pragma GCC unroll 4
++#endif
+         for (unsigned group = 0; group < 32; ++group) {
+ #if XU_HARDWARE_BIAS_CACHE
+             /* Chisel selects all eight cached bias values using GROUP. */

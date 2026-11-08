@@ -1,0 +1,10 @@
+["verilator", "--binary", "--timing", "--assert", "-CFLAGS", "-std=gnu++20", "-j", "2", "-Wno-fatal", "--top-module", "tb_accel_soc", "-Mdir", "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/poll_backoff/backoff-0/verilator-obj", "-o", "soc_sim", "-DDISABLE_SV_ASSERTION=1", "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/poll_backoff/backoff-0/source/rtl/core", "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/poll_backoff/backoff-0/source/rtl/perips", "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/poll_backoff/backoff-0/source/rtl/perips/apb_i2c", "-f", "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/poll_backoff/backoff-0/rtl.f"]
+%Error-UNSUPPORTED: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/poll_backoff/backoff-0/tb.sv:65:33: Unsupported: defparam with more than one dot
+   65 |   defparam dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_nice_core.u_drain8.POLL_BACKOFF_CYCLES=POLL_BACKOFF_CYCLES;
+      |                                 ^
+                    ... For error description see https://verilator.org/warn/UNSUPPORTED?v=5.032
+%Error: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/poll-repo/experiments/poll_backoff/backoff-0/tb.sv:65:34: syntax error, unexpected IDENTIFIER, expecting ',' or ';'
+   65 |   defparam dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_nice_core.u_drain8.POLL_BACKOFF_CYCLES=POLL_BACKOFF_CYCLES;
+      |                                  ^~~~~~~~~~~~~~~~~~
+%Error: Exiting due to 2 error(s)
+        ... See the manual at https://verilator.org/verilator_doc.html for more assistance.

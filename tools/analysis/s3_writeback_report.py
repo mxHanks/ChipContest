@@ -15,6 +15,10 @@ old-NICE to read-pop schedule change and one +NICE_READ_POP=1 runtime selector;
 all loaded firmware bytes, ELF load contracts, build arguments and other
 conditions must still match. Raw ELF hashes are retained; nonloaded metadata
 may differ and is explicitly identified in the comparison.
+--allow-direct-transport permits only read-pop to direct transport, the exact
+runtime-selector replacement and one -DXU_NICE_DIRECT=1 compiler define. Its
+declared firmware capability probe/mode write may change loaded code; both
+ELF-to-Verilog loading identities are independently verified and reported.
 """
 
 import argparse
@@ -37,6 +41,17 @@ AUTO = ('rows', 'pops_retired', 'compute_writeback_overlap', 'fifo_full_wait')
 WINDOW = ('first_request', 'first_accept', 'final_y_response', 'first_request_wait')
 SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-window'
 READ_POP_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-read-pop-window'
+DIRECT_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-direct-window'
+DIRECT_SOURCE_PATHS = frozenset((
+    'rtl/core/e203_cpu.v', 'rtl/core/e203_cpu_top.v',
+    'rtl/perips/accel_icb_slave.v', 'rtl/subsys/e203_subsys_main.v',
+    'rtl/subsys/e203_subsys_nice_core.v', 'rtl/subsys/e203_subsys_perips.v',
+    'rtl/subsys/xu_nice_drain8.v', 'tests/e203/firmware/accel.c',
+    'tests/e203/tb_accel_soc.sv', 'tools/scripts/e203_soc.py',
+    'tools/scripts/xu_firmware_contract.py'))
+DIRECT_REQUIRED_CHANGES = frozenset(('rtl/perips/accel_icb_slave.v',
+    'rtl/subsys/xu_nice_drain8.v', 'tests/e203/firmware/accel.c',
+    'tools/scripts/xu_firmware_contract.py'))
 PASS = 'DEVELOPMENT_PASS_POLICY_PENDING'
 SHA = re.compile(r'[0-9a-f]{64}\Z')
 HISTORICAL_STARTUP = dict(profile='historical', version='historical-single-release',
@@ -98,6 +113,58 @@ def read_json(path):
             result[key] = value
         return result
     return json.loads(path.read_text(), object_pairs_hook=no_duplicates)
+
+
+def verify_loaded_image(campaign):
+    """Match the actual 64KiB ITCM byte image to every file-backed ELF load byte.
+
+    The campaign's objcopy seam rewrites @800... to @000..., and the TB loads
+    those bytes into program_bytes[0:65535]. Nonloaded ELF metadata and BSS do
+    not contribute image bytes. Never run objcopy or trust a claimed mapping.
+    """
+    path = artifact(Path(campaign['result_path']).parent, 'accel_soc.verilog',
+                    campaign['firmware_image_sha256'])
+    memory, address = {}, None
+    for token in path.read_text().split():
+        if re.fullmatch(r'@[0-9a-fA-F]+', token):
+            address = int(token[1:], 16)
+        else:
+            require(address is not None and re.fullmatch(r'[0-9a-fA-F]{2}', token),
+                    'malformed firmware Verilog load image')
+            require(0 <= address < 65536 and address not in memory,
+                    'firmware image address outside ITCM or duplicated')
+            memory[address] = int(token, 16)
+            address += 1
+    expected_addresses = set()
+    for segment in campaign['firmware_loaded_elf']['load_segments']:
+        if not segment['filesz']:
+            continue
+        first = segment['paddr'] - 0x80000000
+        last = first + segment['filesz']
+        require(0 <= first < last <= 65536, 'ELF file-backed load outside campaign ITCM mapping')
+        addresses = set(range(first, last))
+        require(not (addresses & expected_addresses) and addresses <= memory.keys(),
+                'ELF load bytes overlap or are missing from firmware image')
+        loaded = bytes(memory[index] for index in range(first, last))
+        require(hashlib.sha256(loaded).hexdigest() == segment['bytes_sha256'],
+                'firmware image bytes differ from ELF PT_LOAD')
+        expected_addresses.update(addresses)
+    require(expected_addresses and set(memory) == expected_addresses,
+            'firmware image contains bytes outside ELF PT_LOAD')
+    return dict(verified=True, mapping='ELF physical 0x80000000 -> 64KiB ITCM offset0',
+                loaded_bytes=len(memory), image_sha256=campaign['firmware_image_sha256'])
+
+
+def generated_clear_c_identity(path, old_out):
+    """Normalize only the known frozen-main include, preserving all other bytes."""
+    data = path.read_bytes()
+    include = ('#include "' + str(old_out / 'source/tests/e203/firmware/main.c') + '"').encode()
+    require(data.splitlines().count(include) == 1 and data.count(include) == 1,
+            'generated clear C lacks its one exact frozen-main snapshot include')
+    normalized = data.replace(include,
+        b'#include "@CAMPAIGN_SOURCE@/tests/e203/firmware/main.c"', 1)
+    return dict(normalized_sha256=hashlib.sha256(normalized).hexdigest(),
+                normalization='only exact frozen-main snapshot include path; all other bytes unchanged')
 
 
 def artifact(root, relative, expected):
@@ -232,8 +299,10 @@ def load_campaign(path):
     old_out, repo = Path(args['out']), Path(args['repo'])
     require(old_out.is_absolute() and repo.is_absolute(), 'nonabsolute saved campaign/repository')
     schedule = report['configuration']['schedule']
-    require(schedule in (SCHEDULE, READ_POP_SCHEDULE), 'requires a supported Y32 packed16 NICE schedule')
+    require(schedule in (SCHEDULE, READ_POP_SCHEDULE, DIRECT_SCHEDULE),
+            'requires a supported Y32 packed16 NICE schedule')
     read_pop = schedule == READ_POP_SCHEDULE
+    direct = schedule == DIRECT_SCHEDULE
     for key in ('configuration', 'bias_kind', 'original_layers', 'clock_configuration',
                 'platform_assertions', 'chisel_procedural_assertions', 'original_source_sha256'):
         require(report[key] == plan[key], 'plan/result differ: ' + key)
@@ -281,7 +350,8 @@ def load_campaign(path):
             recipe['policy'] == report['cache_policy'] and
             recipe['fifo_payload_physical_zero'] == report['fifo_payload_physical_zero'],
             'clear recipe process/reset/policy differs')
-    artifact(root, 's3_clear_main.c', recipe['generated_c_sha256'])
+    generated_c = artifact(root, 's3_clear_main.c', recipe['generated_c_sha256'])
+    clear_c_identity = generated_clear_c_identity(generated_c, old_out)
     artifact(root, 'tb.sv', recipe['generated_tb_sha256'])
     filelist_path = root / 'rtl.f'
     require(filelist_path.is_file() and not filelist_path.is_symlink(), 'missing/unsafe RTL filelist')
@@ -330,10 +400,21 @@ def load_campaign(path):
     expected_tasks = {'task-%02d/simulation' % layer for layer in layers}
     require({name for name in logs if name.endswith('/simulation')} == expected_tasks,
             'simulation step coverage differs')
+    if direct:
+        require(sum(step['name'] == 'firmware-build' for step in steps) == 1,
+                'direct firmware requires one saved firmware-build step')
     for step in steps:
         if read_pop and step['name'].endswith('/simulation'):
             require([arg for arg in step['command'] if arg.startswith('+NICE_READ_POP')] == ['+NICE_READ_POP=1'],
                     'read-pop run lacks its exact runtime selector')
+        if direct:
+            command = step['command']
+            selectors = [arg for arg in command if arg.startswith(('+NICE_DIRECT', '+NICE_READ_POP'))]
+            require(selectors == (['+NICE_DIRECT=1'] if step['name'].endswith('/simulation') else []),
+                    'direct run lacks its exact exclusive runtime selector')
+            macros = [arg for arg in command if arg.startswith('-DXU_NICE_DIRECT')]
+            require(macros == (['-DXU_NICE_DIRECT=1'] if step['name'] == 'firmware-build' else []),
+                    'direct firmware build lacks its exact compiler macro')
     require(isinstance(report.get('versions'), dict) and report['versions'], 'missing tool versions')
     require(report['versions'] == observed_versions, 'saved/raw tool versions differ')
 
@@ -368,11 +449,27 @@ def load_campaign(path):
         nice = record(log, 'NICE_TASK', ('layer', *NICE))
         require(nice == task['nice_activity'] and nice.pop('layer') == 0, 'saved/raw NICE differs')
         for key, expected in dict(requests=3168, responses=3168, oitf_retired=3168,
-                                  result_reads=25344, pops_retired=3168, shared_writes=25344).items():
+                                  result_reads=0 if direct else 25344,
+                                  pops_retired=3168, shared_writes=25344).items():
             require(nice[key] == expected, 'NICE protocol count differs: ' + key)
         require(nice['status_polls'] >= 3168, 'NICE status coverage incomplete')
-        require(performance['mmio_reads'] >= nice['status_polls'] + nice['result_reads'] + 1,
-                'MMIO reads omit NICE work or the in-window Y32 capability read')
+        if direct:
+            require(performance['mmio_reads'] == nice['status_polls'] + 2,
+                    'direct MMIO reads differ from status polls plus Y32/DIRECT capability probes')
+            transport_record = record(log, 'DIRECT_TASK',
+                ('layer', 'snapshots', 'lanes', 'pops_retired', 'result_mmio_reads'))
+            require(transport_record == dict(layer=0, snapshots=3168, lanes=25344,
+                    pops_retired=3168, result_mmio_reads=0), 'direct transaction coverage differs')
+            if 'direct_activity' in task:
+                require(task['direct_activity'] == transport_record, 'saved/raw direct activity differs')
+            require(not re.search(r'^READ_POP_TASK\b', log, re.M), 'unexpected read-pop activity in direct schedule')
+            transport = dict(alias_reads=0, explicit_pops=0,
+                direct_snapshots=transport_record['snapshots'], direct_lanes=transport_record['lanes'],
+                direct_pops=transport_record['pops_retired'], result_mmio_reads=transport_record['result_mmio_reads'])
+        else:
+            require(performance['mmio_reads'] >= nice['status_polls'] + nice['result_reads'] + 1,
+                    'MMIO reads omit NICE work or the in-window Y32 capability read')
+            require(not re.search(r'^DIRECT_TASK\b', log, re.M), 'unexpected direct activity in old schedule')
         if read_pop:
             transport_record = record(log, 'READ_POP_TASK', ('layer', 'alias_reads', 'explicit_pops'))
             require(transport_record == dict(layer=0, alias_reads=3168, explicit_pops=0),
@@ -380,12 +477,12 @@ def load_campaign(path):
             if 'read_pop_activity' in task:
                 require(task['read_pop_activity'] == transport_record, 'saved/raw read-pop activity differs')
             transport = {key: value for key, value in transport_record.items() if key != 'layer'}
-        else:
+        elif not direct:
             require(not re.search(r'^READ_POP_TASK\b', log, re.M), 'unexpected read-pop activity in old schedule')
             # The old observer checks explicit POP order before counting this
             # NICE retirement; no alias transactions belong to that transport.
             transport = dict(alias_reads=0, explicit_pops=nice['pops_retired'])
-        require(performance['mmio_writes'] == (12329 if read_pop else 15497),
+        require(performance['mmio_writes'] == (12330 if direct else 12329 if read_pop else 15497),
                 'MMIO transaction count differs from selected transport')
         auto = record(log, 'AUTO_TASK', ('layer', *AUTO))
         require(auto.pop('layer') == 0 and auto['rows'] == 99 and auto['pops_retired'] == 3168 and
@@ -441,13 +538,17 @@ def load_campaign(path):
         'platform_assertions', 'chisel_procedural_assertions', 'simulator_evidence', 'versions', 'fixture',
         'integer_reference', 'activity_extension', 'cache_policy', 'fifo_payload_physical_zero')})
     conditions['commands'] = steps
-    return dict(result_path=str(path), result_sha256=digest(path), conditions=conditions,
+    campaign = dict(result_path=str(path), result_sha256=digest(path), conditions=conditions,
                 source_sha256=sources, firmware_elf_sha256=report['firmware_elf_sha256'],
                 firmware_loaded_elf=loaded_elf,
                 firmware_image_sha256=report['firmware_image_sha256'],
                 simulator_sha256=report['simulator_sha256'],
                 clear_recipe_sha256=digest(recipe_path), generated_tb_sha256=recipe['generated_tb_sha256'],
-                generated_c_sha256=recipe['generated_c_sha256'], rtl_filelist_sha256=digest(filelist_path), rows=rows)
+                generated_c_sha256=recipe['generated_c_sha256'], generated_clear_c_identity=clear_c_identity,
+                rtl_filelist_sha256=digest(filelist_path), rows=rows)
+    if direct:
+        campaign['firmware_image_load_identity'] = verify_loaded_image(campaign)
+    return campaign
 
 
 def source_expectation(value):
@@ -474,9 +575,13 @@ def differences(before, after):
             for key, value in before.items()}
 
 
-def compare(base, candidate, expected_source_changes=None, allow_read_pop_transport=False):
+def compare(base, candidate, expected_source_changes=None, allow_read_pop_transport=False,
+            allow_direct_transport=False):
     expected = expected_source_changes or {}
+    require(not (allow_read_pop_transport and allow_direct_transport),
+            'transport exceptions are mutually exclusive')
     candidate_conditions = copy.deepcopy(candidate['conditions'])
+    loaded_image_checks = None
     if allow_read_pop_transport:
         require(base['conditions']['configuration']['schedule'] == SCHEDULE and
                 candidate_conditions['configuration']['schedule'] == READ_POP_SCHEDULE and
@@ -497,6 +602,32 @@ def compare(base, candidate, expected_source_changes=None, allow_read_pop_transp
                 command.remove('+NICE_READ_POP=1')
             else:
                 require(not arguments, 'read-pop selector present outside simulation command')
+    if allow_direct_transport:
+        require(base['conditions']['configuration']['schedule'] == READ_POP_SCHEDULE and
+                candidate_conditions['configuration']['schedule'] == DIRECT_SCHEDULE and
+                base['conditions']['schedule'] == READ_POP_SCHEDULE and
+                candidate_conditions['schedule'] == DIRECT_SCHEDULE,
+                '--allow-direct-transport requires the directed read-pop to direct schedule pair')
+        candidate_conditions['configuration']['schedule'] = READ_POP_SCHEDULE
+        candidate_conditions['schedule'] = READ_POP_SCHEDULE
+        for step in base['conditions']['commands']:
+            selectors = [arg for arg in step['command'] if arg.startswith(('+NICE_READ_POP', '+NICE_DIRECT'))]
+            require(selectors == (['+NICE_READ_POP=1'] if step['name'].endswith('/simulation') else []),
+                    'direct baseline must contain exactly one exclusive +NICE_READ_POP=1 per simulation')
+            require(not any(arg.startswith('-DXU_NICE_DIRECT') for arg in step['command']),
+                    'direct baseline already contains a direct compiler macro')
+        for step in candidate_conditions['commands']:
+            command = step['command']
+            selectors = [arg for arg in command if arg.startswith(('+NICE_DIRECT', '+NICE_READ_POP'))]
+            require(selectors == (['+NICE_DIRECT=1'] if step['name'].endswith('/simulation') else []),
+                    'direct simulation must replace exactly one selector with +NICE_DIRECT=1')
+            if selectors:
+                command[command.index('+NICE_DIRECT=1')] = '+NICE_READ_POP=1'
+            macros = [arg for arg in command if arg.startswith('-DXU_NICE_DIRECT')]
+            require(macros == (['-DXU_NICE_DIRECT=1'] if step['name'] == 'firmware-build' else []),
+                    'direct firmware must add exactly one -DXU_NICE_DIRECT=1')
+            if macros:
+                command.remove('-DXU_NICE_DIRECT=1')
     require(base['conditions'] == candidate_conditions,
             'campaign conditions differ (arguments, inputs, tools, clocks, assertions or commands)')
     require(set(base['source_sha256']) == set(candidate['source_sha256']), 'source file set differs')
@@ -504,6 +635,18 @@ def compare(base, candidate, expected_source_changes=None, allow_read_pop_transp
                 for key, value in base['source_sha256'].items() if value != candidate['source_sha256'][key]}
     require(observed == expected, 'source changes differ from exact declared SHA pairs: ' +
             ', '.join(sorted(set(observed) | set(expected))))
+    if allow_direct_transport:
+        require(DIRECT_REQUIRED_CHANGES <= set(observed) <= DIRECT_SOURCE_PATHS,
+                'direct transport requires declared accel.c, contract and paired RTL changes; unexpected source changes')
+        require(base['generated_clear_c_identity'] == candidate['generated_clear_c_identity'],
+                'generated clear C differs beyond the frozen-main snapshot include path')
+        loaded_image_checks = dict(baseline=verify_loaded_image(base), candidate=verify_loaded_image(candidate))
+        # Preserve the existing two-field old/read-pop report schema. Only this
+        # explicit comparison adds direct bundle metrics to its read-pop side.
+        base = copy.deepcopy(base)
+        for row in base['rows']:
+            row['transport'].update(direct_snapshots=0, direct_lanes=0, direct_pops=0,
+                                    result_mmio_reads=row['nice']['result_reads'])
     # With unchanged firmware sources, loaded firmware must remain identical.
     # Raw ELF metadata can contain GCC's random temporary STT_FILE object names.
     firmware_changed = any(key.startswith('tests/e203/firmware/') or
@@ -538,12 +681,18 @@ def compare(base, candidate, expected_source_changes=None, allow_read_pop_transp
                 delta_convention='candidate minus baseline; negative cycle delta is an improvement',
                 overlap_semantics='FIFO full wait and compute/writeback overlap overlap phase counters; do not add them',
                 gap_semantics='clear_to_source_gap is reported separately and excluded from the main metric',
-                transport_exception='old-NICE to read-pop; schedule and one simulation plusarg only'
-                    if allow_read_pop_transport else None,
+                transport_exception=('read-pop to direct; exact selector replacement, one compiler macro; '
+                    'declared capability probe and mode-write firmware change') if allow_direct_transport else
+                    'old-NICE to read-pop; schedule and one simulation plusarg only' if allow_read_pop_transport else None,
                 firmware_identity=dict(raw_elf_sha256_equal=base['firmware_elf_sha256'] == candidate['firmware_elf_sha256'],
                     loaded_image_sha256_equal=base['firmware_image_sha256'] == candidate['firmware_image_sha256'],
                     elf_load_contract_equal=base['firmware_loaded_elf'] == candidate['firmware_loaded_elf'],
-                    nonloaded_elf_metadata_may_differ=base['firmware_elf_sha256'] != candidate['firmware_elf_sha256']),
+                    nonloaded_elf_metadata_may_differ=base['firmware_elf_sha256'] != candidate['firmware_elf_sha256'] and
+                        base['firmware_loaded_elf'] == candidate['firmware_loaded_elf'],
+                    loaded_firmware_change_allowed=allow_direct_transport,
+                    loaded_firmware_change_reason='in-window DIRECT_CAP probe and DIRECT_CTRL enable write'
+                        if allow_direct_transport else None,
+                    independent_load_verification=loaded_image_checks),
                 source_changes={key: dict(baseline_sha256=pair[0], candidate_sha256=pair[1])
                                 for key, pair in observed.items()},
                 baseline_identity={k: v for k, v in base.items() if k != 'rows'},
@@ -557,15 +706,18 @@ def main(argv=None):
     parser.add_argument('candidate', type=Path)
     parser.add_argument('--expect-source-change', type=source_expectation, action='append', default=[],
                         metavar='PATH=BASE_SHA:CANDIDATE_SHA')
-    parser.add_argument('--allow-read-pop-transport', action='store_true',
+    transports = parser.add_mutually_exclusive_group()
+    transports.add_argument('--allow-read-pop-transport', action='store_true',
                         help='allow only old-NICE to read-pop schedule and +NICE_READ_POP=1 differences; loaded firmware must match')
+    transports.add_argument('--allow-direct-transport', action='store_true',
+                        help='allow only read-pop to direct, exact selector/macro changes and declared capability/mode firmware change')
     parser.add_argument('--out', type=Path)
     args = parser.parse_args(argv)
     try:
         require(len(dict(args.expect_source_change)) == len(args.expect_source_change),
                 'duplicate expected source path')
         result = compare(load_campaign(args.baseline), load_campaign(args.candidate),
-                         dict(args.expect_source_change), args.allow_read_pop_transport)
+                         dict(args.expect_source_change), args.allow_read_pop_transport, args.allow_direct_transport)
         if args.out:
             with args.out.open('x') as stream:
                 json.dump(result, stream, indent=2, sort_keys=True)

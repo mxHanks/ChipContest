@@ -1,0 +1,105 @@
+{
+  "scope": "additional fresh-process boundary check; not primary comparison",
+  "command": [
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/verilator-obj/soc_sim",
+    "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/accel_soc",
+    "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-full12/task-00/vectors",
+    "+TASKS=1",
+    "+DUMPWAVE=0",
+    "+MAX_CYCLES=3000000",
+    "+FIRST_SOURCE_STALL=7",
+    "+OUTPUT_Y32=1",
+    "+SHARED_W_PACKED16=1",
+    "+NICE_DRAIN8=1",
+    "+NICE_DIRECT=1"
+  ],
+  "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-first-stall7",
+  "simulator_sha256": "9cda331d4f212cc396b481bcfba767e2e567b53308421e7c4238177f0c1a0bab",
+  "firmware_image_sha256": "9eb5c300eb7103f04195f3e1caceca9dbcae0d019e0944c20f3a0f91e54e1ca4",
+  "requested_first_stall": 7,
+  "native_exit": 0,
+  "elapsed_seconds": 33.03253633900022,
+  "log_sha256": "9948c9c9d27348452807792fb8418ad106150c28f8ac12ef843448048366ad14",
+  "layers": [
+    {
+      "layer": 0,
+      "cycles": 453266,
+      "firmware_cycles": 453359
+    }
+  ],
+  "performance": [
+    {
+      "w_load": 114720,
+      "x_load": 71084,
+      "bias_load": 10760,
+      "compute_wait": 24552,
+      "writeback": 193252,
+      "other": 38898,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 5051,
+      "mmio_writes": 12330,
+      "shared_reads": 15040,
+      "shared_writes": 25344,
+      "shared_stall": 14129,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    }
+  ],
+  "autogroup": [
+    {
+      "layer": 0,
+      "rows": 99,
+      "pops_retired": 3168,
+      "compute_writeback_overlap": 158103,
+      "fifo_full_wait": 20695
+    }
+  ],
+  "results": [
+    {
+      "layer": 0,
+      "words": 25344,
+      "logical_results": 25344
+    }
+  ],
+  "weights": [
+    {
+      "layer": 0,
+      "source_words": 8192,
+      "uploaded_values": 16384
+    }
+  ],
+  "nice": [
+    {
+      "layer": 0,
+      "requests": 3168,
+      "responses": 3168,
+      "oitf_retired": 3168,
+      "status_polls": 5049,
+      "result_reads": 0,
+      "pops_retired": 3168,
+      "shared_writes": 25344
+    }
+  ],
+  "direct": [
+    {
+      "layer": 0,
+      "snapshots": 3168,
+      "lanes": 25344,
+      "pops_retired": 3168,
+      "result_mmio_reads": 0
+    }
+  ],
+  "read_pop": [],
+  "windows": [
+    {
+      "layer": 0,
+      "first_request": 1402451,
+      "first_accept": 1402458,
+      "final_y_response": 1855716,
+      "first_request_wait": 7
+    }
+  ],
+  "status": "DEVELOPMENT_BOUNDARY_PASS"
+}

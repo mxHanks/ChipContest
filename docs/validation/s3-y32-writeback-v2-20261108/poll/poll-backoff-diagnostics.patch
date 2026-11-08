@@ -1,0 +1,105 @@
+--- a/tests/e203/tb_accel_soc.sv
++++ b/tests/e203/tb_accel_soc.sv
+@@ -40,6 +40,20 @@
+   `define NICE_FRONT `EXU.u_e203_exu_alu.u_e203_exu_nice
+   `define LSU `CPU.u_e203_cpu.u_e203_core.u_e203_lsu.u_e203_lsu_ctrl
+ 
++  // Experiment parameter: elaboration-time synthesizable hardware setting.
++  localparam integer POLL_BACKOFF_CYCLES=0;
++  initial begin
++    if (`NICE.u_drain8.POLL_BACKOFF_CYCLES!=POLL_BACKOFF_CYCLES)
++      $fatal(1,"poll diagnostic/hardware parameter mismatch");
++  end
++  integer s3_poll_index=0, s3_poll_cmd_cycle=0, s3_poll_endpoint_cycle=0;
++  integer s3_poll_ready_cycle=-1;
++  reg s3_poll_was_ready=0;
++  always @(posedge clk) begin
++    if (`ACCEL.row_valid && !s3_poll_was_ready) s3_poll_ready_cycle=cycles;
++    s3_poll_was_ready=`ACCEL.row_valid;
++  end
++
+   integer nice_requests=0, nice_responses=0, nice_retired=0;
+   integer nice_request_cycle=0;
+   integer nice_polls=0, nice_reads=0, nice_pops=0, nice_writes=0, nice_step=0;
+@@ -102,6 +116,7 @@
+             `OITF.disp_i_rdidx!==`NICE.nice_req_inst[11:7])
+           $fatal(1,"NICE instruction descriptor or OITF allocation mismatch index=%0d",nice_requests);
+         nice_instruction=1; nice_step=0; nice_request_cycle=cycles; nice_destination=`NICE.nice_req_rs1;
++        s3_poll_index=0;
+         nice_lane_responses=0; nice_pop_retired=0; nice_group_writes=0;
+         nice_final_y_response_cycle=-1;
+         nice_group=`NICE.nice_req_rs2[4:0]; nice_rd=`NICE.nice_req_inst[11:7];
+@@ -116,6 +131,7 @@
+         nice_address=`NICE.nice_icb_cmd_addr; nice_read=`NICE.nice_icb_cmd_read;
+         nice_data=`NICE.nice_icb_cmd_wdata;
+         if (nice_step==0) begin
++          s3_poll_cmd_cycle=cycles;
+           if (!nice_read || nice_address!==32'h100420c4) $fatal(1,"NICE status poll order");
+         end else if (nice_step<=8) begin
+           if (!nice_read || nice_address!==(nice_read_pop && nice_step==8 ?
+@@ -161,6 +177,7 @@
+         if (endpoint_response) begin
+           if (!nice_endpoint || nice_endpoint_done) $fatal(1,"NICE orphan endpoint response");
+           nice_endpoint_done=1;
++          if (nice_step==0) s3_poll_endpoint_cycle=cycles;
+           if (nice_address[31:12]==20'h10042) begin
+             nice_endpoint_data=`ACCEL.rsp_rdata; endpoint_error=`ACCEL.rsp_err;
+           end else nice_endpoint_data=rsp_rdata;
+@@ -173,6 +190,11 @@
+           $fatal(1,"NICE response differs from real endpoint");
+         if (nice_step==0) begin
+           nice_polls=nice_polls+1;
++          s3_poll_index=s3_poll_index+1;
++          $display("S3_POLL_DIAG backoff=%0d request=%0d group=%0d poll=%0d request_cycle=%0d command_cycle=%0d endpoint_cycle=%0d response_cycle=%0d valid=%0d actual_valid=%0d ready_cycle=%0d",
++            POLL_BACKOFF_CYCLES,nice_requests-1,nice_group,s3_poll_index,nice_request_cycle,
++            s3_poll_cmd_cycle,s3_poll_endpoint_cycle,cycles,`NICE.nice_icb_rsp_rdata[1],
++            `ACCEL.row_valid,s3_poll_ready_cycle);
+           if (`NICE.nice_icb_rsp_rdata[1]) begin
+             if (!`NICE.nice_icb_rsp_rdata[0] || `NICE.nice_icb_rsp_rdata[10:6]!==nice_group)
+               $fatal(1,"NICE polled FIFO head differs from expected group");
+--- a/experiments/nice_reachability/tb_nice_drain8.sv
++++ b/experiments/nice_reachability/tb_nice_drain8.sv
+@@ -1,6 +1,6 @@
+ `include "e203_defines.v"
+ // Isolated transport/FSM tests only. This does NOT prove real LSU reachability.
+-module tb_nice_drain8;
++module tb_nice_drain8 #(parameter integer POLL_BACKOFF_CYCLES=0);
+   reg clk=0, rst_n=0;
+   always #5 clk=~clk;
+   reg req_valid=0, rsp_ready=0, cmd_ready=0, bus_rsp_valid=0, bus_rsp_err=0;
+@@ -16,7 +16,7 @@
+   integer alias_errors=0, post_pop_write_errors=0;
+   wire [66:0] payload={cmd_addr,cmd_read,cmd_data,cmd_size};
+ 
+-  xu_nice_drain8 dut (
++  xu_nice_drain8 #(.POLL_BACKOFF_CYCLES(POLL_BACKOFF_CYCLES)) dut (
+     .nice_clk(clk), .nice_rst_n(rst_n), .nice_active(active), .nice_mem_holdup(hold),
+     .nice_req_valid(req_valid), .nice_req_ready(req_ready), .nice_req_inst(req_inst),
+     .nice_req_rs1(req_rs1), .nice_req_rs2(req_rs2),
+@@ -123,6 +123,18 @@
+       bus_rsp_valid=0;
+       bus_rsp_err=0;
+       bus_rsp_data=0;
++      // A retired empty response may insert idle cycles, but never another
++      // outstanding transfer or completion. Timeout responses bypass delay.
++      if (!reply_error && expected_addr==32'h100420c4 && !reply[1] && !rsp_valid) begin
++        for (j=0; j<POLL_BACKOFF_CYCLES; j=j+1) begin
++          if (cmd_valid || bus_rsp_ready || rsp_valid || req_ready || !hold ||
++              case_commands!=case_responses)
++            $fatal(1,"invalid empty-poll delay interface cycle=%0d",j);
++          @(negedge clk);
++        end
++        if (!cmd_valid || cmd_addr!==32'h100420c4)
++          $fatal(1,"empty-poll retry did not resume at configured delay");
++      end
+     end
+   endtask
+ 
+@@ -208,6 +220,7 @@
+     if(alias_errors!=1 || post_pop_write_errors!=8) $fatal(1,"read-pop error coverage incomplete");
+     $display("NICE_DRAIN8_UNIT_PASS cases=%0d commands=%0d responses=%0d all_error_transactions=17 groups=32 alias_errors=%0d post_pop_write_errors=%0d",
+              cases,total_commands,total_responses,alias_errors,post_pop_write_errors);
++    $display("POLL_BACKOFF_UNIT_PASS parameter=%0d retired_poll_limit=1 empty_response_delay_checked=1",POLL_BACKOFF_CYCLES);
+     $finish;
+   end
+ 

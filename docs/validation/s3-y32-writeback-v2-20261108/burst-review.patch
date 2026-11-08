@@ -1,0 +1,924 @@
+--- baseline/tools/scripts/e203_soc.py
++++ burst/tools/scripts/e203_soc.py
+@@ -188,7 +188,7 @@
+     names = ['layer', 'alias_reads', 'explicit_pops']
+     pattern = r'^READ_POP_TASK ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
+     found = re.findall(pattern, log, re.M)
+-    expected = len(layers) if schedule == contract.NICE_READ_POP_SCHEDULE else 0
++    expected = len(layers) if schedule in (contract.NICE_READ_POP_SCHEDULE, contract.NICE_DRAIN_N_SCHEDULE) else 0
+     if len(found) != expected or len(found) != len(re.findall(r'^READ_POP_TASK\b', log, re.M)):
+         raise ValueError('missing, duplicate or malformed read-pop activity')
+     records = [dict(zip(names, map(int, row))) for row in found]
+--- baseline/tools/scripts/xu_firmware_contract.py
++++ burst/tools/scripts/xu_firmware_contract.py
+@@ -13,7 +13,8 @@
+              'bias-hw-autogroup-paired-hi-packed16-window',
+              'bias-hw-autogroup-y32-packed16-window',
+              'bias-hw-autogroup-y32-packed16-nice-window',
+-             'bias-hw-autogroup-y32-packed16-nice-read-pop-window')
++             'bias-hw-autogroup-y32-packed16-nice-read-pop-window',
++             'bias-hw-autogroup-y32-packed16-nice-drainn-read-pop-window')
+ PAIRED_HI_SCHEDULE = 'bias-hw-autogroup-paired-hi-window'
+ PAIRED_HI_PACKED16_SCHEDULE = 'bias-hw-autogroup-paired-hi-packed16-window'
+ PAIRED_HI_SCHEDULES = (PAIRED_HI_SCHEDULE, PAIRED_HI_PACKED16_SCHEDULE)
+@@ -21,7 +22,8 @@
+ Y32_PACKED16_SCHEDULE = 'bias-hw-autogroup-y32-packed16-window'
+ NICE_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-window'
+ NICE_READ_POP_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-read-pop-window'
+-NICE_SCHEDULES = (NICE_SCHEDULE, NICE_READ_POP_SCHEDULE)
++NICE_DRAIN_N_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-drainn-read-pop-window'
++NICE_SCHEDULES = (NICE_SCHEDULE, NICE_READ_POP_SCHEDULE, NICE_DRAIN_N_SCHEDULE)
+ Y32_SCHEDULES = (Y32_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
+ PACKED16_SCHEDULES = (PAIRED_HI_PACKED16_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
+ AUTOGROUP_SCHEDULES = ('bias-hw-autogroup-window',) + PAIRED_HI_SCHEDULES + Y32_SCHEDULES
+@@ -88,6 +90,8 @@
+         values['XU_SHARED_W_PACKED16'] = True
+     if config['schedule'] in NICE_SCHEDULES:
+         values['XU_NICE_DRAIN8'] = True
++    if config['schedule'] == NICE_DRAIN_N_SCHEDULE:
++        values['XU_NICE_DRAIN_N'] = True
+     return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
+ 
+ 
+@@ -100,8 +104,10 @@
+         arguments.append('+NICE_DRAIN8=1')
+     # This selects the observer/contract for the matching RTL snapshot. It
+     # does not switch hardware behavior or change the custom instruction ABI.
+-    if schedule == NICE_READ_POP_SCHEDULE:
++    if schedule in (NICE_READ_POP_SCHEDULE, NICE_DRAIN_N_SCHEDULE):
+         arguments.append('+NICE_READ_POP=1')
++    if schedule == NICE_DRAIN_N_SCHEDULE:
++        arguments.append('+NICE_DRAIN_N=1')
+     return arguments
+ 
+ 
+@@ -123,7 +129,7 @@
+     if schedule in AUTOGROUP_SCHEDULES:
+         # One STARTROW and 32 response-retired POPs per row. No GROUP/W1C.
+         mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 99 * (1 + 32)
+-    if schedule == NICE_READ_POP_SCHEDULE:
++    if schedule in (NICE_READ_POP_SCHEDULE, NICE_DRAIN_N_SCHEDULE):
+         # Lane7 read response retires each POP, removing 32 writes per row.
+         mmio_writes -= 99 * 32
+     # Source packing does not change the 8192 W_PACK32 upload transactions.
+@@ -141,7 +147,9 @@
+         result.update(result_mmio_reads=OUTPUTS_PER_TASK, y32_mmio_reads=OUTPUTS_PER_TASK,
+                       w_mmio_upload_words=8192, rows=99, pops_retired=3168)
+     if schedule in NICE_SCHEDULES:
+-        result.update(nice_requests=3168, nice_responses=3168, nice_oitf_retired=3168)
++        result.update(nice_requests=99 if schedule==NICE_DRAIN_N_SCHEDULE else 3168,
++                      nice_responses=99 if schedule==NICE_DRAIN_N_SCHEDULE else 3168,
++                      nice_oitf_retired=99 if schedule==NICE_DRAIN_N_SCHEDULE else 3168)
+     return result
+ 
+ 
+@@ -195,7 +203,9 @@
+     for record, layer in zip(records, layers):
+         if (set(record) != names or any(type(v) is not int or v < 0 for v in record.values()) or
+                 record['layer'] != layer['layer'] or
+-                any(record[key] != 3168 for key in ['requests', 'responses', 'oitf_retired', 'pops_retired']) or
++                any(record[key] != (99 if schedule==NICE_DRAIN_N_SCHEDULE else 3168)
++                    for key in ['requests', 'responses', 'oitf_retired']) or
++                record['pops_retired'] != 3168 or
+                 record['result_reads'] != OUTPUTS_PER_TASK or record['shared_writes'] != OUTPUTS_PER_TASK or
+                 not 3168 <= record['status_polls'] <= layer['cycles']):
+             raise ValueError('NICE instruction retirement or payload coverage differs')
+--- baseline/tests/e203/firmware/accel.c
++++ burst/tests/e203/firmware/accel.c
+@@ -37,13 +37,20 @@
+ #define XU_RESULT_WINDOW RESULT_WINDOW
+ #endif
+ 
++#ifndef XU_NICE_DRAIN_N
++#define XU_NICE_DRAIN_N 0
++#endif
+ #if XU_NICE_DRAIN8
+ static inline uint32_t xu_nice_drain8(volatile uint32_t *destination, uint32_t control) {
+     uint32_t code;
+     /* The used output operand receives a real non-x0 rd. The fixed core does
+      * not turn NICE err into a trap, so the caller must inspect this code. */
+     __asm__ volatile (
++#if XU_NICE_DRAIN_N
++        ".insn r 0x7b, 7, 0x21, %0, %1, %2\n\t"
++#else
+         ".insn r 0x7b, 7, 0x20, %0, %1, %2\n\t"
++#endif
+         "fence iorw, iorw"
+         : "=r"(code) : "r"(destination), "r"(control) : "memory");
+     return code;
+@@ -130,7 +137,7 @@
+                  const volatile uint32_t *bias, volatile uint32_t *y,
+                  uint32_t poll_limit) {
+ #if XU_NICE_DRAIN8
+-    if (!poll_limit || poll_limit > 0x07ffffffu) return -11;
++    if (!poll_limit || poll_limit > (XU_NICE_DRAIN_N ? 0x003fffffu : 0x07ffffffu)) return -11;
+ #endif
+     volatile uint32_t *reg = (volatile uint32_t *)ACCEL_BASE;
+     if (reg[ID] != 0xacce2030u) return -1;
+@@ -234,6 +241,13 @@
+ #if XU_HARDWARE_AUTO_GROUP
+         reg[ROW_CTRL] = 1;
+ #endif
++#if XU_NICE_DRAIN_N
++        /* Explicit optional ABI: group=0,count=32, per-group poll budget.
++         * The single completion covers all groups; hardware aborts at the first
++         * failed response and the caller aborts this whole task immediately. */
++        uint32_t row_code = xu_nice_drain8(y + row * COLS, (poll_limit << 10) | (31u << 5));
++        if (row_code != 0) return -12;
++#else
+         for (unsigned group = 0; group < 32; ++group) {
+ #if XU_HARDWARE_BIAS_CACHE
+             /* Chisel selects all eight cached bias values using GROUP. */
+@@ -333,6 +347,7 @@
+ #endif
+ #endif /* XU_NICE_DRAIN8: CPU polling and output transfer stay in the legacy branch. */
+         }
++#endif /* XU_NICE_DRAIN_N */
+     }
+     __asm__ volatile ("fence iorw, iorw" ::: "memory");
+     return 0;
+--- baseline/tests/e203/tb_accel_soc.sv
++++ burst/tests/e203/tb_accel_soc.sv
+@@ -22,7 +22,7 @@
+   integer outstanding = 0;
+   reg final_write_pending = 0;
+   integer dumpwave;
+-  integer output_y32 = 0, shared_w_packed16 = 0, output_words = 50688, nice_drain8 = 0, nice_read_pop = 0;
++  integer output_y32 = 0, shared_w_packed16 = 0, output_words = 50688, nice_drain8 = 0, nice_read_pop = 0, nice_drain_n = 0;
+   localparam BASE = 32'ha0000000, YOFF = 32'h20000, HOST = 32'h7f000;
+ 
+   // Backpressure exercises CPU/bus waits; responses remain stable until accepted.
+@@ -42,6 +42,8 @@
+ 
+   integer nice_requests=0, nice_responses=0, nice_retired=0;
+   integer nice_request_cycle=0;
++  integer nice_groups_done=0, nice_instruction_groups=1, nice_groups_in_instruction=0;
++  integer nice_group_start_cycle=0;
+   integer nice_polls=0, nice_reads=0, nice_pops=0, nice_writes=0, nice_step=0;
+   integer nice_alias_responses=0, nice_group_writes=0, nice_final_y_response_cycle=-1;
+   reg [7:0] nice_lane_responses=0;
+@@ -77,13 +79,16 @@
+       if (`NICE.nice_rsp_valid &&
+           (!nice_instruction || nice_pending || nice_step!=(nice_read_pop ? 17 : 18) ||
+            nice_lane_responses!==8'hff || !nice_pop_retired || nice_group_writes!=8 ||
++           nice_groups_in_instruction!=nice_instruction_groups ||
+            nice_final_y_response_cycle<0 || cycles<=nice_final_y_response_cycle))
+         $fatal(1,"NICE completion offered before final Y response retired");
+ 
+       if (nice_instruction && `OITF.ret_ena && `OITF.ret_ptr===nice_tag &&
+           !(`NICE.nice_rsp_valid && `NICE.nice_rsp_ready))
+         $fatal(1,"NICE OITF entry retired before its completion");
+-      if (nice_instruction && cycles-nice_request_cycle>1024) begin
++      if (nice_instruction &&
++          (cycles-nice_group_start_cycle>1024 ||
++           cycles-nice_request_cycle>1024*nice_instruction_groups)) begin
+         $display("NICE_COMPLETION_BLOCKED valid=%b ready=%b code=%h active=%b mem_holdup=%b fifo_valid=%b fifo_tag=%0d oitf_empty=%b ret_ptr=%0d expected_tag=%0d ret_rdidx=%0d expected_rd=%0d wb_selected=%b step=%0d",
+           `NICE.nice_rsp_valid,`NICE.nice_rsp_ready,`NICE.nice_rsp_rdat,
+           `NICE.nice_active,`NICE.nice_mem_holdup,`NICE_FRONT.fifo_o_vld,`NICE_FRONT.nice_o_itag,
+@@ -93,15 +98,19 @@
+       end
+ 
+       if (`NICE.nice_req_valid && `NICE.nice_req_ready) begin
+-        if (nice_instruction || nice_pending || nice_requests>=3168 ||
++        if (nice_instruction || nice_pending || nice_requests>=(nice_drain_n ? 99 : 3168) ||
+             `NICE.nice_req_inst[6:0]!==7'h7b || `NICE.nice_req_inst[14:12]!==7 ||
+-            `NICE.nice_req_inst[31:25]!==7'h20 || `NICE.nice_req_inst[11:7]==0 ||
+-            `NICE.nice_req_rs1!==BASE+YOFF+nice_requests*32 ||
+-            `NICE.nice_req_rs2[4:0]!==nice_requests%32 || `NICE.nice_req_rs2[31:5]==0 ||
++            `NICE.nice_req_inst[31:25]!==(nice_drain_n ? 7'h21 : 7'h20) || `NICE.nice_req_inst[11:7]==0 ||
++            `NICE.nice_req_rs1!==BASE+YOFF+nice_groups_done*32 ||
++            `NICE.nice_req_rs2[4:0]!==nice_groups_done%32 ||
++            (nice_drain_n ? (`NICE.nice_req_rs2[9:5]!==5'd31 || `NICE.nice_req_rs2[31:10]==0) :
++                            `NICE.nice_req_rs2[31:5]==0) ||
+             !`OITF.dis_ena || !`OITF.disp_i_rdwen ||
+             `OITF.disp_i_rdidx!==`NICE.nice_req_inst[11:7])
+           $fatal(1,"NICE instruction descriptor or OITF allocation mismatch index=%0d",nice_requests);
+-        nice_instruction=1; nice_step=0; nice_request_cycle=cycles; nice_destination=`NICE.nice_req_rs1;
++        nice_instruction=1; nice_step=0; nice_request_cycle=cycles;
++        nice_instruction_groups=nice_drain_n ? 32 : 1;
++        nice_groups_in_instruction=0; nice_group_start_cycle=cycles; nice_destination=`NICE.nice_req_rs1;
+         nice_lane_responses=0; nice_pop_retired=0; nice_group_writes=0;
+         nice_final_y_response_cycle=-1;
+         nice_group=`NICE.nice_req_rs2[4:0]; nice_rd=`NICE.nice_req_inst[11:7];
+@@ -133,7 +142,7 @@
+           if (nice_read || nice_address!==nice_destination+4*lane ||
+               nice_lane_responses!==8'hff || nice_group_writes!=lane ||
+               ((nice_read_pop || lane==7) ? !nice_pop_retired : nice_pop_retired) ||
+-              nice_data!==golden_y32[(nice_requests-1)*8+lane]) $fatal(1,"NICE shared write order/value");
++              nice_data!==golden_y32[nice_groups_done*8+lane]) $fatal(1,"NICE shared write order/value");
+         end else $fatal(1,"NICE extra bus command after last write");
+         nice_pending=1; nice_endpoint=0; nice_endpoint_done=0;
+       end
+@@ -196,11 +205,24 @@
+             if (nice_step==(nice_read_pop ? 16 : 17)) nice_final_y_response_cycle=cycles;
+           end
+           nice_step=nice_step+1;
++          if (nice_step==(nice_read_pop ? 17 : 18)) begin
++            nice_groups_done=nice_groups_done+1;
++            nice_groups_in_instruction=nice_groups_in_instruction+1;
++            nice_group_start_cycle=cycles;
++            if (nice_groups_in_instruction<nice_instruction_groups) begin
++              if (!nice_drain_n || nice_group==31 || nice_group_writes!=8 ||
++                  nice_lane_responses!==8'hff || !nice_pop_retired)
++                $fatal(1,"NICE burst group advancement before complete retirement");
++              nice_step=0;nice_group=nice_group+1;nice_destination=nice_destination+32;
++              nice_lane_responses=0;nice_pop_retired=0;nice_group_writes=0;
++              nice_final_y_response_cycle=-1;
++            end
++          end
+         end
+         nice_pending=0;
+       end
+       if (`NICE.nice_rsp_valid && `NICE.nice_rsp_ready) begin
+-        if (!nice_instruction || nice_pending || nice_step!=(nice_read_pop ? 17 : 18) || nice_completion_payload!==0 ||
++        if (!nice_instruction || nice_pending || nice_step!=(nice_read_pop ? 17 : 18) || nice_completion_payload!==0 || nice_groups_in_instruction!=nice_instruction_groups ||
+             !`LONGWB.wbck_sel_nice || !`OITF.ret_ena || `OITF.ret_ptr!==nice_tag ||
+             !`OITF.ret_rdwen || `OITF.ret_rdidx!==nice_rd ||
+             !`LONGWB.longp_wbck_o_valid || !`LONGWB.longp_wbck_o_ready ||
+@@ -266,7 +288,8 @@
+       nice_alias_responses=0; nice_group_writes=0; nice_final_y_response_cycle=-1;
+       nice_lane_responses=0; nice_pop_retired=0;
+       nice_instruction=0; nice_pending=0; nice_endpoint=0; nice_endpoint_done=0;
+-      nice_request_cycle=0;
++      nice_request_cycle=0; nice_groups_done=0; nice_groups_in_instruction=0;
++      nice_instruction_groups=1; nice_group_start_cycle=0;
+       nice_cmd_hold=0; nice_completion_hold=0;
+     end
+   endtask
+@@ -605,7 +628,8 @@
+           layer,packed_w_source_words,packed_w_uploaded_values);
+       end
+       if (nice_drain8) begin
+-        if (nice_requests!=3168 || nice_responses!=3168 || nice_retired!=3168 ||
++        if (nice_requests!=(nice_drain_n ? 99 : 3168) || nice_responses!=(nice_drain_n ? 99 : 3168) ||
++            nice_retired!=(nice_drain_n ? 99 : 3168) || nice_groups_done!=3168 ||
+             nice_polls<3168 || nice_reads!=25344 || nice_pops!=3168 || nice_writes!=25344 ||
+             nice_alias_responses!=(nice_read_pop ? 3168 : 0) || nice_group_writes!=8 ||
+             nice_lane_responses!==8'hff || !nice_pop_retired || nice_final_y_response_cycle<0 ||
+@@ -701,11 +725,13 @@
+     if (!$value$plusargs("OUTPUT_Y32=%d",output_y32)) output_y32=0;
+     if (!$value$plusargs("SHARED_W_PACKED16=%d",shared_w_packed16)) shared_w_packed16=0;
+     if (!$value$plusargs("NICE_DRAIN8=%d",nice_drain8)) nice_drain8=0;
++    if (!$value$plusargs("NICE_DRAIN_N=%d",nice_drain_n)) nice_drain_n=0;
+     if (!$value$plusargs("NICE_READ_POP=%d",nice_read_pop)) nice_read_pop=0;
+     if ((output_y32!=0 && output_y32!=1) ||
+         (shared_w_packed16!=0 && shared_w_packed16!=1) ||
+         (nice_drain8!=0 && nice_drain8!=1) || (nice_drain8 && (!output_y32 || !shared_w_packed16)) ||
+-        (nice_read_pop!=0 && nice_read_pop!=1) || (nice_read_pop && !nice_drain8))
++        (nice_read_pop!=0 && nice_read_pop!=1) || (nice_read_pop && !nice_drain8) ||
++        (nice_drain_n!=0 && nice_drain_n!=1) || (nice_drain_n && !nice_read_pop))
+       $fatal(1,"invalid output or shared W layout mode");
+     output_words=output_y32 ? 25344 : 50688;
+     if (!$value$plusargs("MAX_CYCLES=%d",max_cycles)) max_cycles=200000000;
+--- baseline/tests/e203/tb_xu_nice_route_wrapper.sv
++++ burst/tests/e203/tb_xu_nice_route_wrapper.sv
+@@ -217,11 +217,13 @@
+     checked_error(32'h0000707b,32'ha0020000,1);
+     drain_success();
+     checked_error(32'h4000707b,32'ha0020004,2);
++    checked_error(32'h4200707b,32'ha0020004,2); // optional drainN still uses checked owner
+     for(func7=0;func7<128;func7=func7+1)
+       for(func3=0;func3<8;func3=func3+1) begin
+         instruction=(func7<<25)|(func3<<12)|32'h7b;
+         if(instruction!=32'h0200207b && instruction!=32'h0400207b &&
+-           instruction!=32'h0c00607b && instruction!=32'h4000707b && instruction!=32'h0000707b)
++           instruction!=32'h0c00607b && instruction!=32'h4000707b &&
++           instruction!=32'h4200707b && instruction!=32'h0000707b)
+           checked_error(instruction,32'ha0020000,1);
+       end
+     for(op=0;op<4;op=op+1) begin
+@@ -234,11 +236,11 @@
+       checked_error(instruction,32'ha0020000,1);
+     end
+     legacy_transaction(2,2); // retained demo state survived checked/drain work
+-    if(unsupported!=1024 || descriptor_errors!=1 || legacy_cases!=4 || drain_cases!=1 ||
++    if(unsupported!=1023 || descriptor_errors!=2 || legacy_cases!=4 || drain_cases!=1 ||
+        requests!=1030 || completions!=requests || commands!=29 || responses!=commands)
+       $fatal(1,"Final route accounting wrong unsupported=%0d requests=%0d completions=%0d commands=%0d responses=%0d",
+         unsupported,requests,completions,commands,responses);
+-    $display("XU_NICE_ROUTE_WRAPPER_PASS unsupported=1024 descriptor_errors=1 legacy=4 drain=1 requests=1030 completions=1030 commands=29 responses=29");
++    $display("XU_NICE_ROUTE_WRAPPER_PASS unsupported=1023 descriptor_errors=2 legacy=4 drain=1 requests=1030 completions=1030 commands=29 responses=29");
+     $finish;
+   end
+   initial begin #2000000;$fatal(1,"Nice routing global timeout");end
+--- baseline/tests/e203/test_drain_n.py
++++ burst/tests/e203/test_drain_n.py
+@@ -0,0 +1,43 @@
++"""Optional drainN transport: explicit ABI, unchanged payload and old drain8 ABI."""
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools/scripts'))
++import xu_firmware_contract as contract
++import e203_soc as soc
++
++class DrainNTests(unittest.TestCase):
++    def test_explicit_schedule_changes_instruction_count_only(self):
++        old=contract.NICE_READ_POP_SCHEDULE;new=contract.NICE_DRAIN_N_SCHEDULE
++        self.assertEqual(contract.task_contract(new), {**contract.task_contract(old),
++            'nice_requests':99,'nice_responses':99,'nice_oitf_retired':99})
++        old_flags=contract.compiler_defines(contract.configuration(old))
++        self.assertNotIn('-DXU_NICE_DRAIN_N=1',old_flags)
++        self.assertEqual(contract.compiler_defines(contract.configuration(new)),old_flags+['-DXU_NICE_DRAIN_N=1'])
++        self.assertEqual(contract.simulator_arguments(new),contract.simulator_arguments(old)+['+NICE_DRAIN_N=1'])
++        layers=[dict(layer=0,cycles=1000000)]
++        log=('NICE_TASK layer=0 requests=99 responses=99 oitf_retired=99 status_polls=3168 '
++             'result_reads=25344 pops_retired=3168 shared_writes=25344\n')
++        self.assertEqual(soc.check_nice_activity(log,layers,new)[0]['requests'],99)
++        for invalid in [log.replace('requests=99','requests=3168'),
++                        log.replace('oitf_retired=99','oitf_retired=98'),
++                        log.replace('pops_retired=3168','pops_retired=99'),
++                        log.replace('result_reads=25344','result_reads=25343')]:
++            with self.assertRaises(ValueError): soc.check_nice_activity(invalid,layers,new)
++        with self.assertRaises(ValueError): soc.check_nice_activity(log,layers,old)
++        self.assertEqual(soc.check_read_pop_activity('READ_POP_TASK layer=0 alias_reads=3168 explicit_pops=0\n',layers,new)[0]['alias_reads'],3168)
++
++    def test_state_machine_conservation_bounds_errors_and_backpressure(self):
++        root=Path(__file__).resolve().parents[2];rtl=root/'third-party/e203_hbirdv2/rtl/e203'
++        with tempfile.TemporaryDirectory() as directory:
++            binary=Path(directory)/'drainN.vvp'
++            compiled=subprocess.run(['iverilog','-g2012','-I'+str(rtl/'core'),'-s','tb_nice_drainN','-o',str(binary),
++                str(root/'experiments/nice_reachability/tb_nice_drainN.sv'),str(rtl/'subsys/xu_nice_drain8.v')],capture_output=True,text=True,timeout=30)
++            self.assertEqual(compiled.returncode,0,compiled.stderr)
++            result=subprocess.run(['vvp',str(binary)],capture_output=True,text=True,timeout=30)
++            self.assertEqual(result.returncode,0,result.stdout+result.stderr)
++            self.assertIn('NICE_DRAIN_N_UNIT_PASS cases=79 commands=10617 responses=10617',result.stdout)
++
++if __name__=='__main__': unittest.main()
+--- baseline/tests/e203/test_nice_route_wrapper.py
++++ burst/tests/e203/test_nice_route_wrapper.py
+@@ -38,7 +38,7 @@
+                                   universal_newlines=True,timeout=60)
+             save('simulation.log',result.stdout)
+             self.assertEqual(result.returncode,0,result.stdout)
+-            marker='XU_NICE_ROUTE_WRAPPER_PASS unsupported=1024 descriptor_errors=1 legacy=4 drain=1 requests=1030 completions=1030 commands=29 responses=29'
++            marker='XU_NICE_ROUTE_WRAPPER_PASS unsupported=1023 descriptor_errors=2 legacy=4 drain=1 requests=1030 completions=1030 commands=29 responses=29'
+             self.assertEqual(result.stdout.count(marker),1,result.stdout)
+             self.assertEqual(len(re.findall(r'^NICE_ROUTE_LEGACY_COMPAT_PASS ',result.stdout,re.M)),4,result.stdout)
+             self.assertNotRegex(result.stdout,re.compile(r'(?im)^\s*(?:Fatal:|Error:|FATAL:)|\b(?:FAIL|FAILED|FAILURE)\b'))
+--- baseline/tests/e203/test_y32_firmware_contract.py
++++ burst/tests/e203/test_y32_firmware_contract.py
+@@ -36,9 +36,10 @@
+         if schedule in contract.PACKED16_SCHEDULES:
+             lines.append(f'W_PACKED16_TASK layer={layer} source_words=8192 uploaded_values=16384')
+         if schedule in contract.NICE_SCHEDULES:
+-            lines.append(f'NICE_TASK layer={layer} requests=3168 responses=3168 oitf_retired=3168 '
++            n=work['nice_requests']
++            lines.append(f'NICE_TASK layer={layer} requests={n} responses={n} oitf_retired={n} '
+                          'status_polls=3168 result_reads=25344 pops_retired=3168 shared_writes=25344')
+-        if schedule == contract.NICE_READ_POP_SCHEDULE:
++        if schedule in (contract.NICE_READ_POP_SCHEDULE, contract.NICE_DRAIN_N_SCHEDULE):
+             lines.append(f'READ_POP_TASK layer={layer} alias_reads=3168 explicit_pops=0')
+     lines.append(f'SOC_PASS tasks={tasks} outputs={tasks*25344} '
+                  f'writes={tasks*work["shared_writes"]}')
+@@ -257,7 +258,7 @@
+                                  schedule in contract.PACKED16_SCHEDULES)
+                 self.assertEqual('+NICE_DRAIN8=1' in command, schedule in contract.NICE_SCHEDULES)
+                 self.assertEqual('+NICE_READ_POP=1' in command,
+-                                 schedule == contract.NICE_READ_POP_SCHEDULE)
++                                 schedule in (contract.NICE_READ_POP_SCHEDULE, contract.NICE_DRAIN_N_SCHEDULE))
+ 
+     def test_read_pop_changes_only_transport_work_and_keeps_firmware_abi(self):
+         old, new = contract.NICE_SCHEDULE, contract.NICE_READ_POP_SCHEDULE
+@@ -294,7 +295,7 @@
+         with self.assertRaises(ValueError):
+             soc.check_performance(complete.replace(marker, ''), layers, schedule)
+         for old in contract.SCHEDULES:
+-            if old == schedule:
++            if old in (schedule, contract.NICE_DRAIN_N_SCHEDULE):
+                 continue
+             self.assertEqual(soc.check_read_pop_activity('', layers, old), [])
+             with self.subTest(old=old), self.assertRaises(ValueError):
+--- baseline/experiments/nice_reachability/make_burst_unit.py
++++ burst/experiments/nice_reachability/make_burst_unit.py
+@@ -0,0 +1,86 @@
++from pathlib import Path
++source=Path(__file__).with_name('tb_nice_drain8.sv').read_text()
++source=source.replace('module tb_nice_drain8;', 'module tb_nice_drainN;')
++source=source.replace('integer index, lane, command_delay, response_delay, j;', 'integer index, lane, command_delay, response_delay, j;')
++source=source.replace('index=case_commands;', 'index=case_commands % (17+empty_polls);')
++start=source.index('  initial begin : tests')
++end=source.index('\n  always @(posedge clk)',start)
++source=source[:start]+'''  task run_n(input [31:0] destination, input integer poll_limit,
++      input integer group_id, input integer count, input integer expected_code,
++      input integer expected_commands, input integer error_at,
++      input integer empty_polls, input integer bad_at, input integer bad_kind);
++    integer guard, j, g, local_error, local_bad;
++    reg [32:0] saved_completion;
++    begin
++      @(negedge clk);
++      if (!req_ready || cmd_valid || rsp_valid) $fatal(1,"burst did not start idle");
++      case_commands=0; case_responses=0; lane_responses=0; write_responses=0; alias_retired=0;
++      req_inst=32'h4200707b; req_rs1=destination;
++      req_rs2=(poll_limit<<10)|((count-1)<<5)|group_id; req_valid=1;
++      @(posedge clk);
++      if (!req_ready) $fatal(1,"burst not accepted");
++      @(negedge clk); req_valid=0; req_inst=0;req_rs1=0;req_rs2=0;
++      guard=0;
++      while (!rsp_valid) begin
++        if (cmd_valid) begin
++          if (case_commands>=expected_commands) $fatal(1,"burst command after error or invalid descriptor");
++          g=case_commands/(17+empty_polls);
++          if(case_commands%(17+empty_polls)==0) begin
++            lane_responses=0;write_responses=0;alias_retired=0;
++          end
++          local_error=error_at<0 ? -1 : error_at-g*(17+empty_polls);
++          local_bad=g==bad_at ? bad_kind : 0;
++          service_command(destination+g*32,group_id+g,empty_polls,local_bad,local_error,7);
++        end else @(negedge clk);
++        guard=guard+1;if(guard>1000) $fatal(1,"burst no progress");
++      end
++      if(rsp_data!==expected_code || rsp_err!==(expected_code!=0) ||
++         case_commands!=expected_commands || case_commands!=case_responses)
++        $fatal(1,"burst code/count mismatch code=%0d want=%0d commands=%0d want=%0d",rsp_data,expected_code,case_commands,expected_commands);
++      if(expected_code==0 && (lane_responses!==8'hff || write_responses!==8'hff || !alias_retired))
++        $fatal(1,"burst completed before last Y response");
++      saved_completion={rsp_err,rsp_data};req_valid=1;
++      for(j=0;j<9;j=j+1) begin
++        @(negedge clk);
++        if(!rsp_valid || {rsp_err,rsp_data}!==saved_completion || cmd_valid || req_ready || !hold || bus_rsp_ready)
++          $fatal(1,"burst completion unstable or issued later work");
++      end
++      req_valid=0;rsp_ready=1;@(posedge clk);
++      if(!rsp_valid) $fatal(1,"burst completion vanished");
++      @(negedge clk);rsp_ready=0;
++      if(!req_ready || rsp_valid || cmd_valid || hold) $fatal(1,"burst did not return idle");
++      cases=cases+1;
++    end
++  endtask
++  initial begin : tests
++    integer error_index;
++    #22 rst_n=1;
++    // Count endpoints, arbitrary segment, last row, and poll-budget reload.
++    run_n(32'ha0020000,1,0,32,0,544,-1,0,-1,0);
++    run_n(32'ha0038800,3,0,32,0,608,-1,2,-1,0);
++    run_n(32'ha0038be0,1,31,1,0,17,-1,0,-1,0);
++    run_n(32'ha00200e0,3,7,5,0,95,-1,2,-1,0);
++    // Abort on every transaction of two groups, including post-POP writes.
++    for(error_index=0;error_index<34;error_index=error_index+1)
++      run_n(32'ha0020000,1,0,3,8,error_index+1,error_index,0,-1,0);
++    // A POP-alias failure in every group forbids its writes and all later groups.
++    for(error_index=0;error_index<32;error_index=error_index+1)
++      run_n(32'ha0020000,1,0,32,8,17*error_index+9,17*error_index+8,0,-1,0);
++    // A bad group/row state after the first group cannot touch later payload.
++    run_n(32'ha0020000,1,0,3,6,18,-1,0,1,1);
++    run_n(32'ha0020000,1,0,3,7,18,-1,0,1,2);
++    // Timeout of first group; zero budget and invalid spans touch no memory.
++    run_n(32'ha0020000,2,0,3,5,2,-1,2,-1,0);
++    run_n(32'ha0020000,0,0,32,4,0,-1,0,-1,0);
++    run_n(32'ha00203e0,1,31,2,9,0,-1,0,-1,0);
++    run_n(32'ha0038be0,1,31,2,9,0,-1,0,-1,0);
++    run_n(32'ha0020020,1,0,2,9,0,-1,0,-1,0);
++    run_n(32'ha0038c00,1,0,32,3,0,-1,0,-1,0);
++    run_n(32'ha0020004,1,0,32,2,0,-1,0,-1,0);
++    if(total_commands!=total_responses) $fatal(1,"burst request conservation");
++    $display("NICE_DRAIN_N_UNIT_PASS cases=%0d commands=%0d responses=%0d per_group_budget_reload=1 error_positions=34 all_32_group_abort=1 row_bounds=1 stable_completion=1",cases,total_commands,total_responses);
++    $finish;
++  end
++''' + source[end:]
++source=source.replace('clock_count>100000','clock_count>1000000')
++Path(__file__).with_name('tb_nice_drainN.sv').write_text(source)
+--- baseline/experiments/nice_reachability/tb_nice_drainN.sv
++++ burst/experiments/nice_reachability/tb_nice_drainN.sv
+@@ -0,0 +1,264 @@
++`include "e203_defines.v"
++// Isolated transport/FSM tests only. This does NOT prove real LSU reachability.
++module tb_nice_drainN;
++  reg clk=0, rst_n=0;
++  always #5 clk=~clk;
++  reg req_valid=0, rsp_ready=0, cmd_ready=0, bus_rsp_valid=0, bus_rsp_err=0;
++  reg [31:0] req_inst=32'h4000707b, req_rs1=0, req_rs2=0, bus_rsp_data=0;
++  wire req_ready, rsp_valid, rsp_err, cmd_valid, cmd_read, bus_rsp_ready, active, hold;
++  wire [31:0] rsp_data, cmd_addr, cmd_data;
++  wire [1:0] cmd_size;
++  integer cases=0, total_commands=0, total_responses=0;
++  integer case_commands=0, case_responses=0;
++  integer clock_count=0;
++  reg [7:0] lane_responses=0, write_responses=0;
++  reg alias_retired=0;
++  integer alias_errors=0, post_pop_write_errors=0;
++  wire [66:0] payload={cmd_addr,cmd_read,cmd_data,cmd_size};
++
++  xu_nice_drain8 dut (
++    .nice_clk(clk), .nice_rst_n(rst_n), .nice_active(active), .nice_mem_holdup(hold),
++    .nice_req_valid(req_valid), .nice_req_ready(req_ready), .nice_req_inst(req_inst),
++    .nice_req_rs1(req_rs1), .nice_req_rs2(req_rs2),
++    .nice_rsp_valid(rsp_valid), .nice_rsp_ready(rsp_ready),
++    .nice_rsp_rdat(rsp_data), .nice_rsp_err(rsp_err),
++    .nice_icb_cmd_valid(cmd_valid), .nice_icb_cmd_ready(cmd_ready),
++    .nice_icb_cmd_addr(cmd_addr), .nice_icb_cmd_read(cmd_read),
++    .nice_icb_cmd_wdata(cmd_data), .nice_icb_cmd_size(cmd_size),
++    .nice_icb_rsp_valid(bus_rsp_valid), .nice_icb_rsp_ready(bus_rsp_ready),
++    .nice_icb_rsp_rdata(bus_rsp_data), .nice_icb_rsp_err(bus_rsp_err)
++  );
++
++  function automatic [31:0] lane_data(input integer lane);
++    case (lane)
++      0: lane_data=32'h00000000;
++      1: lane_data=32'h00000001;
++      2: lane_data=32'hffffffff;
++      3: lane_data=32'h01234567;
++      4: lane_data=32'hfedcba98;
++      5: lane_data=32'h40000000;
++      6: lane_data=32'hc0000000;
++      7: lane_data=32'hbbbbbbbb;
++      default: lane_data=32'hxxxxxxxx;
++    endcase
++  endfunction
++
++  // Every accepted command receives exactly one delayed response. Every SEND
++  // boundary is stalled independently; no timer may cancel the held command.
++  task service_command(input [31:0] destination, input integer group_id,
++      input integer empty_polls, input integer bad_head, input integer error_index,
++      input integer stall_seed);
++    integer index, lane, command_delay, response_delay, j;
++    reg [31:0] expected_addr, expected_data, reply;
++    reg expected_read, reply_error;
++    reg [66:0] saved;
++    begin
++      index=case_commands % (17+empty_polls);
++      expected_addr=0; expected_data=0; expected_read=1; reply=0;
++      if (index<=empty_polls) begin
++        expected_addr=32'h100420c4;
++        reply=(group_id<<6)|32'h1;
++        if (index==empty_polls) reply=reply|32'h2;
++        if (bad_head==1) reply=(((group_id+1)%32)<<6)|32'h3;
++        if (bad_head==2) reply=(group_id<<6)|32'h2;
++      end else if (index<=empty_polls+8) begin
++        lane=index-empty_polls-1;
++        expected_addr=lane==7 ? 32'h100421a0 : 32'h10042180+4*lane;
++        reply=lane_data(lane);
++      end else if (index<=empty_polls+16) begin
++        lane=index-empty_polls-9;
++        expected_addr=destination+4*lane;
++        expected_data=lane_data(lane);
++        expected_read=0;
++      end else $fatal(1,"unexpected extra command index=%0d",index);
++      if (cmd_addr!==expected_addr || cmd_read!==expected_read || cmd_size!==2'b10 ||
++          (!expected_read && cmd_data!==expected_data))
++        $fatal(1,"wrong drain command index=%0d addr=%h read=%b data=%h",index,cmd_addr,cmd_read,cmd_data);
++      saved=payload;
++      command_delay=(stall_seed+index)%5;
++      if (stall_seed==31) command_delay=17;
++      for (j=0; j<command_delay; j=j+1) begin
++        @(negedge clk);
++        if (cmd_valid!==1'b1 || payload!==saved || rsp_valid || req_ready)
++          $fatal(1,"command withdrawn/changed before ready index=%0d",index);
++      end
++      cmd_ready=1;
++      @(posedge clk);
++      if (!(cmd_valid && cmd_ready) || case_commands!=case_responses)
++        $fatal(1,"command handshake or single outstanding failed");
++      if(expected_addr==32'h100421a0 &&
++         (lane_responses!==8'h7f || write_responses!==0 || alias_retired))
++        $fatal(1,"alias issued before all seven ordinary lane responses retired");
++      if(!expected_read && (lane_responses!==8'hff || !alias_retired))
++        $fatal(1,"Y write before complete snapshot and read-POP response retirement");
++      case_commands=case_commands+1;
++      total_commands=total_commands+1;
++      @(negedge clk);
++      cmd_ready=0;
++      response_delay=1+(stall_seed+3*index)%7;
++      if (stall_seed==31) response_delay=19;
++      for (j=0; j<response_delay; j=j+1) begin
++        if (cmd_valid || rsp_valid || !hold || req_ready || case_commands-case_responses!=1)
++          $fatal(1,"in-flight request canceled or overlapped index=%0d",index);
++        @(negedge clk);
++      end
++      reply_error=(index==error_index);
++      bus_rsp_data=reply;
++      bus_rsp_err=reply_error;
++      bus_rsp_valid=1;
++      @(posedge clk);
++      if (!bus_rsp_ready) $fatal(1,"DUT did not consume outstanding response");
++      if(!reply_error) begin
++        if(index>empty_polls && index<=empty_polls+8) lane_responses[lane]=1;
++        if(expected_addr==32'h100421a0) alias_retired=1;
++        if(!expected_read) write_responses[lane]=1;
++      end else if(expected_addr==32'h100421a0) alias_errors=alias_errors+1;
++      else if(!expected_read) begin
++        if(!alias_retired) $fatal(1,"post-POP write error coverage missed ownership release");
++        post_pop_write_errors=post_pop_write_errors+1;
++      end
++      case_responses=case_responses+1;
++      total_responses=total_responses+1;
++      @(negedge clk);
++      bus_rsp_valid=0;
++      bus_rsp_err=0;
++      bus_rsp_data=0;
++    end
++  endtask
++
++  task run_case(input [31:0] destination, input integer poll_limit,
++      input integer group_id, input integer expected_code, input integer expected_commands,
++      input integer error_index, input integer empty_polls, input integer bad_head,
++      input integer stall_seed, input [31:0] instruction);
++    integer guard, j;
++    reg [32:0] saved_completion;
++    begin
++      @(negedge clk);
++      if (!req_ready || cmd_valid || rsp_valid) $fatal(1,"case did not start idle");
++      case_commands=0; case_responses=0; lane_responses=0; write_responses=0; alias_retired=0;
++      req_inst=instruction; req_rs1=destination; req_rs2=(poll_limit<<5)|group_id;
++      req_valid=1;
++      @(posedge clk);
++      if (!req_ready) $fatal(1,"instruction request not accepted");
++      @(negedge clk);
++      req_valid=0;
++      // A request is captured once: subsequent changing operands must not alter it.
++      req_inst=0; req_rs1=32'hffffffff; req_rs2=0;
++      guard=0;
++      while (!rsp_valid) begin
++        if (cmd_valid) begin
++          if (case_commands>=expected_commands) $fatal(1,"command after error/timeout/invalid descriptor");
++          service_command(destination,group_id,empty_polls,bad_head,error_index,stall_seed);
++        end else @(negedge clk);
++        guard=guard+1;
++        if (guard>100) $fatal(1,"case made no progress");
++      end
++      if (rsp_data!==expected_code || rsp_err!==(expected_code!=0) ||
++          case_commands!=expected_commands || case_responses!=case_commands)
++        $fatal(1,"wrong completion code=%0d expected=%0d commands=%0d expected_commands=%0d",
++               rsp_data,expected_code,case_commands,expected_commands);
++      if(expected_code==0 && (lane_responses!==8'hff || write_responses!==8'hff || !alias_retired))
++        $fatal(1,"completion before eighth Y response retired");
++      saved_completion={rsp_err,rsp_data};
++      // Completion backpressure must retain the response, with no new command
++      // or new instruction acceptance, including all eight post-POP write errors.
++      req_valid=1;
++      for (j=0; j<9; j=j+1) begin
++        @(negedge clk);
++        if (!rsp_valid || {rsp_err,rsp_data}!==saved_completion || cmd_valid ||
++            req_ready || !hold || bus_rsp_ready)
++          $fatal(1,"completion changed or error emitted later work");
++      end
++      req_valid=0;
++      rsp_ready=1;
++      @(posedge clk);
++      if (!rsp_valid) $fatal(1,"completion disappeared at retirement");
++      @(negedge clk);
++      rsp_ready=0;
++      if (!req_ready || rsp_valid || cmd_valid || hold) $fatal(1,"DUT failed to return idle");
++      cases=cases+1;
++    end
++  endtask
++
++  task run_n(input [31:0] destination, input integer poll_limit,
++      input integer group_id, input integer count, input integer expected_code,
++      input integer expected_commands, input integer error_at,
++      input integer empty_polls, input integer bad_at, input integer bad_kind);
++    integer guard, j, g, local_error, local_bad;
++    reg [32:0] saved_completion;
++    begin
++      @(negedge clk);
++      if (!req_ready || cmd_valid || rsp_valid) $fatal(1,"burst did not start idle");
++      case_commands=0; case_responses=0; lane_responses=0; write_responses=0; alias_retired=0;
++      req_inst=32'h4200707b; req_rs1=destination;
++      req_rs2=(poll_limit<<10)|((count-1)<<5)|group_id; req_valid=1;
++      @(posedge clk);
++      if (!req_ready) $fatal(1,"burst not accepted");
++      @(negedge clk); req_valid=0; req_inst=0;req_rs1=0;req_rs2=0;
++      guard=0;
++      while (!rsp_valid) begin
++        if (cmd_valid) begin
++          if (case_commands>=expected_commands) $fatal(1,"burst command after error or invalid descriptor");
++          g=case_commands/(17+empty_polls);
++          if(case_commands%(17+empty_polls)==0) begin
++            lane_responses=0;write_responses=0;alias_retired=0;
++          end
++          local_error=error_at<0 ? -1 : error_at-g*(17+empty_polls);
++          local_bad=g==bad_at ? bad_kind : 0;
++          service_command(destination+g*32,group_id+g,empty_polls,local_bad,local_error,7);
++        end else @(negedge clk);
++        guard=guard+1;if(guard>1000) $fatal(1,"burst no progress");
++      end
++      if(rsp_data!==expected_code || rsp_err!==(expected_code!=0) ||
++         case_commands!=expected_commands || case_commands!=case_responses)
++        $fatal(1,"burst code/count mismatch code=%0d want=%0d commands=%0d want=%0d",rsp_data,expected_code,case_commands,expected_commands);
++      if(expected_code==0 && (lane_responses!==8'hff || write_responses!==8'hff || !alias_retired))
++        $fatal(1,"burst completed before last Y response");
++      saved_completion={rsp_err,rsp_data};req_valid=1;
++      for(j=0;j<9;j=j+1) begin
++        @(negedge clk);
++        if(!rsp_valid || {rsp_err,rsp_data}!==saved_completion || cmd_valid || req_ready || !hold || bus_rsp_ready)
++          $fatal(1,"burst completion unstable or issued later work");
++      end
++      req_valid=0;rsp_ready=1;@(posedge clk);
++      if(!rsp_valid) $fatal(1,"burst completion vanished");
++      @(negedge clk);rsp_ready=0;
++      if(!req_ready || rsp_valid || cmd_valid || hold) $fatal(1,"burst did not return idle");
++      cases=cases+1;
++    end
++  endtask
++  initial begin : tests
++    integer error_index;
++    #22 rst_n=1;
++    // Count endpoints, arbitrary segment, last row, and poll-budget reload.
++    run_n(32'ha0020000,1,0,32,0,544,-1,0,-1,0);
++    run_n(32'ha0038800,3,0,32,0,608,-1,2,-1,0);
++    run_n(32'ha0038be0,1,31,1,0,17,-1,0,-1,0);
++    run_n(32'ha00200e0,3,7,5,0,95,-1,2,-1,0);
++    // Abort on every transaction of two groups, including post-POP writes.
++    for(error_index=0;error_index<34;error_index=error_index+1)
++      run_n(32'ha0020000,1,0,3,8,error_index+1,error_index,0,-1,0);
++    // A POP-alias failure in every group forbids its writes and all later groups.
++    for(error_index=0;error_index<32;error_index=error_index+1)
++      run_n(32'ha0020000,1,0,32,8,17*error_index+9,17*error_index+8,0,-1,0);
++    // A bad group/row state after the first group cannot touch later payload.
++    run_n(32'ha0020000,1,0,3,6,18,-1,0,1,1);
++    run_n(32'ha0020000,1,0,3,7,18,-1,0,1,2);
++    // Timeout of first group; zero budget and invalid spans touch no memory.
++    run_n(32'ha0020000,2,0,3,5,2,-1,2,-1,0);
++    run_n(32'ha0020000,0,0,32,4,0,-1,0,-1,0);
++    run_n(32'ha00203e0,1,31,2,9,0,-1,0,-1,0);
++    run_n(32'ha0038be0,1,31,2,9,0,-1,0,-1,0);
++    run_n(32'ha0020020,1,0,2,9,0,-1,0,-1,0);
++    run_n(32'ha0038c00,1,0,32,3,0,-1,0,-1,0);
++    run_n(32'ha0020004,1,0,32,2,0,-1,0,-1,0);
++    if(total_commands!=total_responses) $fatal(1,"burst request conservation");
++    $display("NICE_DRAIN_N_UNIT_PASS cases=%0d commands=%0d responses=%0d per_group_budget_reload=1 error_positions=34 all_32_group_abort=1 row_bounds=1 stable_completion=1",cases,total_commands,total_responses);
++    $finish;
++  end
++
++  always @(posedge clk) begin
++    clock_count=clock_count+1;
++    if (clock_count>1000000) $fatal(1,"drain8 unit timeout");
++  end
++endmodule
+--- baseline/experiments/nice_reachability/tb_nice_route_invalid.sv
++++ burst/experiments/nice_reachability/tb_nice_route_invalid.sv
+@@ -34,7 +34,7 @@
+     if(!$value$plusargs("CASE=%d",selected)) selected=0;
+     case(selected)
+       0: nice_req_inst=32'h0000707b; // unsupported custom3
+-      1: nice_req_inst=32'h4200707b; // one-bit drain funct7 near miss
++      1: nice_req_inst=32'h4400707b; // unsupported funct7=0x22; 0x21 is optional drainN
+       2: nice_req_inst=32'h4000607b; // drain funct3 near miss
+       3: nice_req_inst=32'h4000705b; // drain opcode near miss
+       4: nice_req_inst=32'h0600207b; // legacy funct7 between sbuf and rowsum
+--- baseline/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v
++++ burst/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v
+@@ -1,4 +1,11 @@
+-// S3-Y32 drain8: custom3 / funct3=7 / funct7=0x20.
++// S3-Y32 drain8: custom3 / funct3=7 / funct7=0x20 (unchanged).
++// Optional drainN: same opcode/funct3 / funct7=0x21.
++// drainN rs2: group[4:0], count_minus_one[9:5] (1..32 groups),
++// nonzero per-group status-poll limit[31:10]. rs1's row offset must match
++// group*32. The complete destination span and group range must stay in one row.
++// Each group snapshots/POPs/writes exactly as drain8. Poll budget reloads at
++// the next group. Completion is returned once, after the final group, or at
++// the first error; no later group is touched after an error.
+ // rs1: 32-byte-aligned Y32 destination in [0xa0020000, 0xa0038be0].
+ // rs2: [4:0] expected FIFO head group, [31:5] nonzero status-poll limit.
+ // Status polls count retired responses, never cycles or in-flight requests.
+@@ -44,7 +51,7 @@
+     // transaction trace; every bus-error phase returns the same nonzero code.
+     localparam [31:0] ERR_INSTRUCTION=1, ERR_ALIGNMENT=2, ERR_RANGE=3,
+                       ERR_POLL_LIMIT=4, ERR_TIMEOUT=5, ERR_GROUP=6,
+-                      ERR_ROW_STATE=7, ERR_BUS=8;
++                      ERR_ROW_STATE=7, ERR_BUS=8, ERR_GROUP_RANGE=9;
+     localparam [31:0] ROW_STATUS=32'h100420c4;
+     localparam [31:0] Y32_LANES=32'h10042180, Y32_LANE7_POP=32'h100421a0;
+     localparam [31:0] Y_FIRST=32'ha0020000, Y_LAST_GROUP=32'ha0038be0;
+@@ -52,16 +59,21 @@
+     reg [3:0] state;
+     reg [31:0] destination, completion_code;
+     reg [4:0] expected_group;
+-    reg [26:0] polls_left;
++    reg [26:0] polls_left, poll_limit;
++    reg [5:0] groups_left;
+     reg [2:0] lane;
+     reg [31:0] snapshot [0:7];
+     wire send_command = state==SEND_POLL || state==SEND_READ || state==SEND_WRITE;
+     wire outstanding = state==WAIT_POLL || state==WAIT_READ || state==WAIT_WRITE;
+     wire command_fire = nice_icb_cmd_valid && nice_icb_cmd_ready;
+     wire response_fire = nice_icb_rsp_valid && nice_icb_rsp_ready;
++    wire is_drain_n = nice_req_inst[31:25]==7'h21;
++    wire [5:0] request_count = is_drain_n ? {1'b0,nice_req_rs2[9:5]}+6'd1 : 6'd1;
++    wire [26:0] request_limit = is_drain_n ? {5'b0,nice_req_rs2[31:10]} : nice_req_rs2[31:5];
++    wire [31:0] request_last_group = nice_req_rs1 + ({26'b0,request_count}-1)*32;
+     wire instruction_ok = nice_req_inst[6:0]==7'h7b &&
+                           nice_req_inst[14:12]==3'b111 &&
+-                          nice_req_inst[31:25]==7'h20;
++                          (nice_req_inst[31:25]==7'h20 || is_drain_n);
+     integer i;
+ 
+     assign nice_active = state!=IDLE || nice_req_valid;
+@@ -100,6 +112,8 @@
+             completion_code <= 0;
+             expected_group <= 0;
+             polls_left <= 0;
++            poll_limit <= 0;
++            groups_left <= 1;
+             lane <= 0;
+             for (i=0; i<8; i=i+1) snapshot[i] <= 0;
+         end else begin
+@@ -107,7 +121,9 @@
+                 IDLE: if (nice_req_valid && nice_req_ready) begin
+                     destination <= nice_req_rs1;
+                     expected_group <= nice_req_rs2[4:0];
+-                    polls_left <= nice_req_rs2[31:5];
++                    polls_left <= request_limit;
++                    poll_limit <= request_limit;
++                    groups_left <= request_count;
+                     lane <= 0;
+                     completion_code <= 0;
+                     if (!instruction_ok) begin
+@@ -119,7 +135,13 @@
+                     end else if (nice_req_rs1<Y_FIRST || nice_req_rs1>Y_LAST_GROUP) begin
+                         completion_code <= ERR_RANGE;
+                         state <= RESP;
+-                    end else if (nice_req_rs2[31:5]==0) begin
++                    end else if (is_drain_n &&
++                        ({1'b0,nice_req_rs2[4:0]}+request_count>6'd32 ||
++                         nice_req_rs1[9:0]!={nice_req_rs2[4:0],5'b0} ||
++                         request_last_group>Y_LAST_GROUP || request_last_group<nice_req_rs1)) begin
++                        completion_code <= ERR_GROUP_RANGE;
++                        state <= RESP;
++                    end else if (request_limit==0) begin
+                         completion_code <= ERR_POLL_LIMIT;
+                         state <= RESP;
+                     end else state <= SEND_POLL;
+@@ -170,7 +192,17 @@
+                     if (nice_icb_rsp_err) begin
+                         completion_code <= ERR_BUS;
+                         state <= RESP;
+-                    end else if (lane==7) state <= RESP;
++                    end else if (lane==7) begin
++                        if (groups_left==1) state <= RESP;
++                        else begin
++                            groups_left <= groups_left-1'b1;
++                            expected_group <= expected_group+1'b1;
++                            destination <= destination+32;
++                            polls_left <= poll_limit;
++                            lane <= 0;
++                            state <= SEND_POLL;
++                        end
++                    end
+                     else begin
+                         lane <= lane+1'b1;
+                         state <= SEND_WRITE;
+--- baseline/docs/drain-n-experiment-20261108.md
++++ burst/docs/drain-n-experiment-20261108.md
+@@ -0,0 +1,59 @@
++# Optional row-local NICE drainN experiment
++
++This isolated experiment extends the read-pop baseline without changing E203 LSU/BIU, core retirement, outstanding transaction count, accelerator arithmetic, or the existing drain8 encoding. The baseline is parent 562a8c9 with submodule 6e2ec89; the repository is a private copy under build/writeback-v2-20261108/burst-repo. It is development evidence, not official acceptance or PPA.
++
++## Explicit ABI
++
++- Existing drain8 remains custom3 opcode 0x7b, funct3=7, funct7=0x20. Its rs2 layout, legal destinations, codes, and single-group completion semantics are unchanged.
++- Optional drainN is custom3 opcode 0x7b, funct3=7, funct7=0x21. The used rd receives 0 on success and a nonzero error code on failure. The fixed E203 core does not turn NICE err into a trap; firmware must check rd.
++- rs1 is the first destination, aligned to 32 bytes in the Y32 allocation [0xa0020000,0xa0038bff]. Its offset within the 1024-byte row must equal `group * 32`.
++- rs2[4:0] is initial group 0..31. rs2[9:5] is count minus one: encoded 0 means one group; encoded 31 means 32 groups. There is no zero-group request. rs2[31:10] is a nonzero per-group status-response poll budget (1..0x3fffff).
++- `initial_group + count <= 32`; the entire destination span must remain within the row and allocation. Invalid alignment returns 2, initial destination range returns 3, zero poll budget returns 4, invalid group/span/row-offset returns new code 9, with zero bus commands.
++- Other preserved codes are instruction=1, timeout=5, group mismatch=6, row inactive=7, bus error=8. The first error ends the whole instruction and task. There is no rollback or retry: a successful lane7 read-pop response has already retired its FIFO head before the Y writes.
++- Per group: poll ROW_STATUS (0x100420c4), verify valid/active/expected group, read lanes0..6 at 0x10042180..198, lane7 at read-pop alias 0x100421a0, then write all eight snapshot words. Only the eighth successful Y response advances to the next group and reloads its poll budget. There is exactly one outstanding ICB command. Completion valid/code/err remain stable under backpressure; success is offered only after the last group's final Y response.
++
++## Firmware and observation
++
++The explicit schedule is `bias-hw-autogroup-y32-packed16-nice-drainn-read-pop-window`. It uses one drainN(group=0,count=32) per row. Firmware retains the `fence iorw, iorw`, memory clobber, a real rd and immediate nonzero-code task abort. The old schedule still emits funct7=0x20 and uses the old 27-bit budget.
++
++The real SoC observer checks every command through the unchanged LSU and real accelerator/shared-memory endpoints, every result value against original integer vectors, every POP and Y response, each request/OITF allocation and completion/rd writeback. New drainN requires 99 requests, 99 completions and 99 OITF retirements, with 25344 result reads, 3168 POPs, and 25344 Y writes. Legacy drain8 still requires 3168 instructions. Legacy's 1024-cycle bound remains; drainN uses both a 1024-cycle per-group progress bound and a `count*1024` overall instruction bound. Timing still stops at the final Y response, before the last CPU completion/check.
++
++## Reproduction
++
++From this experiment repository:
++
++```bash
++python3 tools/ppa/s3_task_campaign.py --repo . --out ../burst-full12 \
++  --schedule bias-hw-autogroup-y32-packed16-nice-drainn-read-pop-window \
++  --layers 0,1,2,3,4,5,6,7,8,9,10,11 --simulator verilator \
++  --bias-kind sram --cross-prefix /usr/bin/riscv64-unknown-elf- \
++  --platform-clocks 150mhz --startup-profile external-reset
++python3 -m unittest discover -s tests/e203 -p test_drain_n.py
++python3 -m unittest discover -s tests/e203 -p test_y32_firmware_contract.py
++```
++
++The runner uses Verilator --assert -j2. Chisel/procedural assertions remain enabled. Historical vendor SVA is disabled by the existing development flow; no signoff claim is made. Each native task starts fresh and includes the same separate physical preclear (198403 cycles). Source snapshots, hashes, commands, ELF, disassembly, simulator, native logs and return codes are preserved in each output directory.
++
++## Initial evidence
++
++Task0 in `../burst-task0` passed: 542635 payload cycles, 198403 clear cycles, 99 requests/completions/OITF retirements, 5049 status polls, 25344 result reads/Y writes and 3168 alias POPs. The read-pop baseline was 564118 payload cycles, a reduction of 21483 (3.8082% payload, 2.8174% including clear). Extra polling means the savings are limited by producer/transport timing; no direct result path is included.
++
++The independent state-machine test initially passed 79 cases/10617 commands/responses: count endpoints, an arbitrary partial-row segment, the last output row, poll-budget reload, each transaction phase in two groups, alias failures in every one of 32 groups, mid-instruction group/row errors, timeout, zero budget and illegal spans. Existing drain8 regression passed unchanged: 61 cases/817 commands/responses. Final full12 and expanded middle/final-group write-error results are recorded in the adjacent evidence summary after the run.
++
++## Final evidence
++
++`../burst-full12/result.json` completed all original layers 0..11 as twelve fresh native processes with `DEVELOPMENT_PASS_POLICY_PENDING`. Every layer measured 542635 payload cycles and 198403 separate clear cycles, against 564118+198403 for the frozen read-pop baseline. Each saved 21483 cycles: 3.8082458% of payload or 2.8173650% including clear. Aggregate payload is 6511620 versus 6769416 cycles; including the twelve clears it is 8892456 versus 9150252 cycles.
++
++Every layer independently passed its real-core assertions with 99 requests/completions/OITF retirements, 5049 retired status polls, 25344 real result reads, 3168 read-pop responses and 25344 real Y-write responses. Actual golden values were checked at both the NICE source and shared-memory endpoint. Final-response timing boundaries, source/weight upload work, 202752 MAC-fire cycles, 3168 group starts/dones and physical preclear remained the original contracts. No measured-frequency or startup-profile difference was permitted by `../burst-summarize.py`.
++
++Old frozen drain8 firmware was replayed on the new drainN-capable RTL in `../burst-legacy-task0`: it passed with its original 564118 cycles and 3168 requests/completions/OITF retirements. The old 0x20 ABI therefore has both the original 61-case isolated regression and a real-CPU layer replay.
++
++The final independent negative test is `../burst-unit/tb_nice_drainN_extended.sv`, compiled against the frozen full12 DUT snapshot. It passed 97 cases with 17225 commands and 17225 responses. Beyond the 79-case checked-in unit, it injects errors at all eight Y-write positions in both middle group16 and final group31, verifies immediate abort with no later write/POP/group, and adds row-crossing descriptors at both an interior row and the last row. Commands, native exit codes and source/log hashes are in `../burst-unit/extended-result.json`.
++
++The two new contract/FSM tests and thirteen existing Y32 contract tests pass. The actual NICE routing-top development replay also passes: 1023 unsupported encodings, two malformed descriptors (old drain8 and new drainN), four preserved legacy operations, 1030 total requests/completions and 29 commands/responses. The new 0x21 encoding is explicitly excluded from the unsupported enumeration; 0x22 is used for the old near-miss negative probe. `../burst-unit/top-route-development.log` identifies the Icarus development replay.
++
++The original vendor-SVA routing regression still requires VCS and failed immediately because this host has no `vcs` executable (`../burst-unit/route.log`). Its tool requirement was retained. Icarus development routing evidence and Verilator full12 evidence do not replace VCS, gate-level, mapped-area, STA, power, energy or official task-policy qualification.
++
++`../burst-summary.json` checks the successful native steps and exact per-task counts and records evidence hashes. The executable production source differs from the baseline in exactly five files: `rtl/subsys/xu_nice_drain8.v`, `tests/e203/firmware/accel.c`, `tests/e203/tb_accel_soc.sv`, `tools/scripts/xu_firmware_contract.py`, and `tools/scripts/e203_soc.py` (the RTL path is relative to the campaign snapshot). Four additional Python 3.14 bytecode cache files generated while loading the snapshot are recorded separately. The working experiment's complete thirteen-file change list and small review patch are `../burst-changed-files.json` and `../burst-review.patch`.
++
++The dedicated older `tools/analysis/s3_writeback_report.py` still accepts its original schedules. This experiment uses the separate explicit drainN summary; integrating drainN into that reporter requires a separate deliberate schema/test change. No branch, commit or main-source integration was performed.

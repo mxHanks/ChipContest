@@ -1,0 +1,67 @@
+{
+  "scope": "task0 CPU loop-unroll experiments only; no PPA claim",
+  "baseline": "cpu-baseline-task0",
+  "rows": [
+    {
+      "name": "cpu-baseline-task0",
+      "status": "DEVELOPMENT_PASS_POLICY_PENDING",
+      "payload_cycles": 564118,
+      "clear_cycles": 198403,
+      "cpu_gaps": {
+        "layer": 0,
+        "count": 3167,
+        "sum": 94003,
+        "min": 7,
+        "max": 740,
+        "group_count": 3069,
+        "group_sum": 21483,
+        "row_count": 98,
+        "row_sum": 72520
+      },
+      "static_fence_mnemonics": 4,
+      "static_nice_encodings": 1,
+      "firmware_image_sha256": "574f9ff5445f12d8ec39fb4bf39657ac67fbd0e0077e907ebbd88f8a6555c290"
+    },
+    {
+      "name": "cpu-unroll4-task0",
+      "status": "DEVELOPMENT_PASS_POLICY_PENDING",
+      "payload_cycles": 564118,
+      "clear_cycles": 198403,
+      "cpu_gaps": {
+        "layer": 0,
+        "count": 3167,
+        "sum": 91529,
+        "min": 6,
+        "max": 739,
+        "group_count": 3069,
+        "group_sum": 19107,
+        "row_count": 98,
+        "row_sum": 72422
+      },
+      "static_fence_mnemonics": 7,
+      "static_nice_encodings": 4,
+      "firmware_image_sha256": "bd458a2d97a4adbef2d514f0014f21fcaaf4fde4d8a1c7218a48901350a670ae"
+    },
+    {
+      "name": "cpu-unroll32-task0",
+      "status": "DEVELOPMENT_PASS_POLICY_PENDING",
+      "payload_cycles": 564132,
+      "clear_cycles": 198403,
+      "cpu_gaps": {
+        "layer": 0,
+        "count": 3167,
+        "sum": 86388,
+        "min": 4,
+        "max": 732,
+        "group_count": 3069,
+        "group_sum": 14652,
+        "row_count": 98,
+        "row_sum": 71736
+      },
+      "static_fence_mnemonics": 35,
+      "static_nice_encodings": 32,
+      "firmware_image_sha256": "8d8e73587bafb1e90487d5754c6fe905ead19b3efcd700fdc69eff2eeed9a4cc"
+    }
+  ],
+  "conclusion": "Neither factor4 (0-cycle delta) nor factor32 (+14 cycles) lowers the full task metric; both retain a fence and immediate nonzero error branch after every custom instruction. Do not integrate."
+}

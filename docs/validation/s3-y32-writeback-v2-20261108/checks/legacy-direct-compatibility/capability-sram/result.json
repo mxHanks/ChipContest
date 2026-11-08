@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "variant": "SRAM",
+  "commands": [
+    {
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-s",
+        "tb_xu_bias_capability_wrapper",
+        "-DXU_EXPECT_BIAS_SRAM=1",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/capability-sram/wrapper.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_xu_bias_capability_wrapper.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_2048x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v"
+      ],
+      "returncode": 0,
+      "log": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/capability-sram/compile.log"
+    },
+    {
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/capability-sram/wrapper.vvp"
+      ],
+      "returncode": 0,
+      "log": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/writeback-v2-20261108/direct-proof/legacy-port-fix/capability-sram/simulation.log"
+    }
+  ]
+}
