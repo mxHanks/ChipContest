@@ -1,0 +1,1133 @@
+--- a/src/main/scala/linear/BiasSramPrefetch.scala
++++ b/src/main/scala/linear/BiasSramPrefetch.scala
+@@ -35,7 +35,7 @@
+ }
+ 
+ private object BiasSramState extends ChiselEnum {
+-    val idle, selectWord, readIssue, readCapture, writeCommit, clearWord = Value
++    val idle, selectWord, readIssue, readCapture, writeCommit, clearWord, groupStream = Value
+ }
+ private object BiasSramOwner extends ChiselEnum {
+     val hostRead, hostWrite, groupFill = Value
+@@ -44,8 +44,8 @@
+ /** One real 1024x16 synchronous single-port memory; two tagged eight-bias slots.
+   * Host descriptors are captured once. The response is not published until the
+   * final physical write commits or all three read words have been sampled.
+-  * A full group uses 24 issue/capture pairs (48 memory cycles), deliberately
+-  * matching the independently exercised SV prototype before further pipelining.
++  * A group issues 24 consecutive reads and captures each synchronous return on
++  * the following edge. Host reads/writes retain their original sequencing.
+   */
+ class BiasSramPrefetch extends Module {
+     val io = IO(new BiasSramPrefetchIO)
+@@ -73,7 +73,9 @@
+     private val slotData = Reg(Vec(2, Vec(8, UInt(40.W))))
+     private val fillSlot = Reg(Bool())
+     private val fillTag = Reg(UInt(5.W))
+-    private val fillWord = RegInit(0.U(5.W))
++    private val fillIssueWord = RegInit(0.U(5.W))
++    private val fillReturnWord = RegInit(0.U(5.W))
++    private val fillReadPending = RegInit(false.B)
+     private val fillEpoch = Reg(UInt(32.W))
+     private val lastGrantHost = RegInit(false.B)
+ 
+@@ -116,14 +118,18 @@
+         0.U -> hostData(15, 0), 1.U -> hostData(31, 16), 2.U -> Cat(0.U(8.W), hostData(39, 32))))
+     private val byteMask = Cat(Fill(8, wordMask(1)), Fill(8, wordMask(0)))
+     private val hostPhysicalAddr = ((hostAddr << 1) +& hostAddr +& hostWord)(9, 0)
+-    private val groupPhysicalAddr = ((fillTag << 4) +& (fillTag << 3) +& fillWord)(9, 0)
++    private val groupPhysicalAddr = ((fillTag << 4) +& (fillTag << 3) +& fillIssueWord)(9, 0)
+     memory.io.en := false.B
+     memory.io.isWrite := false.B
+     memory.io.addr := 0.U
+     memory.io.wdata := 0.S
+     when(!reset.asBool && state === BiasSramState.readIssue) {
+         memory.io.en := true.B
+-        memory.io.addr := Mux(owner === BiasSramOwner.groupFill, groupPhysicalAddr, hostPhysicalAddr)
++        memory.io.addr := hostPhysicalAddr
++    }.elsewhen(!reset.asBool && state === BiasSramState.groupStream &&
++        fillIssueWord < 24.U && fillEpoch === epoch && !io.invalidate) {
++        memory.io.en := true.B
++        memory.io.addr := groupPhysicalAddr
+     }.elsewhen(!reset.asBool && state === BiasSramState.writeCommit) {
+         memory.io.en := true.B
+         memory.io.isWrite := true.B
+@@ -169,8 +175,10 @@
+                 }
+             }.elsewhen(fillNeeded && !io.invalidate) {
+                 lastGrantHost := false.B; owner := BiasSramOwner.groupFill
+-                fillSlot := nextFillSlot; fillTag := nextFillTag; fillWord := 0.U; fillEpoch := epoch
+-                slotValid(nextFillSlot) := false.B; state := BiasSramState.readIssue
++                fillSlot := nextFillSlot; fillTag := nextFillTag
++                fillIssueWord := 0.U; fillReturnWord := 0.U; fillReadPending := false.B
++                fillEpoch := epoch
++                slotValid(nextFillSlot) := false.B; state := BiasSramState.groupStream
+             }
+         }
+         is(BiasSramState.selectWord) {
+@@ -188,29 +196,7 @@
+         is(BiasSramState.readCapture) {
+             assert(memory.io.rvalid, "Bias SRAM Q sampled without a completed synchronous read")
+             val data = memory.io.rdata.asUInt
+-            when(owner === BiasSramOwner.groupFill) {
+-                when(fillEpoch =/= epoch || io.invalidate) { state := BiasSramState.idle }
+-                .otherwise {
+-                    // Constants avoid inferred division/modulo or a variable
+-                    // part-select in the physical SRAM-to-staging path.
+-                    for (lane <- 0 until 8) {
+-                        when(fillWord === (lane * 3).U) {
+-                            slotData(fillSlot)(lane) := Cat(slotData(fillSlot)(lane)(39, 16), data)
+-                        }
+-                        when(fillWord === (lane * 3 + 1).U) {
+-                            slotData(fillSlot)(lane) := Cat(slotData(fillSlot)(lane)(39, 32), data,
+-                                slotData(fillSlot)(lane)(15, 0))
+-                        }
+-                        when(fillWord === (lane * 3 + 2).U) {
+-                            slotData(fillSlot)(lane) := Cat(data(7, 0), slotData(fillSlot)(lane)(31, 0))
+-                        }
+-                    }
+-                    when(fillWord === 23.U) {
+-                        slotValid(fillSlot) := true.B; slotTag(fillSlot) := fillTag
+-                        slotEpoch(fillSlot) := fillEpoch; state := BiasSramState.idle
+-                    }.otherwise { fillWord := fillWord + 1.U; state := BiasSramState.readIssue }
+-                }
+-            }.elsewhen(owner === BiasSramOwner.hostRead) {
++            when(owner === BiasSramOwner.hostRead) {
+                 switch(hostWord) {
+                     is(0.U) { readData := Cat(readData(39, 16), data) }
+                     is(1.U) { readData := Cat(readData(39, 32), data, readData(15, 0)) }
+@@ -225,6 +211,43 @@
+                 state := BiasSramState.writeCommit
+             }
+         }
++        is(BiasSramState.groupStream) {
++            // Each issue owns the one-cycle return on the next edge. An epoch
++            // change kills both that return and any new issue, then retries the
++            // accepted demand from IDLE without publishing a partial slot.
++            when(fillEpoch =/= epoch || io.invalidate) {
++                fillReadPending := false.B
++                state := BiasSramState.idle
++            }.otherwise {
++                val issue = fillIssueWord < 24.U
++                fillReadPending := issue
++                when(issue) { fillIssueWord := fillIssueWord + 1.U }
++                when(fillReadPending) {
++                    assert(memory.io.rvalid, "Bias group SRAM return missing after issued read")
++                    assert(fillReturnWord < 24.U, "Bias group captured more than 24 words")
++                    val data = memory.io.rdata.asUInt
++                    // Constant selects avoid division/modulo in the SRAM path.
++                    for (lane <- 0 until 8) {
++                        when(fillReturnWord === (lane * 3).U) {
++                            slotData(fillSlot)(lane) := Cat(slotData(fillSlot)(lane)(39, 16), data)
++                        }
++                        when(fillReturnWord === (lane * 3 + 1).U) {
++                            slotData(fillSlot)(lane) := Cat(slotData(fillSlot)(lane)(39, 32), data,
++                                slotData(fillSlot)(lane)(15, 0))
++                        }
++                        when(fillReturnWord === (lane * 3 + 2).U) {
++                            slotData(fillSlot)(lane) := Cat(data(7, 0), slotData(fillSlot)(lane)(31, 0))
++                        }
++                    }
++                    when(fillReturnWord === 23.U) {
++                        assert(fillIssueWord === 24.U && !issue,
++                            "Bias group published before all 24 reads completed")
++                        slotValid(fillSlot) := true.B; slotTag(fillSlot) := fillTag
++                        slotEpoch(fillSlot) := fillEpoch; state := BiasSramState.idle
++                    }.otherwise { fillReturnWord := fillReturnWord + 1.U }
++                }
++            }
++        }
+         is(BiasSramState.writeCommit) {
+             when(hostWord === 2.U) {
+                 responseValid := true.B; responseError := false.B; responseData := 0.U
+--- a/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv
++++ b/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv
+@@ -138,7 +138,9 @@
+   reg  [39:0] slotData_1_7;
+   reg         fillSlot;
+   reg  [4:0]  fillTag;
+-  reg  [4:0]  fillWord;
++  reg  [4:0]  fillIssueWord;
++  reg  [4:0]  fillReturnWord;
++  reg         fillReadPending;
+   reg  [31:0] fillEpoch;
+   reg         lastGrantHost;
+   wire        _nextHit_T_2 = slotEpoch_0 == epoch;
+@@ -161,7 +163,7 @@
+     & (~fillNeeded | ~lastGrantHost);
+   wire        io_groupValid_0 =
+     ~reset & wantedPending & currentHit & ~io_invalidate & ~clearFire;
+-  wire        _memory_io_addr_T = owner == 2'h2;
++  wire        _wordData_T_8 = hostWord == 2'h2;
+   reg  [1:0]  casez_tmp;
+   always_comb begin
+     casez (hostWord)
+@@ -192,18 +194,25 @@
+     {1'h0, hostAddr, 1'h0} + {2'h0, hostAddr} + {8'h0, hostWord};
+   wire        _GEN_0 = state == 3'h2;
+   wire        _GEN_1 = ~reset & _GEN_0;
+-  wire        _GEN_2 = state == 3'h4;
+-  wire        _GEN_3 = ~reset & _GEN_2;
+-  wire        _GEN_4 = state == 3'h5;
++  wire        _GEN_2 = state == 3'h6;
++  wire        _GEN_3 =
++    ~reset & _GEN_2 & fillIssueWord[4:3] != 2'h3 & fillEpoch == epoch & ~io_invalidate;
++  wire        _GEN_4 = state == 3'h4;
+   wire        _GEN_5 = ~reset & _GEN_4;
+-  wire        memory_io_en = _GEN_1 | _GEN_3 | _GEN_5;
++  wire        _GEN_6 = _GEN_1 | _GEN_3;
++  wire        _GEN_7 = state == 3'h5;
++  wire        _GEN_8 = ~reset & _GEN_7;
++  wire        memory_io_en = _GEN_1 | _GEN_3 | _GEN_5 | _GEN_8;
+   wire [9:0]  memory_io_addr =
+     _GEN_1
+-      ? (_memory_io_addr_T
+-           ? {1'h0, fillTag, 4'h0} + {2'h0, fillTag, 3'h0} + {5'h0, fillWord}
+-           : _hostPhysicalAddr_T_2)
+-      : _GEN_3 ? _hostPhysicalAddr_T_2 : _GEN_5 ? clearAddr : 10'h0;
+-  wire        _GEN_6 = state == 3'h3;
++      ? _hostPhysicalAddr_T_2
++      : _GEN_3
++          ? {1'h0, fillTag, 4'h0} + {2'h0, fillTag, 3'h0} + {5'h0, fillIssueWord}
++          : _GEN_5 ? _hostPhysicalAddr_T_2 : _GEN_8 ? clearAddr : 10'h0;
++  wire        _GEN_9 = owner == 2'h0;
++  wire        _GEN_10 = casez_tmp == 2'h0;
++  wire        _GEN_11 = (&casez_tmp) | _wordData_T_8;
++  wire        _GEN_12 = state == 3'h3;
+   reg  [39:0] casez_tmp_1;
+   always_comb begin
+     casez (hostWord)
+@@ -217,120 +226,164 @@
+         casez_tmp_1 = readData;
+     endcase
+   end // always_comb
++  wire        _GEN_13 = fillEpoch != epoch | io_invalidate;
++  wire        _GEN_14 = fillReturnWord == 5'h17;
++  wire        _GEN_15 = clearAddr == 10'h2FF;
++  reg  [2:0]  casez_tmp_2;
++  wire [2:0]  _GEN_16 = {2'h0, ~_wordData_T_8};
++  wire [2:0]  _GEN_17 = _GEN_7 & _GEN_15 ? 3'h0 : state;
++  always_comb begin
++    casez (state)
++      3'b000:
++        casez_tmp_2 = _GEN_17;
++      3'b001:
++        casez_tmp_2 =
++          _GEN_9
++            ? 3'h2
++            : _GEN_10 ? (_wordData_T_8 ? 3'h0 : state) : _GEN_11 ? 3'h4 : 3'h2;
++      3'b010:
++        casez_tmp_2 = 3'h3;
++      3'b011:
++        casez_tmp_2 = _GEN_9 ? _GEN_16 : 3'h4;
++      3'b100:
++        casez_tmp_2 = _GEN_16;
++      3'b101:
++        casez_tmp_2 = _GEN_17;
++      3'b110:
++        casez_tmp_2 = _GEN_13 | fillReadPending & _GEN_14 ? 3'h0 : state;
++      default:
++        casez_tmp_2 = _GEN_17;
++    endcase
++  end // always_comb
+   `ifndef SYNTHESIS
++    wire _GEN_18 = _GEN & state != 3'h1 & state != 3'h2;
++    wire _GEN_19 = _GEN_18 & state != 3'h3 & _GEN_2 & ~_GEN_13 & fillReadPending;
++    wire _GEN_20 = _GEN_19 & ~reset;
+     always @(posedge clock) begin
+-      if (_GEN & state != 3'h1 & state != 3'h2 & _GEN_6 & ~reset
+-          & ~_memory_io_rvalid) begin
++      if (_GEN_18 & _GEN_12 & ~reset & ~_memory_io_rvalid) begin
+         if (`ASSERT_VERBOSE_COND_)
+           $error("Assertion failed: Bias SRAM Q sampled without a completed synchronous read\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
++      if (_GEN_20 & ~_memory_io_rvalid) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Bias group SRAM return missing after issued read\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (_GEN_20 & (&(fillReturnWord[4:3]))) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Bias group captured more than 24 words\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (_GEN_19 & _GEN_14 & ~reset
++          & ~(fillIssueWord == 5'h18 & fillIssueWord > 5'h17)) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Bias group published before all 24 reads completed\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
+       if (memory_io_en & ~reset & (&(memory_io_addr[9:8]))) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at BiasSramPrefetch.scala:239\n");
++          $error("Assertion failed at BiasSramPrefetch.scala:262\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+     end // always @(posedge)
+   `endif // not def SYNTHESIS
++  wire        issue = fillIssueWord[4:3] != 2'h3;
+   wire        groupFire =
+     io_groupReqValid & ~reset & ~wantedPending & ~clearFire & ~io_invalidate;
+-  wire        _GEN_7 = ~(responseValid & io_rspReady) & responseValid;
++  wire        _GEN_21 = ~(responseValid & io_rspReady) & responseValid;
+   wire [31:0] _epoch_T = epoch + 32'h1;
+-  wire        _GEN_8 = _GEN | clearFire;
+-  wire        _GEN_9 = clearAddr == 10'h2FF;
++  wire        _GEN_22 = _GEN | clearFire;
+   wire [15:0] byteMask = {{8{casez_tmp[1]}}, {8{casez_tmp[0]}}};
+-  wire        _GEN_10 = fillWord == 5'h0;
+-  wire [39:0] _GEN_11 = fillSlot ? slotData_1_0 : slotData_0_0;
+-  wire [39:0] _slotData_0_T_1 = {_GEN_11[39:16], _memory_io_rdata};
+-  wire        _GEN_12 = fillWord == 5'h1;
+-  wire [39:0] _slotData_0_T_4 = {_GEN_11[39:32], _memory_io_rdata, _GEN_11[15:0]};
+-  wire        _GEN_13 = fillWord == 5'h2;
+-  wire [39:0] _slotData_0_T_7 = {_memory_io_rdata[7:0], _GEN_11[31:0]};
+-  wire        _GEN_14 = fillWord == 5'h3;
+-  wire [39:0] _GEN_15 = fillSlot ? slotData_1_1 : slotData_0_1;
+-  wire [39:0] _slotData_1_T_1 = {_GEN_15[39:16], _memory_io_rdata};
+-  wire        _GEN_16 = fillWord == 5'h4;
+-  wire [39:0] _slotData_1_T_4 = {_GEN_15[39:32], _memory_io_rdata, _GEN_15[15:0]};
+-  wire        _GEN_17 = fillWord == 5'h5;
+-  wire [39:0] _slotData_1_T_7 = {_memory_io_rdata[7:0], _GEN_15[31:0]};
+-  wire        _GEN_18 = fillWord == 5'h6;
+-  wire [39:0] _GEN_19 = fillSlot ? slotData_1_2 : slotData_0_2;
+-  wire [39:0] _slotData_2_T_1 = {_GEN_19[39:16], _memory_io_rdata};
+-  wire        _GEN_20 = fillWord == 5'h7;
+-  wire [39:0] _slotData_2_T_4 = {_GEN_19[39:32], _memory_io_rdata, _GEN_19[15:0]};
+-  wire        _GEN_21 = fillWord == 5'h8;
+-  wire [39:0] _slotData_2_T_7 = {_memory_io_rdata[7:0], _GEN_19[31:0]};
+-  wire        _GEN_22 = fillWord == 5'h9;
+-  wire [39:0] _GEN_23 = fillSlot ? slotData_1_3 : slotData_0_3;
+-  wire [39:0] _slotData_3_T_1 = {_GEN_23[39:16], _memory_io_rdata};
+-  wire        _GEN_24 = fillWord == 5'hA;
+-  wire [39:0] _slotData_3_T_4 = {_GEN_23[39:32], _memory_io_rdata, _GEN_23[15:0]};
+-  wire        _GEN_25 = fillWord == 5'hB;
+-  wire [39:0] _slotData_3_T_7 = {_memory_io_rdata[7:0], _GEN_23[31:0]};
+-  wire        _GEN_26 = fillWord == 5'hC;
+-  wire [39:0] _GEN_27 = fillSlot ? slotData_1_4 : slotData_0_4;
+-  wire [39:0] _slotData_4_T_1 = {_GEN_27[39:16], _memory_io_rdata};
+-  wire        _GEN_28 = fillWord == 5'hD;
+-  wire [39:0] _slotData_4_T_4 = {_GEN_27[39:32], _memory_io_rdata, _GEN_27[15:0]};
+-  wire        _GEN_29 = fillWord == 5'hE;
+-  wire [39:0] _slotData_4_T_7 = {_memory_io_rdata[7:0], _GEN_27[31:0]};
+-  wire        _GEN_30 = fillWord == 5'hF;
+-  wire [39:0] _GEN_31 = fillSlot ? slotData_1_5 : slotData_0_5;
+-  wire [39:0] _slotData_5_T_1 = {_GEN_31[39:16], _memory_io_rdata};
+-  wire        _GEN_32 = fillWord == 5'h10;
+-  wire [39:0] _slotData_5_T_4 = {_GEN_31[39:32], _memory_io_rdata, _GEN_31[15:0]};
+-  wire        _GEN_33 = fillWord == 5'h11;
+-  wire [39:0] _slotData_5_T_7 = {_memory_io_rdata[7:0], _GEN_31[31:0]};
+-  wire        _GEN_34 = fillWord == 5'h12;
+-  wire [39:0] _GEN_35 = fillSlot ? slotData_1_6 : slotData_0_6;
+-  wire [39:0] _slotData_6_T_1 = {_GEN_35[39:16], _memory_io_rdata};
+-  wire        _GEN_36 = fillWord == 5'h13;
+-  wire [39:0] _slotData_6_T_4 = {_GEN_35[39:32], _memory_io_rdata, _GEN_35[15:0]};
+-  wire        _GEN_37 = fillWord == 5'h14;
+-  wire [39:0] _slotData_6_T_7 = {_memory_io_rdata[7:0], _GEN_35[31:0]};
+-  wire        _GEN_38 = fillWord == 5'h15;
+-  wire [39:0] _GEN_39 = fillSlot ? slotData_1_7 : slotData_0_7;
+-  wire [39:0] _slotData_7_T_1 = {_GEN_39[39:16], _memory_io_rdata};
+-  wire        _GEN_40 = fillWord == 5'h16;
+-  wire [39:0] _slotData_7_T_4 = {_GEN_39[39:32], _memory_io_rdata, _GEN_39[15:0]};
+-  wire [39:0] _slotData_7_T_7 = {_memory_io_rdata[7:0], _GEN_39[31:0]};
++  wire        _GEN_23 = fillReturnWord == 5'h0;
++  wire [39:0] _GEN_24 = fillSlot ? slotData_1_0 : slotData_0_0;
++  wire [39:0] _slotData_0_T_1 = {_GEN_24[39:16], _memory_io_rdata};
++  wire        _GEN_25 = fillReturnWord == 5'h1;
++  wire [39:0] _slotData_0_T_4 = {_GEN_24[39:32], _memory_io_rdata, _GEN_24[15:0]};
++  wire        _GEN_26 = fillReturnWord == 5'h2;
++  wire [39:0] _slotData_0_T_7 = {_memory_io_rdata[7:0], _GEN_24[31:0]};
++  wire        _GEN_27 = fillReturnWord == 5'h3;
++  wire [39:0] _GEN_28 = fillSlot ? slotData_1_1 : slotData_0_1;
++  wire [39:0] _slotData_1_T_1 = {_GEN_28[39:16], _memory_io_rdata};
++  wire        _GEN_29 = fillReturnWord == 5'h4;
++  wire [39:0] _slotData_1_T_4 = {_GEN_28[39:32], _memory_io_rdata, _GEN_28[15:0]};
++  wire        _GEN_30 = fillReturnWord == 5'h5;
++  wire [39:0] _slotData_1_T_7 = {_memory_io_rdata[7:0], _GEN_28[31:0]};
++  wire        _GEN_31 = fillReturnWord == 5'h6;
++  wire [39:0] _GEN_32 = fillSlot ? slotData_1_2 : slotData_0_2;
++  wire [39:0] _slotData_2_T_1 = {_GEN_32[39:16], _memory_io_rdata};
++  wire        _GEN_33 = fillReturnWord == 5'h7;
++  wire [39:0] _slotData_2_T_4 = {_GEN_32[39:32], _memory_io_rdata, _GEN_32[15:0]};
++  wire        _GEN_34 = fillReturnWord == 5'h8;
++  wire [39:0] _slotData_2_T_7 = {_memory_io_rdata[7:0], _GEN_32[31:0]};
++  wire        _GEN_35 = fillReturnWord == 5'h9;
++  wire [39:0] _GEN_36 = fillSlot ? slotData_1_3 : slotData_0_3;
++  wire [39:0] _slotData_3_T_1 = {_GEN_36[39:16], _memory_io_rdata};
++  wire        _GEN_37 = fillReturnWord == 5'hA;
++  wire [39:0] _slotData_3_T_4 = {_GEN_36[39:32], _memory_io_rdata, _GEN_36[15:0]};
++  wire        _GEN_38 = fillReturnWord == 5'hB;
++  wire [39:0] _slotData_3_T_7 = {_memory_io_rdata[7:0], _GEN_36[31:0]};
++  wire        _GEN_39 = fillReturnWord == 5'hC;
++  wire [39:0] _GEN_40 = fillSlot ? slotData_1_4 : slotData_0_4;
++  wire [39:0] _slotData_4_T_1 = {_GEN_40[39:16], _memory_io_rdata};
++  wire        _GEN_41 = fillReturnWord == 5'hD;
++  wire [39:0] _slotData_4_T_4 = {_GEN_40[39:32], _memory_io_rdata, _GEN_40[15:0]};
++  wire        _GEN_42 = fillReturnWord == 5'hE;
++  wire [39:0] _slotData_4_T_7 = {_memory_io_rdata[7:0], _GEN_40[31:0]};
++  wire        _GEN_43 = fillReturnWord == 5'hF;
++  wire [39:0] _GEN_44 = fillSlot ? slotData_1_5 : slotData_0_5;
++  wire [39:0] _slotData_5_T_1 = {_GEN_44[39:16], _memory_io_rdata};
++  wire        _GEN_45 = fillReturnWord == 5'h10;
++  wire [39:0] _slotData_5_T_4 = {_GEN_44[39:32], _memory_io_rdata, _GEN_44[15:0]};
++  wire        _GEN_46 = fillReturnWord == 5'h11;
++  wire [39:0] _slotData_5_T_7 = {_memory_io_rdata[7:0], _GEN_44[31:0]};
++  wire        _GEN_47 = fillReturnWord == 5'h12;
++  wire [39:0] _GEN_48 = fillSlot ? slotData_1_6 : slotData_0_6;
++  wire [39:0] _slotData_6_T_1 = {_GEN_48[39:16], _memory_io_rdata};
++  wire        _GEN_49 = fillReturnWord == 5'h13;
++  wire [39:0] _slotData_6_T_4 = {_GEN_48[39:32], _memory_io_rdata, _GEN_48[15:0]};
++  wire        _GEN_50 = fillReturnWord == 5'h14;
++  wire [39:0] _slotData_6_T_7 = {_memory_io_rdata[7:0], _GEN_48[31:0]};
++  wire        _GEN_51 = fillReturnWord == 5'h15;
++  wire [39:0] _GEN_52 = fillSlot ? slotData_1_7 : slotData_0_7;
++  wire [39:0] _slotData_7_T_1 = {_GEN_52[39:16], _memory_io_rdata};
++  wire        _GEN_53 = fillReturnWord == 5'h16;
++  wire [39:0] _slotData_7_T_4 = {_GEN_52[39:32], _memory_io_rdata, _GEN_52[15:0]};
++  wire [39:0] _slotData_7_T_7 = {_memory_io_rdata[7:0], _GEN_52[31:0]};
+   wire        nextFillSlot = demandMissing ? slotValid_0 & ~slotValid_1 : currentHits_0;
+   wire        hostFire = io_hostValid & io_hostReady_0;
+-  wire        _wordData_T_8 = hostWord == 2'h2;
+-  wire        _GEN_41 = io_groupValid_0 & io_groupTake;
+-  wire        _GEN_42 = ~io_hostRead & (io_computeActive | _GEN_41);
+-  wire        _GEN_43 = hostFire & _GEN_42;
+-  wire        _GEN_44 = clearFire | ~hostFire | _GEN_42;
+-  wire        _GEN_45 = fillNeeded & ~io_invalidate;
+-  wire        _GEN_46 = clearFire | hostFire;
+-  wire        _GEN_47 = state == 3'h1;
+-  wire        _GEN_48 = owner == 2'h0;
+-  wire        _GEN_49 = casez_tmp == 2'h0;
+-  wire        _GEN_50 = _GEN_49 & _wordData_T_8;
+-  wire        _GEN_51 = _GEN_48 | ~_GEN_50;
+-  wire        _GEN_52 = (&casez_tmp) | _wordData_T_8;
+-  wire        _GEN_53 = fillEpoch != epoch | io_invalidate;
+-  wire        _GEN_54 = _GEN_6 & _memory_io_addr_T;
+-  wire        _GEN_55 = _GEN_47 | _GEN_0;
+-  wire        _GEN_56 = fillWord == 5'h17;
+-  wire        _GEN_57 = _GEN_56 & ~fillSlot;
+-  wire        _GEN_58 = _GEN_56 & fillSlot;
+-  wire        _GEN_59 = ~_GEN | _GEN_55;
+-  wire        _GEN_60 = _GEN_59 | ~_GEN_54 | _GEN_53 | ~_GEN_57;
+-  wire        _GEN_61 = _GEN_59 | ~_GEN_54 | _GEN_53 | ~_GEN_58;
+-  wire        _GEN_62 = _GEN_48 & _wordData_T_8;
+-  wire        _GEN_63 = _memory_io_addr_T | ~_GEN_62;
+-  wire        _GEN_64 = _GEN_2 & _wordData_T_8;
+-  wire        _GEN_65 = io_invalidate | _GEN_41 & currentHits_0;
+-  wire        _GEN_66 = ~_GEN_65 & slotValid_0;
+-  wire        _GEN_67 = io_invalidate | _GEN_41 & currentHits_1;
+-  wire        _GEN_68 = ~_GEN_67 & slotValid_1;
+-  wire        _GEN_69 = ~clearFire & _GEN_43;
+-  wire        _GEN_70 = _GEN_47 | _GEN_0 | _GEN_6 | _GEN_2;
+-  wire        _GEN_71 = _GEN_53 | _GEN_56;
+-  wire [2:0]  _GEN_72 = {2'h0, ~_wordData_T_8};
++  wire        _GEN_54 = io_groupValid_0 & io_groupTake;
++  wire        _GEN_55 = ~io_hostRead & (io_computeActive | _GEN_54);
++  wire        _GEN_56 = hostFire & _GEN_55;
++  wire        _GEN_57 = clearFire | ~hostFire | _GEN_55;
++  wire        _GEN_58 = fillNeeded & ~io_invalidate;
++  wire        _GEN_59 = clearFire | hostFire;
++  wire        _GEN_60 = state == 3'h1;
++  wire        _GEN_61 = _GEN_10 & _wordData_T_8;
++  wire        _GEN_62 = _GEN_9 | ~_GEN_61;
++  wire        _GEN_63 = _GEN_9 & _wordData_T_8;
++  wire        _GEN_64 = _GEN_60 | _GEN_0 | _GEN_12;
++  wire        _GEN_65 = _GEN_14 & ~fillSlot;
++  wire        _GEN_66 = _GEN_14 & fillSlot;
++  wire        _GEN_67 = fillReadPending & _GEN_65;
++  wire        _GEN_68 = fillReadPending & _GEN_66;
++  wire        _GEN_69 = ~_GEN | _GEN_64;
++  wire        _GEN_70 = _GEN_69 | ~_GEN_2 | _GEN_13 | ~_GEN_67;
++  wire        _GEN_71 = _GEN_69 | ~_GEN_2 | _GEN_13 | ~_GEN_68;
++  wire        _GEN_72 = _GEN_4 & _wordData_T_8;
++  wire        _GEN_73 = _GEN_2 | ~_GEN_72;
++  wire        _GEN_74 = io_invalidate | _GEN_54 & currentHits_0;
++  wire        _GEN_75 = ~_GEN_74 & slotValid_0;
++  wire        _GEN_76 = io_invalidate | _GEN_54 & currentHits_1;
++  wire        _GEN_77 = ~_GEN_76 & slotValid_1;
++  wire        _GEN_78 = ~clearFire & _GEN_56;
++  wire        _GEN_79 = _GEN_60 | _GEN_0 | _GEN_12 | _GEN_2 | _GEN_4;
++  wire        _GEN_80 = _GEN_59 | ~_GEN_58;
+   always @(posedge clock) begin
+     if (reset) begin
+       state <= 3'h0;
+@@ -345,59 +398,52 @@
+       wantedTag <= 5'h0;
+       slotValid_0 <= 1'h0;
+       slotValid_1 <= 1'h0;
+-      fillWord <= 5'h0;
++      fillIssueWord <= 5'h0;
++      fillReturnWord <= 5'h0;
++      fillReadPending <= 1'h0;
+       lastGrantHost <= 1'h0;
+     end
+     else begin
+       if (_GEN) begin
+-        if (_GEN_47) begin
+-          if (_GEN_48)
+-            state <= 3'h2;
+-          else if (_GEN_49) begin
+-            if (_wordData_T_8)
+-              state <= 3'h0;
+-          end
+-          else
+-            state <= _GEN_52 ? 3'h4 : 3'h2;
+-          if (_GEN_48 | ~_GEN_49 | _wordData_T_8) begin
++        state <= casez_tmp_2;
++        if (_GEN_60) begin
++          if (_GEN_9 | ~_GEN_10 | _wordData_T_8) begin
+           end
+           else
+             hostWord <= hostWord + 2'h1;
+-          responseError <= _GEN_51 & responseError;
+-        end
+-        else if (_GEN_0)
+-          state <= 3'h3;
+-        else begin
+-          if (_GEN_6) begin
+-            state <=
+-              _memory_io_addr_T ? {1'h0, ~_GEN_71, 1'h0} : _GEN_48 ? _GEN_72 : 3'h4;
+-            if (_memory_io_addr_T | ~_GEN_48 | _wordData_T_8) begin
++          responseError <= _GEN_62 & responseError;
++        end
++        else if (~_GEN_0) begin
++          if (_GEN_12) begin
++            if (~_GEN_9 | _wordData_T_8) begin
+             end
+             else
+               hostWord <= hostWord + 2'h1;
+           end
+-          else begin
+-            if (_GEN_2)
+-              state <= _GEN_72;
+-            else if (_GEN_4 & _GEN_9)
+-              state <= 3'h0;
+-            if (~_GEN_2 | _wordData_T_8) begin
+-            end
+-            else
+-              hostWord <= hostWord + 2'h1;
++          else if (_GEN_2 | ~_GEN_4 | _wordData_T_8) begin
+           end
+-          responseError <= _GEN_6 ? _GEN_63 & responseError : ~_GEN_64 & responseError;
+-        end
+-        if (_GEN_70 | ~_GEN_4 | _GEN_9) begin
++          else
++            hostWord <= hostWord + 2'h1;
++          responseError <= _GEN_12 ? ~_GEN_63 & responseError : _GEN_73 & responseError;
++        end
++        if (_GEN_79 | ~_GEN_7 | _GEN_15) begin
+         end
+         else
+           clearAddr <= clearAddr + 10'h1;
+         if (io_invalidate)
+           epoch <= _epoch_T;
+-        if (_GEN_55 | ~_GEN_54 | _GEN_71) begin
++        if (_GEN_64 | ~_GEN_2 | _GEN_13 | ~issue) begin
+         end
+         else
+-          fillWord <= fillWord + 5'h1;
++          fillIssueWord <= fillIssueWord + 5'h1;
++        if (_GEN_64 | ~_GEN_2 | _GEN_13 | ~fillReadPending | _GEN_14) begin
++        end
++        else
++          fillReturnWord <= fillReturnWord + 5'h1;
++        if (_GEN_64 | ~_GEN_2) begin
++        end
++        else
++          fillReadPending <= ~_GEN_13 & issue;
+       end
+       else begin
+         if (clearFire) begin
+@@ -407,68 +453,71 @@
+         end
+         else begin
+           if (hostFire) begin
+-            if (~_GEN_42)
++            if (~_GEN_55)
+               state <= 3'h1;
+           end
+-          else if (_GEN_45)
+-            state <= 3'h2;
+-          if (~hostFire | _GEN_42 | io_hostRead) begin
++          else if (_GEN_58)
++            state <= 3'h6;
++          if (~hostFire | _GEN_55 | io_hostRead) begin
+             if (io_invalidate)
+               epoch <= _epoch_T;
+           end
+           else
+             epoch <= epoch + 32'h1;
+         end
+-        if (_GEN_44) begin
++        if (_GEN_57) begin
+         end
+         else
+           hostWord <= 2'h0;
+-        responseError <= _GEN_69 | responseError;
+-        if (_GEN_46 | ~_GEN_45) begin
+-        end
+-        else
+-          fillWord <= 5'h0;
+-      end
+-      if (_GEN_8) begin
++        responseError <= _GEN_78 | responseError;
++        if (_GEN_80) begin
++        end
++        else begin
++          fillIssueWord <= 5'h0;
++          fillReturnWord <= 5'h0;
++        end
++        fillReadPending <= _GEN_80 & fillReadPending;
++      end
++      if (_GEN_22) begin
+       end
+       else if (hostFire) begin
+-        if (~_GEN_42)
++        if (~_GEN_55)
+           owner <= {1'h0, ~io_hostRead};
+       end
+-      else if (_GEN_45)
++      else if (_GEN_58)
+         owner <= 2'h2;
+       responseValid <=
+         _GEN
+-          ? (_GEN_47
+-               ? ~_GEN_48 & _GEN_50 | _GEN_7
++          ? (_GEN_60
++               ? ~_GEN_9 & _GEN_61 | _GEN_21
+                : _GEN_0
+-                   ? _GEN_7
+-                   : _GEN_6 ? ~_memory_io_addr_T & _GEN_62 | _GEN_7 : _GEN_64 | _GEN_7)
+-          : _GEN_69 | _GEN_7;
+-      clearDone <= ~(~_GEN | _GEN_70) & _GEN_4 & _GEN_9;
+-      wantedPending <= ~_GEN_41 & (groupFire | wantedPending);
++                   ? _GEN_21
++                   : _GEN_12 ? _GEN_63 | _GEN_21 : ~_GEN_2 & _GEN_72 | _GEN_21)
++          : _GEN_78 | _GEN_21;
++      clearDone <= ~(~_GEN | _GEN_79) & _GEN_7 & _GEN_15;
++      wantedPending <= ~_GEN_54 & (groupFire | wantedPending);
+       if (groupFire)
+         wantedTag <= io_groupReqTag;
+       slotValid_0 <=
+         _GEN
+-          ? ~_GEN_55 & _GEN_54 & ~_GEN_53 & _GEN_57 | _GEN_66
++          ? ~_GEN_64 & _GEN_2 & ~_GEN_13 & _GEN_67 | _GEN_75
+           : ~clearFire
+             & (hostFire
+-                 ? (_GEN_42 ? _GEN_66 : ~(~io_hostRead | _GEN_65) & slotValid_0)
+-                 : _GEN_45 ? ~(~nextFillSlot | _GEN_65) & slotValid_0 : _GEN_66);
++                 ? (_GEN_55 ? _GEN_75 : ~(~io_hostRead | _GEN_74) & slotValid_0)
++                 : _GEN_58 ? ~(~nextFillSlot | _GEN_74) & slotValid_0 : _GEN_75);
+       slotValid_1 <=
+         _GEN
+-          ? ~_GEN_55 & _GEN_54 & ~_GEN_53 & _GEN_58 | _GEN_68
++          ? ~_GEN_64 & _GEN_2 & ~_GEN_13 & _GEN_68 | _GEN_77
+           : ~clearFire
+             & (hostFire
+-                 ? (_GEN_42 ? _GEN_68 : ~(~io_hostRead | _GEN_67) & slotValid_1)
+-                 : _GEN_45 ? ~(nextFillSlot | _GEN_67) & slotValid_1 : _GEN_68);
+-      if (_GEN_8) begin
++                 ? (_GEN_55 ? _GEN_77 : ~(~io_hostRead | _GEN_76) & slotValid_1)
++                 : _GEN_58 ? ~(nextFillSlot | _GEN_76) & slotValid_1 : _GEN_77);
++      if (_GEN_22) begin
+       end
+       else
+-        lastGrantHost <= hostFire | ~_GEN_45 & lastGrantHost;
+-    end
+-    if (_GEN | clearFire | ~hostFire | _GEN_42) begin
++        lastGrantHost <= hostFire | ~_GEN_58 & lastGrantHost;
++    end
++    if (_GEN | clearFire | ~hostFire | _GEN_55) begin
+     end
+     else begin
+       hostAddr <= io_hostAddr;
+@@ -476,143 +525,143 @@
+       hostMask <= io_hostMask;
+     end
+     if (_GEN) begin
+-      if (_GEN_55 | ~_GEN_6 | _memory_io_addr_T | ~_GEN_48) begin
++      if (_GEN_60 | _GEN_0 | ~(_GEN_12 & _GEN_9)) begin
+       end
+       else
+         readData <= casez_tmp_1;
+-      if (_GEN_47) begin
+-        if (_GEN_48 | _GEN_49 | ~_GEN_52) begin
++      if (_GEN_60) begin
++        if (_GEN_9 | _GEN_10 | ~_GEN_11) begin
+         end
+         else
+           writeWord <= casez_tmp_0;
+-        if (_GEN_51) begin
++        if (_GEN_62) begin
+         end
+         else
+           responseData <= 40'h0;
+       end
+       else begin
+-        if (_GEN_0 | ~_GEN_6 | _memory_io_addr_T | _GEN_48) begin
++        if (_GEN_0 | ~_GEN_12 | _GEN_9) begin
+         end
+         else
+           writeWord <= _memory_io_rdata & ~byteMask | casez_tmp_0 & byteMask;
+         if (~_GEN_0) begin
+-          if (_GEN_6) begin
+-            if (_GEN_63) begin
+-            end
+-            else
++          if (_GEN_12) begin
++            if (_GEN_63)
+               responseData <= {_memory_io_rdata[7:0], readData[31:0]};
+           end
+-          else if (_GEN_64)
++          else if (_GEN_73) begin
++          end
++          else
+             responseData <= 40'h0;
+         end
+       end
+-      if (_GEN_55 | ~_GEN_54 | _GEN_53) begin
++      if (_GEN_64 | ~_GEN_2 | _GEN_13 | ~fillReadPending) begin
+       end
+       else begin
+-        if (_GEN_13 & ~fillSlot)
++        if (_GEN_26 & ~fillSlot)
+           slotData_0_0 <= _slotData_0_T_7;
+-        else if (_GEN_12 & ~fillSlot)
++        else if (_GEN_25 & ~fillSlot)
+           slotData_0_0 <= _slotData_0_T_4;
+-        else if (_GEN_10 & ~fillSlot)
++        else if (_GEN_23 & ~fillSlot)
+           slotData_0_0 <= _slotData_0_T_1;
+-        if (_GEN_17 & ~fillSlot)
++        if (_GEN_30 & ~fillSlot)
+           slotData_0_1 <= _slotData_1_T_7;
+-        else if (_GEN_16 & ~fillSlot)
++        else if (_GEN_29 & ~fillSlot)
+           slotData_0_1 <= _slotData_1_T_4;
+-        else if (_GEN_14 & ~fillSlot)
++        else if (_GEN_27 & ~fillSlot)
+           slotData_0_1 <= _slotData_1_T_1;
+-        if (_GEN_21 & ~fillSlot)
++        if (_GEN_34 & ~fillSlot)
+           slotData_0_2 <= _slotData_2_T_7;
+-        else if (_GEN_20 & ~fillSlot)
++        else if (_GEN_33 & ~fillSlot)
+           slotData_0_2 <= _slotData_2_T_4;
+-        else if (_GEN_18 & ~fillSlot)
++        else if (_GEN_31 & ~fillSlot)
+           slotData_0_2 <= _slotData_2_T_1;
+-        if (_GEN_25 & ~fillSlot)
++        if (_GEN_38 & ~fillSlot)
+           slotData_0_3 <= _slotData_3_T_7;
+-        else if (_GEN_24 & ~fillSlot)
++        else if (_GEN_37 & ~fillSlot)
+           slotData_0_3 <= _slotData_3_T_4;
+-        else if (_GEN_22 & ~fillSlot)
++        else if (_GEN_35 & ~fillSlot)
+           slotData_0_3 <= _slotData_3_T_1;
+-        if (_GEN_29 & ~fillSlot)
++        if (_GEN_42 & ~fillSlot)
+           slotData_0_4 <= _slotData_4_T_7;
+-        else if (_GEN_28 & ~fillSlot)
++        else if (_GEN_41 & ~fillSlot)
+           slotData_0_4 <= _slotData_4_T_4;
+-        else if (_GEN_26 & ~fillSlot)
++        else if (_GEN_39 & ~fillSlot)
+           slotData_0_4 <= _slotData_4_T_1;
+-        if (_GEN_33 & ~fillSlot)
++        if (_GEN_46 & ~fillSlot)
+           slotData_0_5 <= _slotData_5_T_7;
+-        else if (_GEN_32 & ~fillSlot)
++        else if (_GEN_45 & ~fillSlot)
+           slotData_0_5 <= _slotData_5_T_4;
+-        else if (_GEN_30 & ~fillSlot)
++        else if (_GEN_43 & ~fillSlot)
+           slotData_0_5 <= _slotData_5_T_1;
+-        if (_GEN_37 & ~fillSlot)
++        if (_GEN_50 & ~fillSlot)
+           slotData_0_6 <= _slotData_6_T_7;
+-        else if (_GEN_36 & ~fillSlot)
++        else if (_GEN_49 & ~fillSlot)
+           slotData_0_6 <= _slotData_6_T_4;
+-        else if (_GEN_34 & ~fillSlot)
++        else if (_GEN_47 & ~fillSlot)
+           slotData_0_6 <= _slotData_6_T_1;
+-        if (_GEN_57)
++        if (_GEN_65)
+           slotData_0_7 <= _slotData_7_T_7;
+-        else if (_GEN_40 & ~fillSlot)
++        else if (_GEN_53 & ~fillSlot)
+           slotData_0_7 <= _slotData_7_T_4;
+-        else if (_GEN_38 & ~fillSlot)
++        else if (_GEN_51 & ~fillSlot)
+           slotData_0_7 <= _slotData_7_T_1;
+-        if (_GEN_13 & fillSlot)
++        if (_GEN_26 & fillSlot)
+           slotData_1_0 <= _slotData_0_T_7;
+-        else if (_GEN_12 & fillSlot)
++        else if (_GEN_25 & fillSlot)
+           slotData_1_0 <= _slotData_0_T_4;
+-        else if (_GEN_10 & fillSlot)
++        else if (_GEN_23 & fillSlot)
+           slotData_1_0 <= _slotData_0_T_1;
+-        if (_GEN_17 & fillSlot)
++        if (_GEN_30 & fillSlot)
+           slotData_1_1 <= _slotData_1_T_7;
+-        else if (_GEN_16 & fillSlot)
++        else if (_GEN_29 & fillSlot)
+           slotData_1_1 <= _slotData_1_T_4;
+-        else if (_GEN_14 & fillSlot)
++        else if (_GEN_27 & fillSlot)
+           slotData_1_1 <= _slotData_1_T_1;
+-        if (_GEN_21 & fillSlot)
++        if (_GEN_34 & fillSlot)
+           slotData_1_2 <= _slotData_2_T_7;
+-        else if (_GEN_20 & fillSlot)
++        else if (_GEN_33 & fillSlot)
+           slotData_1_2 <= _slotData_2_T_4;
+-        else if (_GEN_18 & fillSlot)
++        else if (_GEN_31 & fillSlot)
+           slotData_1_2 <= _slotData_2_T_1;
+-        if (_GEN_25 & fillSlot)
++        if (_GEN_38 & fillSlot)
+           slotData_1_3 <= _slotData_3_T_7;
+-        else if (_GEN_24 & fillSlot)
++        else if (_GEN_37 & fillSlot)
+           slotData_1_3 <= _slotData_3_T_4;
+-        else if (_GEN_22 & fillSlot)
++        else if (_GEN_35 & fillSlot)
+           slotData_1_3 <= _slotData_3_T_1;
+-        if (_GEN_29 & fillSlot)
++        if (_GEN_42 & fillSlot)
+           slotData_1_4 <= _slotData_4_T_7;
+-        else if (_GEN_28 & fillSlot)
++        else if (_GEN_41 & fillSlot)
+           slotData_1_4 <= _slotData_4_T_4;
+-        else if (_GEN_26 & fillSlot)
++        else if (_GEN_39 & fillSlot)
+           slotData_1_4 <= _slotData_4_T_1;
+-        if (_GEN_33 & fillSlot)
++        if (_GEN_46 & fillSlot)
+           slotData_1_5 <= _slotData_5_T_7;
+-        else if (_GEN_32 & fillSlot)
++        else if (_GEN_45 & fillSlot)
+           slotData_1_5 <= _slotData_5_T_4;
+-        else if (_GEN_30 & fillSlot)
++        else if (_GEN_43 & fillSlot)
+           slotData_1_5 <= _slotData_5_T_1;
+-        if (_GEN_37 & fillSlot)
++        if (_GEN_50 & fillSlot)
+           slotData_1_6 <= _slotData_6_T_7;
+-        else if (_GEN_36 & fillSlot)
++        else if (_GEN_49 & fillSlot)
+           slotData_1_6 <= _slotData_6_T_4;
+-        else if (_GEN_34 & fillSlot)
++        else if (_GEN_47 & fillSlot)
+           slotData_1_6 <= _slotData_6_T_1;
+-        if (_GEN_58)
++        if (_GEN_66)
+           slotData_1_7 <= _slotData_7_T_7;
+-        else if (_GEN_40 & fillSlot)
++        else if (_GEN_53 & fillSlot)
+           slotData_1_7 <= _slotData_7_T_4;
+-        else if (_GEN_38 & fillSlot)
++        else if (_GEN_51 & fillSlot)
+           slotData_1_7 <= _slotData_7_T_1;
+       end
+     end
+     else begin
+-      if (_GEN_44) begin
++      if (_GEN_57) begin
+       end
+       else
+         readData <= 40'h0;
+-      if (clearFire | ~_GEN_43) begin
++      if (clearFire | ~_GEN_56) begin
+       end
+       else
+         responseData <= 40'h0;
+@@ -635,23 +684,23 @@
+         slotData_1_7 <= 40'h0;
+       end
+     end
+-    if (_GEN_60) begin
++    if (_GEN_70) begin
+     end
+     else
+       slotTag_0 <= fillTag;
+-    if (_GEN_61) begin
++    if (_GEN_71) begin
+     end
+     else
+       slotTag_1 <= fillTag;
+-    if (_GEN_60) begin
++    if (_GEN_70) begin
+     end
+     else
+       slotEpoch_0 <= fillEpoch;
+-    if (_GEN_61) begin
++    if (_GEN_71) begin
+     end
+     else
+       slotEpoch_1 <= fillEpoch;
+-    if (_GEN | _GEN_46 | ~_GEN_45) begin
++    if (_GEN | _GEN_59 | ~_GEN_58) begin
+     end
+     else begin
+       fillSlot <= nextFillSlot;
+@@ -712,9 +761,11 @@
+         slotData_1_7 = {_RANDOM[5'h1B][31:19], _RANDOM[5'h1C][26:0]};
+         fillSlot = _RANDOM[5'h1C][27];
+         fillTag = {_RANDOM[5'h1C][31:28], _RANDOM[5'h1D][0]};
+-        fillWord = _RANDOM[5'h1D][5:1];
+-        fillEpoch = {_RANDOM[5'h1D][31:6], _RANDOM[5'h1E][5:0]};
+-        lastGrantHost = _RANDOM[5'h1E][6];
++        fillIssueWord = _RANDOM[5'h1D][5:1];
++        fillReturnWord = _RANDOM[5'h1D][10:6];
++        fillReadPending = _RANDOM[5'h1D][11];
++        fillEpoch = {_RANDOM[5'h1D][31:12], _RANDOM[5'h1E][11:0]};
++        lastGrantHost = _RANDOM[5'h1E][12];
+       `endif // RANDOMIZE_REG_INIT
+     end // initial
+     `ifdef FIRRTL_AFTER_INITIAL
+@@ -725,9 +776,9 @@
+     .clock      (clock),
+     .reset      (reset),
+     .io_en      (memory_io_en),
+-    .io_isWrite (~_GEN_1 & (_GEN_3 | _GEN_5)),
++    .io_isWrite (~_GEN_6 & (_GEN_5 | _GEN_8)),
+     .io_addr    (memory_io_addr),
+-    .io_wdata   (_GEN_1 | ~_GEN_3 ? 16'h0 : writeWord),
++    .io_wdata   (_GEN_6 | ~_GEN_5 ? 16'h0 : writeWord),
+     .io_rdata   (_memory_io_rdata),
+     .io_rvalid  (_memory_io_rvalid)
+   );
+@@ -737,7 +788,7 @@
+   assign io_rspValid = responseValid;
+   assign io_rspError = responseError;
+   assign io_rspData = responseData;
+-  assign io_hostIdle = ~responseValid & (~_GEN | _memory_io_addr_T & state != 3'h5);
++  assign io_hostIdle = ~responseValid & (~_GEN | owner == 2'h2 & state != 3'h5);
+   assign io_groupValid = io_groupValid_0;
+   assign io_groupTag = wantedTag;
+   assign io_groupBias_0 = currentHits_0 ? slotData_0_0 : slotData_1_0;
+--- a/tests/e203/tb_bias_group_pipeline.sv
++++ b/tests/e203/tb_bias_group_pipeline.sv
+@@ -0,0 +1,165 @@
++`timescale 1ns/1ps
++module tb_bias_group_pipeline;
++  reg clock=0, reset=1;
++  always #5 clock=~clock;
++  reg io_computeActive=0, io_invalidate=0, io_clearValid=0;
++  wire io_clearReady, io_clearDone;
++  reg io_hostValid=0, io_hostRead=0, io_rspReady=0;
++  reg [7:0] io_hostAddr=0;
++  reg [39:0] io_hostData=0;
++  reg [4:0] io_hostMask=31;
++  wire io_hostReady, io_rspValid, io_rspError, io_hostIdle;
++  wire [39:0] io_rspData;
++  reg io_groupReqValid=0, io_groupTake=0;
++  reg [4:0] io_groupReqTag=0;
++  wire io_groupValid;
++  wire [4:0] io_groupTag;
++  wire [39:0] bias [0:7];
++  BiasSramPrefetch dut(.clock(clock), .reset(reset),
++    .io_computeActive(io_computeActive), .io_invalidate(io_invalidate),
++    .io_clearValid(io_clearValid), .io_clearReady(io_clearReady), .io_clearDone(io_clearDone),
++    .io_hostValid(io_hostValid), .io_hostReady(io_hostReady), .io_hostRead(io_hostRead),
++    .io_hostAddr(io_hostAddr), .io_hostData(io_hostData), .io_hostMask(io_hostMask),
++    .io_rspValid(io_rspValid), .io_rspReady(io_rspReady), .io_rspError(io_rspError),
++    .io_rspData(io_rspData), .io_hostIdle(io_hostIdle),
++    .io_groupReqValid(io_groupReqValid), .io_groupReqTag(io_groupReqTag),
++    .io_groupValid(io_groupValid), .io_groupTag(io_groupTag), .io_groupTake(io_groupTake),
++    .io_groupBias_0(bias[0]), .io_groupBias_1(bias[1]), .io_groupBias_2(bias[2]),
++    .io_groupBias_3(bias[3]), .io_groupBias_4(bias[4]), .io_groupBias_5(bias[5]),
++    .io_groupBias_6(bias[6]), .io_groupBias_7(bias[7]));
++  reg [39:0] expected [0:255];
++  integer cycles=0, stream_cycles=0, reads=0, completed=0, physical_reads=0;
++  integer last_read_cycle=0, clear_words=0, invalidations=0, resets=0;
++  reg [2:0] previous_state=0;
++  reg monitoring_clear=0;
++  always @(posedge clock) begin
++    cycles=cycles+1;
++    if(cycles>100000) $fatal(1,"pipeline test watchdog");
++    if(reset) begin stream_cycles=0; reads=0; previous_state=0; end
++    else begin
++      if(dut.memory.io_en && dut.memory.io_addr>=768) $fatal(1,"out of range memory address");
++      if(dut.state==6) begin
++        if(previous_state!=6) begin stream_cycles=0; reads=0; end
++        stream_cycles=stream_cycles+1;
++        if(io_invalidate && dut.memory.io_en) $fatal(1,"read issued during invalidate");
++        if(dut.memory.io_en) begin
++          if(dut.memory.io_isWrite || dut.memory.io_addr!==dut.fillTag*24+reads)
++            $fatal(1,"nonsequential group read tag=%d read=%d addr=%d",dut.fillTag,reads,dut.memory.io_addr);
++          if(reads>0 && cycles!=last_read_cycle+1) $fatal(1,"bubble in continuous group reads");
++          reads=reads+1; physical_reads=physical_reads+1; last_read_cycle=cycles;
++        end
++        if(dut.fillReadPending && !io_invalidate && dut.fillEpoch==dut.epoch) begin
++          if(!dut.memory.io_rvalid) $fatal(1,"capture lacked synchronous return");
++          if(dut.fillReturnWord==23) begin
++            if(reads!=24 || stream_cycles!=25 || dut.memory.io_en)
++              $fatal(1,"group completed early/late reads=%d cycles=%d",reads,stream_cycles);
++            completed=completed+1;
++          end
++        end
++      end
++      if(monitoring_clear && dut.memory.io_en) begin
++        if(!dut.memory.io_isWrite || dut.memory.io_addr!=clear_words || dut.memory.io_wdata!==0)
++          $fatal(1,"physical clear order/data failed word=%d",clear_words);
++        clear_words=clear_words+1;
++      end
++      previous_state=dut.state;
++    end
++  end
++  task tick; begin @(posedge clock); #1; @(negedge clock); end endtask
++  task hard_reset; begin
++    reset=1; io_hostValid=0; io_rspReady=0; io_groupReqValid=0; io_groupTake=0;
++    io_invalidate=0; io_clearValid=0; tick(); tick(); reset=0;
++    if(io_groupValid || io_rspValid) $fatal(1,"reset retained protocol ownership");
++  end endtask
++  task host(input bit read_op, input integer addr, input [39:0] data, input bit error);
++    integer waits; reg [39:0] held;
++    begin
++      io_hostValid=1; io_hostRead=read_op; io_hostAddr=addr; io_hostData=data; #1;
++      waits=0;
++      while(!io_hostReady) begin tick(); waits=waits+1; if(waits>70) $fatal(1,"host starvation"); end
++      tick(); io_hostValid=0; io_hostAddr=~addr; io_hostData=~data;
++      waits=0;
++      while(!io_rspValid) begin tick(); waits=waits+1; if(waits>70) $fatal(1,"host timeout"); end
++      if(io_rspError!==error) $fatal(1,"host error mismatch");
++      held=io_rspData;
++      repeat(3) begin tick(); if(!io_rspValid || io_rspData!==held || io_rspError!==error)
++        $fatal(1,"host response changed while stalled"); end
++      if(read_op && !error && held!==expected[addr]) $fatal(1,"host read data mismatch addr=%d",addr);
++      io_rspReady=1; tick(); io_rspReady=0;
++    end
++  endtask
++  task request(input integer tag);
++    begin
++      if(dut.wantedPending) $fatal(1,"overlapping group requests in test");
++      io_groupReqTag=tag; io_groupReqValid=1; tick(); io_groupReqValid=0;
++    end
++  endtask
++  task check_group(input integer tag);
++    integer waits,lane; begin
++      waits=0;
++      while(!io_groupValid) begin tick(); waits=waits+1; if(waits>90) $fatal(1,"group starvation tag=%d",tag); end
++      if(io_groupTag!=tag) $fatal(1,"wrong group tag");
++      for(lane=0;lane<8;lane=lane+1)
++        if(bias[lane]!==expected[tag*8+lane]) $fatal(1,"bias mismatch tag=%d lane=%d",tag,lane);
++    end
++  endtask
++  task take; begin io_groupTake=1; tick(); io_groupTake=0; end endtask
++  task wait_stage(input integer stage);
++    integer waits; begin
++      waits=0;
++      while(!(dut.state==6 && ((stage==0 && !dut.fillReadPending && dut.fillIssueWord==0) ||
++           (stage>0 && dut.fillReadPending && dut.fillReturnWord==stage-1)))) begin
++        tick(); waits=waits+1; if(waits>30) $fatal(1,"stage unreachable %d",stage);
++      end
++    end
++  endtask
++  integer addr,tag,stage,k;
++  initial begin
++    @(negedge clock); hard_reset();
++    for(addr=0;addr<256;addr=addr+1) begin
++      expected[addr]=(40'h9123456789 ^ (40'h100010001*addr));
++      if(addr==0) expected[addr]=40'h8000000000;
++      if(addr==255) expected[addr]=40'h7fffffffff;
++      host(0,addr,expected[addr],0);
++    end
++    for(tag=0;tag<32;tag=tag+1) begin
++      hard_reset(); request(tag); check_group(tag);
++      repeat(30) begin tick(); check_group(tag); end // current stable through next-tag prefetch
++      take();
++    end
++    for(stage=0;stage<=24;stage=stage+1) begin
++      hard_reset(); request(31); wait_stage(stage);
++      io_invalidate=1; tick(); invalidations=invalidations+1;
++      if(io_groupValid || dut.slotValid_0 || dut.slotValid_1) $fatal(1,"stale slot published on invalidate");
++      io_invalidate=0; check_group(31); take();
++    end
++    for(stage=0;stage<=24;stage=stage+1) begin
++      hard_reset(); request(31); wait_stage(stage);
++      hard_reset(); resets=resets+1;
++      repeat(2) begin tick(); if(io_groupValid) $fatal(1,"stale response after reset"); end
++      request(31); check_group(31); take();
++    end
++    // A stalled host response cannot stop a demand or its next-tag prefetch.
++    hard_reset(); io_hostValid=1; io_hostRead=1; io_hostAddr=91; #1;
++    while(!io_hostReady) tick(); tick(); io_hostValid=0;
++    while(!io_rspValid) tick();
++    request(0); check_group(0); repeat(30) tick(); check_group(0);
++    if(!io_rspValid || io_rspData!==expected[91]) $fatal(1,"stalled response corrupted");
++    io_rspReady=1; tick(); io_rspReady=0; take();
++    // Simultaneous demand plus host traffic must let each side progress.
++    hard_reset(); request(0); host(1,219,0,0); check_group(0);
++    io_computeActive=1; host(0,0,0,1); check_group(0); io_computeActive=0; take();
++    // Clear is blocked by an owned group and then writes every physical word.
++    hard_reset(); request(31); check_group(31); io_clearValid=1;
++    repeat(3) begin if(io_clearReady) $fatal(1,"clear accepted while group owned"); tick(); end
++    io_clearValid=0; take();
++    while(!io_clearReady) tick(); monitoring_clear=1; io_clearValid=1; tick(); io_clearValid=0;
++    k=0; while(!io_clearDone) begin tick(); k=k+1; if(k>770) $fatal(1,"clear timeout"); end
++    monitoring_clear=0; if(clear_words!=768) $fatal(1,"incomplete physical clear");
++    for(addr=0;addr<256;addr=addr+1) expected[addr]=0;
++    for(tag=0;tag<32;tag=tag+1) begin request(tag); check_group(tag); take(); end
++    host(1,0,0,0); host(1,255,0,0);
++    $display("BIAS_GROUP_PIPELINE_PASS tags=32 words_per_fill=24 stream_cycles=25 invalidation_stages=%0d reset_stages=%0d complete_fills=%0d physical_reads=%0d clear_words=%0d",invalidations,resets,completed,physical_reads,clear_words);
++    $finish;
++  end
++endmodule
+--- a/tests/e203/test_bias_group_pipeline.py
++++ b/tests/e203/test_bias_group_pipeline.py
+@@ -0,0 +1,44 @@
++"""Check consecutive SRAM reads and ownership cancellation on real generated RTL."""
++from pathlib import Path
++import os
++import shutil
++import subprocess
++import tempfile
++import unittest
++
++
++class BiasGroupPipelineTests(unittest.TestCase):
++    def test_continuous_reads_all_tags_invalidate_reset_backpressure_and_clear(self):
++        if not shutil.which('iverilog') or not shutil.which('vvp'):
++            self.skipTest('iverilog and vvp are required')
++        root = Path(__file__).resolve().parents[2]
++        perips = root / 'third-party/e203_hbirdv2/rtl/e203/perips'
++        sources = [root / 'tests/e203/tb_bias_group_pipeline.sv',
++                   *(perips / name for name in ('BiasSramPrefetch.sv',
++                                                'Sram1024x16.sv', 'mem_1024x16.sv'))]
++        log_dir = os.environ.get('XU_BIAS_PIPELINE_LOG_DIR')
++        def save(name, text):
++            if log_dir:
++                path = Path(log_dir)
++                path.mkdir(parents=True, exist_ok=True)
++                (path / name).write_text(text)
++        with tempfile.TemporaryDirectory(prefix='bias-group-pipeline-') as temporary:
++            binary = Path(temporary) / 'pipeline.vvp'
++            built = subprocess.run(['iverilog', '-g2012', '-s', 'tb_bias_group_pipeline',
++                                    '-o', str(binary), *map(str, sources)],
++                                   capture_output=True, text=True, timeout=60)
++            save('compile.log', built.stdout + built.stderr)
++            self.assertEqual(built.returncode, 0, built.stdout + built.stderr)
++            result = subprocess.run(['vvp', str(binary)], capture_output=True,
++                                    text=True, timeout=60)
++            output = result.stdout + result.stderr
++            save('simulation.log', output)
++            self.assertEqual(result.returncode, 0, output)
++            self.assertRegex(output, r'BIAS_GROUP_PIPELINE_PASS tags=32 words_per_fill=24 '
++                             r'stream_cycles=25 invalidation_stages=25 reset_stages=25 '
++                             r'complete_fills=[1-9][0-9]* physical_reads=[1-9][0-9]* clear_words=768')
++            self.assertNotRegex(output, r'(?i)\b(?:FATAL|FAIL(?:ED|URE)?)\b')
++
++
++if __name__ == '__main__':
++    unittest.main()

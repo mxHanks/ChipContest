@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/handoff/packaging-diagnostics/verify_evidence-before.py", line 87, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/handoff/packaging-diagnostics/verify_evidence-before.py", line 56, in main
+    for rel,expected in task.get('vectors',{}).items():artifact(vectors,rel,expected)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/handoff/packaging-diagnostics/verify_evidence-before.py", line 19, in artifact
+    if expected:assert sha(p)==expected,rel
+                       ^^^^^^^^^^^^^^^^
+AssertionError: layer_00/x.mem

@@ -1,0 +1,61 @@
+...usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --platform-assertions requires VCS
+usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --platform-assertions requires VCS
+....S3_CLEAR_CAMPAIGN_FAIL missing native tool
+FAIL /tmp/tmp__yr6i09/campaign/result.json
+.S3_CLEAR_CAMPAIGN_FAIL 'types.SimpleNamespace' object has no attribute 'NICE_STREAM_SCHEDULE'
+FAIL /tmp/tmpq_kadwgy/campaign/result.json
+F....usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --startup-profile external-reset requires Verilator
+usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --startup-profile external-reset requires Verilator
+..
+======================================================================
+FAIL: test_mocked_verilator_campaign_reports_development_scope_and_complete_receipts (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_mocked_verilator_campaign_reports_development_scope_and_complete_receipts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/ppa/test_s3_task_campaign.py", line 216, in test_mocked_verilator_campaign_reports_development_scope_and_complete_receipts
+    self.assertEqual(code,0,report.get('error'))
+AssertionError: 1 != 0 : 'types.SimpleNamespace' object has no attribute 'NICE_STREAM_SCHEDULE'
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.034s
+
+FAILED (failures=1)

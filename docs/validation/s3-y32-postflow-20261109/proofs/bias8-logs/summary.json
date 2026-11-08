@@ -1,0 +1,52 @@
+{
+  "status": "DEVELOPMENT_PASS_POLICY_PENDING",
+  "baseline_source": "build/writeback-v2-20261108/direct-full12/result.json",
+  "candidate_source": "build/postflow-20261108/bias8-task0/result.json",
+  "payload": {
+    "baseline": 453259,
+    "candidate": 451866,
+    "delta": -1393
+  },
+  "clear_cycles": 198403,
+  "total_cycles": {
+    "baseline": 651662,
+    "candidate": 650269
+  },
+  "performance_changes": {
+    "compute_wait": {
+      "baseline": 24552,
+      "candidate": 22770,
+      "delta": -1782
+    },
+    "writeback": {
+      "baseline": 193252,
+      "candidate": 193641,
+      "delta": 389
+    },
+    "mmio_reads": {
+      "baseline": 5051,
+      "candidate": 4754,
+      "delta": -297
+    },
+    "shared_stall": {
+      "baseline": 14122,
+      "candidate": 14511,
+      "delta": 389
+    }
+  },
+  "firmware_elf_identical": false,
+  "firmware_image_identical": true,
+  "source_drift": [],
+  "outputs": 25344,
+  "nice_activity": {
+    "layer": 0,
+    "requests": 3168,
+    "responses": 3168,
+    "oitf_retired": 3168,
+    "status_polls": 4752,
+    "result_reads": 0,
+    "pops_retired": 3168,
+    "shared_writes": 25344
+  },
+  "qualification": "Verilator 2-state development-only; no synthesis or official qualification"
+}

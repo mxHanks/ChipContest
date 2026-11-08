@@ -1,0 +1,25 @@
+{
+  "status": "ANALYTIC_ARCHITECTURE_ASSESSMENT_NOT_RTL_SIMULATION",
+  "shape": {
+    "M": 99,
+    "K": 64,
+    "N": 256
+  },
+  "one_row_16_columns": {
+    "physical_mac_cycles": 101376,
+    "weight_sram_16bit_reads": 1622016,
+    "logical_bias_values": 25344,
+    "contiguous_Y_words_per_pair": 16
+  },
+  "two_rows_8_columns": {
+    "row_pairs": 50,
+    "physical_mac_cycles_if_tail_row_masked": 102400,
+    "weight_sram_16bit_reads": 819200,
+    "logical_bias_values": 12800,
+    "additional_X_row_raw_bytes": 128,
+    "Y_stride_between_rows_bytes": 1024,
+    "optional_second_row_output_buffer_raw_bytes": 1024,
+    "tail_row_policy": "mask absent row99; preserve only99 real output rows"
+  },
+  "decision": "DEFER until batch16 and bias pipeline identify residual bandwidth/overlap limit. Requires strided row-aware result ownership and output scheduling; no measured speedup claim."
+}

@@ -1,0 +1,74 @@
+{
+  "status": "DEVELOPMENT_PASS_POLICY_PENDING",
+  "baseline": "build/pe16-20261108/pe16-task0/result.json",
+  "candidate": "build/postflow-20261108/bias16-task0/result.json",
+  "payload": {
+    "baseline": 469191,
+    "candidate": 464340,
+    "delta": -4851
+  },
+  "clear_cycles": 198403,
+  "total_cycles": {
+    "baseline": 667594,
+    "candidate": 662743
+  },
+  "performance_changes": {
+    "compute_wait": {
+      "baseline": 38412,
+      "candidate": 33858,
+      "delta": -4554
+    },
+    "writeback": {
+      "baseline": 194928,
+      "candidate": 194829,
+      "delta": -99
+    },
+    "other": {
+      "baseline": 39294,
+      "candidate": 39096,
+      "delta": -198
+    },
+    "mmio_reads": {
+      "baseline": 7427,
+      "candidate": 6635,
+      "delta": -792
+    },
+    "shared_stall": {
+      "baseline": 15798,
+      "candidate": 15699,
+      "delta": -99
+    }
+  },
+  "firmware_image_identical": true,
+  "source_drift": [],
+  "outputs": 25344,
+  "nice_activity": {
+    "layer": 0,
+    "requests": 3168,
+    "responses": 3168,
+    "oitf_retired": 3168,
+    "status_polls": 6633,
+    "result_reads": 0,
+    "pops_retired": 3168,
+    "shared_writes": 25344
+  },
+  "pe16_activity": {
+    "layer": 0,
+    "pes": 16,
+    "engines": 2,
+    "physical_groups": 1584,
+    "physical_mac_cycles": 101376,
+    "logical_macs": 1622016,
+    "lo_starts": 1584,
+    "hi_starts": 1584,
+    "lo_init": 1584,
+    "hi_init": 1584,
+    "lo_mac_fire": 101376,
+    "hi_mac_fire": 101376,
+    "lo_done": 1584,
+    "hi_done": 1584,
+    "checked_cycles": 464340,
+    "sync_errors": 0
+  },
+  "qualification": "Verilator 2-state development-only; no synthesis or official qualification"
+}

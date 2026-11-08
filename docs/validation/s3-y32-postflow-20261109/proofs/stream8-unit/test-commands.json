@@ -1,0 +1,85 @@
+[
+  {
+    "tag": "stream8",
+    "phase": "compile",
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/third-party/e203_hbirdv2/rtl/e203/core",
+      "-s",
+      "tb_nice_stream8_errors",
+      "-o",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/build/stream8-unit/stream8.vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/build/stream8-unit/tb_nice_stream8_errors.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v"
+    ],
+    "returncode": 0
+  },
+  {
+    "tag": "stream8",
+    "phase": "simulation",
+    "command": [
+      "vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/build/stream8-unit/stream8.vvp"
+    ],
+    "returncode": 0
+  },
+  {
+    "tag": "disabled",
+    "phase": "compile",
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/third-party/e203_hbirdv2/rtl/e203/core",
+      "-s",
+      "tb_nice_stream8_disabled",
+      "-o",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/build/stream8-unit/disabled.vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/build/stream8-unit/tb_nice_stream8_disabled.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v"
+    ],
+    "returncode": 0
+  },
+  {
+    "tag": "disabled",
+    "phase": "simulation",
+    "command": [
+      "vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/build/stream8-unit/disabled.vvp"
+    ],
+    "returncode": 0
+  },
+  {
+    "tag": "legacy-direct",
+    "phase": "compile",
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/third-party/e203_hbirdv2/rtl/e203/core",
+      "-s",
+      "tb_nice_direct_errors",
+      "-o",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/build/stream8-unit/legacy-direct.vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/tests/e203/tb_nice_direct_errors.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v"
+    ],
+    "returncode": 0
+  },
+  {
+    "tag": "legacy-direct",
+    "phase": "simulation",
+    "command": [
+      "vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/stream8-repo/build/stream8-unit/legacy-direct.vvp"
+    ],
+    "returncode": 0
+  },
+  {
+    "source_sha256": {
+      "third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v": "76e447e3bfbcdaf1f872c3f8ad33a7365b18450adf12cb44800532855608e079",
+      "tests/e203/firmware/accel.c": "d3b303dacf84337982f627d6c4a3f7f6757bca5041138b1be08094058ae39b53",
+      "build/stream8-unit/tb_nice_stream8_errors.sv": "40738b8385450ed42e63eec9b8b59742ff0f945f3c47502a9813500495a468a3",
+      "build/stream8-unit/tb_nice_stream8_disabled.sv": "f6b55d5b552d005061042c81cd497f025b696a2d367a3b5fd88fdc3a9f94af10"
+    }
+  }
+]

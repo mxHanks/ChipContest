@@ -1,0 +1,264 @@
+{
+  "baseline_result_sha256": "3a45ed4122c6cfbedb797259bd67daa4a7fc4d060e4dbb82686eea61ef1f3077",
+  "candidate_result_sha256": "6185e3531796b2b04d09471ecbd318ecd0d4c146a18fe724a1baf8f5bae5b3d4",
+  "count": 20,
+  "positive_result": {
+    "layers": 12,
+    "status": "SAVED_CAMPAIGNS_COMPARED",
+    "totals": {
+      "baseline": {
+        "auto": {
+          "compute_writeback_overlap": 1897236,
+          "fifo_full_wait": 248340,
+          "pops_retired": 38016,
+          "rows": 1188
+        },
+        "bus_counters": {
+          "busy": 2585088,
+          "dones": 38016,
+          "mac_fire": 2433024,
+          "mmio_reads": 60612,
+          "mmio_stall": 0,
+          "mmio_writes": 147960,
+          "shared_reads": 180480,
+          "shared_stall": 169464,
+          "shared_writes": 304128,
+          "starts": 38016
+        },
+        "clear_cycles": 2380836,
+        "clear_to_source_gap": 1224,
+        "nice": {
+          "oitf_retired": 38016,
+          "pops_retired": 38016,
+          "requests": 38016,
+          "responses": 38016,
+          "result_reads": 0,
+          "shared_writes": 304128,
+          "status_polls": 60588
+        },
+        "payload_cycles": 5439108,
+        "payload_plus_clear_cycles": 7819944,
+        "phases": {
+          "bias_load": 129120,
+          "compute_wait": 294624,
+          "other": 466776,
+          "w_load": 1376556,
+          "writeback": 2319024,
+          "x_load": 853008
+        },
+        "transport": {
+          "alias_reads": 0,
+          "direct_lanes": 304128,
+          "direct_pops": 38016,
+          "direct_snapshots": 38016,
+          "explicit_pops": 0,
+          "result_mmio_reads": 0
+        }
+      },
+      "candidate": {
+        "auto": {
+          "compute_writeback_overlap": 2174040,
+          "fifo_full_wait": 0,
+          "pops_retired": 38016,
+          "rows": 1188
+        },
+        "bus_counters": {
+          "busy": 2585088,
+          "dones": 38016,
+          "mac_fire": 2433024,
+          "mmio_reads": 57048,
+          "mmio_stall": 0,
+          "mmio_writes": 147960,
+          "shared_reads": 180480,
+          "shared_stall": 209784,
+          "shared_writes": 304128,
+          "starts": 38016
+        },
+        "clear_cycles": 2380836,
+        "clear_to_source_gap": 1224,
+        "nice": {
+          "oitf_retired": 1188,
+          "pops_retired": 38016,
+          "requests": 1188,
+          "responses": 1188,
+          "result_reads": 0,
+          "shared_writes": 304128,
+          "status_polls": 57024
+        },
+        "payload_cycles": 5156364,
+        "payload_plus_clear_cycles": 7537200,
+        "phases": {
+          "bias_load": 129120,
+          "compute_wait": 273240,
+          "other": 165096,
+          "w_load": 1376556,
+          "writeback": 2356992,
+          "x_load": 855360
+        },
+        "transport": {
+          "alias_reads": 0,
+          "direct_lanes": 304128,
+          "direct_pops": 38016,
+          "direct_snapshots": 38016,
+          "explicit_pops": 0,
+          "result_mmio_reads": 0
+        }
+      },
+      "delta": {
+        "auto": {
+          "compute_writeback_overlap": 276804,
+          "fifo_full_wait": -248340,
+          "pops_retired": 0,
+          "rows": 0
+        },
+        "bus_counters": {
+          "busy": 0,
+          "dones": 0,
+          "mac_fire": 0,
+          "mmio_reads": -3564,
+          "mmio_stall": 0,
+          "mmio_writes": 0,
+          "shared_reads": 0,
+          "shared_stall": 40320,
+          "shared_writes": 0,
+          "starts": 0
+        },
+        "clear_cycles": 0,
+        "clear_to_source_gap": 0,
+        "nice": {
+          "oitf_retired": -36828,
+          "pops_retired": 0,
+          "requests": -36828,
+          "responses": -36828,
+          "result_reads": 0,
+          "shared_writes": 0,
+          "status_polls": -3564
+        },
+        "payload_cycles": -282744,
+        "payload_plus_clear_cycles": -282744,
+        "phases": {
+          "bias_load": 0,
+          "compute_wait": -21384,
+          "other": -301680,
+          "w_load": 0,
+          "writeback": 37968,
+          "x_load": 2352
+        },
+        "transport": {
+          "alias_reads": 0,
+          "direct_lanes": 0,
+          "direct_pops": 0,
+          "direct_snapshots": 0,
+          "explicit_pops": 0,
+          "result_mmio_reads": 0
+        }
+      }
+    }
+  },
+  "rejected_cases": [
+    {
+      "name": "unreviewed_source_pin",
+      "reason": "source manifest differs from externally pinned exact source SHA map",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "wrong_physical_profile",
+      "reason": "physical core source SHA differs",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "wrong_instruction_profile",
+      "reason": "schedule differs from explicit profile",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "undeclared_nice_rtl_change",
+      "reason": "source changes differ from the exact reviewed SHA pairs",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "extra_compile_macro",
+      "reason": "unexpected/missing exact transport compiler macro at firmware-build",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "extra_runtime_selector",
+      "reason": "unexpected/missing exact transport runtime selector at task-00/simulation",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "missing_stream_selector",
+      "reason": "unexpected/missing exact transport runtime selector at task-00/simulation",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "changed_clock_configuration",
+      "reason": "conditions differ beyond the exact profile macro/selector/schedule normalization",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "changed_physical_clear_recipe",
+      "reason": "conditions differ beyond the exact profile macro/selector/schedule normalization",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "changed_physical_clear_work",
+      "reason": "physical clear work differs",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "changed_tensor_identity",
+      "reason": "task input/clock differs: vectors",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "changed_startup_reset_semantics",
+      "reason": "startup reset semantics differ",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "changed_generated_clear_program",
+      "reason": "generated clear C differs beyond the exact frozen-main snapshot include",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "elf_image_byte_mismatch",
+      "reason": "firmware image bytes differ from ELF PT_LOAD",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "reordered_result_layer",
+      "reason": "layer ordering differs",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "duplicate_stream_marker",
+      "reason": "missing, duplicate, malformed or unexpected direct stream activity",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "missing_stream_marker",
+      "reason": "missing, duplicate, malformed or unexpected direct stream activity",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "completion_before_final_response",
+      "reason": "direct stream group/POP/response coverage differs",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "wrong_group_count",
+      "reason": "direct stream group/POP/response coverage differs",
+      "status": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "wrong_nice_request_count",
+      "reason": "NICE instruction retirement or payload coverage differs",
+      "status": "EXPECTED_REJECTION"
+    }
+  ],
+  "schema": "s3-postflow-verifier-negative-receipt-v1",
+  "scope": "in-memory negative checks against revalidated final full12 evidence; no new simulation",
+  "status": "ALL_EXPECTED_REJECTIONS",
+  "verifier_sha256": "70432692d99bd15ac214e925f97626523d3c60ef4977705fe19b537943bfda9e"
+}

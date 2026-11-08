@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "scope": "Root independent extraction preserving original permissions and read-only verification; no simulator or EDA launched",
+  "archive_sha256": "ab4a84301dd8c2a797ce48c199b7b7daf47780e4875f627ca90f236962fa1138",
+  "relocated_root": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/handoff/root-independent-relocation/s3-y32-postflow-evidence",
+  "steps": [
+    {
+      "command": [
+        "/usr/bin/python3.12",
+        "-E",
+        "-B",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/handoff/root-independent-relocation/s3-y32-postflow-evidence/verify_evidence.py",
+        "--out",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/handoff/root-relocated-verification.json"
+      ],
+      "exit": 0,
+      "receipt": "root-relocated-verification.json",
+      "log": "root-relocated-verification.log",
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/python3.12",
+        "-E",
+        "-B",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/handoff/root-independent-relocation/s3-y32-postflow-evidence/revalidate_comparisons.py",
+        "--out",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/handoff/root-relocated-comparisons.json"
+      ],
+      "exit": 0,
+      "receipt": "root-relocated-comparisons.json",
+      "log": "root-relocated-comparisons.log",
+      "status": "PASS"
+    }
+  ],
+  "selected_total": 7537200,
+  "selected_delta": -282744,
+  "strict_comparisons": 6
+}

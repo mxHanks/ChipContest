@@ -1,0 +1,11 @@
+--- a/verify_evidence.py
++++ b/verify_evidence.py
+@@ -52,7 +52,7 @@
+   artifact(campaign,'source/tests/e203/firmware/main.c',recipe['frozen_main_sha256'])
+   artifact(campaign,'source/tools/ppa/s3_task_clear_protocol.py',recipe['helper_sha256'])
+   for task in d.get('task_results',[]):
+-   native=task['native_layer'];vectors=campaign/f'task-{native:02d}/vectors'
++   original=task['original_layer'];vectors=campaign/f'task-{original:02d}/vectors'
+    for rel,expected in task.get('vectors',{}).items():artifact(vectors,rel,expected)
+   campaigns.append(dict(relative_path=str(result_path.relative_to(root)),status=d['status'],
+      recorded_layers=len(d.get('task_results',[])),payload_cycles=d.get('cycles'),

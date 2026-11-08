@@ -1,0 +1,15 @@
+# Reviewed selected-candidate SHA pairs
+
+`../selected-full12-sourcepairs.json` pins the following seven source differences against the previously saved 8 PE direct full12 campaign. Each exact diff is preserved here. All remaining campaign source SHAs must remain equal. The candidate was still running when this review was written; no completion or full12 totals are claimed here.
+
+- `BiasSramPrefetch.sv`: generated from the independently tested group-only streaming pipeline. One read per edge, next-edge return, 24 words plus final drain. Host read/write/clear semantics remain as in the reviewed Scala source; generated dependency hashes other than Bias remain unchanged.
+- `xu_nice_drain8.v`: add funct7 `0x23`, exact nonzero per-group poll limit, count 1..32 and row/span bounds. Each group retains poll→snapshot8→next-edge POP→8 retired shared writes. Only after the last group does completion become valid. Error ends the instruction without retry. Old `0x20` decoding and encoding remain supported.
+- `accel.c`: add the explicit `XU_NICE_DRAINN` guard, matching 0x23 encoding, 22-bit nonzero poll-limit check, one 32-group instruction per row, immediate error check and original fences/memory clobber. No other firmware source changes are allowed.
+- `tb_accel_soc.sv`: add a separately selected stream observer that validates the real CPU request, OITF allocation/retirement, real LSU command/response, endpoint data/address/order, capture-before-POP, POP-before-write, exact golden values and final-response-before-completion for all 32 groups. Retain legacy observer, group watchdog 1024 and total watchdog 32*1024, and exact whole-task work counters. Source is passive observation only.
+- `xu_firmware_contract.py`: explicit stream schedule/macro/selector, 99 NICE requests/responses/retirements and unchanged 3168 groups/POPs, 25344 snapshots lanes/writes, 202752 physical MAC cycles, 3168 starts/dones, all existing non-stream work contracts.
+- `e203_soc.py`: require the new exact STREAM marker plus the existing DIRECT marker and strict NICE activity. No simulation stimulus changes.
+- `campaign.py`: save the already required stream activity record in the result. All campaign options, source snapshot logic, tool/version commands, preclear, startup and clock transformations remain equal.
+
+The independent comparator accepts only the exact selected new compiler argument `-DXU_NICE_DRAINN=1`, runtime argument `+NICE_STREAM=1`, and directed schedule replacement. It then compares every remaining argument and condition unchanged. Loaded firmware may differ only for this explicit transport change and reviewed `accel.c`; both saved ELF-to-Verilog images are independently checked byte for byte. Generated clear C must be identical after only the exact frozen-main snapshot include path is normalized.
+
+No E203 LSU/BIU/arbitration/outstanding setting, CPU control, accelerator wrapper, matrix compute core, numerical model, vector exporter, tensors, SRAM model, or reset implementation changed.

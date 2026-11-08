@@ -1,0 +1,53 @@
+...usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --platform-assertions requires VCS
+usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --platform-assertions requires VCS
+....S3_CLEAR_CAMPAIGN_FAIL missing native tool
+FAIL /tmp/tmpr8n2wxou/campaign/result.json
+.S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmpsca3xcqz/campaign/result.json
+.....usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --startup-profile external-reset requires Verilator
+usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --startup-profile external-reset requires Verilator
+..
+----------------------------------------------------------------------
+Ran 15 tests in 0.022s
+
+OK

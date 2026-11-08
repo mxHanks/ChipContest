@@ -1,0 +1,59 @@
+[
+  {
+    "tag": "batch16",
+    "phase": "compile",
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/third-party/e203_hbirdv2/rtl/e203/core",
+      "-s",
+      "tb_nice_batch16_errors",
+      "-o",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/build/batch16-unit/batch16.vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/build/batch16-unit/tb_nice_batch16_errors.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v"
+    ],
+    "returncode": 0
+  },
+  {
+    "tag": "batch16",
+    "phase": "simulation",
+    "command": [
+      "vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/build/batch16-unit/batch16.vvp"
+    ],
+    "returncode": 0
+  },
+  {
+    "tag": "legacy-direct",
+    "phase": "compile",
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/third-party/e203_hbirdv2/rtl/e203/core",
+      "-s",
+      "tb_nice_direct_errors",
+      "-o",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/build/batch16-unit/legacy-direct.vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/tests/e203/tb_nice_direct_errors.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v"
+    ],
+    "returncode": 0
+  },
+  {
+    "tag": "legacy-direct",
+    "phase": "simulation",
+    "command": [
+      "vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/batch16-repo/build/batch16-unit/legacy-direct.vvp"
+    ],
+    "returncode": 0
+  },
+  {
+    "source_sha256": {
+      "third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v": "27861bbf306791f196091295b0699e183794905127d72af12744941a2fe9f3ca",
+      "tests/e203/firmware/accel.c": "677442f903016cea1a6b9c5fb840606ac2531bce1c1024167a340ce6955b763c",
+      "build/batch16-unit/tb_nice_batch16_errors.sv": "fd40df5a4560e3795e1dd4ce6af264b19f5ab755afbcc3724bc3ff207ca732ba"
+    }
+  }
+]

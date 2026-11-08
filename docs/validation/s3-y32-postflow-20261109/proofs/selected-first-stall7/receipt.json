@@ -1,0 +1,80 @@
+{
+  "scope": "fresh process additional request-window check, not main performance comparison",
+  "command": [
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/verilator-obj/soc_sim",
+    "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/accel_soc",
+    "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/task-00/vectors",
+    "+TASKS=1",
+    "+DUMPWAVE=0",
+    "+MAX_CYCLES=3000000",
+    "+FIRST_SOURCE_STALL=7",
+    "+OUTPUT_Y32=1",
+    "+SHARED_W_PACKED16=1",
+    "+NICE_DRAIN8=1",
+    "+NICE_DIRECT=1",
+    "+NICE_STREAM=1"
+  ],
+  "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-first-stall7",
+  "native_exit": 0,
+  "elapsed_seconds": 46.971414835999894,
+  "simulator_sha256": "b5734eae0429fcae5cd2a1b86080845326d69a4ebb6e0a95ebb50e8ee0260e57",
+  "firmware_image_sha256": "8c348851199da4d2d48b2720aea183df83398c926c53a5ec871eb48194c3b851",
+  "log_sha256": "f901e6f3e0c25bf2cd4a5ea89ceecc033398455b2df2818caccc548181ccd1a9",
+  "layers": [
+    {
+      "layer": 0,
+      "cycles": 429704,
+      "firmware_cycles": 429790
+    }
+  ],
+  "performance": [
+    {
+      "w_load": 114720,
+      "x_load": 71280,
+      "bias_load": 10760,
+      "compute_wait": 22770,
+      "writeback": 196416,
+      "other": 13758,
+      "busy": 215424,
+      "mac_fire": 202752,
+      "mmio_reads": 4754,
+      "mmio_writes": 12330,
+      "shared_reads": 15040,
+      "shared_writes": 25344,
+      "shared_stall": 17489,
+      "mmio_stall": 0,
+      "starts": 3168,
+      "dones": 3168
+    }
+  ],
+  "windows": [
+    {
+      "layer": 0,
+      "first_request": 1402451,
+      "first_accept": 1402458,
+      "final_y_response": 1832154,
+      "first_request_wait": 7
+    }
+  ],
+  "stream": [
+    {
+      "layer": 0,
+      "requests": 99,
+      "groups": 3168,
+      "snapshots": 3168,
+      "pops_retired": 3168,
+      "shared_writes": 25344,
+      "final_response_before_completion": 1
+    }
+  ],
+  "direct": [
+    {
+      "layer": 0,
+      "snapshots": 3168,
+      "lanes": 25344,
+      "pops_retired": 3168,
+      "result_mmio_reads": 0
+    }
+  ],
+  "status": "DEVELOPMENT_BOUNDARY_PASS"
+}

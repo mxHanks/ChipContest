@@ -1,0 +1,11 @@
+--- a/campaign.py
++++ b/campaign.py
+@@ -471,6 +471,8 @@
+                         measured_clocks=clocks,startup_observations=startup,**identity)
+             if args.schedule in soc.contract.NICE_SCHEDULES:
+                 item['nice_activity'] = soc.check_nice_activity(log,native_layers,args.schedule)[0]
++            if args.schedule == soc.contract.NICE_STREAM_SCHEDULE:
++                item['stream_activity'] = soc.check_stream_activity(log,native_layers,args.schedule)[0]
+             if extension is not None:
+                 item['activity'] = extension.inspect_task(log, task, item)
+             report['task_results'].append(item)

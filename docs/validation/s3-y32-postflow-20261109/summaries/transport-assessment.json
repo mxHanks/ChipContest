@@ -1,0 +1,50 @@
+{
+  "status": "PASSIVE_DIAGNOSTIC_PASS",
+  "payload_cycles_unchanged": 453259,
+  "clear_cycles_unchanged": 198403,
+  "raw": {
+    "layer": 0,
+    "y_commands": 25344,
+    "y_responses": 25344,
+    "y_service_sum": 50688,
+    "y_service_min": 2,
+    "y_service_max": 2,
+    "y_command_stall": 12676,
+    "y_response_stall": 0,
+    "bias_wait_free_slot": 5742,
+    "fifo_full_wait": 19804,
+    "claim_cycles": 34848,
+    "bundle_hold": 0
+  },
+  "nice_state_cycles": {
+    "0": 220212,
+    "1": 5049,
+    "2": 25245,
+    "3": 0,
+    "4": 0,
+    "5": 25344,
+    "6": 139394,
+    "7": 31680,
+    "8": 3168,
+    "9": 0,
+    "10": 0,
+    "11": 3167,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0
+  },
+  "derived": {
+    "endpoint_Y_service_cycles_inclusive_avg": 2.0,
+    "nice_wait_write_cycles_per_word": 5.500078914141414,
+    "shared_endpoint_accepts_per_payload_cycle": 0.08909696222248206
+  },
+  "interpretation": [
+    "Endpoint accepted-command to retired-response inclusive service is exactly2 cycles in this testbench.",
+    "NICE WAIT_WRITE average5.5 cycles includes routing/endpoint waits/return path; these intervals are not additive.",
+    "8.91% accepted shared endpoint requests per payload cycle is not a measurement of all SoC fabric links, not a DMA speedup estimate.",
+    "A new bus master needs independent arbitration/order/error/last-response validation; DMA deferred until safe integration is budgeted."
+  ],
+  "raw_log_sha256": "bcd10135d67866a9ac5fa7f2b196de4a75342ad166f5e18afdc44498dfcc80a9",
+  "preparation_note": "First probe prepare rejected an incorrect instance name; the untouched initial replay only reproduced baseline. Only transport-observed-task0 contains these counters."
+}
