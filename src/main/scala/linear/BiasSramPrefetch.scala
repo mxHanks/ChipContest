@@ -35,7 +35,7 @@ class BiasSramPrefetchIO extends Bundle {
 }
 
 private object BiasSramState extends ChiselEnum {
-    val idle, selectWord, readIssue, readCapture, writeCommit, clearWord = Value
+    val idle, selectWord, readIssue, readCapture, writeCommit, clearWord, groupStream = Value
 }
 private object BiasSramOwner extends ChiselEnum {
     val hostRead, hostWrite, groupFill = Value
@@ -44,8 +44,8 @@ private object BiasSramOwner extends ChiselEnum {
 /** One real 1024x16 synchronous single-port memory; two tagged eight-bias slots.
   * Host descriptors are captured once. The response is not published until the
   * final physical write commits or all three read words have been sampled.
-  * A full group uses 24 issue/capture pairs (48 memory cycles), deliberately
-  * matching the independently exercised SV prototype before further pipelining.
+  * A group issues 24 consecutive reads and captures each synchronous return on
+  * the following edge. Host reads/writes retain their original sequencing.
   */
 class BiasSramPrefetch extends Module {
     val io = IO(new BiasSramPrefetchIO)
@@ -73,7 +73,9 @@ class BiasSramPrefetch extends Module {
     private val slotData = Reg(Vec(2, Vec(8, UInt(40.W))))
     private val fillSlot = Reg(Bool())
     private val fillTag = Reg(UInt(5.W))
-    private val fillWord = RegInit(0.U(5.W))
+    private val fillIssueWord = RegInit(0.U(5.W))
+    private val fillReturnWord = RegInit(0.U(5.W))
+    private val fillReadPending = RegInit(false.B)
     private val fillEpoch = Reg(UInt(32.W))
     private val lastGrantHost = RegInit(false.B)
 
@@ -116,14 +118,18 @@ class BiasSramPrefetch extends Module {
         0.U -> hostData(15, 0), 1.U -> hostData(31, 16), 2.U -> Cat(0.U(8.W), hostData(39, 32))))
     private val byteMask = Cat(Fill(8, wordMask(1)), Fill(8, wordMask(0)))
     private val hostPhysicalAddr = ((hostAddr << 1) +& hostAddr +& hostWord)(9, 0)
-    private val groupPhysicalAddr = ((fillTag << 4) +& (fillTag << 3) +& fillWord)(9, 0)
+    private val groupPhysicalAddr = ((fillTag << 4) +& (fillTag << 3) +& fillIssueWord)(9, 0)
     memory.io.en := false.B
     memory.io.isWrite := false.B
     memory.io.addr := 0.U
     memory.io.wdata := 0.S
     when(!reset.asBool && state === BiasSramState.readIssue) {
         memory.io.en := true.B
-        memory.io.addr := Mux(owner === BiasSramOwner.groupFill, groupPhysicalAddr, hostPhysicalAddr)
+        memory.io.addr := hostPhysicalAddr
+    }.elsewhen(!reset.asBool && state === BiasSramState.groupStream &&
+        fillIssueWord < 24.U && fillEpoch === epoch && !io.invalidate) {
+        memory.io.en := true.B
+        memory.io.addr := groupPhysicalAddr
     }.elsewhen(!reset.asBool && state === BiasSramState.writeCommit) {
         memory.io.en := true.B
         memory.io.isWrite := true.B
@@ -169,8 +175,10 @@ class BiasSramPrefetch extends Module {
                 }
             }.elsewhen(fillNeeded && !io.invalidate) {
                 lastGrantHost := false.B; owner := BiasSramOwner.groupFill
-                fillSlot := nextFillSlot; fillTag := nextFillTag; fillWord := 0.U; fillEpoch := epoch
-                slotValid(nextFillSlot) := false.B; state := BiasSramState.readIssue
+                fillSlot := nextFillSlot; fillTag := nextFillTag
+                fillIssueWord := 0.U; fillReturnWord := 0.U; fillReadPending := false.B
+                fillEpoch := epoch
+                slotValid(nextFillSlot) := false.B; state := BiasSramState.groupStream
             }
         }
         is(BiasSramState.selectWord) {
@@ -188,29 +196,7 @@ class BiasSramPrefetch extends Module {
         is(BiasSramState.readCapture) {
             assert(memory.io.rvalid, "Bias SRAM Q sampled without a completed synchronous read")
             val data = memory.io.rdata.asUInt
-            when(owner === BiasSramOwner.groupFill) {
-                when(fillEpoch =/= epoch || io.invalidate) { state := BiasSramState.idle }
-                .otherwise {
-                    // Constants avoid inferred division/modulo or a variable
-                    // part-select in the physical SRAM-to-staging path.
-                    for (lane <- 0 until 8) {
-                        when(fillWord === (lane * 3).U) {
-                            slotData(fillSlot)(lane) := Cat(slotData(fillSlot)(lane)(39, 16), data)
-                        }
-                        when(fillWord === (lane * 3 + 1).U) {
-                            slotData(fillSlot)(lane) := Cat(slotData(fillSlot)(lane)(39, 32), data,
-                                slotData(fillSlot)(lane)(15, 0))
-                        }
-                        when(fillWord === (lane * 3 + 2).U) {
-                            slotData(fillSlot)(lane) := Cat(data(7, 0), slotData(fillSlot)(lane)(31, 0))
-                        }
-                    }
-                    when(fillWord === 23.U) {
-                        slotValid(fillSlot) := true.B; slotTag(fillSlot) := fillTag
-                        slotEpoch(fillSlot) := fillEpoch; state := BiasSramState.idle
-                    }.otherwise { fillWord := fillWord + 1.U; state := BiasSramState.readIssue }
-                }
-            }.elsewhen(owner === BiasSramOwner.hostRead) {
+            when(owner === BiasSramOwner.hostRead) {
                 switch(hostWord) {
                     is(0.U) { readData := Cat(readData(39, 16), data) }
                     is(1.U) { readData := Cat(readData(39, 32), data, readData(15, 0)) }
@@ -223,6 +209,43 @@ class BiasSramPrefetch extends Module {
             }.otherwise {
                 writeWord := (data & ~byteMask) | (wordData & byteMask)
                 state := BiasSramState.writeCommit
+            }
+        }
+        is(BiasSramState.groupStream) {
+            // Each issue owns the one-cycle return on the next edge. An epoch
+            // change kills both that return and any new issue, then retries the
+            // accepted demand from IDLE without publishing a partial slot.
+            when(fillEpoch =/= epoch || io.invalidate) {
+                fillReadPending := false.B
+                state := BiasSramState.idle
+            }.otherwise {
+                val issue = fillIssueWord < 24.U
+                fillReadPending := issue
+                when(issue) { fillIssueWord := fillIssueWord + 1.U }
+                when(fillReadPending) {
+                    assert(memory.io.rvalid, "Bias group SRAM return missing after issued read")
+                    assert(fillReturnWord < 24.U, "Bias group captured more than 24 words")
+                    val data = memory.io.rdata.asUInt
+                    // Constant selects avoid division/modulo in the SRAM path.
+                    for (lane <- 0 until 8) {
+                        when(fillReturnWord === (lane * 3).U) {
+                            slotData(fillSlot)(lane) := Cat(slotData(fillSlot)(lane)(39, 16), data)
+                        }
+                        when(fillReturnWord === (lane * 3 + 1).U) {
+                            slotData(fillSlot)(lane) := Cat(slotData(fillSlot)(lane)(39, 32), data,
+                                slotData(fillSlot)(lane)(15, 0))
+                        }
+                        when(fillReturnWord === (lane * 3 + 2).U) {
+                            slotData(fillSlot)(lane) := Cat(data(7, 0), slotData(fillSlot)(lane)(31, 0))
+                        }
+                    }
+                    when(fillReturnWord === 23.U) {
+                        assert(fillIssueWord === 24.U && !issue,
+                            "Bias group published before all 24 reads completed")
+                        slotValid(fillSlot) := true.B; slotTag(fillSlot) := fillTag
+                        slotEpoch(fillSlot) := fillEpoch; state := BiasSramState.idle
+                    }.otherwise { fillReturnWord := fillReturnWord + 1.U }
+                }
             }
         }
         is(BiasSramState.writeCommit) {

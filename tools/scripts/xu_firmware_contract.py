@@ -14,7 +14,8 @@ SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-wi
              'bias-hw-autogroup-y32-packed16-window',
              'bias-hw-autogroup-y32-packed16-nice-window',
              'bias-hw-autogroup-y32-packed16-nice-read-pop-window',
-             'bias-hw-autogroup-y32-packed16-nice-direct-window')
+             'bias-hw-autogroup-y32-packed16-nice-direct-window',
+             'bias-hw-autogroup-y32-packed16-nice-direct-stream-window')
 PAIRED_HI_SCHEDULE = 'bias-hw-autogroup-paired-hi-window'
 PAIRED_HI_PACKED16_SCHEDULE = 'bias-hw-autogroup-paired-hi-packed16-window'
 PAIRED_HI_SCHEDULES = (PAIRED_HI_SCHEDULE, PAIRED_HI_PACKED16_SCHEDULE)
@@ -23,7 +24,9 @@ Y32_PACKED16_SCHEDULE = 'bias-hw-autogroup-y32-packed16-window'
 NICE_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-window'
 NICE_READ_POP_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-read-pop-window'
 NICE_DIRECT_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-direct-window'
-NICE_SCHEDULES = (NICE_SCHEDULE, NICE_READ_POP_SCHEDULE, NICE_DIRECT_SCHEDULE)
+NICE_STREAM_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-direct-stream-window'
+DIRECT_SCHEDULES = (NICE_DIRECT_SCHEDULE, NICE_STREAM_SCHEDULE)
+NICE_SCHEDULES = (NICE_SCHEDULE, NICE_READ_POP_SCHEDULE) + DIRECT_SCHEDULES
 Y32_SCHEDULES = (Y32_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
 PACKED16_SCHEDULES = (PAIRED_HI_PACKED16_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
 AUTOGROUP_SCHEDULES = ('bias-hw-autogroup-window',) + PAIRED_HI_SCHEDULES + Y32_SCHEDULES
@@ -90,8 +93,10 @@ def compiler_defines(config):
         values['XU_SHARED_W_PACKED16'] = True
     if config['schedule'] in NICE_SCHEDULES:
         values['XU_NICE_DRAIN8'] = True
-    if config['schedule'] == NICE_DIRECT_SCHEDULE:
+    if config['schedule'] in DIRECT_SCHEDULES:
         values['XU_NICE_DIRECT'] = True
+    if config['schedule'] == NICE_STREAM_SCHEDULE:
+        values['XU_NICE_DRAINN'] = True
     return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
 
 
@@ -106,8 +111,10 @@ def simulator_arguments(schedule='baseline'):
     # does not switch hardware behavior or change the custom instruction ABI.
     if schedule == NICE_READ_POP_SCHEDULE:
         arguments.append('+NICE_READ_POP=1')
-    if schedule == NICE_DIRECT_SCHEDULE:
+    if schedule in DIRECT_SCHEDULES:
         arguments.append('+NICE_DIRECT=1')
+    if schedule == NICE_STREAM_SCHEDULE:
+        arguments.append('+NICE_STREAM=1')
     return arguments
 
 
@@ -129,10 +136,10 @@ def task_contract(schedule='baseline'):
     if schedule in AUTOGROUP_SCHEDULES:
         # One STARTROW and 32 response-retired POPs per row. No GROUP/W1C.
         mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 99 * (1 + 32)
-    if schedule in (NICE_READ_POP_SCHEDULE, NICE_DIRECT_SCHEDULE):
+    if schedule in (NICE_READ_POP_SCHEDULE,) + DIRECT_SCHEDULES:
         # Direct or lane7 read response retires each POP, removing 32 writes per row.
         mmio_writes -= 99 * 32
-    if schedule == NICE_DIRECT_SCHEDULE:
+    if schedule in DIRECT_SCHEDULES:
         # One measured DIRECT_CTRL mode write. Eight lane reads disappear;
         # the frozen ROW_STATUS polling still uses the real LSU.
         mmio_writes += 1
@@ -152,9 +159,12 @@ def task_contract(schedule='baseline'):
                       w_mmio_upload_words=8192, rows=99, pops_retired=3168)
     if schedule in NICE_SCHEDULES:
         result.update(nice_requests=3168, nice_responses=3168, nice_oitf_retired=3168)
-    if schedule == NICE_DIRECT_SCHEDULE:
+    if schedule in DIRECT_SCHEDULES:
         result.update(result_mmio_reads=0, y32_mmio_reads=0,
                       direct_snapshots=3168, direct_lanes=OUTPUTS_PER_TASK)
+    if schedule == NICE_STREAM_SCHEDULE:
+        result.update(nice_requests=99, nice_responses=99, nice_oitf_retired=99,
+                      stream_groups=3168)
     return result
 
 
@@ -208,8 +218,10 @@ def validate_nice_activity(records, layers, schedule):
     for record, layer in zip(records, layers):
         if (set(record) != names or any(type(v) is not int or v < 0 for v in record.values()) or
                 record['layer'] != layer['layer'] or
-                any(record[key] != 3168 for key in ['requests', 'responses', 'oitf_retired', 'pops_retired']) or
-                record['result_reads'] != (0 if schedule == NICE_DIRECT_SCHEDULE else OUTPUTS_PER_TASK) or
+                any(record[key] != (99 if schedule == NICE_STREAM_SCHEDULE else 3168)
+                    for key in ['requests', 'responses', 'oitf_retired']) or
+                record['pops_retired'] != 3168 or
+                record['result_reads'] != (0 if schedule in DIRECT_SCHEDULES else OUTPUTS_PER_TASK) or
                 record['shared_writes'] != OUTPUTS_PER_TASK or
                 not 3168 <= record['status_polls'] <= layer['cycles']):
             raise ValueError('NICE instruction retirement or payload coverage differs')

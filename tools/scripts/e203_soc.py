@@ -181,8 +181,9 @@ def check_nice_activity(log, layers, schedule):
     if len(records) != len(re.findall(r'^NICE_TASK\b', log, re.M)):
         raise ValueError('malformed or duplicate NICE activity')
     contract.validate_nice_activity(records, layers, schedule)
-    if schedule == contract.NICE_DIRECT_SCHEDULE:
+    if schedule in contract.DIRECT_SCHEDULES:
         check_direct_activity(log, layers, schedule)
+    check_stream_activity(log, layers, schedule)
     return records
 
 
@@ -559,6 +560,7 @@ def main():
                     report['nice_activity']=check_nice_activity(
                         log,report['layers'],args.firmware_schedule)
                     report['direct_activity']=check_direct_activity(log,report['layers'],args.firmware_schedule)
+                    report['stream_activity']=check_stream_activity(log,report['layers'],args.firmware_schedule)
                 for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
                     layer['performance'] = counters
                 report['outputs']=args.tasks*25344
@@ -578,13 +580,28 @@ def check_direct_activity(log, layers, schedule):
     names=['layer','snapshots','lanes','pops_retired','result_mmio_reads']
     pattern=r'^DIRECT_TASK '+' '.join(name+r'=(\d+)' for name in names)+r'$'
     records=[dict(zip(names,map(int,row))) for row in re.findall(pattern,log,re.M)]
-    expected=len(layers) if schedule==contract.NICE_DIRECT_SCHEDULE else 0
+    expected=len(layers) if schedule in contract.DIRECT_SCHEDULES else 0
     if len(records)!=expected or len(records)!=len(re.findall(r'^DIRECT_TASK\b',log,re.M)):
         raise ValueError('missing, malformed or unexpected direct activity')
     for record,layer in zip(records,layers):
         if record!=dict(layer=layer['layer'],snapshots=3168,lanes=25344,pops_retired=3168,result_mmio_reads=0):
             raise ValueError('direct bundle/POP coverage differs')
     return records
+
+def check_stream_activity(log, layers, schedule):
+    names=['layer','requests','groups','snapshots','pops_retired','shared_writes',
+           'final_response_before_completion']
+    pattern=r'^STREAM_TASK '+' '.join(name+r'=(\d+)' for name in names)+r'$'
+    records=[dict(zip(names,map(int,row))) for row in re.findall(pattern,log,re.M)]
+    expected=len(layers) if schedule==contract.NICE_STREAM_SCHEDULE else 0
+    if len(records)!=expected or len(records)!=len(re.findall(r'^STREAM_TASK\b',log,re.M)):
+        raise ValueError('missing, duplicate, malformed or unexpected direct stream activity')
+    for record,layer in zip(records,layers):
+        if record!=dict(layer=layer['layer'],requests=99,groups=3168,snapshots=3168,
+                        pops_retired=3168,shared_writes=25344,final_response_before_completion=1):
+            raise ValueError('direct stream group/POP/response coverage differs')
+    return records
+
 
 if __name__=='__main__':
     sys.exit(main())

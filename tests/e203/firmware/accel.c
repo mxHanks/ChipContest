@@ -26,6 +26,12 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
 #ifndef XU_NICE_DIRECT
 #define XU_NICE_DIRECT 0
 #endif
+#ifndef XU_NICE_DRAINN
+#define XU_NICE_DRAINN 0
+#endif
+#if XU_NICE_DRAINN && (!XU_NICE_DRAIN8 || !XU_NICE_DIRECT)
+#error "NICE drainN requires direct NICE drain8 transport"
+#endif
 #if XU_NICE_DIRECT && !XU_NICE_DRAIN8
 #error "direct result transport requires NICE drain8"
 #endif
@@ -49,7 +55,11 @@ static inline uint32_t xu_nice_drain8(volatile uint32_t *destination, uint32_t c
     /* The used output operand receives a real non-x0 rd. The fixed core does
      * not turn NICE err into a trap, so the caller must inspect this code. */
     __asm__ volatile (
+#if XU_NICE_DRAINN
+        ".insn r 0x7b, 7, 0x23, %0, %1, %2\n\t"
+#else
         ".insn r 0x7b, 7, 0x20, %0, %1, %2\n\t"
+#endif
         "fence iorw, iorw"
         : "=r"(code) : "r"(destination), "r"(control) : "memory");
     return code;
@@ -135,7 +145,9 @@ static uint32_t bias_cache[2 * COLS];
 int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                  const volatile uint32_t *bias, volatile uint32_t *y,
                  uint32_t poll_limit) {
-#if XU_NICE_DRAIN8
+#if XU_NICE_DRAINN
+    if (!poll_limit || poll_limit > 0x003fffffu) return -11;
+#elif XU_NICE_DRAIN8
     if (!poll_limit || poll_limit > 0x07ffffffu) return -11;
 #endif
     volatile uint32_t *reg = (volatile uint32_t *)ACCEL_BASE;
@@ -246,7 +258,11 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
 #if XU_HARDWARE_AUTO_GROUP
         reg[ROW_CTRL] = 1;
 #endif
+#if XU_NICE_DRAINN
+        for (unsigned group = 0; group < 32; group += 32) {
+#else
         for (unsigned group = 0; group < 32; ++group) {
+#endif
 #if XU_HARDWARE_BIAS_CACHE
             /* Chisel selects all eight cached bias values using GROUP. */
 #elif XU_FIRMWARE_BIAS_UNROLL
@@ -268,7 +284,11 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
 #endif
 #if XU_NICE_DRAIN8
             unsigned index = row * COLS + group * 8;
+#if XU_NICE_DRAINN
+            uint32_t code = xu_nice_drain8(y + index, (poll_limit << 10) | (31u << 5) | group);
+#else
             uint32_t code = xu_nice_drain8(y + index, (poll_limit << 5) | group);
+#endif
             if (code != 0) return -12; /* Whole-task failure; never retry partial POP/writeback. */
 #else
 #if XU_HARDWARE_AUTO_GROUP
