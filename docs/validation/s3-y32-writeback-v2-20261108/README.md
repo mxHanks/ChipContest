@@ -16,6 +16,8 @@
 - `integrated-production-source-check.json` 核对最终 DUT／固件 170 个测量源与集成版本一致。兼容性测试夹具和报告器不在 DUT 性能快照内。
 - `sha256.json` 覆盖本目录收录文件（不含自身与本 README）。原始 result、日志不经重写。完整归档的 4,204 个文件、15 组 campaign 已独立解包核验；最终归档报告器还对解包后的两组 full12 严格复算，逐层、总计、源码变化与固件身份均与原对照一致，见 `archive-verification.json` 与 `relocated-direct-comparison-receipt.json`。
 
+冻结日志与补丁保持原始字节（含工具输出或 patch context 的行尾空格），不为 whitespace 检查改写；源码、测试和说明正文的差异检查通过。`.gitattributes` 禁止本目录 checkout 时转换行尾，以保留 SHA。
+
 这里是便于 Git 评审的紧凑摘录，**不包含所有大文件，不能单独运行严格 campaign loader**。完整 saved campaign 包含冻结源、向量、ELF／镜像、原生模拟器、完整构建命令及日志，归档在本机工作树 `build/writeback-v2-20261108/handoff/`；该目录还包含父子增量 Git bundle、SHA 清单和解包验证说明。
 
 ## 复现
