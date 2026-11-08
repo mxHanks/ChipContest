@@ -1,0 +1,11 @@
+POLL 5 stage=0 next=0 running=0 tag=0 pending=1 valid=0 state=3 fillword=9
+POLL 10 stage=0 next=0 running=0 tag=0 pending=1 valid=0 state=3 fillword=19
+POLL 15 stage=1 next=0 running=0 tag=1 pending=1 valid=0 state=2 fillword=5
+POLL 20 stage=1 next=0 running=0 tag=1 pending=1 valid=0 state=2 fillword=15
+POLL 25 stage=0 next=2 running=1 tag=2 pending=0 valid=0 state=3 fillword=0
+POLL 30 stage=0 next=2 running=1 tag=2 pending=1 valid=0 state=3 fillword=10
+POLL 35 stage=0 next=2 running=1 tag=2 pending=1 valid=0 state=3 fillword=20
+POLL 40 stage=1 next=2 running=1 tag=3 pending=1 valid=0 state=2 fillword=6
+TIMEOUT stage=1 next=2 running=1 stageDemand=1 biasReady=0 active=1 nexttag=3 cachePending=1 cacheTag=3 cacheValid=0 cacheState=2 slotvalid=00 slottag=2/1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/pe16-20261108/wrapper-diagnostic/tb.sv:228: FIFO producer timeout
+       Time: 466930000  Scope: tb_xu_direct_wrapper.wait_valid

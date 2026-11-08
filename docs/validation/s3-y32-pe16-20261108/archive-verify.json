@@ -1,0 +1,28 @@
+{
+  "status": "RELOCATED_PE16_COMPARISON_PASS",
+  "scope": "saved artifact revalidation only; no extra simulation",
+  "command": [
+    "python3.12",
+    "-E",
+    "-B",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/pe16-20261108/archive-verify/pe16-single-layer/experiment/compare_pe16.py",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/pe16-20261108/archive-verify/pe16-single-layer/baseline-task0/result.json",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/pe16-20261108/archive-verify/pe16-single-layer/pe16-task0/result.json",
+    "--out",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/pe16-20261108/relocated-comparison.json"
+  ],
+  "native_exit": 0,
+  "identical_to_original": [
+    "totals",
+    "physical",
+    "source_changes",
+    "identity_checks"
+  ],
+  "archive": {
+    "file": "pe16-single-layer-evidence.tar.gz",
+    "bytes": 10826644,
+    "sha256": "6cd8b570f55e8b804bd7d3d65ff59de5d089f151cfdc859a19139103afcf1ece",
+    "scope": "two saved single-layer campaigns + experiment evidence; no synthesis"
+  },
+  "experiment_files_hashed": 36
+}

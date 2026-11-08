@@ -1,0 +1,1497 @@
+--- a/src/main/scala/GenerateRTL.scala
++++ b/src/main/scala/GenerateRTL.scala
+@@ -14,6 +14,7 @@
+         "LinearComputeCore" -> (() => new LinearComputeCore),
+         "LinearCachedCore" -> (() => new LinearCachedCore),
+         "LinearAutoGroupCore" -> (() => new LinearAutoGroupCore),
++        "LinearAutoGroupCore16" -> (() => new LinearAutoGroupCore),
+         "LinearAutoGroupCoreRegisters" -> (() => new LinearAutoGroupCore(useBiasSram = false)),
+         "BiasBankCache" -> (() => new BiasBankCache),
+         "BiasSramPrefetch" -> (() => new BiasSramPrefetch),
+--- a/src/main/scala/linear/LinearAutoGroupCore.scala
++++ b/src/main/scala/linear/LinearAutoGroupCore.scala
+@@ -41,7 +41,7 @@
+ class LinearAutoGroupCore(useBiasSram: Boolean = true) extends Module {
+     val io = IO(new LinearAutoGroupCoreIO)
+     io.biasSramCapability := (if (useBiasSram) "h42530001".U(32.W) else 0.U(32.W))
+-    private val core = Module(new LinearComputeCore)
++    private val core = Module(new PairComputeCore)
+     private val active = RegInit(false.B)
+     private val running = RegInit(false.B)
+     private val produced = RegInit(0.U(6.W))
+@@ -56,22 +56,43 @@
+     private val manualCached = Reg(Bool())
+     private val biasReady = Wire(Bool())
+     private val selectedBias = Wire(Vec(8, SInt(40.W)))
++    // Experimental pair producer: result FIFO and all external indices still
++    // count groups of eight. A launch reserves both empty FIFO entries.
++    private val nextPair = RegInit(0.U(6.W))
++    private val runningGroup = Reg(UInt(5.W))
++    private val staged = RegInit(0.U(2.W))
++    private val stagedLo = Reg(Vec(8, SInt(40.W)))
++    private val stagedHi = Reg(Vec(8, SInt(40.W)))
++    private val publishHigh = RegInit(false.B)
++    private val biasProtected = RegNext(core.io.start && active, false.B)
++    private val stageTag = (nextPair + staged)(4, 0)
++    private val stageDemand = active && nextPair < 32.U && staged < 2.U && !biasProtected
+ 
+-    private val launch = active && !running && produced < 32.U && count < 2.U &&
+-        (!io.cacheEnable || biasReady)
+-    private val enqueue = active && running && core.io.done
++    private val launch = active && !running && !publishHigh && nextPair < 32.U &&
++        count === 0.U && staged === 2.U
++    private val enqueueLow = active && running && core.io.done
++    private val enqueueHigh = active && publishHigh
++    private val enqueue = enqueueLow || enqueueHigh
+     private val pop = io.rowPop && active && count =/= 0.U
+-    private val selectedGroup = Mux(active, produced(4, 0), Mux(manualPending || manualRunning,
++    private val selectedGroup = Mux(active, stageTag, Mux(manualPending || manualRunning,
+         manualGroup, io.group))
+     private val manualLaunch = !active && manualPending && biasReady
+     private val computeLaunch = Mux(active, launch,
+         Mux(io.cacheEnable, manualLaunch, io.start))
+-    // INIT samples bias on the edge following start. Releasing the group on
+-    // start itself would permit its slot to be reused one edge too early.
+-    private val takeBias = RegNext(computeLaunch && io.cacheEnable, false.B)
++    // Manual cache data must survive the following INIT edge. Automatic mode
++    // copies each eight-bias group into staging before releasing its slot.
++    private val takeBias = RegNext(!active && computeLaunch && io.cacheEnable, false.B)
++    private val stageCapture = stageDemand && biasReady
+     private val modeChanged = RegNext(io.cacheEnable, false.B) =/= io.cacheEnable
+     private val schedulerIdle = !active && !manualPending && !manualRunning && !takeBias
+ 
++    when(stageCapture) {
++        assert(staged < 2.U)
++        when(staged === 0.U) { stagedLo := selectedBias }
++        .otherwise { stagedHi := selectedBias }
++        staged := staged + 1.U
++    }
++
+     // External invalidation is a configuration operation. The standalone SRAM
+     // module can retry a cancelled demand, but this scheduler must not retract
+     // a bias group during the compute core's INIT sampling edge.
+@@ -107,14 +128,27 @@
+         count := 0.U
+         head := false.B
+         tail := false.B
++        nextPair := 0.U
++        staged := 0.U
++        publishHigh := false.B
+     }.otherwise {
+-        when(launch) { running := true.B }
++        when(launch) {
++            assert(count === 0.U && produced === retired)
++            assert(nextPair(0) === 0.U && nextPair <= 30.U)
++            running := true.B
++            runningGroup := nextPair(4, 0)
++            nextPair := nextPair + 2.U
++            staged := 0.U
++        }
+         when(enqueue) {
+             assert(count < 2.U)
+-            results(tail) := core.io.result
++            assert(enqueueLow =/= enqueueHigh)
++            assert(produced === Mux(enqueueHigh, runningGroup +& 1.U, runningGroup))
++            results(tail) := Mux(enqueueHigh, core.io.resultHi, core.io.result)
+             tail := !tail
+             produced := produced + 1.U
+-            running := false.B
++            when(enqueueLow) { publishHigh := true.B }
++            when(enqueueHigh) { publishHigh := false.B; running := false.B }
+         }
+         when(pop) {
+             head := !head
+@@ -127,11 +161,15 @@
+         assert(!io.start && !io.xLoadWen && !io.wLoadWen && !io.cacheWriteEnable)
+         assert(io.cacheEnable)
+         assert(produced - retired === count)
++        assert(nextPair <= 32.U && staged <= 2.U)
++        assert(!publishHigh || running)
++        when(running) { assert(count <= 1.U) }
++        when(biasProtected) { assert(!stageCapture) }
+     }
+     assert(count <= 2.U)
+ 
+     core.io.start := computeLaunch
+-    core.io.group := selectedGroup
++    core.io.group := Mux(active, Mux(running, runningGroup, nextPair(4, 0)), selectedGroup)
+     core.io.xLoadWen := io.xLoadWen
+     core.io.xLoadAddr := io.xLoadAddr
+     core.io.xLoadData := io.xLoadData
+@@ -158,9 +196,9 @@
+         io.cacheReadData := biasCache.io.rspData
+         io.cacheIdle := biasCache.io.hostIdle
+         biasCache.io.groupReqValid := io.cacheEnable &&
+-            ((active && !running && produced < 32.U) || (!active && manualPending))
++            (stageDemand || (!active && manualPending))
+         biasCache.io.groupReqTag := selectedGroup
+-        biasCache.io.groupTake := takeBias
++        biasCache.io.groupTake := takeBias || stageCapture
+         biasReady := biasCache.io.groupValid && biasCache.io.groupTag === selectedGroup
+         selectedBias := biasCache.io.groupBias
+         when(takeBias) { assert(biasCache.io.groupValid) }
+@@ -194,7 +232,8 @@
+         assert(!io.cacheClearValid, "The register-cache ablation has no SRAM-clear operation")
+     }
+     assert(!(io.cacheWriteEnable && io.cacheReadEnable))
+-    core.io.bias := Mux(io.cacheEnable, selectedBias, io.bias)
++    core.io.bias := Mux(active, stagedLo, Mux(io.cacheEnable, selectedBias, io.bias))
++    core.io.biasHi := Mux(active, stagedHi, VecInit(Seq.fill(8)(0.S(40.W))))
+     io.done := core.io.done
+     io.result := core.io.result
+     io.rowActive := active
+--- a/src/main/scala/linear/PairComputeCore.scala
++++ b/src/main/scala/linear/PairComputeCore.scala
+@@ -0,0 +1,66 @@
++package linear
++
++import chisel3._
++import chisel3.util.Cat
++import dotproduct.DotProductEngine
++import memory.{Sram1024x16, XRowBuffer}
++
++class PairComputeCoreIO extends LinearComputeCoreIO {
++    val biasHi = Input(Vec(8, SInt(40.W)))
++    val resultHi = Output(Vec(8, SInt(48.W)))
++}
++
++/** Experimental sixteen-PE core. Upload addresses retain the eight-bank ABI.
++  * Each original bank's two SRAMs now hold even/odd groups, respectively;
++  * removing logical address bit six gives a ten-bit physical SRAM address.
++  * Both SRAMs are read in parallel, with no extra weight storage or read ports.
++  */
++class PairComputeCore extends Module {
++    val io = IO(new PairComputeCoreIO)
++    private val xBuffer = Module(new XRowBuffer)
++    private val engine = Module(new DotProductEngine)
++    private val engineHi = Module(new DotProductEngine)
++    private val memories = Seq.fill(8, 2)(Module(new Sram1024x16))
++    private val groupHi = (io.group + 1.U)(4, 0)
++    private val lowAddr = Cat(io.group(4, 1), engine.io.weightReadK)
++    private val highAddr = Cat(groupHi(4, 1), engineHi.io.weightReadK)
++    private val writeAddr = Cat(io.wLoadAddr(10, 7), io.wLoadAddr(5, 0))
++
++    xBuffer.io.wen := io.xLoadWen
++    xBuffer.io.waddr := io.xLoadAddr
++    xBuffer.io.wdata := io.xLoadData
++    xBuffer.io.raddr := engine.io.k
++    engine.io.start := io.start
++    engineHi.io.start := io.start
++    engine.io.x := xBuffer.io.rdata
++    engineHi.io.x := xBuffer.io.rdata
++    engine.io.bias := io.bias
++    engineHi.io.bias := io.biasHi
++
++    private val delayedOdd = RegNext(io.group(0), false.B)
++    for (lane <- 0 until 8) {
++        for (parity <- 0 until 2) {
++            val memory = memories(lane)(parity)
++            val write = io.wLoadWen && io.wLoadBank === lane.U &&
++                io.wLoadAddr(6) === (parity == 1).B
++            val low = io.group(0) === (parity == 1).B
++            val readEnable = Mux(low, engine.io.weightRen, engineHi.io.weightRen)
++            assert(!(write && readEnable), "Pair weight SRAM read/write overlap")
++            memory.io.en := write || readEnable
++            memory.io.isWrite := write
++            memory.io.addr := Mux(write, writeAddr, Mux(low, lowAddr, highAddr))
++            memory.io.wdata := io.wLoadData
++        }
++        engine.io.w(lane) := Mux(delayedOdd, memories(lane)(1).io.rdata,
++            memories(lane)(0).io.rdata)
++        engineHi.io.w(lane) := Mux(delayedOdd, memories(lane)(0).io.rdata,
++            memories(lane)(1).io.rdata)
++    }
++    assert(engine.io.k === engineHi.io.k)
++    assert(engine.io.weightRen === engineHi.io.weightRen)
++    assert(engine.io.weightReadK === engineHi.io.weightReadK)
++    assert(engine.io.done === engineHi.io.done)
++    io.done := engine.io.done
++    io.result := engine.io.result
++    io.resultHi := engineHi.io.result
++}
+--- a/tests/e203/tb_accel_soc.sv
++++ b/tests/e203/tb_accel_soc.sv
+@@ -40,6 +40,10 @@
+   `define LONGWB `EXU.u_e203_exu_longpwbck
+   `define NICE_FRONT `EXU.u_e203_exu_alu.u_e203_exu_nice
+   `define LSU `CPU.u_e203_cpu.u_e203_core.u_e203_lsu.u_e203_lsu_ctrl
++  // Experimental physical 16-PE core: two independently instantiated 8-PE
++  // engines. Observe both controls, rather than scaling an 8-PE counter.
++  `define PE16_LO `ACCEL.u_linear_compute_core.core.engine
++  `define PE16_HI `ACCEL.u_linear_compute_core.core.engineHi
+ 
+   integer nice_requests=0, nice_responses=0, nice_retired=0;
+   integer nice_request_cycle=0;
+@@ -264,6 +268,9 @@
+   integer perf_cycles, perf_w_load, perf_x_load, perf_bias_load;
+   integer perf_compute_wait, perf_writeback, perf_other;
+   integer perf_busy, perf_mac_fire, perf_starts, perf_dones;
++  integer pe16_lo_starts, pe16_hi_starts, pe16_lo_init, pe16_hi_init;
++  integer pe16_lo_mac_fire, pe16_hi_mac_fire, pe16_lo_done, pe16_hi_done;
++  integer pe16_logical_macs, pe16_checked_cycles, pe16_sync_errors;
+   integer perf_mmio_reads, perf_mmio_writes, perf_mmio_stall;
+   integer perf_shared_reads, perf_shared_writes, perf_shared_stall;
+   integer perf_auto_rows, perf_auto_pops, perf_auto_overlap, perf_auto_full;
+@@ -290,6 +297,9 @@
+       perf_cycles=0; perf_w_load=0; perf_x_load=0; perf_bias_load=0;
+       perf_compute_wait=0; perf_writeback=0; perf_other=0;
+       perf_busy=0; perf_mac_fire=0; perf_starts=0; perf_dones=0;
++      pe16_lo_starts=0; pe16_hi_starts=0; pe16_lo_init=0; pe16_hi_init=0;
++      pe16_lo_mac_fire=0; pe16_hi_mac_fire=0; pe16_lo_done=0; pe16_hi_done=0;
++      pe16_logical_macs=0; pe16_checked_cycles=0; pe16_sync_errors=0;
+       perf_mmio_reads=0; perf_mmio_writes=0; perf_mmio_stall=0;
+       perf_shared_reads=0; perf_shared_writes=0; perf_shared_stall=0;
+       perf_auto_rows=0; perf_auto_pops=0; perf_auto_overlap=0; perf_auto_full=0;
+@@ -575,9 +585,31 @@
+           perf_auto_overlap=perf_auto_overlap+1;
+         if (`ACCEL.row_active && `ACCEL.row_count==2 && !`ACCEL.row_running)
+           perf_auto_full=perf_auto_full+1;
+-        // All eight PEs share this enable: one fire means eight signed16 MACs.
+-        if (`ACCEL.u_linear_compute_core.core.engine.peArray.io_enable)
++        // Each physical engine has eight signed16 MAC lanes. Independent
++        // controls must remain synchronized on every measured task edge.
++        pe16_checked_cycles=pe16_checked_cycles+1;
++        if (`PE16_LO.io_start !== `PE16_HI.io_start ||
++            `PE16_LO.peArray.io_init !== `PE16_HI.peArray.io_init ||
++            `PE16_LO.peArray.io_enable !== `PE16_HI.peArray.io_enable ||
++            `PE16_LO.io_done !== `PE16_HI.io_done) begin
++          pe16_sync_errors=pe16_sync_errors+1;
++          $fatal(1,"physical 16-PE engine start/init/enable/done synchronization mismatch");
++        end
++        if (`PE16_LO.io_start) pe16_lo_starts=pe16_lo_starts+1;
++        if (`PE16_HI.io_start) pe16_hi_starts=pe16_hi_starts+1;
++        if (`PE16_LO.peArray.io_init) pe16_lo_init=pe16_lo_init+1;
++        if (`PE16_HI.peArray.io_init) pe16_hi_init=pe16_hi_init+1;
++        if (`PE16_LO.peArray.io_enable) begin
++          pe16_lo_mac_fire=pe16_lo_mac_fire+1;
++          pe16_logical_macs=pe16_logical_macs+8;
+           perf_mac_fire=perf_mac_fire+1;
++        end
++        if (`PE16_HI.peArray.io_enable) begin
++          pe16_hi_mac_fire=pe16_hi_mac_fire+1;
++          pe16_logical_macs=pe16_logical_macs+8;
++        end
++        if (`PE16_LO.io_done) pe16_lo_done=pe16_lo_done+1;
++        if (`PE16_HI.io_done) pe16_hi_done=pe16_hi_done+1;
+         if (start_accept || (`ACCEL.row_active && `ACCEL.compute_start))
+           perf_starts=perf_starts+1;
+         if (`ACCEL.core_done) perf_dones=perf_dones+1;
+@@ -637,6 +669,17 @@
+         $fatal(1,"first source request/wait is missing from the measured interval");
+       $display("WINDOW_TASK layer=%0d first_request=%0d first_accept=%0d final_y_response=%0d first_request_wait=%0d",
+         layer,first_cycle,first_accept_cycle,last_cycle,first_accept_cycle-first_cycle);
++      if (!nice_direct || perf_starts!=1584 || perf_dones!=1584 ||
++          perf_mac_fire!=101376 || pe16_lo_starts!=1584 || pe16_hi_starts!=1584 ||
++          pe16_lo_init!=1584 || pe16_hi_init!=1584 ||
++          pe16_lo_mac_fire!=101376 || pe16_hi_mac_fire!=101376 ||
++          pe16_lo_done!=1584 || pe16_hi_done!=1584 ||
++          pe16_logical_macs!=1622016 || pe16_checked_cycles!=perf_cycles || pe16_sync_errors!=0)
++        $fatal(1,"physical 16-PE work/control coverage differs from single-layer contract");
++      $display("PE16_TASK layer=%0d pes=16 engines=2 physical_groups=%0d physical_mac_cycles=%0d logical_macs=%0d lo_starts=%0d hi_starts=%0d lo_init=%0d hi_init=%0d lo_mac_fire=%0d hi_mac_fire=%0d lo_done=%0d hi_done=%0d checked_cycles=%0d sync_errors=%0d",
++        layer,perf_starts,perf_mac_fire,pe16_logical_macs,pe16_lo_starts,pe16_hi_starts,
++        pe16_lo_init,pe16_hi_init,pe16_lo_mac_fire,pe16_hi_mac_fire,
++        pe16_lo_done,pe16_hi_done,pe16_checked_cycles,pe16_sync_errors);
+       if (output_y32 && perf_auto_rows==0)
+         $fatal(1,"Y32 requires complete autonomous row and lane observations");
+       if (perf_auto_rows!=0) begin
+--- a/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv
++++ b/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv
+@@ -149,6 +149,14 @@
+   wire [47:0] _core_io_result_5;
+   wire [47:0] _core_io_result_6;
+   wire [47:0] _core_io_result_7;
++  wire [47:0] _core_io_resultHi_0;
++  wire [47:0] _core_io_resultHi_1;
++  wire [47:0] _core_io_resultHi_2;
++  wire [47:0] _core_io_resultHi_3;
++  wire [47:0] _core_io_resultHi_4;
++  wire [47:0] _core_io_resultHi_5;
++  wire [47:0] _core_io_resultHi_6;
++  wire [47:0] _core_io_resultHi_7;
+   reg         active;
+   reg         running;
+   reg  [5:0]  produced;
+@@ -176,25 +184,61 @@
+   reg         manualRunning;
+   reg  [4:0]  manualGroup;
+   reg         manualCached;
++  reg  [5:0]  nextPair;
++  reg  [4:0]  runningGroup;
++  reg  [1:0]  staged;
++  reg  [39:0] stagedLo_0;
++  reg  [39:0] stagedLo_1;
++  reg  [39:0] stagedLo_2;
++  reg  [39:0] stagedLo_3;
++  reg  [39:0] stagedLo_4;
++  reg  [39:0] stagedLo_5;
++  reg  [39:0] stagedLo_6;
++  reg  [39:0] stagedLo_7;
++  reg  [39:0] stagedHi_0;
++  reg  [39:0] stagedHi_1;
++  reg  [39:0] stagedHi_2;
++  reg  [39:0] stagedHi_3;
++  reg  [39:0] stagedHi_4;
++  reg  [39:0] stagedHi_5;
++  reg  [39:0] stagedHi_6;
++  reg  [39:0] stagedHi_7;
++  reg         publishHigh;
++  reg         biasProtected;
++  wire        stageDemand = active & ~(nextPair[5]) & ~(staged[1]) & ~biasProtected;
++  wire        _launch_T_6 = count == 2'h0;
+   wire        launch =
+-    active & ~running & ~(produced[5]) & ~(count[1]) & (~io_cacheEnable | biasReady);
+-  wire        enqueue = active & running & _core_io_done;
++    active & ~running & ~publishHigh & ~(nextPair[5]) & _launch_T_6 & staged == 2'h2;
++  wire        enqueueLow = active & running & _core_io_done;
++  wire        enqueueHigh = active & publishHigh;
++  wire        enqueue = enqueueLow | enqueueHigh;
+   wire        io_rowValid_0 = |count;
+-  wire        _selectedGroup_T_1 = manualPending | manualRunning;
++  wire        _selectedGroup_T = manualPending | manualRunning;
++  wire [4:0]  _selectedGroup_T_1 = _selectedGroup_T ? manualGroup : io_group;
+   wire [4:0]  selectedGroup =
+-    active ? produced[4:0] : _selectedGroup_T_1 ? manualGroup : io_group;
++    active ? nextPair[4:0] + {3'h0, staged} : _selectedGroup_T_1;
+   wire        manualLaunch = ~active & manualPending & biasReady;
+   wire        computeLaunch = active ? launch : io_cacheEnable ? manualLaunch : io_start;
+   reg         takeBias;
++  wire        stageCapture = stageDemand & biasReady;
+   reg         modeChanged_REG;
+   wire        modeChanged = modeChanged_REG != io_cacheEnable;
+   wire        _GEN = io_start & ~active;
+   assign biasReady = _biasCache_io_groupValid & _biasCache_io_groupTag == selectedGroup;
+   `ifndef SYNTHESIS
+-    wire _GEN_0 =
++    wire       _GEN_0 =
+       ~active & ~manualPending & ~manualRunning & ~takeBias & ~io_start & ~io_rowStart;
+-    wire _GEN_1 = active & ~reset;
++    wire       _GEN_1 = ~io_rowStart & launch & ~reset;
++    wire       _GEN_2 = ~io_rowStart & enqueue & ~reset;
++    wire [5:0] _GEN_3 = {1'h0, runningGroup};
++    wire       _GEN_4 = active & ~reset;
+     always @(posedge clock) begin
++      if (stageCapture & ~reset & staged[1]) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at LinearAutoGroupCore.scala:90\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
+       if (io_cacheInvalidate & ~reset & ~_GEN_0) begin
+         if (`ASSERT_VERBOSE_COND_)
+           $error("Assertion failed: Bias invalidation requires an idle scheduler and no START\n");
+@@ -216,70 +260,127 @@
+       if (_GEN & ~reset
+           & ~(~manualPending & ~manualRunning & _biasCache_io_hostIdle)) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at LinearAutoGroupCore.scala:89\n");
++          $error("Assertion failed at LinearAutoGroupCore.scala:110\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+-      if (_selectedGroup_T_1 & ~reset & io_cacheEnable != manualCached) begin
++      if (_selectedGroup_T & ~reset & io_cacheEnable != manualCached) begin
+         if (`ASSERT_VERBOSE_COND_)
+           $error("Assertion failed: Bias mode changed during a manual computation\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+       if (io_rowStart & ~reset
+-          & ~(~active & count == 2'h0 & ~manualPending & ~manualRunning
++          & ~(~active & _launch_T_6 & ~manualPending & ~manualRunning
+               & _biasCache_io_hostIdle)) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at LinearAutoGroupCore.scala:102\n");
++          $error("Assertion failed at LinearAutoGroupCore.scala:123\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (_GEN_1 & ~(_launch_T_6 & produced == retired)) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at LinearAutoGroupCore.scala:136\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (_GEN_1 & ~(~(nextPair[0]) & nextPair < 6'h1F)) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at LinearAutoGroupCore.scala:137\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (_GEN_2 & count[1]) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at LinearAutoGroupCore.scala:144\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+-      if (~io_rowStart & enqueue & ~reset & count[1]) begin
++      if (_GEN_2 & enqueueLow == enqueueHigh) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at LinearAutoGroupCore.scala:113\n");
++          $error("Assertion failed at LinearAutoGroupCore.scala:145\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+-      if (_GEN_1
++      if (_GEN_2 & produced != (enqueueHigh ? _GEN_3 + 6'h1 : _GEN_3)) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at LinearAutoGroupCore.scala:146\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (_GEN_4
+           & ~(~io_start & ~io_xLoadWen & ~io_wLoadWen & ~io_cacheWriteEnable)) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at LinearAutoGroupCore.scala:127\n");
++          $error("Assertion failed at LinearAutoGroupCore.scala:161\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+-      if (_GEN_1 & ~io_cacheEnable) begin
++      if (_GEN_4 & ~io_cacheEnable) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at LinearAutoGroupCore.scala:128\n");
++          $error("Assertion failed at LinearAutoGroupCore.scala:162\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+-      if (_GEN_1 & produced - retired != {4'h0, count}) begin
++      if (_GEN_4 & produced - retired != {4'h0, count}) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at LinearAutoGroupCore.scala:129\n");
++          $error("Assertion failed at LinearAutoGroupCore.scala:163\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (_GEN_4 & ~(nextPair < 6'h21 & staged != 2'h3)) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at LinearAutoGroupCore.scala:164\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (_GEN_4 & ~(~publishHigh | running)) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at LinearAutoGroupCore.scala:165\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (active & running & ~reset & count[1]) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at LinearAutoGroupCore.scala:166\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (biasProtected & ~reset & stageCapture) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at LinearAutoGroupCore.scala:167\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+       if (~reset & (&count)) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at LinearAutoGroupCore.scala:131\n");
++          $error("Assertion failed at LinearAutoGroupCore.scala:169\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+       if (takeBias & ~reset & ~_biasCache_io_groupValid) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at LinearAutoGroupCore.scala:166\n");
++          $error("Assertion failed at LinearAutoGroupCore.scala:204\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+       if (~reset & io_cacheWriteEnable & io_cacheReadEnable) begin
+         if (`ASSERT_VERBOSE_COND_)
+-          $error("Assertion failed at LinearAutoGroupCore.scala:196\n");
++          $error("Assertion failed at LinearAutoGroupCore.scala:234\n");
+         if (`STOP_COND_)
+           $fatal;
+       end
+     end // always @(posedge)
+   `endif // not def SYNTHESIS
+   wire        pop = io_rowPop & active & io_rowValid_0;
++  wire        _GEN_5 = staged == 2'h0;
++  wire [47:0] _GEN_6 = enqueueHigh ? _core_io_resultHi_0 : _core_io_result_0;
++  wire [47:0] _GEN_7 = enqueueHigh ? _core_io_resultHi_1 : _core_io_result_1;
++  wire [47:0] _GEN_8 = enqueueHigh ? _core_io_resultHi_2 : _core_io_result_2;
++  wire [47:0] _GEN_9 = enqueueHigh ? _core_io_resultHi_3 : _core_io_result_3;
++  wire [47:0] _GEN_10 = enqueueHigh ? _core_io_resultHi_4 : _core_io_result_4;
++  wire [47:0] _GEN_11 = enqueueHigh ? _core_io_resultHi_5 : _core_io_result_5;
++  wire [47:0] _GEN_12 = enqueueHigh ? _core_io_resultHi_6 : _core_io_result_6;
++  wire [47:0] _GEN_13 = enqueueHigh ? _core_io_resultHi_7 : _core_io_result_7;
+   always @(posedge clock) begin
+     if (reset) begin
+       active <= 1'h0;
+@@ -291,16 +392,21 @@
+       tail <= 1'h0;
+       manualPending <= 1'h0;
+       manualRunning <= 1'h0;
++      nextPair <= 6'h0;
++      staged <= 2'h0;
++      publishHigh <= 1'h0;
++      biasProtected <= 1'h0;
+       takeBias <= 1'h0;
+       modeChanged_REG <= 1'h0;
+     end
+     else begin
+       active <= io_rowStart | ~(pop & retired == 6'h1F) & active;
+-      running <= ~(io_rowStart | enqueue) & (launch | running);
++      running <= ~(io_rowStart | enqueue & enqueueHigh) & (launch | running);
+       if (io_rowStart) begin
+         produced <= 6'h0;
+         retired <= 6'h0;
+         count <= 2'h0;
++        nextPair <= 6'h0;
+       end
+       else begin
+         if (enqueue)
+@@ -309,6 +415,8 @@
+           retired <= retired + 6'h1;
+         if (enqueue != pop)
+           count <= enqueue ? count + 2'h1 : count - 2'h1;
++        if (launch)
++          nextPair <= nextPair + 6'h2;
+       end
+       head <= ~io_rowStart & (pop ^ head);
+       tail <= ~io_rowStart & (enqueue ^ tail);
+@@ -316,115 +424,195 @@
+       manualRunning <=
+         ~(_core_io_done & ~active)
+         & (manualLaunch | _GEN & ~io_cacheEnable | manualRunning);
+-      takeBias <= computeLaunch & io_cacheEnable;
++      if (io_rowStart | launch)
++        staged <= 2'h0;
++      else if (stageCapture)
++        staged <= staged + 2'h1;
++      publishHigh <=
++        ~io_rowStart
++        & (enqueue ? ~enqueueHigh & (enqueueLow | publishHigh) : publishHigh);
++      biasProtected <= computeLaunch & active;
++      takeBias <= ~active & computeLaunch & io_cacheEnable;
+       modeChanged_REG <= io_cacheEnable;
+     end
+     if (io_rowStart | ~(enqueue & ~tail)) begin
+     end
+     else begin
+-      results_0_0 <= _core_io_result_0;
+-      results_0_1 <= _core_io_result_1;
+-      results_0_2 <= _core_io_result_2;
+-      results_0_3 <= _core_io_result_3;
+-      results_0_4 <= _core_io_result_4;
+-      results_0_5 <= _core_io_result_5;
+-      results_0_6 <= _core_io_result_6;
+-      results_0_7 <= _core_io_result_7;
++      results_0_0 <= _GEN_6;
++      results_0_1 <= _GEN_7;
++      results_0_2 <= _GEN_8;
++      results_0_3 <= _GEN_9;
++      results_0_4 <= _GEN_10;
++      results_0_5 <= _GEN_11;
++      results_0_6 <= _GEN_12;
++      results_0_7 <= _GEN_13;
+     end
+     if (io_rowStart | ~(enqueue & tail)) begin
+     end
+     else begin
+-      results_1_0 <= _core_io_result_0;
+-      results_1_1 <= _core_io_result_1;
+-      results_1_2 <= _core_io_result_2;
+-      results_1_3 <= _core_io_result_3;
+-      results_1_4 <= _core_io_result_4;
+-      results_1_5 <= _core_io_result_5;
+-      results_1_6 <= _core_io_result_6;
+-      results_1_7 <= _core_io_result_7;
++      results_1_0 <= _GEN_6;
++      results_1_1 <= _GEN_7;
++      results_1_2 <= _GEN_8;
++      results_1_3 <= _GEN_9;
++      results_1_4 <= _GEN_10;
++      results_1_5 <= _GEN_11;
++      results_1_6 <= _GEN_12;
++      results_1_7 <= _GEN_13;
+     end
+     if (_GEN) begin
+       manualGroup <= io_group;
+       manualCached <= io_cacheEnable;
+     end
++    if (io_rowStart | ~launch) begin
++    end
++    else
++      runningGroup <= nextPair[4:0];
++    if (stageCapture & _GEN_5) begin
++      stagedLo_0 <= _biasCache_io_groupBias_0;
++      stagedLo_1 <= _biasCache_io_groupBias_1;
++      stagedLo_2 <= _biasCache_io_groupBias_2;
++      stagedLo_3 <= _biasCache_io_groupBias_3;
++      stagedLo_4 <= _biasCache_io_groupBias_4;
++      stagedLo_5 <= _biasCache_io_groupBias_5;
++      stagedLo_6 <= _biasCache_io_groupBias_6;
++      stagedLo_7 <= _biasCache_io_groupBias_7;
++    end
++    if (~stageCapture | _GEN_5) begin
++    end
++    else begin
++      stagedHi_0 <= _biasCache_io_groupBias_0;
++      stagedHi_1 <= _biasCache_io_groupBias_1;
++      stagedHi_2 <= _biasCache_io_groupBias_2;
++      stagedHi_3 <= _biasCache_io_groupBias_3;
++      stagedHi_4 <= _biasCache_io_groupBias_4;
++      stagedHi_5 <= _biasCache_io_groupBias_5;
++      stagedHi_6 <= _biasCache_io_groupBias_6;
++      stagedHi_7 <= _biasCache_io_groupBias_7;
++    end
+   end // always @(posedge)
+   `ifdef ENABLE_INITIAL_REG_
+     `ifdef FIRRTL_BEFORE_INITIAL
+       `FIRRTL_BEFORE_INITIAL
+     `endif // FIRRTL_BEFORE_INITIAL
+-    logic [31:0] _RANDOM[0:24];
++    logic [31:0] _RANDOM[0:45];
+     initial begin
+       `ifdef INIT_RANDOM_PROLOG_
+         `INIT_RANDOM_PROLOG_
+       `endif // INIT_RANDOM_PROLOG_
+       `ifdef RANDOMIZE_REG_INIT
+-        for (logic [4:0] i = 5'h0; i < 5'h19; i += 5'h1) begin
++        for (logic [5:0] i = 6'h0; i < 6'h2E; i += 6'h1) begin
+           _RANDOM[i] = `RANDOM;
+         end
+-        active = _RANDOM[5'h0][0];
+-        running = _RANDOM[5'h0][1];
+-        produced = _RANDOM[5'h0][7:2];
+-        retired = _RANDOM[5'h0][13:8];
+-        count = _RANDOM[5'h0][15:14];
+-        head = _RANDOM[5'h0][16];
+-        tail = _RANDOM[5'h0][17];
+-        results_0_0 = {_RANDOM[5'h0][31:18], _RANDOM[5'h1], _RANDOM[5'h2][1:0]};
+-        results_0_1 = {_RANDOM[5'h2][31:2], _RANDOM[5'h3][17:0]};
+-        results_0_2 = {_RANDOM[5'h3][31:18], _RANDOM[5'h4], _RANDOM[5'h5][1:0]};
+-        results_0_3 = {_RANDOM[5'h5][31:2], _RANDOM[5'h6][17:0]};
+-        results_0_4 = {_RANDOM[5'h6][31:18], _RANDOM[5'h7], _RANDOM[5'h8][1:0]};
+-        results_0_5 = {_RANDOM[5'h8][31:2], _RANDOM[5'h9][17:0]};
+-        results_0_6 = {_RANDOM[5'h9][31:18], _RANDOM[5'hA], _RANDOM[5'hB][1:0]};
+-        results_0_7 = {_RANDOM[5'hB][31:2], _RANDOM[5'hC][17:0]};
+-        results_1_0 = {_RANDOM[5'hC][31:18], _RANDOM[5'hD], _RANDOM[5'hE][1:0]};
+-        results_1_1 = {_RANDOM[5'hE][31:2], _RANDOM[5'hF][17:0]};
+-        results_1_2 = {_RANDOM[5'hF][31:18], _RANDOM[5'h10], _RANDOM[5'h11][1:0]};
+-        results_1_3 = {_RANDOM[5'h11][31:2], _RANDOM[5'h12][17:0]};
+-        results_1_4 = {_RANDOM[5'h12][31:18], _RANDOM[5'h13], _RANDOM[5'h14][1:0]};
+-        results_1_5 = {_RANDOM[5'h14][31:2], _RANDOM[5'h15][17:0]};
+-        results_1_6 = {_RANDOM[5'h15][31:18], _RANDOM[5'h16], _RANDOM[5'h17][1:0]};
+-        results_1_7 = {_RANDOM[5'h17][31:2], _RANDOM[5'h18][17:0]};
+-        manualPending = _RANDOM[5'h18][18];
+-        manualRunning = _RANDOM[5'h18][19];
+-        manualGroup = _RANDOM[5'h18][24:20];
+-        manualCached = _RANDOM[5'h18][25];
+-        takeBias = _RANDOM[5'h18][26];
+-        modeChanged_REG = _RANDOM[5'h18][27];
++        active = _RANDOM[6'h0][0];
++        running = _RANDOM[6'h0][1];
++        produced = _RANDOM[6'h0][7:2];
++        retired = _RANDOM[6'h0][13:8];
++        count = _RANDOM[6'h0][15:14];
++        head = _RANDOM[6'h0][16];
++        tail = _RANDOM[6'h0][17];
++        results_0_0 = {_RANDOM[6'h0][31:18], _RANDOM[6'h1], _RANDOM[6'h2][1:0]};
++        results_0_1 = {_RANDOM[6'h2][31:2], _RANDOM[6'h3][17:0]};
++        results_0_2 = {_RANDOM[6'h3][31:18], _RANDOM[6'h4], _RANDOM[6'h5][1:0]};
++        results_0_3 = {_RANDOM[6'h5][31:2], _RANDOM[6'h6][17:0]};
++        results_0_4 = {_RANDOM[6'h6][31:18], _RANDOM[6'h7], _RANDOM[6'h8][1:0]};
++        results_0_5 = {_RANDOM[6'h8][31:2], _RANDOM[6'h9][17:0]};
++        results_0_6 = {_RANDOM[6'h9][31:18], _RANDOM[6'hA], _RANDOM[6'hB][1:0]};
++        results_0_7 = {_RANDOM[6'hB][31:2], _RANDOM[6'hC][17:0]};
++        results_1_0 = {_RANDOM[6'hC][31:18], _RANDOM[6'hD], _RANDOM[6'hE][1:0]};
++        results_1_1 = {_RANDOM[6'hE][31:2], _RANDOM[6'hF][17:0]};
++        results_1_2 = {_RANDOM[6'hF][31:18], _RANDOM[6'h10], _RANDOM[6'h11][1:0]};
++        results_1_3 = {_RANDOM[6'h11][31:2], _RANDOM[6'h12][17:0]};
++        results_1_4 = {_RANDOM[6'h12][31:18], _RANDOM[6'h13], _RANDOM[6'h14][1:0]};
++        results_1_5 = {_RANDOM[6'h14][31:2], _RANDOM[6'h15][17:0]};
++        results_1_6 = {_RANDOM[6'h15][31:18], _RANDOM[6'h16], _RANDOM[6'h17][1:0]};
++        results_1_7 = {_RANDOM[6'h17][31:2], _RANDOM[6'h18][17:0]};
++        manualPending = _RANDOM[6'h18][18];
++        manualRunning = _RANDOM[6'h18][19];
++        manualGroup = _RANDOM[6'h18][24:20];
++        manualCached = _RANDOM[6'h18][25];
++        nextPair = _RANDOM[6'h18][31:26];
++        runningGroup = _RANDOM[6'h19][4:0];
++        staged = _RANDOM[6'h19][6:5];
++        stagedLo_0 = {_RANDOM[6'h19][31:7], _RANDOM[6'h1A][14:0]};
++        stagedLo_1 = {_RANDOM[6'h1A][31:15], _RANDOM[6'h1B][22:0]};
++        stagedLo_2 = {_RANDOM[6'h1B][31:23], _RANDOM[6'h1C][30:0]};
++        stagedLo_3 = {_RANDOM[6'h1C][31], _RANDOM[6'h1D], _RANDOM[6'h1E][6:0]};
++        stagedLo_4 = {_RANDOM[6'h1E][31:7], _RANDOM[6'h1F][14:0]};
++        stagedLo_5 = {_RANDOM[6'h1F][31:15], _RANDOM[6'h20][22:0]};
++        stagedLo_6 = {_RANDOM[6'h20][31:23], _RANDOM[6'h21][30:0]};
++        stagedLo_7 = {_RANDOM[6'h21][31], _RANDOM[6'h22], _RANDOM[6'h23][6:0]};
++        stagedHi_0 = {_RANDOM[6'h23][31:7], _RANDOM[6'h24][14:0]};
++        stagedHi_1 = {_RANDOM[6'h24][31:15], _RANDOM[6'h25][22:0]};
++        stagedHi_2 = {_RANDOM[6'h25][31:23], _RANDOM[6'h26][30:0]};
++        stagedHi_3 = {_RANDOM[6'h26][31], _RANDOM[6'h27], _RANDOM[6'h28][6:0]};
++        stagedHi_4 = {_RANDOM[6'h28][31:7], _RANDOM[6'h29][14:0]};
++        stagedHi_5 = {_RANDOM[6'h29][31:15], _RANDOM[6'h2A][22:0]};
++        stagedHi_6 = {_RANDOM[6'h2A][31:23], _RANDOM[6'h2B][30:0]};
++        stagedHi_7 = {_RANDOM[6'h2B][31], _RANDOM[6'h2C], _RANDOM[6'h2D][6:0]};
++        publishHigh = _RANDOM[6'h2D][7];
++        biasProtected = _RANDOM[6'h2D][8];
++        takeBias = _RANDOM[6'h2D][9];
++        modeChanged_REG = _RANDOM[6'h2D][10];
+       `endif // RANDOMIZE_REG_INIT
+     end // initial
+     `ifdef FIRRTL_AFTER_INITIAL
+       `FIRRTL_AFTER_INITIAL
+     `endif // FIRRTL_AFTER_INITIAL
+   `endif // ENABLE_INITIAL_REG_
+-  LinearComputeCore core (
+-    .clock        (clock),
+-    .reset        (reset),
+-    .io_start     (computeLaunch),
+-    .io_group     (selectedGroup),
+-    .io_xLoadWen  (io_xLoadWen),
+-    .io_xLoadAddr (io_xLoadAddr),
+-    .io_xLoadData (io_xLoadData),
+-    .io_wLoadWen  (io_wLoadWen),
+-    .io_wLoadBank (io_wLoadBank),
+-    .io_wLoadAddr (io_wLoadAddr),
+-    .io_wLoadData (io_wLoadData),
+-    .io_bias_0    (io_cacheEnable ? _biasCache_io_groupBias_0 : io_bias_0),
+-    .io_bias_1    (io_cacheEnable ? _biasCache_io_groupBias_1 : io_bias_1),
+-    .io_bias_2    (io_cacheEnable ? _biasCache_io_groupBias_2 : io_bias_2),
+-    .io_bias_3    (io_cacheEnable ? _biasCache_io_groupBias_3 : io_bias_3),
+-    .io_bias_4    (io_cacheEnable ? _biasCache_io_groupBias_4 : io_bias_4),
+-    .io_bias_5    (io_cacheEnable ? _biasCache_io_groupBias_5 : io_bias_5),
+-    .io_bias_6    (io_cacheEnable ? _biasCache_io_groupBias_6 : io_bias_6),
+-    .io_bias_7    (io_cacheEnable ? _biasCache_io_groupBias_7 : io_bias_7),
+-    .io_done      (_core_io_done),
+-    .io_result_0  (_core_io_result_0),
+-    .io_result_1  (_core_io_result_1),
+-    .io_result_2  (_core_io_result_2),
+-    .io_result_3  (_core_io_result_3),
+-    .io_result_4  (_core_io_result_4),
+-    .io_result_5  (_core_io_result_5),
+-    .io_result_6  (_core_io_result_6),
+-    .io_result_7  (_core_io_result_7)
++  PairComputeCore core (
++    .clock         (clock),
++    .reset         (reset),
++    .io_start      (computeLaunch),
++    .io_group
++      (active ? (running ? runningGroup : nextPair[4:0]) : _selectedGroup_T_1),
++    .io_xLoadWen   (io_xLoadWen),
++    .io_xLoadAddr  (io_xLoadAddr),
++    .io_xLoadData  (io_xLoadData),
++    .io_wLoadWen   (io_wLoadWen),
++    .io_wLoadBank  (io_wLoadBank),
++    .io_wLoadAddr  (io_wLoadAddr),
++    .io_wLoadData  (io_wLoadData),
++    .io_bias_0
++      (active ? stagedLo_0 : io_cacheEnable ? _biasCache_io_groupBias_0 : io_bias_0),
++    .io_bias_1
++      (active ? stagedLo_1 : io_cacheEnable ? _biasCache_io_groupBias_1 : io_bias_1),
++    .io_bias_2
++      (active ? stagedLo_2 : io_cacheEnable ? _biasCache_io_groupBias_2 : io_bias_2),
++    .io_bias_3
++      (active ? stagedLo_3 : io_cacheEnable ? _biasCache_io_groupBias_3 : io_bias_3),
++    .io_bias_4
++      (active ? stagedLo_4 : io_cacheEnable ? _biasCache_io_groupBias_4 : io_bias_4),
++    .io_bias_5
++      (active ? stagedLo_5 : io_cacheEnable ? _biasCache_io_groupBias_5 : io_bias_5),
++    .io_bias_6
++      (active ? stagedLo_6 : io_cacheEnable ? _biasCache_io_groupBias_6 : io_bias_6),
++    .io_bias_7
++      (active ? stagedLo_7 : io_cacheEnable ? _biasCache_io_groupBias_7 : io_bias_7),
++    .io_done       (_core_io_done),
++    .io_result_0   (_core_io_result_0),
++    .io_result_1   (_core_io_result_1),
++    .io_result_2   (_core_io_result_2),
++    .io_result_3   (_core_io_result_3),
++    .io_result_4   (_core_io_result_4),
++    .io_result_5   (_core_io_result_5),
++    .io_result_6   (_core_io_result_6),
++    .io_result_7   (_core_io_result_7),
++    .io_biasHi_0   (active ? stagedHi_0 : 40'h0),
++    .io_biasHi_1   (active ? stagedHi_1 : 40'h0),
++    .io_biasHi_2   (active ? stagedHi_2 : 40'h0),
++    .io_biasHi_3   (active ? stagedHi_3 : 40'h0),
++    .io_biasHi_4   (active ? stagedHi_4 : 40'h0),
++    .io_biasHi_5   (active ? stagedHi_5 : 40'h0),
++    .io_biasHi_6   (active ? stagedHi_6 : 40'h0),
++    .io_biasHi_7   (active ? stagedHi_7 : 40'h0),
++    .io_resultHi_0 (_core_io_resultHi_0),
++    .io_resultHi_1 (_core_io_resultHi_1),
++    .io_resultHi_2 (_core_io_resultHi_2),
++    .io_resultHi_3 (_core_io_resultHi_3),
++    .io_resultHi_4 (_core_io_resultHi_4),
++    .io_resultHi_5 (_core_io_resultHi_5),
++    .io_resultHi_6 (_core_io_resultHi_6),
++    .io_resultHi_7 (_core_io_resultHi_7)
+   );
+   BiasSramPrefetch biasCache (
+     .clock            (clock),
+@@ -445,8 +633,7 @@
+     .io_rspError      (io_cacheRspError),
+     .io_rspData       (io_cacheReadData),
+     .io_hostIdle      (_biasCache_io_hostIdle),
+-    .io_groupReqValid
+-      (io_cacheEnable & (active & ~running & ~(produced[5]) | ~active & manualPending)),
++    .io_groupReqValid (io_cacheEnable & (stageDemand | ~active & manualPending)),
+     .io_groupReqTag   (selectedGroup),
+     .io_groupValid    (_biasCache_io_groupValid),
+     .io_groupTag      (_biasCache_io_groupTag),
+@@ -458,7 +645,7 @@
+     .io_groupBias_5   (_biasCache_io_groupBias_5),
+     .io_groupBias_6   (_biasCache_io_groupBias_6),
+     .io_groupBias_7   (_biasCache_io_groupBias_7),
+-    .io_groupTake     (takeBias)
++    .io_groupTake     (takeBias | stageCapture)
+   );
+   assign io_done = _core_io_done;
+   assign io_result_0 = _core_io_result_0;
+--- a/third-party/e203_hbirdv2/rtl/e203/perips/PairComputeCore.sv
++++ b/third-party/e203_hbirdv2/rtl/e203/perips/PairComputeCore.sv
+@@ -0,0 +1,567 @@
++// Generated by CIRCT firtool-1.160.0
++
++// Users can define 'STOP_COND' to add an extra gate to stop conditions.
++`ifndef STOP_COND_
++  `ifdef STOP_COND
++    `define STOP_COND_ (`STOP_COND)
++  `else  // STOP_COND
++    `define STOP_COND_ 1
++  `endif // STOP_COND
++`endif // not def STOP_COND_
++
++// Users can define 'ASSERT_VERBOSE_COND' to add an extra gate to assert error printing.
++`ifndef ASSERT_VERBOSE_COND_
++  `ifdef ASSERT_VERBOSE_COND
++    `define ASSERT_VERBOSE_COND_ (`ASSERT_VERBOSE_COND)
++  `else  // ASSERT_VERBOSE_COND
++    `define ASSERT_VERBOSE_COND_ 1
++  `endif // ASSERT_VERBOSE_COND
++`endif // not def ASSERT_VERBOSE_COND_
++
++// Include register initializers in init blocks unless synthesis is set
++`ifndef RANDOMIZE
++  `ifdef RANDOMIZE_REG_INIT
++    `define RANDOMIZE
++  `endif // RANDOMIZE_REG_INIT
++`endif // not def RANDOMIZE
++`ifndef SYNTHESIS
++  `ifndef ENABLE_INITIAL_REG_
++    `define ENABLE_INITIAL_REG_
++  `endif // not def ENABLE_INITIAL_REG_
++`endif // not def SYNTHESIS
++
++// Standard header to adapt well known macros for register randomization.
++
++// RANDOM may be set to an expression that produces a 32-bit random unsigned value.
++`ifndef RANDOM
++  `define RANDOM $random
++`endif // not def RANDOM
++
++// Users can define INIT_RANDOM as general code that gets injected into the
++// initializer block for modules with registers.
++`ifndef INIT_RANDOM
++  `define INIT_RANDOM
++`endif // not def INIT_RANDOM
++
++// If using random initialization, you can also define RANDOMIZE_DELAY to
++// customize the delay used, otherwise 0.002 is used.
++`ifndef RANDOMIZE_DELAY
++  `define RANDOMIZE_DELAY 0.002
++`endif // not def RANDOMIZE_DELAY
++
++// Define INIT_RANDOM_PROLOG_ for use in our modules below.
++`ifndef INIT_RANDOM_PROLOG_
++  `ifdef RANDOMIZE
++    `ifdef VERILATOR
++      `define INIT_RANDOM_PROLOG_ `INIT_RANDOM
++    `else  // VERILATOR
++      `define INIT_RANDOM_PROLOG_ `INIT_RANDOM #`RANDOMIZE_DELAY begin end
++    `endif // VERILATOR
++  `else  // RANDOMIZE
++    `define INIT_RANDOM_PROLOG_
++  `endif // RANDOMIZE
++`endif // not def INIT_RANDOM_PROLOG_
++module PairComputeCore(
++  input         clock,
++                reset,
++                io_start,
++  input  [4:0]  io_group,
++  input         io_xLoadWen,
++  input  [5:0]  io_xLoadAddr,
++  input  [15:0] io_xLoadData,
++  input         io_wLoadWen,
++  input  [2:0]  io_wLoadBank,
++  input  [10:0] io_wLoadAddr,
++  input  [15:0] io_wLoadData,
++  input  [39:0] io_bias_0,
++                io_bias_1,
++                io_bias_2,
++                io_bias_3,
++                io_bias_4,
++                io_bias_5,
++                io_bias_6,
++                io_bias_7,
++  output        io_done,
++  output [47:0] io_result_0,
++                io_result_1,
++                io_result_2,
++                io_result_3,
++                io_result_4,
++                io_result_5,
++                io_result_6,
++                io_result_7,
++  input  [39:0] io_biasHi_0,
++                io_biasHi_1,
++                io_biasHi_2,
++                io_biasHi_3,
++                io_biasHi_4,
++                io_biasHi_5,
++                io_biasHi_6,
++                io_biasHi_7,
++  output [47:0] io_resultHi_0,
++                io_resultHi_1,
++                io_resultHi_2,
++                io_resultHi_3,
++                io_resultHi_4,
++                io_resultHi_5,
++                io_resultHi_6,
++                io_resultHi_7
++);
++
++  wire [15:0] _memories_7_1_io_rdata;
++  wire [15:0] _memories_7_0_io_rdata;
++  wire [15:0] _memories_6_1_io_rdata;
++  wire [15:0] _memories_6_0_io_rdata;
++  wire [15:0] _memories_5_1_io_rdata;
++  wire [15:0] _memories_5_0_io_rdata;
++  wire [15:0] _memories_4_1_io_rdata;
++  wire [15:0] _memories_4_0_io_rdata;
++  wire [15:0] _memories_3_1_io_rdata;
++  wire [15:0] _memories_3_0_io_rdata;
++  wire [15:0] _memories_2_1_io_rdata;
++  wire [15:0] _memories_2_0_io_rdata;
++  wire [15:0] _memories_1_1_io_rdata;
++  wire [15:0] _memories_1_0_io_rdata;
++  wire [15:0] _memories_0_1_io_rdata;
++  wire [15:0] _memories_0_0_io_rdata;
++  wire        _engineHi_io_weightRen;
++  wire [5:0]  _engineHi_io_weightReadK;
++  wire [5:0]  _engineHi_io_k;
++  wire        _engineHi_io_done;
++  wire        _engine_io_weightRen;
++  wire [5:0]  _engine_io_weightReadK;
++  wire [5:0]  _engine_io_k;
++  wire        _engine_io_done;
++  wire [15:0] _xBuffer_io_rdata;
++  wire [4:0]  _groupHi_T = io_group + 5'h1;
++  wire [9:0]  lowAddr = {io_group[4:1], _engine_io_weightReadK};
++  wire [9:0]  highAddr = {_groupHi_T[4:1], _engineHi_io_weightReadK};
++  wire [9:0]  writeAddr = {io_wLoadAddr[10:7], io_wLoadAddr[5:0]};
++  reg         delayedOdd;
++  wire        _write_T_4 = io_wLoadBank == 3'h0;
++  wire        write = io_wLoadWen & _write_T_4 & ~(io_wLoadAddr[6]);
++  wire        readEnable = io_group[0] ? _engineHi_io_weightRen : _engine_io_weightRen;
++  wire        write_1 = io_wLoadWen & _write_T_4 & io_wLoadAddr[6];
++  wire        readEnable_1 = io_group[0] ? _engine_io_weightRen : _engineHi_io_weightRen;
++  wire        _write_T_12 = io_wLoadBank == 3'h1;
++  wire        write_2 = io_wLoadWen & _write_T_12 & ~(io_wLoadAddr[6]);
++  wire        readEnable_2 = io_group[0] ? _engineHi_io_weightRen : _engine_io_weightRen;
++  wire        write_3 = io_wLoadWen & _write_T_12 & io_wLoadAddr[6];
++  wire        readEnable_3 = io_group[0] ? _engine_io_weightRen : _engineHi_io_weightRen;
++  wire        _write_T_20 = io_wLoadBank == 3'h2;
++  wire        write_4 = io_wLoadWen & _write_T_20 & ~(io_wLoadAddr[6]);
++  wire        readEnable_4 = io_group[0] ? _engineHi_io_weightRen : _engine_io_weightRen;
++  wire        write_5 = io_wLoadWen & _write_T_20 & io_wLoadAddr[6];
++  wire        readEnable_5 = io_group[0] ? _engine_io_weightRen : _engineHi_io_weightRen;
++  wire        _write_T_28 = io_wLoadBank == 3'h3;
++  wire        write_6 = io_wLoadWen & _write_T_28 & ~(io_wLoadAddr[6]);
++  wire        readEnable_6 = io_group[0] ? _engineHi_io_weightRen : _engine_io_weightRen;
++  wire        write_7 = io_wLoadWen & _write_T_28 & io_wLoadAddr[6];
++  wire        readEnable_7 = io_group[0] ? _engine_io_weightRen : _engineHi_io_weightRen;
++  wire        _write_T_36 = io_wLoadBank == 3'h4;
++  wire        write_8 = io_wLoadWen & _write_T_36 & ~(io_wLoadAddr[6]);
++  wire        readEnable_8 = io_group[0] ? _engineHi_io_weightRen : _engine_io_weightRen;
++  wire        write_9 = io_wLoadWen & _write_T_36 & io_wLoadAddr[6];
++  wire        readEnable_9 = io_group[0] ? _engine_io_weightRen : _engineHi_io_weightRen;
++  wire        _write_T_44 = io_wLoadBank == 3'h5;
++  wire        write_10 = io_wLoadWen & _write_T_44 & ~(io_wLoadAddr[6]);
++  wire        readEnable_10 = io_group[0] ? _engineHi_io_weightRen : _engine_io_weightRen;
++  wire        write_11 = io_wLoadWen & _write_T_44 & io_wLoadAddr[6];
++  wire        readEnable_11 = io_group[0] ? _engine_io_weightRen : _engineHi_io_weightRen;
++  wire        _write_T_52 = io_wLoadBank == 3'h6;
++  wire        write_12 = io_wLoadWen & _write_T_52 & ~(io_wLoadAddr[6]);
++  wire        readEnable_12 = io_group[0] ? _engineHi_io_weightRen : _engine_io_weightRen;
++  wire        write_13 = io_wLoadWen & _write_T_52 & io_wLoadAddr[6];
++  wire        readEnable_13 = io_group[0] ? _engine_io_weightRen : _engineHi_io_weightRen;
++  wire        _write_T_60 = &io_wLoadBank;
++  wire        write_14 = io_wLoadWen & _write_T_60 & ~(io_wLoadAddr[6]);
++  wire        readEnable_14 = io_group[0] ? _engineHi_io_weightRen : _engine_io_weightRen;
++  wire        write_15 = io_wLoadWen & _write_T_60 & io_wLoadAddr[6];
++  wire        readEnable_15 = io_group[0] ? _engine_io_weightRen : _engineHi_io_weightRen;
++  `ifndef SYNTHESIS
++    always @(posedge clock) begin
++      if (~reset & write & readEnable) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_1 & readEnable_1) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_2 & readEnable_2) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_3 & readEnable_3) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_4 & readEnable_4) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_5 & readEnable_5) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_6 & readEnable_6) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_7 & readEnable_7) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_8 & readEnable_8) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_9 & readEnable_9) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_10 & readEnable_10) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_11 & readEnable_11) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_12 & readEnable_12) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_13 & readEnable_13) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_14 & readEnable_14) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & write_15 & readEnable_15) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed: Pair weight SRAM read/write overlap\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & _engine_io_k != _engineHi_io_k) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at PairComputeCore.scala:59\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & _engine_io_weightRen != _engineHi_io_weightRen) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at PairComputeCore.scala:60\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & _engine_io_weightReadK != _engineHi_io_weightReadK) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at PairComputeCore.scala:61\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++      if (~reset & _engine_io_done != _engineHi_io_done) begin
++        if (`ASSERT_VERBOSE_COND_)
++          $error("Assertion failed at PairComputeCore.scala:62\n");
++        if (`STOP_COND_)
++          $fatal;
++      end
++    end // always @(posedge)
++  `endif // not def SYNTHESIS
++  always @(posedge clock) begin
++    if (reset)
++      delayedOdd <= 1'h0;
++    else
++      delayedOdd <= io_group[0];
++  end // always @(posedge)
++  `ifdef ENABLE_INITIAL_REG_
++    `ifdef FIRRTL_BEFORE_INITIAL
++      `FIRRTL_BEFORE_INITIAL
++    `endif // FIRRTL_BEFORE_INITIAL
++    logic [31:0] _RANDOM[0:0];
++    initial begin
++      `ifdef INIT_RANDOM_PROLOG_
++        `INIT_RANDOM_PROLOG_
++      `endif // INIT_RANDOM_PROLOG_
++      `ifdef RANDOMIZE_REG_INIT
++        _RANDOM[/*Zero width*/ 1'b0] = `RANDOM;
++        delayedOdd = _RANDOM[/*Zero width*/ 1'b0][0];
++      `endif // RANDOMIZE_REG_INIT
++    end // initial
++    `ifdef FIRRTL_AFTER_INITIAL
++      `FIRRTL_AFTER_INITIAL
++    `endif // FIRRTL_AFTER_INITIAL
++  `endif // ENABLE_INITIAL_REG_
++  XRowBuffer xBuffer (
++    .clock    (clock),
++    .io_wen   (io_xLoadWen),
++    .io_waddr (io_xLoadAddr),
++    .io_raddr (_engine_io_k),
++    .io_wdata (io_xLoadData),
++    .io_rdata (_xBuffer_io_rdata)
++  );
++  DotProductEngine engine (
++    .clock          (clock),
++    .reset          (reset),
++    .io_start       (io_start),
++    .io_x           (_xBuffer_io_rdata),
++    .io_w_0         (delayedOdd ? _memories_0_1_io_rdata : _memories_0_0_io_rdata),
++    .io_w_1         (delayedOdd ? _memories_1_1_io_rdata : _memories_1_0_io_rdata),
++    .io_w_2         (delayedOdd ? _memories_2_1_io_rdata : _memories_2_0_io_rdata),
++    .io_w_3         (delayedOdd ? _memories_3_1_io_rdata : _memories_3_0_io_rdata),
++    .io_w_4         (delayedOdd ? _memories_4_1_io_rdata : _memories_4_0_io_rdata),
++    .io_w_5         (delayedOdd ? _memories_5_1_io_rdata : _memories_5_0_io_rdata),
++    .io_w_6         (delayedOdd ? _memories_6_1_io_rdata : _memories_6_0_io_rdata),
++    .io_w_7         (delayedOdd ? _memories_7_1_io_rdata : _memories_7_0_io_rdata),
++    .io_bias_0      (io_bias_0),
++    .io_bias_1      (io_bias_1),
++    .io_bias_2      (io_bias_2),
++    .io_bias_3      (io_bias_3),
++    .io_bias_4      (io_bias_4),
++    .io_bias_5      (io_bias_5),
++    .io_bias_6      (io_bias_6),
++    .io_bias_7      (io_bias_7),
++    .io_weightRen   (_engine_io_weightRen),
++    .io_weightReadK (_engine_io_weightReadK),
++    .io_k           (_engine_io_k),
++    .io_done        (_engine_io_done),
++    .io_result_0    (io_result_0),
++    .io_result_1    (io_result_1),
++    .io_result_2    (io_result_2),
++    .io_result_3    (io_result_3),
++    .io_result_4    (io_result_4),
++    .io_result_5    (io_result_5),
++    .io_result_6    (io_result_6),
++    .io_result_7    (io_result_7)
++  );
++  DotProductEngine engineHi (
++    .clock          (clock),
++    .reset          (reset),
++    .io_start       (io_start),
++    .io_x           (_xBuffer_io_rdata),
++    .io_w_0         (delayedOdd ? _memories_0_0_io_rdata : _memories_0_1_io_rdata),
++    .io_w_1         (delayedOdd ? _memories_1_0_io_rdata : _memories_1_1_io_rdata),
++    .io_w_2         (delayedOdd ? _memories_2_0_io_rdata : _memories_2_1_io_rdata),
++    .io_w_3         (delayedOdd ? _memories_3_0_io_rdata : _memories_3_1_io_rdata),
++    .io_w_4         (delayedOdd ? _memories_4_0_io_rdata : _memories_4_1_io_rdata),
++    .io_w_5         (delayedOdd ? _memories_5_0_io_rdata : _memories_5_1_io_rdata),
++    .io_w_6         (delayedOdd ? _memories_6_0_io_rdata : _memories_6_1_io_rdata),
++    .io_w_7         (delayedOdd ? _memories_7_0_io_rdata : _memories_7_1_io_rdata),
++    .io_bias_0      (io_biasHi_0),
++    .io_bias_1      (io_biasHi_1),
++    .io_bias_2      (io_biasHi_2),
++    .io_bias_3      (io_biasHi_3),
++    .io_bias_4      (io_biasHi_4),
++    .io_bias_5      (io_biasHi_5),
++    .io_bias_6      (io_biasHi_6),
++    .io_bias_7      (io_biasHi_7),
++    .io_weightRen   (_engineHi_io_weightRen),
++    .io_weightReadK (_engineHi_io_weightReadK),
++    .io_k           (_engineHi_io_k),
++    .io_done        (_engineHi_io_done),
++    .io_result_0    (io_resultHi_0),
++    .io_result_1    (io_resultHi_1),
++    .io_result_2    (io_resultHi_2),
++    .io_result_3    (io_resultHi_3),
++    .io_result_4    (io_resultHi_4),
++    .io_result_5    (io_resultHi_5),
++    .io_result_6    (io_resultHi_6),
++    .io_result_7    (io_resultHi_7)
++  );
++  Sram1024x16 memories_0_0 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write | readEnable),
++    .io_isWrite (write),
++    .io_addr    (write ? writeAddr : io_group[0] ? highAddr : lowAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_0_0_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_0_1 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_1 | readEnable_1),
++    .io_isWrite (write_1),
++    .io_addr    (write_1 ? writeAddr : io_group[0] ? lowAddr : highAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_0_1_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_1_0 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_2 | readEnable_2),
++    .io_isWrite (write_2),
++    .io_addr    (write_2 ? writeAddr : io_group[0] ? highAddr : lowAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_1_0_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_1_1 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_3 | readEnable_3),
++    .io_isWrite (write_3),
++    .io_addr    (write_3 ? writeAddr : io_group[0] ? lowAddr : highAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_1_1_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_2_0 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_4 | readEnable_4),
++    .io_isWrite (write_4),
++    .io_addr    (write_4 ? writeAddr : io_group[0] ? highAddr : lowAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_2_0_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_2_1 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_5 | readEnable_5),
++    .io_isWrite (write_5),
++    .io_addr    (write_5 ? writeAddr : io_group[0] ? lowAddr : highAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_2_1_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_3_0 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_6 | readEnable_6),
++    .io_isWrite (write_6),
++    .io_addr    (write_6 ? writeAddr : io_group[0] ? highAddr : lowAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_3_0_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_3_1 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_7 | readEnable_7),
++    .io_isWrite (write_7),
++    .io_addr    (write_7 ? writeAddr : io_group[0] ? lowAddr : highAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_3_1_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_4_0 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_8 | readEnable_8),
++    .io_isWrite (write_8),
++    .io_addr    (write_8 ? writeAddr : io_group[0] ? highAddr : lowAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_4_0_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_4_1 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_9 | readEnable_9),
++    .io_isWrite (write_9),
++    .io_addr    (write_9 ? writeAddr : io_group[0] ? lowAddr : highAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_4_1_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_5_0 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_10 | readEnable_10),
++    .io_isWrite (write_10),
++    .io_addr    (write_10 ? writeAddr : io_group[0] ? highAddr : lowAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_5_0_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_5_1 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_11 | readEnable_11),
++    .io_isWrite (write_11),
++    .io_addr    (write_11 ? writeAddr : io_group[0] ? lowAddr : highAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_5_1_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_6_0 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_12 | readEnable_12),
++    .io_isWrite (write_12),
++    .io_addr    (write_12 ? writeAddr : io_group[0] ? highAddr : lowAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_6_0_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_6_1 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_13 | readEnable_13),
++    .io_isWrite (write_13),
++    .io_addr    (write_13 ? writeAddr : io_group[0] ? lowAddr : highAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_6_1_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_7_0 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_14 | readEnable_14),
++    .io_isWrite (write_14),
++    .io_addr    (write_14 ? writeAddr : io_group[0] ? highAddr : lowAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_7_0_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  Sram1024x16 memories_7_1 (
++    .clock      (clock),
++    .reset      (reset),
++    .io_en      (write_15 | readEnable_15),
++    .io_isWrite (write_15),
++    .io_addr    (write_15 ? writeAddr : io_group[0] ? lowAddr : highAddr),
++    .io_wdata   (io_wLoadData),
++    .io_rdata   (_memories_7_1_io_rdata),
++    .io_rvalid  (/* unused */)
++  );
++  assign io_done = _engine_io_done;
++endmodule
++
+--- a/tools/ppa/s3_task_campaign.py
++++ b/tools/ppa/s3_task_campaign.py
+@@ -469,6 +469,7 @@
+             item = dict(original_layer=layer,native_layer=0,cycles=native_layers[0]['cycles'],
+                         performance=counters[0],window=windows[0],clear=clear_record,
+                         measured_clocks=clocks,startup_observations=startup,**identity)
++            item['pe16_activity'] = soc.check_pe16_activity(log,native_layers,args.schedule)[0]
+             if args.schedule in soc.contract.NICE_SCHEDULES:
+                 item['nice_activity'] = soc.check_nice_activity(log,native_layers,args.schedule)[0]
+             if extension is not None:
+--- a/tools/scripts/e203_soc.py
++++ b/tools/scripts/e203_soc.py
+@@ -108,6 +108,7 @@
+     check_result_activity(log, layers, schedule)
+     check_weight_activity(log, layers, schedule)
+     check_read_pop_activity(log, layers, schedule)
++    check_pe16_activity(log, layers, schedule)
+     nice_records = check_nice_activity(log, layers, schedule)
+     fields = contract.PERFORMANCE_FIELDS
+     pattern = r'^PERF_TASK ' + ' '.join(name + r'=(\d+)' for name in fields) + r'$'
+@@ -559,6 +560,7 @@
+                     report['nice_activity']=check_nice_activity(
+                         log,report['layers'],args.firmware_schedule)
+                     report['direct_activity']=check_direct_activity(log,report['layers'],args.firmware_schedule)
++                report['pe16_activity']=check_pe16_activity(log,report['layers'],args.firmware_schedule)
+                 for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
+                     layer['performance'] = counters
+                 report['outputs']=args.tasks*25344
+@@ -586,5 +588,28 @@
+             raise ValueError('direct bundle/POP coverage differs')
+     return records
+ 
++
++def check_pe16_activity(log, layers, schedule):
++    """Require independently observed physical controls on both eight-PE engines."""
++    names = ['layer', 'pes', 'engines', 'physical_groups', 'physical_mac_cycles',
++             'logical_macs', 'lo_starts', 'hi_starts', 'lo_init', 'hi_init',
++             'lo_mac_fire', 'hi_mac_fire', 'lo_done', 'hi_done', 'checked_cycles',
++             'sync_errors']
++    pattern = r'^PE16_TASK ' + ' '.join(name+r'=(\d+)' for name in names) + r'$'
++    records = [dict(zip(names, map(int, row))) for row in re.findall(pattern, log, re.M)]
++    expected = len(layers) if schedule == contract.NICE_DIRECT_SCHEDULE else 0
++    if len(records) != expected or len(records) != len(re.findall(r'^PE16_TASK\b', log, re.M)):
++        raise ValueError('missing, duplicate, malformed or unexpected physical 16-PE activity')
++    for record, layer in zip(records, layers):
++        if record != dict(layer=layer['layer'], pes=16, engines=2,
++                          physical_groups=1584, physical_mac_cycles=101376,
++                          logical_macs=contract.MACS_PER_TASK,
++                          lo_starts=1584, hi_starts=1584, lo_init=1584, hi_init=1584,
++                          lo_mac_fire=101376, hi_mac_fire=101376,
++                          lo_done=1584, hi_done=1584, checked_cycles=layer['cycles'],
++                          sync_errors=0):
++            raise ValueError('physical 16-PE lane work or synchronized control coverage differs')
++    return records
++
+ if __name__=='__main__':
+     sys.exit(main())
+--- a/tools/scripts/xu_firmware_contract.py
++++ b/tools/scripts/xu_firmware_contract.py
+@@ -4,7 +4,9 @@
+ PERFORMANCE_FIELDS = ['layer', 'cycles', *PHASES, 'busy', 'mac_fire',
+                       'mmio_reads', 'mmio_writes', 'shared_reads', 'shared_writes',
+                       'shared_stall', 'mmio_stall', 'starts', 'dones']
+-PES = 8
++# This source snapshot is the explicit two-engine physical 16-PE experiment.
++# Firmware command line and old eight-result external grouping stay unchanged.
++PES = 16
+ MACS_PER_TASK = 99 * 64 * 256
+ OUTPUTS_PER_TASK = 99 * 256
+ SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-window',
+@@ -143,7 +145,7 @@
+                 shared_reads=w_reads + x_reads + bias_reads,
+                 shared_writes=OUTPUTS_PER_TASK if schedule in Y32_SCHEDULES else 50688,
+                 bias_mmio_writes=bias_writes, mmio_writes=mmio_writes,
+-                starts=99 * 32, dones=99 * 32,
++                pes=PES, starts=99 * 16, dones=99 * 16,
+                 mac_fire=MACS_PER_TASK // PES, macs=MACS_PER_TASK, outputs=OUTPUTS_PER_TASK)
+     if schedule in PAIRED_HI_SCHEDULES:
+         result.update(result_mmio_reads=38016, paired_hi_mmio_reads=12672)
