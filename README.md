@@ -1,3 +1,7 @@
+# ChipContest · S3-Y32 开发分支
+
+当前协作版本的架构、复现入口和验收状态见 [S3-Y32 交接](docs/s3-y32.md)。以下保留 S2e 基线的原始交接。
+
 # ChipContest · S2e 交付版
 
 基于 Chisel 与 E203 的八路 INT16 线性层加速器。`main` 交付当前主方案 **S2e paired-HI**，S2c 保留为测量对照。队友请先读 [HANDOFF.md](HANDOFF.md)。

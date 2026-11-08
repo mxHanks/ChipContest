@@ -108,6 +108,20 @@ module tb_xu_autogroup_wrapper;
       if(actual!==word) $fatal(1,"read mismatch offset=%h got=%h expected=%h",offset,actual,word);
     end
   endtask
+  // A cold synchronous bias group can extend manual START. Wait for the
+  // original STATUS contract; keep all value, FIFO and response assertions.
+  task automatic wait_manual_done;
+    time begun;
+    reg [31:0] status;
+    begin
+      begun=$time; status=0;
+      while(status!==32'd2) begin
+        transfer(1,'h00c,0,0,0,0,status);
+        if($time-begun>1500) $fatal(1,"manual SRAM-backed computation exceeded 150 cycles");
+      end
+    end
+  endtask
+
   task automatic wait_valid;
     integer polls;
     reg [31:0] status;
@@ -264,7 +278,7 @@ module tb_xu_autogroup_wrapper;
     if(overlap==0) $fatal(1,"no real compute/readback overlap observed");
     // Manual one-group meaning, read windows and cache selections remain valid.
     put('h010,19,15,0); put('h00c,2,15,0); put('h008,1,15,0);
-    repeat(80) @(negedge clk);
+    wait_manual_done();
     for(lane=0;lane<8;lane=lane+1) begin
       value=expected(1,19,lane); raw=value[47:0];
       get('h080+lane*8,raw[31:0],0); get('h084+lane*8,{16'b0,raw[47:32]},0);

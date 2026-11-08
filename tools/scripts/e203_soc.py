@@ -2,6 +2,7 @@
 """Reproducible xu development SoC checks; Python standard library only."""
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -85,14 +86,16 @@ def check_vectors(directory, tasks):
     return layers
 
 
-def check_log(log, tasks):
-    if re.search(r'FATAL|TEST_FAIL|%Error|Time Out|timeout', log, re.I):
+def check_log(log, tasks, schedule='baseline'):
+    if re.search(r'FATAL|TEST_FAIL|%Error|Time Out|timeout|^Error(?:\s|:)', log, re.I|re.M):
         raise ValueError('simulation reported failure')
-    found = re.findall(r'^TASK_PASS layer=(\d+) outputs=25344 writes=50688 cycles=(\d+) firmware_cycles=(\d+)$', log,re.M)
+    writes = contract.task_contract(schedule)['shared_writes']
+    found = re.findall(r'^TASK_PASS layer=(\d+) outputs=25344 writes=' + str(writes) +
+                       r' cycles=(\d+) firmware_cycles=(\d+)$', log,re.M)
     if ([int(x[0]) for x in found] != list(range(tasks)) or
             len(found)!=len(re.findall(r'^TASK_PASS\b',log,re.M))):
         raise ValueError('missing, duplicate or unordered layer completion')
-    end = f'SOC_PASS tasks={tasks} outputs={tasks*25344} writes={tasks*50688}'
+    end = f'SOC_PASS tasks={tasks} outputs={tasks*25344} writes={tasks*writes}'
     if re.findall(r'^SOC_PASS.*$',log,re.M) != [end]:
         raise ValueError('missing complete SoC result marker')
     return [dict(layer=int(a), cycles=int(b), firmware_cycles=int(c)) for a,b,c in found]
@@ -103,6 +106,8 @@ def check_performance(log, layers, schedule='baseline'):
     contract.configuration(schedule)
     check_autogroup_activity(log, layers, schedule)
     check_result_activity(log, layers, schedule)
+    check_weight_activity(log, layers, schedule)
+    nice_records = check_nice_activity(log, layers, schedule)
     fields = contract.PERFORMANCE_FIELDS
     pattern = r'^PERF_TASK ' + ' '.join(name + r'=(\d+)' for name in fields) + r'$'
     found = re.findall(pattern, log, re.M)
@@ -114,6 +119,11 @@ def check_performance(log, layers, schedule='baseline'):
             raise ValueError('performance window or layer differs from task completion')
         contract.validate_performance({k: v for k, v in row.items()
                                        if k not in ['layer', 'cycles']}, row['cycles'], schedule)
+    for row, nice in zip(records, nice_records):
+        # Poll count is measured, never pinned to the CPU polling experiment.
+        # The Y32 capability probe follows the first source read in this window.
+        if row['mmio_reads'] < nice['status_polls'] + nice['result_reads'] + 1:
+            raise ValueError('MMIO reads omit NICE payload/poll work or the in-window Y32 capability')
     return [{k: v for k, v in row.items() if k not in ['layer', 'cycles']} for row in records]
 
 
@@ -134,12 +144,65 @@ def check_autogroup_activity(log, layers, schedule):
 
 
 def check_result_activity(log, layers, schedule):
-    names = ['layer', 'legacy_words', 'packed_words', 'logical_words']
-    pattern = r'^RESULT_TASK ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
+    y32 = schedule in contract.Y32_SCHEDULES
+    marker = 'RESULT_TASK_Y32' if y32 else 'RESULT_TASK'
+    unexpected = 'RESULT_TASK' if y32 else 'RESULT_TASK_Y32'
+    if re.search(r'^' + unexpected + r'\b', log, re.M):
+        raise ValueError('result activity format differs from the firmware schedule')
+    names = ['layer', 'words', 'logical_results'] if y32 else [
+        'layer', 'legacy_words', 'packed_words', 'logical_words']
+    pattern = r'^' + marker + ' ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
     records = [dict(zip(names, map(int, row))) for row in re.findall(pattern, log, re.M)]
-    if len(records) != len(re.findall(r'^RESULT_TASK\b', log, re.M)):
+    if len(records) != len(re.findall(r'^' + marker + r'\b', log, re.M)):
         raise ValueError('malformed or duplicate result activity')
     contract.validate_result_activity(records, layers, schedule)
+    return records
+
+
+def check_weight_activity(log, layers, schedule):
+    names = ['layer', 'source_words', 'uploaded_values']
+    pattern = r'^W_PACKED16_TASK ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
+    records = [dict(zip(names, map(int, row))) for row in re.findall(pattern, log, re.M)]
+    expected = len(layers) if schedule in contract.PACKED16_SCHEDULES else 0
+    if len(records) != expected or len(records) != len(re.findall(r'^W_PACKED16_TASK\b', log, re.M)):
+        raise ValueError('missing, malformed or unexpected packed16 W activity')
+    for record, layer in zip(records, layers):
+        if record != dict(layer=layer['layer'], source_words=8192, uploaded_values=16384):
+            raise ValueError('packed16 W source coverage or upload work differs')
+    return records
+
+
+def check_nice_activity(log, layers, schedule):
+    names = ['layer', 'requests', 'responses', 'oitf_retired', 'status_polls',
+             'result_reads', 'pops_retired', 'shared_writes']
+    pattern = r'^NICE_TASK ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
+    records = [dict(zip(names, map(int, row))) for row in re.findall(pattern, log, re.M)]
+    if len(records) != len(re.findall(r'^NICE_TASK\b', log, re.M)):
+        raise ValueError('malformed or duplicate NICE activity')
+    contract.validate_nice_activity(records, layers, schedule)
+    return records
+
+
+def check_task_windows(log, layers):
+    """New observers prove request-to-final-response timing, including stalls.
+
+    Historical observers have no WINDOW_TASK records and remain explicitly
+    identifiable as legacy acceptance windows in their saved result.
+    """
+    names = ['layer', 'first_request', 'first_accept', 'final_y_response', 'first_request_wait']
+    pattern = r'^WINDOW_TASK ' + ' '.join(name+r'=(\d+)' for name in names) + r'$'
+    records = [dict(zip(names, map(int, row))) for row in re.findall(pattern, log, re.M)]
+    markers = len(re.findall(r'^WINDOW_TASK\b', log, re.M))
+    if markers == 0:
+        return []
+    if len(records) != markers or len(records) != len(layers):
+        raise ValueError('missing, malformed or duplicate task timing windows')
+    for record, layer in zip(records, layers):
+        if (record['layer'] != layer['layer'] or
+                not record['first_request'] <= record['first_accept'] <= record['final_y_response'] or
+                record['first_accept']-record['first_request'] != record['first_request_wait'] or
+                record['final_y_response']-record['first_request']+1 != layer['cycles']):
+            raise ValueError('task window omits a request wait or final response')
     return records
 
 
@@ -192,7 +255,8 @@ def build_simulator(sim, cache, filelist, includes, waves, out):
         return binary,[str(binary)]
     if sim=='verilator':
         if not binary.exists():
-            run(['verilator','--binary','--timing',*(['--trace'] if waves else []),'-j','2','-Wno-fatal',
+            run(['verilator','--binary','--timing','-CFLAGS','-std=gnu++20',
+                 *(['--trace'] if waves else []),'-j','2','-Wno-fatal',
                  '--top-module','tb_accel_soc','-Mdir',str(cache),'-o','accel_soc',
                  '-DDISABLE_SV_ASSERTION=1',*['-I'+str(p) for p in includes],'-f',str(filelist)],
                 ROOT,out/'simulator-build.log')
@@ -215,6 +279,42 @@ def synthetic(directory, tasks):
              for r in range(99) for c in range(256)]
         for name, values, bits in [('x',x,16),('w',w,16),('bias',bias,40),('y',y,48)]:
             (dest/f'{name}.mem').write_text(''.join(f'{v&((1<<bits)-1):0{bits//4}x}\n' for v in values))
+
+
+def vector_identity(directory, tasks, schedule='baseline'):
+    """Validate the legacy reference, then add the selected versioned transport."""
+    contract.configuration(schedule)
+    tensors = [('x',16,6336),('w',16,16384),('bias',40,256),('y',48,25344)]
+    for layer in range(tasks):
+        for name, bits, count in tensors:
+            read_mem(directory/f'layer_{layer:02d}'/(name+'.mem'), bits, count)
+    identity = {}
+    if schedule in contract.Y32_SCHEDULES or schedule in contract.PACKED16_SCHEDULES:
+        path = ROOT/'tools/model/export_s3_vectors.py'
+        spec = importlib.util.spec_from_file_location('xu_export_s3_vectors', path)
+        exporter = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(exporter)
+        profile_options = dict(shared_w_packed=schedule in contract.PACKED16_SCHEDULES)
+        if schedule not in contract.Y32_SCHEDULES:
+            profile_options['output_y32'] = False
+        identity['vector_profile'] = exporter.add_s3_files(directory, tasks, **profile_options)
+        for layer in range(tasks):
+            read_mem(directory/f'layer_{layer:02d}/y32.mem', 32, 25344)
+            if schedule in contract.PACKED16_SCHEDULES:
+                read_mem(directory/f'layer_{layer:02d}/w_packed16.mem', 32, 8192)
+        identity['profile_source_sha256'] = {
+            str(p.relative_to(ROOT)):sha(p) for p in [path, ROOT/'model/s3_y32.py',
+                                                     ROOT/'model/fixed16_acc48.py']}
+        names = [name+'.mem' for name, _, _ in tensors] + ['y32.mem', 'w_packed16.mem']
+        paths = [directory/f'layer_{layer:02d}'/name
+                 for layer in range(tasks) for name in names] + [directory/'profile.json']
+        if (directory/'export-manifest.json').is_file():
+            paths.append(directory/'export-manifest.json')
+    else:
+        paths = [directory/f'layer_{layer:02d}'/(name+'.mem')
+                 for layer in range(tasks) for name, _, _ in tensors]
+    identity['vectors'] = {str(p.relative_to(directory)):sha(p) for p in paths}
+    return identity
 
 
 def firmware_memory(sections, symbols, stack_files):
@@ -254,6 +354,7 @@ def compile_firmware(out, prefix, schedule='baseline', optimization='-Os', exper
          optimization,*contract.compiler_defines(config),'-fstack-usage',
          '-ffreestanding','-fno-builtin','-msmall-data-limit=0',
          '-nostdlib','-nostartfiles','-static','-mcmodel=medany','-Wl,--no-relax',
+         '-Wl,--build-id=none',
          '-T',str(TESTS/'firmware/link.ld'),*[str(p) for p in sources],'-o',str(target)]
     run(command,out,out/'firmware-build.log')
     run([prefix+'objcopy','-O','verilog',str(target),str(target)+'.verilog'],ROOT,out/'objcopy.log')
@@ -302,6 +403,7 @@ def baseline(out, prefix, sim='iverilog'):
             target=out/name
             run([prefix+'gcc','-march=rv32imac_zicsr2p0_zifencei2p0','-mabi=ilp32',
                  '-nostdlib','-nostartfiles','-static','-mcmodel=medany','-Wl,--no-relax',
+                 '-Wl,--build-id=none',
                  '-T',str(E203/'riscv-tools/riscv-tests/env/p/link.ld'),
                  str(TESTS/(name+'.S')),'-o',str(target)],ROOT,out/(name+'-build.log'))
             run([prefix+'objcopy','-O','verilog',str(target),str(target)+'.verilog'],ROOT,out/(name+'-objcopy.log'))
@@ -332,10 +434,14 @@ def main():
     parser.add_argument('--accel-waves',action='store_true',
                         help='dump accelerator-only VCD during measured task windows for activity analysis')
     parser.add_argument('--max-cycles',type=int,default=200000000)
+    parser.add_argument('--first-source-stall',type=int,default=0,
+                        help='development fabric: additional cycles blocking the first source request')
     contract.add_arguments(parser)
     args=parser.parse_args()
     if args.max_cycles < 1:
         parser.error('--max-cycles must be positive')
+    if not 0 <= args.first_source_stall <= 1000:
+        parser.error('--first-source-stall must be in 0..1000')
     if args.waves and args.accel_waves:
         parser.error('choose --waves or --accel-waves')
     trace_enabled = args.waves or args.accel_waves
@@ -345,6 +451,7 @@ def main():
     report={'status':'RUNNING','mode':args.mode,'tasks':args.tasks,'simulator':selected_sim,
             'firmware_schedule':args.firmware_schedule,'firmware_opt':args.firmware_opt,
             'firmware_experiment':args.firmware_experiment,
+            'first_source_stall':args.first_source_stall,
             'transaction_contract':contract.task_contract(args.firmware_schedule),
             'contract_sha256':sha(Path(contract.__file__)),
             'wave_scope':'accelerator measured windows' if args.accel_waves else 'full TB' if args.waves else 'none',
@@ -398,12 +505,7 @@ def main():
                 else:
                     if args.vectors is None: raise ValueError('--vectors is required')
                     directory=args.vectors.resolve()
-                report['vectors']={}
-                for layer in range(args.tasks):
-                    for name,bits,count in [('x',16,6336),('w',16,16384),('bias',40,256),('y',48,25344)]:
-                        path=directory/f'layer_{layer:02d}'/(name+'.mem')
-                        read_mem(path,bits,count)
-                        report['vectors'][str(path.relative_to(directory))]=sha(path)
+                report.update(vector_identity(directory,args.tasks,args.firmware_schedule))
                 firmware=compile_firmware(out,args.cross_prefix,args.firmware_schedule,
                                           args.firmware_opt,args.firmware_experiment,report)
                 report['runner_sha256']=sha(Path(__file__))
@@ -421,17 +523,28 @@ def main():
                 print(f'Running {args.mode}: {args.tasks} tasks; logs: {out}',flush=True)
                 log=run(command+[f'+TESTCASE={firmware}',f'+VECTORS={directory}',
                         f'+TASKS={args.tasks}',f'+DUMPWAVE={2 if args.accel_waves else int(args.waves)}',
-                        f'+MAX_CYCLES={args.max_cycles}'],out,out/'simulation.log',7200)
-                report['layers']=check_log(log,args.tasks)
+                        f'+MAX_CYCLES={args.max_cycles}',
+                        f'+FIRST_SOURCE_STALL={args.first_source_stall}',
+                        *contract.simulator_arguments(args.firmware_schedule)],out,out/'simulation.log',7200)
+                report['layers']=check_log(log,args.tasks,args.firmware_schedule)
+                report['window_activity']=check_task_windows(log,report['layers'])
+                report['measurement_window']=('first_source_request_to_final_y_response' if
+                    report['window_activity'] else 'legacy_first_source_accept_to_final_y_response')
                 if args.firmware_schedule in contract.AUTOGROUP_SCHEDULES:
                     report['autogroup_activity']=check_autogroup_activity(
                         log,report['layers'],args.firmware_schedule)
                     report['result_activity']=check_result_activity(
                         log,report['layers'],args.firmware_schedule)
+                if args.firmware_schedule in contract.PACKED16_SCHEDULES:
+                    report['weight_activity']=check_weight_activity(
+                        log,report['layers'],args.firmware_schedule)
+                if args.firmware_schedule in contract.NICE_SCHEDULES:
+                    report['nice_activity']=check_nice_activity(
+                        log,report['layers'],args.firmware_schedule)
                 for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
                     layer['performance'] = counters
                 report['outputs']=args.tasks*25344
-                report['write_words']=args.tasks*50688
+                report['write_words']=args.tasks*contract.task_contract(args.firmware_schedule)['shared_writes']
             report['status']='PASS'
     except Exception as exc:
         report['status']='FAIL'

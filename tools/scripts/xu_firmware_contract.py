@@ -9,9 +9,20 @@ MACS_PER_TASK = 99 * 64 * 256
 OUTPUTS_PER_TASK = 99 * 256
 SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-window',
              'bias-hw-stream16-window', 'bias-hw-pack32-window', 'bias-hw-autogroup-window',
-             'bias-hw-autogroup-paired-hi-window')
+             'bias-hw-autogroup-paired-hi-window', 'bias-hw-autogroup-y32-window',
+             'bias-hw-autogroup-paired-hi-packed16-window',
+             'bias-hw-autogroup-y32-packed16-window',
+             'bias-hw-autogroup-y32-packed16-nice-window')
 PAIRED_HI_SCHEDULE = 'bias-hw-autogroup-paired-hi-window'
-AUTOGROUP_SCHEDULES = ('bias-hw-autogroup-window', PAIRED_HI_SCHEDULE)
+PAIRED_HI_PACKED16_SCHEDULE = 'bias-hw-autogroup-paired-hi-packed16-window'
+PAIRED_HI_SCHEDULES = (PAIRED_HI_SCHEDULE, PAIRED_HI_PACKED16_SCHEDULE)
+Y32_SCHEDULE = 'bias-hw-autogroup-y32-window'
+Y32_PACKED16_SCHEDULE = 'bias-hw-autogroup-y32-packed16-window'
+NICE_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-window'
+NICE_SCHEDULES = (NICE_SCHEDULE,)
+Y32_SCHEDULES = (Y32_SCHEDULE, Y32_PACKED16_SCHEDULE, NICE_SCHEDULE)
+PACKED16_SCHEDULES = (PAIRED_HI_PACKED16_SCHEDULE, Y32_PACKED16_SCHEDULE, NICE_SCHEDULE)
+AUTOGROUP_SCHEDULES = ('bias-hw-autogroup-window',) + PAIRED_HI_SCHEDULES + Y32_SCHEDULES
 OPTIMIZATIONS = ('-Os', '-O2', '-O3')
 EXPERIMENTS = ('none', 'bias-unroll', 'result-unroll', 'both-unroll', 'no-masks',
                'bias-unroll-no-masks', 'result-unroll-no-masks', 'both-unroll-no-masks')
@@ -38,6 +49,9 @@ def configuration_from_result(result):
     if ('transaction_contract' in result and
             result['transaction_contract'] != task_contract(config['schedule'])):
         raise ValueError('firmware transaction contract differs from the schedule')
+    if config['schedule'] in NICE_SCHEDULES and result.get('mode') == 'real':
+        validate_nice_activity(result.get('nice_activity', []), result.get('layers', []),
+                               config['schedule'])
     return config
 
 
@@ -64,9 +78,25 @@ def compiler_defines(config):
         values['XU_HARDWARE_PACK32'] = True
     if config['schedule'] in AUTOGROUP_SCHEDULES:
         values['XU_HARDWARE_AUTO_GROUP'] = True
-    if config['schedule'] == PAIRED_HI_SCHEDULE:
+    if config['schedule'] in PAIRED_HI_SCHEDULES:
         values['XU_HARDWARE_PAIRED_HI'] = True
+    if config['schedule'] in Y32_SCHEDULES:
+        values['XU_HARDWARE_Y32'] = True
+    if config['schedule'] in PACKED16_SCHEDULES:
+        values['XU_SHARED_W_PACKED16'] = True
+    if config['schedule'] in NICE_SCHEDULES:
+        values['XU_NICE_DRAIN8'] = True
     return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
+
+
+def simulator_arguments(schedule='baseline'):
+    configuration(schedule)
+    arguments = ['+OUTPUT_Y32=1'] if schedule in Y32_SCHEDULES else []
+    if schedule in PACKED16_SCHEDULES:
+        arguments.append('+SHARED_W_PACKED16=1')
+    if schedule in NICE_SCHEDULES:
+        arguments.append('+NICE_DRAIN8=1')
+    return arguments
 
 
 def task_contract(schedule='baseline'):
@@ -87,23 +117,40 @@ def task_contract(schedule='baseline'):
     if schedule in AUTOGROUP_SCHEDULES:
         # One STARTROW and 32 response-retired POPs per row. No GROUP/W1C.
         mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 99 * (1 + 32)
+    # Source packing does not change the 8192 W_PACK32 upload transactions.
+    if schedule in PACKED16_SCHEDULES:
+        w_reads = 8192
     result = dict(w_shared_reads=w_reads, x_shared_reads=x_reads, bias_shared_reads=bias_reads,
-                shared_reads=w_reads + x_reads + bias_reads, shared_writes=50688,
+                shared_reads=w_reads + x_reads + bias_reads,
+                shared_writes=OUTPUTS_PER_TASK if schedule in Y32_SCHEDULES else 50688,
                 bias_mmio_writes=bias_writes, mmio_writes=mmio_writes,
                 starts=99 * 32, dones=99 * 32,
                 mac_fire=MACS_PER_TASK // PES, macs=MACS_PER_TASK, outputs=OUTPUTS_PER_TASK)
-    if schedule == PAIRED_HI_SCHEDULE:
+    if schedule in PAIRED_HI_SCHEDULES:
         result.update(result_mmio_reads=38016, paired_hi_mmio_reads=12672)
+    if schedule in Y32_SCHEDULES:
+        result.update(result_mmio_reads=OUTPUTS_PER_TASK, y32_mmio_reads=OUTPUTS_PER_TASK,
+                      w_mmio_upload_words=8192, rows=99, pops_retired=3168)
+    if schedule in NICE_SCHEDULES:
+        result.update(nice_requests=3168, nice_responses=3168, nice_oitf_retired=3168)
     return result
 
 
 def validate_result_activity(records, layers, schedule):
-    """S2e records count real result responses, not total MMIO polling reads."""
-    required = schedule == PAIRED_HI_SCHEDULE
+    """Count real output responses separately from MMIO polling reads."""
+    required = schedule in PAIRED_HI_SCHEDULES or schedule in Y32_SCHEDULES
     if not records and not required:
         return
     if schedule not in AUTOGROUP_SCHEDULES or len(records) != len(layers):
         raise ValueError('missing or unexpected result activity records')
+    if schedule in Y32_SCHEDULES:
+        for record, layer in zip(records, layers):
+            if (set(record) != {'layer', 'words', 'logical_results'} or
+                    any(type(v) is not int or v < 0 for v in record.values()) or
+                    record != dict(layer=layer['layer'], words=OUTPUTS_PER_TASK,
+                                   logical_results=OUTPUTS_PER_TASK)):
+                raise ValueError('Y32 response work or result coverage differs')
+        return
     packed = 12672 if required else 0
     legacy = 25344 if required else 50688
     for record, layer in zip(records, layers):
@@ -128,3 +175,18 @@ def validate_performance(perf, cycles, schedule='baseline'):
         raise ValueError('performance work counters differ from the firmware schedule')
     if any(value > cycles for value in perf.values()):
         raise ValueError('performance counter exceeds measured window')
+
+
+def validate_nice_activity(records, layers, schedule):
+    names = {'layer', 'requests', 'responses', 'oitf_retired', 'status_polls',
+             'result_reads', 'pops_retired', 'shared_writes'}
+    expected = len(layers) if schedule in NICE_SCHEDULES else 0
+    if len(records) != expected:
+        raise ValueError('missing or unexpected NICE activity')
+    for record, layer in zip(records, layers):
+        if (set(record) != names or any(type(v) is not int or v < 0 for v in record.values()) or
+                record['layer'] != layer['layer'] or
+                any(record[key] != 3168 for key in ['requests', 'responses', 'oitf_retired', 'pops_retired']) or
+                record['result_reads'] != OUTPUTS_PER_TASK or record['shared_writes'] != OUTPUTS_PER_TASK or
+                not 3168 <= record['status_polls'] <= layer['cycles']):
+            raise ValueError('NICE instruction retirement or payload coverage differs')

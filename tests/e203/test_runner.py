@@ -59,7 +59,8 @@ class RunnerTests(unittest.TestCase):
                     good.replace('SOC_PASS', 'NO_COMPLETION'),
                     good.replace('SOC_PASS tasks=1 outputs=25344 writes=50688',
                                  'SOC_PASS tasks=1 outputs=25344 writes=506880'),
-                    good+'SOC_PASS tasks=2 outputs=50688 writes=101376\n']:
+                    good+'SOC_PASS tasks=2 outputs=50688 writes=101376\n',
+                    good+'Error: vendor SVA failed although simulator exit was zero\n']:
             with self.assertRaises(ValueError):
                 soc.check_log(bad, 1)
 

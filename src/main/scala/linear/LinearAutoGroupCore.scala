@@ -3,6 +3,21 @@ package linear
 import chisel3._
 
 class LinearAutoGroupCoreIO extends LinearCachedCoreIO {
+    // cacheWriteEnable is now a valid signal: hold its descriptor until ready.
+    // A read uses cacheReadEnable/cacheReadAddr. Both share one response slot.
+    val cacheReadEnable = Input(Bool())
+    val cacheCmdReady = Output(Bool())
+    val cacheRspValid = Output(Bool())
+    val cacheRspReady = Input(Bool())
+    val cacheRspError = Output(Bool())
+    val cacheIdle = Output(Bool())
+    val cacheInvalidate = Input(Bool())
+    val cacheClearValid = Input(Bool())
+    val cacheClearReady = Output(Bool())
+    val cacheClearDone = Output(Bool())
+    // Elaborated storage identity: zero for the register-cache ablation.
+    // The MMIO wrapper must not advertise or dispatch an unsupported clear.
+    val biasSramCapability = Output(UInt(32.W))
     val rowStart = Input(Bool())
     // Pulse only when the explicit POP response retires on the host bus.
     val rowPop = Input(Bool())
@@ -23,10 +38,10 @@ class LinearAutoGroupCoreIO extends LinearCachedCoreIO {
   * producer exists, and count cannot increase until that launch completes.
   * X/W/bias writes must be excluded by the host wrapper throughout rowActive.
   */
-class LinearAutoGroupCore extends Module {
+class LinearAutoGroupCore(useBiasSram: Boolean = true) extends Module {
     val io = IO(new LinearAutoGroupCoreIO)
+    io.biasSramCapability := (if (useBiasSram) "h42530001".U(32.W) else 0.U(32.W))
     private val core = Module(new LinearComputeCore)
-    private val biasCache = Module(new BiasBankCache)
     private val active = RegInit(false.B)
     private val running = RegInit(false.B)
     private val produced = RegInit(0.U(6.W))
@@ -35,14 +50,56 @@ class LinearAutoGroupCore extends Module {
     private val head = RegInit(false.B)
     private val tail = RegInit(false.B)
     private val results = Reg(Vec(2, Vec(8, SInt(48.W))))
+    private val manualPending = RegInit(false.B)
+    private val manualRunning = RegInit(false.B)
+    private val manualGroup = Reg(UInt(5.W))
+    private val manualCached = Reg(Bool())
+    private val biasReady = Wire(Bool())
+    private val selectedBias = Wire(Vec(8, SInt(40.W)))
 
-    private val launch = active && !running && produced < 32.U && count < 2.U
+    private val launch = active && !running && produced < 32.U && count < 2.U &&
+        (!io.cacheEnable || biasReady)
     private val enqueue = active && running && core.io.done
     private val pop = io.rowPop && active && count =/= 0.U
-    private val selectedGroup = Mux(active, produced(4, 0), io.group)
+    private val selectedGroup = Mux(active, produced(4, 0), Mux(manualPending || manualRunning,
+        manualGroup, io.group))
+    private val manualLaunch = !active && manualPending && biasReady
+    private val computeLaunch = Mux(active, launch,
+        Mux(io.cacheEnable, manualLaunch, io.start))
+    // INIT samples bias on the edge following start. Releasing the group on
+    // start itself would permit its slot to be reused one edge too early.
+    private val takeBias = RegNext(computeLaunch && io.cacheEnable, false.B)
+    private val modeChanged = RegNext(io.cacheEnable, false.B) =/= io.cacheEnable
+    private val schedulerIdle = !active && !manualPending && !manualRunning && !takeBias
+
+    // External invalidation is a configuration operation. The standalone SRAM
+    // module can retry a cancelled demand, but this scheduler must not retract
+    // a bias group during the compute core's INIT sampling edge.
+    when(io.cacheInvalidate) {
+        assert(schedulerIdle && !io.start && !io.rowStart,
+            "Bias invalidation requires an idle scheduler and no START")
+    }
+    when(modeChanged) {
+        assert(schedulerIdle && !io.start && !io.rowStart,
+            "Bias mode switch requires an idle scheduler and no START")
+    }
+    assert(!(io.start && io.rowStart), "Manual START and ROW_START are mutually exclusive")
+
+    when(io.start && !active) {
+        assert(!manualPending && !manualRunning && io.cacheIdle)
+        manualGroup := io.group
+        manualCached := io.cacheEnable
+        when(io.cacheEnable) { manualPending := true.B }
+        .otherwise { manualRunning := true.B }
+    }
+    when(manualLaunch) { manualPending := false.B; manualRunning := true.B }
+    when(core.io.done && !active) { manualRunning := false.B }
+    when(manualPending || manualRunning) {
+        assert(io.cacheEnable === manualCached, "Bias mode changed during a manual computation")
+    }
 
     when(io.rowStart) {
-        assert(!active && count === 0.U)
+        assert(!active && count === 0.U && !manualPending && !manualRunning && io.cacheIdle)
         active := true.B
         running := false.B
         produced := 0.U
@@ -73,7 +130,7 @@ class LinearAutoGroupCore extends Module {
     }
     assert(count <= 2.U)
 
-    core.io.start := Mux(active, launch, io.start)
+    core.io.start := computeLaunch
     core.io.group := selectedGroup
     core.io.xLoadWen := io.xLoadWen
     core.io.xLoadAddr := io.xLoadAddr
@@ -82,14 +139,62 @@ class LinearAutoGroupCore extends Module {
     core.io.wLoadBank := io.wLoadBank
     core.io.wLoadAddr := io.wLoadAddr
     core.io.wLoadData := io.wLoadData
-    biasCache.io.writeEnable := io.cacheWriteEnable
-    biasCache.io.writeAddr := io.cacheWriteAddr
-    biasCache.io.writeData := io.cacheWriteData
-    biasCache.io.writeMask := io.cacheWriteMask
-    biasCache.io.readAddr := io.cacheReadAddr
-    biasCache.io.group := selectedGroup
-    core.io.bias := Mux(io.cacheEnable, biasCache.io.bias, io.bias)
-    io.cacheReadData := biasCache.io.readData
+    if (useBiasSram) {
+        val biasCache = Module(new BiasSramPrefetch)
+        biasCache.io.computeActive := active || manualPending || manualRunning
+        biasCache.io.invalidate := io.cacheInvalidate || modeChanged
+        biasCache.io.clearValid := io.cacheClearValid
+        io.cacheClearReady := biasCache.io.clearReady
+        io.cacheClearDone := biasCache.io.clearDone
+        biasCache.io.hostValid := io.cacheWriteEnable || io.cacheReadEnable
+        biasCache.io.hostRead := io.cacheReadEnable
+        biasCache.io.hostAddr := Mux(io.cacheReadEnable, io.cacheReadAddr, io.cacheWriteAddr)
+        biasCache.io.hostData := io.cacheWriteData
+        biasCache.io.hostMask := io.cacheWriteMask
+        io.cacheCmdReady := biasCache.io.hostReady
+        io.cacheRspValid := biasCache.io.rspValid
+        biasCache.io.rspReady := io.cacheRspReady
+        io.cacheRspError := biasCache.io.rspError
+        io.cacheReadData := biasCache.io.rspData
+        io.cacheIdle := biasCache.io.hostIdle
+        biasCache.io.groupReqValid := io.cacheEnable &&
+            ((active && !running && produced < 32.U) || (!active && manualPending))
+        biasCache.io.groupReqTag := selectedGroup
+        biasCache.io.groupTake := takeBias
+        biasReady := biasCache.io.groupValid && biasCache.io.groupTag === selectedGroup
+        selectedBias := biasCache.io.groupBias
+        when(takeBias) { assert(biasCache.io.groupValid) }
+    } else {
+        // Explicit register-cache ablation. The host still uses the same
+        // command/response interface, so its response cannot escape timing.
+        val biasCache = Module(new BiasBankCache)
+        val responseValid = RegInit(false.B)
+        val responseData = Reg(UInt(40.W))
+        val hostFire = (io.cacheWriteEnable || io.cacheReadEnable) && io.cacheCmdReady
+        io.cacheCmdReady := !responseValid || io.cacheRspReady
+        io.cacheRspValid := responseValid
+        io.cacheRspError := false.B
+        io.cacheReadData := responseData
+        io.cacheIdle := !responseValid
+        io.cacheClearReady := false.B
+        io.cacheClearDone := false.B
+        when(responseValid && io.cacheRspReady) { responseValid := false.B }
+        when(hostFire) {
+            responseValid := true.B
+            responseData := Mux(io.cacheReadEnable, biasCache.io.readData, 0.U)
+        }
+        biasCache.io.writeEnable := hostFire && io.cacheWriteEnable
+        biasCache.io.writeAddr := io.cacheWriteAddr
+        biasCache.io.writeData := io.cacheWriteData
+        biasCache.io.writeMask := io.cacheWriteMask
+        biasCache.io.readAddr := io.cacheReadAddr
+        biasCache.io.group := selectedGroup
+        selectedBias := biasCache.io.bias
+        biasReady := true.B
+        assert(!io.cacheClearValid, "The register-cache ablation has no SRAM-clear operation")
+    }
+    assert(!(io.cacheWriteEnable && io.cacheReadEnable))
+    core.io.bias := Mux(io.cacheEnable, selectedBias, io.bias)
     io.done := core.io.done
     io.result := core.io.result
     io.rowActive := active

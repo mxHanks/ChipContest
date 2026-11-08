@@ -12,6 +12,7 @@ module tb_xu_cached_wrapper;
   reg [39:0] legacy [0:7];
   reg [31:0] seed=32'h2032026;
   integer accepted=0, retired=0;
+  integer physical_cache_writes=0;
   integer addr, lane, group_id, k, trial;
   reg [31:0] value, low_word, high_word;
   reg [39:0] data40;
@@ -19,6 +20,9 @@ module tb_xu_cached_wrapper;
   always @(posedge clk) if (rst_n) begin
     if (cmd_valid && cmd_ready) accepted=accepted+1;
     if (rsp_valid && rsp_ready) retired=retired+1;
+    if (dut.u_linear_compute_core.biasCache.memory.io_en &&
+        dut.u_linear_compute_core.biasCache.memory.io_isWrite)
+      physical_cache_writes=physical_cache_writes+1;
   end
 
   function automatic [31:0] random_next(input [31:0] previous);
@@ -46,9 +50,16 @@ module tb_xu_cached_wrapper;
         @(posedge clk);
       end
       #1;
+      // The SRAM adapter responds after its physical operation commits.
+      // Preserve the original response/value/backpressure checks below.
+      @(negedge clk); cmd_valid=0;
+      timeout=0;
+      while (!rsp_valid) begin
+        @(posedge clk); #1; timeout=timeout+1;
+        if(timeout>32) $fatal(1,"SRAM response did not commit within 32 cycles");
+      end
       if (!rsp_valid || rsp_err) $fatal(1,"missing/error response");
       captured=rsp_rdata;
-      @(negedge clk); cmd_valid=0;
       seed=random_next(seed); wait_cycles=1+seed[1:0];
       repeat (wait_cycles) begin
         @(posedge clk); #1;
@@ -123,8 +134,10 @@ module tb_xu_cached_wrapper;
   // must not update before cmd_ready; both responses must retire exactly once.
   task automatic blocked_write;
     reg [39:0] original;
+    integer before_commits, wait_commits;
     begin
       put('h044,42,15); original=expected[42];
+      before_commits=physical_cache_writes;
       @(negedge clk);
       cmd_valid=1; cmd_read=1; cmd_addr=32'h10042000; rsp_ready=0;
       @(posedge clk); #1;
@@ -132,17 +145,26 @@ module tb_xu_cached_wrapper;
       cmd_read=0; cmd_addr=32'h10042048; cmd_wdata=32'hcafef00d; cmd_wmask=15;
       repeat(4) begin
         @(posedge clk); #1;
-        if (cmd_ready || dut.cache_read_data!==original || rsp_rdata!==32'hacce2030)
+        if (cmd_ready || physical_cache_writes!=before_commits ||
+            dut.cache_command || rsp_rdata!==32'hacce2030)
           $fatal(1,"blocked command had a side effect");
       end
       @(negedge clk); rsp_ready=1;
       @(posedge clk); #1;
-      if (dut.cache_read_data!=={original[39:32],32'hcafef00d})
+      @(negedge clk); cmd_valid=0; rsp_ready=0;
+      wait_commits=0;
+      while(!rsp_valid) begin
+        @(posedge clk); #1; wait_commits=wait_commits+1;
+        if(wait_commits>32) $fatal(1,"accepted pipelined cache write missing");
+      end
+      if(rsp_err || physical_cache_writes<=before_commits)
         $fatal(1,"accepted pipelined cache write missing");
-      expected[42]={original[39:32],32'hcafef00d};
-      @(negedge clk); cmd_valid=0;
+      @(negedge clk); rsp_ready=1;
       @(posedge clk); #1;
       @(negedge clk); rsp_ready=0;
+      expected[42]={original[39:32],32'hcafef00d};
+      expect_read('h048,expected[42][31:0]);
+      expect_read('h04c,{24'b0,expected[42][39:32]});
     end
   endtask
 

@@ -13,8 +13,14 @@
 #define INNER 64u
 #define COLS 256u
 
-/* x/w use signed16 codes in 32-bit slots, bias uses signed40 in 64-bit slots.
- * y receives signed48 results, sign-extended into explicit low/high32 slots. */
+/* X uses signed16 codes in 32-bit slots; bias uses signed40 in 64-bit slots.
+ * W normally uses the same signed16 slots; XU_SHARED_W_PACKED16 instead stores
+ * two consecutive signed16 codes in each low/high16 shared word.
+ * Y normally receives signed48 in explicit sign-extended low/high32 slots;
+ * XU_HARDWARE_Y32 receives row-major signed32 RNE(y48 / 512), one word/result.
+ * XU_NICE_DRAIN8 requires poll_limit in 1..0x07ffffff and checks the returned
+ * status code explicitly; -11 rejects the limit and -12 aborts the whole task
+ * after a NICE failure, which may include an already-retired POP. */
 int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                  const volatile uint32_t *bias, volatile uint32_t *y,
                  uint32_t poll_limit);

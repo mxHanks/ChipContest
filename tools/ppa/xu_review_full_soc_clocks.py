@@ -142,21 +142,38 @@ puts "XU_SDC_MOCK_PASS 192_mode_divisor_combinations; missing_pin_rejected; revi
     return receipt
 
 
-def rtl_test(out):
+def rtl_test(out, simulator='iverilog'):
     sources = ['tools/ppa/tb_xu_full_soc_clocks.sv', RTL+'general/sirv_gnrl_dffs.v',
                RTL+'core/e203_clkgate.v', RTL+'subsys/e203_subsys_pll.v',
                RTL+'subsys/e203_subsys_pllclkdiv.v', RTL+'subsys/e203_subsys_gfcm.v',
                RTL+'subsys/e203_subsys_hclkgen_rstsync.v', RTL+'subsys/e203_subsys_hclkgen.v',
                RTL+'perips/sirv_hclkgen_regs.v']
-    exe = out/'clock.vvp'
-    compile_result = run(['iverilog', '-g2012', '-DDISABLE_SV_ASSERTION', '-I', RTL+'core',
-                          '-s', 'tb_xu_full_soc_clocks', '-o', str(exe)]+sources,
-                         out, 'rtl-compile')
-    result = run(['vvp', str(exe)], out, 'rtl-clock')
-    if 'XU_CLOCK_RTL_PASS' not in (out/'rtl-clock.log').read_text():
+    if simulator == 'vcs':
+        sources.append(RTL+'general/sirv_gnrl_xchecker.v')
+        exe = out/'clock.simv'
+        command = ['vcs', '-full64', '-sverilog', '-timescale=1ns/1ps',
+                   '+incdir+'+RTL+'core', '-top', 'tb_xu_full_soc_clocks',
+                   '-Mdir='+str(out/'clock-csrc'), '-o', str(exe)]
+        execute = [str(exe)]
+    else:
+        # Preserve the historical Icarus recipe. The explicit VCS branch above
+        # supports the original vendor SVA without defining this legacy switch.
+        exe = out/'clock.vvp'
+        command = ['iverilog', '-g2012', '-DDISABLE_SV_ASSERTION', '-I', RTL+'core',
+                   '-s', 'tb_xu_full_soc_clocks', '-o', str(exe)]
+        execute = ['vvp', str(exe)]
+    compile_result = run(command+sources, out, 'rtl-compile')
+    result = run(execute, out, 'rtl-clock')
+    log = (out/'rtl-clock.log').read_text()
+    if log.count('XU_CLOCK_RTL_PASS') != 1:
         raise RuntimeError('actual RTL completion marker missing')
+    if simulator == 'vcs' and re.search(r'(?im)^\s*(?:Fatal:|Error(?:\s|:)|FATAL:)|\b(?:TEST_FAIL|FAILED|FAILURE)\b', log):
+        raise RuntimeError('VCS reported an assertion/error despite its native exit status')
     result['compile'] = compile_result
     result['scope'] = 'actual non-FPGA divider all64 settings, by1, reset-register defaults, and five PLL/GFCM steady modes; not CDC/metastability or mode-transition proof'
+    result['simulator'] = simulator
+    result['vendor_assertions_disabled'] = simulator != 'vcs'
+    result['source_files'] = {name:dict(path=str(ROOT/name), sha256=sha(ROOT/name)) for name in sources}
     return result
 
 
@@ -164,6 +181,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--run-rtl', action='store_true')
+    parser.add_argument('--rtl-simulator', choices=['iverilog', 'vcs'], default='iverilog',
+                        help='VCS retains original vendor xchecker SVA; default preserves the legacy Icarus recipe')
     args = parser.parse_args()
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=True)
@@ -173,14 +192,15 @@ def main():
         if re.search(r'\b'+command+r'\b', body):
             raise RuntimeError('review required: unexpected exception command '+command)
     tests = dict(sdc_mock=tcl_mock(out))
-    tests['rtl_clock'] = rtl_test(out) if args.run_rtl else dict(status='NOT_RUN')
+    tests['rtl_clock'] = rtl_test(out, args.rtl_simulator) if args.run_rtl else dict(status='NOT_RUN')
+    source_names = SOURCES + ([RTL+'general/sirv_gnrl_xchecker.v'] if args.run_rtl and args.rtl_simulator == 'vcs' else [])
     review = dict(
         schema='xu-full-soc-clock-review-v1', status='REVIEWED',
         review_scope='source-derived digital constraints and local lightweight checks only',
         sta_status='NOT_RUN_NO_DC_PT_RESULT',
         created_utc=datetime.now(timezone.utc).isoformat(),
         constraints_sha256=sha(sdc),
-        source_files={name:dict(path=str(ROOT/name), sha256=sha(ROOT/name)) for name in SOURCES},
+        source_files={name:dict(path=str(ROOT/name), sha256=sha(ROOT/name)) for name in source_names},
         primary_clocks=[dict(name='xu_hfextclk', period_ns=6.666666667, purpose='150MHz digital target'),
                         dict(name='xu_lfextclk', period_ns=30517.578125, purpose='32.768kHz platform LF reference'),
                         dict(name='xu_jtag_tck', period_ns=100, purpose='10MHz engineering assumption')],
@@ -199,7 +219,8 @@ def main():
         lf_clock_scope=dict(development_tb_period_ns=66, target_period_ns=30517.578125,
                             ratio=30517.578125/66,
                             note='AON boot/deglitch/reset delay changes; actual twelve-task window comparison is required, not inferred from this unit test'),
-        tests=tests, tools={tool:shutil.which(tool) for tool in ['dc_shell','pt_shell','tclsh','iverilog','vvp']},
+        tests=tests, tools={tool:shutil.which(tool) for tool in ['dc_shell','pt_shell','tclsh','iverilog','vvp']+
+                           (['vcs'] if args.run_rtl and args.rtl_simulator == 'vcs' else [])},
         pending=['real DC/PT execution and mapped selector/clock coverage audit',
                  'setup, hold, recovery, removal, gating and minimum pulse-width closure',
                  'all untested paths and HF/LF/JTAG CDC/reset review',

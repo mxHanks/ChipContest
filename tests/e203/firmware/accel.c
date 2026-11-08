@@ -14,12 +14,44 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
 #ifndef XU_HARDWARE_PAIRED_HI
 #define XU_HARDWARE_PAIRED_HI 0
 #endif
+#ifndef XU_HARDWARE_Y32
+#define XU_HARDWARE_Y32 0
+#endif
+#ifndef XU_SHARED_W_PACKED16
+#define XU_SHARED_W_PACKED16 0
+#endif
+#ifndef XU_NICE_DRAIN8
+#define XU_NICE_DRAIN8 0
+#endif
+#if XU_NICE_DRAIN8 && (!XU_HARDWARE_Y32 || !XU_SHARED_W_PACKED16)
+#error "NICE drain8 requires the Y32 and packed16 shared-source profile"
+#endif
+#if XU_HARDWARE_Y32 && (!XU_HARDWARE_AUTO_GROUP || XU_HARDWARE_PAIRED_HI)
+#error "Y32 requires autonomous groups and its independent result window"
+#endif
 #if XU_HARDWARE_AUTO_GROUP
 enum { AUTO_CAPABILITY = 0x78 / 4, ROW_CTRL = 0xc0 / 4,
        ROW_STATUS = 0xc4 / 4, ROW_POP = 0xc8 / 4 };
 #define XU_RESULT_WINDOW (0x100 / 4)
 #else
 #define XU_RESULT_WINDOW RESULT_WINDOW
+#endif
+
+#if XU_NICE_DRAIN8
+static inline uint32_t xu_nice_drain8(volatile uint32_t *destination, uint32_t control) {
+    uint32_t code;
+    /* The used output operand receives a real non-x0 rd. The fixed core does
+     * not turn NICE err into a trap, so the caller must inspect this code. */
+    __asm__ volatile (
+        ".insn r 0x7b, 7, 0x20, %0, %1, %2\n\t"
+        "fence iorw, iorw"
+        : "=r"(code) : "r"(destination), "r"(control) : "memory");
+    return code;
+}
+#endif
+
+#if XU_HARDWARE_Y32
+enum { Y32_CAPABILITY = 0xe4 / 4, Y32_WINDOW = 0x180 / 4 };
 #endif
 
 #if XU_HARDWARE_PAIRED_HI
@@ -43,6 +75,9 @@ enum { PAIRED_HI_CAPABILITY = 0xe0 / 4, PAIRED_HI_WINDOW = 0x140 / 4 };
 #endif
 #ifndef XU_HARDWARE_PACK32
 #define XU_HARDWARE_PACK32 0
+#endif
+#if XU_SHARED_W_PACKED16 && !XU_HARDWARE_PACK32
+#error "packed16 shared W requires the W_PACK32 upload port"
 #endif
 #if XU_HARDWARE_STREAM16 || XU_HARDWARE_PACK32
 enum { W_CURSOR = 0x54 / 4, W_STREAM16 = 0x58 / 4,
@@ -94,6 +129,9 @@ static uint32_t bias_cache[2 * COLS];
 int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                  const volatile uint32_t *bias, volatile uint32_t *y,
                  uint32_t poll_limit) {
+#if XU_NICE_DRAIN8
+    if (!poll_limit || poll_limit > 0x07ffffffu) return -11;
+#endif
     volatile uint32_t *reg = (volatile uint32_t *)ACCEL_BASE;
     if (reg[ID] != 0xacce2030u) return -1;
     if (reg[STATUS] & 1u) return -2;
@@ -113,10 +151,24 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
     uint32_t packed_cap = reg[PACKED_CAPABILITY];
     if ((packed_cap & 0xffff0000u) != 0x58500000u || (packed_cap & 3u) != 3u)
         return -6;
+#if XU_SHARED_W_PACKED16
+    /* Each shared word already holds two consecutive signed16 W values. */
+    uint32_t first_w = w[0];
+#if XU_HARDWARE_Y32
+    if (reg[Y32_CAPABILITY] != 0x59330001u) return -10;
+#endif
+    reg[W_CURSOR] = 0;
+    reg[W_PACK32] = first_w;
+    for (unsigned word = 1; word < INNER * COLS / 2; ++word)
+        reg[W_PACK32] = w[word];
+#else
     /* Preserve the original 32-bit shared slots: both high halves are explicitly
      * truncated even when the legacy no-masks experiment is selected. */
     uint32_t first_w0 = w[0];
     uint32_t first_w1 = w[1];
+#if XU_HARDWARE_Y32
+    if (reg[Y32_CAPABILITY] != 0x59330001u) return -10;
+#endif
     reg[W_CURSOR] = 0;
     reg[W_PACK32] = (uint32_t)(uint16_t)first_w0 | ((uint32_t)(uint16_t)first_w1 << 16);
     for (unsigned element = 2; element < INNER * COLS; element += 2) {
@@ -124,6 +176,7 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
         uint32_t high = w[element + 1];
         reg[W_PACK32] = (uint32_t)(uint16_t)low | ((uint32_t)(uint16_t)high << 16);
     }
+#endif
 #elif XU_HARDWARE_STREAM16
     if (reg[STREAM_CAPABILITY] != 0x58530003u) return -5;
     /* Keep initialization inside the first shared-read/final-Y-response window.
@@ -201,6 +254,11 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
                 reg[BIAS_HI] = XU_LOW8(task_bias[2 * col + 1]);
             }
 #endif
+#if XU_NICE_DRAIN8
+            unsigned index = row * COLS + group * 8;
+            uint32_t code = xu_nice_drain8(y + index, (poll_limit << 5) | group);
+            if (code != 0) return -12; /* Whole-task failure; never retry partial POP/writeback. */
+#else
 #if XU_HARDWARE_AUTO_GROUP
             unsigned polls = 0;
             uint32_t status;
@@ -217,7 +275,19 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             while (!(reg[STATUS] & 2u))
                 if (++polls >= poll_limit) return -3;
 #endif
-#if XU_HARDWARE_PAIRED_HI
+#if XU_HARDWARE_Y32
+            /* Snapshot all eight signed32 values while this FIFO head is owned.
+             * CPU MMIO accesses are synchronous: POP's response retires before
+             * the last shared write, retaining POP inside the task window. */
+            uint32_t result[8];
+            for (unsigned bank = 0; bank < 8; ++bank)
+                result[bank] = reg[Y32_WINDOW + bank];
+            unsigned index = row * COLS + group * 8;
+            for (unsigned bank = 0; bank < 7; ++bank)
+                y[index + bank] = result[bank];
+            reg[ROW_POP] = 1;
+            y[index + 7] = result[7];
+#elif XU_HARDWARE_PAIRED_HI
 #if XU_FIRMWARE_RESULT_UNROLL
             XU_READ_PAIRED_RESULT(0);
             XU_READ_PAIRED_RESULT(1);
@@ -250,7 +320,7 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
 #endif
             }
 #endif
-#if XU_HARDWARE_AUTO_GROUP && !XU_HARDWARE_PAIRED_HI
+#if XU_HARDWARE_AUTO_GROUP && !XU_HARDWARE_PAIRED_HI && !XU_HARDWARE_Y32
             // Read every word while the head is owned. Retire POP before the
             // final two shared writes, so even the final row's POP remains in
             // the existing first-input/final-Y-response measurement window.
@@ -261,6 +331,7 @@ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
             y[last_index] = last_lo;
             y[last_index + 1] = last_hi;
 #endif
+#endif /* XU_NICE_DRAIN8: CPU polling and output transfer stay in the legacy branch. */
         }
     }
     __asm__ volatile ("fence iorw, iorw" ::: "memory");

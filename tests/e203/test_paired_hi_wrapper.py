@@ -18,7 +18,7 @@ class XuPairedHiWrapperTests(unittest.TestCase):
             self.assertIsNotNone(shutil.which('vcs'), 'XU_PAIRED_HI_WRAPPER_SIM=vcs requires vcs')
         root = Path(__file__).resolve().parents[2]
         perips = root / 'third-party/e203_hbirdv2/rtl/e203/perips'
-        sources = ['BiasBankCache.sv', 'LinearAutoGroupCore.sv', 'LinearCachedCore.sv', 'LinearComputeCore.sv',
+        sources = ['BiasSramPrefetch.sv', 'BiasBankCache.sv', 'LinearAutoGroupCore.sv', 'LinearCachedCore.sv', 'LinearComputeCore.sv',
                    'DotProductEngine.sv', 'MacController.sv', 'MacPEArray.sv',
                    'MacPE.sv', 'XRowBuffer.sv', 'WeightBankArray.sv',
                    'WeightBank.sv', 'Sram1024x16.sv', 'mem_1024x16.sv',

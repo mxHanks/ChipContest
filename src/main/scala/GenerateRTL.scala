@@ -14,7 +14,9 @@ object GenerateRTL {
         "LinearComputeCore" -> (() => new LinearComputeCore),
         "LinearCachedCore" -> (() => new LinearCachedCore),
         "LinearAutoGroupCore" -> (() => new LinearAutoGroupCore),
+        "LinearAutoGroupCoreRegisters" -> (() => new LinearAutoGroupCore(useBiasSram = false)),
         "BiasBankCache" -> (() => new BiasBankCache),
+        "BiasSramPrefetch" -> (() => new BiasSramPrefetch),
         "LinearLayerEngine" -> (() => new LinearLayerEngine)
     )
 
@@ -34,6 +36,10 @@ object GenerateRTL {
             Array("--target-dir", s"generated/$moduleName"),
             firtoolOpts = Array(
                 "--strip-debug-info",
+                // Keep every verification assertion in the emitted modules.
+                // Otherwise Chisel 7 emits optional bind layers that plain
+                // Icarus/SoC file lists do not automatically enable.
+                "--default-layer-specialization=enable",
                 "--lowering-options=disallowLocalVariables,disallowPackedArrays"
             )
         )

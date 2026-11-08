@@ -21,6 +21,7 @@ def summarize(result, frequency_mhz):
     explicit = 'firmware_schedule' in result
     layers = result['layers']
     contract.validate_result_activity(result.get('result_activity', []), layers, config['schedule'])
+    contract.validate_nice_activity(result.get('nice_activity', []), layers, config['schedule'])
     if (type(result['tasks']) is not int or not 1 <= result['tasks'] <= 12 or
             not layers or [x['layer'] for x in layers] != list(range(result['tasks']))):
         raise ValueError('incomplete or unordered layers')
@@ -71,6 +72,7 @@ def summarize(result, frequency_mhz):
                 firmware_build=result.get('firmware_build'),
                 transaction_contract=contract.task_contract(config['schedule']),
                 result_activity=result.get('result_activity'),
+                nice_activity=result.get('nice_activity'),
                 source_identity={key:result[key] for key in [
                     'main_commit','e203_commit','runner_sha256','contract_sha256',
                     'firmware_sha256','firmware_elf_sha256','firmware_image_sha256',
