@@ -24,6 +24,12 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def command_sha256(command):
+    """Hash the exact argv as canonical JSON, without ambiguous shell joining."""
+    return hashlib.sha256(json.dumps([str(x) for x in command],
+        separators=(',', ':'), ensure_ascii=True).encode('utf-8')).hexdigest()
+
+
 def write(path, value):
     Path(path).write_text(json.dumps(value, indent=2)+'\n')
 
@@ -107,6 +113,87 @@ def check_clock_observations(log, profile):
     return records
 
 
+def startup_configuration(profile):
+    if profile=='historical':
+        return dict(profile=profile,version='historical-single-release',
+                    counter_origin='historical TB clock origin',scope='original external pad reset stimulus')
+    if profile!='external-reset':
+        raise ValueError('unknown startup profile')
+    return dict(profile=profile,version='external-pad-double-reset-v1',
+                external_reset_low_ns=120,prewarm_watchdog_ns=10000000,
+                counter_origin='after_final_external_reset_release',
+                scope='Verilator development only; external pad reset, no internal state initialization',
+                prewarm='wait actual CPU rst_core high, then assert external reset on next HF falling edge; any source/NICE/MMIO/shared request fails')
+
+
+def apply_startup_profile(tb, profile):
+    """An explicit external-pin reset protocol; original assertions stay active."""
+    startup_configuration(profile)
+    if profile=='historical':
+        return tb
+    anchor = '  reg clk = 0, lfclk = 0, rst_n = 0;'
+    assert tb.count(anchor)==1, 'unexpected frozen TB reset declaration'
+    tb = tb.replace(anchor,anchor+'\n  reg s3_startup_complete=0;\n  realtime s3_startup_assert_ns;',1)
+    anchor = '    #120 rst_n=1;'
+    assert tb.count(anchor)==1, 'unexpected frozen TB reset release'
+    tb = tb.replace(anchor,'''    #120 rst_n=1;
+    // Let synchronized CPU reset become high, before any transaction can begin.
+    wait (`CPU.u_e203_cpu.rst_core===1'b1);
+    @(negedge clk);
+    if (source_request || `NICE.nice_req_valid || `ACCEL.cmd_valid || cmd_valid)
+      $fatal(1,"S3 startup reset unsafe prewarm transaction");
+    s3_startup_assert_ns=$realtime/1ns;
+    $display("S3_STARTUP_PROFILE event=second_assert time_ns=%.6f cpu_reset_n=%b",
+      s3_startup_assert_ns,`CPU.u_e203_cpu.rst_core);
+    rst_n=0;
+    #120ns;
+    if (`CPU.u_e203_cpu.rst_core!==1'b0)
+      $fatal(1,"S3 startup reset did not reach actual CPU reset");
+    $display("S3_STARTUP_PROFILE event=second_release time_ns=%.6f held_ns=%.6f cpu_reset_n=%b",
+      $realtime/1ns,$realtime/1ns-s3_startup_assert_ns,`CPU.u_e203_cpu.rst_core);
+    s3_startup_complete=1;
+    rst_n=1;
+    $display("S3_STARTUP_PROFILE event=measurement_begin time_ns=%.6f external_reset_n=%b cycle=%0d",
+      $realtime/1ns,rst_n,cycles);''',1)
+    anchor = '    cycles <= cycles+1;'
+    assert tb.count(anchor)==1, 'unexpected frozen TB cycle counter'
+    tb = tb.replace(anchor,'    cycles <= s3_startup_complete ? cycles+1 : 0;',1)
+    assert tb.count('\nendmodule')==1, 'unexpected frozen TB module boundary'
+    return tb.replace('\nendmodule','''
+  // Prewarm cannot execute clear or payload; all original monitors remain active.
+  always @(posedge source_request or posedge `NICE.nice_req_valid or
+           posedge `ACCEL.cmd_valid or posedge cmd_valid) begin
+    if (!s3_startup_complete)
+      $fatal(1,"S3 startup reset prewarm issued a transaction");
+  end
+  initial begin
+    #10ms;
+    if (!s3_startup_complete) $fatal(1,"S3 startup reset actual CPU release timeout");
+  end
+endmodule''',1)
+
+
+def check_startup_observations(log, profile):
+    startup_configuration(profile)
+    lines = re.findall(r'^S3_STARTUP_PROFILE\b.*$',log,re.M)
+    if profile=='historical':
+        if lines:
+            raise ValueError('unexpected startup records in historical mode')
+        return []
+    patterns = [r'event=second_assert time_ns=([0-9.]+) cpu_reset_n=1',
+                r'event=second_release time_ns=([0-9.]+) held_ns=([0-9.]+) cpu_reset_n=0',
+                r'event=measurement_begin time_ns=([0-9.]+) external_reset_n=1 cycle=0']
+    matches = [re.fullmatch('S3_STARTUP_PROFILE '+pattern,line)
+               for pattern,line in zip(patterns,lines)]
+    if len(lines)!=3 or len(matches)!=3 or not all(matches):
+        raise ValueError('missing, duplicate, unordered or malformed startup records')
+    asserted,released,begin = (Decimal(row.group(1)) for row in matches)
+    held = Decimal(matches[1].group(2))
+    if asserted<=0 or held<120 or released-asserted!=held or begin!=released:
+        raise ValueError('actual external startup reset interval differs')
+    return [dict(item.split('=',1) for item in line.split()[1:]) for line in lines]
+
+
 def vcs_assertion_command(command, enabled):
     """Keep historical defaults explicit; enabled VCS never defines the waiver."""
     command = list(command)
@@ -118,7 +205,56 @@ def vcs_assertion_command(command, enabled):
     return command
 
 
-def instrument_tb(original, observer, platform_clocks='development'):
+def simulator_build_command(soc, simulator, out, filelist, includes, waves,
+                            platform_assertions=False):
+    """Return a build argv and distinct simulator artifact/run argv."""
+    if platform_assertions and simulator!='vcs':
+        raise ValueError('--platform-assertions requires VCS')
+    if simulator=='vcs':
+        build = vcs_assertion_command(soc.vcs_build_command(out, filelist, includes, waves),
+                                      platform_assertions)
+        binary = out/'simv'
+        build[build.index('-o')+1] = str(binary)
+        return build, binary, [str(binary)]
+    if simulator=='verilator':
+        directory = out/'verilator-obj'
+        binary = directory/'soc_sim'
+        build = ['verilator','--binary','--timing','--assert','-CFLAGS','-std=gnu++20',
+                 *(['--trace'] if waves else []),'-j','2','-Wno-fatal',
+                 '--top-module','tb_accel_soc','-Mdir',str(directory),'-o',binary.name,
+                 '-DDISABLE_SV_ASSERTION=1',*['-I'+p for p in includes],'-f',str(filelist)]
+        return build, binary, [str(binary)]
+    if simulator=='iverilog':
+        binary = out/'soc.vvp'
+        build = ['iverilog','-g2012','-s','tb_accel_soc','-DDISABLE_SV_ASSERTION=1',
+                 *['-I'+p for p in includes],'-o',str(binary),'-f',str(filelist)]
+        return build, binary, ['vvp',str(binary)]
+    raise ValueError('unknown simulator')
+
+
+def simulator_evidence(simulator, platform_assertions):
+    return dict(simulator=simulator,
+                logic_semantics='2-state' if simulator=='verilator' else '4-state',
+                vendor_sva='enabled' if platform_assertions else 'disabled',
+                chisel_procedural_assertions='enabled_with_--assert' if simulator=='verilator' else 'retained',
+                qualification='DEVELOPMENT_ONLY_NOT_VCS_OR_GATE_LEVEL_SIGNOFF' if simulator=='verilator'
+                              else 'DEVELOPMENT_ONLY_NOT_GATE_LEVEL_SIGNOFF')
+
+
+def version_commands(simulator, cross_prefix):
+    commands = [[sys.executable,'--version'],
+                *[[cross_prefix+tool,'--version'] for tool in ['gcc','objcopy','objdump']],
+                ['gcc','--version']]
+    if simulator=='verilator':
+        commands += [['verilator','--version'],['g++','--version'],['make','--version']]
+    elif simulator=='vcs':
+        commands += [['vcs','-ID']]
+    else:
+        commands += [['iverilog','-V'],['vvp','-V']]
+    return commands
+
+
+def instrument_tb(original, observer, platform_clocks='development', startup_profile='historical'):
     """Add passive clear checks without replacing any payload assertion."""
     anchor = '  integer nice_requests=0, nice_responses=0, nice_retired=0;'
     assert original.count(anchor) == 1, 'unexpected frozen TB declarations'
@@ -150,7 +286,7 @@ def instrument_tb(original, observer, platform_clocks='development'):
     # Every preexisting fatal is retained, and all original TB text outside the
     # three declared insertion seams is byte-identical by construction.
     assert result.count('$fatal(') >= original.count('$fatal(')
-    return apply_platform_clocks(result,platform_clocks)
+    return apply_platform_clocks(apply_startup_profile(result,startup_profile),platform_clocks)
 
 
 def snapshot_inputs(repo, source):
@@ -175,7 +311,8 @@ def main(argv=None, extension=None):
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--schedule', default='bias-hw-autogroup-y32-packed16-nice-window')
     parser.add_argument('--layers', default=','.join(map(str, range(12))))
-    parser.add_argument('--simulator', choices=['vcs','iverilog'], default='vcs')
+    parser.add_argument('--simulator', choices=['vcs','iverilog','verilator'], default='vcs',
+                        help='Verilator is 2-state development evidence, not VCS/gate-level signoff')
     parser.add_argument('--bias-kind', choices=['sram','registers'], required=True)
     parser.add_argument('--cross-prefix', default='/opt/eda/xilinx/2025.2/Vitis/gnu/riscv/lin/bin/riscv64-unknown-elf-')
     parser.add_argument('--first-source-stall', type=int, default=0)
@@ -183,11 +320,15 @@ def main(argv=None, extension=None):
     parser.add_argument('--waves', action='store_true', help='full TB, including separate preclear; not macro power qualification')
     parser.add_argument('--platform-clocks', choices=['development','150mhz'], default='development',
                         help='explicit 150MHz/32.768kHz stimulus, or unchanged historical development clocks')
+    parser.add_argument('--startup-profile', choices=['historical','external-reset'], default='historical',
+                        help='explicit Verilator external pad double reset; historical preserves original startup')
     parser.add_argument('--platform-assertions', action='store_true',
-                        help='enable original vendor SVA in VCS; preserve Chisel/procedural assertions in both modes')
+                        help='enable original vendor SVA in VCS; preserve Chisel/procedural assertions in all modes')
     args = parser.parse_args(argv)
     if args.platform_assertions and args.simulator!='vcs':
         parser.error('--platform-assertions requires VCS')
+    if args.startup_profile!='historical' and args.simulator!='verilator':
+        parser.error('--startup-profile external-reset requires Verilator')
     layers = [int(x) for x in args.layers.split(',')]
     if not layers or len(set(layers)) != len(layers) or any(x not in range(12) for x in layers):
         parser.error('--layers must contain distinct indices from 0..11')
@@ -209,7 +350,9 @@ def main(argv=None, extension=None):
     report = dict(status='RUNNING', scope='fresh-process CPU/RTL, physical parameter preclear; no mapped/PPA or official acceptance',
                   configuration=config, bias_kind=args.bias_kind, original_layers=layers,
                   clock_configuration=clock_configuration(args.platform_clocks),
+                  startup_configuration=startup_configuration(args.startup_profile),
                   platform_assertions='enabled' if args.platform_assertions else 'historical_DISABLED_SV_ASSERTION_define',
+                  simulator_evidence=simulator_evidence(args.simulator,args.platform_assertions),
                   chisel_procedural_assertions='retained',
                   original_source_sha256=pins, steps=[], task_results=[],
                   cache_policy='REVIEW_PENDING', fifo_payload_physical_zero='UNPROVEN',
@@ -223,30 +366,36 @@ def main(argv=None, extension=None):
     def step(name, command, cwd=out, timeout=7200):
         logfile = out/(name+'.log')
         logfile.parent.mkdir(parents=True, exist_ok=True)
-        with logfile.open('x') as log:
-            log.write(json.dumps([str(x) for x in command])+'\n')
-            log.flush()
-            result = subprocess.run(command, cwd=str(cwd), stdin=subprocess.DEVNULL,
-                                    stdout=log, stderr=subprocess.STDOUT, timeout=timeout,
-                                    env=dict(os.environ, PWD=str(Path(cwd).resolve())))
-        report['steps'].append(dict(name=name, native_exit=result.returncode, waitpid_completed=True,
-                                    command=[str(x) for x in command], log_sha256=sha(logfile)))
-        write(out/'result.json', report)
+        record = dict(name=name, native_exit=None, waitpid_completed=False,
+                      command=[str(x) for x in command], command_sha256=command_sha256(command),
+                      cwd=str(Path(cwd).resolve()))
+        report['steps'].append(record)
+        try:
+            with logfile.open('x') as log:
+                log.write(json.dumps(record['command'])+'\n')
+                log.flush()
+                result = subprocess.run(command, cwd=str(cwd), stdin=subprocess.DEVNULL,
+                                        stdout=log, stderr=subprocess.STDOUT, timeout=timeout,
+                                        env=dict(os.environ, PWD=str(Path(cwd).resolve())))
+            record.update(native_exit=result.returncode, waitpid_completed=True)
+        finally:
+            if logfile.is_file():
+                record['log_sha256'] = sha(logfile)
+            write(out/'result.json', report)
         if result.returncode:
             raise RuntimeError('native exit '+str(result.returncode)+': '+str(logfile))
         return logfile.read_text(errors='replace').split('\n',1)[1]
 
     try:
         report['versions'] = {}
-        for tool, flag in [(args.cross_prefix+'gcc','--version'), ('gcc','--version'),
-                           ('vcs','-ID') if args.simulator=='vcs' else ('iverilog','-V')]:
-            report['versions'][tool] = step('version-'+Path(tool).name, [tool,flag], timeout=120)
+        for command in version_commands(args.simulator,args.cross_prefix):
+            report['versions'][command[0]] = step('version-'+Path(command[0]).name, command, timeout=120)
         firmware = source/'tests/e203/firmware'
         (out/'s3_clear_main.c').write_text(clear.firmware_wrapper(firmware/'main.c', sha(firmware/'main.c')))
         observer = clear.observer_declarations()
         (out/'s3_clear_observer.svh').write_text(observer)
         original_tb = (source/'tests/e203/tb_accel_soc.sv').read_text()
-        generated_tb = instrument_tb(original_tb, observer,args.platform_clocks)
+        generated_tb = instrument_tb(original_tb, observer,args.platform_clocks,args.startup_profile)
         if extension is not None:
             generated_tb = extension.testbench(generated_tb, source, out, args)
         (out/'tb.sv').write_text(generated_tb)
@@ -269,31 +418,24 @@ def main(argv=None, extension=None):
         if '80000086 <write_tohost>' not in disassembly:
             raise ValueError('tohost PC identity differs from frozen TB')
         report['firmware_elf_sha256'], report['firmware_image_sha256'] = sha(elf), sha(image)
+        report['firmware_elf'] = str(elf)
         sources = sorted(p for p in (source/'rtl').rglob('*') if p.suffix in ['.v','.sv'])+[out/'tb.sv']
         if extension is not None:
             sources = extension.sources(sources, source, out)
         includes = [str(source/'rtl'/p) for p in ['core','perips','perips/apb_i2c']]
         (out/'rtl.f').write_text(''.join(str(p)+'\n' for p in sources))
-        if args.simulator=='vcs':
-            build = vcs_assertion_command(soc.vcs_build_command(out, out/'rtl.f', includes, args.waves),
-                                          args.platform_assertions)
-            if args.platform_assertions:
-                xchecker = source/'rtl/general/sirv_gnrl_xchecker.v'
-                if xchecker not in sources:
-                    raise ValueError('vendor xchecker missing from full platform RTL')
-                report['platform_xchecker_sha256'] = sha(xchecker)
-            binary, program = out/'accel_soc', [str(out/'accel_soc')]
-            # Keep executable simulator and RISC-V ELF identities separate.
-            build[build.index('-o')+1] = str(out/'simv')
-            binary, program = out/'simv', [str(out/'simv')]
-        else:
-            binary, program = out/'soc.vvp', ['vvp',str(out/'soc.vvp')]
-            build = ['iverilog','-g2012','-s','tb_accel_soc','-DDISABLE_SV_ASSERTION=1',
-                     *['-I'+p for p in includes],'-o',str(binary),'-f',str(out/'rtl.f')]
+        build, binary, program = simulator_build_command(soc,args.simulator,out,out/'rtl.f',includes,
+                                                         args.waves,args.platform_assertions)
+        if args.platform_assertions:
+            xchecker = source/'rtl/general/sirv_gnrl_xchecker.v'
+            if xchecker not in sources:
+                raise ValueError('vendor xchecker missing from full platform RTL')
+            report['platform_xchecker_sha256'] = sha(xchecker)
         if extension is not None:
             build = extension.build_command(build)
         step('simulator-build', build)
         report['simulator_sha256'] = sha(binary)
+        report['simulator_binary'] = str(binary)
         vectors = out/'original-vectors'
         report['fixture'] = soc.load_fixture(vectors,12)
         # Verify every original tensor and its exact unbounded integer result.
@@ -312,6 +454,7 @@ def main(argv=None, extension=None):
                 *soc.contract.simulator_arguments(args.schedule)], cwd=task)
             native_layers = soc.check_log(log,1,args.schedule)
             clocks = check_clock_observations(log,args.platform_clocks)
+            startup = check_startup_observations(log,args.startup_profile)
             counters = soc.check_performance(log,native_layers,args.schedule)
             windows = soc.check_task_windows(log,native_layers)
             clear_lines = re.findall(r'^S3_TASK_CLEAR_OBSERVED .*$',log,re.M)
@@ -325,7 +468,7 @@ def main(argv=None, extension=None):
                 raise ValueError('physical bias kind or clear work differs')
             item = dict(original_layer=layer,native_layer=0,cycles=native_layers[0]['cycles'],
                         performance=counters[0],window=windows[0],clear=clear_record,
-                        measured_clocks=clocks,**identity)
+                        measured_clocks=clocks,startup_observations=startup,**identity)
             if args.schedule in soc.contract.NICE_SCHEDULES:
                 item['nice_activity'] = soc.check_nice_activity(log,native_layers,args.schedule)[0]
             if extension is not None:

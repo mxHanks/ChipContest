@@ -265,7 +265,7 @@ class S3TaskClearNativeTests(unittest.TestCase):
         perips = ROOT/'third-party/e203_hbirdv2/rtl/e203/perips'
         variant = None
         if not use_sram:
-            self.assertIn('S3_REGISTER_BIAS_RTL_DIR', os.environ,
+            self.assertTrue('S3_REGISTER_BIAS_RTL_DIR' in os.environ,
                           'Set generated register-bias RTL directory explicitly; do not skip fallback')
             variant = Path(os.environ['S3_REGISTER_BIAS_RTL_DIR'])
             self.assertTrue((variant/'LinearAutoGroupCore.sv').is_file())

@@ -1,6 +1,5 @@
 `include "e203_defines.v"
 // Isolated transport/FSM tests only. This does NOT prove real LSU reachability.
-// Root runs this on Linux; no local compile/simulation result is claimed.
 module tb_nice_drain8;
   reg clk=0, rst_n=0;
   always #5 clk=~clk;
@@ -12,6 +11,9 @@ module tb_nice_drain8;
   integer cases=0, total_commands=0, total_responses=0;
   integer case_commands=0, case_responses=0;
   integer clock_count=0;
+  reg [7:0] lane_responses=0, write_responses=0;
+  reg alias_retired=0;
+  integer alias_errors=0, post_pop_write_errors=0;
   wire [66:0] payload={cmd_addr,cmd_read,cmd_data,cmd_size};
 
   xu_nice_drain8 dut (
@@ -61,20 +63,12 @@ module tb_nice_drain8;
         if (bad_head==2) reply=(group_id<<6)|32'h2;
       end else if (index<=empty_polls+8) begin
         lane=index-empty_polls-1;
-        expected_addr=32'h10042180+4*lane;
+        expected_addr=lane==7 ? 32'h100421a0 : 32'h10042180+4*lane;
         reply=lane_data(lane);
-      end else if (index<=empty_polls+15) begin
+      end else if (index<=empty_polls+16) begin
         lane=index-empty_polls-9;
         expected_addr=destination+4*lane;
         expected_data=lane_data(lane);
-        expected_read=0;
-      end else if (index==empty_polls+16) begin
-        expected_addr=32'h100420c8;
-        expected_data=1;
-        expected_read=0;
-      end else if (index==empty_polls+17) begin
-        expected_addr=destination+28;
-        expected_data=lane_data(7);
         expected_read=0;
       end else $fatal(1,"unexpected extra command index=%0d",index);
       if (cmd_addr!==expected_addr || cmd_read!==expected_read || cmd_size!==2'b10 ||
@@ -92,6 +86,11 @@ module tb_nice_drain8;
       @(posedge clk);
       if (!(cmd_valid && cmd_ready) || case_commands!=case_responses)
         $fatal(1,"command handshake or single outstanding failed");
+      if(expected_addr==32'h100421a0 &&
+         (lane_responses!==8'h7f || write_responses!==0 || alias_retired))
+        $fatal(1,"alias issued before all seven ordinary lane responses retired");
+      if(!expected_read && (lane_responses!==8'hff || !alias_retired))
+        $fatal(1,"Y write before complete snapshot and read-POP response retirement");
       case_commands=case_commands+1;
       total_commands=total_commands+1;
       @(negedge clk);
@@ -109,6 +108,15 @@ module tb_nice_drain8;
       bus_rsp_valid=1;
       @(posedge clk);
       if (!bus_rsp_ready) $fatal(1,"DUT did not consume outstanding response");
+      if(!reply_error) begin
+        if(index>empty_polls && index<=empty_polls+8) lane_responses[lane]=1;
+        if(expected_addr==32'h100421a0) alias_retired=1;
+        if(!expected_read) write_responses[lane]=1;
+      end else if(expected_addr==32'h100421a0) alias_errors=alias_errors+1;
+      else if(!expected_read) begin
+        if(!alias_retired) $fatal(1,"post-POP write error coverage missed ownership release");
+        post_pop_write_errors=post_pop_write_errors+1;
+      end
       case_responses=case_responses+1;
       total_responses=total_responses+1;
       @(negedge clk);
@@ -127,7 +135,7 @@ module tb_nice_drain8;
     begin
       @(negedge clk);
       if (!req_ready || cmd_valid || rsp_valid) $fatal(1,"case did not start idle");
-      case_commands=0; case_responses=0;
+      case_commands=0; case_responses=0; lane_responses=0; write_responses=0; alias_retired=0;
       req_inst=instruction; req_rs1=destination; req_rs2=(poll_limit<<5)|group_id;
       req_valid=1;
       @(posedge clk);
@@ -149,9 +157,11 @@ module tb_nice_drain8;
           case_commands!=expected_commands || case_responses!=case_commands)
         $fatal(1,"wrong completion code=%0d expected=%0d commands=%0d expected_commands=%0d",
                rsp_data,expected_code,case_commands,expected_commands);
+      if(expected_code==0 && (lane_responses!==8'hff || write_responses!==8'hff || !alias_retired))
+        $fatal(1,"completion before eighth Y response retired");
       saved_completion={rsp_err,rsp_data};
       // Completion backpressure must retain the response, with no new command
-      // or new instruction acceptance, including after POP/last-write errors.
+      // or new instruction acceptance, including all eight post-POP write errors.
       req_valid=1;
       for (j=0; j<9; j=j+1) begin
         @(negedge clk);
@@ -175,14 +185,14 @@ module tb_nice_drain8;
     #22 rst_n=1;
     // All 32 group tags, all lanes and delayed head availability.
     for (group_id=0; group_id<32; group_id=group_id+1)
-      run_case(32'ha0020000+32*group_id,3,group_id,0,20,-1,2,0,group_id,32'h4000707b);
+      run_case(32'ha0020000+32*group_id,3,group_id,0,19,-1,2,0,group_id,32'h4000707b);
     // Both range endpoints; poll_limit=1 is NOT a bus-cycle timeout.
-    run_case(32'ha0020000,1,0,0,18,-1,0,0,31,32'h4000707b);
-    run_case(32'ha0038be0,1,31,0,18,-1,0,0,31,32'h4000707b);
+    run_case(32'ha0020000,1,0,0,17,-1,0,0,31,32'h4000707b);
+    run_case(32'ha0038be0,1,31,0,17,-1,0,0,31,32'h4000707b);
     // Same legal aligned destination is allowed with any matching head tag.
-    run_case(32'ha0020000,1,31,0,18,-1,0,0,2,32'h4000707b);
+    run_case(32'ha0020000,1,31,0,17,-1,0,0,2,32'h4000707b);
     // An error on every individual transaction forbids all later commands.
-    for (error_index=0; error_index<18; error_index=error_index+1)
+    for (error_index=0; error_index<17; error_index=error_index+1)
       run_case(32'ha0020000,1,0,8,error_index+1,error_index,0,0,error_index,32'h4000707b);
     run_case(32'ha0020000,3,0,5,3,-1,3,0,3,32'h4000707b);
     run_case(32'ha0020000,1,31,6,1,-1,0,1,4,32'h4000707b);
@@ -195,8 +205,9 @@ module tb_nice_drain8;
     run_case(32'hffffffe0,1,0,3,0,-1,0,0,0,32'h4000707b);
     run_case(32'ha0020000,0,0,4,0,-1,0,0,0,32'h4000707b);
     if (total_commands!=total_responses) $fatal(1,"final request conservation failed");
-    $display("NICE_DRAIN8_UNIT_PASS cases=%0d commands=%0d responses=%0d all_error_transactions=18 groups=32",
-             cases,total_commands,total_responses);
+    if(alias_errors!=1 || post_pop_write_errors!=8) $fatal(1,"read-pop error coverage incomplete");
+    $display("NICE_DRAIN8_UNIT_PASS cases=%0d commands=%0d responses=%0d all_error_transactions=17 groups=32 alias_errors=%0d post_pop_write_errors=%0d",
+             cases,total_commands,total_responses,alias_errors,post_pop_write_errors);
     $finish;
   end
 

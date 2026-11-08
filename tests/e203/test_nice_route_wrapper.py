@@ -38,7 +38,7 @@ class XuNiceRouteWrapperTests(unittest.TestCase):
                                   universal_newlines=True,timeout=60)
             save('simulation.log',result.stdout)
             self.assertEqual(result.returncode,0,result.stdout)
-            marker='XU_NICE_ROUTE_WRAPPER_PASS unsupported=1024 descriptor_errors=1 legacy=4 drain=1 requests=1030 completions=1030 commands=30 responses=30'
+            marker='XU_NICE_ROUTE_WRAPPER_PASS unsupported=1024 descriptor_errors=1 legacy=4 drain=1 requests=1030 completions=1030 commands=29 responses=29'
             self.assertEqual(result.stdout.count(marker),1,result.stdout)
             self.assertEqual(len(re.findall(r'^NICE_ROUTE_LEGACY_COMPAT_PASS ',result.stdout,re.M)),4,result.stdout)
             self.assertNotRegex(result.stdout,re.compile(r'(?im)^\s*(?:Fatal:|Error:|FATAL:)|\b(?:FAIL|FAILED|FAILURE)\b'))

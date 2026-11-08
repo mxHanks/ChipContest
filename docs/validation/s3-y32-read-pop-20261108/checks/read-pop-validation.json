@@ -1,0 +1,38 @@
+{
+  "status": "DIRECT_CHECKS_PASS_FULL_SOC_OWNED_BY_ROOT",
+  "scope": "paired hardware transport, direct unit/wrapper/route and Python contracts; no CPU/full-SoC performance claim",
+  "source_sha256": {
+    "third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v": "004dd136ce73e8a87fd59adf0b005382483400d8fdaf16954f86882268d78cf4",
+    "third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "7a3832158198b72150b27be689f1e1c31e388afb47beb098131c0517452cc537",
+    "experiments/nice_reachability/tb_nice_drain8.sv": "87e22684fa68cc7dedd6d44caada5589967f16611edd2311f423c5f8b6864874",
+    "experiments/nice_reachability/tb_nice_completion_normal.sv": "55be595806561a3a7b612e455344159f41d291c5f418123329dd26def4e80d64",
+    "tests/e203/tb_accel_soc.sv": "8cfdeb52d000a572d2c46a6b58aee08191ffbb5e2cb2333c9fe0803e17438f9f",
+    "tests/e203/tb_xu_nice_route_wrapper.sv": "916d6984e71e355b89cfb9a9d2cacf8aff101ec44cff052da266075520d6b5dc",
+    "tests/e203/test_nice_route_wrapper.py": "77863dce4b7eaf53604e335a71d0fb97794d0a2fb77131190223e0db985434a9",
+    "tests/e203/tb_xu_read_pop_wrapper.sv": "b157c6580019bb0ffd3cb18a8a128ee941fb28e304eb82198d0ef94d1ae4a79d",
+    "tests/e203/test_read_pop_wrapper.py": "c6dcf424aebd90b971df20704315a8946ae79a9592d5c3f13b712780f089509e",
+    "tests/e203/test_y32_firmware_contract.py": "6471c005040342f0eb853af120248dda151fc1ac563de79e6eaca0ed4e7d4e63",
+    "tools/scripts/xu_firmware_contract.py": "75b874f749744389b807540a0df48751f58cd3dd2f0554f31b681a6d9c2e2577",
+    "tools/scripts/e203_soc.py": "4754030a295feb7f26faeb29601481757b37b53d58e5757c65a4d320fe00e838"
+  },
+  "checks": {
+    "drain8": "61 cases / 817 CMD-RSP / 17 error locations / alias error1 / all8 post-POP write errors",
+    "alias_wrapper": "32 naturally produced groups / alias pops32 / ordinary lane7 reads64 / legacy explicit POP1 / stalled owned-head / legal bounds + illegal range/X assertions",
+    "legacy_y32_wrapper": "original wrapper test PASS",
+    "route_verilator_assert": "requests/completions1030 / CMD-RSP29 / legacy4 / unsupported1024",
+    "y32_firmware_contract": "13 tests PASS including strict READ_POP_TASK parser",
+    "hardware_contract": "7 tests PASS",
+    "firmware_contract": "7 tests PASS",
+    "performance": "3 tests PASS"
+  },
+  "negative_controls": {
+    "old-18-transport": {
+      "native_exit": 1,
+      "rejection": "wrong drain command"
+    },
+    "retry-after-alias-write-error": {
+      "native_exit": 1,
+      "rejection": "command after error/timeout/invalid descriptor"
+    }
+  }
+}

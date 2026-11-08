@@ -112,10 +112,8 @@ module tb_xu_nice_route_wrapper;
     begin
       reading=1;data=0;reply=0;
       if(position==0) begin address=32'h100420c4;reply=(3<<6)|3;end
-      else if(position<9) begin lane=position-1;address=32'h10042180+4*lane;reply=lane_data(lane);end
-      else if(position<16) begin lane=position-9;address=32'ha0020000+4*lane;data=lane_data(lane);reading=0;end
-      else if(position==16) begin address=32'h100420c8;data=1;reading=0;end
-      else begin address=32'ha002001c;data=lane_data(7);reading=0;end
+      else if(position<9) begin lane=position-1;address=lane==7 ? 32'h100421a0 : 32'h10042180+4*lane;reply=lane_data(lane);end
+      else begin lane=position-9;address=32'ha0020000+4*lane;data=lane_data(lane);reading=0;end
       if(!nice_icb_cmd_valid || nice_icb_cmd_addr!==address || nice_icb_cmd_read!==reading ||
          nice_icb_cmd_size!==2 || (!reading&&nice_icb_cmd_wdata!==data))
         $fatal(1,"Wrong top-routed drain command position=%0d",position);
@@ -145,9 +143,9 @@ module tb_xu_nice_route_wrapper;
       nice_req_rs2=(2<<5)|3;nice_req_valid=1;nice_rsp_ready=0;
       @(posedge nice_clk);if(!nice_req_ready) $fatal(1,"Drain request not accepted");
       @(negedge nice_clk);nice_req_inst=32'h0200207b;nice_req_rs1=32'hbad00000;
-      for(p=0;p<18;p=p+1) service_drain(p);
+      for(p=0;p<17;p=p+1) service_drain(p);
       finish_checked(0,7);
-      if(commands!=before_cmd+18 || responses!=commands || requests!=before_req+1)
+      if(commands!=before_cmd+17 || responses!=commands || requests!=before_req+1)
         $fatal(1,"Top-routed drain accounting differs");
       drain_cases=drain_cases+1;
     end
@@ -237,10 +235,10 @@ module tb_xu_nice_route_wrapper;
     end
     legacy_transaction(2,2); // retained demo state survived checked/drain work
     if(unsupported!=1024 || descriptor_errors!=1 || legacy_cases!=4 || drain_cases!=1 ||
-       requests!=1030 || completions!=requests || commands!=30 || responses!=commands)
+       requests!=1030 || completions!=requests || commands!=29 || responses!=commands)
       $fatal(1,"Final route accounting wrong unsupported=%0d requests=%0d completions=%0d commands=%0d responses=%0d",
         unsupported,requests,completions,commands,responses);
-    $display("XU_NICE_ROUTE_WRAPPER_PASS unsupported=1024 descriptor_errors=1 legacy=4 drain=1 requests=1030 completions=1030 commands=30 responses=30");
+    $display("XU_NICE_ROUTE_WRAPPER_PASS unsupported=1024 descriptor_errors=1 legacy=4 drain=1 requests=1030 completions=1030 commands=29 responses=29");
     $finish;
   end
   initial begin #2000000;$fatal(1,"Nice routing global timeout");end

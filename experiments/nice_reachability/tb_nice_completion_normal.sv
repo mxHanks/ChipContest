@@ -14,8 +14,9 @@ module tb_nice_completion_normal;
   integer cycles=0, request_cycle=0, requests=0, responses=0;
   integer polls=0, lanes=0, pops=0, writes=0, checked=0, pending=0;
   reg [7:0] seen_writes=0, seen_checks=0;
-  integer error_write=-1, committed=0, failed_responses=0;
-  integer source_pending_kind=0, retired_pops=0;
+  integer error_write=-1, committed=0, failed_responses=0, nice_read_pop=0;
+  integer source_pending_kind=0, source_lane=0, retired_pops=0, retired_lanes=0, retired_writes=0;
+  reg source_failed=0;
   reg [4:0] rd;
   reg [`E203_ITAG_WIDTH-1:0] tag;
   assign cmd_ready=(!rsp_valid || rsp_ready) && cycles%7!=0;
@@ -63,6 +64,8 @@ module tb_nice_completion_normal;
     integer i;
     if(!$value$plusargs("TESTCASE=%s",testcase)) $fatal(1,"missing TESTCASE");
     if(!$value$plusargs("ERROR_WRITE=%d",error_write)) error_write=-1;
+    if(!$value$plusargs("NICE_READ_POP=%d",nice_read_pop)) nice_read_pop=0;
+    if(nice_read_pop!=0 && nice_read_pop!=1) $fatal(1,"invalid read-pop profile");
     if(error_write < -1 || error_write > 7) $fatal(1,"invalid error-write lane");
     for(i=0;i<65536;i=i+1) program_bytes[i]=0;
     $readmemh({testcase,".verilog"},program_bytes);
@@ -89,7 +92,9 @@ module tb_nice_completion_normal;
         if(!cmd_read) begin
           if(responses || requests!=1 || seen_writes[lane] || cmd_wmask!==15 ||
               lane!=writes || cmd_wdata!==golden(lane)) $fatal(1,"bad real NICE output/owner/order");
-          if(lane==7 && retired_pops!=1) $fatal(1,"last write preceded successful POP response");
+          if(retired_lanes!=8 ||
+              ((nice_read_pop || lane==7) ? retired_pops!=1 : retired_pops!=0))
+            $fatal(1,"Y write preceded complete snapshot or mismatched POP profile");
           if(lane==error_write) rsp_err<=1;
           else begin ram[lane]=cmd_wdata; committed=committed+1; end
           seen_writes[lane]=1; writes=writes+1; rsp_rdata<=0;
@@ -113,24 +118,53 @@ module tb_nice_completion_normal;
         if(source_pending_kind==2) begin
           if(`NICE.nice_icb_rsp_err) $fatal(1,"POP unexpectedly failed");
           retired_pops=retired_pops+1;
+        end else if(source_pending_kind==3 || source_pending_kind==5) begin
+          if(`NICE.nice_icb_rsp_err || `NICE.nice_icb_rsp_rdata!==golden(source_lane) ||
+              source_lane!=retired_lanes) $fatal(1,"bad real NICE lane snapshot response");
+          retired_lanes=retired_lanes+1;
+          if(source_pending_kind==5) retired_pops=retired_pops+1;
+        end else if(source_pending_kind==4) begin
+          if(`NICE.nice_icb_rsp_err) source_failed=1;
+          else retired_writes=retired_writes+1;
         end
         source_pending_kind=0;
       end
       if(`NICE.nice_icb_cmd_valid && `NICE.nice_icb_cmd_ready) begin
         if(source_pending_kind) $fatal(1,"multiple NICE bus commands outstanding");
+        if(source_failed || failed_responses) $fatal(1,"write failure emitted later command/retry");
         source_pending_kind=(!`NICE.nice_icb_cmd_read && `NICE.nice_icb_cmd_addr==32'h100420c8) ? 2 : 1;
         if(!requests || responses) $fatal(1,"NICE command outside owned instruction");
         if(`NICE.nice_icb_cmd_read && `NICE.nice_icb_cmd_addr==32'h100420c4) polls=polls+1;
-        else if(`NICE.nice_icb_cmd_read && `NICE.nice_icb_cmd_addr>=32'h10042180 &&
-            `NICE.nice_icb_cmd_addr<=32'h1004219c) lanes=lanes+1;
-        else if(!`NICE.nice_icb_cmd_read && `NICE.nice_icb_cmd_addr==32'h100420c8) pops=pops+1;
+        else if(nice_read_pop && `NICE.nice_icb_cmd_read && `NICE.nice_icb_cmd_addr==32'h100421a0) begin
+          if(lanes!=7 || retired_lanes!=7 || pops || writes)
+            $fatal(1,"alias preceded seven lane responses or followed a Y write");
+          source_pending_kind=5; source_lane=7; lanes=8; pops=1;
+        end else if(`NICE.nice_icb_cmd_read && `NICE.nice_icb_cmd_addr>=32'h10042180 &&
+            `NICE.nice_icb_cmd_addr<=32'h1004219c) begin
+          if(`NICE.nice_icb_cmd_addr!==32'h10042180+4*lanes || pops || writes ||
+              (nice_read_pop && lanes==7))
+            $fatal(1,"bad real NICE lane snapshot command order");
+          source_pending_kind=3; source_lane=lanes; lanes=lanes+1;
+        end else if(!`NICE.nice_icb_cmd_read && `NICE.nice_icb_cmd_addr==32'h100420c8) begin
+          if(nice_read_pop || lanes!=8 || retired_lanes!=8 || pops || writes!=7)
+            $fatal(1,"legacy explicit POP profile/order mismatch");
+          pops=pops+1;
+        end
         else if(`NICE.nice_icb_cmd_read || `NICE.nice_icb_cmd_addr<32'ha0020000 ||
             `NICE.nice_icb_cmd_addr>32'ha002001c) $fatal(1,"unexpected NICE source command");
+        else begin
+          if(retired_lanes!=8 ||
+              ((nice_read_pop || `NICE.nice_icb_cmd_addr==32'ha002001c) ? retired_pops!=1 : retired_pops!=0))
+            $fatal(1,"NICE Y command snapshot or POP profile mismatch");
+          source_pending_kind=4;
+        end
       end
       if(`NICE.nice_rsp_valid && `NICE.nice_rsp_ready) begin
         if(responses || writes!=(error_write>=0 ? error_write+1 : 8) || polls<1 || lanes!=8 ||
-            pops!=(error_write>=0 && error_write<7 ? 0 : 1) || retired_pops!=pops || pending ||
+            pops!=((nice_read_pop || error_write<0 || error_write==7) ? 1 : 0) ||
+            retired_pops!=pops || retired_lanes!=8 || pending ||
             source_pending_kind || committed!=(error_write>=0 ? error_write : 8) ||
+            retired_writes!=committed || source_failed!==(error_write>=0) ||
             failed_responses!=(error_write>=0 ? 1 : 0) ||
             `NICE.nice_rsp_err!==(error_write>=0) || `NICE.nice_rsp_rdat!==(error_write>=0 ? 32'd8 : 32'd0) ||
             !`OITF.ret_ena || `OITF.ret_ptr!==tag || !`OITF.ret_rdwen || `OITF.ret_rdidx!==rd ||

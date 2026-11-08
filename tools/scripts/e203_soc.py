@@ -107,6 +107,7 @@ def check_performance(log, layers, schedule='baseline'):
     check_autogroup_activity(log, layers, schedule)
     check_result_activity(log, layers, schedule)
     check_weight_activity(log, layers, schedule)
+    check_read_pop_activity(log, layers, schedule)
     nice_records = check_nice_activity(log, layers, schedule)
     fields = contract.PERFORMANCE_FIELDS
     pattern = r'^PERF_TASK ' + ' '.join(name + r'=(\d+)' for name in fields) + r'$'
@@ -180,6 +181,20 @@ def check_nice_activity(log, layers, schedule):
     if len(records) != len(re.findall(r'^NICE_TASK\b', log, re.M)):
         raise ValueError('malformed or duplicate NICE activity')
     contract.validate_nice_activity(records, layers, schedule)
+    return records
+
+
+def check_read_pop_activity(log, layers, schedule):
+    names = ['layer', 'alias_reads', 'explicit_pops']
+    pattern = r'^READ_POP_TASK ' + ' '.join(name + r'=(\d+)' for name in names) + r'$'
+    found = re.findall(pattern, log, re.M)
+    expected = len(layers) if schedule == contract.NICE_READ_POP_SCHEDULE else 0
+    if len(found) != expected or len(found) != len(re.findall(r'^READ_POP_TASK\b', log, re.M)):
+        raise ValueError('missing, duplicate or malformed read-pop activity')
+    records = [dict(zip(names, map(int, row))) for row in found]
+    for record, layer in zip(records, layers):
+        if record != dict(layer=layer['layer'], alias_reads=3168, explicit_pops=0):
+            raise ValueError('read-pop alias retirement or explicit POP coverage differs')
     return records
 
 

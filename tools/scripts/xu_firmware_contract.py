@@ -12,16 +12,18 @@ SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-wi
              'bias-hw-autogroup-paired-hi-window', 'bias-hw-autogroup-y32-window',
              'bias-hw-autogroup-paired-hi-packed16-window',
              'bias-hw-autogroup-y32-packed16-window',
-             'bias-hw-autogroup-y32-packed16-nice-window')
+             'bias-hw-autogroup-y32-packed16-nice-window',
+             'bias-hw-autogroup-y32-packed16-nice-read-pop-window')
 PAIRED_HI_SCHEDULE = 'bias-hw-autogroup-paired-hi-window'
 PAIRED_HI_PACKED16_SCHEDULE = 'bias-hw-autogroup-paired-hi-packed16-window'
 PAIRED_HI_SCHEDULES = (PAIRED_HI_SCHEDULE, PAIRED_HI_PACKED16_SCHEDULE)
 Y32_SCHEDULE = 'bias-hw-autogroup-y32-window'
 Y32_PACKED16_SCHEDULE = 'bias-hw-autogroup-y32-packed16-window'
 NICE_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-window'
-NICE_SCHEDULES = (NICE_SCHEDULE,)
-Y32_SCHEDULES = (Y32_SCHEDULE, Y32_PACKED16_SCHEDULE, NICE_SCHEDULE)
-PACKED16_SCHEDULES = (PAIRED_HI_PACKED16_SCHEDULE, Y32_PACKED16_SCHEDULE, NICE_SCHEDULE)
+NICE_READ_POP_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-read-pop-window'
+NICE_SCHEDULES = (NICE_SCHEDULE, NICE_READ_POP_SCHEDULE)
+Y32_SCHEDULES = (Y32_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
+PACKED16_SCHEDULES = (PAIRED_HI_PACKED16_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
 AUTOGROUP_SCHEDULES = ('bias-hw-autogroup-window',) + PAIRED_HI_SCHEDULES + Y32_SCHEDULES
 OPTIMIZATIONS = ('-Os', '-O2', '-O3')
 EXPERIMENTS = ('none', 'bias-unroll', 'result-unroll', 'both-unroll', 'no-masks',
@@ -96,6 +98,10 @@ def simulator_arguments(schedule='baseline'):
         arguments.append('+SHARED_W_PACKED16=1')
     if schedule in NICE_SCHEDULES:
         arguments.append('+NICE_DRAIN8=1')
+    # This selects the observer/contract for the matching RTL snapshot. It
+    # does not switch hardware behavior or change the custom instruction ABI.
+    if schedule == NICE_READ_POP_SCHEDULE:
+        arguments.append('+NICE_READ_POP=1')
     return arguments
 
 
@@ -117,6 +123,9 @@ def task_contract(schedule='baseline'):
     if schedule in AUTOGROUP_SCHEDULES:
         # One STARTROW and 32 response-retired POPs per row. No GROUP/W1C.
         mmio_writes = (1 + w_reads // 2) + 99 * (1 + 32) + 768 + 2 + 99 * (1 + 32)
+    if schedule == NICE_READ_POP_SCHEDULE:
+        # Lane7 read response retires each POP, removing 32 writes per row.
+        mmio_writes -= 99 * 32
     # Source packing does not change the 8192 W_PACK32 upload transactions.
     if schedule in PACKED16_SCHEDULES:
         w_reads = 8192

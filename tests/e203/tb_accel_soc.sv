@@ -22,7 +22,7 @@ module tb_accel_soc;
   integer outstanding = 0;
   reg final_write_pending = 0;
   integer dumpwave;
-  integer output_y32 = 0, shared_w_packed16 = 0, output_words = 50688, nice_drain8 = 0;
+  integer output_y32 = 0, shared_w_packed16 = 0, output_words = 50688, nice_drain8 = 0, nice_read_pop = 0;
   localparam BASE = 32'ha0000000, YOFF = 32'h20000, HOST = 32'h7f000;
 
   // Backpressure exercises CPU/bus waits; responses remain stable until accepted.
@@ -43,6 +43,9 @@ module tb_accel_soc;
   integer nice_requests=0, nice_responses=0, nice_retired=0;
   integer nice_request_cycle=0;
   integer nice_polls=0, nice_reads=0, nice_pops=0, nice_writes=0, nice_step=0;
+  integer nice_alias_responses=0, nice_group_writes=0, nice_final_y_response_cycle=-1;
+  reg [7:0] nice_lane_responses=0;
+  reg nice_pop_retired=0;
   reg nice_instruction=0, nice_pending=0, nice_endpoint=0, nice_endpoint_done=0;
   reg [31:0] nice_destination=0, nice_address=0, nice_data=0, nice_endpoint_data=0;
   reg nice_read=0;
@@ -71,6 +74,12 @@ module tb_accel_soc;
       nice_completion_hold=`NICE.nice_rsp_valid && !`NICE.nice_rsp_ready;
       nice_saved_command=nice_command_payload; nice_saved_completion=nice_completion_payload;
 
+      if (`NICE.nice_rsp_valid &&
+          (!nice_instruction || nice_pending || nice_step!=(nice_read_pop ? 17 : 18) ||
+           nice_lane_responses!==8'hff || !nice_pop_retired || nice_group_writes!=8 ||
+           nice_final_y_response_cycle<0 || cycles<=nice_final_y_response_cycle))
+        $fatal(1,"NICE completion offered before final Y response retired");
+
       if (nice_instruction && `OITF.ret_ena && `OITF.ret_ptr===nice_tag &&
           !(`NICE.nice_rsp_valid && `NICE.nice_rsp_ready))
         $fatal(1,"NICE OITF entry retired before its completion");
@@ -93,6 +102,8 @@ module tb_accel_soc;
             `OITF.disp_i_rdidx!==`NICE.nice_req_inst[11:7])
           $fatal(1,"NICE instruction descriptor or OITF allocation mismatch index=%0d",nice_requests);
         nice_instruction=1; nice_step=0; nice_request_cycle=cycles; nice_destination=`NICE.nice_req_rs1;
+        nice_lane_responses=0; nice_pop_retired=0; nice_group_writes=0;
+        nice_final_y_response_cycle=-1;
         nice_group=`NICE.nice_req_rs2[4:0]; nice_rd=`NICE.nice_req_inst[11:7];
         nice_tag=`OITF.dis_ptr; nice_requests=nice_requests+1;
       end
@@ -107,13 +118,22 @@ module tb_accel_soc;
         if (nice_step==0) begin
           if (!nice_read || nice_address!==32'h100420c4) $fatal(1,"NICE status poll order");
         end else if (nice_step<=8) begin
-          if (!nice_read || nice_address!==32'h10042180+4*(nice_step-1)) $fatal(1,"NICE lane snapshot order");
-        end else if (nice_step<=15 || nice_step==17) begin
-          lane=nice_step==17 ? 7 : nice_step-9;
+          if (!nice_read || nice_address!==(nice_read_pop && nice_step==8 ?
+              32'h100421a0 : 32'h10042180+4*(nice_step-1)))
+            $fatal(1,"NICE lane snapshot order/profile mismatch");
+          if (nice_read_pop && nice_step==8 &&
+              (nice_lane_responses!==8'h7f || nice_group_writes!=0 || nice_pop_retired))
+            $fatal(1,"NICE alias preceded seven lane responses or followed a Y write");
+        end else if (!nice_read_pop && nice_step==16) begin
+          if (nice_read || nice_address!==32'h100420c8 || nice_data!==1 ||
+              nice_lane_responses!==8'hff || nice_group_writes!=7 || nice_pop_retired)
+            $fatal(1,"NICE legacy POP order");
+        end else if (nice_step<=(nice_read_pop ? 16 : 17)) begin
+          lane=nice_read_pop ? nice_step-9 : (nice_step==17 ? 7 : nice_step-9);
           if (nice_read || nice_address!==nice_destination+4*lane ||
+              nice_lane_responses!==8'hff || nice_group_writes!=lane ||
+              ((nice_read_pop || lane==7) ? !nice_pop_retired : nice_pop_retired) ||
               nice_data!==golden_y32[(nice_requests-1)*8+lane]) $fatal(1,"NICE shared write order/value");
-        end else if (nice_step==16) begin
-          if (nice_read || nice_address!==32'h100420c8 || nice_data!==1) $fatal(1,"NICE POP order");
         end else $fatal(1,"NICE extra bus command after last write");
         nice_pending=1; nice_endpoint=0; nice_endpoint_done=0;
       end
@@ -159,15 +179,28 @@ module tb_accel_soc;
             nice_step=1;
           end
         end else begin
-          if (nice_step<=8) nice_reads=nice_reads+1;
-          else if (nice_step==16) nice_pops=nice_pops+1;
-          else nice_writes=nice_writes+1;
+          if (nice_step<=8) begin
+            nice_reads=nice_reads+1;
+            nice_lane_responses[nice_step-1]=1;
+            if (nice_read_pop && nice_step==8) begin
+              nice_alias_responses=nice_alias_responses+1;
+              nice_pops=nice_pops+1;
+              nice_pop_retired=1;
+            end
+          end else if (!nice_read_pop && nice_step==16) begin
+            nice_pops=nice_pops+1;
+            nice_pop_retired=1;
+          end else begin
+            nice_writes=nice_writes+1;
+            nice_group_writes=nice_group_writes+1;
+            if (nice_step==(nice_read_pop ? 16 : 17)) nice_final_y_response_cycle=cycles;
+          end
           nice_step=nice_step+1;
         end
         nice_pending=0;
       end
       if (`NICE.nice_rsp_valid && `NICE.nice_rsp_ready) begin
-        if (!nice_instruction || nice_pending || nice_step!=18 || nice_completion_payload!==0 ||
+        if (!nice_instruction || nice_pending || nice_step!=(nice_read_pop ? 17 : 18) || nice_completion_payload!==0 ||
             !`LONGWB.wbck_sel_nice || !`OITF.ret_ena || `OITF.ret_ptr!==nice_tag ||
             !`OITF.ret_rdwen || `OITF.ret_rdidx!==nice_rd ||
             !`LONGWB.longp_wbck_o_valid || !`LONGWB.longp_wbck_o_ready ||
@@ -196,6 +229,8 @@ module tb_accel_soc;
   integer perf_result_legacy, perf_result_packed, perf_result_logical, perf_result_y32;
   reg [15:0] perf_result_seen, perf_result_pending_mask;
   reg perf_result_pending, perf_result_pending_packed, perf_result_pending_y32;
+  reg perf_result_pending_alias;
+  integer perf_read_pop_aliases, perf_explicit_pops;
   reg [31:0] perf_result_expected;
   // Packed-source coverage is independent of transaction totals: every source
   // address must return its original W pair, then both values must be uploaded.
@@ -220,6 +255,7 @@ module tb_accel_soc;
       perf_result_legacy=0; perf_result_packed=0; perf_result_logical=0; perf_result_y32=0;
       perf_result_seen=0; perf_result_pending=0; perf_result_pending_mask=0;
       perf_result_pending_packed=0; perf_result_pending_y32=0; perf_result_expected=0;
+      perf_result_pending_alias=0; perf_read_pop_aliases=0; perf_explicit_pops=0;
       packed_w_source_seen=0; packed_w_upload_seen=0;
       packed_w_source_words=0; packed_w_uploaded_values=0;
       packed_w_source_index=0; packed_w_source_pending=0; packed_w_source_expected=0;
@@ -227,6 +263,8 @@ module tb_accel_soc;
       packed_w_upload_rsp_seen=0; packed_w_upload_rsp_data=0;
       nice_requests=0; nice_responses=0; nice_retired=0; nice_polls=0;
       nice_reads=0; nice_pops=0; nice_writes=0; nice_step=0;
+      nice_alias_responses=0; nice_group_writes=0; nice_final_y_response_cycle=-1;
+      nice_lane_responses=0; nice_pop_retired=0;
       nice_instruction=0; nice_pending=0; nice_endpoint=0; nice_endpoint_done=0;
       nice_request_cycle=0;
       nice_cmd_hold=0; nice_completion_hold=0;
@@ -244,7 +282,15 @@ module tb_accel_soc;
             `ACCEL.rsp_rdata!==perf_result_expected)
           $fatal(1,"owned result response changed or differs from integer golden");
         if (`ACCEL.rsp_ready) begin
+          // The alias retires its POP at this endpoint edge. NICE may receive
+          // the returned lane7 on a later edge, so count ownership here using
+          // this accepted endpoint response rather than NICE's response mask.
           perf_result_seen=perf_result_seen | perf_result_pending_mask;
+          if (perf_result_pending_alias) begin
+            if (!nice_read_pop || !`ACCEL.row_pop)
+              $fatal(1,"alias response retired without its owned POP");
+            perf_read_pop_aliases=perf_read_pop_aliases+1;
+          end
           if (perf_result_pending_y32) begin
             perf_result_y32=perf_result_y32+1;
             perf_result_logical=perf_result_logical+1;
@@ -259,9 +305,12 @@ module tb_accel_soc;
         end
       end
       if (output_y32 && `ACCEL.cmd_valid && `ACCEL.cmd_ready && !`ACCEL.cmd_read &&
-          `ACCEL.cmd_addr[11:0]==12'h0c8 && `ACCEL.cmd_wdata[0] &&
-          (perf_result_seen!==16'h00ff || perf_result_pending))
-        $fatal(1,"Y32 POP accepted before all eight lane responses retired");
+          `ACCEL.cmd_addr[11:0]==12'h0c8 && `ACCEL.cmd_wdata[0]) begin
+        if (perf_result_seen!==16'h00ff || perf_result_pending)
+          $fatal(1,"Y32 POP accepted before all eight lane responses retired");
+        if (nice_read_pop) $fatal(1,"read-pop profile issued explicit POP write");
+        perf_explicit_pops=perf_explicit_pops+1;
+      end
       if (`ACCEL.row_pop) begin
         if (perf_result_seen!==(output_y32 ? 16'h00ff : 16'hffff) || perf_result_pending)
           $fatal(1,"POP retired before all owned logical result words returned");
@@ -271,18 +320,23 @@ module tb_accel_soc;
           `ACCEL.cmd_read &&
           ((`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h13c) ||
            (`ACCEL.cmd_addr[11:0]>=12'h140 && `ACCEL.cmd_addr[11:0]<=12'h14c) ||
-           (`ACCEL.cmd_addr[11:0]>=12'h180 && `ACCEL.cmd_addr[11:0]<=12'h19c))) begin
+           (`ACCEL.cmd_addr[11:0]>=12'h180 && `ACCEL.cmd_addr[11:0]<=12'h19c) ||
+           `ACCEL.cmd_addr[11:0]==12'h1a0)) begin
         if (`ACCEL.row_valid!==1'b1 || `ACCEL.row_pop!==1'b0 || perf_result_pending ||
             `ACCEL.cmd_addr[1:0]!=0 || (^`ACCEL.row_group)===1'bx ||
             perf_auto_rows<1 || perf_auto_rows>99)
           $fatal(1,"ambiguous or unaligned owned result read");
+        perf_result_pending_alias=`ACCEL.cmd_addr[11:0]==12'h1a0;
+        if (perf_result_pending_alias &&
+            (!nice_read_pop || perf_result_seen!==16'h007f || perf_result_pending))
+          $fatal(1,"read-pop alias requires seven retired ordinary lane responses");
         perf_result_pending_y32=`ACCEL.cmd_addr[11:0]>=12'h180;
         if (perf_result_pending_y32 != (output_y32!=0))
           $fatal(1,"owned result read used the wrong output profile");
         lane=`ACCEL.cmd_addr[5:3];
         perf_result_pending_packed=`ACCEL.cmd_addr[11:0]>=12'h140 &&
                                    `ACCEL.cmd_addr[11:0]<=12'h14c;
-        if (perf_result_pending_y32) lane=`ACCEL.cmd_addr[4:2];
+        if (perf_result_pending_y32) lane=perf_result_pending_alias ? 7 : `ACCEL.cmd_addr[4:2];
         if (perf_result_pending_packed) lane=2*`ACCEL.cmd_addr[3:2];
         index=(perf_auto_rows-1)*256+`ACCEL.row_group*8+lane;
         if (perf_result_pending_y32) begin
@@ -420,7 +474,8 @@ module tb_accel_soc;
         if (mmio_accept && `ACCEL.cmd_read &&
             ((`ACCEL.cmd_addr[11:0]>=12'h080 && `ACCEL.cmd_addr[11:0]<=12'h0bc) ||
              (`ACCEL.cmd_addr[11:0]>=12'h100 && `ACCEL.cmd_addr[11:0]<=12'h14c) ||
-             (`ACCEL.cmd_addr[11:0]>=12'h180 && `ACCEL.cmd_addr[11:0]<=12'h19c))) begin
+             (`ACCEL.cmd_addr[11:0]>=12'h180 && `ACCEL.cmd_addr[11:0]<=12'h19c) ||
+             `ACCEL.cmd_addr[11:0]==12'h1a0)) begin
           phase_now=PERF_WRITEBACK; phase_next=PERF_WRITEBACK;
         end
         if (start_accept || row_start_accept) begin
@@ -552,10 +607,19 @@ module tb_accel_soc;
       if (nice_drain8) begin
         if (nice_requests!=3168 || nice_responses!=3168 || nice_retired!=3168 ||
             nice_polls<3168 || nice_reads!=25344 || nice_pops!=3168 || nice_writes!=25344 ||
+            nice_alias_responses!=(nice_read_pop ? 3168 : 0) || nice_group_writes!=8 ||
+            nice_lane_responses!==8'hff || !nice_pop_retired || nice_final_y_response_cycle<0 ||
             nice_instruction || nice_pending || nice_cmd_hold || nice_completion_hold)
           $fatal(1,"NICE complete task instruction/payload retirement mismatch");
         $display("NICE_TASK layer=%0d requests=%0d responses=%0d oitf_retired=%0d status_polls=%0d result_reads=%0d pops_retired=%0d shared_writes=%0d",
           layer,nice_requests,nice_responses,nice_retired,nice_polls,nice_reads,nice_pops,nice_writes);
+        if (nice_read_pop) begin
+          if (perf_read_pop_aliases!=3168 || perf_explicit_pops!=0)
+            $fatal(1,"read-pop alias endpoint retirement or explicit POP count mismatch");
+          $display("READ_POP_TASK layer=%0d alias_reads=%0d explicit_pops=%0d",
+            layer,perf_read_pop_aliases,perf_explicit_pops);
+        end else if (perf_read_pop_aliases || perf_explicit_pops!=3168)
+          $fatal(1,"legacy NICE endpoint POP profile mismatch");
       end
       $display("PERF_TASK layer=%0d cycles=%0d w_load=%0d x_load=%0d bias_load=%0d compute_wait=%0d writeback=%0d other=%0d busy=%0d mac_fire=%0d mmio_reads=%0d mmio_writes=%0d shared_reads=%0d shared_writes=%0d shared_stall=%0d mmio_stall=%0d starts=%0d dones=%0d",
         layer,perf_cycles,perf_w_load,perf_x_load,perf_bias_load,
@@ -637,9 +701,11 @@ module tb_accel_soc;
     if (!$value$plusargs("OUTPUT_Y32=%d",output_y32)) output_y32=0;
     if (!$value$plusargs("SHARED_W_PACKED16=%d",shared_w_packed16)) shared_w_packed16=0;
     if (!$value$plusargs("NICE_DRAIN8=%d",nice_drain8)) nice_drain8=0;
+    if (!$value$plusargs("NICE_READ_POP=%d",nice_read_pop)) nice_read_pop=0;
     if ((output_y32!=0 && output_y32!=1) ||
         (shared_w_packed16!=0 && shared_w_packed16!=1) ||
-        (nice_drain8!=0 && nice_drain8!=1) || (nice_drain8 && (!output_y32 || !shared_w_packed16)))
+        (nice_drain8!=0 && nice_drain8!=1) || (nice_drain8 && (!output_y32 || !shared_w_packed16)) ||
+        (nice_read_pop!=0 && nice_read_pop!=1) || (nice_read_pop && !nice_drain8))
       $fatal(1,"invalid output or shared W layout mode");
     output_words=output_y32 ? 25344 : 50688;
     if (!$value$plusargs("MAX_CYCLES=%d",max_cycles)) max_cycles=200000000;

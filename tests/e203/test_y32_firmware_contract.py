@@ -38,6 +38,8 @@ def task_log(schedule, tasks=1):
         if schedule in contract.NICE_SCHEDULES:
             lines.append(f'NICE_TASK layer={layer} requests=3168 responses=3168 oitf_retired=3168 '
                          'status_polls=3168 result_reads=25344 pops_retired=3168 shared_writes=25344')
+        if schedule == contract.NICE_READ_POP_SCHEDULE:
+            lines.append(f'READ_POP_TASK layer={layer} alias_reads=3168 explicit_pops=0')
     lines.append(f'SOC_PASS tasks={tasks} outputs={tasks*25344} '
                  f'writes={tasks*work["shared_writes"]}')
     return '\n'.join(lines) + '\n'
@@ -254,6 +256,52 @@ class Y32FirmwareContractTests(unittest.TestCase):
                 self.assertEqual('+SHARED_W_PACKED16=1' in command,
                                  schedule in contract.PACKED16_SCHEDULES)
                 self.assertEqual('+NICE_DRAIN8=1' in command, schedule in contract.NICE_SCHEDULES)
+                self.assertEqual('+NICE_READ_POP=1' in command,
+                                 schedule == contract.NICE_READ_POP_SCHEDULE)
+
+    def test_read_pop_changes_only_transport_work_and_keeps_firmware_abi(self):
+        old, new = contract.NICE_SCHEDULE, contract.NICE_READ_POP_SCHEDULE
+        self.assertEqual(contract.task_contract(new),
+                         {**contract.task_contract(old), 'mmio_writes': 12329})
+        self.assertEqual(contract.task_contract(old)['mmio_writes'], 15497)
+        for optimization in contract.OPTIMIZATIONS:
+            for experiment in contract.EXPERIMENTS:
+                self.assertEqual(
+                    contract.compiler_defines(contract.configuration(new, optimization, experiment)),
+                    contract.compiler_defines(contract.configuration(old, optimization, experiment)))
+        self.assertEqual(contract.simulator_arguments(new),
+                         contract.simulator_arguments(old) + ['+NICE_READ_POP=1'])
+        self.assertIn(new, contract.Y32_SCHEDULES)
+        self.assertIn(new, contract.PACKED16_SCHEDULES)
+        self.assertIn(new, contract.NICE_SCHEDULES)
+
+    def test_read_pop_records_require_alias_retirement_and_forbid_explicit_pops(self):
+        schedule = contract.NICE_READ_POP_SCHEDULE
+        layers = [dict(layer=0, cycles=1000000)]
+        marker = 'READ_POP_TASK layer=0 alias_reads=3168 explicit_pops=0\n'
+        self.assertEqual(soc.check_read_pop_activity(marker, layers, schedule),
+                         [dict(layer=0, alias_reads=3168, explicit_pops=0)])
+        for bad in ['', marker+marker, marker.replace('layer=0', 'layer=1'),
+                    marker.replace('reads=3168', 'reads=3167'),
+                    marker.replace('reads=3168', 'reads=3169'),
+                    marker.replace('reads=3168', 'reads=-1'),
+                    marker.replace('explicit_pops=0', 'explicit_pops=1'),
+                    marker.replace(' explicit_pops=0', ''), marker.rstrip()+' other=0\n']:
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                soc.check_read_pop_activity(bad, layers, schedule)
+        complete = task_log(schedule)
+        self.assertEqual(len(soc.check_performance(complete, layers, schedule)), 1)
+        with self.assertRaises(ValueError):
+            soc.check_performance(complete.replace(marker, ''), layers, schedule)
+        for old in contract.SCHEDULES:
+            if old == schedule:
+                continue
+            self.assertEqual(soc.check_read_pop_activity('', layers, old), [])
+            with self.subTest(old=old), self.assertRaises(ValueError):
+                soc.check_read_pop_activity(marker, layers, old)
+        with self.assertRaises(ValueError):
+            soc.check_performance(task_log(contract.NICE_SCHEDULE)+marker,
+                                  layers, contract.NICE_SCHEDULE)
 
     def test_nice_records_require_real_instruction_retirement_and_payload_counts(self):
         schedule = contract.NICE_SCHEDULE
