@@ -15,7 +15,8 @@ SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-wi
              'bias-hw-autogroup-y32-packed16-nice-window',
              'bias-hw-autogroup-y32-packed16-nice-read-pop-window',
              'bias-hw-autogroup-y32-packed16-nice-direct-window',
-             'bias-hw-autogroup-y32-packed16-nice-direct-stream-window')
+             'bias-hw-autogroup-y32-packed16-nice-direct-stream-window',
+             'bias-hw-autogroup-y32-packed16-nice-direct-stream-ready-window')
 PAIRED_HI_SCHEDULE = 'bias-hw-autogroup-paired-hi-window'
 PAIRED_HI_PACKED16_SCHEDULE = 'bias-hw-autogroup-paired-hi-packed16-window'
 PAIRED_HI_SCHEDULES = (PAIRED_HI_SCHEDULE, PAIRED_HI_PACKED16_SCHEDULE)
@@ -25,7 +26,9 @@ NICE_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-window'
 NICE_READ_POP_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-read-pop-window'
 NICE_DIRECT_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-direct-window'
 NICE_STREAM_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-direct-stream-window'
-DIRECT_SCHEDULES = (NICE_DIRECT_SCHEDULE, NICE_STREAM_SCHEDULE)
+NICE_READY_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-direct-stream-ready-window'
+STREAM_SCHEDULES = (NICE_STREAM_SCHEDULE, NICE_READY_SCHEDULE)
+DIRECT_SCHEDULES = (NICE_DIRECT_SCHEDULE,) + STREAM_SCHEDULES
 NICE_SCHEDULES = (NICE_SCHEDULE, NICE_READ_POP_SCHEDULE) + DIRECT_SCHEDULES
 Y32_SCHEDULES = (Y32_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
 PACKED16_SCHEDULES = (PAIRED_HI_PACKED16_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
@@ -95,8 +98,10 @@ def compiler_defines(config):
         values['XU_NICE_DRAIN8'] = True
     if config['schedule'] in DIRECT_SCHEDULES:
         values['XU_NICE_DIRECT'] = True
-    if config['schedule'] == NICE_STREAM_SCHEDULE:
+    if config['schedule'] in STREAM_SCHEDULES:
         values['XU_NICE_DRAINN'] = True
+    if config['schedule'] == NICE_READY_SCHEDULE:
+        values['XU_NICE_READY'] = True
     return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
 
 
@@ -113,8 +118,10 @@ def simulator_arguments(schedule='baseline'):
         arguments.append('+NICE_READ_POP=1')
     if schedule in DIRECT_SCHEDULES:
         arguments.append('+NICE_DIRECT=1')
-    if schedule == NICE_STREAM_SCHEDULE:
+    if schedule in STREAM_SCHEDULES:
         arguments.append('+NICE_STREAM=1')
+    if schedule == NICE_READY_SCHEDULE:
+        arguments.append('+NICE_READY=1')
     return arguments
 
 
@@ -162,9 +169,11 @@ def task_contract(schedule='baseline'):
     if schedule in DIRECT_SCHEDULES:
         result.update(result_mmio_reads=0, y32_mmio_reads=0,
                       direct_snapshots=3168, direct_lanes=OUTPUTS_PER_TASK)
-    if schedule == NICE_STREAM_SCHEDULE:
+    if schedule in STREAM_SCHEDULES:
         result.update(nice_requests=99, nice_responses=99, nice_oitf_retired=99,
                       stream_groups=3168)
+    if schedule == NICE_READY_SCHEDULE:
+        result.update(ready_groups=3168, status_polls=0)
     return result
 
 
@@ -218,10 +227,11 @@ def validate_nice_activity(records, layers, schedule):
     for record, layer in zip(records, layers):
         if (set(record) != names or any(type(v) is not int or v < 0 for v in record.values()) or
                 record['layer'] != layer['layer'] or
-                any(record[key] != (99 if schedule == NICE_STREAM_SCHEDULE else 3168)
+                any(record[key] != (99 if schedule in STREAM_SCHEDULES else 3168)
                     for key in ['requests', 'responses', 'oitf_retired']) or
                 record['pops_retired'] != 3168 or
                 record['result_reads'] != (0 if schedule in DIRECT_SCHEDULES else OUTPUTS_PER_TASK) or
                 record['shared_writes'] != OUTPUTS_PER_TASK or
-                not 3168 <= record['status_polls'] <= layer['cycles']):
+                (record['status_polls'] != 0 if schedule == NICE_READY_SCHEDULE else
+                 not 3168 <= record['status_polls'] <= layer['cycles'])):
             raise ValueError('NICE instruction retirement or payload coverage differs')

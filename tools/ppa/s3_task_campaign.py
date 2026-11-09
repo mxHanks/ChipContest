@@ -471,8 +471,10 @@ def main(argv=None, extension=None):
                         measured_clocks=clocks,startup_observations=startup,**identity)
             if args.schedule in soc.contract.NICE_SCHEDULES:
                 item['nice_activity'] = soc.check_nice_activity(log,native_layers,args.schedule)[0]
-            if args.schedule == soc.contract.NICE_STREAM_SCHEDULE:
+            if args.schedule in soc.contract.STREAM_SCHEDULES:
                 item['stream_activity'] = soc.check_stream_activity(log,native_layers,args.schedule)[0]
+            if args.schedule == soc.contract.NICE_READY_SCHEDULE:
+                item['ready_activity'] = soc.check_ready_activity(log,native_layers,args.schedule)[0]
             if extension is not None:
                 item['activity'] = extension.inspect_task(log, task, item)
             report['task_results'].append(item)

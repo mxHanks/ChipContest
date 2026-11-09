@@ -37,15 +37,20 @@ def task_log(schedule, tasks=1):
             lines.append(f'W_PACKED16_TASK layer={layer} source_words=8192 uploaded_values=16384')
         if schedule in contract.NICE_SCHEDULES:
             result_reads = 0 if schedule in contract.DIRECT_SCHEDULES else 25344
-            instructions = 99 if schedule == contract.NICE_STREAM_SCHEDULE else 3168
+            instructions = 99 if schedule in contract.STREAM_SCHEDULES else 3168
+            polls = 0 if schedule == contract.NICE_READY_SCHEDULE else 3168
             lines.append(f'NICE_TASK layer={layer} requests={instructions} responses={instructions} oitf_retired={instructions} '
-                         f'status_polls=3168 result_reads={result_reads} pops_retired=3168 shared_writes=25344')
+                         f'status_polls={polls} result_reads={result_reads} pops_retired=3168 shared_writes=25344')
         if schedule in contract.DIRECT_SCHEDULES:
             lines.append(f'DIRECT_TASK layer={layer} snapshots=3168 lanes=25344 '
                          'pops_retired=3168 result_mmio_reads=0')
-        if schedule == contract.NICE_STREAM_SCHEDULE:
+        if schedule in contract.STREAM_SCHEDULES:
             lines.append(f'STREAM_TASK layer={layer} requests=99 groups=3168 snapshots=3168 '
                          'pops_retired=3168 shared_writes=25344 final_response_before_completion=1')
+        if schedule == contract.NICE_READY_SCHEDULE:
+            lines.append(f'READY_TASK layer={layer} requests=99 groups=3168 ready_edges=3168 '
+                         'ready_wait_cycles=9504 status_polls=0 snapshots=3168 pops_retired=3168 '
+                         'shared_writes=25344 final_response_before_completion=1')
         if schedule == contract.NICE_READ_POP_SCHEDULE:
             lines.append(f'READ_POP_TASK layer={layer} alias_reads=3168 explicit_pops=0')
     lines.append(f'SOC_PASS tasks={tasks} outputs={tasks*25344} '
@@ -267,7 +272,8 @@ class Y32FirmwareContractTests(unittest.TestCase):
                 self.assertEqual('+NICE_READ_POP=1' in command,
                                  schedule == contract.NICE_READ_POP_SCHEDULE)
                 self.assertEqual('+NICE_DIRECT=1' in command, schedule in contract.DIRECT_SCHEDULES)
-                self.assertEqual('+NICE_STREAM=1' in command, schedule == contract.NICE_STREAM_SCHEDULE)
+                self.assertEqual('+NICE_STREAM=1' in command, schedule in contract.STREAM_SCHEDULES)
+                self.assertEqual('+NICE_READY=1' in command, schedule == contract.NICE_READY_SCHEDULE)
 
     def test_direct_transport_work_and_opt_in_preserve_existing_encoding(self):
         old, new = contract.NICE_READ_POP_SCHEDULE, contract.NICE_DIRECT_SCHEDULE
@@ -358,7 +364,7 @@ class Y32FirmwareContractTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             soc.check_performance(complete.replace(direct, ''), layers, schedule)
         for old in contract.SCHEDULES:
-            if old == schedule:
+            if old in contract.STREAM_SCHEDULES:
                 continue
             self.assertEqual(soc.check_stream_activity('', layers, old), [])
             with self.subTest(old=old), self.assertRaises(ValueError):
@@ -366,6 +372,51 @@ class Y32FirmwareContractTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             soc.check_performance(task_log(contract.NICE_DIRECT_SCHEDULE)+marker,
                                   layers, contract.NICE_DIRECT_SCHEDULE)
+
+    def test_ready_opt_in_retains_stream_descriptor_and_changes_only_wait_transport(self):
+        old, new = contract.NICE_STREAM_SCHEDULE, contract.NICE_READY_SCHEDULE
+        self.assertEqual(contract.task_contract(new),
+                         {**contract.task_contract(old), 'ready_groups':3168, 'status_polls':0})
+        for optimization in contract.OPTIMIZATIONS:
+            for experiment in contract.EXPERIMENTS:
+                self.assertEqual(contract.compiler_defines(contract.configuration(new, optimization, experiment)),
+                                 contract.compiler_defines(contract.configuration(old, optimization, experiment)) +
+                                 ['-DXU_NICE_READY=1'])
+        self.assertEqual(contract.simulator_arguments(new),
+                         contract.simulator_arguments(old) + ['+NICE_READY=1'])
+
+    def test_ready_requires_zero_poll_every_wait_edge_and_final_response(self):
+        schedule = contract.NICE_READY_SCHEDULE
+        layers = [dict(layer=0, cycles=1000000)]
+        marker = ('READY_TASK layer=0 requests=99 groups=3168 ready_edges=3168 '
+                  'ready_wait_cycles=9504 status_polls=0 snapshots=3168 pops_retired=3168 '
+                  'shared_writes=25344 final_response_before_completion=1\n')
+        complete = task_log(schedule)
+        self.assertEqual(len(soc.check_performance(complete, layers, schedule)), 1)
+        self.assertEqual(soc.check_ready_activity(marker, layers, schedule)[0]['ready_wait_cycles'], 9504)
+        bad_markers = ['', marker*2, marker.replace('layer=0', 'layer=1')]
+        for field, value in [('requests',98), ('groups',3167), ('ready_edges',3167),
+                             ('ready_wait_cycles',3167), ('ready_wait_cycles',1000001),
+                             ('status_polls',1), ('snapshots',3167), ('pops_retired',3167),
+                             ('shared_writes',25343), ('final_response_before_completion',0)]:
+            import re
+            bad_markers.append(re.sub(r'(?<![a-z_])'+field+r'=\d+', field+'='+str(value), marker))
+        bad_markers += [marker.replace('ready_wait_cycles=9504', 'ready_wait_cycles=-1'),
+                        marker.replace(' ready_edges=3168', ''), marker.rstrip()+' extra=0\n']
+        for bad in bad_markers:
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                soc.check_performance(complete.replace(marker,bad), layers, schedule)
+        with self.assertRaises(ValueError):
+            soc.check_performance(complete.replace('status_polls=0','status_polls=1',1), layers, schedule)
+        for prefix in ['DIRECT_TASK', 'STREAM_TASK']:
+            bad='\n'.join(line for line in complete.split('\n') if not line.startswith(prefix))
+            with self.subTest(prefix=prefix), self.assertRaises(ValueError):
+                soc.check_performance(bad, layers, schedule)
+        for old in contract.SCHEDULES:
+            if old == schedule: continue
+            self.assertEqual(soc.check_ready_activity('',layers,old), [])
+            with self.subTest(old=old), self.assertRaises(ValueError):
+                soc.check_ready_activity(marker,layers,old)
 
     def test_read_pop_changes_only_transport_work_and_keeps_firmware_abi(self):
         old, new = contract.NICE_SCHEDULE, contract.NICE_READ_POP_SCHEDULE

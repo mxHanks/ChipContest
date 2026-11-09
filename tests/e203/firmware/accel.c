@@ -29,6 +29,12 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
 #ifndef XU_NICE_DRAINN
 #define XU_NICE_DRAINN 0
 #endif
+#ifndef XU_NICE_READY
+#define XU_NICE_READY 0
+#endif
+#if XU_NICE_READY && (!XU_NICE_DRAINN || !XU_NICE_DRAIN8 || !XU_NICE_DIRECT)
+#error "NICE ready requires direct NICE drainN transport"
+#endif
 #if XU_NICE_DRAINN && (!XU_NICE_DRAIN8 || !XU_NICE_DIRECT)
 #error "NICE drainN requires direct NICE drain8 transport"
 #endif
@@ -55,7 +61,12 @@ static inline uint32_t xu_nice_drain8(volatile uint32_t *destination, uint32_t c
     /* The used output operand receives a real non-x0 rd. The fixed core does
      * not turn NICE err into a trap, so the caller must inspect this code. */
     __asm__ volatile (
-#if XU_NICE_DRAINN
+#if XU_NICE_READY
+        /* Unlike poll-based drainN, ready waiting issues no LSU read to order
+         * the earlier STARTROW store. Retire it before accepting the command. */
+        "fence iorw, iorw\n\t"
+        ".insn r 0x7b, 7, 0x24, %0, %1, %2\n\t"
+#elif XU_NICE_DRAINN
         ".insn r 0x7b, 7, 0x23, %0, %1, %2\n\t"
 #else
         ".insn r 0x7b, 7, 0x20, %0, %1, %2\n\t"

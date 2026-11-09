@@ -161,7 +161,7 @@ class S3TaskCampaignSimulatorTests(unittest.TestCase):
                   'frequency_hz=32767.999998926 precision_fs=1\n')
         contract = SimpleNamespace(configuration=lambda *args:{},compiler_defines=lambda config:[],
                                    simulator_arguments=lambda schedule:[],NICE_SCHEDULES=set(),
-                                   NICE_STREAM_SCHEDULE='bias-hw-autogroup-y32-packed16-nice-direct-stream-window')
+                                   STREAM_SCHEDULES=(), NICE_READY_SCHEDULE='ready')
         soc = SimpleNamespace(contract=contract,load_fixture=lambda *args:{},check_vectors=lambda *args:{},
                               vector_identity=lambda *args:{},check_log=lambda *args:[{'cycles':3}],
                               check_performance=lambda *args:[{}],
