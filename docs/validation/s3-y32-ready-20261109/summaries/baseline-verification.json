@@ -1,0 +1,75 @@
+{
+  "status": "BASELINE_SAVED_EVIDENCE_VERIFIED",
+  "source_count": 170,
+  "original_layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "totals": {
+    "payload_cycles": 5156364,
+    "clear_cycles": 2380836,
+    "payload_plus_clear_cycles": 7537200,
+    "clear_to_source_gap": 1224,
+    "phases": {
+      "w_load": 1376556,
+      "x_load": 855360,
+      "bias_load": 129120,
+      "compute_wait": 273240,
+      "writeback": 2356992,
+      "other": 165096
+    },
+    "bus_counters": {
+      "busy": 2585088,
+      "mac_fire": 2433024,
+      "mmio_reads": 57048,
+      "mmio_writes": 147960,
+      "shared_reads": 180480,
+      "shared_writes": 304128,
+      "shared_stall": 209784,
+      "mmio_stall": 0,
+      "starts": 38016,
+      "dones": 38016
+    },
+    "nice": {
+      "requests": 1188,
+      "responses": 1188,
+      "oitf_retired": 1188,
+      "status_polls": 57024,
+      "result_reads": 0,
+      "pops_retired": 38016,
+      "shared_writes": 304128
+    },
+    "auto": {
+      "rows": 1188,
+      "pops_retired": 38016,
+      "compute_writeback_overlap": 2174040,
+      "fifo_full_wait": 0
+    },
+    "transport": {
+      "alias_reads": 0,
+      "explicit_pops": 0,
+      "direct_snapshots": 38016,
+      "direct_lanes": 304128,
+      "direct_pops": 38016,
+      "result_mmio_reads": 0
+    }
+  },
+  "firmware_image_load_identity": {
+    "verified": true,
+    "mapping": "ELF physical 0x80000000 -> 64KiB ITCM offset0",
+    "loaded_bytes": 982,
+    "image_sha256": "8c348851199da4d2d48b2720aea183df83398c926c53a5ec871eb48194c3b851"
+  },
+  "result_sha256": "6185e3531796b2b04d09471ecbd318ecd0d4c146a18fe724a1baf8f5bae5b3d4",
+  "scope": "no new simulation; all original twelve layers verified before any comparison projection"
+}

@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "command": [
+    "/usr/bin/riscv64-unknown-elf-objcopy",
+    "-O",
+    "binary",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/ready-fenced-task0/accel_soc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/ready-fenced-task0/accel_soc.load.bin"
+  ],
+  "native_exit": 0,
+  "elf_sha256": "bd06971bc85d0ed53b986a14829013cfc4a5f135e1b6d82ee1c14e4947a005a3",
+  "load_sha256": "22e83e39ae73ee2eaf56fe897d475c99381bd946d0a751dee8a643f465ef7924",
+  "ready_instructions": [
+    {
+      "address": "0x80000394",
+      "word": "0x491877fb",
+      "rd": 15,
+      "funct3": 7,
+      "funct7": 36,
+      "preceding_fence": true,
+      "following_fence": true
+    }
+  ],
+  "disassembly": "ready-fenced-task0/firmware-disassembly.log"
+}

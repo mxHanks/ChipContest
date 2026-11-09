@@ -1,0 +1,30 @@
+{
+  "status": "HARNESS_REPAIRED_NEGATIVE_CHECKS_COMPLETE",
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "HARNESS_ERROR",
+      "diagnostic": "Errno18 cross-device hardlink into /tmp",
+      "fix": "temporary fixture directories moved under ready build root on same filesystem"
+    },
+    {
+      "attempt": 2,
+      "result": "HARNESS_EXPECTATION_ERROR",
+      "diagnostic": "missing READY_TASK rejected by exactly pinned parser before local record checker; expected diagnostic string differed",
+      "fix": "expect pinned parser ready activity diagnostic"
+    },
+    {
+      "attempt": 3,
+      "result": "HARNESS_EXPECTATION_ERROR",
+      "diagnostic": "nonzero READY_TASK poll rejected by pinned parser ready wait/group/POP/final-response coverage check; expected diagnostic string differed",
+      "fix": "expect exact pinned parser coverage diagnostic"
+    },
+    {
+      "attempt": 4,
+      "result": "PASS",
+      "negative_cases": 14
+    }
+  ],
+  "original_campaign_bytes_modified": false,
+  "simulation_launched": false
+}

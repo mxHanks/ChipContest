@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "scope": "Read-only review of the eight integrated firmware/observer/parser/campaign/test diffs; no additional simulation",
+  "baseline": "d6bea15",
+  "reviewer": "ready_campaign",
+  "source_files": [
+    {
+      "path": "tests/e203/firmware/accel.c",
+      "baseline_sha256": "d3b303dacf84337982f627d6c4a3f7f6757bca5041138b1be08094058ae39b53",
+      "integrated_sha256": "cf3cd0ec60d6f8066bea721e2e53030c8264a60f6708ad89e598b95e78d539b5"
+    },
+    {
+      "path": "tests/e203/firmware/accel.h",
+      "baseline_sha256": "b088571372bc7bbf918b390d82d35dc3fad5595a79dde4acde166f026ecd1291",
+      "integrated_sha256": "4cdd6966996468d9d8574f54fd198d5164d3484295c2f53c5f222afbcfd8c233"
+    },
+    {
+      "path": "tests/e203/tb_accel_soc.sv",
+      "baseline_sha256": "426e4e888d7408c790b449afc4adcca0fb342e326f935ad1b130eaab9bcc0d07",
+      "integrated_sha256": "4f920e5fda4e91326228f382f1077f22b84faedd9c5bb5adb3eba94c809aef46"
+    },
+    {
+      "path": "tests/e203/test_y32_firmware_contract.py",
+      "baseline_sha256": "ffe3fc759842e140b8f737b2eb22fe9b03f7c66c9b14cef5f6aaa639c5663ca8",
+      "integrated_sha256": "1f7aeafe3214529d930037cf0437be96f763839d389efb55ac80f076a7297104"
+    },
+    {
+      "path": "tests/ppa/test_s3_task_campaign.py",
+      "baseline_sha256": "6a612d510756ec5996e70bb80b433b3e17f3721d1cf0d8588a43148a3db1a29f",
+      "integrated_sha256": "d487e1e4c761d2ceee1d50268a4b7e45c9e3538004f628ddd74e8d6900fd00a0"
+    },
+    {
+      "path": "tools/scripts/e203_soc.py",
+      "baseline_sha256": "572af83fbd3279be4d3c64215769a52621eea71bce47a799e160925773e89758",
+      "integrated_sha256": "3b4b3da0e529fab606e783eee3925da454844bd9426c668f6bb92efbed718e04"
+    },
+    {
+      "path": "tools/scripts/xu_firmware_contract.py",
+      "baseline_sha256": "0138a732ca816593e92bba4e658ab345cbec210abfb5402f5cb36763c3f733c5",
+      "integrated_sha256": "ed8bc6d8fd89aa534a44ad4b4a15cbcf6b8b9d02ca468a4446e9003f126deaca"
+    },
+    {
+      "path": "tools/ppa/s3_task_campaign.py",
+      "baseline_sha256": "fe33ab935dcfcecab8c4b2e00994479678833504be04706182cfb8ebfc6ed994",
+      "integrated_sha256": "9d04abeb87ed1d0d8da1870f8faf2e11c9c116a9b5c3f63019ae818b380f0f2f"
+    }
+  ],
+  "diff_sha256": "e9b6cccc24fe0400b9a2ad4762bb98e38751c7cdc2c9090f2065296d6af57c0c",
+  "findings": [],
+  "verified": [
+    "Only READY 0x24 inserts the preceding fence; existing following fence, memory clobber, nonzero rd and returned-code check remain.",
+    "New macro requires DRAINN, DRAIN8, DIRECT and inherits existing Y32/packed16/autogroup constraints; old macro-off load identity is proven separately.",
+    "Every READY_WAIT edge observes independent wrapper metadata, capability, low claim, no LSU command and exact remaining per-group edge budget.",
+    "Every row pairs its accepted STARTROW endpoint command with the retired endpoint response before accepting NICE; source fence is required and asserted.",
+    "READY forbids every accepted ROW_STATUS query and every NICE LSU read; existing source/status ABI reads remain counted.",
+    "Original per-lane golden values, FIFO ownership, next-edge POP, each write response, final response before completion, OITF and held command/completion checks remain.",
+    "Parser requires exact READY markers, readiness/groups/snapshot/POP/Y counts, zero polls, bounded real wait edges, and all original STREAM/DIRECT markers.",
+    "Physical clear helper, request-window definition, clock/reset policy, core LSU/BIU control and numeric model remain unchanged."
+  ],
+  "nonblocking_notes": [
+    "READY_WAIT state value is intentionally tied to measured RTL value 9; future state renumbering requires observer update.",
+    "Whole ELF hashes can differ across recompilation because a non-load FILE symbol names a random GCC temporary object; load bytes/image identity is the compatibility check."
+  ]
+}

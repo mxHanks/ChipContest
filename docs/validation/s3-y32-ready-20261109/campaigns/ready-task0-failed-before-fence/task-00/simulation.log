@@ -1,0 +1,11 @@
+["/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/ready-task0/verilator-obj/soc_sim", "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/ready-task0/accel_soc", "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/ready-task0/task-00/vectors", "+TASKS=1", "+DUMPWAVE=0", "+MAX_CYCLES=3000000", "+FIRST_SOURCE_STALL=0", "+OUTPUT_Y32=1", "+SHARED_W_PACKED16=1", "+NICE_DRAIN8=1", "+NICE_DIRECT=1", "+NICE_STREAM=1", "+NICE_READY=1"]
+S3_CLOCK_PROFILE domain=hf requested_half_ns=3.333333333 measured_half_ns=3.333333000 period_ns=6.666666000 frequency_hz=150000015.000001490 precision_fs=1
+S3_CLOCK_PROFILE domain=lf requested_half_ns=15258.7890625 measured_half_ns=15258.789063000 period_ns=30517.578126000 frequency_hz=32767.999998926 precision_fs=1
+S3_STARTUP_PROFILE event=second_assert time_ns=8011012.532232 cpu_reset_n=1
+S3_STARTUP_PROFILE event=second_release time_ns=8011132.532232 held_ns=120.000000 cpu_reset_n=0
+S3_STARTUP_PROFILE event=measurement_begin time_ns=8011132.532232 external_reset_n=1 cycle=0
+S3_CLEAR_OBSERVER_ARM cycle=1203947 actual_accel_reset_n=1
+S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=32930 w=16384 x=64 legacy_bias=8 bias_entries=0 sram_clear_commands=1 sram_done=1 commands=32935 responses=32935 clear_cycles=198403 response_end_cycle=198403 gap_to_source_request=102 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING
+[18202168000000] %Fatal: tb.sv:582: Assertion failed in tb_accel_soc.observe_nice_stream: ready instruction preceded STARTROW response retirement
+%Error: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/ready-task0/tb.sv:582: Verilog $stop
+Aborting...

@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "repo": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest",
+  "baseline": "d6bea15",
+  "checks": [
+    {
+      "command": [
+        "python3.12",
+        "-E",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.e203.test_y32_firmware_contract"
+      ],
+      "native_exit": 0,
+      "count": 19,
+      "log": "integrated-firmware-contract.log",
+      "log_sha256": "a38ac27b91eb95c4d5b8ac382f382b859e354193359c266a1edb34e44b30ff01"
+    },
+    {
+      "command": [
+        "python3.12",
+        "-E",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.ppa.test_s3_task_campaign"
+      ],
+      "native_exit": 0,
+      "count": 15,
+      "log": "integrated-campaign.log",
+      "log_sha256": "92fbdc6fd8c782a2f31f3d9f83811df8ed6b7eb609b509e2ac9fa7b5ce015d02"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "tests/e203/firmware/accel.c",
+      "baseline_sha256": "d3b303dacf84337982f627d6c4a3f7f6757bca5041138b1be08094058ae39b53",
+      "integrated_sha256": "cf3cd0ec60d6f8066bea721e2e53030c8264a60f6708ad89e598b95e78d539b5"
+    },
+    {
+      "path": "tests/e203/firmware/accel.h",
+      "baseline_sha256": "b088571372bc7bbf918b390d82d35dc3fad5595a79dde4acde166f026ecd1291",
+      "integrated_sha256": "4cdd6966996468d9d8574f54fd198d5164d3484295c2f53c5f222afbcfd8c233"
+    },
+    {
+      "path": "tests/e203/tb_accel_soc.sv",
+      "baseline_sha256": "426e4e888d7408c790b449afc4adcca0fb342e326f935ad1b130eaab9bcc0d07",
+      "integrated_sha256": "4f920e5fda4e91326228f382f1077f22b84faedd9c5bb5adb3eba94c809aef46"
+    },
+    {
+      "path": "tests/e203/test_y32_firmware_contract.py",
+      "baseline_sha256": "ffe3fc759842e140b8f737b2eb22fe9b03f7c66c9b14cef5f6aaa639c5663ca8",
+      "integrated_sha256": "1f7aeafe3214529d930037cf0437be96f763839d389efb55ac80f076a7297104"
+    },
+    {
+      "path": "tests/ppa/test_s3_task_campaign.py",
+      "baseline_sha256": "6a612d510756ec5996e70bb80b433b3e17f3721d1cf0d8588a43148a3db1a29f",
+      "integrated_sha256": "d487e1e4c761d2ceee1d50268a4b7e45c9e3538004f628ddd74e8d6900fd00a0"
+    },
+    {
+      "path": "tools/scripts/e203_soc.py",
+      "baseline_sha256": "572af83fbd3279be4d3c64215769a52621eea71bce47a799e160925773e89758",
+      "integrated_sha256": "3b4b3da0e529fab606e783eee3925da454844bd9426c668f6bb92efbed718e04"
+    },
+    {
+      "path": "tools/scripts/xu_firmware_contract.py",
+      "baseline_sha256": "0138a732ca816593e92bba4e658ab345cbec210abfb5402f5cb36763c3f733c5",
+      "integrated_sha256": "ed8bc6d8fd89aa534a44ad4b4a15cbcf6b8b9d02ca468a4446e9003f126deaca"
+    },
+    {
+      "path": "tools/ppa/s3_task_campaign.py",
+      "baseline_sha256": "fe33ab935dcfcecab8c4b2e00994479678833504be04706182cfb8ebfc6ed994",
+      "integrated_sha256": "9d04abeb87ed1d0d8da1870f8faf2e11c9c116a9b5c3f63019ae818b380f0f2f"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "status": "NEGATIVE_COMPARATOR_CHECKS_PASS",
+  "count": 14,
+  "candidate": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/ready-fenced-task0/result.json",
+  "candidate_result_sha256": "ab2f4cb919018a8eaf81f68acf18b8bdbc5ef0ca9d5963d09f9a6163eed9b394",
+  "baseline": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/result.json",
+  "baseline_result_sha256": "6185e3531796b2b04d09471ecbd318ecd0d4c146a18fe724a1baf8f5bae5b3d4",
+  "comparator_sha256": "6f1b93f49f0f8754c9fad7894c2e45414f902ee325344d5e56aefd9761f85bd3",
+  "scope": "synthetic saved-evidence corruption; no simulator or synthesis invoked; originals untouched",
+  "cases": [
+    {
+      "case": "failed_campaign",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: campaign has not passed: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/ready-evidence-negative-vxz3858t/candidate/result.json"
+    },
+    {
+      "case": "unhashed_source_byte",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: artifact SHA differs: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/ready-evidence-negative-jsp79ofd/candidate/source/rtl/subsys/xu_nice_drain8.v"
+    },
+    {
+      "case": "image_rehashed_but_not_ELF_load",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: firmware image bytes differ from ELF PT_LOAD"
+    },
+    {
+      "case": "missing_raw_READY_marker",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: missing, duplicate, malformed or unexpected ready activity"
+    },
+    {
+      "case": "duplicate_raw_READY_marker",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: missing, duplicate, malformed or unexpected ready activity"
+    },
+    {
+      "case": "READY_marker_claims_bus_poll",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: ready wait/group/POP/final-response coverage differs"
+    },
+    {
+      "case": "numerical_output_coverage",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: complete numerical task markers missing or inconsistent"
+    },
+    {
+      "case": "missing_exact_READY_runtime_selector",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: exact profile runtime selector differs"
+    },
+    {
+      "case": "rehashed_generated_clear_C_drift",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: generated clear C differs beyond the exact frozen-main snapshot include"
+    },
+    {
+      "case": "rehashed_input_vector_identity",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: task input/clock differs: vectors"
+    },
+    {
+      "case": "partial_requires_explicit_layer_projection",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: full12 comparison requires twelve candidate layers; use explicit --layers for a partial experiment"
+    },
+    {
+      "case": "unauthorized_core_source_pair",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: invalid/unreviewable source pair: rtl/core/e203_lsu.v"
+    },
+    {
+      "case": "missing_declared_firmware_pair",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: source manifest differs from externally pinned exact source SHA map"
+    },
+    {
+      "case": "wrong_baseline_source_pair_SHA",
+      "status": "EXPECTED_REJECTION",
+      "diagnostic": "READY_COMPARISON_REJECTED: source pair baseline SHA or candidate SHA differs: rtl/subsys/xu_nice_drain8.v"
+    }
+  ]
+}

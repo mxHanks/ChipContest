@@ -1,0 +1,559 @@
+{
+  "status": "PASS",
+  "scope": "Read-only relocated ready strict comparison; no simulator/EDA launched",
+  "comparisons": [
+    {
+      "comparison": "ready-full12-comparison.json",
+      "status": "SAVED_CAMPAIGNS_COMPARED",
+      "totals": {
+        "baseline": {
+          "payload_cycles": 5156364,
+          "clear_cycles": 2380836,
+          "payload_plus_clear_cycles": 7537200,
+          "clear_to_source_gap": 1224,
+          "phases": {
+            "w_load": 1376556,
+            "x_load": 855360,
+            "bias_load": 129120,
+            "compute_wait": 273240,
+            "writeback": 2356992,
+            "other": 165096
+          },
+          "bus_counters": {
+            "busy": 2585088,
+            "mac_fire": 2433024,
+            "mmio_reads": 57048,
+            "mmio_writes": 147960,
+            "shared_reads": 180480,
+            "shared_writes": 304128,
+            "shared_stall": 209784,
+            "mmio_stall": 0,
+            "starts": 38016,
+            "dones": 38016
+          },
+          "nice": {
+            "requests": 1188,
+            "responses": 1188,
+            "oitf_retired": 1188,
+            "status_polls": 57024,
+            "result_reads": 0,
+            "pops_retired": 38016,
+            "shared_writes": 304128
+          },
+          "auto": {
+            "rows": 1188,
+            "pops_retired": 38016,
+            "compute_writeback_overlap": 2174040,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 38016,
+            "direct_lanes": 304128,
+            "direct_pops": 38016,
+            "result_mmio_reads": 0
+          }
+        },
+        "candidate": {
+          "payload_cycles": 5106468,
+          "clear_cycles": 2380836,
+          "payload_plus_clear_cycles": 7487304,
+          "clear_to_source_gap": 1224,
+          "phases": {
+            "w_load": 1376556,
+            "x_load": 855360,
+            "bias_load": 129120,
+            "compute_wait": 115236,
+            "writeback": 2360556,
+            "other": 269640
+          },
+          "bus_counters": {
+            "busy": 2585088,
+            "mac_fire": 2433024,
+            "mmio_reads": 24,
+            "mmio_writes": 147960,
+            "shared_reads": 180480,
+            "shared_writes": 304128,
+            "shared_stall": 213348,
+            "mmio_stall": 0,
+            "starts": 38016,
+            "dones": 38016
+          },
+          "nice": {
+            "requests": 1188,
+            "responses": 1188,
+            "oitf_retired": 1188,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 38016,
+            "shared_writes": 304128
+          },
+          "auto": {
+            "rows": 1188,
+            "pops_retired": 38016,
+            "compute_writeback_overlap": 2253636,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 38016,
+            "direct_lanes": 304128,
+            "direct_pops": 38016,
+            "result_mmio_reads": 0
+          }
+        },
+        "delta": {
+          "payload_cycles": -49896,
+          "clear_cycles": 0,
+          "payload_plus_clear_cycles": -49896,
+          "clear_to_source_gap": 0,
+          "phases": {
+            "w_load": 0,
+            "x_load": 0,
+            "bias_load": 0,
+            "compute_wait": -158004,
+            "writeback": 3564,
+            "other": 104544
+          },
+          "bus_counters": {
+            "busy": 0,
+            "mac_fire": 0,
+            "mmio_reads": -57024,
+            "mmio_writes": 0,
+            "shared_reads": 0,
+            "shared_writes": 0,
+            "shared_stall": 3564,
+            "mmio_stall": 0,
+            "starts": 0,
+            "dones": 0
+          },
+          "nice": {
+            "requests": 0,
+            "responses": 0,
+            "oitf_retired": 0,
+            "status_polls": -57024,
+            "result_reads": 0,
+            "pops_retired": 0,
+            "shared_writes": 0
+          },
+          "auto": {
+            "rows": 0,
+            "pops_retired": 0,
+            "compute_writeback_overlap": 79596,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 0,
+            "direct_lanes": 0,
+            "direct_pops": 0,
+            "result_mmio_reads": 0
+          }
+        }
+      },
+      "layer_selection": {
+        "baseline_original": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "candidate_original": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "compared": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "mode": "full12-to-full12",
+        "original_results_unmodified": true
+      }
+    },
+    {
+      "comparison": "ready-task0-comparison-v2.json",
+      "status": "SAVED_CAMPAIGNS_COMPARED",
+      "totals": {
+        "baseline": {
+          "payload_cycles": 429697,
+          "clear_cycles": 198403,
+          "payload_plus_clear_cycles": 628100,
+          "clear_to_source_gap": 102,
+          "phases": {
+            "w_load": 114713,
+            "x_load": 71280,
+            "bias_load": 10760,
+            "compute_wait": 22770,
+            "writeback": 196416,
+            "other": 13758
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 4754,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_writes": 25344,
+            "shared_stall": 17482,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          },
+          "nice": {
+            "requests": 99,
+            "responses": 99,
+            "oitf_retired": 99,
+            "status_polls": 4752,
+            "result_reads": 0,
+            "pops_retired": 3168,
+            "shared_writes": 25344
+          },
+          "auto": {
+            "rows": 99,
+            "pops_retired": 3168,
+            "compute_writeback_overlap": 181170,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 3168,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "result_mmio_reads": 0
+          }
+        },
+        "candidate": {
+          "payload_cycles": 425539,
+          "clear_cycles": 198403,
+          "payload_plus_clear_cycles": 623942,
+          "clear_to_source_gap": 102,
+          "phases": {
+            "w_load": 114713,
+            "x_load": 71280,
+            "bias_load": 10760,
+            "compute_wait": 9603,
+            "writeback": 196713,
+            "other": 22470
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 2,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_writes": 25344,
+            "shared_stall": 17779,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          },
+          "nice": {
+            "requests": 99,
+            "responses": 99,
+            "oitf_retired": 99,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 3168,
+            "shared_writes": 25344
+          },
+          "auto": {
+            "rows": 99,
+            "pops_retired": 3168,
+            "compute_writeback_overlap": 187803,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 3168,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "result_mmio_reads": 0
+          }
+        },
+        "delta": {
+          "payload_cycles": -4158,
+          "clear_cycles": 0,
+          "payload_plus_clear_cycles": -4158,
+          "clear_to_source_gap": 0,
+          "phases": {
+            "w_load": 0,
+            "x_load": 0,
+            "bias_load": 0,
+            "compute_wait": -13167,
+            "writeback": 297,
+            "other": 8712
+          },
+          "bus_counters": {
+            "busy": 0,
+            "mac_fire": 0,
+            "mmio_reads": -4752,
+            "mmio_writes": 0,
+            "shared_reads": 0,
+            "shared_writes": 0,
+            "shared_stall": 297,
+            "mmio_stall": 0,
+            "starts": 0,
+            "dones": 0
+          },
+          "nice": {
+            "requests": 0,
+            "responses": 0,
+            "oitf_retired": 0,
+            "status_polls": -4752,
+            "result_reads": 0,
+            "pops_retired": 0,
+            "shared_writes": 0
+          },
+          "auto": {
+            "rows": 0,
+            "pops_retired": 0,
+            "compute_writeback_overlap": 6633,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 0,
+            "direct_lanes": 0,
+            "direct_pops": 0,
+            "result_mmio_reads": 0
+          }
+        }
+      },
+      "layer_selection": {
+        "baseline_original": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "candidate_original": [
+          0
+        ],
+        "compared": [
+          0
+        ],
+        "mode": "explicit-common-layer-projection",
+        "original_results_unmodified": true
+      }
+    },
+    {
+      "comparison": "ready-task0-comparison.json",
+      "status": "SAVED_CAMPAIGNS_COMPARED",
+      "totals": {
+        "baseline": {
+          "payload_cycles": 429697,
+          "clear_cycles": 198403,
+          "payload_plus_clear_cycles": 628100,
+          "clear_to_source_gap": 102,
+          "phases": {
+            "w_load": 114713,
+            "x_load": 71280,
+            "bias_load": 10760,
+            "compute_wait": 22770,
+            "writeback": 196416,
+            "other": 13758
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 4754,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_writes": 25344,
+            "shared_stall": 17482,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          },
+          "nice": {
+            "requests": 99,
+            "responses": 99,
+            "oitf_retired": 99,
+            "status_polls": 4752,
+            "result_reads": 0,
+            "pops_retired": 3168,
+            "shared_writes": 25344
+          },
+          "auto": {
+            "rows": 99,
+            "pops_retired": 3168,
+            "compute_writeback_overlap": 181170,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 3168,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "result_mmio_reads": 0
+          }
+        },
+        "candidate": {
+          "payload_cycles": 425539,
+          "clear_cycles": 198403,
+          "payload_plus_clear_cycles": 623942,
+          "clear_to_source_gap": 102,
+          "phases": {
+            "w_load": 114713,
+            "x_load": 71280,
+            "bias_load": 10760,
+            "compute_wait": 9603,
+            "writeback": 196713,
+            "other": 22470
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 2,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_writes": 25344,
+            "shared_stall": 17779,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          },
+          "nice": {
+            "requests": 99,
+            "responses": 99,
+            "oitf_retired": 99,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 3168,
+            "shared_writes": 25344
+          },
+          "auto": {
+            "rows": 99,
+            "pops_retired": 3168,
+            "compute_writeback_overlap": 187803,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 3168,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "result_mmio_reads": 0
+          }
+        },
+        "delta": {
+          "payload_cycles": -4158,
+          "clear_cycles": 0,
+          "payload_plus_clear_cycles": -4158,
+          "clear_to_source_gap": 0,
+          "phases": {
+            "w_load": 0,
+            "x_load": 0,
+            "bias_load": 0,
+            "compute_wait": -13167,
+            "writeback": 297,
+            "other": 8712
+          },
+          "bus_counters": {
+            "busy": 0,
+            "mac_fire": 0,
+            "mmio_reads": -4752,
+            "mmio_writes": 0,
+            "shared_reads": 0,
+            "shared_writes": 0,
+            "shared_stall": 297,
+            "mmio_stall": 0,
+            "starts": 0,
+            "dones": 0
+          },
+          "nice": {
+            "requests": 0,
+            "responses": 0,
+            "oitf_retired": 0,
+            "status_polls": -4752,
+            "result_reads": 0,
+            "pops_retired": 0,
+            "shared_writes": 0
+          },
+          "auto": {
+            "rows": 0,
+            "pops_retired": 0,
+            "compute_writeback_overlap": 6633,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 0,
+            "direct_lanes": 0,
+            "direct_pops": 0,
+            "result_mmio_reads": 0
+          }
+        }
+      },
+      "layer_selection": {
+        "baseline_original": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "candidate_original": [
+          0
+        ],
+        "compared": [
+          0
+        ],
+        "mode": "explicit-common-layer-projection",
+        "original_results_unmodified": true
+      }
+    }
+  ]
+}

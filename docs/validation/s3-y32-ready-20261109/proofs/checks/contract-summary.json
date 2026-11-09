@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "command": [
+        "python3.12",
+        "-E",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.e203.test_y32_firmware_contract"
+      ],
+      "native_exit": 0,
+      "tests": 19,
+      "log": "checks/firmware-contract.log",
+      "sha256": "eb51fcbd5b5c2dab845369b84185c22843a12cf846994c82e2a71403f67cd1e6"
+    },
+    {
+      "command": [
+        "python3.12",
+        "-E",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.ppa.test_s3_task_campaign"
+      ],
+      "native_exit": 0,
+      "tests": 15,
+      "log": "checks/campaign.log",
+      "sha256": "bbe2b0706ba88e118208e7f25856a4502cbe5f19d3028f214aab0c4844f10aff"
+    }
+  ],
+  "source_sha256": {
+    "tests/e203/firmware/accel.c": "cf3cd0ec60d6f8066bea721e2e53030c8264a60f6708ad89e598b95e78d539b5",
+    "tests/e203/firmware/accel.h": "4cdd6966996468d9d8574f54fd198d5164d3484295c2f53c5f222afbcfd8c233",
+    "tests/e203/tb_accel_soc.sv": "4f920e5fda4e91326228f382f1077f22b84faedd9c5bb5adb3eba94c809aef46",
+    "tests/e203/test_y32_firmware_contract.py": "1f7aeafe3214529d930037cf0437be96f763839d389efb55ac80f076a7297104",
+    "tests/ppa/test_s3_task_campaign.py": "d487e1e4c761d2ceee1d50268a4b7e45c9e3538004f628ddd74e8d6900fd00a0",
+    "tools/scripts/e203_soc.py": "3b4b3da0e529fab606e783eee3925da454844bd9426c668f6bb92efbed718e04",
+    "tools/scripts/xu_firmware_contract.py": "ed8bc6d8fd89aa534a44ad4b4a15cbcf6b8b9d02ca468a4446e9003f126deaca",
+    "tools/ppa/s3_task_campaign.py": "9d04abeb87ed1d0d8da1870f8faf2e11c9c116a9b5c3f63019ae818b380f0f2f"
+  },
+  "identity_receipt": "checks/firmware-identity/result.json"
+}

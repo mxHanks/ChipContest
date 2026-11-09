@@ -1,0 +1,227 @@
+{
+  "status": "PASS",
+  "variants": [
+    {
+      "variant": "frozen",
+      "commands": [
+        [
+          "/usr/bin/riscv64-unknown-elf-gcc",
+          "-march=rv32imac_zicsr2p0_zifencei2p0",
+          "-mabi=ilp32",
+          "-O2",
+          "-DXU_FIRMWARE_BIAS_DTCM=0",
+          "-DXU_HARDWARE_BIAS_CACHE=1",
+          "-DXU_HARDWARE_RESULT_WINDOW=1",
+          "-DXU_FIRMWARE_BIAS_UNROLL=1",
+          "-DXU_FIRMWARE_RESULT_UNROLL=1",
+          "-DXU_FIRMWARE_NO_MASKS=1",
+          "-DXU_HARDWARE_PACK32=1",
+          "-DXU_HARDWARE_AUTO_GROUP=1",
+          "-DXU_HARDWARE_Y32=1",
+          "-DXU_SHARED_W_PACKED16=1",
+          "-DXU_NICE_DRAIN8=1",
+          "-DXU_NICE_DIRECT=1",
+          "-DXU_NICE_DRAINN=1",
+          "-fstack-usage",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-msmall-data-limit=0",
+          "-nostdlib",
+          "-nostartfiles",
+          "-static",
+          "-mcmodel=medany",
+          "-Wl,--no-relax",
+          "-Wl,--build-id=none",
+          "-T",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/source/tests/e203/firmware/link.ld",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/source/tests/e203/firmware/start.S",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/s3_clear_main.c",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/source/tests/e203/firmware/accel.c",
+          "-o",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/frozen"
+        ],
+        [
+          "/usr/bin/riscv64-unknown-elf-objcopy",
+          "-O",
+          "binary",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/frozen",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/frozen.bin"
+        ],
+        [
+          "/usr/bin/riscv64-unknown-elf-objcopy",
+          "-O",
+          "verilog",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/frozen",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/frozen.verilog"
+        ]
+      ],
+      "elf_sha256": "ea995c511e20e2439857864150d31b30c00a3662340621497195034115c0df4e",
+      "load_binary_sha256": "e8a5e4da6917fa0e04fc58dfded11c336bb8bd8bc5f3477b16968e525d94d06e",
+      "image_sha256": "ca207f8e7469dca447ea346bc560c81565730ae97663ec0c6ff63f189eabef90"
+    },
+    {
+      "variant": "default-off",
+      "commands": [
+        [
+          "/usr/bin/riscv64-unknown-elf-gcc",
+          "-march=rv32imac_zicsr2p0_zifencei2p0",
+          "-mabi=ilp32",
+          "-O2",
+          "-DXU_FIRMWARE_BIAS_DTCM=0",
+          "-DXU_HARDWARE_BIAS_CACHE=1",
+          "-DXU_HARDWARE_RESULT_WINDOW=1",
+          "-DXU_FIRMWARE_BIAS_UNROLL=1",
+          "-DXU_FIRMWARE_RESULT_UNROLL=1",
+          "-DXU_FIRMWARE_NO_MASKS=1",
+          "-DXU_HARDWARE_PACK32=1",
+          "-DXU_HARDWARE_AUTO_GROUP=1",
+          "-DXU_HARDWARE_Y32=1",
+          "-DXU_SHARED_W_PACKED16=1",
+          "-DXU_NICE_DRAIN8=1",
+          "-DXU_NICE_DIRECT=1",
+          "-DXU_NICE_DRAINN=1",
+          "-fstack-usage",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-msmall-data-limit=0",
+          "-nostdlib",
+          "-nostartfiles",
+          "-static",
+          "-mcmodel=medany",
+          "-Wl,--no-relax",
+          "-Wl,--build-id=none",
+          "-T",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/source/tests/e203/firmware/link.ld",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/source/tests/e203/firmware/start.S",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/s3_clear_main.c",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/prototype-repo/tests/e203/firmware/accel.c",
+          "-o",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/default-off"
+        ],
+        [
+          "/usr/bin/riscv64-unknown-elf-objcopy",
+          "-O",
+          "binary",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/default-off",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/default-off.bin"
+        ],
+        [
+          "/usr/bin/riscv64-unknown-elf-objcopy",
+          "-O",
+          "verilog",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/default-off",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/default-off.verilog"
+        ]
+      ],
+      "elf_sha256": "43d69121fe2d6414e6cd684da2fa93b7d811b44fc4ff715f825d6d36111a3f2f",
+      "load_binary_sha256": "e8a5e4da6917fa0e04fc58dfded11c336bb8bd8bc5f3477b16968e525d94d06e",
+      "image_sha256": "ca207f8e7469dca447ea346bc560c81565730ae97663ec0c6ff63f189eabef90"
+    },
+    {
+      "variant": "explicit-off",
+      "commands": [
+        [
+          "/usr/bin/riscv64-unknown-elf-gcc",
+          "-march=rv32imac_zicsr2p0_zifencei2p0",
+          "-mabi=ilp32",
+          "-O2",
+          "-DXU_NICE_READY=0",
+          "-DXU_FIRMWARE_BIAS_DTCM=0",
+          "-DXU_HARDWARE_BIAS_CACHE=1",
+          "-DXU_HARDWARE_RESULT_WINDOW=1",
+          "-DXU_FIRMWARE_BIAS_UNROLL=1",
+          "-DXU_FIRMWARE_RESULT_UNROLL=1",
+          "-DXU_FIRMWARE_NO_MASKS=1",
+          "-DXU_HARDWARE_PACK32=1",
+          "-DXU_HARDWARE_AUTO_GROUP=1",
+          "-DXU_HARDWARE_Y32=1",
+          "-DXU_SHARED_W_PACKED16=1",
+          "-DXU_NICE_DRAIN8=1",
+          "-DXU_NICE_DIRECT=1",
+          "-DXU_NICE_DRAINN=1",
+          "-fstack-usage",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-msmall-data-limit=0",
+          "-nostdlib",
+          "-nostartfiles",
+          "-static",
+          "-mcmodel=medany",
+          "-Wl,--no-relax",
+          "-Wl,--build-id=none",
+          "-T",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/source/tests/e203/firmware/link.ld",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/source/tests/e203/firmware/start.S",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/postflow-20261108/selected-full12/s3_clear_main.c",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/prototype-repo/tests/e203/firmware/accel.c",
+          "-o",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/explicit-off"
+        ],
+        [
+          "/usr/bin/riscv64-unknown-elf-objcopy",
+          "-O",
+          "binary",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/explicit-off",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/explicit-off.bin"
+        ],
+        [
+          "/usr/bin/riscv64-unknown-elf-objcopy",
+          "-O",
+          "verilog",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/explicit-off",
+          "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/checks/firmware-identity/explicit-off.verilog"
+        ]
+      ],
+      "elf_sha256": "93f688c88ec3d748de0a1a96dd00cf9dfe96d785164fb059c9e6d92fbda87584",
+      "load_binary_sha256": "e8a5e4da6917fa0e04fc58dfded11c336bb8bd8bc5f3477b16968e525d94d06e",
+      "image_sha256": "ca207f8e7469dca447ea346bc560c81565730ae97663ec0c6ff63f189eabef90"
+    }
+  ],
+  "macro_dependency_rejections": [
+    {
+      "command": [
+        "/usr/bin/riscv64-unknown-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-fsyntax-only",
+        "-DXU_NICE_READY=1",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/prototype-repo/tests/e203/firmware/accel.c"
+      ],
+      "native_exit": 1,
+      "diagnostic": "NICE ready requires direct NICE drainN transport"
+    },
+    {
+      "command": [
+        "/usr/bin/riscv64-unknown-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-fsyntax-only",
+        "-DXU_NICE_READY=1",
+        "-DXU_NICE_DRAINN=1",
+        "-DXU_NICE_DIRECT=1",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/prototype-repo/tests/e203/firmware/accel.c"
+      ],
+      "native_exit": 1,
+      "diagnostic": "NICE ready requires direct NICE drainN transport"
+    },
+    {
+      "command": [
+        "/usr/bin/riscv64-unknown-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-fsyntax-only",
+        "-DXU_NICE_READY=1",
+        "-DXU_NICE_DRAIN8=1",
+        "-DXU_NICE_DIRECT=1",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/prototype-repo/tests/e203/firmware/accel.c"
+      ],
+      "native_exit": 1,
+      "diagnostic": "NICE ready requires direct NICE drainN transport"
+    }
+  ],
+  "baseline_elf_sha256": "497703ac8ddf55357c900c475cef48a16d21e2c83b252d55156c2c8bbd2ed274",
+  "baseline_load_sha256": "e8a5e4da6917fa0e04fc58dfded11c336bb8bd8bc5f3477b16968e525d94d06e",
+  "elf_metadata_note": "Whole ELF SHA may differ because the non-load .strtab FILE symbol contains a random GCC temporary assembler object name; load binaries and verilog images are compared exactly.",
+  "baseline_accel_sha256": "d3b303dacf84337982f627d6c4a3f7f6757bca5041138b1be08094058ae39b53",
+  "candidate_accel_sha256": "cf3cd0ec60d6f8066bea721e2e53030c8264a60f6708ad89e598b95e78d539b5"
+}

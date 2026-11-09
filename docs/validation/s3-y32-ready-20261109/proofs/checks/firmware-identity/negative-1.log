@@ -1,0 +1,10 @@
+["/usr/bin/riscv64-unknown-elf-gcc", "-march=rv32imac_zicsr2p0_zifencei2p0", "-mabi=ilp32", "-fsyntax-only", "-DXU_NICE_READY=1", "-DXU_NICE_DRAINN=1", "-DXU_NICE_DIRECT=1", "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/prototype-repo/tests/e203/firmware/accel.c"]
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/prototype-repo/tests/e203/firmware/accel.c:36:2: error: #error "NICE ready requires direct NICE drainN transport"
+   36 | #error "NICE ready requires direct NICE drainN transport"
+      |  ^~~~~
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/prototype-repo/tests/e203/firmware/accel.c:39:2: error: #error "NICE drainN requires direct NICE drain8 transport"
+   39 | #error "NICE drainN requires direct NICE drain8 transport"
+      |  ^~~~~
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/ready-20261109/prototype-repo/tests/e203/firmware/accel.c:42:2: error: #error "direct result transport requires NICE drain8"
+   42 | #error "direct result transport requires NICE drain8"
+      |  ^~~~~

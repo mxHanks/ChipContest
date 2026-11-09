@@ -1,0 +1,39 @@
+{
+  "status": "READ_ONLY_REVIEW_NO_FINDINGS",
+  "scope": "two implementation RTL files; independent source/semantic review, no simulation or synthesis performed by reviewer",
+  "source_sha256": {
+    "third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v": "4e03013e5367ff775216f34f84543791849a1d763ed62a2e750bf334c2fdee85",
+    "third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "ed32808d925cd315a6ef421186105ead559fe736e09c6b70eeeb73a9ec2ef55b"
+  },
+  "checks": [
+    "0x20 unchanged single-group poll-response budget and fallback semantics",
+    "0x23 unchanged stream group-span descriptor and per-group poll-response budget",
+    "0x24 distinct decode requires direct and live-status bit31 capability",
+    "READY_WAIT rechecks both capabilities every edge before ready/error/timeout",
+    "valid=0 including active=0 waits within per-group budget for row_start propagation",
+    "valid=1 requires active and exact expected FIFO-head group",
+    "last allowed budget edge prioritizes successful ready; only unready edge decrements",
+    "each group reloads budget after final Y write response",
+    "ready path issues no LSU status/result read",
+    "claim=0 publishes capability plus exact lower31 real row status",
+    "claim=1 preserves frozen metadata and snapshot payload under stall",
+    "same descriptor range,row alignment,count1..32 and end overflow checks as 0x23",
+    "capture edge then separate POP edge then eight individually acknowledged writes",
+    "first error stops whole instruction without retry after POP",
+    "existing CPU/LSU/BIU/outstanding/arbitration and real clear are untouched"
+  ],
+  "limitations": [
+    "No mapped synthesis, area or STA claim",
+    "Real-MAC and unit test logs are owned by RTL implementation agent; this receipt is an independent source review"
+  ],
+  "prior_receipt": "rtl-independent-review.json",
+  "prior_receipt_sha256": "b6bcab05ffc423e4945e8538228fbba6d12c34d1c0e2be9e785d8f7cf6763f44",
+  "final_freeze": "ready-fenced-task0/source",
+  "final_comment_delta_only_verified": {
+    "path": "rtl/subsys/xu_nice_drain8.v",
+    "earlier_sha256": "900b79b51d370fc4946f4aee446fda53018f3e24bcbfc91e73e0ac83a0406a06",
+    "final_sha256": "4e03013e5367ff775216f34f84543791849a1d763ed62a2e750bf334c2fdee85",
+    "line_comment_normalization": "only // through end of line, all other Verilog bytes equal",
+    "noncomment_bytes_equal": true
+  }
+}

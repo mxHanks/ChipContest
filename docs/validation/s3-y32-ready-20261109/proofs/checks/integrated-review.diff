@@ -1,0 +1,455 @@
+diff --git a/tests/e203/firmware/accel.c b/tests/e203/firmware/accel.c
+index 286f215..3ae6ef7 100644
+--- a/tests/e203/firmware/accel.c
++++ b/tests/e203/firmware/accel.c
+@@ -29,6 +29,12 @@ enum { CACHE_CTRL = 0x40 / 4, CACHE_ADDR = 0x44 / 4,
+ #ifndef XU_NICE_DRAINN
+ #define XU_NICE_DRAINN 0
+ #endif
++#ifndef XU_NICE_READY
++#define XU_NICE_READY 0
++#endif
++#if XU_NICE_READY && (!XU_NICE_DRAINN || !XU_NICE_DRAIN8 || !XU_NICE_DIRECT)
++#error "NICE ready requires direct NICE drainN transport"
++#endif
+ #if XU_NICE_DRAINN && (!XU_NICE_DRAIN8 || !XU_NICE_DIRECT)
+ #error "NICE drainN requires direct NICE drain8 transport"
+ #endif
+@@ -55,7 +61,12 @@ static inline uint32_t xu_nice_drain8(volatile uint32_t *destination, uint32_t c
+     /* The used output operand receives a real non-x0 rd. The fixed core does
+      * not turn NICE err into a trap, so the caller must inspect this code. */
+     __asm__ volatile (
+-#if XU_NICE_DRAINN
++#if XU_NICE_READY
++        /* Unlike poll-based drainN, ready waiting issues no LSU read to order
++         * the earlier STARTROW store. Retire it before accepting the command. */
++        "fence iorw, iorw\n\t"
++        ".insn r 0x7b, 7, 0x24, %0, %1, %2\n\t"
++#elif XU_NICE_DRAINN
+         ".insn r 0x7b, 7, 0x23, %0, %1, %2\n\t"
+ #else
+         ".insn r 0x7b, 7, 0x20, %0, %1, %2\n\t"
+diff --git a/tests/e203/firmware/accel.h b/tests/e203/firmware/accel.h
+index cbb976f..161844c 100644
+--- a/tests/e203/firmware/accel.h
++++ b/tests/e203/firmware/accel.h
+@@ -18,8 +18,11 @@
+  * two consecutive signed16 codes in each low/high16 shared word.
+  * Y normally receives signed48 in explicit sign-extended low/high32 slots;
+  * XU_HARDWARE_Y32 receives row-major signed32 RNE(y48 / 512), one word/result.
+- * XU_NICE_DRAIN8 requires poll_limit in 1..0x07ffffff and checks the returned
+- * status code explicitly; -11 rejects the limit and -12 aborts the whole task
++ * XU_NICE_DRAIN8 (0x20) uses poll_limit in 1..0x07ffffff, counting
++ * retired ROW_STATUS responses. XU_NICE_DRAINN (0x23) uses 1..0x003fffff
++ * retired responses per group. XU_NICE_READY (0x24, requires DRAINN, DIRECT
++ * and DRAIN8) uses the same 22-bit range but counts READY_WAIT clock edges
++ * per group. Every variant checks the returned status code explicitly; -11 rejects the limit and -12 aborts the whole task
+  * after a NICE failure, which may include an already-retired POP. */
+ int accel_linear(const volatile uint32_t *x, const volatile uint32_t *w,
+                  const volatile uint32_t *bias, volatile uint32_t *y,
+diff --git a/tests/e203/tb_accel_soc.sv b/tests/e203/tb_accel_soc.sv
+index a3bd3f9..77ff5d9 100644
+--- a/tests/e203/tb_accel_soc.sv
++++ b/tests/e203/tb_accel_soc.sv
+@@ -24,6 +24,9 @@ module tb_accel_soc;
+   integer dumpwave;
+   integer output_y32 = 0, shared_w_packed16 = 0, output_words = 50688, nice_drain8 = 0, nice_read_pop = 0, nice_direct = 0;
+   integer nice_stream=0, stream_group=0, stream_groups_written=0, stream_group_cycle=0;
++  integer nice_ready=0, ready_wait_cycles=0, ready_edges=0, ready_group_wait=0;
++  integer ready_budget=0, ready_row_responses=0, ready_row_response_cycle=-1;
++  reg ready_row_pending=0;
+   wire nice_prepop = nice_read_pop || nice_direct;
+   localparam BASE = 32'ha0000000, YOFF = 32'h20000, HOST = 32'h7f000;
+ 
+@@ -288,19 +291,43 @@ module tb_accel_soc;
+       if (`NICE.nice_req_valid && `NICE.nice_req_ready) begin
+         if (nice_instruction || nice_pending || nice_requests>=99 ||
+             `NICE.nice_req_inst[6:0]!==7'h7b || `NICE.nice_req_inst[14:12]!==7 ||
+-            `NICE.nice_req_inst[31:25]!==7'h23 || `NICE.nice_req_inst[11:7]==0 ||
++            `NICE.nice_req_inst[31:25]!==(nice_ready ? 7'h24 : 7'h23) || `NICE.nice_req_inst[11:7]==0 ||
+             `NICE.nice_req_rs1!==BASE+YOFF+nice_requests*1024 ||
+             `NICE.nice_req_rs2[4:0]!==0 || `NICE.nice_req_rs2[9:5]!==31 ||
+             `NICE.nice_req_rs2[31:10]==0 ||
+             !`OITF.dis_ena || !`OITF.disp_i_rdwen ||
+             `OITF.disp_i_rdidx!==`NICE.nice_req_inst[11:7])
+           $fatal(1,"NICE instruction descriptor or OITF allocation mismatch index=%0d",nice_requests);
++        if (nice_ready && (ready_row_pending || ready_row_responses!=nice_requests+1 ||
++            ready_row_response_cycle<0 || cycles<=ready_row_response_cycle))
++          $fatal(1,"ready instruction preceded STARTROW response retirement pending=%0d rows=%0d requests=%0d response_cycle=%0d request_cycle=%0d",
++            ready_row_pending,ready_row_responses,nice_requests,ready_row_response_cycle,cycles);
++        ready_budget=`NICE.nice_req_rs2[31:10]; ready_group_wait=0;
+         nice_instruction=1; nice_step=0; stream_group=0; stream_group_cycle=cycles; nice_request_cycle=cycles; nice_destination=`NICE.nice_req_rs1;
+         nice_lane_responses=0; nice_pop_retired=0; nice_group_writes=0;
+         nice_final_y_response_cycle=-1;
+         nice_group=`NICE.nice_req_rs2[4:0]; nice_rd=`NICE.nice_req_inst[11:7];
+         nice_tag=`OITF.dis_ptr; nice_requests=nice_requests+1;
+       end
++      if (nice_ready && `NICE.u_drain8.state==4'd9) begin
++        // Observe real READY_WAIT edges independently of marker expectations.
++        // Live metadata exists only with claim low and must equal ROW_STATUS.
++        if (!nice_instruction || nice_step!=0 || nice_pending ||
++            `NICE.xu_direct_claim || `NICE.xu_direct_ready || `NICE.xu_direct_commit ||
++            `NICE.nice_icb_cmd_valid || !`NICE.xu_direct_capable ||
++            `NICE.xu_direct_status!=={1'b1,1'b0,`ACCEL.row_retired,2'b0,`ACCEL.row_produced,
++              5'b0,`ACCEL.row_group,`ACCEL.row_count,`ACCEL.row_running,
++              (`ACCEL.row_produced==32),`ACCEL.row_valid,`ACCEL.row_active} ||
++            `NICE.u_drain8.polls_left!==ready_budget-ready_group_wait)
++          $fatal(1,"ready live-status ownership/metadata/budget mismatch");
++        ready_wait_cycles=ready_wait_cycles+1; ready_group_wait=ready_group_wait+1;
++        if (ready_group_wait>ready_budget) $fatal(1,"ready exceeded per-group edge budget");
++        if (`NICE.xu_direct_status[1]) begin
++          if (!`NICE.xu_direct_status[0] || `NICE.xu_direct_status[10:6]!==nice_group)
++            $fatal(1,"ready live FIFO head differs from expected group");
++          ready_edges=ready_edges+1; nice_step=1;
++        end
++      end
+       if (nice_direct) begin
+         if (direct_bundle_hold && (!`NICE.xu_direct_valid ||
+             {`NICE.xu_direct_status,`NICE.xu_direct_payload}!==direct_saved_bundle))
+@@ -345,6 +372,7 @@ module tb_accel_soc;
+           $fatal(1,"NICE command did not pass through real LSU");
+         nice_address=`NICE.nice_icb_cmd_addr; nice_read=`NICE.nice_icb_cmd_read;
+         nice_data=`NICE.nice_icb_cmd_wdata;
++        if (nice_ready && nice_read) $fatal(1,"ready instruction issued an LSU read");
+         if (nice_step==0) begin
+           if (!nice_read || nice_address!==32'h100420c4) $fatal(1,"NICE status poll order");
+         end else if (nice_step<=8) begin
+@@ -431,7 +459,7 @@ module tb_accel_soc;
+             if (stream_group<31) begin
+               stream_group=stream_group+1; nice_group=nice_group+1;
+               nice_destination=nice_destination+32; stream_group_cycle=cycles;
+-              nice_step=0; nice_lane_responses=0; nice_pop_retired=0;
++              nice_step=0; ready_group_wait=0; nice_lane_responses=0; nice_pop_retired=0;
+               nice_group_writes=0; nice_final_y_response_cycle=-1;
+             end
+           end
+@@ -452,6 +480,22 @@ module tb_accel_soc;
+ 
+   task observe_nice;
+     begin
++      if (nice_ready) begin
++        // Response metadata retires before accepting a new endpoint command.
++        if (ready_row_pending && `ACCEL.rsp_valid && `ACCEL.rsp_ready) begin
++          if (`ACCEL.rsp_err) $fatal(1,"STARTROW failed before ready instruction");
++          ready_row_pending=0; ready_row_responses=ready_row_responses+1;
++          ready_row_response_cycle=cycles;
++        end
++        if (`ACCEL.cmd_valid && `ACCEL.cmd_ready) begin
++          if (`ACCEL.cmd_read && `ACCEL.cmd_addr[11:0]==12'h0c4)
++            $fatal(1,"ready profile issued a ROW_STATUS query");
++          if (!`ACCEL.cmd_read && `ACCEL.cmd_addr[11:0]==12'h0c0 && `ACCEL.cmd_wdata[0]) begin
++            if (ready_row_pending) $fatal(1,"overlapping STARTROW commands");
++            ready_row_pending=1;
++          end
++        end
++      end
+       if (nice_stream) observe_nice_stream();
+       else observe_nice_legacy();
+     end
+@@ -513,6 +557,8 @@ module tb_accel_soc;
+       nice_alias_responses=0; nice_group_writes=0; nice_final_y_response_cycle=-1;
+       nice_lane_responses=0; nice_pop_retired=0;
+       stream_group=0; stream_groups_written=0; stream_group_cycle=0;
++      ready_wait_cycles=0; ready_edges=0; ready_group_wait=0; ready_budget=0;
++      ready_row_responses=0; ready_row_response_cycle=-1; ready_row_pending=0;
+       nice_instruction=0; nice_pending=0; nice_endpoint=0; nice_endpoint_done=0;
+       nice_request_cycle=0;
+       nice_cmd_hold=0; nice_completion_hold=0;
+@@ -881,7 +927,7 @@ module tb_accel_soc;
+       if (nice_drain8) begin
+         if (nice_requests!=(nice_stream ? 99 : 3168) || nice_responses!=(nice_stream ? 99 : 3168) ||
+             nice_retired!=(nice_stream ? 99 : 3168) ||
+-            nice_polls<3168 || nice_reads!=(nice_direct ? 0 : 25344) || nice_pops!=3168 || nice_writes!=25344 ||
++            (nice_ready ? nice_polls!=0 : nice_polls<3168) || nice_reads!=(nice_direct ? 0 : 25344) || nice_pops!=3168 || nice_writes!=25344 ||
+             nice_alias_responses!=(nice_read_pop ? 3168 : 0) || nice_group_writes!=8 ||
+             nice_lane_responses!==8'hff || !nice_pop_retired || nice_final_y_response_cycle<0 ||
+             nice_instruction || nice_pending || nice_cmd_hold || nice_completion_hold)
+@@ -899,6 +945,14 @@ module tb_accel_soc;
+               $fatal(1,"stream group/final-response coverage mismatch");
+             $display("STREAM_TASK layer=%0d requests=%0d groups=%0d snapshots=%0d pops_retired=%0d shared_writes=%0d final_response_before_completion=1",
+               layer,nice_requests,stream_groups_written,nice_direct_snapshots,nice_direct_pops,nice_writes);
++            if (nice_ready) begin
++              if (ready_edges!=3168 || ready_wait_cycles<3168 || ready_wait_cycles>perf_cycles ||
++                  ready_row_responses!=99 || ready_row_pending || nice_polls!=0)
++                $fatal(1,"ready exact wait/row/zero-poll coverage mismatch");
++              $display("READY_TASK layer=%0d requests=%0d groups=%0d ready_edges=%0d ready_wait_cycles=%0d status_polls=%0d snapshots=%0d pops_retired=%0d shared_writes=%0d final_response_before_completion=1",
++                layer,nice_requests,stream_groups_written,ready_edges,ready_wait_cycles,nice_polls,
++                nice_direct_snapshots,nice_direct_pops,nice_writes);
++            end
+           end
+         end else if (nice_read_pop) begin
+           if (perf_read_pop_aliases!=3168 || perf_explicit_pops!=0)
+@@ -991,12 +1045,14 @@ module tb_accel_soc;
+     if (!$value$plusargs("NICE_READ_POP=%d",nice_read_pop)) nice_read_pop=0;
+     if (!$value$plusargs("NICE_DIRECT=%d",nice_direct)) nice_direct=0;
+     if (!$value$plusargs("NICE_STREAM=%d",nice_stream)) nice_stream=0;
++    if (!$value$plusargs("NICE_READY=%d",nice_ready)) nice_ready=0;
+     if ((output_y32!=0 && output_y32!=1) ||
+         (shared_w_packed16!=0 && shared_w_packed16!=1) ||
+         (nice_drain8!=0 && nice_drain8!=1) || (nice_drain8 && (!output_y32 || !shared_w_packed16)) ||
+         (nice_read_pop!=0 && nice_read_pop!=1) || (nice_read_pop && !nice_drain8) ||
+         (nice_direct!=0 && nice_direct!=1) || (nice_direct && (!nice_drain8 || nice_read_pop)) ||
+-        (nice_stream!=0 && nice_stream!=1) || (nice_stream && !nice_direct))
++        (nice_stream!=0 && nice_stream!=1) || (nice_stream && !nice_direct) ||
++        (nice_ready!=0 && nice_ready!=1) || (nice_ready && !nice_stream))
+       $fatal(1,"invalid output or shared W layout mode");
+     output_words=output_y32 ? 25344 : 50688;
+     if (!$value$plusargs("MAX_CYCLES=%d",max_cycles)) max_cycles=200000000;
+diff --git a/tests/e203/test_y32_firmware_contract.py b/tests/e203/test_y32_firmware_contract.py
+index ad6ecf0..84a15ae 100644
+--- a/tests/e203/test_y32_firmware_contract.py
++++ b/tests/e203/test_y32_firmware_contract.py
+@@ -37,15 +37,20 @@ def task_log(schedule, tasks=1):
+             lines.append(f'W_PACKED16_TASK layer={layer} source_words=8192 uploaded_values=16384')
+         if schedule in contract.NICE_SCHEDULES:
+             result_reads = 0 if schedule in contract.DIRECT_SCHEDULES else 25344
+-            instructions = 99 if schedule == contract.NICE_STREAM_SCHEDULE else 3168
++            instructions = 99 if schedule in contract.STREAM_SCHEDULES else 3168
++            polls = 0 if schedule == contract.NICE_READY_SCHEDULE else 3168
+             lines.append(f'NICE_TASK layer={layer} requests={instructions} responses={instructions} oitf_retired={instructions} '
+-                         f'status_polls=3168 result_reads={result_reads} pops_retired=3168 shared_writes=25344')
++                         f'status_polls={polls} result_reads={result_reads} pops_retired=3168 shared_writes=25344')
+         if schedule in contract.DIRECT_SCHEDULES:
+             lines.append(f'DIRECT_TASK layer={layer} snapshots=3168 lanes=25344 '
+                          'pops_retired=3168 result_mmio_reads=0')
+-        if schedule == contract.NICE_STREAM_SCHEDULE:
++        if schedule in contract.STREAM_SCHEDULES:
+             lines.append(f'STREAM_TASK layer={layer} requests=99 groups=3168 snapshots=3168 '
+                          'pops_retired=3168 shared_writes=25344 final_response_before_completion=1')
++        if schedule == contract.NICE_READY_SCHEDULE:
++            lines.append(f'READY_TASK layer={layer} requests=99 groups=3168 ready_edges=3168 '
++                         'ready_wait_cycles=9504 status_polls=0 snapshots=3168 pops_retired=3168 '
++                         'shared_writes=25344 final_response_before_completion=1')
+         if schedule == contract.NICE_READ_POP_SCHEDULE:
+             lines.append(f'READ_POP_TASK layer={layer} alias_reads=3168 explicit_pops=0')
+     lines.append(f'SOC_PASS tasks={tasks} outputs={tasks*25344} '
+@@ -267,7 +272,8 @@ class Y32FirmwareContractTests(unittest.TestCase):
+                 self.assertEqual('+NICE_READ_POP=1' in command,
+                                  schedule == contract.NICE_READ_POP_SCHEDULE)
+                 self.assertEqual('+NICE_DIRECT=1' in command, schedule in contract.DIRECT_SCHEDULES)
+-                self.assertEqual('+NICE_STREAM=1' in command, schedule == contract.NICE_STREAM_SCHEDULE)
++                self.assertEqual('+NICE_STREAM=1' in command, schedule in contract.STREAM_SCHEDULES)
++                self.assertEqual('+NICE_READY=1' in command, schedule == contract.NICE_READY_SCHEDULE)
+ 
+     def test_direct_transport_work_and_opt_in_preserve_existing_encoding(self):
+         old, new = contract.NICE_READ_POP_SCHEDULE, contract.NICE_DIRECT_SCHEDULE
+@@ -358,7 +364,7 @@ class Y32FirmwareContractTests(unittest.TestCase):
+         with self.assertRaises(ValueError):
+             soc.check_performance(complete.replace(direct, ''), layers, schedule)
+         for old in contract.SCHEDULES:
+-            if old == schedule:
++            if old in contract.STREAM_SCHEDULES:
+                 continue
+             self.assertEqual(soc.check_stream_activity('', layers, old), [])
+             with self.subTest(old=old), self.assertRaises(ValueError):
+@@ -367,6 +373,51 @@ class Y32FirmwareContractTests(unittest.TestCase):
+             soc.check_performance(task_log(contract.NICE_DIRECT_SCHEDULE)+marker,
+                                   layers, contract.NICE_DIRECT_SCHEDULE)
+ 
++    def test_ready_opt_in_retains_stream_descriptor_and_changes_only_wait_transport(self):
++        old, new = contract.NICE_STREAM_SCHEDULE, contract.NICE_READY_SCHEDULE
++        self.assertEqual(contract.task_contract(new),
++                         {**contract.task_contract(old), 'ready_groups':3168, 'status_polls':0})
++        for optimization in contract.OPTIMIZATIONS:
++            for experiment in contract.EXPERIMENTS:
++                self.assertEqual(contract.compiler_defines(contract.configuration(new, optimization, experiment)),
++                                 contract.compiler_defines(contract.configuration(old, optimization, experiment)) +
++                                 ['-DXU_NICE_READY=1'])
++        self.assertEqual(contract.simulator_arguments(new),
++                         contract.simulator_arguments(old) + ['+NICE_READY=1'])
++
++    def test_ready_requires_zero_poll_every_wait_edge_and_final_response(self):
++        schedule = contract.NICE_READY_SCHEDULE
++        layers = [dict(layer=0, cycles=1000000)]
++        marker = ('READY_TASK layer=0 requests=99 groups=3168 ready_edges=3168 '
++                  'ready_wait_cycles=9504 status_polls=0 snapshots=3168 pops_retired=3168 '
++                  'shared_writes=25344 final_response_before_completion=1\n')
++        complete = task_log(schedule)
++        self.assertEqual(len(soc.check_performance(complete, layers, schedule)), 1)
++        self.assertEqual(soc.check_ready_activity(marker, layers, schedule)[0]['ready_wait_cycles'], 9504)
++        bad_markers = ['', marker*2, marker.replace('layer=0', 'layer=1')]
++        for field, value in [('requests',98), ('groups',3167), ('ready_edges',3167),
++                             ('ready_wait_cycles',3167), ('ready_wait_cycles',1000001),
++                             ('status_polls',1), ('snapshots',3167), ('pops_retired',3167),
++                             ('shared_writes',25343), ('final_response_before_completion',0)]:
++            import re
++            bad_markers.append(re.sub(r'(?<![a-z_])'+field+r'=\d+', field+'='+str(value), marker))
++        bad_markers += [marker.replace('ready_wait_cycles=9504', 'ready_wait_cycles=-1'),
++                        marker.replace(' ready_edges=3168', ''), marker.rstrip()+' extra=0\n']
++        for bad in bad_markers:
++            with self.subTest(bad=bad), self.assertRaises(ValueError):
++                soc.check_performance(complete.replace(marker,bad), layers, schedule)
++        with self.assertRaises(ValueError):
++            soc.check_performance(complete.replace('status_polls=0','status_polls=1',1), layers, schedule)
++        for prefix in ['DIRECT_TASK', 'STREAM_TASK']:
++            bad='\n'.join(line for line in complete.split('\n') if not line.startswith(prefix))
++            with self.subTest(prefix=prefix), self.assertRaises(ValueError):
++                soc.check_performance(bad, layers, schedule)
++        for old in contract.SCHEDULES:
++            if old == schedule: continue
++            self.assertEqual(soc.check_ready_activity('',layers,old), [])
++            with self.subTest(old=old), self.assertRaises(ValueError):
++                soc.check_ready_activity(marker,layers,old)
++
+     def test_read_pop_changes_only_transport_work_and_keeps_firmware_abi(self):
+         old, new = contract.NICE_SCHEDULE, contract.NICE_READ_POP_SCHEDULE
+         self.assertEqual(contract.task_contract(new),
+diff --git a/tests/ppa/test_s3_task_campaign.py b/tests/ppa/test_s3_task_campaign.py
+index 17462c0..0b49adc 100644
+--- a/tests/ppa/test_s3_task_campaign.py
++++ b/tests/ppa/test_s3_task_campaign.py
+@@ -161,7 +161,7 @@ class S3TaskCampaignSimulatorTests(unittest.TestCase):
+                   'frequency_hz=32767.999998926 precision_fs=1\n')
+         contract = SimpleNamespace(configuration=lambda *args:{},compiler_defines=lambda config:[],
+                                    simulator_arguments=lambda schedule:[],NICE_SCHEDULES=set(),
+-                                   NICE_STREAM_SCHEDULE='bias-hw-autogroup-y32-packed16-nice-direct-stream-window')
++                                   STREAM_SCHEDULES=(), NICE_READY_SCHEDULE='ready')
+         soc = SimpleNamespace(contract=contract,load_fixture=lambda *args:{},check_vectors=lambda *args:{},
+                               vector_identity=lambda *args:{},check_log=lambda *args:[{'cycles':3}],
+                               check_performance=lambda *args:[{}],
+diff --git a/tools/ppa/s3_task_campaign.py b/tools/ppa/s3_task_campaign.py
+index cd9d17b..bce2279 100644
+--- a/tools/ppa/s3_task_campaign.py
++++ b/tools/ppa/s3_task_campaign.py
+@@ -471,8 +471,10 @@ def main(argv=None, extension=None):
+                         measured_clocks=clocks,startup_observations=startup,**identity)
+             if args.schedule in soc.contract.NICE_SCHEDULES:
+                 item['nice_activity'] = soc.check_nice_activity(log,native_layers,args.schedule)[0]
+-            if args.schedule == soc.contract.NICE_STREAM_SCHEDULE:
++            if args.schedule in soc.contract.STREAM_SCHEDULES:
+                 item['stream_activity'] = soc.check_stream_activity(log,native_layers,args.schedule)[0]
++            if args.schedule == soc.contract.NICE_READY_SCHEDULE:
++                item['ready_activity'] = soc.check_ready_activity(log,native_layers,args.schedule)[0]
+             if extension is not None:
+                 item['activity'] = extension.inspect_task(log, task, item)
+             report['task_results'].append(item)
+diff --git a/tools/scripts/e203_soc.py b/tools/scripts/e203_soc.py
+index 02956dd..6e4d48b 100644
+--- a/tools/scripts/e203_soc.py
++++ b/tools/scripts/e203_soc.py
+@@ -184,6 +184,7 @@ def check_nice_activity(log, layers, schedule):
+     if schedule in contract.DIRECT_SCHEDULES:
+         check_direct_activity(log, layers, schedule)
+     check_stream_activity(log, layers, schedule)
++    check_ready_activity(log, layers, schedule)
+     return records
+ 
+ 
+@@ -561,6 +562,7 @@ def main():
+                         log,report['layers'],args.firmware_schedule)
+                     report['direct_activity']=check_direct_activity(log,report['layers'],args.firmware_schedule)
+                     report['stream_activity']=check_stream_activity(log,report['layers'],args.firmware_schedule)
++                    report['ready_activity']=check_ready_activity(log,report['layers'],args.firmware_schedule)
+                 for layer, counters in zip(report['layers'], check_performance(log, report['layers'],args.firmware_schedule)):
+                     layer['performance'] = counters
+                 report['outputs']=args.tasks*25344
+@@ -593,7 +595,7 @@ def check_stream_activity(log, layers, schedule):
+            'final_response_before_completion']
+     pattern=r'^STREAM_TASK '+' '.join(name+r'=(\d+)' for name in names)+r'$'
+     records=[dict(zip(names,map(int,row))) for row in re.findall(pattern,log,re.M)]
+-    expected=len(layers) if schedule==contract.NICE_STREAM_SCHEDULE else 0
++    expected=len(layers) if schedule in contract.STREAM_SCHEDULES else 0
+     if len(records)!=expected or len(records)!=len(re.findall(r'^STREAM_TASK\b',log,re.M)):
+         raise ValueError('missing, duplicate, malformed or unexpected direct stream activity')
+     for record,layer in zip(records,layers):
+@@ -603,5 +605,24 @@ def check_stream_activity(log, layers, schedule):
+     return records
+ 
+ 
++def check_ready_activity(log, layers, schedule):
++    names=['layer','requests','groups','ready_edges','ready_wait_cycles','status_polls',
++           'snapshots','pops_retired','shared_writes','final_response_before_completion']
++    pattern=r'^READY_TASK '+' '.join(name+r'=(\d+)' for name in names)+r'$'
++    records=[dict(zip(names,map(int,row))) for row in re.findall(pattern,log,re.M)]
++    expected=len(layers) if schedule==contract.NICE_READY_SCHEDULE else 0
++    if len(records)!=expected or len(records)!=len(re.findall(r'^READY_TASK\b',log,re.M)):
++        raise ValueError('missing, duplicate, malformed or unexpected ready activity')
++    for record,layer in zip(records,layers):
++        variable={'ready_wait_cycles'}
++        if ({k:v for k,v in record.items() if k not in variable} !=
++                dict(layer=layer['layer'],requests=99,groups=3168,ready_edges=3168,status_polls=0,
++                     snapshots=3168,pops_retired=3168,shared_writes=25344,
++                     final_response_before_completion=1) or
++                not 3168 <= record['ready_wait_cycles'] <= layer['cycles']):
++            raise ValueError('ready wait/group/POP/final-response coverage differs')
++    return records
++
++
+ if __name__=='__main__':
+     sys.exit(main())
+diff --git a/tools/scripts/xu_firmware_contract.py b/tools/scripts/xu_firmware_contract.py
+index 132f00e..7af46fe 100644
+--- a/tools/scripts/xu_firmware_contract.py
++++ b/tools/scripts/xu_firmware_contract.py
+@@ -15,7 +15,8 @@ SCHEDULES = ('baseline', 'bias-dtcm', 'bias-hw', 'bias-dtcm-window', 'bias-hw-wi
+              'bias-hw-autogroup-y32-packed16-nice-window',
+              'bias-hw-autogroup-y32-packed16-nice-read-pop-window',
+              'bias-hw-autogroup-y32-packed16-nice-direct-window',
+-             'bias-hw-autogroup-y32-packed16-nice-direct-stream-window')
++             'bias-hw-autogroup-y32-packed16-nice-direct-stream-window',
++             'bias-hw-autogroup-y32-packed16-nice-direct-stream-ready-window')
+ PAIRED_HI_SCHEDULE = 'bias-hw-autogroup-paired-hi-window'
+ PAIRED_HI_PACKED16_SCHEDULE = 'bias-hw-autogroup-paired-hi-packed16-window'
+ PAIRED_HI_SCHEDULES = (PAIRED_HI_SCHEDULE, PAIRED_HI_PACKED16_SCHEDULE)
+@@ -25,7 +26,9 @@ NICE_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-window'
+ NICE_READ_POP_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-read-pop-window'
+ NICE_DIRECT_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-direct-window'
+ NICE_STREAM_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-direct-stream-window'
+-DIRECT_SCHEDULES = (NICE_DIRECT_SCHEDULE, NICE_STREAM_SCHEDULE)
++NICE_READY_SCHEDULE = 'bias-hw-autogroup-y32-packed16-nice-direct-stream-ready-window'
++STREAM_SCHEDULES = (NICE_STREAM_SCHEDULE, NICE_READY_SCHEDULE)
++DIRECT_SCHEDULES = (NICE_DIRECT_SCHEDULE,) + STREAM_SCHEDULES
+ NICE_SCHEDULES = (NICE_SCHEDULE, NICE_READ_POP_SCHEDULE) + DIRECT_SCHEDULES
+ Y32_SCHEDULES = (Y32_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
+ PACKED16_SCHEDULES = (PAIRED_HI_PACKED16_SCHEDULE, Y32_PACKED16_SCHEDULE) + NICE_SCHEDULES
+@@ -95,8 +98,10 @@ def compiler_defines(config):
+         values['XU_NICE_DRAIN8'] = True
+     if config['schedule'] in DIRECT_SCHEDULES:
+         values['XU_NICE_DIRECT'] = True
+-    if config['schedule'] == NICE_STREAM_SCHEDULE:
++    if config['schedule'] in STREAM_SCHEDULES:
+         values['XU_NICE_DRAINN'] = True
++    if config['schedule'] == NICE_READY_SCHEDULE:
++        values['XU_NICE_READY'] = True
+     return ['-D' + name + '=' + str(int(value)) for name, value in values.items()]
+ 
+ 
+@@ -113,8 +118,10 @@ def simulator_arguments(schedule='baseline'):
+         arguments.append('+NICE_READ_POP=1')
+     if schedule in DIRECT_SCHEDULES:
+         arguments.append('+NICE_DIRECT=1')
+-    if schedule == NICE_STREAM_SCHEDULE:
++    if schedule in STREAM_SCHEDULES:
+         arguments.append('+NICE_STREAM=1')
++    if schedule == NICE_READY_SCHEDULE:
++        arguments.append('+NICE_READY=1')
+     return arguments
+ 
+ 
+@@ -162,9 +169,11 @@ def task_contract(schedule='baseline'):
+     if schedule in DIRECT_SCHEDULES:
+         result.update(result_mmio_reads=0, y32_mmio_reads=0,
+                       direct_snapshots=3168, direct_lanes=OUTPUTS_PER_TASK)
+-    if schedule == NICE_STREAM_SCHEDULE:
++    if schedule in STREAM_SCHEDULES:
+         result.update(nice_requests=99, nice_responses=99, nice_oitf_retired=99,
+                       stream_groups=3168)
++    if schedule == NICE_READY_SCHEDULE:
++        result.update(ready_groups=3168, status_polls=0)
+     return result
+ 
+ 
+@@ -218,10 +227,11 @@ def validate_nice_activity(records, layers, schedule):
+     for record, layer in zip(records, layers):
+         if (set(record) != names or any(type(v) is not int or v < 0 for v in record.values()) or
+                 record['layer'] != layer['layer'] or
+-                any(record[key] != (99 if schedule == NICE_STREAM_SCHEDULE else 3168)
++                any(record[key] != (99 if schedule in STREAM_SCHEDULES else 3168)
+                     for key in ['requests', 'responses', 'oitf_retired']) or
+                 record['pops_retired'] != 3168 or
+                 record['result_reads'] != (0 if schedule in DIRECT_SCHEDULES else OUTPUTS_PER_TASK) or
+                 record['shared_writes'] != OUTPUTS_PER_TASK or
+-                not 3168 <= record['status_polls'] <= layer['cycles']):
++                (record['status_polls'] != 0 if schedule == NICE_READY_SCHEDULE else
++                 not 3168 <= record['status_polls'] <= layer['cycles'])):
+             raise ValueError('NICE instruction retirement or payload coverage differs')

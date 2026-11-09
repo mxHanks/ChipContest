@@ -1,0 +1,29 @@
+{
+  "status": "STARTROW_ORDERING_RISK_IDENTIFIED_AND_SOURCE_FIX_REVIEWED",
+  "reviewer_scope": "read-only source review; no simulation run",
+  "failed_campaign": "ready-task0",
+  "failure": "strict passive STARTROW response-retirement assertion rejected first unfenced experiment",
+  "cause": "legacy firmware custom instruction had only a trailing fence; old transport LSU poll serialized STARTROW whereas ready transport issues no LSU read",
+  "fix": "XU_NICE_READY-only leading fence iorw,iorw; original trailing fence and memory clobber retained",
+  "firmware_source_sha256": "cf3cd0ec60d6f8066bea721e2e53030c8264a60f6708ad89e598b95e78d539b5",
+  "core_evidence": {
+    "file": "third-party/e203_hbirdv2/rtl/e203/core/e203_exu_disp.v",
+    "lines": [
+      133,
+      134,
+      135,
+      213
+    ],
+    "meaning": "fence/fencei dispatch requires original OITF empty"
+  },
+  "measurement": "front fence cost remains inside original request-to-final-Y-response payload; comparator never normalizes cycles or firmware instructions",
+  "validation": {
+    "campaign": "ready-fenced-task0",
+    "status": "DEVELOPMENT_PASS_POLICY_PENDING",
+    "payload": 425539,
+    "clear": 198403,
+    "source_drift": [],
+    "comparison": "ready-task0-comparison.json",
+    "strict_STARTROW_assertion": "retained and passed for all99 row requests"
+  }
+}
