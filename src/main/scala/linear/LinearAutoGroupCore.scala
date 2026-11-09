@@ -157,13 +157,24 @@ class LinearAutoGroupCore(useBiasSram: Boolean = true) extends Module {
         io.cacheRspError := biasCache.io.rspError
         io.cacheReadData := biasCache.io.rspData
         io.cacheIdle := biasCache.io.hostIdle
+        // INIT samples the current bias before takeBias releases its demand.
+        // Once that edge has passed, request the next group while this group's
+        // MACs run. The compute selector remains on produced until enqueue;
+        // only the independent bias request looks ahead. A pending demand is
+        // held by the SRAM module and its ready prevents duplicate acceptance.
+        val nextBiasDemand = active && running && !takeBias && produced < 31.U
         biasCache.io.groupReqValid := io.cacheEnable &&
-            ((active && !running && produced < 32.U) || (!active && manualPending))
-        biasCache.io.groupReqTag := selectedGroup
+            ((active && !running && produced < 32.U) || nextBiasDemand ||
+                (!active && manualPending))
+        biasCache.io.groupReqTag := Mux(nextBiasDemand,
+            (produced + 1.U)(4, 0), selectedGroup)
         biasCache.io.groupTake := takeBias
         biasReady := biasCache.io.groupValid && biasCache.io.groupTag === selectedGroup
         selectedBias := biasCache.io.groupBias
-        when(takeBias) { assert(biasCache.io.groupValid) }
+        when(takeBias) {
+            assert(biasCache.io.groupValid && biasCache.io.groupTag === selectedGroup,
+                "Compute INIT must consume its own bias group")
+        }
     } else {
         // Explicit register-cache ablation. The host still uses the same
         // command/response interface, so its response cannot escape timing.
