@@ -125,6 +125,48 @@ def verify(args):
     require(fallback['status'] == 'PASS' and fallback['principal'] == 489570, 'fallback not proved')
     protocol = read(root/args.protocol/'result.json')
     require(protocol['status'] == 'PASS' and protocol['source_drift'] == [], 'protocol not proved')
+    pf = root/args.protocol
+    for pin in protocol['source_files']:
+        require(sha(pf/'source'/pin['path']) == pin['sha256'], 'protocol source drift')
+    for pin in protocol['vector_files']:
+        require(sha(pf/'vectors'/pin['path']) == pin['sha256'], 'protocol vector drift')
+    for pin in protocol['synthetic_vectors']['files']:
+        require(sha(pf/'synthetic-vectors'/pin['path']) == pin['sha256'], 'synthetic vector drift')
+    require(len(protocol['jobs']) == 21, 'missing protocol cases')
+    protocol_outputs = 0
+    for job in protocol['jobs']:
+        require(job['passed'] and job['returncode'] == 0, 'protocol job failed')
+        require(sha(pf/job['log']) == job['log_sha256'], 'protocol raw log changed')
+        log = (pf/job['log']).read_text()
+        records = []
+        for line in log.splitlines():
+            if line.startswith(('DMA_NUMERIC_PASS ', 'DMA_CLEAR_PASS ', 'DMA_ABORT_PASS ', 'DMA_RESET_PASS ', 'DMA_PROTOCOL_PASS ')):
+                records.append({'kind':line.split()[0],'values':dict(re.findall(r'(\w+)=(\S+)',line))})
+        require(records == job['records'], 'protocol raw records differ')
+        end = [r['values'] for r in records if r['kind'] == 'DMA_PROTOCOL_PASS']
+        require(len(end) == 1 and end[0]['exact_outputs'] == '25344' and
+                end[0]['physical_y_readback'] == '25344', 'protocol outputs incomplete')
+        protocol_outputs += int(end[0]['exact_outputs'])
+    core = root.parent/'dma-core-checks-20261109/final-r2'
+    receipt = read(core/'receipt.json')
+    require(receipt['source_drift'] == [], 'core source drift reported')
+    repository = root.parent.parent
+    for old_path, digest in receipt['sources'].items():
+        relative = old_path.split('/ChipContest/',1)[1]
+        require(sha(repository/relative) == digest, 'core source identity differs: '+relative)
+    raw_expected = (baseline/'task-00/vectors/layer_00/y.mem').read_text().lower().split()
+    y_expected = (baseline/'task-00/vectors/layer_00/y32.mem').read_text().lower().split()
+    for rows in (1,2):
+        for stall in (0,31,60,80,255):
+            prefix = core/f'rows{rows}-stall{stall}'
+            case = read(Path(str(prefix)+'.json'))
+            require(case['outputs_exact_raw48'] == case['outputs_exact_cpp_rne_y32'] == 25344,
+                    'core outputs incomplete')
+            require(Path(str(prefix)+'.json.actual-raw48.mem').read_text().lower().split() == raw_expected,
+                    'core captured raw48 differs')
+            require(Path(str(prefix)+'.json.cpp-rne-y32.mem').read_text().lower().split() == y_expected,
+                    'core captured C++ Y32 differs')
+            require('nonzero_prestate=1' in Path(str(prefix)+'.log').read_text(), 'core all-dirty proof missing')
     fabric = read(root/'fabric-preflight/result.json')
     require(fabric['status'] == 'PASS', 'fabric probe failed')
     for record in protocol['source_files']:
@@ -146,6 +188,8 @@ def verify(args):
                 performance_target_met=dual['principal_cycles']<=1800000,
                 clock_condition_hz=150000000,unchanged_cpu_files=len(cpu_files),
                 outputs_per_mode=304128,negative_log_checks={'dual':dn,'single':sn},layers=table,
+                protocol_jobs=21,protocol_exact_outputs_and_public_readbacks=protocol_outputs,
+                core_full_cases=10,
                 area_sta_official='Not established by this verifier; inspect separate area report and limitations.')
 
 
