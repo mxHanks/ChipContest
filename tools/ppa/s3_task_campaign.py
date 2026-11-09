@@ -18,6 +18,10 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
+CLEAR_HELPERS = {
+    'scalar': 'tools/ppa/s3_task_clear_protocol.py',
+    'packed16-mmio': 'tools/ppa/s3_task_packed_clear_protocol.py',
+}
 
 
 def sha(path):
@@ -289,13 +293,17 @@ def instrument_tb(original, observer, platform_clocks='development', startup_pro
     return apply_platform_clocks(apply_startup_profile(result,startup_profile),platform_clocks)
 
 
-def snapshot_inputs(repo, source):
+def snapshot_inputs(repo, source, clear_profile='scalar'):
     """One frozen firmware/observer/RTL seam shared by optional activity adapters."""
+    if clear_profile not in CLEAR_HELPERS:
+        raise ValueError('unknown clear profile')
     selected = ['model/__init__.py','model/fixed16_acc48.py','model/s3_y32.py',
                 'tools/model/export_s3_vectors.py','tools/scripts/e203_soc.py',
                 'tools/scripts/xu_firmware_contract.py','tools/ppa/s3_task_clear_protocol.py',
                 'tools/ppa/xu_task_clear_protocol.py','tests/e203/tb_accel_soc.sv',
                 'tests/e203/vectors/kwt-silence-v1.json','tests/e203/vectors/kwt-silence-v1.tar.gz']
+    if clear_profile!='scalar':
+        selected.append(CLEAR_HELPERS[clear_profile])
     selected += [str(p.relative_to(repo)) for p in (repo/'tests/e203/firmware').iterdir() if p.is_file()]
     for rel in selected:
         target = source/rel
@@ -303,6 +311,25 @@ def snapshot_inputs(repo, source):
         shutil.copy2(repo/rel, target)
     shutil.copytree(repo/'third-party/e203_hbirdv2/rtl/e203', source/'rtl')
     shutil.copy2(__file__, source/'campaign.py')
+
+
+def check_clear_record(record, bias_kind, clear_counts, clear_profile):
+    """Keep the historical scalar check, with exact optional transport proof."""
+    if (int(record['mode_sram']) != int(bias_kind=='sram') or
+            int(record['writes']) != clear_counts[bias_kind]['accepted_writes']):
+        raise ValueError('physical bias kind or clear work differs')
+    if clear_profile=='scalar':
+        return
+    if clear_profile!='packed16-mmio':
+        raise ValueError('unknown clear profile')
+    writes = 8252 if bias_kind=='sram' else 9019
+    expected = dict(reads=8, writes=writes, commands=writes+8, responses=writes+8,
+                    physical_w=16384, physical_x=64,
+                    physical_bias=768 if bias_kind=='sram' else 0,
+                    w_packs=8192, x_packs=32)
+    if (record.get('clear_transport')!='public-pack32' or
+            any(int(record[key])!=value for key,value in expected.items())):
+        raise ValueError('packed clear transport or physical coverage differs')
 
 
 def main(argv=None, extension=None):
@@ -314,6 +341,8 @@ def main(argv=None, extension=None):
     parser.add_argument('--simulator', choices=['vcs','iverilog','verilator'], default='vcs',
                         help='Verilator is 2-state development evidence, not VCS/gate-level signoff')
     parser.add_argument('--bias-kind', choices=['sram','registers'], required=True)
+    parser.add_argument('--clear-profile', choices=list(CLEAR_HELPERS), default='scalar',
+                        help='physical preclear transport; scalar preserves historical firmware and observer')
     parser.add_argument('--cross-prefix', default='/opt/eda/xilinx/2025.2/Vitis/gnu/riscv/lin/bin/riscv64-unknown-elf-')
     parser.add_argument('--first-source-stall', type=int, default=0)
     parser.add_argument('--max-cycles', type=int, default=3000000)
@@ -338,17 +367,24 @@ def main(argv=None, extension=None):
     out.mkdir(parents=True, exist_ok=False)
     source = out/'source'
     source.mkdir()
-    snapshot_inputs(repo, source)
+    # Preserve the original two-argument scalar seam for existing adapters.
+    if args.clear_profile=='scalar':
+        snapshot_inputs(repo, source)
+    else:
+        snapshot_inputs(repo, source, args.clear_profile)
     if extension is not None:
         extension.snapshot(repo, source)
     sys.path.insert(0, str(source/'tools/scripts'))
     sys.path.insert(0, str(source))
     soc = load('s3_campaign_soc', source/'tools/scripts/e203_soc.py')
-    clear = load('s3_campaign_clear', source/'tools/ppa/s3_task_clear_protocol.py')
+    helper_path = CLEAR_HELPERS[args.clear_profile]
+    clear = load('s3_campaign_clear', source/helper_path)
     config = soc.contract.configuration(args.schedule, '-O2', 'both-unroll-no-masks')
     pins = {str(p.relative_to(source)):sha(p) for p in source.rglob('*') if p.is_file()}
     report = dict(status='RUNNING', scope='fresh-process CPU/RTL, physical parameter preclear; no mapped/PPA or official acceptance',
                   configuration=config, bias_kind=args.bias_kind, original_layers=layers,
+                  clear_profile=args.clear_profile, clear_helper_source_path=helper_path,
+                  clear_helper_sha256=pins.get(helper_path),
                   clock_configuration=clock_configuration(args.platform_clocks),
                   startup_configuration=startup_configuration(args.startup_profile),
                   platform_assertions='enabled' if args.platform_assertions else 'historical_DISABLED_SV_ASSERTION_define',
@@ -392,7 +428,8 @@ def main(argv=None, extension=None):
             report['versions'][command[0]] = step('version-'+Path(command[0]).name, command, timeout=120)
         firmware = source/'tests/e203/firmware'
         (out/'s3_clear_main.c').write_text(clear.firmware_wrapper(firmware/'main.c', sha(firmware/'main.c')))
-        observer = clear.observer_declarations()
+        observer = (clear.observer_declarations(use_bias_sram=args.bias_kind=='sram')
+                    if args.clear_profile=='packed16-mmio' else clear.observer_declarations())
         (out/'s3_clear_observer.svh').write_text(observer)
         original_tb = (source/'tests/e203/tb_accel_soc.sv').read_text()
         generated_tb = instrument_tb(original_tb, observer,args.platform_clocks,args.startup_profile)
@@ -400,7 +437,8 @@ def main(argv=None, extension=None):
             generated_tb = extension.testbench(generated_tb, source, out, args)
         (out/'tb.sv').write_text(generated_tb)
         write(out/'clear-recipe.json', dict(frozen_main_sha256=sha(firmware/'main.c'),
-            helper_sha256=sha(source/'tools/ppa/s3_task_clear_protocol.py'),
+            clear_profile=args.clear_profile, helper_source_path=helper_path,
+            helper_sha256=sha(source/helper_path),
             generated_c_sha256=sha(out/'s3_clear_main.c'), generated_tb_sha256=sha(out/'tb.sv'),
             clear_counts=clear.CLEAR_COUNTS, tasks_per_process=1, reset='fresh native process',
             policy='REVIEW_PENDING', fifo_payload_physical_zero='UNPROVEN'))
@@ -463,9 +501,7 @@ def main(argv=None, extension=None):
             if windows[0]['first_request_wait'] < args.first_source_stall:
                 raise ValueError('first-request injected wait was omitted')
             clear_record = dict(item.split('=',1) for item in clear_lines[0].split()[1:])
-            if (int(clear_record['mode_sram']) != int(args.bias_kind=='sram') or
-                    int(clear_record['writes']) != clear.CLEAR_COUNTS[args.bias_kind]['accepted_writes']):
-                raise ValueError('physical bias kind or clear work differs')
+            check_clear_record(clear_record,args.bias_kind,clear.CLEAR_COUNTS,args.clear_profile)
             item = dict(original_layer=layer,native_layer=0,cycles=native_layers[0]['cycles'],
                         performance=counters[0],window=windows[0],clear=clear_record,
                         measured_clocks=clocks,startup_observations=startup,**identity)

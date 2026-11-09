@@ -150,7 +150,7 @@ class S3TaskCampaignSimulatorTests(unittest.TestCase):
             self.assertFalse(step['waitpid_completed'])
             self.assertIsNone(step['native_exit'])
 
-    def test_mocked_verilator_campaign_reports_development_scope_and_complete_receipts(self):
+    def run_mocked_verilator_campaign(self, clear_profile=None, bias_kind='sram'):
         # No compiler or simulator is executed. Exercise the real driver/report
         # and the same 150MHz clock observations used for native acceptance.
         clocks = ('S3_CLOCK_PROFILE domain=hf requested_half_ns=3.333333333 '
@@ -166,17 +166,22 @@ class S3TaskCampaignSimulatorTests(unittest.TestCase):
                               vector_identity=lambda *args:{},check_log=lambda *args:[{'cycles':3}],
                               check_performance=lambda *args:[{}],
                               check_task_windows=lambda *args:[{'first_request_wait':0}])
+        selected_profile = clear_profile or 'scalar'
+        writes = (8252 if bias_kind=='sram' else 9019) if selected_profile=='packed16-mmio' else 42
+        observer = mock.Mock(return_value='// clear observer')
         clear = SimpleNamespace(firmware_wrapper=lambda *args:'frozen firmware wrapper',
-                                observer_declarations=lambda:'// clear observer',
-                                CLEAR_COUNTS={'sram':{'accepted_writes':42}})
+                                observer_declarations=observer,
+                                CLEAR_COUNTS={bias_kind:{'accepted_writes':writes}})
 
-        def snapshot(repo, source):
+        def snapshot(repo, source, profile='scalar'):
             firmware = source/'tests/e203/firmware'
             firmware.mkdir(parents=True)
             (firmware/'main.c').write_text('frozen main')
             (source/'tests/e203/tb_accel_soc.sv').write_text((ROOT/'tests/e203/tb_accel_soc.sv').read_text())
             (source/'tools/ppa').mkdir(parents=True)
             (source/'tools/ppa/s3_task_clear_protocol.py').write_text('frozen clear helper')
+            if profile=='packed16-mmio':
+                (source/campaign.CLEAR_HELPERS[profile]).write_text('packed physical clear helper')
 
         def run(command, **kwargs):
             if '--version' in command:
@@ -192,14 +197,18 @@ class S3TaskCampaignSimulatorTests(unittest.TestCase):
                 binary.parent.mkdir(parents=True)
                 binary.write_bytes(b'native simulator')
             else:
+                physical_bias = 768 if bias_kind=='sram' else 0
+                extra = (f' reads=8 commands={writes+8} responses={writes+8} physical_w=16384 '
+                         f'physical_x=64 physical_bias={physical_bias} w_packs=8192 x_packs=32 '
+                         'clear_transport=public-pack32') if selected_profile=='packed16-mmio' else ''
                 kwargs['stdout'].write(clocks+S3TaskCampaignStartupTests.STARTUP_LOG+
-                                       'S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=42 clear_cycles=5\n')
+                    f'S3_TASK_CLEAR_OBSERVED mode_sram={int(bias_kind=="sram")} writes={writes} clear_cycles=5{extra}\n')
             return SimpleNamespace(returncode=0)
 
         with tempfile.TemporaryDirectory() as directory:
             out = Path(directory)/'campaign'
             with mock.patch.object(campaign,'snapshot_inputs',side_effect=snapshot), \
-                 mock.patch.object(campaign,'load',side_effect=[soc,clear]), \
+                 mock.patch.object(campaign,'load',side_effect=[soc,clear]) as loader, \
                  mock.patch.object(campaign.subprocess,'run',side_effect=run) as native, \
                  mock.patch.object(campaign.sys,'path',list(campaign.sys.path)):
                 # The real fixture extraction is mocked, but the layer-view
@@ -209,9 +218,12 @@ class S3TaskCampaignSimulatorTests(unittest.TestCase):
                     (vectors/'layer_00/tensor.hex').write_text('00\n')
                     return {}
                 soc.load_fixture = fixture
-                code = campaign.main(['--out',str(out),'--bias-kind','sram','--layers','0',
+                arguments = ['--out',str(out),'--bias-kind',bias_kind,'--layers','0',
                                       '--simulator','verilator','--cross-prefix','rv-',
-                                      '--platform-clocks','150mhz','--startup-profile','external-reset'])
+                                      '--platform-clocks','150mhz','--startup-profile','external-reset']
+                if clear_profile is not None:
+                    arguments += ['--clear-profile',clear_profile]
+                code = campaign.main(arguments)
             report = json.loads((out/'result.json').read_text())
             plan = json.loads((out/'plan.json').read_text())
             self.assertEqual(code,0,report.get('error'))
@@ -233,6 +245,118 @@ class S3TaskCampaignSimulatorTests(unittest.TestCase):
             self.assertEqual(set(report['versions']),
                              {x[0] for x in campaign.version_commands('verilator','rv-')})
             self.assertEqual(report['source_drift'],[])
+            helper = campaign.CLEAR_HELPERS[selected_profile]
+            recipe = json.loads((out/'clear-recipe.json').read_text())
+            self.assertEqual(report['clear_profile'],selected_profile)
+            self.assertEqual(report['clear_helper_source_path'],helper)
+            self.assertEqual(report['clear_helper_sha256'],campaign.sha(out/'source'/helper))
+            self.assertEqual(report['original_source_sha256'][helper],report['clear_helper_sha256'])
+            self.assertEqual(plan['clear_helper_sha256'],report['clear_helper_sha256'])
+            self.assertEqual(plan['arguments']['clear_profile'],selected_profile)
+            self.assertEqual(loader.call_args_list[1].args[1],out/'source'/helper)
+            self.assertEqual(recipe['clear_profile'],selected_profile)
+            self.assertEqual(recipe['helper_source_path'],helper)
+            self.assertEqual(recipe['helper_sha256'],report['clear_helper_sha256'])
+            self.assertEqual(recipe['clear_counts'],clear.CLEAR_COUNTS)
+            self.assertEqual(recipe['generated_c_sha256'],campaign.sha(out/'s3_clear_main.c'))
+            self.assertEqual(recipe['generated_tb_sha256'],campaign.sha(out/'tb.sv'))
+            if selected_profile=='scalar':
+                observer.assert_called_once_with()
+            else:
+                observer.assert_called_once_with(use_bias_sram=bias_kind=='sram')
+            return report, recipe
+
+    def test_mocked_verilator_campaign_reports_development_scope_and_complete_receipts(self):
+        self.run_mocked_verilator_campaign()
+
+    def test_packed_profile_pins_selected_helper_and_physical_recipe(self):
+        report, recipe = self.run_mocked_verilator_campaign('packed16-mmio')
+        self.assertNotEqual(recipe['helper_sha256'],
+                            report['original_source_sha256'][campaign.CLEAR_HELPERS['scalar']])
+        self.assertEqual(report['task_results'][0]['clear']['commands'],'8260')
+
+    def test_explicit_scalar_matches_default_generated_recipe(self):
+        default_report, default_recipe = self.run_mocked_verilator_campaign()
+        scalar_report, scalar_recipe = self.run_mocked_verilator_campaign('scalar')
+        self.assertEqual(default_report['clear_profile'],scalar_report['clear_profile'])
+        self.assertEqual(default_recipe,scalar_recipe)
+
+    def test_packed_register_profile_selects_register_physical_observer(self):
+        report, recipe = self.run_mocked_verilator_campaign('packed16-mmio','registers')
+        self.assertEqual(report['task_results'][0]['clear']['commands'],'9027')
+        self.assertEqual(report['task_results'][0]['clear']['physical_bias'],'0')
+        self.assertEqual(recipe['clear_counts']['registers']['accepted_writes'],9019)
+
+
+class S3TaskCampaignClearProfileTests(unittest.TestCase):
+    def test_unknown_profile_rejected_before_output_creation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)/'must-not-exist'
+            with self.assertRaises(SystemExit) as caught:
+                campaign.main(['--out',str(out),'--bias-kind','sram',
+                               '--clear-profile','packed32-dma'])
+            self.assertEqual(caught.exception.code,2)
+            self.assertFalse(out.exists())
+            with self.assertRaisesRegex(ValueError,'unknown clear profile'):
+                campaign.snapshot_inputs(ROOT,out,'packed32-dma')
+            self.assertFalse(out.exists())
+
+    def test_scalar_preserves_original_minimal_observation_contract(self):
+        record = dict(mode_sram='1',writes='32930')
+        counts = {'sram':dict(accepted_writes=32930)}
+        campaign.check_clear_record(record,'sram',counts,'scalar')
+        for key, value in [('mode_sram','0'),('writes','32929')]:
+            with self.subTest(key=key), self.assertRaisesRegex(ValueError,'clear work differs'):
+                campaign.check_clear_record(dict(record,**{key:value}),'sram',counts,'scalar')
+
+    def packed_record(self, bias_kind):
+        writes = 8252 if bias_kind=='sram' else 9019
+        return {key:str(value) for key,value in dict(mode_sram=int(bias_kind=='sram'),
+            writes=writes,reads=8,commands=writes+8,responses=writes+8,physical_w=16384,
+            physical_x=64,physical_bias=768 if bias_kind=='sram' else 0,
+            w_packs=8192,x_packs=32,clear_transport='public-pack32').items()}
+
+    def test_packed_requires_exact_physical_coverage_and_completed_transactions(self):
+        for bias_kind, writes in [('sram',8252),('registers',9019)]:
+            record = self.packed_record(bias_kind)
+            counts = {bias_kind:dict(accepted_writes=writes)}
+            campaign.check_clear_record(record,bias_kind,counts,'packed16-mmio')
+            for key in record:
+                bad = dict(record)
+                bad[key] = 'public-dma' if key=='clear_transport' else str(int(record[key])+1)
+                with self.subTest(bias_kind=bias_kind,key=key), self.assertRaises(ValueError):
+                    campaign.check_clear_record(bad,bias_kind,counts,'packed16-mmio')
+            for key in ['reads','commands','responses','physical_w','physical_x',
+                        'physical_bias','w_packs','x_packs']:
+                bad = dict(record)
+                del bad[key]
+                with self.subTest(bias_kind=bias_kind,missing=key), self.assertRaises(KeyError):
+                    campaign.check_clear_record(bad,bias_kind,counts,'packed16-mmio')
+
+    def test_packed_rejects_self_consistent_but_incorrect_recipe_count(self):
+        record = self.packed_record('sram')
+        record['writes']='8251'
+        with self.assertRaisesRegex(ValueError,'physical coverage differs'):
+            campaign.check_clear_record(record,'sram',{'sram':dict(accepted_writes=8251)},
+                                        'packed16-mmio')
+
+    def test_snapshot_adds_only_explicit_packed_helper_and_preserves_all_scalar_bytes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            scalar, packed = (Path(directory)/name for name in ['scalar','packed'])
+            scalar.mkdir()
+            packed.mkdir()
+            campaign.snapshot_inputs(ROOT,scalar)
+            campaign.snapshot_inputs(ROOT,packed,'packed16-mmio')
+            scalar_hashes = {str(p.relative_to(scalar)):campaign.sha(p)
+                             for p in scalar.rglob('*') if p.is_file()}
+            packed_hashes = {str(p.relative_to(packed)):campaign.sha(p)
+                             for p in packed.rglob('*') if p.is_file()}
+            helper = campaign.CLEAR_HELPERS['packed16-mmio']
+            self.assertEqual(set(packed_hashes)-set(scalar_hashes),{helper})
+            self.assertEqual(set(scalar_hashes)-set(packed_hashes),set())
+            for name, digest in scalar_hashes.items():
+                self.assertEqual(packed_hashes[name],digest,name)
+            self.assertEqual(packed_hashes[helper],campaign.sha(ROOT/helper))
 
 
 class S3TaskCampaignStartupTests(unittest.TestCase):
