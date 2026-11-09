@@ -1,0 +1,269 @@
+{
+  "archive_root": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest",
+  "comparisons": [
+    {
+      "all_fields_equal_except_current_paths": true,
+      "baseline_archive_relative": "build/packed-clear-20261109/packed-full12/result.json",
+      "baseline_result_sha256": "80cd3a507ff2ae6ace6b743eab6c8c6381f2927ffdbb27851f3b82205e534d4b",
+      "campaign": "pilot",
+      "candidate_archive_relative": "build/bias-demand-20261109/pilot-task0/result.json",
+      "candidate_result_sha256": "8c125b66b91c0a96f5252f4955ea0c731d6a458c3d1b495115591008fe305972",
+      "compared_original_layers": [
+        0
+      ],
+      "firmware_identity": {
+        "elf_load_contract_equal": true,
+        "independent_load_verification": {
+          "baseline": {
+            "image_sha256": "ee4d6d90077526f3b3649affdd2cda908697c5a6cde26de8ca5482fe4a9ebce3",
+            "loaded_bytes": 1002,
+            "mapping": "ELF physical 0x80000000 -> 64KiB ITCM offset0",
+            "verified": true
+          },
+          "candidate": {
+            "image_sha256": "ee4d6d90077526f3b3649affdd2cda908697c5a6cde26de8ca5482fe4a9ebce3",
+            "loaded_bytes": 1002,
+            "mapping": "ELF physical 0x80000000 -> 64KiB ITCM offset0",
+            "verified": true
+          }
+        },
+        "loaded_firmware_change_allowed": false,
+        "loaded_image_sha256_equal": true,
+        "raw_elf_sha256_equal": false,
+        "strict_nonloaded_elf_normalization": {
+          "baseline": {
+            "file_offset": 5549,
+            "normalization": "only six alphanumeric random characters in one nonloaded local ABS STT_FILE ccXXXXXX.o string",
+            "normalized_sha256": "47c4acf28d73e5166c58b80cf41159cf648b36cbdb06802189ea532717033152",
+            "original_file_symbol": "ccjb06CB.o"
+          },
+          "candidate": {
+            "file_offset": 5549,
+            "normalization": "only six alphanumeric random characters in one nonloaded local ABS STT_FILE ccXXXXXX.o string",
+            "normalized_sha256": "47c4acf28d73e5166c58b80cf41159cf648b36cbdb06802189ea532717033152",
+            "original_file_symbol": "cciePHV1.o"
+          }
+        }
+      },
+      "original_saved_comparison_sha256": "5fda58cd663198132cfda580da33759524b5655c657fc0124b975f36431000b0",
+      "source_changes": {
+        "rtl/perips/LinearAutoGroupCore.sv": {
+          "baseline_sha256": "ebc9c411a6318000369f6c466381767a469bb9d33454e4c955df713c728f9ab4",
+          "candidate_sha256": "7d3c0f9acb6adc19c65c35360f9595fd625a68764560322c1fd3900cb650f18a"
+        }
+      },
+      "totals": {
+        "baseline": {
+          "auto": {
+            "compute_writeback_overlap": 187803,
+            "fifo_full_wait": 0,
+            "pops_retired": 3168,
+            "rows": 99
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "dones": 3168,
+            "mac_fire": 202752,
+            "mmio_reads": 2,
+            "mmio_stall": 0,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_stall": 17780,
+            "shared_writes": 25344,
+            "starts": 3168
+          },
+          "clear_cycles": 66802,
+          "clear_to_source_gap": 102,
+          "nice": {
+            "oitf_retired": 99,
+            "pops_retired": 3168,
+            "requests": 99,
+            "responses": 99,
+            "result_reads": 0,
+            "shared_writes": 25344,
+            "status_polls": 0
+          },
+          "payload_cycles": 425540,
+          "payload_plus_clear_cycles": 492342,
+          "phases": {
+            "bias_load": 10760,
+            "compute_wait": 9603,
+            "other": 22470,
+            "w_load": 114714,
+            "writeback": 196713,
+            "x_load": 71280
+          },
+          "ready_activity": {
+            "final_response_before_completion": 1,
+            "groups": 3168,
+            "pops_retired": 3168,
+            "ready_edges": 3168,
+            "ready_wait_cycles": 23859,
+            "requests": 99,
+            "shared_writes": 25344,
+            "snapshots": 3168,
+            "status_polls": 0
+          },
+          "stream_activity": {
+            "final_response_before_completion": 1,
+            "groups": 3168,
+            "pops_retired": 3168,
+            "requests": 99,
+            "shared_writes": 25344,
+            "snapshots": 3168
+          },
+          "transport": {
+            "alias_reads": 0,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "direct_snapshots": 3168,
+            "explicit_pops": 0,
+            "result_mmio_reads": 0
+          }
+        },
+        "candidate": {
+          "auto": {
+            "compute_writeback_overlap": 190476,
+            "fifo_full_wait": 0,
+            "pops_retired": 3168,
+            "rows": 99
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "dones": 3168,
+            "mac_fire": 202752,
+            "mmio_reads": 2,
+            "mmio_stall": 0,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_stall": 17681,
+            "shared_writes": 25344,
+            "starts": 3168
+          },
+          "clear_cycles": 66802,
+          "clear_to_source_gap": 102,
+          "nice": {
+            "oitf_retired": 99,
+            "pops_retired": 3168,
+            "requests": 99,
+            "responses": 99,
+            "result_reads": 0,
+            "shared_writes": 25344,
+            "status_polls": 0
+          },
+          "payload_cycles": 422768,
+          "payload_plus_clear_cycles": 489570,
+          "phases": {
+            "bias_load": 10760,
+            "compute_wait": 9603,
+            "other": 19797,
+            "w_load": 114714,
+            "writeback": 196614,
+            "x_load": 71280
+          },
+          "ready_activity": {
+            "final_response_before_completion": 1,
+            "groups": 3168,
+            "pops_retired": 3168,
+            "ready_edges": 3168,
+            "ready_wait_cycles": 21186,
+            "requests": 99,
+            "shared_writes": 25344,
+            "snapshots": 3168,
+            "status_polls": 0
+          },
+          "stream_activity": {
+            "final_response_before_completion": 1,
+            "groups": 3168,
+            "pops_retired": 3168,
+            "requests": 99,
+            "shared_writes": 25344,
+            "snapshots": 3168
+          },
+          "transport": {
+            "alias_reads": 0,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "direct_snapshots": 3168,
+            "explicit_pops": 0,
+            "result_mmio_reads": 0
+          }
+        },
+        "delta": {
+          "auto": {
+            "compute_writeback_overlap": 2673,
+            "fifo_full_wait": 0,
+            "pops_retired": 0,
+            "rows": 0
+          },
+          "bus_counters": {
+            "busy": 0,
+            "dones": 0,
+            "mac_fire": 0,
+            "mmio_reads": 0,
+            "mmio_stall": 0,
+            "mmio_writes": 0,
+            "shared_reads": 0,
+            "shared_stall": -99,
+            "shared_writes": 0,
+            "starts": 0
+          },
+          "clear_cycles": 0,
+          "clear_to_source_gap": 0,
+          "nice": {
+            "oitf_retired": 0,
+            "pops_retired": 0,
+            "requests": 0,
+            "responses": 0,
+            "result_reads": 0,
+            "shared_writes": 0,
+            "status_polls": 0
+          },
+          "payload_cycles": -2772,
+          "payload_plus_clear_cycles": -2772,
+          "phases": {
+            "bias_load": 0,
+            "compute_wait": 0,
+            "other": -2673,
+            "w_load": 0,
+            "writeback": -99,
+            "x_load": 0
+          },
+          "ready_activity": {
+            "final_response_before_completion": 0,
+            "groups": 0,
+            "pops_retired": 0,
+            "ready_edges": 0,
+            "ready_wait_cycles": -2673,
+            "requests": 0,
+            "shared_writes": 0,
+            "snapshots": 0,
+            "status_polls": 0
+          },
+          "stream_activity": {
+            "final_response_before_completion": 0,
+            "groups": 0,
+            "pops_retired": 0,
+            "requests": 0,
+            "shared_writes": 0,
+            "snapshots": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "direct_lanes": 0,
+            "direct_pops": 0,
+            "direct_snapshots": 0,
+            "explicit_pops": 0,
+            "result_mmio_reads": 0
+          }
+        }
+      }
+    }
+  ],
+  "inherited_loader_sha256": "2554944714fafb04370570b66ab217be283d4e2dd18306bfae22e06ef5567af2",
+  "schema": "s3-bias-demand-relocated-revalidation-v1",
+  "scope": "read-only original archived artifacts; no native simulation, source edit or result rewriting",
+  "script_sha256": "e15603094a2a4202accde568c2b8fac7ea49f606fa74500953b6ff7dd20069a3",
+  "status": "RELOCATED_STRICT_REVALIDATION_PASS",
+  "verifier_sha256": "3eb2c9aa1fc4ca13bd71cc854de95fb79713cb868e1455389852cd9dda71bd35"
+}

@@ -1,0 +1,25 @@
+REJECTED unreviewed-core-byte artifact SHA differs: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/verification/baseline-negative-checks-02/unreviewed-core-byte-fixture/source/rtl/perips/LinearAutoGroupCore.sv
+REJECTED cpu-control-byte artifact SHA differs: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/verification/baseline-negative-checks-02/cpu-control-byte-fixture/source/rtl/core/e203_cpu.v
+REJECTED tensor-byte artifact SHA differs: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/verification/baseline-negative-checks-02/tensor-byte-fixture/task-00/vectors/layer_00/w.mem
+REJECTED missing-physical-write-c generated clear C differs from exact selected helper regeneration
+REJECTED firmware-padding-c generated clear C differs from exact selected helper regeneration
+REJECTED disabled-payload-observer generated TB differs from exact old payload seams and selected preclear observer
+REJECTED weakened-clear-observer saved clear observer differs from exact selected helper
+REJECTED loaded-image-byte firmware image bytes differ from ELF PT_LOAD
+REJECTED nonloaded-elf-byte raw firmware ELF differs
+REJECTED missing-physical-w-marker fixed clear protocol/physical-work/policy differs
+REJECTED clear-commands-marker fixed clear protocol/physical-work/policy differs
+REJECTED fifo-policy-promotion fixed clear protocol/physical-work/policy differs
+REJECTED early-clear-timing clear observer local/global timing relation differs
+REJECTED duplicate-task-pass complete numerical task markers missing or inconsistent
+REJECTED wrong-numeric-output-count complete numerical task markers missing or inconsistent
+REJECTED selfconsistent-tool-version conditions differ; only exact campaign/repository path normalization is allowed
+REJECTED nonempty-source-drift source drift is missing/nonempty
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/verification/test_compare_bias_demand.py", line 127, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/verification/test_compare_bias_demand.py", line 101, in main
+    assert error is not None and expected in error,(name,error,expected)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('selfconsistent-manifest-core', 'plan/result differ: original_source_sha256', 'source manifest differs from externally pinned exact source SHA map')

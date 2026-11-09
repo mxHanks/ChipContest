@@ -1,0 +1,92 @@
+[
+  {
+    "file": "proofs/rtl-checks/schedule-run1-console.log",
+    "classification": "RAW_FAILURE_OR_EXPECTED_REJECTION_REQUIRES_CONTEXT",
+    "matches": [
+      {
+        "line": 3,
+        "text": "FAIL: test_real_scheduler_demand_take_backpressure_reset_and_manual (test_bias_demand_schedule.BiasDemandScheduleTests.test_real_scheduler_demand_take_backpressure_reset_and_manual)"
+      },
+      {
+        "line": 5,
+        "text": "Traceback (most recent call last):"
+      },
+      {
+        "line": 10,
+        "text": "AssertionError: 2 != 0 : /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:168: sorry: constant selects in always_* processes are not currently supported (all bits will be included)."
+      },
+      {
+        "line": 29,
+        "text": "FAILED (failures=1)"
+      }
+    ]
+  },
+  {
+    "file": "proofs/rtl-checks/schedule-run2-console.log",
+    "classification": "RAW_FAILURE_OR_EXPECTED_REJECTION_REQUIRES_CONTEXT",
+    "matches": [
+      {
+        "line": 3,
+        "text": "FAIL: test_real_scheduler_demand_take_backpressure_reset_and_manual (test_bias_demand_schedule.BiasDemandScheduleTests.test_real_scheduler_demand_take_backpressure_reset_and_manual)"
+      },
+      {
+        "line": 5,
+        "text": "Traceback (most recent call last):"
+      },
+      {
+        "line": 8,
+        "text": "AssertionError: 1 != 2 : lookahead must remove the actual two-edge demand handshake gap"
+      },
+      {
+        "line": 13,
+        "text": "FAILED (failures=1)"
+      }
+    ]
+  },
+  {
+    "file": "proofs/rtl-checks/schedule-run3/baseline-simulation.log",
+    "classification": "RAW_FAILURE_OR_EXPECTED_REJECTION_REQUIRES_CONTEXT",
+    "matches": [
+      {
+        "line": 1,
+        "text": "FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/prototype-repo/tests/e203/tb_bias_demand_schedule.sv:160: baseline unexpectedly requested while RUN"
+      }
+    ]
+  },
+  {
+    "file": "proofs/rtl-checks/schedule-run3-console.log",
+    "classification": "RAW_FAILURE_OR_EXPECTED_REJECTION_REQUIRES_CONTEXT",
+    "matches": [
+      {
+        "line": 3,
+        "text": "FAIL: test_real_scheduler_demand_take_backpressure_reset_and_manual (test_bias_demand_schedule.BiasDemandScheduleTests.test_real_scheduler_demand_take_backpressure_reset_and_manual)"
+      },
+      {
+        "line": 5,
+        "text": "Traceback (most recent call last):"
+      },
+      {
+        "line": 11,
+        "text": "AssertionError: 1 != 0 : FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/prototype-repo/tests/e203/tb_bias_demand_schedule.sv:160: baseline unexpectedly requested while RUN"
+      },
+      {
+        "line": 18,
+        "text": "FAILED (failures=1)"
+      }
+    ]
+  },
+  {
+    "file": "verification/baseline-negative-checks-02.log",
+    "classification": "RAW_FAILURE_OR_EXPECTED_REJECTION_REQUIRES_CONTEXT",
+    "matches": [
+      {
+        "line": 18,
+        "text": "Traceback (most recent call last):"
+      },
+      {
+        "line": 25,
+        "text": "AssertionError: ('selfconsistent-manifest-core', 'plan/result differ: original_source_sha256', 'source manifest differs from externally pinned exact source SHA map')"
+      }
+    ]
+  }
+]

@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_real_scheduler_demand_take_backpressure_reset_and_manual (test_bias_demand_schedule.BiasDemandScheduleTests.test_real_scheduler_demand_take_backpressure_reset_and_manual)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/prototype-repo/tests/e203/test_bias_demand_schedule.py", line 59, in test_real_scheduler_demand_take_backpressure_reset_and_manual
+    self.assertEqual(base - cand, 2, "lookahead must remove the actual two-edge demand handshake gap")
+AssertionError: 1 != 2 : lookahead must remove the actual two-edge demand handshake gap
+
+----------------------------------------------------------------------
+Ran 1 test in 4.640s
+
+FAILED (failures=1)

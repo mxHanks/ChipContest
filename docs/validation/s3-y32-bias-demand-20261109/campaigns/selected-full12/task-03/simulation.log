@@ -1,0 +1,24 @@
+["/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/verilator-obj/soc_sim", "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/accel_soc", "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-03/vectors", "+TASKS=1", "+DUMPWAVE=0", "+MAX_CYCLES=3000000", "+FIRST_SOURCE_STALL=0", "+OUTPUT_Y32=1", "+SHARED_W_PACKED16=1", "+NICE_DRAIN8=1", "+NICE_DIRECT=1", "+NICE_STREAM=1", "+NICE_READY=1"]
+S3_CLOCK_PROFILE domain=hf requested_half_ns=3.333333333 measured_half_ns=3.333333000 period_ns=6.666666000 frequency_hz=150000015.000001490 precision_fs=1
+S3_CLOCK_PROFILE domain=lf requested_half_ns=15258.7890625 measured_half_ns=15258.789063000 period_ns=30517.578126000 frequency_hz=32767.999998926 precision_fs=1
+S3_STARTUP_PROFILE event=second_assert time_ns=8011012.532232 cpu_reset_n=1
+S3_STARTUP_PROFILE event=second_release time_ns=8011132.532232 held_ns=120.000000 cpu_reset_n=0
+S3_STARTUP_PROFILE event=measurement_begin time_ns=8011132.532232 external_reset_n=1 cycle=0
+S3_CLEAR_OBSERVER_ARM cycle=1203947 actual_accel_reset_n=1
+S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=66802 response_end_cycle=66802 gap_to_source_request=102 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32
+TASK_PASS layer=0 outputs=25344 writes=25344 cycles=422768 firmware_cycles=422855
+WINDOW_TASK layer=0 first_request=1270850 first_accept=1270851 final_y_response=1693617 first_request_wait=1
+DIRECT_AUTO_DIAGNOSTIC rows=99 pops=3168 active=0 retired=32 produced=32 count=0 overlap=190476 full_wait=0 bundles=3168 direct_pops=3168 logical=25344
+AUTO_TASK layer=0 rows=99 pops_retired=3168 compute_writeback_overlap=190476 fifo_full_wait=0
+RESULT_TASK_Y32 layer=0 words=25344 logical_results=25344
+W_PACKED16_TASK layer=0 source_words=8192 uploaded_values=16384
+NICE_TASK layer=0 requests=99 responses=99 oitf_retired=99 status_polls=0 result_reads=0 pops_retired=3168 shared_writes=25344
+DIRECT_TASK layer=0 snapshots=3168 lanes=25344 pops_retired=3168 result_mmio_reads=0
+STREAM_TASK layer=0 requests=99 groups=3168 snapshots=3168 pops_retired=3168 shared_writes=25344 final_response_before_completion=1
+READY_TASK layer=0 requests=99 groups=3168 ready_edges=3168 ready_wait_cycles=21186 status_polls=0 snapshots=3168 pops_retired=3168 shared_writes=25344 final_response_before_completion=1
+PERF_TASK layer=0 cycles=422768 w_load=114714 x_load=71280 bias_load=10760 compute_wait=9603 writeback=196614 other=19797 busy=215424 mac_fire=202752 mmio_reads=2 mmio_writes=12330 shared_reads=15040 shared_writes=25344 shared_stall=17681 mmio_stall=0 starts=3168 dones=3168
+SOC_PASS tasks=1 outputs=25344 writes=25344
+- /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/tb.sv:2102: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.032 2025-01-01
+- Verilator: $finish at 19ms; walltime 38.072 s; speed 507.253 us/s
+- Verilator: cpu 38.053 s on 1 threads; alloced 107 MB

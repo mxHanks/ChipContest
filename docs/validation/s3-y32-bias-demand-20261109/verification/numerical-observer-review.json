@@ -1,0 +1,20 @@
+{
+  "checks": [
+    "golden_y32 initialized unknown and all 25344 entries checked loaded",
+    "all shared-memory output writes checked with !== against expected exact Y32 golden",
+    "TASK_PASS only after exact output count, task completion and bus error checks",
+    "SOC_PASS exact one task and 25344 outputs/writes per fresh process"
+  ],
+  "loaded_tensors_and_expected_y32_manifest_unchanged": true,
+  "outputs_per_layer": 25344,
+  "scope": "source-level observer identity and independently rehashed raw artifact checks; does not upgrade two-state or policy qualification",
+  "source_lines": {
+    "actual_vs_expected_case_inequality": 1118,
+    "golden_load": 1006,
+    "soc_pass": 1145,
+    "task_pass": 1130
+  },
+  "status": "UNCHANGED_EXACT_NUMERICAL_OBSERVER_CONFIRMED",
+  "tb_sha_equal": true,
+  "tb_source_sha256": "4f920e5fda4e91326228f382f1077f22b84faedd9c5bb5adb3eba94c809aef46"
+}

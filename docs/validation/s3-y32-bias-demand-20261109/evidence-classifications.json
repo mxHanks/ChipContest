@@ -1,0 +1,23 @@
+{
+  "status": "ORIGINAL_FAILURES_PRESERVED_NOT_COUNTED_AS_PASS",
+  "notpass": [
+    {
+      "path": "proofs/rtl-checks/schedule-run1-console.log",
+      "reason": "Fixture referenced firtool-eliminated request-ready pin; compile failed."
+    },
+    {
+      "path": "proofs/rtl-checks/schedule-run2-console.log",
+      "reason": "Two real simulations passed, but Python incorrectly expected two clocks instead of one."
+    },
+    {
+      "path": "proofs/rtl-checks/schedule-run3-console.log",
+      "reason": "Baseline path selected integrated candidate; baseline behavioral check failed."
+    },
+    {
+      "path": "verification/baseline-negative-checks-02.log",
+      "reason": "Old harness expected a different rejection; not counted as final negative-test PASS."
+    }
+  ],
+  "expected_rejections": "Final negative-check result.json files preserve per-case actual/expected rejection and mutated bytes; intentional corruption is not candidate performance evidence.",
+  "final_pass": "Use completed campaign result.json and strict comparison status with pinned artifacts, plus schedule-run4, independent and integrated receipts. grep PASS alone is insufficient."
+}

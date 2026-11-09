@@ -1,0 +1,41 @@
+{
+  "status": "PILOT_DEVELOPMENT_PASS_FULL12_PENDING",
+  "scope": "single original layer0 only; new compiler build and simulator; no synthesis",
+  "baseline_cycles": 425540,
+  "candidate_cycles": 422768,
+  "cycle_delta": -2772,
+  "clear_cycles": {
+    "baseline": 66802,
+    "candidate": 66802
+  },
+  "gap_cycles": {
+    "baseline": 102,
+    "candidate": 102
+  },
+  "performance_delta": {
+    "w_load": 0,
+    "x_load": 0,
+    "bias_load": 0,
+    "compute_wait": 0,
+    "writeback": -99,
+    "other": -2673,
+    "busy": 0,
+    "mac_fire": 0,
+    "mmio_reads": 0,
+    "mmio_writes": 0,
+    "shared_reads": 0,
+    "shared_writes": 0,
+    "shared_stall": -99,
+    "mmio_stall": 0,
+    "starts": 0,
+    "dones": 0
+  },
+  "ready_wait_delta": -2673,
+  "checks": {
+    "source_drift": [],
+    "all_nice_activity_identical": true,
+    "all_stream_activity_identical": true,
+    "entire_clear_record_identical": true
+  },
+  "partial_mechanism": "continuous isolated launch interval69->68, one removed handshake bubble per group gap; SoC phase/READY/LSU effects reported by actual counters, not substituted with theoretical total"
+}
