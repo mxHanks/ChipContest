@@ -38,7 +38,7 @@ wrapper探针通过独立的scalar公共MMIO路径把全部W/X/bias/legacy写非
 
 两槽bias staging经public manual group0/1真实取数填非零后再arm清零，16×40bit全部实际擦除；legacy8×40bit同样前后态检查。随后重新从6个ABI读执行完整新配方，验证零写边沿／唯一覆盖／末响应和后态。fresh process零初始化没有代替非零前态证明。
 
-探针覆盖漏写、重复／错地址、非零高半、mask/cap错误、早proof／早source、响应背压、reset边界与错误原子性。另在隔离副本注入真实RTL故障：漏bank7零写、漏X0写、漏legacy高8bit写；实际边沿或非零后态检查均拒绝。生产RTL字节未变，mutant不计候选硬件。最终6个unittest方法完成（其中1个可选寄存bias变体显式skip）；22个真实wrapper模式含5个正例和17个拒绝，再加3个真实漏写fault mutant均符合预期。寄存bias选项未获本轮完整RTL／SoC验证，正式结果只来自SRAM模式。收据随证据目录保存。
+探针覆盖漏写、重复／错地址、非零高半、mask错误、早proof／早source、响应背压、reset边界与错误原子性。另在隔离副本注入真实RTL故障：漏bank7零写、漏X0写、漏legacy高8bit写；实际边沿或非零后态检查均拒绝。生产RTL字节未变，mutant不计候选硬件。cap为只读寄存器，探针核验实际合法值；固件通过精确比较拒绝未知cap，未声称通过公共MMIO注入过错误cap。最终6个unittest方法完成（其中1个可选寄存bias变体显式skip）；22个真实wrapper模式含5个正例和17个拒绝，再加3个真实漏写fault mutant均符合预期。寄存bias选项未获本轮完整RTL／SoC验证，正式结果只来自SRAM模式。收据随证据目录保存。
 
 ## 同条件单层结果
 
