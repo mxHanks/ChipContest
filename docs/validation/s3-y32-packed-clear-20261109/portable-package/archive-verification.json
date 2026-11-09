@@ -1,0 +1,228 @@
+{
+  "archive": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/handoff/s3-y32-packed-clear-evidence.tar.gz",
+  "archive_bytes": 12764162,
+  "archive_sha256": "2e1edd2cb7e0467244b7b9e39c2f072e35b6521ef08d8c41fca8890a32c53630",
+  "fifo_payload_physical_zero": "UNPROVEN",
+  "manifest_files": 1596,
+  "original_files": 1590,
+  "original_inodes_linked": false,
+  "policy": "REVIEW_PENDING",
+  "receipt_files": {
+    "assembly.json": "f9e1c5ab2a9c69d0a27720baab00d70b8122f7641eddd8e5ef67ff1f07c59dcd",
+    "freeze-receipt.json": "ad36e550fdb92af98c948ba5680096186cd9f0b62feb26627714ca8c17134582",
+    "relocated-comparisons.json": "8b9723e7646f67e0bde927091fe3ece0891187a47658e04adb56afe4f88af768",
+    "relocated-verification.json": "bc7a97dfd507d7fbbbade9564749c3a18e79ab70a70b08bc0739b3c6604246fb",
+    "staging-verification.json": "bc7a97dfd507d7fbbbade9564749c3a18e79ab70a70b08bc0739b3c6604246fb"
+  },
+  "relocated_hash_mode_verification": "PASS",
+  "scope": "New-directory mode-preserving extraction, read-only byte/source/image/vector/log verification and exact strict C/TB/ELF-image comparisons. No simulation or EDA.",
+  "staging_hash_mode_verification": "PASS",
+  "status": "PASS",
+  "strict_full12_totals": {
+    "baseline": {
+      "auto": {
+        "compute_writeback_overlap": 2253636,
+        "fifo_full_wait": 0,
+        "pops_retired": 38016,
+        "rows": 1188
+      },
+      "bus_counters": {
+        "busy": 2585088,
+        "dones": 38016,
+        "mac_fire": 2433024,
+        "mmio_reads": 24,
+        "mmio_stall": 0,
+        "mmio_writes": 147960,
+        "shared_reads": 180480,
+        "shared_stall": 213348,
+        "shared_writes": 304128,
+        "starts": 38016
+      },
+      "clear_cycles": 2380836,
+      "clear_to_source_gap": 1224,
+      "nice": {
+        "oitf_retired": 1188,
+        "pops_retired": 38016,
+        "requests": 1188,
+        "responses": 1188,
+        "result_reads": 0,
+        "shared_writes": 304128,
+        "status_polls": 0
+      },
+      "payload_cycles": 5106468,
+      "payload_plus_clear_cycles": 7487304,
+      "phases": {
+        "bias_load": 129120,
+        "compute_wait": 115236,
+        "other": 269640,
+        "w_load": 1376556,
+        "writeback": 2360556,
+        "x_load": 855360
+      },
+      "ready_activity": {
+        "final_response_before_completion": 12,
+        "groups": 38016,
+        "pops_retired": 38016,
+        "ready_edges": 38016,
+        "ready_wait_cycles": 286308,
+        "requests": 1188,
+        "shared_writes": 304128,
+        "snapshots": 38016,
+        "status_polls": 0
+      },
+      "stream_activity": {
+        "final_response_before_completion": 12,
+        "groups": 38016,
+        "pops_retired": 38016,
+        "requests": 1188,
+        "shared_writes": 304128,
+        "snapshots": 38016
+      },
+      "transport": {
+        "alias_reads": 0,
+        "direct_lanes": 304128,
+        "direct_pops": 38016,
+        "direct_snapshots": 38016,
+        "explicit_pops": 0,
+        "result_mmio_reads": 0
+      }
+    },
+    "candidate": {
+      "auto": {
+        "compute_writeback_overlap": 2253636,
+        "fifo_full_wait": 0,
+        "pops_retired": 38016,
+        "rows": 1188
+      },
+      "bus_counters": {
+        "busy": 2585088,
+        "dones": 38016,
+        "mac_fire": 2433024,
+        "mmio_reads": 24,
+        "mmio_stall": 0,
+        "mmio_writes": 147960,
+        "shared_reads": 180480,
+        "shared_stall": 213360,
+        "shared_writes": 304128,
+        "starts": 38016
+      },
+      "clear_cycles": 801624,
+      "clear_to_source_gap": 1224,
+      "nice": {
+        "oitf_retired": 1188,
+        "pops_retired": 38016,
+        "requests": 1188,
+        "responses": 1188,
+        "result_reads": 0,
+        "shared_writes": 304128,
+        "status_polls": 0
+      },
+      "payload_cycles": 5106480,
+      "payload_plus_clear_cycles": 5908104,
+      "phases": {
+        "bias_load": 129120,
+        "compute_wait": 115236,
+        "other": 269640,
+        "w_load": 1376568,
+        "writeback": 2360556,
+        "x_load": 855360
+      },
+      "ready_activity": {
+        "final_response_before_completion": 12,
+        "groups": 38016,
+        "pops_retired": 38016,
+        "ready_edges": 38016,
+        "ready_wait_cycles": 286308,
+        "requests": 1188,
+        "shared_writes": 304128,
+        "snapshots": 38016,
+        "status_polls": 0
+      },
+      "stream_activity": {
+        "final_response_before_completion": 12,
+        "groups": 38016,
+        "pops_retired": 38016,
+        "requests": 1188,
+        "shared_writes": 304128,
+        "snapshots": 38016
+      },
+      "transport": {
+        "alias_reads": 0,
+        "direct_lanes": 304128,
+        "direct_pops": 38016,
+        "direct_snapshots": 38016,
+        "explicit_pops": 0,
+        "result_mmio_reads": 0
+      }
+    },
+    "delta": {
+      "auto": {
+        "compute_writeback_overlap": 0,
+        "fifo_full_wait": 0,
+        "pops_retired": 0,
+        "rows": 0
+      },
+      "bus_counters": {
+        "busy": 0,
+        "dones": 0,
+        "mac_fire": 0,
+        "mmio_reads": 0,
+        "mmio_stall": 0,
+        "mmio_writes": 0,
+        "shared_reads": 0,
+        "shared_stall": 12,
+        "shared_writes": 0,
+        "starts": 0
+      },
+      "clear_cycles": -1579212,
+      "clear_to_source_gap": 0,
+      "nice": {
+        "oitf_retired": 0,
+        "pops_retired": 0,
+        "requests": 0,
+        "responses": 0,
+        "result_reads": 0,
+        "shared_writes": 0,
+        "status_polls": 0
+      },
+      "payload_cycles": 12,
+      "payload_plus_clear_cycles": -1579200,
+      "phases": {
+        "bias_load": 0,
+        "compute_wait": 0,
+        "other": 0,
+        "w_load": 12,
+        "writeback": 0,
+        "x_load": 0
+      },
+      "ready_activity": {
+        "final_response_before_completion": 0,
+        "groups": 0,
+        "pops_retired": 0,
+        "ready_edges": 0,
+        "ready_wait_cycles": 0,
+        "requests": 0,
+        "shared_writes": 0,
+        "snapshots": 0,
+        "status_polls": 0
+      },
+      "stream_activity": {
+        "final_response_before_completion": 0,
+        "groups": 0,
+        "pops_retired": 0,
+        "requests": 0,
+        "shared_writes": 0,
+        "snapshots": 0
+      },
+      "transport": {
+        "alias_reads": 0,
+        "direct_lanes": 0,
+        "direct_pops": 0,
+        "direct_snapshots": 0,
+        "explicit_pops": 0,
+        "result_mmio_reads": 0
+      }
+    }
+  },
+  "strict_relocated_comparison_count": 3
+}

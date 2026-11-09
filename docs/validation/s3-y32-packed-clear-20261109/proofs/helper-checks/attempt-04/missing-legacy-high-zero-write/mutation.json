@@ -1,0 +1,8 @@
+{
+  "purpose": "Negative fault injection into an isolated real RTL copy; not a production or full-SoC result",
+  "original": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v",
+  "original_sha256": "ed32808d925cd315a6ef421186105ead559fe736e09c6b70eeeb73a9ec2ef55b",
+  "mutant_sha256": "05793b4623f2a89fe66080bfbb2389d9970810c7236a2086daf2679801cec1d4",
+  "before": "if (cmd_wmask[0])\n                                    bias_regs[bias_index_reg][39:32]",
+  "after": "if (cmd_wmask[0] && (|cmd_wdata[7:0]))\n                                    bias_regs[bias_index_reg][39:32]"
+}

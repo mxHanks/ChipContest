@@ -1,0 +1,8 @@
+{
+  "purpose": "Negative fault injection into an isolated real RTL copy; not a production or full-SoC result",
+  "original": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+  "original_sha256": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+  "mutant_sha256": "2e2752059861703ee441a77d159886d08477c968461dbbf1957027f15654a88b",
+  "before": "if (io_wen & io_waddr == 6'h0)",
+  "after": "if (io_wen & io_waddr == 6'h0 & (|io_wdata))"
+}

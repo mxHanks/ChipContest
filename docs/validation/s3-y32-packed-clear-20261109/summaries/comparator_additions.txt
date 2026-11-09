@@ -1,0 +1,87 @@
+def load_verified_module(name,path):
+    spec=importlib.util.spec_from_file_location(name,path)
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def function_bytes(path,names):
+    import ast
+    text=path.read_text()
+    tree=ast.parse(text)
+    found={node.name:ast.get_source_segment(text,node)
+           for node in tree.body if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name in names}
+    require(set(found)==set(names), 'generation seam function missing')
+    return found
+
+
+def verify_clear_generation(root,old_out,sources,profile,recipe,generated_c,generated_tb,args):
+    """Recreate C and TB exactly from pinned helper, original main and old seam.
+
+    C changes are explicitly allowed only through this selected helper. The
+    generated C is never equated across algorithms by erasing/replacing code.
+    The one path normalization is the exact frozen-main include. TB regeneration
+    uses the unchanged scalar campaign's exact instrument_tb/clock/reset seam.
+    """
+    helper_path=artifact(root/'source',profile['helper'],sources[profile['helper']])
+    helper=load_verified_module('packed_clear_pinned_helper',helper_path)
+    require(recipe['clear_counts']==helper.CLEAR_COUNTS, 'clear count recipe differs from pinned helper')
+    frozen_main=artifact(root/'source','tests/e203/firmware/main.c',sources['tests/e203/firmware/main.c'])
+    reconstructed=helper.firmware_wrapper(frozen_main,sources['tests/e203/firmware/main.c']).encode()
+    current_include=('#include "'+str(frozen_main.resolve())+'"').encode()
+    old_include=('#include "'+str(old_out/'source/tests/e203/firmware/main.c')+'"').encode()
+    require(reconstructed.count(current_include)==1, 'reconstructed main include is not exact/unique')
+    reconstructed=reconstructed.replace(current_include,old_include,1)
+    require(generated_c.read_bytes()==reconstructed, 'generated clear C differs from exact selected helper regeneration')
+    campaign_path=artifact(root/'source','campaign.py',sources['campaign.py'])
+    baseline_seams=Path(__file__).resolve().parent/'baseline-campaign-seams.json'
+    require(baseline_seams.is_file() and not baseline_seams.is_symlink(), 'missing independent baseline campaign seam pins')
+    frozen_seams=read_json(baseline_seams)
+    # These literal functions were extracted from BASELINE_CAMPAIGN_SHA and are
+    # data, not candidate claims. Generated payload text must match byte-for-byte.
+    seam_names=('instrument_tb','apply_platform_clocks','apply_startup_profile',
+                'clock_configuration','startup_configuration')
+    require(function_bytes(campaign_path,seam_names)==frozen_seams, 'candidate campaign generation seam differs')
+    # Execute only the hash-verified campaign. Seam source has just been checked
+    # exact against the separately pinned baseline functions.
+    campaign=load_verified_module('packed_clear_pinned_campaign',campaign_path)
+    original_tb=artifact(root/'source','tests/e203/tb_accel_soc.sv',sources['tests/e203/tb_accel_soc.sv'])
+    observer=helper.observer_declarations()
+    observer_path=root/'s3_clear_observer.svh'
+    require(observer_path.is_file() and not observer_path.is_symlink() and
+            observer_path.read_bytes()==observer.encode(), 'saved clear observer differs from exact selected helper')
+    expected_tb=campaign.instrument_tb(original_tb.read_text(),observer,args['platform_clocks'],args.get('startup_profile','historical'))
+    require(generated_tb.read_bytes()==expected_tb.encode(), 'generated TB differs from exact old payload seams and selected preclear observer')
+    return dict(verified=True,selected_helper=profile['helper'],helper_sha256=sources[profile['helper']],
+        generated_c_exactly_regenerated=True,generated_tb_exactly_regenerated=True,
+        original_payload_observer_sha256=sources['tests/e203/tb_accel_soc.sv'],
+        generated_c_normalization='only exact frozen-main snapshot include path for relocation',
+        pinned_campaign_seams_sha256=digest(baseline_seams))
+
+
+SCALAR_CLEAR_FIELDS=frozenset(('mode_sram','writes','w','x','legacy_bias','bias_entries',
+    'sram_clear_commands','sram_done','commands','responses','clear_cycles','response_end_cycle',
+    'gap_to_source_request','preflight_commands','preflight_responses','nice_idle',
+    'fifo_payload_physical_zero','policy'))
+PACKED_EXTRA_FIELDS=frozenset(('physical_w','physical_x','physical_bias','w_packs','x_packs','clear_transport'))
+
+
+def validate_clear_marker(clear,clear_profile,bias_kind):
+    packed=clear_profile=='packed16-mmio'
+    sram=bias_kind=='sram'
+    require(set(clear)==SCALAR_CLEAR_FIELDS|(PACKED_EXTRA_FIELDS if packed else frozenset()), 'clear marker fields differ')
+    expected=dict(mode_sram=str(int(sram)),w='16384',x='64',legacy_bias='8',bias_entries='0' if sram else '256',
+        sram_clear_commands='1' if sram else '0',sram_done='1' if sram else '0',nice_idle='1',
+        fifo_payload_physical_zero='UNPROVEN',policy='REVIEW_PENDING')
+    writes=(8252 if sram else 9019) if packed else (32930 if sram else 33697)
+    commands=writes+(8 if packed else 5)
+    expected.update(writes=str(writes),commands=str(commands),responses=str(commands),
+                    preflight_commands='6',preflight_responses='6')
+    if packed:
+        expected.update(physical_w='16384',physical_x='64',physical_bias='768' if sram else '0',
+                        w_packs='8192',x_packs='32',clear_transport='public-pack32')
+    require(all(clear.get(key)==value for key,value in expected.items()), 'fixed clear protocol/physical-work/policy differs')
+    for key in ('clear_cycles','response_end_cycle','gap_to_source_request'):
+        require(re.fullmatch(r'[1-9][0-9]*',clear[key]) is not None, 'invalid clear marker timing: '+key)
+
+

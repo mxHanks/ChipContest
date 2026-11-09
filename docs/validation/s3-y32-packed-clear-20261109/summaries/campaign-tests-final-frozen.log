@@ -1,0 +1,100 @@
+test_packed_rejects_self_consistent_but_incorrect_recipe_count (test_s3_task_campaign.S3TaskCampaignClearProfileTests.test_packed_rejects_self_consistent_but_incorrect_recipe_count) ... ok
+test_packed_requires_exact_physical_coverage_and_completed_transactions (test_s3_task_campaign.S3TaskCampaignClearProfileTests.test_packed_requires_exact_physical_coverage_and_completed_transactions) ... ok
+test_scalar_preserves_original_minimal_observation_contract (test_s3_task_campaign.S3TaskCampaignClearProfileTests.test_scalar_preserves_original_minimal_observation_contract) ... ok
+test_snapshot_adds_only_explicit_packed_helper_and_preserves_all_scalar_bytes (test_s3_task_campaign.S3TaskCampaignClearProfileTests.test_snapshot_adds_only_explicit_packed_helper_and_preserves_all_scalar_bytes) ... ok
+test_unknown_profile_rejected_before_output_creation (test_s3_task_campaign.S3TaskCampaignClearProfileTests.test_unknown_profile_rejected_before_output_creation) ... usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: argument --clear-profile: invalid choice: 'packed32-dma' (choose from 'scalar', 'packed16-mmio')
+ok
+test_actual_rounding_records_required_and_checked (test_s3_task_campaign.S3TaskCampaignClockTests.test_actual_rounding_records_required_and_checked) ... ok
+test_development_clock_seam_preserves_exact_source (test_s3_task_campaign.S3TaskCampaignClockTests.test_development_clock_seam_preserves_exact_source) ... ok
+test_explicit_clocks_preserve_original_assertions_and_other_text (test_s3_task_campaign.S3TaskCampaignClockTests.test_explicit_clocks_preserve_original_assertions_and_other_text) ... ok
+test_vendor_assertions_reject_non_vcs_before_output_creation (test_s3_task_campaign.S3TaskCampaignClockTests.test_vendor_assertions_reject_non_vcs_before_output_creation) ... usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --platform-assertions requires VCS
+usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --platform-assertions requires VCS
+ok
+test_vendor_assertions_remove_only_explicit_vcs_waiver (test_s3_task_campaign.S3TaskCampaignClockTests.test_vendor_assertions_remove_only_explicit_vcs_waiver) ... ok
+test_command_hash_covers_exact_argv_boundaries (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_command_hash_covers_exact_argv_boundaries) ... ok
+test_existing_vcs_and_icarus_commands_and_assertion_boundary (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_existing_vcs_and_icarus_commands_and_assertion_boundary) ... ok
+test_explicit_scalar_matches_default_generated_recipe (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_explicit_scalar_matches_default_generated_recipe) ... S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmp_zdwywq_/campaign/result.json
+S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmpl1_ez_70/campaign/result.json
+ok
+test_failed_native_launch_retains_exact_command_receipt (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_failed_native_launch_retains_exact_command_receipt) ... S3_CLEAR_CAMPAIGN_FAIL missing native tool
+FAIL /tmp/tmpyipww_l0/campaign/result.json
+ok
+test_mocked_verilator_campaign_reports_development_scope_and_complete_receipts (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_mocked_verilator_campaign_reports_development_scope_and_complete_receipts) ... S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmpme9_1wul/campaign/result.json
+ok
+test_packed_profile_pins_selected_helper_and_physical_recipe (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_packed_profile_pins_selected_helper_and_physical_recipe) ... S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmp6rji0f6e/campaign/result.json
+ok
+test_packed_register_profile_selects_register_physical_observer (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_packed_register_profile_selects_register_physical_observer) ... S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmplmdrwpku/campaign/result.json
+ok
+test_verilator_preserves_procedural_assertions_and_separates_artifacts (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_verilator_preserves_procedural_assertions_and_separates_artifacts) ... ok
+test_versions_cover_invoked_native_tools (test_s3_task_campaign.S3TaskCampaignSimulatorTests.test_versions_cover_invoked_native_tools) ... ok
+test_external_reset_has_real_pin_edges_transaction_guard_and_separate_watchdog (test_s3_task_campaign.S3TaskCampaignStartupTests.test_external_reset_has_real_pin_edges_transaction_guard_and_separate_watchdog) ... ok
+test_external_reset_records_are_ordered_and_verify_actual_low_interval (test_s3_task_campaign.S3TaskCampaignStartupTests.test_external_reset_records_are_ordered_and_verify_actual_low_interval) ... ok
+test_external_reset_rejects_other_simulators_before_output_creation (test_s3_task_campaign.S3TaskCampaignStartupTests.test_external_reset_rejects_other_simulators_before_output_creation) ... usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --startup-profile external-reset requires Verilator
+usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --startup-profile external-reset requires Verilator
+ok
+test_historical_preserves_exact_testbench_and_requires_no_new_records (test_s3_task_campaign.S3TaskCampaignStartupTests.test_historical_preserves_exact_testbench_and_requires_no_new_records) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.129s
+
+OK

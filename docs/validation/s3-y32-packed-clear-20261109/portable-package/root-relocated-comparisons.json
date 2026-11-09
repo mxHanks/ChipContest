@@ -1,0 +1,730 @@
+{
+  "status": "PASS",
+  "scope": "Read-only relocated public-PACK32 strict comparison; no simulator/EDA launched",
+  "comparisons": [
+    {
+      "comparison": "packed-final-task0-comparison.json",
+      "status": "SAVED_CAMPAIGNS_COMPARED",
+      "totals": {
+        "baseline": {
+          "payload_cycles": 425539,
+          "clear_cycles": 198403,
+          "payload_plus_clear_cycles": 623942,
+          "clear_to_source_gap": 102,
+          "phases": {
+            "w_load": 114713,
+            "x_load": 71280,
+            "bias_load": 10760,
+            "compute_wait": 9603,
+            "writeback": 196713,
+            "other": 22470
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 2,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_writes": 25344,
+            "shared_stall": 17779,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          },
+          "nice": {
+            "requests": 99,
+            "responses": 99,
+            "oitf_retired": 99,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 3168,
+            "shared_writes": 25344
+          },
+          "auto": {
+            "rows": 99,
+            "pops_retired": 3168,
+            "compute_writeback_overlap": 187803,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 3168,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "result_mmio_reads": 0
+          },
+          "ready_activity": {
+            "requests": 99,
+            "groups": 3168,
+            "ready_edges": 3168,
+            "ready_wait_cycles": 23859,
+            "status_polls": 0,
+            "snapshots": 3168,
+            "pops_retired": 3168,
+            "shared_writes": 25344,
+            "final_response_before_completion": 1
+          },
+          "stream_activity": {
+            "requests": 99,
+            "groups": 3168,
+            "snapshots": 3168,
+            "pops_retired": 3168,
+            "shared_writes": 25344,
+            "final_response_before_completion": 1
+          }
+        },
+        "candidate": {
+          "payload_cycles": 425540,
+          "clear_cycles": 66802,
+          "payload_plus_clear_cycles": 492342,
+          "clear_to_source_gap": 102,
+          "phases": {
+            "w_load": 114714,
+            "x_load": 71280,
+            "bias_load": 10760,
+            "compute_wait": 9603,
+            "writeback": 196713,
+            "other": 22470
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 2,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_writes": 25344,
+            "shared_stall": 17780,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          },
+          "nice": {
+            "requests": 99,
+            "responses": 99,
+            "oitf_retired": 99,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 3168,
+            "shared_writes": 25344
+          },
+          "auto": {
+            "rows": 99,
+            "pops_retired": 3168,
+            "compute_writeback_overlap": 187803,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 3168,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "result_mmio_reads": 0
+          },
+          "ready_activity": {
+            "requests": 99,
+            "groups": 3168,
+            "ready_edges": 3168,
+            "ready_wait_cycles": 23859,
+            "status_polls": 0,
+            "snapshots": 3168,
+            "pops_retired": 3168,
+            "shared_writes": 25344,
+            "final_response_before_completion": 1
+          },
+          "stream_activity": {
+            "requests": 99,
+            "groups": 3168,
+            "snapshots": 3168,
+            "pops_retired": 3168,
+            "shared_writes": 25344,
+            "final_response_before_completion": 1
+          }
+        },
+        "delta": {
+          "payload_cycles": 1,
+          "clear_cycles": -131601,
+          "payload_plus_clear_cycles": -131600,
+          "clear_to_source_gap": 0,
+          "phases": {
+            "w_load": 1,
+            "x_load": 0,
+            "bias_load": 0,
+            "compute_wait": 0,
+            "writeback": 0,
+            "other": 0
+          },
+          "bus_counters": {
+            "busy": 0,
+            "mac_fire": 0,
+            "mmio_reads": 0,
+            "mmio_writes": 0,
+            "shared_reads": 0,
+            "shared_writes": 0,
+            "shared_stall": 1,
+            "mmio_stall": 0,
+            "starts": 0,
+            "dones": 0
+          },
+          "nice": {
+            "requests": 0,
+            "responses": 0,
+            "oitf_retired": 0,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 0,
+            "shared_writes": 0
+          },
+          "auto": {
+            "rows": 0,
+            "pops_retired": 0,
+            "compute_writeback_overlap": 0,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 0,
+            "direct_lanes": 0,
+            "direct_pops": 0,
+            "result_mmio_reads": 0
+          },
+          "ready_activity": {
+            "requests": 0,
+            "groups": 0,
+            "ready_edges": 0,
+            "ready_wait_cycles": 0,
+            "status_polls": 0,
+            "snapshots": 0,
+            "pops_retired": 0,
+            "shared_writes": 0,
+            "final_response_before_completion": 0
+          },
+          "stream_activity": {
+            "requests": 0,
+            "groups": 0,
+            "snapshots": 0,
+            "pops_retired": 0,
+            "shared_writes": 0,
+            "final_response_before_completion": 0
+          }
+        }
+      },
+      "layer_selection": {
+        "baseline_original": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "candidate_original": [
+          0
+        ],
+        "compared": [
+          0
+        ],
+        "mode": "explicit-common-layer-projection",
+        "original_results_unmodified": true
+      }
+    },
+    {
+      "comparison": "packed-full12-comparison.json",
+      "status": "SAVED_CAMPAIGNS_COMPARED",
+      "totals": {
+        "baseline": {
+          "payload_cycles": 5106468,
+          "clear_cycles": 2380836,
+          "payload_plus_clear_cycles": 7487304,
+          "clear_to_source_gap": 1224,
+          "phases": {
+            "w_load": 1376556,
+            "x_load": 855360,
+            "bias_load": 129120,
+            "compute_wait": 115236,
+            "writeback": 2360556,
+            "other": 269640
+          },
+          "bus_counters": {
+            "busy": 2585088,
+            "mac_fire": 2433024,
+            "mmio_reads": 24,
+            "mmio_writes": 147960,
+            "shared_reads": 180480,
+            "shared_writes": 304128,
+            "shared_stall": 213348,
+            "mmio_stall": 0,
+            "starts": 38016,
+            "dones": 38016
+          },
+          "nice": {
+            "requests": 1188,
+            "responses": 1188,
+            "oitf_retired": 1188,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 38016,
+            "shared_writes": 304128
+          },
+          "auto": {
+            "rows": 1188,
+            "pops_retired": 38016,
+            "compute_writeback_overlap": 2253636,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 38016,
+            "direct_lanes": 304128,
+            "direct_pops": 38016,
+            "result_mmio_reads": 0
+          },
+          "ready_activity": {
+            "requests": 1188,
+            "groups": 38016,
+            "ready_edges": 38016,
+            "ready_wait_cycles": 286308,
+            "status_polls": 0,
+            "snapshots": 38016,
+            "pops_retired": 38016,
+            "shared_writes": 304128,
+            "final_response_before_completion": 12
+          },
+          "stream_activity": {
+            "requests": 1188,
+            "groups": 38016,
+            "snapshots": 38016,
+            "pops_retired": 38016,
+            "shared_writes": 304128,
+            "final_response_before_completion": 12
+          }
+        },
+        "candidate": {
+          "payload_cycles": 5106480,
+          "clear_cycles": 801624,
+          "payload_plus_clear_cycles": 5908104,
+          "clear_to_source_gap": 1224,
+          "phases": {
+            "w_load": 1376568,
+            "x_load": 855360,
+            "bias_load": 129120,
+            "compute_wait": 115236,
+            "writeback": 2360556,
+            "other": 269640
+          },
+          "bus_counters": {
+            "busy": 2585088,
+            "mac_fire": 2433024,
+            "mmio_reads": 24,
+            "mmio_writes": 147960,
+            "shared_reads": 180480,
+            "shared_writes": 304128,
+            "shared_stall": 213360,
+            "mmio_stall": 0,
+            "starts": 38016,
+            "dones": 38016
+          },
+          "nice": {
+            "requests": 1188,
+            "responses": 1188,
+            "oitf_retired": 1188,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 38016,
+            "shared_writes": 304128
+          },
+          "auto": {
+            "rows": 1188,
+            "pops_retired": 38016,
+            "compute_writeback_overlap": 2253636,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 38016,
+            "direct_lanes": 304128,
+            "direct_pops": 38016,
+            "result_mmio_reads": 0
+          },
+          "ready_activity": {
+            "requests": 1188,
+            "groups": 38016,
+            "ready_edges": 38016,
+            "ready_wait_cycles": 286308,
+            "status_polls": 0,
+            "snapshots": 38016,
+            "pops_retired": 38016,
+            "shared_writes": 304128,
+            "final_response_before_completion": 12
+          },
+          "stream_activity": {
+            "requests": 1188,
+            "groups": 38016,
+            "snapshots": 38016,
+            "pops_retired": 38016,
+            "shared_writes": 304128,
+            "final_response_before_completion": 12
+          }
+        },
+        "delta": {
+          "payload_cycles": 12,
+          "clear_cycles": -1579212,
+          "payload_plus_clear_cycles": -1579200,
+          "clear_to_source_gap": 0,
+          "phases": {
+            "w_load": 12,
+            "x_load": 0,
+            "bias_load": 0,
+            "compute_wait": 0,
+            "writeback": 0,
+            "other": 0
+          },
+          "bus_counters": {
+            "busy": 0,
+            "mac_fire": 0,
+            "mmio_reads": 0,
+            "mmio_writes": 0,
+            "shared_reads": 0,
+            "shared_writes": 0,
+            "shared_stall": 12,
+            "mmio_stall": 0,
+            "starts": 0,
+            "dones": 0
+          },
+          "nice": {
+            "requests": 0,
+            "responses": 0,
+            "oitf_retired": 0,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 0,
+            "shared_writes": 0
+          },
+          "auto": {
+            "rows": 0,
+            "pops_retired": 0,
+            "compute_writeback_overlap": 0,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 0,
+            "direct_lanes": 0,
+            "direct_pops": 0,
+            "result_mmio_reads": 0
+          },
+          "ready_activity": {
+            "requests": 0,
+            "groups": 0,
+            "ready_edges": 0,
+            "ready_wait_cycles": 0,
+            "status_polls": 0,
+            "snapshots": 0,
+            "pops_retired": 0,
+            "shared_writes": 0,
+            "final_response_before_completion": 0
+          },
+          "stream_activity": {
+            "requests": 0,
+            "groups": 0,
+            "snapshots": 0,
+            "pops_retired": 0,
+            "shared_writes": 0,
+            "final_response_before_completion": 0
+          }
+        }
+      },
+      "layer_selection": {
+        "baseline_original": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "candidate_original": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "compared": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "mode": "full12-to-full12",
+        "original_results_unmodified": true
+      }
+    },
+    {
+      "comparison": "packed-pilot-task0-comparison.json",
+      "status": "SAVED_CAMPAIGNS_COMPARED",
+      "totals": {
+        "baseline": {
+          "payload_cycles": 425539,
+          "clear_cycles": 198403,
+          "payload_plus_clear_cycles": 623942,
+          "clear_to_source_gap": 102,
+          "phases": {
+            "w_load": 114713,
+            "x_load": 71280,
+            "bias_load": 10760,
+            "compute_wait": 9603,
+            "writeback": 196713,
+            "other": 22470
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 2,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_writes": 25344,
+            "shared_stall": 17779,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          },
+          "nice": {
+            "requests": 99,
+            "responses": 99,
+            "oitf_retired": 99,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 3168,
+            "shared_writes": 25344
+          },
+          "auto": {
+            "rows": 99,
+            "pops_retired": 3168,
+            "compute_writeback_overlap": 187803,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 3168,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "result_mmio_reads": 0
+          },
+          "ready_activity": {
+            "requests": 99,
+            "groups": 3168,
+            "ready_edges": 3168,
+            "ready_wait_cycles": 23859,
+            "status_polls": 0,
+            "snapshots": 3168,
+            "pops_retired": 3168,
+            "shared_writes": 25344,
+            "final_response_before_completion": 1
+          },
+          "stream_activity": {
+            "requests": 99,
+            "groups": 3168,
+            "snapshots": 3168,
+            "pops_retired": 3168,
+            "shared_writes": 25344,
+            "final_response_before_completion": 1
+          }
+        },
+        "candidate": {
+          "payload_cycles": 425540,
+          "clear_cycles": 66802,
+          "payload_plus_clear_cycles": 492342,
+          "clear_to_source_gap": 102,
+          "phases": {
+            "w_load": 114714,
+            "x_load": 71280,
+            "bias_load": 10760,
+            "compute_wait": 9603,
+            "writeback": 196713,
+            "other": 22470
+          },
+          "bus_counters": {
+            "busy": 215424,
+            "mac_fire": 202752,
+            "mmio_reads": 2,
+            "mmio_writes": 12330,
+            "shared_reads": 15040,
+            "shared_writes": 25344,
+            "shared_stall": 17780,
+            "mmio_stall": 0,
+            "starts": 3168,
+            "dones": 3168
+          },
+          "nice": {
+            "requests": 99,
+            "responses": 99,
+            "oitf_retired": 99,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 3168,
+            "shared_writes": 25344
+          },
+          "auto": {
+            "rows": 99,
+            "pops_retired": 3168,
+            "compute_writeback_overlap": 187803,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 3168,
+            "direct_lanes": 25344,
+            "direct_pops": 3168,
+            "result_mmio_reads": 0
+          },
+          "ready_activity": {
+            "requests": 99,
+            "groups": 3168,
+            "ready_edges": 3168,
+            "ready_wait_cycles": 23859,
+            "status_polls": 0,
+            "snapshots": 3168,
+            "pops_retired": 3168,
+            "shared_writes": 25344,
+            "final_response_before_completion": 1
+          },
+          "stream_activity": {
+            "requests": 99,
+            "groups": 3168,
+            "snapshots": 3168,
+            "pops_retired": 3168,
+            "shared_writes": 25344,
+            "final_response_before_completion": 1
+          }
+        },
+        "delta": {
+          "payload_cycles": 1,
+          "clear_cycles": -131601,
+          "payload_plus_clear_cycles": -131600,
+          "clear_to_source_gap": 0,
+          "phases": {
+            "w_load": 1,
+            "x_load": 0,
+            "bias_load": 0,
+            "compute_wait": 0,
+            "writeback": 0,
+            "other": 0
+          },
+          "bus_counters": {
+            "busy": 0,
+            "mac_fire": 0,
+            "mmio_reads": 0,
+            "mmio_writes": 0,
+            "shared_reads": 0,
+            "shared_writes": 0,
+            "shared_stall": 1,
+            "mmio_stall": 0,
+            "starts": 0,
+            "dones": 0
+          },
+          "nice": {
+            "requests": 0,
+            "responses": 0,
+            "oitf_retired": 0,
+            "status_polls": 0,
+            "result_reads": 0,
+            "pops_retired": 0,
+            "shared_writes": 0
+          },
+          "auto": {
+            "rows": 0,
+            "pops_retired": 0,
+            "compute_writeback_overlap": 0,
+            "fifo_full_wait": 0
+          },
+          "transport": {
+            "alias_reads": 0,
+            "explicit_pops": 0,
+            "direct_snapshots": 0,
+            "direct_lanes": 0,
+            "direct_pops": 0,
+            "result_mmio_reads": 0
+          },
+          "ready_activity": {
+            "requests": 0,
+            "groups": 0,
+            "ready_edges": 0,
+            "ready_wait_cycles": 0,
+            "status_polls": 0,
+            "snapshots": 0,
+            "pops_retired": 0,
+            "shared_writes": 0,
+            "final_response_before_completion": 0
+          },
+          "stream_activity": {
+            "requests": 0,
+            "groups": 0,
+            "snapshots": 0,
+            "pops_retired": 0,
+            "shared_writes": 0,
+            "final_response_before_completion": 0
+          }
+        }
+      },
+      "layer_selection": {
+        "baseline_original": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "candidate_original": [
+          0
+        ],
+        "compared": [
+          0
+        ],
+        "mode": "explicit-common-layer-projection",
+        "original_results_unmodified": true
+      }
+    }
+  ]
+}

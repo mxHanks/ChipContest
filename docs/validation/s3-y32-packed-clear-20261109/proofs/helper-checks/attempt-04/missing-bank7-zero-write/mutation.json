@@ -1,0 +1,8 @@
+{
+  "purpose": "Negative fault injection into an isolated real RTL copy; not a production or full-SoC result",
+  "original": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+  "original_sha256": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+  "mutant_sha256": "770ae06e0f5a4a9d3fdc04150a3a05b634e53894d4723ab4a259250dafdedc0e",
+  "before": ".io_wen   (io_loadWen & (&io_loadBank))",
+  "after": ".io_wen   (io_loadWen & (&io_loadBank) & (|io_loadData))"
+}

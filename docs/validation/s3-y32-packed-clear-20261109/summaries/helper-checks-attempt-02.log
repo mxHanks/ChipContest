@@ -1,0 +1,156 @@
+test_generation_rejects_drift_and_binds_all_outputs (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearGenerationTests.test_generation_rejects_drift_and_binds_all_outputs) ... ok
+test_observer_rejects_invalid_hierarchy (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearGenerationTests.test_observer_rejects_invalid_hierarchy) ... ok
+test_actual_register_wrapper_fallback (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_register_wrapper_fallback) ... skipped 'Optional register-bias generated variant not supplied; SRAM is the selected candidate'
+test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) ... GENERATED_NOT_FULL_SOC_SIMULATED: /tmp/s3-clear-generation-kco2oegu/recipe/clear-recipe.json
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32
+S3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 2308590000 (1ps)
+
+
+  test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=0) ... FAIL
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:613: S3_CLEAR_REJECT incomplete clear before first source request
+       Time: 2308115000  Scope: tb_s3_task_clear_protocol.s3_require_clear_coverage
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:613: S3_CLEAR_REJECT incomplete clear before first source request
+       Time: 2300445000  Scope: tb_s3_task_clear_protocol.s3_require_clear_coverage
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:773: S3_CLEAR_REJECT missing ABI or incomplete/unknown clear word
+       Time: 1723515000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:794: S3_CLEAR_REJECT nonzero/duplicate W packed command
+       Time: 1723515000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:646: S3_CLEAR_REJECT undrained clear before first source request
+       Time: 2308145000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:630: S3_CLEAR_REJECT NICE not idle before task request
+       Time: 2308585000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:613: S3_CLEAR_REJECT incomplete clear before first source request
+       Time: 1723105000  Scope: tb_s3_task_clear_protocol.s3_require_clear_coverage
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:646: S3_CLEAR_REJECT undrained clear before first source request
+       Time: 2296965000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:800: S3_CLEAR_REJECT nonzero/duplicate X packed command
+       Time: 2308185000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:650: S3_CLEAR_REJECT missing clear completion proof before first source request
+       Time: 2308185000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:727: S3_CLEAR_REJECT parameter write before first source request
+       Time: 2308285000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:730: S3_CLEAR_REJECT unexpected ABI preflight read
+       Time: 2308285000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:646: S3_CLEAR_REJECT undrained clear before first source request
+       Time: 2296905000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:794: S3_CLEAR_REJECT nonzero/duplicate W packed command
+       Time: 1723515000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:783: S3_CLEAR_REJECT W cursor initialization
+       Time: 1723585000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:613: S3_CLEAR_REJECT incomplete clear before first source request
+       Time: 2296885000  Scope: tb_s3_task_clear_protocol.s3_require_clear_coverage
+
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+FATAL: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:758: S3_CLEAR_REJECT repeated ABI read
+       Time: 2308185000  Scope: tb_s3_task_clear_protocol.s3_observe_task_clear
+
+S3_PACKED_RESET_BOUNDARY_PASS boundary=0
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32
+S3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 4031740000 (1ps)
+
+  test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=20) ... FAIL
+S3_PACKED_RESET_BOUNDARY_PASS boundary=1
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32
+S3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 4031750000 (1ps)
+
+  test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=21) ... FAIL
+S3_PACKED_RESET_BOUNDARY_PASS boundary=2
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32
+S3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 4031760000 (1ps)
+
+  test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=22) ... FAIL
+S3_PACKED_ERROR_ATOMICITY_PASS masks_odd_bounds_busy=1
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32
+S3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 2310440000 (1ps)
+
+  test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=23) ... FAIL
+test_packed_frozen_wrapper_riscv_compile (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_packed_frozen_wrapper_riscv_compile) ... ok
+
+======================================================================
+FAIL: test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/tests/ppa/test_s3_task_packed_clear_protocol.py", line 495, in _actual_wrapper
+    self.assertIn('S3_CLEAR_MMIO_PROBE_PASS', log)
+AssertionError: 'S3_CLEAR_MMIO_PROBE_PASS' not found in 'S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1\nS3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32\nS3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING\n/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 2308590000 (1ps)\n'
+
+======================================================================
+FAIL: test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=20)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/tests/ppa/test_s3_task_packed_clear_protocol.py", line 495, in _actual_wrapper
+    self.assertIn('S3_CLEAR_MMIO_PROBE_PASS', log)
+AssertionError: 'S3_CLEAR_MMIO_PROBE_PASS' not found in 'S3_PACKED_RESET_BOUNDARY_PASS boundary=0\nS3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1\nS3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32\nS3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING\n/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 4031740000 (1ps)\n'
+
+======================================================================
+FAIL: test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=21)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/tests/ppa/test_s3_task_packed_clear_protocol.py", line 495, in _actual_wrapper
+    for mode, rejected in cases:
+                ^^^^^^^^^^^^^^^^^
+AssertionError: 'S3_CLEAR_MMIO_PROBE_PASS' not found in 'S3_PACKED_RESET_BOUNDARY_PASS boundary=1\nS3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1\nS3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32\nS3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING\n/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 4031750000 (1ps)\n'
+
+======================================================================
+FAIL: test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=22)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/tests/ppa/test_s3_task_packed_clear_protocol.py", line 495, in _actual_wrapper
+    for mode, rejected in cases:
+                ^^^^^^^^^^^^^^^^^
+AssertionError: 'S3_CLEAR_MMIO_PROBE_PASS' not found in 'S3_PACKED_RESET_BOUNDARY_PASS boundary=2\nS3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1\nS3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32\nS3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING\n/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 4031760000 (1ps)\n'
+
+======================================================================
+FAIL: test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) (sram=True, mode=23)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/tests/ppa/test_s3_task_packed_clear_protocol.py", line 495, in _actual_wrapper
+    for mode, rejected in cases:
+                ^^^^^^^^^^^^^^^^^
+AssertionError: 'S3_CLEAR_MMIO_PROBE_PASS' not found in 'S3_PACKED_ERROR_ATOMICITY_PASS masks_odd_bounds_busy=1\nS3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1\nS3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32\nS3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING\n/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-02/sram/tb.sv:1661: $finish called at 2310440000 (1ps)\n'
+
+----------------------------------------------------------------------
+Ran 5 tests in 208.210s
+
+FAILED (failures=5, skipped=1)

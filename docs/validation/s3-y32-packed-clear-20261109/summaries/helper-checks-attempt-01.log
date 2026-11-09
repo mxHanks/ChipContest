@@ -1,0 +1,34 @@
+test_generation_rejects_drift_and_binds_all_outputs (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearGenerationTests.test_generation_rejects_drift_and_binds_all_outputs) ... ok
+test_observer_rejects_invalid_hierarchy (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearGenerationTests.test_observer_rejects_invalid_hierarchy) ... ok
+test_actual_register_wrapper_fallback (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_register_wrapper_fallback) ... skipped 'Optional register-bias generated variant not supplied; SRAM is the selected candidate'
+test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths) ... FAIL
+test_packed_frozen_wrapper_riscv_compile (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_packed_frozen_wrapper_riscv_compile) ... ok
+
+======================================================================
+FAIL: test_actual_sram_wrapper_and_rejection_paths (tests.ppa.test_s3_task_packed_clear_protocol.S3TaskPackedClearNativeTests.test_actual_sram_wrapper_and_rejection_paths)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/tests/ppa/test_s3_task_packed_clear_protocol.py", line 500, in test_actual_sram_wrapper_and_rejection_paths
+    self._actual_wrapper(True, [
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/tests/ppa/test_s3_task_packed_clear_protocol.py", line 478, in _actual_wrapper
+    self.assertEqual(built.returncode, 0, built.stdout+built.stderr)
+AssertionError: 1 != 0 : /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:168: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:168: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:168: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:181: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:181: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:181: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:217: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:217: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:217: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:217: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/prototype-repo/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv:217: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/attempt-01/sram/tb.sv:10: error: Wildcard named port connection (.*) did not find a matching identifier for port 1 (xu_direct_capable).
+1 error(s) during elaboration.
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.146s
+
+FAILED (failures=1, skipped=1)
+GENERATED_NOT_FULL_SOC_SIMULATED: /tmp/s3-clear-generation-vzzpg3ls/recipe/clear-recipe.json

@@ -1,0 +1,5 @@
+S3_PACKED_RESET_BOUNDARY_PASS boundary=1
+S3_PACKED_CLEAR_NONZERO_PRESTATE_PASS W=16384 X=64 bias_words=768 legacy_bits=320 staging_bits=640 public_mmio_only=1
+S3_TASK_CLEAR_OBSERVED mode_sram=1 writes=8252 reads=8 w=16384 x=64 legacy_bias=8 bias_entries=0 physical_w=16384 physical_x=64 physical_bias=768 w_packs=8192 x_packs=32 sram_clear_commands=1 sram_done=1 commands=8260 responses=8260 clear_cycles=58516 response_end_cycle=58517 gap_to_source_request=32 preflight_commands=6 preflight_responses=6 nice_idle=1 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING clear_transport=public-pack32
+S3_PACKED_CLEAR_MMIO_PROBE_PASS mode_sram=1 writes=8252 checked_w=16384 checked_x=64 checked_bias=256 checked_legacy=8 clear_cycles=58516 fifo_payload_physical_zero=UNPROVEN policy=REVIEW_PENDING
+/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/tb.sv:1741: $finish called at 4031750000 (1ps)

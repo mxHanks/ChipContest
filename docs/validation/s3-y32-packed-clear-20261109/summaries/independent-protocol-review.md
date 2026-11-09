@@ -1,0 +1,19 @@
+# Independent packed preclear architecture review
+
+Baseline parent `51a021c8bfc9649e2be4be1292735181f7a551e8`, E203 `0f852a35741881400a7e10b4760bdb8f300245ae`. Read-only review; no simulator or synthesis was run by this reviewer.
+
+- The existing W public packed MMIO path captures cursor/data at command acceptance. At each following physical edge it drives one scalar core load. The first edge writes the lower half; the second writes the upper half and only then publishes its ICB response. Response backpressure must preserve the stable response and must not repeat a physical edge.
+- An even W cursor maps to logical bank `cursor[2:0]` and address `{cursor[7:3],cursor[13:8]}`. The second half increments the bank, not the address. Since first bank is always even, it never wraps bank 7. Exhausting even cursor 0..16382 covers each of 8×2048 locations once. Each WeightBank splits physical address bit 10 across its `sram0`/`sram1`; therefore all 16 macros require independent en+write edge/address/data coverage.
+- X packed stores use consecutive scalar X addresses. The final command at cursor 62 commits entries 62 and 63 before returning. Counting 32 commands times two is insufficient evidence of actual writes.
+- Full write masks, exact capability checks and fresh reset are required. Packed busy/error are latched status; both final STREAM_STATUS==0 and legacy STATUS==0 are needed after a compiler+CPU fence. A final MMIO response by itself is insufficient for a completion boundary if pending data, strobes or a response remain active.
+- Bias physical 768-word clear and 640-bit staging zero, legacy eight 40-bit values and cache disable remain explicit work. Clearing validity flags is not a substitute. The final source boundary must be the first read VALID, including a stalled request, and checks must run before consuming same-edge responses or writes.
+- A public-MMIO nonzero prefill followed by the real clear is needed for post-state probes: reset-zero assumptions, writing internal memories from the TB or checking only counters cannot establish clearing. The probe must establish nonzero pre-state through real physical writes, then inspect all W/X/bias/staging/legacy locations after clear.
+- This experiment cannot establish FIFO payload physical zero or official clear policy acceptance. Preserve `UNPROVEN` / `REVIEW_PENDING` independently of numerical PASS and stronger parameter-clear evidence.
+
+The existing RTL mapping and response sequencing support this strategy without a hardware change. Review of the new helper's actual implementation and captured evidence is still required; this architecture review does not claim the candidate has passed.
+
+## Final source review
+
+Final helper `fbd013b9b0c8de9f7c2d6e0c76cc8676aaabf6436b5835f2a8046072d589533d` and campaign `350430351168d67f1d761023ba3c3f407aeca13f0268098aa4b37ddd0474984c` reviewed with no actionable findings. The final packed response check explicitly requires both physical writes before retirement. The complete frozen baseline twelve layers and final candidate layer 0 passed independent saved-evidence validation, including exact generation and image loading. Thirteen coherent evidence-corruption cases were rejected. The candidate first-source VALID waits one cycle before acceptance; this measured cycle remains in the payload result.
+
+The nonzero public-MMIO probe verifies all accessible W/X/bias/legacy data plus both staging slots before clearing. The public bias ABI exposes 40 bits per entry; inaccessible SRAM padding bits cannot be made nonzero through that ABI. Actual full-width zero write edges and poststate checks cover all 768 physical bias words. FIFO payload physical zero remains `UNPROVEN`, policy remains `REVIEW_PENDING`. This review does not claim historical scalar logs observed the sixteen macro pins. See `independent-final-source-review.json` for exact scope and evidence hashes.

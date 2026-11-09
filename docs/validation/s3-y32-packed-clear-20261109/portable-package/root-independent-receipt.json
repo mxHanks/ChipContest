@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "scope": "Root independent extraction preserving original permissions and read-only verification; no simulator or EDA launched",
+  "archive_sha256": "2e1edd2cb7e0467244b7b9e39c2f072e35b6521ef08d8c41fca8890a32c53630",
+  "relocated_root": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/handoff/root-independent-relocation/s3-y32-packed-clear-evidence",
+  "steps": [
+    {
+      "command": [
+        "/usr/bin/python3.12",
+        "-E",
+        "-B",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/handoff/root-independent-relocation/s3-y32-packed-clear-evidence/verify_evidence.py",
+        "--out",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/handoff/root-relocated-verification.json"
+      ],
+      "exit": 0,
+      "receipt": "root-relocated-verification.json",
+      "log": "root-relocated-verification.log",
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/python3.12",
+        "-E",
+        "-B",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/handoff/root-independent-relocation/s3-y32-packed-clear-evidence/revalidate_comparisons.py",
+        "--out",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/handoff/root-relocated-comparisons.json"
+      ],
+      "exit": 0,
+      "receipt": "root-relocated-comparisons.json",
+      "log": "root-relocated-comparisons.log",
+      "status": "PASS"
+    }
+  ],
+  "selected_total": 5908104,
+  "selected_delta": -1579200,
+  "strict_comparisons": 3
+}

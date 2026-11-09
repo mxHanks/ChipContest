@@ -1,0 +1,336 @@
+{
+  "cases": [
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/missing-bank7-zero-write/clear.vvp",
+        "+MODE=0"
+      ],
+      "expected_rejection": "physical W strobe cardinality",
+      "log_sha256": "fa322ba8eaa6057a31f3ff61fc089c38cecc2c49d9c411a1bf8fa58ee9f011b1",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/missing-bank7-zero-write/mode-00-result.json",
+      "result_sha256": "43c7794dd11c8f425f148013e6c1b7315bafa5216f4f4c156587674c20d5170d"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/missing-legacy-high-zero-write/clear.vvp",
+        "+MODE=0"
+      ],
+      "expected_rejection": "physical legacy bias poststate lane=0",
+      "log_sha256": "b47bd29c48e4e35b1a90a0195e64073a3d3918e70f7f42fef580bfbade27b9cf",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/missing-legacy-high-zero-write/mode-00-result.json",
+      "result_sha256": "8fe17e061830eacbf6a675fc24e47f3fba8e629f9e4ea28a8fd4f06b45f0d5d6"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/missing-x0-zero-write/clear.vvp",
+        "+MODE=0"
+      ],
+      "expected_rejection": "physical X poststate address=0",
+      "log_sha256": "73d8ff999bf7c054cc6ab56649fbe1cdbf4c60d1e18338a9b5e8410a0ce29d07",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/missing-x0-zero-write/mode-00-result.json",
+      "result_sha256": "87e74e220380c57d358f000830bac8a9118169023193953eaade4f8f66ddb385"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=0"
+      ],
+      "expected_rejection": null,
+      "log_sha256": "127aeacf496f27fa31a7a4e2307c71f59d1c01ba0238531370c1f8bd75aeddb9",
+      "native_exit": 0,
+      "result_file": "final-fbd013b/sram/mode-00-result.json",
+      "result_sha256": "4096ad5ee10e4088c3af012ee9a8148f8f4f12a1950d20019f705c2c607934c9"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=1"
+      ],
+      "expected_rejection": "incomplete clear before first source request",
+      "log_sha256": "2d829b0b1538a2b8c23b5b2b72d6439e0fe872016fbad8e9ced76ff60806b532",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-01-result.json",
+      "result_sha256": "8a5ad75d7b444a25ec84c2a46ee6f2859a535f3437b74abb0a4bd7decb8f1461"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=2"
+      ],
+      "expected_rejection": "incomplete clear before first source request",
+      "log_sha256": "51ec5b648f79aba20daf9fc6349f3fff052ef84faa256cd0c241f4b0b026bb9e",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-02-result.json",
+      "result_sha256": "5e0ca6103c70ad6ea1e70ddbccfe345232205d27f57293c5a4e5ed923e3d8c1f"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=3"
+      ],
+      "expected_rejection": "missing ABI or incomplete/unknown clear word",
+      "log_sha256": "7f3af59b1ed69d5f5dd9c7bd6a1785d5b5c98877d8d0d1530e62b42c3a1710b7",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-03-result.json",
+      "result_sha256": "90e998dc195a12c9ec13f015c3b2b8a2b63253863fe2569e2c19e35dfc298e47"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=4"
+      ],
+      "expected_rejection": "nonzero/duplicate W packed command",
+      "log_sha256": "3e32b2973fd3bb8700a3f4a4d05d7d59d081371d27721531ff117c36b8f43b16",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-04-result.json",
+      "result_sha256": "f02972d0da727488b4889d8de14b8f09d274b404333caa4d59adc17c3676513f"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=5"
+      ],
+      "expected_rejection": "undrained clear before first source request",
+      "log_sha256": "0a4a97bd37fc45e3b9bb636dfdbf72a2f5f12c8128afecfe14a369ddd93b79a3",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-05-result.json",
+      "result_sha256": "ab97d5282ee62fc530f5afe1c0a423ee8ad53921058da6c1fe1737e25ad6aedc"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=6"
+      ],
+      "expected_rejection": "NICE not idle before task request",
+      "log_sha256": "75835ad179e22b98703c3367094970b445865c1f112ec099bcb93e594d1acd47",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-06-result.json",
+      "result_sha256": "460371d6844e42e072567b529350a81716d5aa0b8a5d03e35df619839a235e32"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=7"
+      ],
+      "expected_rejection": "incomplete clear before first source request",
+      "log_sha256": "ac37d14ca38477f111ef373dbd10abdbfd2b802cf0bdfa8b5a66e7535916ddd4",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-07-result.json",
+      "result_sha256": "bf5e5cb38c4e19baec54180f76648c13589cc4885a20bf856673c878960301b6"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=8"
+      ],
+      "expected_rejection": "undrained clear before first source request",
+      "log_sha256": "b75435515905abfcb190452dfe215fb7ae6cca4a90f0645ea86fc4ab91b30c6a",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-08-result.json",
+      "result_sha256": "c5599295214557884782675ff164e8d1ae6bbb926751c0dd029b264a58c2eb70"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=9"
+      ],
+      "expected_rejection": "nonzero/duplicate X packed command",
+      "log_sha256": "8f398b1d7442e4902087b0a05501a304a95f62bed1f5c6edb3c6d933ae8ba1ff",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-09-result.json",
+      "result_sha256": "f406fdf958896d9b2874637710469c87e250680c171f7ad3697b660b87c1f9b7"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=10"
+      ],
+      "expected_rejection": "missing clear completion proof before first source request",
+      "log_sha256": "bf9892ff780a665c9c115b4ca54b0c26d929622088749d9934be5958a1c5ba84",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-10-result.json",
+      "result_sha256": "893a80a6e33feef2ac6cfcfed85eea92d18564bf54a4bd4ec2c85f81e24fcbb4"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=11"
+      ],
+      "expected_rejection": "parameter write before first source request",
+      "log_sha256": "0912133f32c2fdb153c9abfb20d66ac0d734d0b5da71a97dfe66e33aec4bac1b",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-11-result.json",
+      "result_sha256": "0ca378c95454d502f9c329abce324daa5cdb4a1c08f68f9a804582554b3c9fc0"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=12"
+      ],
+      "expected_rejection": "unexpected ABI preflight read",
+      "log_sha256": "baffd4e5c34f5f74778ee70ee86547427f3c0d923b35939997972ca6e5e9893b",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-12-result.json",
+      "result_sha256": "9b92e17a83adc4fd5f4b8c03e17f32957eda0519b9ddeef098330ddb2465a788"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=14"
+      ],
+      "expected_rejection": "undrained clear before first source request",
+      "log_sha256": "67be701ceb3baec5c79ddb2dfba4a8a15a51be321731d5cb52ffe11e1be8f1d4",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-14-result.json",
+      "result_sha256": "6b9ca340753c3e392b87f04fcf23eb5b395a9e87dbfc58463e39f9fac2cd9e8b"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=15"
+      ],
+      "expected_rejection": "nonzero/duplicate W packed command",
+      "log_sha256": "3e32b2973fd3bb8700a3f4a4d05d7d59d081371d27721531ff117c36b8f43b16",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-15-result.json",
+      "result_sha256": "6fa204c7a51d98f853cdde43d8885c493774aad1d544076adbcbd609e3e40b11"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=16"
+      ],
+      "expected_rejection": "W cursor initialization",
+      "log_sha256": "ae48834c6af00bb704119965a7d4a53ec31e3a018a30c544575cbdeb5c5eeb0a",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-16-result.json",
+      "result_sha256": "c440156dea0e11d36112b7893bae6f8b40d9207de5f995ea4560a0c4447af408"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=17"
+      ],
+      "expected_rejection": "incomplete clear before first source request",
+      "log_sha256": "09408c03c190b2249ce1f0b87eef48ba2c5734a0cb8de64bb5abca3cc91dd5d8",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-17-result.json",
+      "result_sha256": "367b9fa999ab7b8816f44662dc5bc0130682a10df0553bdb3011dff44cfc4765"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=18"
+      ],
+      "expected_rejection": "repeated ABI read",
+      "log_sha256": "cfc5f2c4efff7e7f3d6b621ca0ea4457121d1e92bf757643685325f02052da8d",
+      "native_exit": 1,
+      "result_file": "final-fbd013b/sram/mode-18-result.json",
+      "result_sha256": "3c137449e0ce50508a6465d34f4b606a2075e11e20b4de6a6147390755d79e60"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=20"
+      ],
+      "expected_rejection": null,
+      "log_sha256": "583326d9217061a56371a1ae385d9b1b8088b4cb39d664abfefea3c55ed32ee3",
+      "native_exit": 0,
+      "result_file": "final-fbd013b/sram/mode-20-result.json",
+      "result_sha256": "d6debd0bd2689e8bb927104f566ce6d8bbce9c498b34f3c515eb0ef75974d649"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=21"
+      ],
+      "expected_rejection": null,
+      "log_sha256": "99c335cd616c7924389a8c6a8c8355ba72e0d8916b1eb17d1ccf50f0c6e0607e",
+      "native_exit": 0,
+      "result_file": "final-fbd013b/sram/mode-21-result.json",
+      "result_sha256": "a72a537bfff8673ea6e1728b330151105cba726951a2c7ff4f746687deeaa7b0"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=22"
+      ],
+      "expected_rejection": null,
+      "log_sha256": "85c9edd6bf9c3ed93869402572bdcf4a93e635627d0ffba667d93d1d374b97c9",
+      "native_exit": 0,
+      "result_file": "final-fbd013b/sram/mode-22-result.json",
+      "result_sha256": "83f581ac70af0aca07ab7d38e4cc4e337762bc6631d24a05c30c1b3a6a022101"
+    },
+    {
+      "argv": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/helper-checks/final-fbd013b/sram/clear.vvp",
+        "+MODE=23"
+      ],
+      "expected_rejection": null,
+      "log_sha256": "fa345fe53744cb8f4a4ba33cc76bb75c091f5122918c2b7a13c5c451ca4995b8",
+      "native_exit": 0,
+      "result_file": "final-fbd013b/sram/mode-23-result.json",
+      "result_sha256": "6ef72439a06293e837672caf2af6d64f428c5251fd7d34efe955218effbfcd5d"
+    }
+  ],
+  "console_log": "helper-checks-final.log",
+  "console_log_sha256": "6fc46ca0d829a5d8a049ccd866db4e6bfa957cd6da186a835cec254ebc624603",
+  "explicit_optional_register_variant_skips": 1,
+  "fifo_payload_physical_zero": "UNPROVEN",
+  "helper_sha256": "fbd013b9b0c8de9f7c2d6e0c76cc8676aaabf6436b5835f2a8046072d589533d",
+  "negative_rtl_fault_cases": 3,
+  "obsolete_attempts": {
+    "attempt01": "DIRECT tieoff fixture elaboration failure, raw retained",
+    "attempt02": "Python historical scalar PASS marker spelling caused five fixture failures; raw retained",
+    "attempt03": "intermediate helper 638f positive only",
+    "attempt04": "intermediate helper 638f complete native suite PASS; not final helper",
+    "attempt05": "final helper fbd013b positive only"
+  },
+  "physical_nonzero_prestate": {
+    "bias_third_word_padding": "known zero prepared with public BIAS_CLEAR",
+    "bias_third_word_valid_bits": 8,
+    "bias_words": 768,
+    "legacy_bits": 320,
+    "staging_bits": 640,
+    "w_words": 16384,
+    "x_entries": 64
+  },
+  "policy": "REVIEW_PENDING",
+  "positive_cases": 5,
+  "proof": "public MMIO nonzero prefill; independent scalar W/X mapping; deep known nonzero read-only prestate; actual core and 16-macro write-edge coverage; full zero poststate; no internal DUT drives",
+  "protocol_rejection_cases": 17,
+  "real_wrapper_cases": 22,
+  "scope": "Icarus real-wrapper/native C compile; no full-SoC/PPA/official policy qualification",
+  "source_pins_sha256": "8102af0013fddc25053fd7d9d547c774e71427f088dba6eaff3336dc4221adc7",
+  "status": "PASS",
+  "test_sha256": "3868a850a72c8420cefeda4022b74c3c1707e28f30411bb1fde5b5abd9dc36c9",
+  "unittest_methods": 6
+}

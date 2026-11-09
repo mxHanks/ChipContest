@@ -1,0 +1,60 @@
+{
+  "baseline_e203": "0f852a35741881400a7e10b4760bdb8f300245ae",
+  "baseline_parent": "51a021c8bfc9649e2be4be1292735181f7a551e8",
+  "limits": [
+    "Historical scalar campaign did not sample 16 macro pins; its evidence is pinned per-address MMIO + scalar C + identical RTL, separate from candidate macro-edge evidence",
+    "Public bias ABI exposes 40 data bits per entry, not the upper eight padding bits of the third SRAM word; physical full-16-bit zero write edges and poststate checks cover all 768 words, but probe does not claim a nonzero public-ABI prefill of those inaccessible padding bits",
+    "UNPROVEN FIFO payload physical zero and REVIEW_PENDING policy are unchanged; development simulation is not mapped PPA, official clear-policy acceptance, or gate-level signoff",
+    "Register-bias fallback is optional and not the selected SRAM candidate; existing conditional test may skip without generated register variant",
+    "Full12 candidate is not yet complete at this review receipt; final 12-to-12 strict comparison remains required"
+  ],
+  "reviewed": [
+    "C helper exact public-MMIO capability probes, full masks, 8192 W and 32 X pack commands, bias clear, legacy zero, compiler+CPU fence, STREAM_STATUS then STATUS proof",
+    "Existing RTL even cursor bijection: bank=cursor[2:0], address={cursor[7:3],cursor[13:8]}, second edge adjacent bank; 16 macro split addressed by logical bit10",
+    "Observer actual core W/X edge uniqueness and data zero, 16 W macro en/wmode/address/data matches plus per-edge cardinality, 768 ordered actual bias writes",
+    "Every packed response retires only after both actual core writes, equal W macro count and inactive stream/core strobe",
+    "Before stream/final/source proof: physical W/X/bias ports inactive; all W/X/bias/staging/legacy poststate zero; source is VALID including stalled first request; checks precede same-edge activity",
+    "Frozen payload TB, clock/reset/instrument seams unchanged; campaign changes limited to optional profile selection/snapshot/metadata/checks",
+    "Nonzero probe uses public scalar W/X uploads independently of packed map, public bias writes and manual compute to fill both staging slots; deep hierarchy is read-only",
+    "Corruption verifier rejects changed RTL, old helper, tensor, missing clear loop, added nop, disabled payload observation, weakened physical observer, mismatched actual ITCM image, corrupted clear markers/timing/policy"
+  ],
+  "schema": "s3-packed-clear-independent-review-v1",
+  "scope": "read-only architecture, source, saved-evidence review; reviewer ran no native simulation or synthesis",
+  "selected_source_sha256": {
+    "campaign.py": "350430351168d67f1d761023ba3c3f407aeca13f0268098aa4b37ddd0474984c",
+    "tools/ppa/s3_task_packed_clear_protocol.py": "fbd013b9b0c8de9f7c2d6e0c76cc8676aaabf6436b5835f2a8046072d589533d"
+  },
+  "status": "NO_ACTIONABLE_FINDINGS",
+  "timing": {
+    "baseline_first_request_wait": 0,
+    "candidate_first_request_wait": 1,
+    "payload_baseline": 425539,
+    "payload_candidate": 425540,
+    "semantics": "actual first VALID-to-accept wait retained, no timing normalization or added padding"
+  },
+  "verification": {
+    "baseline_complete_layers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "baseline_total": 7487304,
+    "candidate_complete_layers": [
+      0
+    ],
+    "comparison": "packed-final-task0-comparison.json",
+    "negative_cases": 13,
+    "negatives": "final-task0-comparator-negatives/result.json",
+    "probe_final_log": "helper-checks-attempt-05.log",
+    "probe_final_log_sha256": "1708421664062154a360268f4670b5f9b2cb2b17ca5268de4fc9f150eb152019"
+  }
+}

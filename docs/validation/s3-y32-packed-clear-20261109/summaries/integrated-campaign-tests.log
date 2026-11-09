@@ -1,0 +1,77 @@
+....usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: argument --clear-profile: invalid choice: 'packed32-dma' (choose from 'scalar', 'packed16-mmio')
+....usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --platform-assertions requires VCS
+usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --platform-assertions requires VCS
+....S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmphxw_vdko/campaign/result.json
+S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmp_g7er7ty/campaign/result.json
+.S3_CLEAR_CAMPAIGN_FAIL missing native tool
+FAIL /tmp/tmpd87vz6rm/campaign/result.json
+.S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmp1gqrmoei/campaign/result.json
+.S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmphkgrmwpy/campaign/result.json
+.S3_CLEAR_TASK_PASS original_layer=0 cycles=3 first_wait=0 clear_cycles=5
+DEVELOPMENT_PASS_POLICY_PENDING /tmp/tmpfih6aexk/campaign/result.json
+.....usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --startup-profile external-reset requires Verilator
+usage: python3.12 -m unittest [-h] [--repo REPO] --out OUT
+                              [--schedule SCHEDULE] [--layers LAYERS]
+                              [--simulator {vcs,iverilog,verilator}]
+                              --bias-kind {sram,registers}
+                              [--clear-profile {scalar,packed16-mmio}]
+                              [--cross-prefix CROSS_PREFIX]
+                              [--first-source-stall FIRST_SOURCE_STALL]
+                              [--max-cycles MAX_CYCLES] [--waves]
+                              [--platform-clocks {development,150mhz}]
+                              [--startup-profile {historical,external-reset}]
+                              [--platform-assertions]
+python3.12 -m unittest: error: --startup-profile external-reset requires Verilator
+..
+----------------------------------------------------------------------
+Ran 23 tests in 0.121s
+
+OK

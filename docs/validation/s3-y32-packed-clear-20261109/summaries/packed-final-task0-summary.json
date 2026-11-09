@@ -1,0 +1,71 @@
+{
+  "status": "DEVELOPMENT_PASS_POLICY_PENDING",
+  "source_report": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/packed-clear-20261109/packed-final-task0/result.json",
+  "source_report_sha256": "bee3f000b8d831f831be6eef910f8eb36ddbf52bdb7140b09cf0f2ab359d46de",
+  "classification": "FINAL_SINGLE_LAYER",
+  "original_layers": [
+    0
+  ],
+  "outputs": 25344,
+  "source_drift": [],
+  "clear_profile": "packed16-mmio",
+  "clear_helper_sha256": "fbd013b9b0c8de9f7c2d6e0c76cc8676aaabf6436b5835f2a8046072d589533d",
+  "payload_cycles": 425540,
+  "physical_clear_cycles": 66802,
+  "payload_plus_clear_cycles": 492342,
+  "gap_to_source_request_cycles": 102,
+  "first_valid_wait_cycles": 1,
+  "clear_work": {
+    "mode_sram": "1",
+    "writes": "8252",
+    "reads": "8",
+    "w": "16384",
+    "x": "64",
+    "legacy_bias": "8",
+    "bias_entries": "0",
+    "physical_w": "16384",
+    "physical_x": "64",
+    "physical_bias": "768",
+    "w_packs": "8192",
+    "x_packs": "32",
+    "sram_clear_commands": "1",
+    "sram_done": "1",
+    "commands": "8260",
+    "responses": "8260",
+    "clear_cycles": "66802",
+    "response_end_cycle": "66802",
+    "gap_to_source_request": "102",
+    "preflight_commands": "6",
+    "preflight_responses": "6",
+    "nice_idle": "1",
+    "fifo_payload_physical_zero": "UNPROVEN",
+    "policy": "REVIEW_PENDING",
+    "clear_transport": "public-pack32"
+  },
+  "ready_activity": {
+    "layer": 0,
+    "requests": 99,
+    "groups": 3168,
+    "ready_edges": 3168,
+    "ready_wait_cycles": 23859,
+    "status_polls": 0,
+    "snapshots": 3168,
+    "pops_retired": 3168,
+    "shared_writes": 25344,
+    "final_response_before_completion": 1
+  },
+  "comparison_basis": {
+    "baseline_payload": 425539,
+    "baseline_clear": 198403,
+    "baseline_payload_plus_clear": 623942,
+    "delta_payload": 1,
+    "delta_clear": -131601,
+    "delta_payload_plus_clear": -131600
+  },
+  "limits": [
+    "Verilator 2-state development evidence only",
+    "150 MHz is TB stimulus, no synthesis/PPA/STA",
+    "clear policy REVIEW_PENDING and FIFO physical zero UNPROVEN preserved",
+    "payload +1 and first VALID wait1 measured without padding"
+  ]
+}

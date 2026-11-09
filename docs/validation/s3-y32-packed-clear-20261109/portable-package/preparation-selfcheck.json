@@ -1,0 +1,31 @@
+{
+  "checks": [
+    "campaigns all use their recorded original_layer for vector roots",
+    "source copies use copy2 with modes and never original inode hardlinks",
+    "helper selected from recipe; packed candidates require171 pinned sources",
+    "explicit --seal and frozen report required; unfinished campaign status rejected",
+    "25 final native case logs/60 pinned source bytes/old638f exact source snapshot retained"
+  ],
+  "final_helper_sha256": "fbd013b9b0c8de9f7c2d6e0c76cc8676aaabf6436b5835f2a8046072d589533d",
+  "final_native_source_count": 60,
+  "no_stage_or_archive": true,
+  "note": "Static preparation only. Final assembly, extraction, hash/source checks and strict relocated comparisons remain pending root freeze.",
+  "required_dependencies": [
+    "summaries/packed_clear_compare.py",
+    "summaries/baseline-campaign-seams.json",
+    "summaries/ready-baseline-sources.json"
+  ],
+  "script_sha256": {
+    "assemble_evidence.py": "9f0933e0cb7d99b9a3db6acea580dcbb6151c2a2ad34fec12acf0196b3779632",
+    "replay_saved_command.py": "6735a22e9ac89d57a2c918c0aea35756bef501b9860ce54eaed42a33eabb3390",
+    "revalidate_comparisons.py": "1a9dcf71351e0d9c558726e38c5a6f43aa0a0085964a27409722cafcae67c4e3",
+    "verify_evidence.py": "6cc53dda7fe20e575bb1dcaec6bf66cbbaf9f75b48b07036f4f8c119a79805f4"
+  },
+  "selected_campaigns": [
+    "baseline-ready-full12",
+    "packed-pilot-task0",
+    "packed-final-task0",
+    "packed-full12"
+  ],
+  "status": "PREPARED_NOT_SEALED"
+}
