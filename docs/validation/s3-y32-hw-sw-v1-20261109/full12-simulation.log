@@ -1,0 +1,88 @@
+{"command": ["/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/simulator/dma_day_soc", "+TESTCASE=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/firmware/dma_day_soc", "+VECTORS=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors", "+TASKS=12", "+DUAL=1", "+WARMUP=1", "+THROTTLE=7", "+FIRST_SOURCE_STALL=0", "+MAX_CYCLES=20000000", "+DUMPWAVE=0"], "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1"}
+BOUNDARY_ENDPOINT real_phase_reset=2 throttle=7 transaction_clock=fabric timing_clock=HF source_preload=existing_TB_contract
+DMA_CLOCK measured_hf_period_fs=6666666 measured_lf_period_fs=30517578126 hf_edges=1201670 lf_edges=263
+DMA_STARTUP external_double_reset=1 held_ns=120.000000 clock_period_fs=6666666
+DMA_PHYSICAL_CLEAR_BEGIN call=1 warmup=1 nonzero_W=0 nonzero_BIAS=0 nonzero_X=0 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=1 warmup=1 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_WARMUP_TASK_PASS layer=0 dual=1 outputs=25344 payload=124134 clear=2052 principal=126186 gap=41 including_gap=126227 firmware_cycles=126252 start_to_done=124137
+DMA_WARMUP_WINDOW layer=0 first_request=1206098 endpoint_request=1206098 first_accept=1206098 last_y_response=1330231 clear_request=1204005 clear_done=1206056 start=1206097 done=1330233
+DMA_WARMUP_COUNTS layer=0 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11474 mmio_writes=6
+DMA_WARMUP_CHANNEL layer=0 wb_cycles=12686 xy_window=111439 endpoint_stall=6577 dma_stall=6577 source_stall=2470 write_stall=4107 accept_interval_sum=124132 accept_intervals=40383 max_accept_interval=99 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_WARMUP_DONE tasks=1 outputs=25344 excluded_principal=1
+DMA_PHYSICAL_CLEAR_BEGIN call=2 warmup=0 nonzero_W=16377 nonzero_BIAS=659 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=2 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=0 dual=1 outputs=25344 payload=124133 clear=2052 principal=126185 gap=41 including_gap=126226 firmware_cycles=126252 start_to_done=124136
+DMA_WINDOW layer=0 first_request=1332366 endpoint_request=1332366 first_accept=1332366 last_y_response=1456498 clear_request=1330273 clear_done=1332324 start=1332365 done=1456500
+DMA_COUNTS layer=0 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=0 wb_cycles=12686 xy_window=111439 endpoint_stall=6576 dma_stall=6576 source_stall=2517 write_stall=4059 accept_interval_sum=124131 accept_intervals=40383 max_accept_interval=99 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=3 warmup=0 nonzero_W=16377 nonzero_BIAS=659 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=3 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=1 dual=1 outputs=25344 payload=124134 clear=2052 principal=126186 gap=41 including_gap=126227 firmware_cycles=126252 start_to_done=124137
+DMA_WINDOW layer=1 first_request=1458634 endpoint_request=1458634 first_accept=1458634 last_y_response=1582767 clear_request=1456541 clear_done=1458592 start=1458633 done=1582769
+DMA_COUNTS layer=1 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=1 wb_cycles=12686 xy_window=111440 endpoint_stall=6528 dma_stall=6528 source_stall=2468 write_stall=4060 accept_interval_sum=124132 accept_intervals=40383 max_accept_interval=100 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=4 warmup=0 nonzero_W=16368 nonzero_BIAS=719 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=4 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=2 dual=1 outputs=25344 payload=124133 clear=2052 principal=126185 gap=41 including_gap=126226 firmware_cycles=126252 start_to_done=124136
+DMA_WINDOW layer=2 first_request=1584904 endpoint_request=1584904 first_accept=1584904 last_y_response=1709036 clear_request=1582811 clear_done=1584862 start=1584903 done=1709038
+DMA_COUNTS layer=2 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=2 wb_cycles=12685 xy_window=111439 endpoint_stall=6576 dma_stall=6576 source_stall=2469 write_stall=4107 accept_interval_sum=124131 accept_intervals=40383 max_accept_interval=99 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=5 warmup=0 nonzero_W=16362 nonzero_BIAS=697 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=5 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=3 dual=1 outputs=25344 payload=124135 clear=2052 principal=126187 gap=41 including_gap=126228 firmware_cycles=126252 start_to_done=124138
+DMA_WINDOW layer=3 first_request=1711172 endpoint_request=1711172 first_accept=1711173 last_y_response=1835306 clear_request=1709079 clear_done=1711130 start=1711171 done=1835308
+DMA_COUNTS layer=3 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=3 wb_cycles=12687 xy_window=111440 endpoint_stall=6529 dma_stall=6529 source_stall=2469 write_stall=4060 accept_interval_sum=124132 accept_intervals=40383 max_accept_interval=100 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=6 warmup=0 nonzero_W=16369 nonzero_BIAS=694 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=6 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=4 dual=1 outputs=25344 payload=124136 clear=2052 principal=126188 gap=41 including_gap=126229 firmware_cycles=126252 start_to_done=124139
+DMA_WINDOW layer=4 first_request=1837440 endpoint_request=1837440 first_accept=1837440 last_y_response=1961575 clear_request=1835347 clear_done=1837398 start=1837439 done=1961577
+DMA_COUNTS layer=4 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=4 wb_cycles=12687 xy_window=111441 endpoint_stall=6578 dma_stall=6578 source_stall=2471 write_stall=4107 accept_interval_sum=124134 accept_intervals=40383 max_accept_interval=99 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=7 warmup=0 nonzero_W=16357 nonzero_BIAS=688 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=7 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=5 dual=1 outputs=25344 payload=124133 clear=2052 principal=126185 gap=41 including_gap=126226 firmware_cycles=126252 start_to_done=124136
+DMA_WINDOW layer=5 first_request=1963709 endpoint_request=1963709 first_accept=1963709 last_y_response=2087841 clear_request=1961616 clear_done=1963667 start=1963708 done=2087843
+DMA_COUNTS layer=5 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=5 wb_cycles=12685 xy_window=111439 endpoint_stall=6576 dma_stall=6576 source_stall=2469 write_stall=4107 accept_interval_sum=124131 accept_intervals=40383 max_accept_interval=99 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=8 warmup=0 nonzero_W=16360 nonzero_BIAS=711 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=8 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=6 dual=1 outputs=25344 payload=124135 clear=2052 principal=126187 gap=41 including_gap=126228 firmware_cycles=126252 start_to_done=124138
+DMA_WINDOW layer=6 first_request=2089977 endpoint_request=2089977 first_accept=2089978 last_y_response=2214111 clear_request=2087884 clear_done=2089935 start=2089976 done=2214113
+DMA_COUNTS layer=6 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=6 wb_cycles=12687 xy_window=111440 endpoint_stall=6529 dma_stall=6529 source_stall=2469 write_stall=4060 accept_interval_sum=124132 accept_intervals=40383 max_accept_interval=100 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=9 warmup=0 nonzero_W=16360 nonzero_BIAS=678 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=9 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=7 dual=1 outputs=25344 payload=124136 clear=2052 principal=126188 gap=41 including_gap=126229 firmware_cycles=126252 start_to_done=124139
+DMA_WINDOW layer=7 first_request=2216245 endpoint_request=2216245 first_accept=2216245 last_y_response=2340380 clear_request=2214152 clear_done=2216203 start=2216244 done=2340382
+DMA_COUNTS layer=7 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=7 wb_cycles=12687 xy_window=111441 endpoint_stall=6578 dma_stall=6578 source_stall=2471 write_stall=4107 accept_interval_sum=124134 accept_intervals=40383 max_accept_interval=99 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=10 warmup=0 nonzero_W=16352 nonzero_BIAS=683 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=10 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=8 dual=1 outputs=25344 payload=124133 clear=2052 principal=126185 gap=41 including_gap=126226 firmware_cycles=126252 start_to_done=124136
+DMA_WINDOW layer=8 first_request=2342514 endpoint_request=2342514 first_accept=2342514 last_y_response=2466646 clear_request=2340421 clear_done=2342472 start=2342513 done=2466648
+DMA_COUNTS layer=8 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=8 wb_cycles=12685 xy_window=111439 endpoint_stall=6576 dma_stall=6576 source_stall=2469 write_stall=4107 accept_interval_sum=124131 accept_intervals=40383 max_accept_interval=99 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=11 warmup=0 nonzero_W=16358 nonzero_BIAS=697 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=11 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=9 dual=1 outputs=25344 payload=124135 clear=2052 principal=126187 gap=41 including_gap=126228 firmware_cycles=126252 start_to_done=124138
+DMA_WINDOW layer=9 first_request=2468782 endpoint_request=2468782 first_accept=2468783 last_y_response=2592916 clear_request=2466689 clear_done=2468740 start=2468781 done=2592918
+DMA_COUNTS layer=9 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=9 wb_cycles=12687 xy_window=111440 endpoint_stall=6529 dma_stall=6529 source_stall=2469 write_stall=4060 accept_interval_sum=124132 accept_intervals=40383 max_accept_interval=100 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=12 warmup=0 nonzero_W=16360 nonzero_BIAS=721 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=12 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=10 dual=1 outputs=25344 payload=124136 clear=2052 principal=126188 gap=41 including_gap=126229 firmware_cycles=126252 start_to_done=124139
+DMA_WINDOW layer=10 first_request=2595050 endpoint_request=2595050 first_accept=2595050 last_y_response=2719185 clear_request=2592957 clear_done=2595008 start=2595049 done=2719187
+DMA_COUNTS layer=10 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=10 wb_cycles=12687 xy_window=111441 endpoint_stall=6578 dma_stall=6578 source_stall=2471 write_stall=4107 accept_interval_sum=124134 accept_intervals=40383 max_accept_interval=99 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_PHYSICAL_CLEAR_BEGIN call=13 warmup=0 nonzero_W=16373 nonzero_BIAS=707 nonzero_X=256 observed_last_public_writes=1
+DMA_PHYSICAL_CLEAR_PASS call=13 warmup=0 W=16384 BIAS=768 X=256 total16bit_writes=17408 physical_cycles=2051 X_REGS=256 ACC=16 ENGINE_RESULT=16 FIFO=32 BIAS_CACHE=16 DMA_SNAPSHOT=1 all_addresses=1 all_payload_zero=1
+DMA_TASK_PASS layer=11 dual=1 outputs=25344 payload=124133 clear=2052 principal=126185 gap=41 including_gap=126226 firmware_cycles=126252 start_to_done=124136
+DMA_WINDOW layer=11 first_request=2721319 endpoint_request=2721319 first_accept=2721319 last_y_response=2845451 clear_request=2719226 clear_done=2721277 start=2721318 done=2845453
+DMA_COUNTS layer=11 reads=15040 w_reads=8192 bias_reads=512 x_reads=6336 writes=25344 write_responses=25344 requests=40384 responses=40384 pops=3168 macs=102400 mmio_reads=11473 mmio_writes=6
+DMA_CHANNEL layer=11 wb_cycles=12685 xy_window=111439 endpoint_stall=6576 dma_stall=6576 source_stall=2469 write_stall=4107 accept_interval_sum=124131 accept_intervals=40383 max_accept_interval=99 response_latency_sum=40384 max_response_latency=1 max_outstanding=1
+DMA_SOC_PASS tasks=12 dual=1 outputs=304128 writes=304128
+- /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-task0-namespaced-r1/source/tests/tb_dma_day_soc.sv:383: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.032 2025-01-01
+- Verilator: $finish at 27ms; walltime 94.398 s; speed 285.888 us/s
+- Verilator: cpu 94.377 s on 1 threads; alloced 107 MB

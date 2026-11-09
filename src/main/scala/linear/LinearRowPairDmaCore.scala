@@ -69,7 +69,7 @@ class LinearRowPairDmaCore extends Module {
   val tags = Reg(Vec(2, UInt(5.W)))
   val clearing = RegInit(false.B); val clearIndex = RegInit(0.U(12.W))
   val biasCleared = RegInit(false.B); val clearDone = RegInit(false.B)
-  val bias = withReset(reset.asBool || io.abort) { Module(new BiasSramPrefetch) }
+  val bias = withReset(reset.asBool || io.abort) { Module(new DmaBiasSramPrefetch) }
   io.clearReady := !active && !running && count === 0.U && !clearing &&
     bias.io.clearReady && !io.abort
   val clearFire = io.clearValid && io.clearReady

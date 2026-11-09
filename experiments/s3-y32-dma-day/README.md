@@ -1,5 +1,11 @@
 # Independent matrix DMA candidate
 
+The published integration v1 is documented in
+[the hardware/software handoff](../../docs/s3-y32-hw-sw-handoff.md). Its checked-in
+DMA-only `DmaBiasSramPrefetch` keeps the legacy `BiasSramPrefetch` interface
+intact. Use the handoff's sealed fabric-clock testbench to reproduce the shared
+clock/reset repair; historical CPU test commands below remain prior evidence.
+
 Build flag `XU_MATRIX_DMA` selects `xu_matrix_dma` in `e203_subsys_perips` and
 `xu_dma_shared_arb` at the external shared-memory port. The candidate replaces
 the historical accelerator instance, so it retains exactly sixteen weight
@@ -62,7 +68,7 @@ is the existing uncached external region; no cache-coherency bypass is added.
 
 ## Evidence and reproduction
 
-- [Single-day scope and execution record](../../../docs/s3-y32-dma-day-plan.md).
+- [Single-day scope and execution record](../../docs/s3-y32-dma-day-plan.md).
 - `fabric/run_probe.py`: real ingress bandwidth, contention, response and reset.
 - `core/README.md`: generation, exact numerical tests, dirty physical clear,
   ping-pong, backpressure and abort tests.

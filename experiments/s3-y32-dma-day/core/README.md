@@ -11,6 +11,12 @@ Generate from the repository root:
 scala-cli run project.scala src/main/scala experiments/s3-y32-dma-day/core/GenerateDmaCore.scala --server=false --main-class GenerateDmaCore -- generated/LinearRowPairDmaCore
 ```
 
+Integration v1 generates `DmaBiasSramPrefetch.sv` for the DMA-only live ports.
+It preserves the general `BiasSramPrefetch.sv` used by the legacy interface;
+do not replace that general module with an older DMA-specialized same-name file.
+All eleven regenerated SV files were checked byte-for-byte against the published
+production RTL; the receipt is in the handoff evidence directory.
+
 The eleven generated SV files retain assertions. Exactly two eight-lane
 48-bit engines share sixteen weight SRAM macros and one bias SRAM macro. No
 weight/bias capacity was added. Four register-based 64x16 X buffers form two

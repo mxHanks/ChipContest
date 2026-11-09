@@ -1,0 +1,76 @@
+{
+  "status": "PASS_ALL_11_REGENERATED_SV_BYTE_IDENTICAL",
+  "files": [
+    {
+      "file": "DmaBiasSramPrefetch.sv",
+      "generated_sha256": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+      "committed_candidate_sha256": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed"
+    },
+    {
+      "file": "DmaWeightBankArray.sv",
+      "generated_sha256": "3fcd0cd40b24d71e2de38560ad23e1b0fc750f174fa0444ad4fdb7306070a003",
+      "committed_candidate_sha256": "3fcd0cd40b24d71e2de38560ad23e1b0fc750f174fa0444ad4fdb7306070a003"
+    },
+    {
+      "file": "DotProductEngine.sv",
+      "generated_sha256": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+      "committed_candidate_sha256": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45"
+    },
+    {
+      "file": "LinearRowPairDmaCore.sv",
+      "generated_sha256": "7299a95d127f9bb33141baf4d8872c9070662b94e8299e4d47da38d6dda81da1",
+      "committed_candidate_sha256": "7299a95d127f9bb33141baf4d8872c9070662b94e8299e4d47da38d6dda81da1"
+    },
+    {
+      "file": "MacController.sv",
+      "generated_sha256": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+      "committed_candidate_sha256": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7"
+    },
+    {
+      "file": "MacPE.sv",
+      "generated_sha256": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+      "committed_candidate_sha256": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70"
+    },
+    {
+      "file": "MacPEArray.sv",
+      "generated_sha256": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+      "committed_candidate_sha256": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55"
+    },
+    {
+      "file": "Sram1024x16.sv",
+      "generated_sha256": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+      "committed_candidate_sha256": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc"
+    },
+    {
+      "file": "WeightBank.sv",
+      "generated_sha256": "1cd4e8ba0f2f19f282134b0e8c1739e4e1a84cfd5bee9a0c158e35f8f2885d35",
+      "committed_candidate_sha256": "1cd4e8ba0f2f19f282134b0e8c1739e4e1a84cfd5bee9a0c158e35f8f2885d35"
+    },
+    {
+      "file": "XRowBuffer.sv",
+      "generated_sha256": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+      "committed_candidate_sha256": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514"
+    },
+    {
+      "file": "mem_1024x16.sv",
+      "generated_sha256": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+      "committed_candidate_sha256": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4"
+    }
+  ],
+  "scala_files": {
+    "src/main/scala/linear/LinearRowPairDmaCore.scala": "e04823aeebc5517ae7690cc01af8863ee87567a4837501000a4a837eb781a6a0",
+    "src/main/scala/linear/DmaBiasSramPrefetch.scala": "ed5c79fb9dfbefe45b4e125aad076eefab8c517713de85ccb2ece7bb7bd515c8"
+  },
+  "command": [
+    "scala-cli",
+    "run",
+    "project.scala",
+    "src/main/scala",
+    "experiments/s3-y32-dma-day/core/GenerateDmaCore.scala",
+    "--server=false",
+    "--main-class",
+    "GenerateDmaCore",
+    "--",
+    "NEW_OUTPUT_DIRECTORY"
+  ]
+}

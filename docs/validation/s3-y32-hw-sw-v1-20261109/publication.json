@@ -1,0 +1,35 @@
+{
+  "schema": "s3-hw-sw-github-publication-v1",
+  "release_branch": "codex/s3-y32-hw-sw-v1",
+  "parent_repository": "https://github.com/mxHanks/ChipContest",
+  "child_repository": "https://github.com/mxHanks/e203_hbirdv2",
+  "parent_base": "1800a0767f1df5f0af483d546b24edcf84a7b857",
+  "child_commit": "45e61b6101ad6f0aaa7583098294ffb1550f1f2d",
+  "source_files": 170,
+  "production_files": 158,
+  "archive": {
+    "file": "frozen-run.tar.gz",
+    "bytes": 4403136,
+    "sha256": "c93a484178553e1f65a4af9bc0c4728bb6e3ab486b01b8b96757cefc9384bc07",
+    "verified_files": 257
+  },
+  "baseline_archive": {
+    "file": "baseline-frozen-run.tar.gz",
+    "sha256": "e88a2fad53f32d6bf04f566746700f2d89d970c30ef6ab53f25485cec25780c5",
+    "scope": "historical original 168-file candidate before DMA bias namespace isolation; historical no-push fields describe packing time"
+  },
+  "functional_status": "FULL12_PASS",
+  "outputs": 304128,
+  "principal_cycles": 1514236,
+  "including_gap_cycles": 1514728,
+  "task_per_second_at_assumed_150mhz": 1188.7182711281464,
+  "firmware_elf_sha256": "b256b70b8ec5bad899a84dfb560909e68434b24ac7ef5c2a03515b251d4bfdf1",
+  "firmware_image_sha256": "7f20af91d64efad7267b1badd5aad3473d070e3f151dff9268242c8d89840370",
+  "legacy_fallback": "PASS_25344_OUTPUTS_422768_PAYLOAD_66802_CLEAR_102_GAP",
+  "generator": "PASS_11_SV_BYTE_IDENTICAL",
+  "area_status": "NEW_CANDIDATE_UNMEASURED",
+  "sta_status": "NOT_CLOSED_NEW_CANDIDATE_UNMEASURED",
+  "formal_contest_qualification": "UNVERIFIED",
+  "failure_record": "Initial child integration caused five missing legacy bias ports; fixed by independent module namespace before parent publication. Original failed build and successful fallback retained.",
+  "policy": "new branches only; no force push, no main merge, no PR"
+}

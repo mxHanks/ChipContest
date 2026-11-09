@@ -1,0 +1,34 @@
+{
+  "schema": "s3-publication-dma-bias-namespace-proof-v1",
+  "status": "PASS_BYTE_EXACT_INVERSE_RENAME_NOT_NEW_CPU_VALIDATION",
+  "reason": "Isolate DMA-only bias interface while preserving default legacy BiasSramPrefetch interface",
+  "measured_source": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/hw-sw-integration-v1/source/rtl/perips",
+  "legacy_commit": "79c8af1cd92589ddeb3f49edb5b9e4454fcf8efa",
+  "checks": {
+    "dma_bias_normalized_equals_measured": true,
+    "rowpair_normalized_equals_measured": true,
+    "legacy_bias_equals_79c8af1": true
+  },
+  "files": {
+    "DmaBiasSramPrefetch.sv": {
+      "sha256": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+      "measured_original_sha256": "9cc633caaac00015177ab022f18507108615589321d8b37c0a457e92f5b33749",
+      "only_replacement": {
+        "from": "module BiasSramPrefetch(",
+        "to": "module DmaBiasSramPrefetch("
+      }
+    },
+    "LinearRowPairDmaCore.sv": {
+      "sha256": "7299a95d127f9bb33141baf4d8872c9070662b94e8299e4d47da38d6dda81da1",
+      "measured_original_sha256": "1abfa51ee7d2a00412a1d9e8a9246f3a58c5d5844ffdbcc88dd464c95d5b388e",
+      "only_replacement": {
+        "from": "  BiasSramPrefetch bias (",
+        "to": "  DmaBiasSramPrefetch bias ("
+      }
+    },
+    "BiasSramPrefetch.sv": {
+      "sha256": "93e20943133e78dbc73b715b85c9cf4a2b04ecbee0da9f4ce64fa2a6a1ec9da9",
+      "equals_legacy_git_object": true
+    }
+  }
+}

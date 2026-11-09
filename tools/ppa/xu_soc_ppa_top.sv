@@ -72,6 +72,7 @@ module xu_soc_ppa_top (
 
 );
 
+  wire shared_mem_clk, shared_mem_rst_n;
   wire  ext_sysmem_cmd_valid;
   wire  ext_sysmem_cmd_ready;
   wire [31:0] ext_sysmem_cmd_addr;
@@ -84,6 +85,8 @@ module xu_soc_ppa_top (
   wire [31:0] ext_sysmem_rsp_rdata;
 
   e203_soc_top #(.EXTERNAL_SYSMEM(1)) u_soc (
+    .shared_mem_clk(shared_mem_clk),
+    .shared_mem_rst_n(shared_mem_rst_n),
     .hfextclk(hfextclk),
     .hfxoscen(hfxoscen),
     .lfextclk(lfextclk),
@@ -134,7 +137,7 @@ module xu_soc_ppa_top (
   );
 
   xu_shared_icb_sram u_shared (
-    .clk(hfextclk), .rst_n(io_pads_aon_erst_n_i_ival),
+    .clk(shared_mem_clk), .rst_n(shared_mem_rst_n),
     .cmd_valid(ext_sysmem_cmd_valid),
     .cmd_ready(ext_sysmem_cmd_ready),
     .cmd_addr(ext_sysmem_cmd_addr),
