@@ -1,0 +1,698 @@
+{
+  "vector_scope": {
+    "corner": "synthetic extreme signed16/40 domain, positive/negative ties; vector_mode=0",
+    "task0": "published speech task0 x/w/bias with 25344 y32.mem plus independent64bit MAC oracle; vector_mode=1"
+  },
+  "scope": "4-state Icarus module RTL only, real generated MAC, checked synthetic LSU sink; no CPU, MMIO, clear-window, area, STA or independent DMA claim",
+  "baseline_parent": "e984bad936855debfc5fa01f04bcbc6252d59ecc",
+  "baseline_e203": "dba1b5f82395b762f126387a1840e6a843e3a01a",
+  "source_before": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v": "dc7690d5d8ead50e84e7bc1d378c0a11ebf8f2db37bca23d1a43dfe751f2901a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/tb_nice_pair_errors.sv": "84cb9563a2cd5f92a8c83878051d0c894fbc399faa3baced5a303b332078c756",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/tb_rowpair_nice_real.sv": "7be37249302cb5d63777cdc99b6597ff33a73c1ed1916d0819f6cae1cc99a209",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/rowpair_direct_bridge.v": "8b4e12891c8ef7ec7033a3ee2089845277b40e772c0bf6ebc83fe885357bfe83",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/run_probe.py": "66a55bb06284f764588d72040a2eea21b2773f2b58a2af8fd1f9a3947bfc4a80",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/BiasSramPrefetch.sv": "9cc633caaac00015177ab022f18507108615589321d8b37c0a457e92f5b33749",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/LinearRowPairPrototype.sv": "a6abaf295e8ccbbef77106f3cca3dd5a960c21f0a50e2aed1a36a9a983767b9f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/WeightBank.sv": "1cd4e8ba0f2f19f282134b0e8c1739e4e1a84cfd5bee9a0c158e35f8f2885d35",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00/x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00/w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00/bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00/y32.mem": "1656994e4ef0daf4de8d5c814c890bc7a143925629ec56dff32ddfa5a1b49c95",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_nice_ready_errors.sv": "1fd95c13f0309bf4f45687f3f6ecef83357f9886171b21c5a27c42b6717b8036",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_nice_ready_disabled.sv": "83a31108b7306a4efb960e69c8d90607bcc5f31358c37f164d54f8a7b6ba7a92",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_nice_direct_errors.sv": "891a56ddbe341483cb19c8d732361fed586e6fba3c67e203dced6b60f445cb9b",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_ready_wrapper_disabled.sv": "206323f09605a28694fb4fe418e3db276f8f1c718e2920918a0d4a73cef9c3b7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_xu_nice_ready_wrapper.sv": "636267cb8bc702f973c5e47563666bd7478afb73d0093243c5b3252162ca2d17",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv": "93e20943133e78dbc73b715b85c9cf4a2b04ecbee0da9f4ce64fa2a6a1ec9da9",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv": "7d3c0f9acb6adc19c65c35360f9595fd625a68764560322c1fd3900cb650f18a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv": "1cd4e8ba0f2f19f282134b0e8c1739e4e1a84cfd5bee9a0c158e35f8f2885d35",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "ed32808d925cd315a6ef421186105ead559fe736e09c6b70eeeb73a9ec2ef55b",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core/e203_defines.v": "50348b28a961b87eff4040cecc44b35e163acc28042eb6fa53bd1c2e69682109",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core/config.v": "235fc827eb88290dab3e4d6ecaf9cd22aa897ac8f5da9abf562a308ded191d9c"
+  },
+  "source_after": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v": "dc7690d5d8ead50e84e7bc1d378c0a11ebf8f2db37bca23d1a43dfe751f2901a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/tb_nice_pair_errors.sv": "84cb9563a2cd5f92a8c83878051d0c894fbc399faa3baced5a303b332078c756",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/tb_rowpair_nice_real.sv": "7be37249302cb5d63777cdc99b6597ff33a73c1ed1916d0819f6cae1cc99a209",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/rowpair_direct_bridge.v": "8b4e12891c8ef7ec7033a3ee2089845277b40e772c0bf6ebc83fe885357bfe83",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/run_probe.py": "66a55bb06284f764588d72040a2eea21b2773f2b58a2af8fd1f9a3947bfc4a80",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/BiasSramPrefetch.sv": "9cc633caaac00015177ab022f18507108615589321d8b37c0a457e92f5b33749",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/LinearRowPairPrototype.sv": "a6abaf295e8ccbbef77106f3cca3dd5a960c21f0a50e2aed1a36a9a983767b9f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/WeightBank.sv": "1cd4e8ba0f2f19f282134b0e8c1739e4e1a84cfd5bee9a0c158e35f8f2885d35",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00/x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00/w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00/bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00/y32.mem": "1656994e4ef0daf4de8d5c814c890bc7a143925629ec56dff32ddfa5a1b49c95",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_nice_ready_errors.sv": "1fd95c13f0309bf4f45687f3f6ecef83357f9886171b21c5a27c42b6717b8036",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_nice_ready_disabled.sv": "83a31108b7306a4efb960e69c8d90607bcc5f31358c37f164d54f8a7b6ba7a92",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_nice_direct_errors.sv": "891a56ddbe341483cb19c8d732361fed586e6fba3c67e203dced6b60f445cb9b",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_ready_wrapper_disabled.sv": "206323f09605a28694fb4fe418e3db276f8f1c718e2920918a0d4a73cef9c3b7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_xu_nice_ready_wrapper.sv": "636267cb8bc702f973c5e47563666bd7478afb73d0093243c5b3252162ca2d17",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv": "93e20943133e78dbc73b715b85c9cf4a2b04ecbee0da9f4ce64fa2a6a1ec9da9",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv": "671ba86e05f763559db550f04134d33b2c04beefcb51e5833488fc19fbd6ad28",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv": "7d3c0f9acb6adc19c65c35360f9595fd625a68764560322c1fd3900cb650f18a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv": "66f43571a8d5e6df6ecbde62f0eb210c29dfcb035f83969c1afc788eda7276e7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv": "81fb308bdae391fdffdb7c28a4560a63fceb0074904cff87de9b44658827dc00",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv": "1cd4e8ba0f2f19f282134b0e8c1739e4e1a84cfd5bee9a0c158e35f8f2885d35",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v": "ed32808d925cd315a6ef421186105ead559fe736e09c6b70eeeb73a9ec2ef55b",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core/e203_defines.v": "50348b28a961b87eff4040cecc44b35e163acc28042eb6fa53bd1c2e69682109",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core/config.v": "235fc827eb88290dab3e4d6ecaf9cd22aa897ac8f5da9abf562a308ded191d9c"
+  },
+  "source_drift": [],
+  "runs": [
+    {
+      "name": "disabled",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/disabled.vvp"
+      ],
+      "returncode": 0,
+      "seconds": 0.0188143253326416,
+      "marker": "NICE_PAIR_DISABLED_PASS no_side_effect=1",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "disabled-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_nice_pair_errors",
+        "-Ptb_nice_pair_errors.PAIR_EN=0",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/disabled.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/tb_nice_pair_errors.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v"
+      ],
+      "returncode": 0,
+      "seconds": 0.025589466094970703,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "legacy-pop-race",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_xu_nice_ready_wrapper.vvp",
+        "+POP_RACE"
+      ],
+      "returncode": 0,
+      "seconds": 1.2696115970611572,
+      "marker": "READY_POP_RACE_PASS",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "legacy-reset-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_xu_nice_ready_wrapper.vvp",
+        "+RESET_PHASE=1"
+      ],
+      "returncode": 0,
+      "seconds": 1.2691092491149902,
+      "marker": "DIRECT_RESET_PASS phase=1",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "legacy-reset-2",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_xu_nice_ready_wrapper.vvp",
+        "+RESET_PHASE=2"
+      ],
+      "returncode": 0,
+      "seconds": 1.2503843307495117,
+      "marker": "DIRECT_RESET_PASS phase=2",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "legacy-reset-3",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_xu_nice_ready_wrapper.vvp",
+        "+RESET_PHASE=3"
+      ],
+      "returncode": 0,
+      "seconds": 1.2834618091583252,
+      "marker": "DIRECT_RESET_PASS phase=3",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_rowpair_nice_real",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/tb_rowpair_nice_real.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/rowpair_direct_bridge.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/BiasSramPrefetch.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/DotProductEngine.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/LinearRowPairPrototype.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/MacController.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/MacPE.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/MacPEArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/Sram1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/WeightBank.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/WeightBankArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/XRowBuffer.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation/generated/LinearRowPairPrototype/mem_1024x16.sv"
+      ],
+      "returncode": 0,
+      "seconds": 0.04471611976623535,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-error-15",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+FAIL_WRITE=15"
+      ],
+      "returncode": 0,
+      "seconds": 0.7025899887084961,
+      "marker": "ROWPAIR_NICE_REAL_ERROR_PASS error_index=15 writes=16 responses=16",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-error-511",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+FAIL_WRITE=511"
+      ],
+      "returncode": 0,
+      "seconds": 0.8554706573486328,
+      "marker": "ROWPAIR_NICE_REAL_ERROR_PASS error_index=511 writes=512 responses=512",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-fast-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=0",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=0"
+      ],
+      "returncode": 0,
+      "seconds": 14.413615465164185,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-fast-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=1",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=0"
+      ],
+      "returncode": 0,
+      "seconds": 11.194108009338379,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-mixed-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=0",
+        "+CMD_PERIOD=3",
+        "+WRITE_LATENCY=2"
+      ],
+      "returncode": 0,
+      "seconds": 14.38154911994934,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-mixed-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=1",
+        "+CMD_PERIOD=3",
+        "+WRITE_LATENCY=2"
+      ],
+      "returncode": 0,
+      "seconds": 14.048354387283325,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-service60-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=0",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=3"
+      ],
+      "returncode": 0,
+      "seconds": 14.41764521598816,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-service60-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=1",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=3"
+      ],
+      "returncode": 0,
+      "seconds": 12.223544836044312,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-service80-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=0",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=5"
+      ],
+      "returncode": 0,
+      "seconds": 14.193929195404053,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-service80-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=1",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=5"
+      ],
+      "returncode": 0,
+      "seconds": 13.402219772338867,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "task0-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=0",
+        "+VECTOR_DIR=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00"
+      ],
+      "returncode": 0,
+      "seconds": 23.884067058563232,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "task0-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/real.vvp",
+        "+MODE=1",
+        "+VECTOR_DIR=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/bias-demand-20261109/full12/task-00/vectors/layer_00"
+      ],
+      "returncode": 0,
+      "seconds": 21.085857152938843,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_nice_direct_errors",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_nice_direct_errors.vvp"
+      ],
+      "returncode": 0,
+      "seconds": 0.018071889877319336,
+      "marker": "NICE_DIRECT_ERRORS_PASS cases=19",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_nice_direct_errors-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_nice_direct_errors",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_nice_direct_errors.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_nice_direct_errors.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v"
+      ],
+      "returncode": 0,
+      "seconds": 0.02042388916015625,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_nice_ready_disabled",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_nice_ready_disabled.vvp"
+      ],
+      "returncode": 0,
+      "seconds": 0.014607429504394531,
+      "marker": "NICE_READY8_DISABLED_PASS",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_nice_ready_disabled-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_nice_ready_disabled",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_nice_ready_disabled.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_nice_ready_disabled.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v"
+      ],
+      "returncode": 0,
+      "seconds": 0.021686553955078125,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_nice_ready_errors",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_nice_ready_errors.vvp"
+      ],
+      "returncode": 0,
+      "seconds": 4.308559894561768,
+      "marker": "NICE_READY8_PASS cases=418",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_nice_ready_errors-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_nice_ready_errors",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_nice_ready_errors.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_nice_ready_errors.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v"
+      ],
+      "returncode": 0,
+      "seconds": 0.024257659912109375,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_ready_wrapper_disabled",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_ready_wrapper_disabled.vvp"
+      ],
+      "returncode": 0,
+      "seconds": 0.035808563232421875,
+      "marker": "READY_WRAPPER_DISABLED_PASS",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_ready_wrapper_disabled-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_ready_wrapper_disabled",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_ready_wrapper_disabled.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_ready_wrapper_disabled.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v"
+      ],
+      "returncode": 0,
+      "seconds": 0.05053448677062988,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_xu_nice_ready_wrapper",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_xu_nice_ready_wrapper.vvp"
+      ],
+      "returncode": 0,
+      "seconds": 1.494692087173462,
+      "marker": "READY_WRAPPER_PASS real_groups=32 real_y32_lanes=256",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "tb_xu_nice_ready_wrapper-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_xu_nice_ready_wrapper",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/tb_xu_nice_ready_wrapper.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tests/e203/tb_xu_nice_ready_wrapper.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasSramPrefetch.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/BiasBankCache.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearAutoGroupCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearCachedCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearComputeCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DotProductEngine.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPEArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacPE.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/XRowBuffer.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBankArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/WeightBank.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/accel_icb_slave.v"
+      ],
+      "returncode": 0,
+      "seconds": 0.048828125,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "unit",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/unit.vvp"
+      ],
+      "returncode": 0,
+      "seconds": 2.367779016494751,
+      "marker": "NICE_PAIR_PASS cases=613 counts=64 write_error_positions=512",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "unit-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_nice_pair_errors",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay/unit.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/tb_nice_pair_errors.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v"
+      ],
+      "returncode": 0,
+      "seconds": 0.024725914001464844,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    }
+  ],
+  "matrix": [
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 221760,
+      "cmd_period": 1,
+      "write_latency": 0,
+      "vector_mode": 0,
+      "name": "real-fast-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 119840,
+      "cmd_period": 1,
+      "write_latency": 0,
+      "vector_mode": 0,
+      "name": "real-fast-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 0,
+      "name": "real-mixed-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195130,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 0,
+      "name": "real-mixed-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 1,
+      "write_latency": 3,
+      "vector_mode": 0,
+      "name": "real-service60-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195128,
+      "cmd_period": 1,
+      "write_latency": 3,
+      "vector_mode": 0,
+      "name": "real-service60-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 250272,
+      "cmd_period": 1,
+      "write_latency": 5,
+      "vector_mode": 0,
+      "name": "real-service80-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 245568,
+      "cmd_period": 1,
+      "write_latency": 5,
+      "vector_mode": 0,
+      "name": "real-service80-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 1,
+      "name": "task0-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195130,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 1,
+      "name": "task0-1"
+    }
+  ],
+  "pass": true
+}

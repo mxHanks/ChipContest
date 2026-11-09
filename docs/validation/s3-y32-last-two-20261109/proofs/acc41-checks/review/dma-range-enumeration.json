@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "method": "Independent exact integer reconstruction of RTL acceptance expressions versus row/group oracle; not an RTL simulation. Positive/negative boundary row coverage -2..100, all 32 groups/counts, second flag0/1.",
+  "cases": 210944,
+  "accepted": 104016,
+  "rejected": 106928,
+  "y_first": "0xa0020000",
+  "y_end_exclusive": "0xa0038c00",
+  "address_relation": "rs1=Y_FIRST+row*1024+group*32",
+  "row_group_oracle": "0<=row<99; group+count<=32; second implies row+1<99",
+  "rtl_source_sha256": "dc7690d5d8ead50e84e7bc1d378c0a11ebf8f2db37bca23d1a43dfe751f2901a",
+  "overflow": "RTL uses unsigned33 request_end. Maximum rs1(32bit)+1024+1024 fits33, so no silent32bit wrap can pass."
+}

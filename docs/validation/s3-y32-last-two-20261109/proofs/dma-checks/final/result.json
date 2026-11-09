@@ -1,0 +1,413 @@
+{
+  "scope": "4-state Icarus module RTL only, real generated MAC, checked synthetic LSU sink; no CPU, MMIO, clear-window, area, STA or independent DMA claim",
+  "baseline_parent": "e984bad936855debfc5fa01f04bcbc6252d59ecc",
+  "baseline_e203": "dba1b5f82395b762f126387a1840e6a843e3a01a",
+  "source_before": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v": "dc7690d5d8ead50e84e7bc1d378c0a11ebf8f2db37bca23d1a43dfe751f2901a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/tb_nice_pair_errors.sv": "84cb9563a2cd5f92a8c83878051d0c894fbc399faa3baced5a303b332078c756",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/tb_rowpair_nice_real.sv": "7be37249302cb5d63777cdc99b6597ff33a73c1ed1916d0819f6cae1cc99a209",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/rowpair_direct_bridge.v": "8b4e12891c8ef7ec7033a3ee2089845277b40e772c0bf6ebc83fe885357bfe83",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tools/experiments/run_rowpair_transfer_probe.py": "e9cd4672cc0ccd5e899a6fbfe716ce32b618f9fc391c8e42f7a1527a3a8d0a7e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/BiasSramPrefetch.sv": "9cc633caaac00015177ab022f18507108615589321d8b37c0a457e92f5b33749",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/LinearRowPairPrototype.sv": "a6abaf295e8ccbbef77106f3cca3dd5a960c21f0a50e2aed1a36a9a983767b9f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/WeightBank.sv": "1cd4e8ba0f2f19f282134b0e8c1739e4e1a84cfd5bee9a0c158e35f8f2885d35",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors/x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors/w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors/bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors/y32.mem": "1656994e4ef0daf4de8d5c814c890bc7a143925629ec56dff32ddfa5a1b49c95"
+  },
+  "source_after": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v": "dc7690d5d8ead50e84e7bc1d378c0a11ebf8f2db37bca23d1a43dfe751f2901a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/tb_nice_pair_errors.sv": "84cb9563a2cd5f92a8c83878051d0c894fbc399faa3baced5a303b332078c756",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/tb_rowpair_nice_real.sv": "7be37249302cb5d63777cdc99b6597ff33a73c1ed1916d0819f6cae1cc99a209",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/rowpair_direct_bridge.v": "8b4e12891c8ef7ec7033a3ee2089845277b40e772c0bf6ebc83fe885357bfe83",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tools/experiments/run_rowpair_transfer_probe.py": "e9cd4672cc0ccd5e899a6fbfe716ce32b618f9fc391c8e42f7a1527a3a8d0a7e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/BiasSramPrefetch.sv": "9cc633caaac00015177ab022f18507108615589321d8b37c0a457e92f5b33749",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/LinearRowPairPrototype.sv": "a6abaf295e8ccbbef77106f3cca3dd5a960c21f0a50e2aed1a36a9a983767b9f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/WeightBank.sv": "1cd4e8ba0f2f19f282134b0e8c1739e4e1a84cfd5bee9a0c158e35f8f2885d35",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/WeightBankArray.sv": "4e48d646fb6ff98193593682f4521408ac5a5faeeb227a8c25ada31bcb59cb57",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/XRowBuffer.sv": "d7ae54ff0d0182ff43418e2a88edf68ddd45fb9c63b41388b542f95e09bb0514",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors/x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors/w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors/bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors/y32.mem": "1656994e4ef0daf4de8d5c814c890bc7a143925629ec56dff32ddfa5a1b49c95"
+  },
+  "source_drift": [],
+  "runs": [
+    {
+      "name": "disabled",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/disabled.vvp"
+      ],
+      "returncode": 0,
+      "seconds": 0.007575511932373047,
+      "marker": "NICE_PAIR_DISABLED_PASS no_side_effect=1",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "disabled-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_nice_pair_errors",
+        "-Ptb_nice_pair_errors.PAIR_EN=0",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/disabled.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/tb_nice_pair_errors.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v"
+      ],
+      "returncode": 0,
+      "seconds": 0.02176976203918457,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_rowpair_nice_real",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/tb_rowpair_nice_real.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/rowpair_direct_bridge.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/BiasSramPrefetch.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/DotProductEngine.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/LinearRowPairPrototype.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/MacController.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/MacPE.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/MacPEArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/Sram1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/WeightBank.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/WeightBankArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/XRowBuffer.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/generated/LinearRowPairPrototype/mem_1024x16.sv"
+      ],
+      "returncode": 0,
+      "seconds": 0.03925824165344238,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-error-15",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+FAIL_WRITE=15"
+      ],
+      "returncode": 0,
+      "seconds": 0.6949431896209717,
+      "marker": "ROWPAIR_NICE_REAL_ERROR_PASS error_index=15 writes=16 responses=16",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-error-511",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+FAIL_WRITE=511"
+      ],
+      "returncode": 0,
+      "seconds": 0.9115264415740967,
+      "marker": "ROWPAIR_NICE_REAL_ERROR_PASS error_index=511 writes=512 responses=512",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-fast-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=0",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=0"
+      ],
+      "returncode": 0,
+      "seconds": 16.04500651359558,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-fast-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=1",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=0"
+      ],
+      "returncode": 0,
+      "seconds": 12.465177297592163,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-mixed-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=0",
+        "+CMD_PERIOD=3",
+        "+WRITE_LATENCY=2"
+      ],
+      "returncode": 0,
+      "seconds": 13.867831945419312,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-mixed-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=1",
+        "+CMD_PERIOD=3",
+        "+WRITE_LATENCY=2"
+      ],
+      "returncode": 0,
+      "seconds": 12.53445839881897,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-service60-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=0",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=3"
+      ],
+      "returncode": 0,
+      "seconds": 15.264461517333984,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-service60-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=1",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=3"
+      ],
+      "returncode": 0,
+      "seconds": 14.427297353744507,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-service80-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=0",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=5"
+      ],
+      "returncode": 0,
+      "seconds": 16.203376054763794,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "real-service80-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=1",
+        "+CMD_PERIOD=1",
+        "+WRITE_LATENCY=5"
+      ],
+      "returncode": 0,
+      "seconds": 15.360793113708496,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "task0-0",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=0",
+        "+VECTOR_DIR=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors"
+      ],
+      "returncode": 0,
+      "seconds": 20.32357358932495,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "task0-1",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/real.vvp",
+        "+MODE=1",
+        "+VECTOR_DIR=/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/task0-vectors"
+      ],
+      "returncode": 0,
+      "seconds": 17.73009943962097,
+      "marker": "ROWPAIR_NICE_REAL_PASS rows=99 outputs=25344",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "unit",
+      "command": [
+        "vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/unit.vvp"
+      ],
+      "returncode": 0,
+      "seconds": 3.117455005645752,
+      "marker": "NICE_PAIR_PASS cases=613 counts=64 write_error_positions=512",
+      "marker_found": true,
+      "pass": true
+    },
+    {
+      "name": "unit-compile",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/third-party/e203_hbirdv2/rtl/e203/core",
+        "-s",
+        "tb_nice_pair_errors",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/final/unit.vvp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/tests/e203/tb_nice_pair_errors.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/third-party/e203_hbirdv2/rtl/e203/subsys/xu_nice_drain8.v"
+      ],
+      "returncode": 0,
+      "seconds": 0.026648759841918945,
+      "marker": "",
+      "marker_found": true,
+      "pass": true
+    }
+  ],
+  "matrix": [
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 221760,
+      "cmd_period": 1,
+      "write_latency": 0,
+      "vector_mode": 0,
+      "name": "real-fast-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 119840,
+      "cmd_period": 1,
+      "write_latency": 0,
+      "vector_mode": 0,
+      "name": "real-fast-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 0,
+      "name": "real-mixed-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195130,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 0,
+      "name": "real-mixed-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 1,
+      "write_latency": 3,
+      "vector_mode": 0,
+      "name": "real-service60-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195128,
+      "cmd_period": 1,
+      "write_latency": 3,
+      "vector_mode": 0,
+      "name": "real-service60-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 250272,
+      "cmd_period": 1,
+      "write_latency": 5,
+      "vector_mode": 0,
+      "name": "real-service80-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 245568,
+      "cmd_period": 1,
+      "write_latency": 5,
+      "vector_mode": 0,
+      "name": "real-service80-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 1,
+      "name": "task0-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195130,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 1,
+      "name": "task0-1"
+    }
+  ],
+  "pass": true
+}

@@ -1,0 +1,67 @@
+{
+  "status": "ALL_OPTIONAL_GENERATION_MATCHES",
+  "commands": [
+    {
+      "argv": [
+        "scala-cli",
+        "run",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system",
+        "-M",
+        "GenerateRTL",
+        "--",
+        "LinearAutoGroupCore"
+      ],
+      "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation",
+      "native_exit": 0
+    },
+    {
+      "argv": [
+        "scala-cli",
+        "run",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system",
+        "-M",
+        "GenerateRTL",
+        "--",
+        "LinearAutoGroupCore41"
+      ],
+      "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation",
+      "native_exit": 0
+    },
+    {
+      "argv": [
+        "scala-cli",
+        "run",
+        ".",
+        "--server=false",
+        "--jvm",
+        "system",
+        "-M",
+        "GenerateRTL",
+        "--",
+        "LinearRowPairPrototype"
+      ],
+      "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-generation",
+      "native_exit": 0
+    }
+  ],
+  "checks": {
+    "LinearAutoGroupCore": {
+      "modules": 12,
+      "differences": {}
+    },
+    "LinearAutoGroupCore41": {
+      "modules": 12,
+      "differences": {}
+    },
+    "LinearRowPairPrototype": {
+      "modules": 11,
+      "differences": {}
+    }
+  }
+}

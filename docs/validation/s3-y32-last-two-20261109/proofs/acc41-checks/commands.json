@@ -1,0 +1,74 @@
+[
+  {
+    "name": "generate-MacPE",
+    "argv": [
+      "scala-cli",
+      "run",
+      ".",
+      "--server=false",
+      "--jvm",
+      "system",
+      "-M",
+      "GenerateRTL",
+      "--",
+      "MacPE"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "generate-MacPE40Counterexample",
+    "argv": [
+      "scala-cli",
+      "run",
+      ".",
+      "--server=false",
+      "--jvm",
+      "system",
+      "-M",
+      "GenerateRTL",
+      "--",
+      "MacPE40Counterexample"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "rtl-prefix-compile",
+    "argv": [
+      "iverilog",
+      "-g2012",
+      "-s",
+      "tb_acc41",
+      "-o",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/acc41.vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/tb_acc41.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/MacPE48.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/MacPE41.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/MacPE40.sv"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "rtl-prefix-simulation",
+    "argv": [
+      "vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/acc41.vvp"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "generate-LinearAutoGroupCore",
+    "argv": [
+      "scala-cli",
+      "run",
+      ".",
+      "--server=false",
+      "--jvm",
+      "system",
+      "-M",
+      "GenerateRTL",
+      "--",
+      "LinearAutoGroupCore"
+    ],
+    "returncode": 0
+  }
+]

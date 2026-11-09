@@ -1,0 +1,96 @@
+[
+  {
+    "argv": [
+      "scala-cli",
+      "run",
+      ".",
+      "--server=false",
+      "--jvm",
+      "system",
+      "-M",
+      "GenerateRTL",
+      "--",
+      "MacPE"
+    ],
+    "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/chisel",
+    "native_exit": 0,
+    "log": "generate-MacPE.log"
+  },
+  {
+    "argv": [
+      "scala-cli",
+      "run",
+      ".",
+      "--server=false",
+      "--jvm",
+      "system",
+      "-M",
+      "GenerateRTL",
+      "--",
+      "MacPE40Counterexample"
+    ],
+    "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/chisel",
+    "native_exit": 0,
+    "log": "generate-MacPE40Counterexample.log"
+  },
+  {
+    "argv": [
+      "scala-cli",
+      "run",
+      ".",
+      "--server=false",
+      "--jvm",
+      "system",
+      "-M",
+      "GenerateRTL",
+      "--",
+      "LinearAutoGroupCore"
+    ],
+    "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/chisel",
+    "native_exit": 0,
+    "log": "generate-LinearAutoGroupCore.log"
+  },
+  {
+    "argv": [
+      "scala-cli",
+      "run",
+      ".",
+      "--server=false",
+      "--jvm",
+      "system",
+      "-M",
+      "GenerateRTL",
+      "--",
+      "LinearAutoGroupCore41"
+    ],
+    "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/chisel",
+    "native_exit": 0,
+    "log": "generate-LinearAutoGroupCore41.log"
+  },
+  {
+    "argv": [
+      "iverilog",
+      "-g2012",
+      "-s",
+      "tb_acc41",
+      "-o",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/prefix.vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/tb_acc41.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/MacPE48.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/MacPE41.sv",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/MacPE40.sv"
+    ],
+    "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/chisel",
+    "native_exit": 0,
+    "log": "compile-prefix.log"
+  },
+  {
+    "argv": [
+      "vvp",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/prefix.vvp"
+    ],
+    "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/chisel",
+    "native_exit": 0,
+    "log": "run-prefix.log"
+  }
+]

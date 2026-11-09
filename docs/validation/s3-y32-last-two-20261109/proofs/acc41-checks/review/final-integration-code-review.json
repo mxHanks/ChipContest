@@ -1,0 +1,119 @@
+{
+  "status": "PASS_NO_HARDWARE_BLOCKER_FOUND",
+  "scope": "Independent final code review plus read-only saved-evidence verification; no new full12 or module simulation executed by reviewer.",
+  "reviewed_source_sha256": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/src/main/scala/linear/LinearRowPairPrototype.scala": "2f4688fdf7768b1ea96120ec5fe433d6680dcc1183e555f39d944ed4aaa8c002",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/acc41/run_acc41.py": "492d7ea48f434ba8666f13f687f8e00466beefc08ae4ba0a487ff64f7e564a47",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/acc41/tb_acc41.sv": "ff84b37f7dca154a8256c2f3a858e3dd137954fee092e51e4794a770a4e0aa43",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/rowpair/run_rowpair.py": "585071b2fee81ac9de9cab2b938675a427a04060437ff11ec78c48eeb5974a57",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/rowpair/verify_rowpair.py": "d645bea078363436137a4be325f7693ad2a2d94dbf05286419174d34add44915",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/rowpair/rowpair_driver.cpp": "37e752e97b9bf1f302c06a0e88b0eb412b95a7b015593d622b5d703dd818c77e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/rowpair/generate_observer.py": "adcfc14e2408eef9f93a677045bf14d85394a19e221adebc47c0a0941b96e094",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/experiments/s3-y32-last-two/paired-nice/xu_nice_drain8.v": "dc7690d5d8ead50e84e7bc1d378c0a11ebf8f2db37bca23d1a43dfe751f2901a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/experiments/s3-y32-last-two/paired-nice/run_probe.py": "66a55bb06284f764588d72040a2eea21b2773f2b58a2af8fd1f9a3947bfc4a80",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/experiments/s3-y32-last-two/paired-nice/tb_nice_pair_errors.sv": "84cb9563a2cd5f92a8c83878051d0c894fbc399faa3baced5a303b332078c756",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/experiments/s3-y32-last-two/paired-nice/tb_rowpair_nice_real.sv": "7be37249302cb5d63777cdc99b6597ff33a73c1ed1916d0819f6cae1cc99a209",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/experiments/s3-y32-last-two/paired-nice/rowpair_direct_bridge.v": "8b4e12891c8ef7ec7033a3ee2089845277b40e772c0bf6ebc83fe885357bfe83",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/experiments/s3-y32-last-two/paired-nice/README.md": "e3297f699b79f44dc2406315c41aaaa6ec81e1d4de2f80334dea1f5a28e35d43",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/handoff/revalidate_saved.py": "848cf53ed771771ae797b63ce25b0c7614b0ad392c2cbda41ca7b782d89656fb"
+  },
+  "installed_default_baseline": {
+    "sources_checked": 171,
+    "changed": [],
+    "MacPE_default": "48 bits",
+    "CPU_LSU_BIU_firmware_macros": "unchanged"
+  },
+  "integrated_generated_sv": {
+    "default48_modules_match_baseline": 12,
+    "optional41_modules_match_tested_candidate": 12,
+    "rowpair_modules_match_tested_candidate": 11
+  },
+  "rowpair_code_assessment": {
+    "compute": "Two default48 eight-PE engines consume one shared weight array in lockstep. Group remains stable until enqueue; INIT consumes tagged bias next edge, then requests next group while MAC runs.",
+    "tail": "secondRow is latched per launch; second engine start gated, outputSecond never advances on single-row mode. Odd row98 never emits row99.",
+    "queue": "Two pair slots, four eight-lane bundles maximum. Single producer reserves by launch count<2. Row0 POP retains the pair slot; row1 POP retires it. Simultaneous enqueue/retire preserves count and distinct head/tail ownership.",
+    "clear": "Accepts only idle/count0; resets both engines on clearFire, writes all16384 weights, both64-value X buffers, and shared768-word bias SRAM; clearDone waits all controllers. Results/tags are explicitly zeroed. Read-only physical observer checks per-address zero writes and nonzero prestate in development.",
+    "public_contract": "Start and source writes require idle; active modifications assert. Prototype has no CPU/MMIO lifecycle or error-response ABI."
+  },
+  "paired_nice_assessment": {
+    "address": "33-bit request_end includes optional second-row1024 stride; row-aligned group offset and group+count<=32 enforce each row span. Prior independent210944-case algebra enumeration passed.",
+    "identity": "bit30 marks exclusive pair route, old20/23/24 reject before side effects; bit11 row identity checked live and after capture; group tag preserved.",
+    "ownership": "Stable eight-lane snapshot precedes later commit; first error aborts, POP cannot retry. Eight serial32-bit LSU writes wait each response; completion follows last response.",
+    "validation": {
+      "native_runs": 31,
+      "pinned_sources": 42,
+      "source_drift": [],
+      "unit_cases": 613,
+      "write_error_positions": 512,
+      "count_tail_combinations": 64,
+      "reset_events": 13,
+      "real_mac_success_runs": 10,
+      "real_mac_error_indexes": [
+        15,
+        511
+      ]
+    }
+  },
+  "permanent_acc41_assessment": {
+    "status": "ACC41_REPRODUCTION_PASS",
+    "source_only_snapshot": true,
+    "installed_RTL_written": false,
+    "testbench_frozen_and_hash_checked": true,
+    "prefix_bound_proof": "All65 prefixes and complete signed16/signed40 domain",
+    "generic48_contract": "600 consecutive products remain tested; fixed64 engine rejects40 elaboration"
+  },
+  "independent_rowpair_saved_verification": {
+    "accepted_final_campaigns": [
+      {
+        "campaign": "rowpair-checks/final-numeric",
+        "receipt": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/review/rowpair-final-numeric-last-verifier.json",
+        "receipt_sha256": "dc8726ec745eda9a6a2252727b196b40f308f63ffcce3d1aad547168d92c9c58",
+        "native_exit": 0,
+        "cases": 10,
+        "outputs_per_case": 25344
+      },
+      {
+        "campaign": "integrated-rowpair-replay",
+        "receipt": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/review/rowpair-integrated-last-verifier.json",
+        "receipt_sha256": "dc8726ec745eda9a6a2252727b196b40f308f63ffcce3d1aad547168d92c9c58",
+        "native_exit": 0,
+        "cases": 10,
+        "outputs_per_case": 25344
+      }
+    ],
+    "old_final_campaign": "NOTFINAL: correctly rejected because current driver SHA differs; not counted as accepted evidence",
+    "old_final_rejection_log": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/review/rowpair-module-independent-verification.log"
+  },
+  "resolved_review_findings": [
+    "Comparator now requires each layer totals/window/entireclear equal, preventing aggregate cancellation.",
+    "Fixed64 DotProductEngine rejects width40; valid default48/optional41 generated SV unchanged.",
+    "Pair route rejects old drain opcodes upfront to prevent partial row0 consumption.",
+    "Permanent accumulator runner copies and hashes TB before and after simulation.",
+    "Portable paired runner pins transitive core/config.v and refuses output-directory reuse."
+  ],
+  "known_limits": [
+    "Frozen pair TB stores vector path in1024 bits; README requires <=128 ASCII bytes, tested106. Use a shorter vectors path for relocation.",
+    "Module timings exclude production CPU/LSU/fabric, source loading/clear as documented; they are not full-SoC speed measurements.",
+    "Paired engine uses serial NICE LSU; it is not an independent DMA master and introduces no new bus requester.",
+    "No synthesis, area, energy, STA or formal-clear qualification. Production clear policy REVIEW_PENDING and FIFO physical-zero UNPROVEN remain."
+  ],
+  "artifact_sha256": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/root-integrated-generation-receipt.json": "d1aa8c2ddb4292e298cdddc573c0d3671cdeff05c2abf810a16112e10ca635b3",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/root-optional-integration-freeze.json": "d2841e29120d932e9caf849fae8a285a329bc4ae6b8c20aac2bfd6381f08c67a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-acc41-replay-final/result.json": "7fd856d97a0edb4bd3999c291c611f1f030d91ca6f9e4fe257d0224de9b72044",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-checks/portable-final-r2/result.json": "3295c6d459cc5e435146527f3ba26a00c4322ed5d1ff55842b218751f25ce5c1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/review/final-acc41-review.json": "8b2a2d987500aa53fe86b71311675523fb2980c6b1658ff90e17c497d4ac6057"
+  },
+  "review_execution_notes": [
+    "Old rowpair final rejected source SHA as designed; reviewer switched to matching final-numeric and root integrated-rowpair-replay, both independently native_exit=0/PASS. No old receipt was changed or hash check relaxed.",
+    "An early static reviewer fixture counted repeated capability checks outside instruction_ok. The reviewer narrowed only its own assertion scope; raw failure log preserved. Candidate RTL was unchanged."
+  ],
+  "relocated_verifier_code_review": {
+    "status": "PASS_WITH_EXTRACTION_LOCATION_CAVEAT",
+    "path_hook": "Final permanent rowpair verifier now accepts a pure resolve callback; default preserves local behavior. Source/input paths all go through callback before reading; exact SHA remains mandatory. No receipt/source rewrite.",
+    "mapping": "Longest original prefix first, then exact provenance fallback. Both return only actual files whose resolved path remains inside archive. Unmapped references fail.",
+    "comparison": "Only current verifier/result path fields normalized; source/numeric/work/firmware data remain exact.",
+    "no_mutation": "No simulator/synthesis invoked; dont_write_bytecode is set before importing helpers; only new output receipt is written outside archive.",
+    "caveat": "Frozen comparator may find SHA-pinned inherited loader in ancestor live repo before local fallback if archive extracted inside that repo. Independent /tmp extraction avoids this. Suggested asserting resolved inherited loader inside archive and documenting independent extraction location."
+  }
+}

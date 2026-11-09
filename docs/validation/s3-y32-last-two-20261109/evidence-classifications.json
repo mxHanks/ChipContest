@@ -1,0 +1,21 @@
+{
+  "status": "INITIAL_FAILURES_AND_NOTFINAL_PRESERVED_NEVER_PROMOTED_TO_PASS",
+  "notfinal_mentions_requires_context": [
+    "README.md",
+    "proofs/acc41-checks/review/final-integration-code-review.json",
+    "proofs/acc41-checks/review/report-review.json",
+    "summaries/s3-y32-last-two-results.md",
+    "verification/README.md"
+  ],
+  "known_superseded_drafts": [
+    "verification/compare_acc41-initial.py"
+  ],
+  "superseded_comparator": "verification/compare_acc41-initial.py is an initial draft; use final compare_acc41.py and final receipts.",
+  "expected_rejections": "verification/*-negatives* result.json files preserve actual/expected rejection. Mutated artifacts are not performance evidence.",
+  "fixture_failures": [
+    "proofs/dma-checks/rowpair-real-compile.log: initial wire declaration syntax failure",
+    "proofs/dma-checks/portable-driver-failed-config-path.log: guessed e203_config.v path did not exist; final uses core/config.v",
+    "proofs/acc41-checks/review/final-integration-code-review-first-fixture-failure.log: first review fixture failure, superseded by final receipt"
+  ],
+  "final_pass": "Use confirmed campaign result.json, *comparison-final.json / full12 comparison, integrated *-final replay results, final proof summary and independent review receipts; historical PASS strings alone are insufficient."
+}

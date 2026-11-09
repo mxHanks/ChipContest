@@ -1,0 +1,318 @@
+{
+  "cases": [
+    {
+      "actual_rejection": "artifact SHA differs: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/verification/acc41-full12-negatives/unreviewed-core-byte-fixture/source/rtl/perips/MacPE.sv",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "adc0e30bcd669599cd7fb6e076c15b621ea4dc1b4cb4490b78b4d62a5002ab93",
+          "original_sha256": "1b8eefc0910663a6996cb7f282def3f6a0b9656e016a18bb5a8b711f5c14a8d1",
+          "path": "source/rtl/perips/MacPE.sv"
+        }
+      ],
+      "expected_rejection": "artifact SHA differs",
+      "name": "unreviewed-core-byte"
+    },
+    {
+      "actual_rejection": "artifact SHA differs: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/verification/acc41-full12-negatives/cpu-control-byte-fixture/source/rtl/core/e203_cpu.v",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "579f6e367d8eee7a655fae5fd608c5504ebd19023cacd466424137538f76f84d",
+          "original_sha256": "757ac56dd2f58e914cba08b940ea89c5279045e61208768ad27d1a2c7f3d7261",
+          "path": "source/rtl/core/e203_cpu.v"
+        }
+      ],
+      "expected_rejection": "artifact SHA differs",
+      "name": "cpu-control-byte"
+    },
+    {
+      "actual_rejection": "artifact SHA differs: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/verification/acc41-full12-negatives/tensor-byte-fixture/task-00/vectors/layer_00/w.mem",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "4efe9498d273886b26ec7d9596eb3a69d02c08c567cdd88eb17c7f24a92b070e",
+          "original_sha256": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+          "path": "task-00/vectors/layer_00/w.mem"
+        }
+      ],
+      "expected_rejection": "artifact SHA differs",
+      "name": "tensor-byte"
+    },
+    {
+      "actual_rejection": "generated clear C differs from exact selected helper regeneration",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "5ae859fc7636f6c2c646bf4a68866e139b3e91b3ca346d7698e4167a9fdffc6e",
+          "original_sha256": "ce049a9da881e26c450438807ab29340f14d38929a53a4c1216d9f4bd35ca1d4",
+          "path": "clear-recipe.json"
+        },
+        {
+          "mutant_sha256": "f1a6d263484e701ac134df4e8578e51473d1d4907444957e016ef7f29a3f238d",
+          "original_sha256": "2835c165d48fadbdf2696280ba20fe9314853945535e95854542f7bfb21e3022",
+          "path": "s3_clear_main.c"
+        }
+      ],
+      "expected_rejection": "generated clear C differs from exact selected helper regeneration",
+      "name": "missing-physical-write-c"
+    },
+    {
+      "actual_rejection": "generated clear C differs from exact selected helper regeneration",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "c2c2fc35a87f1b2cf6684b6e1a129b4625eeebb40622019a1324813808cafc67",
+          "original_sha256": "ce049a9da881e26c450438807ab29340f14d38929a53a4c1216d9f4bd35ca1d4",
+          "path": "clear-recipe.json"
+        },
+        {
+          "mutant_sha256": "1d70e840bead6fd35fdf4a7a9743568709653e192a9cf2c283f77ff479eae99e",
+          "original_sha256": "2835c165d48fadbdf2696280ba20fe9314853945535e95854542f7bfb21e3022",
+          "path": "s3_clear_main.c"
+        }
+      ],
+      "expected_rejection": "generated clear C differs from exact selected helper regeneration",
+      "name": "firmware-padding-c"
+    },
+    {
+      "actual_rejection": "generated TB differs from exact old payload seams and selected preclear observer",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "e3af5697c6274f9f7593a776707e08727b89324430cf1c6476990e4ef7eac278",
+          "original_sha256": "3bcc7ac86b6bfbdc712330323ee66c25866feee0870344150d9d52c93705ffe0",
+          "path": "tb.sv"
+        },
+        {
+          "mutant_sha256": "3767dd00f9624067d611ea5c8b5ca3ad37510ab90c3db4dd013ff8e2d7ccd546",
+          "original_sha256": "ce049a9da881e26c450438807ab29340f14d38929a53a4c1216d9f4bd35ca1d4",
+          "path": "clear-recipe.json"
+        }
+      ],
+      "expected_rejection": "generated TB differs from exact old payload seams",
+      "name": "disabled-payload-observer"
+    },
+    {
+      "actual_rejection": "saved clear observer differs from exact selected helper",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "bc2d64f30a8c84619acda5a55d7a20d2e300c8002c2a98ec4fd62c3bcc69454e",
+          "original_sha256": "40962339b5f2f0aede3764401417a0b851efd305347565b634ed16e4a4900238",
+          "path": "s3_clear_observer.svh"
+        }
+      ],
+      "expected_rejection": "saved clear observer differs from exact selected helper",
+      "name": "weakened-clear-observer"
+    },
+    {
+      "actual_rejection": "firmware image bytes differ from ELF PT_LOAD",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "cc8c7d32845037c66a771db4b22c99a073eb726552a3f9b9479187b95ea88c05",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        },
+        {
+          "mutant_sha256": "93da629c46e5ddea1a000a2b6a688f215d8dab931cde26e2a3325a33b5a27212",
+          "original_sha256": "ee4d6d90077526f3b3649affdd2cda908697c5a6cde26de8ca5482fe4a9ebce3",
+          "path": "accel_soc.verilog"
+        }
+      ],
+      "expected_rejection": "firmware image bytes differ from ELF PT_LOAD",
+      "name": "loaded-image-byte"
+    },
+    {
+      "actual_rejection": "ELF differs beyond one exact nonloaded GCC temporary-object FILE symbol",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "a58c5ba7c8d09cbaf8383842a8ad67a7a52edae03c4efdaf0f1828c25ff6f56d",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        },
+        {
+          "mutant_sha256": "f1aadcb120d840643480dbe493d700ff4091a095d5ee4110fd6fccddd62ffc5d",
+          "original_sha256": "9444f8452bd26ef355cfc2e2e988824d9561cd41250da38aa6166ce68f9282de",
+          "path": "accel_soc"
+        }
+      ],
+      "expected_rejection": "ELF differs beyond one exact nonloaded GCC temporary-object FILE symbol",
+      "name": "nonloaded-elf-byte"
+    },
+    {
+      "actual_rejection": "fixed clear protocol/physical-work/policy differs",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "07287331f06dfa192792898deedf31567167b5e0548e927997031bd579d46335",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        },
+        {
+          "mutant_sha256": "46d7f69d9552940e0831d9690f618382009f0019e367b019f28c559706b425a9",
+          "original_sha256": "0b69822c2a0a9d8828327c0bbf6745e537a21dc38c3ad7dd80f29473bc8b724a",
+          "path": "task-00/simulation.log"
+        }
+      ],
+      "expected_rejection": "fixed clear protocol/physical-work/policy differs",
+      "name": "missing-physical-w-marker"
+    },
+    {
+      "actual_rejection": "fixed clear protocol/physical-work/policy differs",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "50d01ff48433d62fbb98caeabe5cdbfa5bc3a523b3108de4f727986b97420e49",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        },
+        {
+          "mutant_sha256": "ceab1e535f1f0f9ae3b29a5dbd836d96a682010ed0f593b8275d1e878629506f",
+          "original_sha256": "0b69822c2a0a9d8828327c0bbf6745e537a21dc38c3ad7dd80f29473bc8b724a",
+          "path": "task-00/simulation.log"
+        }
+      ],
+      "expected_rejection": "fixed clear protocol/physical-work/policy differs",
+      "name": "clear-commands-marker"
+    },
+    {
+      "actual_rejection": "fixed clear protocol/physical-work/policy differs",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "ea9cf673a42dd16049ccce1eb3cc59ae651754f362ed9c0fef4c48a318e77ddd",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        },
+        {
+          "mutant_sha256": "978efa710acdd78e36e08b55863bccde952ca996f1e3ee9bc441272c1be347c0",
+          "original_sha256": "0b69822c2a0a9d8828327c0bbf6745e537a21dc38c3ad7dd80f29473bc8b724a",
+          "path": "task-00/simulation.log"
+        }
+      ],
+      "expected_rejection": "fixed clear protocol/physical-work/policy differs",
+      "name": "fifo-policy-promotion"
+    },
+    {
+      "actual_rejection": "clear observer local/global timing relation differs",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "b3d8a86dd81d163433a278e6a31cefd5a720a24f549516993f5164dd1f5bc4cc",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        },
+        {
+          "mutant_sha256": "57db1b8aaa685b3f468c30f6d69500bea7641e3880c5c475e0771e1218f632b8",
+          "original_sha256": "0b69822c2a0a9d8828327c0bbf6745e537a21dc38c3ad7dd80f29473bc8b724a",
+          "path": "task-00/simulation.log"
+        }
+      ],
+      "expected_rejection": "clear observer local/global timing relation differs",
+      "name": "early-clear-timing"
+    },
+    {
+      "actual_rejection": "complete numerical task markers missing or inconsistent",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "c716f5568b3c337cd878bf3c6fad3e824cc7e34fc28e30352f95949edd7313d9",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        },
+        {
+          "mutant_sha256": "dda4e1e64339dfbb847e886044a9d263a482e87a9badb5f128b37e14cb366616",
+          "original_sha256": "0b69822c2a0a9d8828327c0bbf6745e537a21dc38c3ad7dd80f29473bc8b724a",
+          "path": "task-00/simulation.log"
+        }
+      ],
+      "expected_rejection": "complete numerical task markers missing or inconsistent",
+      "name": "duplicate-task-pass"
+    },
+    {
+      "actual_rejection": "complete numerical task markers missing or inconsistent",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "0534f6f5a1608a0c26acda22c2384660108da1de208fcd78b21cbf655860309f",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        },
+        {
+          "mutant_sha256": "4561801b90239426ab441b36c894315fe4e83b4d3643c1d7effa9f5f00d8385b",
+          "original_sha256": "0b69822c2a0a9d8828327c0bbf6745e537a21dc38c3ad7dd80f29473bc8b724a",
+          "path": "task-00/simulation.log"
+        }
+      ],
+      "expected_rejection": "complete numerical task markers missing or inconsistent",
+      "name": "wrong-numeric-output-count"
+    },
+    {
+      "actual_rejection": "conditions differ; only exact campaign/repository path normalization is allowed",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "49b351340ce4742d2ac81b0638f990a465c2699cc1734127d6dfbdeeb099157f",
+          "original_sha256": "01c7e9d360674a916c8acc415048d001df02251db24b061cd9b4fb670b184a5a",
+          "path": "version-python3.12.log"
+        },
+        {
+          "mutant_sha256": "b204e918e2c47da79657cf87d1ce77b304467004d6adb70cbda59551b5bdb859",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        }
+      ],
+      "expected_rejection": "conditions differ",
+      "name": "selfconsistent-tool-version"
+    },
+    {
+      "actual_rejection": "source drift is missing/nonempty",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "414ddb64c679b1c0b8d5e6acdac578374dfe6f58fe4c3026d8afc50058b38086",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        }
+      ],
+      "expected_rejection": "source drift is missing/nonempty",
+      "name": "nonempty-source-drift"
+    },
+    {
+      "actual_rejection": "source manifest differs from externally pinned exact source SHA map",
+      "changed_artifacts": [
+        {
+          "mutant_sha256": "dfb590d2b2e5f2eb334c52c62dd0a91b9ac688c63721ac5dbee61200fa219048",
+          "original_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+          "path": "result.json"
+        },
+        {
+          "mutant_sha256": "86ff74d6cb10789767d39f17a79e5d65685c3f60d79cee9c76de9665944a2928",
+          "original_sha256": "13f1b08845073458bd58a849e86a5a7414b932350751be39a074b93a2223ce9c",
+          "path": "plan.json"
+        }
+      ],
+      "expected_rejection": "source manifest differs from externally pinned exact source SHA map",
+      "name": "selfconsistent-manifest-core"
+    },
+    {
+      "actual_rejection": "reviewed changed-core SHA pair is invalid",
+      "changed_artifacts": [],
+      "expected_rejection": "reviewed changed-core SHA pair is invalid",
+      "name": "unreviewed-pair"
+    },
+    {
+      "actual_rejection": "only one reviewed MacPE.sv SHA pair is allowed",
+      "changed_artifacts": [],
+      "expected_rejection": "only one reviewed MacPE.sv SHA pair is allowed",
+      "name": "added-cpu-pair"
+    }
+  ],
+  "inherited_fixture_helper_sha256": "eae8094fe916580c2f960ee86ee9b33d109943047ed64a9b13f3dc69a4e200f7",
+  "positive_layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "positive_result_sha256": "4185045ad39cf66c3a696d802917ac632f85042ff3ef70c8b538a736b372fa01",
+  "positive_status": "ACC41_SAVED_CAMPAIGNS_COMPARED",
+  "schema": "s3-acc41-verifier-corruption-tests-v1",
+  "scope": "atomic replacement of copied evidence; no native simulation; no original artifact mutation",
+  "status": "ALL_EXPECTED_REJECTIONS",
+  "verifier_sha256": "220d9a908d71cb5edbf42800eac8b7a87200997efb8e3970317e21c6751ddb82"
+}

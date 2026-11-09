@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/experiments/s3-y32-last-two/paired-nice/run_probe.py", line 91, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ~~~~^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/experiments/s3-y32-last-two/paired-nice/run_probe.py", line 36, in main
+    before={str(p):sha(p) for p in source};records=[]
+                   ~~~^^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/experiments/s3-y32-last-two/paired-nice/run_probe.py", line 12, in sha
+    def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+                                     ~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 778, in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 772, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/dma-repo/third-party/e203_hbirdv2/rtl/e203/core/e203_config.v'

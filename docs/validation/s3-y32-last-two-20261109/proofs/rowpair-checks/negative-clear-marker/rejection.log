@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/rowpair-checks/verify_rowpair.py", line 60, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/rowpair-checks/verify_rowpair.py", line 57, in main
+    result=verify(a.campaign)
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/rowpair-checks/verify_rowpair.py", line 46, in verify
+    check(f'ROWPAIR_PHYSICAL_CLEAR_PASS call={call} W=16384 BIAS=768 X=128 ACC=16 ENGINE_RESULT=16 FIFO=32 nonzero_prestate={dirty}' in log,name+' physical clear')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/rowpair-checks/verify_rowpair.py", line 6, in check
+    if not ok:raise ValueError(msg)
+              ^^^^^^^^^^^^^^^^^^^^^
+ValueError: rows2-stall60 physical clear

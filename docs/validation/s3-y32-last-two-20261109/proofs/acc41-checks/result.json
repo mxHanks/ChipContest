@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "proof_prefixes": 65,
+  "product_domain": "all signed16 x signed16",
+  "bias_domain": "all signed40",
+  "rtl_prefix_result": "ACC41_PREFIX_PASS checks=3345 scenarios=36 prefixes=65 signed40_mismatches=1127 stalls=396 resets=4 init_priority=39 positive_ties=351 negative_ties=506 generic48_products=600\n/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/acc41-checks/tb_acc41.sv:105: $finish called at 33450000 (1ps)",
+  "production_source_drift": [],
+  "note": "Analytic domain proof plus cycle-by-cycle real generated RTL regression, no synthesis or PPA.",
+  "initial_v1_source_update": {
+    "only_change": [
+      "src/main/scala/dotproduct/DotProductEngine.scala"
+    ],
+    "reason": "Reject illegal fixed64 engine accWidth40 elaboration; default48/variant41 generated SV SHA unchanged",
+    "guard_negative_test": "PASS",
+    "regeneration_sv_identity": "PASS"
+  },
+  "production_source_freeze": "production-source-frozen-v2.json"
+}

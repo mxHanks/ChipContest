@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "python3.12",
+    "-E",
+    "-B",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/run_probe.py",
+    "--repo",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest",
+    "--generated-rowpair",
+    "generated/LinearRowPairPrototype",
+    "--vectors",
+    "/tmp/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "--out",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/path-limit-rejected"
+  ],
+  "native_exit": 1,
+  "expected_rejection": "path length preflight before output creation",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/run_probe.py\", line 95, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n                                             ^^^^^^\n  File \"/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/run_probe.py\", line 24, in main\n    raise ValueError('The testbench vector path must be ASCII and at most 128 bytes')\nValueError: The testbench vector path must be ASCII and at most 128 bytes\n"
+}

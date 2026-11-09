@@ -1,0 +1,111 @@
+{
+  "status": "REPORT_REVIEW_PASS",
+  "report": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/docs/s3-y32-last-two-results.md",
+  "report_sha256": "5fc5a567d1e971bc16ea0fc333ddc6425e5b503484937b58a94e72c168ea63be",
+  "review_scope": "Read-only report numbers and claim scope; no new simulation or regression.",
+  "table_checks": [
+    {
+      "type": "rowpair_module_table",
+      "stall": 0,
+      "single": 224631,
+      "paired": 116635,
+      "reduction_percent": 48.077
+    },
+    {
+      "type": "rowpair_module_table",
+      "stall": 31,
+      "single": 227700,
+      "paired": 119704,
+      "reduction_percent": 47.429
+    },
+    {
+      "type": "rowpair_module_table",
+      "stall": 60,
+      "single": 230571,
+      "paired": 204601,
+      "reduction_percent": 11.263
+    },
+    {
+      "type": "rowpair_module_table",
+      "stall": 80,
+      "single": 272448,
+      "paired": 267744,
+      "reduction_percent": 1.727
+    },
+    {
+      "type": "rowpair_module_table",
+      "stall": 255,
+      "single": 826848,
+      "paired": 822144,
+      "reduction_percent": 0.569
+    },
+    {
+      "type": "NICE_module_table",
+      "service": "1\uff0f0\uff0c\u5408\u6210\u7aef\u70b9",
+      "single": 221760,
+      "paired": 119840,
+      "reduction_percent": 45.96
+    },
+    {
+      "type": "NICE_module_table",
+      "service": "1\uff0f3\uff0c\u5408\u6210\u7aef\u70b9",
+      "single": 224136,
+      "paired": 195128,
+      "reduction_percent": 12.942
+    },
+    {
+      "type": "NICE_module_table",
+      "service": "1\uff0f5\uff0c\u5408\u6210\u7aef\u70b9",
+      "single": 250272,
+      "paired": 245568,
+      "reduction_percent": 1.88
+    },
+    {
+      "type": "NICE_module_table",
+      "service": "3\uff0f2\uff0cspeech task0",
+      "single": 224136,
+      "paired": 195130,
+      "reduction_percent": 12.941
+    }
+  ],
+  "acc41_full12_same_cycles": 5874840,
+  "numeric_domain": {
+    "product_min": -1073709056,
+    "product_max": 1073741824,
+    "all64_prefix_min": -618473193472,
+    "all64_prefix_max": 618475290623,
+    "output_count": 304128,
+    "saved_ACC_bits": 56
+  },
+  "module_storage_and_work": {
+    "pair_result_bytes": 192,
+    "extra_X_bytes": 128,
+    "single_W_macro_reads": 1622016,
+    "paired_W_macro_reads": 819200,
+    "single_bias_reads": 76032,
+    "paired_bias_reads": 38400,
+    "launches_pair": 1600
+  },
+  "scope_check": {
+    "pair_SoC_performance_claim": false,
+    "independent_DMA_claim": false,
+    "PPA_claim": false,
+    "clear_fixture_scope_separated": true,
+    "old_final_NOTFINAL": true,
+    "default48_retained": true,
+    "formal_qualification_limits_retained": true
+  },
+  "wording_note": "Resolved: opening now says \u5f53\u524d\u5df2\u6d4b8PE\u5f00\u53d1\u7248\u672c\u6700\u4f18; no official qualification claim.",
+  "relocation_code_note": "Latest revalidate_saved.py stages original comparator/baseline/map/helper bytes under an independent temporary directory, checks hashes, and asserts loaded helper inside staged directory; closes prior ancestor-loader concern without editing frozen comparator or saved originals.",
+  "evidence_sha256": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/verification/acc41-full12-comparison.json": "713d75180534eba6b4f4d65eca1155a0b4797a7181a2f239fcc2e2b48334c4a5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/rowpair-checks/comparison.json": "1b8ee9819562450138357ea8c3c48b2ae0130147143591b32c514bd775ec63c4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/integrated-paired-nice-replay-final/result.json": "ac15b304796142ccc30bbc535f922af9ac729de3185c965c02c4ca08ad4f9730",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/last-two-20261109/handoff/revalidate_saved.py": "25eed0afdee96e85872b5982daf21d0596242aab382bb511c7b44f1a48a4086d",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/validation-receipt.json": "9c778240aad9ea1988d6e74b9c2ca67932c86295b3b8f9e586175c5e7929f134",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/validation-receipt-author-r2.json": "c552a4e03746fc27eb60cac92899130986257b5c78eee01249235dc4241cef2e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-last-two/paired-nice/README.md": "8a26effcdccaf544b2d102c70e5e484ba20c1a9d51b00a3e2f98495f08e4fd99"
+  },
+  "published_paired_receipt_note": "Root aligned validation-receipt.json with integrated final exact runner/README; historical author r2 is separately retained under validation-receipt-author-r2.json. RTL SHA is unchanged.",
+  "published_paired_receipt_exact_hash_check": "PASS: all six variant code/README SHA match current bytes; result_sha256 matches integrated-paired-nice-replay-final/result.json; 31 runs/42 sources."
+}
