@@ -113,12 +113,12 @@ class LinearComputeCoreIO extends Bundle {
  * 当前实现为单组点积计算核心，后续可通过增加外层调度控制器，
  * 实现完整的 99×64 与 64×256 矩阵乘法。
  */
-class LinearComputeCore extends Module {
+class LinearComputeCore(accWidth: Int = 48) extends Module {
     val io: LinearComputeCoreIO = IO(new LinearComputeCoreIO)
 
     private val xBuffer = Module(new XRowBuffer)
     private val weightBanks = Module(new WeightBankArray)
-    private val engine = Module(new DotProductEngine)
+    private val engine = Module(new DotProductEngine(accWidth))
 
     // 外部加载 X：将输入行写入 XRowBuffer
     xBuffer.io.wen := io.xLoadWen

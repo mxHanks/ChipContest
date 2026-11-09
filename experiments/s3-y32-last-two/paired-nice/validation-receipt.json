@@ -1,0 +1,110 @@
+{
+  "status": "PASS_MODULE_RTL_ROOT_FINAL",
+  "result_file": "build/last-two-20261109/integrated-paired-nice-replay-final/result.json",
+  "result_sha256": "ac15b304796142ccc30bbc535f922af9ac729de3185c965c02c4ca08ad4f9730",
+  "runs": 31,
+  "used_source_files": 42,
+  "source_drift": [],
+  "source_variant_sha256": {
+    "README.md": "8a26effcdccaf544b2d102c70e5e484ba20c1a9d51b00a3e2f98495f08e4fd99",
+    "rowpair_direct_bridge.v": "8b4e12891c8ef7ec7033a3ee2089845277b40e772c0bf6ebc83fe885357bfe83",
+    "tb_rowpair_nice_real.sv": "7be37249302cb5d63777cdc99b6597ff33a73c1ed1916d0819f6cae1cc99a209",
+    "run_probe.py": "ff0f4c9875a9b901a3804cfb20b52a3a8e50bce0a3bcd26bf706bb75226f8b7b",
+    "xu_nice_drain8.v": "dc7690d5d8ead50e84e7bc1d378c0a11ebf8f2db37bca23d1a43dfe751f2901a",
+    "tb_nice_pair_errors.sv": "84cb9563a2cd5f92a8c83878051d0c894fbc399faa3baced5a303b332078c756"
+  },
+  "matrix": [
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 221760,
+      "cmd_period": 1,
+      "write_latency": 0,
+      "vector_mode": 0,
+      "name": "real-fast-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 119840,
+      "cmd_period": 1,
+      "write_latency": 0,
+      "vector_mode": 0,
+      "name": "real-fast-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 0,
+      "name": "real-mixed-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195130,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 0,
+      "name": "real-mixed-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 1,
+      "write_latency": 3,
+      "vector_mode": 0,
+      "name": "real-service60-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195128,
+      "cmd_period": 1,
+      "write_latency": 3,
+      "vector_mode": 0,
+      "name": "real-service60-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 250272,
+      "cmd_period": 1,
+      "write_latency": 5,
+      "vector_mode": 0,
+      "name": "real-service80-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 245568,
+      "cmd_period": 1,
+      "write_latency": 5,
+      "vector_mode": 0,
+      "name": "real-service80-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 1,
+      "name": "task0-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195130,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 1,
+      "name": "task0-1"
+    }
+  ],
+  "author_prior_receipt": "validation-receipt-author-r2.json preserves author r2 and its earlier runner/README hashes; root final adds preflight-only path guard and independently reruns all31 native jobs",
+  "scope": "4-state Icarus module RTL only, real generated MAC, checked synthetic LSU sink; no CPU, MMIO, clear-window, area, STA or independent DMA claim"
+}

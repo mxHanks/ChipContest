@@ -28,10 +28,17 @@ class MacPEIO extends Bundle {
  * Outputs:
  *  - result = ACC ( X * W + bias)
  */
-class MacPE extends Module {
+/** accWidth defaults to the historical generic 48-bit accumulator. A narrower
+ * instance is a bounded-dot-product specialization: its caller must ensure
+ * that every partial sum fits, not just the final result. For signed16 inputs,
+ * signed40 bias and at most 64 products, 41 bits cover the complete domain.
+ * The public result remains signed48 through sign extension.
+ */
+class MacPE(accWidth: Int = 48) extends Module {
+    require(accWidth >= 40 && accWidth <= 48, "Accumulator must represent signed40 bias")
 
     val io: MacPEIO = IO(new MacPEIO)
-    private val ACC: SInt = RegInit(0.S(48.W)) // 存储当前的和
+    private val ACC: SInt = RegInit(0.S(accWidth.W)) // Only this internal accumulator is specialized
 
     when(io.init) {
         ACC := io.bias

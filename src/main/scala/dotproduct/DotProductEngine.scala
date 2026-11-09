@@ -36,7 +36,8 @@ class DotProductEngineIO extends Bundle {
  *  - weightRen     向 权重存储器 发送 同步读取使能
  *  - weightReadK   指定要预取的权重序号（0~63）
  */
-class DotProductEngine extends Module {
+class DotProductEngine(accWidth: Int = 48) extends Module {
+    require(accWidth >= 41 && accWidth <= 48, "64 signed16 products plus signed40 bias require at least 41 bits")
 
     val io: DotProductEngineIO = IO(new DotProductEngineIO)
 
@@ -44,7 +45,7 @@ class DotProductEngine extends Module {
     private val resultReg = RegInit(VecInit(Seq.fill(8)(0.S(48.W))))
 
     private val controller = Module(new MacController)
-    private val peArray = Module(new MacPEArray)
+    private val peArray = Module(new MacPEArray(accWidth))
 
     // 控制器
     controller.io.start := io.start

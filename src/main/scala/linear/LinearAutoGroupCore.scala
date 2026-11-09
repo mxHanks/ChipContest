@@ -38,10 +38,10 @@ class LinearAutoGroupCoreIO extends LinearCachedCoreIO {
   * producer exists, and count cannot increase until that launch completes.
   * X/W/bias writes must be excluded by the host wrapper throughout rowActive.
   */
-class LinearAutoGroupCore(useBiasSram: Boolean = true) extends Module {
+class LinearAutoGroupCore(useBiasSram: Boolean = true, accWidth: Int = 48) extends Module {
     val io = IO(new LinearAutoGroupCoreIO)
     io.biasSramCapability := (if (useBiasSram) "h42530001".U(32.W) else 0.U(32.W))
-    private val core = Module(new LinearComputeCore)
+    private val core = Module(new LinearComputeCore(accWidth))
     private val active = RegInit(false.B)
     private val running = RegInit(false.B)
     private val produced = RegInit(0.U(6.W))

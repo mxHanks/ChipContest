@@ -24,11 +24,11 @@ class MacPEArrayIO extends Bundle {
  * 其中 x 为 8 个 PE 共享，而 8 个 w 元素独立。
  * 状态受 MacController 控制。
  */
-class MacPEArray extends Module {
+class MacPEArray(accWidth: Int = 48) extends Module {
 
     val io: MacPEArrayIO = IO(new MacPEArrayIO)
 
-    private val pes: Seq[MacPE] = Seq.fill(8)(Module(new MacPE))
+    private val pes: Seq[MacPE] = Seq.fill(8)(Module(new MacPE(accWidth)))
 
     for (i <- 0 until 8) {
         val pe = pes(i)

@@ -1,0 +1,118 @@
+{
+  "status": "PASS_MODULE_RTL_ONLY",
+  "result_file": "build/last-two-20261109/dma-checks/portable-final-r2/result.json",
+  "result_sha256": "3295c6d459cc5e435146527f3ba26a00c4322ed5d1ff55842b218751f25ce5c1",
+  "runs": 31,
+  "used_source_files": 42,
+  "source_drift": [],
+  "source_variant_sha256": {
+    "README.md": "e3297f699b79f44dc2406315c41aaaa6ec81e1d4de2f80334dea1f5a28e35d43",
+    "rowpair_direct_bridge.v": "8b4e12891c8ef7ec7033a3ee2089845277b40e772c0bf6ebc83fe885357bfe83",
+    "run_probe.py": "66a55bb06284f764588d72040a2eea21b2773f2b58a2af8fd1f9a3947bfc4a80",
+    "tb_nice_pair_errors.sv": "84cb9563a2cd5f92a8c83878051d0c894fbc399faa3baced5a303b332078c756",
+    "tb_rowpair_nice_real.sv": "7be37249302cb5d63777cdc99b6597ff33a73c1ed1916d0819f6cae1cc99a209",
+    "xu_nice_drain8.v": "dc7690d5d8ead50e84e7bc1d378c0a11ebf8f2db37bca23d1a43dfe751f2901a"
+  },
+  "matrix": [
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 221760,
+      "cmd_period": 1,
+      "write_latency": 0,
+      "vector_mode": 0,
+      "name": "real-fast-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 119840,
+      "cmd_period": 1,
+      "write_latency": 0,
+      "vector_mode": 0,
+      "name": "real-fast-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 0,
+      "name": "real-mixed-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195130,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 0,
+      "name": "real-mixed-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 1,
+      "write_latency": 3,
+      "vector_mode": 0,
+      "name": "real-service60-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195128,
+      "cmd_period": 1,
+      "write_latency": 3,
+      "vector_mode": 0,
+      "name": "real-service60-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 250272,
+      "cmd_period": 1,
+      "write_latency": 5,
+      "vector_mode": 0,
+      "name": "real-service80-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 245568,
+      "cmd_period": 1,
+      "write_latency": 5,
+      "vector_mode": 0,
+      "name": "real-service80-1"
+    },
+    {
+      "mode": 0,
+      "requests": 99,
+      "cycles": 224136,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 1,
+      "name": "task0-0"
+    },
+    {
+      "mode": 1,
+      "requests": 50,
+      "cycles": 195130,
+      "cmd_period": 3,
+      "write_latency": 2,
+      "vector_mode": 1,
+      "name": "task0-1"
+    }
+  ],
+  "baseline_parent": "e984bad936855debfc5fa01f04bcbc6252d59ecc",
+  "baseline_e203": "dba1b5f82395b762f126387a1840e6a843e3a01a",
+  "not_claimed": [
+    "independent DMA master",
+    "CPU/SoC integration",
+    "total task speedup",
+    "PPA/STA/energy",
+    "physical clear window for this fixture"
+  ],
+  "vector_path_limit_ascii_bytes": 128
+}
