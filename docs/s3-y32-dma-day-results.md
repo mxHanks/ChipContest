@@ -4,7 +4,7 @@
 
 ## 三项判定
 
-- **工程与证据：开发实现及测试完成，交付包正在封装。** 真实 E203 CPU、外围 DMA、实际仲裁与共享 ICB 存储组成完整候选；单层和完整 12 层均有冻结源码、ELF/image、原始日志、工具身份及物理清零记录。包的最终校验以交付清单为准。
+- **工程与证据：完成。** 真实 E203 CPU、外围 DMA、实际仲裁与共享 ICB 存储组成完整候选；单层和完整 12 层均有冻结源码、ELF/image、原始日志、工具身份及物理清零记录。已在仓库外解包核对全部文件，并从无 Git 的冻结目录重新编译、重放完整 12 任务；304,128 个输出及 1,514,236 拍主口径逐层复现。包的最终身份以交付清单为准。
 - **性能：开发完整 12 任务周期目标达到。** 主口径 **1,514,236 拍、1,188.72 task/s**；包含 clear 后 gap 为 **1,514,728 拍、1,188.33 task/s**。两种新模式各核对 **304,128 个 Y32 输出**，每层独立低于预算。
 - **面积／时序／正式资格：未完成验证。** 候选本地标准单元映射通过；旧基线映射因结构组合环失败，不能计算净面积增幅或认定 25% 软预算通过。未做 STA、门级、正式等价、能耗或官方样本／资格验收。150 MHz 是仿真刺激和换算条件。
 
@@ -66,7 +66,7 @@
 - 逐事务比对 DMA 与共享端点地址、方向、数据、mask、响应身份；无提前 completion 或跨任务残留。断言开启；厂商 IP 原有受控 SVA 配置沿基线保留。
 - 交付核验从冻结日志重算周期和计数，检查源／ELF／image／仿真器哈希、向量和独立整数 oracle；14 个损坏日志负例均被拒绝。
 
-主证据目录 [build/dma-day-20261109](../build/dma-day-20261109)：`cpu-dual-full12-r2`、`cpu-single-full12-r2`、`cpu-dual-task0-final-r2`、`cpu-dual-stall31-r2`、`protocol-r4`、`fabric-preflight`、`fallback-task0-r1`、`delivery-audit-r3.json`。原 8 PE 证据为 `build/bias-demand-20261109/full12`；核心原件为 `build/dma-core-checks-20261109/final-r2`。
+主证据目录 [build/dma-day-20261109](../build/dma-day-20261109)：`cpu-dual-full12-r2`、`cpu-single-full12-r2`、`cpu-dual-task0-final-r2`、`cpu-dual-stall31-r2`、`protocol-r4`、`fabric-preflight`、`fallback-task0-r1`、`delivery-audit-final.json`。原 8 PE 证据为 `build/bias-demand-20261109/full12`；核心原件为 `build/dma-core-checks-20261109/final-r2`。
 
 ## 面积及缺项
 
@@ -83,3 +83,5 @@
 单在途、512 B X 与 224 B 结果缓冲已通过预算，未继续扩 PE、深 FIFO 或 41 位特化。当前瓶颈以有效 MAC 为主；下一步应先闭合同条件基线组合环与正式 PPA／资格，然后再决定是否值得压缩组间和启动开销。任何正式频率或分数结论必须等待相应证据。
 
 复现命令见 [CPU 验证说明](../experiments/s3-y32-dma-day/CPU-VALIDATION.md) 和 [接口说明](../experiments/s3-y32-dma-day/README.md)。本地父子补丁、bundle、证据清单及包校验以最终交付清单为准。
+
+本地交付入口：[完整复现包](../build/dma-delivery-20261109/r2/s3-y32-dma-day-evidence.tar.gz)；[包身份清单](../build/dma-delivery-20261109/r2/package.json)。包内含父子提交 bundle、binary patch、回退原件、全部最终日志和缺失诊断说明。独立解包重编译重放原件为 `build/dma-day-20261109/portable-replay-r2`；初次重放在桌面执行器重启后进程句柄消失，原始部分结果保留并记为中断，未计为 PASS。
