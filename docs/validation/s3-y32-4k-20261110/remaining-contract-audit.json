@@ -1,0 +1,127 @@
+{
+  "schema": "s3-y32-4k-remaining-contract-audit-v1",
+  "audited_at": "2026-11-10T15:36:06.801905+00:00",
+  "scope": "targeted existing local document and sealed result read-only audit; no new RTL, simulation, EDA, server access, or external messages",
+  "goal_complete": false,
+  "candidate": {
+    "e203": "a80dd184536e0f2312c62768d5acf4ba1b01c34e",
+    "cpu_result_status": "PASS",
+    "outputs": 304128,
+    "principal_cycles": 428915,
+    "including_gap_cycles": 429431,
+    "ppa_status": "PREPARED_NOT_SYNTHESIZED",
+    "preflight_status": "PASS"
+  },
+  "gates": [
+    {
+      "id": "Q1",
+      "name": "official platform and test boundary",
+      "status": "UNVERIFIED",
+      "missing": [
+        "official2026 SDK/SoC release identity and interface allowed-change contract",
+        "shared64/new-master/rebank eligibility",
+        "official input loading and timing boundary mapping"
+      ]
+    },
+    {
+      "id": "Q2",
+      "name": "same-candidate macro adapter equivalence",
+      "status": "UNVERIFIED",
+      "missing": [
+        "candidate-level validation of weight/bias and ITCM/DTCM model substitutions with selected official macro contract"
+      ]
+    },
+    {
+      "id": "Q3",
+      "name": "complete150MHzSTA",
+      "status": "NOT_RUN",
+      "missing": [
+        "new candidate mapped netlist and all timing/electrical/coverage reports",
+        "authoritative external clock/reset/IO contract or explicitly bounded engineering assumptions"
+      ]
+    },
+    {
+      "id": "Q4",
+      "name": "charged area<=2.25mm2",
+      "status": "NOT_RUN_AND_UNIT_CONTRACT_UNVERIFIED",
+      "missing": [
+        "new candidate unique mapped leaf area inventory",
+        "authoritative standard-cell area dimension and organizer exact SRAM price table"
+      ]
+    },
+    {
+      "id": "Q5",
+      "name": "same frozen configuration final acceptance",
+      "status": "PARTIAL",
+      "proved": [
+        "CPU full12 functional/cycle result and dirty-start physical clear are sealed",
+        "PPA preparation explicitly bound to same CPU result",
+        "preflight geometry inventory prepared"
+      ],
+      "missing": [
+        "Q1 through Q4 completion and final identity/evidence seal"
+      ]
+    }
+  ],
+  "primary_documents_to_obtain": [
+    "official2026 platform/SDK/interface modification and evaluation contract",
+    "standard-cell area unit/library identity plus organizer SRAM model/price package",
+    "HF/PLL/LF/JTAG/reset/IO constraints package"
+  ],
+  "additional_primary_local_source_resolving_official_gaps": null,
+  "search_limit": "No repeated broad search. Existing previously catalogued materials were read. Missing locally collected primary contract evidence is not proof no such files exist elsewhere.",
+  "inputs": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/docs/s3-y32-4k-acceptance.md": {
+      "sha256": "ccd9c42ee12c1018680770a189bd035ead5dd793a37eec37f1ba0fc0155c8439",
+      "bytes": 6691
+    },
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/goal-official-contract-catalog.md": {
+      "sha256": "88863832b843e7f6b4983150e64f74f79484aa753bab7c3edd9e65cac5b44ba8",
+      "bytes": 12536
+    },
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/docs/platform-interface.md": {
+      "sha256": "d38ea9e9f109ea321ea4c07e99fdf0ea4e9b68feaca3afbfd56bf5f89e62d777",
+      "bytes": 14540
+    },
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-4k/ppa/README.md": {
+      "sha256": "9ec2482010dca471d451fe0a2c5e3d108f01be3264d0fcc485fbdb4981bd339d",
+      "bytes": 4822
+    },
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-4k/ppa/hierarchy_contract.tcl": {
+      "sha256": "7296ec5f486f6e2c431df1565e58c0df19f929ad62ddf67ce60423997d8a9a7a",
+      "bytes": 2694
+    },
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/ppa-final-prepared-r2/manifest.json": {
+      "sha256": "1b26af716a3e34ed58302b659d6cbee72c88662eb4212d81dc5eaa6ced1e0c4c",
+      "bytes": 84184
+    },
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/ppa-final-prepared-r2/preflight/result.json": {
+      "sha256": "676ee1e029144cb1a21c16db40b0ee6220cce730c24e55c05fd6e970f4ed6178",
+      "bytes": 7531
+    },
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/cpu-full12-r2/result.json": {
+      "sha256": "300bf5e26f354d4fe0813c77309fd7a91d80ce4db1a8755bc4ae5e0dde480f2a",
+      "bytes": 56866
+    },
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/contract/coverage-electrical-disposition.md": {
+      "sha256": "fb97ffb539c8d3955734943ecc2b8529dc74fe76affef034b25d975b0c1f1ef5",
+      "bytes": 7911
+    },
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tools/ppa/xu_full_soc.sdc": {
+      "sha256": "c15ede0fc2c65771f87e2d6aee763b4ea0d53934868ca807b4785c36182fce7c",
+      "bytes": 6369
+    }
+  },
+  "preflight_result_keys": [
+    "cell_reference_counts",
+    "engines",
+    "log_sha256",
+    "mac_pe",
+    "macro_groups",
+    "macro_scopes_unique",
+    "macros",
+    "scope",
+    "status",
+    "xml_sha256"
+  ]
+}
