@@ -67,7 +67,7 @@ def main():
   path=ROOT/'docs'/name
   if path.exists():shutil.copy2(path,docs/name)
  evidence=out/'evidence';evidence.mkdir();base=ROOT/'build/parallel4k-20261110'
- for name in ('goal-baseline.json','goal-execution.json','task0-bottleneck-r1.json','dma64-lint-failure-disposition.json','dma64-error-code-r2-amendment.json','cpu-core-pins-r1.json','cpu-replay-guard-amendment-r1.json'):
+ for name in ('goal-baseline.json','goal-execution.json','task0-bottleneck-r1.json','dma64-lint-failure-disposition.json','dma64-error-code-r2-amendment.json','cpu-core-pins-r1.json','cpu-replay-guard-amendment-r1.json','delivery-rebuild-proof-r1.json','completion-audit-r1.json','completion-audit-r2.json'):
   path=base/name
   if path.exists():shutil.copy2(path,evidence/name)
  for name in ('core-screen-r1','core-matrix-r1','fabric-r1','fabric-r2','dma-screen-r1','dma-screen-r2','dma-reset-recovery-r3','fallback-preprocess-r1','independent-audit-r1'):
@@ -77,6 +77,20 @@ def main():
   for path in directory.rglob('*'):
    if path.is_file() and path.suffix in ('.log','.json','.md') and not any(x in ('obj','source','simulator') for x in path.relative_to(directory).parts):
     dst=target/path.relative_to(directory);dst.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(path,dst)
+ for pattern in ('dma64-lint-r*.log','core-generation-*.log'):
+  for path in base.glob(pattern):shutil.copy2(path,evidence/path.name)
+ for directory in ('storage-inventory-r1','delivery-rebuild-r1'):
+  source=base/directory
+  if source.exists():
+   target=evidence/directory;target.mkdir()
+   for path in source.iterdir():
+    if path.is_file() and path.suffix in ('.json','.log','.md'):shutil.copy2(path,target/path.name)
+ server=ROOT/'build/server-4k-synth-20261110/final-r3'
+ if server.exists():
+  target=out/'prepared-synthesis';target.mkdir()
+  for name in ('candidate.tar.gz','candidate.receipt.json','candidate.review.json'):
+   path=server/name
+   if path.is_file():shutil.copy2(path,target/name)
  for path in base.glob('cpu-*-selection-audit.json'):shutil.copy2(path,evidence/path.name)
  for repo,base_commit,name in [(ROOT/'third-party/e203_hbirdv2','45e61b6101ad6f0aaa7583098294ffb1550f1f2d','hardware.patch'),(ROOT,'655713b304597ca5b2810a0940ac3f1850072d63','parent.patch')]:
   (out/name).write_bytes(subprocess.check_output(['git','diff','--binary',base_commit,'HEAD'],cwd=repo))

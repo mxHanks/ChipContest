@@ -1,0 +1,85 @@
+{
+  "schema": "s3_4k_requirement_completion_audit_v1",
+  "checked_at_utc": "2026-11-10T15:29:32.314746+00:00",
+  "goal_complete": false,
+  "requirements": [
+    {
+      "requirement": "same frozen64PE candidate",
+      "status": "PROVEN",
+      "evidence": "cpu-full12-r2/result.json + independent-audit-r1/review-final-r2.json",
+      "finding": "Final childa80dd184; every productionRTL hash matches.42CPU untouched."
+    },
+    {
+      "requirement": "exact signed16/40 and Y32 RNE full12",
+      "status": "PROVEN",
+      "evidence": "independent-audit-r1/final-golden-oracle-review.json + cpu-full12-r2/simulation.log",
+      "finding": "304128 exactoutputs plus independent denseintegeroracle and packedW identity."
+    },
+    {
+      "requirement": "physicalclear independenttaskparameters",
+      "status": "PROVEN",
+      "evidence": "cpu-full12-r2/simulation.log physicalclear and publicfixture records",
+      "finding": "Eachcountedtask dirty W/bias/X, everyrequiredaddresswritten, internalpayloadzero."
+    },
+    {
+      "requirement": "CPU descriptors fences completion retirement",
+      "status": "PROVEN_LOCAL_SCOPE",
+      "evidence": "cpu-full12-r2/source/tests/dma_day_main.c + simulation.log",
+      "finding": "RealCPU MMIO/fences/status;20,192accepts/responses each; no earlydone."
+    },
+    {
+      "requirement": "backpressure read/writefault reset inflight recovery",
+      "status": "PROVEN_LOCAL_SCOPE",
+      "evidence": "dma-screen-r2/receipt.json + dma-reset-recovery-r3/receipt.json",
+      "finding": "LastY97edgehold, firsterrorabort/drain, threeacceptedpendingresetfreshdifferentlayerrecovery."
+    },
+    {
+      "requirement": "true shared64 no storagebackdoor",
+      "status": "PROVEN_LOCAL_SCOPE",
+      "evidence": "fabric-r2/result.json + cpu-full12-r2/source/tests/tb_dma64_soc.sv",
+      "finding": "256macrorealendpoint, hostpublicsource/poison/readback, ITCMbootloadexceptionexplicit."
+    },
+    {
+      "requirement": "full12cyclethreshold and eachlayerthreshold",
+      "status": "PROVEN_AT_ASSUMED_CLOCK",
+      "evidence": "cpu-full12-r2/result.json",
+      "finding": "428915<=450000, each35742/35743<=37500;gap516 separately, firmware429720."
+    },
+    {
+      "requirement": "realachieved150MHz completeSTA",
+      "status": "MISSING",
+      "evidence": "ppa-final-prepared-r2/manifest.json",
+      "finding": "Onlypreparedreferenceconstraints; no newSTA. OldviolationsnotclosedbyRTLsimulation."
+    },
+    {
+      "requirement": "officialchargedarea<=2.25mm2",
+      "status": "MISSING",
+      "evidence": "ppa-final-prepared-r2/manifest.json",
+      "finding": "No newmappedarea, authoritativeunit andofficialmacropricingstillmissing."
+    },
+    {
+      "requirement": "officialshared64platformeligibility",
+      "status": "UNVERIFIED",
+      "evidence": "goal-official-contract-catalog.md",
+      "finding": "No explicit sourceconfirms sharedplatformrebanks/wideportqualification."
+    },
+    {
+      "requirement": "localparentchildcommits fallback",
+      "status": "PROVEN",
+      "evidence": "parent4b9db53/childa80dd184 + fallback-preprocess-r1/result.json",
+      "finding": "Olddefaultandlegacy32 preprocessedtokenssame. No push."
+    },
+    {
+      "requirement": "logs source ELF image vectors tools identity handoff package",
+      "status": "PROVEN",
+      "evidence": "delivery-r1/SHA256.json + docs/s3-y32-4k-handoff.md",
+      "finding": "411-file sealed archive identity verified; independently rebuilt from package-onlysource and completedCPUfull12 again,304128exact,428915cycles."
+    },
+    {
+      "requirement": "completeallGoalrequirements",
+      "status": "NOT_ACHIEVED",
+      "evidence": "thiscompletionaudit",
+      "finding": "Function/cyclegatespass. PPA/officialqualificationmissing; keepactive."
+    }
+  ]
+}
