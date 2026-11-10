@@ -86,3 +86,5 @@
 复现包已完成独立重建验证：只用封存包内RTL、固件和向量重建可执行模型，再跑完整12任务，仍为428,915主周期／429,431含gap周期、304,128个精确Y32。原始构建命令、日志与哈希保存在 `build/parallel4k-20261110/delivery-rebuild-r1`，证明在 `delivery-rebuild-proof-r1.json`；不依赖工作区当前Git或活跃RTL。
 
 原始RTL时序状态清单：最终30,993bit，回退9,413bit，净增21,580bit。X双缓冲2KiB、raw48结果FIFO768B；W16宏／bias1宏／共享256宏容量不增。逐实例逐变量账本为 `storage-inventory-r1/final-result-r2.json`；原始声明位不等于映射触发器或面积。清单曾遗漏旧端点物理adapter状态，已保留旧结果并通过独立处置文件明确作废。
+
+最终交付包：`build/parallel4k-20261110/delivery-final-r2.tar.gz`（5,656,296B，438个文件身份已直接核验压缩包内容；SHA256 `464bea138c254d842b1db656da0e8feb42e04e509f9ab85d92e0cd30736b543f`）。最终包的CPU源码/ELF/image/仿真模型与已独立重建复测通过的封存版本完全一致，新增内容为最终文档、资源清单、复建证据和未执行的综合输入包。无凭据、无服务器截屏；本轮未push。
