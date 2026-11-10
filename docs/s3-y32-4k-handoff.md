@@ -1,6 +1,6 @@
 # 64 PE／真实64位搬运候选联调 handoff
 
-2026-11-10。本候选用于本机周期实验，尚未替换 GitHub 已发布16PE联调版。
+2026-11-10。本交付为 **64 PE＋共享W/bias＋真实64位搬运的仿真定稿**。主仓库和硬件子仓库通过独立分支发布，16PE联调版作为回退保留。
 用户指定本轮先本机仿真，达到瓶颈后定稿，再集中综合；今天23:59上海时间停止新增实验。
 最终功能、周期、面积、时序、正式资格分别判定，不用其中一项替代其他项。
 
@@ -8,9 +8,50 @@
 
 - 回退：父 `655713b304597ca5b2810a0940ac3f1850072d63`，E203子 `45e61b6101ad6f0aaa7583098294ffb1550f1f2d`。
 - 候选硬件：E203子分支 `codex/s3-y32-4k-candidate`，提交 **`a80dd184536e0f2312c62768d5acf4ba1b01c34e`**。
-- 父分支 `codex/s3-y32-4k-goal`。本轮仅本地提交，不自动推送或合并。
+- 主仓库发布分支 [`codex/s3-y32-4k-goal`](https://github.com/mxHanks/ChipContest/tree/codex/s3-y32-4k-goal)；硬件发布分支 [`codex/s3-y32-4k-candidate`](https://github.com/mxHanks/e203_hbirdv2/tree/codex/s3-y32-4k-candidate)。本轮发布已获用户明确授权，主仓库以gitlink固定上述硬件提交。
 - 新构建同时定义 `XU_MATRIX_DMA`、`XU_MATRIX_DMA64`。不定义新宏时保留原默认／32位DMA接口。四个修改模块在这两个旧构建模式的预处理代码均与回退一致。
 - 42个CPU核文件逐文件SHA无变更；CPU、LSU、BIU及原在途配置不改。
+
+## 获取交付与结果等级
+
+```sh
+git clone --branch codex/s3-y32-4k-goal --recurse-submodules https://github.com/mxHanks/ChipContest.git ChipContest-4k
+cd ChipContest-4k
+git submodule status
+```
+
+硬件子模块应固定在`a80dd184536e0f2312c62768d5acf4ba1b01c34e`；按主仓库gitlink检出，不用子仓库的后续分支头替换本次证据对应版本。
+
+- 完整CPU12任务：304,128个Y32全部正确，含真实clear共428,915拍。
+- 按假定150MHz换算：4,196.64task/s；含gap4,191.59；CPU固件完整同步区间4,188.77。
+- 同源独立重建复测一致；这些是功能/周期证据，**面积、实际150MHz时序和正式比赛资格未验证**。
+- [完整结果](s3-y32-4k-results.md) · [原始日志及审计](validation/s3-y32-4k-20261110/README.md) · [正式验收待办](s3-y32-4k-acceptance.md)。
+
+## 可下载复现包
+
+[封存包 frozen-delivery.tar.gz](validation/s3-y32-4k-20261110/frozen-delivery.tar.gz)，5,656,296B，438个文件；包含冻结RTL、固件ELF/image、12组向量、原始日志、工具身份、必要补丁及未执行的综合输入包。
+
+SHA256：`464bea138c254d842b1db656da0e8feb42e04e509f9ab85d92e0cd30736b543f`。
+
+以下步骤只验证交付身份，不启动仿真或综合：
+
+```sh
+sha256sum docs/validation/s3-y32-4k-20261110/frozen-delivery.tar.gz
+mkdir -p build/4k-handoff
+tar -xzf docs/validation/s3-y32-4k-20261110/frozen-delivery.tar.gz -C build/4k-handoff
+python3 -B build/4k-handoff/delivery-final-r2/REPLAY.py
+```
+
+包内CPU RTL/ELF/image/原始可执行模型与已经独立重建复测的版本一致。`REPLAY.py`默认仅核对哈希；本轮用户要求先发布、不继续测量。未来显式`--run`才仿真，`--rebuild`还会重编冻结RTL，需要另行明确新的实验时间范围。包内文档保留封存时状态，最新发布说明以本handoff及仓库结果页为准。
+
+## 硬件顶层接入
+
+1. 同时定义`XU_MATRIX_DMA`与`XU_MATRIX_DMA64`，编译`rtl/e203/perips/`中的新模块和原有生成依赖。新增入口为`xu_matrix_dma64`、`xu_dma64_shared_arb`、`xu_shared_icb_sram64`、`LinearTileDmaCore`及`TileWeightBankArray`／`TileWeightBank`／`TileXRowBuffer`。
+2. 将`e203_soc_top`的`EXTERNAL_SYSMEM`设为1，连接`ext_sysmem_cmd/rsp`：地址32位、数据/响应64位、mask8位，并传递新的`ext_sysmem_cmd_is32`。CPU32事务的半字选择与mask由外围适配保留；DMA内部宽事务的is32为0。
+3. 真实共享端点使用SoC导出的`shared_mem_clk`和`shared_mem_rst_n`，与受测外围保持同一时钟/复位合同。共享容量512KiB、256宏不变，64深度bank×4条16位lane；一次DMA事务同时访问4条lane。
+4. [CPU测试台](../experiments/s3-y32-4k/validation/tb_dma64_soc.sv)包含完整功能接线；[集中综合包装](../experiments/s3-y32-4k/ppa/xu_soc_dma64_ppa_top.sv)提供无测试host的端点连接示例。后者目前只做过本地接口预检，不代表综合或时序通过。
+
+旧默认构建及32位DMA构建使用原路径。软件联调应明确选中新构建及真实共享端点，再按下述ABI提交任务；不得把开发用HOST ready/ACK握手当作新生产端口。
 
 ## 固定数据合同
 

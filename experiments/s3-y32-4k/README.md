@@ -1,6 +1,8 @@
-# Local 64 PE / true64 experiment
+# 64 PE / true64 simulation candidate
 
-This is an isolated experimental candidate, not the published v1 handoff.
+This is the isolated64PE simulation delivery. The published16PE v1 stays as fallback.
+See [hardware/software handoff](../../docs/s3-y32-4k-handoff.md) for the recursive
+GitHub checkout, MMIO contract and downloadable frozen evidence package.
 Parent base `655713b304597ca5b2810a0940ac3f1850072d63`, E203 base
 `45e61b6101ad6f0aaa7583098294ffb1550f1f2d`; candidate uses both
 `XU_MATRIX_DMA` and `XU_MATRIX_DMA64`. Without the new define, the legacy
