@@ -1,0 +1,20 @@
+{
+  "scope": "CPU task0 R1 measured, not final R2/full12/PPA proof",
+  "principal_cycles": 35742,
+  "payload_cycles": 34714,
+  "clear_cycles": 1028,
+  "gap_cycles": 43,
+  "pure_mac_steps": 26624,
+  "mac_share_of_principal": 0.7448939622852666,
+  "wb_window_cycles": 5078,
+  "wb_ideal_on_measured_throttle_cycles": 5077.333333333333,
+  "xy_window_cycles": 29635,
+  "xy_non_mac_cycles": 3011,
+  "unallocated_payload_cycles": 1,
+  "task_per_second_assumed_150mhz": 4196.74332717811,
+  "throughput_margin_over_4k_percent": 4.918583179452751,
+  "cycle_margin_to_37500_percent": 4.688,
+  "decision": "Retain64PE, one ordered external request and bounded existing queues. WB is already at actual endpoint throughput; next potential gains are MAC/group/tile control, not deeper generic DMA. Freeze only after same-source R2 CPU/full12/protocol passes.",
+  "no_change_to_throttle_clear_or_timing_boundaries": true,
+  "synthesis_started": false
+}

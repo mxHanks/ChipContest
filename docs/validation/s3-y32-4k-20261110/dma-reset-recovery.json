@@ -1,0 +1,150 @@
+{
+  "schema": "dma64_postreset_recovery_v1",
+  "status": "PASS",
+  "scope": "Fresh full99-row numeric task after each of3common reset phases; same frozen R2RTLmodel",
+  "inputs": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/DotProductEngine.sv": "34103993c5c5edb4baa10f50fd1045936435a11bcfd34058f5333b146ed99d45",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/LinearTileDmaCore.sv": "bfe74205e3554c0d00b16aa69a296f1afddd5652094d1eb6d76903817cda1a9e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/MacPE.sv": "74321ca1a17f355f71ecea27807078d42c9be423564d453b2f1de097ffa2ae70",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/MacPEArray.sv": "6d276b23d9fe91821f7b811c10a5361cd1972cb05d8b1ee2b6b6d1cae32a4a55",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/TileWeightBank.sv": "e44d885e304faf608a4f8cf2f4cd13bc4653a34cbd0fe81904f02d51a0a7bf48",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/TileWeightBankArray.sv": "2aa3b687b1e393f4950895ca4bcad4dc4f0668cb60733c944423685a5f760e9a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/TileXRowBuffer.sv": "3881b2db4c1d40ecea60089462ae24e38409de43ec572a600af0029635c427a4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/core-generated-r1/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-4k/xu_matrix_dma64.sv": "6aaa6927e211202acb65bb0ca22478e8e2b070b1f2fc0678db76dea3f21c9cf7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-4k/fabric/xu_dma64_shared_arb.sv": "17538e6b77c9975f1f50eb55a92cf73154c160f1d3e9d58b278d7ae91bdbd9c4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-4k/fabric/xu_shared_icb_sram64.sv": "16b840e884a5ff0eba17129338e7a6c2f69b872b770de14f81104f1a0fab2e0e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/tools/ppa/generic_ramsp_non_ppa.sv": "4a138045dfebeafd9728908627133c2e1b04fa8115fd8abad1ace7fa3235eac7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-4k/dma-test/dma64_test_top.sv": "7e81a0dfc0de5decd00785e20653dfd859f6effcb1a7e5ca44ca90080f321fca",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-4k/dma-test/dma64_test.cpp": "13594b373cc848af13afb2ffab902e94a87ae3b01df8533c57dd395541741de6",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-4k/dma-test/run_dma.py": "2d705bff55492afc52ee6db8d716ee40b3bc0431f706ca85ea83a640a1092148",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_00/x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_00/w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_00/bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_00/y32.mem": "1656994e4ef0daf4de8d5c814c890bc7a143925629ec56dff32ddfa5a1b49c95",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_01/x.mem": "c71a441702b99a6e5d4d9a6dcf4da7b304437a5c55bd83cd89f17f7447b13dca",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_01/w.mem": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_01/bias.mem": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_01/y32.mem": "084f5eb9d7c38abf7d5112dc0c6796f8f122ce55ef800df4d32586c551ca794f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_02/x.mem": "51e47b183ca7528ae1f9c34d713bf7877eafeb70d429ac39cd9688dc9091e2f3",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_02/w.mem": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_02/bias.mem": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_02/y32.mem": "a92d3cda8346ff391ab89455277843b947b9ea2837ab0de7a12423d0a18192c0",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_03/x.mem": "5f1dd9d57106afbff85c96c9d85e1bfa59ff43457b77cf8914e2f5fca2da45d4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_03/w.mem": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_03/bias.mem": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_03/y32.mem": "a2213c1393cc34735a61e24feccf73855506ebafc7d7eec6889fc57b7f4df470",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_04/x.mem": "f981389f3abef58c6df432b49b942d2e5b11d2b15ff1af4955df1a6ac3ba8ebb",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_04/w.mem": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_04/bias.mem": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_04/y32.mem": "85d0eea33b284a782070549f4b4ffa96479911aa6b0903fe36599f3d46b924ee",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_05/x.mem": "09a340b6a55187fdcc5b15cbe601e1b4fbb65545534a3ef5aaf75aae7ecf0456",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_05/w.mem": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_05/bias.mem": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_05/y32.mem": "22c068bc31a060d07df7b14d1adf19c703cf1c07b1af6d50791cd29626daa5f3",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_06/x.mem": "dea4fc9f26ac90123758c605dfab7c74b7df953e709350245b6d5344f17e4a3a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_06/w.mem": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_06/bias.mem": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_06/y32.mem": "b33f910db37acce9c982025081372dcce34f41ef6701acd86262028811e9a92f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_07/x.mem": "64c2a590083e456ac3d838dbc3fec287bf6899440a8a4c377f7ffa200e1a92bf",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_07/w.mem": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_07/bias.mem": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_07/y32.mem": "a7c198500a0ab1296480125a5d1acf1ea8634a52f0c4ad66f1a3e70a0273930b",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_08/x.mem": "8f41479e9c89c62cf12fd69fd5cb966469043516de034bcf6546b06bafc5bcf8",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_08/w.mem": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_08/bias.mem": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_08/y32.mem": "51d5efbfe41a97fd9198d95c2afc323036f24f24f5eb03230c3095b0e9e165c3",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_09/x.mem": "75d3f134c03e0f1a7155458fbb6a65c79e42273b7594ee6e1897772959969550",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_09/w.mem": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_09/bias.mem": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_09/y32.mem": "d64f8e0705fd42baf60c057cfcf8dd67d63f2e53035ac3650bf41e1a38d27ea5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_10/x.mem": "f0cab491f7f6bdfa7df0ebcb6f5a9187233a5b7e3b6ee3bedfe5a727de0ee90e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_10/w.mem": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_10/bias.mem": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_10/y32.mem": "e0629e12ab565a6553055bd9788d2d07afd1fc00b13a200c5a8c14e2614eb5ba",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_11/x.mem": "c5eb2770ec2c0c49a39cc0636e84ac69b9532779d2adce6bbef925745aa75e20",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_11/w.mem": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_11/bias.mem": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors/layer_11/y32.mem": "e5f153fff488b710bc555a82ecb6e1202d9de8d1178c8e1c171bc17da4510a44",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/obj/Vdma64_test_top": "6c2cf3bf64d380d52a5803a877943b2a2d25ca491f9c89c5afa35e60292cacdb",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/experiments/s3-y32-4k/dma-test/dma64_reset_recovery.cpp": "d25322bcaa92963b5c2b33469213afc059d6129f56b6ea5a33408945b07ad097",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/obj/Vdma64_test_top__ALL.a": "a2deaddddbbd993445be38ab5df33890e74aecb6ffe437850c5e6198479a5a6f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/obj/verilated.o": "908e6de86a133be4675334e962c19a43ded18f981724d567311584884748b899",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/obj/verilated_threads.o": "2e212b833be6d655b4a97b54506297cb86039717d9b64538546d2b40e9e5d8c0",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/obj/Vdma64_test_top.h": "19f0b12f13e213a494d2809bf787910590df3228f9ab061e077bcf485b880f81",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/source/dma64_test.cpp": "13594b373cc848af13afb2ffab902e94a87ae3b01df8533c57dd395541741de6"
+  },
+  "commands": [
+    {
+      "name": "compile-driver-only",
+      "command": [
+        "g++",
+        "-Os",
+        "-std=c++17",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/obj",
+        "-I/usr/share/verilator/include",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/source",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-reset-recovery-r3/dma64_reset_recovery.cpp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/obj/verilated.o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/obj/verilated_threads.o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-screen-r2/obj/Vdma64_test_top__ALL.a",
+        "-pthread",
+        "-lpthread",
+        "-latomic",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-reset-recovery-r3/dma64_reset_recovery"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 1.4373808479977015
+    },
+    {
+      "name": "simulation",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-reset-recovery-r3/dma64_reset_recovery",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/publication/cpu-full12-namespaced-r1/vectors",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/dma-reset-recovery-r3/recovery.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 17.811333584999375
+    }
+  ],
+  "source_drift": [],
+  "same_parent_rtl_model_sha256": "a2deaddddbbd993445be38ab5df33890e74aecb6ffe437850c5e6198479a5a6f",
+  "outputs": {
+    "compile-driver-only.log": {
+      "bytes": 705,
+      "sha256": "cd4753caa18eaae733d4c2a8e57b9ceea268b30c102fcbe8d74f14b78c4301c9"
+    },
+    "dma64_reset_recovery": {
+      "bytes": 2121616,
+      "sha256": "b6591c95c60b107b8fdbbed312ad1d719e4b8e8022f33c9a76fd561e51b0dcb7"
+    },
+    "dma64_reset_recovery.cpp": {
+      "bytes": 4085,
+      "sha256": "d25322bcaa92963b5c2b33469213afc059d6129f56b6ea5a33408945b07ad097"
+    },
+    "recovery.json": {
+      "bytes": 817,
+      "sha256": "b8a6e1d6696dff2adfe7c286b18df8c345812b80c35ae0e15570af6cae985d9d"
+    },
+    "recovery.json.phase0.actual-y32.mem": {
+      "bytes": 228096,
+      "sha256": "084f5eb9d7c38abf7d5112dc0c6796f8f122ce55ef800df4d32586c551ca794f"
+    },
+    "recovery.json.phase1.actual-y32.mem": {
+      "bytes": 228096,
+      "sha256": "a92d3cda8346ff391ab89455277843b947b9ea2837ab0de7a12423d0a18192c0"
+    },
+    "recovery.json.phase2.actual-y32.mem": {
+      "bytes": 228096,
+      "sha256": "a2213c1393cc34735a61e24feccf73855506ebafc7d7eec6889fc57b7f4df470"
+    },
+    "simulation.log": {
+      "bytes": 23179,
+      "sha256": "5c27b6db5a5aa4c778533e3ed4df392dee0b41b47bac9145cbad58465c14aa84"
+    }
+  }
+}

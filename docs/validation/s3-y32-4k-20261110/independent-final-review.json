@@ -1,0 +1,392 @@
+{
+  "schema": "parallel4k_independent_evidence_audit_v1",
+  "status": "PASS_FINAL_LOCAL_CYCLE_EVIDENCE",
+  "checked_at": "2026-11-10T15:11:56.206938+00:00",
+  "auditor_sha256": "9132b1bd8a69bc100057490f14c6f6e6748a1d12f1b59b6d2bcf31c27d7171c1",
+  "new_simulation_or_eda": false,
+  "final_child": "a80dd184536e0f2312c62768d5acf4ba1b01c34e",
+  "fallback_child": "45e61b6101ad6f0aaa7583098294ffb1550f1f2d",
+  "production_diff": "A\trtl/e203/perips/LinearTileDmaCore.sv\nA\trtl/e203/perips/TileWeightBank.sv\nA\trtl/e203/perips/TileWeightBankArray.sv\nA\trtl/e203/perips/TileXRowBuffer.sv\nA\trtl/e203/perips/xu_dma64_shared_arb.sv\nA\trtl/e203/perips/xu_matrix_dma64.sv\nA\trtl/e203/perips/xu_shared_icb_sram64.sv\nM\trtl/e203/soc/e203_soc_top.v\nM\trtl/e203/subsys/e203_subsys_main.v\nM\trtl/e203/subsys/e203_subsys_perips.v\nM\trtl/e203/subsys/e203_subsys_top.v",
+  "cpu_files_unchanged": 42,
+  "generated_core_files_identical": 11,
+  "core_input_hashes_verified": 22,
+  "matrix_input_hashes_verified": 80,
+  "fabric_hashes_verified": 7,
+  "dma_r2_input_hashes_verified": 67,
+  "dma_r2_output_hashes_verified": 14,
+  "postreset_recovery_r3": {
+    "input_hashes_verified": 73,
+    "output_hashes_verified": 8,
+    "full_tasks": 3,
+    "exact_y32": 76032,
+    "actual_y32_dump_comparisons": 76032,
+    "all_resets_had_inflight": true
+  },
+  "fallback_static_review_sha256": "d27db166112036ee43879759b6e54538f6a9502eea6f2d8a93efd102293cd326",
+  "dma_r2_full12": {
+    "outputs": 304128,
+    "principal_cycles": 428905
+  },
+  "cpu_runs": [
+    {
+      "run": "cpu-task0-r1",
+      "status": "PASS_FUNCTION_AND_IDENTITY",
+      "result_sha256": "c806ab734ad3905fb2f57adb8be88c27dc6059bec3726a28c1a87b07942ca44d",
+      "raw_log_sha256": "36c64154f9d22acc1c6d206f4f12eba1b316a5cfceb45239d36a52601cbf7609",
+      "source_files": 175,
+      "vector_files": 6,
+      "final_child_rtl_differences": [
+        "perips/xu_matrix_dma64.sv"
+      ],
+      "harness_extra_rtl": [
+        "perips/generic_ramsp_non_ppa.sv",
+        "perips/tile_physical_observer.sv"
+      ],
+      "final_child_matches": false,
+      "rows": 8,
+      "tasks": 1,
+      "warmup": true,
+      "outputs": 25344,
+      "principal_cycles": 35742,
+      "including_gap_cycles": 35785,
+      "gap_cycles": 43,
+      "payload_cycles": 34714,
+      "clear_cycles": 1028,
+      "assumed150mhz_tasks_per_second": 4196.74332717811,
+      "assumed150mhz_including_gap_tasks_per_second": 4191.700433142378,
+      "firmware_counted_cycles": 35810,
+      "assumed150mhz_firmware_interval_tasks_per_second": 4188.774085450991,
+      "required_frequency_hz_for_4000_principal": 142968000.0,
+      "required_frequency_hz_for_4000_including_gap": 143140000.0,
+      "required_frequency_hz_for_4000_firmware_interval": 143240000.0,
+      "each_layer_target_met": true,
+      "full12_cycle_target_met": false,
+      "physical_clear_calls": 2,
+      "physical_clear_intervals": [
+        1027
+      ],
+      "source_manifest_sha256": "533996aad6146eb2e525ccc333bdeba37d29ac18305f5b9acae0a8c8dd4ab6c2",
+      "elf_sha256": "e1eeb6b54db73b3ddb855f34cb9189b020017cceec66e79b0fe85ee28e76bef4",
+      "image_sha256": "3fd25b2ad24a8715ade3922bee96d6f043a61ba5cd709e89c1728d6d9ac1ab7a",
+      "simulator_sha256": "42034ea9b0231ef2547f31e675de686425d1a198f906afe57b17723c3a7f42a1"
+    },
+    {
+      "run": "cpu-full12-r1",
+      "status": "PASS_FUNCTION_AND_IDENTITY",
+      "result_sha256": "8cbea6ed875761f173d5778f67b0d3e5a3992e2f390a7251d11af68089c49025",
+      "raw_log_sha256": "4e047e095fcb027074d976dd72c6d6087224e8b6e518a26d7c80c0509c6bbc64",
+      "source_files": 175,
+      "vector_files": 72,
+      "final_child_rtl_differences": [
+        "perips/xu_matrix_dma64.sv"
+      ],
+      "harness_extra_rtl": [
+        "perips/generic_ramsp_non_ppa.sv",
+        "perips/tile_physical_observer.sv"
+      ],
+      "final_child_matches": false,
+      "rows": 8,
+      "tasks": 12,
+      "warmup": true,
+      "outputs": 304128,
+      "principal_cycles": 428915,
+      "including_gap_cycles": 429431,
+      "gap_cycles": 516,
+      "payload_cycles": 416579,
+      "clear_cycles": 12336,
+      "assumed150mhz_tasks_per_second": 4196.635697049532,
+      "assumed150mhz_including_gap_tasks_per_second": 4191.593061516285,
+      "firmware_counted_cycles": 429720,
+      "assumed150mhz_firmware_interval_tasks_per_second": 4188.774085450991,
+      "required_frequency_hz_for_4000_principal": 142971666.66666666,
+      "required_frequency_hz_for_4000_including_gap": 143143666.66666666,
+      "required_frequency_hz_for_4000_firmware_interval": 143240000.0,
+      "each_layer_target_met": true,
+      "full12_cycle_target_met": true,
+      "physical_clear_calls": 13,
+      "physical_clear_intervals": [
+        1027
+      ],
+      "source_manifest_sha256": "1041ef22fb622f1ac7acff69a6608e74fd2ff74758e8545cf4839ac092a5c7bc",
+      "elf_sha256": "e1eeb6b54db73b3ddb855f34cb9189b020017cceec66e79b0fe85ee28e76bef4",
+      "image_sha256": "3fd25b2ad24a8715ade3922bee96d6f043a61ba5cd709e89c1728d6d9ac1ab7a",
+      "simulator_sha256": "42034ea9b0231ef2547f31e675de686425d1a198f906afe57b17723c3a7f42a1"
+    },
+    {
+      "run": "cpu-row1-r1",
+      "status": "PASS_FUNCTION_AND_IDENTITY",
+      "result_sha256": "605ba1399cea806bec8ff09107f8242c7e1bb3bc867fdc8d348ff942b7327381",
+      "raw_log_sha256": "768cc0f203d11c87140e4478016ce68f5066a3f11ae37e61c8bdb0429c78ea3a",
+      "source_files": 175,
+      "vector_files": 6,
+      "final_child_rtl_differences": [
+        "perips/xu_matrix_dma64.sv"
+      ],
+      "harness_extra_rtl": [
+        "perips/generic_ramsp_non_ppa.sv",
+        "perips/tile_physical_observer.sv"
+      ],
+      "final_child_matches": false,
+      "rows": 1,
+      "tasks": 1,
+      "warmup": true,
+      "outputs": 25344,
+      "principal_cycles": 224994,
+      "including_gap_cycles": 225037,
+      "gap_cycles": 43,
+      "payload_cycles": 223966,
+      "clear_cycles": 1028,
+      "assumed150mhz_tasks_per_second": 666.6844449185312,
+      "assumed150mhz_including_gap_tasks_per_second": 666.5570550620564,
+      "firmware_counted_cycles": 225065,
+      "assumed150mhz_firmware_interval_tasks_per_second": 666.4741296958656,
+      "required_frequency_hz_for_4000_principal": 899976000.0,
+      "required_frequency_hz_for_4000_including_gap": 900148000.0,
+      "required_frequency_hz_for_4000_firmware_interval": 900260000.0,
+      "each_layer_target_met": false,
+      "full12_cycle_target_met": false,
+      "physical_clear_calls": 2,
+      "physical_clear_intervals": [
+        1027
+      ],
+      "source_manifest_sha256": "1041ef22fb622f1ac7acff69a6608e74fd2ff74758e8545cf4839ac092a5c7bc",
+      "elf_sha256": "e1eeb6b54db73b3ddb855f34cb9189b020017cceec66e79b0fe85ee28e76bef4",
+      "image_sha256": "3fd25b2ad24a8715ade3922bee96d6f043a61ba5cd709e89c1728d6d9ac1ab7a",
+      "simulator_sha256": "42034ea9b0231ef2547f31e675de686425d1a198f906afe57b17723c3a7f42a1"
+    },
+    {
+      "run": "cpu-source-stall31-r1",
+      "status": "PASS_FUNCTION_AND_IDENTITY",
+      "result_sha256": "df4af5b74e7a6a9acb720571a9d3acc71d9d004799c9f8562d7bdb64b5d83d66",
+      "raw_log_sha256": "c39a7ee7bb444dc7a132ae903a810a4f3ac2940f873f2b1310fb003f8f8129db",
+      "source_files": 175,
+      "vector_files": 6,
+      "final_child_rtl_differences": [
+        "perips/xu_matrix_dma64.sv"
+      ],
+      "harness_extra_rtl": [
+        "perips/generic_ramsp_non_ppa.sv",
+        "perips/tile_physical_observer.sv"
+      ],
+      "final_child_matches": false,
+      "rows": 8,
+      "tasks": 1,
+      "warmup": true,
+      "outputs": 25344,
+      "principal_cycles": 35772,
+      "including_gap_cycles": 35815,
+      "gap_cycles": 43,
+      "payload_cycles": 34744,
+      "clear_cycles": 1028,
+      "assumed150mhz_tasks_per_second": 4193.223750419323,
+      "assumed150mhz_including_gap_tasks_per_second": 4188.189306156638,
+      "firmware_counted_cycles": 35843,
+      "assumed150mhz_firmware_interval_tasks_per_second": 4184.917557124125,
+      "required_frequency_hz_for_4000_principal": 143088000.0,
+      "required_frequency_hz_for_4000_including_gap": 143260000.0,
+      "required_frequency_hz_for_4000_firmware_interval": 143372000.0,
+      "each_layer_target_met": true,
+      "full12_cycle_target_met": false,
+      "physical_clear_calls": 2,
+      "physical_clear_intervals": [
+        1027
+      ],
+      "source_manifest_sha256": "1041ef22fb622f1ac7acff69a6608e74fd2ff74758e8545cf4839ac092a5c7bc",
+      "elf_sha256": "e1eeb6b54db73b3ddb855f34cb9189b020017cceec66e79b0fe85ee28e76bef4",
+      "image_sha256": "3fd25b2ad24a8715ade3922bee96d6f043a61ba5cd709e89c1728d6d9ac1ab7a",
+      "simulator_sha256": "42034ea9b0231ef2547f31e675de686425d1a198f906afe57b17723c3a7f42a1"
+    },
+    {
+      "run": "cpu-task0-r2",
+      "status": "PASS_FUNCTION_AND_IDENTITY",
+      "result_sha256": "ab649cb7c132a3be779ae84a4287b1f17f2b225f42fbb598c0ea50215c19cab1",
+      "raw_log_sha256": "ee556800dea63f2d5bfa3b413f465fb3a7ee384a64b6deca8e416a0311c203f6",
+      "source_files": 175,
+      "vector_files": 6,
+      "final_child_rtl_differences": [],
+      "harness_extra_rtl": [
+        "perips/generic_ramsp_non_ppa.sv",
+        "perips/tile_physical_observer.sv"
+      ],
+      "final_child_matches": true,
+      "rows": 8,
+      "tasks": 1,
+      "warmup": true,
+      "outputs": 25344,
+      "principal_cycles": 35742,
+      "including_gap_cycles": 35785,
+      "gap_cycles": 43,
+      "payload_cycles": 34714,
+      "clear_cycles": 1028,
+      "assumed150mhz_tasks_per_second": 4196.74332717811,
+      "assumed150mhz_including_gap_tasks_per_second": 4191.700433142378,
+      "firmware_counted_cycles": 35810,
+      "assumed150mhz_firmware_interval_tasks_per_second": 4188.774085450991,
+      "required_frequency_hz_for_4000_principal": 142968000.0,
+      "required_frequency_hz_for_4000_including_gap": 143140000.0,
+      "required_frequency_hz_for_4000_firmware_interval": 143240000.0,
+      "each_layer_target_met": true,
+      "full12_cycle_target_met": false,
+      "physical_clear_calls": 2,
+      "physical_clear_intervals": [
+        1027
+      ],
+      "source_manifest_sha256": "e1a743b5f5826f9307a2e031857fd74f5a01449afed2bc4ba1b04d91aff98571",
+      "elf_sha256": "428430a346e3546ad643bf44ec48210913980acb2178083aaf2a6ee8b16273fc",
+      "image_sha256": "3fd25b2ad24a8715ade3922bee96d6f043a61ba5cd709e89c1728d6d9ac1ab7a",
+      "simulator_sha256": "6d73aa5214719220a6e34f0a3698cd734e83791399fb097d4fe842154ac1393b"
+    },
+    {
+      "run": "cpu-full12-r2",
+      "status": "PASS_FUNCTION_AND_IDENTITY",
+      "result_sha256": "300bf5e26f354d4fe0813c77309fd7a91d80ce4db1a8755bc4ae5e0dde480f2a",
+      "raw_log_sha256": "d46d359a752300be428a0df352a5538955f812110de6dc9869ff31f5f632ecd0",
+      "source_files": 175,
+      "vector_files": 72,
+      "final_child_rtl_differences": [],
+      "harness_extra_rtl": [
+        "perips/generic_ramsp_non_ppa.sv",
+        "perips/tile_physical_observer.sv"
+      ],
+      "final_child_matches": true,
+      "rows": 8,
+      "tasks": 12,
+      "warmup": true,
+      "outputs": 304128,
+      "principal_cycles": 428915,
+      "including_gap_cycles": 429431,
+      "gap_cycles": 516,
+      "payload_cycles": 416579,
+      "clear_cycles": 12336,
+      "assumed150mhz_tasks_per_second": 4196.635697049532,
+      "assumed150mhz_including_gap_tasks_per_second": 4191.593061516285,
+      "firmware_counted_cycles": 429720,
+      "assumed150mhz_firmware_interval_tasks_per_second": 4188.774085450991,
+      "required_frequency_hz_for_4000_principal": 142971666.66666666,
+      "required_frequency_hz_for_4000_including_gap": 143143666.66666666,
+      "required_frequency_hz_for_4000_firmware_interval": 143240000.0,
+      "each_layer_target_met": true,
+      "full12_cycle_target_met": true,
+      "physical_clear_calls": 13,
+      "physical_clear_intervals": [
+        1027
+      ],
+      "source_manifest_sha256": "149a5091586584383c35c47fbe9e2b90fdb6a536a9981008573fc454b4c77d57",
+      "elf_sha256": "428430a346e3546ad643bf44ec48210913980acb2178083aaf2a6ee8b16273fc",
+      "image_sha256": "3fd25b2ad24a8715ade3922bee96d6f043a61ba5cd709e89c1728d6d9ac1ab7a",
+      "simulator_sha256": "6d73aa5214719220a6e34f0a3698cd734e83791399fb097d4fe842154ac1393b"
+    },
+    {
+      "run": "cpu-row1-r2",
+      "status": "PASS_FUNCTION_AND_IDENTITY",
+      "result_sha256": "b79103bccd81e6bd0d35b3bade781a6f672824712cf96f284874ad9e8ca7cb53",
+      "raw_log_sha256": "1f20f2d6f554a3066ac7178f15fc9523f4c61f90bf10002d098c972a45137460",
+      "source_files": 175,
+      "vector_files": 6,
+      "final_child_rtl_differences": [],
+      "harness_extra_rtl": [
+        "perips/generic_ramsp_non_ppa.sv",
+        "perips/tile_physical_observer.sv"
+      ],
+      "final_child_matches": true,
+      "rows": 1,
+      "tasks": 1,
+      "warmup": true,
+      "outputs": 25344,
+      "principal_cycles": 224994,
+      "including_gap_cycles": 225037,
+      "gap_cycles": 43,
+      "payload_cycles": 223966,
+      "clear_cycles": 1028,
+      "assumed150mhz_tasks_per_second": 666.6844449185312,
+      "assumed150mhz_including_gap_tasks_per_second": 666.5570550620564,
+      "firmware_counted_cycles": 225065,
+      "assumed150mhz_firmware_interval_tasks_per_second": 666.4741296958656,
+      "required_frequency_hz_for_4000_principal": 899976000.0,
+      "required_frequency_hz_for_4000_including_gap": 900148000.0,
+      "required_frequency_hz_for_4000_firmware_interval": 900260000.0,
+      "each_layer_target_met": false,
+      "full12_cycle_target_met": false,
+      "physical_clear_calls": 2,
+      "physical_clear_intervals": [
+        1027
+      ],
+      "source_manifest_sha256": "149a5091586584383c35c47fbe9e2b90fdb6a536a9981008573fc454b4c77d57",
+      "elf_sha256": "428430a346e3546ad643bf44ec48210913980acb2178083aaf2a6ee8b16273fc",
+      "image_sha256": "3fd25b2ad24a8715ade3922bee96d6f043a61ba5cd709e89c1728d6d9ac1ab7a",
+      "simulator_sha256": "6d73aa5214719220a6e34f0a3698cd734e83791399fb097d4fe842154ac1393b"
+    },
+    {
+      "run": "cpu-source-stall31-r2",
+      "status": "PASS_FUNCTION_AND_IDENTITY",
+      "result_sha256": "95cd4f47e3e6cdd40afce93eb18041331b943c68c85f6f71a374f81ba7d3a793",
+      "raw_log_sha256": "8f2d80c7e15124c10b36fe65e5ba69dec5477cf216b2e8a9f646da8e2a3224b3",
+      "source_files": 175,
+      "vector_files": 6,
+      "final_child_rtl_differences": [],
+      "harness_extra_rtl": [
+        "perips/generic_ramsp_non_ppa.sv",
+        "perips/tile_physical_observer.sv"
+      ],
+      "final_child_matches": true,
+      "rows": 8,
+      "tasks": 1,
+      "warmup": true,
+      "outputs": 25344,
+      "principal_cycles": 35772,
+      "including_gap_cycles": 35815,
+      "gap_cycles": 43,
+      "payload_cycles": 34744,
+      "clear_cycles": 1028,
+      "assumed150mhz_tasks_per_second": 4193.223750419323,
+      "assumed150mhz_including_gap_tasks_per_second": 4188.189306156638,
+      "firmware_counted_cycles": 35843,
+      "assumed150mhz_firmware_interval_tasks_per_second": 4184.917557124125,
+      "required_frequency_hz_for_4000_principal": 143088000.0,
+      "required_frequency_hz_for_4000_including_gap": 143260000.0,
+      "required_frequency_hz_for_4000_firmware_interval": 143372000.0,
+      "each_layer_target_met": true,
+      "full12_cycle_target_met": false,
+      "physical_clear_calls": 2,
+      "physical_clear_intervals": [
+        1027
+      ],
+      "source_manifest_sha256": "149a5091586584383c35c47fbe9e2b90fdb6a536a9981008573fc454b4c77d57",
+      "elf_sha256": "428430a346e3546ad643bf44ec48210913980acb2178083aaf2a6ee8b16273fc",
+      "image_sha256": "3fd25b2ad24a8715ade3922bee96d6f043a61ba5cd709e89c1728d6d9ac1ab7a",
+      "simulator_sha256": "6d73aa5214719220a6e34f0a3698cd734e83791399fb097d4fe842154ac1393b"
+    }
+  ],
+  "final_r2_controls_bind_selected_binary": true,
+  "independent_golden_oracle_review_sha256": "8d31c1ed56771f701dd95cdf077c7b4489edc173f0d4c63a31745ac8f204651f",
+  "scope": {
+    "local_module": "PASS",
+    "cpu_full12": "PASS",
+    "actual_150mhz_sta": "UNVERIFIED",
+    "final_candidate_area": "UNMEASURED",
+    "contest_2_25mm2": "NOT_ESTABLISHED",
+    "official_shared64_platform_permission": "UNVERIFIED"
+  },
+  "findings": [
+    {
+      "id": "REPLAY_COMPILE_PARAMETER",
+      "severity": "nonblocking-harness-guard",
+      "detail": "Historical replay guard defect was corrected before final delivery; all selected R2 controls and full12 use the identical simulator/ELF with frozen throttle7. Current run_cpu preflight and dedicated local regressions cover mismatch rejection."
+    },
+    {
+      "id": "RESET_RECOVERY_SCOPE",
+      "severity": "closed-by-bounded-r3",
+      "detail": "R3 cancels an accepted/unretired transaction in each of WB, active-compute, and output phases, then publicly loads a different layer and completes a fresh full task. All76032 actual readback dump values independently match golden; same R2 RTL archive."
+    },
+    {
+      "id": "PERFORMANCE_MEASUREMENT",
+      "severity": "reporting-requirement",
+      "detail": "Primary cycles sum physical-clear interval and first source VALID through final Y write response. Clear-to-source gaps and firmware polling/fence completion are separate; report all three without substituting CSR sums."
+    },
+    {
+      "id": "FORMAL_IMPLEMENTATION",
+      "severity": "qualification-pending",
+      "detail": "Generic functional SRAM and clock stimulus do not prove achieved150MHz, final area<=2.25mm2, or permission to rebank/widen the shared platform endpoint."
+    }
+  ]
+}
