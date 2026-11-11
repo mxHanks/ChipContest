@@ -1,0 +1,39 @@
+{
+  "all_reported_coverage_no_clock_reasons": {
+    "check": "min_pulse_width",
+    "classification": "Every native no_clock reason is an async reset/preset low minimum-pulse check. No automatic waiver or replacement of physical reset-pulse proof.",
+    "count": 10152,
+    "pin_counts": {
+      "RDN": 9709,
+      "SDN": 443
+    }
+  },
+  "bound_independent_audit_sha256": "5d0245a9a4dd0ef8c12ed7e8a0844b07b19b3388df3ab1a53cabeb9576fe0d95",
+  "debug_path_observation": {
+    "U8_buffer_delay_ns": "10.59778404",
+    "U8_output_transition_ns": "21.06254005",
+    "gfcm_clkout_fanout": 39577,
+    "limitation": "Ideal clock replay without CTS/parasitics; actual characterized load/path model violation remains, no idealization or output exception applied.",
+    "load_pf": "28.42194366",
+    "native_path_report": "reports/setup.rpt",
+    "worst_setup_ns": "-10.66794014"
+  },
+  "execution_sha256": "bfb261a787e62f88c20c636e285bddd1f2f58a536c819c265f3c69561eae9970",
+  "interpretation": "Area and simulated cycle comparison can be reported independently; no claim of 150MHz hardware timing or contest qualification.",
+  "new_eda_or_simulation": false,
+  "open_coverage_issues": [
+    "4 unknown checks and 4 maximum-delay-unconstrained endpoints remain",
+    "clock periods across HF/LF/JTAG not expandable",
+    "17755 constant_disabled and 10152 reset/preset min-pulse no_clock checks require explicit disposition",
+    "omitted broad accelerator Cartesian-scope timing query remains documented"
+  ],
+  "reported_drc_blocks_by_type": {
+    "max_capacitance": 98,
+    "max_transition": 276
+  },
+  "reported_drc_count_limit": "Counts native printed constraint blocks; not a unique physical net count, nor equivalent to coverage check counts.",
+  "schema": "s3-area-opt-pt-r4-native-triage-v1",
+  "status": "NOT_CLOSED_NATIVE_VIOLATIONS",
+  "worst_bias_hold_ns": "-0.13472039",
+  "worst_reported_async_removal_ns": "-0.12148283"
+}

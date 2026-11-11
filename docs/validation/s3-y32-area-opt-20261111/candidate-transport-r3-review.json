@@ -1,0 +1,99 @@
+{
+  "rejection_checks": [
+    {
+      "case": "missing-owner",
+      "observed_rejection": "owned_scratch_not_unique",
+      "status": "PASS",
+      "target_created": false
+    },
+    {
+      "case": "ambiguous-owner",
+      "observed_rejection": "owned_scratch_not_unique",
+      "status": "PASS",
+      "target_created": false
+    },
+    {
+      "case": "corrupt-encoded-archive",
+      "observed_rejection": "delta_archive_identity_mismatch",
+      "status": "PASS",
+      "target_created": false
+    },
+    {
+      "case": "base-input-drift",
+      "observed_rejection": "base_input_drift:rtl.f",
+      "status": "PASS",
+      "target_created": false
+    },
+    {
+      "case": "wrong-owner-uid",
+      "observed_rejection": "owned_scratch_not_unique",
+      "status": "PASS",
+      "target_created": false
+    }
+  ],
+  "review_tool_sha256": "42621c3d271730388924caed8c4468f263dfd1f30cae463867e6e8356dcec976",
+  "scope": "Local independent review only; no network/UI/credentials/EDA. Exact emitted transport source executed against redirected own mock Desktop and /tmp. Native compile input bytes and every retained original input remain exact. Omitted raw XML remains locally frozen and bound to full local proof; remote XML replay is explicitly unavailable.",
+  "status": "PASS_TRANSPORT_ONLY_TWO_XML_LOCAL_OMISSIONS",
+  "variants": [
+    {
+      "all243_remote_files_exact": true,
+      "all_native_compile_inputs_unchanged": true,
+      "all_retained_original_inputs_byte_exact": true,
+      "bootstrap": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-input-delta-r3/bootstrap-candidate-a-r3.sh",
+      "bootstrap_bytes": 93681,
+      "bootstrap_sha256": "56eca2107fce4f21593ea0ee6c2be680cfd9ed9784332cfd9bad16afd6d141a7",
+      "candidate": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-synth-a-r3/candidate",
+      "compiled158_source_paths_exact": true,
+      "delta_archive": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-input-delta-r3/candidate-a-delta-r3.tar.xz",
+      "delta_archive_bytes": 63876,
+      "delta_archive_sha256": "52aad9302e77505dccd9755f99dead8fd43567be42b99f118ab499814b27b2f7",
+      "delta_files": 40,
+      "delta_members": 41,
+      "full_remote_archive_bytes": 3170504,
+      "full_remote_archive_sha256": "5f30e7cb4a9638540f4db66d28434f7e97780ba4d9e54d26d2b56597bb7314bd",
+      "local_full_xml_proof_bound": true,
+      "offline_stdout": "READY_INPUTS_VERIFIED_NO_COMPILE {\"all242_input_hashes_verified\": true, \"archive_bytes\": 63876, \"archive_sha256\": \"52aad9302e77505dccd9755f99dead8fd43567be42b99f118ab499814b27b2f7\", \"base_manifest_sha256\": \"437ede00614caa3bfc4c16a0c7972f5e16865d0dec420dda00be8f1138563c6f\", \"candidate\": \"/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-input-delta-r3/independent-offline-review/codex-area-opt-20261111-happy-a/candidate-a-r3/candidate\", \"candidate_manifest_sha256\": \"228b0c936d6e23db99d25bbb0c32596a12e8f2f8a9a4606342ec175ca73001c1\", \"compile_started\": false, \"delta_files\": 40, \"input_files\": 242, \"only_pinned_base_inputs_copied\": true, \"scratch\": \"/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-input-delta-r3/independent-offline-review/codex-area-opt-20261111-happy-a\", \"scratch_owner_sha256\": \"2ce72b3b777a7668fa9258d2f9ddb295acb3f3bc4f115383cad22d8af3f286cc\", \"scratch_uid_and_mode_verified\": true, \"status\": \"READY_INPUTS_VERIFIED_NO_COMPILE\", \"variant\": \"a\"}",
+      "omissions_sidecar_sha256": "c3d969ae26f39aec462bf4971be4ac5c0e72e0493c38b0d39ac9eddd0b2e7f7c",
+      "original241_retained_bytes_exact": true,
+      "original_full_manifest_sha256": "90119719bd22d48871d559ff9efa199bea465c2ee1a479132dac4bb6a9966502",
+      "original_xml_preserved_and_bound": true,
+      "raw_xml_not_native_consumed": true,
+      "remote_input_count": 242,
+      "remote_manifest_sha256": "228b0c936d6e23db99d25bbb0c32596a12e8f2f8a9a4606342ec175ca73001c1",
+      "retained_original_input_count": 241,
+      "status": "PASS_EXACT_REMOTE_RECONSTRUCTION_NO_COMPILE",
+      "unlisted_native_outputs_excluded": true,
+      "variant": "a"
+    },
+    {
+      "all243_remote_files_exact": true,
+      "all_native_compile_inputs_unchanged": true,
+      "all_retained_original_inputs_byte_exact": true,
+      "bootstrap": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-input-delta-r3/bootstrap-candidate-b-r3.sh",
+      "bootstrap_bytes": 95030,
+      "bootstrap_sha256": "e7931b12f6f7e5b18f8c01c2f9346c2b9ec5a86a2381b62ea0196e176ad159ff",
+      "candidate": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-synth-b-r3/candidate",
+      "compiled158_source_paths_exact": true,
+      "delta_archive": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-input-delta-r3/candidate-b-delta-r3.tar.xz",
+      "delta_archive_bytes": 64884,
+      "delta_archive_sha256": "9154c5b96c0d1d43e84b5cb313886aaa9c12994c4c02e373b67dfabda9ba41d2",
+      "delta_files": 40,
+      "delta_members": 41,
+      "full_remote_archive_bytes": 3171112,
+      "full_remote_archive_sha256": "8a03367cda442aff22d9e7806c82964f454934d0c80cb299420de436f68a5d48",
+      "local_full_xml_proof_bound": true,
+      "offline_stdout": "READY_INPUTS_VERIFIED_NO_COMPILE {\"all242_input_hashes_verified\": true, \"archive_bytes\": 64884, \"archive_sha256\": \"9154c5b96c0d1d43e84b5cb313886aaa9c12994c4c02e373b67dfabda9ba41d2\", \"base_manifest_sha256\": \"437ede00614caa3bfc4c16a0c7972f5e16865d0dec420dda00be8f1138563c6f\", \"candidate\": \"/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-input-delta-r3/independent-offline-review/codex-area-opt-20261111-happy-b/candidate-b-r3/candidate\", \"candidate_manifest_sha256\": \"a6ac0c36ecf3616cee2aa80b547f187929b48ec01fa1b4df6a50145d81a9cf3c\", \"compile_started\": false, \"delta_files\": 40, \"input_files\": 242, \"only_pinned_base_inputs_copied\": true, \"scratch\": \"/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/candidate-input-delta-r3/independent-offline-review/codex-area-opt-20261111-happy-b\", \"scratch_owner_sha256\": \"2ce72b3b777a7668fa9258d2f9ddb295acb3f3bc4f115383cad22d8af3f286cc\", \"scratch_uid_and_mode_verified\": true, \"status\": \"READY_INPUTS_VERIFIED_NO_COMPILE\", \"variant\": \"b\"}",
+      "omissions_sidecar_sha256": "b1cc36f9e27d8a04cecb7ecb2ec58606e494a174c10a182b71f7c0acb51f811f",
+      "original241_retained_bytes_exact": true,
+      "original_full_manifest_sha256": "f174f305c7569f47ec2a39628d88a76f34194684800a5ebc100ec3271ca1ba80",
+      "original_xml_preserved_and_bound": true,
+      "raw_xml_not_native_consumed": true,
+      "remote_input_count": 242,
+      "remote_manifest_sha256": "a6ac0c36ecf3616cee2aa80b547f187929b48ec01fa1b4df6a50145d81a9cf3c",
+      "retained_original_input_count": 241,
+      "status": "PASS_EXACT_REMOTE_RECONSTRUCTION_NO_COMPILE",
+      "unlisted_native_outputs_excluded": true,
+      "variant": "b"
+    }
+  ]
+}
