@@ -1,0 +1,83 @@
+{
+  "confirmed_design_weaknesses": [
+    {
+      "consequence": "102 chunks, approximately835584bytes, cannot be resumed or reconstructed from existing native output; whole hash was never validated.",
+      "issue": "Verified chunks live only in assembler.chunks RAM until every chunk arrives. Mid-transfer failure discards all verified progress.",
+      "source": "rfb_artifact_receiver.py:52,109,115-138"
+    },
+    {
+      "consequence": "Timeout stage cannot be distinguished from existing receipt alone.",
+      "issue": "Both tools print only exception class, without a safe phase/index/reason code.",
+      "source": "receive_rfb_ack.py:132-133;send_rfb_ack.py:144-147"
+    },
+    {
+      "consequence": "Must close only own control before data publication; no proof this occurred in failed attempt or any authority to touch other clients.",
+      "issue": "An authenticated idle control helper does not continuously drain ServerCutText.",
+      "source": "rfb_transfer.py:11-30"
+    }
+  ],
+  "created_at": "2026-11-11T07:17:32.492876+00:00",
+  "deferred_optional_changes_not_implemented": [
+    "Safe bounded phase/index/error-code diagnostics, excluding clipboard text/credentials.",
+    "Authenticated per-chunk0600 persistence and startup revalidation would need a separate frozen implementation plus duplicate/corruption/finalhash/offline tests; unnecessary for initial small-part recovery."
+  ],
+  "freeze_proposal": {
+    "between_parts": "Require native file and receipt whole-hash verification, close/drain receiver gracefully, confirm own control closed before publishing next part; do not automatically reconnect/flood during global VNC outage.",
+    "binary_chunk_bytes_max": 8192,
+    "each_part": "Separate uniquely named/tokened own regular file with native byte count and SHA256; current unmodified stop-and-wait protocol and timeout/retry bounds.",
+    "first_delivery": "Small own metadata/index plus selected complete native reports required for identity/area/timing audit; do not transfer mapped/WORK collateral unless specifically needed.",
+    "if_split_needed": "Index pins ordered part byte counts/SHA and original complete compressed file bytes/SHA. Reconstruct locally only after all parts validate and verify the complete original hash before extraction/audit. No truncated reports or omitted output hashes treated as complete evidence.",
+    "implementation_change": "NONE",
+    "original_archive_preserved": true,
+    "part_max_bytes": 262144,
+    "part_max_chunks_at8192": 32,
+    "resume_strategy": "Completed independent files persist natively, so a failed later part costs only that part. No chunk-resume protocol implemented.",
+    "server_settings": "Keep existing authorized temporary state/restoration procedure; no service restart, client killing, configuration relaxation, higher chunk size, longer timeout, or CPU/EDA action in this diagnosis."
+  },
+  "input_sha256": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/native/baseline-r5-rfb/incomplete-transfer.json": "7f97d8691f6f4a9b69a9d9d1f92c0703b5a397aec35a0fd2f21aaa770f1754c9",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/native/frontend-failures-rfb-v3/frontend-failures.tar.gz.rfb-ack-v3-receipt.json": "e43b870327ae1e34ecf6fe17a11d7671ba9b52a18b685110bbf87c4585b9e31a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/transfer-v3/receive_rfb_ack.py": "f9c3e0dbd7b449c2bc0ba68aa1fc15ed620eac4d8373340bf56a99ac8b1e5ed2",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/transfer-v3/send_rfb_ack.py": "6b2ce89bd0a75f80c2a2497fbb671966113b5ce3ec2a0664e2c8b41bcc6a4b30",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/server-dma-synth-20261109/rfb_artifact_receiver.py": "561fa17a5009938760b6cef8671e2a62747733944c9efe19acd3dd8d67b42205",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/server-dma-synth-20261109/rfb_transfer.py": "0e048fc7ef346b0d1e1480e67b7665ed76b40bc378278f0c472888ee98c1fda8",
+    "/home/mxhanks/.local/share/xu-eda-access/rfb_session.py": "824038ac5489ff847e50bc09a04e31d7f53c1ef57b636fb85d060ee4293fc9fa"
+  },
+  "observed_facts": {
+    "at_process_inventory_only_own_new_control_rfb_pid": 115102,
+    "failed_archive_bytes": 30671466,
+    "failed_expected_chunks": 3745,
+    "failed_received_chunks_observed": 102,
+    "no_local_artifact_receiver_or_FTP_process_seen": true,
+    "not_a_proven_102_chunk_threshold": true,
+    "preauth_timeout_evidence": "Recorded by root and incomplete-transfer receipt; no server logs or packet trace available to this review",
+    "prior_complete_chunks": 39,
+    "prior_complete_native_transfer_bytes": 317183
+  },
+  "ranked_hypotheses": [
+    {
+      "confidence": "Plausible, not proven",
+      "hypothesis": "VNC/X clipboard bridge or server event loop stops servicing input/output under cumulative clipboard activity, possibly including broadcast backpressure to a non-draining client",
+      "limitation": "No server process state, server logs, socket queues, or historical connection inventory; root states own control was closed, so no specific idle client is identified.",
+      "rank": 1,
+      "support": "A newly attempted connection stalls before authentication after transfer progress stops; this is broader than a bad token/ACK/schema. Control helper blocks on stdin without draining ServerCutText while idle."
+    },
+    {
+      "confidence": "Plausible, not proven",
+      "hypothesis": "Large number of clipboard ownership round trips exposes bridge/GTK stalls or async selection callbacks that never return",
+      "limitation": "No actual sender log was returned. The bounded logical retry paths work offline; no fixed102 limit, integer wrap or steadily growing Python per-chunk state was found.",
+      "rank": 2,
+      "support": "3745 stop-and-wait data/ACK rounds for the failed archive versus39 for a verified success. AsyncAckReader can reissue selection requests every0.5s after callback absence; old requests are logically ignored, not cancelled."
+    },
+    {
+      "confidence": "Definite behavior, incident causality unproven",
+      "hypothesis": "Receiver aborts a partially delivered RFB frame after an8s socket read gap, while overall600s budget remains",
+      "limitation": "Does not itself explain a30s original-control pre-auth timeout or a server-wide hang. No timeout limits should be extended to conceal it.",
+      "rank": 3,
+      "support": "receive_rfb_ack.py read override sets min(8,left) per recv and does not retry socket.timeout. Its constructor also uses this8s read behavior during RFB handshake."
+    }
+  ],
+  "schema": "s3-rfb-artifact-readonly-diagnosis-v1",
+  "scope": "Read existing local transfer source/receipts and one local process inventory only; no credential contents, network, remote/UI action, implementation or service change",
+  "status": "DIAGNOSED_LIMITED_NO_REMOTE_CAUSE_PROOF"
+}

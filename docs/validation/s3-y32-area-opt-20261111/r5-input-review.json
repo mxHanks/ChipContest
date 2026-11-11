@@ -1,0 +1,117 @@
+{
+  "schema": "s3_area_opt_baseline_r5_portability_independent_review_v1",
+  "created_at_utc": "2026-11-11T03:11:07.304676+00:00",
+  "status": "PASS_R5_DECLARATION_PORTABILITY_EVIDENCE",
+  "activity": "Existing local raw files, XML/type AST and Yosys result parsing only; no new tool execution or remote activity",
+  "checks": {
+    "all_package_inputs_match": true,
+    "exactly_one_of_167_rtl_ppa_changed": true,
+    "original_main_matches_published_cpu_frozen": true,
+    "exact_pure_unchanged_declaration_block_movement": true,
+    "full_original_and_portable_bytes_pinned": true,
+    "block_patch_script_log_result_hashes_match": true,
+    "hierarchy_full_1409_identical": true,
+    "all_238_active_module_logic_type_asts_equal": true,
+    "geometry_64pe8engine337macro": true,
+    "yosys_all_3727_bits_proven": true,
+    "yosys_native_log_agrees": true,
+    "r4_closed_list_only_removed_7_inactive": true,
+    "r4_removed_source_bytes_retained_and_side_effect_free": true,
+    "r5_analysis_list_same_as_r4": true,
+    "runner_compile_collector_sdc_conditions_same_as_r2": true,
+    "current_manifest_and_binding_closed": true,
+    "cpu_full12_identity_unchanged": true
+  },
+  "archive": {
+    "bytes": 3890305,
+    "sha256": "299f37e0f6192a3507fab29e9276037ab619dd659a14e9f77023be9f91ccc78a"
+  },
+  "package_input_count": 209,
+  "changed_rtl_ppa_files": [
+    "source/rtl/subsys/e203_subsys_main.v"
+  ],
+  "unchanged_rtl_ppa_count": 166,
+  "closure_source_records": [
+    {
+      "path": "source/rtl/general/sirv_gnrl_xchecker.v",
+      "retained_byte_identical": true,
+      "zero_active_modules": true,
+      "no_define_undef_include": true,
+      "modules": [
+        "sirv_gnrl_xchecker"
+      ]
+    },
+    {
+      "path": "source/rtl/perips/DmaWeightBankArray.sv",
+      "retained_byte_identical": true,
+      "zero_active_modules": true,
+      "no_define_undef_include": true,
+      "modules": [
+        "DmaWeightBankArray"
+      ]
+    },
+    {
+      "path": "source/rtl/perips/LinearCachedCore.sv",
+      "retained_byte_identical": true,
+      "zero_active_modules": true,
+      "no_define_undef_include": true,
+      "modules": [
+        "LinearCachedCore"
+      ]
+    },
+    {
+      "path": "source/rtl/perips/LinearComputeCore.sv",
+      "retained_byte_identical": true,
+      "zero_active_modules": true,
+      "no_define_undef_include": true,
+      "modules": [
+        "LinearComputeCore"
+      ]
+    },
+    {
+      "path": "source/rtl/perips/WeightBankArray.sv",
+      "retained_byte_identical": true,
+      "zero_active_modules": true,
+      "no_define_undef_include": true,
+      "modules": [
+        "WeightBankArray"
+      ]
+    },
+    {
+      "path": "source/rtl/perips/xu_dma_shared_arb.v",
+      "retained_byte_identical": true,
+      "zero_active_modules": true,
+      "no_define_undef_include": true,
+      "modules": [
+        "xu_dma_shared_arb"
+      ]
+    },
+    {
+      "path": "source/rtl/perips/xu_matrix_dma.sv",
+      "retained_byte_identical": true,
+      "zero_active_modules": true,
+      "no_define_undef_include": true,
+      "modules": [
+        "xu_matrix_dma"
+      ]
+    }
+  ],
+  "normalized_ast": {
+    "modules": 238,
+    "sha256": "08db60bcfc28366de81875629f6d9e36c7ee79ce5a893a9ffb39a0b77af7532b",
+    "normalization": "Ignore only loc; sort pure module var declarations by name; resolve dtype_id into exact structural types; retain all expression/process/connection ordering"
+  },
+  "yosys": {
+    "equiv_cells": 3727,
+    "proven_bits": 3727,
+    "unproven_bits": 0,
+    "scope": "Unmapped main wrapper with unchanged child interfaces exposed as common arbitrary inputs/checked outputs, not full-SoC mapped proof"
+  },
+  "source_identity_chain": "Published CPU source -> unchanged original PPA source except original two documented macro adapters -> R3/R4 unreachable-list closure -> one exact main wire declaration-block move in R5",
+  "timing_condition": "Original SDC/DB/compile unchanged. No path exception or timing relaxation introduced by overlay.",
+  "caveats": [
+    "production checkout remains unchanged, but one active source file in the PPA package differs by the explicit audited declaration-only overlay; do not claim all167 package RTL/PPA files byte-identical.",
+    "baseline-identity root old rtl_f/source-tree fields are upstream historical; current manifest and explicit portability proofs govern actual inputs.",
+    "This establishes declaration/list portability equivalence under current defines, not candidate-level physical macro equivalence, mapped logic equivalence, actual frequency, current area or contest qualification."
+  ]
+}

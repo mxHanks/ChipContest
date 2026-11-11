@@ -1,0 +1,455 @@
+{
+  "active_cells": 1409,
+  "active_specialized_modules": 238,
+  "candidate": "b-raw41",
+  "complete_split_concat_ast_type_equal": true,
+  "cpu": {
+    "audited_nonrtl_source_deltas": {
+      "check_results.py": "Four stronger duration/nonoverlap guards only; no measurement boundary or output computation change",
+      "run_cpu.py": "Replay simulator/throttle guards only; runtime source snapshot unchanged"
+    },
+    "clear_cycles": 12336,
+    "firmware_identity": {
+      "actual_differing_offsets": [
+        5019,
+        5020,
+        5021,
+        5022,
+        5023,
+        5024
+      ],
+      "all_other_elf_bytes_equal": true,
+      "all_program_headers_and_PT_LOAD_bytes_equal": true,
+      "allowed_byte_offsets": [
+        5019,
+        5020,
+        5021,
+        5022,
+        5023,
+        5024
+      ],
+      "audit_tool_sha256": "3e11bb582be4f58937a184a917c9f3bc8f17e59b5eb976f4a90b50a09b111809",
+      "baseline_elf_sha256": "428430a346e3546ad643bf44ec48210913980acb2178083aaf2a6ee8b16273fc",
+      "baseline_result_sha256": "300bf5e26f354d4fe0813c77309fd7a91d80ce4db1a8755bc4ae5e0dde480f2a",
+      "baseline_root": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/parallel4k-20261110/cpu-full12-r2",
+      "baseline_temporary_symbol": {
+        "name": "ccC1lr9u.o",
+        "offset": 5017,
+        "string_section": 6,
+        "symbol_index": 5,
+        "symbol_section": 5
+      },
+      "candidate_elf_sha256": "e355b4de096990546a2b3694e4d2b4c78ed7fa6731ba5b23c2989ccef3842385",
+      "candidate_result_sha256": "f33e2d404c31a0fe1b05b8fb50f8c566763e2810d44e5a6a57dd2e7e0b75f4fe",
+      "candidate_root": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/cpu/b-full12-r1",
+      "candidate_temporary_symbol": {
+        "name": "ccLU74L0.o",
+        "offset": 5017,
+        "string_section": 6,
+        "symbol_index": 5,
+        "symbol_section": 5
+      },
+      "loaded_image_byte_identical": true,
+      "loaded_image_sha256": "3fd25b2ad24a8715ade3922bee96d6f043a61ba5cd709e89c1728d6d9ac1ab7a",
+      "policy": "EXACT_ELF_EXCEPT_ONE_NONALLOC_LOCAL_FILE_ABS_GCC_TEMP_NAME_6_CHARS",
+      "status": "PASS",
+      "whole_elf_bytes": 5564
+    },
+    "gap_cycles": 516,
+    "including_gap_cycles": 429431,
+    "outputs": 304128,
+    "principal_cycles": 428915,
+    "result_path": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/cpu/b-full12-r1/result.json",
+    "result_sha256": "f33e2d404c31a0fe1b05b8fb50f8c566763e2810d44e5a6a57dd2e7e0b75f4fe",
+    "status": "PASS"
+  },
+  "cpu_result_sha256": "f33e2d404c31a0fe1b05b8fb50f8c566763e2810d44e5a6a57dd2e7e0b75f4fe",
+  "default11_byte_identical": true,
+  "fallback3_byte_identical": true,
+  "files": {
+    "build/area-opt-20261111/candidates/b-raw41/generated/DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+    "build/area-opt-20261111/candidates/b-raw41/generated/DotProductEngine_Acc41_Result41.sv": "780e577043c4eccbf4591946624a49ae853dfa8bc17425e55f66eb23f2e52ed9",
+    "build/area-opt-20261111/candidates/b-raw41/generated/LinearTileDmaCore.sv": "7faee8e4fc4bccb8ec61d79d5fac6866aae072a2e205d2027532adbb924813ca",
+    "build/area-opt-20261111/candidates/b-raw41/generated/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "build/area-opt-20261111/candidates/b-raw41/generated/MacPEArray_Acc41.sv": "9cf80e0d0dc6f713cd0a32fe852a022178b4183315f4527d308437d098ff001e",
+    "build/area-opt-20261111/candidates/b-raw41/generated/MacPE_Acc41.sv": "17ec5517b7d4052b54b6c0cb598c1ad7fab74ccb4a0faa0422f314d2af0dfa32",
+    "build/area-opt-20261111/candidates/b-raw41/generated/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "build/area-opt-20261111/candidates/b-raw41/generated/TileWeightBank.sv": "e44d885e304faf608a4f8cf2f4cd13bc4653a34cbd0fe81904f02d51a0a7bf48",
+    "build/area-opt-20261111/candidates/b-raw41/generated/TileWeightBankArray.sv": "2aa3b687b1e393f4950895ca4bcad4dc4f0668cb60733c944423685a5f760e9a",
+    "build/area-opt-20261111/candidates/b-raw41/generated/TileXRowBuffer.sv": "3881b2db4c1d40ecea60089462ae24e38409de43ec572a600af0029635c427a4",
+    "build/area-opt-20261111/candidates/b-raw41/generated/mem_1024x16.sv": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+    "build/area-opt-20261111/candidates/b-raw41/generation-result.json": "49bcb1d13b2abea6aa8ec3284a3a8dad8717b5540934e67beadc065be637fb5d",
+    "build/area-opt-20261111/candidates/b-raw41/install/LinearTileDmaCore.sv": "710b8e180652f49751769e152a3b3a9e6a35ba622fb4c3e2385dc5ffab241fcb",
+    "build/area-opt-20261111/candidates/b-raw41/packaging-proof/concat.xml": "9c667036bef971cf4807496b8afb6d6433700f343cc4c785d5a7da3bf3487b34",
+    "build/area-opt-20261111/candidates/b-raw41/packaging-proof/fulltop/source/rtl/perips/xu_matrix_dma64.sv": "6aaa6927e211202acb65bb0ca22478e8e2b070b1f2fc0678db76dea3f21c9cf7",
+    "build/area-opt-20261111/candidates/b-raw41/packaging-proof/proof.json": "47509243f7d7793d90ac3e6c718cf9f61ad828832610fd74d544b652235876bf",
+    "build/area-opt-20261111/candidates/b-raw41/packaging-proof/split.xml": "5189f8e945b4f0e6be4b8a236de1fe27af884ca932a9d3acdb6029eca26bf285",
+    "build/area-opt-20261111/candidates/bounds-and-state/result.json": "b43c2227e56212b510cec6ed74a21864050792c55b11200fcadc75d63c6189b0"
+  },
+  "geometry": {
+    "engines": 8,
+    "mac_pe": 64,
+    "sram_macros": 337
+  },
+  "independent_ast_type_canonical_sha256": "e7a784d704909cc9746bcf50483d9a4b4533d8ec0e1c50d437e5de4098834c59",
+  "macro_groups": {
+    "bias": 1,
+    "dtcm": 32,
+    "itcm": 32,
+    "shared": 256,
+    "weights": 16
+  },
+  "no_intermediate_rounding": true,
+  "nominal_declared_storage_reduction_bits": 1792,
+  "nominal_storage_reduction_is_not_mapped_area_claim": true,
+  "only_installed_original_source_changed": [
+    "source/rtl/perips/LinearTileDmaCore.sv"
+  ],
+  "prefix_bounds": [
+    {
+      "lower": -549755813888,
+      "n": 0,
+      "upper": 549755813887
+    },
+    {
+      "lower": -550829522944,
+      "n": 1,
+      "upper": 550829555711
+    },
+    {
+      "lower": -551903232000,
+      "n": 2,
+      "upper": 551903297535
+    },
+    {
+      "lower": -552976941056,
+      "n": 3,
+      "upper": 552977039359
+    },
+    {
+      "lower": -554050650112,
+      "n": 4,
+      "upper": 554050781183
+    },
+    {
+      "lower": -555124359168,
+      "n": 5,
+      "upper": 555124523007
+    },
+    {
+      "lower": -556198068224,
+      "n": 6,
+      "upper": 556198264831
+    },
+    {
+      "lower": -557271777280,
+      "n": 7,
+      "upper": 557272006655
+    },
+    {
+      "lower": -558345486336,
+      "n": 8,
+      "upper": 558345748479
+    },
+    {
+      "lower": -559419195392,
+      "n": 9,
+      "upper": 559419490303
+    },
+    {
+      "lower": -560492904448,
+      "n": 10,
+      "upper": 560493232127
+    },
+    {
+      "lower": -561566613504,
+      "n": 11,
+      "upper": 561566973951
+    },
+    {
+      "lower": -562640322560,
+      "n": 12,
+      "upper": 562640715775
+    },
+    {
+      "lower": -563714031616,
+      "n": 13,
+      "upper": 563714457599
+    },
+    {
+      "lower": -564787740672,
+      "n": 14,
+      "upper": 564788199423
+    },
+    {
+      "lower": -565861449728,
+      "n": 15,
+      "upper": 565861941247
+    },
+    {
+      "lower": -566935158784,
+      "n": 16,
+      "upper": 566935683071
+    },
+    {
+      "lower": -568008867840,
+      "n": 17,
+      "upper": 568009424895
+    },
+    {
+      "lower": -569082576896,
+      "n": 18,
+      "upper": 569083166719
+    },
+    {
+      "lower": -570156285952,
+      "n": 19,
+      "upper": 570156908543
+    },
+    {
+      "lower": -571229995008,
+      "n": 20,
+      "upper": 571230650367
+    },
+    {
+      "lower": -572303704064,
+      "n": 21,
+      "upper": 572304392191
+    },
+    {
+      "lower": -573377413120,
+      "n": 22,
+      "upper": 573378134015
+    },
+    {
+      "lower": -574451122176,
+      "n": 23,
+      "upper": 574451875839
+    },
+    {
+      "lower": -575524831232,
+      "n": 24,
+      "upper": 575525617663
+    },
+    {
+      "lower": -576598540288,
+      "n": 25,
+      "upper": 576599359487
+    },
+    {
+      "lower": -577672249344,
+      "n": 26,
+      "upper": 577673101311
+    },
+    {
+      "lower": -578745958400,
+      "n": 27,
+      "upper": 578746843135
+    },
+    {
+      "lower": -579819667456,
+      "n": 28,
+      "upper": 579820584959
+    },
+    {
+      "lower": -580893376512,
+      "n": 29,
+      "upper": 580894326783
+    },
+    {
+      "lower": -581967085568,
+      "n": 30,
+      "upper": 581968068607
+    },
+    {
+      "lower": -583040794624,
+      "n": 31,
+      "upper": 583041810431
+    },
+    {
+      "lower": -584114503680,
+      "n": 32,
+      "upper": 584115552255
+    },
+    {
+      "lower": -585188212736,
+      "n": 33,
+      "upper": 585189294079
+    },
+    {
+      "lower": -586261921792,
+      "n": 34,
+      "upper": 586263035903
+    },
+    {
+      "lower": -587335630848,
+      "n": 35,
+      "upper": 587336777727
+    },
+    {
+      "lower": -588409339904,
+      "n": 36,
+      "upper": 588410519551
+    },
+    {
+      "lower": -589483048960,
+      "n": 37,
+      "upper": 589484261375
+    },
+    {
+      "lower": -590556758016,
+      "n": 38,
+      "upper": 590558003199
+    },
+    {
+      "lower": -591630467072,
+      "n": 39,
+      "upper": 591631745023
+    },
+    {
+      "lower": -592704176128,
+      "n": 40,
+      "upper": 592705486847
+    },
+    {
+      "lower": -593777885184,
+      "n": 41,
+      "upper": 593779228671
+    },
+    {
+      "lower": -594851594240,
+      "n": 42,
+      "upper": 594852970495
+    },
+    {
+      "lower": -595925303296,
+      "n": 43,
+      "upper": 595926712319
+    },
+    {
+      "lower": -596999012352,
+      "n": 44,
+      "upper": 597000454143
+    },
+    {
+      "lower": -598072721408,
+      "n": 45,
+      "upper": 598074195967
+    },
+    {
+      "lower": -599146430464,
+      "n": 46,
+      "upper": 599147937791
+    },
+    {
+      "lower": -600220139520,
+      "n": 47,
+      "upper": 600221679615
+    },
+    {
+      "lower": -601293848576,
+      "n": 48,
+      "upper": 601295421439
+    },
+    {
+      "lower": -602367557632,
+      "n": 49,
+      "upper": 602369163263
+    },
+    {
+      "lower": -603441266688,
+      "n": 50,
+      "upper": 603442905087
+    },
+    {
+      "lower": -604514975744,
+      "n": 51,
+      "upper": 604516646911
+    },
+    {
+      "lower": -605588684800,
+      "n": 52,
+      "upper": 605590388735
+    },
+    {
+      "lower": -606662393856,
+      "n": 53,
+      "upper": 606664130559
+    },
+    {
+      "lower": -607736102912,
+      "n": 54,
+      "upper": 607737872383
+    },
+    {
+      "lower": -608809811968,
+      "n": 55,
+      "upper": 608811614207
+    },
+    {
+      "lower": -609883521024,
+      "n": 56,
+      "upper": 609885356031
+    },
+    {
+      "lower": -610957230080,
+      "n": 57,
+      "upper": 610959097855
+    },
+    {
+      "lower": -612030939136,
+      "n": 58,
+      "upper": 612032839679
+    },
+    {
+      "lower": -613104648192,
+      "n": 59,
+      "upper": 613106581503
+    },
+    {
+      "lower": -614178357248,
+      "n": 60,
+      "upper": 614180323327
+    },
+    {
+      "lower": -615252066304,
+      "n": 61,
+      "upper": 615254065151
+    },
+    {
+      "lower": -616325775360,
+      "n": 62,
+      "upper": 616327806975
+    },
+    {
+      "lower": -617399484416,
+      "n": 63,
+      "upper": 617401548799
+    },
+    {
+      "lower": -618473193472,
+      "n": 64,
+      "upper": 618475290623
+    }
+  ],
+  "public48_sign_extension_before_original_dma_rne": true,
+  "reviewer_script_sha256": "1da6b178f2fe0169e63fa559526020981ede6210ce7728315bbf538c1e2957e6",
+  "same_policy": true,
+  "schema": "s3-area-opt-independent-candidate-review-v1",
+  "scope": "Independent source/arithmetic/packaging audit plus full12 source and cycle gate when terminal; no mapped equivalence, area or STA claim",
+  "signed16_product_range": [
+    -1073709056,
+    1073741824
+  ],
+  "signed40_negative_control_insufficient": true,
+  "signed41_range": [
+    -1099511627776,
+    1099511627775
+  ],
+  "status": "PASS",
+  "widths": {
+    "ACC": 41,
+    "FIFO": 41,
+    "resultReg": 41
+  }
+}

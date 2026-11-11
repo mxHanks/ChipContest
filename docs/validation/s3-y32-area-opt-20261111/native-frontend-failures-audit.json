@@ -1,0 +1,104 @@
+{
+  "no_current64pe_area_in_these_runs": true,
+  "runs": [
+    {
+      "execution_sha256": "8e49ba4dd1fe60f36c6aa258d1ca8c79270d3c2c776c8e285253f6c2da4d26a6",
+      "failure_phase": "FRONTEND_ANALYZE_NO_AREA_OR_TIMING_RESULT",
+      "mapping_outputs_present": [
+        [
+          "mapped.v",
+          false
+        ],
+        [
+          "mapped.ddc",
+          false
+        ],
+        [
+          "mapped.sdc",
+          false
+        ]
+      ],
+      "native_errors": [
+        "Error:  ./source/rtl/perips/accel_icb_slave.v:96: The symbol 'rsp_row_pop' is not defined. (VER-956)",
+        "Error:  ./source/rtl/perips/accel_icb_slave.v:104: The symbol 'row_retired' is not defined. (VER-956)",
+        "Error:  ./source/rtl/perips/accel_icb_slave.v:104: The symbol 'row_produced' is not defined. (VER-956)",
+        "Error:  ./source/rtl/perips/accel_icb_slave.v:105: The symbol 'row_group' is not defined. (VER-956)",
+        "Error:  ./source/rtl/perips/accel_icb_slave.v:105: The symbol 'row_count' is not defined. (VER-956)",
+        "Error:  ./source/rtl/perips/accel_icb_slave.v:105: The symbol 'row_running' is not defined. (VER-956)",
+        "Error:  ./source/rtl/perips/accel_icb_slave.v:106: The symbol 'row_valid' is not defined. (VER-956)",
+        "Error:  ./source/rtl/perips/accel_icb_slave.v:106: The symbol 'row_active' is not defined. (VER-956)",
+        "Error:  Cannot recover from previous errors. (VER-518)"
+      ],
+      "native_errors_count": 9,
+      "native_log_sha256": "0c827d7011f1cd64a26f17a6a40b1e1173ab9af4611f4ee5ddc7f41ae447dcda",
+      "preserved": true,
+      "run": "r2",
+      "status": "FAILED"
+    },
+    {
+      "execution_sha256": "3ce81decf9ed416e6834dad3a1b0af63795291c5bc0fe803c4416b2646b75d04",
+      "failure_phase": "FRONTEND_ANALYZE_NO_AREA_OR_TIMING_RESULT",
+      "mapping_outputs_present": [
+        [
+          "mapped.v",
+          false
+        ],
+        [
+          "mapped.ddc",
+          false
+        ],
+        [
+          "mapped.sdc",
+          false
+        ]
+      ],
+      "native_errors": [
+        "Error:  ./source/rtl/perips/xu_matrix_dma.sv:56: The symbol 'core_clear_ready' is not defined. (VER-956)",
+        "Error:  ./source/rtl/perips/xu_matrix_dma.sv:59: The symbol 'descriptor_valid' is not defined. (VER-956)",
+        "Error:  Cannot recover from previous errors. (VER-518)"
+      ],
+      "native_errors_count": 3,
+      "native_log_sha256": "2ccd2a285e7cbc89933c88653fcfc9f57c3964e62817c5e4665187b91dee1026",
+      "preserved": true,
+      "run": "r3",
+      "status": "FAILED"
+    },
+    {
+      "execution_sha256": "b10a9a53bbc4be4fa1ce2afc496383e3f44bd27e5b8b980806a992cff5c5af48",
+      "failure_phase": "FRONTEND_ANALYZE_NO_AREA_OR_TIMING_RESULT",
+      "mapping_outputs_present": [
+        [
+          "mapped.v",
+          false
+        ],
+        [
+          "mapped.ddc",
+          false
+        ],
+        [
+          "mapped.sdc",
+          false
+        ]
+      ],
+      "native_errors": [
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:884: net symbol dma_cmd_valid has already been defined. (VER-262)",
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:884: net symbol dma_cmd_ready has already been defined. (VER-262)",
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:884: net symbol dma_cmd_read has already been defined. (VER-262)",
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:885: net symbol dma_cmd_addr has already been defined. (VER-262)",
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:887: net symbol dma_cmd_wdata has already been defined. (VER-262)",
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:892: net symbol dma_cmd_wmask has already been defined. (VER-262)",
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:896: net symbol dma_rsp_valid has already been defined. (VER-262)",
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:896: net symbol dma_rsp_ready has already been defined. (VER-262)",
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:896: net symbol dma_rsp_err has already been defined. (VER-262)",
+        "Error:  ./source/rtl/subsys/e203_subsys_main.v:898: net symbol dma_rsp_rdata has already been defined. (VER-262)",
+        "Error:  Cannot recover from previous errors. (VER-518)"
+      ],
+      "native_errors_count": 11,
+      "native_log_sha256": "c15c60e86df3cda55fe6731333d30c2c57e3b83ad71a475ff902560bb2a6d7cd",
+      "preserved": true,
+      "run": "r4",
+      "status": "FAILED"
+    }
+  ],
+  "status": "NATIVE_FAILURE_REASONS_CONFIRMED"
+}
