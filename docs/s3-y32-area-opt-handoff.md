@@ -1,28 +1,65 @@
-# 64PE面积优化候选 handoff
+# 64PE面积优化 B 方案 handoff
 
-2026-11-11 18:45（上海）。A/B完整本机仿真均通过，同条件综合及独立PT报告采集均已在服务器实际完成。候选原件回传中断，尚未完成独立PPA审计、选型或生产安装；本轮最终硬件版本尚未发布。实验进度已推送并核验：[实验进度分支](https://github.com/mxHanks/ChipContest/tree/codex/s3-y32-area-opt-20261111)，证据节点[576c944](https://github.com/mxHanks/ChipContest/commit/576c9442808482990480ccc85460c13cca5d762a)。其中包含冻结输入、原始证据及接续工具，不能据此替换软件联调版本。软件联调继续固定已发布父`d60e0e00d79051747b8adcfa39fca273a6e7e309`、硬件子`a80dd184536e0f2312c62768d5acf4ba1b01c34e`，生产gitlink保持。
+2026-11-11。本轮选定 **B：ACC41＋引擎结果41＋结果FIFO41**，用于保持仿真周期并减少映射面积。完整12任务与原48位版逐层周期、输出和事务完全一致；同条件保守计费面积减少 **3.69%**。这是本轮源码选型，**时序尚未闭合，实际150MHz、2.25mm²和正式比赛资格未认证**。
 
-A为ACC41；B为ACC41＋引擎结果/FIFO41。均保留公开raw48和最终Y32，描述符/MMIO、数据布局、8行模式、99行尾部、fence、完成/错误排空、总线及CPU核配置不变。每任务独立参数、真实物理清零和全部写响应退休规则保持。软件接口与启动步骤继续使用[s3-y32-4k-handoff.md](s3-y32-4k-handoff.md)。
+## 固定版本与软件整合
 
-完整12任务均304,128个Y32逐位正确、428,915主周期，其中真实clear12,336拍；gap516另列，含gap429,431拍，固件完整区间429,720拍。第0层35,742拍，其余11层各35,743拍；每层周期和全部工作/等待/事务计数与发布版一致。单行及source-stall控制也一致。约4196.64 task/s仅按假定150MHz换算，实际频率未认证。
+| 用途 | 父仓库提交 | E203硬件子提交 |
+|---|---|---|
+| 本轮B源码 | `96fffcb2a4b2492fd2cfdecb88e164d2c67881ae` | `ccdac30d92ecf40f14d0b78879b8711fb0b1cdd1` |
+| 原48位回退 | `d60e0e00d79051747b8adcfa39fca273a6e7e309` | `a80dd184536e0f2312c62768d5acf4ba1b01c34e` |
 
-[结果](s3-y32-area-opt-results.md) · [状态](s3-y32-area-opt-status.md) · [证据/复现包](validation/s3-y32-area-opt-20261111/README.md)。已封存607文件仿真delta包，SHA256 `885d595a33b6dbfb682f5e9555f15872ac63521654bcf0a3b36556cabbd028bd`；用已发布baseline archive恢复A/B源码/向量均已逐SHA核对。保留测量当时父子身份，不能用当前HEAD改写历史结果。
+父子分支均为`codex/s3-y32-area-opt-20261111`。[父源码96fffcb](https://github.com/mxHanks/ChipContest/commit/96fffcb2a4b2492fd2cfdecb88e164d2c67881ae)与[子源码ccdac30](https://github.com/mxHanks/e203_hbirdv2/commit/ccdac30d92ecf40f14d0b78879b8711fb0b1cdd1)已推送并经远端head逐项核验；先前`ef57994`是实验进度节点，未安装B，不能把它当本轮B源码。
 
-已核验的48位基线计费面积为523,712.858238库单位（标准逻辑368,187.943200＋17个内部SRAM155,524.915038），完整leaf已独立重算。原DC在映射后卡住的额外查询由负责人停止，保持原FAILED/1和owner-stop记录；mapped.v/ddc尚未在本地逐字节核验。基线只读PT r4全部46项输出已核验，setup−10.66794014ns、hold−0.13472039ns、211项违例，时序未闭合。旧recovery r3预检失败已被r4实际取证取代，不需要重跑。
+按固定源码提交检出（最后的文档提交可以更新，源提交与gitlink保持）：
 
-候选A/B均已串行完成正常映射和PT采集，每项最多2核。A屏幕原生面积初值515,134.996638库单位，约比基线小1.64%；候选leaf未回传审计，因此不能将其写成已验证面积优化。B也已完成，但面积和候选时序数值未完整回传，暂不据此选型。compile、原SDC、DB、158条源路径、宏数量和计费范围保持同条件；映射后省略的两条额外宽泛查询明确记录缺项，未删除或放宽时序约束。
+```sh
+git clone --branch codex/s3-y32-area-opt-20261111 --recurse-submodules https://github.com/mxHanks/ChipContest.git
+cd ChipContest
+git checkout 96fffcb2a4b2492fd2cfdecb88e164d2c67881ae
+git submodule update --init --recursive
+git -C third-party/e203_hbirdv2 rev-parse HEAD
+```
 
-当前阻点是证据回传：r3原件压缩包6,260,784B、24个独立SHA分片，仅第0、1片完整；第2片25/32块后超时。完整包SHA为`4fc0a9ae3c1ae54f9e080f5ed1202a2c7862dbe9d8c44edfbc7df9f06679ca6b`，索引SHA为`7a8bd98cec644708c54a3e40064c72197fa09869314da9b74ae8618ed7a94054`。不得把未完成分片拼装成可审计原件。VNC多次TCP成功却未返回RFB握手头；用户指示等会重试，不更改凭据、不重启或终止他人资源。
+最后应为`ccdac30d92ecf40f14d0b78879b8711fb0b1cdd1`。安装tile SHA256必须为`710b8e180652f49751769e152a3b3a9e6a35ba622fb4c3e2385dc5ffab241fcb`。独立安装审计已将新父子提交与真实CPU测试源码绑定，165份现有RTL逐SHA匹配；没有重写历史测量JSON的旧父子身份。
 
-恢复时按以下顺序接续：
+软件沿用[原64PE接口与启动说明](s3-y32-4k-handoff.md)，其中旧版本号作回退。本轮没有描述符、MMIO、布局、固件或CPU/LSU/BIU改动。保留`XU_MATRIX_DMA`和`XU_MATRIX_DMA64`、0x10042300基址、8字节地址对齐、CTRL=1真实清零、CTRL=0x802八行模式、CAPABILITY=0x00084001；99行尾部为3行。输入/权重signed16、bias signed40、公开raw48与最终Y32/RNE(acc/512)语义保持。提交前fence、错误排空和全部输出写响应退休后才完成的规则保持。
 
-1. 读取上海时间和自有会话状态。2026-11-11 23:59后不得启动新实验；当前无需重跑综合或PT。
-2. 核对本轮自有scratch记录、服务器已完成的A/B execution、映射输出及PT输出身份。优先继续已验证分片的原件回传；若通道仍不稳定，使用已准备但尚未执行的`build/area-opt-20261111/prepare-candidate-reports-only-r4.sh`只读提取所需报告。保留r3原始包和全部传输失败，不覆盖旧证据。
-3. 每片落盘检查SHA和字节数，所有片及完整包核验通过才安全解压；独立重算leaf面积并审计PT全部输出。审计入口是`build/area-opt-20261111/audit/audit_native_area.py`及`audit_candidate_pt.py`，后者使用`--variant a|b --native PT目录 --dc-native DC目录 --prepared build/area-opt-20261111/pt-recovery-r4 --area-audit 面积审计回执 --out 新回执`，不运行EDA。PT采集完成和时序闭合分别判定。
-4. 用已完成完整12任务证据和同条件面积/时序审计结果选型。安装与发布前使用`build/area-opt-20261111/finalization/README.md`及只读`verify_install.py`绑定实际CPU源和安装SHA。候选仅替换硬件子仓库`rtl/e203/perips/LinearTileDmaCore.sv`；默认generic叶模块、CPU、固件、仿真observer和PPA声明前移main副本不安装。父仓库对应5份生成器源码补丁已准备，尚未应用。
-5. 选型后再建立新子分支、提交唯一硬件版本，固定父子提交并更新GitHub handoff。先推子分支再推父分支，保留d60e0e0/a80dd184回退，不创建未经请求的PR。本轮最终硬件版本当前未选定、未发布；仅发布实验进度分支时，应明确其供查看证据和接续实验，不能标为生产定稿。实验进度的已核验节点见本页开头；最终硬件提交仍待选型和安装。
-6. 临时VNC状态v5尚待恢复：本轮启用SendCutText=1，原值0。`build/area-opt-20261111/restore-owned-bridge-v5.sh`已准备，受当前VNC阻塞尚未执行；恢复连接后先核对自有进程/记录，只恢复本轮状态，并在交付或长期停止前关闭自有辅助连接。
+每任务真实source读7520次（4096W＋256bias＋3168X）、Y写12672次、3168次POP、26624个MAC有效周期。八行共享W16宏与bias1宏；共享512KiB、ITCM和DTCM容量及总337宏不增加。物理清零仍写18176个16bit地址/任务，并清空ACC/结果/FIFO/cache/DMA状态，不使用valid失效代替实际写零。
 
-实际输入为`build/area-opt-20261111/candidate-synth-a-r3/candidate`与`candidate-synth-b-r3/candidate`，242项远端manifest SHA分别为`228b0c936d6e23db99d25bbb0c32596a12e8f2f8a9a4606342ec175ca73001c1`、`a6ac0c36ecf3616cee2aa80b547f187929b48ec01fa1b4df6a50145d81a9cf3c`。只省略两份不参与编译的大XML证据，完整243项及原XML仍在本地并有独立绑定证明；不能把早期r1运输包当成实际测量输入。
+## 改动和验证结果
 
-比赛2.25mm²上限仍需官方SRAM计价和面积库单位证据；平台宽口资格、实际150MHz也未验证。最终交付必须分别说明功能/周期、面积收益、时序及正式资格，不得把报告采集完成写成时序通过或正式成绩。
+只改子仓一份`rtl/e203/perips/LinearTileDmaCore.sv`，父仓改对应五份生成器源码。累加器、引擎结果与FIFO的48→41收窄均有全signed16/signed40输入范围证明；公开raw48以符号扩展恢复，最终舍入位置保持。声明状态累计减少1792位（224B），SRAM容量/数量、2KiB X双缓冲和总线调度不变。原generic叶模块、旧构建和默认48位生成保持；仿真observer、PPA声明前移main副本均未安装。
+
+完整12任务304128个Y32逐位一致，payload416579拍＋真实clear12336拍＝**428915拍**；gap516单列，含gap429431拍，固件同步全区间429720拍。第0层35742拍，其余11层各35743拍，全部与回退相同。单行224994拍、source-stall31控制35772拍也相同。极值/RNE、背压、首次读写错误与排空、在途复位恢复和全物理清零均通过。固件image逐字节相同，ELF临时非分配STT_FILE名6字符差异经独立窄范围审计保留。
+
+| 同条件计费面积（库单位） | 回退48位 | A（未选） | B（选定） |
+|---|---:|---:|---:|
+| 标准逻辑 | 368187.943200 | 359610.081600 | 348816.652800 |
+| 内部17 SRAM | 155524.915038 | 155524.915038 | 155524.915038 |
+| 原计费合计 | 523712.858238 | 515134.996638 | 504341.567838 |
+| 范围外逻辑正增长保守加计 | — | 70.224000 | 53.625600 |
+| 保守合计 | 523712.858238 | 515205.220638 | **504395.193438** |
+| 比回退减少 | — | 1.6245% | **3.6886%** |
+
+没有以全SoC面积作节省分母。B标准逻辑减少5.2613%，主要收益来自引擎与FIFO/核心控制。A同样周期不增，但面积更大且transition违例更多，因此不选。完整leaf、组件分类、范围外逻辑变化与同一映射PT均已独立审计。
+
+PT setup：基线−10.66794014ns，A−10.53013802ns，B−10.11695099ns，均为GFCM调试时钟到GPIOA[27]；hold均−0.13472039ns，位于bias SRAM。三者各211个coverage违例（178hold＋5removal＋27门控hold＋1输出setup），27911未测，**不能宣称时序通过**。B DRC maxcap/mincap/maxtransition为92/1449/276，基线98/1505/276；低打印精度标记仍作为违例保留。674个辅助CEN/RET1N与337个实际CLK关联已逐项分类，未豁免任何路径。
+
+4196.64task/s仅按假定150MHz换算。库面积量纲和官方SRAM计价未确认，不能直接把库单位标为mm²或宣称2.25mm²合格；映射后形式等价和官方宽口平台资格也未验证。
+
+## 证据和复现
+
+见[结果](s3-y32-area-opt-results.md)、[状态](s3-y32-area-opt-status.md)、[全部归档与SHA](validation/s3-y32-area-opt-20261111/README.md)。保留原48位发布包、607文件仿真delta、A/B真实242项PPA输入、完整baseline leaf/PT、A/B完整leaf/DC所需报告和全部PT输出、独立比较、选型与安装身份收据。
+
+A/B报告r4包2532604B，SHA`fd235de2b63b06b321d9940641937e1a29a35c6497ca6ba3ed89687be13fd763`，20片与整包均已验证。两候选各584项DC输出中51项已本地逐字节核验，含完整leaf及所需面积报告；其余WORK、SVF、mapped.v/ddc等保留远端SHA/bytes，未作本地网表字节或映射后等价声明。PT各45项输出完整核验。旧大包及VNC中断记录保留，r4取证没有重跑综合。R5旧collector FAILED/退出码1也保持，后续PT不改写原失败。
+
+重新生成选定B时明确使用三个41参数，默认48仍服务回退：
+
+```sh
+scala-cli run project.scala src/main/scala experiments/s3-y32-4k/core --server=false --jvm system -M GenerateTileCore -- NEW_OUTPUT_DIR 41 41 41
+```
+
+按归档generation-result.json的concat_order，以一个额外换行连接四个特化片段，逐SHA匹配后才可覆盖安装；不要用无分隔的shell cat或默认48参数替代选定版本。原始工具/时钟/运行命令和固件身份都在封存包中。输入恢复工具只用已发布归档，已实际恢复baseline209和A/B各243输入并重放面积审计。
+
+本轮临时VNC设置已原生读回核验：SendCutText恢复0，自有manager292673已退出；辅助连接已关闭。后续优先处理已定位的时序违例、覆盖/CDC/复位契约和官方面积计价；新实验截止2026-11-11 23:59上海，不能把本轮面积选型当作这些缺项已经通过。

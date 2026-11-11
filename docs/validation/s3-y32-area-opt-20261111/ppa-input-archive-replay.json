@@ -1,0 +1,158 @@
+{
+  "area_dimension": "UNVERIFIED_NOT_MM2_NO_CONTEST_AREA_PASS",
+  "files": {
+    "README.md": {
+      "bytes": 5485,
+      "sha256": "802aeb4ab1a79d7d02bcc8bfb137425e16e8a26cdebc90b38fb25610cf5b68ff"
+    },
+    "a-area-replay.json": {
+      "bytes": 93600,
+      "sha256": "790c2f3c458bc77a9747eee0debb15d7e95ce2dd21cdffe8911b2b391cb7302e"
+    },
+    "actual-recovery-receipt.json": {
+      "bytes": 493722,
+      "sha256": "cb0dfb1bf2a9bde5bf2c0ed9263416406bfe219d159490d88cf4300131caa96f"
+    },
+    "b-area-replay.json": {
+      "bytes": 93598,
+      "sha256": "38413f50a38a81e39423674735302ed5c41768bbabbf0a54dfb9a3b5b316e054"
+    },
+    "baseline-area-replay.json": {
+      "bytes": 90782,
+      "sha256": "a5fe420be8160ea5ae6ad9e721690071ae30863306f0e080c74b0c58526cf37a"
+    },
+    "baseline-metadata-pins.json": {
+      "bytes": 2756,
+      "sha256": "a1e9613fd07152b5a38e45bf7580520a77af0ba74212e41e7e4dd0c685eca96f"
+    },
+    "metadata-extraction-receipt.json": {
+      "bytes": 4755,
+      "sha256": "a9126893703a77b4d1dcf6b0af7bfd3d94677eb2f4d09f7aa7b6ad1c6d4bbdb5"
+    },
+    "restore_ppa_inputs.py": {
+      "bytes": 13598,
+      "sha256": "387f9f14908705491556d5f9ad366939ae4e3760ea1f2b4f307cc13ec28fddb2"
+    }
+  },
+  "new_STA": false,
+  "new_simulation": false,
+  "new_synthesis": false,
+  "restore_command": [
+    "python3",
+    "build/area-opt-20261111/replay-inputs/restore_ppa_inputs.py",
+    "--validation-dir",
+    "docs/validation/s3-y32-area-opt-20261111",
+    "--frozen-archive",
+    "docs/validation/s3-y32-4k-20261110/frozen-delivery.tar.gz",
+    "--tools-root",
+    "build/area-opt-20261111/replay-inputs/published-tools-metadata-r1",
+    "--out",
+    "build/area-opt-20261111/replay-inputs/restored-r1"
+  ],
+  "results": {
+    "a": {
+      "charged": {
+        "scope_area_library_units": {
+          "arbiter": "363.888000",
+          "dma": "509539.739838",
+          "endpoint_logic": "5231.368800"
+        },
+        "scope_counts": {
+          "arbiter": 174,
+          "dma": 137578,
+          "endpoint_logic": 3421,
+          "none": 64061
+        },
+        "sram17_library_units": "155524.915038",
+        "standard_cell_library_units": "359610.081600",
+        "total_library_units": "515134.996638"
+      },
+      "execution_sha256": "52d83aff7270e5e700236da07ed9ef3b70f75245a697d58ea96e9ea8470d0ca0",
+      "input_manifest_sha256": "228b0c936d6e23db99d25bbb0c32596a12e8f2f8a9a4606342ec175ca73001c1",
+      "policy": {
+        "changed_observational_source": [
+          "source/contracts/reference-clock-review.tcl"
+        ],
+        "changed_rtl": [
+          "source/rtl/perips/LinearTileDmaCore.sv"
+        ],
+        "omission_sidecar_sha256": "c3d969ae26f39aec462bf4971be4ac5c0e72e0493c38b0d39ac9eddd0b2e7f7c",
+        "omitted_local_raw_xml": {
+          "evidence/variant-proof/packaging/concat.xml": "e5c89a6539d3ca189ca5da0db3a3bca38aa5312ffd5ad2a90db5ed7f145a8d54",
+          "evidence/variant-proof/packaging/split.xml": "b19fb81cc89935f0ee54150848ce0a311f56423ed40186ba3a166fa91ae56ddb"
+        },
+        "original_full_manifest_sha256": "90119719bd22d48871d559ff9efa199bea465c2ee1a479132dac4bb6a9966502",
+        "scope": "Two omitted XMLs are noncompile proof inputs and remain present/verified locally. No simulation/synthesis/STA is performed by this identity audit.",
+        "status": "REMOTE242_RECONCILED_WITH_FULL_LOCAL243_SAME_COMPILE_POLICY",
+        "transport_manifest_sha256": "228b0c936d6e23db99d25bbb0c32596a12e8f2f8a9a4606342ec175ca73001c1"
+      },
+      "status": "NATIVE_RETURNED_LEAF_AREA_INDEPENDENTLY_RECOMPUTED_NOT_QUALIFIED"
+    },
+    "b": {
+      "charged": {
+        "scope_area_library_units": {
+          "arbiter": "363.888000",
+          "dma": "498738.969438",
+          "endpoint_logic": "5238.710400"
+        },
+        "scope_counts": {
+          "arbiter": 174,
+          "dma": 133271,
+          "endpoint_logic": 3437,
+          "none": 64103
+        },
+        "sram17_library_units": "155524.915038",
+        "standard_cell_library_units": "348816.652800",
+        "total_library_units": "504341.567838"
+      },
+      "execution_sha256": "6267e323667d2af1907618b5d9b2f06e37b87e9901957e184bae14694dcdbcf6",
+      "input_manifest_sha256": "a6ac0c36ecf3616cee2aa80b547f187929b48ec01fa1b4df6a50145d81a9cf3c",
+      "policy": {
+        "changed_observational_source": [
+          "source/contracts/reference-clock-review.tcl"
+        ],
+        "changed_rtl": [
+          "source/rtl/perips/LinearTileDmaCore.sv"
+        ],
+        "omission_sidecar_sha256": "b1cc36f9e27d8a04cecb7ecb2ec58606e494a174c10a182b71f7c0acb51f811f",
+        "omitted_local_raw_xml": {
+          "evidence/variant-proof/packaging/concat.xml": "9c667036bef971cf4807496b8afb6d6433700f343cc4c785d5a7da3bf3487b34",
+          "evidence/variant-proof/packaging/split.xml": "5189f8e945b4f0e6be4b8a236de1fe27af884ca932a9d3acdb6029eca26bf285"
+        },
+        "original_full_manifest_sha256": "f174f305c7569f47ec2a39628d88a76f34194684800a5ebc100ec3271ca1ba80",
+        "scope": "Two omitted XMLs are noncompile proof inputs and remain present/verified locally. No simulation/synthesis/STA is performed by this identity audit.",
+        "status": "REMOTE242_RECONCILED_WITH_FULL_LOCAL243_SAME_COMPILE_POLICY",
+        "transport_manifest_sha256": "a6ac0c36ecf3616cee2aa80b547f187929b48ec01fa1b4df6a50145d81a9cf3c"
+      },
+      "status": "NATIVE_RETURNED_LEAF_AREA_INDEPENDENTLY_RECOMPUTED_NOT_QUALIFIED"
+    },
+    "baseline": {
+      "charged": {
+        "scope_area_library_units": {
+          "arbiter": "365.484000",
+          "dma": "518014.499838",
+          "endpoint_logic": "5332.874400"
+        },
+        "scope_counts": {
+          "arbiter": 175,
+          "dma": 150796,
+          "endpoint_logic": 3587,
+          "none": 64046
+        },
+        "sram17_library_units": "155524.915038",
+        "standard_cell_library_units": "368187.943200",
+        "total_library_units": "523712.858238"
+      },
+      "execution_sha256": "29af3d0aa9c13b2c8978ea362a64a571d488e545b579590e9f403aeb1c82621b",
+      "input_manifest_sha256": "437ede00614caa3bfc4c16a0c7972f5e16865d0dec420dda00be8f1138563c6f",
+      "policy": {
+        "input_count": 209,
+        "status": "EXACT_FROZEN_R5_209_INPUTS"
+      },
+      "status": "NATIVE_RETURNED_LEAF_AREA_INDEPENDENTLY_RECOMPUTED_NOT_QUALIFIED"
+    }
+  },
+  "schema": "s3-areaopt-published-input-recovery-actual-replay-v1",
+  "scope": "Only published archives and exactly 15 published baseline metadata files were used to restore the prepared inputs. Existing native reports were read by the published auditor; production source and historic evidence were not edited.",
+  "status": "ACTUAL_PUBLISHED_ARCHIVE_RESTORATION_AND_THREE_AREA_AUDITS_PASS_NO_NEW_EDA_OR_SIMULATION"
+}

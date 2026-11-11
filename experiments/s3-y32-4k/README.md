@@ -77,3 +77,15 @@ and formal platform eligibility remain independent final acceptance items.
 The clear-write counter at+0x38 counts W/X writes only (17,408). The
 read-only physical observer separately verifies768 bias writes, for18,176
 required physical16-bit writes/task. Do not label the register as totalclear.
+
+## 2026-11-11 selected area candidate
+
+The dated 48-bit figures above describe the published fallback. The selected
+area candidate uses widths `41 41 41`, with signed extension at public raw48
+interfaces and the same DMA RNE. The 64 ACC and engine-result registers each
+use 2624 bits, and the two result slots use 5248 bits (656B); X storage and all
+337 SRAM macros remain unchanged. Default generation stays `48 48 48` for
+fallback. Use explicit selected widths and the pinned installed tile SHA.
+Complete12 cycles remain428915; conservative same-library charged area falls
+3.6886%. Timing remains NOT_CLOSED and contest area units are unverified.
+See [selected source and handoff](../../docs/s3-y32-area-opt-handoff.md).

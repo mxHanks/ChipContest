@@ -1,0 +1,433 @@
+{
+  "area_dimension": "UNVERIFIED_LIBRARY_UNITS_NOT_MM2",
+  "audit_inputs": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/audit/a-native-leaf-review-r1.json": "921c7a7f2efd26fade0765fea16c7afdb703831753151d94736545b5ded5958e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/audit/baseline-r5-leaf-native-review-r3.json": "237e7422aff24996c137a36772be18a3b12b0f5fe366246bc8dbfa42b126453f"
+  },
+  "charged_logic_reduction_percent": "2.329750812980993887145840684",
+  "charged_reduction_percent": "1.637894022472484765022799241",
+  "components": [
+    {
+      "baseline_leaf_count": 175,
+      "baseline_library_units": "365.484000",
+      "candidate_leaf_count": 174,
+      "candidate_library_units": "363.888000",
+      "classification": "standard_cell",
+      "component": "arbiter",
+      "delta_leaf_count": -1,
+      "delta_library_units": "-1.596000"
+    },
+    {
+      "baseline_leaf_count": 1,
+      "baseline_library_units": "9148.524414",
+      "candidate_leaf_count": 1,
+      "candidate_library_units": "9148.524414",
+      "classification": "SRAM",
+      "component": "bias",
+      "delta_leaf_count": 0,
+      "delta_library_units": "0.000000"
+    },
+    {
+      "baseline_leaf_count": 3797,
+      "baseline_library_units": "8611.696800",
+      "candidate_leaf_count": 3812,
+      "candidate_library_units": "8625.422400",
+      "classification": "standard_cell",
+      "component": "bias",
+      "delta_leaf_count": 15,
+      "delta_library_units": "13.725600"
+    },
+    {
+      "baseline_leaf_count": 17442,
+      "baseline_library_units": "51009.436800",
+      "candidate_leaf_count": 17390,
+      "candidate_library_units": "51003.372000",
+      "classification": "standard_cell",
+      "component": "core_fifo_and_control",
+      "delta_leaf_count": -52,
+      "delta_library_units": "-6.064800"
+    },
+    {
+      "baseline_leaf_count": 5171,
+      "baseline_library_units": "12567.542400",
+      "candidate_leaf_count": 5165,
+      "candidate_library_units": "12564.988800",
+      "classification": "standard_cell",
+      "component": "dma_frontend_and_scheduler",
+      "delta_leaf_count": -6,
+      "delta_library_units": "-2.553600"
+    },
+    {
+      "baseline_leaf_count": 3587,
+      "baseline_library_units": "5332.874400",
+      "candidate_leaf_count": 3421,
+      "candidate_library_units": "5231.368800",
+      "classification": "standard_cell",
+      "component": "endpoint_logic",
+      "delta_leaf_count": -166,
+      "delta_library_units": "-101.505600"
+    },
+    {
+      "baseline_leaf_count": 62099,
+      "baseline_library_units": "152250.100800",
+      "candidate_leaf_count": 56830,
+      "candidate_library_units": "144416.613600",
+      "classification": "standard_cell",
+      "component": "engines_64pe",
+      "delta_leaf_count": -5269,
+      "delta_library_units": "-7833.487200"
+    },
+    {
+      "baseline_leaf_count": 16,
+      "baseline_library_units": "146376.390624",
+      "candidate_leaf_count": 16,
+      "candidate_library_units": "146376.390624",
+      "classification": "SRAM",
+      "component": "weights",
+      "delta_leaf_count": 0,
+      "delta_library_units": "0.000000"
+    },
+    {
+      "baseline_leaf_count": 642,
+      "baseline_library_units": "1099.324800",
+      "candidate_leaf_count": 621,
+      "candidate_library_units": "1076.661600",
+      "classification": "standard_cell",
+      "component": "weights",
+      "delta_leaf_count": -21,
+      "delta_library_units": "-22.663200"
+    },
+    {
+      "baseline_leaf_count": 61628,
+      "baseline_library_units": "136951.483200",
+      "candidate_leaf_count": 53743,
+      "candidate_library_units": "136327.766400",
+      "classification": "standard_cell",
+      "component": "x_double_buffers",
+      "delta_leaf_count": -7885,
+      "delta_library_units": "-623.716800"
+    }
+  ],
+  "conservative_charging": {
+    "candidate_charged_library_units": "515134.996638",
+    "conservative_candidate_library_units": "515205.220638",
+    "delta_vs_baseline_charged_library_units": "-8507.637600",
+    "positive_outside_standard_growth_library_units": "70.224000",
+    "reduction_vs_baseline_charged_percent": "1.624485147953676048158101745"
+  },
+  "created_at_utc": "2026-11-11T11:06:16.586044+00:00",
+  "fixed_contract": {
+    "area_components": "6ea8d141ad8e5d035a9e8a49b16ddca002dbf40fd2413d421572bd6f1e4f1a6d",
+    "compile_script": "fdd787ddc78897359d76071cd8fe9db6fec77c7280300a4738b8e2a32d697529",
+    "hierarchy": "7296ec5f486f6e2c431df1565e58c0df19f929ad62ddf67ce60423997d8a9a7a",
+    "rtl_f": "d0c7b7a0a44de9fa042e3494b5c21e37d0049b8dbf55f41e3c5c1f05f7dd5ad6",
+    "sdc": "c15ede0fc2c65771f87e2d6aee763b4ea0d53934868ca807b4785c36182fce7c",
+    "sram_db": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f",
+    "standard_cell_db": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+  },
+  "new_eda_or_simulation": false,
+  "outside_standard_logic_counts": {
+    "baseline": 63510,
+    "candidate": 63525,
+    "delta": 15
+  },
+  "ownership_limit": "Positive total growth outside the fixed three charged scopes is conservatively added. Leaf path/reference renamings alone do not prove ownership; excluded-area reductions are never credited to charged savings. WholeSoC area is not used as a denominator.",
+  "partitions": {
+    "charged_standard_logic": {
+      "baseline_library_units": "368187.943200",
+      "candidate_library_units": "359610.081600",
+      "delta_library_units": "-8577.861600"
+    },
+    "charged_total": {
+      "baseline_library_units": "523712.858238",
+      "candidate_library_units": "515134.996638",
+      "delta_library_units": "-8577.861600"
+    },
+    "internal17_sram": {
+      "baseline_library_units": "155524.915038",
+      "candidate_library_units": "155524.915038",
+      "delta_library_units": "0.000000"
+    },
+    "outside_charged_standard_logic": {
+      "baseline_library_units": "142055.172000",
+      "candidate_library_units": "142125.396000",
+      "delta_library_units": "70.224000"
+    },
+    "whole_soc_standard_logic_separately": {
+      "baseline_library_units": "510243.115200",
+      "candidate_library_units": "501735.477600",
+      "delta_library_units": "-8507.637600"
+    }
+  },
+  "performance_qualification": "Local simulation cycles and PT timing are separate evidence; area saving alone does not prove maintained physical throughput.",
+  "schema": "s3-area-opt-native-area-comparison-v1",
+  "script_sha256": "9040585c79a0eaa71087068b2324033869b1d5556b377b0e4aaa30a8fafdc0f1",
+  "status": "SAME_POLICY_NATIVE_AREA_COMPARISON_ONLY_NOT_QUALIFIED",
+  "timing": {
+    "baseline": {
+      "audit_path": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/audit/pt-r4-native-independent-review-r2.json",
+      "audit_sha256": "5d0245a9a4dd0ef8c12ed7e8a0844b07b19b3388df3ab1a53cabeb9576fe0d95",
+      "clock_association": {
+        "classification": "674 raw all_registers pins are exactly CEN+RET1N on the same 337 macros with associated explicit CLK. This is inventory classification, not a timing waiver.",
+        "clock_memberships": {
+          "xu_hfextclk": 42791,
+          "xu_jtag_tck": 185,
+          "xu_lfextclk": 1015,
+          "xu_plldiv_envelope": 42779
+        },
+        "macro_auxiliary_pair_count": 337,
+        "multi_clock_count": 42438,
+        "native_raw_register_no_clock_count": 674,
+        "native_sram_clk_no_clock_count": 0,
+        "pin_counts": {
+          "SRAM": 337,
+          "register": 44332
+        },
+        "unassociated_outside_exact_sram_cen_ret1n_pairs": 0
+      },
+      "coverage": {
+        "check": "All Checks",
+        "met": 441568,
+        "total": 469690,
+        "untested": 27911,
+        "violated": 211
+      },
+      "coverage_rows": [
+        {
+          "check": "setup",
+          "met": 114602,
+          "total": 118258,
+          "untested": 3656,
+          "violated": 0
+        },
+        {
+          "check": "hold",
+          "met": 114426,
+          "total": 118258,
+          "untested": 3654,
+          "violated": 178
+        },
+        {
+          "check": "recovery",
+          "met": 19695,
+          "total": 19697,
+          "untested": 2,
+          "violated": 0
+        },
+        {
+          "check": "removal",
+          "met": 19692,
+          "total": 19697,
+          "untested": 0,
+          "violated": 5
+        },
+        {
+          "check": "min_period",
+          "met": 674,
+          "total": 11121,
+          "untested": 10447,
+          "violated": 0
+        },
+        {
+          "check": "min_pulse_width",
+          "met": 172165,
+          "total": 182317,
+          "untested": 10152,
+          "violated": 0
+        },
+        {
+          "check": "clock_gating_setup",
+          "met": 27,
+          "total": 27,
+          "untested": 0,
+          "violated": 0
+        },
+        {
+          "check": "clock_gating_hold",
+          "met": 0,
+          "total": 27,
+          "untested": 0,
+          "violated": 27
+        },
+        {
+          "check": "out_setup",
+          "met": 143,
+          "total": 144,
+          "untested": 0,
+          "violated": 1
+        },
+        {
+          "check": "out_hold",
+          "met": 144,
+          "total": 144,
+          "untested": 0,
+          "violated": 0
+        },
+        {
+          "check": "All Checks",
+          "met": 441568,
+          "total": 469690,
+          "untested": 27911,
+          "violated": 211
+        }
+      ],
+      "hold": {
+        "first_endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro",
+        "first_startpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/writeWord_reg[1]",
+        "negative_reported_paths": 50,
+        "reported_paths": 50,
+        "scope": "finite printed paths; not a complete path census or timing pass",
+        "worst_reported_slack_ns": "-0.13472039"
+      },
+      "limitation": "Native collection completion is not timing closure; known macro auxiliary no-clock classification and all raw timing violations remain visible.",
+      "setup": {
+        "first_endpoint": "io_pads_gpioA_o_oval[27]",
+        "first_startpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk1_clkgate/enb_reg",
+        "negative_reported_paths": 1,
+        "reported_paths": 50,
+        "scope": "finite printed paths; not a complete path census or timing pass",
+        "worst_reported_slack_ns": "-10.66794014"
+      },
+      "status": "NATIVE_PT_AUDIT_LINKED_SAME_MAPPING",
+      "untested_reasons": {
+        "constant_disabled": 17755,
+        "no_clock": 10152,
+        "unknown": 4
+      },
+      "verdict": "NOT_CLOSED"
+    },
+    "candidate": {
+      "audit_path": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/area-opt-20261111/audit/a-native-pt-review-r1.json",
+      "audit_sha256": "b172202e89297d4a50de68f9057f5029ce5f4d7fe56b56827b616f5c2ef7b57c",
+      "clock_association": {
+        "classification": "674 raw all_registers pins are exactly CEN+RET1N on the same 337 macros with associated explicit CLK. This is inventory classification, not a timing waiver.",
+        "clock_memberships": {
+          "xu_hfextclk": 42343,
+          "xu_jtag_tck": 185,
+          "xu_lfextclk": 1015,
+          "xu_plldiv_envelope": 42331
+        },
+        "macro_auxiliary_pair_count": 337,
+        "multi_clock_count": 41990,
+        "native_raw_register_no_clock_count": 674,
+        "native_sram_clk_no_clock_count": 0,
+        "pin_counts": {
+          "SRAM": 337,
+          "register": 43884
+        },
+        "unassociated_outside_exact_sram_cen_ret1n_pairs": 0
+      },
+      "coverage": {
+        "check": "All Checks",
+        "met": 437820,
+        "total": 465942,
+        "untested": 27911,
+        "violated": 211
+      },
+      "coverage_rows": [
+        {
+          "check": "setup",
+          "met": 113624,
+          "total": 117280,
+          "untested": 3656,
+          "violated": 0
+        },
+        {
+          "check": "hold",
+          "met": 113448,
+          "total": 117280,
+          "untested": 3654,
+          "violated": 178
+        },
+        {
+          "check": "recovery",
+          "met": 19695,
+          "total": 19697,
+          "untested": 2,
+          "violated": 0
+        },
+        {
+          "check": "removal",
+          "met": 19692,
+          "total": 19697,
+          "untested": 0,
+          "violated": 5
+        },
+        {
+          "check": "min_period",
+          "met": 674,
+          "total": 11121,
+          "untested": 10447,
+          "violated": 0
+        },
+        {
+          "check": "min_pulse_width",
+          "met": 170373,
+          "total": 180525,
+          "untested": 10152,
+          "violated": 0
+        },
+        {
+          "check": "clock_gating_setup",
+          "met": 27,
+          "total": 27,
+          "untested": 0,
+          "violated": 0
+        },
+        {
+          "check": "clock_gating_hold",
+          "met": 0,
+          "total": 27,
+          "untested": 0,
+          "violated": 27
+        },
+        {
+          "check": "out_setup",
+          "met": 143,
+          "total": 144,
+          "untested": 0,
+          "violated": 1
+        },
+        {
+          "check": "out_hold",
+          "met": 144,
+          "total": 144,
+          "untested": 0,
+          "violated": 0
+        },
+        {
+          "check": "All Checks",
+          "met": 437820,
+          "total": 465942,
+          "untested": 27911,
+          "violated": 211
+        }
+      ],
+      "hold": {
+        "first_endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro",
+        "first_startpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/writeWord_reg[1]",
+        "negative_reported_paths": 50,
+        "reported_paths": 50,
+        "scope": "finite printed paths; not a complete path census or timing pass",
+        "worst_reported_slack_ns": "-0.13472039"
+      },
+      "limitation": "Native collection completion is not timing closure; known macro auxiliary no-clock classification and all raw timing violations remain visible.",
+      "setup": {
+        "first_endpoint": "io_pads_gpioA_o_oval[27]",
+        "first_startpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk1_clkgate/enb_reg",
+        "negative_reported_paths": 1,
+        "reported_paths": 50,
+        "scope": "finite printed paths; not a complete path census or timing pass",
+        "worst_reported_slack_ns": "-10.53013802"
+      },
+      "status": "NATIVE_PT_AUDIT_LINKED_SAME_MAPPING",
+      "untested_reasons": {
+        "constant_disabled": 17755,
+        "no_clock": 10152,
+        "unknown": 4
+      },
+      "verdict": "NOT_CLOSED"
+    }
+  },
+  "timing_comparison_verdict": "NOT_CLOSED"
+}
