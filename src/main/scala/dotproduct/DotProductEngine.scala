@@ -36,13 +36,16 @@ class DotProductEngineIO extends Bundle {
  *  - weightRen     向 权重存储器 发送 同步读取使能
  *  - weightReadK   指定要预取的权重序号（0~63）
  */
-class DotProductEngine(accWidth: Int = 48) extends Module {
+class DotProductEngine(accWidth: Int = 48, resultWidth: Int = 48) extends Module {
+    require(resultWidth >= 41 && resultWidth <= 48, "Exact bounded completed results require at least41 bits")
+    override def desiredName: String = if (accWidth == 48 && resultWidth == 48) "DotProductEngine"
+      else s"DotProductEngine_Acc${accWidth}_Result${resultWidth}"
     require(accWidth >= 41 && accWidth <= 48, "64 signed16 products plus signed40 bias require at least 41 bits")
 
     val io: DotProductEngineIO = IO(new DotProductEngineIO)
 
     // 创建 8 个 48 位寄存器，总计 384 bit。它们专门负责保存 上一轮 已经完成的计算结果
-    private val resultReg = RegInit(VecInit(Seq.fill(8)(0.S(48.W))))
+    private val resultReg = RegInit(VecInit(Seq.fill(8)(0.S(resultWidth.W))))
 
     private val controller = Module(new MacController)
     private val peArray = Module(new MacPEArray(accWidth))
@@ -55,10 +58,19 @@ class DotProductEngine(accWidth: Int = 48) extends Module {
 
     // Controller 通知捕获结果
     when(controller.io.capture) {
-        resultReg := peArray.io.result
+        if (resultWidth == 48) {
+            resultReg := peArray.io.result
+        } else {
+            for (lane <- 0 until 8) {
+                val bounded = peArray.io.result(lane)(resultWidth - 1, 0).asSInt
+                assert(peArray.io.result(lane) === bounded.pad(48), "Completed result must fit selected signed storage")
+                resultReg(lane) := bounded
+            }
+        }
     }
     // 对外输出保存好的计算结果
-    io.result := resultReg
+    if (resultWidth == 48) { io.result := resultReg }
+    else { for (lane <- 0 until 8) io.result(lane) := resultReg(lane).pad(48) }
 
     peArray.io.x := io.x
     peArray.io.w := io.w

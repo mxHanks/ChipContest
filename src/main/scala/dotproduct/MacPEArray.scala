@@ -25,6 +25,7 @@ class MacPEArrayIO extends Bundle {
  * 状态受 MacController 控制。
  */
 class MacPEArray(accWidth: Int = 48) extends Module {
+    override def desiredName: String = if (accWidth == 48) "MacPEArray" else s"MacPEArray_Acc${accWidth}"
 
     val io: MacPEArrayIO = IO(new MacPEArrayIO)
 

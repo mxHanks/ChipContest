@@ -35,6 +35,7 @@ class MacPEIO extends Bundle {
  * The public result remains signed48 through sign extension.
  */
 class MacPE(accWidth: Int = 48) extends Module {
+    override def desiredName: String = if (accWidth == 48) "MacPE" else s"MacPE_Acc${accWidth}"
     require(accWidth >= 40 && accWidth <= 48, "Accumulator must represent signed40 bias")
 
     val io: MacPEIO = IO(new MacPEIO)

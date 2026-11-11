@@ -68,7 +68,7 @@ private class TileXRowBuffer extends Module {
   * validRows=1..8 is captured at START; the 99-row tail uses three rows.
   * Two complete output-column tiles remain owned until every valid row is popped.
   */
-class LinearTileDmaCore extends Module {
+class LinearTileDmaCore(accWidth: Int = 48, resultWidth: Int = 48, fifoWidth: Int = 48) extends Module { require(accWidth >= 41 && accWidth <= 48); require(resultWidth >= 41 && resultWidth <= 48); require(fifoWidth >= 41 && fifoWidth <= 48)
   val io = IO(new Bundle {
     val start = Input(Bool()); val validRows = Input(UInt(4.W)); val abort = Input(Bool())
     val active = Output(Bool()); val done = Output(Bool())
@@ -95,14 +95,14 @@ class LinearTileDmaCore extends Module {
   val produced = RegInit(0.U(6.W)); val retired = RegInit(0.U(6.W))
   val count = RegInit(0.U(2.W)); val head = RegInit(false.B); val tail = RegInit(false.B)
   val outputRow = RegInit(0.U(3.W))
-  val results = Reg(Vec(2, Vec(8, Vec(8, SInt(48.W)))))
+  val results = Reg(Vec(2, Vec(8, Vec(8, SInt(fifoWidth.W)))))
   val tags = Reg(Vec(2, UInt(5.W)))
   val clearing = RegInit(false.B); val clearIndex = RegInit(0.U(11.W))
   val biasCleared = RegInit(false.B); val clearDone = RegInit(false.B)
   val bias = withReset(reset.asBool || io.abort) { Module(new DmaBiasSramPrefetch) }
   io.clearReady := !active && !running && count === 0.U && !clearing && bias.io.clearReady && !io.abort
   val clearFire = io.clearValid && io.clearReady
-  val engines = Seq.fill(8)(withReset(reset.asBool || clearFire || io.abort) { Module(new DotProductEngine) })
+  val engines = Seq.fill(8)(withReset(reset.asBool || clearFire || io.abort) { Module(new DotProductEngine(accWidth, resultWidth)) })
   private val xs = Seq.fill(2, 8)(Module(new TileXRowBuffer))
   private val weights = Module(new TileWeightBankArray)
   val selectedGroup = produced(4, 0)
@@ -185,7 +185,7 @@ class LinearTileDmaCore extends Module {
     when(launch) { running := true.B }
     when(enqueue) {
       assert(count < 2.U)
-      for (row <- 0 until 8) results(tail)(row) := engines(row).io.result
+      if (fifoWidth == 48) { for (row <- 0 until 8) results(tail)(row) := engines(row).io.result } else { for (row <- 0 until 8; lane <- 0 until 8) { val bounded = engines(row).io.result(lane)(fifoWidth - 1, 0).asSInt; assert(engines(row).io.result(lane) === bounded.pad(48), "FIFO raw result must fit selected signed storage"); results(tail)(row)(lane) := bounded } }
       tags(tail) := selectedGroup; tail := !tail
       produced := produced + 1.U; running := false.B
     }
@@ -208,7 +208,7 @@ class LinearTileDmaCore extends Module {
   io.active := active && !io.abort; io.clearing := clearing && !io.abort
   io.clearDone := clearDone && !io.abort
   io.outValid := active && count =/= 0.U && !io.abort
-  io.outGroup := tags(head); io.outRow := outputRow; io.outResult := results(head)(outputRow)
+  io.outGroup := tags(head); io.outRow := outputRow; if (fifoWidth == 48) { io.outResult := results(head)(outputRow) } else { for (lane <- 0 until 8) io.outResult(lane) := results(head)(outputRow)(lane).pad(48) }
   io.computeStart := launch; io.weightRead := weights.io.ren
   io.macStep := running && RegNext(weights.io.ren, false.B) && !io.abort
   io.fifoFullWait := active && !running && produced < 32.U && count === 2.U && !io.abort
