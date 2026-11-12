@@ -1,0 +1,128 @@
+{
+  "accepted_full12": {
+    "campaign_sha256": "4cae2c2ebcc9f260a319176780ffafced101ecc4d288344e54cc377b3bcf1c69",
+    "input_manifest_sha256": "1d8cd861b75c377ecd7282edd1fa1bdb7dae7a166078d43d6308e3010335a6c6",
+    "native_sha256": "e0dbc2ac8e9e517dc9e46d5fc8d69da39a725d48afa3c65d5b5fef05596a06e2",
+    "simulator_sha256": "09c82dab56bfba6cc9ebf11c3500ad7b0b23d794d8dec834c0ee20716dbd3e4c"
+  },
+  "campaign_sha256": "4e6708967077d8e4ae396f4d9ed76681f694cf4e64370938fc745f946936def8",
+  "cpu_assert_properties": 6,
+  "fault_cases": {
+    "backoff_8_256_fast4-O2-read": {
+      "ack": 0,
+      "busy": 0,
+      "done": 0,
+      "error_publications": 1,
+      "locked": 0,
+      "mode": 1,
+      "pending": 0,
+      "requests": 2,
+      "responses": 2,
+      "return_code": 5
+    },
+    "backoff_8_256_fast4-O2-write": {
+      "ack": 0,
+      "busy": 0,
+      "done": 0,
+      "error_publications": 1,
+      "locked": 0,
+      "mode": 2,
+      "pending": 0,
+      "requests": 4691,
+      "responses": 4691,
+      "return_code": 5
+    },
+    "phased_64_fast4-O2-read": {
+      "ack": 0,
+      "busy": 0,
+      "done": 0,
+      "error_publications": 1,
+      "locked": 0,
+      "mode": 1,
+      "pending": 0,
+      "requests": 2,
+      "responses": 2,
+      "return_code": 5
+    },
+    "phased_64_fast4-O2-write": {
+      "ack": 0,
+      "busy": 0,
+      "done": 0,
+      "error_publications": 1,
+      "locked": 0,
+      "mode": 2,
+      "pending": 0,
+      "requests": 4692,
+      "responses": 4692,
+      "return_code": 5
+    },
+    "tight-O2-read": {
+      "ack": 0,
+      "busy": 0,
+      "done": 0,
+      "error_publications": 1,
+      "locked": 0,
+      "mode": 1,
+      "pending": 0,
+      "requests": 2,
+      "responses": 2,
+      "return_code": 5
+    },
+    "tight-O2-write": {
+      "ack": 0,
+      "busy": 0,
+      "done": 0,
+      "error_publications": 1,
+      "locked": 0,
+      "mode": 2,
+      "pending": 0,
+      "requests": 4691,
+      "responses": 4691,
+      "return_code": 5
+    }
+  },
+  "fault_compile_units": 168,
+  "fault_simulator_sha256": "1b873eacdedadffbd471be3d7a5d1e126231a1739a56695e9c9ca308e43d939e",
+  "frozen_checker_sha256": "d4e121ae9ddb5e529b5327b0ae51893d27a5e50eedf1e69aa35d19f15aba2a20",
+  "input_manifest_sha256": "4ac437cd4ff2e480a4f33ae7c8c3b969949ebe151d195aa36b993ca9b47b5db4",
+  "native_seconds": 707.7203531760024,
+  "native_sha256": "8430b682d7f6c7b0a9eff13f730de8a95a17b37ff0573c63efdffc1f1378e7b9",
+  "official_score": null,
+  "physical_energy": null,
+  "qualification": "DEVELOPMENT_RTL_ONLY",
+  "reviewer_sha256": "85a2a789c596d754e04a33a986289c4f4a65e54d11728e238b26ba0561138ed9",
+  "sequence_sha256": "f36b53665d2edd8eb41caab7a3d8fdd0cf99422da4fde95de5a1f39e240a65c0",
+  "stall_cases": {
+    "backoff_8_256_fast4-O2": {
+      "first_source_wait_cycles": [
+        31,
+        31
+      ],
+      "measured_outputs": 25344,
+      "physical_clears": 2,
+      "report_delay": 294,
+      "warmup_outputs": 25344
+    },
+    "phased_64_fast4-O2": {
+      "first_source_wait_cycles": [
+        31,
+        31
+      ],
+      "measured_outputs": 25344,
+      "physical_clears": 2,
+      "report_delay": 83,
+      "warmup_outputs": 25344
+    },
+    "tight-O2": {
+      "first_source_wait_cycles": [
+        31,
+        31
+      ],
+      "measured_outputs": 25344,
+      "physical_clears": 2,
+      "report_delay": 38,
+      "warmup_outputs": 25344
+    }
+  },
+  "status": "PASS_RAW_B41_FOLLOWUP"
+}

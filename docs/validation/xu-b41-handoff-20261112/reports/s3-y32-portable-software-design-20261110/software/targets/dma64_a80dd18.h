@@ -1,0 +1,34 @@
+#ifndef FFN_DMA64_A80DD18_H
+#define FFN_DMA64_A80DD18_H
+
+/* Verified against child a80dd184536e0f2312c62768d5acf4ba1b01c34e.
+ * The public ready/ACK mailbox is a development fixture, not a production ABI. */
+#define FFN_DMA_BASE 0x10042300u
+#define FFN_SHARED_BASE 0xa0000000u
+#define FFN_HOST_ADDRESS (FFN_SHARED_BASE + 0x7f000u)
+#define FFN_STATUS_ADDRESS (FFN_DMA_BASE + 0x08u)
+#define FFN_ERROR_ADDRESS (FFN_DMA_BASE + 0x0cu)
+#define FFN_ERROR_MAILBOX (FFN_HOST_ADDRESS + 5u * 4u)
+#define FFN_DMA_ID 0x444d4131u
+#define FFN_DMA_CAPABILITY 0x00084001u
+#define FFN_X_ADDRESS FFN_SHARED_BASE
+#define FFN_W_ADDRESS (FFN_SHARED_BASE + 0x08000u)
+#define FFN_B_ADDRESS (FFN_SHARED_BASE + 0x18000u)
+#define FFN_Y_ADDRESS (FFN_SHARED_BASE + 0x20000u)
+#define FFN_READY_POLL_LIMIT 1000000u
+#define FFN_DRAIN_BUDGET_CYCLES 1000000u
+#define FFN_DRAIN_POLL_LIMIT 1000000u
+
+#define FFN_DMA_REG(offset) (*(volatile uint32_t *)(FFN_DMA_BASE + (offset)))
+#define FFN_TARGET_CHECK() \
+    (FFN_DMA_REG(0x00) == FFN_DMA_ID && FFN_DMA_REG(0x4c) == FFN_DMA_CAPABILITY)
+#define FFN_TARGET_CLEAR() (FFN_DMA_REG(0x04) = 1u)
+#define FFN_TARGET_START(rows) (FFN_DMA_REG(0x04) = ((rows) == 8u ? 0x802u : 2u))
+#define FFN_TARGET_DESCRIPTORS() do { \
+    FFN_DMA_REG(0x10) = FFN_X_ADDRESS; \
+    FFN_DMA_REG(0x14) = FFN_W_ADDRESS; \
+    FFN_DMA_REG(0x18) = FFN_B_ADDRESS; \
+    FFN_DMA_REG(0x1c) = FFN_Y_ADDRESS; \
+} while (0)
+
+#endif

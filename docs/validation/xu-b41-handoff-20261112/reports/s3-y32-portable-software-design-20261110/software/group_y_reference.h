@@ -1,0 +1,17 @@
+#ifndef FFN_GROUP_Y_REFERENCE_H
+#define FFN_GROUP_Y_REFERENCE_H
+
+/* Historical ABI reference only. Do not label this as the new 64-PE profile. */
+#define FFN_DMA_BASE 0x10042300u
+#define FFN_SHARED_BASE 0xa0000000u
+#define FFN_HOST_ADDRESS (FFN_SHARED_BASE + 0x7f000u)
+#define FFN_STATUS_ADDRESS (FFN_DMA_BASE + 0x08u)
+#define FFN_ERROR_ADDRESS (FFN_DMA_BASE + 0x0cu)
+#define FFN_ERROR_MAILBOX (FFN_HOST_ADDRESS + 5u * 4u)
+#define FFN_DMA_ID 0x444d4131u
+#define FFN_X_ADDRESS FFN_SHARED_BASE
+#define FFN_W_ADDRESS (FFN_SHARED_BASE + 0x08000u)
+#define FFN_B_ADDRESS (FFN_SHARED_BASE + 0x18000u)
+#define FFN_Y_ADDRESS (FFN_SHARED_BASE + 0x20000u)
+
+#endif

@@ -1,0 +1,107 @@
+{
+  "campaign_sha256": "4cae2c2ebcc9f260a319176780ffafced101ecc4d288344e54cc377b3bcf1c69",
+  "child_revision": "ccdac30d92ecf40f14d0b78879b8711fb0b1cdd1",
+  "coverage": {
+    "backoff_8_256_fast4-O2": {
+      "measured_outputs": 304128,
+      "physical_clears": 13,
+      "target_cycles_met": true,
+      "warmup_outputs": 25344
+    },
+    "phased_64_fast4-O2": {
+      "measured_outputs": 304128,
+      "physical_clears": 13,
+      "target_cycles_met": true,
+      "warmup_outputs": 25344
+    },
+    "tight-O2": {
+      "measured_outputs": 304128,
+      "physical_clears": 13,
+      "target_cycles_met": true,
+      "warmup_outputs": 25344
+    }
+  },
+  "cpu_assert_properties": 6,
+  "first_source_stall": 0,
+  "input_manifest_sha256": "1d8cd861b75c377ecd7282edd1fa1bdb7dae7a166078d43d6308e3010335a6c6",
+  "native_seconds": 1589.3298086830182,
+  "native_sha256": "e0dbc2ac8e9e517dc9e46d5fc8d69da39a725d48afa3c65d5b5fef05596a06e2",
+  "official_score": null,
+  "parent_revision": "96fffcb2a4b2492fd2cfdecb88e164d2c67881ae",
+  "physical_energy": null,
+  "proxy_objectives": [
+    "software_control_cycles",
+    "max_report_delay",
+    "retired",
+    "itcm_accesses",
+    "mmio_reads"
+  ],
+  "raw_preprocessed_sha256": "aff88a44cacff347ccb3c8604b412fb3b496b279a26afa966a1ac228246c94a9",
+  "scope": "Real CPU64 execution with SVA and original functional checks. warmup separately tagged in CSV. Operation counts do not establish energy benefit or official eligibility.",
+  "simulator_sha256": "09c82dab56bfba6cc9ebf11c3500ad7b0b23d794d8dec834c0ee20716dbd3e4c",
+  "source_build_receipt_sha256": "b9395a66d613a6d600a1adf8637aaeb9fb174e7704aecc458358c4f0560b7602",
+  "status": "PASS_RAW_CPU64_COMPARISON",
+  "summaries": {
+    "backoff_8_256_fast4-O2": {
+      "clear_cycles": 12336,
+      "clear_reads": 828,
+      "compute_reads": 1584,
+      "descriptor_submission_cycles": 396,
+      "discovery_delay": 179,
+      "firmware_cycles": 430080,
+      "gap_cycles": 696,
+      "including_gap_cycles": 429601,
+      "itcm_accesses": 115968,
+      "max_report_delay": 45,
+      "mmio_reads": 2412,
+      "payload_cycles": 416569,
+      "principal_cycles": 428905,
+      "report_delay": 536,
+      "retired": 413004,
+      "software_control_cycles": 430161
+    },
+    "phased_64_fast4-O2": {
+      "clear_cycles": 12336,
+      "clear_reads": 780,
+      "compute_reads": 5256,
+      "descriptor_submission_cycles": 396,
+      "discovery_delay": 84,
+      "firmware_cycles": 429984,
+      "gap_cycles": 756,
+      "including_gap_cycles": 429660,
+      "itcm_accesses": 114420,
+      "max_report_delay": 37,
+      "mmio_reads": 6036,
+      "payload_cycles": 416568,
+      "principal_cycles": 428904,
+      "report_delay": 444,
+      "retired": 398592,
+      "software_control_cycles": 430128
+    },
+    "tight-O2": {
+      "clear_cycles": 12336,
+      "clear_reads": 732,
+      "compute_reads": 24516,
+      "descriptor_submission_cycles": 312,
+      "discovery_delay": 84,
+      "firmware_cycles": 429744,
+      "gap_cycles": 528,
+      "including_gap_cycles": 429444,
+      "itcm_accesses": 151572,
+      "max_report_delay": 33,
+      "mmio_reads": 25248,
+      "payload_cycles": 416580,
+      "principal_cycles": 428916,
+      "report_delay": 396,
+      "retired": 252792,
+      "software_control_cycles": 429864
+    }
+  },
+  "tasks_csv_sha256": "86cc4cc3855b796a872765ee98fe9dd7e09b15fb277bb08a3a4c2cccd700af6e",
+  "tasks_per_variant": 12,
+  "timing_operation_proxy_front": [
+    "backoff_8_256_fast4-O2",
+    "phased_64_fast4-O2",
+    "tight-O2"
+  ]
+}

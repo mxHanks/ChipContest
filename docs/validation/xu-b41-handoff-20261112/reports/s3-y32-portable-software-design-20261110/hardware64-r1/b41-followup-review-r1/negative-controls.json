@@ -1,0 +1,56 @@
+{
+  "status": "PASS_NEGATIVE_CONTROLS",
+  "reviewer_sha256": "85a2a789c596d754e04a33a986289c4f4a65e54d11728e238b26ba0561138ed9",
+  "cases": [
+    {
+      "case": "missing_fault",
+      "rejected": true,
+      "native_exit": 1,
+      "reason": "ValueError: Missing or extra firmware stall/fault cases"
+    },
+    {
+      "case": "wrong_full12",
+      "rejected": true,
+      "native_exit": 1,
+      "reason": "ValueError: Follow-up does not use the accepted same-version full12 executable"
+    },
+    {
+      "case": "disabled_sva",
+      "rejected": true,
+      "native_exit": 1,
+      "reason": "ValueError: Fault build options differ"
+    },
+    {
+      "case": "missing_sva_property",
+      "rejected": true,
+      "native_exit": 1,
+      "reason": "ValueError: Fault CPU assertion evidence differs"
+    },
+    {
+      "case": "unretired_write",
+      "rejected": true,
+      "native_exit": 1,
+      "reason": "ValueError: CPU error publication or transaction retirement differs"
+    },
+    {
+      "case": "missing_warmup",
+      "rejected": true,
+      "native_exit": 1,
+      "reason": "ValueError: missing/duplicate layer evidence"
+    },
+    {
+      "case": "native_guard_event",
+      "rejected": true,
+      "native_exit": 1,
+      "reason": "ValueError: Native campaign did not pass and drain with the frozen input"
+    },
+    {
+      "case": "sequence_overlap",
+      "rejected": true,
+      "native_exit": 1,
+      "reason": "ValueError: Native sequence did not complete in the required order"
+    }
+  ],
+  "original_artifact_hashes_unchanged": true,
+  "scope": "Offline evidence checker rejection controls; no new RTL or EDA simulation"
+}

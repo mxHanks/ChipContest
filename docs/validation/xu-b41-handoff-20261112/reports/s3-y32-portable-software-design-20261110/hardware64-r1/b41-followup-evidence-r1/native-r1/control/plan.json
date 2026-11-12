@@ -1,0 +1,20 @@
+{
+  "command": [
+    "bash",
+    "-lc",
+    "module load openEDA/verilator/v5.046 gcc/v13.5.0 && export CCACHE_DISABLE=1 && exec /work/leo/cats-r4/runtime/python312-20261012-r1/bin/python3.12 -E -B /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-followup-input-r1/run_followup.py --sim-cpu 9"
+  ],
+  "cpus": [
+    9,
+    11,
+    13
+  ],
+  "input_pins": {
+    "run_followup.py": "d4e121ae9ddb5e529b5327b0ae51893d27a5e50eedf1e69aa35d19f15aba2a20",
+    "run_native.py": "b4031e633705ecf761af4c52d9966790b42ea71a110cef831c6da468fedaf9cd",
+    "tb_dma64_fault_soc.sv": "ea27d4f0fdce755ed6ef794f6897a88a4ca6c798d56990a0aa3f4f7a971c4fb8"
+  },
+  "memory_limit_bytes": 4294967296,
+  "nice": 10,
+  "timeout_seconds": 3600
+}

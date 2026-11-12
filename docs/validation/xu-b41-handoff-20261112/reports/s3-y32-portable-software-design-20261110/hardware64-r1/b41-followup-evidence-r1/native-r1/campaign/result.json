@@ -1,0 +1,1249 @@
+{
+  "accepted_full12": {
+    "campaign_sha256": "4cae2c2ebcc9f260a319176780ffafced101ecc4d288344e54cc377b3bcf1c69",
+    "input_manifest_sha256": "1d8cd861b75c377ecd7282edd1fa1bdb7dae7a166078d43d6308e3010335a6c6",
+    "native_sha256": "e0dbc2ac8e9e517dc9e46d5fc8d69da39a725d48afa3c65d5b5fef05596a06e2",
+    "simulator_sha256": "09c82dab56bfba6cc9ebf11c3500ad7b0b23d794d8dec834c0ee20716dbd3e4c"
+  },
+  "fault_build_argv": [
+    "verilator",
+    "--binary",
+    "-CFLAGS",
+    "-std=gnu++20",
+    "-j",
+    "2",
+    "-Wno-fatal",
+    "-Mdir",
+    "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-followup-input-r1/native-r1/campaign/fault-obj",
+    "-o",
+    "cpu64_fault",
+    "--timing",
+    "--assert",
+    "--top-module",
+    "tb_dma64_fault_soc",
+    "-DXU_MATRIX_DMA",
+    "-DXU_MATRIX_DMA64",
+    "-DD4K_THROTTLE=7",
+    "-I/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core",
+    "-I/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips",
+    "-I/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c",
+    "-I/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests",
+    "-f",
+    "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-followup-input-r1/native-r1/campaign/fault-rtl.f"
+  ],
+  "fault_cases": {
+    "backoff_8_256_fast4-O2-read": {
+      "argv": [
+        "taskset",
+        "-c",
+        "9",
+        "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-followup-input-r1/native-r1/campaign/fault-obj/cpu64_fault",
+        "+TESTCASE=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/firmware/backoff_8_256_fast4-O2/dma64_soc",
+        "+VECTORS=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/vectors",
+        "+TASKS=1",
+        "+ROWS=8",
+        "+MAX_CYCLES=20000000",
+        "+WARMUP=0",
+        "+FIRST_SOURCE_STALL=0",
+        "+FAULT=1"
+      ],
+      "firmware_image_sha256": "890b18dac8db08bd294d9c0a2073b96e323c8a34c482c329530b03bebb3b35f0",
+      "injection": {
+        "cycle": 1346370,
+        "mode": 1
+      },
+      "log_sha256": "d83bee02bfce3ddd7c382e5994106af1de8d4badf8d08fc1aa671bc4c16376b8",
+      "physical_clear": [
+        {
+          "ACC": 64,
+          "BIAS": 768,
+          "BIAS_CACHE": 16,
+          "DMA_SNAPSHOT": 1,
+          "ENGINE_RESULT": 64,
+          "FIFO": 128,
+          "W": 16384,
+          "X": 1024,
+          "X_REGS": 1024,
+          "all_addresses": 1,
+          "all_payload_zero": 1,
+          "call": 1,
+          "dirty_before": {
+            "call": 1,
+            "nonzero_BIAS": 0,
+            "nonzero_W": 0,
+            "nonzero_X": 0,
+            "observed_last_public_writes": 1,
+            "warmup": 0
+          },
+          "physical_cycles": 1027,
+          "total16bit_writes": 18176,
+          "warmup": 0
+        }
+      ],
+      "terminal": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 1,
+        "pending": 0,
+        "requests": 2,
+        "responses": 2,
+        "return_code": 5
+      }
+    },
+    "backoff_8_256_fast4-O2-write": {
+      "argv": [
+        "taskset",
+        "-c",
+        "9",
+        "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-followup-input-r1/native-r1/campaign/fault-obj/cpu64_fault",
+        "+TESTCASE=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/firmware/backoff_8_256_fast4-O2/dma64_soc",
+        "+VECTORS=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/vectors",
+        "+TASKS=1",
+        "+ROWS=8",
+        "+MAX_CYCLES=20000000",
+        "+WARMUP=0",
+        "+FIRST_SOURCE_STALL=0",
+        "+FAULT=2"
+      ],
+      "firmware_image_sha256": "890b18dac8db08bd294d9c0a2073b96e323c8a34c482c329530b03bebb3b35f0",
+      "injection": {
+        "cycle": 1351845,
+        "mode": 2
+      },
+      "log_sha256": "fa7c905eb188e2d79c85ee9ea6ac3fe473feadbcef2b7442e6990e5f0d80327b",
+      "physical_clear": [
+        {
+          "ACC": 64,
+          "BIAS": 768,
+          "BIAS_CACHE": 16,
+          "DMA_SNAPSHOT": 1,
+          "ENGINE_RESULT": 64,
+          "FIFO": 128,
+          "W": 16384,
+          "X": 1024,
+          "X_REGS": 1024,
+          "all_addresses": 1,
+          "all_payload_zero": 1,
+          "call": 1,
+          "dirty_before": {
+            "call": 1,
+            "nonzero_BIAS": 0,
+            "nonzero_W": 0,
+            "nonzero_X": 0,
+            "observed_last_public_writes": 1,
+            "warmup": 0
+          },
+          "physical_cycles": 1027,
+          "total16bit_writes": 18176,
+          "warmup": 0
+        }
+      ],
+      "terminal": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 2,
+        "pending": 0,
+        "requests": 4691,
+        "responses": 4691,
+        "return_code": 5
+      }
+    },
+    "phased_64_fast4-O2-read": {
+      "argv": [
+        "taskset",
+        "-c",
+        "9",
+        "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-followup-input-r1/native-r1/campaign/fault-obj/cpu64_fault",
+        "+TESTCASE=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/firmware/phased_64_fast4-O2/dma64_soc",
+        "+VECTORS=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/vectors",
+        "+TASKS=1",
+        "+ROWS=8",
+        "+MAX_CYCLES=20000000",
+        "+WARMUP=0",
+        "+FIRST_SOURCE_STALL=0",
+        "+FAULT=1"
+      ],
+      "firmware_image_sha256": "cb55d5f6d4aa0e7a677e85314ef9c6590a769261e9aa6efe8e54a91ef65dbafd",
+      "injection": {
+        "cycle": 1346374,
+        "mode": 1
+      },
+      "log_sha256": "7e51a0d604ed35ef2ba7f26c7aec2cc8216cd6427f695b92da9060f60c6ee76c",
+      "physical_clear": [
+        {
+          "ACC": 64,
+          "BIAS": 768,
+          "BIAS_CACHE": 16,
+          "DMA_SNAPSHOT": 1,
+          "ENGINE_RESULT": 64,
+          "FIFO": 128,
+          "W": 16384,
+          "X": 1024,
+          "X_REGS": 1024,
+          "all_addresses": 1,
+          "all_payload_zero": 1,
+          "call": 1,
+          "dirty_before": {
+            "call": 1,
+            "nonzero_BIAS": 0,
+            "nonzero_W": 0,
+            "nonzero_X": 0,
+            "observed_last_public_writes": 1,
+            "warmup": 0
+          },
+          "physical_cycles": 1027,
+          "total16bit_writes": 18176,
+          "warmup": 0
+        }
+      ],
+      "terminal": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 1,
+        "pending": 0,
+        "requests": 2,
+        "responses": 2,
+        "return_code": 5
+      }
+    },
+    "phased_64_fast4-O2-write": {
+      "argv": [
+        "taskset",
+        "-c",
+        "9",
+        "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-followup-input-r1/native-r1/campaign/fault-obj/cpu64_fault",
+        "+TESTCASE=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/firmware/phased_64_fast4-O2/dma64_soc",
+        "+VECTORS=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/vectors",
+        "+TASKS=1",
+        "+ROWS=8",
+        "+MAX_CYCLES=20000000",
+        "+WARMUP=0",
+        "+FIRST_SOURCE_STALL=0",
+        "+FAULT=2"
+      ],
+      "firmware_image_sha256": "cb55d5f6d4aa0e7a677e85314ef9c6590a769261e9aa6efe8e54a91ef65dbafd",
+      "injection": {
+        "cycle": 1351848,
+        "mode": 2
+      },
+      "log_sha256": "16f408b83d229a9296ba608e1bb17ac3af48e10e20a3b160ec4aaf5fd4f11c27",
+      "physical_clear": [
+        {
+          "ACC": 64,
+          "BIAS": 768,
+          "BIAS_CACHE": 16,
+          "DMA_SNAPSHOT": 1,
+          "ENGINE_RESULT": 64,
+          "FIFO": 128,
+          "W": 16384,
+          "X": 1024,
+          "X_REGS": 1024,
+          "all_addresses": 1,
+          "all_payload_zero": 1,
+          "call": 1,
+          "dirty_before": {
+            "call": 1,
+            "nonzero_BIAS": 0,
+            "nonzero_W": 0,
+            "nonzero_X": 0,
+            "observed_last_public_writes": 1,
+            "warmup": 0
+          },
+          "physical_cycles": 1027,
+          "total16bit_writes": 18176,
+          "warmup": 0
+        }
+      ],
+      "terminal": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 2,
+        "pending": 0,
+        "requests": 4692,
+        "responses": 4692,
+        "return_code": 5
+      }
+    },
+    "tight-O2-read": {
+      "argv": [
+        "taskset",
+        "-c",
+        "9",
+        "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-followup-input-r1/native-r1/campaign/fault-obj/cpu64_fault",
+        "+TESTCASE=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/firmware/tight-O2/dma64_soc",
+        "+VECTORS=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/vectors",
+        "+TASKS=1",
+        "+ROWS=8",
+        "+MAX_CYCLES=20000000",
+        "+WARMUP=0",
+        "+FIRST_SOURCE_STALL=0",
+        "+FAULT=1"
+      ],
+      "firmware_image_sha256": "2a2332d1d88610ab64fdfdefc34c0b0001da52cc68d43026e4520dbc25f0cf7d",
+      "injection": {
+        "cycle": 1346351,
+        "mode": 1
+      },
+      "log_sha256": "e99f33117c73bd36c3372e21c7d50e012cb4e5ff60655733964bc97fda33507e",
+      "physical_clear": [
+        {
+          "ACC": 64,
+          "BIAS": 768,
+          "BIAS_CACHE": 16,
+          "DMA_SNAPSHOT": 1,
+          "ENGINE_RESULT": 64,
+          "FIFO": 128,
+          "W": 16384,
+          "X": 1024,
+          "X_REGS": 1024,
+          "all_addresses": 1,
+          "all_payload_zero": 1,
+          "call": 1,
+          "dirty_before": {
+            "call": 1,
+            "nonzero_BIAS": 0,
+            "nonzero_W": 0,
+            "nonzero_X": 0,
+            "observed_last_public_writes": 1,
+            "warmup": 0
+          },
+          "physical_cycles": 1027,
+          "total16bit_writes": 18176,
+          "warmup": 0
+        }
+      ],
+      "terminal": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 1,
+        "pending": 0,
+        "requests": 2,
+        "responses": 2,
+        "return_code": 5
+      }
+    },
+    "tight-O2-write": {
+      "argv": [
+        "taskset",
+        "-c",
+        "9",
+        "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-followup-input-r1/native-r1/campaign/fault-obj/cpu64_fault",
+        "+TESTCASE=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/firmware/tight-O2/dma64_soc",
+        "+VECTORS=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/vectors",
+        "+TASKS=1",
+        "+ROWS=8",
+        "+MAX_CYCLES=20000000",
+        "+WARMUP=0",
+        "+FIRST_SOURCE_STALL=0",
+        "+FAULT=2"
+      ],
+      "firmware_image_sha256": "2a2332d1d88610ab64fdfdefc34c0b0001da52cc68d43026e4520dbc25f0cf7d",
+      "injection": {
+        "cycle": 1351826,
+        "mode": 2
+      },
+      "log_sha256": "8121ae704f9ed4d4b71753419eb4319827090e941b0259e7b413df8f86f371d9",
+      "physical_clear": [
+        {
+          "ACC": 64,
+          "BIAS": 768,
+          "BIAS_CACHE": 16,
+          "DMA_SNAPSHOT": 1,
+          "ENGINE_RESULT": 64,
+          "FIFO": 128,
+          "W": 16384,
+          "X": 1024,
+          "X_REGS": 1024,
+          "all_addresses": 1,
+          "all_payload_zero": 1,
+          "call": 1,
+          "dirty_before": {
+            "call": 1,
+            "nonzero_BIAS": 0,
+            "nonzero_W": 0,
+            "nonzero_X": 0,
+            "observed_last_public_writes": 1,
+            "warmup": 0
+          },
+          "physical_cycles": 1027,
+          "total16bit_writes": 18176,
+          "warmup": 0
+        }
+      ],
+      "terminal": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 2,
+        "pending": 0,
+        "requests": 4691,
+        "responses": 4691,
+        "return_code": 5
+      }
+    }
+  },
+  "fault_cpu_assert_properties": 6,
+  "fault_fixture_sha256": "ea27d4f0fdce755ed6ef794f6897a88a4ca6c798d56990a0aa3f4f7a971c4fb8",
+  "fault_preprocessed_sha256": "71ade69feca8abc385ee9752c1af0aa73531fb366bb1e9cefc0d034a5a12577e",
+  "fault_simulator_sha256": "1b873eacdedadffbd471be3d7a5d1e126231a1739a56695e9c9ca308e43d939e",
+  "stall_cases": {
+    "backoff_8_256_fast4-O2": {
+      "argv": [
+        "taskset",
+        "-c",
+        "9",
+        "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/native-r1/campaign/obj/dma64_soc",
+        "+TESTCASE=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/firmware/backoff_8_256_fast4-O2/dma64_soc",
+        "+VECTORS=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/vectors",
+        "+TASKS=1",
+        "+ROWS=8",
+        "+MAX_CYCLES=20000000",
+        "+WARMUP=1",
+        "+FIRST_SOURCE_STALL=31",
+        "+DUMPWAVE=0"
+      ],
+      "firmware_image_sha256": "890b18dac8db08bd294d9c0a2073b96e323c8a34c482c329530b03bebb3b35f0",
+      "first_source_wait_cycles": [
+        31,
+        31
+      ],
+      "log_sha256": "fdcd7594e9ca81495b2868c87869c54e2e9cde15b1e4fa11eec005812e008b52",
+      "measurements": {
+        "clear_cycles": 1028,
+        "each_layer_target_met": true,
+        "full12_target_met": false,
+        "gap_cycles": 58,
+        "including_gap_cycles": 35831,
+        "including_gap_task_per_second_at_assumed_150mhz": 4186.319109151294,
+        "layers": [
+          {
+            "channel": {
+              "dma_stall": 3950,
+              "layer": 0,
+              "max_outstanding": 1,
+              "source_stall": 1347,
+              "wb_cycles": 5109,
+              "write_stall": 2603,
+              "xy_window": 29635
+            },
+            "clear": 1028,
+            "counters": {
+              "bias_reads": 256,
+              "layer": 0,
+              "macs": 26624,
+              "mmio_reads": 202,
+              "mmio_writes": 6,
+              "pops": 3168,
+              "reads": 7520,
+              "requests": 20192,
+              "responses": 20192,
+              "w_reads": 4096,
+              "write_responses": 12672,
+              "writes": 12672,
+              "x_reads": 3168
+            },
+            "firmware_cycles": 36121,
+            "gap": 58,
+            "including_gap": 35831,
+            "layer": 0,
+            "outputs": 25344,
+            "payload": 34745,
+            "principal": 35773,
+            "rows": 8,
+            "start_to_done": 34748,
+            "window": {
+              "clear_done": 1612505,
+              "clear_request": 1611478,
+              "done": 1647310,
+              "first_accept": 1612595,
+              "first_request": 1612564,
+              "last_y_response": 1647308,
+              "layer": 0,
+              "start": 1612563
+            }
+          }
+        ],
+        "measured_clock": {
+          "hf_edges": 2405568,
+          "lf_edges": 526,
+          "measured_hf_period_fs": 6666666,
+          "measured_lf_period_fs": 30517578126
+        },
+        "outputs": 25344,
+        "payload_cycles": 34745,
+        "physical_clear": [
+          {
+            "ACC": 64,
+            "BIAS": 768,
+            "BIAS_CACHE": 16,
+            "DMA_SNAPSHOT": 1,
+            "ENGINE_RESULT": 64,
+            "FIFO": 128,
+            "W": 16384,
+            "X": 1024,
+            "X_REGS": 1024,
+            "all_addresses": 1,
+            "all_payload_zero": 1,
+            "call": 1,
+            "dirty_before": {
+              "call": 1,
+              "nonzero_BIAS": 0,
+              "nonzero_W": 0,
+              "nonzero_X": 0,
+              "observed_last_public_writes": 1,
+              "warmup": 1
+            },
+            "physical_cycles": 1027,
+            "total16bit_writes": 18176,
+            "warmup": 1
+          },
+          {
+            "ACC": 64,
+            "BIAS": 768,
+            "BIAS_CACHE": 16,
+            "DMA_SNAPSHOT": 1,
+            "ENGINE_RESULT": 64,
+            "FIFO": 128,
+            "W": 16384,
+            "X": 1024,
+            "X_REGS": 1024,
+            "all_addresses": 1,
+            "all_payload_zero": 1,
+            "call": 2,
+            "dirty_before": {
+              "call": 2,
+              "nonzero_BIAS": 659,
+              "nonzero_W": 16377,
+              "nonzero_X": 1024,
+              "observed_last_public_writes": 1,
+              "warmup": 0
+            },
+            "physical_cycles": 1027,
+            "total16bit_writes": 18176,
+            "warmup": 0
+          }
+        ],
+        "principal_cycles": 35773,
+        "public_fixture": [
+          {
+            "call": 1,
+            "layer": 0,
+            "poison_writes": 25344,
+            "readbacks": 25344,
+            "ready_sequence": 1,
+            "source_writes": 15040
+          },
+          {
+            "call": 2,
+            "layer": 0,
+            "poison_writes": 25344,
+            "readbacks": 25344,
+            "ready_sequence": 2,
+            "source_writes": 15040
+          }
+        ],
+        "task_per_second_at_assumed_150mhz": 4193.106532859978,
+        "timing_status": "DEVELOPMENT_STIMULUS_ONLY_NO_STA_PASS",
+        "warmup": {
+          "clear_cycles": 1028,
+          "each_layer_target_met": true,
+          "full12_target_met": false,
+          "gap_cycles": 58,
+          "including_gap_cycles": 35831,
+          "including_gap_task_per_second_at_assumed_150mhz": 4186.319109151294,
+          "layers": [
+            {
+              "channel": {
+                "dma_stall": 3950,
+                "layer": 0,
+                "max_outstanding": 1,
+                "source_stall": 1347,
+                "wb_cycles": 5109,
+                "write_stall": 2603,
+                "xy_window": 29635
+              },
+              "clear": 1028,
+              "counters": {
+                "bias_reads": 256,
+                "layer": 0,
+                "macs": 26624,
+                "mmio_reads": 202,
+                "mmio_writes": 6,
+                "pops": 3168,
+                "reads": 7520,
+                "requests": 20192,
+                "responses": 20192,
+                "w_reads": 4096,
+                "write_responses": 12672,
+                "writes": 12672,
+                "x_reads": 3168
+              },
+              "firmware_cycles": 36121,
+              "gap": 58,
+              "including_gap": 35831,
+              "layer": 0,
+              "outputs": 25344,
+              "payload": 34745,
+              "principal": 35773,
+              "rows": 8,
+              "start_to_done": 34748,
+              "window": {
+                "clear_done": 1346309,
+                "clear_request": 1345282,
+                "done": 1381114,
+                "first_accept": 1346399,
+                "first_request": 1346368,
+                "last_y_response": 1381112,
+                "layer": 0,
+                "start": 1346367
+              }
+            }
+          ],
+          "outputs": 25344,
+          "payload_cycles": 34745,
+          "principal_cycles": 35773,
+          "task_per_second_at_assumed_150mhz": 4193.106532859978,
+          "timing_status": "DEVELOPMENT_STIMULUS_ONLY_NO_STA_PASS"
+        }
+      },
+      "timeline": [
+        {
+          "call": 1,
+          "clear_begin": 1345282,
+          "clear_discovered": 1346312,
+          "clear_end": 1346309,
+          "clear_reads": 69,
+          "compute_first": 1351807,
+          "compute_last": 1381089,
+          "compute_reads": 133,
+          "config_begin": 1346335,
+          "descriptor_submission_cycles": 33,
+          "discovered": 1381379,
+          "discovery_delay": 265,
+          "final_y_response": 1381112,
+          "hardware_done": 1381114,
+          "itcm_accesses": 9739,
+          "layer": 0,
+          "report_accept": 1381407,
+          "report_delay": 294,
+          "report_retire": 1381408,
+          "retired": 34690,
+          "software_control_cycles": 36127,
+          "source_accepted": 1346399,
+          "source_begin": 1346368,
+          "start": 1346367,
+          "warmup": 1,
+          "wb_window": 5109,
+          "xy_window": 29635
+        },
+        {
+          "call": 2,
+          "clear_begin": 1611478,
+          "clear_discovered": 1612508,
+          "clear_end": 1612505,
+          "clear_reads": 69,
+          "compute_first": 1618003,
+          "compute_last": 1647285,
+          "compute_reads": 133,
+          "config_begin": 1612531,
+          "descriptor_submission_cycles": 33,
+          "discovered": 1647575,
+          "discovery_delay": 265,
+          "final_y_response": 1647308,
+          "hardware_done": 1647310,
+          "itcm_accesses": 9739,
+          "layer": 0,
+          "report_accept": 1647603,
+          "report_delay": 294,
+          "report_retire": 1647604,
+          "retired": 34690,
+          "software_control_cycles": 36127,
+          "source_accepted": 1612595,
+          "source_begin": 1612564,
+          "start": 1612563,
+          "warmup": 0,
+          "wb_window": 5109,
+          "xy_window": 29635
+        }
+      ]
+    },
+    "phased_64_fast4-O2": {
+      "argv": [
+        "taskset",
+        "-c",
+        "9",
+        "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/native-r1/campaign/obj/dma64_soc",
+        "+TESTCASE=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/firmware/phased_64_fast4-O2/dma64_soc",
+        "+VECTORS=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/vectors",
+        "+TASKS=1",
+        "+ROWS=8",
+        "+MAX_CYCLES=20000000",
+        "+WARMUP=1",
+        "+FIRST_SOURCE_STALL=31",
+        "+DUMPWAVE=0"
+      ],
+      "firmware_image_sha256": "cb55d5f6d4aa0e7a677e85314ef9c6590a769261e9aa6efe8e54a91ef65dbafd",
+      "first_source_wait_cycles": [
+        31,
+        31
+      ],
+      "log_sha256": "f34fe6bfe288fc18e4e2d575376da5e8b4f4db1e3692f6ab0dfde3f51c301f9a",
+      "measurements": {
+        "clear_cycles": 1028,
+        "each_layer_target_met": true,
+        "full12_target_met": false,
+        "gap_cycles": 63,
+        "including_gap_cycles": 35837,
+        "including_gap_task_per_second_at_assumed_150mhz": 4185.618215810475,
+        "layers": [
+          {
+            "channel": {
+              "dma_stall": 3952,
+              "layer": 0,
+              "max_outstanding": 1,
+              "source_stall": 1341,
+              "wb_cycles": 5109,
+              "write_stall": 2611,
+              "xy_window": 29636
+            },
+            "clear": 1028,
+            "counters": {
+              "bias_reads": 256,
+              "layer": 0,
+              "macs": 26624,
+              "mmio_reads": 504,
+              "mmio_writes": 6,
+              "pops": 3168,
+              "reads": 7520,
+              "requests": 20192,
+              "responses": 20192,
+              "w_reads": 4096,
+              "write_responses": 12672,
+              "writes": 12672,
+              "x_reads": 3168
+            },
+            "firmware_cycles": 35912,
+            "gap": 63,
+            "including_gap": 35837,
+            "layer": 0,
+            "outputs": 25344,
+            "payload": 34746,
+            "principal": 35774,
+            "rows": 8,
+            "start_to_done": 34749,
+            "window": {
+              "clear_done": 1612295,
+              "clear_request": 1611268,
+              "done": 1647106,
+              "first_accept": 1612390,
+              "first_request": 1612359,
+              "last_y_response": 1647104,
+              "layer": 0,
+              "start": 1612358
+            }
+          }
+        ],
+        "measured_clock": {
+          "hf_edges": 2405568,
+          "lf_edges": 526,
+          "measured_hf_period_fs": 6666666,
+          "measured_lf_period_fs": 30517578126
+        },
+        "outputs": 25344,
+        "payload_cycles": 34746,
+        "physical_clear": [
+          {
+            "ACC": 64,
+            "BIAS": 768,
+            "BIAS_CACHE": 16,
+            "DMA_SNAPSHOT": 1,
+            "ENGINE_RESULT": 64,
+            "FIFO": 128,
+            "W": 16384,
+            "X": 1024,
+            "X_REGS": 1024,
+            "all_addresses": 1,
+            "all_payload_zero": 1,
+            "call": 1,
+            "dirty_before": {
+              "call": 1,
+              "nonzero_BIAS": 0,
+              "nonzero_W": 0,
+              "nonzero_X": 0,
+              "observed_last_public_writes": 1,
+              "warmup": 1
+            },
+            "physical_cycles": 1027,
+            "total16bit_writes": 18176,
+            "warmup": 1
+          },
+          {
+            "ACC": 64,
+            "BIAS": 768,
+            "BIAS_CACHE": 16,
+            "DMA_SNAPSHOT": 1,
+            "ENGINE_RESULT": 64,
+            "FIFO": 128,
+            "W": 16384,
+            "X": 1024,
+            "X_REGS": 1024,
+            "all_addresses": 1,
+            "all_payload_zero": 1,
+            "call": 2,
+            "dirty_before": {
+              "call": 2,
+              "nonzero_BIAS": 659,
+              "nonzero_W": 16377,
+              "nonzero_X": 1024,
+              "observed_last_public_writes": 1,
+              "warmup": 0
+            },
+            "physical_cycles": 1027,
+            "total16bit_writes": 18176,
+            "warmup": 0
+          }
+        ],
+        "principal_cycles": 35774,
+        "public_fixture": [
+          {
+            "call": 1,
+            "layer": 0,
+            "poison_writes": 25344,
+            "readbacks": 25344,
+            "ready_sequence": 1,
+            "source_writes": 15040
+          },
+          {
+            "call": 2,
+            "layer": 0,
+            "poison_writes": 25344,
+            "readbacks": 25344,
+            "ready_sequence": 2,
+            "source_writes": 15040
+          }
+        ],
+        "task_per_second_at_assumed_150mhz": 4192.98932185386,
+        "timing_status": "DEVELOPMENT_STIMULUS_ONLY_NO_STA_PASS",
+        "warmup": {
+          "clear_cycles": 1028,
+          "each_layer_target_met": true,
+          "full12_target_met": false,
+          "gap_cycles": 63,
+          "including_gap_cycles": 35837,
+          "including_gap_task_per_second_at_assumed_150mhz": 4185.618215810475,
+          "layers": [
+            {
+              "channel": {
+                "dma_stall": 3950,
+                "layer": 0,
+                "max_outstanding": 1,
+                "source_stall": 1341,
+                "wb_cycles": 5109,
+                "write_stall": 2609,
+                "xy_window": 29636
+              },
+              "clear": 1028,
+              "counters": {
+                "bias_reads": 256,
+                "layer": 0,
+                "macs": 26624,
+                "mmio_reads": 504,
+                "mmio_writes": 6,
+                "pops": 3168,
+                "reads": 7520,
+                "requests": 20192,
+                "responses": 20192,
+                "w_reads": 4096,
+                "write_responses": 12672,
+                "writes": 12672,
+                "x_reads": 3168
+              },
+              "firmware_cycles": 35912,
+              "gap": 63,
+              "including_gap": 35837,
+              "layer": 0,
+              "outputs": 25344,
+              "payload": 34746,
+              "principal": 35774,
+              "rows": 8,
+              "start_to_done": 34749,
+              "window": {
+                "clear_done": 1346308,
+                "clear_request": 1345281,
+                "done": 1381119,
+                "first_accept": 1346403,
+                "first_request": 1346372,
+                "last_y_response": 1381117,
+                "layer": 0,
+                "start": 1346371
+              }
+            }
+          ],
+          "outputs": 25344,
+          "payload_cycles": 34746,
+          "principal_cycles": 35774,
+          "task_per_second_at_assumed_150mhz": 4192.98932185386,
+          "timing_status": "DEVELOPMENT_STIMULUS_ONLY_NO_STA_PASS"
+        }
+      },
+      "timeline": [
+        {
+          "call": 1,
+          "clear_begin": 1345281,
+          "clear_discovered": 1346315,
+          "clear_end": 1346308,
+          "clear_reads": 65,
+          "compute_first": 1351812,
+          "compute_last": 1381094,
+          "compute_reads": 439,
+          "config_begin": 1346339,
+          "descriptor_submission_cycles": 33,
+          "discovered": 1381174,
+          "discovery_delay": 55,
+          "final_y_response": 1381117,
+          "hardware_done": 1381119,
+          "itcm_accesses": 9556,
+          "layer": 0,
+          "report_accept": 1381201,
+          "report_delay": 83,
+          "report_retire": 1381202,
+          "retired": 33291,
+          "software_control_cycles": 35922,
+          "source_accepted": 1346403,
+          "source_begin": 1346372,
+          "start": 1346371,
+          "warmup": 1,
+          "wb_window": 5109,
+          "xy_window": 29636
+        },
+        {
+          "call": 2,
+          "clear_begin": 1611268,
+          "clear_discovered": 1612302,
+          "clear_end": 1612295,
+          "clear_reads": 65,
+          "compute_first": 1617799,
+          "compute_last": 1647081,
+          "compute_reads": 439,
+          "config_begin": 1612326,
+          "descriptor_submission_cycles": 33,
+          "discovered": 1647161,
+          "discovery_delay": 55,
+          "final_y_response": 1647104,
+          "hardware_done": 1647106,
+          "itcm_accesses": 9556,
+          "layer": 0,
+          "report_accept": 1647188,
+          "report_delay": 83,
+          "report_retire": 1647189,
+          "retired": 33291,
+          "software_control_cycles": 35922,
+          "source_accepted": 1612390,
+          "source_begin": 1612359,
+          "start": 1612358,
+          "warmup": 0,
+          "wb_window": 5109,
+          "xy_window": 29636
+        }
+      ]
+    },
+    "tight-O2": {
+      "argv": [
+        "taskset",
+        "-c",
+        "9",
+        "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/native-r1/campaign/obj/dma64_soc",
+        "+TESTCASE=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/firmware/tight-O2/dma64_soc",
+        "+VECTORS=/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/vectors",
+        "+TASKS=1",
+        "+ROWS=8",
+        "+MAX_CYCLES=20000000",
+        "+WARMUP=1",
+        "+FIRST_SOURCE_STALL=31",
+        "+DUMPWAVE=0"
+      ],
+      "firmware_image_sha256": "2a2332d1d88610ab64fdfdefc34c0b0001da52cc68d43026e4520dbc25f0cf7d",
+      "first_source_wait_cycles": [
+        31,
+        31
+      ],
+      "log_sha256": "dd58db3d0810d0798117b114f06966727ac3d8786af4a3be40072a68fcc56143",
+      "measurements": {
+        "clear_cycles": 1028,
+        "each_layer_target_met": true,
+        "full12_target_met": false,
+        "gap_cycles": 44,
+        "including_gap_cycles": 35816,
+        "including_gap_task_per_second_at_assumed_150mhz": 4188.072369890551,
+        "layers": [
+          {
+            "channel": {
+              "dma_stall": 3952,
+              "layer": 0,
+              "max_outstanding": 1,
+              "source_stall": 1349,
+              "wb_cycles": 5110,
+              "write_stall": 2603,
+              "xy_window": 29633
+            },
+            "clear": 1028,
+            "counters": {
+              "bias_reads": 256,
+              "layer": 0,
+              "macs": 26624,
+              "mmio_reads": 2106,
+              "mmio_writes": 6,
+              "pops": 3168,
+              "reads": 7520,
+              "requests": 20192,
+              "responses": 20192,
+              "w_reads": 4096,
+              "write_responses": 12672,
+              "writes": 12672,
+              "x_reads": 3168
+            },
+            "firmware_cycles": 35846,
+            "gap": 44,
+            "including_gap": 35816,
+            "layer": 0,
+            "outputs": 25344,
+            "payload": 34744,
+            "principal": 35772,
+            "rows": 8,
+            "start_to_done": 34747,
+            "window": {
+              "clear_done": 1612220,
+              "clear_request": 1611193,
+              "done": 1647010,
+              "first_accept": 1612296,
+              "first_request": 1612265,
+              "last_y_response": 1647008,
+              "layer": 0,
+              "start": 1612264
+            }
+          }
+        ],
+        "measured_clock": {
+          "hf_edges": 2405568,
+          "lf_edges": 526,
+          "measured_hf_period_fs": 6666666,
+          "measured_lf_period_fs": 30517578126
+        },
+        "outputs": 25344,
+        "payload_cycles": 34744,
+        "physical_clear": [
+          {
+            "ACC": 64,
+            "BIAS": 768,
+            "BIAS_CACHE": 16,
+            "DMA_SNAPSHOT": 1,
+            "ENGINE_RESULT": 64,
+            "FIFO": 128,
+            "W": 16384,
+            "X": 1024,
+            "X_REGS": 1024,
+            "all_addresses": 1,
+            "all_payload_zero": 1,
+            "call": 1,
+            "dirty_before": {
+              "call": 1,
+              "nonzero_BIAS": 0,
+              "nonzero_W": 0,
+              "nonzero_X": 0,
+              "observed_last_public_writes": 1,
+              "warmup": 1
+            },
+            "physical_cycles": 1027,
+            "total16bit_writes": 18176,
+            "warmup": 1
+          },
+          {
+            "ACC": 64,
+            "BIAS": 768,
+            "BIAS_CACHE": 16,
+            "DMA_SNAPSHOT": 1,
+            "ENGINE_RESULT": 64,
+            "FIFO": 128,
+            "W": 16384,
+            "X": 1024,
+            "X_REGS": 1024,
+            "all_addresses": 1,
+            "all_payload_zero": 1,
+            "call": 2,
+            "dirty_before": {
+              "call": 2,
+              "nonzero_BIAS": 659,
+              "nonzero_W": 16377,
+              "nonzero_X": 1024,
+              "observed_last_public_writes": 1,
+              "warmup": 0
+            },
+            "physical_cycles": 1027,
+            "total16bit_writes": 18176,
+            "warmup": 0
+          }
+        ],
+        "principal_cycles": 35772,
+        "public_fixture": [
+          {
+            "call": 1,
+            "layer": 0,
+            "poison_writes": 25344,
+            "readbacks": 25344,
+            "ready_sequence": 1,
+            "source_writes": 15040
+          },
+          {
+            "call": 2,
+            "layer": 0,
+            "poison_writes": 25344,
+            "readbacks": 25344,
+            "ready_sequence": 2,
+            "source_writes": 15040
+          }
+        ],
+        "task_per_second_at_assumed_150mhz": 4193.223750419323,
+        "timing_status": "DEVELOPMENT_STIMULUS_ONLY_NO_STA_PASS",
+        "warmup": {
+          "clear_cycles": 1028,
+          "each_layer_target_met": true,
+          "full12_target_met": false,
+          "gap_cycles": 44,
+          "including_gap_cycles": 35816,
+          "including_gap_task_per_second_at_assumed_150mhz": 4188.072369890551,
+          "layers": [
+            {
+              "channel": {
+                "dma_stall": 3952,
+                "layer": 0,
+                "max_outstanding": 1,
+                "source_stall": 1349,
+                "wb_cycles": 5110,
+                "write_stall": 2603,
+                "xy_window": 29633
+              },
+              "clear": 1028,
+              "counters": {
+                "bias_reads": 256,
+                "layer": 0,
+                "macs": 26624,
+                "mmio_reads": 2106,
+                "mmio_writes": 6,
+                "pops": 3168,
+                "reads": 7520,
+                "requests": 20192,
+                "responses": 20192,
+                "w_reads": 4096,
+                "write_responses": 12672,
+                "writes": 12672,
+                "x_reads": 3168
+              },
+              "firmware_cycles": 35846,
+              "gap": 44,
+              "including_gap": 35816,
+              "layer": 0,
+              "outputs": 25344,
+              "payload": 34744,
+              "principal": 35772,
+              "rows": 8,
+              "start_to_done": 34747,
+              "window": {
+                "clear_done": 1346304,
+                "clear_request": 1345277,
+                "done": 1381094,
+                "first_accept": 1346380,
+                "first_request": 1346349,
+                "last_y_response": 1381092,
+                "layer": 0,
+                "start": 1346348
+              }
+            }
+          ],
+          "outputs": 25344,
+          "payload_cycles": 34744,
+          "principal_cycles": 35772,
+          "task_per_second_at_assumed_150mhz": 4193.223750419323,
+          "timing_status": "DEVELOPMENT_STIMULUS_ONLY_NO_STA_PASS"
+        }
+      },
+      "timeline": [
+        {
+          "call": 1,
+          "clear_begin": 1345277,
+          "clear_discovered": 1346307,
+          "clear_end": 1346304,
+          "clear_reads": 61,
+          "compute_first": 1351790,
+          "compute_last": 1381072,
+          "compute_reads": 2045,
+          "config_begin": 1346323,
+          "descriptor_submission_cycles": 26,
+          "discovered": 1381106,
+          "discovery_delay": 12,
+          "final_y_response": 1381092,
+          "hardware_done": 1381094,
+          "itcm_accesses": 12643,
+          "layer": 0,
+          "report_accept": 1381131,
+          "report_delay": 38,
+          "report_retire": 1381132,
+          "retired": 21086,
+          "software_control_cycles": 35856,
+          "source_accepted": 1346380,
+          "source_begin": 1346349,
+          "start": 1346348,
+          "warmup": 1,
+          "wb_window": 5110,
+          "xy_window": 29633
+        },
+        {
+          "call": 2,
+          "clear_begin": 1611193,
+          "clear_discovered": 1612223,
+          "clear_end": 1612220,
+          "clear_reads": 61,
+          "compute_first": 1617706,
+          "compute_last": 1646988,
+          "compute_reads": 2045,
+          "config_begin": 1612239,
+          "descriptor_submission_cycles": 26,
+          "discovered": 1647022,
+          "discovery_delay": 12,
+          "final_y_response": 1647008,
+          "hardware_done": 1647010,
+          "itcm_accesses": 12643,
+          "layer": 0,
+          "report_accept": 1647047,
+          "report_delay": 38,
+          "report_retire": 1647048,
+          "retired": 21086,
+          "software_control_cycles": 35856,
+          "source_accepted": 1612296,
+          "source_begin": 1612265,
+          "start": 1612264,
+          "warmup": 0,
+          "wb_window": 5110,
+          "xy_window": 29633
+        }
+      ]
+    }
+  },
+  "status": "PASS_CPU64_B41_FOLLOWUP"
+}

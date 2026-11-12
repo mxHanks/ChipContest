@@ -1,0 +1,259 @@
+{
+  "scope": "VNC现场观察；不是已下载的服务器原始回执或报告",
+  "recorded_at_utc": "2026-11-12T04:58:38.195755+00:00",
+  "client_date": "2026-11-11",
+  "official_host": "RDserver04",
+  "workspace": 3,
+  "official_root": "/tmp/xu-b41-close-20261111-r1",
+  "old_thread_status": "idle/interrupted",
+  "mapped_equivalence": {
+    "path": "fm-gate-targeted-r2-from-dual",
+    "status": "VERIFIED_REVIEW_SCOPE",
+    "native_exit": 0,
+    "complete": true,
+    "seconds": 67.471,
+    "reference_sha256": "24de75106e74b3f0f4a83c36cea7e5f9e32eccdc520c2636ba8366fa8cb5cc6a",
+    "implementation_sha256": "9849303f264d97f2f6735353d89a35fbe143b0897f589e94352d23ae517aa87b",
+    "unverified_compare_points": 0,
+    "local_native_original_received": false
+  },
+  "rtl_resume": {
+    "status": "INCONCLUSIVE_CHECKPOINT_SAVED",
+    "controller_pid": 58976,
+    "path": "fm-dc-dual-rtl-resume-r1",
+    "launch_log": "rtl-resume-launch-r1.log",
+    "script_sha256": "33ba52fc5f982ec4d0e82396acced2d42eaddc51ddaa93fcffaa80b9d3d9395c",
+    "restored_checkpoint_sha256": "309286b5b81c5683d183ef3112acf064c1987a9875a8235e33622a9cb8d3633d",
+    "prior_receipt_sha256": "341b81e2c648db476641fb7b613ee6aa90b988dd52f52d2fd32e2d3c2f16ca40",
+    "same_account_eda_processes_before_launch": [],
+    "controller_exists": false,
+    "native_exit": 1,
+    "complete": false,
+    "seconds": 2136.921,
+    "passing": 57016,
+    "failing": 0,
+    "aborted": 0,
+    "unverified": 1316,
+    "new_checkpoint_sha256": "6533296b0e6c320732aa0fe774f318c48db78e92f05d994277d1971f2c2d15bb",
+    "native_receipt_sha256": "989b4f9748c0ed20c13a11f51a86d935a7e67a1b024a84dd7c6101b9b36e6bf3",
+    "native_log_sha256": "d693ef266c7c06baf8602cbf658d57d3d1dd08975fb9fc0ba50f4d82d7e82daa",
+    "native_script_sha256": "c45261c562efd519740013d061989941f043e65b7ba1997d02309289c30c8da2",
+    "local_native_original_received": false
+  },
+  "network": {
+    "failed_direct_routes": [
+      "default",
+      "en0"
+    ],
+    "working_route": "Mac loopback -> cats-linux loopback -> existing cats-compute SSH master -> original official VNC endpoint",
+    "public_listener_created": false,
+    "user_completed_authentication": true,
+    "ftp_pool_recheck": {
+      "at_utc": "2026-11-12T05:21:27.655875+00:00",
+      "route": "existing FPT compute",
+      "status": "CONNECT_220_CLOSED",
+      "authenticated": false,
+      "file_transfer_performed": false,
+      "credentials_available": false
+    }
+  },
+  "electrical_upload": {
+    "status": "UPLOADED_VNC_SHA_AND_SIZE_VERIFIED",
+    "retried": true,
+    "user_explicitly_approved_retry_request": true,
+    "source_sha256": "43695e1a01c853d8685b25a199cc4a3e88072749bf21550e672098d711ed1637",
+    "source_bytes": 5410,
+    "receipt": "electrical-upload-retry-r1.json",
+    "credentials_persisted": false,
+    "route": "already authenticated official VNC Workspace 3",
+    "destination": "~/Desktop/xu-64pe-b41-synth-20261111/run_b41_electrical_eco.py",
+    "ftp_failures": [
+      "AUTHENTICATE 530",
+      "CONNECT 421"
+    ],
+    "failure_receipts": [
+      "electrical-upload-retry-r1.json",
+      "electrical-upload-retry-r2.json"
+    ]
+  },
+  "qualification": "NOT_FINAL_NOT_OFFICIALLY_QUALIFIED",
+  "electrical_run": {
+    "status": "PT_COMPLETE_DC_BLOCKED_BY_SLOT_GUARD",
+    "controller_pid": 133941,
+    "path": "timing-electrical-r1",
+    "launch_log": "electrical-launch-r1.log",
+    "observed_marker": "START pt-electrical",
+    "same_account_eda_processes_before_launch": [],
+    "source_sha256": "43695e1a01c853d8685b25a199cc4a3e88072749bf21550e672098d711ed1637",
+    "local_native_original_received": false,
+    "controller_exists": false,
+    "observed_error": "Same-account EDA slot occupied",
+    "netlist_edits_applied": false,
+    "pt_native": {
+      "native_exit": 0,
+      "complete": true,
+      "seconds": 221.856,
+      "receipt_sha256": "27c8afb140296be7baf48e0ee7e96016bad158e46b7764a5d857b2e246fed678",
+      "changes_sha256": "7790ce20e39597f70437341f3891874a044d241fe3b7fd4e77292799b006bce3"
+    },
+    "later_heavy_jobs_observed": []
+  },
+  "rtl_resume_r2": {
+    "status": "RUNNING_NOT_QUALIFIED",
+    "script": "run_formality_resume_r2.py",
+    "script_sha256": "04f8d1179c26854602989ee26ce520a5e5807e6375abefa6cc78dfaee4c778ba",
+    "restored_checkpoint_sha256": "6533296b0e6c320732aa0fe774f318c48db78e92f05d994277d1971f2c2d15bb",
+    "prior_receipt_sha256": "989b4f9748c0ed20c13a11f51a86d935a7e67a1b024a84dd7c6101b9b36e6bf3",
+    "controller_pid": 153063,
+    "path": "fm-dc-dual-rtl-resume-r2",
+    "launch_log": "rtl-resume-launch-r2.log",
+    "observed_marker": "START fm-dc-dual-rtl-resume-r2",
+    "same_account_eda_processes_before_launch": [],
+    "local_native_original_received": false,
+    "last_observed_counts": {
+      "passing": 57016,
+      "failing": 0,
+      "aborted": 0,
+      "unverified": 1316
+    },
+    "current_native_state_verified": false,
+    "status_scope": "Last observed live state before Mac lock; no current terminal outcome observed"
+  },
+  "electrical_resume": {
+    "status": "FOUR_SCENARIOS_CAPTURED_DRC_NOT_CLOSED",
+    "controller_pid": 143353,
+    "path": "timing-electrical-resume-r1",
+    "launch_log": "electrical-resume-launch-r1.log",
+    "script_sha256": "7aad5d95b47be45fe4eb9e0a36575570d87eeb3c1f87011264e66fb14d52311e",
+    "observed_marker": "START dc-electrical",
+    "reused_pt_results": true,
+    "guard_preserved": true,
+    "local_native_original_received": false,
+    "controller_exists": false,
+    "mapped_sha256": "f73b4518be9e6670bc8ed3bcf38623e1411ba55b1256ac6aae5b5c636c60a7a3",
+    "native_status": "IDEAL_TIMING_AND_ELECTRICAL_REVIEW",
+    "scenario_slack_ns": {
+      "ss-envelope": {
+        "max": 0.0,
+        "min": 0.166962
+      },
+      "ff-envelope": {
+        "max": 0.463278,
+        "min": 0.000183
+      },
+      "ss-reset_bypass": {
+        "max": 0.0,
+        "min": 0.166962
+      },
+      "ff-reset_bypass": {
+        "max": 0.463278,
+        "min": 0.000183
+      }
+    },
+    "drc": {
+      "ss-envelope": {
+        "max_capacitance": 8,
+        "min_capacitance": 1449,
+        "max_transition": 0
+      },
+      "ff-envelope": {
+        "max_capacitance": 0,
+        "min_capacitance": 1449,
+        "max_transition": 1774
+      },
+      "ss-reset_bypass": {
+        "max_capacitance": 8,
+        "min_capacitance": 1449,
+        "max_transition": 0
+      },
+      "ff-reset_bypass": {
+        "max_capacitance": 0,
+        "min_capacitance": 1449,
+        "max_transition": 1774
+      }
+    },
+    "qualification": "NOT_QUALIFIED_REMAINING_DRC_AND_EQUIVALENCE"
+  },
+  "drc_connectivity": {
+    "status": "USER_APPROVED_UPLOADED_SHA_VERIFIED_QUEUED",
+    "script": "run_drc_connectivity.py",
+    "bytes": 3780,
+    "sha256": "3d41e7ff2084fc833cfb08ac53a4173c8e41ed1384935382cfb35974669c3e84",
+    "reason": "Previous upload approval covered electrical ECO file, not this new diagnostic script",
+    "official_partial_path": null,
+    "complete_file_written": true,
+    "executed": null,
+    "user_explicitly_approved_upload_and_execution": true,
+    "official_script": "run_drc_connectivity.py",
+    "queue_pid": 157298,
+    "lock_wait_pid": 157299,
+    "lock_wait_seconds": 2400,
+    "launch_log": "drc-connectivity-launch-r1.log",
+    "observed_log_bytes": 0,
+    "earlier_auto_review_rejection_cleared_by_user_authorization": true,
+    "execution_last_observed": false,
+    "current_native_state_verified": false,
+    "status_scope": "Upload/hash/queue confirmed earlier; execution outcome currently unobserved"
+  },
+  "gate_models": {
+    "scope": "Existing official-side copies and public SRAM model; SHA observed through VNC, not locally received",
+    "standard_cells": {
+      "path": "~/Desktop/xu-published16-v1-synth-20261109/xu-official-models/scc40nll_vhsc40_rvt.v",
+      "sha256": "9ceaac7085f267c9a2da19d86aa9d88ddb25894df4b2485e32d13e04d0e46581",
+      "original_vendor_archive_binding_verified": false
+    },
+    "sram": {
+      "path": "/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP1024X16/verilog/RAMSP1024X16.v",
+      "sha256": "81b55d87d5e6821d44037d6f0290ec89c9edb9582eb1932957f181aefc300d51"
+    },
+    "older_bench": "~/Desktop/xu-group-y-prelim-20261110/xu-submission-r7-zero-activity/tb.sv",
+    "older_bench_geometry": "128 depth banks x 2 lanes; current DMA64 uses64 x4; cannot reuse unchanged",
+    "current_gate_qualification": "NOT_RUN"
+  },
+  "computer_access": {
+    "status": "WAITING_USER_MANUAL_MAC_UNLOCK",
+    "observed_at_utc": "2026-11-12T05:18:52.724146+00:00",
+    "tool_message": "Mac is locked and automatic unlock could not unlock it",
+    "user_input_requested": true,
+    "remote_native_jobs_interrupted": false,
+    "latest_native_state_unobserved_since_lock": true,
+    "last_recheck_at_utc": "2026-11-12T05:24:56.810110+00:00",
+    "last_recheck_status": "MAC_STILL_LOCKED",
+    "blocking_goal_turns": 3,
+    "required_next_action": "User manually unlocks Mac; original async request remains pending",
+    "cua_completion_summary_pending_until_handoff_ends": true,
+    "previous_goal_turn_classification": "no progress: no current official native result could be observed",
+    "this_goal_turn_classification": "no progress: same manual Mac unlock dependency confirmed again",
+    "local_tunnel_listener": {
+      "pid": 1360,
+      "address": "127.0.0.1:19523",
+      "observed_listening": true
+    }
+  },
+  "gate_preflight": {
+    "path": "gate-preflight-r1.json",
+    "status": "PREPARATION_ONLY_NATIVE_GATE_NOT_STARTED",
+    "verified_local_source_inputs": 7,
+    "verified_firmware_candidates": 3,
+    "gate_adapter_implemented": false
+  },
+  "blocked_audit": {
+    "threshold_met": true,
+    "consecutive_goal_turns": 3,
+    "reason": "CUA explicitly requires user manual Mac unlock; official native receipts and final mapped hierarchy are inaccessible through the authenticated VNC session",
+    "independent_preparation_completed": [
+      "B41 software raw evidence review",
+      "three firmware and seven gate-related source input hash checks",
+      "gate preflight and preliminary material index"
+    ],
+    "unproven_requirements": [
+      "RTL resume r2 terminal outcome",
+      "DRC connectivity execution outcome and electrical closure",
+      "final netlist equivalence and full physical qualification",
+      "same-version gate functionality and full-SoC energy for three firmware",
+      "final preliminary delivery"
+    ],
+    "restart_or_kill_performed": false,
+    "required_user_action": "Manually unlock Mac and reply 已解锁"
+  }
+}

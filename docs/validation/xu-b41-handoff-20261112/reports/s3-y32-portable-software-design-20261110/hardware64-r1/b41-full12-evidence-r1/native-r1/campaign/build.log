@@ -1,0 +1,1221 @@
+{"argv": ["verilator", "--binary", "-CFLAGS", "-std=gnu++20", "-j", "2", "-Wno-fatal", "-Mdir", "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/native-r1/campaign/obj", "-o", "dma64_soc", "--timing", "--assert", "--top-module", "tb_dma64_soc", "-DXU_MATRIX_DMA", "-DXU_MATRIX_DMA64", "-DD4K_THROTTLE=7", "-I/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core", "-I/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips", "-I/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c", "-I/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests", "-f", "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/native-r1/campaign/rtl.f"]}
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'hfxoscen'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:52:10: ... Location of port declaration
+   52 |   output hfxoscen, 
+      |          ^~~~~~~~
+                     ... For warning description see https://verilator.org/warn/PINMISSING?v=5.046
+                     ... Use "/* verilator lint_off PINMISSING */" and lint_on around source to disable this message.
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'lfxoscen'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:56:10: ... Location of port declaration
+   56 |   output lfxoscen, 
+      |          ^~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_jtag_TDO_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:69:11: ... Location of port declaration
+   69 |   output  io_pads_jtag_TDO_o_oval,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_jtag_TDO_o_oe'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:70:11: ... Location of port declaration
+   70 |   output  io_pads_jtag_TDO_o_oe,
+      |           ^~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_gpioA_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:74:19: ... Location of port declaration
+   74 |   output [32-1:0] io_pads_gpioA_o_oval,
+      |                   ^~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_gpioA_o_oe'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:75:19: ... Location of port declaration
+   75 |   output [32-1:0] io_pads_gpioA_o_oe,
+      |                   ^~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_gpioB_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:78:19: ... Location of port declaration
+   78 |   output [32-1:0] io_pads_gpioB_o_oval,
+      |                   ^~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_gpioB_o_oe'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:79:19: ... Location of port declaration
+   79 |   output [32-1:0] io_pads_gpioB_o_oe,
+      |                   ^~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_sck_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:82:11: ... Location of port declaration
+   82 |   output  io_pads_qspi0_sck_o_oval,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_cs_0_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:83:11: ... Location of port declaration
+   83 |   output  io_pads_qspi0_cs_0_o_oval,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_dq_0_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:87:11: ... Location of port declaration
+   87 |   output  io_pads_qspi0_dq_0_o_oval,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_dq_0_o_oe'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:88:11: ... Location of port declaration
+   88 |   output  io_pads_qspi0_dq_0_o_oe,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_dq_1_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:90:11: ... Location of port declaration
+   90 |   output  io_pads_qspi0_dq_1_o_oval,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_dq_1_o_oe'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:91:11: ... Location of port declaration
+   91 |   output  io_pads_qspi0_dq_1_o_oe,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_dq_2_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:93:11: ... Location of port declaration
+   93 |   output  io_pads_qspi0_dq_2_o_oval,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_dq_2_o_oe'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:94:11: ... Location of port declaration
+   94 |   output  io_pads_qspi0_dq_2_o_oe,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_dq_3_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:96:11: ... Location of port declaration
+   96 |   output  io_pads_qspi0_dq_3_o_oval,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_qspi0_dq_3_o_oe'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:97:11: ... Location of port declaration
+   97 |   output  io_pads_qspi0_dq_3_o_oe,
+      |           ^~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_aon_pmu_padrst_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:115:10: ... Location of port declaration
+  115 |   output io_pads_aon_pmu_padrst_o_oval,
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:74:39: Instance has missing pin: 'io_pads_aon_pmu_vddpaden_o_oval'
+   74 |   e203_soc_top #(.EXTERNAL_SYSMEM(1)) dut(
+      |                                       ^~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/soc/e203_soc_top.v:116:10: ... Location of port declaration
+  116 |   output io_pads_aon_pmu_vddpaden_o_oval 
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_biu.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_biu(
+      |        ^~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+                       ... For warning description see https://verilator.org/warn/TIMESCALEMOD?v=5.046
+                       ... Use "/* verilator lint_off TIMESCALEMOD */" and lint_on around source to disable this message.
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clk_ctrl.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_clk_ctrl (
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module e203_clkgate (
+      |        ^~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_core.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_core(
+      |        ^~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_cpu.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_cpu #(
+      |        ^~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_cpu_top.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_cpu_top(
+      |        ^~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_dtcm_ctrl.v:31:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   31 | module e203_dtcm_ctrl(
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_dtcm_ram.v:32:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   32 | module e203_dtcm_ram(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_exu(
+      |        ^~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu.v:32:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   32 | module e203_exu_alu(
+      |        ^~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_bjp.v:32:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   32 | module e203_exu_alu_bjp(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_csrctrl.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_exu_alu_csrctrl(
+      |        ^~~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_dpath.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_exu_alu_dpath(
+      |        ^~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_lsuagu.v:32:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   32 | module e203_exu_alu_lsuagu(
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_muldiv.v:32:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   32 | module e203_exu_alu_muldiv(
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_rglr.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_exu_alu_rglr(
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_branchslv.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_exu_branchslv(
+      |        ^~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_commit.v:31:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   31 | module e203_exu_commit(
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_csr.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_exu_csr(
+      |        ^~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_decode.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_exu_decode(
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_disp.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_exu_disp(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_excp.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_exu_excp(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_longpwbck.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_exu_longpwbck(
+      |        ^~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_nice.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_exu_nice(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_oitf.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_exu_oitf (
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_regfile.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module e203_exu_regfile(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_wbck.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_exu_wbck(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_ifu.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_ifu(
+      |        ^~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_ifu_ifetch.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_ifu_ifetch(
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_ifu_ift2icb.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_ifu_ift2icb(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_ifu_litebpu.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module e203_ifu_litebpu(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_ifu_minidec.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module e203_ifu_minidec(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_irq_sync.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_irq_sync #(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_itcm_ctrl.v:31:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   31 | module e203_itcm_ctrl(
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_itcm_ram.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_itcm_ram(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_lsu.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module e203_lsu(
+      |        ^~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_lsu_ctrl.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module e203_lsu_ctrl(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_reset_ctrl.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module e203_reset_ctrl #(
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_srams.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module e203_srams(
+      |        ^~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/debug/sirv_debug_csr.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module sirv_debug_csr 
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/debug/sirv_debug_module.v:30:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   30 | module sirv_debug_module
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/debug/sirv_debug_ram.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module sirv_debug_ram(
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/debug/sirv_debug_rom.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module sirv_debug_rom(
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/debug/sirv_jtag_dtm.v:21:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   21 | module sirv_jtag_dtm (
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/fab/sirv_icb1to16_bus.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module sirv_icb1to16_bus # (
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/fab/sirv_icb1to2_bus.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module sirv_icb1to2_bus # (
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/fab/sirv_icb1to8_bus.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module sirv_icb1to8_bus # (
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_1cyc_sram_ctrl.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module sirv_1cyc_sram_ctrl #(
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_bufs.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module sirv_gnrl_pipe_stage # (
+      |        ^~~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_bufs.v:99:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   99 | module sirv_gnrl_sync # (
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_bufs.v:142:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  142 | module sirv_gnrl_cdc_rx
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_bufs.v:223:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  223 | module sirv_gnrl_cdc_tx
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_bufs.v:306:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  306 | module sirv_gnrl_bypbuf # (
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_bufs.v:381:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  381 | module sirv_gnrl_fifo # (
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_dffs.v:40:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   40 | module sirv_gnrl_dfflrs # (
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_dffs.v:87:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   87 | module sirv_gnrl_dfflr # (
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_dffs.v:133:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  133 | module sirv_gnrl_dffl # (
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_dffs.v:177:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  177 | module sirv_gnrl_dffrs # (
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_dffs.v:209:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  209 | module sirv_gnrl_dffr # (
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_dffs.v:240:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  240 | module sirv_gnrl_ltch # (
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:37:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   37 | module sirv_gnrl_icb_arbt # (
+      |        ^~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:351:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  351 | module sirv_gnrl_icb_buffer # (
+      |        ^~~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:503:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  503 | module sirv_gnrl_icb_n2w # (
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:648:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  648 | module sirv_gnrl_icb_splt # (
+      |        ^~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:1007:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+ 1007 | module sirv_gnrl_icb2axi # (
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:1300:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+ 1300 | module sirv_gnrl_icb32towishb8 # (
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:1385:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+ 1385 | module sirv_gnrl_icb2apb # (
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:1468:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+ 1468 | module sirv_gnrl_icb2ahbl #(
+      |        ^~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:1577:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+ 1577 | module sirv_gnrl_axi_buffer
+      |        ^~~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_ram.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module sirv_gnrl_ram
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_xchecker.v:32:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   32 | module sirv_gnrl_xchecker # (
+      |        ^~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_sim_ram.v:27:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   27 | module sirv_sim_ram 
+      |        ^~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_sram_icb_ctrl.v:29:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   29 | module sirv_sram_icb_ctrl #(
+      |        ^~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/mems/sirv_mrom.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module sirv_mrom # (
+      |        ^~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/mems/sirv_mrom_top.v:28:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   28 | module sirv_mrom_top #(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/BiasBankCache.sv:46:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   46 | module BiasBankCache(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/BiasSramPrefetch.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module BiasSramPrefetch(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/DmaBiasSramPrefetch.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module DmaBiasSramPrefetch(
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/DmaWeightBankArray.sv:2:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    2 | module DmaWeightBankArray(
+      |        ^~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/DotProductEngine.sv:46:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   46 | module DotProductEngine(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/LinearAutoGroupCore.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module LinearAutoGroupCore(
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/LinearCachedCore.sv:2:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    2 | module LinearCachedCore(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/LinearComputeCore.sv:2:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    2 | module LinearComputeCore(
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/LinearRowPairDmaCore.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module LinearRowPairDmaCore(
+      |        ^~~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/LinearTileDmaCore.sv:46:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   46 | module MacPE_Acc41(
+      |        ^~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/LinearTileDmaCore.sv:92:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   92 | module MacPEArray_Acc41(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/LinearTileDmaCore.sv:270:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  270 | module DotProductEngine_Acc41_Result41(
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/LinearTileDmaCore.sv:562:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  562 | module LinearTileDmaCore(
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/MacController.sv:46:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   46 | module MacController(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/MacPE.sv:46:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   46 | module MacPE(
+      |        ^~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/MacPEArray.sv:2:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    2 | module MacPEArray(
+      |        ^~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/Sram1024x16.sv:46:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   46 | module Sram1024x16(
+      |        ^~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/TileWeightBank.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module TileWeightBank(
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/TileWeightBankArray.sv:20:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   20 | module TileWeightBankArray(
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/TileXRowBuffer.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module TileXRowBuffer(
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/WeightBank.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module WeightBank(
+      |        ^~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/WeightBankArray.sv:2:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    2 | module WeightBankArray(
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/XRowBuffer.sv:46:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   46 | module XRowBuffer(
+      |        ^~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/accel_icb_slave.v:11:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   11 | module accel_icb_slave #(parameter DIRECT_ENABLE=0) (
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/adv_timer_apb_if.v:103:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  103 | module adv_timer_apb_if #(
+      |        ^~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/apb_adv_timer.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module apb_adv_timer #(
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/comparator.v:21:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   21 | module comparator #(
+      |        ^~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/input_stage.v:12:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   12 | module input_stage #(
+      |        ^~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/prescaler.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module prescaler (
+      |        ^~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/timer_cntrl.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module timer_cntrl (
+      |        ^~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/timer_module.v:14:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   14 | module timer_module #(
+      |        ^~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/up_down_counter.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module up_down_counter #(
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_gpio/apb_gpio.v:31:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   31 | module apb_gpio
+      |        ^~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:22:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   22 | module apb_i2c
+      |        ^~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/i2c_master_bit_ctrl.v:139:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+  139 | module i2c_master_bit_ctrl
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/i2c_master_byte_ctrl.v:71:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   71 | module i2c_master_byte_ctrl (
+      |        ^~~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/apb_spi_master.v:20:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   20 | module apb_spi_master
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_apb_if.v:26:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   26 | module spi_master_apb_if
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_clkgen.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module spi_master_clkgen (
+      |        ^~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_controller.v:16:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   16 | module spi_master_controller (
+      |        ^~~~~~~~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_fifo.v:14:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   14 | module spi_master_fifo
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_rx.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module spi_master_rx (
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_tx.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module spi_master_tx (
+      |        ^~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_uart/apb_uart.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module apb_uart_sv 
+      |        ^~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_uart/io_generic_fifo.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module io_generic_fifo 
+      |        ^~~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_uart/uart_interrupt.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module uart_interrupt
+      |        ^~~~~~~~~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_uart/uart_rx.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module uart_rx (
+      |        ^~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_uart/uart_tx.v:13:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   13 | module uart_tx (
+      |        ^~~~~~~
+                       /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:255:43: Operator OR expects 32 bits on the LHS, but LHS's VARREF 'i_arbt_indic_id' generates 1 bits.
+                                                                                                                                       : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_lsu.u_e203_lsu_ctrl.u_lsu_icb_arbt'
+  255 |         i_arbt_indic_id = i_arbt_indic_id | {ARBT_PTR_W{i_bus_icb_cmd_sel[j]}} & $unsigned(j);
+      |                                           ^
+                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.046
+                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:255:80: Operator AND expects 32 bits on the LHS, but LHS's REPLICATE generates 1 bits.
+                                                                                                                                       : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_lsu.u_e203_lsu_ctrl.u_lsu_icb_arbt'
+  255 |         i_arbt_indic_id = i_arbt_indic_id | {ARBT_PTR_W{i_bus_icb_cmd_sel[j]}} & $unsigned(j);
+      |                                                                                ^
+%Warning-WIDTHTRUNC: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/general/sirv_gnrl_icbs.v:255:25: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's OR generates 32 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_lsu.u_e203_lsu_ctrl.u_lsu_icb_arbt'
+  255 |         i_arbt_indic_id = i_arbt_indic_id | {ARBT_PTR_W{i_bus_icb_cmd_sel[j]}} & $unsigned(j);
+      |                         ^
+                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.046
+                     ... Use "/* verilator lint_off WIDTHTRUNC */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_muldiv.v:591:51: Operator COND expects 33 bits on the Conditional True, but Conditional True's VARREF 'div_special_res' generates 32 bits.
+                                                                                                                                         : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_alu.u_e203_exu_alu_muldiv'
+  591 |   wire [32:0] golden_res_div  = div_special_cases ? div_special_res : 
+      |                                                   ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_muldiv.v:593:52: Operator COND expects 33 bits on the Conditional True, but Conditional True's VARREF 'div_special_res' generates 32 bits.
+                                                                                                                                         : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_alu.u_e203_exu_alu_muldiv'
+  593 |   wire [32:0] golden_res_divu  = div_special_cases ? div_special_res : 
+      |                                                    ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_muldiv.v:595:51: Operator COND expects 33 bits on the Conditional True, but Conditional True's VARREF 'div_special_res' generates 32 bits.
+                                                                                                                                         : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_alu.u_e203_exu_alu_muldiv'
+  595 |   wire [32:0] golden_res_rem  = div_special_cases ? div_special_res : 
+      |                                                   ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_alu_muldiv.v:597:52: Operator COND expects 33 bits on the Conditional True, but Conditional True's VARREF 'div_special_res' generates 32 bits.
+                                                                                                                                         : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_alu.u_e203_exu_alu_muldiv'
+  597 |   wire [32:0] golden_res_remu  = div_special_cases ? div_special_res : 
+      |                                                    ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_lsu_ctrl.v:283:37: Operator ASSIGNW expects 39 bits on the Assign RHS, but Assign RHS's REPLICATE generates 38 bits.
+                                                                                                                                   : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_lsu.u_e203_lsu_ctrl'
+  283 |   wire [USR_W-1:0] nice_icb_cmd_usr = {USR_W-1{1'b0}};
+      |                                     ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_lsu_ctrl.v:286:36: Operator ASSIGNW expects 39 bits on the Assign RHS, but Assign RHS's REPLICATE generates 38 bits.
+                                                                                                                                   : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_lsu.u_e203_lsu_ctrl'
+  286 |   wire [USR_W-1:0] fpu_icb_cmd_usr = {USR_W-1{1'b0}};
+      |                                    ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_lsu_ctrl.v:415:32: Operator ASSIGNW expects 4 bits on the Assign RHS, but Assign RHS's REPLICATE generates 2 bits.
+                                                                                                                                   : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_lsu.u_e203_lsu_ctrl'
+  415 |   assign arbt_bus_icb_cmd_beat =
+      |                                ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_ifu_ifetch.v:458:48: Operator COND expects 32 bits on the Conditional False, but Conditional False's VARREF 'pc_incr_ofst' generates 3 bits.
+                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_ifu.u_e203_ifu_ifetch'
+  458 |                                ifu_reset_req   ? 32'b0 :
+      |                                                ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_oitf.v:91:41: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'alc_ptr_r' generates 1 bits.
+                                                                                                                                  : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_oitf'
+   91 |       wire alc_ptr_flg_ena = (alc_ptr_r == ($unsigned(2-1))) & alc_ptr_ena;
+      |                                         ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_exu_oitf.v:104:41: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ret_ptr_r' generates 1 bits.
+                                                                                                                                   : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_core.u_e203_exu.u_e203_exu_oitf'
+  104 |       wire ret_ptr_flg_ena = (ret_ptr_r == ($unsigned(2-1))) & ret_ptr_ena;
+      |                                         ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/input_stage.v:104:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'r_sel' generates 8 bits.
+                                                                                                                                                 : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_pwm.u_tim3.u_in_stage'
+  104 |             if (r_sel == i)  s_int_sig = signal_i[i];
+      |                       ^~
+%Warning-WIDTHTRUNC: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/sirv_qspi_media.v:322:15: Operator ASSIGNDLY expects 1 bits on the Assign RHS, but Assign RHS's CONST '2'h0' generates 2 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_sirv_qspi0_top.u_sirv_flash_qspi.mac'
+  322 |     cs_id     <= 2'b0;
+      |               ^~
+%Warning-WIDTHTRUNC: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/i2c_master_bit_ctrl.v:248:41: Operator ASSIGNDLY expects 14 bits on the Assign RHS, but Assign RHS's SHIFTR generates 16 bits.
+                                                                                                                                                  : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1.byte_controller.bit_controller'
+  248 |       else if (~|filter_cnt) filter_cnt <= clk_cnt >> 2;  
+      |                                         ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/timer_cntrl.v:38:26: Operator ASSIGNW expects 8 bits on the Assign RHS, but Assign RHS's REPLICATE generates 7 bits.
+                                                                                                                                                : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_pwm.u_tim3.u_controller'
+   38 |     assign status_o      = {6'h00, r_pending};
+      |                          ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_fifo.v:88:32: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pointer_in' generates 4 bits.
+                                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi2.u_rxfifo'
+   88 |                 if (pointer_in == $unsigned(BUFFER_DEPTH - 1))
+      |                                ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_fifo.v:100:33: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pointer_out' generates 4 bits.
+                                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi2.u_rxfifo'
+  100 |                 if (pointer_out == $unsigned(BUFFER_DEPTH - 1))
+      |                                 ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_uart/io_generic_fifo.v:85:32: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pointer_in' generates 4 bits.
+                                                                                                                                               : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.uart_tx_fifo_i'
+   85 |                 if (pointer_in == $unsigned(BUFFER_DEPTH - 1))
+      |                                ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_uart/io_generic_fifo.v:98:33: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'pointer_out' generates 4 bits.
+                                                                                                                                               : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart2.uart_tx_fifo_i'
+   98 |                 if (pointer_out == $unsigned(BUFFER_DEPTH - 1))
+      |                                 ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/sirv_plic_man.v:405:49: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'icb_cmd_addr' generates 24 bits.
+                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_plic.u_sirv_plic_top.u_sirv_plic_man'
+  405 |      assign icb_cmd_sel_prio[i] = (icb_cmd_addr == ($unsigned(i) * 4)); 
+      |                                                 ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/sirv_plic_man.v:412:49: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'icb_cmd_addr' generates 24 bits.
+                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_plic.u_sirv_plic_top.u_sirv_plic_man'
+  412 |      assign icb_cmd_sel_pend[i] = (icb_cmd_addr == (($unsigned(i) * 4) + 24'h1000)); 
+      |                                                 ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/sirv_plic_man.v:412:72: Operator ADD expects 32 bits on the RHS, but RHS's CONST '24'h1000' generates 24 bits.
+                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_plic.u_sirv_plic_top.u_sirv_plic_man'
+  412 |      assign icb_cmd_sel_pend[i] = (icb_cmd_addr == (($unsigned(i) * 4) + 24'h1000)); 
+      |                                                                        ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/sirv_plic_man.v:421:51: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'icb_cmd_addr' generates 24 bits.
+                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_plic.u_sirv_plic_top.u_sirv_plic_man'
+  421 |        assign icb_cmd_sel_enab[i] = (icb_cmd_addr == (($unsigned(i) * 4) + 24'h2000)); 
+      |                                                   ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/sirv_plic_man.v:421:74: Operator ADD expects 32 bits on the RHS, but RHS's CONST '24'h2000' generates 24 bits.
+                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_plic.u_sirv_plic_top.u_sirv_plic_man'
+  421 |        assign icb_cmd_sel_enab[i] = (icb_cmd_addr == (($unsigned(i) * 4) + 24'h2000)); 
+      |                                                                          ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/sirv_plic_man.v:445:72: Operator AND expects 32 bits on the RHS, but RHS's ARRAYSEL generates 3 bits.
+                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_plic.u_sirv_plic_top.u_sirv_plic_man'
+  445 |          rsp_rdata_prio = rsp_rdata_prio | ({32{icb_cmd_sel_prio[ii]}} & irq_prio_r[ii] );
+      |                                                                        ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/sirv_plic_man.v:470:66: Operator AND expects 32 bits on the RHS, but RHS's VARREF 'irq_thod_r' generates 3 bits.
+                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_plic.u_sirv_plic_top.u_sirv_plic_man'
+  470 |        rsp_rdata_targ = rsp_rdata_targ | ({32{icb_cmd_sel_thod}} & irq_thod_r ); 
+      |                                                                  ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/sirv_plic_man.v:471:66: Operator AND expects 32 bits on the RHS, but RHS's VARREF 'plic_irq_id' generates 6 bits.
+                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_plic.u_sirv_plic_top.u_sirv_plic_man'
+  471 |        rsp_rdata_targ = rsp_rdata_targ | ({32{icb_cmd_sel_clam}} & plic_irq_id);
+      |                                                                  ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_controller.v:226:42: Operator ASSIGN expects 16 bits on the Assign RHS, but Assign RHS's REPLICATE generates 14 bits.
+                                                                                                                                                            : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi2.u_spictrl'
+  226 |                         counter_tx       = {8'h00, spi_cmd_len};
+      |                                          ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_controller.v:234:39: Operator ASSIGN expects 16 bits on the Assign RHS, but Assign RHS's REPLICATE generates 14 bits.
+                                                                                                                                                            : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi2.u_spictrl'
+  234 |                      counter_tx       = {8'h00, spi_addr_len};
+      |                                       ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_controller.v:288:42: Operator ASSIGN expects 16 bits on the Assign RHS, but Assign RHS's REPLICATE generates 14 bits.
+                                                                                                                                                            : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi2.u_spictrl'
+  288 |                         counter_tx       = {8'h00, spi_addr_len};
+      |                                          ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:96:13: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h0' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+   96 |             case (s_apb_addr)
+      |             ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:96:13: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h1' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+   96 |             case (s_apb_addr)
+      |             ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:96:13: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h4' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+   96 |             case (s_apb_addr)
+      |             ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:96:13: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h5' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+   96 |             case (s_apb_addr)
+      |             ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:114:9: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h0' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+  114 |         case (s_apb_addr)
+      |         ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:114:9: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h1' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+  114 |         case (s_apb_addr)
+      |         ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:114:9: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h2' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+  114 |         case (s_apb_addr)
+      |         ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:114:9: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h3' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+  114 |         case (s_apb_addr)
+      |         ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:114:9: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h4' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+  114 |         case (s_apb_addr)
+      |         ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:114:9: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '3'h5' generates 3 bits.
+                                                                                                                                      : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_i2c1'
+  114 |         case (s_apb_addr)
+      |         ^~~~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/apb_spi_master.v:116:25: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 2 bits.
+                                                                                                                                                     : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi2'
+  116 |     assign s_int_status = {s_rise_int_rx, s_rise_int_tx};
+      |                         ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:23:48: Operator ADD expects 32 bits on the RHS, but RHS's SEL generates 2 bits.
+                                                                                                                                             : ... note: In instance 'tb_dma64_soc.endpoint.banks[63].lanes[3].u_macro'
+   23 |           Q[bit_index]<=mem[A[9:2]][4*bit_index+A[1:0]];
+      |                                                ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:26:60: Operator ADD expects 32 bits on the RHS, but RHS's SEL generates 2 bits.
+                                                                                                                                             : ... note: In instance 'tb_dma64_soc.endpoint.banks[63].lanes[3].u_macro'
+   26 |           if(WEN[bit_index]===1'b0) mem[A[9:2]][4*bit_index+A[1:0]]<=D[bit_index];
+      |                                                            ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/generic_ramsp_non_ppa.sv:27:65: Operator ADD expects 32 bits on the RHS, but RHS's SEL generates 2 bits.
+                                                                                                                                             : ... note: In instance 'tb_dma64_soc.endpoint.banks[63].lanes[3].u_macro'
+   27 |           else if(WEN[bit_index]!==1'b1) mem[A[9:2]][4*bit_index+A[1:0]]<=1'bx;
+      |                                                                 ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/xu_shared_icb_sram64.sv:40:56: Operator EQ expects 32 or 2 bits on the RHS, but RHS's SEL generates 1 bits.
+                                                                                                                                            : ... note: In instance 'tb_dma64_soc.endpoint'
+   40 |       wire lane_selected=cmd_read ? (!cmd_is32 || (l/2)==cmd_addr[2]) :
+      |                                                        ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/xu_shared_icb_sram64.sv:58:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'phase' generates 3 bits.
+                                                                                                                                            : ... note: In instance 'tb_dma64_soc.endpoint'
+   58 |         phase <= phase==THROTTLE_PERIOD-1 ? 0 : phase+1'b1;
+      |                       ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/tile_physical_observer.sv:32:60: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's VARREF 'validRows' generates 4 bits.
+                                                                                                                                              : ... note: In instance 'tb_dma64_soc.physical_observer'
+   32 |      if(start)begin rowWeightReads=0;rowBiasReads=0;rowRows=validRows;end
+      |                                                            ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/tile_physical_observer.sv:64:15: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's SEL generates 10 bits.
+                                                                                                                                              : ... note: In instance 'tb_dma64_soc.physical_observer'
+   64 |        address=macroAddr[i*10+:10];
+      |               ^
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/tile_physical_observer.sv:82:15: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's SEL generates 6 bits.
+                                                                                                                                              : ... note: In instance 'tb_dma64_soc.physical_observer'
+   82 |        address=xAddr[i*6+:6];
+      |               ^
+%Warning-WIDTHTRUNC: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:133:22: Logical operator COND expects 1 bit on the Conditional Test, but Conditional Test's VARREF 'warmup_active' generates 32 bits.
+                                                                                                                               : ... note: In instance 'tb_dma64_soc'
+  133 |       p=warmup_active?"D4K_WARMUP":"D4K";
+      |                      ^
+%Warning-WIDTHTRUNC: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:169:46: Logical operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'warmup' generates 32 bits.
+                                                                                                                               : ... note: In instance 'tb_dma64_soc'
+  169 |       call_index=callno;warmup_active=(warmup&&callno==1);layer=callno-1-warmup;if(layer<0)layer=0;
+      |                                              ^~
+%Warning-WIDTHEXPAND: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:169:38: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's LOGAND generates 1 bits.
+                                                                                                                                : ... note: In instance 'tb_dma64_soc'
+  169 |       call_index=callno;warmup_active=(warmup&&callno==1);layer=callno-1-warmup;if(layer<0)layer=0;
+      |                                      ^
+%Warning-WIDTHTRUNC: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:177:7: Logical operator IF expects 1 bit on the If, but If's VARREF 'warmup_active' generates 32 bits.
+                                                                                                                              : ... note: In instance 'tb_dma64_soc'
+  177 |       if(warmup_active)$display("D4K_WARMUP_DONE tasks=1 outputs=25344 excluded_principal=1");else completed=completed+1;
+      |       ^~
+%Warning-WIDTHTRUNC: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:179:5: Logical operator WAIT expects 1 bit on the Wait, but Wait's VARREF 'firmware_pass' generates 32 bits.
+                                                                                                                              : ... note: In instance 'tb_dma64_soc'
+  179 |     wait(firmware_pass);$display("D4K_SOC_PASS tasks=%0d rows=%0d outputs=%0d writes=%0d",completed,rows,completed*25344,completed*12672);$finish;
+      |     ^~~~
+%Warning-WIDTHTRUNC: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:234:23: Logical operator LOGOR expects 1 bit on the RHS, but RHS's VARREF 'outstanding' generates 32 bits.
+                                                                                                                               : ... note: In instance 'tb_dma64_soc'
+  234 |         if(!start_seen||outstanding||writes!=12672||yresponses!=12672||dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_xu_matrix_dma.mem_cmd_valid||dma_requests!=dma_responses)$fatal(1,"premature completion");done_seen=1;done_cycle=cycles;
+      |                       ^~
+%Warning-WIDTHTRUNC: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/dma64_physical_observer.svh:9:3: Input port connection 'warmup' expects 1 bits on the pin connection, but pin connection's VARREF 'warmup_active' generates 32 bits.
+                                                                                                                                        : ... note: In instance 'tb_dma64_soc'
+    9 |  .warmup(warmup_active),
+      |   ^~~~~~
+                     /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/tests/tb_dma64_soc.sv:282:1: ... note: In file included from 'tb_dma64_soc.sv'
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_gpio/apb_gpio.v:132:13: Case values incompletely covered (example pattern 0x1)
+  132 |             case (s_apb_addr)
+      |             ^~~~
+                         ... For warning description see https://verilator.org/warn/CASEINCOMPLETE?v=5.046
+                         ... Use "/* verilator lint_off CASEINCOMPLETE */" and lint_on around source to disable this message.
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_i2c/apb_i2c.v:96:13: Case values incompletely covered (example pattern 0x2)
+   96 |             case (s_apb_addr)
+      |             ^~~~
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_adv_timer/adv_timer_apb_if.v:626:13: Case values incompletely covered (example pattern 0xb)
+  626 |             case (s_apb_addr)
+      |             ^~~~
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/debug/sirv_jtag_dtm.v:237:7: Case values incompletely covered (example pattern 0x0)
+  237 |       case (jtagStateReg)
+      |       ^~~~
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/debug/sirv_jtag_dtm.v:295:10: Case values incompletely covered (example pattern 0x0)
+  295 |          case(jtagStateReg)
+      |          ^~~~
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/debug/sirv_jtag_dtm.v:308:10: Case values incompletely covered (example pattern 0x0)
+  308 |          case(jtagStateReg)
+      |          ^~~~
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_uart/apb_uart.v:182:13: Case values incompletely covered (example pattern 0x4)
+                                                                                                                                            : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_uart0'
+  182 |             case (register_adr)
+      |             ^~~~
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/apb_spi_master.v:124:9: Case values incompletely covered (example pattern 0x3)
+                                                                                                                                                       : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi1'
+  124 |         case (spi_mode)
+      |         ^~~~
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_apb_if.v:109:13: Case values incompletely covered (example pattern 0x6)
+                                                                                                                                                           : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi1'
+  109 |             case (write_address)
+      |             ^~~~
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_controller.v:172:9: Case values incompletely covered (example pattern 0x5)
+                                                                                                                                                              : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi1'
+  172 |         case (ctrl_data_mux)
+      |         ^~~~
+%Warning-CASEINCOMPLETE: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/perips/apb_spi_master/spi_master_controller.v:215:9: Case values incompletely covered (example pattern 0x8)
+                                                                                                                                                              : ... note: In instance 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_spi1'
+  215 |         case (state)
+      |         ^~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.u_e203_subsys_pllclkdiv.u_pllclkdiv_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+                ... For warning description see https://verilator.org/warn/LATCH?v=5.046
+                ... Use "/* verilator lint_off LATCH */" and lint_on around source to disable this message.
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.u_e203_subsys_gfcm.u_clk0_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen.u_e203_subsys_gfcm.u_clk1_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_clk_ctrl.u_ifu_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_clk_ctrl.u_exu_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_clk_ctrl.u_lsu_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_clk_ctrl.u_biu_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_clk_ctrl.u_itcm_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_clk_ctrl.u_dtcm_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_itcm_ctrl.u_sram_icb_ctrl.u_sirv_1cyc_sram_ctrl.u_ram_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_cpu_top.u_e203_cpu.u_e203_dtcm_ctrl.u_sram_icb_ctrl.u_sirv_1cyc_sram_ctrl.u_ram_clkgate.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_pwm.i_clk_gate_timer0.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_pwm.i_clk_gate_timer1.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_pwm.i_clk_gate_timer2.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+%Warning-LATCH: /work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/source/rtl/core/e203_clkgate.v:44:1: Latch inferred for signal 'tb_dma64_soc.dut.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_perips.u_perips_apb_pwm.i_clk_gate_timer3.enb' (not all control paths of combinational always assign a value)
+                                                                                                                          : ... Suggest use of always_latch for intentional latches
+   44 | always@(*)
+      | ^~~~~~
+make: Entering directory '/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/native-r1/campaign/obj'
+ccache g++ -Os  -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -c -o verilated.o /opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/verilated.cpp
+ccache g++ -Os  -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -c -o verilated_timing.o /opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/verilated_timing.cpp
+ccache g++ -Os  -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -c -o verilated_threads.o /opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/verilated_threads.cpp
+ccache g++ -Os  -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -x c++-header Vtb_dma64_soc__pch.h -o Vtb_dma64_soc__pch.h.fast.gch
+ccache g++   -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -x c++-header Vtb_dma64_soc__pch.h -o Vtb_dma64_soc__pch.h.slow.gch
+ccache g++ -Os  -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -include Vtb_dma64_soc__pch.h.fast -c -o Vtb_dma64_soc_vm_classes_0.o Vtb_dma64_soc_vm_classes_0.cpp
+ccache g++ -Os  -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -include Vtb_dma64_soc__pch.h.fast -c -o Vtb_dma64_soc_vm_classes_1.o Vtb_dma64_soc_vm_classes_1.cpp
+ccache g++   -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -include Vtb_dma64_soc__pch.h.slow -c -o Vtb_dma64_soc_vm_classes_Slow_0.o Vtb_dma64_soc_vm_classes_Slow_0.cpp
+ccache g++   -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -include Vtb_dma64_soc__pch.h.slow -c -o Vtb_dma64_soc___024root__2__Slow.o Vtb_dma64_soc___024root__2__Slow.cpp
+ccache g++   -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -include Vtb_dma64_soc__pch.h.slow -c -o Vtb_dma64_soc___024root__3__Slow.o Vtb_dma64_soc___024root__3__Slow.cpp
+ccache g++   -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -include Vtb_dma64_soc__pch.h.slow -c -o Vtb_dma64_soc_vm_classes_Slow_1.o Vtb_dma64_soc_vm_classes_Slow_1.cpp
+ccache g++   -I.  -MMD -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include -I/opt/eda/OpenEDA/verilator/v5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=gnu++20 -DVL_TIME_CONTEXT    -include Vtb_dma64_soc__pch.h.slow -c -o Vtb_dma64_soc__Syms__Slow.o Vtb_dma64_soc__Syms__Slow.cpp
+g++    verilated.o verilated_timing.o verilated_threads.o Vtb_dma64_soc__ALL.a    -pthread -lpthread -latomic   -o dma64_soc
+rm Vtb_dma64_soc__ALL.verilator_deplist.tmp
+make: Leaving directory '/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-strict-input-r1/native-r1/campaign/obj'
+- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev v5.046
+- Verilator: Built from 350.144 MB sources in 188 modules, into 47.522 MB in 60 C++ files needing 0.010 MB
+- Verilator: Walltime 206.729 s (elab=0.947, cvt=8.936, bld=195.255); cpu 12.297 s on 2 threads; allocated 552.234 MB

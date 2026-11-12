@@ -1,0 +1,150 @@
+{
+  "status": "PREPARATION_ONLY_NATIVE_GATE_NOT_STARTED",
+  "recorded_at_utc": "2026-11-12T05:18:18.762411+00:00",
+  "source_parent": "96fffcb2a4b2492fd2cfdecb88e164d2c67881ae",
+  "source_child": "ccdac30d92ecf40f14d0b78879b8711fb0b1cdd1",
+  "candidate_netlist": {
+    "sha256": "f73b4518be9e6670bc8ed3bcf38623e1411ba55b1256ac6aae5b5c636c60a7a3",
+    "official_path": "/tmp/xu-b41-close-20261111-r1/timing-electrical-resume-r1/dc-electrical/mapped.v",
+    "final": false,
+    "local_native_original_received": false
+  },
+  "inputs": {
+    "ppa/xu_soc_dma64_ppa_top.sv": {
+      "path": "gate-source/ppa/xu_soc_dma64_ppa_top.sv",
+      "bytes": 6079,
+      "sha256": "98e62eb8d06a543a920001cb059ec04bd01e51df4057d610f35f8130aa63cfd0"
+    },
+    "rtl/perips/xu_shared_icb_sram64.sv": {
+      "path": "gate-source/rtl/perips/xu_shared_icb_sram64.sv",
+      "bytes": 3157,
+      "sha256": "16b840e884a5ff0eba17129338e7a6c2f69b872b770de14f81104f1a0fab2e0e"
+    },
+    "rtl/general/sirv_sim_ram.v": {
+      "path": "gate-source/rtl/general/sirv_sim_ram.v",
+      "bytes": 3638,
+      "sha256": "b2b2baaa1e105ed794382886439cd2c16fd280a0f29b54c4d925351e6f90a0c5"
+    },
+    "rtl/core/config.v": {
+      "path": "gate-source/rtl/core/config.v",
+      "bytes": 3756,
+      "sha256": "235fc827eb88290dab3e4d6ecaf9cd22aa897ac8f5da9abf562a308ded191d9c"
+    },
+    "tests/tb_dma64_soc.sv": {
+      "path": "reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-strict-input-r1/source/tests/tb_dma64_soc.sv",
+      "bytes": 20003,
+      "sha256": "cba7aef3a92d13a190bdfc2ca8bd076b5c6d0ac297dac653727b8e280a925dda"
+    },
+    "tests/dma64_physical_observer.svh": {
+      "path": "reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-strict-input-r1/source/tests/dma64_physical_observer.svh",
+      "bytes": 89458,
+      "sha256": "0fc096466dc3ad2e9415191a723cac6c1bda147894eb8cc137a0e604ab6766a0"
+    },
+    "tests/tile_physical_observer.sv": {
+      "path": "reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-strict-input-r1/source/tests/tile_physical_observer.sv",
+      "bytes": 4812,
+      "sha256": "b90a8c485f8db8a4468f5174eb073650f48aabae7874e7d527120748adaaa93c"
+    }
+  },
+  "firmware": {
+    "tight-O2": {
+      "elf": {
+        "path": "reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-strict-input-r1/firmware/tight-O2/dma64_soc",
+        "bytes": 5784,
+        "sha256": "e2048f46f62ea03fda33198aa28b2240010c68924e6ba306465a91725af7344a"
+      },
+      "image": {
+        "path": "reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-strict-input-r1/firmware/tight-O2/dma64_soc.verilog",
+        "bytes": 2116,
+        "sha256": "2a2332d1d88610ab64fdfdefc34c0b0001da52cc68d43026e4520dbc25f0cf7d"
+      }
+    },
+    "phased_64_fast4-O2": {
+      "elf": {
+        "path": "reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-strict-input-r1/firmware/phased_64_fast4-O2/dma64_soc",
+        "bytes": 5944,
+        "sha256": "f913e73c5867666be6e45bbfc052f65ffd4bc97a478b4b5205d26c6047c4e700"
+      },
+      "image": {
+        "path": "reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-strict-input-r1/firmware/phased_64_fast4-O2/dma64_soc.verilog",
+        "bytes": 2590,
+        "sha256": "cb55d5f6d4aa0e7a677e85314ef9c6590a769261e9aa6efe8e54a91ef65dbafd"
+      }
+    },
+    "backoff_8_256_fast4-O2": {
+      "elf": {
+        "path": "reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-strict-input-r1/firmware/backoff_8_256_fast4-O2/dma64_soc",
+        "bytes": 6904,
+        "sha256": "10465248fa4941e015cf5f50f80eeb6aecda53efb9dcdb8215e7d3495ea6ea0a"
+      },
+      "image": {
+        "path": "reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-strict-input-r1/firmware/backoff_8_256_fast4-O2/dma64_soc.verilog",
+        "bytes": 5476,
+        "sha256": "890b18dac8db08bd294d9c0a2073b96e323c8a34c482c329530b03bebb3b35f0"
+      }
+    }
+  },
+  "existing_vendor_probe": {
+    "path": "gate-source/tools/ppa/tb_xu_vendor_preload.sv",
+    "bytes": 1497,
+    "sha256": "96c7d3a538adafd02b043b8edd21f2bbc65fc964a8e89345126d6d55b5dc15e7"
+  },
+  "models": {
+    "standard_cells": {
+      "official_path": "~/Desktop/xu-published16-v1-synth-20261109/xu-official-models/scc40nll_vhsc40_rvt.v",
+      "observed_sha256": "9ceaac7085f267c9a2da19d86aa9d88ddb25894df4b2485e32d13e04d0e46581",
+      "scope": "VNC observation; original vendor archive binding still pending"
+    },
+    "sram": {
+      "official_path": "/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP1024X16/verilog/RAMSP1024X16.v",
+      "observed_sha256": "81b55d87d5e6821d44037d6f0290ec89c9edb9582eb1932957f181aefc300d51",
+      "scope": "Public server model VNC source/hash observation; no local original"
+    }
+  },
+  "sram_geometry": {
+    "macro": "RAMSP1024X16",
+    "physical_memory": "reg [63:0] mem [0:255]",
+    "macro_address_row": "A[9:2]",
+    "macro_address_column": "A[1:0]",
+    "physical_bit": "4 * data_bit + column",
+    "shared": {
+      "bytes": 524288,
+      "depth_banks": 64,
+      "lanes_16_bit": 4,
+      "bank_byte_address_bits": "[18:13]",
+      "macro_address_byte_bits": "[12:3]",
+      "macro_count": 256
+    },
+    "itcm": {
+      "bytes": 65536,
+      "logical_word_bits": 64,
+      "depth_banks": 8,
+      "lanes_16_bit": 4,
+      "macro_count_from_source": 32
+    },
+    "dtcm": {
+      "bytes": 65536,
+      "logical_word_bits": 32,
+      "depth_banks": 16,
+      "lanes_16_bit": 2,
+      "macro_count_from_source": 32
+    },
+    "accelerator_macro_count": 17,
+    "expected_total_macros": 337
+  },
+  "required_before_gate": [
+    "Freeze and hash final netlist after electrical diagnosis; renew equivalence for that exact netlist",
+    "Confirm actual macro and observable hierarchy in the final mapped file; elaborate all 337 macros",
+    "Run existing four-state preload probe with the actual pinned SRAM model",
+    "Adapt gate fixture explicitly: PPA top owns shared SRAM, so direct physical preload/readback is outside measured windows and must not be reported as public-port transactions",
+    "Keep frozen RTL CPU SVA and 52 original TB fatal checks; gate adapter needs an explicit retained-check mapping and real native evidence",
+    "Observe real DMA outputs, physical clear and response retirement, and firmware return for all 12 tasks plus warmup",
+    "Capture full-SoC activity over identical declared windows for the same three pinned firmware images and verify annotation coverage"
+  ],
+  "native_gate_started": false,
+  "gate_adapter_implemented": false,
+  "full_soc_energy": null,
+  "official_score": null,
+  "path_base": "docs/validation/xu-b41-handoff-20261112 from repository root",
+  "publication_note": "Local file locations relocated for GitHub. Input hashes and official model locations retained."
+}

@@ -1,0 +1,461 @@
+{
+  "builds": {
+    "backoff_8_256_fast4-O2": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-O2",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/backoff_8_256_fast4-O2",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/backoff_8_256_fast4-O2/dma64_soc"
+      ],
+      "elf_sha256": "10465248fa4941e015cf5f50f80eeb6aecda53efb9dcdb8215e7d3495ea6ea0a",
+      "image_sha256": "890b18dac8db08bd294d9c0a2073b96e323c8a34c482c329530b03bebb3b35f0",
+      "optimization": "O2",
+      "selected_config_sha256": "47ad47c00c32fefa63a3a134cc1f00416e51daad651ea75258bb62cfc7142376",
+      "source_sha256": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+      "stack_usage": {
+        "dma64_soc-dma64_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:14:12:failed_wait\t0\tstatic\n/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:22:5:main\t32\tstatic\n"
+      },
+      "text_bytes": 1822
+    },
+    "clear8_compute64-O2": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-O2",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/clear8_compute64-O2",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/clear8_compute64-O2/dma64_soc"
+      ],
+      "elf_sha256": "39ba1074ffb37215c79491c409f738a103d816570ecb0a107b5618bc3e374cae",
+      "image_sha256": "95bfb62333d47a09b4c6128e7b789bf76d9117deaab253bf40f060522a51d7e5",
+      "optimization": "O2",
+      "selected_config_sha256": "af4da2fe3c2fe35cb7a37ebe4ed75392b6d98ece327167f27418e5d65af031b5",
+      "source_sha256": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+      "stack_usage": {
+        "dma64_soc-dma64_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:14:12:failed_wait\t0\tstatic\n/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:22:5:main\t16\tstatic\n"
+      },
+      "text_bytes": 1000
+    },
+    "fixed_256-O2": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-O2",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_256-O2",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_256-O2/dma64_soc"
+      ],
+      "elf_sha256": "875b52a8552209eae6f4051ecfc250c37c20f87ca0e6890499b48946e64d5fd9",
+      "image_sha256": "75ed019ac62fe957c8ae41058efc41c688c8bc19040c18ae35e4b5a14520af6d",
+      "optimization": "O2",
+      "selected_config_sha256": "32902c386ec6f067f5660306b0812039aa10a1369ada711440b9a300892506a5",
+      "source_sha256": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+      "stack_usage": {
+        "dma64_soc-dma64_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:14:12:failed_wait\t0\tstatic\n/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:22:5:main\t16\tstatic\n"
+      },
+      "text_bytes": 1346
+    },
+    "fixed_32-O2": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-O2",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_32-O2",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_32-O2/dma64_soc"
+      ],
+      "elf_sha256": "1d2e657ef514091a29abbc57a2e4a98989b7d891c53ed43da3200633b2c632d4",
+      "image_sha256": "499bce0b7c73cd9265725f4d0b48461ae38e6e2496d62d866a24e320d6a25bdd",
+      "optimization": "O2",
+      "selected_config_sha256": "e35dd31e533fa9a286eb5544fec2cb325b5adfba49f8e010e1d6621f5a419cd9",
+      "source_sha256": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+      "stack_usage": {
+        "dma64_soc-dma64_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:14:12:failed_wait\t0\tstatic\n/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:22:5:main\t16\tstatic\n"
+      },
+      "text_bytes": 894
+    },
+    "fixed_64-O2": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-O2",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_64-O2",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_64-O2/dma64_soc"
+      ],
+      "elf_sha256": "c560eb0078f3a14354668761f461404ad67816ef121dc292b5bdbb0ff688cef1",
+      "image_sha256": "5b551bdfd2037df92906df55d927c2c06e56d7f604c275ae01b7bc3d3c8a322e",
+      "optimization": "O2",
+      "selected_config_sha256": "c51091ab983917148bf95e1e0d8572d2f42f9bc0d2a0b35773e894ec7f5f948b",
+      "source_sha256": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+      "stack_usage": {
+        "dma64_soc-dma64_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:14:12:failed_wait\t0\tstatic\n/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:22:5:main\t16\tstatic\n"
+      },
+      "text_bytes": 958
+    },
+    "fixed_64-O3": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-O3",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_64-O3",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_64-O3/dma64_soc"
+      ],
+      "elf_sha256": "ecc89658ce6eb23bffb3d51e878d19d5f9e698fa208ead566353cdfc2116f2c3",
+      "image_sha256": "d972f7eafa6b47cfa23f85a71d7404c47e365d76b90c8b73f1fa5d7968928a31",
+      "optimization": "O3",
+      "selected_config_sha256": "43c2782877d809488dc42d44c971581185fa59ed66e655f6ee9dea77d4c9a2e2",
+      "source_sha256": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+      "stack_usage": {
+        "dma64_soc-dma64_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:22:5:main\t16\tstatic\n"
+      },
+      "text_bytes": 872
+    },
+    "fixed_64-Os": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-Os",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_64-Os",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/fixed_64-Os/dma64_soc"
+      ],
+      "elf_sha256": "2d37b34c955b6a27381eed32bef1c1a7f1eea9b75f6a44d3fb36007ae1446994",
+      "image_sha256": "2c71c5a2c5f694dee9d1b653e6abbee8373833f2f9c8d88e97478750a27e0221",
+      "optimization": "Os",
+      "selected_config_sha256": "43c2782877d809488dc42d44c971581185fa59ed66e655f6ee9dea77d4c9a2e2",
+      "source_sha256": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+      "stack_usage": {
+        "dma64_soc-dma64_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:14:12:failed_wait\t0\tstatic\n/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:22:5:main\t0\tstatic\n"
+      },
+      "text_bytes": 766
+    },
+    "phased_64_fast4-O2": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-O2",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/phased_64_fast4-O2",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/phased_64_fast4-O2/dma64_soc"
+      ],
+      "elf_sha256": "f913e73c5867666be6e45bbfc052f65ffd4bc97a478b4b5205d26c6047c4e700",
+      "image_sha256": "cb55d5f6d4aa0e7a677e85314ef9c6590a769261e9aa6efe8e54a91ef65dbafd",
+      "optimization": "O2",
+      "selected_config_sha256": "20e99cc59bddcb3977021f50b7f6ec94c0d0e97dc0831f5ec2d0d30edbbc2f31",
+      "source_sha256": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+      "stack_usage": {
+        "dma64_soc-dma64_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:14:12:failed_wait\t0\tstatic\n/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:22:5:main\t16\tstatic\n"
+      },
+      "text_bytes": 860
+    },
+    "published-gcc15-O2": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-O2",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/published-gcc15-O2",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/published_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/published-gcc15-O2/dma64_soc"
+      ],
+      "elf_sha256": "c4c0b3bb43ee453f97a4691c06de29460aa345f7fc13d38f2de08af4c2613947",
+      "image_sha256": "a8f75bf85393b392d7885b13544377f361a03053caccee9f43511f6b0bb82e78",
+      "optimization": "O2",
+      "selected_config_sha256": "38867afd761e904e32dd8699d4700f217bf40407496374abf71e8cee6ac7f7a4",
+      "source_sha256": "3699e60f7460184d8a5e4613741029a2e52279731d3952285386aa64e57a1963",
+      "stack_usage": {
+        "dma64_soc-published_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/published_driver.c:27:12:wait_status\t0\tstatic\n/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/published_driver.c:41:5:main\t48\tstatic\n"
+      },
+      "text_bytes": 514
+    },
+    "tight-O2": {
+      "command": [
+        "/tmp/xu-riscv-toolchain/bin/riscv-none-elf-gcc",
+        "-march=rv32imac_zicsr2p0_zifencei2p0",
+        "-mabi=ilp32",
+        "-O2",
+        "-fstack-usage",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-msmall-data-limit=0",
+        "-nostdlib",
+        "-nostartfiles",
+        "-static",
+        "-mcmodel=medany",
+        "-Wl,--no-relax",
+        "-Wl,--build-id=none",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/tight-O2",
+        "-I",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software",
+        "-T",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/link.ld",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/reference_firmware/start.S",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c",
+        "-o",
+        "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/tight-O2/dma64_soc"
+      ],
+      "elf_sha256": "e2048f46f62ea03fda33198aa28b2240010c68924e6ba306465a91725af7344a",
+      "image_sha256": "2a2332d1d88610ab64fdfdefc34c0b0001da52cc68d43026e4520dbc25f0cf7d",
+      "optimization": "O2",
+      "selected_config_sha256": "5f70724cd32db6b6eab60327e2dbe198734ae7bbc6b9bca05dfde9211ca9ff31",
+      "source_sha256": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+      "stack_usage": {
+        "dma64_soc-dma64_driver.su": "/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:14:12:failed_wait\t0\tstatic\n/Users/leo/competition/30107 \u82af\u7247\u8bbe\u8ba1\u5927\u8d5b/reports/s3-y32-portable-software-design-20261110/hardware64-r1/candidates-r3/software/dma64_driver.c:22:5:main\t32\tstatic\n"
+      },
+      "text_bytes": 702
+    }
+  },
+  "compiler": "riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC arm64) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "host_drain_cases": 9,
+  "identical_loaded_image_groups": [
+    [
+      "tight-O2"
+    ],
+    [
+      "fixed_32-O2"
+    ],
+    [
+      "fixed_64-O2"
+    ],
+    [
+      "fixed_256-O2"
+    ],
+    [
+      "phased_64_fast4-O2"
+    ],
+    [
+      "backoff_8_256_fast4-O2"
+    ],
+    [
+      "published-gcc15-O2"
+    ],
+    [
+      "fixed_64-O3"
+    ],
+    [
+      "fixed_64-Os"
+    ],
+    [
+      "clear8_compute64-O2"
+    ]
+  ],
+  "negative_controls": {
+    "ignore_drain_busy": {
+      "native_exit": 1,
+      "output": "DRAIN_FAIL line=47 check=model.reads==3 && model.reports==1 && model.published==0x71\n"
+    },
+    "republish_error": {
+      "native_exit": 1,
+      "output": "DRAIN_FAIL line=47 check=model.reads==3 && model.reports==1 && model.published==0x71\n"
+    }
+  },
+  "scope": "Real a80dd18 ABI, static adapters and existing wait source; compile/host seam only. CPU64 execution and physical energy pending.",
+  "source_sha256": {
+    "dma64_driver.c": "833a0b1d92e04414c2c9cdeedea7d653f08c2668dd00c44c19d7b0eb0f77c249",
+    "ffn_error_drain.h": "e0f2d6e13c9590e49cfa02c671df9e35ce9ef4c9c5f888258067945c8c625e06",
+    "ffn_wait.h": "9043bf301b45bb8f64b71decbab5ccc4d19058f7f9803401e77a80c434adfc91",
+    "group_y_reference.h": "daf095025dddbd178a62b9e0444b2ba68d4652958754a242edfeddd4d9d8262e",
+    "reference_driver.c": "de3f3ac4e09f42d8bffba0b10a6afe14469cf1635e7a7c481052eeafb1efc8f1",
+    "reference_firmware/link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+    "reference_firmware/start.S": "b170e44a291ace631c4abda8136d2fd705de608b6ac7597c156e3b012c19a092",
+    "rv32_port.h": "b72bb4a815d877d19ef86ff376f2ae44708ad0b34ea14909226d06f0c08a12f5",
+    "targets/dma64_a80dd18.h": "5af130d51c163f82af4bc82596343b6e3d70f9aaecb6c46033f59ebe7c1f9d65"
+  },
+  "status": "PASS_CPU64_TARGET_BUILDS_ONLY"
+}

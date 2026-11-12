@@ -1,0 +1,772 @@
+{
+  "status": "ACTIVE_B41_VALIDATION_AND_ENERGY_SELECTION",
+  "target_context": "Current B41 parent 96fffcb / E203 ccdac30; completed software development evidence uses 48-bit E203 a80dd18",
+  "configuration_method": "offline search; immutable build-time config; no online learning",
+  "host_contract_cases": 72,
+  "negative_controls_detected": 3,
+  "synthetic_cases": 2340,
+  "synthetic_configs": 15,
+  "synthetic_proxy_front": [
+    "tight",
+    "fixed_8",
+    "fixed_16",
+    "fixed_32",
+    "fixed_64",
+    "fixed_128",
+    "fixed_256",
+    "fixed_512",
+    "fixed_1024",
+    "phased_64_fast4",
+    "phased_1024_fast8",
+    "backoff_8_256_fast4",
+    "backoff_16_1024_fast8"
+  ],
+  "cross_builds": 45,
+  "actual_64pe_qualified": false,
+  "official_score": null,
+  "physical_energy": null,
+  "validated_source_sha256": {
+    "software/ffn_wait.h": "9043bf301b45bb8f64b71decbab5ccc4d19058f7f9803401e77a80c434adfc91",
+    "software/group_y_reference.h": "daf095025dddbd178a62b9e0444b2ba68d4652958754a242edfeddd4d9d8262e",
+    "software/reference_driver.c": "de3f3ac4e09f42d8bffba0b10a6afe14469cf1635e7a7c481052eeafb1efc8f1",
+    "software/reference_firmware/link.ld": "c88af2b8f3bb1d8e5c2b68b86dd130dac1d01ab1d007073c8c3e85a96fe96a29",
+    "software/reference_firmware/start.S": "b170e44a291ace631c4abda8136d2fd705de608b6ac7597c156e3b012c19a092",
+    "software/rv32_port.h": "b72bb4a815d877d19ef86ff376f2ae44708ad0b34ea14909226d06f0c08a12f5",
+    "tests/wait_model.c": "fee7e8c5d77bf3728b02cc722dbb1f344565c3822f9d22dac576c3c00be56e29",
+    "tools/run_validation.py": "4c06ded8532c96b17c3ced49ec2d00aea1b879f7208b7639194fdf35f500bfec"
+  },
+  "validation_receipt_sha256": "fb62208ba61c3acd7e31570b9eefefac9d27fb354cc317d7befdb7badd57768a",
+  "next_required_input": "Restore existing FPT path and read official job receipts; run the three B41 firmware replays, then same-netlist mapped functionality and full-SoC energy",
+  "stage1_status": "PASS_PORTABLE_SOFTWARE_DEVELOPMENT",
+  "stage2": {
+    "hardware_input": "hardware64-r1/input-identity.json",
+    "published_parent_commit": "d60e0e00d79051747b8adcfa39fca273a6e7e309",
+    "published_child_commit": "a80dd184536e0f2312c62768d5acf4ba1b01c34e",
+    "strict_control": "PASS",
+    "strict_cpu_sva": "6 assertion properties observed in preprocessed build",
+    "new_driver_host_drain_cases": 9,
+    "new_driver_negative_controls_detected": 2,
+    "new_target_rv32_builds": 10,
+    "source_build_receipt": "hardware64-r1/candidates-r3/result.json",
+    "software_cpu64_candidates_qualified": true,
+    "physical_energy": null,
+    "official_score": null,
+    "strict_control_receipt": "hardware64-r1/strict-control-review-r2.json",
+    "strict_control_counts": {
+      "measured_outputs": 304128,
+      "warmup_outputs": 25344,
+      "physical_clears": 13,
+      "principal_cycles": 428915,
+      "including_gap_cycles": 429431
+    },
+    "software_screen": {
+      "status": "PASS_RAW_CPU64_COMPARISON",
+      "variants": 10,
+      "measured_tasks_each": 1,
+      "warmup_tasks_each": 1,
+      "raw_review": "hardware64-r1/screen-comparison-r1/result.json",
+      "physical_energy": null
+    },
+    "hotpath_trial": {
+      "status": "PASS_HOST_AND_BUILDS_ONLY",
+      "receipt": "hardware64-r1/hotpath-r1/result.json",
+      "actual_c_wait_cases": 72,
+      "busy_negative_controls_detected": 1,
+      "new_rv32_images": 3,
+      "cpu64_execution": {
+        "status": "PASS_RAW_CPU64_COMPARISON",
+        "variants": 3,
+        "measured_tasks_each": 1,
+        "raw_review": "hardware64-r1/hotpath-screen-comparison-r1/result.json"
+      },
+      "scope": "Equivalent completion predicate in isolated snapshot; original portable source and r3 candidates retained"
+    },
+    "priority_candidates": [
+      "candidates-r3/tight-O2",
+      "candidates-r3/backoff_8_256_fast4-O2"
+    ],
+    "fault_validation": {
+      "status": "PASS_RAW_CPU64_FAULT_REVIEW",
+      "cases": 4,
+      "cpu_assert_properties": 6,
+      "receipt": "hardware64-r1/fault-review-r1.json",
+      "native_seconds": 362.0470031540026
+    },
+    "full12_validation": {
+      "status": "PASS_RAW_CPU64_COMPARISON",
+      "variants": [
+        "backoff_8_256_fast4-O2",
+        "published-gcc15-O2",
+        "tight-O2"
+      ],
+      "tasks_each": 12,
+      "measured_outputs_each": 304128,
+      "warmup_outputs_each": 25344,
+      "physical_clears_each": 13,
+      "native_seconds": 1344.1966347520065,
+      "receipt": "hardware64-r1/full12-comparison-r1/result.json",
+      "summaries": {
+        "backoff_8_256_fast4-O2": {
+          "clear_cycles": 12336,
+          "clear_reads": 828,
+          "compute_reads": 1584,
+          "descriptor_submission_cycles": 396,
+          "discovery_delay": 179,
+          "firmware_cycles": 430080,
+          "gap_cycles": 696,
+          "including_gap_cycles": 429601,
+          "itcm_accesses": 115968,
+          "max_report_delay": 45,
+          "mmio_reads": 2412,
+          "payload_cycles": 416569,
+          "principal_cycles": 428905,
+          "report_delay": 536,
+          "retired": 413004,
+          "software_control_cycles": 430161
+        },
+        "published-gcc15-O2": {
+          "clear_cycles": 12336,
+          "clear_reads": 1128,
+          "compute_reads": 37883,
+          "descriptor_submission_cycles": 324,
+          "discovery_delay": 123,
+          "firmware_cycles": 429949,
+          "gap_cycles": 648,
+          "including_gap_cycles": 429574,
+          "itcm_accesses": 117345,
+          "max_report_delay": 40,
+          "mmio_reads": 39011,
+          "payload_cycles": 416590,
+          "principal_cycles": 428926,
+          "report_delay": 471,
+          "retired": 273533,
+          "software_control_cycles": 430069
+        },
+        "tight-O2": {
+          "clear_cycles": 12336,
+          "clear_reads": 732,
+          "compute_reads": 24516,
+          "descriptor_submission_cycles": 312,
+          "discovery_delay": 84,
+          "firmware_cycles": 429744,
+          "gap_cycles": 528,
+          "including_gap_cycles": 429444,
+          "itcm_accesses": 151572,
+          "max_report_delay": 33,
+          "mmio_reads": 25248,
+          "payload_cycles": 416580,
+          "principal_cycles": 428916,
+          "report_delay": 396,
+          "retired": 252792,
+          "software_control_cycles": 429864
+        }
+      }
+    },
+    "backpressure_validation": {
+      "status": "PASS_RAW_CPU64_COMPARISON",
+      "receipt": "hardware64-r1/stall-comparison-r1/result.json",
+      "first_source_stall": 31,
+      "native_seconds": 168.67425925299176,
+      "max_report_delay_cycles": {
+        "tight-O2": 38,
+        "backoff_8_256_fast4-O2": 294
+      }
+    },
+    "cpu_activity": {
+      "status": "PASS_RAW_CPU64_LOGICAL_ACTIVITY_REVIEW",
+      "receipt": "hardware64-r1/cpu-activity-review-r2/result.json",
+      "variants": 3,
+      "cpu_trace_bits": 74170,
+      "comparison": [
+        {
+          "config": "backoff_8_256_fast4-O2",
+          "cpu_sum_tc": 47308639,
+          "cpu_tc_change_percent": -60.22979333340025,
+          "cpu_traced_bits": 74170,
+          "window_cycles": 35802
+        },
+        {
+          "config": "published-gcc15-O2",
+          "cpu_sum_tc": 118954974,
+          "cpu_tc_change_percent": 0.0,
+          "cpu_traced_bits": 74170,
+          "window_cycles": 35796
+        },
+        {
+          "config": "tight-O2",
+          "cpu_sum_tc": 125517916,
+          "cpu_tc_change_percent": 5.517164839193689,
+          "cpu_traced_bits": 74170,
+          "window_cycles": 35787
+        }
+      ],
+      "native_seconds": 525.3297596949851,
+      "failure_preserved": "hardware64-r1/cpu-activity-failed-r1",
+      "diagnosis": "hardware64-r1/cpu-activity-diagnosis-r1.json",
+      "scope": "One task0 after warmup. Exact same CPU logical trace inventory, two-state SAIF, aliases retained, clear+gap+payload half-open window. No full-SoC/SRAM macro-pin or power claim."
+    },
+    "software_qualification_scope": "Development CPU/RTL full12, actual read/write errors and31-cycle source backpressure; physical/official qualification pending"
+  },
+  "actual_64pe_cpu_rtl_full12_pass": true,
+  "overall_qualification_note": "actual_64pe_qualified remains false for final/official qualification; development full12 and fault passes are explicit in stage2",
+  "current_recommendation": "Three development-qualified candidates: tight-O2 for low report delay; phased_64_fast4-O2 for balanced activity/response; backoff_8_256_fast4-O2 for lower CPU TC. Final score winner requires same-version full-SoC energy and formal timing boundaries.",
+  "all_native_jobs_this_phase_terminal": true,
+  "stage3": {
+    "status": "PASS_BALANCED_WAIT_DEVELOPMENT",
+    "reason": "Observed294-cycle report delay of256-NOP backoff under31-cycle first-source stall",
+    "candidates": [
+      "phased_64_fast4-O2",
+      "fixed_64-O3"
+    ],
+    "remote": "/work/leo/chipcontest-xu-own155-diagnosis-20261105/s3-portable64-balanced-activity-20261110-r1",
+    "controller_pid": 1411793,
+    "scope": "New31-cycle disturbance only; accepted normal task0 and old candidate evidence reused",
+    "physical_energy": null,
+    "backpressure_review": "hardware64-r1/balanced-stall-comparison-r1/result.json",
+    "selected_for_qualification": "phased_64_fast4-O2",
+    "selection_basis": "Both measured phases have faster report/flow; same O2 reduces compiler confounding. Fixed64/O3 has slightly fewer instructions/ITCM but no measured energy dominance.",
+    "remaining": [
+      "same-version physical reports",
+      "formal loader/timing/sample qualification",
+      "official normalized score selection"
+    ],
+    "full12_review": "hardware64-r1/balanced-full12-comparison-r1/result.json",
+    "fault_review": "hardware64-r1/balanced-fault-review-r1.json",
+    "score_sensitivity": "hardware64-r1/balanced-score-sensitivity-r1.json",
+    "activity_review": "hardware64-r1/balanced-activity-review-r1.json",
+    "activity_comparison": {
+      "duration_fs": 238699976130,
+      "hf_clock": [
+        119349988065,
+        119349988065,
+        71610
+      ],
+      "paths_sha256": "05005a7a1366a617fb6030f58088d7fc06f7700a3730b85d86c09ca8c3fada5c",
+      "saif_sha256": "d5d47e4b8f0b9c87b43ebbc8d7d319c75fabb1b84d714bf3beb046080d501cbd",
+      "scope": "TOP/tb_dma64_soc/dut/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu",
+      "scope_note": "CPU-only logical two-state trace, aliases retained; no full-SoC/SRAM macro-pin or physical-energy claim",
+      "sum_tc": 56835583,
+      "traced_bits": 74170
+    },
+    "cpu_tc_change_percent": -52.220927726822076,
+    "fault_results": {
+      "phased_64_fast4-O2-read": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "firmware_image_sha256": "cb55d5f6d4aa0e7a677e85314ef9c6590a769261e9aa6efe8e54a91ef65dbafd",
+        "locked": 0,
+        "mode": 1,
+        "pending": 0,
+        "raw_log_sha256": "ba421248de12da1bbf53d3e7a0a8f6cbfe03a97d576e5770c8daec450898c661",
+        "requests": 2,
+        "responses": 2,
+        "return_code": 5
+      },
+      "phased_64_fast4-O2-write": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "firmware_image_sha256": "cb55d5f6d4aa0e7a677e85314ef9c6590a769261e9aa6efe8e54a91ef65dbafd",
+        "locked": 0,
+        "mode": 2,
+        "pending": 0,
+        "raw_log_sha256": "7ba5ac2debdd86d40aa3dda43f5ef464cbd6a5f1df4db07894dacd61edd0e860",
+        "requests": 4692,
+        "responses": 4692,
+        "return_code": 5
+      }
+    }
+  },
+  "development_shortlist": [
+    "tight-O2",
+    "phased_64_fast4-O2",
+    "backoff_8_256_fast4-O2"
+  ],
+  "dependency_status": {
+    "status": "ACTIVE",
+    "fresh_network_access_observation": "FPT SSH banner timed out and direct VNC dropped before authentication",
+    "verified_new_physical_evidence": "Dual-corner DC export, four STA reports, mapped-to-mapped equivalence, and LEF geometry audit",
+    "resume_contract": "PROGRESS.md"
+  },
+  "software_investment_decision": {
+    "status": "USER_CONFIRMED",
+    "date": "2026-11-10",
+    "direction": "Stop new polling/compiler sweeps; retain three qualified fixed candidates; focus on formal loader adaptation, same-netlist whole-SoC energy selection and reproducible scoring. Large throughput work requires hardware collaboration.",
+    "record": "SOFTWARE-INVESTMENT.md",
+    "new_experiments_started": false,
+    "physical_dependency_unchanged": true
+  },
+  "previous_dependency_status": {
+    "status": "BLOCKED",
+    "audit": "hardware64-r1/physical-input-availability-r1.json",
+    "consecutive_dependency_observations": 3,
+    "reason": "Same-version physical and formal inputs remain unavailable after three consecutive dependency observations; three development candidates are complete.",
+    "resume_contract": "hardware64-r1/PHYSICAL-NEXT.md"
+  },
+  "stage4": {
+    "hardware_parent": "96fffcb2a4b2492fd2cfdecb88e164d2c67881ae",
+    "hardware_child": "ccdac30d92ecf40f14d0b78879b8711fb0b1cdd1",
+    "tile_sha256": "710b8e180652f49751769e152a3b3a9e6a35ba622fb4c3e2385dc5ffab241fcb",
+    "software": {
+      "tight-O2": {
+        "elf_sha256": "e2048f46f62ea03fda33198aa28b2240010c68924e6ba306465a91725af7344a",
+        "image_sha256": "2a2332d1d88610ab64fdfdefc34c0b0001da52cc68d43026e4520dbc25f0cf7d",
+        "optimization": "O2",
+        "text_bytes": 702,
+        "selected_config_sha256": "5f70724cd32db6b6eab60327e2dbe198734ae7bbc6b9bca05dfde9211ca9ff31"
+      },
+      "phased_64_fast4-O2": {
+        "elf_sha256": "f913e73c5867666be6e45bbfc052f65ffd4bc97a478b4b5205d26c6047c4e700",
+        "image_sha256": "cb55d5f6d4aa0e7a677e85314ef9c6590a769261e9aa6efe8e54a91ef65dbafd",
+        "optimization": "O2",
+        "text_bytes": 860,
+        "selected_config_sha256": "20e99cc59bddcb3977021f50b7f6ec94c0d0e97dc0831f5ec2d0d30edbbc2f31"
+      },
+      "backoff_8_256_fast4-O2": {
+        "elf_sha256": "10465248fa4941e015cf5f50f80eeb6aecda53efb9dcdb8215e7d3495ea6ea0a",
+        "image_sha256": "890b18dac8db08bd294d9c0a2073b96e323c8a34c482c329530b03bebb3b35f0",
+        "optimization": "O2",
+        "text_bytes": 1822,
+        "selected_config_sha256": "47ad47c00c32fefa63a3a134cc1f00416e51daad651ea75258bb62cfc7142376"
+      }
+    },
+    "strict_input_manifest_sha256": "1d8cd861b75c377ecd7282edd1fa1bdb7dae7a166078d43d6308e3010335a6c6",
+    "lint": "hardware64-r1/b41-lint-r1/result.json",
+    "native_b41_cpu_status": "PASS_RAW_REVIEWED",
+    "native_b41_cpu_blocker": null,
+    "b41_dependency_review": {
+      "first_hop_native_exit": 255,
+      "two_hop_native_exit": 255,
+      "consecutive_goal_turns_with_first_hop_failure": 3,
+      "github_parent_branch_head": "dafd56613e6cf084e3aa64d90e948008216da524",
+      "physical_originals": "FINAL_NETLIST_AND_SAME_WINDOW_POWER_PENDING"
+    },
+    "fault_fixture_lint": "hardware64-r1/b41-fault-lint-r1/result.json",
+    "native_b41_fault_status": "PASS_RAW_REVIEWED",
+    "b41_followup": {
+      "tool": "tools/run_cpu64_b41_followup.py",
+      "input_directory": "hardware64-r1/b41-followup-input-r1",
+      "input_manifest_sha256": "4ac437cd4ff2e480a4f33ae7c8c3b969949ebe151d195aa36b993ca9b47b5db4",
+      "first_source_stall_cycles": 31,
+      "stall_cases": 3,
+      "fault_cases": 6,
+      "legacy_stall_logs_recomputed": 3,
+      "legacy_fault_logs_recomputed": 6,
+      "rejected_mutated_legacy_logs": 27,
+      "legacy_full12_rejected_as_b41": true,
+      "native_b41_status": "PASS_RAW_REVIEWED",
+      "evidence": "hardware64-r1/b41-followup-evidence-r1",
+      "review": "hardware64-r1/b41-followup-review-r1/result.json",
+      "negative_controls": "hardware64-r1/b41-followup-review-r1/negative-controls.json",
+      "native_seconds": 707.7203531760024,
+      "cpu_assert_properties": 6,
+      "stall_results": {
+        "backoff_8_256_fast4-O2": {
+          "first_source_wait_cycles": [
+            31,
+            31
+          ],
+          "measured_outputs": 25344,
+          "physical_clears": 2,
+          "report_delay": 294,
+          "warmup_outputs": 25344
+        },
+        "phased_64_fast4-O2": {
+          "first_source_wait_cycles": [
+            31,
+            31
+          ],
+          "measured_outputs": 25344,
+          "physical_clears": 2,
+          "report_delay": 83,
+          "warmup_outputs": 25344
+        },
+        "tight-O2": {
+          "first_source_wait_cycles": [
+            31,
+            31
+          ],
+          "measured_outputs": 25344,
+          "physical_clears": 2,
+          "report_delay": 38,
+          "warmup_outputs": 25344
+        }
+      },
+      "fault_results": {
+        "backoff_8_256_fast4-O2-read": {
+          "ack": 0,
+          "busy": 0,
+          "done": 0,
+          "error_publications": 1,
+          "locked": 0,
+          "mode": 1,
+          "pending": 0,
+          "requests": 2,
+          "responses": 2,
+          "return_code": 5
+        },
+        "backoff_8_256_fast4-O2-write": {
+          "ack": 0,
+          "busy": 0,
+          "done": 0,
+          "error_publications": 1,
+          "locked": 0,
+          "mode": 2,
+          "pending": 0,
+          "requests": 4691,
+          "responses": 4691,
+          "return_code": 5
+        },
+        "phased_64_fast4-O2-read": {
+          "ack": 0,
+          "busy": 0,
+          "done": 0,
+          "error_publications": 1,
+          "locked": 0,
+          "mode": 1,
+          "pending": 0,
+          "requests": 2,
+          "responses": 2,
+          "return_code": 5
+        },
+        "phased_64_fast4-O2-write": {
+          "ack": 0,
+          "busy": 0,
+          "done": 0,
+          "error_publications": 1,
+          "locked": 0,
+          "mode": 2,
+          "pending": 0,
+          "requests": 4692,
+          "responses": 4692,
+          "return_code": 5
+        },
+        "tight-O2-read": {
+          "ack": 0,
+          "busy": 0,
+          "done": 0,
+          "error_publications": 1,
+          "locked": 0,
+          "mode": 1,
+          "pending": 0,
+          "requests": 2,
+          "responses": 2,
+          "return_code": 5
+        },
+        "tight-O2-write": {
+          "ack": 0,
+          "busy": 0,
+          "done": 0,
+          "error_publications": 1,
+          "locked": 0,
+          "mode": 2,
+          "pending": 0,
+          "requests": 4691,
+          "responses": 4691,
+          "return_code": 5
+        }
+      }
+    },
+    "full12_raw_review": {
+      "tool": "tools/compare_cpu64_runs.py",
+      "flag": "--b41",
+      "b41_native_evidence_reviewed": true,
+      "b41_input_files_verified": 269,
+      "b41_cpu_assert_properties_verified": 6,
+      "legacy_default_output_byte_identical": true,
+      "legacy_raw_variants_recomputed": 4,
+      "rejected_negative_controls": [
+        "legacy receipt supplied as B41",
+        "disabled CPU assertions",
+        "missing frozen firmware candidates",
+        "changed preprocessed source digest"
+      ],
+      "evidence": "hardware64-r1/b41-full12-evidence-r1",
+      "comparison": "hardware64-r1/b41-full12-comparison-r1/result.json",
+      "native_seconds": 1589.3298086830182,
+      "simulator_sha256": "09c82dab56bfba6cc9ebf11c3500ad7b0b23d794d8dec834c0ee20716dbd3e4c",
+      "coverage": {
+        "backoff_8_256_fast4-O2": {
+          "measured_outputs": 304128,
+          "physical_clears": 13,
+          "target_cycles_met": true,
+          "warmup_outputs": 25344
+        },
+        "phased_64_fast4-O2": {
+          "measured_outputs": 304128,
+          "physical_clears": 13,
+          "target_cycles_met": true,
+          "warmup_outputs": 25344
+        },
+        "tight-O2": {
+          "measured_outputs": 304128,
+          "physical_clears": 13,
+          "target_cycles_met": true,
+          "warmup_outputs": 25344
+        }
+      },
+      "summaries": {
+        "backoff_8_256_fast4-O2": {
+          "clear_cycles": 12336,
+          "clear_reads": 828,
+          "compute_reads": 1584,
+          "descriptor_submission_cycles": 396,
+          "discovery_delay": 179,
+          "firmware_cycles": 430080,
+          "gap_cycles": 696,
+          "including_gap_cycles": 429601,
+          "itcm_accesses": 115968,
+          "max_report_delay": 45,
+          "mmio_reads": 2412,
+          "payload_cycles": 416569,
+          "principal_cycles": 428905,
+          "report_delay": 536,
+          "retired": 413004,
+          "software_control_cycles": 430161
+        },
+        "phased_64_fast4-O2": {
+          "clear_cycles": 12336,
+          "clear_reads": 780,
+          "compute_reads": 5256,
+          "descriptor_submission_cycles": 396,
+          "discovery_delay": 84,
+          "firmware_cycles": 429984,
+          "gap_cycles": 756,
+          "including_gap_cycles": 429660,
+          "itcm_accesses": 114420,
+          "max_report_delay": 37,
+          "mmio_reads": 6036,
+          "payload_cycles": 416568,
+          "principal_cycles": 428904,
+          "report_delay": 444,
+          "retired": 398592,
+          "software_control_cycles": 430128
+        },
+        "tight-O2": {
+          "clear_cycles": 12336,
+          "clear_reads": 732,
+          "compute_reads": 24516,
+          "descriptor_submission_cycles": 312,
+          "discovery_delay": 84,
+          "firmware_cycles": 429744,
+          "gap_cycles": 528,
+          "including_gap_cycles": 429444,
+          "itcm_accesses": 151572,
+          "max_report_delay": 33,
+          "mmio_reads": 25248,
+          "payload_cycles": 416580,
+          "principal_cycles": 428916,
+          "report_delay": 396,
+          "retired": 252792,
+          "software_control_cycles": 429864
+        }
+      }
+    },
+    "dc_dual": {
+      "mapped_sha256": "24de75106e74b3f0f4a83c36cea7e5f9e32eccdc520c2636ba8366fa8cb5cc6a",
+      "measured_area_um2": 507299.913438,
+      "soc_area_um2": 3581271.25952,
+      "original_b_lef_reference_count": 316,
+      "netlist_equivalence": "PASS",
+      "direct_rtl_formality": "INCONCLUSIVE_TIMEOUT",
+      "direct_rtl_formality_readback": {
+        "official_receipt": "/tmp/xu-b41-close-20261111-r1/fm-dc-dual-from-rtl/result.json",
+        "native_exit": 124,
+        "seconds": 1550.223,
+        "passing": 56191,
+        "failing": 0,
+        "aborted": 0,
+        "unverified": 2141
+      },
+      "ss_envelope": {
+        "setup_ns": 0.0,
+        "hold_ns": -0.133222,
+        "violations": 10,
+        "untested": 27911
+      },
+      "ff_envelope": {
+        "setup_ns": 0.557101,
+        "hold_ns": -0.149455,
+        "violations": 17,
+        "untested": 27911
+      },
+      "ss_reset_bypass": {
+        "setup_ns": 0.0,
+        "hold_ns": -0.133222,
+        "violations": 10,
+        "untested": 27917
+      },
+      "ff_reset_bypass": {
+        "setup_ns": 0.557101,
+        "hold_ns": -0.148967,
+        "violations": 17,
+        "untested": 27917
+      }
+    },
+    "pin_hold_r2": {
+      "mapped_sha256": "c9020f568090ffcfe731ef342463bc359c077f8a8ea8276697a532aa2f26fefb",
+      "native_result": "/tmp/xu-b41-close-20261111-r1/timing-pin-hold-r2/result.json",
+      "ss_setup_ns": 0.0,
+      "ss_hold_ns": 0.166962,
+      "ff_setup_ns": 0.463278,
+      "ff_hold_ns": -0.017237,
+      "mode_results_identical": [
+        "envelope",
+        "reset_bypass"
+      ],
+      "timing_status": "RESIDUAL_ITCM_GATING_HOLD_VIOLATION"
+    },
+    "physical_selection": "PENDING",
+    "native_b41_sequence": {
+      "controller_pid": 3882879,
+      "normal_supervisor_pid": 3882880,
+      "path": "/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-validation-sequence-r1",
+      "status": "PASS_DRAINED",
+      "local_raw_review_complete": true,
+      "last_readback_epoch": 1794453820.5607743,
+      "completed_variant_markers": [
+        "backoff_8_256_fast4-O2",
+        "phased_64_fast4-O2",
+        "tight-O2"
+      ],
+      "remaining_variant": null,
+      "controller_exists_at_readback": false,
+      "followup_supervisor_pid": 3935441
+    },
+    "current_netlist": {
+      "mapped_sha256": "9849303f264d97f2f6735353d89a35fbe143b0897f589e94352d23ae517aa87b",
+      "mapped_equivalence": {
+        "path": "fm-gate-targeted-r2-from-dual",
+        "status": "VERIFIED_REVIEW_SCOPE",
+        "native_exit": 0,
+        "complete": true,
+        "seconds": 67.471,
+        "reference_sha256": "24de75106e74b3f0f4a83c36cea7e5f9e32eccdc520c2636ba8366fa8cb5cc6a",
+        "implementation_sha256": "9849303f264d97f2f6735353d89a35fbe143b0897f589e94352d23ae517aa87b",
+        "unverified_compare_points": 0,
+        "local_native_original_received": false
+      },
+      "direct_rtl_resume": {
+        "status": "INCONCLUSIVE_CHECKPOINT_SAVED",
+        "controller_pid": 58976,
+        "path": "fm-dc-dual-rtl-resume-r1",
+        "launch_log": "rtl-resume-launch-r1.log",
+        "script_sha256": "33ba52fc5f982ec4d0e82396acced2d42eaddc51ddaa93fcffaa80b9d3d9395c",
+        "restored_checkpoint_sha256": "309286b5b81c5683d183ef3112acf064c1987a9875a8235e33622a9cb8d3633d",
+        "prior_receipt_sha256": "341b81e2c648db476641fb7b613ee6aa90b988dd52f52d2fd32e2d3c2f16ca40",
+        "same_account_eda_processes_before_launch": [],
+        "controller_exists": false,
+        "native_exit": 1,
+        "complete": false,
+        "seconds": 2136.921,
+        "passing": 57016,
+        "failing": 0,
+        "aborted": 0,
+        "unverified": 1316,
+        "new_checkpoint_sha256": "6533296b0e6c320732aa0fe774f318c48db78e92f05d994277d1971f2c2d15bb",
+        "native_receipt_sha256": "989b4f9748c0ed20c13a11f51a86d935a7e67a1b024a84dd7c6101b9b36e6bf3",
+        "native_log_sha256": "d693ef266c7c06baf8602cbf658d57d3d1dd08975fb9fc0ba50f4d82d7e82daa",
+        "native_script_sha256": "c45261c562efd519740013d061989941f043e65b7ba1997d02309289c30c8da2",
+        "local_native_original_received": false
+      },
+      "electrical_status": "FOUR_SCENARIOS_CAPTURED_DRC_NOT_CLOSED",
+      "observation": "../s3-y32-area-opt-synthesis-20261111/continuation-observation-r1.json",
+      "final_selected": false,
+      "electrical_observation": "../s3-y32-area-opt-synthesis-20261111/continuation-observation-r1.json",
+      "direct_rtl_resume_r2": {
+        "status": "RUNNING_NOT_QUALIFIED",
+        "script": "run_formality_resume_r2.py",
+        "script_sha256": "04f8d1179c26854602989ee26ce520a5e5807e6375abefa6cc78dfaee4c778ba",
+        "restored_checkpoint_sha256": "6533296b0e6c320732aa0fe774f318c48db78e92f05d994277d1971f2c2d15bb",
+        "prior_receipt_sha256": "989b4f9748c0ed20c13a11f51a86d935a7e67a1b024a84dd7c6101b9b36e6bf3",
+        "controller_pid": 153063,
+        "path": "fm-dc-dual-rtl-resume-r2",
+        "launch_log": "rtl-resume-launch-r2.log",
+        "observed_marker": "START fm-dc-dual-rtl-resume-r2",
+        "same_account_eda_processes_before_launch": [],
+        "local_native_original_received": false,
+        "current_native_state_verified": false,
+        "status_scope": "Last observed live state before Mac lock; no current terminal outcome observed"
+      },
+      "electrical_candidate": {
+        "status": "FOUR_SCENARIOS_CAPTURED_DRC_NOT_CLOSED",
+        "controller_pid": 143353,
+        "path": "timing-electrical-resume-r1",
+        "launch_log": "electrical-resume-launch-r1.log",
+        "script_sha256": "7aad5d95b47be45fe4eb9e0a36575570d87eeb3c1f87011264e66fb14d52311e",
+        "observed_marker": "START dc-electrical",
+        "reused_pt_results": true,
+        "guard_preserved": true,
+        "local_native_original_received": false,
+        "controller_exists": false,
+        "mapped_sha256": "f73b4518be9e6670bc8ed3bcf38623e1411ba55b1256ac6aae5b5c636c60a7a3",
+        "native_status": "IDEAL_TIMING_AND_ELECTRICAL_REVIEW",
+        "scenario_slack_ns": {
+          "ss-envelope": {
+            "max": 0.0,
+            "min": 0.166962
+          },
+          "ff-envelope": {
+            "max": 0.463278,
+            "min": 0.000183
+          },
+          "ss-reset_bypass": {
+            "max": 0.0,
+            "min": 0.166962
+          },
+          "ff-reset_bypass": {
+            "max": 0.463278,
+            "min": 0.000183
+          }
+        },
+        "drc": {
+          "ss-envelope": {
+            "max_capacitance": 8,
+            "min_capacitance": 1449,
+            "max_transition": 0
+          },
+          "ff-envelope": {
+            "max_capacitance": 0,
+            "min_capacitance": 1449,
+            "max_transition": 1774
+          },
+          "ss-reset_bypass": {
+            "max_capacitance": 8,
+            "min_capacitance": 1449,
+            "max_transition": 0
+          },
+          "ff-reset_bypass": {
+            "max_capacitance": 0,
+            "min_capacitance": 1449,
+            "max_transition": 1774
+          }
+        },
+        "qualification": "NOT_QUALIFIED_REMAINING_DRC_AND_EQUIVALENCE"
+      },
+      "drc_connectivity": {
+        "status": "USER_APPROVED_UPLOADED_SHA_VERIFIED_QUEUED",
+        "script": "run_drc_connectivity.py",
+        "bytes": 3780,
+        "sha256": "3d41e7ff2084fc833cfb08ac53a4173c8e41ed1384935382cfb35974669c3e84",
+        "reason": "Previous upload approval covered electrical ECO file, not this new diagnostic script",
+        "official_partial_path": null,
+        "complete_file_written": true,
+        "executed": null,
+        "user_explicitly_approved_upload_and_execution": true,
+        "official_script": "run_drc_connectivity.py",
+        "queue_pid": 157298,
+        "lock_wait_pid": 157299,
+        "lock_wait_seconds": 2400,
+        "launch_log": "drc-connectivity-launch-r1.log",
+        "observed_log_bytes": 0,
+        "earlier_auto_review_rejection_cleared_by_user_authorization": true,
+        "execution_last_observed": false,
+        "current_native_state_verified": false,
+        "status_scope": "Upload/hash/queue confirmed earlier; execution outcome currently unobserved"
+      }
+    }
+  }
+}
