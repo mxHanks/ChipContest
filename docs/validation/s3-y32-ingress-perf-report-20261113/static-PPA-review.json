@@ -1,0 +1,119 @@
+{
+  "schema": "s3-ingress-perf-independent-static-PPA-review-v1",
+  "status": "STATIC_SOURCE_REVIEW_COMPLETE_NO_STOP_ISSUE_FOUND",
+  "profile": "sysbus32-x-sram-353-dev-n3",
+  "review_scope": "Local frozen inputs only. No remote access, native EDA, simulation, RTL/SDC/flow edits, or additional acceptance gates.",
+  "package_files_catalog_sha256": "96fbf8088cb2b94cc5bd682e09b9ec126762bd6c2dd54aad32caea854fb416ed",
+  "package_inputs_rehashed": 186,
+  "manifest_sha256": "33895a85bd41bd23210457c45707e786c9ccaa3bd41efbe1efaacce3e2eb5faa",
+  "source_manifest_sha256": "f8f8e34a692e69928de4d0e2213a8a3696087c665554c9e27268c67894fe1f2e",
+  "tracked_sources_byte_identical_to_seal": [
+    {
+      "tracked": "experiments/s3-y32-ingress-perf/ppa/xu_soc_sysbus32_ppa_top.sv",
+      "sealed": "source/ppa/xu_soc_sysbus32_ppa_top.sv",
+      "sha256": "8b575fd5d1b69493088dcc2793ed7d7fe038ec5801bbbcaf4f961a4c41c2dc68"
+    },
+    {
+      "tracked": "tools/ppa/xu_full_soc.sdc",
+      "sealed": "source/contracts/reference-full-soc.sdc",
+      "sha256": "c15ede0fc2c65771f87e2d6aee763b4ea0d53934868ca807b4785c36182fce7c"
+    },
+    {
+      "tracked": "experiments/s3-y32-ingress-perf/ppa/synth.tcl",
+      "sealed": "synth.tcl",
+      "sha256": "95354c86d97104037653bd21890edd98d28be9c26fc427b85c16f09642eba697"
+    },
+    {
+      "tracked": "experiments/s3-y32-ingress-perf/ppa/run_once.py",
+      "sealed": "run_once.py",
+      "sha256": "ebd6039ed287630e980eb40611300886fd9187f6ce070c240ca1b65f74eb4c8a"
+    },
+    {
+      "tracked": "experiments/s3-y32-ingress-perf/ppa/pt_collect.tcl",
+      "sealed": "pt_collect.tcl",
+      "sha256": "4bc40f1e39811b44e67906bf371082799cc16adfcd1a85fcb907a3bc35fd1bea"
+    },
+    {
+      "tracked": "tools/ppa/xu_sirv_sram_adapter.sv",
+      "sealed": "source/rtl/general/sirv_sim_ram.v",
+      "sha256": "b2b2baaa1e105ed794382886439cd2c16fd280a0f29b54c4d925351e6f90a0c5"
+    }
+  ],
+  "input_output_static_bit_accounting": {
+    "top_input_bits": 150,
+    "top_output_bits": 179,
+    "loader_input_bits": 71,
+    "loader_output_bits": 35,
+    "HF_nonclock_nonJTAG_input_bits": 145,
+    "JTAG_data_input_bits": 2,
+    "primary_clock_input_bits": 3,
+    "HF_nonJTAG_output_bits": 177,
+    "JTAG_output_bits": 2,
+    "note": "Derived from port declarations and SDC selectors. These are not native get_ports/analysis-coverage counts."
+  },
+  "checks": [
+    {
+      "subject": "N3 interface",
+      "result": "All10 loader ports/106bits connected by name through the PPA top. TEST_LOADER=1 selects N3/PW2; no top constant disables loading.",
+      "locations": [
+        "experiments/s3-y32-ingress-perf/ppa/xu_soc_sysbus32_ppa_top.sv:7",
+        "experiments/s3-y32-ingress-perf/ppa/xu_soc_sysbus32_ppa_top.sv:96",
+        "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v:984",
+        "third-party/e203_hbirdv2/rtl/e203/subsys/e203_subsys_main.v:1020",
+        "third-party/e203_hbirdv2/rtl/e203/subsys/xu_systembus_ingress32.v:31"
+      ]
+    },
+    {
+      "subject": "Clock/IO input contract",
+      "result": "Unchanged original SDC creates HF/LF/JTAG primary clocks and divide-by1 envelope generated clock; all loader inputs enter HF0.5ns max/0ns min, all loader outputs likewise, with output load0.01. No static false/multicycle/asynchronous group or reset case waiver is applied in envelope mode.",
+      "locations": [
+        "tools/ppa/xu_full_soc.sdc:35",
+        "tools/ppa/xu_full_soc.sdc:46",
+        "tools/ppa/xu_full_soc.sdc:81",
+        "tools/ppa/xu_full_soc.sdc:88",
+        "tools/ppa/xu_full_soc.sdc:99",
+        "experiments/s3-y32-ingress-perf/ppa/synth.tcl:32"
+      ]
+    },
+    {
+      "subject": "SVF and same-map PT",
+      "result": "Own final.svf opens before analyze; set_svf-off follows mapped.v/ddc/sdc writes. PT runner binds same catalog/top/defines/profile/libraries, rehashes DC map/ddc/sdc/SVF and area outputs before and after PT. PT reads the bound mapped.v and replays original SDC; output-local -add portability substitution is pinned and changes no period/edge/IO/path exception.",
+      "locations": [
+        "experiments/s3-y32-ingress-perf/ppa/synth.tcl:20",
+        "experiments/s3-y32-ingress-perf/ppa/synth.tcl:124",
+        "experiments/s3-y32-ingress-perf/ppa/synth.tcl:127",
+        "experiments/s3-y32-ingress-perf/ppa/run_once.py:183",
+        "experiments/s3-y32-ingress-perf/ppa/run_once.py:229",
+        "experiments/s3-y32-ingress-perf/ppa/pt_collect.tcl:39",
+        "experiments/s3-y32-ingress-perf/ppa/pt_collect.tcl:66",
+        "experiments/s3-y32-ingress-perf/ppa/pt_collect.tcl:82"
+      ]
+    },
+    {
+      "subject": "Area",
+      "result": "Every DMA/core leaf including result/bias payload and metadata, complete ingress, complete NICE scope and shared endpoint standard-cell logic is classified. All33 internal macros must be charged;320 reused CPU/shared macros separately excluded. All-full-SoC-standard-cell plus33macro upper bound covers leaves outside those scoped categories. No current ingress/DMA logic omission found.",
+      "locations": [
+        "experiments/s3-y32-ingress-perf/ppa/synth.tcl:57",
+        "experiments/s3-y32-ingress-perf/ppa/synth.tcl:77",
+        "experiments/s3-y32-ingress-perf/ppa/synth.tcl:97",
+        "experiments/s3-y32-ingress-perf/ppa/synth.tcl:104"
+      ]
+    },
+    {
+      "subject": "CPU behavioral versus macro boundary",
+      "result": "Original performance run uses289 functional macro models and existing behavioral CPU RAM. PPA replaces sirv_sim_ram with same-B physical adapter, adds64CPU macro cells and adapter glue; this configuration difference is disclosed and cannot establish functional timing/energy at353 macros or GPIO loading equivalence.",
+      "locations": [
+        "experiments/s3-y32-ingress-perf/run_cpu.py:148",
+        "tools/ppa/xu_sirv_sram_adapter.sv:18",
+        "tools/ppa/xu_sirv_sram_adapter.sv:30",
+        "tools/ppa/xu_sirv_sram_adapter.sv:57",
+        "docs/validation/s3-y32-ingress-perf-report-20261113/README.md:19"
+      ]
+    }
+  ],
+  "report_notes": [
+    "CHARGED_* is the specified accelerator/interface scope subtotal, not full-SoC area. CPU macro adapter read-bank/forward glue resides outside that subtotal; the full-standard-cell upper bound includes it. The adapter is same_B_physical_macro_adapter, not an original5470 change.",
+    "Actual clock associations, IO tested/untested/violated checks, timing slack and closure remain for this same-map native PT review. Collectors explicitly do not certify closure; ensure future native coverage parsing includes sysbus_load_* endpoints and reconciles full totals.",
+    "Unchanged IO values are provisional engineering assumptions; no board timing/CDC/reset-release or post-layout/CTS signoff follows. No public600 NRMSE, old353 STA, merged374 PASS or oldS2 FM is imported."
+  ]
+}
