@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+"""Reject incomplete production-N2 GPIO/CPU/SystemBus functional evidence."""
+from __future__ import annotations
+import argparse
+import json
+from pathlib import Path
+import re
+
+
+def records(log, marker, fields):
+    pattern=r'^'+re.escape(marker)+' '+r' '.join(re.escape(f)+r'=(\d+)' for f in fields)+r'$'
+    found=[dict(zip(fields,map(int,m))) for m in re.findall(pattern,log,re.M)]
+    if len(found)!=len(re.findall(r'^'+re.escape(marker)+r'\b',log,re.M)):
+        raise ValueError('malformed '+marker)
+    return found
+
+
+
+def check_records(log,tasks,rows,prefix='C32'):
+    groups={
+      'layers':records(log,prefix+'_TASK_PASS',['layer','rows','outputs','total','load_to_y','loading','clear','dma_payload','firmware_cycles','start_to_done']),
+      'windows':records(log,prefix+'_WINDOW',['layer','load_begin','load_finish','first_request','first_accept','last_y_response','clear_request','clear_done','start','done']),
+      'counts':records(log,prefix+'_COUNTS',['layer','reads','w_reads','bias_reads','x_reads','writes','write_responses','requests','responses','pops','macs','mmio_reads','mmio_writes']),
+      'endpoints':records(log,prefix+'_ENDPOINT',['layer','requests','responses','outstanding','source_reads','source_writes','y_writes','y_write_responses']),
+      'channels':records(log,prefix+'_CHANNEL',['layer','wb_cycles','xy_window','dma_stall','source_stall','write_stall','max_outstanding','endpoint_first_offer','endpoint_first_accept','forced_wait','load_endpoint_offer','load_endpoint_accept','forced_load_wait']),
+    }
+    if any(len(v)!=tasks for v in groups.values()):raise ValueError('missing/duplicate full-load layer evidence')
+    for i,(item,window,count,endpoint,channel) in enumerate(zip(*groups.values())):
+        if any(r['layer']!=i for r in [item,window,count,endpoint,channel]):raise ValueError('task identity/order mismatch')
+        if item['rows']!=rows or item['outputs']!=25344:raise ValueError('mode/output scope mismatch')
+        if item['total']!=window['last_y_response']-window['clear_request']+1:raise ValueError('full load-through-retirement timing boundary')
+        if item['load_to_y']!=window['last_y_response']-window['load_begin']+1:raise ValueError('load-to-lastY boundary')
+        if item['loading']!=window['load_finish']-window['load_begin']+1:raise ValueError('source load boundary')
+        if item['clear']!=window['clear_done']-window['clear_request']+1:raise ValueError('clear boundary')
+        if item['dma_payload']!=window['last_y_response']-window['first_request']+1:raise ValueError('DMA boundary')
+        if not (window['clear_request']<=window['clear_done']<window['load_begin']<=window['load_finish']<window['start']<=window['first_request']<=window['first_accept']<=window['last_y_response']<window['done']):raise ValueError('ownership/timing order')
+        if item['total']<item['loading']+item['clear']+item['dma_payload']:raise ValueError('load/clear/work omitted')
+        if item['start_to_done']!=window['done']-window['start']+1:raise ValueError('start/done duration')
+        if item['firmware_cycles']<window['done']-window['clear_request']+1:raise ValueError('firmware duration excludes internal work')
+        if i and window['clear_request']<=groups['windows'][i-1]['done']:raise ValueError('overlapping task windows')
+        expected=dict(reads=15040,w_reads=8192,bias_reads=512,x_reads=6336,writes=25344,write_responses=25344,requests=40384,responses=40384,pops=3168,macs=((99+rows-1)//rows)*32*64,mmio_writes=6)
+        if any(count[k]!=v for k,v in expected.items()):raise ValueError('transaction/MAC count mismatch')
+        if count['mmio_reads']<=0 or not 2<=channel['max_outstanding']<=4:raise ValueError('CPU polling or DMA occupancy differs')
+        if channel['load_endpoint_accept']-channel['load_endpoint_offer']<channel['forced_load_wait']:raise ValueError('forced source loading wait omitted')
+        if channel['load_endpoint_offer']<window['load_begin']:raise ValueError('loading timestamp after actual source offer')
+        if channel['endpoint_first_accept']-channel['endpoint_first_offer']<channel['forced_wait']:raise ValueError('forced endpoint wait omitted')
+        if endpoint['requests']-endpoint['responses']!=endpoint['outstanding'] or endpoint['outstanding'] not in [0,1] or endpoint['source_reads']!=15040 or endpoint['source_writes']!=15040 or endpoint['y_writes']!=50688 or endpoint['y_write_responses']!=50688:raise ValueError('endpoint transaction retirement/coverage')
+        item.update(window=window,counters=count,endpoint=endpoint,channel=channel)
+    total=sum(x['total'] for x in groups['layers'])
+    return dict(layers=groups['layers'],outputs=tasks*25344,total_cycles=total,load_to_y_cycles=sum(x['load_to_y'] for x in groups['layers']),source_loading_cycles=sum(x['loading'] for x in groups['layers']),clear_cycles=sum(x['clear'] for x in groups['layers']),dma_payload_cycles=sum(x['dma_payload'] for x in groups['layers']),task_per_second_at_assumed_150mhz=150000000*tasks/total,timing_status='LOCAL_CPU_FULL_LOAD_STIMULUS_NO_STA_OR_OFFICIAL_SDK_SIGNOFF')
+
+def check_physical_clear(log,tasks,warmup,x_macros=False):
+    starts=records(log,'C32_PHYSICAL_CLEAR_BEGIN',['call','warmup','nonzero_W','nonzero_BIAS','nonzero_X','observed_last_public_writes'])
+    end_fields=['call','warmup','W','BIAS','X','total16bit_writes','physical_cycles','X_REGS','ACC','ENGINE_RESULT','FIFO','BIAS_CACHE','DMA_SNAPSHOT','all_addresses','all_payload_zero']
+    if x_macros:
+        index=end_fields.index('X_REGS')+1;end_fields[index:index]=['X_MACROS','X_USED_WORDS']
+    ends=records(log,'C32_PHYSICAL_CLEAR_PASS',end_fields)
+    if len(starts)!=tasks+int(warmup) or len(ends)!=len(starts):raise ValueError('physical-clear evidence missing/duplicate')
+    expected=dict(W=16384,BIAS=768,X=1024,total16bit_writes=18176,X_REGS=1024,ACC=64,
+                  ENGINE_RESULT=64,FIFO=128,BIAS_CACHE=16,DMA_SNAPSHOT=1,all_addresses=1,all_payload_zero=1)
+    if x_macros:expected.update(X=16384,total16bit_writes=33536,X_REGS=0,X_MACROS=16,X_USED_WORDS=1024)
+    for i,(begin,end) in enumerate(zip(starts,ends)):
+        if begin['call']!=i+1 or end['call']!=i+1 or begin['warmup']!=int(warmup and i==0) or end['warmup']!=begin['warmup']:
+            raise ValueError('physical-clear call identity')
+        if any(end[k]!=v for k,v in expected.items()) or not end['physical_cycles'] or begin['observed_last_public_writes']!=1:
+            raise ValueError('physical-clear address/payload totals')
+        if i>0 and any(begin[k]==0 for k in ['nonzero_W','nonzero_BIAS','nonzero_X']):raise ValueError('missing publicly dirtied prestate')
+        end['dirty_before']=begin
+    return ends
+
+
+def check_storage_clear(log,tasks,warmup,configuration):
+    count=configuration['storage']['result_macros']
+    total=33536+1024*count
+    begins=records(log,'SM_CLEAR_BEGIN',['W_dirty','B_dirty','X_dirty','R_dirty'])
+    ends=records(log,'SM_PHYSICAL_CLEAR_PASS',['W','BIAS','X','RESULT','total16bit_writes','all_addresses','ACC64_zero'])
+    states=records(log,'G32_STORAGE_STATE_CLEAR_PASS',['call','warmup','result_macros','ACC','ASSEMBLY','METADATA','DESCRIPTORS','OWNERS'])
+    measures=records(log,'SM_RESULT_PORT_MEASURE',['store_edges','read_edges','hold_edges','producer_blocked_by_read','scalar_rsp_retired_pops'])
+    if any(len(items)!=tasks+int(warmup) for items in (begins,ends,states,measures)):
+        raise ValueError('storage physical-clear/state/retirement evidence missing or duplicate')
+    if re.search(r'^C32_PHYSICAL_CLEAR',log,re.M):raise ValueError('mixed old storage observer cannot prove selected new SRAM')
+    checked=[]
+    for i,(begin,end,state,measure) in enumerate(zip(begins,ends,states,measures)):
+        expected=dict(W=16384,BIAS=768,X=16384,RESULT=1024*count,total16bit_writes=total,all_addresses=1,ACC64_zero=1)
+        if end!=expected:raise ValueError('selected result SRAM physical clear/address count differs')
+        if state!=dict(call=i+1,warmup=int(warmup and i==0),result_macros=count,ACC=64,ASSEMBLY=1,METADATA=1,DESCRIPTORS=1,OWNERS=1):
+            raise ValueError('selected storage payload/state/owner clear proof differs')
+        if i>0 and any(begin[k]<=0 for k in ('W_dirty','B_dirty','X_dirty','R_dirty')):
+            raise ValueError('selected result SRAM lacks publicly dirtied prestate')
+        if (measure['store_edges']!=(25344 if count==3 else 3168) or
+                measure['scalar_rsp_retired_pops']!=25344 or measure['read_edges']<=0 or measure['hold_edges']<=0):
+            raise ValueError('selected SRAM result store/read/scalar retirement scope differs')
+        checked.append(dict(**end,dirty_before=begin,state=state,result_port=measure))
+    return checked
+
+
+def check_log(log,tasks,rows,warmup=True,x_macros=False,storage_configuration=None):
+    if re.search(r'FATAL|TEST_FAIL|%Error|Time Out|timeout|^Error(?:\s|:)',log,re.I|re.M):raise ValueError('failure marker in simulation')
+    result=check_records(log,tasks,rows)
+    expected=f'C32_SOC_PASS tasks={tasks} rows={rows} outputs={tasks*25344} writes={tasks*25344}'
+    if re.findall(r'^C32_SOC_PASS.*$',log,re.M)!=[expected]:raise ValueError('missing complete real-CPU marker')
+    if warmup:
+        result['warmup']=check_records(log,1,rows,'C32_WARMUP')
+        if result['warmup']['layers'][0]['window']['done']>=result['layers'][0]['window']['clear_request']:raise ValueError('warmup overlaps counted task')
+        if re.findall(r'^C32_WARMUP_DONE.*$',log,re.M)!=['C32_WARMUP_DONE tasks=1 outputs=25344 excluded_principal=1']:raise ValueError('warmup completion missing')
+    elif re.search(r'^C32_WARMUP',log,re.M):raise ValueError('unexpected warmup')
+    clocks=records(log,'C32_CLOCK',['measured_hf_period_fs','measured_lf_period_fs','hf_edges','lf_edges'])
+    if len(clocks)!=1 or clocks[0]['measured_hf_period_fs']!=6666666 or clocks[0]['measured_lf_period_fs']!=30517578126 or min(clocks[0]['hf_edges'],clocks[0]['lf_edges'])<2:raise ValueError('measured clock identity differs')
+    result['measured_clock']=clocks[0]
+    result['physical_clear']=(check_storage_clear(log,tasks,warmup,storage_configuration) if storage_configuration
+                              else check_physical_clear(log,tasks,warmup,x_macros))
+    loaders=records(log,'C32_SYSTEMBUS_LOAD_PASS',['call','layer','source_writes','poison_writes','readbacks','ready_sequence'])
+    if len(loaders)!=tasks+int(warmup):raise ValueError('SystemBus source loading missing/duplicate')
+    for call,item in enumerate(loaders,1):
+        if item!=dict(call=call,layer=max(0,call-1-int(warmup)),source_writes=15040,poison_writes=25344,readbacks=25344,ready_sequence=call):raise ValueError('source transaction coverage/identity differs')
+    result['systembus_loader']=loaders
+    topology=records(log,'G32_PRODUCTION_TOPOLOGY',['ingress_sources','pointer_bits','cpu_macros','shared_macros','internal_macros','total_macros'])
+    internal=storage_configuration['storage']['internal_macros'] if storage_configuration else 33
+    full=storage_configuration['storage']['full_soc_macros'] if storage_configuration else 353
+    if topology!=[dict(ingress_sources=2,pointer_bits=1,cpu_macros=64,shared_macros=256,internal_macros=internal,total_macros=full)]:raise ValueError('not exact selected production N2 macro topology')
+    native_macros=re.findall(r'^S3_GENERIC_NON_PPA_MACRO_INSTANCE (.+)$',log,re.M)
+    if len(native_macros)!=full or len(set(native_macros))!=full:raise ValueError('actual generic macro inventory is incomplete/duplicated')
+    macro_groups=dict(itcm=[],dtcm=[],shared=[],weights=[],bias=[],x=[],result=[])
+    for name in native_macros:
+        owners=[group for group,pattern in [('itcm','.u_e203_itcm_ram.'),('dtcm','.u_e203_dtcm_ram.'),
+            ('shared','.endpoint.'),('weights','.u_core.weights.'),('bias','.u_core.biasMemory.'),
+            ('x','.u_core.xSets['),('result','.u_core.resultSlices[')] if pattern in name]
+        if len(owners)!=1:raise ValueError('actual macro is unclassified or has ambiguous owner: '+name)
+        macro_groups[owners[0]].append(name)
+    if {k:len(v) for k,v in macro_groups.items()}!=dict(itcm=32,dtcm=32,shared=256,weights=16,bias=1,x=16,result=21):
+        raise ValueError('actual macro leaf grouping differs from final374 geometry')
+    result['actual_macro_inventory']=macro_groups
+    gpio=records(log,'G32_GPIO_LOAD_PASS',['call','layer','words','acks','first_data','first_data_fs','clear_ack_retired','setup_hf_edges'])
+    if len(gpio)!=tasks+int(warmup):raise ValueError('GPIO load evidence missing or duplicated')
+    ordered=([result['warmup']['layers'][0]] if warmup else [])+result['layers']
+    for call,(item,task) in enumerate(zip(gpio,ordered),1):
+        window=task['window']
+        if (item['call']!=call or item['layer']!=task['layer'] or item['words']!=15040 or
+                item['acks']!=15040 or item['first_data']!=window['load_begin'] or
+                item['setup_hf_edges']!=3 or not item['first_data_fs'] or
+                not window['clear_done']<item['clear_ack_retired']<item['first_data']):
+            raise ValueError('GPIO loading/clear retirement/data setup contract differs')
+        task['gpio']=item
+    result.update(gpio_loader=gpio,production_topology=topology[0],actual_generic_macro_instances=len(native_macros),
+        gpio_input_to_y_cycles=result['load_to_y_cycles'],
+        gpio_input_to_y_task_per_second_at_assumed_150mhz=150000000*tasks/result['load_to_y_cycles'],
+        conservative_clear_to_y_cycles=result['total_cycles'])
+    ledger=records(log,'G32_DMA_LEDGER',['call','layer','depth','requests','responses','W_retired','B_retired','X_retired','Y_retired','wraps','max_outstanding','empty'])
+    last_y=records(log,'G32_DMA_LAST_Y',['call','layer','index','accepted','retired','done'])
+    if len(ledger)!=tasks+int(warmup) or len(last_y)!=len(ledger):
+        raise ValueError('missing independent DMA4 ledger/lastY retirement evidence')
+    for call,(owners,tail,task) in enumerate(zip(ledger,last_y,ordered),1):
+        expected=dict(call=call,layer=task['layer'],depth=4,requests=40384,responses=40384,
+                      W_retired=8192,B_retired=512,X_retired=6336,Y_retired=25344,
+                      wraps=10096,max_outstanding=task['channel']['max_outstanding'],empty=1)
+        if owners!=expected:raise ValueError('independent DMA4 metadata owner/retirement proof differs')
+        if (tail['call']!=call or tail['layer']!=task['layer'] or tail['index']!=25343 or
+                tail['retired']!=task['window']['last_y_response'] or tail['done']!=task['window']['done'] or
+                not task['window']['first_accept']<=tail['accepted']<=tail['retired']<tail['done']):
+            raise ValueError('lastY response ownership/retirement/DONE ordering differs')
+        task['dma4_ledger']=owners;task['last_y_retirement']=tail
+    windows=[item['window'] for item in result['layers']]
+    gaps=[windows[i]['clear_request']-windows[i-1]['last_y_response']-1 for i in range(1,tasks)]
+    if any(gap<0 for gap in gaps):raise ValueError('negative task gap/overlap')
+    span=windows[-1]['last_y_response']-windows[0]['clear_request']+1
+    gpio_span=windows[-1]['last_y_response']-windows[0]['load_begin']+1
+    if span!=result['total_cycles']+sum(gaps):raise ValueError('campaign timing reconciliation differs')
+    result.update(dma4_ledger=ledger,last_y_retirement=last_y,inter_task_gap_cycles=gaps,
+        inter_task_gap_total_cycles=sum(gaps),campaign_clear_to_last_y_cycles=span,
+        campaign_gpio_first_input_to_last_y_cycles=gpio_span,
+        campaign_clear_to_last_y_task_per_second_at_assumed_150mhz=150000000*tasks/span,
+        campaign_gpio_first_input_to_last_y_task_per_second_at_assumed_150mhz=150000000*tasks/gpio_span)
+    result['scope']='Exact sealed final production N2/DMA4/374-macro RTL. Tensor inputs enter existing GPIO pads; CPU loads through original LSU/BIU/SystemBus. Independent four-slot metadata ledger checks all 40384 acceptances and ordered response owners, including final Y retirement before DONE. Per-task first-input and clear-through-lastY windows include all loading, handshake, scheduling and waits; campaign spans additionally include every inter-task CPU-readback/poison/handshake gap. Generic functional/cycle evidence only; no PPA qualification.' 
+    return result
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('log',type=Path);p.add_argument('--tasks',type=int,required=True);p.add_argument('--rows',type=int,choices=[1,8],default=8);p.add_argument('--no-warmup',action='store_true');a=p.parse_args()
+    print(json.dumps(check_log(a.log.read_text(),a.tasks,a.rows,not a.no_warmup),indent=2))

@@ -1,0 +1,82 @@
+{
+  "artifacts": {
+    "affinity-adjustment.json": {
+      "bytes": 3192,
+      "sha256": "c2db2f1d5479eb5c3c1b7259b59de7f64c3c98fc5f6ed90dff32b443cd6e306a"
+    },
+    "campaign-running-state.json": {
+      "bytes": 513,
+      "sha256": "86f8d4c9f6911891ff08354f2727120a8f61b94b00115d12851ad1e63de74633"
+    },
+    "task0-running-result.json": {
+      "bytes": 80428,
+      "sha256": "f41a5c7a018030f3a3b3440575430673db2148b5299e5ed14f95f26571c6a7e9"
+    },
+    "task0-running-simulation.log": {
+      "bytes": 59014,
+      "sha256": "c66fff81469900c1a0ebb37b00b34f398b4d08908aa1a6f30f208ce12f0b8db3"
+    }
+  },
+  "campaign": {
+    "full12_path": "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/gpio-followups-r1/full12/result.json",
+    "policy": "Await current base PASS, then serial same-binary full12/wait31, independent single-active-trace clear/GPIO task0 captures and native audit/SAIF; resource-gated activity12; one CPU",
+    "state": "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/activity/campaign-r3/state.json",
+    "supervisor_pid": 329419
+  },
+  "failed_attempts": [
+    {
+      "name": "gpio-task0-r1",
+      "reason": "New TB token concatenation syntax error; no RTL simulation; fixed harness only"
+    },
+    {
+      "name": "activity/campaign-r1",
+      "reason": "Own WAIT_BASE process replaced before any child to correct output path"
+    },
+    {
+      "name": "activity/campaign-r2",
+      "reason": "Own WAIT_BASE process replaced before any child to avoid simultaneous Verilator trace cleanup interference"
+    }
+  ],
+  "functional": {
+    "base": "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/gpio-task0-r2",
+    "compiler_status": "PASS",
+    "definitions": [
+      "SYNTHESIS",
+      "DISABLE_SV_ASSERTION=1",
+      "XU_MATRIX_DMA",
+      "XU_MATRIX_DMA_SYSBUS32",
+      "XU_MATRIX_X_SRAM",
+      "XU_MATRIX_STORAGE_SRAM"
+    ],
+    "package_files_sha256": "0330a268da42961b636c0a2c9fc72432277ed611164ba3d45be119143ed1e8aa",
+    "production_source_identity": "ALL_SEALED_FINAL_PRODUCTION_RTL_EXACT_NO_STORAGE_OVERLAY",
+    "result_status": "SIMULATING",
+    "runner_pid": 316880,
+    "simulator_pid": 323593,
+    "source_count": 159,
+    "supervisor_pid": 316878,
+    "verilator_wall_seconds": 568.81
+  },
+  "qualification": "No final throughput/STA/PPA/power/mapped-equivalence pass. Activity tools are prepared, not yet built or executed.",
+  "schema": "final-production-gpio-status-snapshot-v1",
+  "snapshot_at": "2026-11-13T09:54:12.087362+00:00",
+  "status": "TASK0_RUNNING_WARMUP_PASS_FULL12_AND_ACTIVITY_PENDING",
+  "warmup_only": {
+    "clear_cycles": 1027,
+    "cpu_y_readbacks": 25344,
+    "dma_payload_cycles": 100626,
+    "done": 2799568,
+    "first_request": 2698940,
+    "last_y_accepted": 2799559,
+    "last_y_response": 2799565,
+    "load_begin": 1382870,
+    "load_finish": 2698850,
+    "loading_cycles": 1315981,
+    "max_outstanding": 3,
+    "outputs_written": 25344,
+    "physical_clear16bit": 55040,
+    "requests": 40384,
+    "responses": 40384,
+    "scope": "Complete publicly dirtied warmup only; excluded from principal performance; formal task0 and final12 not yet PASS"
+  }
+}
