@@ -1,0 +1,31 @@
+{
+  "status": "PASS_NEGATIVE_OMISSION_GUARDS_NO_EVIDENCE_DRIFT",
+  "cases": [
+    {
+      "case": "cache-needs-explicit-selector",
+      "returncode": 1,
+      "expected_failure": "missing returned evidence:dc:alib-52/",
+      "observed_failure": "ValueError: missing returned evidence:dc:alib-52/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db.alib"
+    },
+    {
+      "case": "missing-hold-report",
+      "returncode": 1,
+      "expected_failure": "missing returned evidence:pt:reports/hold.rpt",
+      "observed_failure": "ValueError: missing returned evidence:pt:reports/hold.rpt"
+    },
+    {
+      "case": "missing-mapped-netlist",
+      "returncode": 1,
+      "expected_failure": "missing returned evidence:dc:mapped.v",
+      "observed_failure": "ValueError: missing returned evidence:dc:mapped.v"
+    },
+    {
+      "case": "alib-prefix-cannot-hide-report",
+      "returncode": 1,
+      "expected_failure": "missing returned evidence:dc:alib-52/important-report.rpt",
+      "observed_failure": "ValueError: missing returned evidence:dc:alib-52/important-report.rpt"
+    }
+  ],
+  "all_payload_files_restored_byte_exact": true,
+  "no_eda_or_remote_access": true
+}

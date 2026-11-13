@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "scope": "Structural/fallback evidence, no functional/PPA claim",
+  "fallback_cases": [
+    {
+      "defines": [],
+      "core_and_dma_tokens_equal": true
+    },
+    {
+      "defines": [
+        "XU_MATRIX_STORAGE_SRAM"
+      ],
+      "core_and_dma_tokens_equal": true
+    },
+    {
+      "defines": [
+        "XU_MATRIX_X_SRAM"
+      ],
+      "core_and_dma_tokens_equal": true
+    },
+    {
+      "defines": [
+        "XU_MATRIX_X_SRAM",
+        "XU_MATRIX_STORAGE_SRAM"
+      ],
+      "core_and_dma_tokens_equal": true
+    },
+    {
+      "defines": [
+        "XU_MATRIX_DMA_SYSBUS32"
+      ],
+      "core_and_dma_tokens_equal": true
+    },
+    {
+      "defines": [
+        "XU_MATRIX_DMA_SYSBUS32",
+        "XU_MATRIX_STORAGE_SRAM"
+      ],
+      "core_and_dma_tokens_equal": true
+    },
+    {
+      "defines": [
+        "XU_MATRIX_DMA_SYSBUS32",
+        "XU_MATRIX_X_SRAM"
+      ],
+      "core_and_dma_tokens_equal": true
+    }
+  ],
+  "selected_arithmetic_module_byte_identical": true,
+  "selected_payload_caches_removed": true,
+  "candidate_manifest_sha256": "71929a93ccfbc328b495c11455716741b1356f4a4a9f5517c7e6ff287f2bb70c",
+  "inputs": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/LinearTileDmaCore.sv": "7d353c0d086d2992aa4b4b06b75b1b5dcb9dd77024df1df3c6ce4996ac4eb10f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/TileWeightBank.sv": "e44d885e304faf608a4f8cf2f4cd13bc4653a34cbd0fe81904f02d51a0a7bf48",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/TileWeightBankArray.sv": "2aa3b687b1e393f4950895ca4bcad4dc4f0668cb60733c944423685a5f760e9a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/TileXMacroRowBuffer.sv": "400b8e51b4cfad62633f53df9905ab9fad5e8a5b300f41b3070a1c0ba19b57a7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/TileXRowBuffer.sv": "3881b2db4c1d40ecea60089462ae24e38409de43ec572a600af0029635c427a4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/generic_ramsp_non_ppa.sv": "4a138045dfebeafd9728908627133c2e1b04fa8115fd8abad1ace7fa3235eac7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/mem_1024x16.sv": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/storage-macro/candidate-r2/rtl/xu_matrix_dma_sysbus32.sv": "a63c7f98e8e6f2d002463e38f277ff39857f5c9c732e3457776d55c34a8b21be"
+  }
+}

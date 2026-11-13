@@ -79,8 +79,33 @@ proc eco_buffer {} {
   eco_require [expr {[sizeof_collection $ip] == 1 && [sizeof_collection $op] == 1}] {buffer must be unary}
   set input [file tail [get_object_name $ip]]
   set output [file tail [get_object_name $op]]
-  set function [get_attribute $op function]
+  # Native T-2022 PT has no lib_pin.function attribute (ATTR-1). DC does.
+  # Read the exact same characterized DB via a separately checked DC process;
+  # the runner pins its output bytes before PT starts and after PT finishes.
+  if {[info exists ::eco_query_function_in_dc] && $::eco_query_function_in_dc} {
+    set function [get_attribute $op function]
+  } else {
+    eco_require [info exists ::eco_dc_function_file] {missing native DC function proof}
+    eco_sha $::eco_dc_function_file $::eco_dc_function_sha
+    set f [open $::eco_dc_function_file r]; set rows [split [string trim [read $f]] \n]; close $f
+    eco_require [expr {[llength $rows] == 3 && [lindex $rows 0] eq "library_cell\treference\tpin\tdirection\tfunction\tis_sequential"}] {invalid native DC function columns/row count}
+    set expected_cell [get_object_name $cell]
+    set function {}; set seen {}
+    foreach row [lrange $rows 1 end] {
+      set fields [split $row \t]
+      eco_require [expr {[llength $fields] == 6 && [lindex $fields 0] eq $expected_cell && [lindex $fields 1] eq $::eco_buffer_reference && [lindex $fields 5] in {false 0}}] {native DC function identity mismatch}
+      lappend seen [lindex $fields 2]
+      if {[lindex $fields 2] eq $input} {
+        eco_require [expr {[lindex $fields 3] eq {in} && [lindex $fields 4] eq {-}}] {native DC input differs}
+      } elseif {[lindex $fields 2] eq $output} {
+        eco_require [expr {[lindex $fields 3] eq {out}}] {native DC output direction differs}
+        set function [lindex $fields 4]
+      } else {error {unexpected native DC function pin}}
+    }
+    eco_require [expr {[lsort $seen] eq [lsort [list $input $output]]}] {native DC function pins duplicated/missing}
+  }
   eco_require [expr {$input eq {I} && $output eq {Z} && [string map [list {(} {} {)} {} { } {} {"} {}] $function] eq $input}] {unproven noninverting I/Z buffer}
+  set ::eco_proven_buffer_function $function
   set area [get_attribute $cell area]
   eco_require [expr {[string is double -strict $area] && $area > 0}] {invalid characterized buffer area}
   return $cell
@@ -236,7 +261,7 @@ proc eco_native_proof {} {
   foreach_in_collection pin [get_lib_pins -of_objects $cell] {
     set direction [get_attribute $pin direction]
     set function {-}
-    if {$direction eq {out}} {set function [get_attribute $pin function]}
+    if {$direction eq {out}} {set function $::eco_proven_buffer_function}
     puts $f "[get_object_name $cell]\t$::eco_buffer_reference\t[file tail [get_object_name $pin]]\t$direction\t$function\t[get_attribute $cell is_sequential]"
   }
   close $f

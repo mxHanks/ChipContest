@@ -7,7 +7,7 @@ from pathlib import Path
 import shutil
 import subprocess
 
-FILES=['common.tcl','pt_probe.tcl','pt_edit.tcl','dc_apply.tcl','pt_reload.tcl','run_stage.py',
+FILES=['common.tcl','dc_library_proof.tcl','pt_probe.tcl','pt_edit.tcl','dc_apply.tcl','pt_reload.tcl','run_stage.py',
        'gate-anchors.txt','check_buffer_equivalence.py','README.md','prepare.py']
 
 def main():

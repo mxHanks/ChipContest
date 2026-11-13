@@ -1,0 +1,13 @@
+# Final storage374 activity
+
+Capture only after `cpu-gpio-storage21-task0-r1/result.json` reports actual functional PASS. The source is the copied, immutable final production N2 GPIO CPU freeze, not the previous N3 test-loader run and not the 353-macro run. The selected define set is SYNTHESIS, DISABLE_SV_ASSERTION=1, XU_MATRIX_DMA, XU_MATRIX_DMA_SYSBUS32, XU_MATRIX_X_SRAM, XU_MATRIX_STORAGE_SRAM.
+
+Source-reviewed physical macro inventory:32 ITCM +32 DTCM +256 shared +16 W +1 bias +16 X +21 result =374. The exact374 path set in `build/compliant32-20261113/activity-profile374-source-draft-r1/inventory.json` was independently compared with the final374 PPA Verilator XML (`ppa-storage374-xml-r2`): zero missing, zero extra after Verilator bracket-name decoding. This does not infer completeness from an observed FST count. The final activity profile must also bind the completed CPU baseline result, every production RTL SHA, the base PPA package and selected storage manifest.
+
+The activity runner copies the full sealed CPU source and firmware; only the copied testbench gains a read-only monitor and the simulator gets a tracing C++ main. The storage physical observer and its final geometry constants are preserved. The original frozen checker receives the explicit storage binding: expected physical clear is55,04016-bit writes, including21,504 actual result-macro writes. The final storage core must remain25344 scalar Y32 outputs/task with all response retirement and CPU readback checks.
+
+Capture one task first. Check real FST metadata/time range, exact374 macro path SET, all10 named pin classes and initial values, alias handles, CPU logical memory interface activity and one-cycle boundary guards. A subsequent complete12 replay must use the same activity binary/ELF/vector bytes/profile, and compare all12 per-layer cycles/counts with no-trace complete12 CPU output. A functional one-task pass is not complete12 evidence.
+
+FST-to-SAIF uses the actually probed native converter; `dut` maps to `u_soc`, `endpoint` maps to `u_shared`; aliases are retained. Unknown dwell is not coerced to zero, and absent signals do not acquire invented default-zero activity. Native digital probe and former353 stress result demonstrate converter behavior only. They do not validate final374 mapped annotation.
+
+Every output remains `NOT_POWER_READY`: actual vendor-macro power characterization, mapped netlist annotation and unmatched coverage, achieved timing and full-SoC J/task still require independent same-freeze measurements. Generic RTL pin activity alone does not establish SRAM internal energy or contest power pass.

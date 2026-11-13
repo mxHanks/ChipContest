@@ -1,6 +1,14 @@
 # Bounded mapped-cell ECO: selected32bit SystemBus +64PE +16X SRAM
 
-These tools are **prepared, not native-executed**. They do not establish a timing,
+Native r2 failed before insertion because PT has no lib_pin.function attribute.
+Read-only native DC confirmed the same DB's BUFV2 I→Z function. Revised tools
+query it in a separate, sequential max2core native DC process before every PT
+stage, retain the log/return code/output hashes, and bind the proof file before
+PT insertion. No missing attribute is interpreted as a Boolean identity.
+Revised r4 completed the real one-buffer PT probe with native DC function proof,
+zero native errors, unchanged source/SDC identities and original clock coverage.
+The exported changes still need DC persistence and fresh PT reload. A successful
+API probe does not establish a timing,
 area, power or contest PASS. The source RTL, CPU/LSU/BIU state machines, original
 SDC and library bytes are unchanged. No constraint, false-path, ideal-clock,
 clock-group, uncertainty or gating-check relaxation is allowed.

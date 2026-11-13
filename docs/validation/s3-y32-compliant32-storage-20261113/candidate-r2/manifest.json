@@ -1,0 +1,69 @@
+{
+  "schema": "compliant32_storage_macro_v1",
+  "status": "PREPARED_NOT_VERIFIED",
+  "required_defines": [
+    "XU_MATRIX_DMA_SYSBUS32",
+    "XU_MATRIX_X_SRAM",
+    "XU_MATRIX_STORAGE_SRAM"
+  ],
+  "origins": {
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/LinearTileDmaCore.sv": "0c3570c361d78b41bad2e4451335981c2fd4e59b8b07f6ac244632d7726cdb14",
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/TileWeightBank.sv": "e44d885e304faf608a4f8cf2f4cd13bc4653a34cbd0fe81904f02d51a0a7bf48",
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/TileWeightBankArray.sv": "2aa3b687b1e393f4950895ca4bcad4dc4f0668cb60733c944423685a5f760e9a",
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/TileXMacroRowBuffer.sv": "400b8e51b4cfad62633f53df9905ab9fad5e8a5b300f41b3070a1c0ba19b57a7",
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/TileXRowBuffer.sv": "3881b2db4c1d40ecea60089462ae24e38409de43ec572a600af0029635c427a4",
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/generic_ramsp_non_ppa.sv": "4a138045dfebeafd9728908627133c2e1b04fa8115fd8abad1ace7fa3235eac7",
+    "build/compliant32-20261113/x-macro/candidate-r2/rtl/mem_1024x16.sv": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707",
+    "third-party/e203_hbirdv2/rtl/e203/perips/xu_matrix_dma_sysbus32.sv": "296f8d7fe046ba5ac6c02c9a8202b660a17d9355bf0405a75c63225b00d7cc42",
+    "experiments/s3-y32-compliant32/storage-macro/StorageMacroCore.sv": "13370a4f5e86bcc9fcfb114baab8b1088d78affe2bbb42dbd720c0965475c971",
+    "experiments/s3-y32-compliant32/storage-macro/prepare_candidate.py": "9331e6a997321aca6c8be1f2b978c58018315e07682c941f19ed35fb35ce6faf"
+  },
+  "files": {
+    "DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+    "LinearTileDmaCore.sv": "7d353c0d086d2992aa4b4b06b75b1b5dcb9dd77024df1df3c6ce4996ac4eb10f",
+    "MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "TileWeightBank.sv": "e44d885e304faf608a4f8cf2f4cd13bc4653a34cbd0fe81904f02d51a0a7bf48",
+    "TileWeightBankArray.sv": "2aa3b687b1e393f4950895ca4bcad4dc4f0668cb60733c944423685a5f760e9a",
+    "TileXMacroRowBuffer.sv": "400b8e51b4cfad62633f53df9905ab9fad5e8a5b300f41b3070a1c0ba19b57a7",
+    "TileXRowBuffer.sv": "3881b2db4c1d40ecea60089462ae24e38409de43ec572a600af0029635c427a4",
+    "generic_ramsp_non_ppa.sv": "4a138045dfebeafd9728908627133c2e1b04fa8115fd8abad1ace7fa3235eac7",
+    "mem_1024x16.sv": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707",
+    "xu_matrix_dma_sysbus32.sv": "a63c7f98e8e6f2d002463e38f277ff39857f5c9c732e3457776d55c34a8b21be"
+  },
+  "arithmetic": "MacPE_Acc41 reused byte-identically; signed16 multiply, signed40 bias init, signed41 ACC, RNE9 Y32",
+  "storage": {
+    "weight_macros": 16,
+    "bias_macros": 1,
+    "x_macros": 16,
+    "result_macros": 3,
+    "internal_macros": 36,
+    "full_soc_macros": 356,
+    "result_logical_bits": 5248,
+    "result_physical_bits": 49152,
+    "bias_reusable_cache_bits": 0,
+    "result_register_copy_bits": 0,
+    "dma_group_payload_bits": 0
+  },
+  "clear": {
+    "weight_writes": 16384,
+    "bias_writes": 768,
+    "x_writes": 16384,
+    "result_writes": 3072,
+    "total16bit_writes": 36608,
+    "mmio_W_X_result_writes": 35840,
+    "parallel_address_steps": 1024
+  },
+  "payload_state": {
+    "host_bias_transaction_bits": 40,
+    "bias_read_low_assembly_bits": 32,
+    "scalar_bus_lock_data_bits": 32,
+    "note": "Single in-flight transaction/operand assembly state retained and disclosed; no reusable parameter slots or result group/row arrays."
+  },
+  "result_contract": "Scalar result Q repeatedly reads identical macro address until its successful Y write response retires; single-port store/read arbitration, 2 packet slots. Original external MMIO ABI/counters retained.",
+  "fallback": "Without XU_MATRIX_STORAGE_SRAM both original installed X-macro core and original sysbus32 DMA bytes retained verbatim.",
+  "scope": "Isolated experiment, generic functional models; no synthesis, STA, power, contest qualification or CPU claim"
+}
