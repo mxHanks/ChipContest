@@ -54,8 +54,13 @@ def probe_sections(text):
  ends=re.findall(r'^XU_FINAL374_FM_API_END\t([^\t\n]+)\t([^\t\n]+)\t([01])\t([0-9]+)$',text,re.M)
  need(len(begin)==len(ends)>0 and len(set(begin))==len(begin),'probe markers incomplete/duplicated')
  need(begin==[(k,n) for k,n,_,_ in ends],'probe begin/end order differs')
- need(len(re.findall(r'^XU_FINAL374_FM_API_DOCUMENTATION_COLLECTED\tmissing=\d+$',text,re.M))==1,'probe terminal marker absent/duplicate')
- return {(k,n):dict(exists=e=='1',returncode=int(rc)) for k,n,e,rc in ends}
+ need(len(re.findall(r'^XU_FINAL374_FM_API_DOCUMENTATION_COLLECTED\tmissing=\d+$',text,re.M))>=1,'probe terminal marker absent')
+ result={}
+ for k,n,e,rc in ends:
+  body=re.search(r'^XU_FINAL374_FM_API_BEGIN\t'+re.escape(k)+r'\t'+re.escape(n)+r'\n(.*?)^XU_FINAL374_FM_API_END\t'+re.escape(k)+r'\t'+re.escape(n)+r'\t',text,re.M|re.S)[1]
+  errors=re.findall(r'^(?:Error:|Fatal:).*$',body,re.M)
+  result[k,n]=dict(exists=e=='1',returncode=int(rc),native_errors=errors)
+ return result
 
 def api_check(contract_path,adapter_path,probe_path):
  c=json.loads(Path(contract_path).read_text());need(c['schema']=='final374-fm-native-api-contract-v1' and c['status']=='REVIEWED_NATIVE_API_ADAPTER' and c['hardware_profile']==PROFILE,'unreviewed API contract')
@@ -66,14 +71,21 @@ def api_check(contract_path,adapter_path,probe_path):
  names=c['documented_commands'];need(set(COMMANDS)<=set(names),'core native API evidence missing')
  for name in names:
   for kind in ['help','man']:
-   need((kind,name) in sections and sections[kind,name]==dict(exists=True,returncode=0),'unsupported/undocumented native API:'+kind+' '+name)
+   need((kind,name) in sections and sections[kind,name]['exists'] and sections[kind,name]['returncode']==0 and not sections[kind,name]['native_errors'],'unsupported/undocumented native API:'+kind+' '+name)
  need(c['launcher']['native_version'] and len(c['launcher']['sha256'])==64,'actual FM launcher identity required')
  need(c['launcher'].get('historical_hint_only',False) is False,'historical launcher hint has not been replaced by current native identity')
  versions=re.findall(r'^\s*Version (\S+)',Path(probe_path).read_text(),re.M)
  need(versions and versions[0]==c['launcher']['native_version'],'API contract version is not actual native probe version')
  need(Path(c['launcher']['path']).name=='fm_shell','retain actual vendor entry name')
+ need(c['required_attributes']=={'cell':['full_name','ref_name'],'pin':['full_name','direction']},'actual required FM attributes not specified')
+ for cls,names in c['required_attributes'].items():
+  for name in names:
+   key=('attribute_help',cls+'.'+name)
+   need(key in sections and sections[key]['returncode']==0 and not sections[key]['native_errors'],'native attribute documentation missing:'+str(key))
+   body=re.search(r'^XU_FINAL374_FM_API_BEGIN\tattribute_help\t'+re.escape(cls+'.'+name)+r'\n(.*?)^XU_FINAL374_FM_API_END',Path(probe_path).read_text(),re.M|re.S)[1]
+   need(re.search(r'^\s*'+re.escape(name)+r'\s+#',body,re.M),'attribute help did not actually define:'+cls+'.'+name)
  text=Path(adapter_path).read_text()
- need('UNCONFIRMED_NATIVE_API' not in text,'adapter template cannot execute')
+ need('UNCONFIRMED_NATIVE_API' not in text and 'set ::final_fm_native_adapter_pending 1' not in text,'adapter template cannot execute')
  for proc in ['final_fm_configure_resources','final_fm_configure_assumptions','final_fm_collect','final_fm_assert_boundaries']:
   need(re.search(r'\bproc\s+'+proc+r'\s+\{',text),'missing adapter procedure:'+proc)
  need(not any(x in text for x in ['set_false_path','set_multicycle_path','set_dont_verify','set_black_box','set_user_match','set_constant','hdlin_unresolved_modules black_box']),'adapter may not hide logic or invent matching')

@@ -38,7 +38,7 @@ if {[catch {
 '''
  for name in REPORTS:
   text+='  if {![file isfile reports/'+name+'.rpt] || [file size reports/'+name+'.rpt] == 0} {error {Missing native '+name+' report}}\n'
- text+='  if {![file isfile coverage.json] || [file size coverage.json] == 0} {error {Missing complete native coverage inventory}}\n'
+ text+='  if {![file isfile coverage-native.tsv] || [file size coverage-native.tsv] == 0} {error {Missing complete native coverage collector}}\n'
  text+='''  if {$final_fm_verified} {
     puts {XU_FINAL374_FM_VERIFY_SUCCEEDED_NOT_ACCEPTED}
     exit 0
@@ -74,9 +74,12 @@ def main():
   bundle['verification_tcl']=emit(package,a.native,c,a.adapter,out);bundle['verification_tcl_emitted']=True
   for src,name in [(a.api_contract,'api-contract.json'),(a.probe_log,'native-api-probe.log')]:shutil.copy2(src,out/name)
   bundle['status']='READY_FOR_NATIVE_FULL_TOP_FM_NOT_EXECUTED_NOT_ACCEPTED';bundle['missing']=['Actual native full-top FM match/verify and every coverage/assumption review']
+ bundle['historical_native_syntax_sources']={}
  for log,want in [('s2c-fm.log','c4214d589302ef3e7a147304b5de86dffc13c03d6e60ccb7c1cf241abfebf76c'),('s2e155-fm.log','d88c3a5e3e8842d501efb13d70a1eb33aa9547d35eb1cecca9434dce68a2b0e4')]:
-  need(sha(ROOT/'docs/handoff-evidence'/log)==want,'old syntax provenance drift')
- bundle['historical_native_syntax_sources']={n:record(ROOT/'docs/handoff-evidence'/n) for n in ['s2c-fm.log','s2e155-fm.log']}
+  path=ROOT/'docs/handoff-evidence'/log
+  if path.is_file():need(sha(path)==want,'old syntax provenance drift')
+  bundle['historical_native_syntax_sources'][log]=dict(expected_sha256=want,locally_present=path.is_file(),actual_identity=record(path) if path.is_file() else None,used_as_current_equivalence_evidence=False)
+ bundle['control_tools']={name:sha(HERE/name) for name in ['common.py','prepare.py','run_once.py','review_native.py','normalize.py']}
  bundle['tool_sha256']=sha(Path(__file__).resolve());dump(out/'preparation.json',bundle)
  print(json.dumps({k:bundle[k] for k in ['status','verification_tcl_emitted','eda_executed','missing']}))
 if __name__=='__main__':

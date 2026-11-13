@@ -1,0 +1,161 @@
+{
+  "count": 30,
+  "native_eda_run": false,
+  "package_files_sha256": "0330a268da42961b636c0a2c9fc72432277ed611164ba3d45be119143ed1e8aa",
+  "qualification": "No native Formality result; fixture acceptance is solely a parser/gate test",
+  "schema": "final374-fm-offline-gate-tests-v1",
+  "status": "PASS",
+  "synthetic_native_fixtures": true,
+  "tests": [
+    {
+      "case": "synthetic-complete-boundary-gate",
+      "detail": "Synthetic acceptance fixture only; no native equivalence claim",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-nonzero-failing",
+      "detail": "nonzero failure/abort/unverified or empty proof",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-nonzero-aborted",
+      "detail": "nonzero failure/abort/unverified or empty proof",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-nonzero-unverified",
+      "detail": "nonzero failure/abort/unverified or empty proof",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-zero-proof",
+      "detail": "nonzero failure/abort/unverified or empty proof",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-missing-report",
+      "detail": "missing raw native report role",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-missing-native-command-provenance",
+      "detail": "missing actual report-command provenance",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-unsupported-report-api",
+      "detail": "report collected using unreviewed native API:aborted",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-unresolved-module",
+      "detail": "unresolved or unexpected opaque logic",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-extra-blackbox",
+      "detail": "unresolved or unexpected opaque logic",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-missing-physical-macro",
+      "detail": "physical macro inventory must account for all374",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-unreviewed-assumption",
+      "detail": "unreviewed native ignored/unread/unmatched/constant/assumption objects",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-unreviewed-dont-verify",
+      "detail": "unreviewed native ignored/unread/unmatched/constant/assumption objects",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-opaque-input-bit-hole",
+      "detail": "macro pin direction/width/coverage hole",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-unverified-opaque-pin",
+      "detail": "opaque boundary bit was not proved/matched",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-duplicate-opaque-pair",
+      "detail": "many-to-one opaque pairing",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-unreviewed-opaque-constant",
+      "detail": "unreviewed boundary constant",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-missing-guidance-rejection-list",
+      "detail": "SVF guidance count/list mismatch",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-core-limit3",
+      "detail": "native max2core proof missing",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-general-unresolved-blackboxing",
+      "detail": "general unresolved blackboxing is forbidden even if manually reviewed",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-unreviewed-optimized-macro",
+      "detail": "unreviewed optimized/omitted macro",
+      "status": "PASS"
+    },
+    {
+      "case": "real-final-sealed159-reference",
+      "detail": "",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-historical-marker-s2c-fm.log",
+      "detail": "Historical proof cannot satisfy final native marker",
+      "status": "PASS"
+    },
+    {
+      "case": "reject-historical-marker-s2e155-fm.log",
+      "detail": "Historical proof cannot satisfy final native marker",
+      "status": "PASS"
+    },
+    {
+      "case": "Tcl-parser-completeness",
+      "detail": "",
+      "status": "PASS"
+    },
+    {
+      "case": "RC0-man-native-error-retained",
+      "detail": "FM man may return0 while printing a real native error",
+      "status": "PASS"
+    },
+    {
+      "case": "source-only-preparation-cannot-verify",
+      "detail": "{\"status\": \"OFFLINE_SOURCE_REVIEWED_NOT_FORMALITY_EXECUTED\", \"verification_tcl_emitted\": false, \"eda_executed\": false, \"missing\": [\"Same-package completed DC mapped.v/mapped.ddc/final.svf and DC receipt\", \"Current native FM launcher identity and max2core/report API documentation\", \"Reviewed native API adapter and signatures\", \"Actual full-top FM match/verify plus coverage/assumption review\"]}",
+      "status": "PASS"
+    },
+    {
+      "case": "unready-native-wrapper-rejected-before-tools",
+      "detail": "FAIL: API/DC/source gates are incomplete; only documentation probe is prepared",
+      "status": "PASS"
+    },
+    {
+      "case": "unsupported-API-probe-not-empty-pass",
+      "detail": "",
+      "status": "PASS"
+    },
+    {
+      "case": "unapproved-API-template-rejected",
+      "detail": "unreviewed API contract",
+      "status": "PASS"
+    }
+  ]
+}

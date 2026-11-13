@@ -9,6 +9,6 @@ def main():
  s=probe_sections(a.log.read_text());version=re.findall(r'^\s*Version (\S+)',a.log.read_text(),re.M)
  dump(a.out,dict(schema='final374-fm-native-api-documentation-review-v1',status='DOCUMENTATION_PARSED_SIGNATURE_REVIEW_REQUIRED',log=record(a.log),native_versions=version,
   sections=[dict(kind=k,name=n,**v) for (k,n),v in s.items()],signature_certification=False,verification_run=False,
-  missing=[dict(kind=k,name=n,**v) for (k,n),v in s.items() if not v['exists'] or v['returncode']!=0]))
+  missing=[dict(kind=k,name=n,**v) for (k,n),v in s.items() if not v['exists'] or v['returncode']!=0 or v['native_errors']]))
  print('DOCUMENTATION_PARSED_NOT_API_SIGNATURE_APPROVAL')
 if __name__=='__main__':main()

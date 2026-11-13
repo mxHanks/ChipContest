@@ -1,0 +1,119 @@
+{
+  "adapter_sha256": "f6e057dd75ffea32ba63ba2a8a4f051c83b94511f307b604a6422aa358da419e",
+  "all_report_signatures_reviewed": true,
+  "assumption_policy": "Use documented DC auto-setup guidance semantics and enumerate every resulting actual phase value/constant/dont_verify/unread point for independent acceptance review. No general unresolved blackboxing. No force constants/user matches/point exclusions are added.",
+  "current_document_sources": [
+    {
+      "identity": {
+        "bytes": 178826,
+        "sha256": "11675552d88095cd0d3790a6200e432e9b29e33758a29f537e3bc032d95d0dfd"
+      },
+      "path": "build/s3-y32-final/native/fm-api-r1/extracted/native.log"
+    },
+    {
+      "identity": {
+        "bytes": 63466,
+        "sha256": "2a839a5060fb15a215568fb2035edd98bd5dde779290de03b90d470c52651272"
+      },
+      "path": "build/s3-y32-final/native/fm-api-extra-r1/extracted/native.log"
+    },
+    {
+      "identity": {
+        "bytes": 7258,
+        "sha256": "2e4b5bd47adb6e179ed631eb035a3350556eb31305413dac181f0c8b4c6dc4c3"
+      },
+      "path": "build/s3-y32-final/native/fm-api-attributes-r1/extracted/native.log"
+    }
+  ],
+  "documented_commands": [
+    "set_host_options",
+    "report_host_options",
+    "read_db",
+    "read_sverilog",
+    "read_verilog",
+    "set_top",
+    "set_svf",
+    "match",
+    "verify",
+    "report_unmatched_points",
+    "report_failing_points",
+    "report_black_boxes",
+    "report_matched_points",
+    "report_passing_points",
+    "report_not_compared_points",
+    "report_aborted_points",
+    "report_unverified_points",
+    "report_dont_verify_points",
+    "report_constants",
+    "report_hdlin_mismatches",
+    "report_guidance",
+    "get_cells",
+    "get_pins",
+    "get_attribute",
+    "sizeof_collection",
+    "foreach_in_collection",
+    "current_design",
+    "redirect",
+    "find_svf_operation",
+    "report_svf_operation",
+    "list_attributes",
+    "help_attributes"
+  ],
+  "explicit_setup": {
+    "hdlin_unresolved_modules": "error",
+    "synopsys_auto_setup": true,
+    "verification_timeout_limit": "2:0:0"
+  },
+  "hardware_profile": "sysbus32-dma4-storage-sram-374-final",
+  "hdl_assumptions_explicitly_reviewed": true,
+  "launcher": {
+    "historical_hint_only": false,
+    "native_version": "R-2020.09-SP5",
+    "path": "/eda/synopsys/fm/fm_2020.09-SP5/bin/fm_shell",
+    "resolved_path": "/eda/synopsys/fm/fm_2020.09-SP5/bin/fm_shell",
+    "sha256": "4c502a4490b6eb1e27c9196732db1bc4f12488297bfa458f1e00e70c971e6e48"
+  },
+  "limits": [
+    "Only native documentation/attribute-definition probes executed. Runtime object/list/report formatting is validated fail-closed; first same-map native run remains required.",
+    "2:0:0 native timeout plus external7200second default; a plain3600 would mean3600hours in this FM version.",
+    "No old42338-point result or ignored/unread exceptions inherited."
+  ],
+  "max_cores": 2,
+  "native_design_verification_executed": false,
+  "probe_log_sha256": "248a5571ad3518e8c67dbb792b0f80494b588e416635558b769810c45c5a0ab0",
+  "reports": [
+    "resources",
+    "assumptions",
+    "unmatched",
+    "matched",
+    "failing",
+    "aborted",
+    "unverified",
+    "dont_verify",
+    "constants",
+    "unread",
+    "black_boxes",
+    "guidance",
+    "hdlin_mismatches"
+  ],
+  "required_attributes": {
+    "cell": [
+      "full_name",
+      "ref_name"
+    ],
+    "pin": [
+      "full_name",
+      "direction"
+    ]
+  },
+  "resource_setting_actually_executed": false,
+  "reviewer": "Codex final_dma_storage: direct current native man and attribute-definition review",
+  "schema": "final374-fm-native-api-contract-v1",
+  "status": "REVIEWED_NATIVE_API_ADAPTER",
+  "unsupported_not_used": [
+    "get_object_name",
+    "man hdlin_error_on_mismatch_message",
+    "man cell_attributes",
+    "man pin_attributes"
+  ]
+}

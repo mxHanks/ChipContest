@@ -1,34 +1,52 @@
 {
-  "schema": "final374-formal-preparation-handoff-v1",
-  "status": "SOURCE_AND_NATIVE_API_DOCUMENTATION_REVIEWED_ADAPTER_PENDING_NO_FORMALITY_RUN",
-  "package_files_sha256": "0330a268da42961b636c0a2c9fc72432277ed611164ba3d45be119143ed1e8aa",
-  "source_count": 159,
+  "adapter": {
+    "bytes": 11113,
+    "sha256": "f6e057dd75ffea32ba63ba2a8a4f051c83b94511f307b604a6422aa358da419e"
+  },
+  "api_contract": {
+    "bytes": 3811,
+    "sha256": "1f36dcf499c73df24f7c649f2912361706b70d36d50fb740342228897a73d90e"
+  },
+  "combined_native_docs": {
+    "bytes": 249552,
+    "sha256": "248a5571ad3518e8c67dbb792b0f80494b588e416635558b769810c45c5a0ab0"
+  },
+  "current_priority": "User prioritized original1064.35 candidate. This374 design FM was never started and remains separate.",
   "hardware_profile": "sysbus32-dma4-storage-sram-374-final",
+  "missing": [
+    "Same374 package CPU12 and completed own DC map/final.svf",
+    "Actual same374 full-top native match/verify",
+    "Full coverage/assumption review; no old S2 proof inherited"
+  ],
+  "native_equivalence_executed": false,
   "native_probe": {
-    "archive_sha256": "944b2acdd76e640102113cb06ab8a3bcdd48db4e3271acf5def39ae1abdc6e66",
-    "log_sha256": "11675552d88095cd0d3790a6200e432e9b29e33758a29f537e3bc032d95d0dfd",
-    "launcher_sha256": "4c502a4490b6eb1e27c9196732db1bc4f12488297bfa458f1e00e70c971e6e48",
-    "returncode": 0,
     "affinity": [
       0,
       1
     ],
-    "design_or_verify_read": false
+    "archive_sha256": "944b2acdd76e640102113cb06ab8a3bcdd48db4e3271acf5def39ae1abdc6e66",
+    "design_or_verify_read": false,
+    "launcher_sha256": "4c502a4490b6eb1e27c9196732db1bc4f12488297bfa458f1e00e70c971e6e48",
+    "log_sha256": "11675552d88095cd0d3790a6200e432e9b29e33758a29f537e3bc032d95d0dfd",
+    "returncode": 0
   },
-  "offline_tests": {
+  "normalizer_tests": {
+    "cases": 4,
     "status": "PASS",
-    "cases": 28,
     "synthetic_only": true
   },
-  "native_equivalence_executed": false,
-  "missing": [
-    "Same-package CPU full12 and completed own DC map/final.svf",
-    "Reviewed executable native adapter/API contract",
-    "Actual full-top match/verify and complete coverage/assumption review"
-  ],
   "notes": [
     "Native documentation confirms set_host_options -max_cores and report_host_options; setting was not executed by this documentation probe.",
     "get_object_name is unavailable; get_attribute full_name is documented. Additional attribute/point-report documentation may be collected before adapter finalization.",
     "No historical42338-point/S2 success inherited."
-  ]
+  ],
+  "offline_tests": {
+    "cases": 30,
+    "status": "PASS",
+    "synthetic_only": true
+  },
+  "package_files_sha256": "0330a268da42961b636c0a2c9fc72432277ed611164ba3d45be119143ed1e8aa",
+  "schema": "final374-formal-preparation-handoff-v1",
+  "source_count": 159,
+  "status": "NATIVE_API_ADAPTER_PREPARED_LOCAL_GATES_PASS_NO_DESIGN_FORMALITY_RUN"
 }

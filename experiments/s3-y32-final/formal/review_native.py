@@ -6,7 +6,7 @@ from pathlib import Path
 sys.dont_write_bytecode=True
 from common import *
 
-REVIEWED=['unmatched_reference','unmatched_implementation','unmatched_primary_reference','unmatched_primary_implementation','match_unread_reference','match_unread_implementation','unread','dont_verify','constants','cuts','hdlin_mismatches','guidance_not_accepted','assumptions','macro_omissions']
+REVIEWED=['unmatched_reference','unmatched_implementation','unmatched_primary_reference','unmatched_primary_implementation','match_unread_reference','match_unread_implementation','unread','not_compared_other','power_points','dont_verify','constants','cuts','hdlin_mismatches','guidance_not_accepted','assumptions','macro_omissions']
 
 def review_coverage(c,folder,decisions,contract,documented_commands):
  need(c['schema']=='final374-fm-native-coverage-v1' and c['collector_complete'] is True,'native coverage collector missing/incomplete')
@@ -60,9 +60,12 @@ def review_coverage(c,folder,decisions,contract,documented_commands):
     boundary_bits+=1
  need(c['resource_limit']['max_cores']==2 and c['resource_limit']['native_report_role']=='resources','native max2core proof missing')
  need(lists['assumptions'],'actual HDL/undriven/auto-setup assumption inventory missing')
- required_assumptions={'synopsys_auto_setup','hdlin_unresolved_modules','verification_set_undriven_signals','verification_verify_directly_undriven_output','hdlin_ignore_parallel_case','hdlin_ignore_full_case','hdlin_error_on_mismatch_message'}
+ required_assumptions={'verification_timeout_limit','synopsys_auto_setup','hdlin_unresolved_modules','verification_set_undriven_signals','verification_verify_directly_undriven_output','hdlin_ignore_parallel_case','hdlin_ignore_full_case','hdlin_error_on_mismatch_message'}
  need(required_assumptions<={r['id'] for r in lists['assumptions']},'actual HDL/undriven/auto-setup variables omitted')
  need(all('actual_value' in r for r in lists['assumptions']),'assumptions must include actual values')
+ actual={r['id']:r['actual_value'] for r in lists['assumptions']}
+ need(actual['hdlin_unresolved_modules']=='error','general unresolved blackboxing is forbidden even if manually reviewed')
+ need(actual['verification_timeout_limit']=='2:0:0','explicit native2hour timeout policy differs')
  guidance=c['guidance_counts'];need(set(guidance)=={'accepted','rejected','unsupported','unprocessed','total'} and all(isinstance(v,int) and v>=0 for v in guidance.values()),'guidance inventory missing/invalid')
  need(guidance['accepted']>0 and guidance['total']==sum(guidance[k] for k in ['accepted','rejected','unsupported','unprocessed']) and len(lists['guidance_not_accepted'])==sum(guidance[k] for k in ['rejected','unsupported','unprocessed']),'SVF guidance count/list mismatch')
  return dict(paired_opaque_macros=len(refs),proved_unobservable_macros=374-len(refs),accounted_boundary_bits=boundary_bits,reviewed_exceptions=len(observed),compare_counts=counts)
@@ -79,7 +82,7 @@ def main():
  need(e['status']=='NATIVE_FM_COMPLETE_NOT_ACCEPTED' and e['returncode']==0 and e['tool_timed_out'] is False and e['source_drift']==[] and e['max_cores']==2,'native FM incomplete/timeout/drift/resource mismatch')
  need(e['tool']['sha256']==api['launcher']['sha256'] and e['tool']['path']==api['launcher']['path'],'native launcher identity/argv0 differs')
  need(e['native_tool_errors']==[],'native tool errors')
- for name in ['fm.log','coverage.json',*[f'reports/{n}.rpt' for n in REPORTS]]:
+ for name in ['fm.log','coverage.json','coverage-native.tsv',*[f'reports/{n}.rpt' for n in REPORTS]]:
   need(name in e['outputs'] and record(run/name)==e['outputs'][name],'native output unbound:'+name)
  text=(run/'fm.log').read_text(errors='replace')
  need(re.findall(r'^Verification (?:SUCCEEDED|FAILED)[ \t]*$',text,re.M)==['Verification SUCCEEDED'],'unique native verification success required')
@@ -88,7 +91,9 @@ def main():
  need('Version '+api['launcher']['native_version'] in text,'native FM version differs from API probe')
  for prefix in ['Reference design: r:/WORK/'+TOP,'Implementation design: i:/WORK/'+TOP]:
   need(len(re.findall(r'^\s*'+re.escape(prefix)+r'[ \t]*$',text,re.M))==1,'full verification top differs')
- c=json.loads((run/'coverage.json').read_text());s=review_coverage(c,run,json.loads(a.decisions.read_text()),sha(prep/'api-contract.json'),api['documented_commands'])
+ c=json.loads((run/'coverage.json').read_text())
+ need(e['normalization']['returncode']==0 and e['normalization']['normalizer_sha256']==b['control_tools']['normalize.py']==c['normalizer_sha256'] and c['native_collector']==record(run/'coverage-native.tsv'),'native rows/normalizer identity differs')
+ s=review_coverage(c,run,json.loads(a.decisions.read_text()),sha(prep/'api-contract.json'),api['documented_commands'])
  passing=re.findall(r'^\s*(\d+) Passing compare points[ \t]*$',text,re.M);need(passing==[str(s['compare_counts']['passing'])],'native passing compare-point count differs')
  progress=re.findall(r'(\d+)F/(\d+)A/(\d+)P/(\d+)U \(100% Verification completed\)',text)
  need(progress and tuple(map(int,progress[-1]))==(0,0,s['compare_counts']['passing'],0),'terminal failure/abort/unverified progress differs')
@@ -100,12 +105,12 @@ def main():
  match_unread=re.findall(r'^\s*(\d+)\((\d+)\) Unmatched reference\(implementation\) unread points[ \t]*$',text,re.M)
  need(match_unread and set(match_unread)=={(str(len(c['point_lists']['match_unread_reference'])),str(len(c['point_lists']['match_unread_implementation'])))},'native matching unread list differs from final unread list')
  passing_table=re.findall(r'^Passing \(equivalent\)[ \t]+([0-9 \t]+)$',text,re.M)
- need(len(passing_table)==1 and len(passing_table[0].split())==8 and int(passing_table[0].split()[-1])==s['compare_counts']['passing'] and int(passing_table[0].split()[3])==len(c['point_lists']['cuts']),'native compare-point/cut table differs')
+ need(len(passing_table)==1 and len(passing_table[0].split())==8 and int(passing_table[0].split()[-1])==s['compare_counts']['passing'] and int(passing_table[0].split()[3])==sum(row.get('verify_status')=='PASSING' for row in c['point_lists']['cuts']),'native compare-point/cut table differs')
  failing_table=re.findall(r'^Failing \(not equivalent\)[ \t]+([0-9 \t]+)$',text,re.M)
  need(len(failing_table)==1 and len(failing_table[0].split())==8 and all(int(v)==0 for v in failing_table[0].split()),'native final failing table nonzero/missing')
  result=dict(schema='final374-native-fm-acceptance-review-v1',status='ACCEPTED_FULL_TOP_LOGIC_AT_REVIEWED_OPAQUE_SRAM_BOUNDARIES_NOT_QUALIFIED',hardware_profile=PROFILE,top=TOP,
   source_package_sha256=b['package_files_sha256'],dc_binding=b['native'],fm_execution=record(run/'execution.json'),coverage=record(run/'coverage.json'),decisions=record(a.decisions),summary=s,
-  scope='RTL-to-mapped logic equivalence at reviewed opaque RAMSP boundaries; excludes SRAM internal circuits/timing, STA, PPA/power and official sample qualification',historical_S2_proof_inherited=False)
+  scope='RTL-to-mapped logic equivalence at reviewed opaque RAMSP boundaries; excludes SRAM internal circuits/timing, STA, PPA/power and official sample qualification',historical_S2_proof_inherited=False,review_tool_sha256=sha(Path(__file__).resolve()),prepared_control_tools=b['control_tools'])
  dump(a.out,result);print(result['status'])
 if __name__=='__main__':
  try:main()

@@ -11,9 +11,9 @@ import prepare
 def fixture(folder):
  (folder/'reports').mkdir()
  for role in REPORTS:(folder/'reports'/(role+'.rpt')).write_text('SYNTHETIC UNIT TEST ONLY - not native evidence '+role+'\n')
- assumptions=['synopsys_auto_setup','hdlin_unresolved_modules','verification_set_undriven_signals','verification_verify_directly_undriven_output','hdlin_ignore_parallel_case','hdlin_ignore_full_case','hdlin_error_on_mismatch_message']
+ assumptions=['verification_timeout_limit','synopsys_auto_setup','hdlin_unresolved_modules','verification_set_undriven_signals','verification_verify_directly_undriven_output','hdlin_ignore_parallel_case','hdlin_ignore_full_case','hdlin_error_on_mismatch_message']
  lists={k:[] for k in REVIEWED+['failing','aborted','unverified']}
- lists['assumptions']=[dict(id=k,actual_value='synthetic',evidence_reports=['assumptions']) for k in assumptions]
+ lists['assumptions']=[dict(id=k,actual_value='error' if k=='hdlin_unresolved_modules' else '2:0:0' if k=='verification_timeout_limit' else 'synthetic',evidence_reports=['assumptions']) for k in assumptions]
  macros=[]
  for group,count in GEOMETRY.items():
   for i in range(count):
@@ -55,6 +55,7 @@ def main():
    'reject-unreviewed-opaque-constant':lambda x,y:x['physical_macro_boundaries'][0]['ports']['D']['bits'][0].update(status='VERIFIED_CONSTANT'),
    'reject-missing-guidance-rejection-list':lambda x,y:x['guidance_counts'].update(rejected=1,total=3),
    'reject-core-limit3':lambda x,y:x['resource_limit'].update(max_cores=3),
+   'reject-general-unresolved-blackboxing':lambda x,y:next(r for r in x['point_lists']['assumptions'] if r['id']=='hdlin_unresolved_modules').update(actual_value='black_box'),
    'reject-unreviewed-optimized-macro':lambda x,y:x['physical_macro_boundaries'][0].update(disposition='PROVED_UNOBSERVABLE'),
   }
   for name,mutate in mutations.items():
@@ -71,6 +72,8 @@ def main():
    prepare.emit(a.package,folder/'fake-native',{},HERE/'adapter.template.tcl',emitdir)
   syntax='foreach p $argv {set h [open $p r];set s [read $h];close $h;if {![info complete $s]} {exit 1}}\n';(folder/'syntax.tcl').write_text(syntax)
   parsed=subprocess.run(['tclsh',str(folder/'syntax.tcl'),str(emitdir/'verify.tcl'),str(HERE/'api_probe.tcl'),str(HERE/'adapter.template.tcl')],capture_output=True,text=True);result('Tcl-parser-completeness',parsed.returncode==0,parsed.stderr)
+  bad_doc='XU_FINAL374_FM_API_BEGIN\tman\tfake_api\nError: No manual entry (CMD-025)\nXU_FINAL374_FM_API_END\tman\tfake_api\t1\t0\nXU_FINAL374_FM_API_DOCUMENTATION_COLLECTED\tmissing=0\n'
+  bad=probe_sections(bad_doc);result('RC0-man-native-error-retained',bad['man','fake_api']['native_errors']!=[],'FM man may return0 while printing a real native error')
   # A real initial source-only bundle must not emit/run native verification.
   reviewdir=folder/'source-review'
   done=subprocess.run([sys.executable,str(HERE/'prepare.py'),'--package',str(a.package.resolve()),'--out',str(reviewdir)],capture_output=True,text=True)

@@ -1,3 +1,13 @@
+当前可用状态：三轮真实原生文档与属性探针已完成，`native-adapter.tcl` 和 `docs/validation/s3-y32-final-20261113/formal-prep/api-contract.json` 已审并绑定；不是待填模板。只有API准备及本地合成门禁测试通过，未读本轮设计、未match/verify。用户现优先原1064.35开发候选，本374流程保留且不借用/转移证据。
+
+实际后续命令使用已审adapter及三轮原生文档拼接：
+
+```sh
+python3 experiments/s3-y32-final/formal/prepare.py --package /absolute/same374-final-package --native /absolute/same374-DC-output --api-contract docs/validation/s3-y32-final-20261113/formal-prep/api-contract.json --adapter experiments/s3-y32-final/formal/native-adapter.tcl --probe-log docs/validation/s3-y32-final-20261113/formal-prep/native-api-combined.log --out /absolute/NEW/formal-ready
+```
+
+采集器写实际 `coverage-native.tsv`（所有字段UTF8十六进制，不执行工具输出），原生结束后由 `normalize.py` 生成coverage.json。不存在/未知API、native Error（即使Tcl RC0）、列表格式/计数不符、宏/引脚缺失均明确失败。当前collector严格要求374个实际可配对宏；若FM消除物理宏，保存原件并另行逐宏审查/版本化适配，不能补写计数。全部not-compared其他类型、PGPin、匹配/最终两个unread统计独立导出；native成功而归一化尚未通过会标记COVERAGE_PENDING，保留原件，不伪造proof。旧模板仅供以后移植参考。
+
 # 最终 DMA4/storage21 的 RTL → mapped 准备与门禁
 
 仅适用于 `sysbus32-dma4-storage-sram-374-final`，顶层 `xu_soc_sysbus32_ppa_top`，同一密封包159个RTL、同序 `rtl.f`、六项生产defines，以及该包本轮DC自己的 `mapped.v` / `mapped.ddc` / 已flush的 `final.svf`。不读取当前工作树替代reference；不包含TB、generic SRAM、旧353/S2的map/SVF。不继承旧42,338点、17个unmatched或511个unread例外。本目录的准备/审查均默认离线；本轮尚无原生FM通过。
