@@ -108,6 +108,9 @@ def check_cpu_full12(root):
             'CPU initial source package differs')
     require(sha(root / 'evidence/cpu-source-package-files.json') == m['cpu_source_package_files_sha256'],
             'initial immutable source-package receipt differs')
+    initial_receipt = json.loads((root / 'evidence/cpu-source-package-files.json').read_text())
+    require(initial_receipt['manifest.json'] == run['ppa_binding']['manifest_sha256'],
+            'CPU initial production manifest differs')
     require(run['ppa_binding']['production_rtl_files'] == m['production_rtl_files'] == production_files(root) and
             run.get('source_drift') == [], 'CPU/PPA complete production source SET differs')
     sm = json.loads((root / 'source-manifest.json').read_text())

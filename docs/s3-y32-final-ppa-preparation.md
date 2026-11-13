@@ -73,3 +73,24 @@ RTL→mapped formal证明。
 
 最终面积必须重新枚举所有leaf和54颗内部宏。原始库面积单位与官方宏计价/mm²尚需
 独立核定；旧353面积、旧GPIO活动和功耗结果都不继承给最终候选。
+
+## 后续已核验进展（等待生产完整12，尚未执行最终EDA）
+
+本地 `bind_when_ready.py` worker 正等待实际GPIO完整12的PASS；完成后自动生成新的
+`cpu12-bound-r1`，重放原始CPU日志并生成输入传输包和逐文件transfer manifest。
+该worker不启动EDA，也不上传文件。完整12未完成时不生成成功结果或替代数字。
+
+已补核真正回传的旧353 bias终态：16384条path按16个pin、每pin8个min/max交替
+阶段、每阶段128条path重放，与summary逐项一致；每pin3颗BUF，共48颗，原始
+characterized面积增加45.964800单位。最终目标最差min为+0.037193ns，max为
++3.912694ns。全量all-violators中的bias路径32→0、timing行583→551，三类DRC
+数量全不变；全局hold仍−0.13322231ns。回传14件不含after coverage，不能据此独立
+宣称coverage计数595→563，也没有DC持久化或fresh PT。完整复核在
+`bias-terminal-review.json`，这些结果仍只属于旧353。
+
+最终374诊断/ECO工具已放在 `experiments/s3-y32-final/ppa/eco/`。它要求最终map和
+PT报告SHA绑定的显式target plan；先只读诊断真实pin/local net/clock/latch拓扑，
+再同plan单buffer探针、受限hold延迟实验、DC回放及自己的eco.svf、fresh PT重载。
+没有旧pin默认值，GFCM clock-root仅导出实际local segment成员，未自动建树。
+Python/Tcl语法、旧595项parser完整重放、故意缺失一项时拒绝，以及复用的buffer
+contraction检查器selftest均通过；没有最终map原生探针或修复PASS。

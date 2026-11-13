@@ -70,6 +70,14 @@ def bind_cpu(a, out):
              cpu_full12_evidence={name: sha(out / 'evidence' / name) for _, name in artifacts},
              final_flow_tool_sha256={name: sha(out / name) for name in TOOLS},
              status='SEALED_FINAL_CPU12_BOUND_EDA_NOT_EXECUTED_NOT_QUALIFIED')
+    m['cpu_source_git_identity'] = {name: m.get(name) for name in
+        ['final_parent_commit', 'final_child_commit', 'final_parent_status', 'final_child_status']}
+    root = a.root.resolve()
+    child = root / 'third-party/e203_hbirdv2'
+    m.update(final_parent_commit=subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip(),
+        final_child_commit=subprocess.check_output(['git', '-C', str(child), 'rev-parse', 'HEAD'], text=True).strip(),
+        final_parent_status=subprocess.check_output(['git', '-C', str(root), 'status', '--porcelain'], text=True).splitlines(),
+        final_child_status=subprocess.check_output(['git', '-C', str(child), 'status', '--porcelain'], text=True).splitlines())
     m['compile_policy']['new_synthesis_sha256'] = sha(out / 'synth.tcl')
     dump(out / 'manifest.json', m)
     seal(out)

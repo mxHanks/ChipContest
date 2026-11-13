@@ -1,0 +1,1072 @@
+{
+  "added_characterized_area_library_units": "45.964800",
+  "all_violators": {
+    "after": {
+      "bias_violating_path_rows": 0,
+      "max_capacitance": 68,
+      "max_transition": 483,
+      "min_capacitance": 1416,
+      "timing_path_rows": 551
+    },
+    "before": {
+      "bias_violating_path_rows": 32,
+      "max_capacitance": 68,
+      "max_transition": 483,
+      "min_capacitance": 1416,
+      "timing_path_rows": 583
+    }
+  },
+  "endpoint_count": 16,
+  "execution_sha256": "baeb6040fd3bc26b20c2313ce116410861a512f4b5783d4083657314677d2f78",
+  "global_after_hold_topN_worst_ns": "-0.13322231",
+  "inserted_buffers": 48,
+  "limitations": [
+    "old353 bias structure/map only; final374 has a different bias owner/name/data path",
+    "32 bias timing path rows removed but551 other timing rows and unchanged DRC remain",
+    "full coverage after-edit was not in returned14-file subset; cannot claim595->563 coverage count as independently replayed",
+    "DC-persisted mapped.v/ddc/SVF and fresh PT reload absent; native exported changes only",
+    "library area dimension/mm2 and official macro charge unresolved"
+  ],
+  "native_status": "NATIVE_COLLECTION_COMPLETE_NOT_TIMING_CLOSURE",
+  "native_tool_errors": [],
+  "per_pin_insertions": 3,
+  "phase_detail": [
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[0]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[1]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.134720"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087943"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.091426"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.044354"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.027109"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.979930"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.037193"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.915631"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[2]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[3]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[4]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[5]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.134720"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087943"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.091426"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.044354"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.027109"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.979930"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.037193"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.915631"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[6]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[7]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[8]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[9]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[10]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[11]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[12]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[13]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[14]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    },
+    {
+      "endpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/u_core/bias/memory/mem_ext/macro/D[15]",
+      "groups": [
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "-0.102850"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "before",
+          "worst_slack_ns": "4.087441"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "-0.060515"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_1",
+          "worst_slack_ns": "4.041418"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "-0.006494"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_2",
+          "worst_slack_ns": "3.976994"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "min",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "0.047431"
+        },
+        {
+          "clock_edge_contexts": 8,
+          "delay": "max",
+          "paths": 128,
+          "phase": "after_buffer_3",
+          "worst_slack_ns": "3.912694"
+        }
+      ]
+    }
+  ],
+  "returncode": 0,
+  "schema": "old353-bias-terminal-local-review-v1",
+  "source_drift": [],
+  "status": "OLD353_LOCAL_BIAS_DELAY_EXPERIMENT_PASS_NOT_FINAL374_OR_GLOBAL_CLOSURE",
+  "total_endpoint_paths": 16384,
+  "verified_returned_outputs": {
+    "after-all_violators.rpt": {
+      "bytes": 2028053,
+      "sha256": "84b476299f96c8fb00933f78894c96caffd95cce383d8fcbecd36b4b6c965844"
+    },
+    "after-clocks.rpt": {
+      "bytes": 1396,
+      "sha256": "06dccae1d9979c686ec05945d5269103f352eaebac4f7590cfc8c08988554f50"
+    },
+    "after-hold.rpt": {
+      "bytes": 254468,
+      "sha256": "de3f125c786b69867fd29baf76341218fd090c6847354820512c31b3bf5c9b70"
+    },
+    "before-all_violators.rpt": {
+      "bytes": 2115637,
+      "sha256": "b95c0ce78b63f83f1bec171582f7f4ff539fb8b6779d650d1aff75a1b8e20b4f"
+    },
+    "before-clocks.rpt": {
+      "bytes": 1396,
+      "sha256": "e141d71823ca06f94ea707a4db8d8a70970ada69a8301028c6d492ffd1778b30"
+    },
+    "before-hold.rpt": {
+      "bytes": 255518,
+      "sha256": "ec4b93b305e6ff3bf5cba7c9ffa02bcc46c3cdda9a61bcb1c63dc4b37ff16c1e"
+    },
+    "cell-delta.tsv": {
+      "bytes": 6890,
+      "sha256": "d01083520806d7ecb512d99b02b183f6c603ca5874c92e2bc774260cea16e54d"
+    },
+    "changes.dctcl": {
+      "bytes": 6401,
+      "sha256": "b480bb26f748c90712eae90259e460e32e7a7e2d36b24014cc64c0a8825e9663"
+    },
+    "endpoint-paths.tsv": {
+      "bytes": 2996625,
+      "sha256": "b75a3cbc0ec00148f3d40c20fc11c0dade2971c0cacf01b58347924fb7d968e7"
+    },
+    "endpoint-summary.tsv": {
+      "bytes": 2711,
+      "sha256": "65ac6407d1e54d200d53ca09f2299e96bf4a6b08d36e4b1afbad76eec62dd97e"
+    },
+    "insertions.tsv": {
+      "bytes": 18753,
+      "sha256": "119759c1f9ea1665e0e8ad1776cdaf5bc8f197972ef7938f3f32e70de3fe20e0"
+    },
+    "native.log": {
+      "bytes": 733635,
+      "sha256": "8635173bac1752061821c211a738f3a979c0bd3cb53248bc557b9d07867bdc67"
+    },
+    "net-delta.tsv": {
+      "bytes": 6443,
+      "sha256": "a7593f89bfd62f6abca6d87327281fe08db0e94b659ca8a9d13ede5e191d5050"
+    }
+  },
+  "worst_final_target_max_slack_ns": "3.912694",
+  "worst_final_target_min_slack_ns": "0.037193"
+}
