@@ -54,3 +54,5 @@ through final Y. The checker also reports every inter-task gap, the continuous
 span including clear and gaps. Inter-task CPU readback, poison and protocol
 work is never silently dropped from the campaign value. All tasks/s figures
 are conversions at assumed 150 MHz until the same map passes STA.
+
+Published independent GPIO374 complete12 evidence and exact timing windows: [report](../../../docs/s3-y32-final-gpio-independent-validation.md). This is separate from the historical1064 N3 candidate.
