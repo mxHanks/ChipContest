@@ -1,0 +1,43 @@
+{
+  "schema": "s3-ingress-perf-report-PPA-input-identity-v1",
+  "status": "SEALED_INPUT_IDENTITY_ONLY",
+  "root": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2",
+  "manifest_sha256": "33895a85bd41bd23210457c45707e786c9ccaa3bd41efbe1efaacce3e2eb5faa",
+  "source_manifest_sha256": "f8f8e34a692e69928de4d0e2213a8a3696087c665554c9e27268c67894fe1f2e",
+  "hardware_profile": "sysbus32-x-sram-353-dev-n3",
+  "top": "xu_soc_sysbus32_ppa_top",
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1",
+    "XU_MATRIX_DMA",
+    "XU_MATRIX_DMA_SYSBUS32",
+    "XU_MATRIX_X_SRAM",
+    "XU_SYSBUS_TEST_LOADER"
+  ],
+  "source_count": 159,
+  "package_files_catalog_sha256": "96fbf8088cb2b94cc5bd682e09b9ec126762bd6c2dd54aad32caea854fb416ed",
+  "package_input_hashes_verified": 186,
+  "expected_geometry": {
+    "bias": 1,
+    "dtcm": 32,
+    "engines": 8,
+    "itcm": 32,
+    "mac_pe": 64,
+    "shared": 256,
+    "total_macros": 353,
+    "weights": 16,
+    "x": 16
+  },
+  "production_test_loader": true,
+  "declared_status": "SEALED_N3_DEVELOPMENT_INPUTS_NOT_EXECUTED_NOT_QUALIFIED",
+  "sealed_compile_source_hashes_verified": 159,
+  "N3_development_loader_extra_top_port_bits": 106,
+  "no_DC_STA_FM_area_or_power_verdict_imported": true,
+  "hardware_sources_verified_against_child": {
+    "xu_matrix_dma_sysbus32.sv": "859d87ef041e0fd0dd4e5eca96c924941e31865a8e5c86c92f6225d0f122e262",
+    "xu_systembus_ingress32.v": "aa62909db97c4961758d4e030cced6ba73b713fd965e16662ab581eb9b88ab3c",
+    "LinearTileDmaCore.sv": "0c3570c361d78b41bad2e4451335981c2fd4e59b8b07f6ac244632d7726cdb14",
+    "DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed"
+  },
+  "development_PPA_top_sha256": "8b575fd5d1b69493088dcc2793ed7d7fe038ec5801bbbcaf4f961a4c41c2dc68"
+}

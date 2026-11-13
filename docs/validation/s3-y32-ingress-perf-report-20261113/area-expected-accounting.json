@@ -1,0 +1,33 @@
+{
+  "schema": "s3-ingress-perf-report-area-accounting-v1",
+  "status": "EXPECTED_ACCOUNTING_ONLY_NO_NUMERIC_AREA",
+  "full_soc_macros": 353,
+  "charged_internal_macros": 33,
+  "excluded_reused_CPU_shared_macros": 320,
+  "result_macros": 0,
+  "result_and_bias_register_payload_bits": 8768,
+  "charged_scopes": [
+    "complete DMA/core including payload registers, assembly and metadata",
+    "complete upstream SystemBus ingress including N3 owner/control logic",
+    "complete NICE interface scope conservatively",
+    "shared endpoint standard-cell logic"
+  ],
+  "upper_bound": "Every full-SoC standard cell plus all33 internal macros; excludes only320 reused CPU/shared macros",
+  "official_mm2_and_macro_pricing": "UNRESOLVED; no contest area PASS follows from raw library area sums",
+  "note": "Declared register payload bits are not cell area; preserve full mapped leaf accounting, not a hand subtraction of result/bias buffers.",
+  "sealed_synthesis_source": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/synth.tcl",
+  "sealed_synthesis_source_sha256": "95354c86d97104037653bd21890edd98d28be9c26fc427b85c16f09642eba697",
+  "sealed_synthesis_area_guard_lines": [
+    57,
+    58,
+    59,
+    77,
+    78,
+    79,
+    80,
+    97,
+    106,
+    111,
+    113
+  ]
+}

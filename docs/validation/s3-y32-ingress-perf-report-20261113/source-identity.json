@@ -1,0 +1,50 @@
+{
+  "schema": "s3-ingress-perf-report-source-identity-v1",
+  "child_commit": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+  "frozen_reference_child": "bde23ba9d06c57f6536d9992b3cd3427daccd9f8",
+  "production_rtl_files_compared": 168,
+  "production_rtl_changed": [
+    "rtl/e203/perips/xu_matrix_dma_sysbus32.sv",
+    "rtl/e203/subsys/xu_systembus_ingress32.v"
+  ],
+  "cpu_captured_rtl_byte_identical_to_child": 167,
+  "cpu_captured_model_replacement": [
+    "rtl/perips/mem_1024x16.sv"
+  ],
+  "cpu_captured_extra_model_and_observer_files": [
+    "rtl/perips/generic_ramsp_non_ppa.sv",
+    "rtl/perips/tile_physical_observer.sv",
+    "rtl/perips/xu_compliance_shared_sram.sv",
+    "rtl/perips/xu_shared_icb_sram.sv"
+  ],
+  "model_transform_receipt": {
+    "mem_1024x16.sv": {
+      "origin": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/tools/ppa/xu_weight_sram_adapter.sv",
+      "origin_sha256": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707",
+      "production_sha256": "1cbca87c6e0920d05fa6803ef4c8dd0778cde8525c90d3d5db4c488ad9b084e4",
+      "replacement": "byte-identical PPA macro adapter",
+      "transformed_sha256": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707"
+    },
+    "xu_compliance_shared_sram.sv": {
+      "origin": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/tools/ppa/xu_sirv_sram_adapter.sv",
+      "origin_sha256": "b2b2baaa1e105ed794382886439cd2c16fd280a0f29b54c4d925351e6f90a0c5",
+      "replacement": [
+        "module sirv_sim_ram #",
+        "module xu_compliance_shared_sram #"
+      ],
+      "transformed_sha256": "778eab30e4aea5d2b51c856e0624e1d9f8cc44396ab5bca32eb23f17dbf67166"
+    },
+    "xu_shared_icb_sram.sv": {
+      "origin": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/tools/ppa/xu_shared_icb_sram.sv",
+      "origin_sha256": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d",
+      "replacement": [
+        "sirv_sim_ram #",
+        "xu_compliance_shared_sram #"
+      ],
+      "transformed_sha256": "6637bb609414fab7f4752ad8e2912b8b9b94962420747a049f8e977e6be21f24"
+    }
+  },
+  "firmware_c_sha256": "13dc0f5e5bc26d6fbe1845fb45d2c851e393cd178b1f76fcb9e4a50d7a7be072",
+  "capture_note": "Full12 ran before the two RTL edits were committed; captured per-file hashes bind those exact bytes to child 5470. The recorded bde23ba HEAD plus dirty diff is not an alternate hardware candidate.",
+  "platform_note": "All other production RTL files, including CPU/LSU/BIU and original mem_fab, are byte-identical to the frozen baseline."
+}

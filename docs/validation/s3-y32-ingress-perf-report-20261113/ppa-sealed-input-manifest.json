@@ -1,0 +1,116 @@
+{
+  "area_result": null,
+  "candidate_child_commit": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+  "candidate_parent_commit": "1aceb3d607bb8e9fb0414b84a70eb0766c414bc3",
+  "compile_policy": {
+    "PPA_only_compile_source_delta": [
+      "source/ppa/xu_soc_sysbus32_ppa_top.sv"
+    ],
+    "allowed_differences": [
+      "production32 top and define",
+      "production32 hierarchy checks",
+      "replace downstream wide arbiter accounting with upstream ingress accounting",
+      "sealed exact337/353 macro profile and charge guards",
+      "conservative complete NICE scope charge and full-SoC-standard-cell upper bound",
+      "new experiment labels"
+    ],
+    "false_or_multicycle_or_io_relaxation_added": false,
+    "new_synthesis_sha256": "95354c86d97104037653bd21890edd98d28be9c26fc427b85c16f09642eba697",
+    "own_svf": "final.svf",
+    "patch_sha256": "e32d17f1eee8ee0adabcb40e6949259529dbabaaf0aec50925dd9daec367f373",
+    "reference_B_synthesis_sha256": "fdd787ddc78897359d76071cd8fe9db6fec77c7280300a4738b8e2a32d697529",
+    "resource_change": "Explicit new user authorization cap8; original other compile/SDC/library policy unchanged",
+    "retained_commands": [
+      "set_host_options -max_cores 8",
+      "set_boundary_optimization [get_cells -hierarchical -filter {is_hierarchical == true}] false",
+      "set_dont_touch [get_cells -hierarchical -filter {ref_name == RAMSP1024X16}] true",
+      "set_fix_hold [all_clocks]",
+      "compile_ultra -no_autoungroup",
+      "set XU_CLOCK_MODE envelope",
+      "set XU_PLL_DIV 0",
+      "source source/contracts/reference-full-soc.sdc"
+    ],
+    "sdc_byte_identical": true
+  },
+  "cpu_core_and_mem_fab_exact_unchanged": true,
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1",
+    "XU_MATRIX_DMA",
+    "XU_MATRIX_DMA_SYSBUS32",
+    "XU_MATRIX_X_SRAM",
+    "XU_SYSBUS_TEST_LOADER"
+  ],
+  "development_measurement": {
+    "CPU_actual_functional_RAMSP_models": 289,
+    "CPU_behavioral_ITCM_DTCM": true,
+    "CPU_defines": [
+      "DISABLE_SV_ASSERTION=1",
+      "XU_MATRIX_DMA",
+      "XU_MATRIX_DMA_SYSBUS32",
+      "XU_SYSBUS_TEST_LOADER",
+      "XU_MATRIX_X_SRAM"
+    ],
+    "assumed_clock_hz": 150000000,
+    "conditional_tasks_per_second": 1064.3506,
+    "outputs": 304128,
+    "production_or_SDK_throughput_certified": false,
+    "result_sha256": "e4748261e09801882e91224f989e4e202372d74fac110d122c4837b211b56828",
+    "source_scope": "Original source/core/DMA/ingress; PPA-only106bit direct loader top exposure and physical CPU SRAM adapters",
+    "total_cycles": 1691172
+  },
+  "expected_geometry": {
+    "bias": 1,
+    "dtcm": 32,
+    "engines": 8,
+    "itcm": 32,
+    "mac_pe": 64,
+    "shared": 256,
+    "total_macros": 353,
+    "weights": 16,
+    "x": 16
+  },
+  "expected_internal_macros": 33,
+  "hardware_profile": "sysbus32-x-sram-353-dev-n3",
+  "mapped_equivalence": "PENDING_NEW32_NETLIST",
+  "official_mm2_and_macro_pricing": "UNRESOLVED",
+  "original_N2_package_sha256": "b2a7727bbcefdcb41efd2b41889e8bcf323c69625360fd63a0f8cf047b4c7e9e",
+  "physical_profile": {
+    "cpu_macros": 64,
+    "exposed_loader_interface_bits": 106,
+    "full_soc_macros": 353,
+    "ingress_sources": 3,
+    "internal_macros": 33,
+    "owner_entries": 4,
+    "pointer_bits": 2,
+    "result_macros": 0,
+    "shared_macros": 256
+  },
+  "power_activity": "PENDING_SEPARATE_SAME_NETLIST_SAME_WINDOW_ACTIVITY",
+  "private_old_build_tree_required": false,
+  "production_qualification": "DEVELOPMENT_N3_LOADER_CANDIDATE_NOT_PRODUCTION1000_CERTIFICATION",
+  "production_test_loader": true,
+  "reference_recovery_sha256": "36dcd5c93ee05b4105befc20dc53cfd009977602ebb2e6f4f8f7486c146ef817",
+  "report_collection": "native-proven global/group setup/hold, all violators, recovery/removal, gating, min pulse, exceptions, coverage and clock-pin attribution; collection is not closure",
+  "resource_policy": {
+    "linux_affinity_cores": 8,
+    "one_own_eda_stage_at_a_time": true,
+    "requested_cores": 8,
+    "reserve_at_least_two_other_allowed_cpus": true,
+    "source": "User explicitly authorized multi-core for speed after prior2core preference",
+    "user_authorized_cap": 8
+  },
+  "rtl_f_sha256": "0de94264b6043f856b14d42e27636d1b4dc57e6a8a264fdc173176021ccfcb25",
+  "schema": "sysbus32-sealed-synthesis-preparation-v1",
+  "selected_B41_core_sha256": "710b8e180652f49751769e152a3b3a9e6a35ba622fb4c3e2385dc5ffab241fcb",
+  "source_count": 159,
+  "source_manifest_sha256": "f8f8e34a692e69928de4d0e2213a8a3696087c665554c9e27268c67894fe1f2e",
+  "sta_run": false,
+  "staged_core_sha256": "0c3570c361d78b41bad2e4451335981c2fd4e59b8b07f6ac244632d7726cdb14",
+  "status": "SEALED_N3_DEVELOPMENT_INPUTS_NOT_EXECUTED_NOT_QUALIFIED",
+  "synthesis_run": false,
+  "timing_verdict": "NOT_RUN",
+  "toolchain_sha256": "cc62f6dbac92dc1032f795590c41363c2912e9d94b18bd9fc07765654581cea6",
+  "top": "xu_soc_sysbus32_ppa_top",
+  "x_candidate_manifest_sha256": "5a7ae65ece333666fdf15c6c717bc9a102892d3d36a0fcc04305b0f6a780abdd"
+}

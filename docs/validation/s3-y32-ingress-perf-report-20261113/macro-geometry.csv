@@ -1,0 +1,8 @@
+component,full_soc_PPA_macros,original_CPU_functional_macro_models,note
+CPU ITCM,32,0,CPU simulation retains behavioral RAM
+CPU DTCM,32,0,CPU simulation retains behavioral RAM
+shared 512 KiB endpoint,256,256,32-bit endpoint; two 16-bit lanes per bank
+weights,16,16,internal physical macro owners
+bias,1,1,bias macro plus register prefetch slots
+X,16,16,physical 16-macro double set; 1024 used INT16 words
+result/Y buffers,0,0,"register FIFO/engine result registers/DMA snapshot, not SRAM macros"

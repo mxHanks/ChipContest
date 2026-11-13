@@ -1,0 +1,21 @@
+run,tasks,phase,total_cycles,mean_cycles_per_task
+baseline,12,physical clear,12336,1028.0
+baseline,12,complete source loading,1515973,126331.08333333333
+baseline,12,DMA reads/compute/Y-response retirement,2039579,169964.91666666666
+baseline,12,control gaps,802,66.83333333333333
+full12,12,physical clear,12336,1028.0
+full12,12,complete source loading,505368,42114.0
+full12,12,DMA reads/compute/Y-response retirement,1172748,97729.0
+full12,12,control gaps,720,60.0
+serialized-loader,1,physical clear,1028,1028.0
+serialized-loader,1,complete source loading,90237,90237.0
+serialized-loader,1,DMA reads/compute/Y-response retirement,97731,97731.0
+serialized-loader,1,control gaps,65,65.0
+dma-first-wait31,1,physical clear,1028,1028.0
+dma-first-wait31,1,complete source loading,42113,42113.0
+dma-first-wait31,1,DMA reads/compute/Y-response retirement,97762,97762.0
+dma-first-wait31,1,control gaps,65,65.0
+load-first-wait31,1,physical clear,1028,1028.0
+load-first-wait31,1,complete source loading,42144,42144.0
+load-first-wait31,1,DMA reads/compute/Y-response retirement,97728,97728.0
+load-first-wait31,1,control gaps,63,63.0
