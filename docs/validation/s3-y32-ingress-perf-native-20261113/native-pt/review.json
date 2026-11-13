@@ -1,0 +1,160 @@
+{
+  "schema": "ingress1064-native-PT-return-review-v1",
+  "status": "ALL_CURATED_NATIVE_BYTES_AND_COUNTS_VERIFIED_NOT_TIMING_CLOSED",
+  "archive_sha256": "09e9ae4c672173081fab661fd7422b1bd49386ae7482d61af813269e55693097",
+  "tar_regular_members": 65,
+  "catalog_files_verified": 64,
+  "execution_outputs_verified": 46,
+  "execution_sha256": "93b2808c0ff16c60d41d35f07bc5ca4cc95486a82fdc3699e2d501165479c4c0",
+  "source_DC_execution_sha256": "19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290",
+  "raw_map_SVF_verified_against_returned_DC": true,
+  "elapsed_seconds": 19.76888608932495,
+  "linux_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "max_cores": 8,
+  "coverage": {
+    "setup": {
+      "total": 83486,
+      "met": 79414,
+      "violated": 0,
+      "untested": 4072
+    },
+    "hold": {
+      "total": 83486,
+      "met": 78982,
+      "violated": 434,
+      "untested": 4070
+    },
+    "recovery": {
+      "total": 19889,
+      "met": 19887,
+      "violated": 0,
+      "untested": 2
+    },
+    "removal": {
+      "total": 19889,
+      "met": 19884,
+      "violated": 5,
+      "untested": 0
+    },
+    "min_period": {
+      "total": 11649,
+      "met": 706,
+      "violated": 0,
+      "untested": 10943
+    },
+    "min_pulse_width": {
+      "total": 110473,
+      "met": 100225,
+      "violated": 0,
+      "untested": 10248
+    },
+    "clock_gating_setup": {
+      "total": 27,
+      "met": 27,
+      "violated": 0,
+      "untested": 0
+    },
+    "clock_gating_hold": {
+      "total": 27,
+      "met": 0,
+      "violated": 27,
+      "untested": 0
+    },
+    "out_setup": {
+      "total": 179,
+      "met": 178,
+      "violated": 1,
+      "untested": 0
+    },
+    "out_hold": {
+      "total": 179,
+      "met": 179,
+      "violated": 0,
+      "untested": 0
+    }
+  },
+  "coverage_total": {
+    "total": 329284,
+    "met": 299482,
+    "violated": 467,
+    "untested": 29335
+  },
+  "untested_reasons": {
+    "no_clock": 10248,
+    "constant_disabled": 19083,
+    "unknown": 4
+  },
+  "timing_report_path_blocks": 455,
+  "gating_pin_context_reconciliation": {
+    "total": 455,
+    "by_type": {
+      "out_setup": 1,
+      "removal": 5,
+      "clock_gating_hold": 15,
+      "hold": 434
+    },
+    "gating_coverage_contexts": 27,
+    "gating_unique_constrained_pins": 15,
+    "exactly_matching_constrained_pin_sets": true,
+    "gating_two_clock_pin_count": 12,
+    "gating_single_clock_pin_count": 3,
+    "note": "Coverage counts clock-specific checks; verbose constraint timing reports retain15 worst pin paths for27 gating contexts. All15 actual data A1 pins match. This is not12 missing pins and does not mean27 contexts were independently printed as27 paths."
+  },
+  "electrical_DRC": {
+    "counts": {
+      "max_capacitance": 67,
+      "min_capacitance": 1416,
+      "max_transition": 490
+    },
+    "total": 1973,
+    "worst_slack_native": {
+      "max_capacitance": -0.07670643,
+      "min_capacitance": -0.0005,
+      "max_transition": -0.9845587
+    }
+  },
+  "slack_ns": {
+    "max": "-5.18605757",
+    "max_report": "setup.rpt:91",
+    "max_check": "out_setup to io_pads_gpioA_o_oval[27], not register setup or compute-core Fmax",
+    "min": "-0.13472039",
+    "min_report": "hold.rpt:63"
+  },
+  "clock_association": {
+    "register_clock_pins": 26379,
+    "register_no_clock_pins": 706,
+    "register_multi_clock_pins": 24453,
+    "SRAM_CLK_pins": 353,
+    "SRAM_no_clock_pins": 0,
+    "SRAM_multi_clock_pins": 353
+  },
+  "models": {
+    "DC_setup": "-366.30566406",
+    "DC_setup_archive_sha256": "99cff9ee6bfbb670bcb83595d85cfa45c5bb16dc88517a9bf1da641a9125437c",
+    "DC_setup_member": "candidate/dc-setup.rpt",
+    "DC_setup_member_sha256": "d9bbe1027fdba396b9acfeca4961036124d3d7500243485249f3cb65517c2f22",
+    "DC_model_header_lines": [
+      12,
+      15
+    ],
+    "DC_U8_increment": "372.12545776",
+    "DC_startpoint": "hfextclk clock source",
+    "PT_startpoint": "GFCM/u_clk1_clkgate/enb_reg latch",
+    "same_debug_output": "io_pads_gpioA_o_oval[27]",
+    "PT_U8_increment": "6.09815884",
+    "PT_design_model_report": "designs.rpt:24-29: wire_load_mode top, model_max/min and selection groups --",
+    "PT_parasitics_report": "parasitic_annotation.rpt:24:177700 total nets, all177700 unannotated; no lumped/RCpi/RCnetwork annotation",
+    "interpretation": "Both raw values must remain labeled by tool/model. Observable path-start/delay-estimation differences prevent treating slack change as an ECO/physical timing improvement. No frequency or closure follows, and this review does not apportion the numerical gap causally."
+  },
+  "original_failed_collector_preserved": true,
+  "qualification": false
+}

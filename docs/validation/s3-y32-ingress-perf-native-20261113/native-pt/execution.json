@@ -1,0 +1,334 @@
+{
+  "collector_repair": {
+    "actual_collector_sha256": "55fb8388f87ef1fbcbbc9ccd79250c9ad2b93a91f40f7875823618dc3589f1b3",
+    "change": "report_host_options to native-proven report_host_usage -verbose; no other collector change",
+    "initial_failed_pt_sha256": "c0adde8babf17ae2677206678040bb243d2f90201193cb11c496b46a0cd6488a",
+    "original_collector_sha256": "4bc40f1e39811b44e67906bf371082799cc16adfcd1a85fcb907a3bc35fd1bea",
+    "package_files_sha256": "6f4655e38c72aa0c0be6d44c0a6a92274f755ae2782848d1b0628472ce5e45cd"
+  },
+  "command": [
+    "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+    "-f",
+    "/tmp/codex-ingress1064-pt-recollect-20261113-r1/candidate/pt_collect.tcl"
+  ],
+  "completion_marker": true,
+  "coordination_note": "User authorized cap8. Read-only same-map PT recollection changes only unsupported host report API; original design/library/SDC/failed receipts retained.",
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1",
+    "XU_MATRIX_DMA",
+    "XU_MATRIX_DMA_SYSBUS32",
+    "XU_MATRIX_X_SRAM",
+    "XU_SYSBUS_TEST_LOADER"
+  ],
+  "external_identities": [
+    {
+      "is_symlink": false,
+      "path": "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+      "resolved_path": "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+      "sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+    },
+    {
+      "is_symlink": false,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+      "resolved_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+      "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+    },
+    {
+      "is_symlink": false,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+      "resolved_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+      "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+    },
+    {
+      "is_symlink": true,
+      "path": "/eda/synopsys/lib_compiler/lib_compiler_2022.03-SP5/bin/lc_shell",
+      "resolved_path": "/eda/synopsys/lib_compiler/lib_compiler_2022.03-SP5/bin/snps_shell",
+      "sha256": "15bb8615ae34742544f2149daa47c645d41fd0080372b0a453e7bd19ed083166"
+    }
+  ],
+  "finished_epoch": 1794568961.2597456,
+  "hardware_profile": "sysbus32-x-sram-353-dev-n3",
+  "inputs": 186,
+  "libraries": [
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+      "role": "standard_cell",
+      "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+      "role": "sram",
+      "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+    }
+  ],
+  "linux_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "loadavg": [
+    6.93,
+    7.83,
+    10.27
+  ],
+  "manifest_sha256": "96fbf8088cb2b94cc5bd682e09b9ec126762bd6c2dd54aad32caea854fb416ed",
+  "mapping_or_timing_qualification": false,
+  "max_cores": 8,
+  "missing_required_outputs": [],
+  "native_tool_errors": [],
+  "observed_jobs": [],
+  "online_cpus": 96,
+  "outputs": {
+    "SYSBUS32_PT_COLLECTION_COMPLETE_NOT_QUALIFIED.txt": {
+      "bytes": 146,
+      "sha256": "1fb1d0536befedf2e47c8a762b6a0e4d859b3173d2f1f14f5adf481bd5824a35"
+    },
+    "constraints-pt-add.sdc": {
+      "bytes": 6384,
+      "sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98"
+    },
+    "pt-status.txt": {
+      "bytes": 1118,
+      "sha256": "343e33ff6a995e2e6a35cbc3fa75aaabbdad6df1ab60086bac66ed9386d6874e"
+    },
+    "pt.log": {
+      "bytes": 172795,
+      "sha256": "8599237d19a6e535a0ad5ae48de145338375ae2697cb35f89173c19a402350bb"
+    },
+    "pt_shell_command.log": {
+      "bytes": 58233,
+      "sha256": "7171a8ae6ca383f99a9a40b9747d21584bac9f9c7f84bec39cf076f8b253f510"
+    },
+    "reports/all_violators.rpt": {
+      "bytes": 1714555,
+      "sha256": "2414e20a76b87d47c81505b029bc90a558563a5c4b785ed429bfb6e1b9a7de50"
+    },
+    "reports/async_pin_max.rpt": {
+      "bytes": 191205,
+      "sha256": "f5ecb91ad1f1d35a8d25a22df1590425fbd4539dab37dae158f5d1e00554a3a3"
+    },
+    "reports/async_pin_min.rpt": {
+      "bytes": 139941,
+      "sha256": "6fce9164ac3dfedbc5b80800f33e4b618bc81ea472278343225189c6a7e3fce0"
+    },
+    "reports/case_analysis.rpt": {
+      "bytes": 1603440,
+      "sha256": "c731096b46b335180036153f69aa7b0193b0d75ac028e1a35a7b3e07df2dab7e"
+    },
+    "reports/check_timing.rpt": {
+      "bytes": 1990,
+      "sha256": "69a96e772413aa176bf11ebc7070eba7103167dae81aa8a4fda2e7e0c3eb316c"
+    },
+    "reports/clock_endpoints.tsv": {
+      "bytes": 4250633,
+      "sha256": "730806cbc4b9180502c14f12d3acd18321f764eace23eb3a6e0e635f90dd5953"
+    },
+    "reports/clock_gating_hold.rpt": {
+      "bytes": 38098,
+      "sha256": "89557af8d3521cdc5c839f11d896b1b9db8a582c9495bfff0a1528f52c595f93"
+    },
+    "reports/clock_gating_setup.rpt": {
+      "bytes": 245,
+      "sha256": "7225d3d183d3cc3176d7d82a79fecaf401f8b79254dd9045d61ca7171d89fa8c"
+    },
+    "reports/clocks.rpt": {
+      "bytes": 1396,
+      "sha256": "4920bff8d0d74baa9e5f030e3afa5e1d99b03eb7fdc6b1c2a70c3285e25631d2"
+    },
+    "reports/coverage.rpt": {
+      "bytes": 8679316,
+      "sha256": "e3682b9d0af74bd1c2275c4663c589d6f94c2f40402edf3fd850e3b69df59c8d"
+    },
+    "reports/designs.rpt": {
+      "bytes": 1829,
+      "sha256": "75e097019adac75dfb6937584ba90672b24a4a72942978f764148fd8bd0719d8"
+    },
+    "reports/disable_timing.rpt": {
+      "bytes": 23228867,
+      "sha256": "f7aad3e84cbadc261bdf7e9f2d38b84a48f6ac2f87eacc403ae5d4d343b06bd8"
+    },
+    "reports/dma-register-hold.rpt.unavailable.txt": {
+      "bytes": 186,
+      "sha256": "70dbb1cf6d0d3b0397a6035ed9ef9e4c27b815920c64eb2d4735ab521d464c6c"
+    },
+    "reports/dma-register-setup.rpt.unavailable.txt": {
+      "bytes": 186,
+      "sha256": "70dbb1cf6d0d3b0397a6035ed9ef9e4c27b815920c64eb2d4735ab521d464c6c"
+    },
+    "reports/exceptions.rpt": {
+      "bytes": 197,
+      "sha256": "ceba59920751e974c3852747beb89e4ce4306c054dc0fba3e614da21f5487455"
+    },
+    "reports/group-**async_default**-hold.rpt": {
+      "bytes": 50436,
+      "sha256": "bfaaab44d82582e7b8e5543fc34af4336556d635144db6042e9fbb2365ac491d"
+    },
+    "reports/group-**async_default**-setup.rpt": {
+      "bytes": 76832,
+      "sha256": "b45a696259d9a70d7d39b1164b41bd42ba1abde5c6eb1800e81c1f9981cfc857"
+    },
+    "reports/group-**clock_gating_default**-hold.rpt": {
+      "bytes": 38201,
+      "sha256": "494a77326b164c1d78a1aa730a56f06f51cb24b49d954a00e3abe044225feac8"
+    },
+    "reports/group-**clock_gating_default**-setup.rpt": {
+      "bytes": 40740,
+      "sha256": "ef5472c5098ad7ee42865fd90fde3da1f55149800f3dcc8a137b1c7551557a9d"
+    },
+    "reports/group-**default**-hold.rpt": {
+      "bytes": 344,
+      "sha256": "7c6ce6280abafbd9cda5c7b06daec4e39eee536156f04696d730f9e542f6e7c7"
+    },
+    "reports/group-**default**-setup.rpt": {
+      "bytes": 344,
+      "sha256": "1c134a3244f7eb19623dc0c2120ff4753e9ecf3dc5cb9cc03f245f61aa004718"
+    },
+    "reports/group-xu_hfextclk-hold.rpt": {
+      "bytes": 43872,
+      "sha256": "df2a8715240df335eb666eae7c3a35ef01ec2cd7a83ac0e6c8269978c0cf4fab"
+    },
+    "reports/group-xu_hfextclk-setup.rpt": {
+      "bytes": 371974,
+      "sha256": "dda5d9f34bfbd3324fb1e188afe3c376e54fc500be1379cfca03257bd2a94500"
+    },
+    "reports/group-xu_jtag_tck-hold.rpt": {
+      "bytes": 53477,
+      "sha256": "18293bfc2ed4ba03a8356d4b94c2c4ab3399e079079219b3d1b2e24f0c4761ef"
+    },
+    "reports/group-xu_jtag_tck-setup.rpt": {
+      "bytes": 59629,
+      "sha256": "7720796ff55b4de7c479471c591a9c7bc209c379301d4836bd4eaca084993891"
+    },
+    "reports/group-xu_lfextclk-hold.rpt": {
+      "bytes": 48426,
+      "sha256": "9a81463d1dbd311558894ddda890e1d279df23aad9f5bd6d86079aa0c92e0dc9"
+    },
+    "reports/group-xu_lfextclk-setup.rpt": {
+      "bytes": 157077,
+      "sha256": "6d7a1c098893a2961b06ab9cd05c8c1b5c68e426842134d354251cb2c3eb3ee8"
+    },
+    "reports/group-xu_plldiv_envelope-hold.rpt": {
+      "bytes": 44159,
+      "sha256": "38750d9d7e0bb09664c77f09175b66c93b8b75df8b4127b47115a51033d502f3"
+    },
+    "reports/group-xu_plldiv_envelope-setup.rpt": {
+      "bytes": 388376,
+      "sha256": "7e9caa35bb43d37d913ca5e2a57d41b234bb823be4651c59710e8a7311ae4875"
+    },
+    "reports/hold.rpt": {
+      "bytes": 117043,
+      "sha256": "ae4f3b9e72356415192db5824928dd48f11f2fe7eabb3a6881dd214054231066"
+    },
+    "reports/host-options.rpt": {
+      "bytes": 942,
+      "sha256": "6009a9c034a49c4f6f1d83dc886bdd9635151b3b315b396ad8161a6b8b9eb9ec"
+    },
+    "reports/min_pulse_width.rpt": {
+      "bytes": 242,
+      "sha256": "ceb62bf67970aa5724f8c4db4e6848789d120caa0527b47a8569189bf229ca67"
+    },
+    "reports/native-pin-attributes.rpt": {
+      "bytes": 20499,
+      "sha256": "1280d7ece8cb9fd1ed9e724deba63e34d3c68b22041eaca4cfb2fd37a640ec3f"
+    },
+    "reports/operating_conditions.rpt.unavailable.txt": {
+      "bytes": 222,
+      "sha256": "8abb3c3747dc4182082d23f6c0e21e6f606d21e65c514a715529cc37f5870195"
+    },
+    "reports/parasitic_annotation.rpt": {
+      "bytes": 1256,
+      "sha256": "985031d715610eb021cc8644fc4f3123d1813cc03c302ec30231ad3d7b85aef4"
+    },
+    "reports/recovery.rpt": {
+      "bytes": 235,
+      "sha256": "59867b62c8e299dc6a87491dce5b9723922561b8a007d477ab07f33edc2259fa"
+    },
+    "reports/removal.rpt": {
+      "bytes": 12559,
+      "sha256": "4fa5db6e8471232c4405f6a3cdc31b94b2b967a93944c0edefcdff18a330845e"
+    },
+    "reports/setup.rpt": {
+      "bytes": 2348546,
+      "sha256": "179428c8cc601bae2148c800fce6b952d60f4a9d84c070f5c2a78c0f00100231"
+    },
+    "reports/units.rpt": {
+      "bytes": 445,
+      "sha256": "0b117aecb890a0760b02d8afba1739bd0634248e075c206f71ba10bbc51124db"
+    },
+    "required-reports.list": {
+      "bytes": 1010,
+      "sha256": "d11a4c8f140071d6fbd5c6ac6c779150855879024ff07a77f57e2a65af502f77"
+    },
+    "sdc-portability-receipt.txt": {
+      "bytes": 592,
+      "sha256": "58d5a83e04117468101b4aa2a29558ae02252002fbb093890e302b6ab72e5dc2"
+    }
+  },
+  "pid": 97426,
+  "preexisting_jobs_policy": "READ_ONLY_OBSERVATION_NEVER_STOP_OR_MODIFY",
+  "qualification": "NOT_QUALIFIED",
+  "resource_policy": "USER_COORDINATED_INDEPENDENT_MAX8CORE_JOB",
+  "returncode": 0,
+  "run_requested": true,
+  "schema": "ingress1064-same-source-pt-recollection-v1",
+  "source_dc": {
+    "execution_sha256": "19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290",
+    "outputs": {
+      "area-components.tsv": {
+        "bytes": 684,
+        "sha256": "e640b073e4cbd146dafbb884b71b1c18cf06eae706d05387aa7b8ac3e8ee4fff"
+      },
+      "area-upper-bound.tsv": {
+        "bytes": 359,
+        "sha256": "9be43431c2b8426fe2e921eadb63ce2906a075763dbd6f5c6568afb1ee4386c9"
+      },
+      "final.svf": {
+        "bytes": 1022208,
+        "sha256": "217072e874c2f35cf25a0f5b191209cab0770110eabc92ac34857258174f5cd3"
+      },
+      "leaf-area-summary.txt": {
+        "bytes": 401,
+        "sha256": "4b46856a1344f4432bbf016a02951938df4f8f0398951805375f08e30efd078e"
+      },
+      "leaf-inventory.tsv": {
+        "bytes": 22433912,
+        "sha256": "4bda1ce9359326412ec1c3a0fce51d13d59fe86bcabe486271a03419291df489"
+      },
+      "libraries.tcl": {
+        "bytes": 554,
+        "sha256": "1f3573d96942fe2fb43ec86abcc85711d94cf83c1543017751a29615c5657d53"
+      },
+      "mapped.ddc": {
+        "bytes": 15736832,
+        "sha256": "0a35b959ec431f9367a3e99da0f069190ea2a9232948d0aadb5df5520d3e55d9"
+      },
+      "mapped.sdc": {
+        "bytes": 89482,
+        "sha256": "2686b8bc7542f673e329a9e3ef2f3587ffb39d26be8744da1b39b3b77be5eac8"
+      },
+      "mapped.v": {
+        "bytes": 15666077,
+        "sha256": "882b160f2dfde6a9593f63212ae173fc96bb00b6212c56d304a6e6e80ae4e56e"
+      }
+    }
+  },
+  "source_drift": [],
+  "stage": "pt",
+  "started_epoch": 1794568941.4908595,
+  "status": "PT_REPORT_COLLECTION_COMPLETE_NOT_QUALIFIED",
+  "timeout_seconds": 300,
+  "timing_verdict": "UNREVIEWED_NOT_A_TIMING_PASS",
+  "tool": {
+    "path": "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+    "sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+  },
+  "tool_timed_out": false,
+  "top": "xu_soc_sysbus32_ppa_top",
+  "user_authorized_cap": 8
+}

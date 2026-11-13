@@ -1,0 +1,424 @@
+{
+  "schema": "ingress1064-native-PT-independent-original-review-v1",
+  "status": "ORIGINAL_REPORT_COUNTS_RECONCILED_NOT_TIMING_CLOSED_OR_QUALIFIED",
+  "review_method": "Read-only local raw report/execution review. No remote/native tool execution, ECO, map/SDC/source edits or report prose edits.",
+  "source_execution_sha256": "93b2808c0ff16c60d41d35f07bc5ca4cc95486a82fdc3699e2d501165479c4c0",
+  "execution_output_files_independently_verified": 46,
+  "source_record_status": "PT_REPORT_COLLECTION_COMPLETE_NOT_QUALIFIED",
+  "returncode": 0,
+  "source_drift": [],
+  "native_tool_errors": [],
+  "missing_required_outputs": [],
+  "original_catalog_sha256": "96fbf8088cb2b94cc5bd682e09b9ec126762bd6c2dd54aad32caea854fb416ed",
+  "native_DC_execution_sha256": "19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290",
+  "mapped_v_receipt_sha256": "882b160f2dfde6a9593f63212ae173fc96bb00b6212c56d304a6e6e80ae4e56e",
+  "final_svf_receipt_sha256": "217072e874c2f35cf25a0f5b191209cab0770110eabc92ac34857258174f5cd3",
+  "identity_note": "map/SVF are bound by native DC/PT receipts here; this review did not hash still-returning large raw map/DDC/SVF bytes.",
+  "source_files": [
+    {
+      "path": "recollection/reports/coverage.rpt",
+      "sha256": "e3682b9d0af74bd1c2275c4663c589d6f94c2f40402edf3fd850e3b69df59c8d",
+      "bytes": 8679316
+    },
+    {
+      "path": "recollection/reports/all_violators.rpt",
+      "sha256": "2414e20a76b87d47c81505b029bc90a558563a5c4b785ed429bfb6e1b9a7de50",
+      "bytes": 1714555
+    },
+    {
+      "path": "recollection/reports/clock_gating_hold.rpt",
+      "sha256": "89557af8d3521cdc5c839f11d896b1b9db8a582c9495bfff0a1528f52c595f93",
+      "bytes": 38098
+    },
+    {
+      "path": "recollection/reports/setup.rpt",
+      "sha256": "179428c8cc601bae2148c800fce6b952d60f4a9d84c070f5c2a78c0f00100231",
+      "bytes": 2348546
+    },
+    {
+      "path": "recollection/reports/hold.rpt",
+      "sha256": "ae4f3b9e72356415192db5824928dd48f11f2fe7eabb3a6881dd214054231066",
+      "bytes": 117043
+    },
+    {
+      "path": "recollection/reports/designs.rpt",
+      "sha256": "75e097019adac75dfb6937584ba90672b24a4a72942978f764148fd8bd0719d8",
+      "bytes": 1829
+    },
+    {
+      "path": "recollection/reports/parasitic_annotation.rpt",
+      "sha256": "985031d715610eb021cc8644fc4f3123d1813cc03c302ec30231ad3d7b85aef4",
+      "bytes": 1256
+    },
+    {
+      "path": "recollection/reports/clock_endpoints.tsv",
+      "sha256": "730806cbc4b9180502c14f12d3acd18321f764eace23eb3a6e0e635f90dd5953",
+      "bytes": 4250633
+    }
+  ],
+  "collector_sources": [
+    {
+      "path": "collector-package/pt_collect.tcl",
+      "sha256": "55fb8388f87ef1fbcbbc9ccd79250c9ad2b93a91f40f7875823618dc3589f1b3"
+    },
+    {
+      "path": "collector-package/run.py",
+      "sha256": "a458d1ed234b0874a8b7482f9e6e8800ab40d5f1f1389308fe67bc9d381cc708"
+    },
+    {
+      "path": "collector-package/package-files.json",
+      "sha256": "6f4655e38c72aa0c0be6d44c0a6a92274f755ae2782848d1b0628472ce5e45cd"
+    }
+  ],
+  "coverage": {
+    "summary_line": 23,
+    "total": 329284,
+    "met": 299482,
+    "violated": 467,
+    "untested": 29335,
+    "detailed_rows": 29802,
+    "detailed_status_by_type": {
+      "clock_gating_hold": {
+        "violated": 27,
+        "untested": 0
+      },
+      "clock_gating_setup": {
+        "violated": 0,
+        "untested": 0
+      },
+      "hold": {
+        "violated": 434,
+        "untested": 4070
+      },
+      "min_period": {
+        "violated": 0,
+        "untested": 10943
+      },
+      "min_pulse_width": {
+        "violated": 0,
+        "untested": 10248
+      },
+      "out_hold": {
+        "violated": 0,
+        "untested": 0
+      },
+      "out_setup": {
+        "violated": 1,
+        "untested": 0
+      },
+      "recovery": {
+        "violated": 0,
+        "untested": 2
+      },
+      "removal": {
+        "violated": 5,
+        "untested": 0
+      },
+      "setup": {
+        "violated": 0,
+        "untested": 4072
+      }
+    },
+    "untested_reasons": {
+      "no_clock": 10248,
+      "constant_disabled": 19083,
+      "unknown": 4
+    },
+    "unknown_records": [
+      {
+        "line": 76,
+        "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+        "clock": "xu_lfextclk",
+        "type": "setup",
+        "status": "untested",
+        "reason": "unknown"
+      },
+      {
+        "line": 80,
+        "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+        "clock": "xu_lfextclk",
+        "type": "setup",
+        "status": "untested",
+        "reason": "unknown"
+      },
+      {
+        "line": 138,
+        "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)",
+        "clock": "xu_lfextclk",
+        "type": "recovery",
+        "status": "untested",
+        "reason": "unknown"
+      },
+      {
+        "line": 147,
+        "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)",
+        "clock": "xu_lfextclk",
+        "type": "recovery",
+        "status": "untested",
+        "reason": "unknown"
+      }
+    ]
+  },
+  "timing_path_blocks": {
+    "total": 455,
+    "by_type": {
+      "out_setup": 1,
+      "removal": 5,
+      "clock_gating_hold": 15,
+      "hold": 434
+    },
+    "gating_coverage_contexts": 27,
+    "gating_unique_constrained_pins": 15,
+    "exactly_matching_constrained_pin_sets": true,
+    "gating_two_clock_pin_count": 12,
+    "gating_single_clock_pin_count": 3,
+    "note": "Coverage counts clock-specific checks; verbose constraint timing reports retain15 worst pin paths for27 gating contexts. All15 actual data A1 pins match. This is not12 missing pins and does not mean27 contexts were independently printed as27 paths.",
+    "gating_reconciliation": [
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_biu_clkgate/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          104449,
+          104453
+        ],
+        "all_violators_path_line": 236,
+        "reported_worst_slack": "-0.09386685"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_itcm_clkgate/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          104457,
+          104461
+        ],
+        "all_violators_path_line": 270,
+        "reported_worst_slack": "-0.09386685"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_itcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          104465,
+          104469
+        ],
+        "all_violators_path_line": 304,
+        "reported_worst_slack": "-0.09386685"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/u_pllclkdiv_clkgate/U2/A1",
+        "coverage_context_count": 1,
+        "coverage_clocks": [
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105753
+        ],
+        "all_violators_path_line": 338,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer0/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105757,
+          105761
+        ],
+        "all_violators_path_line": 372,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer1/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105765,
+          105769
+        ],
+        "all_violators_path_line": 406,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer2/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105773,
+          105777
+        ],
+        "all_violators_path_line": 440,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/i_clk_gate_timer3/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105781,
+          105785
+        ],
+        "all_violators_path_line": 474,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_exu_clkgate/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105789,
+          105793
+        ],
+        "all_violators_path_line": 508,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_lsu_clkgate/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105797,
+          105801
+        ],
+        "all_violators_path_line": 542,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_ifu_clkgate/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105805,
+          105809
+        ],
+        "all_violators_path_line": 576,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_clk_ctrl/u_dtcm_clkgate/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105813,
+          105817
+        ],
+        "all_violators_path_line": 610,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_dtcm_ctrl/u_sram_icb_ctrl/u_sirv_1cyc_sram_ctrl/u_ram_clkgate/U2/A1",
+        "coverage_context_count": 2,
+        "coverage_clocks": [
+          "xu_plldiv_envelope",
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105821,
+          105825
+        ],
+        "all_violators_path_line": 644,
+        "reported_worst_slack": "-0.07663716"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk0_clkgate/U2/A1",
+        "coverage_context_count": 1,
+        "coverage_clocks": [
+          "xu_plldiv_envelope"
+        ],
+        "coverage_lines": [
+          105842
+        ],
+        "all_violators_path_line": 678,
+        "reported_worst_slack": "-0.06082472"
+      },
+      {
+        "constrained_pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk1_clkgate/U2/A1",
+        "coverage_context_count": 1,
+        "coverage_clocks": [
+          "xu_hfextclk"
+        ],
+        "coverage_lines": [
+          105861
+        ],
+        "all_violators_path_line": 712,
+        "reported_worst_slack": "-0.02911544"
+      }
+    ]
+  },
+  "DRC": {
+    "total": 1973,
+    "by_type": {
+      "max_capacitance": 67,
+      "min_capacitance": 1416,
+      "max_transition": 490
+    },
+    "first_record_lines": {
+      "max_capacitance": 15807,
+      "min_capacitance": 16278,
+      "max_transition": 26190
+    },
+    "note": "DRC Slack blocks are separate from455 timing paths and467 coverage checks. min_capacitance lines have a leading minus and must not be dropped by parsers."
+  },
+  "PT_slack": {
+    "max": "-5.18605757",
+    "max_report": "setup.rpt:91",
+    "max_check": "out_setup to io_pads_gpioA_o_oval[27], not register setup or compute-core Fmax",
+    "min": "-0.13472039",
+    "min_report": "hold.rpt:63"
+  },
+  "DC_PT_model_difference": {
+    "DC_setup": "-366.30566406",
+    "DC_setup_archive_sha256": "99cff9ee6bfbb670bcb83595d85cfa45c5bb16dc88517a9bf1da641a9125437c",
+    "DC_setup_member": "candidate/dc-setup.rpt",
+    "DC_setup_member_sha256": "d9bbe1027fdba396b9acfeca4961036124d3d7500243485249f3cb65517c2f22",
+    "DC_model_header_lines": [
+      12,
+      15
+    ],
+    "DC_U8_increment": "372.12545776",
+    "DC_startpoint": "hfextclk clock source",
+    "PT_startpoint": "GFCM/u_clk1_clkgate/enb_reg latch",
+    "same_debug_output": "io_pads_gpioA_o_oval[27]",
+    "PT_U8_increment": "6.09815884",
+    "PT_design_model_report": "designs.rpt:24-29: wire_load_mode top, model_max/min and selection groups --",
+    "PT_parasitics_report": "parasitic_annotation.rpt:24:177700 total nets, all177700 unannotated; no lumped/RCpi/RCnetwork annotation",
+    "interpretation": "Both raw values must remain labeled by tool/model. Observable path-start/delay-estimation differences prevent treating slack change as an ECO/physical timing improvement. No frequency or closure follows, and this review does not apportion the numerical gap causally."
+  },
+  "clock_association_note": "Native pt-status separately records26379 register clock pins,706 no-clock,24453 multi-clock;353 SRAM CLK pins have0 no-clock. Those pin counts are not the10248 no_clock coverage-check count.",
+  "qualification": false
+}

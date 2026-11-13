@@ -29,3 +29,21 @@ required output and bound as input to same-map PT. Compilation remains
 inherited from old353 or final374. Raw reports and known failed gates remain
 visible. Report writing starts when actual DC completes and need not wait for
 all later signoff stages.
+
+The original DC completed with its own map/DDC/SDC/final.svf. Initial same-map PT
+was correctly rejected because this PT version has no `report_host_options`.
+`prepare_pt_recollect.py --baseline <original-N3-package> --out <new-directory>`
+seals a report-only repair to the native-proven `report_host_usage -verbose`.
+It pins the exact original input catalog and completed DC receipt, permits only
+that single collector line change, and writes new outputs under the repair
+bundle; it cannot overwrite the original failed PT directory. Run the sealed
+bundle with `XU_RECOLLECT_BASELINE=<original-N3-package> python3 run.py --stage pt
+--run`. This collection succeeded without a map, library, SDC or exception edit.
+
+`io/prepare.py` creates a separate read-only observation bundle for all106 loader
+port bits, max/min each. Its runner also binds the same original DC and map.
+Numeric bounded IO paths are observations, not complete clock-context or timing
+qualification. Native results and retained initial failures are published under
+`docs/validation/s3-y32-ingress-perf-native-20261113/`; the report records467 timing
+check violations,1973 electrical violations and29335 untested checks. No timing
+ECO was applied to this fixed report snapshot.

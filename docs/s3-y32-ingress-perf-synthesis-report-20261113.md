@@ -1,6 +1,6 @@
 # 32位SystemBus有序事务流水优化与原生综合报告
 
-**状态：综合结果阶段报告。DC已完成并核验；独立STA首次采集存在工具API兼容错误，正在修复采集流程。150MHz时序尚未闭合。**
+**状态：DC、同映射PT与新增loader接口路径采集完成，原件已回传核验。PT存在467项时序违例、1973项电气规则违例及29,335项未测检查；150MHz时序尚未闭合。**
 
 本报告对象为 **1064.35 task/s原候选**：父源码基点`1aceb3d`，RTL子提交`5470c5650f2d11d16e7c52cc96626d21030a3973`。单次task执行99×64与64×256的固定形状计算并写回99×256个Y32；本轮共验证12个独立参数任务。报告时间采用北京时间（UTC+8）。
 
@@ -11,7 +11,7 @@
 该数字来自三源SystemBus测试loader开发环境，包含实际源数据写入及响应时间。测试激励的发射器在仿真环境中，真实生产入口尚未由这个结果证明。原候选仍保留结果寄存器FIFO、engine结果寄存器、bias预取slot和DMA行快照；它没有合入另一个374宏分支的存储整改。GPIO整合版的测试结果不作为本报告的1064性能或PPA证据。
 
 <!-- NATIVE_SUMMARY_BEGIN -->
-本轮原生DC于2026-11-13 **18:40:41—19:09:55**完成，8核上限，墙钟1754.145秒（约29分14秒）。返回码0、源码无漂移、原生工具错误和必需产物缺失均为零；实际枚举353颗SRAM。自己的mapped.v/ddc/sdc及非空final.svf已生成并绑定身份。DC本身已报告setup/hold违例，**综合完成不表示150MHz时序闭合，1064.3506仍为假定150MHz的周期仿真换算。**
+本轮原生DC于2026-11-13 **18:40:41—19:09:55**完成，8核上限，墙钟1754.145秒（约29分14秒）。返回码0、源码无漂移、原生工具错误和必需产物缺失均为零；实际枚举353颗SRAM。自己的mapped.v/ddc/sdc及非空final.svf已生成，完整字节已回传并与原生收据逐SHA/字节数核验。同map PT在独立目录完成重收，原失败采集保留；本轮未实施ECO。DC和PT均已报告违例，**综合完成不表示150MHz时序闭合，1064.3506仍为假定150MHz的周期仿真换算。**
 <!-- NATIVE_SUMMARY_END -->
 
 ## 2. 架构与实现改动
@@ -149,11 +149,41 @@ CPU功能仿真使用289个功能宏模型（shared256＋内部33），CPU RAM�
 
 以上分组和scope小计已重算守恒，见[原始分模块面积](validation/s3-y32-ingress-perf-native-20261113/native-dc/area-components.tsv)。原生`report_qor`的Macro Count分类为0，不能据此称没有SRAM：本报告宏数取实际leaf引用`RAMSP1024X16`的353颗枚举，QoR另将其面积列在Macro/Black Box Area。
 
-### 6.2 DC时序与独立PT状态
+### 6.2 DC时序与同map PT结果
 
 DC `report_constraint`已给出调试时钟输出`io_pads_gpioA_o_oval[27]`最差setup slack **−366.30566406ns**；路径由HF源经GFCM时钟网络到调试输出，`U8/Z`段的DC top wire-load估计延迟约372.125ns。DC还报告bias SRAM D等hold违例，例如**−0.13472036ns**。这些是本轮DC原始结果，不能用旧PT的slack替换，也不据此直接推算计算核Fmax。原件包含在[DC摘要包](validation/s3-y32-ingress-perf-native-20261113/native-dc/dc-summary.tar.xz)中。
 
-独立PT已读取本轮同一map和原SDC兼容副本，首次collector因本机PT不支持`report_host_options`而返回失败（`CMD-005`）；required-report门禁实际拒绝了该次采集，未写成PASS。该问题属于资源报告API兼容性。网表、库、时钟/IO预算及路径例外保持不变，将在新输出目录按已确认的原生API重收报告，原失败原件保留。当前不填写尚未审核的PT时序/coverage数字。
+独立PT首次collector因本机不支持`report_host_options`而失败（`CMD-005`），required-report门禁实际拒绝该次采集。只读原生API核查后，仅将资源报告命令改为`report_host_usage -verbose`，在新目录重收；原失败目录、日志和收据保留。映射、库、SDC、时钟/IO预算及路径例外均未修改，未实施时序ECO。新采集返回`PT_REPORT_COLLECTION_COMPLETE_NOT_QUALIFIED`，RC0、源码漂移/工具错误/必需产物缺失均为零，墙钟19.769秒；原生资源报告确认为请求8核、硬件96核、effective8核。
+
+PT coverage全量检查如下，行内及总量均核对守恒；“未测”不等于已通过：
+
+| 检查类型 | 总数 | 满足 | 违例 | 未测 |
+|---|---:|---:|---:|---:|
+| setup | 83,486 | 79,414 | 0 | 4,072 |
+| hold | 83,486 | 78,982 | 434 | 4,070 |
+| recovery | 19,889 | 19,887 | 0 | 2 |
+| removal | 19,889 | 19,884 | 5 | 0 |
+| min_period | 11,649 | 706 | 0 | 10,943 |
+| min_pulse_width | 110,473 | 100,225 | 0 | 10,248 |
+| clock_gating_setup | 27 | 27 | 0 | 0 |
+| clock_gating_hold | 27 | 0 | 27 | 0 |
+| out_setup | 179 | 178 | 1 | 0 |
+| out_hold | 179 | 179 | 0 | 0 |
+| 合计 | **329,284** | **299,482** | **467** | **29,335** |
+
+29,335项未测原因逐行合计为`no_clock=10,248`、`constant_disabled=19,083`、`unknown=4`。4项unknown为LF域两个deglitch寄存器setup及两个PMU复位寄存器recovery；具体端点和原件行号保留在[独立原件复核](validation/s3-y32-ingress-perf-native-20261113/native-pt/independent-review.json)。不能把全部未测项都归为未约束路径，也不能把setup违例为零写成setup已全面通过。
+
+467项时序检查违例为434 hold、5 removal、27 gating_hold、1 out_setup。`all_violators`包含455个时序路径块：27个gating时钟上下文对应15个不同数据A1约束pin，其中12个pin各有HF及divider两个时钟上下文、3个为单时钟；报告保留每pin最差路径，15个pin集合与coverage完全相等。因此差12是上下文归并，不是漏掉12个pin，也不是27个上下文都独立展开为路径。
+
+PT max路径最差slack为**−5.18605757ns**，终点仍是GPIOA[27]调试时钟输出（out_setup）；min路径最差为**−0.13472039ns**。removal与gating_hold最差分别为−0.12148283ns、−0.09386685ns。PT首条max路径从GFCM gate latch起，`U8/Z`段增量约6.098ns；DC首路径从HF源起，使用top wire-load估计。PT设计报告未选定wire-load model，177,700条net全部未作寄生标注。两份原始slack必须按各自路径和模型解释，不能把DC的−366.30566406变化到PT的−5.18605757写成ECO改善、物理收敛或计算核Fmax。
+
+电气规则违例另计**1,973**项：max_capacitance 67、min_capacitance 1,416、max_transition 490。对应最差原生slack为−0.07670643、−0.00050000、−0.98455870；前两项是原生电容单位，最后一项为ns，不能混用。电气违例不计入上表467项时序检查。原生coverage、all_violators、分组与最差路径等46项执行输出均逐SHA/字节数复核，见[PT复核收据](validation/s3-y32-ingress-perf-native-20261113/native-pt/review.json)、[PT执行收据](validation/s3-y32-ingress-perf-native-20261113/native-pt/execution.json)及[全部原件包](validation/s3-y32-ingress-perf-native-20261113/native-pt/pt-recollect-evidence.tar.xz)。
+
+### 6.3 时钟与新增IO的观察边界
+
+原生时钟关联记录为26,379个寄存器clock pin，其中706个无clock、24,453个关联多个clock；353个SRAM CLK pin均有关联clock，且在本envelope中均为多clock关联。pin计数与coverage中的10,248项no_clock检查计数属于不同对象。保留原HF/divider envelope和`XU_PROPAGATE_CLOCKS=0`，未执行CTS、未读取SPEF；该结果不证明clock mux模式、CDC或复位释放安全。
+
+新增loader端口实际枚举为71输入位、35输出位，共106位。逐位分别执行max/min bounded `full_clock_expanded`路径观察，共212份报告；全部具有数值slack且所返回路径均为MET，最差max为+1.39084089ns（cmd_valid），最差min为+0.07905915ns（addr[0]）；NO_PATH、无数值slack和未解析报告均为零。每份记录保留实际返回路径数、最差数值和对应起终点，不把`-max_paths 1`误读为跨所有path group只能返回一个路径。沿用原HF IO max0.5ns/min0ns预算，未因新增端口放宽约束。这些观察仅覆盖所返回的路径，不建立所有时钟上下文、transition极性、例外、CDC或完整IO资格。逐位数值与原件见[IO复核](validation/s3-y32-ingress-perf-native-20261113/native-io/review.json)。
 
 本轮map与guidance身份：
 
@@ -164,13 +194,13 @@ DC `report_constraint`已给出调试时钟输出`io_pads_gpioA_o_oval[27]`最�
 | mapped.sdc | 89,482 | `2686b8bc7542f673e329a9e3ef2f3587ffb39d26be8744da1b39b3b77be5eac8` |
 | final.svf | 1,022,208 | `217072e874c2f35cf25a0f5b191209cab0770110eabc92ac34857258174f5cd3` |
 
-上述身份来自本轮原生execution收据；完整大文件仍在回传，尚不宣称全部raw map/SVF已在本地重放核验。
+上述四个文件的完整字节均已回传，在本地按本轮DC execution收据逐SHA/字节数核验，并与同map PT绑定核对。完整固定映射包含116项有catalog的自有文件，保留DC及首次失败PT原件；成功PT重收另包保存。见[固定映射回传复核](validation/s3-y32-ingress-perf-native-20261113/native-map/review.json)及[完整原件包](validation/s3-y32-ingress-perf-native-20261113/native-map/native-fixed-map.tar.xz)。
 
 <!-- NATIVE_RESULTS_END -->
 
 面积将分列加速器命名scope小计与“全SoC标准单元＋全部33内部宏”的保守上界，两个口径不相加。全部353宏均枚举，计费表另列复用CPU/shared的320颗。原始库面积单位及官方宏计价尚未核定，不能将raw area直接标为mm²，亦不能据此宣称≤2.25mm²通过。
 
-本轮流程未读取版图提取SPEF，并保留原`XU_PROPAGATE_CLOCKS=0`设置，属于原工程契约下的前布局envelope分析。原SDC中IO为工程假设，该分析不证明全部CDC、复位释放、启动或分频模式安全。最终是否闭合，以本轮PT的setup/hold、gating、recovery/removal、pulse、DRC、clock关联和coverage原始结果共同判断；工具返回码0只表示报告采集完成。
+本轮流程未读取版图提取SPEF，并保留原`XU_PROPAGATE_CLOCKS=0`设置，属于原工程契约下的前布局envelope分析。原SDC中IO为工程假设，该分析不证明全部CDC、复位释放、启动或分频模式安全。本轮综合与STA报告采集完成，但上述违例、未测检查和clock关联问题尚未解决；工具返回码0只表示报告采集完成。
 
 ## 7. 当前验收边界
 
@@ -179,7 +209,7 @@ DC `report_constraint`已给出调试时钟输出`io_pads_gpioA_o_oval[27]`最�
 |---|---|
 | RTL开发功能与性能 | 完整12任务PASS，条件1064.3506 task/s |
 | 本轮原生综合 | **已完成**；RC0、源码无漂移、必需产物齐全，353宏/64PE |
-| 150MHz完整STA | **尚未闭合**；DC已报setup/hold违例，PT首次collector因API兼容错误失败，正在同map重收 |
+| 150MHz完整STA | **尚未闭合**；同map PT采集完成，467项时序违例、1,973项电气违例、29,335项未测检查，前布局模型限制保留 |
 | 官方面积≤2.25mm² | 命名scope原始小计524298.160062、保守上界658931.612862；单位/计价未核定，不能判定mm²资格 |
 | RTL→mapped一致性 | 本轮未完成；自己的SVF不是FM通过证明 |
 | 全SoC任务功耗/能耗 | 本轮同353/N3完整活动尚缺，不套用旧FST/SAIF或vectorless数值 |

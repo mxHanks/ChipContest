@@ -1,0 +1,110 @@
+{
+  "schema": "ingress1064-loader-IO-independent-native-review-v1",
+  "status": "212_BOUNDED_NATIVE_IO_REPORTS_RECONCILED_NOT_COMPLETE_IO_OR_STA_QUALIFICATION",
+  "review_scope": "Read-only local original TSV/native reports and receipt verification; no remote tool, ECO, RTL/map/SDC/library edit or report prose edit.",
+  "catalog_members_verified": 231,
+  "native_execution_outputs_verified": 223,
+  "source_execution_sha256": "758f2be9758676d0344f0fa4f472004dbaa2d672fb030ca67b3d5f75cf13a772",
+  "source_record_status": "IO_OBSERVATION_COMPLETE_NOT_QUALIFIED",
+  "returncode": 0,
+  "source_drift": [],
+  "native_tool_errors": [],
+  "missing_required_outputs": [],
+  "original_catalog_sha256": "96fbf8088cb2b94cc5bd682e09b9ec126762bd6c2dd54aad32caea854fb416ed",
+  "IO_bundle_sha256": "59d08cb1bf285c0bd4c95065cab546d5d9ba4da5515f5f075b96cdfbed4c0a19",
+  "native_DC_execution_sha256": "19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290",
+  "mapped_v_sha256": "882b160f2dfde6a9593f63212ae173fc96bb00b6212c56d304a6e6e80ae4e56e",
+  "source_TSV_sha256": "4db212d6c3cb49d74018926cec22c0d6b9bef5c37a7733b7818d555516a09e89",
+  "source_collector_sha256": "2870be12f2cf8ade2aee6d97e8418a255000e5725257a1e5184028a8bba2d510",
+  "source_status_sha256": "b84dc2f27b93217d488c75ca6b92faf69a1f2e1e593fa68ed1119211aa0451af",
+  "observed": {
+    "unique_port_bits": 106,
+    "input_bits": 71,
+    "output_bits": 35,
+    "reports": 212,
+    "exactly_one_min_and_one_max_per_expected_bit": true,
+    "direction_and_target_headers_match": true,
+    "native_numeric_slack_reports": 212,
+    "native_MET_reports": 212,
+    "no_path_reports": 0,
+    "missing_numeric_slack_reports": 0,
+    "unparsed_reports": 0,
+    "actual_path_headers_per_report": 1,
+    "actual_numeric_slacks_per_report": 1,
+    "full_clock_expanded_reports": 212,
+    "clock_names_seen_in_full_reports": {
+      "xu_hfextclk": 212
+    },
+    "direction_delay_reports": {
+      "input": {
+        "max": 71,
+        "min": 71
+      },
+      "output": {
+        "max": 35,
+        "min": 35
+      }
+    },
+    "worst_returned_slack": {
+      "max": {
+        "port": "sysbus_load_cmd_valid",
+        "direction": "input",
+        "delay_type": "max",
+        "slack": "1.39084089",
+        "report": "reports/sysbus_load_cmd_valid-max.rpt",
+        "slack_line": 296
+      },
+      "min": {
+        "port": "sysbus_load_cmd_addr[0]",
+        "direction": "input",
+        "delay_type": "min",
+        "slack": "0.07905915",
+        "report": "reports/sysbus_load_cmd_addr_0_-min.rpt",
+        "slack_line": 61
+      }
+    }
+  },
+  "external_delay": {
+    "required_input_external_delay_present_on_all142_input_reports": true,
+    "required_output_external_delay_present_on_all70_output_reports": true,
+    "raw_values_match_original_max_absolute_0p5_and_min_0": true,
+    "sign_note": "Output max external-delay subtraction is -0.5ns in path arithmetic; input max is +0.5ns. Min values are0ns.",
+    "report_direction_label_counts": {
+      "input": {
+        "max": {
+          "input": 71,
+          "output": 0
+        },
+        "min": {
+          "input": 71,
+          "output": 0
+        }
+      },
+      "output": {
+        "max": {
+          "input": 0,
+          "output": 35
+        },
+        "min": {
+          "input": 1,
+          "output": 35
+        }
+      }
+    },
+    "reports_with_both_input_and_output_delay": [
+      {
+        "port": "sysbus_load_cmd_ready",
+        "delay_type": "min",
+        "report": "reports/sysbus_load_cmd_ready-min.rpt"
+      }
+    ],
+    "both_delay_note": "A combinational input-to-output min path legitimately contains both delay terms; it is one output-port observation, not an extra106th/107th port or a direction mismatch."
+  },
+  "limitations": [
+    "These are bounded max_paths1/nworst1 returned paths per port/delay, not every clock context, edge polarity or exception/unconstrained-path combination.",
+    "All212 returned reports being MET does not close the full SoC: separate same-map PT still has467 violated coverage checks,1973DRC and29335untested checks.",
+    "This does not establish CDC, reset release, production GPIO/bridge loading legality, IO/pad physical implementation or post-layout timing.",
+    "No new clock/IO relaxation was applied. Original 150MHz envelope/provisional external IO contract and unannotated prelayout model remain."
+  ],
+  "qualification": false
+}

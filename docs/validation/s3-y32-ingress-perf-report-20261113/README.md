@@ -16,7 +16,7 @@
 
 总共减少 1,877,518 拍，其中 source 少 1,010,605 拍，DMA 少 866,831 拍，控制间隙少 82 拍，clear 不变。串行 loader 对照只有 task0，189,061 拍 / 793.3947245 tasks/s；它说明连续装载调度本身有显著收益，不能把完整 2.1102 倍全部归因于 owner FIFO。
 
-该 CPU 测试通过第三路 SystemBus test loader 真实发出源写；GPIO 输入接零。它运行原 CPU 与同一加载固件 image，使用 CPU 行为 RAM、shared256 + internal33 共289个功能 RAMSP 模型。当前 N3 开发 PPA 则保留第三路接口的106个新增顶层位，预计完整353宏。它们均不能直接冒充 GPIO→CPU 生产加载边界或同一门级活动。
+该 CPU 测试通过第三路 SystemBus test loader 真实发出源写；GPIO 输入接零。它运行原 CPU 与同一加载固件 image，使用 CPU 行为 RAM、shared256 + internal33 共289个功能 RAMSP 模型。当前 N3 开发 PPA 则保留第三路接口的106个新增顶层位，原生DC实际枚举353宏。它们均不能直接冒充 GPIO→CPU 生产加载边界或同一门级活动。
 
 ## 当前候选仍有的寄存器 payload
 
@@ -31,7 +31,7 @@
 
 预计353宏 = CPU64 + shared256 + W16 + bias1 + X16，**没有 result 宏**。结果 FIFO/engine resultReg、bias slots 和 Y 快照仍按寄存器逻辑存在。结果 SRAM 与无缓存 bias 整改来自另一未合入候选；用户选原1064候选并不建立此版存储规则合规结论。
 
-N3 综合的预期计费口径是完整 DMA/core、完整上游 ingress、保守完整 NICE interface scope 和 shared endpoint 标准单元，另计33个内部宏；复用的 CPU/shared 共320宏另列。还提供“全部 full-SoC 标准单元 +33内部宏”的保守上界。原始库面积、官方单位换算和宏定价必须分开；本目录没有生成数值面积或比赛面积 PASS。
+N3 综合的预期计费口径是完整 DMA/core、完整上游 ingress、保守完整 NICE interface scope 和 shared endpoint 标准单元，另计33个内部宏；复用的 CPU/shared 共320宏另列。还提供“全部 full-SoC 标准单元 +33内部宏”的保守上界。原始库面积、官方单位换算和宏定价必须分开；`native-dc-for-report.json`另绑定本轮实际数值面积，仍没有比赛面积 PASS。
 
 ## 文件与使用约束
 
@@ -44,4 +44,6 @@ N3 综合的预期计费口径是完整 DMA/core、完整上游 ingress、保守
 - `cpu-functional-macro-scopes.csv` / `cpu-functional-model-scope.json`：本地生成模型的289个宏 scope 及来源文件 SHA；不构成门级活动/功耗证据。
 - `evidence-index.json` / `SHA256SUMS`：引用旧冻结日志的 SHA 与本目录数据校验。
 
-原始 `baseline/full12` log、result、checker负例和源码清单保持在 `../s3-y32-ingress-perf-20261113/`。重跑命令见 `experiments/s3-y32-ingress-perf/report/README.md`。本目录不引入公开600旧NRMSE、旧353 STA、merged374 PASS 或旧S2 FM结论；当前候选 DC/PT、GPIO生产实测、同map功能/等价与活动功耗均需要对应新证据。
+原始 `baseline/full12` log、result、checker负例和源码清单保持在 `../s3-y32-ingress-perf-20261113/`。重跑命令见 `experiments/s3-y32-ingress-perf/report/README.md`。本目录不引入公开600旧NRMSE、旧353 STA、merged374 PASS 或旧S2 FM结论；本轮同map DC/PT及106位loader路径观察已完成采集并逐原件核验，`native-{dc,pt,io}-for-report.json`绑定这些新证据。PT有467项时序违例、1973项电气违例和29335项未测检查，尚未闭合；GPIO生产资格、同map功能/等价与活动功耗仍缺本候选对应证据。
+
+本轮完整map/DDC/SDC/SVF原始字节均已回传并与DC收据及同map PT核验，固定映射包、成功PT重收与IO原件分别保存在`../s3-y32-ingress-perf-native-20261113/native-map/`、`native-pt/`和`native-io/`。首次PT失败保留，没有以空required-report列表绕门禁；未实施ECO。原始数值和模型差异见主报告第6节。
