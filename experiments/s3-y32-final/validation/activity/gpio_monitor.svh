@@ -5,7 +5,7 @@ wire [31:0] activity_gpio_first_cycle /* verilator public_flat_rd */ = gpio_firs
 wire activity_capture_enabled /* verilator public_flat_rd */ = startup_complete && shared_mem_rst_n && !warmup_active;
 wire activity_hf_clk /* verilator public_flat_rd */ = clk;
 wire activity_arm /* verilator public_flat_rd */ = startup_complete &&
-  shared_mem_rst_n && !warmup_active && `DMA.cfg_cmd_valid &&
+  shared_mem_rst_n && !warmup_active && `DMA.cfg_cmd_valid && `DMA.cfg_cmd_ready &&
   !`DMA.cfg_cmd_read && `DMA.cfg_cmd_addr[8:0] == 9'h104 &&
   `DMA.cfg_cmd_wdata == 32'd1;
 wire [31:0] activity_layer /* verilator public_flat_rd */ = layer;
