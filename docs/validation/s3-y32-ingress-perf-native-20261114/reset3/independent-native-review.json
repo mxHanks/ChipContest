@@ -1,0 +1,163 @@
+{
+  "area_from_native_dc": [
+    {
+      "area_library_units": "357024.5616",
+      "component": "ALL_FULL_SOC_STANDARD_CELLS",
+      "official_area_mm2": "UNVERIFIED_UNIT_CONVERSION"
+    },
+    {
+      "area_library_units": "301901.305662",
+      "component": "ALL_33_INTERNAL_SRAM",
+      "official_area_mm2": "UNRESOLVED_OFFICIAL_MACRO_TABLE"
+    },
+    {
+      "area_library_units": "658925.867262",
+      "component": "CONSERVATIVE_UPPER_BOUND",
+      "official_area_mm2": "NOT_A_CONTEST_SCORE"
+    }
+  ],
+  "catalog": {
+    "all_bytes_and_sha256_verified": true,
+    "catalog_sha256": "8b4d5d81415a25df23f7c5af3b3576743c34385b95a10c586fe554272c8ebfb6",
+    "files": 75
+  },
+  "catalog_bound_post_receipt_files": [
+    "probe/function-proof.json",
+    "probe/report-guard.json",
+    "split/function-proof.json",
+    "split/report-guard.json",
+    "reload/function-proof.json",
+    "reload/report-guard.json"
+  ],
+  "clock_associations": {
+    "pins": 26343,
+    "probe_split_apply_reload_equal_to_frozen_semantically": true
+  },
+  "coverage": {
+    "all_29335_untested_or_violated_details_equal_to_frozen_as_multiset": true,
+    "all_check_types_and_counts_equal_to_frozen": true,
+    "remaining_numeric_violations": 3,
+    "remaining_removal_slack_ns": [
+      -0.04010564,
+      -0.04010564,
+      -0.04010564
+    ],
+    "stage_totals": {
+      "probe": {
+        "met": 299646,
+        "total": 328981,
+        "untested": 29332,
+        "violated": 3
+      },
+      "reload": {
+        "met": 299646,
+        "total": 328981,
+        "untested": 29332,
+        "violated": 3
+      },
+      "split": {
+        "met": 299646,
+        "total": 328981,
+        "untested": 29332,
+        "violated": 3
+      }
+    },
+    "unknown_checks": [
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D CK(rise) xu_lfextclk setup - untested unknown",
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D CK(rise) xu_lfextclk setup - untested unknown",
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise) CK(rise) xu_lfextclk recovery sdf_cond(ENABLE_NOT_D===1'b1) untested unknown",
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise) CK(rise) xu_lfextclk recovery sdf_cond(ENABLE_NOT_D===1'b1) untested unknown"
+    ],
+    "unknown_count": 4,
+    "untested_reasons": {
+      "constant_disabled": 19083,
+      "no_clock": 10245,
+      "unknown": 4
+    }
+  },
+  "electrical": {
+    "frozen_count": 292,
+    "native_pin_violation_blocks_by_stage": {
+      "probe": 292,
+      "reload": 0,
+      "split": 0
+    },
+    "zero_electrical_kind_or_pin_blocks_in_fresh_full_all_violators_report": true
+  },
+  "limitations": [
+    "3 removal violations and 4 unknown remain; timing is not closed",
+    "RDC, external reset pulse, physical PVT/skew/CTS and SPEF signoff unresolved",
+    "Native DDC and vendor libraries are not returned; receipt hashes checked, local byte rehash unavailable",
+    "Native completion markers and full native log error scans are receipt claims; returned subset excludes those full logs",
+    "Strict mapped structural equivalence and throughput validation are handled separately by root; this review does not replace them"
+  ],
+  "native_receipt_bound_returned_outputs": 50,
+  "reviewed_at": "2026-11-14T00:27:18.350546+08:00",
+  "schema": "ingress1064-reset3-independent-native-review-v1",
+  "scope": "Read-only review of returned native evidence; no EDA or source edits",
+  "source_identity": {
+    "actual_native_pt_add_sdc_sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+    "dc_apply_to_fresh_pt_v_and_ddc_bytes_bound": true,
+    "dual_libraries_exactly_match_frozen": true,
+    "final_mapped_sha256": "b8d18954b2bc9737d725e312335ec89ea9f6041bcb6d52ecc37e9ebd2b5a2888",
+    "native_pt_sdc_outputs_verified_in_three_receipts": true,
+    "original_baseline_receipts_match_frozen": true,
+    "original_sdc_sha256": "c15ede0fc2c65771f87e2d6aee763b4ea0d53934868ca807b4785c36182fce7c",
+    "package_sha256": "3a3962a07aa17d152e13ef47759bdbcd363e3aa230119a96764b6d5726f22a80",
+    "reset_plan_sha256": "774e1646ae873f8611e509b83eb4974a6acf01ac91e8787a1a176841eb2b290d",
+    "seed_apply_execution_sha256": "4fe00af10bfc0b9f561578852027f7309938572ce8c93899e91c0276f8127eba",
+    "seed_mapped_sha256": "9b1c0688139e15decdeb0a08b31b50f600bfc3f1fe93056d520ccf3ee501e2e8",
+    "seed_reload_execution_sha256": "80940c0fbc9cd124666bcb33b47cfdf333df0a4e530aaaaae2d6f4cf808e0581"
+  },
+  "stages": {
+    "apply": {
+      "completion_marker": true,
+      "execution_sha256": "d024d3fcd0a802d218d304f25b150d01fc2fb78f2281102f90080cc1f057f801",
+      "finished_epoch": 1794586716.3438423,
+      "native_tool_errors": [],
+      "report_guard_errors": [],
+      "returncode": 0,
+      "source_drift": [],
+      "started_epoch": 1794586680.7442694,
+      "tool_sha256": "23a4101c711fdb4747a57e6f9524d4989eb76a2b3120f0fa9766f4b25ae8e6d2"
+    },
+    "probe": {
+      "completion_marker": true,
+      "execution_sha256": "a5f642d9ee15fd6efea3a73b277131771c2f76207c9df0374bde915d2fa27c36",
+      "finished_epoch": 1794586570.586593,
+      "native_tool_errors": [],
+      "report_guard_errors": [],
+      "returncode": 0,
+      "source_drift": [],
+      "started_epoch": 1794586523.711384,
+      "tool_sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+    },
+    "reload": {
+      "completion_marker": true,
+      "execution_sha256": "000b5fd921014b801f6f52cc414d9a2d726d7829448c370dd44196e976bd9df2",
+      "finished_epoch": 1794586757.7589893,
+      "native_tool_errors": [],
+      "report_guard_errors": [],
+      "returncode": 0,
+      "source_drift": [],
+      "started_epoch": 1794586728.076363,
+      "tool_sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+    },
+    "split": {
+      "completion_marker": true,
+      "execution_sha256": "22088e6877181d411633cf3c04d8cd026d4e357846e14f9a5cb536a1003fac55",
+      "finished_epoch": 1794586679.1455371,
+      "native_tool_errors": [],
+      "report_guard_errors": [],
+      "returncode": 0,
+      "source_drift": [],
+      "started_epoch": 1794586581.80881,
+      "tool_sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+    }
+  },
+  "status": "PASS_ENGINEERING_RESULT_NOT_TIMING_CLOSURE",
+  "svf_chain": {
+    "all_bound_to_native_apply_receipt": true,
+    "returned_files": 7
+  }
+}
