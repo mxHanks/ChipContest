@@ -5,7 +5,7 @@ The original package stays untouched. All declared source bytes are verified;
 17 reset roots, original receiver catalogue, exact macro names and group IDs
 are retained while the old sealed planner reparses the new source map.
 """
-import argparse,collections,gzip,hashlib,importlib.util,json,shutil,sys
+import argparse,collections,gzip,hashlib,importlib.util,io,json,shutil,sys
 from pathlib import Path
 sys.dont_write_bytecode=True
 
@@ -61,7 +61,11 @@ def rebind(package,source_map,expected_sha,out):
         if name=='reset-eco-plan.json.gz':continue
         target=out/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source/name,target)
     shutil.copyfile(Path(__file__).resolve(),out/'rebind_reset_eco.py')
-    (out/'reset-eco-plan.json.gz').write_bytes(gzip.compress(json.dumps(new,sort_keys=True,separators=(',',':')).encode()+b'\n',mtime=0))
+    # Python3.6 on the native host lacks gzip.compress(mtime=...).
+    stream=io.BytesIO()
+    with gzip.GzipFile(filename='',mode='wb',fileobj=stream,mtime=0) as compressed:
+        compressed.write(json.dumps(new,sort_keys=True,separators=(',',':')).encode()+b'\n')
+    (out/'reset-eco-plan.json.gz').write_bytes(stream.getvalue())
     (out/'rebind-provenance.json').write_text(json.dumps(provenance,sort_keys=True,indent=2)+'\n')
     manifest={p.relative_to(out).as_posix():sha(p)for p in sorted(out.rglob('*'))if p.is_file()}
     (out/'package-files.json').write_text(json.dumps(manifest,sort_keys=True,indent=2)+'\n')
