@@ -1,0 +1,499 @@
+{
+  "frequency_hz": 150000000,
+  "inferred_residuals": {
+    "all_non_traffic_residual_vs_4_cycle_floor": 74667,
+    "dma_compute_writeback_residual_at_4_cycle_service": 8429,
+    "measured_traffic_floor_at_4_cycle_service": 222724,
+    "stage_boundary_residual": 67
+  },
+  "interpretation": {
+    "official_status": "diagnostic estimate; not an official score",
+    "traffic_floor_excludes": [
+      "CPU mailbox polling and software control",
+      "compute waits not hidden by data movement",
+      "extra arbitration latency beyond the selected service interval",
+      "STA frequency uncertainty"
+    ]
+  },
+  "measured_baseline": {
+    "cycles_per_task": 297391,
+    "stage_cycles": {
+      "clear": 1028,
+      "dma_read_compute_writeback": 169965,
+      "source_load": 126331
+    },
+    "stage_sum": 297324,
+    "throughput_tasks_per_s": 504.386481097276,
+    "traffic_counts_explanation": {
+      "complete_55424_count": 55424,
+      "dma_reread": 15040,
+      "old_40384_count": 40384,
+      "source_load": 15040,
+      "y_writeback": 25344
+    },
+    "unclassified_cycles": 67
+  },
+  "model": "b41-throughput-feasibility-r2",
+  "required_service_interval_cycles": {
+    "1000": {
+      "baseline_x_layout": 2.687860854503464,
+      "packed16_x_layout": 3.0347946544980444
+    },
+    "1500": {
+      "baseline_x_layout": 1.7857245958429562,
+      "packed16_x_layout": 2.016215775749674
+    },
+    "2000": {
+      "baseline_x_layout": 1.334656466512702,
+      "packed16_x_layout": 1.506926336375489
+    },
+    "2706": {
+      "baseline_x_layout": 0.9816031413384677,
+      "packed16_x_layout": 1.1083028949140978
+    },
+    "3000": {
+      "baseline_x_layout": 0.883588337182448,
+      "packed16_x_layout": 0.9976368970013038
+    }
+  },
+  "scenarios": [
+    {
+      "cycles": 56452,
+      "latency_us": 376.3466666666667,
+      "name": "one-beat-per-cycle-original-layout",
+      "phases": [
+        {
+          "cycles": 15040,
+          "end_cycle": 15040,
+          "name": "source_load",
+          "start_cycle": 0,
+          "transactions": 15040
+        },
+        {
+          "cycles": 15040,
+          "end_cycle": 30080,
+          "name": "dma_reread",
+          "start_cycle": 15040,
+          "transactions": 15040
+        },
+        {
+          "cycles": 25344,
+          "end_cycle": 55424,
+          "name": "y_writeback",
+          "start_cycle": 30080,
+          "transactions": 25344
+        },
+        {
+          "cycles": 1028,
+          "end_cycle": 56452,
+          "name": "clear",
+          "start_cycle": 55424,
+          "transactions": null
+        },
+        {
+          "cycles": 0,
+          "end_cycle": 56452,
+          "name": "residual_control_compute",
+          "start_cycle": 56452,
+          "transactions": null
+        }
+      ],
+      "residual_cycles": 0,
+      "service_interval_cycles": 1,
+      "throughput_tasks_per_s": 2657.124636859633,
+      "traffic": {
+        "bias_words": 512,
+        "w_words": 8192,
+        "x_words": 6336,
+        "y_words": 25344
+      },
+      "traffic_bytes": 221696,
+      "traffic_words": 55424,
+      "x_packed16": false
+    },
+    {
+      "cycles": 50116,
+      "latency_us": 334.1066666666667,
+      "name": "one-beat-per-cycle-packed16-x",
+      "phases": [
+        {
+          "cycles": 11872,
+          "end_cycle": 11872,
+          "name": "source_load",
+          "start_cycle": 0,
+          "transactions": 11872
+        },
+        {
+          "cycles": 11872,
+          "end_cycle": 23744,
+          "name": "dma_reread",
+          "start_cycle": 11872,
+          "transactions": 11872
+        },
+        {
+          "cycles": 25344,
+          "end_cycle": 49088,
+          "name": "y_writeback",
+          "start_cycle": 23744,
+          "transactions": 25344
+        },
+        {
+          "cycles": 1028,
+          "end_cycle": 50116,
+          "name": "clear",
+          "start_cycle": 49088,
+          "transactions": null
+        },
+        {
+          "cycles": 0,
+          "end_cycle": 50116,
+          "name": "residual_control_compute",
+          "start_cycle": 50116,
+          "transactions": null
+        }
+      ],
+      "residual_cycles": 0,
+      "service_interval_cycles": 1,
+      "throughput_tasks_per_s": 2993.0561098252056,
+      "traffic": {
+        "bias_words": 512,
+        "w_words": 8192,
+        "x_words": 3168,
+        "y_words": 25344
+      },
+      "traffic_bytes": 196352,
+      "traffic_words": 49088,
+      "x_packed16": true
+    },
+    {
+      "cycles": 222724,
+      "latency_us": 1484.8266666666666,
+      "name": "frozen-entry-original-interconnect",
+      "phases": [
+        {
+          "cycles": 60160,
+          "end_cycle": 60160,
+          "name": "source_load",
+          "start_cycle": 0,
+          "transactions": 15040
+        },
+        {
+          "cycles": 60160,
+          "end_cycle": 120320,
+          "name": "dma_reread",
+          "start_cycle": 60160,
+          "transactions": 15040
+        },
+        {
+          "cycles": 101376,
+          "end_cycle": 221696,
+          "name": "y_writeback",
+          "start_cycle": 120320,
+          "transactions": 25344
+        },
+        {
+          "cycles": 1028,
+          "end_cycle": 222724,
+          "name": "clear",
+          "start_cycle": 221696,
+          "transactions": null
+        },
+        {
+          "cycles": 0,
+          "end_cycle": 222724,
+          "name": "residual_control_compute",
+          "start_cycle": 222724,
+          "transactions": null
+        }
+      ],
+      "residual_cycles": 0,
+      "service_interval_cycles": 4,
+      "throughput_tasks_per_s": 673.479283777231,
+      "traffic": {
+        "bias_words": 512,
+        "w_words": 8192,
+        "x_words": 6336,
+        "y_words": 25344
+      },
+      "traffic_bytes": 221696,
+      "traffic_words": 55424,
+      "x_packed16": false
+    },
+    {
+      "cycles": 111876,
+      "latency_us": 745.84,
+      "name": "optimized-entry-original-interconnect",
+      "phases": [
+        {
+          "cycles": 30080,
+          "end_cycle": 30080,
+          "name": "source_load",
+          "start_cycle": 0,
+          "transactions": 15040
+        },
+        {
+          "cycles": 30080,
+          "end_cycle": 60160,
+          "name": "dma_reread",
+          "start_cycle": 30080,
+          "transactions": 15040
+        },
+        {
+          "cycles": 50688,
+          "end_cycle": 110848,
+          "name": "y_writeback",
+          "start_cycle": 60160,
+          "transactions": 25344
+        },
+        {
+          "cycles": 1028,
+          "end_cycle": 111876,
+          "name": "clear",
+          "start_cycle": 110848,
+          "transactions": null
+        },
+        {
+          "cycles": 0,
+          "end_cycle": 111876,
+          "name": "residual_control_compute",
+          "start_cycle": 111876,
+          "transactions": null
+        }
+      ],
+      "residual_cycles": 0,
+      "service_interval_cycles": 2,
+      "throughput_tasks_per_s": 1340.7701383674782,
+      "traffic": {
+        "bias_words": 512,
+        "w_words": 8192,
+        "x_words": 6336,
+        "y_words": 25344
+      },
+      "traffic_bytes": 221696,
+      "traffic_words": 55424,
+      "x_packed16": false
+    },
+    {
+      "cycles": 197380,
+      "latency_us": 1315.8666666666666,
+      "name": "frozen-entry-original-interconnect-packed16-x",
+      "phases": [
+        {
+          "cycles": 47488,
+          "end_cycle": 47488,
+          "name": "source_load",
+          "start_cycle": 0,
+          "transactions": 11872
+        },
+        {
+          "cycles": 47488,
+          "end_cycle": 94976,
+          "name": "dma_reread",
+          "start_cycle": 47488,
+          "transactions": 11872
+        },
+        {
+          "cycles": 101376,
+          "end_cycle": 196352,
+          "name": "y_writeback",
+          "start_cycle": 94976,
+          "transactions": 25344
+        },
+        {
+          "cycles": 1028,
+          "end_cycle": 197380,
+          "name": "clear",
+          "start_cycle": 196352,
+          "transactions": null
+        },
+        {
+          "cycles": 0,
+          "end_cycle": 197380,
+          "name": "residual_control_compute",
+          "start_cycle": 197380,
+          "transactions": null
+        }
+      ],
+      "residual_cycles": 0,
+      "service_interval_cycles": 4,
+      "throughput_tasks_per_s": 759.955415948931,
+      "traffic": {
+        "bias_words": 512,
+        "w_words": 8192,
+        "x_words": 3168,
+        "y_words": 25344
+      },
+      "traffic_bytes": 196352,
+      "traffic_words": 49088,
+      "x_packed16": true
+    },
+    {
+      "cycles": 99204,
+      "latency_us": 661.36,
+      "name": "optimized-entry-original-interconnect-packed16-x",
+      "phases": [
+        {
+          "cycles": 23744,
+          "end_cycle": 23744,
+          "name": "source_load",
+          "start_cycle": 0,
+          "transactions": 11872
+        },
+        {
+          "cycles": 23744,
+          "end_cycle": 47488,
+          "name": "dma_reread",
+          "start_cycle": 23744,
+          "transactions": 11872
+        },
+        {
+          "cycles": 50688,
+          "end_cycle": 98176,
+          "name": "y_writeback",
+          "start_cycle": 47488,
+          "transactions": 25344
+        },
+        {
+          "cycles": 1028,
+          "end_cycle": 99204,
+          "name": "clear",
+          "start_cycle": 98176,
+          "transactions": null
+        },
+        {
+          "cycles": 0,
+          "end_cycle": 99204,
+          "name": "residual_control_compute",
+          "start_cycle": 99204,
+          "transactions": null
+        }
+      ],
+      "residual_cycles": 0,
+      "service_interval_cycles": 2,
+      "throughput_tasks_per_s": 1512.0358050078626,
+      "traffic": {
+        "bias_words": 512,
+        "w_words": 8192,
+        "x_words": 3168,
+        "y_words": 25344
+      },
+      "traffic_bytes": 196352,
+      "traffic_words": 49088,
+      "x_packed16": true
+    },
+    {
+      "cycles": 186543,
+      "latency_us": 1243.62,
+      "name": "optimized-entry-with-current-residual-overhead",
+      "phases": [
+        {
+          "cycles": 30080,
+          "end_cycle": 30080,
+          "name": "source_load",
+          "start_cycle": 0,
+          "transactions": 15040
+        },
+        {
+          "cycles": 30080,
+          "end_cycle": 60160,
+          "name": "dma_reread",
+          "start_cycle": 30080,
+          "transactions": 15040
+        },
+        {
+          "cycles": 50688,
+          "end_cycle": 110848,
+          "name": "y_writeback",
+          "start_cycle": 60160,
+          "transactions": 25344
+        },
+        {
+          "cycles": 1028,
+          "end_cycle": 111876,
+          "name": "clear",
+          "start_cycle": 110848,
+          "transactions": null
+        },
+        {
+          "cycles": 74667,
+          "end_cycle": 186543,
+          "name": "residual_control_compute",
+          "start_cycle": 111876,
+          "transactions": null
+        }
+      ],
+      "residual_cycles": 74667,
+      "service_interval_cycles": 2,
+      "throughput_tasks_per_s": 804.1041475691932,
+      "traffic": {
+        "bias_words": 512,
+        "w_words": 8192,
+        "x_words": 6336,
+        "y_words": 25344
+      },
+      "traffic_bytes": 221696,
+      "traffic_words": 55424,
+      "x_packed16": false
+    },
+    {
+      "cycles": 173871,
+      "latency_us": 1159.14,
+      "name": "optimized-entry-packed16-with-current-residual-overhead",
+      "phases": [
+        {
+          "cycles": 23744,
+          "end_cycle": 23744,
+          "name": "source_load",
+          "start_cycle": 0,
+          "transactions": 11872
+        },
+        {
+          "cycles": 23744,
+          "end_cycle": 47488,
+          "name": "dma_reread",
+          "start_cycle": 23744,
+          "transactions": 11872
+        },
+        {
+          "cycles": 50688,
+          "end_cycle": 98176,
+          "name": "y_writeback",
+          "start_cycle": 47488,
+          "transactions": 25344
+        },
+        {
+          "cycles": 1028,
+          "end_cycle": 99204,
+          "name": "clear",
+          "start_cycle": 98176,
+          "transactions": null
+        },
+        {
+          "cycles": 74667,
+          "end_cycle": 173871,
+          "name": "residual_control_compute",
+          "start_cycle": 99204,
+          "transactions": null
+        }
+      ],
+      "residual_cycles": 74667,
+      "service_interval_cycles": 2,
+      "throughput_tasks_per_s": 862.7085597943303,
+      "traffic": {
+        "bias_words": 512,
+        "w_words": 8192,
+        "x_words": 3168,
+        "y_words": 25344
+      },
+      "traffic_bytes": 196352,
+      "traffic_words": 49088,
+      "x_packed16": true
+    }
+  ],
+  "workload": {
+    "macs_per_task": 1622016,
+    "outputs_in_frozen_campaign": 304128,
+    "outputs_y32_per_task": 25344,
+    "tasks_in_frozen_campaign": 12
+  }
+}
