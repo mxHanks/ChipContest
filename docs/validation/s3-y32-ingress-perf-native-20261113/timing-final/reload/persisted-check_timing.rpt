@@ -1,0 +1,36 @@
+Information: Checking 'no_input_delay'.
+Information: Checking 'no_driving_cell'.
+Information: Checking 'unconstrained_endpoints'.
+Warning: There are 4 endpoints which are not constrained for maximum delay.
+
+Endpoint
+--------------------------------------------------------------------------------
+u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN
+u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN
+u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D
+u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D
+
+Information: Checking 'unexpandable_clocks'.
+Warning: There is 1 clock set for which periods were not expandable.
+
+ Failed clocks set      Related clocks           Original Period     Expanded Period     Added Edges     Voltage Config
+-----------------------------------------------------------------------------------------------------------------------
+  1                     xu_hfextclk                         6.67             6666.67            1998
+  1                     xu_jtag_tck                       100.00            30600.00             610
+  1                     xu_lfextclk                     30517.58            30517.58               0
+  1                     xu_plldiv_envelope                  6.67             6666.67            1998
+
+Information: Checking 'latch_fanout'.
+Information: Checking 'no_clock'.
+Information: Checking 'partial_input_delay'.
+Information: Checking 'generic'.
+Information: Checking 'loops'.
+Information: Checking 'generated_clocks'.
+Information: Checking 'pulse_clock_non_pulse_clock_merge'.
+Information: Checking 'pll_configuration'.
+Information: Checking 'voltage_level'.
+
+Check cell voltage level related issues including rail voltages
+Cell Name                      min/max    issues found 
+----------------------------------------------------------------------
+0

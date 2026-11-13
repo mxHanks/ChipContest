@@ -1,0 +1,59 @@
+N.  Messages                                                 Command Reference
+                                   messages
+
+NAME
+       PTE-052  (Warning)  For  computing a common base period for a number of
+       clocks PrimeTime limits the waveform expansion of the  smallest  period
+       to  be  no more than %d times and the waveform expansion of the largest
+       period to be no more than %d times. Since the  largest  period  is  too
+       large  compared to the smallest period, no common base period is possi-
+       ble satisfying these limits, and PrimeTime has taken the largest period
+       as  the  common  base  period  but  still has not expanded the smallest
+       period beyond its limit. In certain situations, this  can  cause  paths
+       between these clocks to be unconstrained.
+
+DESCRIPTION
+       Two  clocks  are related if there exists a true path between them. They
+       can also be related if they are respectively related to a third  clock.
+       For  example,  if  CLK1 is related to CLK2 and CLK2 is related to CLK3,
+       then CLK1 is related to CLK3. That is, CLK1 is  related  to  CLK3  even
+       though there may not be a true path between them. Using the relatedness
+       relation, PrimeTime partitions the clocks in the design  into  mutually
+       exclusive  (related) clock sets. For each clock set, PrimeTime computes
+       a base period (over all the clocks in the set).
+
+       PrimeTime must ensure that the common base period of a set  of  related
+       clocks is evenly divisible by every clock in the set. Since clock peri-
+       ods can be arbitrary floating-point  numbers,  this  may  require  some
+       adjustments  to the clock periods. Moreover, to prevent the common base
+       period from becoming too large, PrimeTime must restrict clock  waveform
+       expansions by the limits mentioned in the warning message.
+
+       Therefore,  three  cases  can  occur  while  computing  the common base
+       period:
+         1. Largest clock period is so large compared to  the  smallest  clock
+         period that no common base period can be computed satisfying the lim-
+         its. In this case, PrimeTime takes the largest clock  period  as  the
+         common  base  period  but  still  does not expand the smallest period
+         beyond its limit.  2. A common base period is computed but it has  to
+         be  decreased to satisfy the limits.  3. A common base period is com-
+         puted and it already satisfies the limits. This warning message  han-
+         dles the first case.
+
+       One  potential  problem  with  the first scenario occurs if the maximum
+       expansion of the smallest clock period is still lesser than the largest
+       clock  period.  In  this case, for a path between the two corresponding
+       clocks, PrimeTime does not have enough resolution to apply  the  single
+       cycle rule and thus the path constraints cannot be computed.
+
+       Sometimes  unexpected clock relationships due to automatically inferred
+       clock-gating checks may cause a very large common base period. You  can
+       disable  clock-gating  checks  by setting the environment variable tim-
+       ing_disable_clock_gating_checks to "true".
+
+WHAT NEXT
+       Use set_false_path to  declare  that  timing  paths  between  unrelated
+       clocks are false.
+
+                         Version T-2022.03-SP5-1
+            Copyright (c) 2023 Synopsys, Inc. All rights reserved.

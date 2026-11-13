@@ -1,0 +1,248 @@
+{
+  "DDC_native_path": "/tmp/codex-ingress1064-eco-prune-20261113-r5/combined-apply/mapped.ddc",
+  "DDC_returned_locally": false,
+  "SDC_receipt": {
+    "bytes": 89482,
+    "sha256": "328b6da17ff17aa48b85097d4126e19a4c48638f9347193e7d3b73377c1efb86"
+  },
+  "archive_sha256": "6b4e1e184b0938c9553fe41b5c15aa597170e98270f7379cbb8773719b6254d2",
+  "area": {
+    "conservative_upper_bound": 658825.319262,
+    "full_soc_standard_cells": 356924.0136,
+    "internal_33_SRAM": 301901.305662,
+    "original_upper_bound": 658931.612862,
+    "unit": "NATIVE_LIBRARY_UNITS_NOT_MM2"
+  },
+  "child_commit": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+  "clock_hz_assumption": 150000000,
+  "coverage": {
+    "All Checks": {
+      "met": 299642,
+      "total": 328981,
+      "untested": 29332,
+      "violated": 7
+    },
+    "clock_gating_hold": {
+      "met": 27,
+      "total": 27,
+      "untested": 0,
+      "violated": 0
+    },
+    "clock_gating_setup": {
+      "met": 27,
+      "total": 27,
+      "untested": 0,
+      "violated": 0
+    },
+    "hold": {
+      "met": 79342,
+      "total": 83414,
+      "untested": 4070,
+      "violated": 2
+    },
+    "min_period": {
+      "met": 706,
+      "total": 11649,
+      "untested": 10943,
+      "violated": 0
+    },
+    "min_pulse_width": {
+      "met": 100081,
+      "total": 110326,
+      "untested": 10245,
+      "violated": 0
+    },
+    "out_hold": {
+      "met": 179,
+      "total": 179,
+      "untested": 0,
+      "violated": 0
+    },
+    "out_setup": {
+      "met": 179,
+      "total": 179,
+      "untested": 0,
+      "violated": 0
+    },
+    "recovery": {
+      "met": 19881,
+      "total": 19883,
+      "untested": 2,
+      "violated": 0
+    },
+    "removal": {
+      "met": 19878,
+      "total": 19883,
+      "untested": 0,
+      "violated": 5
+    },
+    "setup": {
+      "met": 79342,
+      "total": 83414,
+      "untested": 4072,
+      "violated": 0
+    }
+  },
+  "deferred": {
+    "further_delay_ECO": "NOT_RUN_NO_UNKNOWN_CHECK_PROMOTION",
+    "native_clock_expansion_discovery": "COLLECTED_ON_COMPLETED_CLOCK_R7_NO_INTEGER_EXPAND_VARIABLE_FOUND",
+    "reset_per_receiver_expansion": "NOT_RUN_STOPPED_AFTER_OPTIONAL_SIDECAR_GUARD; no1477 receiver query sweep"
+  },
+  "electrical": {
+    "counts": {
+      "max_capacitance": 16,
+      "max_transition": 276,
+      "min_capacitance": 0
+    },
+    "remaining_all_match_original_reset_net_driver_or_sink_catalogue": true,
+    "total": 292,
+    "worst_slack": {
+      "max_capacitance": -0.00326933,
+      "max_transition": -0.00672734
+    }
+  },
+  "limitations": [
+    "7 numerical timing failures and4 unknown maximum checks remain",
+    "292 electrical violations remain on original reset-net driver/sink pins",
+    "No full physical timing/CTS/extracted parasitic or CDC/RDC signoff",
+    "No RTL-to-mapped formal-equivalence PASS; mapped-to-mapped retained connectivity only",
+    "No official mm2 area conversion, final600sample evaluation, SDK production loading or power qualification"
+  ],
+  "map_sha256": "3ae73f916f02491f4e154eb1b2b7b0938e95158a934ca80da37a51c09faedf30",
+  "native_DDC_receipt": {
+    "bytes": 15720448,
+    "sha256": "1d50e1adffc73033795d57ecfae2f2126f00ebfa1107a18fca33bb08a17492ac"
+  },
+  "native_receipts": {
+    "apply": "d5daab044c442f08fba49680ca2cb14e84bcbc9bf98e52396e871e5f3666f560",
+    "electrical-apply": "0e93127711f6c2a734e2984e814ec3dfebb065daef8f656b42796eeb8c1b302e",
+    "electrical-reload": "468431cb3cdabc039b86a0656730f8bc222a9ca3a6768c83221448e256f3fe2f",
+    "electrical-split": "342feea1648c9189e254e2dc66c798a771410e80d630198eacd869e12568c9a6",
+    "reload": "bf1fae84eb0d47277a334267288bf0dde1c3eb6d78405ea050c8940a77e76147"
+  },
+  "optional_clock_sidecar": {
+    "final_static_root_fanout": 18,
+    "new_native_Pt_run": false,
+    "qualification": false,
+    "status": "REFUSED_BEFORE_NATIVE_PT_ON_34_STATIC_ZERO_LOAD_OUTPUTS_AFTER_DEAD_STATE_DELETION"
+  },
+  "own_eco_svf_receipt": {
+    "bytes": 9984,
+    "sha256": "a448bac64db8f597049b3a6341194973fd3323214bf323a4c519fe16c937535e"
+  },
+  "performance": {
+    "finished_at": "2026-11-13T14:50:08.815817+00:00",
+    "outputs": 304128,
+    "result_sha256": "3a7bb2832bace71ab797e9f95b41756cd9d578e70e985a65721d22610e2ea39f",
+    "scope": "RTL cycle remeasurement, NOT mapped gate-delay simulation",
+    "source_identity": "All compiled RTL/testbench/firmware/runner bytes match replay sources; noncompiled checker strengthened",
+    "started_at": "2026-11-13T14:40:41.487055+00:00",
+    "status": "PASS",
+    "task_per_second_at_assumed_150mhz": 1064.3506396747343,
+    "tasks": 12,
+    "total_cycles": 1691172
+  },
+  "qualification": false,
+  "remaining_native_violated_checks": [
+    {
+      "coverage_line": 103586,
+      "family": "reset_removal",
+      "kind": "removal",
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)\n                     CK(rise)\n                             xu_lfextclk\n                                       removal sdf_cond(ENABLE_NOT_D===1'b1)\n                                                              -0.12  -\n",
+      "native_block_sha256": "331d6fb707a05984025f290ab24b8b4eaf832a2b59d03c96f3f77bc1e1b107af",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)",
+      "slack_printed_ns": "-0.12"
+    },
+    {
+      "coverage_line": 103591,
+      "family": "reset_removal",
+      "kind": "removal",
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)\n                     CK(rise)\n                             xu_lfextclk\n                                       removal sdf_cond(ENABLE_NOT_D===1'b1)\n                                                              -0.12  -\n",
+      "native_block_sha256": "f9a128e652a0c87259d26a4e07cb07eed918abdd28c912ea9a70128c9ff81b43",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)",
+      "slack_printed_ns": "-0.12"
+    },
+    {
+      "coverage_line": 103596,
+      "family": "unverified_setup_data_D_REQUIRES_CONTRACT",
+      "kind": "hold",
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D\n                     CK(rise)\n                             xu_lfextclk\n                                       hold    -              -0.07  -\n",
+      "native_block_sha256": "dc29029f0f2fbeaae21c03568355d4ad4f731274ffa955888cb148a87e1212e6",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+      "slack_printed_ns": "-0.07"
+    },
+    {
+      "coverage_line": 103600,
+      "family": "unverified_setup_data_D_REQUIRES_CONTRACT",
+      "kind": "hold",
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D\n                     CK(rise)\n                             xu_lfextclk\n                                       hold    -              -0.07  -\n",
+      "native_block_sha256": "7b4a1893067440d91e3eb4d801908dadee09439ee6230bfccb8ac418692165e4",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+      "slack_printed_ns": "-0.07"
+    },
+    {
+      "coverage_line": 103604,
+      "family": "reset_removal",
+      "kind": "removal",
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN(rise)\n                     CK(rise)\n                             xu_lfextclk\n                                       removal sdf_cond(ENABLE_D===1'b1)\n                                                              -0.04  -\n",
+      "native_block_sha256": "82d8dddef9b51418b3fe37ee24f258ed22e672b5803a1f75939bc8536087539d",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN(rise)",
+      "slack_printed_ns": "-0.04"
+    },
+    {
+      "coverage_line": 103609,
+      "family": "reset_removal",
+      "kind": "removal",
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN(rise)\n                     CK(rise)\n                             xu_lfextclk\n                                       removal sdf_cond(ENABLE_D===1'b1)\n                                                              -0.04  -\n",
+      "native_block_sha256": "8ea328f516fe42fb60bccbe44dce16f403d437221a1dd5b342e9650fc54915a0",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN(rise)",
+      "slack_printed_ns": "-0.04"
+    },
+    {
+      "coverage_line": 103614,
+      "family": "reset_removal",
+      "kind": "removal",
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN(rise)\n                     CK(rise)\n                             xu_lfextclk\n                                       removal sdf_cond(ENABLE_D===1'b1)\n                                                              -0.04  -\n",
+      "native_block_sha256": "f39fb23046b50be0a4e44275311231ff190794227e7c3e17024e02367bd00c5b",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN(rise)",
+      "slack_printed_ns": "-0.04"
+    }
+  ],
+  "remaining_unknown_checks": [
+    {
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D\n                     CK(rise)\n                             xu_lfextclk\n                                       setup   -           untested  unknown\n",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D"
+    },
+    {
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D\n                     CK(rise)\n                             xu_lfextclk\n                                       setup   -           untested  unknown\n",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D"
+    },
+    {
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)\n                     CK(rise)\n                             xu_lfextclk\n                                       recovery\n                                               sdf_cond(ENABLE_NOT_D===1'b1)\n                                                           untested  unknown\n",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)"
+    },
+    {
+      "native_block": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)\n                     CK(rise)\n                             xu_lfextclk\n                                       recovery\n                                               sdf_cond(ENABLE_NOT_D===1'b1)\n                                                           untested  unknown\n",
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)"
+    }
+  ],
+  "returned_native_output_catalog_hashes_and_lengths_verified": true,
+  "returned_payloads": 46,
+  "schema": "ingress1064-final-engineering-delivery-review-v1",
+  "status": "FINAL_STA_STRUCTURAL_PROOF_AND_12_TASK_RETEST_COMPLETE_NOT_TIMING_CLOSED",
+  "structural_proof": {
+    "added_identity_buffers": 2373,
+    "complete_retained_connectivity_equal": true,
+    "deleted_original_state": 36,
+    "exact_original_deleted": 1796,
+    "preserved_SRAM": 353,
+    "sha256": "0cb0f6a7e812b3cf409606d57bf9444c8c8e4f6d1ab121597bbf86fc49843829",
+    "status": "FINAL_MAPPED_DEAD_CONE_AND_BUFFER_EQUIVALENCE_PASS"
+  },
+  "timing_verdict": "NOT_TIMING_CLOSURE",
+  "untested_reasons": {
+    "constant_disabled": 19083,
+    "no_clock": 10245,
+    "unknown": 4
+  }
+}
