@@ -48,6 +48,8 @@
 
 [完整12摘要](validation/s3-y32-final-20261113/gpio-full12-pass/summary.json)、[原始日志](validation/s3-y32-final-20261113/gpio-full12-pass/simulation.log)、[完整收据](validation/s3-y32-final-20261113/gpio-full12-pass/result.json)、[冻结checker](validation/s3-y32-final-20261113/gpio-full12-pass/check_results.py)。
 
+[完整离线源/CPU12安全封包](validation/s3-y32-final-20261113/gpio-full12-source-package/README.md)与[196成员独立allowlist/SHA审计](validation/s3-y32-final-20261113/gpio-full12-source-package/allowlist-audit.json)可用于脱离旧build目录复查；封包不含厂商库、凭据或原始向量。
+
 [生产验证命令](../experiments/s3-y32-final/validation/README.md)与[独立导出器](../experiments/s3-y32-final/validation/export_functional_evidence.py)。本机实际base为`gpio-task0-r2`，full12为`gpio-followups-r1/full12`；重放使用同一binary，不重编译、不重跑已完成任务。
 
 第一次小证据导出遇到replay目录没有独立`source-manifest.json`，已在[失败收据](validation/s3-y32-final-20261113/gpio-full12-export-attempt-r1/export-failure.json)保留原件。导出器改为生成已经逐文件验证的完整源hash表，随后重放导出PASS；这不是RTL仿真失败，没有重复运行CPU12。
