@@ -17,3 +17,11 @@ yet established. The driver starts PT only after clean same-package DC completio
 
 `prepare/` contains exact input catalogs, source/define/profile identity, and the
 local structural result. It contains no vendor DB/lib or credentials.
+
+DC completed cleanly after1754.14 seconds with own1,022,208-byte final.svf.
+`native-dc/` contains the verified26-member curated summary and exact map/SVF
+identities. The initial same-map PT collection failed on its required
+report_host_options API; its failure and all reports are retained. Report
+collection compatibility is being investigated in a new directory without
+changing the mapped design, libraries, constraints or exceptions. Neither area
+mm² nor timing closure or qualification is claimed.
