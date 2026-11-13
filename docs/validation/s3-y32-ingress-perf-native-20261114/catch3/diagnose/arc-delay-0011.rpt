@@ -1,0 +1,108 @@
+****************************************
+Report : delay_calculation -of_objects: arcs
+Design : xu_soc_sysbus32_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Sat Nov 14 00:37:24 2026
+****************************************
+
+*--------------------------------------------------*
+From pin: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U10/B1
+To pin:   u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U10/ZN
+Main Library Units:  1ns  1pF  1kOhm
+
+Library: 'scc40nll_vhsc40_rvt_ss_v0p99_125c_basic'
+Library Units:  1ns  1pF  1kOhm
+Library Cell: 'NAND2BV0_12TR40'
+arc sense:                       negative_unate
+arc type:                        cell
+Units:  1ns  1pF  1kOhm
+
+
+ Rise Delay
+
+   cell delay = 0.0964521
+     Table is indexed by
+      (X) input_pin_transition = 0.1
+      (Y) output_net_total_cap = 0.00198105
+     Relevant portion of lookup table:
+                   (X)  0.0343      (X)  0.1195
+  (Y)  0.0012      (Z)  0.0558      (Z)  0.0903
+  (Y)  0.0036      (Z)  0.0977      (Z)  0.1325
+
+     Z = A + B*X + C*Y + D*X*Y
+     A =  0.0212           B =  0.4043
+     C = 17.4499           D =  1.1166
+
+  Z = 0.0964521
+  scaling result for operating conditions
+  multiplying by 1 gives 0.0964521
+
+ Fall Delay
+
+   cell delay = 0.0764413
+     Table is indexed by
+      (X) input_pin_transition = 0.1
+      (Y) output_net_total_cap = 0.00198042
+     Relevant portion of lookup table:
+                   (X)  0.0343      (X)  0.1195
+  (Y)  0.0012      (Z)  0.0428      (Z)  0.0732
+  (Y)  0.0036      (Z)  0.0715      (Z)  0.1045
+
+     Z = A + B*X + C*Y + D*X*Y
+     A =  0.0169           B =  0.3415
+     C = 11.5669           D = 12.6168
+
+  Z = 0.0764413
+  scaling result for operating conditions
+  multiplying by 1 gives 0.0764413
+
+  Cell Delay
+  rise:  0.0964521
+  fall:  0.0764413
+
+Rise delay = 0.0964521
+Fall delay = 0.0764413
+
+Units:  1ns  1pF  1kOhm
+
+  Transition rise
+   transition = 0.103149
+     Table is indexed by
+      (X) input_pin_transition = 0.1
+      (Y) output_net_total_cap = 0.00198105
+     Relevant portion of lookup table:
+                   (X)  0.0343      (X)  0.1195
+  (Y)  0.0012      (Z)  0.0711      (Z)  0.0805
+  (Y)  0.0036      (Z)  0.1526      (Z)  0.1528
+
+     Z = A + B*X + C*Y + D*X*Y
+     A =  0.0253           B =  0.1626
+     C = 35.5744           D = -45.0256
+
+  Z = 0.103149
+  scaling result for operating conditions
+  multiplying by 1 gives 0.103149
+
+
+  Transition fall
+   transition = 0.0672944
+     Table is indexed by
+      (X) input_pin_transition = 0.1
+      (Y) output_net_total_cap = 0.00198042
+     Relevant portion of lookup table:
+                   (X)  0.0343      (X)  0.1195
+  (Y)  0.0012      (Z)  0.0450      (Z)  0.0551
+  (Y)  0.0036      (Z)  0.0956      (Z)  0.0966
+
+     Z = A + B*X + C*Y + D*X*Y
+     A =  0.0143           B =  0.1696
+     C = 22.6134           D = -44.0167
+
+  Z = 0.0672944
+  scaling result for operating conditions
+  multiplying by 1 gives 0.0672944
+
+
+Rise transition = 0.103149
+Fall transition = 0.0672944
+1

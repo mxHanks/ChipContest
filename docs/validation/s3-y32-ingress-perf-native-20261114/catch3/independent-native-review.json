@@ -1,0 +1,192 @@
+{
+  "SVF_files": 8,
+  "added_catch_buffers": 6,
+  "all_catalog_bytes_and_sha256_verified": true,
+  "arc_envelope": {
+    "added_buffer_cell_arcs_same_exact_owner_I_to_Z_verified": true,
+    "diagnose_steps_per_endpoint": 5,
+    "disabled_filter_evidence": "Executed sealed Tcl selects is_disabled == false; per-arc TSV does not separately repeat this Boolean. Rejected r2 diagnostic retained to explain native physical-net empty sense/is_user_disabled behavior.",
+    "exact_original_NAND_and_inverter_prefixes_verified_for_all_three_receivers": true,
+    "fall_increment_ns": 0.138889,
+    "independent_polarity_sum_recomputed": true,
+    "maximum_increment_limit_ns": 0.5,
+    "net_arcs_preserve_polarity_with_native_empty_sense": true,
+    "qualification": "CURRENT_NATIVE_PROPAGATION_UPPER_BOUND_ONLY_REQUIRED_MAX_UNKNOWN_RETAINED",
+    "reload_steps_per_endpoint": 9,
+    "rise_increment_ns": 0.114627,
+    "sealed_executed_Tcl_enabled_arc_filter_confirmed": true,
+    "sealed_executed_Tcl_sha256": "4a3f114bd1179c33924f4e23dbb0e8ad6bc4112854ed5622f685e86339c7ae20",
+    "values": {
+      "diagnose": {
+        "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN": {
+          "fall": 0.660418,
+          "rise": 0.621707
+        },
+        "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN": {
+          "fall": 0.660418,
+          "rise": 0.621707
+        },
+        "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN": {
+          "fall": 0.660418,
+          "rise": 0.621707
+        }
+      },
+      "reload": {
+        "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN": {
+          "fall": 0.799307,
+          "rise": 0.736334
+        },
+        "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN": {
+          "fall": 0.799307,
+          "rise": 0.736334
+        },
+        "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN": {
+          "fall": 0.799307,
+          "rise": 0.736334
+        }
+      }
+    }
+  },
+  "area_native_library_units": [
+    {
+      "area_library_units": "357030.3072",
+      "component": "ALL_FULL_SOC_STANDARD_CELLS",
+      "official_area_mm2": "UNVERIFIED_UNIT_CONVERSION"
+    },
+    {
+      "area_library_units": "301901.305662",
+      "component": "ALL_33_INTERNAL_SRAM",
+      "official_area_mm2": "UNRESOLVED_OFFICIAL_MACRO_TABLE"
+    },
+    {
+      "area_library_units": "658931.612862",
+      "component": "CONSERVATIVE_UPPER_BOUND",
+      "official_area_mm2": "NOT_A_CONTEST_SCORE"
+    }
+  ],
+  "catalog_files": 80,
+  "catch_receivers": [
+    {
+      "after_max_or_UNKNOWN": "UNKNOWN",
+      "after_min_ns": "0.067213",
+      "before_max_or_UNKNOWN": "UNKNOWN",
+      "before_min_ns": "-0.040106",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN",
+      "insertions": "2",
+      "qualification": "ASYNC_EDGE_ENVELOPE_ONLY"
+    },
+    {
+      "after_max_or_UNKNOWN": "UNKNOWN",
+      "after_min_ns": "0.067213",
+      "before_max_or_UNKNOWN": "UNKNOWN",
+      "before_min_ns": "-0.040106",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN",
+      "insertions": "2",
+      "qualification": "ASYNC_EDGE_ENVELOPE_ONLY"
+    },
+    {
+      "after_max_or_UNKNOWN": "UNKNOWN",
+      "after_min_ns": "0.067213",
+      "before_max_or_UNKNOWN": "UNKNOWN",
+      "before_min_ns": "-0.040106",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN",
+      "insertions": "2",
+      "qualification": "ASYNC_EDGE_ENVELOPE_ONLY"
+    }
+  ],
+  "clock_associations": {
+    "all_four_stages_equal_reset3": true,
+    "pins": 26343
+  },
+  "coverage": {
+    "all_29332_untested_details_equal_reset3_as_multiset": true,
+    "electrical_violations": 0,
+    "four_unknown_identity_set_equal_reset3": true,
+    "numeric_violations": 0,
+    "stage_totals": {
+      "edit": {
+        "met": 299649,
+        "total": 328981,
+        "untested": 29332,
+        "violated": 0
+      },
+      "reload": {
+        "met": 299649,
+        "total": 328981,
+        "untested": 29332,
+        "violated": 0
+      }
+    },
+    "unknown_checks": [
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D CK(rise) xu_lfextclk setup - untested unknown",
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D CK(rise) xu_lfextclk setup - untested unknown",
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise) CK(rise) xu_lfextclk recovery sdf_cond(ENABLE_NOT_D===1'b1) untested unknown",
+      "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise) CK(rise) xu_lfextclk recovery sdf_cond(ENABLE_NOT_D===1'b1) untested unknown"
+    ]
+  },
+  "final_mapped_sha256": "d83acb49caec51aabc66d8ad61b8784294bebe26c5458aa0b095f9d12a2ae0d1",
+  "final_native_V_DDC_inputs_bound": true,
+  "fresh_PT_catch_min_margin_ns": 0.067213,
+  "libraries_and_baseline_identity_equal_reset3": true,
+  "limitations": [
+    "Four unknown timing checks remain; complete timing qualification is not established",
+    "Arc sums use the fixed native corner/model and are not max setup/recovery slack or an asynchronous phase guarantee",
+    "Physical CTS/SPEF/PVT, reset pulse and CDC/RDC signoff remain unresolved",
+    "Native DDC, vendor libraries and all full native logs were not returned; byte hashes and clean native receipts are reviewed",
+    "Strict mapped structural equivalence and throughput validation are reviewed separately by root"
+  ],
+  "native_receipt_bound_returned_outputs": 67,
+  "original_SDC_and_actual_PT_add_hash_unchanged": true,
+  "post_receipt_function_proofs_catalog_bound": [
+    "diagnose/function-proof.json",
+    "edit/function-proof.json",
+    "reload/function-proof.json"
+  ],
+  "rejected_r2": {
+    "excluded_from_clean_four_stage_verdict": true,
+    "preserved": true,
+    "status": "NATIVE_STAGE_FAILED"
+  },
+  "reviewed_at": "2026-11-14T00:46:28.569719+08:00",
+  "schema": "ingress1064-catch3-independent-native-review-v1",
+  "source_mapped_sha256": "b8d18954b2bc9737d725e312335ec89ea9f6041bcb6d52ecc37e9ebd2b5a2888",
+  "stages": {
+    "apply": {
+      "completion_marker": true,
+      "execution_sha256": "3e49edbd6bb53d9819fbf5f8b4f35c41c5b9b4a23753424694047df38d897600",
+      "missing_outputs": [],
+      "native_tool_errors": [],
+      "returncode": 0,
+      "source_drift": [],
+      "tool_sha256": "23a4101c711fdb4747a57e6f9524d4989eb76a2b3120f0fa9766f4b25ae8e6d2"
+    },
+    "diagnose": {
+      "completion_marker": true,
+      "execution_sha256": "6b41f972e710f47956c5198711792f8bd59476925133f70518d0be16f6f0e4f9",
+      "missing_outputs": [],
+      "native_tool_errors": [],
+      "returncode": 0,
+      "source_drift": [],
+      "tool_sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+    },
+    "edit": {
+      "completion_marker": true,
+      "execution_sha256": "f7edad9476354dcea91ffb19ba98751062486fa0d9cdd5cee6675f38941c47c3",
+      "missing_outputs": [],
+      "native_tool_errors": [],
+      "returncode": 0,
+      "source_drift": [],
+      "tool_sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+    },
+    "reload": {
+      "completion_marker": true,
+      "execution_sha256": "df5ca0b5bf7d7d2abda52f4a02efac68fc17cd6f78bfc58082d59173cc929695",
+      "missing_outputs": [],
+      "native_tool_errors": [],
+      "returncode": 0,
+      "source_drift": [],
+      "tool_sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+    }
+  },
+  "status": "PASS_NUMERIC_STA_AND_DRC_ZERO_UNKNOWN_RETAINED_NOT_SIGNOFF"
+}

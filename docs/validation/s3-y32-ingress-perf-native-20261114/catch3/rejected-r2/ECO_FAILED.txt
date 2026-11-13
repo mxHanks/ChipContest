@@ -1,0 +1,18 @@
+RDN tail must have one enabled native net arc: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN
+RDN tail must have one enabled native net arc: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN
+    while executing
+"error $message"
+    (procedure "eco_require" line 1)
+    invoked from within
+"eco_require [expr {[sizeof_collection $arcs]==1}] "RDN tail must have one enabled native net arc: $sink""
+    (procedure "edge_arrivals" line 25)
+    invoked from within
+"edge_arrivals $row $phase"
+    (procedure "edge_measure" line 8)
+    invoked from within
+"edge_measure $row before"
+    ("foreach" body line 2)
+    invoked from within
+"foreach row [edge_rows] {
+    set name [lindex $row 0];set measured [edge_measure $row before]
+    puts $topology "$name\t[lindex $row 3]\t[get_object..."

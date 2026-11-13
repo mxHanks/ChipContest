@@ -1,0 +1,43 @@
+****************************************
+Report : delay_calculation -of_objects: arcs
+Design : xu_soc_sysbus32_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Sat Nov 14 00:37:24 2026
+****************************************
+
+*--------------------------------------------------*
+From pin: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U10/ZN
+To pin:   u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/U2/I
+Main Library Units:  1ns  1pF  1kOhm
+
+arc sense: unate
+arc type:  net
+Balanced case tree
+RC delay: (r_wire/load_count) * (c_pin + c_wire/load_count)
+rise:     (0 / 3) * (0.00066035 + (0 / 3))
+fall:     (0 / 3) * (0.00066014 + (0 / 3))
+
+
+Rise delay = 0
+Fall delay = 0
+
+ Degradation of input transitions due to interconnect
+
+  Rise
+     Table is indexed by
+      (X) output_pin_transition = 0.103149
+      (Y) connect_delay = 0
+   rising input transition time = 0.103149
+
+  Fall
+     Table is indexed by
+      (X) output_pin_transition = 0.0694606
+      (Y) connect_delay = 0
+   falling input transition time = 0.0694606
+
+
+Rise transition derate = 1
+Fall transition derate = 1
+Rise transition = 0.103149
+Fall transition = 0.0694606
+1
