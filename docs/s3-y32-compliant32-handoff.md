@@ -1,6 +1,6 @@
 # 64PE原SystemBus32整改版硬件／软件交接
 
-当前选择为**374宏、原32位System Bus、GPIO→CPU真实装载**的隔离冻结候选。它已通过CPU单任务，完整12任务及等待测试正在运行；同版本综合、150MHz STA、网表功能与功耗尚未验收，不能宣称已满足全部比赛要求。
+本文件记录**旧单在途374宏、原32位System Bus、GPIO→CPU真实装载**整改基线。完整12及两个wait31已通过；同版综合、150MHz STA、网表功能和功耗尚未验收。用户最新指定更优入口／DMA4候选作为定稿基础，接管说明见`docs/s3-y32-final-synthesis-session-prompt-20261113.md`，不要把本基线当作新流水方案的最终成绩。
 
 父／子分支均为`codex/s3-y32-compliance-20261113`。已安装子提交`bde23ba`仍是353宏回退版；374宏源在`experiments/s3-y32-compliant32/storage-macro/`生成并冻结，尚未安装。最终取版必须核对源清单及完整12收据，不能仅按分支名。
 
@@ -34,7 +34,7 @@ CPU与DMA是生产仲裁两个源（N2/PW1），均经过原`e203_subsys_mems/u_
 
 生产N2／374宏CPU任务0（含非零前态warmup）已通过：25,344个Y32写及CPU公开读回一致、15,040次GPIO ACK、55,040物理写零；source地址顺序、响应退休与完成顺序核验。含clear至末Y为**1,492,424拍**，首GPIO数据至末Y1,491,333拍，其中装载1,315,983拍、clear1027拍、DMA175,261拍。按假定150MHz换算约100.51 task/s；单任务不能代替完整12，150MHz也未获STA证明。
 
-单层冻结包`build/compliant32-20261113/cpu-gpio-storage21-single-delivery-r1/gpio-storage21-single-task.tar.gz`，SHA256 `3a0f1d073af1ff5a4935bb770ab48dc378d51db57dbb56368858ea9a87cf3f65`。完整12与两种wait31复用相同binary／ELF／向量，正在运行。
+单层冻结包`build/compliant32-20261113/cpu-gpio-storage21-single-delivery-r1/gpio-storage21-single-task.tar.gz`，SHA256 `3a0f1d073af1ff5a4935bb770ab48dc378d51db57dbb56368858ea9a87cf3f65`。完整12与两种wait31已复用相同binary／ELF／向量全部通过。完整12为304128个输出，首GPIO数据至末Y累计17895990拍、含clear累计17909088拍；两个wait31单任务均1492455拍。原件在`build/compliant32-20261113/cpu-gpio-storage21-followups-r1/`，不能沿用为新DMA4配置的证据。
 
 真实公开音频开发评测保持原模型162个变量逐值一致：600条开发样本（599条原WAV及1条明确的合成静音），各层最大NRMSE0.0131066%（门槛3%）。CPU向量来自同一音频导出。这不是组委会最终600条选择，也不是整机跑完600×12层。
 
@@ -46,4 +46,4 @@ CPU与DMA是生产仲裁两个源（N2/PW1），均经过原`e203_subsys_mems/u_
 
 353宏计费命名范围为523,232.351262个库面积单位；全SoC标准单元加33内部宏保守上界为657,808.986462个库单位。库面积量纲及官方SRAM计价未核定，不能直接宣布mm²或≤2.25mm²通过，更不能冒充374宏面积。
 
-待新CPU完整12与两个wait31通过后，封同源／固件／向量／定义／实际宏清单的374宏综合STA包。活动采集使用相同生产硬件，分别映射SoC与共享端点；FST／SAIF不是功耗结果。仍缺同版完整150MHz闭合、综合后功能一致性、全SoC功耗／能耗、官方面积计价及最终组委会样本。Goal保持active，所有失败与否决候选保留。
+旧374宏完整12及两个wait31现已通过，离线PPA已封；用户已改选新入口／DMA4架构定稿，须先整合并重验，再封唯一最终综合STA包，不直接执行旧入口包冒充新方案。活动采集使用相同生产硬件，分别映射SoC与共享端点；FST／SAIF不是功耗结果。仍缺同版完整150MHz闭合、综合后功能一致性、全SoC功耗／能耗、官方面积计价及最终组委会样本。Goal保持active，所有失败与否决候选保留。
