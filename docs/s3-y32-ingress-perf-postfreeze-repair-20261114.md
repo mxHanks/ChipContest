@@ -36,3 +36,12 @@
 每条根按min／max、rise／fall及原有时钟查询有限worst64上下文，272种组合；1477接收端仅用作静态身份目录。完整coverage保持类型总量、数值违例身份和untested身份／原因；所有电气违例逐pin／type比较，禁止新增或恶化。0条路径保持无证据状态，worst64截断单独记录。原生DC回放保留自身及祖先SVF，随后以新PT进程重载；最终映射仍需独立完整连接分区证明、353 SRAM及1796死叶白名单核验。
 
 三个catch外源最大传播的只读API补查与编辑流程分开执行，先读取原生`get_timing_arcs`、`report_delay_calculation`手册和arc属性，再作有限路径查询。任何实际到达数值都不能把unknown required time改记通过。
+
+
+## catch弧传播试验进度
+
+r1／r2均在诊断阶段拒绝，尚未修改网表。原始native arc行证明物理net arc确实存在，`is_disabled=false`，但其`is_user_disabled`及`sense`为空；原过滤器对空的非适用属性作false比较导致遗漏。r3仅以`is_disabled=false`选择启用弧，要求精确from／to与网络弧类型；物理线按非反相传播，单元弧仍必须具有明确sense和有限非负双极性delay_max，不能将未知延迟当0。诊断阶段已原生通过，进入受限编辑。
+
+传播值从SHA固定原SDC的ERST max IO delay0.5ns出发，按精确NAND B1→ZN、三路INV及端点尾链逐段累加原生最大延迟，正／负／非单调分别组合输入极性。该值仅为当前库和网络模型的工程上界，不能替代UNKNOWN的setup/recovery required time或异步脉宽/RDC资格。最大上界增加不超过0.5ns，最小数值裕量要求0.03ns；每端点最多8颗、总24颗身份BUF，完整STA和电气0不恶化保护保留。
+
+新runner将untested身份／原因核验从集合包含收紧为完全相等；真实原件自对照通过，修改一项unknown原因的负例被拒绝。
