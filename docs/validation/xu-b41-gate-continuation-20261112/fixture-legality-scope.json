@@ -1,0 +1,61 @@
+{
+  "status": "PASS_FROZEN_FIXTURE_LEGALITY_SCOPE",
+  "enumerated_operations_with_mailbox_overapprox": 65735,
+  "scope": "All frozen fixture calls meet the unchanged endpoint size/range/cpu-mask legality predicate. This scopes the original fixture-port response-error assertion; it is not a general proof of arbitrary fixture addresses or a replacement for DUT DMA error checks.",
+  "ranges": [
+    {
+      "name": "X",
+      "first_offset": "0x0",
+      "last_offset": "0x62fc",
+      "count": 6336,
+      "stride": 4
+    },
+    {
+      "name": "W",
+      "first_offset": "0x8000",
+      "last_offset": "0xfffc",
+      "count": 8192,
+      "stride": 4
+    },
+    {
+      "name": "BIAS_LO",
+      "first_offset": "0x18000",
+      "last_offset": "0x187f8",
+      "count": 256,
+      "stride": 8
+    },
+    {
+      "name": "BIAS_HI",
+      "first_offset": "0x18004",
+      "last_offset": "0x187fc",
+      "count": 256,
+      "stride": 8
+    },
+    {
+      "name": "Y_POISON",
+      "first_offset": "0x20000",
+      "last_offset": "0x38bfc",
+      "count": 25344,
+      "stride": 4
+    },
+    {
+      "name": "Y_READBACK",
+      "first_offset": "0x20000",
+      "last_offset": "0x38bfc",
+      "count": 25344,
+      "stride": 4
+    },
+    {
+      "name": "MAILBOX_OVERAPPROX",
+      "first_offset": "0x7f000",
+      "last_offset": "0x7f018",
+      "count": 7,
+      "stride": 4
+    }
+  ],
+  "sha256": {
+    "tests/tb_dma64_soc.sv": "cba7aef3a92d13a190bdfc2ca8bd076b5c6d0ac297dac653727b8e280a925dda",
+    "rtl/perips/xu_dma64_shared_arb.sv": "17538e6b77c9975f1f50eb55a92cf73154c160f1d3e9d58b278d7ae91bdbd9c4",
+    "rtl/perips/xu_shared_icb_sram64.sv": "16b840e884a5ff0eba17129338e7a6c2f69b872b770de14f81104f1a0fab2e0e"
+  }
+}

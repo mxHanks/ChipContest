@@ -1,0 +1,46 @@
+{
+  "status": "PASS_EXHAUSTIVE_16BIT_COUNTER_HIGH_BIT_INDEPENDENCE",
+  "source_sha256": "d53b2a3a9b14805f057387585800d01d73e4c7919b5ef46e775dc875fb58ce90",
+  "paired_states": 32768,
+  "tick_expression_vector_bits": 16,
+  "instruction_shift_range": [
+    0,
+    15
+  ],
+  "lower_next_state_bits": 15,
+  "count_references": [
+    {
+      "line": 202,
+      "text": "reg [15:0] count;"
+    },
+    {
+      "line": 217,
+      "text": "wire [15:0] GEN_6;"
+    },
+    {
+      "line": 367,
+      "text": "assign T_523 = count + 16'h1;"
+    },
+    {
+      "line": 369,
+      "text": "assign T_525 = count ^ T_524;"
+    },
+    {
+      "line": 380,
+      "text": "assign GEN_6 = run ? GEN_3 : count;"
+    },
+    {
+      "line": 670,
+      "text": "count <= 16'h0;"
+    },
+    {
+      "line": 674,
+      "text": "count <= 16'h0;"
+    },
+    {
+      "line": 676,
+      "text": "count <= T_524;"
+    }
+  ],
+  "scope": "The high counter bit does not affect the tick vector or lower next-state bits. GEN_6 has no read use; hardware macro behavior is outside this proof."
+}

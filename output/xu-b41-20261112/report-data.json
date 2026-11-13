@@ -1,0 +1,383 @@
+{
+  "status": "IN_PROGRESS_REPORT_SOURCE",
+  "parent_revision": "96fffcb2a4b2492fd2cfdecb88e164d2c67881ae",
+  "child_revision": "ccdac30d92ecf40f14d0b78879b8711fb0b1cdd1",
+  "b41_tile_sha256": "710b8e180652f49751769e152a3b3a9e6a35ba622fb4c3e2385dc5ffab241fcb",
+  "physical_candidate_sha256": "2d5adc613980dc21dc1f0aaa398045252911a5c67594349630ff35d78688a220",
+  "functional_simulation_copy_sha256": "d8e1c611016b0baa943115078ad49f6e0a147980a7e9fe13df5d3e5827da95ac",
+  "sources": {
+    "docs/validation/xu-b41-handoff-20261112/reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-full12-comparison-r1/result.json": "110766cfc530f08fb33f60a853094498155605212aa299b654987ee984b9f913",
+    "docs/validation/xu-b41-handoff-20261112/reports/s3-y32-portable-software-design-20261110/hardware64-r1/b41-followup-review-r1/result.json": "7eee5694aeb7485d8a856e989825b1d5c7872934b8cbd2b3f4e5fd0757718158"
+  },
+  "rtl_full12": {
+    "campaign_sha256": "4cae2c2ebcc9f260a319176780ffafced101ecc4d288344e54cc377b3bcf1c69",
+    "child_revision": "ccdac30d92ecf40f14d0b78879b8711fb0b1cdd1",
+    "coverage": {
+      "backoff_8_256_fast4-O2": {
+        "measured_outputs": 304128,
+        "physical_clears": 13,
+        "target_cycles_met": true,
+        "warmup_outputs": 25344
+      },
+      "phased_64_fast4-O2": {
+        "measured_outputs": 304128,
+        "physical_clears": 13,
+        "target_cycles_met": true,
+        "warmup_outputs": 25344
+      },
+      "tight-O2": {
+        "measured_outputs": 304128,
+        "physical_clears": 13,
+        "target_cycles_met": true,
+        "warmup_outputs": 25344
+      }
+    },
+    "cpu_assert_properties": 6,
+    "first_source_stall": 0,
+    "input_manifest_sha256": "1d8cd861b75c377ecd7282edd1fa1bdb7dae7a166078d43d6308e3010335a6c6",
+    "native_seconds": 1589.3298086830182,
+    "native_sha256": "e0dbc2ac8e9e517dc9e46d5fc8d69da39a725d48afa3c65d5b5fef05596a06e2",
+    "official_score": null,
+    "parent_revision": "96fffcb2a4b2492fd2cfdecb88e164d2c67881ae",
+    "physical_energy": null,
+    "proxy_objectives": [
+      "software_control_cycles",
+      "max_report_delay",
+      "retired",
+      "itcm_accesses",
+      "mmio_reads"
+    ],
+    "raw_preprocessed_sha256": "aff88a44cacff347ccb3c8604b412fb3b496b279a26afa966a1ac228246c94a9",
+    "scope": "Real CPU64 execution with SVA and original functional checks. warmup separately tagged in CSV. Operation counts do not establish energy benefit or official eligibility.",
+    "simulator_sha256": "09c82dab56bfba6cc9ebf11c3500ad7b0b23d794d8dec834c0ee20716dbd3e4c",
+    "source_build_receipt_sha256": "b9395a66d613a6d600a1adf8637aaeb9fb174e7704aecc458358c4f0560b7602",
+    "status": "PASS_RAW_CPU64_COMPARISON",
+    "summaries": {
+      "backoff_8_256_fast4-O2": {
+        "clear_cycles": 12336,
+        "clear_reads": 828,
+        "compute_reads": 1584,
+        "descriptor_submission_cycles": 396,
+        "discovery_delay": 179,
+        "firmware_cycles": 430080,
+        "gap_cycles": 696,
+        "including_gap_cycles": 429601,
+        "itcm_accesses": 115968,
+        "max_report_delay": 45,
+        "mmio_reads": 2412,
+        "payload_cycles": 416569,
+        "principal_cycles": 428905,
+        "report_delay": 536,
+        "retired": 413004,
+        "software_control_cycles": 430161
+      },
+      "phased_64_fast4-O2": {
+        "clear_cycles": 12336,
+        "clear_reads": 780,
+        "compute_reads": 5256,
+        "descriptor_submission_cycles": 396,
+        "discovery_delay": 84,
+        "firmware_cycles": 429984,
+        "gap_cycles": 756,
+        "including_gap_cycles": 429660,
+        "itcm_accesses": 114420,
+        "max_report_delay": 37,
+        "mmio_reads": 6036,
+        "payload_cycles": 416568,
+        "principal_cycles": 428904,
+        "report_delay": 444,
+        "retired": 398592,
+        "software_control_cycles": 430128
+      },
+      "tight-O2": {
+        "clear_cycles": 12336,
+        "clear_reads": 732,
+        "compute_reads": 24516,
+        "descriptor_submission_cycles": 312,
+        "discovery_delay": 84,
+        "firmware_cycles": 429744,
+        "gap_cycles": 528,
+        "including_gap_cycles": 429444,
+        "itcm_accesses": 151572,
+        "max_report_delay": 33,
+        "mmio_reads": 25248,
+        "payload_cycles": 416580,
+        "principal_cycles": 428916,
+        "report_delay": 396,
+        "retired": 252792,
+        "software_control_cycles": 429864
+      }
+    },
+    "tasks_csv_sha256": "86cc4cc3855b796a872765ee98fe9dd7e09b15fb277bb08a3a4c2cccd700af6e",
+    "tasks_per_variant": 12,
+    "timing_operation_proxy_front": [
+      "backoff_8_256_fast4-O2",
+      "phased_64_fast4-O2",
+      "tight-O2"
+    ]
+  },
+  "rtl_followup": {
+    "accepted_full12": {
+      "campaign_sha256": "4cae2c2ebcc9f260a319176780ffafced101ecc4d288344e54cc377b3bcf1c69",
+      "input_manifest_sha256": "1d8cd861b75c377ecd7282edd1fa1bdb7dae7a166078d43d6308e3010335a6c6",
+      "native_sha256": "e0dbc2ac8e9e517dc9e46d5fc8d69da39a725d48afa3c65d5b5fef05596a06e2",
+      "simulator_sha256": "09c82dab56bfba6cc9ebf11c3500ad7b0b23d794d8dec834c0ee20716dbd3e4c"
+    },
+    "campaign_sha256": "4e6708967077d8e4ae396f4d9ed76681f694cf4e64370938fc745f946936def8",
+    "cpu_assert_properties": 6,
+    "fault_cases": {
+      "backoff_8_256_fast4-O2-read": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 1,
+        "pending": 0,
+        "requests": 2,
+        "responses": 2,
+        "return_code": 5
+      },
+      "backoff_8_256_fast4-O2-write": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 2,
+        "pending": 0,
+        "requests": 4691,
+        "responses": 4691,
+        "return_code": 5
+      },
+      "phased_64_fast4-O2-read": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 1,
+        "pending": 0,
+        "requests": 2,
+        "responses": 2,
+        "return_code": 5
+      },
+      "phased_64_fast4-O2-write": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 2,
+        "pending": 0,
+        "requests": 4692,
+        "responses": 4692,
+        "return_code": 5
+      },
+      "tight-O2-read": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 1,
+        "pending": 0,
+        "requests": 2,
+        "responses": 2,
+        "return_code": 5
+      },
+      "tight-O2-write": {
+        "ack": 0,
+        "busy": 0,
+        "done": 0,
+        "error_publications": 1,
+        "locked": 0,
+        "mode": 2,
+        "pending": 0,
+        "requests": 4691,
+        "responses": 4691,
+        "return_code": 5
+      }
+    },
+    "fault_compile_units": 168,
+    "fault_simulator_sha256": "1b873eacdedadffbd471be3d7a5d1e126231a1739a56695e9c9ca308e43d939e",
+    "frozen_checker_sha256": "d4e121ae9ddb5e529b5327b0ae51893d27a5e50eedf1e69aa35d19f15aba2a20",
+    "input_manifest_sha256": "4ac437cd4ff2e480a4f33ae7c8c3b969949ebe151d195aa36b993ca9b47b5db4",
+    "native_seconds": 707.7203531760024,
+    "native_sha256": "8430b682d7f6c7b0a9eff13f730de8a95a17b37ff0573c63efdffc1f1378e7b9",
+    "official_score": null,
+    "physical_energy": null,
+    "qualification": "DEVELOPMENT_RTL_ONLY",
+    "reviewer_sha256": "85a2a789c596d754e04a33a986289c4f4a65e54d11728e238b26ba0561138ed9",
+    "sequence_sha256": "f36b53665d2edd8eb41caab7a3d8fdd0cf99422da4fde95de5a1f39e240a65c0",
+    "stall_cases": {
+      "backoff_8_256_fast4-O2": {
+        "first_source_wait_cycles": [
+          31,
+          31
+        ],
+        "measured_outputs": 25344,
+        "physical_clears": 2,
+        "report_delay": 294,
+        "warmup_outputs": 25344
+      },
+      "phased_64_fast4-O2": {
+        "first_source_wait_cycles": [
+          31,
+          31
+        ],
+        "measured_outputs": 25344,
+        "physical_clears": 2,
+        "report_delay": 83,
+        "warmup_outputs": 25344
+      },
+      "tight-O2": {
+        "first_source_wait_cycles": [
+          31,
+          31
+        ],
+        "measured_outputs": 25344,
+        "physical_clears": 2,
+        "report_delay": 38,
+        "warmup_outputs": 25344
+      }
+    },
+    "status": "PASS_RAW_B41_FOLLOWUP"
+  },
+  "gate_full12": {
+    "status": "TWO_OF_THREE_INDEPENDENTLY_VERIFIED",
+    "configuration": {
+      "tasks": 12,
+      "rows": 8,
+      "warmup": 1,
+      "max_cycles": 20000000
+    },
+    "binary_sha256": "1845483bafd5c8fdd6e16111a5a03eefdb275c8817306978e87851f6f9da64fa",
+    "variants": {
+      "tight-O2": {
+        "status": "PASS_INDEPENDENT_GATE_FULL12_REVIEW",
+        "formal_outputs": 304128,
+        "warmup_outputs": 25344,
+        "physical_clears": 13,
+        "macro_read_checks": 169,
+        "payload_cycles": 416580,
+        "clear_cycles": 12336,
+        "principal_cycles": 428916,
+        "gap_cycles": 528,
+        "firmware_cycles": 429744,
+        "software_control_cycles": 429864,
+        "official_review_path": "/tmp/xu-b41-close-20261111-r1/xu-gate-independent-20261113-r2/tight-O2.json",
+        "official_review_sha256": "f75f69aea0c3e9959ea92aa07e8d7e6cc5f0faad42f7ddebdd0f6407d5ee4a4e"
+      },
+      "phased_64_fast4-O2": {
+        "status": "PASS_INDEPENDENT_GATE_FULL12_REVIEW",
+        "reviewer_version": 3,
+        "formal_outputs": 304128,
+        "warmup_outputs": 25344,
+        "physical_clears": 13,
+        "macro_read_checks": 169,
+        "payload_cycles": 416580,
+        "clear_cycles": 12336,
+        "principal_cycles": 428916,
+        "gap_cycles": 756,
+        "firmware_cycles": 429984,
+        "software_control_cycles": 430104,
+        "official_review_path": "/tmp/xu-b41-close-20261111-r1/xu-gate-independent-20261113-r3/phased_64_fast4-O2.json",
+        "official_review_sha256": "8a95f116ae1a42d55a38400c85f1425f22e54b55c1cda137e477638086fd251f",
+        "reviewer_sha256": "500221eb850b894f1d6ed5d58c51ebbd780bb8c2418c6e3b6dda709bcf8e79e8",
+        "native_log_sha256": "331e7d25b1843376b6a00687884924900e5809e032cee42649f3f7d47dcf0d86",
+        "binding_sha256": "df94133f1a396df1404c8f7c0dbb415e45124abc98475c43a37f659cc75911f7",
+        "vcd_bytes": 94355730661,
+        "vcd_sha256_from_controller": "7797a235563c964901210617b19ceb88822866b2e8b3538447a934d9d277c7cb",
+        "rtl_timing_comparison": "DIFFERENT_RECORDED",
+        "rtl_reference_differences": {
+          "payload_cycles": 12,
+          "principal_cycles": 12,
+          "software_control_cycles": -24,
+          "report_delay": -36,
+          "max_report_delay": -2,
+          "discovery_delay": -12
+        }
+      },
+      "backoff_8_256_fast4-O2": {
+        "status": "RUNNING_NATIVE_FULL12",
+        "review_queue_pid": 203683
+      }
+    },
+    "orchestration": {
+      "controller": "xu-run-gate-reset-r16.py",
+      "controller_pid": 156004,
+      "controller_sha256": "c44f7a62da04ce9dbb4b52fec6023c1e4d9d265cd59fe479bffb0b0f4e28ee0a",
+      "policy": "Reuse accepted tight-O2; run the remaining two gates consecutively; power follows."
+    }
+  },
+  "power_watts": null,
+  "energy_joules_per_task": null,
+  "selected_firmware": null,
+  "official_score": null,
+  "physical_qualification": "pending_final_scope_and_coverage_review",
+  "formality": {
+    "rtl_adapter_to_dual": {
+      "passing": 58332,
+      "failing": 0,
+      "aborted": 0,
+      "unverified": 0,
+      "unmatched_reference_dff": 18,
+      "sram_macro_abstractions_per_side": 337
+    },
+    "dual_to_physical": {
+      "passing": 58332,
+      "unmatched_implementation_black_boxes": 1,
+      "unmatched_black_box_input_pins": 5,
+      "unconnected_output": true
+    },
+    "physical_to_functional": {
+      "passing": 58337,
+      "unmatched": 0,
+      "failing": 0,
+      "aborted": 0,
+      "unverified": 0
+    }
+  },
+  "area": {
+    "native_charged_mm2": 0.508327099038,
+    "native_soc_mm2": 3.58042952912,
+    "lef_charged_mm2": 0.5083271039,
+    "lef_soc_mm2": 3.5804296255,
+    "conservative_budget_upper_mm2": 0.6529017215,
+    "budget_mm2": 2.25,
+    "leaf_instances": 206980,
+    "reference_types": 352,
+    "sram_macros": {
+      "shared": 256,
+      "itcm_dtcm": 64,
+      "internal": 17
+    },
+    "official_receipt": "/tmp/xu-b41-close-20261111-r1/xu-final-area-audit-20261113-r1.json"
+  },
+  "timing": {
+    "original_sdc_sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+    "checks_per_scenario": 455015,
+    "violated_per_scenario": 0,
+    "unknown_per_scenario": 4,
+    "ideal_clocks": true,
+    "coverage_review_complete": false,
+    "dc_export_sdc_sha256": "7f075aedba00cd1a8c1b9ddcf0bdb312ea8d0b0bad014cbd38c167fc0a739a1d",
+    "dc_export_is_actual_sta_input": false,
+    "workload_scope_check": {
+      "status": "QUEUED_AFTER_GATE_AND_POWER",
+      "queue_pid": 173281,
+      "source": "/tmp/xu-b41-close-20261111-r1/xu-workload-qualification-r1.py",
+      "official_output_root": "/tmp/xu-b41-close-20261111-r1/xu-workload-qualification-20261113-r1",
+      "scope": "Original SDC retained; supplemental fixed benchmark pads after startup."
+    }
+  },
+  "power_campaign": {
+    "status": "QUEUED_AFTER_GATE_R16",
+    "controller_pid": 160819,
+    "controller_sha256": "46e2c0586463fdbcc7fbc3d47ae99b7e30706a327787c4c429d8e9b87f0629d5",
+    "official_output_root": "/tmp/xu-b41-close-20261111-r1/xu-power-payload-20261113-r3",
+    "scope": "12 scoring payload intervals; no optional clear+payload duplicate measurement",
+    "accepted_results": 0
+  }
+}
