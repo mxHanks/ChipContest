@@ -10,8 +10,9 @@ development measurement with the physical-model difference explicitly recorded.
 Local preflight passed. The new package186 inputs were reconstructed remotely and
 all byte hashes verified; package-files.json SHA is96fbf8088cb2b94cc5bd682e09b9ec126762bd6c2dd54aad32caea854fb416ed.
 Native DC started2026-11-13T10:40:41Z with PID45512, affinity0..7, requested cap8,
-and no preexisting same-account heavy jobs observed. Raw initial receipt return is
-pending. DC/PT area, timing, equivalence, power and contest qualification are not
+and no preexisting same-account heavy jobs observed. The raw initial receipt and host-options report have returned and all8
+native catalog members were SHA verified (`native-start/`). The log snapshot
+shows pass1 mapping; this archive is a partial startup observation. DC/PT area, timing, equivalence, power and contest qualification are not
 yet established. The driver starts PT only after clean same-package DC completion.
 
 `prepare/` contains exact input catalogs, source/define/profile identity, and the

@@ -1,0 +1,87 @@
+{
+  "command": [
+    "/eda/synopsys/dc/dc_2022.03-SP5-5/bin/dc_shell",
+    "-f",
+    "synth.tcl"
+  ],
+  "coordination_note": "User selected original1064 N3 development candidate and authorized cap8; one own EDA stage at a time, preexisting jobs untouched.",
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1",
+    "XU_MATRIX_DMA",
+    "XU_MATRIX_DMA_SYSBUS32",
+    "XU_MATRIX_X_SRAM",
+    "XU_SYSBUS_TEST_LOADER"
+  ],
+  "external_identities": [
+    {
+      "is_symlink": true,
+      "path": "/eda/synopsys/dc/dc_2022.03-SP5-5/bin/dc_shell",
+      "resolved_path": "/eda/synopsys/dc/dc_2022.03-SP5-5/bin/snps_shell",
+      "sha256": "23a4101c711fdb4747a57e6f9524d4989eb76a2b3120f0fa9766f4b25ae8e6d2"
+    },
+    {
+      "is_symlink": false,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+      "resolved_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+      "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+    },
+    {
+      "is_symlink": false,
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+      "resolved_path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+      "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+    }
+  ],
+  "hardware_profile": "sysbus32-x-sram-353-dev-n3",
+  "inputs": 186,
+  "libraries": [
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+      "role": "standard_cell",
+      "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+    },
+    {
+      "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+      "role": "sram",
+      "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+    }
+  ],
+  "linux_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "loadavg": [
+    8.81,
+    8.38,
+    10.77
+  ],
+  "manifest_sha256": "96fbf8088cb2b94cc5bd682e09b9ec126762bd6c2dd54aad32caea854fb416ed",
+  "max_cores": 8,
+  "observed_jobs": [],
+  "online_cpus": 96,
+  "pid": 45512,
+  "preexisting_jobs_policy": "READ_ONLY_OBSERVATION_NEVER_STOP_OR_MODIFY",
+  "qualification": "NOT_QUALIFIED",
+  "resource_policy": "USER_COORDINATED_INDEPENDENT_MAX8CORE_JOB",
+  "run_requested": true,
+  "schema": "sysbus32-same-source-dc-execution-v1",
+  "source_dc": null,
+  "stage": "dc",
+  "started_epoch": 1794566441.0471792,
+  "status": "RUNNING",
+  "timeout_seconds": 14400,
+  "timing_verdict": "UNREVIEWED_NOT_A_TIMING_PASS",
+  "tool": {
+    "path": "/eda/synopsys/dc/dc_2022.03-SP5-5/bin/dc_shell",
+    "sha256": "23a4101c711fdb4747a57e6f9524d4989eb76a2b3120f0fa9766f4b25ae8e6d2"
+  },
+  "top": "xu_soc_sysbus32_ppa_top",
+  "user_authorized_cap": 8
+}
