@@ -183,3 +183,15 @@ energy remain separate obligations. The package copies no old area/netlist/
 functional status as new proof. `reference-B.json` labels the old211 violated and
 27911 untested timing checks as **old B reference facts only**. Old evidence is
 preserved unchanged.
+
+## Explicit resource coordination
+
+The default still refuses other same-account heavy jobs. On 2026-11-13 the user
+explicitly coordinated an additional independent job of at most two cores. For
+that arrangement only, the new sealed runner accepts
+`--allow-coordinated-busy-jobs --coordination-note TEXT`, records the authorization
+and observed PID inventory in its execution receipt, retains the same2core tool
+limit, refuses own output restart/overwrite, and never stops or changes another
+job. This is a resource-scheduling option, not a timing/identity/validation waiver.
+A new sealed package is required after this runner change; prior r1/r2 remain
+unchanged.

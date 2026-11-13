@@ -43,6 +43,14 @@ def check(path, digest):
     require(Path(path).is_file() and not Path(path).is_symlink() and sha(path) == digest, 'input identity mismatch: ' + str(path))
 
 
+def check_external(path, digest):
+    # Vendor launchers are intentional symlinks. Verify actual bytes while
+    # retaining the original path/argv0 when executing (never resolve-launch).
+    p = Path(path)
+    require(p.is_file() and sha(p) == digest, 'external tool/library identity mismatch: ' + str(p))
+    return dict(path=str(p), resolved_path=str(p.resolve()), is_symlink=p.is_symlink(), sha256=sha(p))
+
+
 def check_inputs(root):
     files = json.loads((root / 'package-files.json').read_text())
     for name, digest in files.items():
@@ -123,6 +131,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--stage', choices=['dc', 'pt'], default='dc')
     p.add_argument('--run', action='store_true')
+    p.add_argument('--allow-coordinated-busy-jobs', action='store_true', help='Only after explicit user coordination of this independent max2core job; existing jobs are never altered')
+    p.add_argument('--coordination-note', help='Concrete authorization and resource arrangement recorded in the execution receipt')
     p.add_argument('--timeout-seconds', type=int, help='bounded tool lifetime; default DC14400/PT300')
     a = p.parse_args()
     root = Path(__file__).resolve().parent
@@ -140,11 +150,14 @@ def main():
     timeout_seconds = a.timeout_seconds or (14400 if a.stage == 'dc' else 300)
     require(timeout_seconds > 0, 'timeout must be positive')
     busy = heavy_jobs()
-    require(not busy, 'same-account heavy jobs exist: ' + json.dumps(busy))
+    if busy:
+        require(a.allow_coordinated_busy_jobs and a.coordination_note and len(a.coordination_note.strip())>=16, 'same-account heavy jobs exist without explicit coordination: ' + json.dumps(busy))
+    if a.allow_coordinated_busy_jobs:
+        require(a.coordination_note and len(a.coordination_note.strip())>=16, 'coordination note required')
     tool = toolchain[a.stage]
-    check(tool['path'], tool['sha256'])
+    external_identities = [check_external(tool['path'], tool['sha256'])]
     for lib in toolchain['libraries']:
-        check(lib['path'], lib['sha256'])
+        external_identities.append(check_external(lib['path'], lib['sha256']))
     env = os.environ.copy()
     dc_binding = None
     if a.stage == 'dc':
@@ -173,7 +186,7 @@ def main():
             dc_binding['outputs'][name] = item
         check(root / 'source/contracts/reference-full-soc.sdc', toolchain['sdc_sha256'])
         lc = toolchain['library_compiler']
-        check(Path(lc['root']) / 'bin/lc_shell', lc['launcher_sha256'])
+        external_identities.append(check_external(Path(lc['root']) / 'bin/lc_shell', lc['launcher_sha256']))
         env['SYNOPSYS_LC_ROOT'] = lc['root']
         env['XU_BASELINE_ROOT'] = str(root)
         env['XU_MAPPED_SHA256'] = dc_binding['outputs']['mapped.v']['sha256']
@@ -182,9 +195,11 @@ def main():
         out.mkdir(mode=0o700)
         command, logname = [tool['path'], '-f', str(root / 'pt_collect.tcl')], 'pt.log'
         marker = 'SYSBUS32_PT_COLLECTION_COMPLETE_NOT_QUALIFIED.txt'
-    record.update(status='RUNNING', command=command, libraries=toolchain['libraries'],
+    record.update(status='RUNNING', command=command, libraries=toolchain['libraries'], external_identities=external_identities,
                   tool=tool, started_epoch=time.time(), timeout_seconds=timeout_seconds,
-                  observed_jobs=busy, resource_policy='REFUSE_ALL_SAME_ACCOUNT_HEAVY_JOBS',
+                  observed_jobs=busy, resource_policy='USER_COORDINATED_INDEPENDENT_MAX2CORE_JOB' if a.allow_coordinated_busy_jobs else 'REFUSE_ALL_SAME_ACCOUNT_HEAVY_JOBS',
+                  coordination_note=a.coordination_note if a.allow_coordinated_busy_jobs else None,
+                  preexisting_jobs_policy='READ_ONLY_OBSERVATION_NEVER_STOP_OR_MODIFY',
                   source_dc=dc_binding, timing_verdict='UNREVIEWED_NOT_A_TIMING_PASS')
     receipt = out / 'execution.json'
     dump(receipt, record)
