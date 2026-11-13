@@ -37,7 +37,7 @@
 ## 完整功能与身份
 
 - 每层重新加载独立X/W/bias，先通过完整warmup建立公开产生的非零前态；warmup另报并排除主性能。
-- 每层实际55,040次16位物理零写：W16,384、bias768、X16,384、result21,504；正式12层共660,480次，另有warmup55,040次。ACC/装配/描述符/owner及全部4槽请求元数据另核验。
+- 每层实际55,040次16位物理零写：W16,384、bias768、X16,384、result21,504；正式12层共660,480次，另有warmup55,040次。bias宏末256个地址未映射为任务数据，不声称已经清零；ACC/装配/描述符/owner及全部4槽请求元数据另核验。
 - 正式12层180,480次DMA读取、304,128次Y写，合计484,608笔请求/响应在独立四槽kind/index台账中全部退休；各层峰值在途3。宏Q整行保持到第7列响应退休，末Y索引25,343退休先于DONE。
 - 实际宏leaf枚举374颗：ITCM32、DTCM32、shared256、W16、bias1、X16、result21，完整原始路径在PASS收据中；没有靠常数替代真实枚举。
 - 全部159项生产编译源、编译顺序和6项defines与sealed PPA输入逐项一致：`SYNTHESIS DISABLE_SV_ASSERTION=1 XU_MATRIX_DMA XU_MATRIX_DMA_SYSBUS32 XU_MATRIX_X_SRAM XU_MATRIX_STORAGE_SRAM`。没有测试loader；只有启动固件进入ITCM，张量均由GPIO输入、CPU原总线写入。
@@ -54,6 +54,15 @@
 
 第一次小证据导出遇到replay目录没有独立`source-manifest.json`，已在[失败收据](validation/s3-y32-final-20261113/gpio-full12-export-attempt-r1/export-failure.json)保留原件。导出器改为生成已经逐文件验证的完整源hash表，随后重放导出PASS；这不是RTL仿真失败，没有重复运行CPU12。
 
-截至本次证据提交，两个wait31仍由原campaign串行推进，活动采集尚未开始。活动将从同一159源/6defines/固件重新采集完整u_soc与u_shared，保留全部实际宏pin及初值，分别串行取clear和实际GPIO窗口，不使用旧374 FST。GPIO374离线CPU12绑定包已生成，未运行EDA。
+两个独立wait31均已实际PASS，并用同一冻结checker重放原始日志、复核同一binary/固件/生产源身份：
+
+| 强制场景 | 实测目标端点等待 | 首GPIO→末Y | clear→末Y | 相对基线总增量 |
+|---|---:|---:|---:|---:|
+| DMA首次读取wait31 | 31拍 | 1,416,732 | 1,417,823 | +35拍 |
+| CPU首次加载wait31 | 31拍 | 1,416,732 | 1,417,823 | +35拍 |
+
+DMA场景的加载阶段仍为1,315,983拍、DMA为100,660拍；CPU加载场景的加载阶段1,316,014拍、DMA为100,629拍。目标等待确为31拍，整体窗口还保留总线/CPU相位产生的额外开销，没有强行写成“总增量只能等于31”。[两项原始日志、收据及独立重放摘要](validation/s3-y32-final-20261113/gpio-wait31-pass/summary.json)。
+
+活动版现已进入单核编译，尚无活动PASS。它从同一159源/6defines/固件重新采集完整u_soc与u_shared，保留全部实际宏pin及初值，分别串行取clear和实际GPIO窗口，不使用旧374 FST。GPIO374离线CPU12绑定包已生成，未运行EDA。
 
 本报告没有本配置STA、面积、RTL→mapped等价、功耗或J/task通过结论。公开开发向量的逐位一致也不等于官方最终600样本验收。

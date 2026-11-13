@@ -1,0 +1,128 @@
+{
+  "active_case": null,
+  "active_runner_pid": null,
+  "base": "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/gpio-task0-r2",
+  "base_result_sha256": "6881a239aa9b8dba5cc05602773ce42eb132385efc2cab48289d32ef868da365",
+  "commands": {
+    "dma-first-wait31": [
+      "/usr/bin/python3",
+      "-u",
+      "-B",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-final/validation/run_cpu.py",
+      "--out",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/gpio-followups-r1/dma-first-wait31",
+      "--vectors",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+      "--replay-from",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/gpio-task0-r2",
+      "--tasks",
+      "1",
+      "--rows",
+      "8",
+      "--jobs",
+      "1",
+      "--warmup",
+      "--first-source-stall",
+      "31",
+      "--first-load-stall",
+      "0"
+    ],
+    "full12": [
+      "/usr/bin/python3",
+      "-u",
+      "-B",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-final/validation/run_cpu.py",
+      "--out",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/gpio-followups-r1/full12",
+      "--vectors",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+      "--replay-from",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/gpio-task0-r2",
+      "--tasks",
+      "12",
+      "--rows",
+      "8",
+      "--jobs",
+      "1",
+      "--warmup",
+      "--first-source-stall",
+      "0",
+      "--first-load-stall",
+      "0"
+    ],
+    "load-first-wait31": [
+      "/usr/bin/python3",
+      "-u",
+      "-B",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-final/validation/run_cpu.py",
+      "--out",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/gpio-followups-r1/load-first-wait31",
+      "--vectors",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+      "--replay-from",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/validation/gpio-task0-r2",
+      "--tasks",
+      "1",
+      "--rows",
+      "8",
+      "--jobs",
+      "1",
+      "--warmup",
+      "--first-source-stall",
+      "0",
+      "--first-load-stall",
+      "31"
+    ]
+  },
+  "differential": {
+    "dma-first-wait31": {
+      "dma_payload_cycles_delta": 35,
+      "gpio_input_to_y_cycles_delta": 35,
+      "loading_cycles_delta": 0,
+      "note": "Exact endpoint offer/accept wait and unchanged full timing boundaries are checked per run; CPU polling phase may change the overall delta.",
+      "requested_endpoint_wait": 31,
+      "total_cycles_delta": 35
+    },
+    "load-first-wait31": {
+      "dma_payload_cycles_delta": 4,
+      "gpio_input_to_y_cycles_delta": 35,
+      "loading_cycles_delta": 31,
+      "note": "Exact endpoint offer/accept wait and unchanged full timing boundaries are checked per run; CPU polling phase may change the overall delta.",
+      "requested_endpoint_wait": 31,
+      "total_cycles_delta": 35
+    }
+  },
+  "finished_at": "2026-11-13T11:19:34.095735+00:00",
+  "policy": "Serial exact-binary simulations; one local CPU; no EDA or changes to production RTL",
+  "results": {
+    "dma-first-wait31": {
+      "gpio_input_to_y_cycles": 1416732,
+      "outputs": 25344,
+      "result_sha256": "017a39ce7a3b47eb0dc910da47de200c8daea1b22f79869f254424eeb69c1f4a",
+      "returncode": 0,
+      "status": "PASS",
+      "total_cycles": 1417823
+    },
+    "full12": {
+      "gpio_input_to_y_cycles": 17000358,
+      "outputs": 304128,
+      "result_sha256": "4038368430973760c3a304c51d4ad2489334ba7783fe971a2c02f9c06fa16c2f",
+      "returncode": 0,
+      "status": "PASS",
+      "total_cycles": 17013456
+    },
+    "load-first-wait31": {
+      "gpio_input_to_y_cycles": 1416732,
+      "outputs": 25344,
+      "result_sha256": "d776d5e237988c76945abddd1145e1f0a88bb3665f3de4766ebeec59dc832ae2",
+      "returncode": 0,
+      "status": "PASS",
+      "total_cycles": 1417823
+    }
+  },
+  "runner_sha256": "e7659e29d09d288c124b47ff9c68027ebb34b7a7771212c8f5cd1544d0755559",
+  "schema": "s3-final-production-gpio-followups-v1",
+  "scope": "Generic macro CPU functional/cycle evidence; no achieved STA frequency, area, power or formal contest qualification",
+  "started_at": "2026-11-13T09:54:20.021910+00:00",
+  "status": "PASS"
+}

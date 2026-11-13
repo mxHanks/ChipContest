@@ -1,0 +1,40 @@
+{
+  "base_result_sha256": "6881a239aa9b8dba5cc05602773ce42eb132385efc2cab48289d32ef868da365",
+  "configuration": "GPIO374 independent, not1064 N3 candidate; no EDA",
+  "exported_at": "2026-11-13T11:20:11.067422+00:00",
+  "exporter_sha256": "233c22db886459b52932da321012f9fbeb293aa9b83a9742b593d08740116b68",
+  "schema": "gpio374-independent-wait31-evidence-v1",
+  "scope": "Real GPIO/CPU loading, physical clear, full Y writes/readbacks, endpoint waits and all intervening delays preserved. Overall cycle deltas need not equal31 because of CPU/bus phase.",
+  "simulator_sha256": "a79bb40c41a98d88f47ea29e8a577d1977691e59a76c5b306d8570faab2397c7",
+  "status": "PASS_BOTH_SAME_BINARY_WAIT31_RAW_REPLAYS",
+  "tests": {
+    "dma-first-wait31": {
+      "actual_dma_endpoint_wait": 31,
+      "actual_load_endpoint_wait": 1,
+      "dma_payload_cycles": 100660,
+      "forced_dma_wait": 31,
+      "forced_load_wait": 0,
+      "gpio_input_to_y_cycles": 1416732,
+      "input_window_delta_from_base": 35,
+      "loading_cycles": 1315983,
+      "result_sha256": "017a39ce7a3b47eb0dc910da47de200c8daea1b22f79869f254424eeb69c1f4a",
+      "status": "PASS_RAW_CHECKER_REPLAY_SAME_BINARY",
+      "total_cycles": 1417823,
+      "total_delta_from_base": 35
+    },
+    "load-first-wait31": {
+      "actual_dma_endpoint_wait": 0,
+      "actual_load_endpoint_wait": 31,
+      "dma_payload_cycles": 100629,
+      "forced_dma_wait": 0,
+      "forced_load_wait": 31,
+      "gpio_input_to_y_cycles": 1416732,
+      "input_window_delta_from_base": 35,
+      "loading_cycles": 1316014,
+      "result_sha256": "d776d5e237988c76945abddd1145e1f0a88bb3665f3de4766ebeec59dc832ae2",
+      "status": "PASS_RAW_CHECKER_REPLAY_SAME_BINARY",
+      "total_cycles": 1417823,
+      "total_delta_from_base": 35
+    }
+  }
+}
