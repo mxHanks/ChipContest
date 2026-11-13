@@ -220,6 +220,51 @@ def main():
         lc=chain['library_compiler']
         verify(Path(lc['root'])/'bin/lc_shell',lc['launcher_sha256'],external=True)
         env['SYNOPSYS_LC_ROOT']=lc['root']
+        # This PT version exposes pin directions but not lib_pin.function.
+        # Query the identical DB in native DC first; no compile or edits.
+        dc_identity=verify(chain['dc']['path'],chain['dc']['sha256'],external=True)
+        proof_root=out/'native-library-proof'; proof_root.mkdir(mode=0o700)
+        proof_command=[chain['dc']['path'],'-f',str(package/'dc_library_proof.tcl')]
+        proof_record=dict(tool=dc_identity,libraries=chain['libraries'],command=proof_command,
+                          max_cores=2,config_sha256=sha(configuration),started_epoch=time.time())
+        record.update(status='RUNNING_NATIVE_DC_FUNCTION_QUERY',native_dc_function=proof_record)
+        dump(out/'execution.json',record)
+        proof_timeout=False
+        with (proof_root/'native.log').open('w') as log:
+            proc=subprocess.Popen(proof_command,cwd=proof_root,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+            proof_record['pid']=proc.pid; dump(out/'execution.json',record)
+            try: proof_code=proc.wait(timeout=min(a.timeout_seconds,300))
+            except subprocess.TimeoutExpired:
+                proof_timeout=True; os.killpg(proc.pid,signal.SIGTERM)
+                try: proof_code=proc.wait(timeout=10)
+                except subprocess.TimeoutExpired:
+                    os.killpg(proc.pid,signal.SIGKILL); proof_code=proc.wait()
+        proof_errors=re.findall(r'^(?:Error:|Fatal:).*$',(proof_root/'native.log').read_text(errors='replace'),re.M)
+        proof_files={q.relative_to(proof_root).as_posix():dict(sha256=sha(q),bytes=q.stat().st_size)
+                     for q in sorted(proof_root.rglob('*')) if q.is_file()}
+        proof_complete=(proof_root/'DC_LIBRARY_FUNCTION_PROOF_COMPLETE.txt').is_file()
+        proof_drift=[x['path']for x in bindings+libraries+[dc_identity]
+                     if not Path(x['path']).is_file()or sha(x['path'])!=x['sha256']]
+        proof_record.update(returncode=proof_code,finished_epoch=time.time(),tool_timed_out=proof_timeout,
+                            completion_marker=proof_complete,native_tool_errors=proof_errors,
+                            source_drift=proof_drift,outputs=proof_files)
+        proof_ok=proof_code==0 and proof_complete and not proof_timeout and not proof_errors and not proof_drift and 'dc-library-proof.tsv' in proof_files
+        if not proof_ok:
+            record.update(status='NATIVE_STAGE_FAILED',returncode=proof_code,completion_marker=False,
+                          native_tool_errors=proof_errors,source_drift=proof_drift,
+                          failure_stage='native_dc_library_function_query',finished_epoch=time.time())
+            dump(out/'execution.json',record)
+            print(json.dumps(dict(stage=a.stage,status=record['status'],failure_stage=record['failure_stage']),sort_keys=True))
+            return 1
+        function_file=proof_root/'dc-library-proof.tsv'
+        bindings.append(verify(function_file,sha(function_file)))
+        configuration.write_text(configuration.read_text()+
+            'set ::eco_dc_function_file '+tcl(function_file)+'\n'+
+            'set ::eco_dc_function_sha '+tcl(sha(function_file))+'\n')
+    if toolrole == 'pt':
+        lc=chain['library_compiler']
+        verify(Path(lc['root'])/'bin/lc_shell',lc['launcher_sha256'],external=True)
+        env['SYNOPSYS_LC_ROOT']=lc['root']
     command=[tool['path'],'-f',str(package/script)]
     record.update(status='RUNNING', started_epoch=time.time(), command=command, tool=tool_identity,
                   libraries=chain['libraries'], config_sha256=sha(configuration), inputs=bindings,

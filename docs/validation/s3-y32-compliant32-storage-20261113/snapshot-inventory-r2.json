@@ -1,0 +1,791 @@
+{
+  "status": "STRUCTURAL_INVENTORY",
+  "candidates": [
+    {
+      "candidate": "candidate-r2",
+      "storage": {
+        "weight_macros": 16,
+        "bias_macros": 1,
+        "x_macros": 16,
+        "result_macros": 3,
+        "internal_macros": 36,
+        "full_soc_macros": 356,
+        "result_logical_bits": 5248,
+        "result_physical_bits": 49152,
+        "bias_reusable_cache_bits": 0,
+        "result_register_copy_bits": 0,
+        "dma_group_payload_bits": 0
+      },
+      "clear": {
+        "weight_writes": 16384,
+        "bias_writes": 768,
+        "x_writes": 16384,
+        "result_writes": 3072,
+        "total16bit_writes": 36608,
+        "mmio_W_X_result_writes": 35840,
+        "parallel_address_steps": 1024
+      },
+      "macro_pins": [
+        "CEN",
+        "GWEN",
+        "WEN",
+        "A",
+        "D",
+        "RET1N"
+      ],
+      "macros": [
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_0.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_0.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_1.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_1.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_2.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_2.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_3.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_3.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_4.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_4.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_5.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_5.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_6.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_6.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_7.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_7.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "bias",
+          "path": "CORE.biasMemory.mem_ext.macro",
+          "physical_clear_addresses": 768,
+          "unused_not_cleared": [
+            768,
+            1023
+          ]
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[0].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[1].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[2].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[3].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[4].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[5].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[6].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[7].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[0].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[1].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[2].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[3].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[4].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[5].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[6].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[7].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[0].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[1].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[2].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        }
+      ],
+      "arithmetic_state": {
+        "ACC_bits_each": 41,
+        "ACC_paths": [
+          "CORE.rows[0].lanes[0].pe.ACC",
+          "CORE.rows[0].lanes[1].pe.ACC",
+          "CORE.rows[0].lanes[2].pe.ACC",
+          "CORE.rows[0].lanes[3].pe.ACC",
+          "CORE.rows[0].lanes[4].pe.ACC",
+          "CORE.rows[0].lanes[5].pe.ACC",
+          "CORE.rows[0].lanes[6].pe.ACC",
+          "CORE.rows[0].lanes[7].pe.ACC",
+          "CORE.rows[1].lanes[0].pe.ACC",
+          "CORE.rows[1].lanes[1].pe.ACC",
+          "CORE.rows[1].lanes[2].pe.ACC",
+          "CORE.rows[1].lanes[3].pe.ACC",
+          "CORE.rows[1].lanes[4].pe.ACC",
+          "CORE.rows[1].lanes[5].pe.ACC",
+          "CORE.rows[1].lanes[6].pe.ACC",
+          "CORE.rows[1].lanes[7].pe.ACC",
+          "CORE.rows[2].lanes[0].pe.ACC",
+          "CORE.rows[2].lanes[1].pe.ACC",
+          "CORE.rows[2].lanes[2].pe.ACC",
+          "CORE.rows[2].lanes[3].pe.ACC",
+          "CORE.rows[2].lanes[4].pe.ACC",
+          "CORE.rows[2].lanes[5].pe.ACC",
+          "CORE.rows[2].lanes[6].pe.ACC",
+          "CORE.rows[2].lanes[7].pe.ACC",
+          "CORE.rows[3].lanes[0].pe.ACC",
+          "CORE.rows[3].lanes[1].pe.ACC",
+          "CORE.rows[3].lanes[2].pe.ACC",
+          "CORE.rows[3].lanes[3].pe.ACC",
+          "CORE.rows[3].lanes[4].pe.ACC",
+          "CORE.rows[3].lanes[5].pe.ACC",
+          "CORE.rows[3].lanes[6].pe.ACC",
+          "CORE.rows[3].lanes[7].pe.ACC",
+          "CORE.rows[4].lanes[0].pe.ACC",
+          "CORE.rows[4].lanes[1].pe.ACC",
+          "CORE.rows[4].lanes[2].pe.ACC",
+          "CORE.rows[4].lanes[3].pe.ACC",
+          "CORE.rows[4].lanes[4].pe.ACC",
+          "CORE.rows[4].lanes[5].pe.ACC",
+          "CORE.rows[4].lanes[6].pe.ACC",
+          "CORE.rows[4].lanes[7].pe.ACC",
+          "CORE.rows[5].lanes[0].pe.ACC",
+          "CORE.rows[5].lanes[1].pe.ACC",
+          "CORE.rows[5].lanes[2].pe.ACC",
+          "CORE.rows[5].lanes[3].pe.ACC",
+          "CORE.rows[5].lanes[4].pe.ACC",
+          "CORE.rows[5].lanes[5].pe.ACC",
+          "CORE.rows[5].lanes[6].pe.ACC",
+          "CORE.rows[5].lanes[7].pe.ACC",
+          "CORE.rows[6].lanes[0].pe.ACC",
+          "CORE.rows[6].lanes[1].pe.ACC",
+          "CORE.rows[6].lanes[2].pe.ACC",
+          "CORE.rows[6].lanes[3].pe.ACC",
+          "CORE.rows[6].lanes[4].pe.ACC",
+          "CORE.rows[6].lanes[5].pe.ACC",
+          "CORE.rows[6].lanes[6].pe.ACC",
+          "CORE.rows[6].lanes[7].pe.ACC",
+          "CORE.rows[7].lanes[0].pe.ACC",
+          "CORE.rows[7].lanes[1].pe.ACC",
+          "CORE.rows[7].lanes[2].pe.ACC",
+          "CORE.rows[7].lanes[3].pe.ACC",
+          "CORE.rows[7].lanes[4].pe.ACC",
+          "CORE.rows[7].lanes[5].pe.ACC",
+          "CORE.rows[7].lanes[6].pe.ACC",
+          "CORE.rows[7].lanes[7].pe.ACC"
+        ]
+      },
+      "single_inflight_payload_state": [
+        {
+          "path": "CORE.biasLow",
+          "bits": 32,
+          "purpose": "one bias lane lower two slices during immediate arithmetic init"
+        },
+        {
+          "path": "CORE.hostData",
+          "bits": 40,
+          "purpose": "one accepted host bias write pending three macro slices"
+        },
+        {
+          "path": "DMA.w_low",
+          "bits": 32,
+          "purpose": "pair32 source assembly for four16 W lanes"
+        },
+        {
+          "path": "DMA.bias_low",
+          "bits": 32,
+          "purpose": "one40 bias source assembly"
+        },
+        {
+          "path": "DMA.bias_data",
+          "bits": 40,
+          "purpose": "one accepted bias host transaction"
+        },
+        {
+          "path": "DMA.lock_data",
+          "bits": 32,
+          "purpose": "one stable valid/ready bus payload; not a row snapshot"
+        }
+      ],
+      "removed_selected_payload": [
+        "2x64x41bit results FIFO registers",
+        "2x8x40bit reusable bias slotData/tag/epoch cache",
+        "64x41bit engine resultReg copies",
+        "256bit DMA y_payload row snapshot"
+      ],
+      "control_not_payload": [
+        "CORE head/tail/count/tag0/tag1/outRow/outColumn/storeIndex/produced/validRows/runSet",
+        "CORE biasLane/hostAddr/hostState/clearIndex/state/active/clearing",
+        "DMA descriptors/addresses/counters/pending/locked/owner state"
+      ],
+      "macro_output_caveat": "SRAM Q is not claimed reset by writes. All physical required addresses actually zero-written; temporary transaction payload and ACC separately checked."
+    },
+    {
+      "candidate": "wide-candidate-r2",
+      "storage": {
+        "weight_macros": 16,
+        "bias_macros": 1,
+        "x_macros": 16,
+        "result_macros": 21,
+        "internal_macros": 54,
+        "full_soc_macros": 374,
+        "result_logical_bits": 5248,
+        "result_physical_bits": 344064,
+        "bias_reusable_cache_bits": 0,
+        "result_register_copy_bits": 0,
+        "dma_group_payload_bits": 0
+      },
+      "clear": {
+        "weight_writes": 16384,
+        "bias_writes": 768,
+        "x_writes": 16384,
+        "result_writes": 21504,
+        "total16bit_writes": 55040,
+        "mmio_W_X_result_writes": 54272,
+        "parallel_address_steps": 1024
+      },
+      "macro_pins": [
+        "CEN",
+        "GWEN",
+        "WEN",
+        "A",
+        "D",
+        "RET1N"
+      ],
+      "macros": [
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_0.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_0.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_1.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_1.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_2.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_2.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_3.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_3.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_4.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_4.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_5.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_5.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_6.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_6.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_7.sram0.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "W",
+          "path": "CORE.weights.banks_7.sram1.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "bias",
+          "path": "CORE.biasMemory.mem_ext.macro",
+          "physical_clear_addresses": 768,
+          "unused_not_cleared": [
+            768,
+            1023
+          ]
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[0].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[1].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[2].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[3].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[4].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[5].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[6].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[0].rows[7].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[0].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[1].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[2].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[3].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[4].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[5].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[6].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "X",
+          "path": "CORE.xSets[1].rows[7].memory.memory.mem_ext.macro",
+          "physical_clear_addresses": 1024,
+          "logical_words": 64
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[0].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[1].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[2].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[3].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[4].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[5].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[6].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[7].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[8].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[9].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[10].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[11].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[12].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[13].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[14].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[15].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[16].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[17].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[18].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[19].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        },
+        {
+          "category": "result",
+          "path": "CORE.resultSlices[20].memory.mem_ext.macro",
+          "physical_clear_addresses": 1024
+        }
+      ],
+      "arithmetic_state": {
+        "ACC_bits_each": 41,
+        "ACC_paths": [
+          "CORE.rows[0].lanes[0].pe.ACC",
+          "CORE.rows[0].lanes[1].pe.ACC",
+          "CORE.rows[0].lanes[2].pe.ACC",
+          "CORE.rows[0].lanes[3].pe.ACC",
+          "CORE.rows[0].lanes[4].pe.ACC",
+          "CORE.rows[0].lanes[5].pe.ACC",
+          "CORE.rows[0].lanes[6].pe.ACC",
+          "CORE.rows[0].lanes[7].pe.ACC",
+          "CORE.rows[1].lanes[0].pe.ACC",
+          "CORE.rows[1].lanes[1].pe.ACC",
+          "CORE.rows[1].lanes[2].pe.ACC",
+          "CORE.rows[1].lanes[3].pe.ACC",
+          "CORE.rows[1].lanes[4].pe.ACC",
+          "CORE.rows[1].lanes[5].pe.ACC",
+          "CORE.rows[1].lanes[6].pe.ACC",
+          "CORE.rows[1].lanes[7].pe.ACC",
+          "CORE.rows[2].lanes[0].pe.ACC",
+          "CORE.rows[2].lanes[1].pe.ACC",
+          "CORE.rows[2].lanes[2].pe.ACC",
+          "CORE.rows[2].lanes[3].pe.ACC",
+          "CORE.rows[2].lanes[4].pe.ACC",
+          "CORE.rows[2].lanes[5].pe.ACC",
+          "CORE.rows[2].lanes[6].pe.ACC",
+          "CORE.rows[2].lanes[7].pe.ACC",
+          "CORE.rows[3].lanes[0].pe.ACC",
+          "CORE.rows[3].lanes[1].pe.ACC",
+          "CORE.rows[3].lanes[2].pe.ACC",
+          "CORE.rows[3].lanes[3].pe.ACC",
+          "CORE.rows[3].lanes[4].pe.ACC",
+          "CORE.rows[3].lanes[5].pe.ACC",
+          "CORE.rows[3].lanes[6].pe.ACC",
+          "CORE.rows[3].lanes[7].pe.ACC",
+          "CORE.rows[4].lanes[0].pe.ACC",
+          "CORE.rows[4].lanes[1].pe.ACC",
+          "CORE.rows[4].lanes[2].pe.ACC",
+          "CORE.rows[4].lanes[3].pe.ACC",
+          "CORE.rows[4].lanes[4].pe.ACC",
+          "CORE.rows[4].lanes[5].pe.ACC",
+          "CORE.rows[4].lanes[6].pe.ACC",
+          "CORE.rows[4].lanes[7].pe.ACC",
+          "CORE.rows[5].lanes[0].pe.ACC",
+          "CORE.rows[5].lanes[1].pe.ACC",
+          "CORE.rows[5].lanes[2].pe.ACC",
+          "CORE.rows[5].lanes[3].pe.ACC",
+          "CORE.rows[5].lanes[4].pe.ACC",
+          "CORE.rows[5].lanes[5].pe.ACC",
+          "CORE.rows[5].lanes[6].pe.ACC",
+          "CORE.rows[5].lanes[7].pe.ACC",
+          "CORE.rows[6].lanes[0].pe.ACC",
+          "CORE.rows[6].lanes[1].pe.ACC",
+          "CORE.rows[6].lanes[2].pe.ACC",
+          "CORE.rows[6].lanes[3].pe.ACC",
+          "CORE.rows[6].lanes[4].pe.ACC",
+          "CORE.rows[6].lanes[5].pe.ACC",
+          "CORE.rows[6].lanes[6].pe.ACC",
+          "CORE.rows[6].lanes[7].pe.ACC",
+          "CORE.rows[7].lanes[0].pe.ACC",
+          "CORE.rows[7].lanes[1].pe.ACC",
+          "CORE.rows[7].lanes[2].pe.ACC",
+          "CORE.rows[7].lanes[3].pe.ACC",
+          "CORE.rows[7].lanes[4].pe.ACC",
+          "CORE.rows[7].lanes[5].pe.ACC",
+          "CORE.rows[7].lanes[6].pe.ACC",
+          "CORE.rows[7].lanes[7].pe.ACC"
+        ]
+      },
+      "single_inflight_payload_state": [
+        {
+          "path": "CORE.biasLow",
+          "bits": 32,
+          "purpose": "one bias lane lower two slices during immediate arithmetic init"
+        },
+        {
+          "path": "CORE.hostData",
+          "bits": 40,
+          "purpose": "one accepted host bias write pending three macro slices"
+        },
+        {
+          "path": "DMA.w_low",
+          "bits": 32,
+          "purpose": "pair32 source assembly for four16 W lanes"
+        },
+        {
+          "path": "DMA.bias_low",
+          "bits": 32,
+          "purpose": "one40 bias source assembly"
+        },
+        {
+          "path": "DMA.bias_data",
+          "bits": 40,
+          "purpose": "one accepted bias host transaction"
+        },
+        {
+          "path": "DMA.lock_data",
+          "bits": 32,
+          "purpose": "one stable valid/ready bus payload; not a row snapshot"
+        }
+      ],
+      "removed_selected_payload": [
+        "2x64x41bit results FIFO registers",
+        "2x8x40bit reusable bias slotData/tag/epoch cache",
+        "64x41bit engine resultReg copies",
+        "256bit DMA y_payload row snapshot"
+      ],
+      "control_not_payload": [
+        "CORE head/tail/count/tag0/tag1/outRow/outColumn/storeIndex/produced/validRows/runSet",
+        "CORE biasLane/hostAddr/hostState/clearIndex/state/active/clearing",
+        "DMA descriptors/addresses/counters/pending/locked/owner state"
+      ],
+      "macro_output_caveat": "SRAM Q is not claimed reset by writes. All physical required addresses actually zero-written; temporary transaction payload and ACC separately checked."
+    }
+  ]
+}
