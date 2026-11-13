@@ -1,0 +1,253 @@
+{
+  "schema": "s3_y32_final_dma4_storage21_sources_v1",
+  "source_base_child": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+  "installed_child_commit": "b0a0e47df4431ee8c459c7c0df2fe919e7b0d477",
+  "required_production_defines": [
+    "XU_MATRIX_DMA_SYSBUS32",
+    "XU_MATRIX_X_SRAM",
+    "XU_MATRIX_STORAGE_SRAM"
+  ],
+  "production_test_loader": false,
+  "installed_sources": {
+    "third-party/e203_hbirdv2/rtl/e203/perips/DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+    "third-party/e203_hbirdv2/rtl/e203/perips/LinearTileDmaCore.sv": "609d26c6b44843f3de4f81d395d592042a03b347fee815dfca8d7d9c906a7c9e",
+    "third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "third-party/e203_hbirdv2/rtl/e203/perips/TileWeightBank.sv": "e44d885e304faf608a4f8cf2f4cd13bc4653a34cbd0fe81904f02d51a0a7bf48",
+    "third-party/e203_hbirdv2/rtl/e203/perips/TileWeightBankArray.sv": "2aa3b687b1e393f4950895ca4bcad4dc4f0668cb60733c944423685a5f760e9a",
+    "third-party/e203_hbirdv2/rtl/e203/perips/TileXMacroRowBuffer.sv": "400b8e51b4cfad62633f53df9905ab9fad5e8a5b300f41b3070a1c0ba19b57a7",
+    "third-party/e203_hbirdv2/rtl/e203/perips/TileXRowBuffer.sv": "3881b2db4c1d40ecea60089462ae24e38409de43ec572a600af0029635c427a4",
+    "third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707",
+    "third-party/e203_hbirdv2/rtl/e203/perips/xu_matrix_dma_sysbus32.sv": "247c7f9632ebaba70b66a34845b960f53dbfd5ac84318d8859dc4a5d8ae6016c"
+  },
+  "simulation_only_models": {
+    "tools/ppa/generic_ramsp_non_ppa.sv": "4a138045dfebeafd9728908627133c2e1b04fa8115fd8abad1ace7fa3235eac7"
+  },
+  "storage21_source_manifest_sha256": "9461237a61158e94544cd98d0db491db72cbed6530a98c48da9d78a8289a2f73",
+  "storage21_source_files": {
+    "DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+    "LinearTileDmaCore.sv": "101c1a8d47c177b53d43feabb5eb81efaa98bc7d6f8258a462bb50db7dc0d37c",
+    "MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "TileWeightBank.sv": "e44d885e304faf608a4f8cf2f4cd13bc4653a34cbd0fe81904f02d51a0a7bf48",
+    "TileWeightBankArray.sv": "2aa3b687b1e393f4950895ca4bcad4dc4f0668cb60733c944423685a5f760e9a",
+    "TileXMacroRowBuffer.sv": "400b8e51b4cfad62633f53df9905ab9fad5e8a5b300f41b3070a1c0ba19b57a7",
+    "TileXRowBuffer.sv": "3881b2db4c1d40ecea60089462ae24e38409de43ec572a600af0029635c427a4",
+    "mem_1024x16.sv": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707"
+  },
+  "arithmetic_macpe_acc41_sha256": [
+    "50df2d2c6d5bf558b24a518f6351cdb9e4acdf3eb19acc9cbac1dd03f7ece5f7",
+    "50df2d2c6d5bf558b24a518f6351cdb9e4acdf3eb19acc9cbac1dd03f7ece5f7"
+  ],
+  "core_noncombinational_bytes_equal_storage21": true,
+  "preserved_ingress_sha256": "aa62909db97c4961758d4e030cced6ba73b713fd965e16662ab581eb9b88ab3c",
+  "unchanged_cpu_fabric": true,
+  "changed_rtl": [
+    "rtl/e203/perips/LinearTileDmaCore.sv",
+    "rtl/e203/perips/mem_1024x16.sv",
+    "rtl/e203/perips/xu_matrix_dma_sysbus32.sv"
+  ],
+  "fallback_projection": [
+    {
+      "file": "xu_matrix_dma_sysbus32.sv",
+      "defines": [],
+      "tokens": 4086,
+      "sha256": "8f51271cb110c7ac20610571f1791230fa109d62e0a2e4d98942eb5af50075c7",
+      "same_as_5470": true
+    },
+    {
+      "file": "xu_matrix_dma_sysbus32.sv",
+      "defines": [
+        "XU_MATRIX_DMA_SYSBUS32"
+      ],
+      "tokens": 4086,
+      "sha256": "8f51271cb110c7ac20610571f1791230fa109d62e0a2e4d98942eb5af50075c7",
+      "same_as_5470": true
+    },
+    {
+      "file": "xu_matrix_dma_sysbus32.sv",
+      "defines": [
+        "XU_MATRIX_X_SRAM"
+      ],
+      "tokens": 4086,
+      "sha256": "8f51271cb110c7ac20610571f1791230fa109d62e0a2e4d98942eb5af50075c7",
+      "same_as_5470": true
+    },
+    {
+      "file": "xu_matrix_dma_sysbus32.sv",
+      "defines": [
+        "XU_MATRIX_DMA_SYSBUS32",
+        "XU_MATRIX_X_SRAM"
+      ],
+      "tokens": 4086,
+      "sha256": "8f51271cb110c7ac20610571f1791230fa109d62e0a2e4d98942eb5af50075c7",
+      "same_as_5470": true
+    },
+    {
+      "file": "xu_matrix_dma_sysbus32.sv",
+      "defines": [
+        "XU_MATRIX_STORAGE_SRAM"
+      ],
+      "tokens": 4086,
+      "sha256": "8f51271cb110c7ac20610571f1791230fa109d62e0a2e4d98942eb5af50075c7",
+      "same_as_5470": true
+    },
+    {
+      "file": "xu_matrix_dma_sysbus32.sv",
+      "defines": [
+        "XU_MATRIX_DMA_SYSBUS32",
+        "XU_MATRIX_STORAGE_SRAM"
+      ],
+      "tokens": 4086,
+      "sha256": "8f51271cb110c7ac20610571f1791230fa109d62e0a2e4d98942eb5af50075c7",
+      "same_as_5470": true
+    },
+    {
+      "file": "xu_matrix_dma_sysbus32.sv",
+      "defines": [
+        "XU_MATRIX_X_SRAM",
+        "XU_MATRIX_STORAGE_SRAM"
+      ],
+      "tokens": 4086,
+      "sha256": "8f51271cb110c7ac20610571f1791230fa109d62e0a2e4d98942eb5af50075c7",
+      "same_as_5470": true
+    },
+    {
+      "file": "LinearTileDmaCore.sv",
+      "defines": [],
+      "tokens": 15510,
+      "sha256": "3f0dd2bb8bffa138046190b68019efd55bfa7f8be68d25159e752e766dfbcb22",
+      "same_as_5470": true
+    },
+    {
+      "file": "LinearTileDmaCore.sv",
+      "defines": [
+        "XU_MATRIX_DMA_SYSBUS32"
+      ],
+      "tokens": 15510,
+      "sha256": "3f0dd2bb8bffa138046190b68019efd55bfa7f8be68d25159e752e766dfbcb22",
+      "same_as_5470": true
+    },
+    {
+      "file": "LinearTileDmaCore.sv",
+      "defines": [
+        "XU_MATRIX_X_SRAM"
+      ],
+      "tokens": 15510,
+      "sha256": "3f0dd2bb8bffa138046190b68019efd55bfa7f8be68d25159e752e766dfbcb22",
+      "same_as_5470": true
+    },
+    {
+      "file": "LinearTileDmaCore.sv",
+      "defines": [
+        "XU_MATRIX_DMA_SYSBUS32",
+        "XU_MATRIX_X_SRAM"
+      ],
+      "tokens": 16131,
+      "sha256": "501bb25378f7550292d657a9bcfdd27b40bd20df9b07e065e6c07e8bf777931c",
+      "same_as_5470": true
+    },
+    {
+      "file": "LinearTileDmaCore.sv",
+      "defines": [
+        "XU_MATRIX_STORAGE_SRAM"
+      ],
+      "tokens": 15510,
+      "sha256": "3f0dd2bb8bffa138046190b68019efd55bfa7f8be68d25159e752e766dfbcb22",
+      "same_as_5470": true
+    },
+    {
+      "file": "LinearTileDmaCore.sv",
+      "defines": [
+        "XU_MATRIX_DMA_SYSBUS32",
+        "XU_MATRIX_STORAGE_SRAM"
+      ],
+      "tokens": 15510,
+      "sha256": "3f0dd2bb8bffa138046190b68019efd55bfa7f8be68d25159e752e766dfbcb22",
+      "same_as_5470": true
+    },
+    {
+      "file": "LinearTileDmaCore.sv",
+      "defines": [
+        "XU_MATRIX_X_SRAM",
+        "XU_MATRIX_STORAGE_SRAM"
+      ],
+      "tokens": 15510,
+      "sha256": "3f0dd2bb8bffa138046190b68019efd55bfa7f8be68d25159e752e766dfbcb22",
+      "same_as_5470": true
+    }
+  ],
+  "storage": {
+    "W": 16,
+    "bias": 1,
+    "X": 16,
+    "result": 21,
+    "internal_macros": 54,
+    "expected_full_soc_macros": 374,
+    "internal_physical_bytes": 110592,
+    "result_physical_bytes": 43008,
+    "result_logical_bits": 5248
+  },
+  "clear": {
+    "W": 16384,
+    "bias": 768,
+    "X": 16384,
+    "result": 21504,
+    "total_physical16": 55040,
+    "mmio_W_X_result": 54272,
+    "address_steps": 1024
+  },
+  "metadata": {
+    "request_depth": 4,
+    "request_kind_bits": 12,
+    "request_index_bits": 56,
+    "read_write_pointer_bits": 4,
+    "pending_count_bits": 3,
+    "y_issue_bits": 4,
+    "y_retire_bits": 3,
+    "comment": "No payload stored in the ordered descriptor queue; locked command includes one32bit payload for ICB stability."
+  },
+  "assembly_state": [
+    {
+      "name": "dma.w_low",
+      "bits": 32,
+      "lifetime": "even W response until following odd W response physical load"
+    },
+    {
+      "name": "dma.bias_low",
+      "bits": 32,
+      "lifetime": "low bias response until high response assembled"
+    },
+    {
+      "name": "dma.bias_data",
+      "bits": 40,
+      "lifetime": "one bias host write; no second bias pair while bias_busy"
+    },
+    {
+      "name": "core.hostData",
+      "bits": 40,
+      "lifetime": "accepted bias write during three physical16bit writes"
+    },
+    {
+      "name": "core.biasLow",
+      "bits": 32,
+      "lifetime": "two synchronous bias macro slices until same lane ACC init"
+    },
+    {
+      "name": "dma.lock_data",
+      "bits": 32,
+      "lifetime": "one locked ICB scalar while command VALID waits READY"
+    }
+  ],
+  "compute_accumulator": {
+    "count": 64,
+    "bits_each": 41
+  },
+  "forbidden_copies": {
+    "dma_y_payload_bits": 0,
+    "result_register_fifo_bits": 0,
+    "raw_result_snapshot_bits": 0,
+    "bias_prefetch_slots": 0
+  },
+  "scope": "Source merge identity and fallback projection only. Macros are expected until independently counted in actual simulation/mapped hierarchy. No timing/area/power qualification."
+}

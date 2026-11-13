@@ -1,0 +1,880 @@
+{"command": ["verilator", "--cc", "--exe", "--build", "--assert", "--no-timing", "-DDISABLE_SV_ASSERTION=1", "-Wno-fatal", "-j", "1", "-DXU_MATRIX_DMA_SYSBUS32", "-DXU_MATRIX_X_SRAM", "-DXU_MATRIX_STORAGE_SRAM", "--top-module", "dma32_test_top", "--Mdir", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj", "-CFLAGS", "-std=c++17", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/DmaBiasSramPrefetch.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/LinearTileDmaCore.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/MacController.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/Sram1024x16.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/StorageMacroObserver.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileWeightBank.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileWeightBankArray.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileXMacroRowBuffer.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileXRowBuffer.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/mem_1024x16.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_bufs.v", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_dffs.v", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_icbs.v", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_matrix_dma_sysbus32.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_shared_icb_sram.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_sirv_sram_adapter.sv", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_systembus_ingress32.v", "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test.cpp"], "cwd": "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest"}
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'i_icb_rsp_excl_ok'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:89:34: ... Location of port declaration
+   89 |   output                         i_icb_rsp_excl_ok,
+      |                                  ^~~~~~~~~~~~~~~~~
+                     ... For warning description see https://verilator.org/warn/PINMISSING?v=5.032
+                     ... Use "/* verilator lint_off PINMISSING */" and lint_on around source to disable this message.
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:92:34: ... Location of port declaration
+   92 |   output                         o0_icb_cmd_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:93:34: ... Location of port declaration
+   93 |   input                          o0_icb_cmd_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_addr'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:94:34: ... Location of port declaration
+   94 |   output [             AW-1:0]   o0_icb_cmd_addr, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_read'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:95:34: ... Location of port declaration
+   95 |   output                         o0_icb_cmd_read, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_burst'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:96:34: ... Location of port declaration
+   96 |   output [2-1:0]                 o0_icb_cmd_burst,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_beat'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:97:34: ... Location of port declaration
+   97 |   output [2-1:0]                 o0_icb_cmd_beat,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_wdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:98:34: ... Location of port declaration
+   98 |   output [        DW-1:0]        o0_icb_cmd_wdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_wmask'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:99:34: ... Location of port declaration
+   99 |   output [        DW/8-1:0]      o0_icb_cmd_wmask,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_lock'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:100:34: ... Location of port declaration
+  100 |   output                         o0_icb_cmd_lock,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_excl'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:101:34: ... Location of port declaration
+  101 |   output                         o0_icb_cmd_excl,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_cmd_size'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:102:34: ... Location of port declaration
+  102 |   output [1:0]                   o0_icb_cmd_size,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_rsp_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:104:34: ... Location of port declaration
+  104 |   input                          o0_icb_rsp_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_rsp_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:105:34: ... Location of port declaration
+  105 |   output                         o0_icb_rsp_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_rsp_err'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:106:34: ... Location of port declaration
+  106 |   input                          o0_icb_rsp_err  ,
+      |                                  ^~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_rsp_excl_ok'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:107:34: ... Location of port declaration
+  107 |   input                          o0_icb_rsp_excl_ok,
+      |                                  ^~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o0_icb_rsp_rdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:108:34: ... Location of port declaration
+  108 |   input  [        DW-1:0]        o0_icb_rsp_rdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:110:34: ... Location of port declaration
+  110 |   output                         o1_icb_cmd_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:111:34: ... Location of port declaration
+  111 |   input                          o1_icb_cmd_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_addr'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:112:34: ... Location of port declaration
+  112 |   output [             AW-1:0]   o1_icb_cmd_addr, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_read'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:113:34: ... Location of port declaration
+  113 |   output                         o1_icb_cmd_read, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_burst'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:114:34: ... Location of port declaration
+  114 |   output [2-1:0]                 o1_icb_cmd_burst,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_beat'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:115:34: ... Location of port declaration
+  115 |   output [2-1:0]                 o1_icb_cmd_beat,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_wdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:116:34: ... Location of port declaration
+  116 |   output [        DW-1:0]        o1_icb_cmd_wdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_wmask'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:117:34: ... Location of port declaration
+  117 |   output [        DW/8-1:0]      o1_icb_cmd_wmask,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_lock'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:118:34: ... Location of port declaration
+  118 |   output                         o1_icb_cmd_lock,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_excl'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:119:34: ... Location of port declaration
+  119 |   output                         o1_icb_cmd_excl,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_cmd_size'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:120:34: ... Location of port declaration
+  120 |   output [1:0]                   o1_icb_cmd_size,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_rsp_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:122:34: ... Location of port declaration
+  122 |   input                          o1_icb_rsp_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_rsp_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:123:34: ... Location of port declaration
+  123 |   output                         o1_icb_rsp_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_rsp_err'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:124:34: ... Location of port declaration
+  124 |   input                          o1_icb_rsp_err  ,
+      |                                  ^~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_rsp_excl_ok'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:125:34: ... Location of port declaration
+  125 |   input                          o1_icb_rsp_excl_ok,
+      |                                  ^~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o1_icb_rsp_rdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:126:34: ... Location of port declaration
+  126 |   input  [        DW-1:0]        o1_icb_rsp_rdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:128:34: ... Location of port declaration
+  128 |   output                         o2_icb_cmd_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:129:34: ... Location of port declaration
+  129 |   input                          o2_icb_cmd_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_addr'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:130:34: ... Location of port declaration
+  130 |   output [             AW-1:0]   o2_icb_cmd_addr, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_read'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:131:34: ... Location of port declaration
+  131 |   output                         o2_icb_cmd_read, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_burst'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:132:34: ... Location of port declaration
+  132 |   output [2-1:0]                 o2_icb_cmd_burst,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_beat'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:133:34: ... Location of port declaration
+  133 |   output [2-1:0]                 o2_icb_cmd_beat,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_wdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:134:34: ... Location of port declaration
+  134 |   output [        DW-1:0]        o2_icb_cmd_wdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_wmask'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:135:34: ... Location of port declaration
+  135 |   output [        DW/8-1:0]      o2_icb_cmd_wmask,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_lock'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:136:34: ... Location of port declaration
+  136 |   output                         o2_icb_cmd_lock,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_excl'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:137:34: ... Location of port declaration
+  137 |   output                         o2_icb_cmd_excl,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_cmd_size'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:138:34: ... Location of port declaration
+  138 |   output [1:0]                   o2_icb_cmd_size,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_rsp_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:140:34: ... Location of port declaration
+  140 |   input                          o2_icb_rsp_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_rsp_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:141:34: ... Location of port declaration
+  141 |   output                         o2_icb_rsp_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_rsp_err'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:142:34: ... Location of port declaration
+  142 |   input                          o2_icb_rsp_err  ,
+      |                                  ^~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_rsp_excl_ok'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:143:34: ... Location of port declaration
+  143 |   input                          o2_icb_rsp_excl_ok,
+      |                                  ^~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o2_icb_rsp_rdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:144:34: ... Location of port declaration
+  144 |   input  [        DW-1:0]        o2_icb_rsp_rdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:146:34: ... Location of port declaration
+  146 |   output                         o3_icb_cmd_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:147:34: ... Location of port declaration
+  147 |   input                          o3_icb_cmd_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_addr'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:148:34: ... Location of port declaration
+  148 |   output [             AW-1:0]   o3_icb_cmd_addr, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_read'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:149:34: ... Location of port declaration
+  149 |   output                         o3_icb_cmd_read, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_burst'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:150:34: ... Location of port declaration
+  150 |   output [2-1:0]                 o3_icb_cmd_burst,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_beat'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:151:34: ... Location of port declaration
+  151 |   output [2-1:0]                 o3_icb_cmd_beat,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_wdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:152:34: ... Location of port declaration
+  152 |   output [        DW-1:0]        o3_icb_cmd_wdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_wmask'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:153:34: ... Location of port declaration
+  153 |   output [        DW/8-1:0]      o3_icb_cmd_wmask,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_lock'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:154:34: ... Location of port declaration
+  154 |   output                         o3_icb_cmd_lock,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_excl'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:155:34: ... Location of port declaration
+  155 |   output                         o3_icb_cmd_excl,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_cmd_size'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:156:34: ... Location of port declaration
+  156 |   output [1:0]                   o3_icb_cmd_size,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_rsp_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:158:34: ... Location of port declaration
+  158 |   input                          o3_icb_rsp_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_rsp_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:159:34: ... Location of port declaration
+  159 |   output                         o3_icb_rsp_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_rsp_err'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:160:34: ... Location of port declaration
+  160 |   input                          o3_icb_rsp_err  ,
+      |                                  ^~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_rsp_excl_ok'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:161:34: ... Location of port declaration
+  161 |   input                          o3_icb_rsp_excl_ok,
+      |                                  ^~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o3_icb_rsp_rdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:162:34: ... Location of port declaration
+  162 |   input  [        DW-1:0]        o3_icb_rsp_rdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o4_icb_cmd_burst'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:168:34: ... Location of port declaration
+  168 |   output [2-1:0]                 o4_icb_cmd_burst,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o4_icb_cmd_beat'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:169:34: ... Location of port declaration
+  169 |   output [2-1:0]                 o4_icb_cmd_beat,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o4_icb_cmd_lock'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:172:34: ... Location of port declaration
+  172 |   output                         o4_icb_cmd_lock,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o4_icb_cmd_excl'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:173:34: ... Location of port declaration
+  173 |   output                         o4_icb_cmd_excl,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o4_icb_cmd_size'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:174:34: ... Location of port declaration
+  174 |   output [1:0]                   o4_icb_cmd_size,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:182:34: ... Location of port declaration
+  182 |   output                         o5_icb_cmd_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:183:34: ... Location of port declaration
+  183 |   input                          o5_icb_cmd_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_addr'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:184:34: ... Location of port declaration
+  184 |   output [             AW-1:0]   o5_icb_cmd_addr, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_read'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:185:34: ... Location of port declaration
+  185 |   output                         o5_icb_cmd_read, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_burst'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:186:34: ... Location of port declaration
+  186 |   output [2-1:0]                 o5_icb_cmd_burst,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_beat'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:187:34: ... Location of port declaration
+  187 |   output [2-1:0]                 o5_icb_cmd_beat,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_wdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:188:34: ... Location of port declaration
+  188 |   output [        DW-1:0]        o5_icb_cmd_wdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_wmask'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:189:34: ... Location of port declaration
+  189 |   output [        DW/8-1:0]      o5_icb_cmd_wmask,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_lock'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:190:34: ... Location of port declaration
+  190 |   output                         o5_icb_cmd_lock,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_excl'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:191:34: ... Location of port declaration
+  191 |   output                         o5_icb_cmd_excl,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_cmd_size'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:192:34: ... Location of port declaration
+  192 |   output [1:0]                   o5_icb_cmd_size,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_rsp_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:194:34: ... Location of port declaration
+  194 |   input                          o5_icb_rsp_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_rsp_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:195:34: ... Location of port declaration
+  195 |   output                         o5_icb_rsp_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_rsp_err'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:196:34: ... Location of port declaration
+  196 |   input                          o5_icb_rsp_err  ,
+      |                                  ^~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_rsp_excl_ok'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:197:34: ... Location of port declaration
+  197 |   input                          o5_icb_rsp_excl_ok,
+      |                                  ^~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o5_icb_rsp_rdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:198:34: ... Location of port declaration
+  198 |   input  [        DW-1:0]        o5_icb_rsp_rdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:200:34: ... Location of port declaration
+  200 |   output                         o6_icb_cmd_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:201:34: ... Location of port declaration
+  201 |   input                          o6_icb_cmd_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_addr'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:202:34: ... Location of port declaration
+  202 |   output [             AW-1:0]   o6_icb_cmd_addr, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_read'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:203:34: ... Location of port declaration
+  203 |   output                         o6_icb_cmd_read, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_burst'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:204:34: ... Location of port declaration
+  204 |   output [2-1:0]                 o6_icb_cmd_burst,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_beat'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:205:34: ... Location of port declaration
+  205 |   output [2-1:0]                 o6_icb_cmd_beat,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_wdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:206:34: ... Location of port declaration
+  206 |   output [        DW-1:0]        o6_icb_cmd_wdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_wmask'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:207:34: ... Location of port declaration
+  207 |   output [        DW/8-1:0]      o6_icb_cmd_wmask,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_lock'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:208:34: ... Location of port declaration
+  208 |   output                         o6_icb_cmd_lock,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_excl'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:209:34: ... Location of port declaration
+  209 |   output                         o6_icb_cmd_excl,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_cmd_size'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:210:34: ... Location of port declaration
+  210 |   output [1:0]                   o6_icb_cmd_size,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_rsp_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:212:34: ... Location of port declaration
+  212 |   input                          o6_icb_rsp_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_rsp_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:213:34: ... Location of port declaration
+  213 |   output                         o6_icb_rsp_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_rsp_err'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:214:34: ... Location of port declaration
+  214 |   input                          o6_icb_rsp_err  ,
+      |                                  ^~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_rsp_excl_ok'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:215:34: ... Location of port declaration
+  215 |   input                          o6_icb_rsp_excl_ok,
+      |                                  ^~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o6_icb_rsp_rdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:216:34: ... Location of port declaration
+  216 |   input  [        DW-1:0]        o6_icb_rsp_rdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:218:34: ... Location of port declaration
+  218 |   output                         o7_icb_cmd_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:219:34: ... Location of port declaration
+  219 |   input                          o7_icb_cmd_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_addr'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:220:34: ... Location of port declaration
+  220 |   output [             AW-1:0]   o7_icb_cmd_addr, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_read'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:221:34: ... Location of port declaration
+  221 |   output                         o7_icb_cmd_read, 
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_burst'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:222:34: ... Location of port declaration
+  222 |   output [2-1:0]                 o7_icb_cmd_burst,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_beat'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:223:34: ... Location of port declaration
+  223 |   output [2-1:0]                 o7_icb_cmd_beat,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_wdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:224:34: ... Location of port declaration
+  224 |   output [        DW-1:0]        o7_icb_cmd_wdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_wmask'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:225:34: ... Location of port declaration
+  225 |   output [        DW/8-1:0]      o7_icb_cmd_wmask,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_lock'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:226:34: ... Location of port declaration
+  226 |   output                         o7_icb_cmd_lock,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_excl'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:227:34: ... Location of port declaration
+  227 |   output                         o7_icb_cmd_excl,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_cmd_size'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:228:34: ... Location of port declaration
+  228 |   output [1:0]                   o7_icb_cmd_size,
+      |                                  ^~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_rsp_valid'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:230:34: ... Location of port declaration
+  230 |   input                          o7_icb_rsp_valid,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_rsp_ready'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:231:34: ... Location of port declaration
+  231 |   output                         o7_icb_rsp_ready,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_rsp_err'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:232:34: ... Location of port declaration
+  232 |   input                          o7_icb_rsp_err  ,
+      |                                  ^~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_rsp_excl_ok'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:233:34: ... Location of port declaration
+  233 |   input                          o7_icb_rsp_excl_ok,
+      |                                  ^~~~~~~~~~~~~~~~~~
+%Warning-PINMISSING: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:69:57: Cell has missing pin: 'o7_icb_rsp_rdata'
+   69 |    .O4_BASE_ADDR(32'h80000000),.O4_BASE_REGION_LSB(31)) fabric (
+      |                                                         ^~~~~~
+                     /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v:234:34: ... Location of port declaration
+  234 |   input  [        DW-1:0]        o7_icb_rsp_rdata,
+      |                                  ^~~~~~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/DmaBiasSramPrefetch.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module DmaBiasSramPrefetch(
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/LinearTileDmaCore.sv:54:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   54 | module MacPE_Acc41(
+      |        ^~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/LinearTileDmaCore.sv:99:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   99 | module LinearTileDmaCore(
+      |        ^~~~~~~~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/MacController.sv:46:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   46 | module MacController(
+      |        ^~~~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/Sram1024x16.sv:46:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   46 | module Sram1024x16(
+      |        ^~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/StorageMacroObserver.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    1 | module StorageMacroObserver(
+      |        ^~~~~~~~~~~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileWeightBank.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module TileWeightBank(
+      |        ^~~~~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileWeightBankArray.sv:20:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   20 | module TileWeightBankArray(
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileXMacroRowBuffer.sv:4:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    4 | module TileXMacroRowBuffer (
+      |        ^~~~~~~~~~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileXRowBuffer.sv:64:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+   64 | module TileXRowBuffer(
+      |        ^~~~~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-TIMESCALEMOD: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:3:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    3 | module dma32_test_top (
+      |        ^~~~~~~~~~~~~~
+                       /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:5:8: ... Location of module with timescale
+    5 | module RAMSP1024X16 (
+      |        ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:23:48: Operator ADD expects 32 bits on the RHS, but RHS's SEL generates 2 bits.
+                                                                                                                                                      : ... note: In instance 'dma32_test_top.dma.u_core.weights.banks_7.sram1.mem_ext.macro'
+   23 |           Q[bit_index]<=mem[A[9:2]][4*bit_index+A[1:0]];
+      |                                                ^
+%Warning-WIDTHEXPAND: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:26:60: Operator ADD expects 32 bits on the RHS, but RHS's SEL generates 2 bits.
+                                                                                                                                                      : ... note: In instance 'dma32_test_top.dma.u_core.weights.banks_7.sram1.mem_ext.macro'
+   26 |           if(WEN[bit_index]===1'b0) mem[A[9:2]][4*bit_index+A[1:0]]<=D[bit_index];
+      |                                                            ^
+%Warning-WIDTHEXPAND: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv:27:65: Operator ADD expects 32 bits on the RHS, but RHS's SEL generates 2 bits.
+                                                                                                                                                      : ... note: In instance 'dma32_test_top.dma.u_core.weights.banks_7.sram1.mem_ext.macro'
+   27 |           else if(WEN[bit_index]!==1'b1) mem[A[9:2]][4*bit_index+A[1:0]]<=1'bx;
+      |                                                                 ^
+%Warning-WIDTHTRUNC: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_sirv_sram_adapter.sv:35:17: Operator ASSIGNDLY expects 7 bits on the Assign RHS, but Assign RHS's SHIFTR generates 17 bits.
+                                                                                                                                                    : ... note: In instance 'dma32_test_top.endpoint.storage'
+   35 |       read_bank <= addr >> 10;
+      |                 ^~
+%Warning-WIDTHEXPAND: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_sirv_sram_adapter.sv:99:39: Operator GTE expects 32 or 18 bits on the LHS, but LHS's VARREF 'addr' generates 17 bits.
+                                                                                                                                                     : ... note: In instance 'dma32_test_top.endpoint.storage'
+   99 |   always @(posedge clk) if (cs && addr>=DP) $fatal(1,"xu SRAM address outside logical depth");
+      |                                       ^~
+%Warning-WIDTHEXPAND: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_icbs.v:255:43: Operator OR expects 32 bits on the LHS, but LHS's VARREF 'i_arbt_indic_id' generates 1 bits.
+                                                                                                                                               : ... note: In instance 'dma32_test_top.arb.u_platform_icb_arb'
+  255 |         i_arbt_indic_id = i_arbt_indic_id | {ARBT_PTR_W{i_bus_icb_cmd_sel[j]}} & $unsigned(j);
+      |                                           ^
+%Warning-WIDTHEXPAND: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_icbs.v:255:80: Operator AND expects 32 bits on the LHS, but LHS's REPLICATE generates 1 bits.
+                                                                                                                                               : ... note: In instance 'dma32_test_top.arb.u_platform_icb_arb'
+  255 |         i_arbt_indic_id = i_arbt_indic_id | {ARBT_PTR_W{i_bus_icb_cmd_sel[j]}} & $unsigned(j);
+      |                                                                                ^
+%Warning-WIDTHTRUNC: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_icbs.v:255:25: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's OR generates 32 bits.
+                                                                                                                                              : ... note: In instance 'dma32_test_top.arb.u_platform_icb_arb'
+  255 |         i_arbt_indic_id = i_arbt_indic_id | {ARBT_PTR_W{i_bus_icb_cmd_sel[j]}} & $unsigned(j);
+      |                         ^
+%Warning-WIDTHEXPAND: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_matrix_dma_sysbus32.sv:303:21: Operator GT expects 4 bits on the RHS, but RHS's VARREF 'core_out_column' generates 3 bits.
+                                                                                                                                                        : ... note: In instance 'dma32_test_top.dma'
+  303 |       assert(y_issue>core_out_column)else $fatal(1,"Y retirement before accepted issue");
+      |                     ^
+%Warning-WIDTHEXPAND: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/StorageMacroObserver.sv:51:11: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's SEL generates 10 bits.
+                                                                                                                                                     : ... note: In instance 'dma32_test_top.storage_observer'
+   51 |          a=address[10*i+:10];
+      |           ^
+%Warning-WIDTHEXPAND: /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv:37:20: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's VARXREF 'state' generates 3 bits.
+                                                                                                                                               : ... note: In instance 'dma32_test_top'
+   37 |  assign debug_state=dma.state;assign debug_pending={31'b0,dma.pending};
+      |                    ^
+make: Entering directory '/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj'
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -Os  -c -o dma32_test.o /home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -c -o verilated.o /usr/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -c -o verilated_threads.o /usr/share/verilator/include/verilated_threads.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -x c++-header Vdma32_test_top__pch.h -o Vdma32_test_top__pch.h.fast.gch
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top.o Vdma32_test_top.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_h4d07dd18__0.o Vdma32_test_top___024root__DepSet_h4d07dd18__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_h4d07dd18__1.o Vdma32_test_top___024root__DepSet_h4d07dd18__1.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_h4d07dd18__2.o Vdma32_test_top___024root__DepSet_h4d07dd18__2.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_h4d07dd18__3.o Vdma32_test_top___024root__DepSet_h4d07dd18__3.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_h4d07dd18__4.o Vdma32_test_top___024root__DepSet_h4d07dd18__4.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__0.o Vdma32_test_top___024root__DepSet_hf6cf6674__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__1.o Vdma32_test_top___024root__DepSet_hf6cf6674__1.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__2.o Vdma32_test_top___024root__DepSet_hf6cf6674__2.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__3.o Vdma32_test_top___024root__DepSet_hf6cf6674__3.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__4.o Vdma32_test_top___024root__DepSet_hf6cf6674__4.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__5.o Vdma32_test_top___024root__DepSet_hf6cf6674__5.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__6.o Vdma32_test_top___024root__DepSet_hf6cf6674__6.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__7.o Vdma32_test_top___024root__DepSet_hf6cf6674__7.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__8.o Vdma32_test_top___024root__DepSet_hf6cf6674__8.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__9.o Vdma32_test_top___024root__DepSet_hf6cf6674__9.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__10.o Vdma32_test_top___024root__DepSet_hf6cf6674__10.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__11.o Vdma32_test_top___024root__DepSet_hf6cf6674__11.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__12.o Vdma32_test_top___024root__DepSet_hf6cf6674__12.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__13.o Vdma32_test_top___024root__DepSet_hf6cf6674__13.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__14.o Vdma32_test_top___024root__DepSet_hf6cf6674__14.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__15.o Vdma32_test_top___024root__DepSet_hf6cf6674__15.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__16.o Vdma32_test_top___024root__DepSet_hf6cf6674__16.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__17.o Vdma32_test_top___024root__DepSet_hf6cf6674__17.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__18.o Vdma32_test_top___024root__DepSet_hf6cf6674__18.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__19.o Vdma32_test_top___024root__DepSet_hf6cf6674__19.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__20.o Vdma32_test_top___024root__DepSet_hf6cf6674__20.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__21.o Vdma32_test_top___024root__DepSet_hf6cf6674__21.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top_Sram1024x16__DepSet_h96365975__0.o Vdma32_test_top_Sram1024x16__DepSet_h96365975__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top_Sram1024x16__DepSet_h96365975__1.o Vdma32_test_top_Sram1024x16__DepSet_h96365975__1.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top_Sram1024x16__DepSet_h96365975__2.o Vdma32_test_top_Sram1024x16__DepSet_h96365975__2.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.fast -c -o Vdma32_test_top_Sram1024x16__DepSet_h96365975__3.o Vdma32_test_top_Sram1024x16__DepSet_h96365975__3.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -x c++-header Vdma32_test_top__pch.h -o Vdma32_test_top__pch.h.slow.gch
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top__ConstPool_0.o Vdma32_test_top__ConstPool_0.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top___024root__Slow.o Vdma32_test_top___024root__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top___024root__DepSet_h4d07dd18__0__Slow.o Vdma32_test_top___024root__DepSet_h4d07dd18__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top___024root__DepSet_h4d07dd18__1__Slow.o Vdma32_test_top___024root__DepSet_h4d07dd18__1__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top___024root__DepSet_h4d07dd18__2__Slow.o Vdma32_test_top___024root__DepSet_h4d07dd18__2__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__0__Slow.o Vdma32_test_top___024root__DepSet_hf6cf6674__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__1__Slow.o Vdma32_test_top___024root__DepSet_hf6cf6674__1__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__2__Slow.o Vdma32_test_top___024root__DepSet_hf6cf6674__2__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__3__Slow.o Vdma32_test_top___024root__DepSet_hf6cf6674__3__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top___024root__DepSet_hf6cf6674__4__Slow.o Vdma32_test_top___024root__DepSet_hf6cf6674__4__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top_Sram1024x16__Slow.o Vdma32_test_top_Sram1024x16__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top_Sram1024x16__DepSet_hbfff2bf8__0__Slow.o Vdma32_test_top_Sram1024x16__DepSet_hbfff2bf8__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top_Sram1024x16__DepSet_h96365975__0__Slow.o Vdma32_test_top_Sram1024x16__DepSet_h96365975__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -std=c++17   -include Vdma32_test_top__pch.h.slow -c -o Vdma32_test_top__Syms.o Vdma32_test_top__Syms.cpp
+echo "" > Vdma32_test_top__ALL.verilator_deplist.tmp
+g++    dma32_test.o verilated.o verilated_threads.o Vdma32_test_top__ALL.a    -pthread -lpthread -latomic   -o Vdma32_test_top
+rm Vdma32_test_top__ALL.verilator_deplist.tmp
+make: Leaving directory '/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj'
+- V e r i l a t i o n   R e p o r t: Verilator 5.032 2025-01-01 rev (Debian 5.032-1)
+- Verilator: Built from 3.779 MB sources in 41 modules, into 46.783 MB in 46 C++ files needing 0.006 MB
+- Verilator: Walltime 184.175 s (elab=0.419, cvt=7.273, bld=175.649); cpu 8.523 s on 1 threads; alloced 238.809 MB

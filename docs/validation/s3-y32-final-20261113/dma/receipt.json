@@ -1,0 +1,418 @@
+{
+  "schema": "s3_y32_final_dma4_storage21_unit_v1",
+  "status": "PASS",
+  "started_at": "2026-11-13T09:26:44.074961+00:00",
+  "origins": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/LinearTileDmaCore.sv": "609d26c6b44843f3de4f81d395d592042a03b347fee815dfca8d7d9c906a7c9e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/TileWeightBank.sv": "e44d885e304faf608a4f8cf2f4cd13bc4653a34cbd0fe81904f02d51a0a7bf48",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/TileWeightBankArray.sv": "2aa3b687b1e393f4950895ca4bcad4dc4f0668cb60733c944423685a5f760e9a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/TileXMacroRowBuffer.sv": "400b8e51b4cfad62633f53df9905ab9fad5e8a5b300f41b3070a1c0ba19b57a7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/TileXRowBuffer.sv": "3881b2db4c1d40ecea60089462ae24e38409de43ec572a600af0029635c427a4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/generic_ramsp_non_ppa.sv": "4a138045dfebeafd9728908627133c2e1b04fa8115fd8abad1ace7fa3235eac7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/mem_1024x16.sv": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/xu_matrix_dma_sysbus32.sv": "9a03b03b6c027b2d8bb4b6d6b1d9f788b8d95ee75a5fbe6aadb71abd7cf0ce51",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/subsys/xu_systembus_ingress32.v": "aa62909db97c4961758d4e030cced6ba73b713fd965e16662ab581eb9b88ab3c",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/fab/sirv_icb1to8_bus.v": "110922ec61bc9c3fea85c43661ce65b74c831dfe6cdcaf717d67cdea66cf856a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_icbs.v": "35eb816a2960f3444af19150845447f6140990a0a3e30a4626edcd242bcf3db8",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_bufs.v": "d46f8701f99a79b321cecd2e2b776caa2d7a76925e07b675bbd3952a47fb3ab2",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/third-party/e203_hbirdv2/rtl/e203/general/sirv_gnrl_dffs.v": "cd903d78882040cc17b6fb8bec3862f8d440726d7027ba9c61310d18801f8d83",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/tools/ppa/xu_shared_icb_sram.sv": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/tools/ppa/xu_sirv_sram_adapter.sv": "b2b2baaa1e105ed794382886439cd2c16fd280a0f29b54c4d925351e6f90a0c5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-ingress-perf/dma/dma32_test.cpp": "a51afee406ae64d46d8244685b362d14dba9150ccc0c8a0ec7d802c5a9a24b01",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-ingress-perf/dma/dma32_reset_recovery.cpp": "17fafdd6afc15b140dfcb2a180e5d3ae1cb4c092004d4959121bcc66294d1b0d",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-ingress-perf/dma/dma32_fault_staging.cpp": "d7c73e03b8bf4ebefbe17c2141402f35e3603ad1d9eb5873c361935c471fded6",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-ingress-perf/dma/dma32_test_top.sv": "c800765e5607853d4f5ab7170769bdf22944860e29bebb7fe67cc543d8c62e09",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-compliant32/storage-macro/generate_observer.py": "3f4779ce2a1cc32cc4a1dcac8624e153c72d23a3d1315b23ba682683a1f9abd5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-final/rtl/run_dma.py": "a1976b96f5417230ead3c89fd303c0d3f0d1982e6ab05a9c9e7f9b15f7d8f56c"
+  },
+  "inputs": {
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/DmaBiasSramPrefetch.sv": "6ebec7d73d8dc038bfba66f2249299c0aefda399a6ad34926120d72a38f829ed",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/LinearTileDmaCore.sv": "609d26c6b44843f3de4f81d395d592042a03b347fee815dfca8d7d9c906a7c9e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/MacController.sv": "b74c5febf4a0f51a5f480f959b71a4b224e46fcdc5c270c11b4c2e2e66f04db7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/Sram1024x16.sv": "c202f5d1f2b8ec25056f8efbbcfa4972221bc1d2ced380f2eb7c2d6637c078cc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/StorageMacroObserver.sv": "36442d672d2795aea28ddeb937505f0076774d9b12df12f1d090b9152f2f81a2",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileWeightBank.sv": "e44d885e304faf608a4f8cf2f4cd13bc4653a34cbd0fe81904f02d51a0a7bf48",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileWeightBankArray.sv": "2aa3b687b1e393f4950895ca4bcad4dc4f0668cb60733c944423685a5f760e9a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileXMacroRowBuffer.sv": "400b8e51b4cfad62633f53df9905ab9fad5e8a5b300f41b3070a1c0ba19b57a7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileXRowBuffer.sv": "3881b2db4c1d40ecea60089462ae24e38409de43ec572a600af0029635c427a4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_fault_staging.cpp": "d7c73e03b8bf4ebefbe17c2141402f35e3603ad1d9eb5873c361935c471fded6",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_reset_recovery.cpp": "17fafdd6afc15b140dfcb2a180e5d3ae1cb4c092004d4959121bcc66294d1b0d",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test.cpp": "ffed95834210d3bfe997fb80069ba8f7eede2e7637322a9b5384f41763e756ec",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv": "7bf8bb918cf9a2956707a7b26ea7ad00d3934d3493ed55a245e72f86117be5b9",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generate_observer.py": "3f4779ce2a1cc32cc4a1dcac8624e153c72d23a3d1315b23ba682683a1f9abd5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv": "4a138045dfebeafd9728908627133c2e1b04fa8115fd8abad1ace7fa3235eac7",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/mem_1024x16.sv": "86b49e6279e9e9ac2c91467028608be8e3ca1caadb811ddd09d379311730d707",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/run_dma.py": "a1976b96f5417230ead3c89fd303c0d3f0d1982e6ab05a9c9e7f9b15f7d8f56c",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_bufs.v": "d46f8701f99a79b321cecd2e2b776caa2d7a76925e07b675bbd3952a47fb3ab2",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_dffs.v": "cd903d78882040cc17b6fb8bec3862f8d440726d7027ba9c61310d18801f8d83",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_icbs.v": "35eb816a2960f3444af19150845447f6140990a0a3e30a4626edcd242bcf3db8",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v": "110922ec61bc9c3fea85c43661ce65b74c831dfe6cdcaf717d67cdea66cf856a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/storage_observer.svh": "62e893bee0495279ef7a382b08867fd74cce0b03bc499cfeb2a101873d27340e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_matrix_dma_sysbus32.sv": "9a03b03b6c027b2d8bb4b6d6b1d9f788b8d95ee75a5fbe6aadb71abd7cf0ce51",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_shared_icb_sram.sv": "2ebad6ec1870806cb4b770610213aa4d3318e272f6433bf68e6175b15fa25e9d",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_sirv_sram_adapter.sv": "b2b2baaa1e105ed794382886439cd2c16fd280a0f29b54c4d925351e6f90a0c5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_systembus_ingress32.v": "aa62909db97c4961758d4e030cced6ba73b713fd965e16662ab581eb9b88ab3c",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_00/x.mem": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_00/w.mem": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_00/bias.mem": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_00/y32.mem": "1656994e4ef0daf4de8d5c814c890bc7a143925629ec56dff32ddfa5a1b49c95",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_01/x.mem": "44be25da54cc6bc203d20852197a55f17efa07c8d6c79df1bdd5115b4cebb990",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_01/w.mem": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_01/bias.mem": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_01/y32.mem": "8cd28b0ca1a9a4280389cd37de030661b4f5114ece295d4af826b601bebfc70f",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_02/x.mem": "e7c13b60cb666511addbcaf64cba41ecc04b651ba00cee87ea3cac76c5044c5a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_02/w.mem": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_02/bias.mem": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_02/y32.mem": "4cde1dde3febb577ff14e5ba96cb4a8037c4be83516fbfc71f6617148d904509",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_03/x.mem": "f1f1d796200e1376f6ad4c29d9c4b4923e91c4c264be971f3df3f058110d03c1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_03/w.mem": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_03/bias.mem": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_03/y32.mem": "feb9a8d53cb52991fe05a6d5e0a70ec998d9038ae5c6cb242f764b34d5f2ff77",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_04/x.mem": "a37a06d366d0ed37ee3aeb2107710c1f45daea12fb9d851bda4dd370757d5460",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_04/w.mem": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_04/bias.mem": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_04/y32.mem": "471c8135d3cc07636b504f31bbc7a5665355d28920b27fa6524e4e2e5b02cf13",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_05/x.mem": "76044d5bdd8e234a2ef2ad8da1b2e394f35ace740db21452aaf710eec2be0cc5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_05/w.mem": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_05/bias.mem": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_05/y32.mem": "4a77f33e44672911bd579417af4556c2f7f75df7815627a7194af55f78faefe3",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_06/x.mem": "713994cdb3dd27da064059f68ccac413530cadcfbf4b561aee540b74f92b44ee",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_06/w.mem": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_06/bias.mem": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_06/y32.mem": "9ef7ed6c710309c1d72f6825d58c2948b96e979ae71f2d8e564b7d6edb2aec02",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_07/x.mem": "6ad2f917ecf500b48604ba1baf61ab040f7e955c418081ea292c650d977fe391",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_07/w.mem": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_07/bias.mem": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_07/y32.mem": "8e1b091eab5a917b4770034bbe36ad4594d099269110b6867b9a0734bf0a1ff0",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_08/x.mem": "cf1e3917159c7b758fd074abf6526158a0d6239d853ace4e63a093141d82d871",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_08/w.mem": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_08/bias.mem": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_08/y32.mem": "eefe526f7dda215364681cbab00a2b53a799d145ee812ade8f01352c9953ad0b",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_09/x.mem": "0adb6e1e70ec8dff94d7313920f32775b3cff702c7ce313f1e9fed1de5c34f0a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_09/w.mem": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_09/bias.mem": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_09/y32.mem": "e7fc3bc355703f8700207fbd1b17d296b71aadae3fd67f1e80a2303c70bf0605",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_10/x.mem": "931875d0bed4fafce4b88b036f6ab70f914537016d8f58993077fddcebf8b9f1",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_10/w.mem": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_10/bias.mem": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_10/y32.mem": "f2500d28e887a743337657ca54521ef1078597d70549af647f13819d8d7628dc",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_11/x.mem": "8225b4fa96093663dfa2410f774d5ac46bb00eebab1ae7a82512961695a73ffa",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_11/w.mem": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_11/bias.mem": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53",
+    "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/layer_11/y32.mem": "7056cec63fc995c1ce01e3cb36c6541272588bacf586067247f216e23e84c685"
+  },
+  "commands": [
+    {
+      "name": "verilator-version",
+      "command": [
+        "verilator",
+        "--version"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.0924919270000828
+    },
+    {
+      "name": "compile",
+      "command": [
+        "verilator",
+        "--cc",
+        "--exe",
+        "--build",
+        "--assert",
+        "--no-timing",
+        "-DDISABLE_SV_ASSERTION=1",
+        "-Wno-fatal",
+        "-j",
+        "1",
+        "-DXU_MATRIX_DMA_SYSBUS32",
+        "-DXU_MATRIX_X_SRAM",
+        "-DXU_MATRIX_STORAGE_SRAM",
+        "--top-module",
+        "dma32_test_top",
+        "--Mdir",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj",
+        "-CFLAGS",
+        "-std=c++17",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/DmaBiasSramPrefetch.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/LinearTileDmaCore.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/MacController.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/Sram1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/StorageMacroObserver.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileWeightBank.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileWeightBankArray.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileXMacroRowBuffer.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/TileXRowBuffer.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test_top.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/generic_ramsp_non_ppa.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/mem_1024x16.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_bufs.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_dffs.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_gnrl_icbs.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/sirv_icb1to8_bus.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_matrix_dma_sysbus32.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_shared_icb_sram.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_sirv_sram_adapter.sv",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/xu_systembus_ingress32.v",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_test.cpp"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 184.3457137459991
+    },
+    {
+      "name": "task0",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/Vdma32_test_top",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+        "1",
+        "8",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/task0.json",
+        "0",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 7.136431808998168
+    },
+    {
+      "name": "full12",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/Vdma32_test_top",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+        "12",
+        "8",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/full12.json",
+        "0",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 81.60032105500068
+    },
+    {
+      "name": "faults-task0",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/Vdma32_test_top",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+        "1",
+        "8",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/faults-task0.json",
+        "1",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 8.237910833002388
+    },
+    {
+      "name": "stall-task0",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/Vdma32_test_top",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+        "1",
+        "8",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/stall-task0.json",
+        "0",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 7.5035104700000375
+    },
+    {
+      "name": "rows1-task0",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/Vdma32_test_top",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+        "1",
+        "1",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/rows1-task0.json",
+        "0",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 10.614577871998335
+    },
+    {
+      "name": "last-y-hold-task0",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/Vdma32_test_top",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+        "1",
+        "8",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/last-y-hold-task0.json",
+        "0",
+        "0",
+        "1"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 6.990486034999776
+    },
+    {
+      "name": "compile-recovery-driver",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-pthread",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source",
+        "-I/usr/share/verilator/include",
+        "-I/usr/share/verilator/include/vltstd",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_reset_recovery.cpp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/Vdma32_test_top__ALL.a",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/verilated.o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/verilated_threads.o",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/dma32_reset_recovery"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 1.3448504890002368
+    },
+    {
+      "name": "reset-recovery",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/dma32_reset_recovery",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/reset-recovery.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 32.57119068599786
+    },
+    {
+      "name": "compile-staging-driver",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-pthread",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source",
+        "-I/usr/share/verilator/include",
+        "-I/usr/share/verilator/include/vltstd",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source/dma32_fault_staging.cpp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/Vdma32_test_top__ALL.a",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/verilated.o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/verilated_threads.o",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/dma32_fault_staging"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 1.3585014939999382
+    },
+    {
+      "name": "fault-staging",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/dma32_fault_staging",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/fault-staging.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 71.71252616000129
+    }
+  ],
+  "scope": "DMA4 plus ingress4 and unchanged original32 fabric/endpoint with256 shared+54 internal macros; local diagnostic noCPU/PPA.",
+  "observer_policy": "All physical address/zero-write proof on every clear. Public dirty prestate required after completed task; aborted/reset task may leave categories clean.",
+  "counter_semantics": {
+    "mmio_W_X_result": 54272,
+    "physical_W_bias_X_result": 55040
+  },
+  "simulator_sha256": "e7ac7c5eba4defb5dd114d8bed602c2813b4c20591d3fe817f64e6056138428b",
+  "source_drift": [],
+  "finished_at": "2026-11-13T09:33:37.744550+00:00",
+  "outputs": {
+    "compile-recovery-driver.log": {
+      "bytes": 1668,
+      "sha256": "a5119e7afc02d3b4ca174ad2d4da48277c9fffdde706511d46e420e609607409"
+    },
+    "compile-staging-driver.log": {
+      "bytes": 1665,
+      "sha256": "c529944418c6e8a4ce60be7085130cdea7093155aeaa7642b2c3115063fffa17"
+    },
+    "compile.log": {
+      "bytes": 118430,
+      "sha256": "3f2e2bab0717a73af651a724b81f69be5783dd51d344b290adb9c3dd4d87cb4f"
+    },
+    "fault-staging.json": {
+      "bytes": 816,
+      "sha256": "685e6046fc19239c427eff9ddc6a8a0488373f268a13b89118a22d5c27dc4cbf"
+    },
+    "fault-staging.log": {
+      "bytes": 40601,
+      "sha256": "18537bcf7fb97fdb332ee1ae515bbba16f41ab8e942377a77d8a547981c6f08e"
+    },
+    "faults-task0.json": {
+      "bytes": 474,
+      "sha256": "79efdcd8d570e5b7f055d65424fb330dfac9284c880fe37109dfd9a7f6b743b6"
+    },
+    "faults-task0.log": {
+      "bytes": 37921,
+      "sha256": "8617195cd5f972ac78873fdf9aecc98b89d8a7508ce57592e89bc610a2eb1f6d"
+    },
+    "full12.json": {
+      "bytes": 2625,
+      "sha256": "bb65c51317cce66232e9f3c46d2c880c853453a3c6448fceb42094af842870a5"
+    },
+    "full12.log": {
+      "bytes": 42016,
+      "sha256": "4cd014694ce0ce46c1bb7ce52865403aa91085997e29cf725381b544c17e6923"
+    },
+    "last-y-hold-task0.json": {
+      "bytes": 475,
+      "sha256": "1e2f8557341a3af57bb1793d7a0f3a94b8aba3a17e8ecfd89309e540691935f4"
+    },
+    "last-y-hold-task0.log": {
+      "bytes": 37060,
+      "sha256": "d4d2a40971426a2497a0ee640d154483ad2f0e4404e1ac5c6f486e4654168321"
+    },
+    "reset-recovery.json": {
+      "bytes": 880,
+      "sha256": "b24fece09744a86d7b6cb08a458da03680637c9d20e891cd8020631ce54610e1"
+    },
+    "reset-recovery.json.phase0.actual-y32.mem": {
+      "bytes": 228096,
+      "sha256": "8cd28b0ca1a9a4280389cd37de030661b4f5114ece295d4af826b601bebfc70f"
+    },
+    "reset-recovery.json.phase1.actual-y32.mem": {
+      "bytes": 228096,
+      "sha256": "4cde1dde3febb577ff14e5ba96cb4a8037c4be83516fbfc71f6617148d904509"
+    },
+    "reset-recovery.json.phase2.actual-y32.mem": {
+      "bytes": 228096,
+      "sha256": "feb9a8d53cb52991fe05a6d5e0a70ec998d9038ae5c6cb242f764b34d5f2ff77"
+    },
+    "reset-recovery.log": {
+      "bytes": 38396,
+      "sha256": "ce345af78af32d925c94a07d236628371838e34ec63ac9260779afceb79915ac"
+    },
+    "rows1-task0.json": {
+      "bytes": 475,
+      "sha256": "52188bab1b18f9b548f9688e09c2899b22109df38a69b11a007160c52bf47ed2"
+    },
+    "rows1-task0.log": {
+      "bytes": 37052,
+      "sha256": "f5aab06c022b7eacb1bfd19a5c33feb517ac326159e16b81b29fec59a244d3e3"
+    },
+    "stall-task0.json": {
+      "bytes": 475,
+      "sha256": "63d8987ed77a3aea763fa4f0a5543608e2be51c0524a6dbc6bc6beded02ae56a"
+    },
+    "stall-task0.log": {
+      "bytes": 37057,
+      "sha256": "368e81c3401ac947cf8e93a1e4b4919c908b3a1add76fa76bcb5990b39a8d334"
+    },
+    "task0.json": {
+      "bytes": 474,
+      "sha256": "b0f65c76f3273ecee359cc0376dd38df086011cb34318a67472131a2242651d2"
+    },
+    "task0.log": {
+      "bytes": 37048,
+      "sha256": "05d44b16edbe17823d6acbd9db1c0b55d15ab6b04309842c0175a1ebc1cbafb8"
+    },
+    "verilator-version.log": {
+      "bytes": 154,
+      "sha256": "e76f8d2870548db7417d08e9b01513682eaf295a4a5fcb2fe07c4db28cad3edc"
+    }
+  }
+}

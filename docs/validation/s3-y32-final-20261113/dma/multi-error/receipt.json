@@ -1,0 +1,44 @@
+{
+  "schema": "s3_y32_final_multi_owner_error_extension_v1",
+  "status": "PASS",
+  "base_receipt_sha256": "e30a97812d460f4ff83ac527084468e26f01edcaa17931e85e919b77fd405d18",
+  "driver_sha256": "5012645095ef14e472261c64b0222aa051467a0eb982cf8cc6589af4361615cf",
+  "commands": [
+    {
+      "name": "compile",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-pthread",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj",
+        "-I/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/source",
+        "-I/usr/share/verilator/include",
+        "-I/usr/share/verilator/include/vltstd",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/experiments/s3-y32-final/rtl/dma32_fault_multi.cpp",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/Vdma32_test_top__ALL.a",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/verilated.o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-r1/obj/verilated_threads.o",
+        "-o",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-multi-error-r1/multi-error"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 1.37976640800116
+    },
+    {
+      "name": "multi-error",
+      "command": [
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-multi-error-r1/multi-error",
+        "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors",
+        "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final-20261113/dma-multi-error-r1/result.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 73.298705256002
+    }
+  ],
+  "outputs": {
+    "multi-error": "1935b03b4e22160cb07e8738957bcd9bfa71e10591109a3863e357540a89431c",
+    "multi-error.log": "b61a364a6409ac51b4b16bb36fd51ec72887f488ed433a62a2fe4ab060148621",
+    "result.json": "5b06154faea904ece33d0beb77cc6a3bcc9137d7611fdf1cba6910a0e5d459fa",
+    "compile.log": "8a7b1fac303307955fd5285d90db97544368a830edb0adaffcddb4017d4864e9"
+  }
+}

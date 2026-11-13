@@ -1,0 +1,388 @@
+{
+  "schema": "s3_y32_final_dma4_storage21_validation_v1",
+  "status": "PASS",
+  "child_commit": "b0a0e47",
+  "full12": {
+    "scope": "DMA4 plus ingress4 and original32 fabric/endpoint; noCPU/PPA or official timing",
+    "layers": [
+      {
+        "task": 0,
+        "clear": 1025,
+        "payload": 100626,
+        "wb": 20312,
+        "run": 80314,
+        "source_to_last_write_response": 100624,
+        "cmd_stall": 46133,
+        "response_wait": 54223,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 1,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 2,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 3,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 4,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 5,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 6,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 7,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 8,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 9,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 10,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      },
+      {
+        "task": 11,
+        "clear": 1025,
+        "payload": 100625,
+        "wb": 20311,
+        "run": 80314,
+        "source_to_last_write_response": 100623,
+        "cmd_stall": 46132,
+        "response_wait": 54222,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      }
+    ],
+    "rows": 8,
+    "exact_y32": 304128,
+    "payload_total": 1207501,
+    "clear_total": 12300,
+    "principal_cycles": 1219801,
+    "fault_reset_cases": 0,
+    "last_y_response_held_edges": 0,
+    "status": "PASS"
+  },
+  "reset_recovery": {
+    "scope": "Bounded common-reset recovery; unchanged R2 RTL model; public32 fixtures",
+    "cases": [
+      {
+        "phase": 0,
+        "cancelled_layer": 0,
+        "fresh_layer": 1,
+        "cancelled_inflight": true,
+        "cancelled_count": 2,
+        "cancelled_address": 2684452864,
+        "fresh_clear_csr": 1025,
+        "fresh_payload_csr": 100629,
+        "fresh_exact_y32": 25344,
+        "fresh_accepted": 40384,
+        "fresh_retired": 40384
+      },
+      {
+        "phase": 1,
+        "cancelled_layer": 1,
+        "fresh_layer": 2,
+        "cancelled_inflight": true,
+        "cancelled_count": 3,
+        "cancelled_address": 2684356672,
+        "fresh_clear_csr": 1025,
+        "fresh_payload_csr": 100629,
+        "fresh_exact_y32": 25344,
+        "fresh_accepted": 40384,
+        "fresh_retired": 40384
+      },
+      {
+        "phase": 2,
+        "cancelled_layer": 2,
+        "fresh_layer": 3,
+        "cancelled_inflight": true,
+        "cancelled_count": 3,
+        "cancelled_address": 2684356792,
+        "fresh_clear_csr": 1025,
+        "fresh_payload_csr": 100629,
+        "fresh_exact_y32": 25344,
+        "fresh_accepted": 40384,
+        "fresh_retired": 40384
+      }
+    ],
+    "exact_postreset_y32": 76032,
+    "status": "PASS"
+  },
+  "fault_staging": {
+    "scope": "Address-targeted32bit assembly errors and complete new-parameter recovery; no CPU/PPA",
+    "cases": [
+      {
+        "fault": "w_low",
+        "address": 2684387328,
+        "first_error": 1,
+        "recovery_layer": 1,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "w_high",
+        "address": 2684387332,
+        "first_error": 1,
+        "recovery_layer": 2,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "bias_low",
+        "address": 2684452864,
+        "first_error": 1,
+        "recovery_layer": 3,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "bias_high",
+        "address": 2684452868,
+        "first_error": 1,
+        "recovery_layer": 4,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "x",
+        "address": 2684354560,
+        "first_error": 1,
+        "recovery_layer": 5,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "y_first",
+        "address": 2684485632,
+        "first_error": 1,
+        "recovery_layer": 6,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "y_last",
+        "address": 2684587004,
+        "first_error": 1,
+        "recovery_layer": 7,
+        "exact_y32": 25344
+      }
+    ],
+    "exact_recovery_y32": 177408,
+    "status": "PASS"
+  },
+  "last_y_response": {
+    "scope": "DMA4 plus ingress4 and original32 fabric/endpoint; noCPU/PPA or official timing",
+    "layers": [
+      {
+        "task": 0,
+        "clear": 1025,
+        "payload": 100723,
+        "wb": 20312,
+        "run": 80411,
+        "source_to_last_write_response": 100721,
+        "cmd_stall": 46133,
+        "response_wait": 54320,
+        "exact_y32": 25344,
+        "reads32": 15040,
+        "writes32": 25344
+      }
+    ],
+    "rows": 8,
+    "exact_y32": 25344,
+    "payload_total": 100723,
+    "clear_total": 1025,
+    "principal_cycles": 101748,
+    "fault_reset_cases": 0,
+    "last_y_response_held_edges": 97,
+    "status": "PASS"
+  },
+  "cases": {
+    "rows1-task0": "PASS",
+    "stall-task0": "PASS",
+    "reset-recovery": "PASS",
+    "last-y-hold-task0": "PASS",
+    "fault-staging": "PASS",
+    "full12": "PASS",
+    "task0": "PASS",
+    "faults-task0": "PASS"
+  },
+  "physical": {
+    "unit_macros_counted": 310,
+    "internal": 54,
+    "shared": 256,
+    "clear16bit_writes": 55040
+  },
+  "final_source_binding": "final-projection-binding.json",
+  "scope": "DMA module with ingress4 and original32 fabric/endpoint only; no CPU, production loading, STA, area or power claim.",
+  "omitted": [
+    "compiled model/object files (local build retained)",
+    "raw tensor vectors (identity hashes retained)",
+    "postreset actual Y arrays (hashes in original receipt; local build retained)"
+  ],
+  "explicit_multi_accepted_errors": {
+    "scope": "Address-targeted32bit assembly errors and complete new-parameter recovery; no CPU/PPA",
+    "cases": [
+      {
+        "fault": "w_low",
+        "address": 2684387328,
+        "injected_pending": 3,
+        "first_error": 1,
+        "recovery_layer": 1,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "w_high",
+        "address": 2684387332,
+        "injected_pending": 3,
+        "first_error": 1,
+        "recovery_layer": 2,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "bias_low",
+        "address": 2684452864,
+        "injected_pending": 3,
+        "first_error": 1,
+        "recovery_layer": 3,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "bias_high",
+        "address": 2684452868,
+        "injected_pending": 3,
+        "first_error": 1,
+        "recovery_layer": 4,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "x",
+        "address": 2684354560,
+        "injected_pending": 3,
+        "first_error": 1,
+        "recovery_layer": 5,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "y_first",
+        "address": 2684485632,
+        "injected_pending": 3,
+        "first_error": 1,
+        "recovery_layer": 6,
+        "exact_y32": 25344
+      },
+      {
+        "fault": "y_last",
+        "address": 2684587004,
+        "injected_pending": 1,
+        "first_error": 1,
+        "recovery_layer": 7,
+        "exact_y32": 25344
+      }
+    ],
+    "exact_recovery_y32": 177408,
+    "status": "PASS"
+  }
+}
