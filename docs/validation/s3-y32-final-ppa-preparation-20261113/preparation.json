@@ -1,0 +1,55 @@
+{
+  "actual_ingress_port_widths": {
+    "i_bus_icb_cmd_addr": 64,
+    "i_bus_icb_cmd_valid": 2,
+    "i_bus_icb_cmd_wdata": 64
+  },
+  "actual_macro_count": 374,
+  "actual_macro_groups": {
+    "bias": 1,
+    "dtcm": 32,
+    "itcm": 32,
+    "result": 21,
+    "shared": 256,
+    "weights": 16,
+    "x": 16
+  },
+  "cpu_full12_gate": {
+    "command": [
+      "python3",
+      "-B",
+      "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/ppa/production-r1/run_once.py",
+      "--run"
+    ],
+    "native_execution_created": false,
+    "returncode": 1,
+    "status": "PASS_CPU12_ABSENCE_REJECTED_BEFORE_NATIVE_ACCESS",
+    "stderr": "FAIL: EDA forbidden until same production GPIO full12 PASS is sealed into a NEW package"
+  },
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1",
+    "XU_MATRIX_DMA",
+    "XU_MATRIX_DMA_SYSBUS32",
+    "XU_MATRIX_X_SRAM",
+    "XU_MATRIX_STORAGE_SRAM"
+  ],
+  "hardware_profile": "sysbus32-dma4-storage-sram-374-final",
+  "local_preflight_result_sha256": "53d2e719aa544493b44db87d1084485e02bc530c0657192bb8d5c753ea31ebed",
+  "mac_pe": 64,
+  "native_sta_run": false,
+  "native_synthesis_run": false,
+  "production_overlays": {
+    "source/rtl/perips/LinearTileDmaCore.sv": "609d26c6b44843f3de4f81d395d592042a03b347fee815dfca8d7d9c906a7c9e",
+    "source/rtl/perips/xu_matrix_dma_sysbus32.sv": "247c7f9632ebaba70b66a34845b960f53dbfd5ac84318d8859dc4a5d8ae6016c",
+    "source/rtl/subsys/xu_systembus_ingress32.v": "aa62909db97c4961758d4e030cced6ba73b713fd965e16662ab581eb9b88ab3c"
+  },
+  "production_package_files_sha256": "0330a268da42961b636c0a2c9fc72432277ed611164ba3d45be119143ed1e8aa",
+  "production_package_path": "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/ppa/production-r1",
+  "qualification": "NOT_QUALIFIED_NO_FINAL_PPA_RESULT",
+  "schema": "s3-final-ppa-local-preparation-v1",
+  "source_count": 159,
+  "source_manifest_sha256": "9f4537fc1139deb69cede366d28a27ca3652bfc005ee0c063e1ebb8073933d24",
+  "status": "PASS_SOURCE_SEAL_XML_ONLY_EDA_PENDING_CPU12",
+  "svf_policy": "final.svf generated and flushed by this DC; nonempty required output and PT source binding"
+}

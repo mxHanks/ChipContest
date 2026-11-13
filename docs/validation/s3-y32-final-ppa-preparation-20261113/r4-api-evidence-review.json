@@ -1,0 +1,83 @@
+{
+  "archive_sha256": "c65efa4c735bdc97251125444e8c7eee3bcacd22815940477f2b67751d7a745d",
+  "endpoint_path_phases": [
+    {
+      "contexts": 8,
+      "delay": "min",
+      "minimum_slack_ns": "-0.102850",
+      "paths": 128,
+      "phase": "before_min"
+    },
+    {
+      "contexts": 8,
+      "delay": "max",
+      "minimum_slack_ns": "4.087441",
+      "paths": 128,
+      "phase": "before_max"
+    },
+    {
+      "contexts": 8,
+      "delay": "min",
+      "minimum_slack_ns": "-0.060515",
+      "paths": 128,
+      "phase": "after_min"
+    },
+    {
+      "contexts": 8,
+      "delay": "max",
+      "minimum_slack_ns": "4.041418",
+      "paths": 128,
+      "phase": "after_max"
+    }
+  ],
+  "execution_sha256": "545654762c21e0f0498be7ed72c93a412e8ddd25ae7a09258f96f90e37fe1310",
+  "missing_outputs": [],
+  "native_status": "NATIVE_COLLECTION_COMPLETE_NOT_TIMING_CLOSURE",
+  "native_tool_errors": [],
+  "qualifications": [
+    "one real characterized local buffer inserted",
+    "new final374 mapping requires new target discovery",
+    "four TSV phases may contain multiple paths per clock context",
+    "no DC persistence/fresh PT reload in this probe"
+  ],
+  "returncode": 0,
+  "source_drift": [],
+  "status": "OLD353_API_PROBE_VERIFIED_NOT_FINAL_TIMING_REPAIR",
+  "total_endpoint_paths": 512,
+  "verified_outputs": [
+    "API_PROBE_COMPLETE_NOT_TIMING_CLOSURE.txt",
+    "after-cells.tsv",
+    "after-nets.tsv",
+    "before-cells.tsv",
+    "before-nets.tsv",
+    "buffer-functions.tsv",
+    "cell-delta.tsv",
+    "changes.dctcl",
+    "changes.ptsh",
+    "changes.text",
+    "config.tcl",
+    "endpoint-paths.tsv",
+    "insert-0000-after-new-connections.tsv",
+    "insert-0000-after-old-connections.tsv",
+    "insert-0000-before-connections.tsv",
+    "insertions.tsv",
+    "leaf-pin-directions.tsv",
+    "native-library-proof/DC_LIBRARY_FUNCTION_PROOF_COMPLETE.txt",
+    "native-library-proof/command.log",
+    "native-library-proof/dc-library-proof.tsv",
+    "native-library-proof/native.log",
+    "native-man-current_instance.rpt",
+    "native-man-get_attribute.rpt",
+    "native-man-get_lib_pins.rpt",
+    "native-man-get_timing_paths.rpt",
+    "native-man-insert_buffer.rpt",
+    "native-man-update_timing.rpt",
+    "native-man-write_changes.rpt",
+    "native-pin-attributes.rpt",
+    "native.log",
+    "net-delta.tsv",
+    "original-clock-association.tsv",
+    "original-constraints-pt-add.sdc",
+    "pt_shell_command.log"
+  ]
+}
