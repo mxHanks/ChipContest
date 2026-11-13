@@ -37,6 +37,9 @@ def main():
     if (original.get('status') != 'PASS' or original.get('outputs') != 25344 or
             chain.get('status') != 'PASS' or chain.get('base_result_sha256') != sha(base / 'result.json')):
         raise ValueError('completed and bound GPIO task0/followups required')
+    if any(original['arguments'].get(key) != value for key, value in
+           dict(tasks=1, rows=8, warmup=True, first_source_stall=0, first_load_stall=0).items()):
+        raise ValueError('task0 mode/warmup/wait identity differs')
     if inventory(base / 'source') != original['source_sha256']:
         raise ValueError('original source changed')
     if inventory(vectors) != original['vector_byte_sha256']:
@@ -54,11 +57,19 @@ def main():
         if (result.get('status') != 'PASS' or result['simulator_sha256'] != original['simulator_sha256'] or
                 result['source_sha256'] != original['source_sha256'] or
                 result['vectors_manifest_sha256'] != original['vectors_manifest_sha256'] or
+                result['vector_byte_sha256'] != original['vector_byte_sha256'] or
                 result.get('storage_binding') != original.get('storage_binding') or
                 result['firmware']['elf_sha256'] != original['firmware']['elf_sha256'] or
                 result['firmware']['image_sha256'] != original['firmware']['image_sha256'] or
                 sha(run / 'result.json') != chain['results'][name]['result_sha256']):
             raise ValueError('followup frozen identity differs: ' + name)
+        tasks, source_wait, load_wait = {
+            'full12': (12, 0, 0), 'dma-first-wait31': (1, 31, 0),
+            'load-first-wait31': (1, 0, 31),
+        }[name]
+        if any(result['arguments'].get(key) != value for key, value in dict(tasks=tasks,
+               rows=8, warmup=True, first_source_stall=source_wait, first_load_stall=load_wait).items()):
+            raise ValueError('named followup task/mode/warmup/wait identity differs: ' + name)
         if result['outputs'] != (304128 if name == 'full12' else 25344):
             raise ValueError('followup output scope differs: ' + name)
         results[name] = result

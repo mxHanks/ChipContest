@@ -1,0 +1,64 @@
+Purpose: collect actual FM R-2020.09-SP5 command/variable documentation only, in a new owned directory when the authorized EDA slot is free.
+No claims that every name below is supported. Retain command, native success/failure and full output for each request. Do not replace unavailable reports with empty/zero/PASS.
+
+Required resource/version/entry confirmation:
+  actual launcher path + SHA256 + resolved-path metadata (execute the original vendor entry name)
+  native version/banner
+  help set_host_options
+  man set_host_options
+  help report_host_options
+  man report_host_options
+
+Known from historical native invocation; capture manuals for new script review:
+  help read_sverilog
+  man read_sverilog
+  help read_verilog
+  man read_verilog
+  help read_db
+  man read_db
+  help set_top
+  man set_top
+  help set_svf
+  man set_svf
+  help match
+  man match
+  help verify
+  man verify
+  help report_unmatched_points
+  man report_unmatched_points
+  help report_failing_points
+  man report_failing_points
+
+Coverage/assumption APIs: availability and exact signatures not yet locally proven:
+  help report_black_boxes
+  man report_black_boxes
+  help report_matched_points
+  man report_matched_points
+  help report_aborted_points
+  man report_aborted_points
+  help report_unverified_points
+  man report_unverified_points
+  help report_dont_verify_points
+  man report_dont_verify_points
+  help report_constants
+  man report_constants
+  help report_hdlin_mismatches
+  man report_hdlin_mismatches
+  help report_guidance
+  man report_guidance
+  help get_cells
+  man get_cells
+  help get_designs
+  man get_designs
+
+Variables whose current semantics/actual values must be captured, not silently inherited:
+  man synopsys_auto_setup
+  man hdlin_unresolved_modules
+  man verification_timeout_limit
+  man verification_set_undriven_signals
+  man verification_verify_directly_undriven_output
+  man hdlin_ignore_parallel_case
+  man hdlin_ignore_full_case
+  man hdlin_error_on_mismatch_message
+
+No read_sdc, set_false_path, ideal clock/network, user compare-point exclusions, or blackboxing of whole accelerator/fabric is authorized by this documentation request.

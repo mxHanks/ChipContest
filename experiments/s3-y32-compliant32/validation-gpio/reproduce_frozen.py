@@ -45,11 +45,19 @@ def main():
     if args.case != 'task0':
         evidence = evidence / 'followups' / args.case
     original = json.loads((evidence / 'result.json').read_text())
-    tasks = original['arguments']['tasks']
+    tasks, source_wait, load_wait = {
+        'task0': (1, 0, 0), 'full12': (12, 0, 0),
+        'dma-first-wait31': (1, 31, 0), 'load-first-wait31': (1, 0, 31),
+    }[args.case]
+    arguments = original['arguments']
+    if (arguments['tasks'] != tasks or arguments['rows'] != 8 or arguments['warmup'] is not True or
+            arguments['first_source_stall'] != source_wait or arguments['first_load_stall'] != load_wait):
+        raise ValueError('named case task/mode/warmup/wait identity differs')
     if original['status'] != 'PASS' or original['outputs'] != tasks * 25344:
         raise ValueError('not completed selected GPIO case evidence')
     if (original['source_sha256'] != base['source_sha256'] or
-            original['simulator_sha256'] != base['simulator_sha256']):
+            original['simulator_sha256'] != base['simulator_sha256'] or
+            original['vector_byte_sha256'] != base['vector_byte_sha256']):
         raise ValueError('selected case did not use the frozen source and simulator')
     for name, digest in base['source_sha256'].items():
         if sha(bundle / 'source' / name) != digest:
@@ -57,17 +65,27 @@ def main():
     for name, key in [('dma_day_soc', 'elf_sha256'), ('dma_day_soc.verilog', 'image_sha256')]:
         if sha(bundle / 'firmware' / name) != original['firmware'][key]:
             raise ValueError('frozen firmware mismatch')
-    for path in sorted((bundle / 'vectors').rglob('*.mem')):
-        name = str(path.relative_to(bundle / 'vectors'))
-        if sha(path) != original['vector_byte_sha256'][name]:
-            raise ValueError('selected task0 vector mismatch')
+    present_vectors = {str(path.relative_to(bundle / 'vectors')): sha(path)
+                       for path in sorted((bundle / 'vectors').rglob('*')) if path.is_file()}
+    for name, digest in present_vectors.items():
+        if digest != original['vector_byte_sha256'].get(name):
+            raise ValueError('bundled vector/metadata mismatch: ' + name)
+    required_vectors = {name: digest for name, digest in original['vector_byte_sha256'].items()
+                        if not name.startswith('layer_') or int(name[6:8]) < tasks}
+    if any(present_vectors.get(name) != digest for name, digest in required_vectors.items()):
+        raise ValueError('selected case vector scope is incomplete')
     helper = load('frozen_gpio_math', bundle / 'source/firmware_helpers.py')
     audit = helper.check_vectors(bundle / 'vectors', tasks)
     checker = load('frozen_gpio_checker', bundle / 'source/check_results.py')
     selected = dict(storage_configuration=original['storage_binding']) if original.get('storage_binding') else {}
     checked = checker.check_log((evidence / 'simulation.log').read_text(), tasks, 8, True, x_macros=True, **selected)
-    if checked['total_cycles'] != original['total_cycles']:
-        raise ValueError('original raw log and result differ')
+    for name, value in checked.items():
+        if original.get(name) != value:
+            raise ValueError('original raw log and result differ: ' + name)
+    for task in checked['layers'] + checked['warmup']['layers']:
+        if (task['channel']['forced_wait'] != source_wait or
+                task['channel']['forced_load_wait'] != load_wait):
+            raise ValueError('named case and raw endpoint wait evidence differ')
     if args.verify_only:
         print(json.dumps(dict(status='PASS_FROZEN_CONTENT_AND_RAW_LOG_REPLAY_NO_NEW_SIMULATION',
                              source_files=len(original['source_sha256']), outputs=checked['outputs'],
