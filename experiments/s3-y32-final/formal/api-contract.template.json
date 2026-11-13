@@ -1,0 +1,46 @@
+{
+  "schema": "final374-fm-native-api-contract-v1",
+  "status": "UNAPPROVED_TEMPLATE_DO_NOT_EXECUTE",
+  "hardware_profile": "sysbus32-dma4-storage-sram-374-final",
+  "adapter_sha256": "REPLACE_AFTER_NATIVE_DOC_REVIEW",
+  "probe_log_sha256": "REPLACE_WITH_ACTUAL_PROBE_LOG_SHA256",
+  "max_cores": 2,
+  "reviewer": "",
+  "all_report_signatures_reviewed": false,
+  "hdl_assumptions_explicitly_reviewed": false,
+  "launcher": {
+    "path": "/eda/synopsys/fm/fm_2020.09-SP5/bin/fm_shell",
+    "sha256": "4c502a4490b6eb1e27c9196732db1bc4f12488297bfa458f1e00e70c971e6e48",
+    "native_version": "R-2020.09-SP5",
+    "historical_hint_only": true
+  },
+  "reports": [
+    "resources",
+    "assumptions",
+    "unmatched",
+    "matched",
+    "failing",
+    "aborted",
+    "unverified",
+    "dont_verify",
+    "constants",
+    "unread",
+    "black_boxes",
+    "guidance",
+    "hdlin_mismatches"
+  ],
+  "documented_commands": [
+    "set_host_options",
+    "report_host_options",
+    "read_db",
+    "read_sverilog",
+    "read_verilog",
+    "set_top",
+    "set_svf",
+    "match",
+    "verify",
+    "report_unmatched_points",
+    "report_failing_points"
+  ],
+  "notes": "Historical launcher identity is a hint, not current verification. Add actual documented resource/report/enumeration APIs after inspecting their native help/man; bind exact reviewed adapter bytes. Unavailable APIs must fail, never become empty reports."
+}
