@@ -33,6 +33,7 @@ set failed [catch {
     flush $f
   }
   close $f
+  update_timing -full
   eco_assert_clocks $clocks
   eco_delta $before [eco_snapshot after]
   eco_reports after

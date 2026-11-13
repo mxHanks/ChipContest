@@ -32,7 +32,13 @@ proc eco_config {} {
   set ::eco_required_report_names {}
   foreach {path digest} $::eco_bindings {eco_sha $path $digest}
   set_host_options -max_cores 8
-  eco_capture host-options.rpt {report_host_options}
+  eco_require [info exists ::env(XU_ECO_HOST_TOOL)] {runner must identify PT/DC host-report role}
+  if {$::env(XU_ECO_HOST_TOOL) eq {pt}} {
+    # Native T-2022 PT exposes report_host_usage; report_host_options is DC-only.
+    eco_capture host-options.rpt {report_host_usage -verbose}
+  } elseif {$::env(XU_ECO_HOST_TOOL) eq {dc}} {
+    eco_capture host-options.rpt {report_host_options}
+  } else {error {unsupported native host-report role}}
 }
 proc eco_libraries {tool} {
   foreach {path digest} $::eco_library_bindings {eco_sha $path $digest}
@@ -165,10 +171,41 @@ proc eco_paths {pin delay {gating 0} {phase diagnostic}} {
     # Each launch-clock and target transition is queried explicitly. Capture
     # clocks and path group are retained in endpoint-paths.tsv, never guessed.
     foreach_in_collection clock [get_clocks *] {
-      set cmd [list get_timing_paths -from $clock -${edge}_to $pin -delay_type $delay -slack_lesser_than 1000000000 -nworst 64 -max_paths 64]
-      if {$gating} {lappend cmd -group **clock_gating_default**}
-      set paths [eval $cmd]
-      eco_require [expr {[sizeof_collection $paths] < 64}] {endpoint query hit cap; expand/review actual contexts before repair}
+      set selector [list -from $clock -${edge}_to $pin -delay_type $delay -slack_lesser_than 1000000000]
+      if {$gating == 1} {
+        lappend selector -group **clock_gating_default**
+      } elseif {$gating == 2} {
+        lappend selector -group **async_default**
+      } else {eco_require [expr {$gating == 0}] {unsupported exact endpoint check mode}}
+      # Retry only saturated queries. Keep all native capture-clock/path-group
+      # contexts; do not assume a path-group name identifies a capture clock.
+      set caps {}
+      foreach limit {64 256 1024 4096 8192} {
+        if {$limit < $::eco_max_paths_per_query} {lappend caps $limit}
+      }
+      lappend caps $::eco_max_paths_per_query
+      incr ::eco_query_count
+      foreach limit $caps {
+        set paths [eval [concat [list get_timing_paths] $selector [list -nworst $limit -max_paths $limit]]]
+        set found [sizeof_collection $paths]
+        puts $::eco_query_log "$::eco_query_count\t$phase\t[get_object_name $pin]\t$delay\t$edge\t[get_object_name $clock]\t$limit\t$found"
+        flush $::eco_query_log
+        if {$found < $limit} {break}
+      }
+      if {$found >= $::eco_max_paths_per_query} {
+        set stem [format {query-capped-%06d} $::eco_query_count]
+        set f [eco_open ${stem}-candidates.tsv]
+        puts $f "phase\tendpoint\tdelay\ttransition\tlaunch_clock\tcapture_clock\tpath_group\tslack_ns\tquery_cap"
+        foreach_in_collection path $paths {
+          puts $f "$phase\t[get_object_name [get_attribute $path endpoint]]\t$delay\t$edge\t[get_object_name $clock]\t[get_object_name [get_attribute $path endpoint_clock]]\t[get_object_name [get_attribute $path path_group]]\t[get_attribute $path slack]\t$::eco_max_paths_per_query"
+        }
+        close $f
+        # Candidate count remains explicitly capped; the native representative
+        # paths explain the failure and never convert it into completeness.
+        set report [concat [list report_timing] $selector [list -nworst 128 -max_paths 128 -path_type full_clock_expanded -significant_digits 8 -nets -input_pins -transition_time -capacitance]]
+        eco_capture ${stem}-paths.rpt $report
+        error "endpoint query remains capped: endpoint=[get_object_name $pin] delay=$delay edge=$edge launch_clock=[get_object_name $clock] cap=$::eco_max_paths_per_query; inspect $stem evidence"
+      }
       foreach_in_collection path $paths {
         set slack [get_attribute $path slack]
         eco_require [expr {[string is double -strict $slack] && $slack == $slack && abs($slack) < 1e8}] {nonfinite/unknown slack}
@@ -219,7 +256,9 @@ proc eco_insert {target} {
   eco_require [expr {[sizeof_collection $targetnet] == 1 && [get_object_name $targetnet] ne $netname}] {target did not move to new net}
   eco_connections [format {insert-%04d-after-new} [expr {$::eco_inserted-1}]] $targetnet
   eco_connections [format {insert-%04d-after-old} [expr {$::eco_inserted-1}]] [get_nets $netname]
-  update_timing -full
+  # Native update_timing manual: without -full, invalidate/update only the
+  # affected timing cone. A complete update is retained at load and batch end.
+  update_timing
   return $fullname
 }
 proc eco_export {stem} {
@@ -275,6 +314,8 @@ proc eco_native_proof {} {
   close $f
   set f [eco_open leaf-pin-directions.tsv]
   puts $f "reference\tlibrary_cell\tpin\tdirection"
+  set metadata [eco_open reference-metadata.tsv]
+  puts $metadata "reference\tlibrary_cell\tis_sequential"
   set seen [dict create]
   foreach_in_collection leaf [get_cells -hierarchical -filter {is_hierarchical == false}] {
     set ref [get_attribute $leaf ref_name]
@@ -282,11 +323,15 @@ proc eco_native_proof {} {
     dict set seen $ref 1
     set lib [get_lib_cells -quiet */$ref]
     eco_require [expr {[sizeof_collection $lib] == 1}] "missing/ambiguous original leaf library definition: $ref"
+    set sequential [get_attribute $lib is_sequential]
+    eco_require [string is boolean -strict $sequential] "native library sequential classification is unknown: $ref"
+    puts $metadata "$ref\t[get_object_name $lib]\t$sequential"
     foreach_in_collection pin [get_lib_pins -of_objects $lib] {
       puts $f "$ref\t[get_object_name $lib]\t[file tail [get_object_name $pin]]\t[get_attribute $pin direction]"
     }
   }
   close $f
+  close $metadata
 }
 proc eco_delta {before after} {
   lassign $before oldcells oldnets; lassign $after newcells newnets
@@ -312,6 +357,20 @@ proc eco_plan_targets {} {
   # Every exact name comes from THIS native map's coverage-bound explicit plan.
   # No old anchor list or automatically guessed pin can enter a mutation stage.
   set result {}; set protected [dict create]
+  set data_pin_names [dict create]
+  foreach_in_collection data_pin [all_registers -data_pins] {
+    dict set data_pin_names [get_object_name $data_pin] 1
+  }
+  set async_pin_names [dict create]
+  # Only request the async API when the optional removal experiment is selected.
+  foreach row $::eco_selected_targets {
+    if {[lindex $row 1] eq {reset_removal}} {
+      foreach_in_collection async_pin [all_registers -async_pins] {
+        dict set async_pin_names [get_object_name $async_pin] 1
+      }
+      break
+    }
+  }
   foreach row $::eco_selected_targets {
     lassign $row name family kind
     set pin [eco_pin $name]
@@ -331,10 +390,22 @@ proc eco_plan_targets {} {
       }
       eco_require [expr {[dict get $protected [get_object_name $clock]] eq [dict get $protected [get_object_name $latch]]}] "gate A2/latch EN clock segment changed: $name"
       lappend result [list $name 1 $family]
+    } elseif {$family eq {reset_removal}} {
+      eco_require [expr {$kind eq {removal} && [file tail $name] in {RDN SDN} && [dict exists $async_pin_names $name]}] "not an actual native asynchronous RDN/SDN removal pin: $name"
+      eco_require [expr {![get_attribute $cell is_hierarchical]}] "removal target must belong to a sequential leaf: $name"
+      set lib [get_lib_cells -quiet */$ref]
+      eco_require [expr {[sizeof_collection $lib] == 1 && [get_attribute $lib is_sequential]}] "removal target lacks unique sequential library cell: $name $ref"
+      lappend result [list $name 2 $family]
+    } elseif {$family eq {register_data_D}} {
+      eco_require [expr {$kind eq {hold} && [file tail $name] eq {D} && [dict exists $data_pin_names $name]}] "not an actual native register data D pin: $name"
+      eco_require [expr {![get_attribute $cell is_hierarchical]}] "register data target must belong to a leaf: $name"
+      set lib [get_lib_cells -quiet */$ref]
+      eco_require [expr {[sizeof_collection $lib] == 1 && [get_attribute $lib is_sequential]}] "register data target lacks unique sequential library cell: $name $ref"
+      lappend result [list $name 0 $family]
     } else {
       eco_require [expr {$kind eq {hold} && $ref eq {RAMSP1024X16} && [regexp {/D\[([0-9]+)\]$} $name ignored bit] && $bit >= 0 && $bit < 16}] "not characterized SRAM-D input: $name $ref"
       set match 0
-      foreach {allowed part} {weights_D /u_core/weights/ bias_D /u_core/biasMemory/ x_D /u_core/xSets result_D /u_core/resultSlices} {
+      foreach {allowed part} {weights_D /u_core/weights/ bias_D /u_core/bias/memory/ x_D /u_core/xSets result_D /u_core/resultSlices} {
         if {$family eq $allowed && [string first $part $name] >= 0} {set match 1}
       }
       eco_require $match "SRAM target family/hierarchy mismatch: $name $family"
@@ -369,12 +440,15 @@ proc eco_assert_protected {protected} {
 }
 proc eco_begin_logs {} {
   set ::eco_inserted 0; set ::eco_added_area 0.0
+  set ::eco_query_count 0
+  set ::eco_query_log [eco_open endpoint-query-attempts.tsv]
+  puts $::eco_query_log "query\tphase\tendpoint\tdelay\ttransition\tlaunch_clock\tquery_cap\tpaths_returned"
   set ::eco_insert_log [eco_open insertions.tsv]
   puts $::eco_insert_log "instance\treference\tload_pin\told_net\tarea"
   set ::eco_path_log [eco_open endpoint-paths.tsv]
   puts $::eco_path_log "phase\tendpoint\tdelay\ttransition\tlaunch_clock\tcapture_clock\tpath_group\tslack_ns"
 }
-proc eco_close_logs {} {close $::eco_insert_log; close $::eco_path_log}
+proc eco_close_logs {} {close $::eco_insert_log; close $::eco_path_log; close $::eco_query_log}
 proc eco_failure {reason options} {
   catch {eco_close_logs}
   set f [open ECO_FAILED.txt w]; puts $f $reason

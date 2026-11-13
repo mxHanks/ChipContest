@@ -20,7 +20,7 @@ set failed [catch {
     set net [get_object_name $nets]
     set min [eco_paths $pin min $gating diagnostic_min]
     set max [eco_paths $pin max $gating diagnostic_max]
-    puts $f "$name\t$family\t[expr {$gating ? {clock_gating_hold} : {hold}}]\t$net\t[eco_parent $net]\t[sizeof_collection [get_pins -of_objects $nets]]\t$min\t$max"
+    puts $f "$name\t$family\t[expr {$gating == 1 ? {clock_gating_hold} : ($gating == 2 ? {removal} : {hold})}]\t$net\t[eco_parent $net]\t[sizeof_collection [get_pins -of_objects $nets]]\t$min\t$max"
     eco_connections [format diagnostic-target-%04d $index] $nets
     incr index
   }

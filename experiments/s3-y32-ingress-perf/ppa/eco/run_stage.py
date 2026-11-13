@@ -19,7 +19,7 @@ sys.dont_write_bytecode = True
 from development_controls import check_inputs
 from profiles import SRAM_X as PROFILE, PROFILES
 DEFINES = PROFILES[PROFILE]['defines']
-from plan import catalog, FAMILIES
+from plan import catalog, FAMILIES, pt_baseline, safe_relative, target_rows
 TOP = 'xu_soc_sysbus32_ppa_top'
 STAGES = {'diagnose': ('pt', 'pt_diagnose.tcl', 'DIAGNOSTIC_COLLECTION_COMPLETE_NOT_TIMING_CLOSURE.txt'),
           'probe': ('pt', 'pt_probe.tcl', 'API_PROBE_COMPLETE_NOT_TIMING_CLOSURE.txt'),
@@ -62,6 +62,7 @@ def tcl(value):
 def bind_outputs(receipt, base, names):
     result = []
     for name in names:
+        safe_relative(name)
         item = receipt.get('outputs', {}).get(name)
         require(item and item.get('sha256'), 'unbound native output: ' + name)
         result.append(verify(base / name, item['sha256']))
@@ -69,7 +70,7 @@ def bind_outputs(receipt, base, names):
     return result
 
 
-def baseline(root):
+def baseline(root, ptroot=None):
     require(root.is_dir(), 'missing baseline directory')
     check_inputs(root)
     files = json.loads((root / 'package-files.json').read_text())
@@ -98,18 +99,11 @@ def baseline(root):
     require(dev.get('status') == 'PASS' and dev.get('total_cycles') == 1691172 and dev.get('outputs') == 304128 and
             sha(devpath) == m['development_measurement']['result_sha256'], 'original1064 developer result identity mismatch')
     bindings.append(verify(devpath, sha(devpath)))
-    ptpath = root / 'pt/execution.json'
-    pt = json.loads(ptpath.read_text())
-    require(pt.get('status') == 'PT_REPORT_COLLECTION_COMPLETE_NOT_QUALIFIED' and pt.get('returncode') == 0 and
-            pt.get('source_drift') == [] and pt.get('native_tool_errors') == [] and pt.get('completion_marker') is True and
-            pt.get('source_dc', {}).get('execution_sha256') == sha(root / 'execution.json') and
-            pt.get('manifest_sha256') == sha(root / 'package-files.json'),
-            'same final native PT collection required')
+    ptroot = ptroot if ptroot is not None else root / 'pt'
+    ptpath = ptroot / 'execution.json'
+    pt, native_reports = pt_baseline(root, ptroot)
     bindings.append(verify(ptpath, sha(ptpath)))
-    native_reports = ['required-reports.list', 'reports/coverage.rpt', 'reports/setup.rpt', 'reports/hold.rpt',
-                      'reports/all_violators.rpt', 'reports/clock_gating_hold.rpt', 'reports/removal.rpt']
-    native_reports += (root / 'pt/required-reports.list').read_text().splitlines()
-    bindings += bind_outputs(pt, ptpath.parent, sorted(set(native_reports)))
+    bindings += bind_outputs(pt, ptroot, native_reports)
     return bindings, r, chain
 
 
@@ -126,6 +120,8 @@ def previous(root, stage, package_hash, baseline_hash, plan_hash):
              'probe': ['changes.dctcl', 'buffer-functions.tsv', 'original-clock-association.tsv'],
              'edit': ['changes.dctcl', 'original-clock-association.tsv'],
              'apply': ['mapped.v', 'mapped.ddc', 'mapped.sdc', 'eco.svf', 'original-clock-association.tsv']}[stage]
+    if stage in {'diagnose', 'probe', 'edit'}:
+        files += ['reference-metadata.tsv', 'endpoint-query-attempts.tsv']
     bindings = bind_outputs(r, root, files)
     bindings.append(verify(receipt, sha(receipt)))
     return r, bindings
@@ -153,6 +149,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--stage', choices=STAGES, required=True)
     p.add_argument('--baseline', type=Path, required=True)
+    p.add_argument('--baseline-pt-dir', type=Path, help='explicit successful same-DC PT directory; default BASELINE/pt, no automatic fallback')
     p.add_argument('--out', type=Path, required=True)
     p.add_argument('--prior', type=Path)
     p.add_argument('--targets', type=Path, required=True, help='explicit THIS-map coverage-bound targets.json from plan.py')
@@ -160,12 +157,15 @@ def main():
     p.add_argument('--allow-coordinated-busy-jobs', action='store_true')
     p.add_argument('--coordination-note')
     p.add_argument('--timeout-seconds', type=int, default=1200)
-    p.add_argument('--max-buffers', type=int, default=248)
+    p.add_argument('--max-buffers', type=int, default=1024)
     p.add_argument('--max-per-pin', type=int, default=8)
-    p.add_argument('--max-added-area', type=float, default=1000.0, help='raw characterized library area, not mm2')
+    p.add_argument('--max-paths-per-query', type=int, default=8192,
+                   help='adaptive exact-context native path-query cap; saturation is a failure')
+    p.add_argument('--max-added-area', type=float, default=5000.0, help='raw characterized library area, not mm2')
     a = p.parse_args()
-    require(0 < a.timeout_seconds <= 3600 and 0 < a.max_buffers <= 512 and 0 < a.max_per_pin <= 16 and
-            0 < a.max_added_area <= 10000, 'bounded experiment limits exceeded')
+    require(0 < a.timeout_seconds <= 3600 and 0 < a.max_buffers <= 2048 and 0 < a.max_per_pin <= 16 and
+            0 < a.max_added_area <= 10000 and 64 <= a.max_paths_per_query <= 65536,
+            'bounded experiment limits exceeded')
     package = Path(__file__).resolve().parent
     seal = package / 'package-files.json'
     require(seal.is_file(), 'first create a sealed package with prepare.py')
@@ -177,7 +177,8 @@ def main():
         bindings.append(verify(package / q, digest))
     require('run_stage.py' in entries, 'runner not sealed')
     base = a.baseline.resolve()
-    base_bindings, base_receipt, chain = baseline(base)
+    ptroot = a.baseline_pt_dir.resolve() if a.baseline_pt_dir else base / 'pt'
+    base_bindings, base_receipt, chain = baseline(base, ptroot)
     bindings += base_bindings
     baseline_hash = sha(base / 'execution.json')
     planpath = a.targets.resolve()
@@ -185,17 +186,19 @@ def main():
     require(plan.get('schema') == 'ingress1064-n3-explicit-native-target-plan-v1' and plan.get('hardware_profile') == PROFILE and
             plan.get('baseline_execution_sha256') == baseline_hash and
             plan.get('baseline_mapped_sha256') == sha(base / 'mapped.v') and
-            plan.get('baseline_pt_execution_sha256') == sha(base / 'pt/execution.json') and
-            plan.get('coverage_sha256') == sha(base / 'pt/reports/coverage.rpt') and
-            plan.get('all_violators_sha256') == sha(base / 'pt/reports/all_violators.rpt'), 'target plan is not THIS final native map/reports')
+            plan.get('baseline_pt_execution_sha256') == sha(ptroot / 'execution.json') and
+            plan.get('coverage_sha256') == sha(ptroot / 'reports/coverage.rpt') and
+            plan.get('all_violators_sha256') == sha(ptroot / 'reports/all_violators.rpt'), 'target plan is not THIS final native map/reports')
     bindings.append(verify(planpath, sha(planpath)))
     catalogue = planpath.parent / 'catalog.json'
     bindings.append(verify(catalogue, plan['catalogue_sha256']))
     selected = set(plan['selected_families'])
     require(selected <= FAMILIES, 'unsupported target family')
-    _, checks = catalog((base / 'pt/reports/coverage.rpt').read_text())
-    targets = {row['pin']: {k: row[k] for k in ['pin', 'kind', 'family']} for row in checks if row['family'] in selected}
-    require(plan['targets'] == [targets[name] for name in sorted(targets)], 'target plan differs from exact current violated endpoints')
+    require('reset_removal' not in selected or selected == {'reset_removal'},
+            'reset_removal requires a separate explicit plan')
+    _, checks = catalog((ptroot / 'reports/coverage.rpt').read_text())
+    targets = target_rows(checks, selected)
+    require(plan['targets'] == targets, 'target plan differs from exact current violated endpoints')
     require(plan['targets'] or (a.stage == 'diagnose' and plan['read_only_clock_roots']), 'explicit hold targets required for mutation stages')
     prior = None
     if a.stage != 'diagnose':
@@ -206,7 +209,10 @@ def main():
         bindings += more
     record = dict(schema='ingress1064-n3-bounded-eco-stage-v1', stage=a.stage, mode='finalhold', target_plan_sha256=sha(planpath), hardware_profile=PROFILE,
                   status='SEALED_INPUTS_REVIEWED_NOT_EXECUTED', package_sha256=sha(seal),
-                  baseline_execution_sha256=baseline_hash, top=TOP, max_cores=8,
+                  baseline_execution_sha256=baseline_hash, baseline_pt_execution_sha256=sha(ptroot/'execution.json'),
+                  baseline_pt_dir=str(ptroot), top=TOP, max_cores=8,
+                  max_buffers=a.max_buffers, max_per_pin=a.max_per_pin, max_added_area_raw=a.max_added_area,
+                  max_paths_per_query=a.max_paths_per_query,
                   baseline_mapped_sha256=sha(base/'mapped.v'), run_requested=a.run,
                   qualification='NOT_QUALIFIED', timing_verdict='NOT_TIMING_CLOSURE',
                   prior_execution_sha256=sha(a.prior.resolve()/'execution.json') if a.prior else None)
@@ -239,6 +245,7 @@ def main():
         'set ::eco_buffer_reference {BUFV2_12TR40}',
         'set ::eco_max_buffers '+str(a.max_buffers),
         'set ::eco_max_per_pin '+str(a.max_per_pin),
+        'set ::eco_max_paths_per_query '+str(a.max_paths_per_query),
         'set ::eco_max_added_area '+repr(a.max_added_area),
         'set ::eco_hold_margin 0.03', 'set ::eco_setup_margin 0.03',
         'set ::eco_link_libraries [list * '+' '.join(tcl(x['path']) for x in chain['libraries'])+']',
@@ -253,7 +260,7 @@ def main():
     configuration = out/'config.tcl'
     configuration.write_text('\n'.join(config)+'\n')
     env = os.environ.copy()
-    env.update(XU_ECO_PACKAGE=str(package), XU_ECO_CONFIG=str(configuration))
+    env.update(XU_ECO_PACKAGE=str(package), XU_ECO_CONFIG=str(configuration), XU_ECO_HOST_TOOL=toolrole)
     if toolrole == 'pt':
         lc=chain['library_compiler']
         verify(Path(lc['root'])/'bin/lc_shell',lc['launcher_sha256'],external=True)
@@ -263,13 +270,15 @@ def main():
         dc_identity=verify(chain['dc']['path'],chain['dc']['sha256'],external=True)
         proof_root=out/'native-library-proof'; proof_root.mkdir(mode=0o700)
         proof_command=[chain['dc']['path'],'-f',str(package/'dc_library_proof.tcl')]
+        proof_env=env.copy()
+        proof_env['XU_ECO_HOST_TOOL']='dc'
         proof_record=dict(tool=dc_identity,libraries=chain['libraries'],command=proof_command,
                           max_cores=8,config_sha256=sha(configuration),started_epoch=time.time())
         record.update(status='RUNNING_NATIVE_DC_FUNCTION_QUERY',native_dc_function=proof_record)
         dump(out/'execution.json',record)
         proof_timeout=False
         with (proof_root/'native.log').open('w') as log:
-            proc=subprocess.Popen(proof_command,cwd=proof_root,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+            proc=subprocess.Popen(proof_command,cwd=proof_root,env=proof_env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
             proof_record['pid']=proc.pid; dump(out/'execution.json',record)
             try: proof_code=proc.wait(timeout=min(a.timeout_seconds,300))
             except subprocess.TimeoutExpired:
@@ -330,6 +339,10 @@ def main():
              for q in sorted(out.rglob('*')) if q.is_file() and q.name!='execution.json'}
     required=['changes.dctcl','changes.ptsh','changes.text','cell-delta.tsv','net-delta.tsv','buffer-functions.tsv','leaf-pin-directions.tsv'] if a.stage in ['probe','edit'] else ['target-topology.tsv','endpoint-paths.tsv','diagnostic-coverage.rpt','diagnostic-all_violators.rpt','clock-root-summary.tsv','original-clock-association.tsv'] if a.stage=='diagnose' else ['mapped.v','mapped.ddc','mapped.sdc','eco.svf','area-upper-bound.tsv'] if a.stage=='apply' else ['persisted-coverage.rpt','persisted-all_violators.rpt','persisted-setup.rpt','persisted-hold.rpt','persisted-removal.rpt','persisted-gating_hold.rpt','persisted-min_pulse_width.rpt']
     required += ['required-reports.list', 'host-options.rpt']
+    if toolrole == 'pt':
+        required.append('reference-metadata.tsv')
+    if a.stage in {'diagnose', 'probe', 'edit'}:
+        required.append('endpoint-query-attempts.tsv')
     reportlist = out / 'required-reports.list'
     if reportlist.is_file():
         required += reportlist.read_text().splitlines()
@@ -344,7 +357,8 @@ def main():
         proof=dict(schema='xu-native-buffer-function-proof-v1',
                    native_execution=dict(path='execution.json',sha256=sha(receipt)),
                    report=dict(path='buffer-functions.tsv',sha256=sha(out/'buffer-functions.tsv')),
-                   direction_report=dict(path='leaf-pin-directions.tsv',sha256=sha(out/'leaf-pin-directions.tsv')))
+                   direction_report=dict(path='leaf-pin-directions.tsv',sha256=sha(out/'leaf-pin-directions.tsv')),
+                   reference_metadata=dict(path='reference-metadata.tsv',sha256=sha(out/'reference-metadata.tsv')))
         dump(out/'function-proof.json',proof)
     print(json.dumps({k:record[k] for k in ['stage','status','returncode','completion_marker','source_drift','native_tool_errors','missing_outputs']},sort_keys=True))
     return 0 if ok else 1

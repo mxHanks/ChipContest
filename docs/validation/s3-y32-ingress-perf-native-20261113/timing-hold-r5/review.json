@@ -1,0 +1,131 @@
+{
+  "schema": "ingress1064-persisted-hold-repair-review-v1",
+  "status": "459_NATIVE_TIMING_CHECKS_REMOVED_8_REMAIN_NOT_QUALIFIED",
+  "archive_sha256": "0916f9d87b86954d0eb749c741d8d0d339fa3bc2572c32eb25e92dfcef8536ec",
+  "baseline_mapped_sha256": "882b160f2dfde6a9593f63212ae173fc96bb00b6212c56d304a6e6e80ae4e56e",
+  "mapped_sha256": "1e0ca5d1281ff3e296204c75abbf07fa7732628523feab8b1be6289cb7cfc048",
+  "endpoint_count": 232,
+  "inserted_identity_buffers": 615,
+  "target_min_hold_margin_ns": 0.034452,
+  "target_min_setup_margin_ns": 0.17725,
+  "coverage": {
+    "setup": {
+      "total": 83486,
+      "met": 79414,
+      "violated": 0,
+      "untested": 4072
+    },
+    "hold": {
+      "total": 83486,
+      "met": 79414,
+      "violated": 2,
+      "untested": 4070
+    },
+    "recovery": {
+      "total": 19889,
+      "met": 19887,
+      "violated": 0,
+      "untested": 2
+    },
+    "removal": {
+      "total": 19889,
+      "met": 19884,
+      "violated": 5,
+      "untested": 0
+    },
+    "min_period": {
+      "total": 11649,
+      "met": 706,
+      "violated": 0,
+      "untested": 10943
+    },
+    "min_pulse_width": {
+      "total": 110473,
+      "met": 100225,
+      "violated": 0,
+      "untested": 10248
+    },
+    "clock_gating_setup": {
+      "total": 27,
+      "met": 27,
+      "violated": 0,
+      "untested": 0
+    },
+    "clock_gating_hold": {
+      "total": 27,
+      "met": 27,
+      "violated": 0,
+      "untested": 0
+    },
+    "out_setup": {
+      "total": 179,
+      "met": 178,
+      "violated": 1,
+      "untested": 0
+    },
+    "out_hold": {
+      "total": 179,
+      "met": 179,
+      "violated": 0,
+      "untested": 0
+    },
+    "All Checks": {
+      "total": 329284,
+      "met": 299941,
+      "violated": 8,
+      "untested": 29335
+    }
+  },
+  "remaining_check_counts": {
+    "out_setup": 1,
+    "removal": 5,
+    "hold": 2
+  },
+  "electrical_drc_counts": {
+    "max_capacitance": 67,
+    "min_capacitance": 1416,
+    "max_transition": 490
+  },
+  "area_raw": {
+    "added": 588.924,
+    "all_full_soc_standard_cells": 357619.2312,
+    "internal_33_sram": 301901.305662,
+    "conservative_upper_bound": 659520.536862
+  },
+  "qualification": false,
+  "notes": [
+    "615 actual native noninverting BUFV2 insertions; original SDC/libraries/353macro geometry unchanged",
+    "Full update at end of edit, DC replay with own SVF, fresh PT reload completed cleanly",
+    "Actual original-to-persisted-map buffer contraction proof passed; not RTL FM",
+    "All29335 untested checks retained, including4unknownHF/LF analyses; no physicalparasitics/CTS claim"
+  ],
+  "edit": {
+    "execution_sha256": "cb23da92e664695f6263ad0b961d6a0e1f2b11057dac840dc8dac385efad6234",
+    "returncode": 0,
+    "source_drift": [],
+    "native_errors": [],
+    "missing_outputs": [],
+    "max_cores": 8
+  },
+  "apply": {
+    "execution_sha256": "0c147107c51794824e235affff0cd0b238c77467b6b9873c084a63a0167ef708",
+    "returncode": 0,
+    "source_drift": [],
+    "native_errors": [],
+    "missing_outputs": [],
+    "max_cores": 8
+  },
+  "reload": {
+    "execution_sha256": "a585358a5e37e35d3cbfff0cf5cac84b5a69e13f2ebe36c2c3bcaa89684380cb",
+    "returncode": 0,
+    "source_drift": [],
+    "native_errors": [],
+    "missing_outputs": [],
+    "max_cores": 8
+  },
+  "mapped_buffer_contraction_proof": {
+    "status": "BUFFER_CONTRACTION_STRUCTURAL_EQUIVALENCE_PASS",
+    "path": "build/timing-repair-20261113/hold-r5-buffer-equivalence-r2/result.json",
+    "checker_sha256": "1a4720cedcbb394d9223e0879ec18590dee881ac9d82f84faef4b67d0a0424d4"
+  }
+}
