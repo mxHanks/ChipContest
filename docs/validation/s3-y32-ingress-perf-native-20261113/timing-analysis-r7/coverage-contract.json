@@ -1,0 +1,575 @@
+{
+  "schema": "ingress1064-remaining-AON-reset-coverage-contract-review-v1",
+  "status": "PATH_CONTRACT_REVIEWED_UNKNOWN_NOT_MET_NOT_QUALIFIED",
+  "read_only": true,
+  "source_files": {
+    "persisted_coverage": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/native/persisted-hold-r5/extracted/reload/persisted-coverage.rpt",
+      "sha256": "d3e94309281a5419178ad72a4c71c06f86341b9f5b8995f60f02c6e8ad32ffcb",
+      "bytes": 8519974
+    },
+    "persisted_all_violators": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/native/persisted-hold-r5/extracted/reload/persisted-all_violators.rpt",
+      "sha256": "c36283e496c8fd7104a3d725ae716756019b2440a3cdfa734bd2dfc9d40199e2",
+      "bytes": 589024
+    },
+    "persisted_map": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/native/persisted-hold-r5/extracted/apply/mapped.v",
+      "sha256": "1e0ca5d1281ff3e296204c75abbf07fa7732628523feab8b1be6289cb7cfc048",
+      "bytes": 15756971
+    },
+    "persisted_reload_execution": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/native/persisted-hold-r5/extracted/reload/execution.json",
+      "sha256": "a585358a5e37e35d3cbfff0cf5cac84b5a69e13f2ebe36c2c3bcaa89684380cb",
+      "bytes": 67028
+    },
+    "original_PT_log": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/native/ingress1064-pt-recollect-r1/extracted/recollection/pt.log",
+      "sha256": "8599237d19a6e535a0ad5ae48de145338375ae2697cb35f89173c19a402350bb",
+      "bytes": 172795
+    },
+    "original_PT_execution": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/native/ingress1064-pt-recollect-r1/extracted/recollection/execution.json",
+      "sha256": "93b2808c0ff16c60d41d35f07bc5ca4cc95486a82fdc3699e2d501165479c4c0",
+      "bytes": 12850
+    },
+    "native_coverage_manual_same_PT_version": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/timing-opt-20261109/native/pt-baseline-r3/extracted/xu-timing-opt-20261109/pt-baseline-r3/reports/native-man-report_analysis_coverage.rpt",
+      "sha256": "0fa0f7ae315c06dd79f88f0c080d9da67ee215b77335df3adac900a9620a470a",
+      "bytes": 12517
+    },
+    "original_SDC": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/contracts/reference-full-soc.sdc",
+      "sha256": "c15ede0fc2c65771f87e2d6aee763b4ea0d53934868ca807b4785c36182fce7c",
+      "bytes": 6369
+    },
+    "deglitch_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/perips/sirv_DeglitchShiftRegister.v",
+      "sha256": "332ad5b31f2e002d14f4a278e1057aede1ba05d0ff16d494cb2b49b981ea53be",
+      "bytes": 1822
+    },
+    "AON_wrapper_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/perips/sirv_aon_wrapper.v",
+      "sha256": "da4ba087072df5e1e1c290e9dca8f9f01726666d9e7f7ed7d6613d6218c99e3d",
+      "bytes": 15163
+    },
+    "PMU_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/perips/sirv_pmu.v",
+      "sha256": "3f369dc1ce2de62e8f4de341850fb6567bad18f4bad28dbb4033c607d0c8c0b4",
+      "bytes": 25268
+    },
+    "reset_catch_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/perips/sirv_ResetCatchAndSync.v",
+      "sha256": "b6d9378451815c6ba48c86ad32d6ee5d67b337ea01e0dd61fb956800c8516e4c",
+      "bytes": 2266
+    },
+    "async_reset_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/perips/sirv_AsyncResetReg.v",
+      "sha256": "2ca876742ad8590abe6544097ab30054b91e6adae7a6d3976b5941714efe25d9",
+      "bytes": 1729
+    },
+    "three_stage_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/perips/sirv_AsyncResetRegVec_36.v",
+      "sha256": "741613f950eb24a1266bbbe2722ac98ecae9abd647350243c6d9545c73cabb7d",
+      "bytes": 2681
+    },
+    "SoC_test_mode_binding": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/soc/e203_soc_top.v",
+      "sha256": "24379a4a2950e3de7333d6ad25f76be5af20673bc6c5277906be4403f5307efa",
+      "bytes": 12803
+    },
+    "POR_stub_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/perips/sirv_aon_porrst.v",
+      "sha256": "1bc839e9b50a8169a65e5819c62bcf88b75755f0b60c46b30307fb190eaa285d",
+      "bytes": 1754
+    },
+    "static_electrical_reset_plan": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/electrical-analysis/electrical-targets.json",
+      "sha256": "e430c01163d9f4ecfaabdd209aad86840fae88c5df346a2978680ea80e570e1e",
+      "bytes": 953022
+    },
+    "static_electrical_reset_topology": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/electrical-analysis/electrical-topology.json",
+      "sha256": "becb02c8b3fa8401819a9bbed7610b09df23684e10c1b559d4bdedb476a8afef",
+      "bytes": 2166755
+    },
+    "main_reset_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/subsys/e203_subsys_main.v",
+      "sha256": "dafc81eeb6b4aea786f09810928d7f017627e986c2dd2e0a6984d56c0b6d17d5",
+      "bytes": 45829
+    },
+    "DMA_reset_connection_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/subsys/e203_subsys_perips.v",
+      "sha256": "569e11968cf378d2580c3045189aeec1686aeffddde9b022b3714c1c101be7bd",
+      "bytes": 81593
+    },
+    "CPU_reset_synchronizer_RTL": {
+      "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/ingress-perf-20261113/ppa-dev-n3-r2/source/rtl/core/e203_reset_ctrl.v",
+      "sha256": "9486347d26c4f8ff5bf5769d5a01c402edc6ef3c52be11e94f5e8f70b2c75282",
+      "bytes": 3169
+    }
+  },
+  "independently_verified_native_outputs": [
+    "reload/persisted-coverage.rpt",
+    "reload/persisted-all_violators.rpt",
+    "reload/persisted-setup.rpt",
+    "reload/persisted-hold.rpt",
+    "apply/mapped.v"
+  ],
+  "remaining_min_checks": [
+    {
+      "startpoint": "io_pads_aon_erst_n_i_ival",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN",
+      "check": "removal",
+      "slack_ns": -0.12148283,
+      "path_group": "**async_default**",
+      "line": 60
+    },
+    {
+      "startpoint": "io_pads_aon_erst_n_i_ival",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN",
+      "check": "removal",
+      "slack_ns": -0.11847966,
+      "path_group": "**async_default**",
+      "line": 96
+    },
+    {
+      "startpoint": "io_pads_aon_erst_n_i_ival",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN",
+      "check": "removal",
+      "slack_ns": -0.04010564,
+      "path_group": "**async_default**",
+      "line": 132
+    },
+    {
+      "startpoint": "io_pads_aon_erst_n_i_ival",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN",
+      "check": "removal",
+      "slack_ns": -0.04010564,
+      "path_group": "**async_default**",
+      "line": 168
+    },
+    {
+      "startpoint": "io_pads_aon_erst_n_i_ival",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN",
+      "check": "removal",
+      "slack_ns": -0.04010564,
+      "path_group": "**async_default**",
+      "line": 204
+    },
+    {
+      "startpoint": "io_pads_aon_pmu_dwakeup_n_i_ival",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+      "check": "hold",
+      "slack_ns": -0.06666514,
+      "path_group": "xu_lfextclk",
+      "line": 240
+    },
+    {
+      "startpoint": "io_pads_bootrom_n_i_ival",
+      "endpoint": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+      "check": "hold",
+      "slack_ns": -0.06666514,
+      "path_group": "xu_lfextclk",
+      "line": 274
+    }
+  ],
+  "remaining_output_setup": [
+    {
+      "startpoint": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_gfcm/u_clk1_clkgate/enb_reg",
+      "endpoint": "io_pads_gpioA_o_oval[27]",
+      "check": "out_setup",
+      "slack_ns": -5.26054335,
+      "path_group": "xu_hfextclk",
+      "line": 11
+    }
+  ],
+  "unknown_checks": [
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+      "check": "setup",
+      "clock": "xu_lfextclk",
+      "reason": "unknown",
+      "line": 76
+    },
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+      "check": "setup",
+      "clock": "xu_lfextclk",
+      "reason": "unknown",
+      "line": 80
+    },
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)",
+      "check": "recovery",
+      "clock": "xu_lfextclk",
+      "reason": "unknown",
+      "line": 138
+    },
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)",
+      "check": "recovery",
+      "clock": "xu_lfextclk",
+      "reason": "unknown",
+      "line": 147
+    }
+  ],
+  "native_warning": {
+    "code": "PTE-052",
+    "path": "/home/mxhanks/.codex/worktrees/s3-y32-final/ChipContest/build/s3-y32-final/native/ingress1064-pt-recollect-r1/extracted/recollection/pt.log",
+    "line": 288,
+    "smallest_period_expansion_limit": 1000,
+    "largest_period_expansion_limit": 101,
+    "meaning": "Native warning says waveform expansion is incomplete and some inter-clock paths may be unconstrained.",
+    "causality": "Consistent with the four HF-referenced pad to LF unknown checks; not a path-specific proven sole cause."
+  },
+  "nominal_clock_math": {
+    "HF_Hz": 150000000,
+    "LF_Hz": 32768,
+    "frequency_ratio": 4577.63671875,
+    "gcd_Hz": 128,
+    "ideal_common_period_ns": 7812500.0,
+    "HF_cycles_per_ideal_common_period": 1171875,
+    "LF_cycles_per_ideal_common_period": 256,
+    "qualification": "Exact nominal-frequency arithmetic only; decimal SDC and real independent oscillators do not establish a physical phase relation."
+  },
+  "structural_contract": {
+    "deglitch": "Four LF-clocked flops T_8->T_9->sync->last, output sync & last; T_8 only feeds T_9 in each persisted module. External reset intentionally unused.",
+    "PMU": "Two LF-clocked async-set flops; first D=0, second D=first. Both asynchronous set pins release from ERST branch.",
+    "reset_catch": "Three asynchronous-reset flops shift constant1 from reg_2 to reg_1 to reg_0; output inverted reg_0. Raw reset drives all three asynchronous reset pins.",
+    "test_mode": "Frozen SoC ties test_mode=0 and persisted wrapper/ResetCatchAndSync map removes bypass. No new case analysis added.",
+    "POR": "Frozen sirv_aon_porrst drives porrst_n=1; analog POR behavior is not modeled."
+  },
+  "engineering_decisions": {
+    "can_mark_unknown_met_under_unchanged_SDC": false,
+    "can_document_path_specific_CDC_RDC_review_without_changing_SDC": true,
+    "can_claim_all_checks_closed_from_structural_contract_alone": false,
+    "can_run_separate_bounded_identity_delay_min_experiment": true,
+    "can_promote_delay_result_as_complete_timing_pass": false
+  },
+  "proposed_min_experiment": {
+    "scope": "Only the exact2 first-stage D and5 asynchronous RDN/SDN load pins from current persisted full coverage. Separate candidate and receipts; no default family expansion.",
+    "objective": "Remove7 observed minimum-delay failures for existing coincident edge envelope only.",
+    "required_guards": [
+      "Native noninverting buffer function proof and exact current map pin identity",
+      "Per-endpoint insertion/characterized-area limits; protect clock nets and synchronizer topology",
+      "Native min paths retained for every queryable launch/capture/edge context; all original unknown records remain explicit",
+      "Collect real maximum propagation arrivals for both polarities with unconstrained path reporting when no constrained max path exists; record missing required time/slack as unknown, never0",
+      "No assertion of setup/recovery margin where native check is unknown; such candidate is diagnostic and cannot pass normal promotion gate",
+      "Full final update, own DC replay/SVF, fresh PT under unchanged source SDC/libraries, full coverage/DRC/pulse-width/recovery/removal and clock-association checks",
+      "Original-to-persisted connectivity proof; delayed reset assertion/pulse-width must remain separately unqualified until external pulse contract exists"
+    ]
+  },
+  "missing_external_or_physical_contracts": [
+    "Whether ERST, bootrom strap and wakeup are independent asynchronous inputs or have guaranteed timing relative to LF; the provisional HF input delay establishes neither",
+    "ERST minimum assertion pulse at pads and cells, transition limits, bounce/glitch behavior and reset source overlap",
+    "Required LF clock presence/stability during assertion and release, and when consumers may leave reset/read strap",
+    "Wakeup minimum duration and acceptable event loss/latency; bootrom strap stability across sampling/startup",
+    "Reset-domain-crossing and synchronizer metastability/MTBF criteria with characterized cells, actual placement and extracted interstage routes",
+    "Physical reset tree skew/pulse distortion and PVT/OCV corner validation; current model has ideal clocks/no SPEF"
+  ],
+  "qualification_conditions": [
+    "Same final mapped artifact has no unreviewed tested timing/electrical failures under original fixed constraints; all changes and area measured on that artifact",
+    "All4 unknown checks remain visible until independently resolved by native complete clock relation analysis or formally accepted external CDC/RDC signoff contract; separate reviewed-asynchronous status is not STA Met",
+    "Full native coverage denominator/reasons remain reconciled; unchanged source SDC/hash and no new timing exceptions",
+    "CDC/RDC structural and functional verification of first-stage containment, downstream synchronized consumers, boot/wakeup/reset sequencing with documented assumptions",
+    "Physical multicorner timing/reset/pulse/MTBF evidence required for physical signoff; RTL-vs-final-map formal equivalence remains separate from buffer-contraction proof"
+  ],
+  "immediate_recommendation": "Continue synchronous clock/electrical/prune work; permit separately labelled7-min diagnostic ECO after collecting max propagation bound evidence. Do not block current engineering progress on a user question and do not claim150MHz timing closure/qualified throughput while4unknown or missing asynchronous/physical contracts remain.",
+  "review_markdown": {
+    "path": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/coverage-contract/review.md",
+    "sha256": "621250448e08a5afe4338c350bd3ba76df0496c517e3b19699533f8e385c3a09"
+  },
+  "reset_electrical_distribution_review": {
+    "status": "SAFE_TO_PREPARE_GUARDED_NATIVE_PROBE_NOT_SIGNED_OFF",
+    "native_executed_by_this_review": false,
+    "exact_current_plan_map_sha256": "882b160f2dfde6a9593f63212ae173fc96bb00b6212c56d304a6e6e80ae4e56e",
+    "net_count": 17,
+    "static_sink_total": 1478,
+    "predicted_identity_buffer_groups": 128,
+    "prediction_not_native_result": true,
+    "nets": [
+      {
+        "net_id": "e001",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U27/ZN",
+        "reference": "CLKINV3_12TR40",
+        "original_flattened_sink_count": 195,
+        "predicted_group_count": 13,
+        "predicted_final_root_sink_count": 13,
+        "sink_port_counts": {
+          "RDN": 194,
+          "A1": 1
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e002",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U25/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e003",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U201/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e004",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U213/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e005",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U214/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e006",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U215/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e007",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U216/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e008",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U217/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e009",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U218/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e010",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U219/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e011",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U220/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e012",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U221/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e013",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U222/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e014",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U223/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e015",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U224/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 68,
+        "predicted_group_count": 5,
+        "predicted_final_root_sink_count": 5,
+        "sink_port_counts": {
+          "RDN": 68
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e016",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U212/ZN",
+        "reference": "CLKINV0_12TR40",
+        "original_flattened_sink_count": 56,
+        "predicted_group_count": 4,
+        "predicted_final_root_sink_count": 4,
+        "sink_port_counts": {
+          "RDN": 44,
+          "SDN": 12
+        },
+        "check_types": [
+          "max_capacitance"
+        ],
+        "scope": "DMA"
+      },
+      {
+        "net_id": "e067",
+        "driver": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_csr/U47/Z",
+        "reference": "BUFV4RQ_12TR40",
+        "original_flattened_sink_count": 275,
+        "predicted_group_count": 41,
+        "predicted_final_root_sink_count": 2,
+        "sink_port_counts": {
+          "RDN": 275
+        },
+        "check_types": [
+          "max_transition"
+        ],
+        "scope": "CPU_CSR"
+      }
+    ],
+    "source_origin": "HF-clocked main ResetCatchAndSync produces main_rst_n, bus_rst_n feeds DMA; CPU has additional e203_reset_ctrl. These17 distribution nets are downstream receiver-reset trees, distinct from raw ERST first-stage AON/PMU5removal endpoints.",
+    "immediate_action": "Rebind17nets to integrated map; probe small same-owner identity fanout cut. Require every actual receiver native recovery/removal tested and margin preserved. Keep AON2first-stage hold and4unknown outside stage.",
+    "risks": [
+      "Added release delay consumes recovery even when removal improves",
+      "Unequal branch delay can release interacting registers on different cycles",
+      "Assertion latency and rise/fall asymmetry can change reset pulse width",
+      "Preserve RDN/SDN polarity, inversion boundaries and ordinary logic loads sharing nets",
+      "Actualsameowner cuts and root/leaf fanout must be measured, not inferred",
+      "Recheck after clockECO on the exact integrated map"
+    ],
+    "native_measurements_required": [
+      "Exact local net members, downstream async receiving pins, complete fanout tree",
+      "Current characterized noninverting buffer function and actual cap/slew/fanout at roots/newbuffers/receivers",
+      "Before/after all queryable launch/capture clock and transition contexts for recoverymax/removalmin at every actualreceiver",
+      "Per-synchronous-release-group assertion/deassertion minmaxarrival andspread",
+      "Full pulsewidth coverage, includingno_clock reasons and external minimum pulse contract gap",
+      "Global setuphold/gating/period/coverage/clockassociation/DRC regression",
+      "Own DCreplaySVF,freshPT originalSDC/library,area and connectivityproof"
+    ]
+  },
+  "remaining_AON_reset_experiment_split": {
+    "three_reset_catch_RDN": "Separate bounded original-edge-envelope diagnostic only if native recovery paths tested with margin; rawreset phase/pulse remains unqualified.",
+    "two_PMU_SDN": "Recovery unknown: diagnostic minrepair only with explicit maxpropagation evidence, cannot pass testedmax gate.",
+    "two_AON_T8_D": "Keep excluded from testedmax hold repair until setupunknown resolved; optionaldiagnostic must retain unknownstatus."
+  }
+}

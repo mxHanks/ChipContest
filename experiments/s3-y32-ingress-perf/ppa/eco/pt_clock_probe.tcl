@@ -129,7 +129,9 @@ set failed [catch {
   if {$::eco_clock_stage eq {probe}} {
     eco_require [expr {[llength $::eco_clock_groups] == 1 && [dict get [lindex $::eco_clock_groups 0] id] eq {probe4_core} && $::eco_clock_expected_final_root_fanout == 21589}] {API probe must be exactly the reviewed four-load group}
   } else {
-    eco_require [expr {[llength $::eco_clock_groups] == 1564 && $::eco_clock_expected_final_root_fanout == 18}] {whole tree must retain reviewed bounded topology}
+    # Four unused hierarchy clock inputs have no native leaf loads. The r7
+    # sealed plan omits those boundaries; every created output must be loaded.
+    eco_require [expr {[llength $::eco_clock_groups] == 1560 && $::eco_clock_expected_final_root_fanout == 18}] {whole tree must retain reviewed bounded topology}
   }
   eco_require [expr {$::eco_clock_plan_schema eq {ingress1064-hierarchy-local-clock-tree-static-plan-v1} && $::eco_clock_plan_mapped_sha eq {882b160f2dfde6a9593f63212ae173fc96bb00b6212c56d304a6e6e80ae4e56e}}] {wrong current-map clock plan}
   eco_require [info exists ::eco_mapped_sha] {runner must bind exact baseline or completed seed mapped bytes}

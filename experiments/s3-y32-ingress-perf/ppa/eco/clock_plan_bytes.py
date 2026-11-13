@@ -2,7 +2,7 @@
 import hashlib
 
 EXPECTED_TCL_SHA={'probe':'9063abe956c03cdcec4471ba13b48817355ecb090de35727fa0c4620c61ae54f',
-                  'full':'74d9452b5d4beb34f7b810e4bd7ee3b6c79faf6aac4ce2b7513f9ab149054f35'}
+                  'full':'2c40a71a5e1ebf08cbf080b5c6d4f0c8df99ded98d648c303735d0b4dfb3c9e2'}
 KEYS=['id','owner','expected_local_net','allowed_local_net_aliases','loads','load_kinds','max_loads','new_cell_name','phase']
 
 def literal(value):

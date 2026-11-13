@@ -71,3 +71,30 @@ at the explicit --max-paths-per-query limit (default 8192, bounded 64..65536)
 remains a failure. endpoint-query-attempts.tsv records every attempt and is bound
 as a prior-stage input. A final cap hit additionally exports exact context,
 all capped candidate context/slack rows and up to 128 native timing paths.
+
+The clock chain is probe → tree → DC apply → fresh PT reload. The r7 sealed
+whole-tree plan has 1560 groups and a predicted root fanout of18. Four unused
+hierarchy clock inputs (g0032/g0034/g0052/g0546) are omitted after exact structural
+review; every created output must have1..32 actual flattened leaf loads. The
+discarded four-load probe establishes native insertion scope only. The complete
+tree must reduce actual root capacitance without worsening measured transition.
+An empty native attribute never substitutes for zero or a pass.
+
+The electrical chain measures all68 catalogued roots but mutates only51 ordinary
+control nets in198 bounded groups. The17 asynchronous reset roots remain visible
+and unchanged. Its discarded four-AO32-load probe checks exact local membership,
+fanout and clocks and records real capacitance/slew; it does not claim electrical
+improvement. Every full-split root must reduce measured capacitance without
+worsening transition, followed by full STA/DRC, DC/SVF and a fresh PT reload.
+
+The prune chain requires an explicit completed apply/reload seed and the exact
+original-map1796-leaf whitelist (including36 unobservable state leaves). Complete
+wave outputs are checked for zero native leaf-input/top-port visibility before
+any deletion in that wave. All353 SRAMs remain protected. Optional cleanup
+removes only newly dead, native-proven identity XU_ECO_* buffers and records a
+separate ledger. Fresh PT permits only the exact deleted state clock endpoints
+to disappear; all remaining original clock associations must match.
+
+Unknown setup/recovery on AON first-stage asynchronous receivers remains
+unresolved. A fixed-delay experiment under the current clock-edge envelope does
+not prove arbitrary-phase CDC/RDC safety and cannot change coverage to Met.

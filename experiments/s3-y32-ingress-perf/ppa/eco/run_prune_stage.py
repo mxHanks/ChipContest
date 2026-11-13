@@ -259,7 +259,7 @@ def main():
         package_sha256=sha(seal), prune_plan_sha256=plan_hash, baseline_execution_sha256=base_hash,
         baseline_mapped_sha256=MAPPED_SHA, baseline_pt_execution_sha256=sha(ptroot / 'execution.json'), seed_identity=seed,
         prior_execution_sha256=sha(prior_root / 'execution.json') if prior_root else None,
-        source_ddc_sha256=seed['ddc_sha256'], original_plan_provenance='ORIGINAL_MAP_PROOF_WITH_NATIVE_RUNTIME_SEED_VISIBILITY_RECHECK',
+        source_ddc_sha256=sha(prior_root / 'mapped.ddc') if prior_root else seed['ddc_sha256'], original_plan_provenance='ORIGINAL_MAP_PROOF_WITH_NATIVE_RUNTIME_SEED_VISIBILITY_RECHECK',
         cleanup_new_dead_buffers=a.cleanup_new_dead_buffers,
         max_deleted_leaves=1796, dead_sequential_leaves=36, preserved_SRAM_macros=353,
         top=TOP, hardware_profile=PROFILE, max_cores=8, user_authorized_cap=8, run_requested=a.run,
@@ -278,7 +278,8 @@ def main():
     if a.stage == 'apply':
         changes.write_bytes(payload); inputs.append(verify(changes, plan['generated_tcl_sha256']))
     source_mapped = seed_apply / 'mapped.v' if a.stage == 'apply' else prior_root / 'mapped.v'
-    config = ['set ::eco_baseline ' + tcl(base), 'set ::eco_ddc ' + tcl(seed_apply / 'mapped.ddc'),
+    source_ddc = seed_apply / 'mapped.ddc' if a.stage == 'apply' else prior_root / 'mapped.ddc'
+    config = ['set ::eco_baseline ' + tcl(base), 'set ::eco_ddc ' + tcl(source_ddc),
         'set ::eco_mapped ' + tcl(source_mapped), 'set ::eco_mode {prune}',
         'set ::xu_dead_original_map ' + tcl(base / 'mapped.v'),
         'set ::xu_dead_cleanup_new_buffers ' + str(int(a.cleanup_new_dead_buffers)),

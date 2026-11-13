@@ -198,12 +198,20 @@ set failed [catch {
         if {$::eco_electrical_action eq {probe} && $id eq {e000}} {set expected 210}
         if {$::eco_electrical_action eq {split} && ![dict get $row asynchronous_reset_net]} {set expected [dict get $row predicted_final_root_sink_count]}
         eco_require [expr {[lindex $after 0]==$expected}] "native electrical root cut differs: $id"
-        if {($::eco_electrical_action eq {probe} && $id eq {e000}) || ($::eco_electrical_action eq {split} && ![dict get $row asynchronous_reset_net])} {
+        # The discarded four-load probe establishes native insertion scope.
+        # Its input capacitance can cost more than four small AO32 A2 loads.
+        # Only the complete split is an electrical optimization candidate.
+        if {$::eco_electrical_action eq {split} && ![dict get $row asynchronous_reset_net]} {
           eco_require [expr {[lindex $after 1]<[lindex $original 1] && [lindex $after 2]<=[lindex $original 2]}] "native root capacitance/slew did not improve: $id"
         }
         if {[dict get $row asynchronous_reset_net]} {eco_require [expr {[electrical_names [get_pins -of_objects [electrical_root_net $row]]] eq [dict get $reset_members $id]}] "unselected reset local membership changed: $id"}
       }
       electrical_inserted_metrics
+      if {$::eco_electrical_action eq {probe}} {
+        set f [eco_open FOUR_LOAD_API_SCOPE_ONLY_NOT_ELECTRICAL_IMPROVEMENT.txt]
+        puts $f {Scope probe discarded; measured capacitance and slew are in electrical-metrics.tsv.}
+        close $f
+      }
       eco_delta $before [eco_snapshot after]
       eco_reports after
       eco_export changes

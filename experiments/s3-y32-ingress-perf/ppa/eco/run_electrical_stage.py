@@ -101,11 +101,11 @@ def prior_inputs(root,expected,package_hash,base_hash,plan_hash,seed_identity):
         if expected!='topology':
             require(len(after)==68 and {x['net_id']for x in after}=={x['net_id']for x in before},'prior native after metrics omit electrical/reset roots')
         if expected=='probe':
+            require(r.get('mutation_goal')=='FOUR_LOAD_API_SCOPE_PROBE_NOT_ELECTRICAL_OPTIMIZATION',
+                'prior probe must explicitly distinguish grouping scope from electrical improvement')
             b=next(x for x in before if x['net_id']=='e000');a=next(x for x in after if x['net_id']=='e000')
-            require(int(b['flattened_sink_count'])==213 and int(a['flattened_sink_count'])==210 and
-                float(a['native_max_capacitance'])<float(b['native_max_capacitance']) and
-                float(a['native_max_transition_ns'])<=float(b['native_max_transition_ns']),
-                'native U2548 4-load probe cut/capacitance/slew gate did not pass')
+            require(int(b['flattened_sink_count'])==213 and int(a['flattened_sink_count'])==210,
+                'native U2548 4-load API grouping/fanout probe did not pass')
     return r,inputs
 
 
@@ -166,6 +166,7 @@ def main():
     else:require(a.prior is None,'topology starts from explicitly bound original baseline/seed')
     if a.stage=='reload':mapped=prior_root/'mapped.v';ddc=prior_root/'mapped.ddc'
     record=dict(schema=SCHEMA,stage=a.stage,status='SEALED_INPUTS_REVIEWED_NOT_EXECUTED',mode='electrical',
+        mutation_goal='FOUR_LOAD_API_SCOPE_PROBE_NOT_ELECTRICAL_OPTIMIZATION' if a.stage=='probe' else 'BOUNDED_NONRESET_SPLIT_REQUIRES_ELECTRICAL_IMPROVEMENT',
         package_sha256=sha(seal),electrical_plan_sha256=plan_hash,baseline_execution_sha256=base_hash,
         baseline_mapped_sha256=sha(base/'mapped.v'),baseline_pt_execution_sha256=sha(ptroot/'execution.json'),
         baseline_pt_dir=str(ptroot),seed_identity=seed,source_mapped_sha256=sha(mapped),source_ddc_sha256=sha(ddc),
