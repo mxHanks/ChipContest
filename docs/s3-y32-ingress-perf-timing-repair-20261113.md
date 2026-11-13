@@ -2,6 +2,20 @@
 
 本记录对应原始入口优化候选、N3 开发综合配置 `sysbus32-x-sram-353-dev-n3`。原始性能窗口为 12 项任务共 1,691,172 cycles，按 150 MHz 条件换算 1064.350640 task/s。本轮只对映射网表作非反相缓冲 ECO；当前尚未完成全部时序、电气及覆盖闭合，吞吐仍是条件测量。
 
+## 最新已持久化结果：hold + r7 时钟树
+
+完整时序违例已由原始 **467 项降到 7 项**。615 个 hold 缓冲之后，1560 个分层时钟缓冲已经完成原生 PT 修改 → DC/SVF 回放 → 全新 PT 重载；三个阶段 returncode 均为 0，原生错误、源漂移及缺失输出为零。GPIO A27 的 output setup 已变为通过，未新增 setup、hold、门控或其他时序违例。329284 项总检查、29335 项未测及其中 4 项 unknown 均保持；剩余为 2 项 AON hold 和 5 项 removal。
+
+GFCM U8 的实际叶负载数为 **21592→18**，原生根电容 **16.317097→0.014539**，GPIO 路径上的根转换时间 **12.092101→0.019452 ns**。1560 个新增时钟输出均实际检查为 1～32 个叶负载。此为固定约束下的工程映射模型，仍无提取寄生及物理签核。
+
+| 最新 hold + clock 面积 | 原库单位 |
+|---|---:|
+| 全 SoC 标准单元 | **359113.087200** |
+| 33 个内部 SRAM | 301901.305662 |
+| 保守上界 | **661014.392862** |
+
+相对原映射共新增 2175 个 BUFV2。实际返回网表的独立结构检查通过：收缩这些原生证明的身份缓冲后，全部原始单元、原生层级身份、类型、参数、端口、连接分区及 353 个 SRAM 保持。原生电气违例仍为 1973 项；普通电气修改和死逻辑清理在后续独立阶段验证，尚未算入以上面积。原件见 [clock r7 复核](validation/s3-y32-ingress-perf-native-20261113/timing-clock-r7/review.json)、[完整覆盖报告](validation/s3-y32-ingress-perf-native-20261113/timing-clock-r7/persisted-coverage.rpt)及[结构证明](validation/s3-y32-ingress-perf-native-20261113/timing-clock-r7/mapped-structural-equivalence.json)。
+
 ## 已持久化的 hold 修复
 
 615 个原生库 `BUFV2_12TR40` 已通过 PT 修改、原生 `write_changes -format dctcl` 导出、DC 读取原 DDC 回放并生成自身 SVF、全新 PT 进程重载复验。三个阶段均 returncode 0，源漂移、原生工具错误和缺失输出均为零。作业使用 8 核上限，原 SDC、库、宏数量及原有时钟关联保持。

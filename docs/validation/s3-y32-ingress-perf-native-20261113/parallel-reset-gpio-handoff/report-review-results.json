@@ -1,0 +1,47 @@
+{
+  "status": "LOCAL_REPORT_REVIEW_GUARDS_PASS_NOT_NATIVE_ECO",
+  "native_executed": false,
+  "checks": [
+    {
+      "name": "same_real_coverage",
+      "result": {
+        "before": {
+          "total": 329284,
+          "met": 299941,
+          "violated": 8,
+          "untested": 29335
+        },
+        "after": {
+          "total": 329284,
+          "met": 299941,
+          "violated": 8,
+          "untested": 29335
+        },
+        "new_violated_checks": 0,
+        "new_untested_checks": 0
+      }
+    },
+    {
+      "name": "same_real_electrical",
+      "result": {
+        "before_violations": 1973,
+        "after_violations": 1973,
+        "new_violations": 0,
+        "worsened_violations": 0,
+        "comparison_tolerance_ns_or_library_cap": 1e-05
+      }
+    },
+    {
+      "name": "reject_new_untested_reason",
+      "result": "new or changed untested check introduced"
+    },
+    {
+      "name": "reject_new_timing_check",
+      "result": "new timing violation introduced"
+    },
+    {
+      "name": "reject_new_electrical_check",
+      "result": "new electrical violation introduced"
+    }
+  ]
+}

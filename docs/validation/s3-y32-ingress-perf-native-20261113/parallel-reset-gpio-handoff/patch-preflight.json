@@ -1,0 +1,21 @@
+{
+  "status": "PATCH_APPLY_CHECK_PASS",
+  "command": [
+    "git",
+    "apply",
+    "--check",
+    "/home/mxhanks/Projects/ChipContest/build/parallel-reset-gpio-20261113/reset-gpio-candidate.patch"
+  ],
+  "checkout_modified": false,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "",
+  "patch_sha256": "c34c9118aa450c8b431364cdd00005892e78a77894cead445dd3ad1c4e6d836c",
+  "files_added": [
+    "experiments/s3-y32-ingress-perf/ppa/eco/parallel_reset_gpio_helpers.tcl",
+    "experiments/s3-y32-ingress-perf/ppa/eco/pt_parallel_reset_gpio.tcl",
+    "experiments/s3-y32-ingress-perf/ppa/eco/run_parallel_reset_gpio_stage.py",
+    "experiments/s3-y32-ingress-perf/ppa/eco/prepare_parallel_reset_gpio.py"
+  ],
+  "prior_name_collision": "Initial generic run_reset_stage.py/prepare_reset.py names overlapped new read-only diagnostics in the main checkout; isolated candidate names were changed. No patch was applied."
+}

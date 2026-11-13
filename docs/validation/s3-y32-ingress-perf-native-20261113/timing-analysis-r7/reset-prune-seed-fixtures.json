@@ -1,0 +1,117 @@
+{
+  "cases": [
+    {
+      "accepted": true,
+      "case": "valid_prune_original_retained_removed_partition",
+      "clock_lineage": {
+        "current_reload_clock_sha256": "5e9e857c37ba6dcff2f5cbcdf5c740f7cbef378367519d5b55b49e678cdb2c32",
+        "deleted_leaves_sha256": "14ea3f691df1291b2da518c8513aa0f873a632c5179b132b4c9ecc6677ec1640",
+        "incoming_clock_sha256": "834c903e4f5b3d43d0c15118c0649328e3fc08347d7a1e4b59321908bf37c4b3",
+        "mode": "EXACT_PRUNE_RETAINED_AND_PROVEN_DELETED_CLOCK_PARTITION",
+        "original_clock_pins": 38,
+        "proven_deleted_state_parents": 36,
+        "removed_clock_pins": 36,
+        "removed_clock_sha256": "e4f3d20ec4129daa1dc46096d0fb0d68acf46a8ed63dbff470d8c0a254c11316",
+        "retained_clock_pins": 2,
+        "retained_clock_sha256": "5e9e857c37ba6dcff2f5cbcdf5c740f7cbef378367519d5b55b49e678cdb2c32"
+      },
+      "passed": true
+    },
+    {
+      "accepted": true,
+      "case": "valid_literal_backslash_t_legacy_ledgers",
+      "clock_lineage": {
+        "current_reload_clock_sha256": "3edad6f22067ac7a3188728edfb295c6b9dd27fc8e3ad13e26de22d472fc47dc",
+        "deleted_leaves_sha256": "ba4636e7539a60a6cfe2e98ce6c6e2b6fb688ec2b4c5bc66d35eb6f56538c9f8",
+        "incoming_clock_sha256": "38a10d13f015bcdb34290f03c3befaf75f3c2368ddeaed9e4ee92fcb2d2061fb",
+        "mode": "EXACT_PRUNE_RETAINED_AND_PROVEN_DELETED_CLOCK_PARTITION",
+        "original_clock_pins": 38,
+        "proven_deleted_state_parents": 36,
+        "removed_clock_pins": 36,
+        "removed_clock_sha256": "c2e893f86a5502fa00e8aa2aa933c4ae773d4ed3bbf5aa47337437e69942ecf8",
+        "retained_clock_pins": 2,
+        "retained_clock_sha256": "3edad6f22067ac7a3188728edfb295c6b9dd27fc8e3ad13e26de22d472fc47dc"
+      },
+      "passed": true
+    },
+    {
+      "accepted": false,
+      "case": "wrong_reload_marker_name",
+      "passed": true,
+      "reason": "unbound native output: PRUNE_RELOAD_COLLECTION_COMPLETE_NOT_TIMING_CLOSURE.txt"
+    },
+    {
+      "accepted": false,
+      "case": "missing_reload_marker_file",
+      "passed": true,
+      "reason": "missing/unsafe file: /home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/reset-diagnostic-preflight-r2/fixtures/missing_reload_marker_file/reload/PRUNE_RELOAD_COLLECTION_COMPLETE_NOT_TIMING_CLOSURE.txt"
+    },
+    {
+      "accepted": false,
+      "case": "reload_marker_hash_drift",
+      "passed": true,
+      "reason": "SHA256 mismatch: /home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/reset-diagnostic-preflight-r2/fixtures/reload_marker_hash_drift/reload/PRUNE_RELOAD_COLLECTION_COMPLETE_NOT_TIMING_CLOSURE.txt"
+    },
+    {
+      "accepted": false,
+      "case": "missing_apply_marker_file",
+      "passed": true,
+      "reason": "missing/unsafe file: /home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/reset-diagnostic-preflight-r2/fixtures/missing_apply_marker_file/apply/DC_REPLAY_COMPLETE_NOT_TIMING_CLOSURE.txt"
+    },
+    {
+      "accepted": false,
+      "case": "missing_one_removed_clock_parent",
+      "passed": true,
+      "reason": "removed clock parents do not exactly cover all36 proven deleted state leaves"
+    },
+    {
+      "accepted": false,
+      "case": "removed_clock_wrong_parent",
+      "passed": true,
+      "reason": "removed clock pin lacks its exact proven deleted state parent"
+    },
+    {
+      "accepted": false,
+      "case": "removed_clock_association_changed",
+      "passed": true,
+      "reason": "removed clock association differs from incoming prune seed"
+    },
+    {
+      "accepted": false,
+      "case": "retained_clock_association_changed",
+      "passed": true,
+      "reason": "retained prune clock association changed"
+    },
+    {
+      "accepted": false,
+      "case": "unexpected_extra_current_and_retained_clock",
+      "passed": true,
+      "reason": "incoming prune clock pins are not exactly partitioned into retained and removed"
+    },
+    {
+      "accepted": false,
+      "case": "current_reload_differs_retained",
+      "passed": true,
+      "reason": "fresh prune actual clock table differs from retained partition"
+    },
+    {
+      "accepted": false,
+      "case": "retained_removed_overlap",
+      "passed": true,
+      "reason": "incoming prune clock pins are not exactly partitioned into retained and removed"
+    },
+    {
+      "accepted": false,
+      "case": "only35_deleted_state_parents",
+      "passed": true,
+      "reason": "prune clock partition needs exact1796 deleted leaves and36 deleted state parents"
+    }
+  ],
+  "fixture_evidence_is_native": false,
+  "mutation_authorized": false,
+  "package": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/reset-diagnostic-sealed-r2",
+  "package_sha256": "595b3d61324ac25635b1ee96f3dc8174e93611ba30608ea05c034383e48e8410",
+  "schema": "ingress1064-reset-prune-seed-local-fixtures-v1",
+  "sealed_files": 18,
+  "status": "SYNTHETIC_GUARD_FIXTURES_PASSED_NO_EDA_EXECUTED"
+}

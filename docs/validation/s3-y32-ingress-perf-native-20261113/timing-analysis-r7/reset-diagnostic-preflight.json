@@ -1,0 +1,62 @@
+{
+  "changed_package_files_since_r1": [
+    "README.md",
+    "run_reset_stage.py"
+  ],
+  "checks": [
+    {
+      "check": "actual_original_baseline",
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"actual_async_receivers_static\": 1477, \"baseline_execution_sha256\": \"19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290\", \"baseline_mapped_sha256\": \"882b160f2dfde6a9593f63212ae173fc96bb00b6212c56d304a6e6e80ae4e56e\", \"baseline_pt_execution_sha256\": \"93b2808c0ff16c60d41d35f07bc5ca4cc95486a82fdc3699e2d501165479c4c0\", \"diagnostic_only_reason\": \"Current per-receiver known max/min, nonregression, release-cycle/pulse/RDC evidence must precede a separate reset edit tool. No mutation or replay is implemented.\", \"electrical_sinks_original\": 1478, \"generated_tcl_sha256\": \"778e15ddb46cd970f335712a590db1ec71e6a9f4febadc18383506f3d766de19\", \"hardware_profile\": \"sysbus32-x-sram-353-dev-n3\", \"max_cores\": 8, \"max_paths_per_query\": 8192, \"max_receivers\": 1477, \"mode\": \"reset_read_only\", \"mutation_authorized\": false, \"package_sha256\": \"595b3d61324ac25635b1ee96f3dc8174e93611ba30608ea05c034383e48e8410\", \"qualification\": \"NOT_QUALIFIED\", \"required_margin_ns\": 0.03, \"reset_plan_sha256\": \"b30db72f62c239cae0da650b75b5b82bd48d7bd625758b79eaaafec0fc5c0142\", \"reset_roots\": 17, \"run_requested\": false, \"schema\": \"ingress1064-n3-reset-diagnostic-stage-v1\", \"seed_identity\": null, \"source_ddc_sha256\": \"0a35b959ec431f9367a3e99da0f069190ea2a9232948d0aadb5df5520d3e55d9\", \"source_mapped_sha256\": \"882b160f2dfde6a9593f63212ae173fc96bb00b6212c56d304a6e6e80ae4e56e\", \"stage\": \"diagnose\", \"status\": \"SEALED_INPUTS_REVIEWED_NOT_EXECUTED\", \"timing_verdict\": \"NOT_TIMING_CLOSURE\", \"top\": \"xu_soc_sysbus32_ppa_top\", \"unauthorized_static_groups\": 128, \"user_authorized_cap\": 8}"
+    },
+    {
+      "check": "incomplete_local_hold_export_rejected",
+      "passed": true,
+      "returncode": 1,
+      "stderr": "FAIL: missing/unsafe file: /home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/native/persisted-hold-r5/extracted/apply/DC_REPLAY_COMPLETE_NOT_TIMING_CLOSURE.txt",
+      "stdout": ""
+    },
+    {
+      "check": "mutation_stage_rejected",
+      "passed": true,
+      "returncode": 2,
+      "stderr": "usage: run_reset_stage.py [-h] [--stage {diagnose}] --baseline BASELINE\n                          --baseline-pt-dir BASELINE_PT_DIR --out OUT\n                          [--seed-apply SEED_APPLY]\n                          [--seed-reload SEED_RELOAD] [--run | --dry-run]\n                          [--timeout-seconds TIMEOUT_SECONDS]\n                          [--max-receivers MAX_RECEIVERS]\n                          [--max-paths-per-query MAX_PATHS_PER_QUERY]\n                          [--required-margin REQUIRED_MARGIN]\n                          [--allow-coordinated-busy-jobs]\n                          [--coordination-note COORDINATION_NOTE]\nrun_reset_stage.py: error: argument --stage: invalid choice: 'apply' (choose from diagnose)",
+      "stdout": ""
+    },
+    {
+      "check": "unpaired_seed_rejected",
+      "passed": true,
+      "returncode": 1,
+      "stderr": "FAIL: seed requires BOTH completed apply and successful fresh PT reload",
+      "stdout": ""
+    },
+    {
+      "actual_async_receivers": 1477,
+      "check": "deterministic_tcl_catalogue",
+      "mutation_authorized": false,
+      "passed": true,
+      "roots": 17,
+      "sha256": "778e15ddb46cd970f335712a590db1ec71e6a9f4febadc18383506f3d766de19"
+    }
+  ],
+  "compact_plan_bytes": 7559,
+  "compact_plan_sha256": "b30db72f62c239cae0da650b75b5b82bd48d7bd625758b79eaaafec0fc5c0142",
+  "mutation_authorized": false,
+  "package": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/timing-repair-20261113/reset-diagnostic-sealed-r2",
+  "package_sha256": "595b3d61324ac25635b1ee96f3dc8174e93611ba30608ea05c034383e48e8410",
+  "prune_seed_fixture_report": {
+    "accepted": 2,
+    "path": "prune-seed-fixtures.json",
+    "rejected": 12,
+    "sha256": "e5175fd284b9dadd6eb44629c2012ee264dab350f59111c6633e66abcf26bc7b",
+    "synthetic_fixture_not_native_evidence": true
+  },
+  "qualification": "NOT_QUALIFIED",
+  "schema": "ingress1064-reset-diagnostic-local-preflight-v1",
+  "sealed_files": 18,
+  "seed_preflight_limitation": "Local persisted-hold-r5 brief export omits native DC completion marker; strict seed gate rejects it. Complete remote apply+freshreload directories remain required, never fabricate missing evidence.",
+  "status": "LOCAL_BINDINGS_AND_STATIC_CHECKS_COMPLETE_NO_EDA_EXECUTED",
+  "timing_verdict": "NOT_TIMING_CLOSURE"
+}

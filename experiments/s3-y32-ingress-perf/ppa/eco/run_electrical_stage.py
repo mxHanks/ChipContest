@@ -30,6 +30,18 @@ SCHEMA='ingress1064-n3-electrical-eco-stage-v1'
 MAPPED_SHA='882b160f2dfde6a9593f63212ae173fc96bb00b6212c56d304a6e6e80ae4e56e'
 
 
+def clock_associations(path):
+    """Compare clock identities, independent of native collection row order."""
+    rows=list(csv.DictReader(path.read_text().splitlines(),delimiter='\t'))
+    require(rows and set(rows[0])=={'pin','clocks'},'invalid native clock association columns')
+    result={}
+    for row in rows:
+        require(row['pin'] and row['pin'] not in result and row['clocks'] is not None,
+            'missing/duplicate native clock association')
+        result[row['pin']]=tuple(sorted(row['clocks'].split()))
+    return result
+
+
 def clean_receipt(root,schema,stage,base_hash):
     r=json.loads((root/'execution.json').read_text())
     require(r.get('schema')==schema and r.get('stage')==stage and r.get('returncode')==0 and
@@ -64,7 +76,8 @@ def seed_inputs(a,base,base_hash,chain):
     require('eco.svf' in svfs,'seed lacks native ECO SVF')
     inputs=bind_outputs(ap,apply,['mapped.v','mapped.ddc','mapped.sdc','original-clock-association.tsv']+svfs)
     inputs+=bind_outputs(rp,reload,['persisted-coverage.rpt','persisted-all_violators.rpt','original-clock-association.tsv','buffer-functions.tsv','leaf-pin-directions.tsv','reference-metadata.tsv'])
-    require(sha(apply/'original-clock-association.tsv')==sha(reload/'original-clock-association.tsv'),'seed clock association drift after persistence')
+    require(clock_associations(apply/'original-clock-association.tsv')==clock_associations(reload/'original-clock-association.tsv'),
+        'seed clock association drift after persistence')
     inputs += [verify(apply/'execution.json',sha(apply/'execution.json')),verify(reload/'execution.json',sha(reload/'execution.json'))]
     identity={'mode':'EXPLICIT_COMPLETED_HOLD_OR_CLOCK_SEED_RETAINED','schema':schema,'apply_dir':str(apply),
         'apply_execution_sha256':sha(apply/'execution.json'),'reload_dir':str(reload),'reload_execution_sha256':sha(reload/'execution.json'),

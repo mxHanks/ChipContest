@@ -1,0 +1,54 @@
+{
+  "status": "LOCAL_SYNTHETIC_GUARDS_PASS_NOT_NATIVE_STA",
+  "native_executed": false,
+  "cases": [
+    {
+      "name": "unexpandable_clock_set",
+      "synthetic_fixture": true,
+      "returncode": 42,
+      "stdout": "RESULT rejected inserts=0 export=0 reason=HF/LF clock expansion remains unresolved; delay ECO is refused before any insertion",
+      "stderr": "",
+      "guard_passed": true
+    },
+    {
+      "name": "unknown_max",
+      "synthetic_fixture": true,
+      "returncode": 42,
+      "stdout": "RESULT rejected inserts=0 export=0 reason=no tested max paths to u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN; not a zero-slack result",
+      "stderr": "",
+      "guard_passed": true
+    },
+    {
+      "name": "external_unknown_max",
+      "synthetic_fixture": true,
+      "returncode": 42,
+      "stdout": "RESULT rejected inserts=0 export=0 reason=no tested max external-context paths: synthetic -> u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN; not a zero-slack result",
+      "stderr": "",
+      "guard_passed": true
+    },
+    {
+      "name": "last_negative_max",
+      "synthetic_fixture": true,
+      "returncode": 42,
+      "stdout": "RESULT rejected inserts=0 export=0 reason=setup/recovery has insufficient numeric margin; no delay ECO accepted: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN -.2",
+      "stderr": "",
+      "guard_passed": true
+    },
+    {
+      "name": "lost_max_after_insert",
+      "synthetic_fixture": true,
+      "returncode": 42,
+      "stdout": "RESULT rejected inserts=1 export=0 reason=setup/recovery margin lost: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN",
+      "stderr": "",
+      "guard_passed": true
+    },
+    {
+      "name": "bounded_success",
+      "synthetic_fixture": true,
+      "returncode": 0,
+      "stdout": "RESULT success inserts=3 export=1",
+      "stderr": "",
+      "guard_passed": true
+    }
+  ]
+}
