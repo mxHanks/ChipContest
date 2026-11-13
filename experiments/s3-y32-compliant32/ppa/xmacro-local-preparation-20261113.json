@@ -1,0 +1,220 @@
+{
+  "archive": {
+    "bytes": 464777,
+    "path": "build/compliant32-20261113/ppa-xmacro-inputs-r2.tar.gz",
+    "regular_files_verified": 184,
+    "sha256": "d2cf5b25c36e59befe69f714510ee85c3b670c4fca4be8007e7c7e8888bd2f31"
+  },
+  "area_policy": {
+    "charged_internal_macro_groups": {
+      "bias": 1,
+      "weights": 16,
+      "x": 16
+    },
+    "charged_scopes": [
+      {
+        "components": [
+          "dma32_frontend_and_scheduler",
+          "engines_64pe",
+          "core_fifo_and_control",
+          "x_physical_sram_buffers",
+          "weights",
+          "bias"
+        ],
+        "path": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma",
+        "policy": "all standard cells plus all33 internal RAMSP1024X16 macros",
+        "scope": "dma"
+      },
+      {
+        "path": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_xu_systembus_ingress",
+        "policy": "all new arbitration, owner state, data/control/address mux cells",
+        "scope": "systembus32_ingress"
+      },
+      {
+        "path": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_nice_core",
+        "policy": "all standard cells conservatively charged, including legacy NICE mux, drain8 and direct-interface logic if retained; reused logic is not subtracted",
+        "scope": "cpu_nice_interface"
+      },
+      {
+        "path": "u_shared",
+        "policy": "all endpoint standard cells conservatively charged; all256 reused shared macros separately inventoried",
+        "scope": "endpoint_logic"
+      }
+    ],
+    "conservative_upper_bound": {
+      "excluded_reused_SRAM_macros": 320,
+      "independent_of_precise_incremental_baseline": true,
+      "internal_SRAM_macros": 33,
+      "interpretation": "If verified official units/pricing later make this conservative bound <=2.25mm2, it proves only that bound, not an official area score or full qualification",
+      "library_units_and_official_macro_pricing": "UNRESOLVED_NO_NUMERIC_MM2_OR_VERDICT",
+      "official_formula": "full_soc_standard_cell_area_mm2 + internal_macro_count * official_RAMSP1024X16_area_mm2",
+      "standard_cells": "ALL_FULL_SOC_STANDARD_CELLS_INCLUDING_CPU_AND_REUSED_PERIPHERALS"
+    },
+    "leaf_unit": "raw_library_area_unit",
+    "no_CPU_or_reused_SRAM_savings_credit": true,
+    "official_SRAM_area_table": "UNRESOLVED",
+    "official_incremental_baseline_subtraction": "PENDING_SEPARATE_MATCHED_BASELINE_COMPARISON",
+    "official_mm2_conversion": "UNRESOLVED",
+    "old_B_is_area_baseline": false,
+    "original_platform_baseline_child": "f64a430f172c701df43e3d63afaf9dc0178096e1",
+    "outside_charged_scope_positive_logic_growth": "PENDING_SAME_LIBRARY_ORIGINAL_PLATFORM_BASELINE_COMPARISON; all retained nonplatform NICE/direct passthrough/mux/drain and other interface logic must be added, never credited against savings",
+    "reused_macro_groups": {
+      "dtcm": 32,
+      "itcm": 32,
+      "shared": 256
+    },
+    "schema": "sysbus32-conservative-disjoint-area-policy-v1",
+    "timing_scope": "full digital SoC including all353 SRAMs",
+    "x_storage": {
+      "all_physical_macros_charged": true,
+      "logical_bytes": 2048,
+      "physical_bytes": 32768,
+      "physical_macro_count": 16
+    }
+  },
+  "candidate_negative_checks": {
+    "changed_new_physical_wrapper": {
+      "reason": "X candidate source SHA256 mismatch: TileXMacroRowBuffer.sv",
+      "rejected": true
+    },
+    "exact_candidate": {
+      "accepted": true
+    },
+    "symlink_new_wrapper": {
+      "reason": "X candidate links/special nodes forbidden: /home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/ppa-xmacro-validation-r1/candidate-negative/rtl/TileXMacroRowBuffer.sv",
+      "rejected": true
+    },
+    "unmanifested_extra_source": {
+      "reason": "unmanifested X candidate input",
+      "rejected": true
+    },
+    "wrong_manifest_sha256": {
+      "reason": "X candidate manifest SHA256 mismatch",
+      "rejected": true
+    }
+  },
+  "defines": [
+    "SYNTHESIS",
+    "DISABLE_SV_ASSERTION=1",
+    "XU_MATRIX_DMA",
+    "XU_MATRIX_DMA_SYSBUS32",
+    "XU_MATRIX_X_SRAM"
+  ],
+  "hardware_profile": "sysbus32-x-sram-353",
+  "identical_source_XML_evidence": {
+    "full_XML_invocations": 1,
+    "geometry": {
+      "dma32": 1,
+      "endpoint32": 1,
+      "engines": 8,
+      "forbidden_wide_or_downstream_instances": 0,
+      "ingress32": 1,
+      "internal_macros": 33,
+      "mac_pe": 64,
+      "macro_groups": {
+        "bias": 1,
+        "dtcm": 32,
+        "itcm": 32,
+        "shared": 256,
+        "weights": 16,
+        "x": 16
+      },
+      "macros": 353,
+      "unique_macro_scopes": true,
+      "x_macro_rows": 16,
+      "x_register_rows": 0
+    },
+    "identity_checks": [
+      "all159 ordered compile paths+SHA256 identical",
+      "exact defines identical",
+      "generic functional macro model identical",
+      "geometry profile identical"
+    ],
+    "path": "build/compliant32-20261113/ppa-xmacro-local-r1/result.json",
+    "r2_XML_rerun": false,
+    "r2_reused_r1_evidence": true,
+    "sha256": "80946b95aad2d03ca6d3ba342a5f17732659a58c6a187a3ebd63b201f1d46855",
+    "status": "LOCAL32_ELABORATION_VERIFIED_NOT_SIGNOFF",
+    "xml_sha256": "ca594af4efdeb12c0e938b5b3726f84ee9078782b231ef986a36e444c3059cd0"
+  },
+  "inputs": {
+    "candidate_manifest_sha256": "5a7ae65ece333666fdf15c6c717bc9a102892d3d36a0fcc04305b0f6a780abdd",
+    "compile_source_identity_fingerprint_sha256": "96548a63b7816a5147654908de8db5f39c560e28dd8db7ed4b6d7a7bc8fa3274",
+    "compile_sources": 159,
+    "cpu_and_original_mems_pinned_files": 43,
+    "expected_internal_macros": 33,
+    "native_proven_PT_compat_SDC_sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+    "new_X_wrapper_sha256": "400b8e51b4cfad62633f53df9905ab9fad5e8a5b300f41b3070a1c0ba19b57a7",
+    "original_B41_core_sha256": "710b8e180652f49751769e152a3b3a9e6a35ba622fb4c3e2385dc5ffab241fcb",
+    "rtl_f_sha256": "0de94264b6043f856b14d42e27636d1b4dc57e6a8a264fdc173176021ccfcb25",
+    "sdc_sha256": "c15ede0fc2c65771f87e2d6aee763b4ea0d53934868ca807b4785c36182fce7c",
+    "sealed_files": 183,
+    "source_manifest_sha256": "a0e2d68c248484348468227923051685d532f178292b8f37d651fe3c4b31e613",
+    "staged_core_sha256": "0c3570c361d78b41bad2e4451335981c2fd4e59b8b07f6ac244632d7726cdb14",
+    "x_logical_bytes": 2048,
+    "x_physical_bytes": 32768
+  },
+  "new_netlist_mapped_equivalence": "PENDING",
+  "new_remote_or_EDA_or_simulation": false,
+  "official_area_units_and_macro_pricing": "UNRESOLVED",
+  "old_sealed_evidence_overwritten": false,
+  "original337_reference_profile_review": {
+    "core_source": "fixed tracked original B archive",
+    "path": "build/compliant32-20261113/ppa-register-reference-check-r1",
+    "source_count": 158,
+    "status": "SEALED_INPUTS_REVIEWED_NOT_EXECUTED"
+  },
+  "package_manifest_sha256": "398dbb7144fb2b587f53efac51cc4432013422944ae22443d764e53d4f1c15ef",
+  "preflight": {
+    "failures": [],
+    "max_local_cores": 1,
+    "path": "build/compliant32-20261113/ppa-xmacro-local-r2/result.json",
+    "preprocessed_x_rows": {
+      "macro": 16,
+      "register": 0
+    },
+    "sha256": "97c341454f9c42bf926b8582b93830089f326ac07d763edbaf7a085c91cf1309",
+    "source_drift": [],
+    "status": "LOCAL32_PREPROCESS_VERIFIED_NOT_SIGNOFF"
+  },
+  "preparation_receipt_sha256": "db7354ab65b483ae3679421776151341eff1ceed5a99d6c375dee7bc546d37b0",
+  "prepared_directory": "build/compliant32-20261113/ppa-xmacro-inputs-r2",
+  "prepared_manifest_sha256": "9f85ca00b8633cdac549473d7d7af23ea0e03a20afa7aaa668c99948be1b7650",
+  "production_RTL_changed_by_this_task": false,
+  "same_netlist_activity_and_power": "PENDING",
+  "schema": "sysbus32-xmacro-local-package-preparation-evidence-v1",
+  "status": "SEALED_AND_IDENTICAL_SOURCE353_XML_CHECKED_NOT_QUALIFIED",
+  "timing_verdict": "NOT_RUN",
+  "toolchain": {
+    "dc": {
+      "path": "/eda/synopsys/dc/dc_2022.03-SP5-5/bin/dc_shell",
+      "sha256": "23a4101c711fdb4747a57e6f9524d4989eb76a2b3120f0fa9766f4b25ae8e6d2"
+    },
+    "eligibility": "ACTUAL_OLD_B_IDENTITIES_REUSED_NEW_RUN_MUST_REHASH",
+    "libraries": [
+      {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ss-extract/S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+        "role": "standard_cell",
+        "sha256": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723"
+      },
+      {
+        "path": "/storage2/2026contest/server4/s4_23usr/Desktop/xu-work/xu-libs/xu-ramsp1024x16-ss-0p99v-125c.db",
+        "role": "sram",
+        "sha256": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+      }
+    ],
+    "library_compiler": {
+      "launcher_sha256": "15bb8615ae34742544f2149daa47c645d41fd0080372b0a453e7bd19ed083166",
+      "root": "/eda/synopsys/lib_compiler/lib_compiler_2022.03-SP5",
+      "scope": "child process environment only"
+    },
+    "local_library_files_examined": false,
+    "pt": {
+      "path": "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+      "sha256": "afdcfa7071f86d229ed3b4481f67adefd1c51bb0288b7e7d370213a43b70c9ef"
+    },
+    "schema": "sysbus32-exact-B-native-toolchain-v1",
+    "sdc_pt_add_sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+    "sdc_sha256": "c15ede0fc2c65771f87e2d6aee763b4ea0d53934868ca807b4785c36182fce7c"
+  }
+}

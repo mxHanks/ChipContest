@@ -1,0 +1,105 @@
+{
+  "archive_security_cases": [
+    {
+      "case": "absolute",
+      "reason": "unsafe package path: /escape",
+      "status": "REJECTED"
+    },
+    {
+      "case": "parent",
+      "reason": "unsafe package path: ../escape",
+      "status": "REJECTED"
+    },
+    {
+      "case": "nested-parent",
+      "reason": "unsafe package path: a/../../escape",
+      "status": "REJECTED"
+    },
+    {
+      "case": "windows-absolute",
+      "reason": "noncanonical package path: C:/escape",
+      "status": "REJECTED"
+    },
+    {
+      "case": "backslash",
+      "reason": "unsafe package path: a\\..\\escape",
+      "status": "REJECTED"
+    },
+    {
+      "case": "symlink",
+      "reason": "archive links/special nodes forbidden: link",
+      "status": "REJECTED"
+    },
+    {
+      "case": "hardlink",
+      "reason": "archive links/special nodes forbidden: link",
+      "status": "REJECTED"
+    },
+    {
+      "case": "fifo",
+      "reason": "archive links/special nodes forbidden: node",
+      "status": "REJECTED"
+    },
+    {
+      "case": "duplicate",
+      "reason": "duplicate archive member: same",
+      "status": "REJECTED"
+    },
+    {
+      "case": "normal-regular-file",
+      "status": "ACCEPTED"
+    },
+    {
+      "case": "wrong-fixed-archive-SHA",
+      "status": "REJECTED_BEFORE_RECOVERY"
+    }
+  ],
+  "default_clean_clone_test": {
+    "child_HEAD": "62ff09742218eae9733fc923f4f24201f4526967",
+    "historical_old_build_tree_present": false,
+    "parent_HEAD": "dafd56613e6cf084e3aa64d90e948008216da524",
+    "pending_parent_files_copied": [
+      "experiments/s3-y32-compliant32/ppa",
+      "experiments/s3-y32-compliant32/structure"
+    ],
+    "prepare_log_sha256": "9214526999a38afc779b536208b9d1857975f9a2df77576f18e64257e839ead8",
+    "root": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/ppa-clean-clone-r2/checkout",
+    "scope": "Fresh local parent+child clones, pending new files copied before unified parent commit, default tracked-archive recovery; no old build tree"
+  },
+  "explicit_relocated_archives_test": {
+    "command": [
+      "python3",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/ppa-clean-clone-r2/checkout/experiments/s3-y32-compliant32/ppa/prepare.py",
+      "--reference-package",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/docs/validation/s3-y32-area-opt-20261111/candidate-b-ppa-inputs-r3.tar.xz",
+      "--reference-native-package",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/docs/validation/s3-y32-area-opt-20261111/candidate-native-reports-r4.tar.xz",
+      "--out",
+      "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/ppa-clean-clone-r2/checkout/build/reproduced32/explicit-candidate"
+    ],
+    "existing_verified_caches_reused_without_overwrite": true,
+    "log_sha256": "08a6df5c68cbf868a15dde10816aa052c484933feaeffe5223dcee567fff38db",
+    "status": "RECOVERY_VERIFIED"
+  },
+  "hardware_static_identity": {
+    "compile_sources": 158,
+    "generic_macro_and_SDC_and_emitters_identical": true,
+    "r1_r2_clean_clone_order_and_all_source_SHA256_identical": true,
+    "r1_xml_receipt": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/ppa-local-r1/result.json",
+    "scope": "Prior XML result applies to identical elaboration inputs only; r2 package identity is new",
+    "xml_rerun": false
+  },
+  "new_EDA_or_remote_or_simulation": false,
+  "private_old_build_tree_required": false,
+  "production_RTL_changed": false,
+  "r1_archive_preserved": true,
+  "r2": {
+    "all_seals_and_archived_members_verified": true,
+    "archive": "/home/mxhanks/.codex/worktrees/s3-y32-writeback/ChipContest/build/compliant32-20261113/ppa-inputs-r2.tar.gz",
+    "archive_sha256": "58da5bd40bfe45fe50e750017c08513ddf62c13b7090d95b90a391f167a7159c",
+    "package_manifest_sha256": "16e415db168461a822715984aad2d4c1ee2bf195e94c6e4ef8b9e12475697fa6",
+    "sealed_files": 179
+  },
+  "schema": "sysbus32-clean-clone-reference-recovery-review-v1",
+  "status": "TRACKED_REFERENCE_RECOVERY_AND_SEALS_VERIFIED_NOT_SIGNOFF"
+}
