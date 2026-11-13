@@ -1,0 +1,120 @@
+****************************************
+Report : constraint
+	-all_violators
+	-verbose
+	-removal
+Design : xu_soc_sysbus32_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Fri Nov 13 23:44:39 2026
+****************************************
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg
+               (removal check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  input external delay                                0.00000000 0.00000000 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 0.00000000 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U10/ZN (NAND2BV0_12TR40)
+                                                      0.07644130 0.07644130 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/U2/ZN (CLKINV0_12TR40)
+                                                      0.04456939 0.12101069 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN (DRNQV0_12TR40)
+                                                      0.00000000 0.12101069 r
+  data arrival time                                              0.12101069
+
+  clock xu_lfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/CK (DRNQV0_12TR40)
+                                                                 0.10000000 r
+  library removal time                                0.06111633 0.16111633
+  data required time                                             0.16111633
+  ------------------------------------------------------------------------------
+  data required time                                             0.16111633
+  data arrival time                                              -0.12101069
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.04010564
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg
+               (removal check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  input external delay                                0.00000000 0.00000000 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 0.00000000 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U10/ZN (NAND2BV0_12TR40)
+                                                      0.07644130 0.07644130 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/U3/ZN (CLKINV0_12TR40)
+                                                      0.04456939 0.12101069 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN (DRNQV0_12TR40)
+                                                      0.00000000 0.12101069 r
+  data arrival time                                              0.12101069
+
+  clock xu_lfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/CK (DRNQV0_12TR40)
+                                                                 0.10000000 r
+  library removal time                                0.06111633 0.16111633
+  data required time                                             0.16111633
+  ------------------------------------------------------------------------------
+  data required time                                             0.16111633
+  data arrival time                                              -0.12101069
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.04010564
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_hfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg
+               (removal check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: min
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_hfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  input external delay                                0.00000000 0.00000000 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 0.00000000 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U10/ZN (NAND2BV0_12TR40)
+                                                      0.07644130 0.07644130 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/U2/ZN (CLKINV0_12TR40)
+                                                      0.04456939 0.12101069 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN (DRNQV0_12TR40)
+                                                      0.00000000 0.12101069 r
+  data arrival time                                              0.12101069
+
+  clock xu_lfextclk (rise edge)                       0.00000000 0.00000000
+  clock network delay (ideal)                         0.00000000 0.00000000
+  clock reconvergence pessimism                       0.00000000 0.00000000
+  clock uncertainty                                   0.10000000 0.10000000
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/CK (DRNQV0_12TR40)
+                                                                 0.10000000 r
+  library removal time                                0.06111633 0.16111633
+  data required time                                             0.16111633
+  ------------------------------------------------------------------------------
+  data required time                                             0.16111633
+  data arrival time                                              -0.12101069
+  ------------------------------------------------------------------------------
+  slack (VIOLATED)                                               -0.04010564
+
+
+1

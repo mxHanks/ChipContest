@@ -1,46 +1,51 @@
 # 原1064候选：继续时序修复检查点
 
-本记录延续[22:55最终报告](s3-y32-ingress-perf-final-timing-report-20261113.md)。目标仍为原1064.35 task/s候选；RTL保持5470c565，保留原SDC与原库。本次检查点已取得空时钟缓冲cleanup r3的原生DC与全新PT完成状态；异步端点r5及后续复位分组仍在执行链中。新原件和严格结构证明未回传核验前，不能替代前轮完整交付证据。
+本记录延续[22:55最终报告](s3-y32-ingress-perf-final-timing-report-20261113.md)。目标仍为原1064.35 task/s候选，RTL保持`5470c565`。按用户23:50截止要求，**23:48:46冻结async r5（含cleanup r3）**；2,036,672字节回传包在**23:49:57.970**完整落盘并通过传输整包SHA，解包与64份负载文件逐SHA/长度核验于23:50:08完成。冻结后仅补充核验和报告，不修改候选或重跑EDA。
 
-## 已证实基线和新试验
+## 冻结结果
 
-前轮新PT完整STA仍有7项数值违例、4项unknown及292项复位网电气违例。292项是前轮基线，后续异步/复位分组尚无最终DRC结论，不能将其写成新试验后的结果。12任务吞吐复测为1691172 cycles、304128个Y32逐位PASS；按假设150MHz换算1064.350640 task/s。时序未闭合，所以不是签核吞吐。
+| 项目 | 冻结数据 |
+|---|---:|
+| 数值时序违例 | **3**（前轮7，原映射467） |
+| hold／removal违例 | **0／3** |
+| setup/recovery unknown | **4**，保留原未测状态 |
+| total／met／untested | 328981／299646／29332 |
+| 电气违例 | **292**，无新增或恶化 |
+| 标准单元面积 | **356901.9888 原库单位** |
+| 内部33 SRAM面积 | 301901.305662 原库单位 |
+| 保守上界 | **658803.294462 原库单位** |
+| 12任务RTL周期／假定150MHz吞吐 | 1691172／**1064.350640 task/s** |
 
-4端点实验只选择两个AON首级D和两个PMU SDN；其双极性实际最大传播时间已可由原生PT取得，但最大检查required/slack仍UNKNOWN。三个reset-catch RDN缺外部源的最大传播证据，暂不进行延迟修改。任何工程延迟包络都不能替代异步相位/RDC/脉宽签核。
+吞吐复测沿用22:40:41–22:50:08的实际CPU12运行，304128个Y32逐位PASS；此次未更改RTL及编译执行源，ECO没有改变周期性能。不能将条件150MHz吞吐写为时序签核吞吐；没有新mapped带延迟任务仿真，也没有官方mm²换算。
 
-- r3在最终完整STA拒绝：PMU局部裕量0.038940 ns，后续端点插入后回落到0.023155 ns，低于0.03 ns。未进入DC回放，未采纳。
-- r4每次插入都full更新，并跨4端点累计迭代；被传播包络下限拒绝：尚未修改的PMU邻端点最大到达由0.627842下降至0.619017 ns。这是负载变化，未超过最大传播上限；未采纳。
-- r5把最大传播保护明确为非负实际到达且不超过原到达+0.5 ns。最小裕量、每端点8颗/总32颗预算、完整STA、原约束、unknown保留和全局电气守卫不变。新结果待实测，不能写成PASS。
+四端点工程修复新增12颗原生身份BUF：两个AON D各2颗，两个PMU SDN各4颗。最终完整STA裕量依次为**0.055039、0.055039、0.077078、0.080822 ns**；最大检查仍UNKNOWN。diagnose/edit/DC apply/fresh PT reload均RC0，源漂移、原生工具错误、缺失输出均为空；完整coverage没有新违例或新untested，电气逐身份无新增/恶化。353 SRAM保留，35颗空clock BUF已移除，保留1525颗clock BUF、根叶扇出18。
 
-## 流程阻塞排除与合并验收
+- 冻结mapped.v SHA256：`9b1c0688139e15decdeb0a08b31b50f600bfc3f1fe93056d520ccf3ee501e2e8`。
+- 原件包SHA256：`5905db8f5e53c0a85c9a66192841111b822ec84d646083967db1e09898ba00e8`。
+- [回收与冻结回执](validation/s3-y32-ingress-perf-native-20261113/timing-frozen-2350/freeze-recovery.json)、[原生轻量证据包](validation/s3-y32-ingress-perf-native-20261113/timing-frozen-2350/frozen-2350-evidence.tar.xz)、[新PT完整coverage](validation/s3-y32-ingress-perf-native-20261113/timing-frozen-2350/async5/reload/persisted-coverage.rpt)、[完整电气报告](validation/s3-y32-ingress-perf-native-20261113/timing-frozen-2350/async5/reload/persisted-all_violators.rpt)。
 
-空时钟缓冲cleanup r3已实际完成原生DC回放和全新PT重载，返回码均为0，源漂移、原生工具错误和必需产物缺失均为零。删除34个原已空输出及随后变空的1个祖先，共35个新增身份BUF；剩余时钟缓冲1525个，根叶扇出18，全部353颗SRAM保留。当前完整PT仍为7项数值违例、29332项untested，清理没有消除剩余异步问题。
+**未纳入冻结**：reset r1的17根／128组批量试验仍停留在等待只读catch诊断的协调阶段，原生probe/split未执行，已停止其协调器。三个catch的外部最大传播新诊断没有完成回执；这是实际流程阻塞。不能将其静态计划写成已实施修复。剩余3个catch removal、4个unknown、292个复位电气违例均未闭合。
 
-| cleanup r3检查 | 原生执行状态 |
-|---|---|
-| DC回放／新PT重载 | 已完成，RC0，漂移／工具错误／缺失输出为零 |
-| 删除新增时钟BUF | 35，分两波34＋1；未删除原始叶单元 |
-| 保留时钟BUF／根叶扇出 | 1525／18 |
-| 实际SRAM数 | 353 |
-| 数值时序违例／untested | 7／29332 |
-| mapped.v SHA256 | `7eda3e3a0dd32db91e2c6efc721d077ec8f79631032b12a98c4ecf0a95e59c5b` |
-| 当前网表严格结构证明 | 待源网表及原生轻量证据回传后独立验证，尚不记PASS |
+## 核验及未闭合项
 
-r2原先因DC接口调用被拒绝：`all_connected`传入pin返回net。r3改为先取得唯一local net，再执行`all_connected -leaf`递归查询；同时以父单元`is_hierarchical`区分层级边界和真实叶输入，逐波删除前验证无真实叶输入或顶层端口观察。精确新增BUF白名单、353 SRAM保护、自身SVF和新PT完整重载均保留。原生执行完成与RC0不等于当前网表的严格结构证明已通过。
+冻结后独立严格mapped→mapped结构证明**PASS**：收缩当前2350颗原生I→Z身份缓冲后，保留原始叶单元的层级身份、类型、参数、端口、位宽及完整连接分区相同。精确1796颗原死单元白名单重新证明，其中36颗状态单元；全部353 SRAM保留。删除实际SRAM和篡改其类型的负向检查均被拒绝。此证明不能替代RTL→mapped FM或物理时钟／复位签核。[严格证明原件](validation/s3-y32-ingress-perf-native-20261113/timing-frozen-2350/mapped-structural-equivalence.json)。
 
-复位分组工具已本地预检：按实际网表重绑定17根、128组，每组1至16负载；1477接收端只是静态目录。原生仅按17根有限worst-context查询，结合完整coverage和DRC逐检查身份保护，不做1477端点逐项扫描。不修改unknown/no_clock原因，不增加false path或降低频率。工具封包正在上传；将绑定实际完成的async r5种子重新解析网表，再运行17根／128组试验。当前尚无可验收的原生结果，不能把本地计划写成已实施修复。
+仍有3项reset-catch removal（均为aonrst_catch RDN，slack均为−0.04010564ns），4项setup/recovery unknown，以及292项复位网电气违例（16项max-cap、276项max-transition）。未知和no_clock/constant_disabled逐检查原因未新增或改变；没有增加false path、multicycle、异步时钟组、ideal network，也未改变频率或IO预算。
 
-async r5当前处于edit阶段；三个reset-catch端点的只读传播诊断已排队，尚无修改或通过结论。后续在一条明确完成的候选链上集中进行DC回放、新PT完整STA、结构一致性和面积验收。既有CPU12复测仅在RTL及执行源身份不变且新mapped结构证明通过后复用；若功能源变更，重新执行吞吐测量。
+真实异步输入或复位释放若能以任意相位到达接收边沿，增加固定延迟只会平移相位，仍可能落进setup/hold或recovery/removal窗口。实际最大传播时间有数值不能为UNKNOWN的required time建立裕量；“不超过基线＋0.5ns”只是工程试验保护，不构成异步、RDC、外部断言脉宽、物理PVT/偏斜资格。本次也没有SPEF、CTS、布局后多角时序、官方面积mm²、功耗或600样本最终评测证明。
 
+独立原生回执与报告审查确认5份clean回执、64份负载文件、原SDC／PT兼容SDC、双库和祖先链身份一致；292项DRC的pin／type／slack与cleanup r3逐项相同。26343行时钟关联表的行顺序变化不改变语义。[独立审查记录](validation/s3-y32-ingress-perf-native-20261113/timing-frozen-2350/independent-native-review.json)、[交付清单](validation/s3-y32-ingress-perf-native-20261113/timing-frozen-2350/manifest.json)。
 
-## 为什么仍未闭合
+原生最终DDC留存于`/tmp/codex-ingress1064-async-edge-20261113-r5/apply/mapped.ddc`；回传包包含实际最终Verilog、SDC、各级自身与祖先SVF及报告，排除工艺库。原约束以原始SDC SHA、PT三处-add兼容转换SHA和实际执行输入绑定核验；DC导出的mapped.sdc是独立输出，不能用其文本SHA冒充原始SDC SHA。
 
-原SDC及HF/LF检查合同保持不变，4项setup/recovery仍为unknown，不能改记met。实际最大传播时间有数值，只能说明在当前输入和库模型下信号经过逻辑的到达时间；当required time或有效检查上下文未知时，它不能给出已验证的setup/recovery裕量。
+## 修复过程和实际阻塞
 
-真实异步输入或复位释放若能以任意相位到达HF或LF接收边沿，增加固定延迟只会平移到达相位，仍可能落进接收端的setup/hold或recovery/removal窗口。单靠固定BUF数量不能保证所有相位安全，也不能建立异步释放、RDC、断言脉宽和物理偏斜资格。当前保留非负实际到达及“相对原实际最大传播不超过＋0.5ns”的上限包络，是限制工程试验影响范围的保护；独立最小路径和完整STA／DRC守卫继续执行，这些共同构成工程候选条件，仍不等同于异步签核。
+r3延迟试验在最终完整STA中被拒绝：PMU局部裕量0.038940ns回落至0.023155ns。r4改为每次插入full更新并跨4端点迭代，但尚未修改的相邻PMU最大到达从0.627842降至0.619017ns，被原“必须不减小”的下限拒绝。r5将最大传播限定为非负且不超过基线＋0.5ns，保留独立最小裕量、每端点8颗／总32颗预算和完整STA／DRC保护，最终实际使用12颗并通过DC和新PT。
 
-因此，三个reset-catch端点的外部最大传播证据、4项unknown及后续复位分布DRC仍是未完成项。r5或17根试验未完成前，不把前轮292项DRC、静态组数或已准备的工具记作新结果；待原生报告返回后逐项核验。
+clock cleanup r2因`all_connected`对pin返回net而拒绝；r3先取得唯一local net，再执行`all_connected -leaf`递归验证，并用父单元is_hierarchical区分边界和真实叶输入。分两波删除34＋1颗新增时钟BUF，原生逐波无观察性保护和完整保留时钟关联检查通过。该中间阶段仍7项数值违例；随后async r5将其中4项修复，冻结结果为3项。
 
-## 下一检查点
+复位分组工具已完成本地预检、封包传送及实际网表重绑定功能：17根、128组，每组1至16负载；1477接收端只是静态目录。原生查询限定17根的worst64上下文，并有完整coverage与DRC逐身份保护。截止冻结，其协调器因等待catch只读诊断而未启动原生probe／split，已停止，不把工具准备或静态组数记作修复完成。三个catch的新传播诊断没有完成回执，后续须先排除此流程阻塞。
 
-23:37收到集中ECO、合并验收要求，下一检查点为23:57。届时按实际执行状态更新剩余数值违例/unknown/DRC、失败原因、网表和回执SHA及可信ETA；未闭合继续明确保留并修复。当前不能承诺全部异步签核在20分钟内完成。
+## 冻结后的交付规则
+
+23:57检查点已被用户23:50回收冻结要求取代。当前候选数据保持冻结，本次仅补充原件哈希、严格证明和交付清单。剩余复位修复必须使用新的实验／候选和独立报告，不能覆盖本次冻结数据或将未闭合项改记通过。

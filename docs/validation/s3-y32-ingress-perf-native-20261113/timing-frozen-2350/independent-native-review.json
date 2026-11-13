@@ -1,0 +1,357 @@
+{
+  "schema": "ingress1064-frozen-2350-independent-agent-review-v1",
+  "status": "PASS_WITH_EXPLICIT_SCOPE_LIMITS",
+  "freeze": {
+    "status": "DATA_FROZEN_NOT_TIMING_QUALIFIED",
+    "freeze_epoch": 1794584926.0181227,
+    "freeze_beijing": "2026-11-13 23:48:46",
+    "selected": "async-edge-r5-after-clock-cleanup3",
+    "excluded": "reset-eco-r1-incomplete-not-accepted",
+    "map_sha256": "9b1c0688139e15decdeb0a08b31b50f600bfc3f1fe93056d520ccf3ee501e2e8",
+    "timing_violations": 3,
+    "unknown_checks": 4,
+    "untested": 29332,
+    "qualification": false
+  },
+  "errors": [],
+  "catalog_files_verified": 64,
+  "catalog_manifest_sha256": "25b21907fd6bbe7b63f16555e91f59b5a252433c86b11ccbf11a33f5bb00515f",
+  "receipts": {
+    "async5/apply": {
+      "receipt_sha256": "4fe00af10bfc0b9f561578852027f7309938572ce8c93899e91c0276f8127eba",
+      "schema": "ingress1064-n3-async-edge-envelope-v1",
+      "stage": "apply",
+      "clean": true,
+      "baseline_execution_sha256": "19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290",
+      "package_sha256": "3e80cedcee131bea7ba2a51dfaa32f44d7af25fda45116ce10a8be7b217039a1",
+      "source_mapped_sha256": "7eda3e3a0dd32db91e2c6efc721d077ec8f79631032b12a98c4ecf0a95e59c5b",
+      "source_ddc_sha256": "01a5b971c2cb6ec5683110ddbdf592f2362832a8be40e4fa86c7f879045a5f3d",
+      "prior_execution_sha256": "680f639a1136219689013a9d4efde500b79aeedd7d4092dde17009d271612483",
+      "same_original_SDC": true,
+      "same_original_DB_hashes": true,
+      "returned_native_outputs_verified": 11,
+      "all_receipted_outputs_count": 24,
+      "coverage_review": null,
+      "electrical_review": null
+    },
+    "async5/edit": {
+      "receipt_sha256": "680f639a1136219689013a9d4efde500b79aeedd7d4092dde17009d271612483",
+      "schema": "ingress1064-n3-async-edge-envelope-v1",
+      "stage": "edit",
+      "clean": true,
+      "baseline_execution_sha256": "19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290",
+      "package_sha256": "3e80cedcee131bea7ba2a51dfaa32f44d7af25fda45116ce10a8be7b217039a1",
+      "source_mapped_sha256": "7eda3e3a0dd32db91e2c6efc721d077ec8f79631032b12a98c4ecf0a95e59c5b",
+      "source_ddc_sha256": "01a5b971c2cb6ec5683110ddbdf592f2362832a8be40e4fa86c7f879045a5f3d",
+      "prior_execution_sha256": "2b48ff8f799dc50b1a06a6b530e445153f8a6b72010a12be99f329e64b340210",
+      "same_original_SDC": true,
+      "same_original_DB_hashes": true,
+      "returned_native_outputs_verified": 8,
+      "all_receipted_outputs_count": 133,
+      "coverage_review": {
+        "after": {
+          "met": 299646,
+          "total": 328981,
+          "untested": 29332,
+          "violated": 3
+        },
+        "before": {
+          "met": 299642,
+          "total": 328981,
+          "untested": 29332,
+          "violated": 7
+        },
+        "new_untested_checks": 0,
+        "new_violated_checks": 0
+      },
+      "electrical_review": {
+        "after_violations": 292,
+        "before_violations": 292,
+        "comparison_tolerance_ns_or_library_cap": 1e-05,
+        "new_violations": 0,
+        "worsened_violations": 0
+      }
+    },
+    "async5/reload": {
+      "receipt_sha256": "80940c0fbc9cd124666bcb33b47cfdf333df0a4e530aaaaae2d6f4cf808e0581",
+      "schema": "ingress1064-n3-async-edge-envelope-v1",
+      "stage": "reload",
+      "clean": true,
+      "baseline_execution_sha256": "19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290",
+      "package_sha256": "3e80cedcee131bea7ba2a51dfaa32f44d7af25fda45116ce10a8be7b217039a1",
+      "source_mapped_sha256": "9b1c0688139e15decdeb0a08b31b50f600bfc3f1fe93056d520ccf3ee501e2e8",
+      "source_ddc_sha256": "760725fefadab4af73df5dc69e1eb3571d35fe7c9bf49d68b8e54ecbeaa2bced",
+      "prior_execution_sha256": "4fe00af10bfc0b9f561578852027f7309938572ce8c93899e91c0276f8127eba",
+      "same_original_SDC": true,
+      "same_original_DB_hashes": true,
+      "returned_native_outputs_verified": 14,
+      "all_receipted_outputs_count": 88,
+      "coverage_review": {
+        "after": {
+          "met": 299646,
+          "total": 328981,
+          "untested": 29332,
+          "violated": 3
+        },
+        "before": {
+          "met": 299642,
+          "total": 328981,
+          "untested": 29332,
+          "violated": 7
+        },
+        "new_untested_checks": 0,
+        "new_violated_checks": 0
+      },
+      "electrical_review": {
+        "after_violations": 292,
+        "before_violations": 292,
+        "comparison_tolerance_ns_or_library_cap": 1e-05,
+        "new_violations": 0,
+        "worsened_violations": 0
+      }
+    },
+    "cleanup3/apply": {
+      "receipt_sha256": "a454ce8aebc3822ceb1d546fe95c0dcf608d7bd0fc9974e61ae20bd05eda8337",
+      "schema": "ingress1064-n3-zero-clock-buffer-cleanup-v1",
+      "stage": "apply",
+      "clean": true,
+      "baseline_execution_sha256": "19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290",
+      "package_sha256": "61f31a7b02d9d670a5bc21134d7c3c8e91987e25c2f621f32998058afafb61e2",
+      "source_mapped_sha256": "3ae73f916f02491f4e154eb1b2b7b0938e95158a934ca80da37a51c09faedf30",
+      "source_ddc_sha256": null,
+      "prior_execution_sha256": null,
+      "same_original_SDC": true,
+      "same_original_DB_hashes": true,
+      "returned_native_outputs_verified": 10,
+      "all_receipted_outputs_count": 27,
+      "coverage_review": null,
+      "electrical_review": null
+    },
+    "cleanup3/reload": {
+      "receipt_sha256": "81aceef9fa5a0aecaa4035fd5a483d3c11e0257795c07902262106e323d83949",
+      "schema": "ingress1064-n3-zero-clock-buffer-cleanup-v1",
+      "stage": "reload",
+      "clean": true,
+      "baseline_execution_sha256": "19779073b505e90de94a9f377f5afc74902ca3f10168c5c4da2833fcf093b290",
+      "package_sha256": "61f31a7b02d9d670a5bc21134d7c3c8e91987e25c2f621f32998058afafb61e2",
+      "source_mapped_sha256": "3ae73f916f02491f4e154eb1b2b7b0938e95158a934ca80da37a51c09faedf30",
+      "source_ddc_sha256": null,
+      "prior_execution_sha256": "a454ce8aebc3822ceb1d546fe95c0dcf608d7bd0fc9974e61ae20bd05eda8337",
+      "same_original_SDC": true,
+      "same_original_DB_hashes": true,
+      "returned_native_outputs_verified": 10,
+      "all_receipted_outputs_count": 41,
+      "coverage_review": null,
+      "electrical_review": null
+    }
+  },
+  "chain_checks": {
+    "cleanup_reload_prior_matches_apply": true,
+    "async_edit_seed_apply_matches_cleanup": true,
+    "async_edit_seed_reload_matches_cleanup": true,
+    "async_edit_source_map_matches_cleanup_output": true,
+    "async_edit_source_DDC_matches_cleanup_output": true,
+    "async_apply_prior_matches_edit": true,
+    "async_reload_prior_matches_apply": true,
+    "async_reload_source_map_matches_frozen_map": true,
+    "async_reload_source_DDC_matches_apply_output": true,
+    "async_stage_package_hashes_same": true,
+    "async_stage_seed_identity_same": true
+  },
+  "source_constraints": {
+    "original_SDC_sha256": "c15ede0fc2c65771f87e2d6aee763b4ea0d53934868ca807b4785c36182fce7c",
+    "generated_mapped_SDC_commands_cleanup_vs_async_identical": true,
+    "generated_final_SDC_sha256": "b0b0668591182f51612a77dae10a712714fcc44bd25bb4c3cf7b572368cd3c51",
+    "generated_SDC_is_not_PT_source_SDC": true,
+    "all_clock_association_file_hashes_identical": false,
+    "generated_SDC_comparison": "Exact non-comment nonblank line multiset equality; only timestamp/comment and command ordering differ.",
+    "generated_cleanup_SDC_sha256": "521db165ef0d02099e749fce89f4e76e2b890100228d8a4a0882492a4ca640a5",
+    "generated_SDC_noncomment_line_count": 1169,
+    "all_clock_association_semantic_tables_identical": true,
+    "clock_association_unique_pin_rows": 26343,
+    "clock_association_comparison": "Exact header and pin-to-clock row equality after row-order normalization; no missing, extra, or changed entries.",
+    "clock_association_file_sha256": {
+      "cleanup3/reload/original-clock-association.tsv": "f80521cfd31901e2305ac76852b6a365d6435650907c29978d02d022e365b37a",
+      "async5/edit/original-clock-association.tsv": "d58d4cf4a11698a0ebac4753212609cf075217d975b56186eb48b7e593da2e30",
+      "async5/apply/original-clock-association.tsv": "d58d4cf4a11698a0ebac4753212609cf075217d975b56186eb48b7e593da2e30",
+      "async5/reload/original-clock-association.tsv": "8f664832b049ec6155ec72597dd0b4df641f5c4aca559aa60033ee923ba96dad"
+    }
+  },
+  "coverage": {
+    "setup": {
+      "total": 83414,
+      "met": 79342,
+      "violated": 0,
+      "untested": 4072
+    },
+    "hold": {
+      "total": 83414,
+      "met": 79344,
+      "violated": 0,
+      "untested": 4070
+    },
+    "recovery": {
+      "total": 19883,
+      "met": 19881,
+      "violated": 0,
+      "untested": 2
+    },
+    "removal": {
+      "total": 19883,
+      "met": 19880,
+      "violated": 3,
+      "untested": 0
+    },
+    "min_period": {
+      "total": 11649,
+      "met": 706,
+      "violated": 0,
+      "untested": 10943
+    },
+    "min_pulse_width": {
+      "total": 110326,
+      "met": 100081,
+      "violated": 0,
+      "untested": 10245
+    },
+    "clock_gating_setup": {
+      "total": 27,
+      "met": 27,
+      "violated": 0,
+      "untested": 0
+    },
+    "clock_gating_hold": {
+      "total": 27,
+      "met": 27,
+      "violated": 0,
+      "untested": 0
+    },
+    "out_setup": {
+      "total": 179,
+      "met": 179,
+      "violated": 0,
+      "untested": 0
+    },
+    "out_hold": {
+      "total": 179,
+      "met": 179,
+      "violated": 0,
+      "untested": 0
+    },
+    "All Checks": {
+      "total": 328981,
+      "met": 299646,
+      "violated": 3,
+      "untested": 29332
+    }
+  },
+  "remaining_numeric_checks": [
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN(rise)",
+      "kind": "removal",
+      "family": "reset_removal",
+      "slack_printed_ns": "-0.04",
+      "coverage_line": 103586,
+      "native_block_sha256": "82d8dddef9b51418b3fe37ee24f258ed22e672b5803a1f75939bc8536087539d",
+      "slack_full_precision_ns": -0.04010564
+    },
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN(rise)",
+      "kind": "removal",
+      "family": "reset_removal",
+      "slack_printed_ns": "-0.04",
+      "coverage_line": 103591,
+      "native_block_sha256": "8ea328f516fe42fb60bccbe44dce16f403d437221a1dd5b342e9650fc54915a0",
+      "slack_full_precision_ns": -0.04010564
+    },
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN(rise)",
+      "kind": "removal",
+      "family": "reset_removal",
+      "slack_printed_ns": "-0.04",
+      "coverage_line": 103596,
+      "native_block_sha256": "f39fb23046b50be0a4e44275311231ff190794227e7c3e17024e02367bd00c5b",
+      "slack_full_precision_ns": -0.04010564
+    }
+  ],
+  "untested_reason_counts": {
+    "no_clock": 10245,
+    "constant_disabled": 19083,
+    "unknown": 4
+  },
+  "unknown_checks": [
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+      "check": "setup",
+      "native_detail": "CK(rise) xu_lfextclk setup - untested unknown"
+    },
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+      "check": "setup",
+      "native_detail": "CK(rise) xu_lfextclk setup - untested unknown"
+    },
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)",
+      "check": "recovery",
+      "native_detail": "CK(rise) xu_lfextclk recovery sdf_cond(ENABLE_NOT_D===1'b1) untested unknown"
+    },
+    {
+      "pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)",
+      "check": "recovery",
+      "native_detail": "CK(rise) xu_lfextclk recovery sdf_cond(ENABLE_NOT_D===1'b1) untested unknown"
+    }
+  ],
+  "electrical": {
+    "total": 292,
+    "by_type": {
+      "max_capacitance": 16,
+      "max_transition": 276,
+      "min_capacitance": 0
+    },
+    "worst_by_type": {
+      "max_capacitance": {
+        "pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_xu_matrix_dma/U27/ZN",
+        "type": "max_capacitance",
+        "slack": -0.00326933
+      },
+      "max_transition": {
+        "pin": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_cpu_top/u_e203_cpu/u_e203_core/u_e203_exu/u_e203_exu_csr/U47/Z",
+        "type": "max_transition",
+        "slack": -0.00672734
+      }
+    },
+    "actual_values_identical_to_cleanup3": true
+  },
+  "area_raw_library_units": [
+    {
+      "component": "ALL_FULL_SOC_STANDARD_CELLS",
+      "area_library_units": "356901.9888",
+      "official_area_mm2": "UNVERIFIED_UNIT_CONVERSION"
+    },
+    {
+      "component": "ALL_33_INTERNAL_SRAM",
+      "area_library_units": "301901.305662",
+      "official_area_mm2": "UNRESOLVED_OFFICIAL_MACRO_TABLE"
+    },
+    {
+      "component": "CONSERVATIVE_UPPER_BOUND",
+      "area_library_units": "658803.294462",
+      "official_area_mm2": "NOT_A_CONTEST_SCORE"
+    }
+  ],
+  "selected_final_map": {
+    "sha256": "9b1c0688139e15decdeb0a08b31b50f600bfc3f1fe93056d520ccf3ee501e2e8",
+    "bytes": 16341423,
+    "own_SVF_sha256": "330ffdd46a2065f403f8df61334c193de15ca5f7828145fb617c2a78ab665802",
+    "DDC_receipted_sha256": "760725fefadab4af73df5dc69e1eb3571d35fe7c9bf49d68b8e54ecbeaa2bced",
+    "DDC_bytes_returned": false
+  },
+  "limits": [
+    "No new EDA or data mutation performed",
+    "Only returned subset of every native receipt output is verified locally; final mapped.ddc is not in this curated archive",
+    "Strict final mapped structural equivalence is being run independently by root; no PASS inferred here",
+    "Remaining3removal,4unknown and29332untested retain unqualified status",
+    "Reset distribution incomplete candidate excluded at freeze"
+  ],
+  "qualification": false
+}
