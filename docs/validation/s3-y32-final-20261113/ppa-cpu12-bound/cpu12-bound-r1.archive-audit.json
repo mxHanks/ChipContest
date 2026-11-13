@@ -1,0 +1,76 @@
+{
+  "schema": "final374-cpu12-package-allowlist-audit-v1",
+  "status": "EXACT_CATALOG_AND_EXPLICIT_ARTIFACT_ALLOWLIST_PASS_NO_EDA",
+  "archive_bytes": 554723,
+  "archive_sha256": "ec2a4994165a192be4bfef7cc61dc834e7c891ff1c2ea5f023910f5c38090e5a",
+  "package_files_sha256": "2e88c0227cff598108e2acfaf90f30301a83bc7be5cf65287406acadc8381ef4",
+  "transfer_manifest_sha256": "8e079a9fe800ccd1a98bbe2d804bd0c32ebe4ac6675af6bb7d34c00e1dc02845",
+  "member_count": 196,
+  "pinned_members_verified": 195,
+  "kinds": {
+    "own_metadata_tools": 22,
+    "own_evidence": 9,
+    "local_sim_model": 1,
+    "source": 164
+  },
+  "source_suffixes": [
+    ".v",
+    ".sv",
+    ".vh",
+    ".svh",
+    ".tcl",
+    ".sdc"
+  ],
+  "extra_source_tool": "source/tools/prepare.py",
+  "allowed_root_files": [
+    "README.md",
+    "area-charge-policy.json",
+    "area_components.tcl",
+    "controls.py",
+    "defines.json",
+    "final-vs-base.patch",
+    "manifest.json",
+    "package-files.json",
+    "pinned-cpu-and-mem-fab.json",
+    "preflight.py",
+    "prepare.py",
+    "profiles.py",
+    "pt_collect.tcl",
+    "reference-B.json",
+    "reference-recovery.json",
+    "review_native.py",
+    "rtl.f",
+    "run_once.py",
+    "source-manifest.json",
+    "synth.tcl",
+    "synthesis-emitter-vs-B.patch",
+    "toolchain.json"
+  ],
+  "allowed_evidence_files": [
+    "base-package-files.json",
+    "cpu-full12-checker.py",
+    "cpu-full12-simulation.log",
+    "cpu-full12.elf",
+    "cpu-full12.image",
+    "cpu-full12.json",
+    "cpu-source-package-files.json",
+    "original-full-soc.sdc",
+    "x-candidate/manifest.json"
+  ],
+  "forbidden_present": [],
+  "excluded": [
+    "vendor_DB_lib_alib",
+    "WORK",
+    "cache",
+    "credentials",
+    "serialized_environment",
+    "original_input_vectors_and_datasets"
+  ],
+  "own_runtime_artifacts": [
+    "simulation.log",
+    "firmware.elf",
+    "firmware.image"
+  ],
+  "native_eda_started": false,
+  "scope": "Independent GPIO374 package; does not trigger or replace original1064 N3 synthesis"
+}
