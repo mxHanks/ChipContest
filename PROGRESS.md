@@ -12,6 +12,7 @@
 | completed | 接入完整 E203/SoC 32-bit 路径 | 已复制隔离的 `output/xu-b41-20261112/official32/source`，使用 `XU_MATRIX_DMA`、不定义 `XU_MATRIX_DMA64`、`EXTERNAL_SYSMEM=1`，并在 `e203_subsys_perips.v` 接入 `xu_matrix_dma32_tile`；frozen source 未改写。 |
 | completed | 全 SoC 32-bit 展开烟测 | Verilator 全 RTL lint/build 完成并运行 `OFFICIAL32_SOC_ELAB_PASS`。该测试覆盖完整 `e203_soc_top` 的 32-bit 端口形状和模块展开；仍不等于官方固件、协议、时序或功耗验收。 |
 | completed | 自有服务器 staging | official32 包已传到 t7920：`/work/leo/chipcontest-xu-own155-diagnosis-20261105/b41-official32-20261112/official32`；远端核对 341 个 RTL 文件及 build/testbench/adapter SHA 与本机一致。新增 `pack32.py`、`BUILD-MANIFEST.md`、`manifest-sha256.txt` 也已同步并逐项核对。t7920 当前没有 Verilator/iverilog，因此不把远端 staging 误报成已复跑。 |
+| completed | GitHub 交接分支更新 | 32-bit 源码、官方32隔离工程、12 层打包向量、可复现脚本、复位阻塞证据、吞吐复算和当前报告已推送至 `mxHanks/ChipContest` 的 `feature/xu-b41-handoff-20261112`；最新提交 `abfc405`。本机 Verilator 对象文件已排除。 |
 | in_progress | 自有服务器可迁移回归准备 | 普通工程文件、冻结输入和交接包已集中在 t7920；本机继续执行需要 Verilator 的回归，远端仅做 staging、传输和可用工具检查，官方 VNC 不参与这些普通编译。 |
 | in_progress | 全 SoC 32-bit 功能/协议仿真 | 已加入原生 32-bit 外部端点诊断夹具并成功展开；独立 TB 的 AON/shared-memory 复位未释放，严格记录 `LOCAL_32BIT_SOC_RESET_GATE_BLOCKED commands=0 shared_rst=0`，不计作传输通过。下一步使用既有项目复位/固件启动环境或官方原生环境复跑。 |
 | pending | 官方服务器执行 | `cats-linux/cats-compute` 只指向 CATS-R4；VNC `ic4h22.nicu.cn:15923` 可达，FTP `icdesigns0.nicu.cn:18888` 当前返回连接池 421。官方目录仍为 `/tmp/xu-b41-close-20261111-r1`，确认必要动作后才走 VNC/FTP。 |
