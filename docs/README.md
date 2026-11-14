@@ -10,6 +10,7 @@
 | 入口流水与实验实现 | [当前实现说明](../experiments/s3-y32-ingress-perf/README.md) |
 | 原始性能/综合阶段报告 | [2026-11-13 报告](s3-y32-ingress-perf-synthesis-report-20261113.md)；时序状态以最终修复报告为准 |
 | 操作与接手 | [快速开始](../quickstart.md)、[HANDOFF](../HANDOFF.md) |
+| 本轮干净克隆与分支交付验收 | [验收记录](validation/repository-main-20261114/README.md) |
 | 旧候选、原交接与分支恢复 | [历史导航](history/README.md) |
 
 `validation/` 按候选与日期封存原件，原路径、SHA 清单和失败记录保持可追溯。旧报告描述各自当时状态，不能与当前结果拼接；`rejected-r2/` 是失败诊断，不能计作最终 clean 执行。公开原件可通过 `python3 -B tools/current.py verify --submodule` 核对，该命令不替代重新运行 EDA 或完整签核。

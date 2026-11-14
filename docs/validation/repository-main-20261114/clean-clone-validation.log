@@ -1,0 +1,143 @@
+Cloning into 'build/repo-main-20261114/clean-clone'...
+Submodule 'third-party/e203_hbirdv2' (https://github.com/mxhanks/e203_hbirdv2.git) registered for path 'third-party/e203_hbirdv2'
+Cloning into '/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/repo-main-20261114/clean-clone/third-party/e203_hbirdv2'...
+From https://github.com/mxhanks/e203_hbirdv2
+ * branch            5470c5650f2d11d16e7c52cc96626d21030a3973 -> FETCH_HEAD
+Submodule path 'third-party/e203_hbirdv2': checked out '5470c5650f2d11d16e7c52cc96626d21030a3973'
+
+CLEAN_CLONE_IDENTITY {"head": "b275f05d9dd5d6981432bd800f2e2a4d98d72633", "submodule": "5470c5650f2d11d16e7c52cc96626d21030a3973", "submodule_shallow": "false"}
+
+COMMAND ["python3", "-B", "tools/current.py", "verify", "--submodule"]
+{
+  "status": "EVIDENCE_VERIFIED_NOT_SIGNOFF",
+  "candidate": "s3-y32-ingress1064-postfreeze-catch3",
+  "archive_payload_files": 80,
+  "submodule": "VERIFIED",
+  "numeric_violations": 0,
+  "electrical_violations": 0,
+  "unknown_checks": 4
+}
+
+COMMAND ["python3", "-B", "tools/current.py", "ingress"]
+{"command": ["/usr/bin/python3", "-B", "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/repo-main-20261114/clean-clone/experiments/s3-y32-ingress-perf/run_ingress_regression.py"], "scope": "RTL_ENGINEERING_MEASUREMENT_NOT_GATE_DELAY_SIGNOFF"}
+INGRESS_FABRIC_PASS requests=1000 responses=1000 first=4 last=2000 acceptance_span=1997 min_gap=1 max_gap=2 retire_span=2002
+/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/repo-main-20261114/clean-clone/experiments/s3-y32-ingress-perf/tb_ingress32_fabric.sv:28: $finish called at 20055000 (1ps)
+INGRESS_PIPELINE_PASS loader=0 accepted=243 responses=239 reset_dropped=4 max_outstanding=4 simultaneous=182 errors=120 stalls=71
+/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/repo-main-20261114/clean-clone/experiments/s3-y32-ingress-perf/tb_ingress32_pipeline.sv:127: $finish called at 3357000 (1ps)
+INGRESS_PIPELINE_PASS loader=1 accepted=244 responses=240 reset_dropped=4 max_outstanding=4 simultaneous=186 errors=81 stalls=71
+/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/repo-main-20261114/clean-clone/experiments/s3-y32-ingress-perf/tb_ingress32_pipeline.sv:127: $finish called at 3377000 (1ps)
+
+COMMAND ["python3", "-B", "tools/current.py", "vectors", "--out", "build/judge/vectors"]
+{
+  "status": "VERIFIED_DELIVERY_EXTRACTED_NOT_SIGNOFF",
+  "out": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/repo-main-20261114/clean-clone/build/judge/vectors",
+  "files": [
+    "layer_00/bias.mem",
+    "layer_00/float-reference.npz",
+    "layer_00/w.mem",
+    "layer_00/w_packed16.mem",
+    "layer_00/x.mem",
+    "layer_00/y.mem",
+    "layer_00/y32.mem",
+    "layer_01/bias.mem",
+    "layer_01/float-reference.npz",
+    "layer_01/w.mem",
+    "layer_01/w_packed16.mem",
+    "layer_01/x.mem",
+    "layer_01/y.mem",
+    "layer_01/y32.mem",
+    "layer_02/bias.mem",
+    "layer_02/float-reference.npz",
+    "layer_02/w.mem",
+    "layer_02/w_packed16.mem",
+    "layer_02/x.mem",
+    "layer_02/y.mem",
+    "layer_02/y32.mem",
+    "layer_03/bias.mem",
+    "layer_03/float-reference.npz",
+    "layer_03/w.mem",
+    "layer_03/w_packed16.mem",
+    "layer_03/x.mem",
+    "layer_03/y.mem",
+    "layer_03/y32.mem",
+    "layer_04/bias.mem",
+    "layer_04/float-reference.npz",
+    "layer_04/w.mem",
+    "layer_04/w_packed16.mem",
+    "layer_04/x.mem",
+    "layer_04/y.mem",
+    "layer_04/y32.mem",
+    "layer_05/bias.mem",
+    "layer_05/float-reference.npz",
+    "layer_05/w.mem",
+    "layer_05/w_packed16.mem",
+    "layer_05/x.mem",
+    "layer_05/y.mem",
+    "layer_05/y32.mem",
+    "layer_06/bias.mem",
+    "layer_06/float-reference.npz",
+    "layer_06/w.mem",
+    "layer_06/w_packed16.mem",
+    "layer_06/x.mem",
+    "layer_06/y.mem",
+    "layer_06/y32.mem",
+    "layer_07/bias.mem",
+    "layer_07/float-reference.npz",
+    "layer_07/w.mem",
+    "layer_07/w_packed16.mem",
+    "layer_07/x.mem",
+    "layer_07/y.mem",
+    "layer_07/y32.mem",
+    "layer_08/bias.mem",
+    "layer_08/float-reference.npz",
+    "layer_08/w.mem",
+    "layer_08/w_packed16.mem",
+    "layer_08/x.mem",
+    "layer_08/y.mem",
+    "layer_08/y32.mem",
+    "layer_09/bias.mem",
+    "layer_09/float-reference.npz",
+    "layer_09/w.mem",
+    "layer_09/w_packed16.mem",
+    "layer_09/x.mem",
+    "layer_09/y.mem",
+    "layer_09/y32.mem",
+    "layer_10/bias.mem",
+    "layer_10/float-reference.npz",
+    "layer_10/w.mem",
+    "layer_10/w_packed16.mem",
+    "layer_10/x.mem",
+    "layer_10/y.mem",
+    "layer_10/y32.mem",
+    "layer_11/bias.mem",
+    "layer_11/float-reference.npz",
+    "layer_11/w.mem",
+    "layer_11/w_packed16.mem",
+    "layer_11/x.mem",
+    "layer_11/y.mem",
+    "layer_11/y32.mem",
+    "profile.json",
+    "vectors-manifest.json"
+  ]
+}
+
+COMMAND ["python3", "-B", "tools/current.py", "check-vectors", "--vectors", "build/judge/vectors"]
+GENERIC_Y32_VECTOR_VERIFY {"status": "PASS", "tasks": 12, "outputs": 304128, "exact_raw_mac_checked": true, "exact_y32_checked": true, "manifest_sha256": "4552d7f31cf8307e7440a8385b3ba83c1b67de7fdae975d23d38815c01b77d6b", "official_acceptance": "NOT_CERTIFIED_BY_VECTOR_AUDIT", "oracle_usage": "x/w/bias only for DUT loading; y/y32 checker-only"}
+
+COMMAND ["python3", "-B", "tools/current.py", "unpack-mapped", "--out", "build/judge/mapped"]
+{
+  "status": "VERIFIED_DELIVERY_EXTRACTED_NOT_SIGNOFF",
+  "out": "/home/mxhanks/.codex/worktrees/s3-y32-ingress-perf/ChipContest/build/repo-main-20261114/clean-clone/build/judge/mapped",
+  "files": [
+    "apply/eco.svf",
+    "apply/mapped.sdc",
+    "apply/mapped.v",
+    "apply/seed-svf/eco.svf",
+    "apply/seed-svf/seed-svf/eco.svf",
+    "apply/seed-svf/seed-svf/seed-svf/eco.svf",
+    "apply/seed-svf/seed-svf/seed-svf/seed-svf/eco.svf",
+    "apply/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/eco.svf",
+    "apply/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/eco.svf",
+    "apply/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/seed-hold.svf"
+  ]
+}

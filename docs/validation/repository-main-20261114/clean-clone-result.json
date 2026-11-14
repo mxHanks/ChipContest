@@ -1,0 +1,90 @@
+{
+  "schema": "chipcontest-clean-main-clone-validation-v1",
+  "started_at": "2026-11-14T10:00:29.949752+08:00",
+  "clone_command": [
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "--single-branch",
+    "--branch",
+    "main",
+    "--recurse-submodules",
+    "https://github.com/mxHanks/ChipContest.git",
+    "build/repo-main-20261114/clean-clone"
+  ],
+  "source": "GitHub HTTPS; no local object reuse",
+  "head": "b275f05d9dd5d6981432bd800f2e2a4d98d72633",
+  "expected_main_base": "b275f05",
+  "submodule_head": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+  "submodule_shallow": "false",
+  "status": "PASS",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "tools/current.py",
+        "verify",
+        "--submodule"
+      ],
+      "started_at": "2026-11-14T10:00:29.953829+08:00",
+      "returncode": 0,
+      "finished_at": "2026-11-14T10:00:30.620365+08:00"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "tools/current.py",
+        "ingress"
+      ],
+      "started_at": "2026-11-14T10:00:30.620817+08:00",
+      "returncode": 0,
+      "finished_at": "2026-11-14T10:00:31.438278+08:00"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "tools/current.py",
+        "vectors",
+        "--out",
+        "build/judge/vectors"
+      ],
+      "started_at": "2026-11-14T10:00:31.438693+08:00",
+      "returncode": 0,
+      "finished_at": "2026-11-14T10:00:32.205520+08:00"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "tools/current.py",
+        "check-vectors",
+        "--vectors",
+        "build/judge/vectors"
+      ],
+      "started_at": "2026-11-14T10:00:32.205939+08:00",
+      "returncode": 0,
+      "finished_at": "2026-11-14T10:00:34.276777+08:00"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "tools/current.py",
+        "unpack-mapped",
+        "--out",
+        "build/judge/mapped"
+      ],
+      "started_at": "2026-11-14T10:00:34.277319+08:00",
+      "returncode": 0,
+      "finished_at": "2026-11-14T10:00:34.693668+08:00"
+    }
+  ],
+  "finished_at": "2026-11-14T10:00:34.694282+08:00",
+  "repository_status": "",
+  "submodule_status": "",
+  "commands_performed_no_eda_no_cpu12": true
+}
