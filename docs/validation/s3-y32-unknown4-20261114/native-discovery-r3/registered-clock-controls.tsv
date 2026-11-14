@@ -1,0 +1,65 @@
+name	details
+create_clock_no_input_delay	0	name create_clock_no_input_delay value false default false help {} type bool constraint none
+eco_enable_fixing_clock_used_as_data	0	name eco_enable_fixing_clock_used_as_data value true default true help {} type bool constraint none
+extract_model_clock_latency_arcs_include_all_registers	0	name extract_model_clock_latency_arcs_include_all_registers value true default true help {} type bool constraint none
+extract_model_clock_transition_limit	0	name extract_model_clock_transition_limit value 5 default 5 help {} type real constraint range min 0
+extract_model_include_clock_tree_pulse_width	0	name extract_model_include_clock_tree_pulse_width value false default false help {} type bool constraint none
+extract_model_include_ideal_clock_network_latency	0	name extract_model_include_ideal_clock_network_latency value false default false help {} type bool constraint none
+extract_model_merge_clock_gating	0	name extract_model_merge_clock_gating value false default false help {} type bool constraint none
+extract_model_num_clock_transition_points	0	name extract_model_num_clock_transition_points value 5 default 5 help {} type int constraint range min 1
+extract_model_split_partial_clock_gating_arcs	0	name extract_model_split_partial_clock_gating_arcs value false default false help {} type bool constraint none
+extract_model_with_clock_latency_arcs	0	name extract_model_with_clock_latency_arcs value false default false help {} type bool constraint none
+hier_clock_mapping_period_percent_tolerance	0	name hier_clock_mapping_period_percent_tolerance value 0 default 0 help {} type real constraint range min 0
+hier_context_merge_clock_latency_mode	0	name hier_context_merge_clock_latency_mode value min_max_value default min_max_value help {} type string constraint list list {min_max_value largest_window}
+hier_context_merge_static_clock_latency_mode	0	name hier_context_merge_static_clock_latency_mode value automatic default automatic help {} type string constraint list list {automatic min_max_value smallest_window match_total_latency}
+hier_context_merge_strict_clock_equivalence	0	name hier_context_merge_strict_clock_equivalence value true default true help {} type bool constraint none
+hier_disable_auto_clock_mapping	0	name hier_disable_auto_clock_mapping value false default false help {} type bool constraint none
+hier_disable_auto_multi_clock_mapping	0	name hier_disable_auto_multi_clock_mapping value false default false help {} type bool constraint none
+hier_enable_pba_clock_latency_context	0	name hier_enable_pba_clock_latency_context value false default false help {} type bool constraint none
+hier_merge_match_clock_with_constant	0	name hier_merge_match_clock_with_constant value false default false help {} type bool constraint none
+hier_override_clock_sense_from_context	0	name hier_override_clock_sense_from_context value true default true help {} type bool constraint none
+merge_model_allow_generated_clock_renaming	0	name merge_model_allow_generated_clock_renaming value false default false help {} type bool constraint none
+model_validation_pba_clock_path	0	name model_validation_pba_clock_path value false default false help {} type bool constraint none
+power_clock_network_include_clock_gating_network	0	name power_clock_network_include_clock_gating_network value false default false help {} type bool constraint none
+power_clock_network_include_register_clock_pin_power	0	name power_clock_network_include_register_clock_pin_power value true default true help {} type bool constraint none
+power_default_base_clock	0	name power_default_base_clock value fastest default fastest help {} type string constraint none
+power_default_toggle_rate_reference_clock	0	name power_default_toggle_rate_reference_clock value related default related help {} type string constraint list list {fastest related}
+power_enable_advanced_cycle_power_analysis	0	name power_enable_advanced_cycle_power_analysis value false default false help {} type bool constraint none
+power_enable_clock_cycle_based_glitch	0	name power_enable_clock_cycle_based_glitch value false default false help {} type bool constraint none
+power_enable_clock_domain_based_glitch	0	name power_enable_clock_domain_based_glitch value false default false help {} type bool constraint none
+power_enable_clock_scaling	0	name power_enable_clock_scaling value false default false help {} type bool constraint none
+power_enable_ignore_create_generated_clock	0	name power_enable_ignore_create_generated_clock value false default false help {} type bool constraint none
+power_enable_rtl_advanced_cycle_power_analysis	0	name power_enable_rtl_advanced_cycle_power_analysis value false default false help {} type bool constraint none
+power_enable_write_clock_activity_in_power_waveform	0	name power_enable_write_clock_activity_in_power_waveform value false default false help {} type bool constraint none
+power_order_clock_events	0	name power_order_clock_events value false default false help {} type bool constraint none
+ps_cell_robustness_clock_period_ratio	0	name ps_cell_robustness_clock_period_ratio value 0 default 0 help {} type real constraint none
+sh_mm_resolve_clockdata	0	name sh_mm_resolve_clockdata value true default true help {} type bool constraint none
+timing_all_clocks_propagated	0	name timing_all_clocks_propagated value false default false help {} type bool constraint none
+timing_aocvm_enable_clock_network_only	0	name timing_aocvm_enable_clock_network_only value false default false help {} type bool constraint none
+timing_clock_gating_check_fanout_compatibility	0	name timing_clock_gating_check_fanout_compatibility value false default false help {} type bool constraint none
+timing_clock_gating_propagate_enable	0	name timing_clock_gating_propagate_enable value true default true help {} type bool constraint none
+timing_clock_reconvergence_pessimism	0	name timing_clock_reconvergence_pessimism value normal default normal help {} type string constraint list list {normal same_transition}
+timing_crpr_remove_clock_to_data_crp	0	name timing_crpr_remove_clock_to_data_crp value false default false help {} type bool constraint none
+timing_crpr_remove_muxed_clock_crp	0	name timing_crpr_remove_muxed_clock_crp value true default true help {} type bool constraint none
+timing_disable_clock_gating_checks	0	name timing_disable_clock_gating_checks value false default false help {} type bool constraint none
+timing_enable_auto_mux_clock_exclusivity	0	name timing_enable_auto_mux_clock_exclusivity value false default false help {} type bool constraint none
+timing_enable_clock_propagation_through_preset_clear	0	name timing_enable_clock_propagation_through_preset_clear value false default false help {} type bool constraint none
+timing_enable_clock_propagation_through_three_state_enable_pins	0	name timing_enable_clock_propagation_through_three_state_enable_pins value false default false help {} type bool constraint none
+timing_enable_from_clock_to_dangling_load_endpoints	0	name timing_enable_from_clock_to_dangling_load_endpoints value false default false help {} type bool constraint none
+timing_enable_normalized_slack	0	name timing_enable_normalized_slack value false default false help {} type bool constraint none
+timing_enable_pulse_clock_constraints	0	name timing_enable_pulse_clock_constraints value true default true help {} type bool constraint none
+timing_gclock_source_network_num_master_registers	0	name timing_gclock_source_network_num_master_registers value 10000000 default 10000000 help {} type int constraint none
+timing_ideal_clock_zero_default_transition	0	name timing_ideal_clock_zero_default_transition value true default true help {} type bool constraint none
+timing_input_port_default_clock	0	name timing_input_port_default_clock value false default false help {} type bool constraint none
+timing_is_clock_pin_attribute_on_clock_source_compatibility	0	name timing_is_clock_pin_attribute_on_clock_source_compatibility value false default false help {} type bool constraint none
+timing_lib_cell_derived_clock_name_compatibility	0	name timing_lib_cell_derived_clock_name_compatibility value true default true help {} type bool constraint none
+timing_max_normalization_cycles	0	name timing_max_normalization_cycles value 4 default 4 help {} type int constraint none
+timing_path_arrival_required_attribute_include_clock_edge	0	name timing_path_arrival_required_attribute_include_clock_edge value false default false help {} type bool constraint none
+timing_pocvm_max_transition_clock_sigma	0	name timing_pocvm_max_transition_clock_sigma value disabled default disabled help {} type string constraint none
+timing_propagate_interclock_uncertainty	0	name timing_propagate_interclock_uncertainty value false default false help {} type bool constraint none
+timing_remove_clock_reconvergence_pessimism	0	name timing_remove_clock_reconvergence_pessimism value true default true help {} type bool constraint none
+timing_report_invert_clock_min_pulse_width_constraints	0	name timing_report_invert_clock_min_pulse_width_constraints value false default false help {} type bool constraint none
+timing_report_output_delay_on_clock_source	0	name timing_report_output_delay_on_clock_source value false default false help {} type bool constraint none
+timing_report_trace_ideal_clocks	0	name timing_report_trace_ideal_clocks value false default false help {} type bool constraint none
+timing_simultaneous_clock_data_port_compatibility	0	name timing_simultaneous_clock_data_port_compatibility value false default false help {} type bool constraint none
+timing_single_edge_clock_gating_backward_compatibility	0	name timing_single_edge_clock_gating_backward_compatibility value false default false help {} type bool constraint none

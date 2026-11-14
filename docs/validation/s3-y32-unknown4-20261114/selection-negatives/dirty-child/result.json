@@ -1,0 +1,46 @@
+{
+  "schema": "ingress1064-async-digital-contract-v1",
+  "status": "FAILED",
+  "started_at": "2026-11-14T02:31:54.015798+00:00",
+  "qualification": "DIGITAL_FOUR_STATE_FUNCTIONAL_CONTRACT_ONLY_NOT_CDC_RDC_SIGNOFF",
+  "STA_unknown_status": "UNCHANGED_NOT_MARKED_MET",
+  "scope": "Actual production deglitch, reset catcher and complete sirv_pmu with its real submodules",
+  "internal_probes": [
+    "PMU erst_reset_r and erst_reset_r_r for asynchronous capture/hold/release only"
+  ],
+  "public_observations": [
+    "two real deglitch outputs",
+    "real AON reset catcher output",
+    "PMU public io_regs_cause_read[9:8]"
+  ],
+  "limitations": [
+    "Zero-delay four-state RTL simulation does not prove analog metastability, MTBF, recovery/removal or physical minimum pulse width.",
+    "One-femtosecond pulse checks digital event capture only and is not an admissible physical reset specification.",
+    "Release offsets avoid exactly coincident simulator edges; no setup/recovery margin is inferred.",
+    "HF/LF periods match the CPU stimulus integer-femtosecond periods; clocks have no phase relation or STA exceptions.",
+    "Unit-level composition does not prove complete wrapper boot-vector consumption timing, board input protocol or full-SoC CDC/RDC.",
+    "No EDA, timing constraint, production RTL, mapped design or frozen throughput result is changed."
+  ],
+  "parent": {
+    "commit": "14b2ed5fc5d02c396cf2474531822ce490d2e4e6",
+    "status": "?? experiments/s3-y32-ingress-perf/ppa/eco/pt_unknown_discovery.tcl\n?? experiments/s3-y32-ingress-perf/ppa/eco/run_async_contract.py\n?? experiments/s3-y32-ingress-perf/ppa/eco/tb_async_contract.sv\n?? experiments/s3-y32-ingress-perf/ppa/eco/unknown_checks.py\n?? outputs/\n?? tests/ppa/test_unknown_checks.py\n?? \"\\350\\265\\233\\351\\242\\230\\346\\214\\207\\345\\215\\227.pdf\""
+  },
+  "child": {
+    "commit": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+    "status": " M rtl/e203/perips/sirv_pmu.v"
+  },
+  "selection": {
+    "candidate_manifest": {
+      "bytes": 18798,
+      "sha256": "787d54b51778daa5ff7a05da0af138f87cb4722d5083cf0010ede3fc5a2226b5"
+    },
+    "candidate": "s3-y32-ingress1064-postfreeze-catch3",
+    "rtl": {
+      "path": "third-party/e203_hbirdv2",
+      "commit": "5470c5650f2d11d16e7c52cc96626d21030a3973"
+    }
+  },
+  "error": "Production RTL must match the selected candidate commit and be clean",
+  "finished_at": "2026-11-14T02:31:54.054227+00:00",
+  "outputs": {}
+}

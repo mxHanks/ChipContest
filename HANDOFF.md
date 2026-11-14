@@ -33,3 +33,5 @@ python3 -B tools/current.py verify --submodule
 当前源码包含跨目录复用，`experiments/` 和旧生成源不能因名称为历史而直接删除。历史入口集中在[历史导航](docs/history/README.md)，本轮分支归档与恢复见[归档清单](docs/history/branch-archive-20261114.md)。新工作可按需建立 `codex/` 分支；修改子模块时先推送子仓，再更新父仓 gitlink。
 
 本次仅整理父仓分支；其它工作树及其未提交文件、本地产物和用户资产保留。旧 S2e 原交接已移至[历史归档](docs/history/s2e-20261105/HANDOFF.md)。
+
+四项 unknown 的最新诊断、数字回归与板级待确认项见[2026-11-14 跟进](docs/s3-y32-ingress-perf-unknown4-followup-20261114.md)。本轮仍未闭合，不改变当前候选身份或结果。

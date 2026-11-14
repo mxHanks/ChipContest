@@ -1,0 +1,35 @@
+3.  Attributes and Variables                                 Command Reference
+           timing_path_arrival_required_attribute_include_clock_edge
+
+NAME
+       timing_path_arrival_required_attribute_include_clock_edge
+              Includes   or   excludes   the   clock   edge   time  (the  end-
+              point_clock_close_edge_value             and              start-
+              point_clock_close_edge_value  attributes)  in  the  arrival  and
+              required timing path attributes.
+
+TYPE
+       Boolean
+
+DEFAULT
+       false
+
+DESCRIPTION
+       Set this variable to one of the following values:
+
+       o false (the default) - Excludes the clock edge time of  the  launching
+         or  capturing  clocks of the path from the calculation of the arrival
+         or required timing path attribute, respectively.
+
+       o true - Includes the clock edge time of  the  launching  or  capturing
+         clocks of the path in the calculation of the arrival or required tim-
+         ing path attribute, respectively. When  you  use  this  setting,  the
+         arrival  and required attribute values match the arrival and required
+         times reported by the report_timing command.
+
+SEE ALSO
+       report_timing(2)
+       timing_path_attributes(3)
+
+                         Version T-2022.03-SP5-1
+            Copyright (c) 2023 Synopsys, Inc. All rights reserved.

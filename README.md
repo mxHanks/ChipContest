@@ -22,7 +22,7 @@ X[99,64] × W[64,256] + bias[256] → Y32[99,256]
 
 吞吐来自 **RTL 仿真**，计时包含物理 clear、全部输入/参数装载、控制、DMA 计算及结果写回；暖机、poison 和任务后的参考读回在计时窗外。加载源为原 SystemBus 三源测试 loader。最终时序修复是 **mapped ECO**，没有改变这次性能测量的 RTL，周期复用已完成的 12 task 实测。
 
-保守面积上界把全 SoC 标准单元计入加速器，不代表含全部 353 宏的整机总面积。这些面积值不能直接写为官方 mm²；条件吞吐也不等于已证明的硅上 150 MHz 或生产 GPIO 加载吞吐。当前尚未完成完整异步与物理签核。结果与限制见[最终修复报告](docs/s3-y32-ingress-perf-postfreeze-repair-20261114.md)，周期原件见[性能收据](docs/validation/s3-y32-ingress-perf-native-20261113/timing-final/performance-result.json)。
+保守面积上界把全 SoC 标准单元计入加速器，不代表含全部 353 宏的整机总面积。这些面积值不能直接写为官方 mm²；条件吞吐也不等于已证明的硅上 150 MHz 或生产 GPIO 加载吞吐。当前尚未完成完整异步与物理签核；四项 unknown 的新诊断与数字回归见[跟进记录](docs/s3-y32-ingress-perf-unknown4-followup-20261114.md)。结果与限制见[最终修复报告](docs/s3-y32-ingress-perf-postfreeze-repair-20261114.md)，周期原件见[性能收据](docs/validation/s3-y32-ingress-perf-native-20261113/timing-final/performance-result.json)。
 
 ## 设计要点
 

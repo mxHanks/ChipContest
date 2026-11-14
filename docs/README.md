@@ -4,6 +4,7 @@
 
 | 内容 | 入口 |
 |---|---|
+| 四项 unknown 最新跟进 | [诊断与回归结果](s3-y32-ingress-perf-unknown4-followup-20261114.md)、[板级合同待确认](s3-y32-async-input-contract.md) |
 | 当前最终结果、时序修复与未闭合事项 | [最终修复报告](s3-y32-ingress-perf-postfreeze-repair-20261114.md) |
 | 最终完整 STA、面积、一致性和归档 | [catch3 原件](validation/s3-y32-ingress-perf-native-20261114/catch3/) |
 | 12 task 周期与逐位输出 | [性能收据](validation/s3-y32-ingress-perf-native-20261113/timing-final/performance-result.json)、[仿真日志](validation/s3-y32-ingress-perf-native-20261113/timing-final/performance-simulation.log) |

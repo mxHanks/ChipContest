@@ -1,0 +1,37 @@
+3.  Attributes and Variables                                 Command Reference
+                        timing_max_normalization_cycles
+
+NAME
+       timing_max_normalization_cycles
+              Sets  the  upper limit for the denominator when calculating nor-
+              malized slack.
+
+TYPE
+       integer
+
+DEFAULT
+       4
+
+DESCRIPTION
+       Normalized slack analysis is an additional optional analysis that  com-
+       putes  a normalized slack for each timing path. The normalized slack is
+       the slack divided by the idealized allowed propagation delay. For paths
+       in  a  single  clock  domain, the allowed propagation delay is the time
+       between two different edges of the clock. For 50%  duty  cycle  clocks,
+       the  allowed  propagation  delay  is  usually an integer number of half
+       periods.
+
+       The denominator in the normalization is limited by  the  value  of  the
+       timing_max_normalization_cycles  variable  setting  multiplied  by  the
+       period of the launch clock of a path. Beyond this limit, the  denomina-
+       tor takes the value of the limit.
+
+       Limiting  the denominator saves runtime during analysis. A larger value
+       of the limit might increase runtime.
+
+SEE ALSO
+       report_timing(2)
+       timing_enable_normalized_slack(3)
+
+                         Version T-2022.03-SP5-1
+            Copyright (c) 2023 Synopsys, Inc. All rights reserved.

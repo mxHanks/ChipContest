@@ -1,0 +1,285 @@
+{
+  "closed": false,
+  "failures": [
+    "unknown checks remain: 4",
+    "original unknown is not explicitly met: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+    "original unknown is not explicitly met: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+    "original unknown is not explicitly met: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)",
+    "original unknown is not explicitly met: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)",
+    "baseline lacks full native check identities; recollect met details",
+    "candidate lacks full native check identities",
+    "receipt-bound baseline full details/clocks missing"
+  ],
+  "original_unknown_checks": [
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg",
+      "pin": "D",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "setup",
+      "condition": "-",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 357
+    },
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg",
+      "pin": "D",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "setup",
+      "condition": "-",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 361
+    },
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg",
+      "pin": "SDN(rise)",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "recovery",
+      "condition": "sdf_cond(ENABLE_NOT_D===1'b1)",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 1834
+    },
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg",
+      "pin": "SDN(rise)",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "recovery",
+      "condition": "sdf_cond(ENABLE_NOT_D===1'b1)",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 1843
+    }
+  ],
+  "current_unknown_checks": [
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg",
+      "pin": "D",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "setup",
+      "condition": "-",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 357
+    },
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg",
+      "pin": "D",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "setup",
+      "condition": "-",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 361
+    },
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg",
+      "pin": "SDN(rise)",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "recovery",
+      "condition": "sdf_cond(ENABLE_NOT_D===1'b1)",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 1834
+    },
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg",
+      "pin": "SDN(rise)",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "recovery",
+      "condition": "sdf_cond(ENABLE_NOT_D===1'b1)",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 1843
+    }
+  ],
+  "current_summary": {
+    "setup": {
+      "total": 83414,
+      "met": 79342,
+      "violated": 0,
+      "untested": 4072
+    },
+    "hold": {
+      "total": 83414,
+      "met": 79344,
+      "violated": 0,
+      "untested": 4070
+    },
+    "recovery": {
+      "total": 19883,
+      "met": 19881,
+      "violated": 0,
+      "untested": 2
+    },
+    "removal": {
+      "total": 19883,
+      "met": 19883,
+      "violated": 0,
+      "untested": 0
+    },
+    "min_period": {
+      "total": 11649,
+      "met": 706,
+      "violated": 0,
+      "untested": 10943
+    },
+    "min_pulse_width": {
+      "total": 110326,
+      "met": 100081,
+      "violated": 0,
+      "untested": 10245
+    },
+    "clock_gating_setup": {
+      "total": 27,
+      "met": 27,
+      "violated": 0,
+      "untested": 0
+    },
+    "clock_gating_hold": {
+      "total": 27,
+      "met": 27,
+      "violated": 0,
+      "untested": 0
+    },
+    "out_setup": {
+      "total": 179,
+      "met": 179,
+      "violated": 0,
+      "untested": 0
+    },
+    "out_hold": {
+      "total": 179,
+      "met": 179,
+      "violated": 0,
+      "untested": 0
+    },
+    "All Checks": {
+      "total": 328981,
+      "met": 299649,
+      "violated": 0,
+      "untested": 29332
+    }
+  },
+  "complete_baseline_identities": false,
+  "complete_candidate_identities": false,
+  "clocks": {
+    "xu_hfextclk": {
+      "period_printed_ns": "6.67",
+      "waveform": "0 3.33333",
+      "attributes": "",
+      "source": "hfextclk"
+    },
+    "xu_jtag_tck": {
+      "period_printed_ns": "100.00",
+      "waveform": "0 50",
+      "attributes": "",
+      "source": "io_pads_jtag_TCK_i_ival"
+    },
+    "xu_lfextclk": {
+      "period_printed_ns": "30517.58",
+      "waveform": "0 15258.8",
+      "attributes": "",
+      "source": "lfextclk"
+    },
+    "xu_plldiv_envelope": {
+      "period_printed_ns": "6.67",
+      "waveform": "0 3.33333",
+      "attributes": "G",
+      "source": "u_soc/u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/u_e203_subsys_pllclkdiv/clkout"
+    }
+  },
+  "schema": "ingress1064-native-unknown4-audit-v1",
+  "native": {
+    "files": [
+      {
+        "path": "/home/mxhanks/Projects/ChipContest/docs/validation/s3-y32-ingress-perf-native-20261114/catch3/reload/persisted-coverage.rpt",
+        "bytes": 8516862,
+        "sha256": "3975ca9364fdc03dfd22f3d3b8a5f5ecfde10435370f57b3785584dbcb135ad6"
+      },
+      {
+        "path": "docs/validation/s3-y32-unknown4-20261114/frozen-native/native.log",
+        "bytes": 571499,
+        "sha256": "9675b37ce387a9b202982b8a90d74b10492ee0bf8bd5050c3a3680b680a664a6"
+      },
+      {
+        "path": "docs/validation/s3-y32-unknown4-20261114/frozen-native/persisted-clocks.rpt",
+        "bytes": 1396,
+        "sha256": "ab6a283c7113c56a3a2be6e5bf604b9d86e7291110f34d6561b68da3cf347ec6"
+      }
+    ],
+    "execution": {
+      "path": "docs/validation/s3-y32-ingress-perf-native-20261114/catch3/reload/execution.json",
+      "bytes": 76755,
+      "sha256": "df5ca0b5bf7d7d2abda52f4a02efac68fc17cd6f78bfc58082d59173cc929695"
+    },
+    "contract_signature": {
+      "mapped_sha256": "d83acb49caec51aabc66d8ad61b8784294bebe26c5458aa0b095f9d12a2ae0d1",
+      "original_sdc_sha256": "c15ede0fc2c65771f87e2d6aee763b4ea0d53934868ca807b4785c36182fce7c",
+      "pt_add_sha256": "404c7de9a4ef56d624e64407a501df63d8040159171ea2a88bfcc70294a3de98",
+      "libraries": {
+        "standard_cell": "f69c08a0b89c6d747ecb648e8c212a98d2bba6c8b9aeec766e90babc01a64723",
+        "sram": "c2cce1cf2bd8f25de5df3fe01e67b0ef40a933c2ec51da156dd47a288866bf0f"
+      }
+    },
+    "pte_052_count": 1,
+    "pte_052": [
+      {
+        "file": "docs/validation/s3-y32-unknown4-20261114/frozen-native/native.log",
+        "line": 316,
+        "text": "Warning: For computing a common base period for a number of clocks PrimeTime limits the waveform expansion of the smallest period to be no more than 1000 times and the waveform expansion of the largest period to be no more than 101 times. Since the largest period is too large compared to the smallest period, no common base period is possible satisfying these limits, and PrimeTime has taken the largest period as the common base period but still has not expanded the smallest period beyond its limit. In certain situations, this can cause paths between these clocks to be unconstrained. (PTE-052)",
+        "context": [
+          "Warning: No clock-gating check is inferred for clock xu_jtag_tck at pins u_soc/u_e203_subsys_top/u_e203_subsys_main/U63/B2 and u_soc/u_e203_subsys_top/u_e203_subsys_main/U63/A2 of cell u_soc/u_e203_subsys_top/u_e203_subsys_main/U63. (PTE-060)",
+          "Information: Inferring 15 clock-gating checks. (PTE-017)",
+          "Warning: For computing a common base period for a number of clocks PrimeTime limits the waveform expansion of the smallest period to be no more than 1000 times and the waveform expansion of the largest period to be no more than 101 times. Since the largest period is too large compared to the smallest period, no common base period is possible satisfying these limits, and PrimeTime has taken the largest period as the common base period but still has not expanded the smallest period beyond its limit. In certain situations, this can cause paths between these clocks to be unconstrained. (PTE-052)",
+          "Information: Expanding clock 'xu_plldiv_envelope' to base period of 6666.667 (old period was 6.667, added 1998 edges). (PTE-016)",
+          "Information: Expanding clock 'xu_hfextclk' to base period of 6666.667 (old period was 6.667, added 1998 edges). (PTE-016)"
+        ]
+      }
+    ],
+    "failures": []
+  },
+  "baseline": {
+    "path": "/home/mxhanks/Projects/ChipContest/docs/validation/s3-y32-ingress-perf-native-20261114/catch3/reload/persisted-coverage.rpt",
+    "bytes": 8516862,
+    "sha256": "3975ca9364fdc03dfd22f3d3b8a5f5ecfde10435370f57b3785584dbcb135ad6"
+  },
+  "coverage": {
+    "path": "/home/mxhanks/Projects/ChipContest/docs/validation/s3-y32-ingress-perf-native-20261114/catch3/reload/persisted-coverage.rpt",
+    "bytes": 8516862,
+    "sha256": "3975ca9364fdc03dfd22f3d3b8a5f5ecfde10435370f57b3785584dbcb135ad6"
+  },
+  "baseline_details": null,
+  "baseline_clocks": {
+    "path": "docs/validation/s3-y32-unknown4-20261114/frozen-native/persisted-clocks.rpt",
+    "bytes": 1396,
+    "sha256": "ab6a283c7113c56a3a2be6e5bf604b9d86e7291110f34d6561b68da3cf347ec6"
+  },
+  "qualification": "NATIVE_COVERAGE_ONLY_NOT_CDC_RDC_OR_PHYSICAL_SIGNOFF",
+  "status": "UNKNOWN4_NOT_CLOSED"
+}
