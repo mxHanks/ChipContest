@@ -129,12 +129,23 @@ def check_log(log, tasks, rows, warmup=False, checker_path=None):
     return checker.check_log(log,tasks,rows,warmup)
 
 
+def verify_replay_input_contract(replay_source: Path):
+    """A legacy simulator cannot claim the current qualified input stimulus."""
+    for saved_name, current_name in [('tb_sysbus32_soc.sv', 'cpu_tb.sv'),
+                                     ('lf_input_contract.sv', 'lf_input_contract.sv')]:
+        saved = replay_source / 'tests' / saved_name
+        current = HERE / current_name
+        if not saved.is_file() or sha(saved) != sha(current):
+            raise ValueError('replay input-contract source differs or is missing: ' + saved_name)
+
+
 def snapshot_sources(out):
     source=out/'source';source.mkdir();rtl=source/'rtl';shutil.copytree(E203/'rtl/e203',rtl)
     tests=source/'tests';tests.mkdir();firmware=tests/'firmware';firmware.mkdir()
     for name in ['start.S','link.ld']:shutil.copy2(TESTS/'firmware'/name,firmware/name)
     shutil.copy2(HERE/'cpu_main.c',tests/'dma_day_main.c')
     shutil.copy2(HERE/'cpu_tb.sv',tests/'tb_sysbus32_soc.sv')
+    shutil.copy2(HERE/'lf_input_contract.sv',tests/'lf_input_contract.sv')
     shutil.copy2(Path(__file__),source/'run_cpu.py')
     shutil.copy2(HERE/'check_results.py',source/'check_results.py')
     # The selected 16-X-macro core is already in the production subrepository.
@@ -217,6 +228,7 @@ def main(argv=None):
             source=out/'source';shutil.copytree(replay/'source',source)
             manifest={str(p.relative_to(source)):sha(p) for p in sorted(source.rglob('*')) if p.is_file()}
             if manifest!=prev['source_sha256']:raise ValueError('replay source drift')
+            verify_replay_input_contract(source)
             shutil.copytree(replay/'firmware',out/'firmware');report['firmware']=prev['firmware'].copy();report['firmware']['elf']=str(out/'firmware/dma_day_soc');report['tools']=prev['tools']
             for p,key in [('dma_day_soc','elf_sha256'),('dma_day_soc.verilog','image_sha256')]:
                 if sha(out/'firmware'/p)!=report['firmware'][key]:raise ValueError('replay firmware drift')

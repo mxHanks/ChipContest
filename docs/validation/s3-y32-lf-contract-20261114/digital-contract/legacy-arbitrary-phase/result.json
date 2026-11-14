@@ -1,0 +1,142 @@
+{
+  "schema": "ingress1064-async-digital-contract-v1",
+  "status": "PASS_DIGITAL_CONTRACT_ONLY_NOT_CDC_RDC_SIGNOFF",
+  "started_at": "2026-11-14T03:00:26.132176+00:00",
+  "qualification": "DIGITAL_FOUR_STATE_FUNCTIONAL_CONTRACT_ONLY_NOT_CDC_RDC_SIGNOFF",
+  "STA_unknown_status": "UNCHANGED_NOT_MARKED_MET",
+  "scope": "Actual production deglitch, reset catcher and complete sirv_pmu with its real submodules",
+  "internal_probes": [
+    "PMU erst_reset_r and erst_reset_r_r for asynchronous capture/hold/release only"
+  ],
+  "public_observations": [
+    "two real deglitch outputs",
+    "real AON reset catcher output",
+    "PMU public io_regs_cause_read[9:8]"
+  ],
+  "limitations": [
+    "Zero-delay four-state RTL simulation does not prove analog metastability, MTBF, recovery/removal or physical minimum pulse width.",
+    "One-femtosecond pulse checks digital event capture only and is not an admissible physical reset specification.",
+    "Release offsets avoid exactly coincident simulator edges; no setup/recovery margin is inferred.",
+    "HF/LF periods match the CPU stimulus integer-femtosecond periods; clocks have no phase relation or STA exceptions.",
+    "Unit-level composition does not prove complete wrapper boot-vector consumption timing, board input protocol or full-SoC CDC/RDC.",
+    "No EDA, timing constraint, production RTL, mapped design or frozen throughput result is changed."
+  ],
+  "parent": {
+    "commit": "1bdc530e63a1ed9333294664653d7b6c8ee000c7",
+    "status": "M experiments/s3-y32-ingress-perf/cpu_tb.sv\n M experiments/s3-y32-ingress-perf/run_cpu.py\n?? docs/validation/s3-y32-lf-contract-20261114/\n?? experiments/s3-y32-ingress-perf/lf_input_contract.sv\n?? experiments/s3-y32-ingress-perf/ppa/eco/pt_lf_contract.tcl\n?? experiments/s3-y32-ingress-perf/ppa/eco/run_lf_contract_native.py\n?? experiments/s3-y32-ingress-perf/ppa/eco/run_lf_input_contract.py\n?? experiments/s3-y32-ingress-perf/ppa/eco/tb_lf_input_contract.sv\n?? outputs/\n?? tools/ppa/xu_lf_input_contract_v1.sdc\n?? \"\\350\\265\\233\\351\\242\\230\\346\\214\\207\\345\\215\\227.pdf\""
+  },
+  "child": {
+    "commit": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+    "status": ""
+  },
+  "selection": {
+    "candidate_manifest": {
+      "bytes": 18798,
+      "sha256": "787d54b51778daa5ff7a05da0af138f87cb4722d5083cf0010ede3fc5a2226b5"
+    },
+    "candidate": "s3-y32-ingress1064-postfreeze-catch3",
+    "rtl": {
+      "path": "third-party/e203_hbirdv2",
+      "commit": "5470c5650f2d11d16e7c52cc96626d21030a3973"
+    }
+  },
+  "sources": {
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_DeglitchShiftRegister.v": {
+      "bytes": 1822,
+      "sha256": "332ad5b31f2e002d14f4a278e1057aede1ba05d0ff16d494cb2b49b981ea53be"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync.v": {
+      "bytes": 2266,
+      "sha256": "b6d9378451815c6ba48c86ad32d6ee5d67b337ea01e0dd61fb956800c8516e4c"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_36.v": {
+      "bytes": 2681,
+      "sha256": "741613f950eb24a1266bbbe2722ac98ecae9abd647350243c6d9545c73cabb7d"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetReg.v": {
+      "bytes": 1729,
+      "sha256": "2ca876742ad8590abe6544097ab30054b91e6adae7a6d3976b5941714efe25d9"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_pmu.v": {
+      "bytes": 25268,
+      "sha256": "3f369dc1ce2de62e8f4de341850fb6567bad18f4bad28dbb4033c607d0c8c0b4"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_pmu_core.v": {
+      "bytes": 21963,
+      "sha256": "d53b2a3a9b14805f057387585800d01d73e4c7919b5ef46e775dc875fb58ce90"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_1.v": {
+      "bytes": 3512,
+      "sha256": "d492c602befa1dc7ef6bca079324ff75a1f7adcba5240b61cab83db76164528b"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/tb_async_contract.sv": {
+      "bytes": 11798,
+      "sha256": "2a40ce19cf3babe6c290612990d1287757c13e9aeee15d776f969fea1468d2a4"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/run_async_contract.py": {
+      "bytes": 7609,
+      "sha256": "a92efc9a2eb496ec34f8634c37a260614d6631392365075d0084e486241a56e8"
+    }
+  },
+  "tools": {
+    "iverilog": {
+      "path": "/usr/bin/iverilog",
+      "bytes": 51720,
+      "sha256": "a6681e0b577dcfc4ea83d1591a5714710b0b3535ebb36491ee8177553bab9631",
+      "version_first_line": "Icarus Verilog version 12.0 (stable) ()"
+    },
+    "vvp": {
+      "path": "/usr/bin/vvp",
+      "bytes": 1379032,
+      "sha256": "e0a087a4906d5a9cd1b0b85c9b4c2081704c2c9bcd94f224437fc56b15fc440d",
+      "version_first_line": "Icarus Verilog runtime version 12.0 (stable) ()"
+    }
+  },
+  "commands": {
+    "compile": [
+      "/usr/bin/iverilog",
+      "-g2012",
+      "-s",
+      "tb_async_contract",
+      "-o",
+      "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/legacy-arbitrary-phase/async-contract.vvp",
+      "/home/mxhanks/Projects/ChipContest/experiments/s3-y32-ingress-perf/ppa/eco/tb_async_contract.sv",
+      "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_DeglitchShiftRegister.v",
+      "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync.v",
+      "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_36.v",
+      "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetReg.v",
+      "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_pmu.v",
+      "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_pmu_core.v",
+      "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_1.v"
+    ],
+    "simulate": [
+      "/usr/bin/vvp",
+      "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/legacy-arbitrary-phase/async-contract.vvp"
+    ]
+  },
+  "coverage": {
+    "cases": 34,
+    "assertions": 178,
+    "release_phases": 10,
+    "stopped_pulses": 4,
+    "priority_masks": 14,
+    "hf_edges": 926972,
+    "lf_edges": 199
+  },
+  "source_drift": [],
+  "finished_at": "2026-11-14T03:00:26.469403+00:00",
+  "outputs": {
+    "async-contract.vvp": {
+      "bytes": 165301,
+      "sha256": "54dac3babf6fdf7ec39a0dffd68be8c8ecdcadc413ebf0a3f90e13c261b31eed"
+    },
+    "compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "simulation.log": {
+      "bytes": 4098,
+      "sha256": "65dd027fbfa4c89009937db42d18e0c7c2d1df3b03d298bca7b9fd319f8e5ae4"
+    }
+  }
+}

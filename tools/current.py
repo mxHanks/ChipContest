@@ -245,6 +245,7 @@ def main(argv=None):
     commands.add_parser('info', help='Show selected identities and qualification limits; no verification')
     check = commands.add_parser('verify', help='Read-only SHA and native-report verification; no EDA or network')
     check.add_argument('--submodule', action='store_true', help='Also require the exact initialized, clean RTL child')
+    commands.add_parser('verify-lf-contract', help='Verify the independent LF v1 native STA and fresh CPU12 evidence')
     commands.add_parser('ingress', help='Verify selected RTL, then run current Icarus ingress regression')
     vectors = commands.add_parser('vectors', help='Recover the bound twelve-task vectors; no model/audio download')
     vectors.add_argument('--out', type=Path, default=ROOT / 'build/1064/vectors')
@@ -265,6 +266,11 @@ def main(argv=None):
             print(json.dumps({'status': 'IDENTITY_ONLY_NOT_CHECKED', **selected}, ensure_ascii=False, indent=2))
         elif args.action == 'verify':
             print(json.dumps(verify(submodule=args.submodule), ensure_ascii=False, indent=2))
+        elif args.action == 'verify-lf-contract':
+            spec = importlib.util.spec_from_file_location('verify_lf_contract', ROOT / 'tools/verify_lf_contract.py')
+            checker = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(checker)
+            print(json.dumps(checker.verify(), ensure_ascii=False, indent=2))
         elif args.action == 'unpack-mapped':
             print(json.dumps(unpack(ROOT, selected, args.out), indent=2))
         elif args.action == 'vectors':

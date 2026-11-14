@@ -1,5 +1,6 @@
 `timescale 1ns/1fs
 `include "e203_defines.v"
+`include "lf_input_contract.sv"
 `ifndef C32_THROTTLE
 `define C32_THROTTLE 7
 `endif
@@ -15,6 +16,10 @@ module tb_sysbus32_soc;
   reg clk=0,lfclk=0,rst_n=0,startup_complete=0;
   always #3.333333333 clk=~clk;
   always #15258.7890625 lfclk=~lfclk;
+  // Qualified external stimulus, separate from the unchanged task window.
+  xu_lf_input_contract lf_environment (
+    .lfclk(lfclk), .bootrom_n(1'b0), .dwakeup_n(1'b1),
+    .erst_n(rst_n), .startup_complete(startup_complete));
   wire shared_mem_clk,shared_mem_rst_n;
   wire cmd_valid,cmd_ready,cmd_read,rsp_valid,rsp_ready,rsp_err;
   wire [31:0] cmd_addr; wire [31:0] cmd_wdata,rsp_rdata;wire[3:0]cmd_wmask;
@@ -219,10 +224,17 @@ module tb_sysbus32_soc;
     for(i=0;i<65536;i++)program_bytes[i]=0;
     $readmemh({testcase,".verilog"},program_bytes);
     for(i=0;i<8192;i++)`ITCM.mem_r[i]={program_bytes[8*i+7],program_bytes[8*i+6],program_bytes[8*i+5],program_bytes[8*i+4],program_bytes[8*i+3],program_bytes[8*i+2],program_bytes[8*i+1],program_bytes[8*i]};
-    #120 rst_n=1;
+    // The strap is constant from time zero. First release follows eight valid
+    // LF samples and >=8 LF periods low; release is 1.5ns after LF falling.
+    repeat(8) @(posedge lfclk);
+    @(negedge lfclk); #1.5ns; rst_n=1;
     wait(`CPU.u_e203_cpu.rst_core===1'b1);@(negedge clk);rst_n=0;#120ns;
     if(`CPU.u_e203_cpu.rst_core!==1'b0)$fatal(1,"external reset did not reach CPU");
-    startup_complete=1;rst_n=1;
+    // A second asynchronous assertion retains the original restart check.
+    // Nine subsequent samples guarantee >=8 whole LF periods for any phase.
+    repeat(9) @(posedge lfclk);
+    @(negedge lfclk); #1.5ns; rst_n=1;
+    #1fs; startup_complete=1;
     wait(shared_mem_rst_n===1'b1);
     $display("C32_CLOCK measured_hf_period_fs=%0d measured_lf_period_fs=%0d hf_edges=%0d lf_edges=%0d",hf_period,lf_period,hf_edges,lf_edges);$fflush();
     put(BASE+HOST,tasks);put(BASE+HOST+4,0);put(BASE+HOST+12,rows);put(BASE+HOST+16,warmup);put(BASE+HOST+20,0);put(BASE+HOST+24,0);put(BASE+HOST+28,0);put(BASE+HOST+32,0);

@@ -1,0 +1,203 @@
+{
+  "schema": "lf-input-contract-regression-v1",
+  "status": "PASS_POSITIVE_AND_EIGHT_EXPECTED_REJECTIONS_NOT_PHYSICAL_SIGNOFF",
+  "started_at": "2026-11-14T03:00:25.773511+00:00",
+  "qualification": "QUALIFIED_DIGITAL_STIMULUS_ONLY_NOT_PHYSICAL_CDC_RDC_SIGNOFF",
+  "STA_unknown_status": "NOT_MARKED_MET_BY_DIGITAL_SIMULATION",
+  "cases": {
+    "none": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+        "+BAD_CASE=none"
+      ],
+      "returncode": 0,
+      "expected_rejection": null,
+      "verdict": "PASS"
+    },
+    "bootrom-change": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+        "+BAD_CASE=bootrom-change"
+      ],
+      "returncode": 1,
+      "expected_rejection": "BOOTROM_CHANGED",
+      "verdict": "PASS"
+    },
+    "input-x": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+        "+BAD_CASE=input-x"
+      ],
+      "returncode": 1,
+      "expected_rejection": "DWAKEUP_X",
+      "verdict": "PASS"
+    },
+    "early-release": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+        "+BAD_CASE=early-release"
+      ],
+      "returncode": 1,
+      "expected_rejection": "ERST_MIN_LOW",
+      "verdict": "PASS"
+    },
+    "wake-wrong-edge": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+        "+BAD_CASE=wake-wrong-edge"
+      ],
+      "returncode": 1,
+      "expected_rejection": "DWAKEUP_EDGE_WINDOW",
+      "verdict": "PASS"
+    },
+    "wake-short-hold": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+        "+BAD_CASE=wake-short-hold"
+      ],
+      "returncode": 1,
+      "expected_rejection": "DWAKEUP_MIN_HOLD",
+      "verdict": "PASS"
+    },
+    "reset-wrong-edge": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+        "+BAD_CASE=reset-wrong-edge"
+      ],
+      "returncode": 1,
+      "expected_rejection": "ERST_RELEASE_WINDOW",
+      "verdict": "PASS"
+    },
+    "reset-short-low": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+        "+BAD_CASE=reset-short-low"
+      ],
+      "returncode": 1,
+      "expected_rejection": "ERST_MIN_LOW",
+      "verdict": "PASS"
+    },
+    "reset-stopped-release": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+        "+BAD_CASE=reset-stopped-release"
+      ],
+      "returncode": 1,
+      "expected_rejection": "ERST_RELEASE_WINDOW",
+      "verdict": "PASS"
+    }
+  },
+  "child": {
+    "commit": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+    "status": ""
+  },
+  "sources": {
+    "experiments/s3-y32-ingress-perf/ppa/eco/tb_lf_input_contract.sv": {
+      "bytes": 4168,
+      "sha256": "c2c4e04c3f1ceaf36e01c33b6fda2794593743e869bcf7e3a005cd13d718723a"
+    },
+    "experiments/s3-y32-ingress-perf/lf_input_contract.sv": {
+      "bytes": 3005,
+      "sha256": "5a43ac39d4d4fbee7b83a3e62e5b7e5bb91733f23295220f616b58d7fae51546"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/run_lf_input_contract.py": {
+      "bytes": 4971,
+      "sha256": "61218eb3029ce0c2ae652bd2d138c03cbf53ff08dcb9bd58735bb59970e12e92"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_DeglitchShiftRegister.v": {
+      "bytes": 1822,
+      "sha256": "332ad5b31f2e002d14f4a278e1057aede1ba05d0ff16d494cb2b49b981ea53be"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync.v": {
+      "bytes": 2266,
+      "sha256": "b6d9378451815c6ba48c86ad32d6ee5d67b337ea01e0dd61fb956800c8516e4c"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_36.v": {
+      "bytes": 2681,
+      "sha256": "741613f950eb24a1266bbbe2722ac98ecae9abd647350243c6d9545c73cabb7d"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetReg.v": {
+      "bytes": 1729,
+      "sha256": "2ca876742ad8590abe6544097ab30054b91e6adae7a6d3976b5941714efe25d9"
+    }
+  },
+  "compile_command": [
+    "iverilog",
+    "-g2012",
+    "-s",
+    "tb_lf_input_contract",
+    "-I/home/mxhanks/Projects/ChipContest/experiments/s3-y32-ingress-perf",
+    "-o",
+    "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run-r2/qualified.vvp",
+    "/home/mxhanks/Projects/ChipContest/experiments/s3-y32-ingress-perf/ppa/eco/tb_lf_input_contract.sv",
+    "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_DeglitchShiftRegister.v",
+    "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync.v",
+    "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_36.v",
+    "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetReg.v"
+  ],
+  "legacy_result": {
+    "bytes": 6675,
+    "sha256": "6d84b1f2405c6fe6b51412355bc8cd6f8222144aaa8f9606e660ad138dc1a0d4"
+  },
+  "source_drift": [],
+  "finished_at": "2026-11-14T03:00:26.506477+00:00",
+  "outputs": {
+    "bootrom-change.log": {
+      "bytes": 233,
+      "sha256": "d40c43be3c9a50221ea34287bab6b66ac755827dd74d4a9baab71c357490925f"
+    },
+    "compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "early-release.log": {
+      "bytes": 238,
+      "sha256": "178ba418ed5846016cc85450ecb8283ef9d28a7faf6b7747757fa9779afb6be6"
+    },
+    "input-x.log": {
+      "bytes": 227,
+      "sha256": "83d2523a6b06a68d9c5e89277eef6ab8d74eada26b309e4e013582678cec8665"
+    },
+    "legacy-driver.log": {
+      "bytes": 323,
+      "sha256": "f3d092781106bfdb4f008eda5bb99451bd725ffee68b0073a36db0d6b7d43c0f"
+    },
+    "none.log": {
+      "bytes": 449,
+      "sha256": "31b3f6ffa29b93ee4b14b9f2ec6bd6073b4b45c7d4f4dad20e3815ef526e1002"
+    },
+    "qualified.vvp": {
+      "bytes": 39273,
+      "sha256": "3ee43db59c8ea440d4992bb82e410ec2c09f8b953c579a6c79ff0cd63d4816fb"
+    },
+    "reset-short-low.log": {
+      "bytes": 394,
+      "sha256": "83c3532d054066014c7f6c6fda246f2936485ccd843c77ad2efdef080a092e3f"
+    },
+    "reset-stopped-release.log": {
+      "bytes": 401,
+      "sha256": "86ba16a6ea2545d604ad4919d2a54624da38a3b256f5ee39e949e5066799e15e"
+    },
+    "reset-wrong-edge.log": {
+      "bytes": 401,
+      "sha256": "da1bcf9ecc713c12c99c21fd1cd9c10893c248d1b25eb07d1500367a25cf4682"
+    },
+    "wake-short-hold.log": {
+      "bytes": 398,
+      "sha256": "7ae34aaf791bbbb60b3b36db7264e7d58a359e01707fd39a44032d913f42da08"
+    },
+    "wake-wrong-edge.log": {
+      "bytes": 401,
+      "sha256": "c3d3c99ddebc1b1bb3fba13f5b8cec5040d150e4edbab3c5c9e8902584e2956f"
+    }
+  }
+}

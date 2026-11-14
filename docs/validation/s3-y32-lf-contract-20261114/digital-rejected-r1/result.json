@@ -1,0 +1,83 @@
+{
+  "schema": "lf-input-contract-regression-v1",
+  "status": "FAIL",
+  "started_at": "2026-11-14T02:59:50.584768+00:00",
+  "qualification": "QUALIFIED_DIGITAL_STIMULUS_ONLY_NOT_PHYSICAL_CDC_RDC_SIGNOFF",
+  "STA_unknown_status": "NOT_MARKED_MET_BY_DIGITAL_SIMULATION",
+  "cases": {
+    "none": {
+      "command": [
+        "vvp",
+        "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run/qualified.vvp",
+        "+BAD_CASE=none"
+      ],
+      "returncode": 1,
+      "expected_rejection": null,
+      "verdict": "FAIL"
+    }
+  },
+  "child": {
+    "commit": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+    "status": ""
+  },
+  "sources": {
+    "experiments/s3-y32-ingress-perf/ppa/eco/tb_lf_input_contract.sv": {
+      "bytes": 4168,
+      "sha256": "c2c4e04c3f1ceaf36e01c33b6fda2794593743e869bcf7e3a005cd13d718723a"
+    },
+    "experiments/s3-y32-ingress-perf/lf_input_contract.sv": {
+      "bytes": 2979,
+      "sha256": "2cfc20470a535e02de0b5b0241c5a1060f93c040fec2cacf0b50284f7b804f3a"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/run_lf_input_contract.py": {
+      "bytes": 4971,
+      "sha256": "61218eb3029ce0c2ae652bd2d138c03cbf53ff08dcb9bd58735bb59970e12e92"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_DeglitchShiftRegister.v": {
+      "bytes": 1822,
+      "sha256": "332ad5b31f2e002d14f4a278e1057aede1ba05d0ff16d494cb2b49b981ea53be"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync.v": {
+      "bytes": 2266,
+      "sha256": "b6d9378451815c6ba48c86ad32d6ee5d67b337ea01e0dd61fb956800c8516e4c"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_36.v": {
+      "bytes": 2681,
+      "sha256": "741613f950eb24a1266bbbe2722ac98ecae9abd647350243c6d9545c73cabb7d"
+    },
+    "third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetReg.v": {
+      "bytes": 1729,
+      "sha256": "2ca876742ad8590abe6544097ab30054b91e6adae7a6d3976b5941714efe25d9"
+    }
+  },
+  "compile_command": [
+    "iverilog",
+    "-g2012",
+    "-s",
+    "tb_lf_input_contract",
+    "-I/home/mxhanks/Projects/ChipContest/experiments/s3-y32-ingress-perf",
+    "-o",
+    "/home/mxhanks/Projects/ChipContest/build/unknown4-20261114/lf-input-contract-run/qualified.vvp",
+    "/home/mxhanks/Projects/ChipContest/experiments/s3-y32-ingress-perf/ppa/eco/tb_lf_input_contract.sv",
+    "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_DeglitchShiftRegister.v",
+    "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_ResetCatchAndSync.v",
+    "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetRegVec_36.v",
+    "/home/mxhanks/Projects/ChipContest/third-party/e203_hbirdv2/rtl/e203/perips/sirv_AsyncResetReg.v"
+  ],
+  "error": "unexpected verdict: none",
+  "finished_at": "2026-11-14T02:59:50.622564+00:00",
+  "outputs": {
+    "compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "none.log": {
+      "bytes": 227,
+      "sha256": "980dc6ec6c7c9ecaa6da8da0aa166d930e0409734e59bc14c01dbba90a1549f8"
+    },
+    "qualified.vvp": {
+      "bytes": 39178,
+      "sha256": "4a5d9670dbb4b31251551fbc2e01aeccc7209ccce080492103470a784faee9c7"
+    }
+  }
+}

@@ -15,14 +15,15 @@ X[99,64] × W[64,256] + bias[256] → Y32[99,256]
 | 12 task 总周期 | **1,691,172 cycles** | 平均 140,931 cycles/task |
 | 条件吞吐 | **1064.35 task/s** | 按假定 150 MHz 换算；同口径 504.39 基线的 2.11 倍 |
 | 整数输出一致性 | **304,128 / 304,128 PASS** | 12 task 全部 Y32 与独立整数参考逐位一致 |
-| 最终数值时序 / 电气违例 | **0 / 0** | 原约束、原库下完整 STA；仍有 **4 项 unknown、29,332 项 untested** |
+| LF合同v1数值时序 / 电气违例 / unknown | **0 / 0 / 0** | 同映射、同库，328,981项检查；29,328项untested保留；[合同与完整验收](docs/validation/s3-y32-lf-contract-20261114/report.md) |
+| 原通用IO合同对照 | **0 / 0 / 4** | 原冻结证据保留，29,332项untested |
 | 全 SoC 标准单元面积 | **357,030.3072** | 原库面积单位 |
 | 标准单元＋内部 33 SRAM 保守上界 | **658,931.612862** | 加速器保守计费：全 SoC 标准单元＋内部 SRAM；内部 SRAM 项为 301,901.305662 |
 | 保留的实际 SRAM 宏 | **353** | 内部 33＋共享 256＋CPU 64 |
 
-吞吐来自 **RTL 仿真**，计时包含物理 clear、全部输入/参数装载、控制、DMA 计算及结果写回；暖机、poison 和任务后的参考读回在计时窗外。加载源为原 SystemBus 三源测试 loader。最终时序修复是 **mapped ECO**，没有改变这次性能测量的 RTL，周期复用已完成的 12 task 实测。
+吞吐来自 **RTL 仿真**，计时包含物理 clear、全部输入/参数装载、控制、DMA 计算及结果写回；暖机、poison 和任务后的参考读回在计时窗外。加载源为原 SystemBus 三源测试 loader。最终时序修复是 **mapped ECO**。本轮依照 LF 合同 v1 延长启动复位并监控输入，重新编译、完整执行 12 task，实测周期保持不变；任务计时边界保持。
 
-保守面积上界把全 SoC 标准单元计入加速器，不代表含全部 353 宏的整机总面积。这些面积值不能直接写为官方 mm²；条件吞吐也不等于已证明的硅上 150 MHz 或生产 GPIO 加载吞吐。当前尚未完成完整异步与物理签核；四项 unknown 的新诊断与数字回归见[跟进记录](docs/s3-y32-ingress-perf-unknown4-followup-20261114.md)。结果与限制见[最终修复报告](docs/s3-y32-ingress-perf-postfreeze-repair-20261114.md)，周期原件见[性能收据](docs/validation/s3-y32-ingress-perf-native-20261113/timing-final/performance-result.json)。
+保守面积上界把全 SoC 标准单元计入加速器，不代表含全部 353 宏的整机总面积。这些面积值不能直接写为官方 mm²；条件吞吐也不等于已证明的硅上 150 MHz 或生产 GPIO 加载吞吐。新合同要求BOOTROM初始化后固定、DWAKEUP至少保持4个LF周期、ERST低至少8个LF周期，DWAKEUP变化及ERST撤销在LF下降沿后1–2ns；外部环境须实际满足。它是团队工程条件，原SDC的4项unknown记录保留。新结果见[LF合同v1验收报告](docs/validation/s3-y32-lf-contract-20261114/report.md)。结果与限制见[最终修复报告](docs/s3-y32-ingress-perf-postfreeze-repair-20261114.md)，周期原件见[性能收据](docs/validation/s3-y32-ingress-perf-native-20261113/timing-final/performance-result.json)。
 
 ## 设计要点
 
@@ -54,6 +55,9 @@ git submodule update --init --recursive
 
 # Python 3.10+ 标准库：核对最终原件、哈希、STA 汇总和固定 RTL 身份
 python3 -B tools/current.py verify --submodule
+
+# 新LF合同：重算完整检查身份与极性、导出SDC回放、fresh CPU12证据
+python3 -B tools/current.py verify-lf-contract
 
 # Icarus Verilog：双源/三源入口与原 fabric 流水回归
 python3 -B tools/current.py ingress
@@ -94,6 +98,6 @@ python3 -B tools/current.py unpack-mapped --out build/1064/final-mapped
 
 提取前核对最终包及其 80 份 payload，输出 `apply/mapped.v`、DC 导出的 `apply/mapped.sdc` 和保留祖先层级的 8 份 SVF。最终网表 SHA256 为 `d83acb49caec51aabc66d8ad61b8784294bebe26c5458aa0b095f9d12a2ae0d1`。原生 DC 回放、完整 PT STA、面积及严格 mapped→mapped 结构一致性证据见[最终证据目录](docs/validation/s3-y32-ingress-perf-native-20261114/catch3/)。
 
-严格结构证明保留 353 SRAM，并验证身份 BUF 收缩后的完整连接分区。它不替代 RTL→mapped FM。4 项 unknown 涉及 AON 去毛刺首级 setup 与 PMU recovery；异步输入/释放的 CDC/RDC 合同、复位脉宽、亚稳态、CTS/SPEF/布局后多角、带门延迟任务仿真、功耗、生产加载与官方 600 样本资格仍待验收。
+严格结构证明保留 353 SRAM，并验证身份 BUF 收缩后的完整连接分区。它不替代 RTL→mapped FM。原4项unknown涉及AON去毛刺首级setup与PMU recovery，已在团队LF合同v1下取得明确数值MET；原条件对照保持。29,328项untested原因完整保留。综合前后形式功能、功耗、生产加载及官方600样本资格按各自证据报告；本轮未改mapped或面积。比赛范围为逻辑综合；板级实现、亚稳态、布局后CTS/SPEF等属于后续工程验证。完整v1 SDC见 [submission/lf-input-contract-v1.sdc](submission/lf-input-contract-v1.sdc)，原mapped提取中的SDC仍是原冻结版本。
 
 工艺库、工具许可证及最终 DDC 未发布。现有 EDA 工具保留原生实验链依赖；从空 `build/` 重新综合 RTL 不能一步得到最终 ECO 网表。普通克隆可离线核对已发布原件，并直接取得同一最终映射供有许可环境审阅。

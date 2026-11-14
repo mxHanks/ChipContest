@@ -1,0 +1,329 @@
+{
+  "schema": "chipcontest-lf-input-contract-v1",
+  "contract": "team-lf-input-v1",
+  "qualification": "TEAM_EXTERNAL_INPUT_CONTRACT_NOT_OFFICIAL_BOARD_SPEC",
+  "rtl_commit": "5470c5650f2d11d16e7c52cc96626d21030a3973",
+  "mapped_sha256": "d83acb49caec51aabc66d8ad61b8784294bebe26c5458aa0b095f9d12a2ae0d1",
+  "complete_sdc": "submission/lf-input-contract-v1.sdc",
+  "overlay": "tools/ppa/xu_lf_input_contract_v1.sdc",
+  "report": "docs/validation/s3-y32-lf-contract-20261114/report.md",
+  "native_archive": "docs/validation/s3-y32-lf-contract-20261114/native-r2/lf-contract-native-r2.tar.xz",
+  "export_archive": "docs/validation/s3-y32-lf-contract-20261114/export-r2/lf-contract-export-r2.tar.xz",
+  "digital_result": "docs/validation/s3-y32-lf-contract-20261114/digital-contract/result.json",
+  "performance": {
+    "result": {
+      "path": "docs/validation/s3-y32-lf-contract-20261114/cpu-full12/result.json",
+      "bytes": 77296,
+      "sha256": "74a6604557f0b559c488b6f3dcc90c63a38b6561f4f39adaaf82137c96dd35d4"
+    },
+    "simulation_log": {
+      "path": "docs/validation/s3-y32-lf-contract-20261114/cpu-full12/simulation.log",
+      "bytes": 66544,
+      "sha256": "62569550ee547545f5ae5e54141b55524a2fd64e37b2d581b87cedc897ec92e0"
+    },
+    "checker": {
+      "path": "experiments/s3-y32-ingress-perf/check_results.py",
+      "bytes": 9754,
+      "sha256": "ec2664ddc7f9efd00e1c85a0d1532b4068d3ebf8095393fe591fd903fea57a6c"
+    }
+  },
+  "results": {
+    "total_checks": 328981,
+    "met": 299653,
+    "violated": 0,
+    "unknown": 0,
+    "untested": 29328,
+    "electrical_violations": 0,
+    "rtl_cycles": 1691172,
+    "exact_y32_outputs": 304128,
+    "conditional_tasks_per_second": 1064.3506396747343,
+    "assumed_frequency_hz": 150000000
+  },
+  "original_sdc_result": "PRESERVED_UNKNOWN4",
+  "files": {
+    "docs/validation/s3-y32-lf-contract-20261114/README.md": {
+      "bytes": 10431,
+      "sha256": "61e66270c4de4d13b4a1496f4861a87cd715ea2614c9312572c0ac3fc82d7415"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/cpu-full12/identity-comparison.json": {
+      "bytes": 2774,
+      "sha256": "077e3f4439f9fb26ac06b91125e6141ebed0782820744af83bf5cc1d93d9e2a2"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/cpu-full12/replay-admission-check.json": {
+      "bytes": 609,
+      "sha256": "94f7adf5b27893340077879fc0bd1eea435f54780852513b015dc7a26a0fe2cb"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/cpu-full12/result.json": {
+      "bytes": 77296,
+      "sha256": "74a6604557f0b559c488b6f3dcc90c63a38b6561f4f39adaaf82137c96dd35d4"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/cpu-full12/simulation.log": {
+      "bytes": 66544,
+      "sha256": "62569550ee547545f5ae5e54141b55524a2fd64e37b2d581b87cedc897ec92e0"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/bootrom-change.log": {
+      "bytes": 233,
+      "sha256": "d40c43be3c9a50221ea34287bab6b66ac755827dd74d4a9baab71c357490925f"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/early-release.log": {
+      "bytes": 238,
+      "sha256": "178ba418ed5846016cc85450ecb8283ef9d28a7faf6b7747757fa9779afb6be6"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/input-x.log": {
+      "bytes": 227,
+      "sha256": "83d2523a6b06a68d9c5e89277eef6ab8d74eada26b309e4e013582678cec8665"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/legacy-arbitrary-phase/compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/legacy-arbitrary-phase/result.json": {
+      "bytes": 6675,
+      "sha256": "6d84b1f2405c6fe6b51412355bc8cd6f8222144aaa8f9606e660ad138dc1a0d4"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/legacy-arbitrary-phase/simulation.log": {
+      "bytes": 4098,
+      "sha256": "65dd027fbfa4c89009937db42d18e0c7c2d1df3b03d298bca7b9fd319f8e5ae4"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/legacy-driver.log": {
+      "bytes": 323,
+      "sha256": "f3d092781106bfdb4f008eda5bb99451bd725ffee68b0073a36db0d6b7d43c0f"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/none.log": {
+      "bytes": 449,
+      "sha256": "31b3f6ffa29b93ee4b14b9f2ec6bd6073b4b45c7d4f4dad20e3815ef526e1002"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/reset-short-low.log": {
+      "bytes": 394,
+      "sha256": "83c3532d054066014c7f6c6fda246f2936485ccd843c77ad2efdef080a092e3f"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/reset-stopped-release.log": {
+      "bytes": 401,
+      "sha256": "86ba16a6ea2545d604ad4919d2a54624da38a3b256f5ee39e949e5066799e15e"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/reset-wrong-edge.log": {
+      "bytes": 401,
+      "sha256": "da1bcf9ecc713c12c99c21fd1cd9c10893c248d1b25eb07d1500367a25cf4682"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/result.json": {
+      "bytes": 7213,
+      "sha256": "5455ade5bcab109a0f5914e910c686cd985a4ae03f36130bac0a34f1df84834e"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/wake-short-hold.log": {
+      "bytes": 398,
+      "sha256": "7ae34aaf791bbbb60b3b36db7264e7d58a359e01707fd39a44032d913f42da08"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-contract/wake-wrong-edge.log": {
+      "bytes": 401,
+      "sha256": "c3d3c99ddebc1b1bb3fba13f5b8cec5040d150e4edbab3c5c9e8902584e2956f"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-rejected-r1/compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-rejected-r1/isunknown-probe.sv": {
+      "bytes": 180,
+      "sha256": "8a8fbfda21c629f60707f1d4b455f37d6c5afad127e650b215c52c9c38e26831"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-rejected-r1/none.log": {
+      "bytes": 227,
+      "sha256": "980dc6ec6c7c9ecaa6da8da0aa166d930e0409734e59bc14c01dbba90a1549f8"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/digital-rejected-r1/result.json": {
+      "bytes": 3288,
+      "sha256": "857339e69770594f5b10a4beed3051090af9c897838d184be5c32147f9f94531"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/export-r2/lf-contract-export-r2.tar.xz": {
+      "bytes": 98716,
+      "sha256": "4b82506b85e87cae724de4bfa757b965af4b7189286c26b9f0667c567952e0fc"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/export-r2/lf-contract-export-r2.tar.xz.rfb-receipt.json": {
+      "bytes": 294,
+      "sha256": "654a83d10f1762d24d430987c5a83edf8994ad63c19cd0b229a2a6913d2a2eca"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/coverage-review.json": {
+      "bytes": 5026,
+      "sha256": "346401e74a1bd1ac15858507ee30c6ad68c48ab08f10b2d1fce4da0dac0eba3b"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/final-native-review-v2.json": {
+      "bytes": 22352,
+      "sha256": "d09be7a5530ba37725285215f6b01703a079f03fcd72ba6a3e3910603907bb83"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/lf-contract-native-r2.tar.xz": {
+      "bytes": 2181364,
+      "sha256": "f50c3a7600ef33d207746cab8db1ec2f4b62492f5d62badc05d9003b5b87244b"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/lf-contract-native-r2.tar.xz.rfb-receipt.json": {
+      "bytes": 297,
+      "sha256": "b3ac79a65caeaac0d2d9f9dc64c5c9821ec6c39199427b056dd35c321455e4cd"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/native-review-v2.json": {
+      "bytes": 12819,
+      "sha256": "10e6fb8787daeabc4df49405920fb5f7e538f2f1a79b2127f32a45dacc329ae2"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/execution.json": {
+      "bytes": 12141,
+      "sha256": "43d000f88d4c71dd7f47872831c50bbc6dc989a0017ce97b7c27a5cc1c31646c"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-all_violators.rpt": {
+      "bytes": 224,
+      "sha256": "9b789fb6bb9808f8fea68fb90a3d11609376df5ede85d8e1f51aeb8c13b0f9f5"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-check_timing.rpt": {
+      "bytes": 1605,
+      "sha256": "157774f49441ac36a0d003ec308ea417592a3a30768effe730f9e96e02002051"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-clocks.rpt": {
+      "bytes": 1396,
+      "sha256": "6928d87c2afb85ead7d24d8c83e182558ffb8bc6e8dd65b7e9ae8557ad1c2635"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-ports.rpt": {
+      "bytes": 22008,
+      "sha256": "7b625d74c4aa115d7467fb103b0243b8e9d860c35d0ddee8266da17507d01b00"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-0-max.rpt": {
+      "bytes": 6150,
+      "sha256": "b2e5f9311ded1d4aab0a94d0b1a1f71d40653db54ef37657f56b3ad31b9a8a61"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-0-min.rpt": {
+      "bytes": 5750,
+      "sha256": "f9c2d0bad41af16209062327f736ee43e0efc39856a5e59c7e897a8777a34eda"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-1-max.rpt": {
+      "bytes": 6166,
+      "sha256": "137c5b3dc05d5ad00a5320ca210f52ff68ccb5c4a99368530c45764514eb3750"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-1-min.rpt": {
+      "bytes": 5766,
+      "sha256": "5169c45143004b7e4b25eab335661d50ced9e9450a0f246e3446930d28029e0d"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-2-max.rpt": {
+      "bytes": 3862,
+      "sha256": "bf6960ca9ad919314ccd5b40e5302d0df4028309b5f0d4c22649e4a73029d991"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-2-min.rpt": {
+      "bytes": 3694,
+      "sha256": "ac0348cf730cdcc9ab07909c6de12ad229ac3326567c9b8fb1ce0904606fccd9"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-3-max.rpt": {
+      "bytes": 3870,
+      "sha256": "92d4cfc6f73d5928a24e53898695f5e13db3ee0a723d43d6e1e82e1650da1b9f"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-3-min.rpt": {
+      "bytes": 3702,
+      "sha256": "98c78d696008fb7bd0254d963636237af845b12ec7930087789aee9102741f8b"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-4-max.rpt": {
+      "bytes": 3511,
+      "sha256": "9908b32a4229645397ac07ae567d5a8020a397674cc81863be50d8ce2816fd37"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-4-min.rpt": {
+      "bytes": 3343,
+      "sha256": "e944278f9204b170659502bd4fefb0052b040cef3f39a14a2dc4542b47ffa736"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-5-max.rpt": {
+      "bytes": 3511,
+      "sha256": "8fbee8f3bcfb594383f45b171673ab6715eeeac58b27f688448b7aa642f36bd7"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-5-min.rpt": {
+      "bytes": 3343,
+      "sha256": "aba4a9da7155c150d47d7f0b112822d648a9612a2692633911e298ac8469dec9"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-6-max.rpt": {
+      "bytes": 3511,
+      "sha256": "02a9718f7980fb1dd8f601dfbd88ab9224e8a9a4afbb79ad43deec3ef6e1e762"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/native-r2/reports/revised-target-6-min.rpt": {
+      "bytes": 3343,
+      "sha256": "53ae0dd3a529b4ce17aff8c3d6930f31a6e65faf36a18e3f22ae2bff02d16e17"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/rejected-native-r1/lf-contract-native-r1.tar.xz": {
+      "bytes": 2179056,
+      "sha256": "ab3d98e35d6fef5bc8002a8b7774024ae5cb54e3942342747507cea8a2cdefdb"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/rejected-native-r1/lf-contract-native-r1.tar.xz.rfb-receipt.json": {
+      "bytes": 297,
+      "sha256": "797b0523770101a8edb68695cdeafd90c6d4592b9987dea0a29df42764610fd6"
+    },
+    "docs/validation/s3-y32-lf-contract-20261114/report.md": {
+      "bytes": 8113,
+      "sha256": "4c7237917c355845c2e96e5f47e3373b8b34a0e0eb3bd608afe797a2b6598cf4"
+    },
+    "experiments/s3-y32-ingress-perf/check_results.py": {
+      "bytes": 9754,
+      "sha256": "ec2664ddc7f9efd00e1c85a0d1532b4068d3ebf8095393fe591fd903fea57a6c"
+    },
+    "experiments/s3-y32-ingress-perf/cpu_tb.sv": {
+      "bytes": 30147,
+      "sha256": "445033bd5d70a4c8b4b2f0b8363ec1a988f9a67cf73e2a6841c4ed652d699f2d"
+    },
+    "experiments/s3-y32-ingress-perf/lf_input_contract.sv": {
+      "bytes": 3005,
+      "sha256": "5a43ac39d4d4fbee7b83a3e62e5b7e5bb91733f23295220f616b58d7fae51546"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/lf_contract_coverage.py": {
+      "bytes": 4312,
+      "sha256": "7ef9fc607f2e9c460a72dc8ae62fe44a080f41574915c03bc58c5f94fc8b5513"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/lf_contract_native_review.py": {
+      "bytes": 27243,
+      "sha256": "b91e673b99ca36e0eef680782a69ef44562d3e53648163221d4074cbd2f5fd7a"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/pt_lf_contract.tcl": {
+      "bytes": 2648,
+      "sha256": "b40880b94d9cb8d1a3085b06517764d3938fe469ee9c06fa6184921f922d9c73"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/pt_lf_contract_export.tcl": {
+      "bytes": 2439,
+      "sha256": "ce5a872b7308a8c10ec449e75e445f028b1bb2ea6a07c82075473aab076f935c"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/run_lf_contract_export_native.py": {
+      "bytes": 3658,
+      "sha256": "57f1a51157eba2fadbe5099176fce8eb3976f7b62db65b84b3e4be6edf4fe670"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/run_lf_contract_native.py": {
+      "bytes": 4775,
+      "sha256": "8104fddf8aa2e913b6e92b491d92febfcecdb6aafa924cdbd90c6acc8b2b9976"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/run_lf_input_contract.py": {
+      "bytes": 4971,
+      "sha256": "61218eb3029ce0c2ae652bd2d138c03cbf53ff08dcb9bd58735bb59970e12e92"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/tb_lf_input_contract.sv": {
+      "bytes": 4168,
+      "sha256": "c2c4e04c3f1ceaf36e01c33b6fda2794593743e869bcf7e3a005cd13d718723a"
+    },
+    "experiments/s3-y32-ingress-perf/ppa/eco/unknown_checks.py": {
+      "bytes": 16646,
+      "sha256": "4dcf6a3d596d46aedfdcfd941d3c553e8ddf1e29d4154f22f7ff0cacbb2b34c2"
+    },
+    "experiments/s3-y32-ingress-perf/run_cpu.py": {
+      "bytes": 19640,
+      "sha256": "fd1764bd54bef5ed5b1b86a0b0114f8374a723ae82e10bf4cd79908a7afd82a6"
+    },
+    "submission/candidate.json": {
+      "bytes": 18862,
+      "sha256": "22b219fcc0a075d5810ef1339eafaa57b9377b291279b25ba87aa53dc3c844a7"
+    },
+    "submission/lf-input-contract-v1.sdc": {
+      "bytes": 8169,
+      "sha256": "9729bfd539abe40430d42a953605891f4ff57ffeebf2d8006b7937a6feab55ce"
+    },
+    "tools/current.py": {
+      "bytes": 16221,
+      "sha256": "59db30a697f7fe25c27b7cc022007d098bc7b26977d7feca45d50badd4c1df77"
+    },
+    "tools/ppa/xu_lf_input_contract_v1.sdc": {
+      "bytes": 1709,
+      "sha256": "59d242f407f46f979db386a1e875bb7f735769ea0c27ffc690a16d2674334da7"
+    },
+    "tools/verify_lf_contract.py": {
+      "bytes": 5521,
+      "sha256": "fc933fccf4806f809aaf9ca2d687db56011714be42e4a6c9329fbec4db3ba540"
+    }
+  }
+}

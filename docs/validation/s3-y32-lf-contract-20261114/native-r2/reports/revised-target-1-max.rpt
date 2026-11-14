@@ -1,0 +1,98 @@
+****************************************
+Report : timing
+	-path_type full_clock_expanded
+	-delay_type max
+	-nworst 4
+	-slack_lesser_than 1000000000.00000000
+	-max_paths 4
+	-sort_by slack
+Design : xu_soc_sysbus32_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Sat Nov 14 11:12:02 2026
+****************************************
+
+
+  Startpoint: io_pads_aon_pmu_dwakeup_n_i_ival
+               (input port clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Path Group: xu_lfextclk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (fall edge)                       15258.78906250
+                                                                 15258.78906250
+  clock network delay (ideal)                         0.00000000 15258.78906250
+  input external delay                                2.00000000 15260.78906250 r
+  io_pads_aon_pmu_dwakeup_n_i_ival (in)               0.00000000 15260.78906250 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U6/ZN (CLKINV0_12TR40)
+                                                      0.06330954 15260.85253906 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/XU_ECO_async_edge_0002/Z (BUFV2_12TR40)
+                                                      0.07380252 15260.92578125 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/XU_ECO_async_edge_0003/Z (BUFV2_12TR40)
+                                                      0.06435527 15260.99023438 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D (DQV0_12TR40)
+                                                      0.00000000 15260.99023438 f
+  data arrival time                                              15260.99023438
+
+  clock xu_lfextclk (rise edge)                       30517.57812500
+                                                                 30517.57812500
+  clock network delay (ideal)                         0.00000000 30517.57812500
+  clock reconvergence pessimism                       0.00000000 30517.57812500
+  clock uncertainty                                   -0.10000000
+                                                                 30517.47851562
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/CK (DQV0_12TR40)
+                                                                 30517.47851562 r
+  library setup time                                  0.00535935 30517.48437500
+  data required time                                             30517.48437500
+  ------------------------------------------------------------------------------
+  data required time                                             30517.48437500
+  data arrival time                                              -15260.99023438
+  ------------------------------------------------------------------------------
+  slack (MET)                                                    15256.49316406
+
+
+  Startpoint: io_pads_aon_pmu_dwakeup_n_i_ival
+               (input port clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg
+               (rising edge-triggered flip-flop clocked by xu_lfextclk)
+  Path Group: xu_lfextclk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (fall edge)                       15258.78906250
+                                                                 15258.78906250
+  clock network delay (ideal)                         0.00000000 15258.78906250
+  input external delay                                2.00000000 15260.78906250 f
+  io_pads_aon_pmu_dwakeup_n_i_ival (in)               0.00000000 15260.78906250 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U6/ZN (CLKINV0_12TR40)
+                                                      0.05562863 15260.84472656 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/XU_ECO_async_edge_0002/Z (BUFV2_12TR40)
+                                                      0.06373796 15260.90820312 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/XU_ECO_async_edge_0003/Z (BUFV2_12TR40)
+                                                      0.05413967 15260.96289062 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D (DQV0_12TR40)
+                                                      0.00000000 15260.96289062 r
+  data arrival time                                              15260.96289062
+
+  clock xu_lfextclk (rise edge)                       30517.57812500
+                                                                 30517.57812500
+  clock network delay (ideal)                         0.00000000 30517.57812500
+  clock reconvergence pessimism                       0.00000000 30517.57812500
+  clock uncertainty                                   -0.10000000
+                                                                 30517.47851562
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/CK (DQV0_12TR40)
+                                                                 30517.47851562 r
+  library setup time                                  -0.00244425
+                                                                 30517.47656250
+  data required time                                             30517.47656250
+  ------------------------------------------------------------------------------
+  data required time                                             30517.47656250
+  data arrival time                                              -15260.96289062
+  ------------------------------------------------------------------------------
+  slack (MET)                                                    15256.51269531
+
+
+1

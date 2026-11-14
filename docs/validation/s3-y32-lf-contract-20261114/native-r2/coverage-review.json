@@ -1,0 +1,157 @@
+{
+  "failures": [],
+  "original_unknown_checks": [
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg",
+      "pin": "D",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "setup",
+      "condition": "-",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 357
+    },
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg",
+      "pin": "D",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "setup",
+      "condition": "-",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 361
+    },
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN(rise)",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg",
+      "pin": "SDN(rise)",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "recovery",
+      "condition": "sdf_cond(ENABLE_NOT_D===1'b1)",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 1834
+    },
+    {
+      "constrained_pin": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN(rise)",
+      "instance": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg",
+      "pin": "SDN(rise)",
+      "related_pin": "CK(rise)",
+      "clock": "xu_lfextclk",
+      "kind": "recovery",
+      "condition": "sdf_cond(ENABLE_NOT_D===1'b1)",
+      "status": "untested",
+      "reason": "unknown",
+      "slack_printed_ns": null,
+      "coverage_line": 1843
+    }
+  ],
+  "current_unknown_checks": [],
+  "current_summary": {
+    "setup": {
+      "total": 83414,
+      "met": 79344,
+      "violated": 0,
+      "untested": 4070
+    },
+    "hold": {
+      "total": 83414,
+      "met": 79344,
+      "violated": 0,
+      "untested": 4070
+    },
+    "recovery": {
+      "total": 19883,
+      "met": 19883,
+      "violated": 0,
+      "untested": 0
+    },
+    "removal": {
+      "total": 19883,
+      "met": 19883,
+      "violated": 0,
+      "untested": 0
+    },
+    "min_period": {
+      "total": 11649,
+      "met": 706,
+      "violated": 0,
+      "untested": 10943
+    },
+    "min_pulse_width": {
+      "total": 110326,
+      "met": 100081,
+      "violated": 0,
+      "untested": 10245
+    },
+    "clock_gating_setup": {
+      "total": 27,
+      "met": 27,
+      "violated": 0,
+      "untested": 0
+    },
+    "clock_gating_hold": {
+      "total": 27,
+      "met": 27,
+      "violated": 0,
+      "untested": 0
+    },
+    "out_setup": {
+      "total": 179,
+      "met": 179,
+      "violated": 0,
+      "untested": 0
+    },
+    "out_hold": {
+      "total": 179,
+      "met": 179,
+      "violated": 0,
+      "untested": 0
+    },
+    "All Checks": {
+      "total": 328981,
+      "met": 299653,
+      "violated": 0,
+      "untested": 29328
+    }
+  },
+  "complete_baseline_identities": true,
+  "complete_candidate_identities": true,
+  "coverage_transition_pass": true,
+  "schema": "ingress1064-lf-contract-full-coverage-difference-v1",
+  "status": "LF_CONTRACT_COVERAGE_TRANSITION_PASS_REVIEW_NATIVE_RECEIPTS",
+  "qualification": "NEW_INPUT_CONTRACT_ONLY_NOT_ORIGINAL_SDC_OR_CDC_RDC_SIGNOFF",
+  "original_sdc_unknown_count": 4,
+  "original_sdc_verdict": "UNCHANGED_UNKNOWN4_NOT_CLOSED",
+  "frozen_original_report": {
+    "path": "/home/mxhanks/Projects/ChipContest/docs/validation/s3-y32-ingress-perf-native-20261114/catch3/reload/persisted-coverage.rpt",
+    "bytes": 8516862,
+    "sha256": "3975ca9364fdc03dfd22f3d3b8a5f5ecfde10435370f57b3785584dbcb135ad6"
+  },
+  "baseline_full": {
+    "path": "/home/mxhanks/Projects/ChipContest/build/lf-contract-20261114/native-r2/extracted/run/original-coverage.rpt",
+    "bytes": 101340155,
+    "sha256": "da805f47224d8c437635b576d0c09dddc0e094a190d4c696982083b2e714679d"
+  },
+  "candidate_full": {
+    "path": "/home/mxhanks/Projects/ChipContest/build/lf-contract-20261114/native-r2/extracted/run/revised-coverage-all.rpt",
+    "bytes": 101340131,
+    "sha256": "abb9cdaac97483374885e6ae61cdd1e4b3230c1ed7c986639a103554ebe7d6ee"
+  },
+  "parser": {
+    "path": "/home/mxhanks/Projects/ChipContest/experiments/s3-y32-ingress-perf/ppa/eco/unknown_checks.py",
+    "bytes": 16646,
+    "sha256": "4dcf6a3d596d46aedfdcfd941d3c553e8ddf1e29d4154f22f7ff0cacbb2b34c2"
+  },
+  "allowed_coverage_identity_changes": [],
+  "allowed_state_changes": "EXACT_FOUR_ORIGINAL_UNKNOWN_IDENTITIES_TO_EXPLICIT_MET_ONLY",
+  "native_receipt_and_input_delay_diff_review": "REQUIRED_SEPARATELY"
+}

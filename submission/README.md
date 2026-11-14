@@ -45,3 +45,7 @@ python3 -B tools/current.py cpu --vectors build/1064/vectors --out build/1064/fu
 - `build/`：不入库的本地生成目录。
 
 保留历史路径以维持已发布 SHA 和复现依赖。当前入口不会选择旧 S2e、374 宏整合版或其他候选。CDC/RDC、复位脉宽、物理时序与正式比赛验收仍按最终报告明确保留。
+
+## LF输入合同v1
+
+当前修复映射不变，新增 [团队合同清单](lf-input-contract-v1.json) 与 [完整SDC](lf-input-contract-v1.sdc)。同图同库下原四项unknown均取得数值MET，其余检查身份和状态不变；新CPU12仍为1064.350640 task/s＠假定150MHz。`python3 -B tools/current.py verify-lf-contract` 可离线重算证据。外部环境须满足[合同](../docs/validation/s3-y32-lf-contract-20261114/README.md)，原candidate结果与其提取SDC保留原条件4unknown，不能混用两套结论。

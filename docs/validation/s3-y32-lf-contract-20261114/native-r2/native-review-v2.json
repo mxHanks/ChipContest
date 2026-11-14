@@ -1,0 +1,448 @@
+{
+  "schema": "ingress1064-lf-contract-native-receipt-review-v1",
+  "status": "LF_CONTRACT_RECEIPTS_COVERAGE_PORTS_PASS_PATH_REPLAY_REQUIRED",
+  "receipt_coverage_ports_pass": true,
+  "failures": [],
+  "evidence": {
+    "receipt_and_inputs": {
+      "receipt": {
+        "path": "/home/mxhanks/Projects/ChipContest/build/lf-contract-20261114/native-r2/extracted/run/execution.json",
+        "bytes": 12141,
+        "sha256": "43d000f88d4c71dd7f47872831c50bbc6dc989a0017ce97b7c27a5cc1c31646c"
+      },
+      "native_error_fatal_count": 0,
+      "original_map_sdc_hierarchy_libraries_bound": true,
+      "netlist_modified": false
+    },
+    "output_catalog": {
+      "output_files_verified": 60,
+      "all_bytes_sha256_match": true
+    },
+    "overlay": {
+      "only_input_delay_commands_mutate_design_constraints": true,
+      "no_exceptions_case_analysis_clock_groups_multicycle_or_ideal_network_added": true
+    },
+    "input_delay_difference": {
+      "input_port_count": 150,
+      "changed_polarities": [
+        {
+          "port": "io_pads_aon_erst_n_i_ival",
+          "polarity": "rise",
+          "before": [
+            [
+              0.0,
+              0.5,
+              "xu_hfextclk"
+            ]
+          ],
+          "after": [
+            [
+              1.0,
+              2.0,
+              "xu_lfextclk(f)"
+            ]
+          ]
+        },
+        {
+          "port": "io_pads_aon_pmu_dwakeup_n_i_ival",
+          "polarity": "rise",
+          "before": [
+            [
+              0.0,
+              0.5,
+              "xu_hfextclk"
+            ]
+          ],
+          "after": [
+            [
+              1.0,
+              2.0,
+              "xu_lfextclk(f)"
+            ]
+          ]
+        },
+        {
+          "port": "io_pads_aon_pmu_dwakeup_n_i_ival",
+          "polarity": "fall",
+          "before": [
+            [
+              0.0,
+              0.5,
+              "xu_hfextclk"
+            ]
+          ],
+          "after": [
+            [
+              1.0,
+              2.0,
+              "xu_lfextclk(f)"
+            ]
+          ]
+        },
+        {
+          "port": "io_pads_bootrom_n_i_ival",
+          "polarity": "rise",
+          "before": [
+            [
+              0.0,
+              0.5,
+              "xu_hfextclk"
+            ]
+          ],
+          "after": [
+            [
+              1.0,
+              2.0,
+              "xu_lfextclk(f)"
+            ]
+          ]
+        },
+        {
+          "port": "io_pads_bootrom_n_i_ival",
+          "polarity": "fall",
+          "before": [
+            [
+              0.0,
+              0.5,
+              "xu_hfextclk"
+            ]
+          ],
+          "after": [
+            [
+              1.0,
+              2.0,
+              "xu_lfextclk(f)"
+            ]
+          ]
+        }
+      ],
+      "erst_fall_original_hf_delay_preserved": true,
+      "all_other_polarities_equal": true
+    },
+    "clocks": {
+      "four_clock_reports_identical_except_date": true,
+      "exact_periods_bound_by_original_sdc_and_unchanged_overlay": true
+    },
+    "coverage": {
+      "review": {
+        "path": "/home/mxhanks/Projects/ChipContest/build/lf-contract-20261114/native-r2/coverage-review.json",
+        "bytes": 5026,
+        "sha256": "346401e74a1bd1ac15858507ee30c6ad68c48ab08f10b2d1fce4da0dac0eba3b"
+      },
+      "complete_native_check_identities": true,
+      "exactly_four_unknown_to_met": true,
+      "summary": {
+        "total": 328981,
+        "met": 299653,
+        "violated": 0,
+        "untested": 29328
+      }
+    },
+    "check_timing_partial_input": {
+      "no_partial_input_delay_warning": false,
+      "retained_erst_split_clock_reference_warning": true,
+      "all_pad_polarities_proven_complete_by_report_port": true,
+      "other_check_timing_warnings": [
+        "Warning: There is 1 clock set for which periods were not expandable.",
+        "Warning: There is 1 port with partially defined input delays."
+      ]
+    },
+    "numeric_exact_source_paths": {
+      "reports": 14,
+      "paths": 18,
+      "minimum_slack_ns": 15256.47363281,
+      "details": [
+        {
+          "report": "revised-target-0-min.rpt",
+          "paths": 2,
+          "source": "io_pads_bootrom_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+          "delay_type": "min",
+          "source_polarities": [
+            "f",
+            "r"
+          ],
+          "slack_ns": [
+            15259.84375,
+            15259.8515625
+          ],
+          "arrival_ns": [
+            15259.96289062,
+            15259.99023438
+          ],
+          "required_ns": [
+            0.1184669,
+            0.13887838
+          ]
+        },
+        {
+          "report": "revised-target-0-max.rpt",
+          "paths": 2,
+          "source": "io_pads_bootrom_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/T_8_reg/D",
+          "delay_type": "max",
+          "source_polarities": [
+            "f",
+            "r"
+          ],
+          "slack_ns": [
+            15256.49316406,
+            15256.51269531
+          ],
+          "arrival_ns": [
+            15260.99023438,
+            15260.96289062
+          ],
+          "required_ns": [
+            30517.484375,
+            30517.4765625
+          ]
+        },
+        {
+          "report": "revised-target-1-min.rpt",
+          "paths": 2,
+          "source": "io_pads_aon_pmu_dwakeup_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+          "delay_type": "min",
+          "source_polarities": [
+            "f",
+            "r"
+          ],
+          "slack_ns": [
+            15259.84375,
+            15259.8515625
+          ],
+          "arrival_ns": [
+            15259.96289062,
+            15259.99023438
+          ],
+          "required_ns": [
+            0.1184669,
+            0.13887838
+          ]
+        },
+        {
+          "report": "revised-target-1-max.rpt",
+          "paths": 2,
+          "source": "io_pads_aon_pmu_dwakeup_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/dwakeup_deglitch/T_8_reg/D",
+          "delay_type": "max",
+          "source_polarities": [
+            "f",
+            "r"
+          ],
+          "slack_ns": [
+            15256.49316406,
+            15256.51269531
+          ],
+          "arrival_ns": [
+            15260.99023438,
+            15260.96289062
+          ],
+          "required_ns": [
+            30517.484375,
+            30517.4765625
+          ]
+        },
+        {
+          "report": "revised-target-2-min.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN",
+          "delay_type": "min",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15259.86621094
+          ],
+          "arrival_ns": [
+            15260.13085938
+          ],
+          "required_ns": [
+            0.26473308
+          ]
+        },
+        {
+          "report": "revised-target-2-max.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN",
+          "delay_type": "max",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15256.48828125
+          ],
+          "arrival_ns": [
+            15261.13085938
+          ],
+          "required_ns": [
+            30517.61914062
+          ]
+        },
+        {
+          "report": "revised-target-3-min.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN",
+          "delay_type": "min",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15259.87011719
+          ],
+          "arrival_ns": [
+            15260.13085938
+          ],
+          "required_ns": [
+            0.26112911
+          ]
+        },
+        {
+          "report": "revised-target-3-max.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_r_reg/SDN",
+          "delay_type": "max",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15256.48828125
+          ],
+          "arrival_ns": [
+            15261.13085938
+          ],
+          "required_ns": [
+            30517.61914062
+          ]
+        },
+        {
+          "report": "revised-target-4-min.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN",
+          "delay_type": "min",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15259.85644531
+          ],
+          "arrival_ns": [
+            15260.02441406
+          ],
+          "required_ns": [
+            0.16816811
+          ]
+        },
+        {
+          "report": "revised-target-4-max.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_0/q_reg/RDN",
+          "delay_type": "max",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15256.47363281
+          ],
+          "arrival_ns": [
+            15261.02539062
+          ],
+          "required_ns": [
+            30517.5
+          ]
+        },
+        {
+          "report": "revised-target-5-min.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN",
+          "delay_type": "min",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15259.85644531
+          ],
+          "arrival_ns": [
+            15260.02441406
+          ],
+          "required_ns": [
+            0.16816811
+          ]
+        },
+        {
+          "report": "revised-target-5-max.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_1/q_reg/RDN",
+          "delay_type": "max",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15256.47363281
+          ],
+          "arrival_ns": [
+            15261.02539062
+          ],
+          "required_ns": [
+            30517.5
+          ]
+        },
+        {
+          "report": "revised-target-6-min.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN",
+          "delay_type": "min",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15259.85644531
+          ],
+          "arrival_ns": [
+            15260.02441406
+          ],
+          "required_ns": [
+            0.16816811
+          ]
+        },
+        {
+          "report": "revised-target-6-max.rpt",
+          "paths": 1,
+          "source": "io_pads_aon_erst_n_i_ival",
+          "target": "u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN",
+          "delay_type": "max",
+          "source_polarities": [
+            "r"
+          ],
+          "slack_ns": [
+            15256.47363281
+          ],
+          "arrival_ns": [
+            15261.02539062
+          ],
+          "required_ns": [
+            30517.5
+          ]
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "No pre-overlay native export/mode reports; unchanged exception/case/disabled commands are established by sealed original/common/overlay source, not a native before-after mode-report diff.",
+    "Fresh exported-SDC reload requires separate accepted evidence.",
+    "ERST falling HF delay is diagnostic continuity, not proof of arbitrary-phase assertion CDC/RDC legality.",
+    "Original frozen SDC retains four unknown checks. This new LF contract does not close that result."
+  ],
+  "qualification": "NEW_INPUT_CONTRACT_ONLY_NOT_ORIGINAL_SDC_OR_CDC_RDC_SIGNOFF",
+  "original_sdc_verdict": "UNCHANGED_UNKNOWN4_NOT_CLOSED"
+}

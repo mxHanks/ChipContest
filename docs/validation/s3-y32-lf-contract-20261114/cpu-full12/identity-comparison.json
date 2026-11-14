@@ -1,0 +1,61 @@
+{
+  "schema": "ingress1064-lf-contract-cpu-source-comparison-v1",
+  "status": "PASS_COMPILED_RTL_AND_EXECUTED_FIRMWARE_IMAGE_IDENTICAL_TEST_ENVIRONMENT_CHANGED",
+  "reviewed_at": "2026-11-14T03:14:40.662394+00:00",
+  "baseline": {
+    "path": "docs/validation/s3-y32-ingress-perf-native-20261113/timing-final/performance-result.json",
+    "bytes": 78166,
+    "sha256": "3a7bb2832bace71ab797e9f95b41756cd9d578e70e985a65721d22610e2ea39f"
+  },
+  "new_result": {
+    "path": "build/unknown4-20261114/cpu-lf-contract-full12-r1/result.json",
+    "bytes": 77296,
+    "sha256": "74a6604557f0b559c488b6f3dcc90c63a38b6561f4f39adaaf82137c96dd35d4"
+  },
+  "new_simulation_log": {
+    "path": "build/unknown4-20261114/cpu-lf-contract-full12-r1/simulation.log",
+    "bytes": 66544,
+    "sha256": "62569550ee547545f5ae5e54141b55524a2fd64e37b2d581b87cedc897ec92e0"
+  },
+  "compiled_rtl_files_compared": 172,
+  "compiled_RTL_byte_identity": true,
+  "source_file_count": {
+    "before": 181,
+    "after": 182
+  },
+  "all_source_differences": [
+    {
+      "path": "check_results.py",
+      "before": "89ed54a1f471286fd521581de313c683a14f9dd90f47409a6306c06767087dcd",
+      "after": "ec2664ddc7f9efd00e1c85a0d1532b4068d3ebf8095393fe591fd903fea57a6c"
+    },
+    {
+      "path": "run_cpu.py",
+      "before": "8458d69b36ad34cc916a44662c82ca24273882ac566f2161df0c08c604fcdad5",
+      "after": "f21159bc37d6c52953ad03ac5258687e79d7c869e63dff231b8926a2d79370bc"
+    },
+    {
+      "path": "tests/lf_input_contract.sv",
+      "before": null,
+      "after": "5a43ac39d4d4fbee7b83a3e62e5b7e5bb91733f23295220f616b58d7fae51546"
+    },
+    {
+      "path": "tests/tb_sysbus32_soc.sv",
+      "before": "d2639b1bf0b7151ccd504366ddf1fb0f174cc37d15f2aa1dda0a3ed2b7b29921",
+      "after": "445033bd5d70a4c8b4b2f0b8363ec1a988f9a67cf73e2a6841c4ed652d699f2d"
+    }
+  ],
+  "firmware_execution_image_byte_identical": true,
+  "firmware_image_sha256": "7f5e794c54680e0249fdb6780b3f0254139e1633c3acb76cc021db240abb1905",
+  "fresh_ELF_sha256": "d5a7faac2ffb0ded885b5120492b960971fff05b5120664a9b5c9056dbbf0bed",
+  "baseline_ELF_sha256": "e9b6593d4d0203c894d4f4ff1867d8ba65b90049ba70a2f631afd7d7de9a46ca",
+  "fresh_simulator_sha256": "9532914dd08f31141b3f7121e3b3f458618c804d55ca47c71a6b50e169b08ddc",
+  "fresh_CPU12_outputs": 304128,
+  "fresh_CPU12_cycles": 1691172,
+  "source_drift": [],
+  "scope": "Only startup input environment and its checker/runner changed; all performance timing boundary code remained unchanged. Native mapped/STA is reviewed separately.",
+  "limitations": [
+    "Digital CPU simulation does not prove physical CDC/RDC, metastability, MTBF, minimum pulse or gate-delay timing.",
+    "The checked simulation includes a separately excluded warmup, and same twelve principal task windows."
+  ]
+}

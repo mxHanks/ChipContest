@@ -1,0 +1,33 @@
+Information: Checking 'no_input_delay'.
+Information: Checking 'no_driving_cell'.
+Information: Checking 'unconstrained_endpoints'.
+Information: Checking 'unexpandable_clocks'.
+Warning: There is 1 clock set for which periods were not expandable.
+
+ Failed clocks set      Related clocks           Original Period     Expanded Period     Added Edges     Voltage Config
+-----------------------------------------------------------------------------------------------------------------------
+  1                     xu_hfextclk                         6.67             6666.67            1998
+  1                     xu_jtag_tck                       100.00            30600.00             610
+  1                     xu_lfextclk                     30517.58            30517.58               0
+  1                     xu_plldiv_envelope                  6.67             6666.67            1998
+
+Information: Checking 'latch_fanout'.
+Information: Checking 'no_clock'.
+Information: Checking 'partial_input_delay'.
+Warning: There is 1 port with partially defined input delays.
+
+Ports
+------------------------------------------------------------
+io_pads_aon_erst_n_i_ival
+
+Information: Checking 'generic'.
+Information: Checking 'loops'.
+Information: Checking 'generated_clocks'.
+Information: Checking 'pulse_clock_non_pulse_clock_merge'.
+Information: Checking 'pll_configuration'.
+Information: Checking 'voltage_level'.
+
+Check cell voltage level related issues including rail voltages
+Cell Name                      min/max    issues found 
+----------------------------------------------------------------------
+0

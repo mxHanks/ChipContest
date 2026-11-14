@@ -1,0 +1,62 @@
+****************************************
+Report : timing
+	-path_type full_clock_expanded
+	-delay_type max
+	-nworst 4
+	-slack_lesser_than 1000000000.00000000
+	-max_paths 4
+	-sort_by slack
+Design : xu_soc_sysbus32_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Sat Nov 14 11:12:02 2026
+****************************************
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg
+               (recovery check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (fall edge)                       15258.78906250
+                                                                 15258.78906250
+  clock network delay (ideal)                         0.00000000 15258.78906250
+  input external delay                                2.00000000 15260.78906250 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 15260.78906250 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U4/ZN (CLKINV0_12TR40)
+                                                      0.06102309 15260.84960938 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/U3/ZN (CLKINV0_12TR40)
+                                                      0.04893160 15260.89941406 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/XU_ECO_async_edge_0004/Z (BUFV2_12TR40)
+                                                      0.06462680 15260.96386719 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/XU_ECO_async_edge_0005/Z (BUFV2_12TR40)
+                                                      0.05419950 15261.01757812 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/XU_ECO_async_edge_0006/Z (BUFV2_12TR40)
+                                                      0.05392382 15261.07128906 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/XU_ECO_async_edge_0011/Z (BUFV2_12TR40)
+                                                      0.05910677 15261.13085938 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/SDN (DSNQV0_12TR40)
+                                                      0.00000000 15261.13085938 r
+  data arrival time                                              15261.13085938
+
+  clock xu_lfextclk (rise edge)                       30517.57812500
+                                                                 30517.57812500
+  clock network delay (ideal)                         0.00000000 30517.57812500
+  clock reconvergence pessimism                       0.00000000 30517.57812500
+  clock uncertainty                                   -0.10000000
+                                                                 30517.47851562
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/u_sirv_aon/u_sirv_pmu/erst_reset_r_reg/CK (DSNQV0_12TR40)
+                                                                 30517.47851562 r
+  library recovery time                               0.14119844 30517.61914062
+  data required time                                             30517.61914062
+  ------------------------------------------------------------------------------
+  data required time                                             30517.61914062
+  data arrival time                                              -15261.13085938
+  ------------------------------------------------------------------------------
+  slack (MET)                                                    15256.48828125
+
+
+1

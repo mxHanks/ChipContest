@@ -1,0 +1,58 @@
+****************************************
+Report : timing
+	-path_type full_clock_expanded
+	-delay_type max
+	-nworst 4
+	-slack_lesser_than 1000000000.00000000
+	-max_paths 4
+	-sort_by slack
+Design : xu_soc_sysbus32_ppa_top
+Version: T-2022.03-SP5-1
+Date   : Sat Nov 14 11:12:02 2026
+****************************************
+
+
+  Startpoint: io_pads_aon_erst_n_i_ival
+               (input port clocked by xu_lfextclk)
+  Endpoint: u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg
+               (recovery check against rising-edge clock xu_lfextclk)
+  Path Group: **async_default**
+  Path Type: max
+
+  Point                                                   Incr       Path
+  ------------------------------------------------------------------------------
+  clock xu_lfextclk (fall edge)                       15258.78906250
+                                                                 15258.78906250
+  clock network delay (ideal)                         0.00000000 15258.78906250
+  input external delay                                2.00000000 15260.78906250 r
+  io_pads_aon_erst_n_i_ival (in)                      0.00000000 15260.78906250 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/U10/ZN (NAND2BV0_12TR40)
+                                                      0.07644130 15260.86523438 f
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/U3/ZN (CLKINV0_12TR40)
+                                                      0.04573461 15260.91113281 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/XU_ECO_catch_arc_0004/Z (BUFV2_12TR40)
+                                                      0.06032570 15260.97167969 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/XU_ECO_catch_arc_0005/Z (BUFV2_12TR40)
+                                                      0.05383202 15261.02539062 r
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/RDN (DRNQV0_12TR40)
+                                                      0.00000000 15261.02539062 r
+  data arrival time                                              15261.02539062
+
+  clock xu_lfextclk (rise edge)                       30517.57812500
+                                                                 30517.57812500
+  clock network delay (ideal)                         0.00000000 30517.57812500
+  clock reconvergence pessimism                       0.00000000 30517.57812500
+  clock uncertainty                                   -0.10000000
+                                                                 30517.47851562
+  u_soc/u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/aonrst_catch/reset_n_catch_reg/reg_2/q_reg/CK (DRNQV0_12TR40)
+                                                                 30517.47851562 r
+  library recovery time                               0.02107220 30517.50000000
+  data required time                                             30517.50000000
+  ------------------------------------------------------------------------------
+  data required time                                             30517.50000000
+  data arrival time                                              -15261.02539062
+  ------------------------------------------------------------------------------
+  slack (MET)                                                    15256.47363281
+
+
+1

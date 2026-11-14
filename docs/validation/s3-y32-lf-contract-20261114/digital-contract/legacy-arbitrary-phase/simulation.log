@@ -1,0 +1,65 @@
+ASYNC_CONTRACT_CASE PASS index=1 name=four_state_initial_unknown_preserved
+ASYNC_CONTRACT_CASE PASS index=2 name=deglitch_unsampled_short_pulse
+ASYNC_CONTRACT_CASE PASS index=3 name=deglitch_single_sample_pulse
+ASYNC_CONTRACT_CASE PASS index=4 name=deglitch_stable_window_latency
+ASYNC_CONTRACT_CASE PASS index=5 name=four_state_X_propagation_and_recovery
+ASYNC_CONTRACT_PHASE index=0 release_offset_fs=2
+ASYNC_CONTRACT_CASE PASS index=6 name=ERST_release_phase
+ASYNC_CONTRACT_PHASE index=1 release_offset_fs=1000
+ASYNC_CONTRACT_CASE PASS index=7 name=ERST_release_phase
+ASYNC_CONTRACT_PHASE index=2 release_offset_fs=3333333
+ASYNC_CONTRACT_CASE PASS index=8 name=ERST_release_phase
+ASYNC_CONTRACT_PHASE index=3 release_offset_fs=5086263021
+ASYNC_CONTRACT_CASE PASS index=9 name=ERST_release_phase
+ASYNC_CONTRACT_PHASE index=4 release_offset_fs=15258788063
+ASYNC_CONTRACT_CASE PASS index=10 name=ERST_release_phase
+ASYNC_CONTRACT_PHASE index=5 release_offset_fs=15258789061
+ASYNC_CONTRACT_CASE PASS index=11 name=ERST_release_phase
+ASYNC_CONTRACT_PHASE index=6 release_offset_fs=15258789065
+ASYNC_CONTRACT_CASE PASS index=12 name=ERST_release_phase
+ASYNC_CONTRACT_PHASE index=7 release_offset_fs=15258790063
+ASYNC_CONTRACT_CASE PASS index=13 name=ERST_release_phase
+ASYNC_CONTRACT_PHASE index=8 release_offset_fs=15262122396
+ASYNC_CONTRACT_CASE PASS index=14 name=ERST_release_phase
+ASYNC_CONTRACT_PHASE index=9 release_offset_fs=30517578124
+ASYNC_CONTRACT_CASE PASS index=15 name=ERST_release_phase
+ASYNC_CONTRACT_STOPPED index=0 pulse_width_fs=1
+ASYNC_CONTRACT_CASE PASS index=16 name=LF_stopped_ERST_capture
+ASYNC_CONTRACT_STOPPED index=1 pulse_width_fs=1000
+ASYNC_CONTRACT_CASE PASS index=17 name=LF_stopped_ERST_capture
+ASYNC_CONTRACT_STOPPED index=2 pulse_width_fs=1000000
+ASYNC_CONTRACT_CASE PASS index=18 name=LF_stopped_ERST_capture
+ASYNC_CONTRACT_STOPPED index=3 pulse_width_fs=6666666
+ASYNC_CONTRACT_CASE PASS index=19 name=LF_stopped_ERST_capture
+ASYNC_CONTRACT_PRIORITY mask=1 public_cause=0
+ASYNC_CONTRACT_CASE PASS index=20 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=2 public_cause=1
+ASYNC_CONTRACT_CASE PASS index=21 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=3 public_cause=0
+ASYNC_CONTRACT_CASE PASS index=22 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=4 public_cause=2
+ASYNC_CONTRACT_CASE PASS index=23 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=5 public_cause=0
+ASYNC_CONTRACT_CASE PASS index=24 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=6 public_cause=1
+ASYNC_CONTRACT_CASE PASS index=25 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=7 public_cause=0
+ASYNC_CONTRACT_CASE PASS index=26 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=7 public_cause=0
+ASYNC_CONTRACT_CASE PASS index=27 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=6 public_cause=1
+ASYNC_CONTRACT_CASE PASS index=28 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=5 public_cause=0
+ASYNC_CONTRACT_CASE PASS index=29 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=4 public_cause=2
+ASYNC_CONTRACT_CASE PASS index=30 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=3 public_cause=0
+ASYNC_CONTRACT_CASE PASS index=31 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=2 public_cause=1
+ASYNC_CONTRACT_CASE PASS index=32 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_PRIORITY mask=1 public_cause=0
+ASYNC_CONTRACT_CASE PASS index=33 name=reset_cause_priority_and_retention
+ASYNC_CONTRACT_CASE PASS index=34 name=overlapping_cause_sequential_release
+ASYNC_CONTRACT_PASS cases=34 checks=178 release_phases=10 stopped_pulses=4 priority_masks=14 hf_edges=926972 lf_edges=199
+ASYNC_CONTRACT_LIMIT digital_four_state_only unknown_STA_not_met no_analog_metastability_MTBF_or_physical_min_pulse_proof
+/home/mxhanks/Projects/ChipContest/experiments/s3-y32-ingress-perf/ppa/eco/tb_async_contract.sv:259: $finish called at 6179809570516 (1fs)
