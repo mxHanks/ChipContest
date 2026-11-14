@@ -1,84 +1,35 @@
-# ChipContest 队友交接 · 2026-11-05
+# 当前工程交接 · 1064 修复候选
 
-## 交付决定与入口
+`main` 采用原 1064 候选的 catch3 修复结果。统一操作见[快速开始](quickstart.md)，面向评审的结果见[首页](README.md)，机器身份入口为 [candidate.json](submission/candidate.json)。
 
-交付 **S2e paired-HI 为主方案，S2c 为唯一对照**。其余候选不追加评测。按项目所有者确认，当前S2e如实合入main；资格缺口继续公开保留。原始工作目录是 `/home/mxhanks/Projects/ChipContest`。额外22个工作树已在交付核验和推送后永久删除，不建立外部归档；父仓库分支历史及本次S2e子仓提交保留；其他本地实验子仓/ignored结果随目录永久删除，交付所需证据放在本仓库。
+## 固定身份
 
-入口：[快速开始](quickstart.md)、[原始两候选证据与逐层CSV](docs/validation/xu-score-two-candidate-final-20261105/README.md)、[冻结服务器复现工具](tools/repro/server/README.md)。
-
-## 实际结果与边界
-
-| 指标 | S2c own9c16 | S2e final155 |
-|---|---:|---:|
-| 真实12层总周期 | 11,887,872 | 10,420,116 |
-| 每层周期 | 990,656 | 868,343 |
-| 全SoC任务诊断能量/mJ | 2.6384471466669330 | 2.3659452273331971 |
-| 加速器面积/mm² | 0.2948018380 | 0.3003096339 |
-
-S2e周期−12.3466673%、相同任务吞吐+14.0857933%、诊断能量−10.3281174%、面积+1.8683045%。S2e占2.25mm²加速器面积预算13.3471%。面积对应各自测能网表，不混用wrapper面积与全SoC功耗。数字从native报告舍入功耗乘实际fs窗口重算，长小数不意味着额外测量精度。
-
-状态：**AUDITED / DIAGNOSTIC / NOT_QUALIFIED**。不能上报比赛最终能耗或8T+8E+4A总分。两组采用同一404c7d SDC与45037c forwarded-clock scope，但分析方法相同不证明完整150MHz已闭合。
-
-当前未解除的问题：
-
-1. 严格mapped VCS中原mandatory fatal仍存在（bias_commit等四态问题）；`+notimingcheck`下公共输出通过只属于诊断。必须保留完整原TB的私有断言、clear与FIFO检查，不能删fatal或以HOST+4结束代替验收。
-2. 每层5280个SRAM Q存在TX，4256个Q整窗TX。`x_probability=0`、TC=0和shadow probe不能证明物理Q已知，条件/内部功耗及修补逻辑活动仍待审查。
-3. 原公共时序方法中仍有27217 untested、31 unconstrained及UART/clock/pulse/PLIC等缺口；S2c还有40项时序违例（8hold、5removal、27clock-gating hold）。S2e own155完整FM 42338点通过不等于上述时序/功能资格通过。
-4. 当前SAIF窗口是首个源数据请求至最终Y写响应退休，**pretask clear在窗外**。现有全SoC任务诊断能量不包含该阶段，不能宣称完整比赛单任务能耗合格。
-5. 2026-11-02开发软件数值评测覆盖4445个样本×12个独立FFN1，最坏aggregate NRMSE约0.01328069%、最坏sample/layer约0.01954010%；官方600样本和完整encoder未完成；这不是4445条S2e RTL逐条仿真。原始数值检查见 [数值证据](docs/validation/xu-score-s0-numeric-20261102/README.md)，mapped公共诊断与私有门槛见 [141原件](docs/validation/xu-score-resource-function141-20261105/README.md)。
-
-## 改了哪些代码
-
-- S2c既有Chisel：`src/main/scala/linear/LinearAutoGroupCore.scala` 自动组调度及两槽结果FIFO；`GenerateRTL.scala`增加相应生成入口。此前缓存核心与bias bank代码仍在源树，具体硬件行为见 [S2c设计说明](docs/xu-s2c-autogroup.md)。
-- **S2e没有新Chisel计算架构修改。** E203子模块 `rtl/e203/perips/accel_icb_slave.v` 增加capability `0x0e0=0x58480001`、四个paired-HI读口 `0x140+4*p`，一次返回相邻两个结果的高16位，维持旧HI读口语义、背压快照和显式POP所有权。
-- `tests/e203/firmware/accel.c` 使用 `bias-hw-autogroup-paired-hi-window`，每相邻两结果读两次LO32和一次packed-HI，独立符号扩展后按原canonical Y顺序写回。每层结果读取由50688字降为38016字，输出数、写回数、输入/权重/偏置不变。
-- 被动TB/契约增加读口与计数检查。保持八个PE、signed16输入/权重、signed40偏置、signed48计算/结果、原SRAM几何与数值向量。32/64PE不纳入当前交付方案。
-
-细节见 [S2e协议说明](docs/xu-s2e-paired-hi.md)。
-
-## 源码、网表与证据身份
-
-生产源码来自测得的父提交 `5bf123bfead8f2a37f97f3234d4e40ce8201aae9`，E203子提交 `a0767db69628ef30e53de2d1e93dd0360c0ccf76`，后者已发布到团队子仓库的 `codex/xu-s2e-paired-hi`。当前main在原remote-main历史之上导入选定生产文件，并通过一次保留树的merge接上S2e历史，使strict入口所需旧固件提交可在新克隆中读取；没有覆盖远端既有main历史。源码逐文件身份见 [source-identity.json](docs/handoff-evidence/source-identity.json)。新交付提交哈希是集成身份，不能冒称历史测量提交哈希。
-
-S2e测能目标为own155最终网表SHA256 `3440182eca862290a874bedc4eb3f94168681a7028d584d15217a13dbeafa794`；其捕获活动仍来自own89/120原始映射 `0cfac0b5e99ec05301ec8c0efde38ef2c96790dd1243e84727687b15b25c09d0`。155经历独立时序修补与有序三SVF的完整FM链。**源代码重生成RTL不会直接得到155修补后网表**；必须沿原服务器89→134失败保留→155修补链复现，不能将两个映射视作同字节文件。S2c测能绑定自己的own9c16网表。native面积/FM原件在 [handoff-evidence](docs/handoff-evidence/)。
-
-原始171包SHA256 `2f46075e337a21608faf8dc4f4308e90a31c610e6dd5d1dec4a4fb7bb17ae515`，412payload/353192073B；191包SHA256 `44770417f09a4244cbeea5690b4f21923e5d641de365094010ca7eeaf7c998b3`，392payload/367456367B。压缩包及逐层pt.log/power.rpt哈希已随main交付。数值/141的交付README已更新当前路径，外层清单相应重建并保留original清单；native包和历史审计正文未修改。超大pin报告正文、库、SAIF等仍在原服务器；本地包的hash-only项是服务器流式哈希回执，不能称为本机重读全部原报告。
-
-```bash
-python3 -B tools/scripts/xu_verify_handoff.py
-```
-
-该便携复核只依赖本仓库和Python标准库，独立检查原包、逐层周期/能量、实际Tcl方法、native日志及面积绑定。历史179/205审计输出原样保存；其中179关于旧57方法不一致的警告仍是历史事实，新205使用190共同方法完成最终对照。便携核验不代替重新运行EDA。
-
-## 原服务器接手
-
-原件根目录：`/storage2/2026contest/server4/s4_23usr/Desktop/xu-score-optimization-20261102`。不要清理服务器原件或覆盖任何已运行目录。以下是已有结果，不需重新启动：
-
-| 内容 | 根目录内路径 |
+| 对象 | 身份 |
 |---|---|
-| S2e最终map/面积/STA/FM | `s2e-own-timing-repair-20261105-155` |
-| S2e task0 / 全12层功耗 | `s2e-final155-power-preflight-20261105-166` / `s2e-final155-power12-20261105-166` |
-| S2c task0 / 全12层功耗 | `s2c-common-scope-preflight-20261105-190` / `s2c-common-scope-power12-20261105-190` |
-| 持久队列与事件 | `unified-experiment-control-20261105-150` |
+| 修复完成的来源提交 | `be67e5d745cd7123e0def870f26be9a84263d759` |
+| 生产 RTL 子模块 | `5470c5650f2d11d16e7c52cc96626d21030a3973` |
+| 最终 mapped.v SHA256 | `d83acb49caec51aabc66d8ad61b8784294bebe26c5458aa0b095f9d12a2ae0d1` |
+| 最终证据包 SHA256 | `a0870cf043543db0d1ef4eb3c56fc0fafc8ca624578bfc63dc49ba5d4670a6a0` |
 
-服务器同一工具链：DC2022.03SP5-5、PT2022.03SP5-1、FM2020.09SP5、VCS2020.03SP2-6、SiFive GCC10.2。面积使用服务器原工艺库；库路径和SHA在prepared/input receipts中，未把第三方库、模型、手册或密码放入仓库。
+README/入口整理后的父提交是交付集成身份，测量来源仍按上述固定提交和原始收据追溯。生产核心与 DMA 位于 E203 子模块 `rtl/e203/perips/`；入口为 `rtl/e203/subsys/xu_systembus_ingress32.v`。验证实现位于 [experiments/s3-y32-ingress-perf](experiments/s3-y32-ingress-perf/README.md)。
 
-只读查看统一总控：
+## 已完成与保留项
 
-```bash
-python3 -B "$HOME/Desktop/xu-campaign-batch154/campaign154.py" status
+12 task RTL 实测 1691172 cycles / 304128 Y32 PASS，150 MHz 条件下 1064.350640 task/s。原约束、原库下最终完整 STA 为 0 数值时序违例、0 电气违例，仍有 4 unknown / 29332 untested。全 SoC 标准单元面积 357030.3072、加内部 33 SRAM 保守上界 658931.612862，均为原库单位。
+
+最终映射经过 DC 回放、fresh PT、原件逐 SHA 回收及严格 mapped→mapped 结构证明。修复是映射 ECO，性能 RTL 与固件未改；不能把原始综合输出、23:50 冻结版或 GPIO 存储整合候选作为当前最终映射。完整依据与剩余项见[最终修复报告](docs/s3-y32-ingress-perf-postfreeze-repair-20261114.md)。
+
+后续资格工作应先明确异步输入与释放的 CDC/RDC 合同，再核实 4 unknown 及 catch 的外部 required time；不能靠新增 false path、multicycle 或异步 clock group 宣称原有问题已通过。仍需 RTL→mapped FM、严格 mapped 带延迟任务、复位脉宽/亚稳态、物理多角、功耗、生产 loader/存储规则和官方 600 样本验收。当前没有最终比赛分数。
+
+## 接手与协作
+
+```sh
+git submodule update --init --recursive
+python3 -B tools/current.py verify --submodule
 ```
 
-不要运行旧 `upgrade/start` 配置来重登记八候选。后续新实验只保留S2e/S2c，先核查已有registration和真实进程，沿现有单原生槽位总控依赖顺序登记。许可证总配额未知，当前checkout不能当作余量，不擅自提高并发。
+检查失败时先核对提交、子模块和原件，不覆盖冻结目录。新实验使用新的 `build/` 输出目录；保留输入、实际 argv、工具版本、失败原件和哈希。工艺库、许可证与 DDC 不在公开包内，原 EDA 工具含旧实验依赖，不应直接在空 build 中运行后将结果称为最终 ECO。
 
-已有diagnostic207中S2c查询完成，S2e因cached handle查询失败；失败属于待修复诊断，不是资格成功。后续214/216本地探索没有经过完整服务器验收，不作为交付通过证据。服务器复现工具与原实际命令JSON见 [tools/repro/server](tools/repro/server/README.md)；这些工具刻意锁定原服务器文件身份，不能在缺少工艺库/网表/SAIF的普通新克隆中直接跑出PPA。
+当前源码包含跨目录复用，`experiments/` 和旧生成源不能因名称为历史而直接删除。历史入口集中在[历史导航](docs/history/README.md)，本轮分支归档与恢复见[归档清单](docs/history/branch-archive-20261114.md)。新工作可按需建立 `codex/` 分支；修改子模块时先推送子仓，再更新父仓 gitlink。
 
-接手顺序建议：先便携验包及本地功能回归；再原服务器完整RTL VCS；随后解决严格mapped fatal、未知Q与clear窗口；再完成两图同配置完整150MHz资格；最后重测全SoC完整任务能耗并按8T+8E+4A评分。每项新实验保留原失败，使用新namespace/输出目录，记录冻结输入、逐层周期、面积、能量、原日志SHA及实际argv。
-
-## 本次交付验证
-
-原目录已通过14项Chisel、64项E203、42项数值、42项host测试及S2e完整12层本地回归（304128输出、608256字写回）。全新无本地对象复用的父仓库克隆、从GitHub取得的a076子仓库也通过doctor、12层向量及上述Python测试；便携验包独立通过。日志与命令见 [local-validation](docs/handoff-evidence/local-validation/validation.json)。本地GCC14.2/Verilator结果仅证明开发功能，不替代服务器GCC10.2的正式周期和剩余资格验收。
-
-## 目录清理
-
-所有额外工作树永久删除，无外部归档。原始目录内的赛题指南PDF、原有assets/模型/库、本交付源码及关键证据保留。清理实际名单、PDF前后SHA、父/子仓完整性及清理后验包结果见 [cleanup.json](docs/handoff-evidence/cleanup.json)。已释放约29GiB，`git worktree list`只保留原始目录，临时验证克隆也已删除。本机既有2026-11-06 01:00 CST关机安排未改动；服务器独立运行不依赖本机继续在线。
+本次仅整理父仓分支；其它工作树及其未提交文件、本地产物和用户资产保留。旧 S2e 原交接已移至[历史归档](docs/history/s2e-20261105/HANDOFF.md)。

@@ -1,0 +1,485 @@
+{
+  "schema": "chipcontest-current-candidate-v1",
+  "candidate": "s3-y32-ingress1064-postfreeze-catch3",
+  "baseline_commit": "be67e5d745cd7123e0def870f26be9a84263d759",
+  "rtl": {
+    "path": "third-party/e203_hbirdv2",
+    "commit": "5470c5650f2d11d16e7c52cc96626d21030a3973"
+  },
+  "report": "docs/s3-y32-ingress-perf-postfreeze-repair-20261114.md",
+  "evidence": {
+    "directory": "docs/validation/s3-y32-ingress-perf-native-20261114/catch3",
+    "manifest": {
+      "path": "docs/validation/s3-y32-ingress-perf-native-20261114/catch3/manifest.json",
+      "bytes": 10669,
+      "sha256": "f5893b591fa9fbe77d624aa501c72bd253f4a807fe0d95b8481b40684e474eb4"
+    },
+    "archive": {
+      "path": "docs/validation/s3-y32-ingress-perf-native-20261114/catch3/catch3-evidence.tar.xz",
+      "bytes": 1923272,
+      "sha256": "a0870cf043543db0d1ef4eb3c56fc0fafc8ca624578bfc63dc49ba5d4670a6a0"
+    },
+    "catalog_files": 80,
+    "delivery": {
+      "apply/eco.svf": {
+        "bytes": 9984,
+        "sha256": "f1ebf6bf887cb1980fb9f503c03d221fb56a515265072c49277d3e5293382b52"
+      },
+      "apply/mapped.v": {
+        "bytes": 16393062,
+        "sha256": "d83acb49caec51aabc66d8ad61b8784294bebe26c5458aa0b095f9d12a2ae0d1"
+      },
+      "apply/mapped.sdc": {
+        "bytes": 89482,
+        "sha256": "bcb45f723367dc14d67de25fad299536d7b86e5ea8245a4547c7a60d6f605d09"
+      },
+      "apply/seed-svf/eco.svf": {
+        "bytes": 9984,
+        "sha256": "5a2d8388995e3249871e93989a6696acafbebf9e2b669f6221ebc698bdafb642"
+      },
+      "apply/seed-svf/seed-svf/eco.svf": {
+        "bytes": 9984,
+        "sha256": "330ffdd46a2065f403f8df61334c193de15ca5f7828145fb617c2a78ab665802"
+      },
+      "apply/seed-svf/seed-svf/seed-svf/eco.svf": {
+        "bytes": 9984,
+        "sha256": "5d271fb5d5cb68e342903f775d105aa161b78ab1f8acdcb51f42d2a21c1bdd58"
+      },
+      "apply/seed-svf/seed-svf/seed-svf/seed-svf/eco.svf": {
+        "bytes": 9984,
+        "sha256": "a448bac64db8f597049b3a6341194973fd3323214bf323a4c519fe16c937535e"
+      },
+      "apply/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/eco.svf": {
+        "bytes": 9984,
+        "sha256": "b00fbe00711ade00ecd96acad263a4c54c779ccca764923ab7249516064ec4fc"
+      },
+      "apply/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/eco.svf": {
+        "bytes": 9984,
+        "sha256": "d0935979293f7ea2b195e645684350cbcb7e2a0f0914e9b397b34b8c70971c4d"
+      },
+      "apply/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/seed-svf/seed-hold.svf": {
+        "bytes": 9984,
+        "sha256": "a3b035f0fccac0b4940ff536a78575d71dc9f08327fb635417777acd7c47091e"
+      }
+    }
+  },
+  "entrypoints": {
+    "ingress": {
+      "path": "experiments/s3-y32-ingress-perf/run_ingress_regression.py",
+      "bytes": 1693,
+      "sha256": "603c7c57281e5c32bbb090b83adfb2d49451a25f7ca929dfbbc1041efc5a03b8"
+    },
+    "cpu": {
+      "path": "experiments/s3-y32-ingress-perf/run_cpu.py",
+      "bytes": 18966,
+      "sha256": "8458d69b36ad34cc916a44662c82ca24273882ac566f2161df0c08c604fcdad5"
+    },
+    "source_check": {
+      "path": "experiments/s3-y32-ingress-perf/verify_sources.py",
+      "bytes": 1615,
+      "sha256": "018447fc06f078e9fa8caba3f4ea21823cd12c1ff257d346f6c00ae930a72eab"
+    }
+  },
+  "results": {
+    "numeric_timing_violations": 0,
+    "electrical_violations": 0,
+    "unknown_checks": 4,
+    "untested_checks": 29332,
+    "total_checks": 328981,
+    "met_checks": 299649,
+    "preserved_sram_macros": 353,
+    "rtl_tasks": 12,
+    "rtl_cycles": 1691172,
+    "exact_y32_outputs": 304128,
+    "assumed_frequency_hz": 150000000,
+    "conditional_tasks_per_second": 1064.3506396747343,
+    "standard_cell_area_native_library_units": "357030.3072",
+    "internal_33_sram_area_native_library_units": "301901.305662",
+    "conservative_area_upper_bound_native_library_units": "658931.612862"
+  },
+  "qualification": "NUMERIC_STA_AND_DRC_ZERO_UNKNOWN_RETAINED_NOT_SIGNOFF",
+  "limitations": [
+    "4 unknown checks and external reset max context remain unresolved; CDC/RDC and reset pulse qualification are incomplete.",
+    "Throughput is the existing RTL SystemBus-loader measurement at an assumed 150 MHz; mapped ECO changed no compiled RTL. It is not a GPIO production or gate-delay task measurement.",
+    "Mapped structural equivalence does not replace RTL-to-mapped formal equivalence.",
+    "Area uses native library units, not official mm2. Physical CTS/SPEF/PVT, power and official 600-sample qualification remain incomplete.",
+    "The final mapped design is recovered from the bound ECO archive; a fresh RTL synthesis alone does not reproduce the final ECO design. Vendor libraries, licenses and native DDC are not included."
+  ],
+  "vectors": {
+    "archive": {
+      "path": "docs/validation/s3-y32-compliant32-20261113/evidence.tar.xz",
+      "bytes": 9080324,
+      "sha256": "7e7a4e44fcb555f0c2311b81c60549a8113f183766b1f63f1132b8341357f5f4"
+    },
+    "member_prefix": "evidence/build/compliant32-20261113/numeric/public-validation-600-evaluation-r1/vectors/",
+    "manifest_sha256": "4552d7f31cf8307e7440a8385b3ba83c1b67de7fdae975d23d38815c01b77d6b",
+    "delivery": {
+      "layer_00/bias.mem": {
+        "bytes": 2816,
+        "sha256": "17ff913ef511f10b4ed960aa3211e46d027dbee4dd87cea06a2c50c5ef57c5a1"
+      },
+      "layer_00/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "929f61b8086a3c4a9936abf69a68f35d15614b8b2f4b6449ac5596f6b7d1c9f9"
+      },
+      "layer_00/w.mem": {
+        "bytes": 81920,
+        "sha256": "31029df510ac342d4f850dc311f40d1ff18c1db723fb72f9e81367d7df3e5c7f"
+      },
+      "layer_00/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "b95da71b67b6c1aa22e78589f134b66866cfa597e0f84e78f519202eea8e58ce"
+      },
+      "layer_00/x.mem": {
+        "bytes": 31680,
+        "sha256": "700d8bdafd0f46f1d2e947bde87b2cce05107c2a48a1d19efc0ac6dcdeba4c98"
+      },
+      "layer_00/y.mem": {
+        "bytes": 329472,
+        "sha256": "ccc8b950f2bc79a688ea1d9d6cf577441d1eefc4eb04b558cb011080e0427719"
+      },
+      "layer_00/y32.mem": {
+        "bytes": 228096,
+        "sha256": "1656994e4ef0daf4de8d5c814c890bc7a143925629ec56dff32ddfa5a1b49c95"
+      },
+      "layer_01/bias.mem": {
+        "bytes": 2816,
+        "sha256": "a74090e9c3af666e8ee4dc4ab584896d74c782b01522a245cd2905be64ad6428"
+      },
+      "layer_01/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "9a2ee1b97e8c050369147dd7d160e45cb32c6031fdd7ac27a8ec7d161ed9066b"
+      },
+      "layer_01/w.mem": {
+        "bytes": 81920,
+        "sha256": "67d9d6846cf7d4c655a7d59950675341a7c1c4e7143578e5d4bdfe387d7e04f9"
+      },
+      "layer_01/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "17c465d6715a3c9da0b611cdf10f6c5bb231837834dccaec77296a1a11aeef21"
+      },
+      "layer_01/x.mem": {
+        "bytes": 31680,
+        "sha256": "44be25da54cc6bc203d20852197a55f17efa07c8d6c79df1bdd5115b4cebb990"
+      },
+      "layer_01/y.mem": {
+        "bytes": 329472,
+        "sha256": "1df0853b7506cb877c4993e9a478b6247f34e7f2977fb67ad2718355f13d6cad"
+      },
+      "layer_01/y32.mem": {
+        "bytes": 228096,
+        "sha256": "8cd28b0ca1a9a4280389cd37de030661b4f5114ece295d4af826b601bebfc70f"
+      },
+      "layer_02/bias.mem": {
+        "bytes": 2816,
+        "sha256": "5c2735915785efa51f15a64cb9b219f731a36afb85531a4d885d6356c95d8f6d"
+      },
+      "layer_02/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "e6dba17e8eb1bd983b77519111197433ff083b807695753d6fc86bf65a9c86e0"
+      },
+      "layer_02/w.mem": {
+        "bytes": 81920,
+        "sha256": "f8b1969c3fde03866642ebfd20639117c0048485ace1ae43a434e5506a123af5"
+      },
+      "layer_02/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "ba6510963bed57ae817013df3d82ef3d0fa22c3f699baf088d34998cfeaca3d5"
+      },
+      "layer_02/x.mem": {
+        "bytes": 31680,
+        "sha256": "e7c13b60cb666511addbcaf64cba41ecc04b651ba00cee87ea3cac76c5044c5a"
+      },
+      "layer_02/y.mem": {
+        "bytes": 329472,
+        "sha256": "5ae8476d481b6521b7ad0b9ec90e78601aef8d202fb35e342abaa0190a6fc8fa"
+      },
+      "layer_02/y32.mem": {
+        "bytes": 228096,
+        "sha256": "4cde1dde3febb577ff14e5ba96cb4a8037c4be83516fbfc71f6617148d904509"
+      },
+      "layer_03/bias.mem": {
+        "bytes": 2816,
+        "sha256": "66a0745f3711f9c6f5363096c63ecb252a27489437b6bda1c08d47f9aa333fe4"
+      },
+      "layer_03/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "42dfe45c8bc55b29f6d2ca45652ccafe766ebfceacb74bdf1c4a3f1c2a36a6c5"
+      },
+      "layer_03/w.mem": {
+        "bytes": 81920,
+        "sha256": "cea58daab5f8b3a6eee6929b7960288ed90e66a4dd4816d7753115350318b9e6"
+      },
+      "layer_03/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "05915956ca785fb16259c9d308c4ba3256615bf33b3579636f42d9bd6f02dadb"
+      },
+      "layer_03/x.mem": {
+        "bytes": 31680,
+        "sha256": "f1f1d796200e1376f6ad4c29d9c4b4923e91c4c264be971f3df3f058110d03c1"
+      },
+      "layer_03/y.mem": {
+        "bytes": 329472,
+        "sha256": "443b727a37d2a43050bc5f297085caf1d4e2463ddc78a1a82aa02b1b0f510293"
+      },
+      "layer_03/y32.mem": {
+        "bytes": 228096,
+        "sha256": "feb9a8d53cb52991fe05a6d5e0a70ec998d9038ae5c6cb242f764b34d5f2ff77"
+      },
+      "layer_04/bias.mem": {
+        "bytes": 2816,
+        "sha256": "039027d5cbca031e87a49541f0cb0ceab626b696a90d7d11a71caaafe03b9673"
+      },
+      "layer_04/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "321c92e7c1934be8f1049c5bfaf1646f575b4ca889e1c7924c607a7f892d8e21"
+      },
+      "layer_04/w.mem": {
+        "bytes": 81920,
+        "sha256": "c006435e6743b6face63ec241267815bf89b66246ede961378b274610acc6cf1"
+      },
+      "layer_04/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "fff295b5a9cce6efd51bc01f76470622583efd4f8db286a700e369ae35fbeae9"
+      },
+      "layer_04/x.mem": {
+        "bytes": 31680,
+        "sha256": "a37a06d366d0ed37ee3aeb2107710c1f45daea12fb9d851bda4dd370757d5460"
+      },
+      "layer_04/y.mem": {
+        "bytes": 329472,
+        "sha256": "e8f6638e8436daa3e6231bf81ae9571cf84b5f58599c192d324c78c6677cf90b"
+      },
+      "layer_04/y32.mem": {
+        "bytes": 228096,
+        "sha256": "471c8135d3cc07636b504f31bbc7a5665355d28920b27fa6524e4e2e5b02cf13"
+      },
+      "layer_05/bias.mem": {
+        "bytes": 2816,
+        "sha256": "3bffc66c0acb0c9d8b801e583277f45daa3940bf35ea29ed49c6ad01efb828d1"
+      },
+      "layer_05/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "15dd34eacca10a4606be06df0f5f7b74954299d1e41c05b855d1551587cf2cdd"
+      },
+      "layer_05/w.mem": {
+        "bytes": 81920,
+        "sha256": "321195da3be42431fffb71de52b461c786e3fc3e9476dd0422f93669ae7a949b"
+      },
+      "layer_05/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "e7afbeef376f8ab197d09f9cd68188a917d2071b6c266200fc80fbe5fe3bdf36"
+      },
+      "layer_05/x.mem": {
+        "bytes": 31680,
+        "sha256": "76044d5bdd8e234a2ef2ad8da1b2e394f35ace740db21452aaf710eec2be0cc5"
+      },
+      "layer_05/y.mem": {
+        "bytes": 329472,
+        "sha256": "8e9604659806d40576b3c9410f72ee012a36308d9a29a6c08d43895983a6e49e"
+      },
+      "layer_05/y32.mem": {
+        "bytes": 228096,
+        "sha256": "4a77f33e44672911bd579417af4556c2f7f75df7815627a7194af55f78faefe3"
+      },
+      "layer_06/bias.mem": {
+        "bytes": 2816,
+        "sha256": "cfa1b0390ec5edb054f32a868ab306fa6159723447b8c8a8eb287b9923856ad5"
+      },
+      "layer_06/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "1d09c6244e9220bbe82ed5eabe463802893d67bff9abb263019cbad44f638754"
+      },
+      "layer_06/w.mem": {
+        "bytes": 81920,
+        "sha256": "566495cab42c554c1af8de10be5d31f40c26eb0553b760b743a401357dc0c5fd"
+      },
+      "layer_06/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "3557e5a49ce42cc2d8dd5d90f3a73cdf6b3a4678a251785c3b29b1cbd90b6d3c"
+      },
+      "layer_06/x.mem": {
+        "bytes": 31680,
+        "sha256": "713994cdb3dd27da064059f68ccac413530cadcfbf4b561aee540b74f92b44ee"
+      },
+      "layer_06/y.mem": {
+        "bytes": 329472,
+        "sha256": "7aa3958073c82a90262dc21173526d8eb7fdabff3c26618845396827586e8d26"
+      },
+      "layer_06/y32.mem": {
+        "bytes": 228096,
+        "sha256": "9ef7ed6c710309c1d72f6825d58c2948b96e979ae71f2d8e564b7d6edb2aec02"
+      },
+      "layer_07/bias.mem": {
+        "bytes": 2816,
+        "sha256": "07d35a5846a040a4acec68ee989a1c55e41951b14241201b678b03a139cc7cfc"
+      },
+      "layer_07/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "02f6a53cff897ba1bfa7191703bb8a1f01c381e0676924653c65103373da9ac4"
+      },
+      "layer_07/w.mem": {
+        "bytes": 81920,
+        "sha256": "1923fb00a32e4a07e317b0aa69c674a7fd65dfd3a11936ed5a51ded39748df96"
+      },
+      "layer_07/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "6cb797c0f57082c6f6268f941dec9cbaee5b3d6fbfe2f19f0bbdb53b33fa30a3"
+      },
+      "layer_07/x.mem": {
+        "bytes": 31680,
+        "sha256": "6ad2f917ecf500b48604ba1baf61ab040f7e955c418081ea292c650d977fe391"
+      },
+      "layer_07/y.mem": {
+        "bytes": 329472,
+        "sha256": "9f92b0a0a708991ee0391cc108322542773644736d2d8de0dc3aa5a758cd3a36"
+      },
+      "layer_07/y32.mem": {
+        "bytes": 228096,
+        "sha256": "8e1b091eab5a917b4770034bbe36ad4594d099269110b6867b9a0734bf0a1ff0"
+      },
+      "layer_08/bias.mem": {
+        "bytes": 2816,
+        "sha256": "25ff2626e1814760a2f2d63f3cb8d085d862f62271a3d132bccbd4043e9d8266"
+      },
+      "layer_08/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "81c3181e3542e70d50947f3a8af268d2759707badbbf4028b6104c14f65df9ac"
+      },
+      "layer_08/w.mem": {
+        "bytes": 81920,
+        "sha256": "e9a360d7654b0f52da7c0bb9c724f2116444f3cb484a61d461f03ec314e11eaa"
+      },
+      "layer_08/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "416c4f0002b862057b919ad63bf5184f8cd51f91ae95866f8ef799844b02e328"
+      },
+      "layer_08/x.mem": {
+        "bytes": 31680,
+        "sha256": "cf1e3917159c7b758fd074abf6526158a0d6239d853ace4e63a093141d82d871"
+      },
+      "layer_08/y.mem": {
+        "bytes": 329472,
+        "sha256": "33145d056c2d1259371f4951b67150e626bace70a80fe29c70c7c3b3cd2e58c7"
+      },
+      "layer_08/y32.mem": {
+        "bytes": 228096,
+        "sha256": "eefe526f7dda215364681cbab00a2b53a799d145ee812ade8f01352c9953ad0b"
+      },
+      "layer_09/bias.mem": {
+        "bytes": 2816,
+        "sha256": "6aaf9c6bcc0db507425b4f41513ec7883ae5da52fd7bd1ab812c456e9140147e"
+      },
+      "layer_09/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "00cbde4ecb6f5b444413d6753e71208507be4e699e350237335b4adb660712cb"
+      },
+      "layer_09/w.mem": {
+        "bytes": 81920,
+        "sha256": "75986e771171f1972b5c07305a2e1ccc33dcaf915833784efdf50af8565f9e0a"
+      },
+      "layer_09/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "b18ee611a01ccba7982e5260e51a4ef9726511992c64ca46e3542a2136d11e4a"
+      },
+      "layer_09/x.mem": {
+        "bytes": 31680,
+        "sha256": "0adb6e1e70ec8dff94d7313920f32775b3cff702c7ce313f1e9fed1de5c34f0a"
+      },
+      "layer_09/y.mem": {
+        "bytes": 329472,
+        "sha256": "ff547b7d11a9fc9e62b69be57882b27bbf7cb309fbf47c1d6312385f3b16a122"
+      },
+      "layer_09/y32.mem": {
+        "bytes": 228096,
+        "sha256": "e7fc3bc355703f8700207fbd1b17d296b71aadae3fd67f1e80a2303c70bf0605"
+      },
+      "layer_10/bias.mem": {
+        "bytes": 2816,
+        "sha256": "dbc26a92debc1a3b8aafb2fd393005709ef82757f12aceb29185ba39ca72edd8"
+      },
+      "layer_10/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "836f73d6297eee7d5369bc6dd29c7f6d62abbc3746adce9d33fb8d7cd1e29d1e"
+      },
+      "layer_10/w.mem": {
+        "bytes": 81920,
+        "sha256": "24dbe158c017e9eb6b8b0647df6ba9fb058bc70cd5fe1a00455641bc9742d625"
+      },
+      "layer_10/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "1100a95e619cd1b6abbb9a745d2505e30310ce97ca81e12362d796aaa7e42b1a"
+      },
+      "layer_10/x.mem": {
+        "bytes": 31680,
+        "sha256": "931875d0bed4fafce4b88b036f6ab70f914537016d8f58993077fddcebf8b9f1"
+      },
+      "layer_10/y.mem": {
+        "bytes": 329472,
+        "sha256": "421cea9c09874b1117eb6009d657e64f8078fb26b7f8a9d0ec06eaade7ae3fc9"
+      },
+      "layer_10/y32.mem": {
+        "bytes": 228096,
+        "sha256": "f2500d28e887a743337657ca54521ef1078597d70549af647f13819d8d7628dc"
+      },
+      "layer_11/bias.mem": {
+        "bytes": 2816,
+        "sha256": "018fbd3b9fbc5ba6f89dbdcd846e47ff1d1576f94e8390b4c2242d18fefabd53"
+      },
+      "layer_11/float-reference.npz": {
+        "bytes": 410408,
+        "sha256": "f969ceebc26a98ccd9d58b3f1b62291ac9dc955e8045a77f16863e11527cdf7d"
+      },
+      "layer_11/w.mem": {
+        "bytes": 81920,
+        "sha256": "05b4bb8059517255b9a0294f64f74cb37e54effeed1b22a88c40318f8a43d1b6"
+      },
+      "layer_11/w_packed16.mem": {
+        "bytes": 73728,
+        "sha256": "4529901a841f41336bb81aa6a1fd83a6348ba9c12730d8cb5de2d99d3bf9b9e6"
+      },
+      "layer_11/x.mem": {
+        "bytes": 31680,
+        "sha256": "8225b4fa96093663dfa2410f774d5ac46bb00eebab1ae7a82512961695a73ffa"
+      },
+      "layer_11/y.mem": {
+        "bytes": 329472,
+        "sha256": "c73da4de66f5ddff6188bf7a99353b39dfd53563607410a4374c1bb258bda8df"
+      },
+      "layer_11/y32.mem": {
+        "bytes": 228096,
+        "sha256": "7056cec63fc995c1ce01e3cb36c6541272588bacf586067247f216e23e84c685"
+      },
+      "profile.json": {
+        "bytes": 15973,
+        "sha256": "5a4d0e021921ef26df70ea2872f08f023b18d55bb55640e4d5329ba974104406"
+      },
+      "vectors-manifest.json": {
+        "bytes": 44775,
+        "sha256": "4552d7f31cf8307e7440a8385b3ba83c1b67de7fdae975d23d38815c01b77d6b"
+      }
+    },
+    "checker": {
+      "path": "experiments/s3-y32-compliant32/numeric/verify_vectors.py",
+      "bytes": 5123,
+      "sha256": "68ad019b77c1724d56bbec206dd91fd525f8d916b700fddbac28d3d2b67bebff"
+    }
+  },
+  "performance": {
+    "result": {
+      "path": "docs/validation/s3-y32-ingress-perf-native-20261113/timing-final/performance-result.json",
+      "bytes": 78166,
+      "sha256": "3a7bb2832bace71ab797e9f95b41756cd9d578e70e985a65721d22610e2ea39f"
+    },
+    "simulation_log": {
+      "path": "docs/validation/s3-y32-ingress-perf-native-20261113/timing-final/performance-simulation.log",
+      "bytes": 66373,
+      "sha256": "a4a48ea165cb3dea515b13fae62fdf8ec394d3c4d080ef830e46b4751184b3ea"
+    },
+    "checker": {
+      "path": "experiments/s3-y32-ingress-perf/check_results.py",
+      "bytes": 9754,
+      "sha256": "ec2664ddc7f9efd00e1c85a0d1532b4068d3ebf8095393fe591fd903fea57a6c"
+    }
+  }
+}

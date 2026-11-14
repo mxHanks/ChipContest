@@ -1,4 +1,11 @@
-# Ordered 32-bit ingress regression
+# Current candidate: ordered 32-bit ingress and DMA
+
+This is the implementation selected by the repository's [current submission](../../submission/README.md).
+Use `python3 -B tools/current.py` from the root for the fixed candidate commands.
+The [final repair report](../../docs/s3-y32-ingress-perf-postfreeze-repair-20261114.md)
+records 1064.350640 task/s conditional on 150 MHz, zero numerical timing and
+electrical violations, and four remaining unknown checks. The RTL measurement
+and final mapped ECO evidence have distinct identities and validation scopes.
 
 Run from the repository root:
 
@@ -108,7 +115,8 @@ source, matching the earlier 504.3868 tasks/s baseline. They are not qualificati
 of the newer GPIO-to-CPU loading environment. That environment must be remeasured
 with the new RTL before making a production GPIO throughput claim.
 
-All tasks/s conversions assume 150 MHz. A new matching synthesis/STA/area/power
-run is required: the frozen candidate's old PPA identity cannot be reused for
-changed RTL. X remains in the original one-INT16-per-32-bit-slot format; no
+All tasks/s conversions assume 150 MHz. Matching synthesis and final ECO/STA/area
+evidence are now published in the final repair report; complete asynchronous,
+physical timing and power qualification remain open. Future RTL changes require
+new matching evidence. X remains in the original one-INT16-per-32-bit-slot format; no
 packed16-X performance claim is made.
